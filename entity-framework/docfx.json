@@ -65,6 +65,7 @@
     "globalMetadata":
     {
       "breadcrumb_path": "/ef/breadcrumb/toc.json",
+      "bilingual_type": "hover over",
       "searchScope": ["Entity Framework"],
       "manager": "divega",
       "ms.topic": "article",
