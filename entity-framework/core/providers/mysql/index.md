@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: 4900b882-79c5-40d2-a44a-ccb0292f6ed9
 ms.technology: entity-framework-core
 uid: core/providers/mysql/index
-ms.openlocfilehash: c151845c8b08ef6a668b352f15545752156b0a9d
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: 1500d017cb463c3f394131a79b9063ff90cce5e2
+ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 12/22/2017
 ---
 # <a name="mysql-ef-core-database-provider"></a>MySQL EF Core 資料庫提供者
 
@@ -20,9 +20,9 @@ ms.lasthandoff: 11/15/2017
 > 此提供者是發行前版本。
 
 > [!NOTE]  
-> 但此提供者不會維護為 Entity Framework Core 專案的一部分。 考慮使用協力廠商提供者時，請務必評估品質、授權、支援等，確保它們符合您的需求。
+> 此提供者不會作為 Entity Framework Core 專案的一部分進行維護。 考慮使用協力廠商提供者時，請務必評估品質、授權、支援等，確保其符合您的需求。
 
-## <a name="install"></a>Install
+## <a name="install"></a>安裝
 
 安裝 [MySql.Data.EntityFrameworkCore NuGet 套件](https://www.nuget.org/packages/MySql.Data.EntityFrameworkCore)。
 
@@ -40,6 +40,8 @@ Install-Package MySql.Data.EntityFrameworkCore -Pre
 
 ## <a name="supported-platforms"></a>支援的平台
 
-* .NET Framework (4.5.1 和更新版本)
+* .NET Framework (4.5.1 及更新版本)
 
-* .NET Core
+* .NET 核心
+
+請務必檢閱[這裡](https://dev.mysql.com/doc/connector-net/en/connector-net-versions.html)和[這裡](https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework-core.html)的 MySQL 文件以確認版本相容性資訊
