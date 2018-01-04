@@ -6,18 +6,18 @@ ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 ms.technology: entity-framework-core
 uid: core/querying/raw-sql
-ms.openlocfilehash: ddf3a841800684688d50dcf9323f4d83c851222f
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 79894c7b9fd9e40cdf14460abf5d872ee2f4b9f0
+ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 12/22/2017
 ---
 # <a name="raw-sql-queries"></a>原始的 SQL 查詢
 
 Entity Framework Core 可讓您使用關聯式資料庫時，下拉式清單來原始的 SQL 查詢。 這可以是很有用，如果不使用 LINQ，表示您想要執行的查詢，或使用 LINQ 查詢會導致效率不佳 SQL 傳送給資料庫。
 
 > [!TIP]  
-> 您可以檢視這篇文章[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying)GitHub 上。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
 
 ## <a name="limitations"></a>限制
 
@@ -29,6 +29,13 @@ Entity Framework Core 可讓您使用關聯式資料庫時，下拉式清單來�
 * 在結果集中的資料行名稱必須符合屬性對應到資料行名稱。 請注意這點不同於 EF6 屬性/資料行對應已忽略原始的 SQL 查詢和結果集資料行名稱必須符合的屬性名稱。
 
 * SQL 查詢不能包含相關的資料。 不過，在許多情況下您可以撰寫查詢使用之上`Include`運算子傳回相關的資料 (請參閱[包括相關的資料](#including-related-data))。
+
+* `SELECT`陳述式傳遞給這個方法通常應該是可組合： 如果 EF 核心必須評估伺服器上的其他查詢運算子 (例如轉譯 LINQ 運算子之後套用`FromSql`)，提供的 SQL 將會被視為子查詢。 這表示傳遞 SQL 應該不會包含任何字元或不是有效的子查詢，這類的選項：
+  * 尾端的分號
+  * SQL Server 上尾端查詢層級提示，例如：`OPTION (HASH JOIN)`
+  * SQL Server 上`ORDER BY`子句未隨附的`TOP 100 PERCENT`中`SELECT`子句
+
+* SQL 陳述式以外`SELECT`會自動被辨識為非可組合。 因此，預存程序的完整結果一律會傳回用戶端和之後套用任何 LINQ 運算子`FromSql`是在記憶體中評估。 
 
 ## <a name="basic-raw-sql-queries"></a>基本的原始 SQL 查詢
 

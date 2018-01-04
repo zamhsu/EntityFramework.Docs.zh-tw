@@ -6,11 +6,11 @@ ms.date: 8/13/2017
 ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
 ms.technology: entity-framework-core
 uid: core/miscellaneous/1x-2x-upgrade
-ms.openlocfilehash: 0bd1ea2476621f826cca7d4a526a49a1b902acf8
-ms.sourcegitcommit: 860ec5d047342fbc4063a0de881c9861cc1f8813
+ms.openlocfilehash: 380f27c9f00943a2909ec7b876e151572a67dc37
+ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/05/2017
+ms.lasthandoff: 12/22/2017
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>應用程式從舊版升級 EF 核心 2.0
 
@@ -31,9 +31,9 @@ ms.lasthandoff: 11/05/2017
 1. 請特別參閱[初始化應用程式的服務提供者的新模式](#new-way-of-getting-application-services)如下所述。
 
 > [!TIP]  
-> 這個新模式，當更新應用程式為 2.0 強烈建議您，而且在產品功能，例如 Entity Framework Core 移轉工作的順序必要的採用狀況。 其他一般的替代方式是[實作*IDesignTimeDbContextFactory\<TContext >*](configuring-dbcontext.md#using-idesigntimedbcontextfactorytcontext)。
+> 這個新模式，當更新應用程式為 2.0 強烈建議您，而且在產品功能，例如 Entity Framework Core 移轉工作的順序必要的採用狀況。 其他一般的替代方式是[實作*IDesignTimeDbContextFactory\<TContext >*](xref:core/miscellaneous/cli/dbcontext-creation#from-a-design-time-factory)。
 
-2. 以 ASP.NET Core 2.0 為目標的應用程式可以使用 EF 核心 2.0 不協力廠商資料庫提供者以外的其他相依性。 不過，目標為舊版的 ASP.NET Core 應用程式必須升級至 ASP.NET Core 2.0，才能使用 EF 核心 2.0。 如需升級為 2.0 的 ASP.NET Core 應用程式的詳細資訊，請參閱[ASP.NET Core 上的文件主體](https://docs.microsoft.com/aspnet/core/migration/1x-to-2x/)。
+2. 除了協力廠商資料庫提供者之外，將目標設為 ASP.NET Core 2.0 的應用程式還可以使用 EF Core 2.0，而且沒有其他相依性。 不過，目標為舊版的 ASP.NET Core 應用程式必須升級至 ASP.NET Core 2.0，才能使用 EF 核心 2.0。 如需升級為 2.0 的 ASP.NET Core 應用程式的詳細資訊，請參閱[ASP.NET Core 上的文件主體](https://docs.microsoft.com/aspnet/core/migration/1x-to-2x/)。
 
 ## <a name="breaking-changes"></a>重大變更
 
@@ -102,9 +102,9 @@ EF 核心 2.0 我們進行了許多簡單化和增強功能的方式資料庫提
 
 注意： 這些變更應該不會影響大部分的應用程式程式碼。
 
-若要傳送之訊息的事件識別碼[ILogger](https://github.com/aspnet/Logging/blob/dev/src/Microsoft.Extensions.Logging.Abstractions/ILogger.cs) 2.0 中已變更。 事件識別碼現在是唯一在 EF 核心程式碼中。 這些訊息時，現在也遵循結構化記錄使用，例如，MVC 的標準模式。
+若要傳送之訊息的事件識別碼[ILogger](https://github.com/aspnet/Logging/blob/dev/src/Microsoft.Extensions.Logging.Abstractions/ILogger.cs) 2.0 中已變更。 在 EF Core 程式碼中，事件識別碼現在是唯一的。 例如，這些訊息現在也遵循 MVC 所使用結構化記錄的標準模式。
 
-記錄器類別也已經變更。 現在透過一組已知的類別存取[DbLoggerCategory](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/DbLoggerCategory.cs)。
+記錄器類別也已經變更。 現在已有一組類別可透過 [DbLoggerCategory](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/DbLoggerCategory.cs) 進行存取。
 
 [DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md)事件現在會使用相同的事件識別碼名稱為對應`ILogger`訊息。 事件裝載是所有名義型別衍生自[EventData](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/EventData.cs)。
 
@@ -114,7 +114,7 @@ EF 核心 2.0 我們進行了許多簡單化和增強功能的方式資料庫提
 
 ### <a name="ef-core-relational-metadata-api-changes"></a>EF 核心關聯式中繼資料 API 變更
 
-EF 核心 2.0 現在建置不同[IModel](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IModel.cs)每個不同提供者所使用。 這是通常看不到應用程式。 使任何存取權，這已透過實現的較低層級中繼資料 Api 簡化_common 關聯式中繼資料的概念_一定會透過呼叫`.Relational`而不是`.SqlServer`，`.Sqlite`等等。例如，1.1.x 如下的程式碼：
+EF Core 2.0 現在會為使用的每個不同提供者建置不同的 [IModel](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IModel.cs)。 應用程式通常可以看到這項作業。 這已加速簡化較低階中繼資料 API；因此，任何對_一般關聯式中繼資料概念_的存取一律是透過 `.Relational` 呼叫來進行，而非 `.SqlServer`、`.Sqlite` 等等。例如，1.1.x 如下的程式碼：
 
 ``` csharp
 var tableName = context.Model.FindEntityType(typeof(User)).SqlServer().TableName;
@@ -126,7 +126,7 @@ var tableName = context.Model.FindEntityType(typeof(User)).SqlServer().TableName
 var tableName = context.Model.FindEntityType(typeof(User)).Relational().TableName;
 ```
 
-而不是使用類似的方法`ForSqlServerToTable`，擴充方法現在已可供條件式根據撰寫程式碼中使用目前的提供者。 例如：
+而不是使用類似的方法`ForSqlServerToTable`，擴充方法現在已可供條件式根據撰寫程式碼中使用目前的提供者。 例如: 
 
 ```C#
 modelBuilder.Entity<User>().ToTable(
@@ -143,7 +143,7 @@ EF 核心會使用內部`IServiceProvider`（也就是相依性插入容器） �
 
 ### <a name="in-memory-databases-must-be-named"></a>記憶體中資料庫必須命名為
 
-已移除全域未命名的記憶體中資料庫，而是必須命名為記憶體中的所有資料庫。 例如：
+已移除全域未命名的記憶體中資料庫，而是必須命名為記憶體中的所有資料庫。 例如: 
 
 ``` csharp
 optionsBuilder.UseInMemoryDatabase("MyDatabase");

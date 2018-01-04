@@ -4,28 +4,37 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/27/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: 5fcd9e362d76127e7acadd9e552ef3ac90967a37
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+uid: core/miscellaneous/cli/dbcontext-creation
+ms.openlocfilehash: a899c474cc45437bff7c82ce5bddeb915b15c3b0
+ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 12/22/2017
 ---
 <a name="design-time-dbcontext-creation"></a>設計階段 DbContext 建立
 ==============================
-有些 EF 工具命令需要在設計上建立的 DbContext 執行個體的時間 （例如，當執行移轉命令）。 有許多種，工具會嘗試建立它。
+某些 EF 核心工具命令 (例如，[移轉][ 1]命令) 需要衍生`DbContext`以收集應用程式的相關詳細資料，在設計階段建立的執行個體實體類型和它們如何對應到資料庫結構描述。 在大部分情況下，最好的`DbContext`藉此建立要如何將以類似方式設定[設定在執行階段][2]。
+
+工具會嘗試建立可以使用各種方式`DbContext`:
 
 <a name="from-application-services"></a>從應用程式服務
 -------------------------
-如果您的啟始專案的 ASP.NET Core 應用程式，工具會嘗試從應用程式的服務提供者取得 DbContext 物件。 他們取得叫用`Program.BuildWebHost()`和存取`IWebHost.Services`屬性。 使用註冊任何 DbContext`IServiceCollection.AddDbContext<TContext>()`可以找到並以此方式建立。 此模式已[ASP.NET Core 2.0 中導入][1]
+如果您的啟始專案的 ASP.NET Core 應用程式，工具會嘗試從應用程式的服務提供者取得 DbContext 物件。
 
-<a name="using-the-default-constructor"></a>使用預設建構函式
------------------------------
-如果無法從應用程式服務提供者取得 DbContext，工具會尋找專案內的 DbContext 類型。 嘗試使用其預設建構函式加以建立。
+此工具第一次嘗試叫用來取得服務提供者`Program.BuildWebHost()`和存取`IWebHost.Services`屬性。
+
+> [!NOTE]
+> 當您建立新的 ASP.NET Core 2.0 應用程式時，預設會包含此攔截程序。 在舊版的 EF Core 與 ASP.NET Core，工具會嘗試叫用`Startup.ConfigureServices`直接為了取得應用程式的服務提供者，但這個模式無法再正常運作中 ASP.NET Core 2.0 應用程式。 如果您要升級為 2.0 的 ASP.NET Core 1.x 應用程式，您可以[修改您`Program`類別，以符合新模式][3]。
+
+`DbContext`本身和任何相依性，其建構函式中的需要註冊應用程式的服務提供者服務的身分。 這可以輕易地達成具有[建構函式`DbContext`的執行個體的`DbContextOptions<TContext>`做為引數][ 4]和使用[ `AddDbContext<TContext>` 方法][5].
+
+<a name="using-a-constructor-with-no-parameters"></a>使用不含任何參數的建構函式
+--------------------------------------
+如果無法從應用程式服務提供者取得 DbContext，工具尋找衍生`DbContext`專案內的類型。 然後嘗試建立使用不含任何參數的建構函式的執行個體。 這可以是預設建構函式，如果`DbContext`已設定為使用[ `OnConfiguring` ] [ 6]方法。
 
 <a name="from-a-design-time-factory"></a>從設計階段 factory
 --------------------------
-您也可以分辨工具如何實作來建立您的 DbContext `IDesignTimeDbContextFactory`。 如果您的專案內找到實作此介面的類別，則工具會略過之其他方式建立的 DbContext。
-它們一律會使用在設計階段的處理站。 此處理站是特別有用，如果您需要在執行階段，於設計階段的不同的方式設定 DbContext。
+您也可以分辨工具如何實作來建立您的 DbContext`IDesignTimeDbContextFactory<TContext>`介面： 如果實作此介面的類別中找到 衍生的專案`DbContext`或在應用程式的啟始專案，這些工具略過以其他方式改為建立的 DbContext 和使用的設計階段處理站。
 
 ``` csharp
 using Microsoft.EntityFrameworkCore;
@@ -47,7 +56,15 @@ namespace MyProject
 ```
 
 > [!NOTE]
-> `args`參數是目前未使用。 沒有[問題][ 2]追蹤指定設計階段工具的引數的能力。
+> `args`參數是目前未使用。 沒有[問題][ 7]追蹤指定設計階段工具的引數的能力。
 
-  [1]: https://docs.microsoft.com/aspnet/core/migration/1x-to-2x/#update-main-method-in-programcs
-  [2]: https://github.com/aspnet/EntityFrameworkCore/issues/8332
+設計階段處理站會特別有用，如果您需要以不同的方式設定的設計階段和執行階段的 DbContext 如果`DbContext`建構函式會採用額外的參數未登錄在 DI，如果您未使用 DI 完全或部分原因不想要有`BuildWebHost`中 ASP.NET Core 應用程式的方法  
+`Main` 類別。
+
+  [1]: xref:core/managing-schemas/migrations/index
+  [2]: xref:core/miscellaneous/configuring-dbcontext
+  [3]: https://docs.microsoft.com/aspnet/core/migration/1x-to-2x/#update-main-method-in-programcs
+  [4]: xref:core/miscellaneous/configuring-dbcontext#constructor-argument
+  [5]: xref:core/miscellaneous/configuring-dbcontext#using-dbcontext-with-dependency-injection
+  [6]: xref:core/miscellaneous/configuring-dbcontext#onconfiguring
+  [7]: https://github.com/aspnet/EntityFrameworkCore/issues/8332

@@ -6,24 +6,27 @@ ms.date: 10/27/2016
 ms.assetid: 9a7c5488-aaf4-4b40-b1ff-f435ff30f6ec
 ms.technology: entity-framework-core
 uid: core/modeling/relational/inheritance
-ms.openlocfilehash: a7f697dfe2b93c7b93a2dd14945732db4f37628c
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 55286adf08a6a1c3286b7059d747a62e1feffd22
+ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 12/22/2017
 ---
 # <a name="inheritance-relational-database"></a>繼承 （關聯式資料庫）
 
 > [!NOTE]  
-> 本節中的設定是一般適用於關聯式資料庫。 當您安裝的關聯式資料庫提供者，如下所示的擴充方法會變成可用 (因為共用*Microsoft.EntityFrameworkCore.Relational*封裝)。
+> 本節中的組態一般適用於關聯式資料庫。 當您因共用 *Microsoft.EntityFrameworkCore.Relational* 套件而安裝關聯式資料庫提供者時，這裡顯示的擴充方法會變成可用。
 
 EF 模型中的繼承用來控制如何在實體類別中的繼承表示在資料庫中。
+
+> [!NOTE]  
+> 目前，只有每個階層的資料表 (TPH) 模式中實作的 EF 核心。 其他常見的模式資料表每個類型 (TPT) 等資料表的個別實體類型 (TPC) 尚無法使用。
 
 ## <a name="conventions"></a>慣例
 
 依照慣例，繼承將會使用每個階層資料表 (TPH) 模式對應。 TPH 使用單一資料表儲存在階層中所有類型的資料。 鑑別子資料行用來識別每個資料列都代表哪種類型。
 
-EF 只會設定繼承，如果兩個或多個繼承的型別會明確地包含在模型中 (請參閱[繼承](../inheritance.md)如需詳細資訊)。
+EF 核心只會設定繼承，如果兩個或多個繼承的型別會明確地包含在模型中 (請參閱[繼承](../inheritance.md)如需詳細資訊)。
 
 以下是範例，示範一個簡單的繼承案例及使用 TPH 模式關聯式資料庫資料表中儲存的資料。 *鑑別子*資料行會識別哪一種*部落格*會儲存在每個資料列。
 
@@ -53,7 +56,7 @@ public class RssBlog : Blog
 
 若要設定繼承，您無法使用資料註解。
 
-## <a name="fluent-api"></a>關於 fluent 應用程式開發介面
+## <a name="fluent-api"></a>Fluent API
 
 您可以使用 fluent 應用程式開發的應用程式開發介面來設定的名稱和類型鑑別子資料行以及用來識別階層中的每個類型的值。
 

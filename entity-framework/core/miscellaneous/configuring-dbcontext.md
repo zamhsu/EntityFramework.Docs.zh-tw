@@ -6,25 +6,49 @@ ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 ms.technology: entity-framework-core
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: 96abf3b94be3e1d19f833644f1c2f6f13fe0e730
-ms.sourcegitcommit: 860ec5d047342fbc4063a0de881c9861cc1f8813
+ms.openlocfilehash: de26e3b28851d4dc4e50f0490093dd05ad489b31
+ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/05/2017
+ms.lasthandoff: 12/22/2017
 ---
 # <a name="configuring-a-dbcontext"></a>設定建立的 DbContext
 
-本文將說明的設定模式`DbContext`與`DbContextOptions`。 選項主要用來選取並設定資料存放區。
+本文示範基本模式設定`DbContext`透過`DbContextOptions`連接到資料庫，使用特定的 EF 核心提供者和選擇性的行為。
+
+## <a name="design-time-dbcontext-configuration"></a>設計階段 DbContext 組態
+
+EF 核心設計階段工具，例如[移轉](xref:core/managing-schemas/migrations/index)必須能夠探索和建立的工作執行個體`DbContext`從中收集有關應用程式的實體類型和它們如何對應到資料庫結構描述的詳細資料的類型。 只要可以輕鬆地建立此工具，此程序可能會自動`DbContext`的方式，它將會設定同樣的方式就會在設定 runt 時間。
+
+同時提供必要的組態資訊的任何模式`DbContext`可在執行階段，需要使用的工具`DbContext`在設計階段只能處理有限數目的模式。 中詳細說明這些先決條件[設計階段內容建立](xref:core/miscellaneous/cli/dbcontext-creation)> 一節。
 
 ## <a name="configuring-dbcontextoptions"></a>設定 DbContextOptions
 
-`DbContext`必須具有執行個體的`DbContextOptions`才能執行。 這可以透過覆寫設定`OnConfiguring`，或從外部提供透過建構函式引數。
+`DbContext`必須具有執行個體的`DbContextOptions`才能執行任何工作。 `DbContextOptions`這類執行個體帶有的組態資訊：
 
-如果同時使用`OnConfiguring`上提供選項，也就是說，它加總，而且可以執行覆寫建構函式的引數所提供的選項。
+- 若要使用，資料庫提供者通常會選取叫用方法時，例如`UseSqlServer`或`UseSqlite`
+- 任何必要的連接字串或資料庫執行個體識別項通常傳遞做為引數給上述提供者選取方法
+- 所有的提供者層級時的選擇性行為選取器，通常也會在提供者選取方法的呼叫鏈結
+- 所有一般 EF 核心行為的選取器，通常鏈結提供者選取器方法之前或之後
+
+下列範例會設定`DbContextOptions`若要使用 SQL Server 提供者，連接中所包含`connectionString`變數、 提供者層級命令逾時和 EF 核心行為選取器，讓執行中的所有查詢`DbContext`[否追蹤](xref:core/querying/tracking#no-tracking-queries)預設：
+
+``` csharp
+optionsBuilder
+    .UseSqlServer(connectionString, providerOptions=>providerOptions.CommandTimeout(60))
+    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+```
+
+> [!NOTE]  
+> 提供者選取器方法，以及先前所述的其他行為選取器方法是擴充方法上`DbContextOptions`或提供者特有的選項類別。 才能存取這些擴充方法，您可能需要有命名空間 (通常`Microsoft.EntityFrameworkCore`) 在範圍內，以及包含在專案的其他套件相依性。
+
+`DbContextOptions`可以提供給`DbContext`藉由覆寫`OnConfiguring`方法，或從外部透過建構函式引數。
+
+如果同時使用`OnConfiguring`會最後套用，而且可以覆寫建構函式的引數所提供的選項。
 
 ### <a name="constructor-argument"></a>建構函式引數
 
-使用建構函式的內容程式碼
+使用建構函式的內容程式碼：
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -38,9 +62,9 @@ public class BloggingContext : DbContext
 ```
 
 > [!TIP]  
-> 基底的 DbContext 建構函式也可接受的非泛型版本`DbContextOptions`。 有多個內容類型的應用程式，不建議使用非泛型版本。
+> 基底的 DbContext 建構函式也可接受的非泛型版本`DbContextOptions`，但有多個內容類型的應用程式不建議使用非泛型版本。
 
-應用程式程式碼，以從建構函式引數初始化
+從建構函式引數初始化應用程式程式碼：
 
 ``` csharp
 var optionsBuilder = new DbContextOptionsBuilder<BloggingContext>();
@@ -53,9 +77,6 @@ using (var context = new BloggingContext(optionsBuilder.Options))
 ```
 
 ### <a name="onconfiguring"></a>OnConfiguring
-
-> [!WARNING]  
-> `OnConfiguring`上次發生，而且可以覆寫從 DI 或建構函式取得的選項。 這種方法本身就無法測試 （除非您的目標完整的資料庫）。
 
 內容的程式碼與`OnConfiguring`:
 
@@ -71,7 +92,7 @@ public class BloggingContext : DbContext
 }
 ```
 
-應用程式程式碼以初始化`OnConfiguring`:
+應用程式程式碼以初始化`DbContext`使用`OnConfiguring`:
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -80,15 +101,18 @@ using (var context = new BloggingContext())
 }
 ```
 
-## <a name="using-dbcontext-with-dependency-injection"></a>使用相依性插入的 DbContext
+> [!TIP]
+> 這種方法本身就無法進行測試，除非測試目標的完整的資料庫。
 
-EF 支援使用`DbContext`與相依性插入容器。 DbContext 類型可以使用新增至服務容器`AddDbContext<TContext>`。
+### <a name="using-dbcontext-with-dependency-injection"></a>使用相依性插入的 DbContext
 
-`AddDbContext`將這兩個您 DbContext 類型`TContext`，和`DbContextOptions<TContext>`適用於資料隱碼，從服務容器。
+EF Core 支援使用`DbContext`與相依性插入容器。 DbContext 類型可以使用新增至服務容器`AddDbContext<TContext>`方法。
 
-請參閱[詳細閱讀](#more-reading)下方的相依性插入的詳細資訊。
+`AddDbContext<TContext>`將這兩個您 DbContext 類型`TContext`，而且對應`DbContextOptions<TContext>`適用於資料隱碼，從服務容器。
 
-加入相依性插入的 dbcontext
+請參閱[詳細閱讀](#more-reading)下方的相依性插入的其他資訊。
+
+加入`Dbcontext`相依性插入至：
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)
@@ -97,7 +121,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-這需要將[建構函式引數](#constructor-argument)給 DbContext 類型可接受`DbContextOptions`。
+這需要將[建構函式引數](#constructor-argument)給 DbContext 類型可接受`DbContextOptions<TContext>`。
 
 內容的程式碼：
 
@@ -115,7 +139,17 @@ public class BloggingContext : DbContext
 （在 ASP.NET Core) 的應用程式程式碼：
 
 ``` csharp
-public MyController(BloggingContext context)
+public class MyController
+{
+    private readonly BloggingContext _context;
+
+    public MyController(BloggingContext context)
+    {
+      _context = context;
+    }
+
+    ...
+}
 ```
 
 （ServiceProvider 直接使用，較不常見） 的應用程式程式碼：
@@ -129,35 +163,8 @@ using (var context = serviceProvider.GetService<BloggingContext>())
 var options = serviceProvider.GetService<DbContextOptions<BloggingContext>>();
 ```
 
-## <a name="using-idesigntimedbcontextfactorytcontext"></a>使用`IDesignTimeDbContextFactory<TContext>`
-
-上述選項的替代方案，您可能也提供的實作`IDesignTimeDbContextFactory<TContext>`。 EF 工具可以使用這個處理站，以建立您的 DbContext 執行個體。 這可能需要以啟用特定的設計階段體驗，例如移轉。
-
-實作這個介面來啟用並沒有公用預設建構函式的內容類型的設計階段服務。 設計階段服務會自動探索此介面衍生的內容相同的組件中的實作。
-
-範例：
-
-``` csharp
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-
-namespace MyProject
-{
-    public class BloggingContextFactory : IDesignTimeDbContextFactory<BloggingContext>
-    {
-        public BloggingContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<BloggingContext>();
-            optionsBuilder.UseSqlite("Data Source=blog.db");
-
-            return new BloggingContext(optionsBuilder.Options);
-        }
-    }
-}
-```
-
 ## <a name="more-reading"></a>詳細閱讀
 
 * 讀取[開始使用 ASP.NET Core](../get-started/aspnetcore/index.md)如需有關使用 EF 與 ASP.NET Core。
-* 讀取[相依性插入](https://docs.asp.net/en/latest/fundamentals/dependency-injection.html)若要深入了解使用 DI。
+* 讀取[相依性插入](https://docs.microsoft.com/aspnet/core/fundamentals/dependency-injection)若要深入了解使用 DI。
 * 讀取[測試](testing/index.md)如需詳細資訊。

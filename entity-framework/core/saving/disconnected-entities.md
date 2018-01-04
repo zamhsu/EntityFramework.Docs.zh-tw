@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 ms.technology: entity-framework-core
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: b9d9662ce277e4f7b3d6f997a5117a0592f59fa3
-ms.sourcegitcommit: c72d85805db0aa95f980514a18381fdc5e17c786
+ms.openlocfilehash: 0ea02876b9594d54c971a7b70fcf7ce591e56ba0
+ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2017
+ms.lasthandoff: 12/22/2017
 ---
 # <a name="disconnected-entities"></a>中斷連接的實體
 
@@ -19,7 +19,7 @@ DbContext 執行個體將會自動追蹤從資料庫傳回的實體。 當呼叫
 不過，有時候實體會讓查詢使用一個內容執行個體，然後使用不同的執行個體來儲存。 這通常發生在 已中斷連線 」 的情況下，例如 web 應用程式，其中實體的查詢、 傳送至用戶端、 修改、 傳送至伺服器，在要求中，而且再儲存。 在此情況下，第二個內容執行個體需要知道實體是否為新 （應插入），或現有的 （應該更新）。
 
 > [!TIP]  
-> 您可以檢視這篇文章[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Disconnected/)GitHub 上。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Disconnected/) \(英文\)。
 
 ## <a name="identifying-new-entities"></a>識別新的實體
 
@@ -46,7 +46,7 @@ DbContext 執行個體將會自動追蹤從資料庫傳回的實體。 當呼叫
 
 ### <a name="with-other-keys"></a>其他索引鍵
 
-其他一些機制才能識別新的實體時不會自動產生索引鍵值。 有兩種一般的方法，這個：
+需要其他一些機制來識別新的實體時不會自動產生索引鍵值。 有兩種一般的方法，這個：
  * 查詢實體
  * 從用戶端傳遞旗標
 
@@ -120,7 +120,7 @@ DbContext 執行個體將會自動追蹤從資料庫傳回的實體。 當呼叫
 
 刪除可能很困難，因為處理通常不存在的實體表示，應該刪除。 為了解決這個問題的一個方式是使用 「 虛刪除 」 的實體標記為刪除，而不實際刪除。 刪除，然後更新一樣。 非永久性刪除可以實作在使用[查詢篩選器](xref:core/querying/filters)。
 
-為 true 的刪除，常見的模式是用於執行為何基本上 graph 差異查詢模式的延伸模組例如：
+為 true 的刪除，常見的模式是用於執行為何基本上 graph 差異查詢模式的延伸模組例如: 
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 

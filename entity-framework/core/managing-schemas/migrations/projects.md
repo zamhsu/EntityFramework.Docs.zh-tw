@@ -4,11 +4,11 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: e059deb6c7555a4f6732fe7942855e95b3f9a34c
-ms.sourcegitcommit: b467368cc350e6059fdc0949e042a41cb11e61d9
+ms.openlocfilehash: 3684e86cce0005056380d89604d038c734054d14
+ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 12/22/2017
 ---
 <a name="using-a-separate-project"></a>使用個別的專案
 ========================
@@ -46,5 +46,5 @@ ms.lasthandoff: 11/15/2017
 Add-Migration NewMigration -Project MyApp.Migrations
 ```
 ``` Console
-dotnet ef migraitons add NewMigration --project MyApp.Migrations
+dotnet ef migrations add NewMigration --project MyApp.Migrations
 ```
