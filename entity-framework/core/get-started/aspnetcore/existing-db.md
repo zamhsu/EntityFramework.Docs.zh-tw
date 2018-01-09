@@ -27,7 +27,7 @@ ms.lasthandoff: 11/15/2017
 若要完成此逐步解說，必須符合下列必要條件：
 
 * [Visual Studio 2017 15.3](https://www.visualstudio.com/downloads/) 與這些工作負載：
-  * **ASP.NET 與網頁程式開發** (位在 [Web & Cloud] (Web 與雲端) 下)
+  * **ASP.NET 與網頁程式開發** (位在 [Web & Cloud] \(Web 與雲端) 下)
   * **.NET Core 跨平台開發** (位在 [其他工具組] 下)
 * [.NET Core 2.0 SDK](https://www.microsoft.com/net/download/core)。
 * [部落格資料庫](#blogging-database)
