@@ -48,6 +48,11 @@
         "live": "live",
         "master": "master"
       }
+    },
+    {
+      "path_to_root": "efcore-dev",
+      "url": "https://github.com/aspnet/EntityFrameworkCore.git",
+      "branch": "dev"
     }
   ],
   "need_generate_pdf_url_template": true,
