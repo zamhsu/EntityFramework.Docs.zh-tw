@@ -6,18 +6,18 @@ ms.date: 10/27/2016
 ms.assetid: 0d0590f1-1ea3-4d5c-8f44-db17395cd3f3
 ms.technology: entity-framework-core
 uid: core/miscellaneous/testing/in-memory
-ms.openlocfilehash: c5c48c575e9fd693d1f28d1a6d10eb83ebbc9d70
-ms.sourcegitcommit: 860ec5d047342fbc4063a0de881c9861cc1f8813
+ms.openlocfilehash: 33690e3424d0777930d3cb8167575fb0f4ddd8f7
+ms.sourcegitcommit: d096484dcf9eff73d9943fa60db7a418b10ca0b3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/05/2017
+ms.lasthandoff: 01/22/2018
 ---
 # <a name="testing-with-inmemory"></a>使用 InMemory 測試
 
 InMemory 提供者時，您想要測試元件使用的近似於連接至實際的資料庫，而不實際的資料庫作業的額外負荷。
 
 > [!TIP]  
-> 您可以檢視這篇文章[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing)GitHub 上。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing) \(英文\)。
 
 ## <a name="inmemory-is-not-a-relational-database"></a>InMemory 不是關聯式資料庫
 
@@ -64,6 +64,6 @@ EF 核心資料庫提供者可能沒有關聯式資料庫。 InMemory 的設計�
 以下是使用 InMemory 資料庫測試類別的範例。 每個測試方法指定唯一的資料庫名稱，這表示每一種方法有它自己的 InMemory 資料庫。
 
 >[!TIP]
-> 若要使用`.UseInMemoryDatabase()`擴充方法，參考的 Nuget 套件`Microsoft.EntityFrameworkCore.InMemory`。
+> 若要使用`.UseInMemoryDatabase()`擴充方法，參考的 NuGet 套件`Microsoft.EntityFrameworkCore.InMemory`。
 
 [!code-csharp[Main](../../../../samples/core/Miscellaneous/Testing/TestProject/InMemory/BlogServiceTests.cs)]

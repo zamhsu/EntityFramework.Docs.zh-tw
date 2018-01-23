@@ -55,7 +55,7 @@
 ##### [序列](core/modeling/relational/sequences.md)
 ##### [預設值](core/modeling/relational/default-values.md)
 ##### [索引](core/modeling/relational/indexes.md)
-##### [Foreign Key Constraints](core/modeling/relational/fk-constraints.md)
+##### [外部索引鍵條件約束](core/modeling/relational/fk-constraints.md)
 ##### [替代索引鍵 (唯一條件約束)](core/modeling/relational/unique-constraints.md)
 ##### [繼承 (關聯式資料庫)](core/modeling/relational/inheritance.md)
 
@@ -74,7 +74,7 @@
 #### [相關資料](core/saving/related-data.md)
 #### [串聯刪除](core/saving/cascade-delete.md)
 #### [並行衝突](core/saving/concurrency.md)
-#### [Transactions](core/saving/transactions.md)
+#### [異動](core/saving/transactions.md)
 #### [非同步儲存](core/saving/async.md)
 #### [已中斷連線的實體](core/saving/disconnected-entities.md)
 #### [產生屬性的明確值](core/saving/explicit-values-generated-properties.md)
@@ -83,7 +83,7 @@
 
 ### [資料庫提供者](core/providers/index.md)
 #### [Microsoft SQL Server](core/providers/sql-server/index.md)
-##### [記憶體最佳化資料表](core/providers/sql-server/memory-optimized-tables.md)
+##### [經記憶體最佳化的資料表](core/providers/sql-server/memory-optimized-tables.md)
 #### [SQLite](core/providers/sqlite/index.md)
 ##### [SQLite 限制](core/providers/sqlite/limitations.md)
 #### [PostgreSQL (Npgsql)](core/providers/npgsql/index.md)
@@ -129,11 +129,12 @@
 #### [Microsoft.EntityFrameworkCore.AutoHistory](core/extensions/autohistory.md)
 #### [Microsoft.EntityFrameworkCore.DynamicLinq](core/extensions/dynamiclinq.md)
 #### [Microsoft.EntityFrameworkCore.UnitOfWork](core/extensions/unitofwork.md)
+#### [NeinLinq.EntityFrameworkCore](core/extensions/neinlinq.md)
 
 ### 其他
 #### [連接字串](core/miscellaneous/connection-strings.md)
 #### [記錄](core/miscellaneous/logging.md)
-#### [連接恢復功能](core/miscellaneous/connection-resiliency.md)
+#### [連線復原能力](core/miscellaneous/connection-resiliency.md)
 #### [測試](core/miscellaneous/testing/index.md)
 ##### [使用 SQLite 進行測試](core/miscellaneous/testing/sqlite.md)
 ##### [使用 InMemory 進行測試](core/miscellaneous/testing/in-memory.md)

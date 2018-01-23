@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 ms.technology: entity-framework-core
 uid: core/querying/related-data
-ms.openlocfilehash: cd26bd2e6f85083f73d97b1356d0ba38f53e0b8f
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: ec69bb128890a1e0b72fe77014f37747585bb5a5
+ms.sourcegitcommit: 3b21a7fdeddc7b3c70d9b7777b72bef61f59216c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 01/22/2018
 ---
 # <a name="loading-related-data"></a>載入相關的資料
 
@@ -20,7 +20,7 @@ Entity Framework Core 可讓您在模型中使用的導覽屬性，來載入相�
 * **消極式載入**表示，相關的資料會以透明的方式從資料庫載入時存取導覽屬性。 消極式載入尚無法使用 EF 核心。
 
 > [!TIP]  
-> 您可以檢視這篇文章[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying)GitHub 上。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
 
 ## <a name="eager-loading"></a>積極式載入
 
@@ -42,6 +42,9 @@ Entity Framework Core 可讓您在模型中使用的導覽屬性，來載入相�
 
 [!code-csharp[Main](../../../samples/core/Querying/Querying/RelatedData/Sample.cs#SingleThenInclude)]
 
+> [!NOTE]  
+> 目前版本的 Visual Studio 提供不正確的程式碼完成的選項，而且可能會導致標示有語法錯誤時使用的正確運算式`ThenInclude`之後集合導覽屬性的方法。 這是在 https://github.com/dotnet/roslyn/issues/8237 追蹤 IntelliSense 問題的徵兆。 它可以安全地忽略這些假性的語法錯誤，只要程式碼正確，而且可以成功編譯。 
+
 您可以多個呼叫鏈結到`ThenInclude`繼續進一步包括層級的相關資料。
 
 [!code-csharp[Main](../../../samples/core/Querying/Querying/RelatedData/Sample.cs#MultipleThenIncludes)]
@@ -50,7 +53,7 @@ Entity Framework Core 可讓您在模型中使用的導覽屬性，來載入相�
 
 [!code-csharp[Main](../../../samples/core/Querying/Querying/RelatedData/Sample.cs#IncludeTree)]
 
-若要包含的其中一個實體所包含的多個相關的實體。 例如，當查詢`Blog`s，包括`Posts`接著又想將同時包含`Author`和`Tags`的`Posts`。 若要這樣做，您要指定每個包含從根目錄開始的路徑。 例如， `Blog -> Posts -> Author` 和 `Blog -> Posts -> Tags`。 這不表示您會收到多餘的聯結，在大部分情況下，將會合併 EF 聯結產生 SQL 時。
+若要包含的其中一個實體所包含的多個相關的實體。 例如，當查詢`Blog`s，包括`Posts`接著又想將同時包含`Author`和`Tags`的`Posts`。 若要這樣做，您要指定每個包含從根目錄開始的路徑。 例如，`Blog -> Posts -> Author`和`Blog -> Posts -> Tags`。 這不表示您會收到多餘的聯結，在大部分情況下，將會合併 EF 聯結產生 SQL 時。
 
 [!code-csharp[Main](../../../samples/core/Querying/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
 
