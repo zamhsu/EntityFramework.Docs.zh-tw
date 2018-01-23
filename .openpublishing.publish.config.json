@@ -20,7 +20,6 @@
   ],
   "branches_to_filter": [
     "live",
-    "live-sxs",
     "master"
   ],
   "git_repository_url_open_to_public_contributors": "https://github.com/aspnet/EntityFramework.Docs.zh-tw",
