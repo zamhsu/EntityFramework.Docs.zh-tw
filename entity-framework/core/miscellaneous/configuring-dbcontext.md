@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 ms.technology: entity-framework-core
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: de26e3b28851d4dc4e50f0490093dd05ad489b31
-ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
+ms.openlocfilehash: 6980acd53b0a74055af7a1e04b476f4625c327c9
+ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/22/2017
+ms.lasthandoff: 02/12/2018
 ---
 # <a name="configuring-a-dbcontext"></a>設定建立的 DbContext
 
@@ -18,15 +18,15 @@ ms.lasthandoff: 12/22/2017
 
 ## <a name="design-time-dbcontext-configuration"></a>設計階段 DbContext 組態
 
-EF 核心設計階段工具，例如[移轉](xref:core/managing-schemas/migrations/index)必須能夠探索和建立的工作執行個體`DbContext`從中收集有關應用程式的實體類型和它們如何對應到資料庫結構描述的詳細資料的類型。 只要可以輕鬆地建立此工具，此程序可能會自動`DbContext`的方式，它將會設定同樣的方式就會在設定 runt 時間。
+EF 核心設計階段工具，例如[移轉](xref:core/managing-schemas/migrations/index)必須能夠探索和建立的工作執行個體`DbContext`從中收集有關應用程式的實體類型和它們如何對應到資料庫結構描述的詳細資料的類型。 只要可以輕鬆地建立此工具，此程序可能會自動`DbContext`的方式，它將會設定同樣的方式就會設定在執行階段。
 
 同時提供必要的組態資訊的任何模式`DbContext`可在執行階段，需要使用的工具`DbContext`在設計階段只能處理有限數目的模式。 中詳細說明這些先決條件[設計階段內容建立](xref:core/miscellaneous/cli/dbcontext-creation)> 一節。
 
 ## <a name="configuring-dbcontextoptions"></a>設定 DbContextOptions
 
-`DbContext`必須具有執行個體的`DbContextOptions`才能執行任何工作。 `DbContextOptions`這類執行個體帶有的組態資訊：
+`DbContext` 必須具有執行個體的`DbContextOptions`才能執行任何工作。 `DbContextOptions`這類執行個體帶有的組態資訊：
 
-- 若要使用，資料庫提供者通常會選取叫用方法時，例如`UseSqlServer`或`UseSqlite`
+- 若要使用，資料庫提供者通常會選取叫用方法時，例如`UseSqlServer`或 `UseSqlite`
 - 任何必要的連接字串或資料庫執行個體識別項通常傳遞做為引數給上述提供者選取方法
 - 所有的提供者層級時的選擇性行為選取器，通常也會在提供者選取方法的呼叫鏈結
 - 所有一般 EF 核心行為的選取器，通常鏈結提供者選取器方法之前或之後
@@ -108,7 +108,7 @@ using (var context = new BloggingContext())
 
 EF Core 支援使用`DbContext`與相依性插入容器。 DbContext 類型可以使用新增至服務容器`AddDbContext<TContext>`方法。
 
-`AddDbContext<TContext>`將這兩個您 DbContext 類型`TContext`，而且對應`DbContextOptions<TContext>`適用於資料隱碼，從服務容器。
+`AddDbContext<TContext>` 將這兩個您 DbContext 類型`TContext`，而且對應`DbContextOptions<TContext>`適用於資料隱碼，從服務容器。
 
 請參閱[詳細閱讀](#more-reading)下方的相依性插入的其他資訊。
 

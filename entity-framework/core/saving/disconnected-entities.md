@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 ms.technology: entity-framework-core
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 0ea02876b9594d54c971a7b70fcf7ce591e56ba0
-ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
+ms.openlocfilehash: 0b145217d40027c4b8e4746e9c5651652a28c9eb
+ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/22/2017
+ms.lasthandoff: 02/12/2018
 ---
 # <a name="disconnected-entities"></a>中斷連接的實體
 
@@ -20,6 +20,9 @@ DbContext 執行個體將會自動追蹤從資料庫傳回的實體。 當呼叫
 
 > [!TIP]  
 > 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Disconnected/) \(英文\)。
+
+> [!TIP]
+> EF 核心只能追蹤任何實體與給定的主索引鍵值的一個執行的個體。 若要避免這個問題使用的工作每個單位存留較短的內容，內容開始空的成為，最好有實體附加至其中，儲存這些實體，然後按一下 內容就會處置並捨棄。
 
 ## <a name="identifying-new-entities"></a>識別新的實體
 
@@ -85,6 +88,10 @@ DbContext 執行個體將會自動追蹤從資料庫傳回的實體。 當呼叫
 > SetValues 只會將已修改具有不同的值中的追蹤實體的屬性。 這表示當更新傳送時，將會更新已實際變更這些資料行。 （和如果沒有任何變更，則不會更新將會寄完全）。
 
 ## <a name="working-with-graphs"></a>使用圖形
+
+### <a name="identity-resolution"></a>識別解析
+
+如先前所述，EF 核心只能追蹤任何實體與給定的主索引鍵值的一個執行的個體。 當使用圖形應在理想情況下仍會保留這個不變的且內容適用於只有一個--工作單位中建立圖形。 如果圖表包含重複的項目，則它會需要處理圖形，再將它傳送至 EF 合併成一個多個執行個體。 這可能不簡單式位置執行個體都有衝突的值和關聯性，讓合併的重複項目應該儘快完成您的應用程式管線，以避免衝突解決中。
 
 ### <a name="all-newall-existing-entities"></a>所有新的或全部現有的實體
 
