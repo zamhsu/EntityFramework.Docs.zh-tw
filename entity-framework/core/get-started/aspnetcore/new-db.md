@@ -8,11 +8,11 @@ ms.topic: get-started-article
 ms.assetid: e153627f-f132-4c11-b13c-6c9a607addce
 ms.technology: entity-framework-core
 uid: core/get-started/aspnetcore/new-db
-ms.openlocfilehash: 7e7ecaff29e9830bf3bcf742e6a5d54e1ced24de
-ms.sourcegitcommit: 860ec5d047342fbc4063a0de881c9861cc1f8813
+ms.openlocfilehash: f6ed19d3c5d2ae8d1f5756558e50c1f0dddd2f07
+ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/05/2017
+ms.lasthandoff: 02/12/2018
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-a-new-database"></a>在 ASP.NET Core 上使用 EF Core 搭配新資料庫的使用者入門
 
@@ -121,9 +121,9 @@ ms.lasthandoff: 11/05/2017
 * 巡覽至 `/Blogs`
 * 使用建立連結來建立一些部落格項目。 測試詳細資料和刪除連結。
 
-![image](_static/create.png)
+![影像](_static/create.png)
 
-![image](_static/index-new-db.png)
+![影像](_static/index-new-db.png)
 
 ## <a name="additional-resources"></a>其他資源
 
