@@ -1,12 +1,16 @@
 ---
 title: "交替執行多個模型與 DbContext 類型相同的 EF 核心"
 author: AndriySvyryd
+ms.author: divega
+ms.date: 12/10/2017
+ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
+ms.technology: entity-framework-core
 uid: core/modeling/dynamic-model
-ms.openlocfilehash: e6828c62c55ae6f48d46a20528268264c3f22b26
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 57136802001124ebf9ae7682e33f8dc7826fc2b0
+ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="alternating-between-multiple-models-with-the-same-dbcontext-type"></a>交替執行多個模型與 DbContext 類型相同
 

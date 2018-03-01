@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 ms.technology: entity-framework-core
 uid: core/saving/cascade-delete
-ms.openlocfilehash: e1cb194d7c7472af59eb44fe2a084fa16c40c186
-ms.sourcegitcommit: 3b21a7fdeddc7b3c70d9b7777b72bef61f59216c
+ms.openlocfilehash: 1ab9d114e27aac0bec972df631a426c8ce87a518
+ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/22/2018
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="cascade-delete"></a>串聯刪除
 
@@ -33,21 +33,21 @@ EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪�
 
 有四個 delete 行為，如下列表格中所列。 選擇性的關聯性 （可為 null 的外部索引鍵） 它_是_能夠儲存的 null 外部索引鍵值，而造成下列影響：
 
-| 行為名稱 | 在記憶體中的相依性/子系上的效果 | 在資料庫中的相依性/子系上的效果
-|-|-|-
-| **Cascade** | 刪除實體 | 刪除實體
-| **ClientSetNull** （預設值） | 外部索引鍵屬性會設定為 null | 無
-| **SetNull** | 外部索引鍵屬性會設定為 null | 外部索引鍵屬性會設定為 null
-| **Restrict** | 無 | 無
+| 行為名稱               | 在記憶體中的相依性/子系上的效果    | 在資料庫中的相依性/子系上的效果  |
+|:----------------------------|:---------------------------------------|:---------------------------------------|
+| **Cascade**                 | 刪除實體                   | 刪除實體                   |
+| **ClientSetNull** （預設值） | 外部索引鍵屬性會設定為 null | 無                                   |
+| **SetNull**                 | 外部索引鍵屬性會設定為 null | 外部索引鍵屬性會設定為 null |
+| **Restrict**                | 無                                   | 無                                   |
 
 它是必要的關聯性 （非可為 null 的外部索引鍵）_不_能夠儲存的 null 外部索引鍵值，而造成下列影響：
 
-| 行為名稱 | 在記憶體中的相依性/子系上的效果 | 在資料庫中的相依性/子系上的效果
-|-|-|-
-| **Cascade** （預設值） | 刪除實體 | 刪除實體
-| **ClientSetNull** | SaveChanges 擲回 | 無
-| **SetNull** | SaveChanges 擲回 | SaveChanges 擲回
-| **Restrict** | 無 | 無
+| 行為名稱         | 在記憶體中的相依性/子系上的效果 | 在資料庫中的相依性/子系上的效果 |
+|:----------------------|:------------------------------------|:--------------------------------------|
+| **Cascade** （預設值） | 刪除實體                | 刪除實體                  |
+| **ClientSetNull**     | SaveChanges 擲回                  | 無                                  |
+| **SetNull**           | SaveChanges 擲回                  | SaveChanges 擲回                    |
+| **Restrict**          | 無                                | 無                                  |
 
 在上述資料表中*無*可能會導致條件約束違規。 比方說，如果主體/子實體已刪除，但若要變更相依/子系的外部索引鍵會採取任何動作，然後資料庫將可能擲回 SaveChanges 上因為外部索引條件約束違規。
 
