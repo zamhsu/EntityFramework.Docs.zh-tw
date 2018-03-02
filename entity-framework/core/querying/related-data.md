@@ -6,18 +6,18 @@ ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 ms.technology: entity-framework-core
 uid: core/querying/related-data
-ms.openlocfilehash: ec69bb128890a1e0b72fe77014f37747585bb5a5
-ms.sourcegitcommit: 3b21a7fdeddc7b3c70d9b7777b72bef61f59216c
+ms.openlocfilehash: dadc6235c3879ae27ad5c99988a5e594872045df
+ms.sourcegitcommit: 4b7d3d3e258b0d9cb778bb45a9f4a33c0792e38e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/22/2018
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="loading-related-data"></a>載入相關的資料
 
 Entity Framework Core 可讓您在模型中使用的導覽屬性，來載入相關的實體。 有三種常見的 O/RM 模式來載入相關的資料。
 * **積極式載入**表示相關的資料從資料庫載入做為初始查詢的一部分。
 * **明確式載入**表示相關的資料會明確地載入從資料庫在稍後。
-* **消極式載入**表示，相關的資料會以透明的方式從資料庫載入時存取導覽屬性。 消極式載入尚無法使用 EF 核心。
+* **消極式載入**表示，相關的資料會以透明的方式從資料庫載入時存取導覽屬性。
 
 > [!TIP]  
 > 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
@@ -57,6 +57,61 @@ Entity Framework Core 可讓您在模型中使用的導覽屬性，來載入相�
 
 [!code-csharp[Main](../../../samples/core/Querying/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
 
+### <a name="include-on-derived-types"></a>在衍生類型上包含
+
+您可以加入只在使用衍生的類型上定義導覽中的相關的資料`Include`和`ThenInclude`。 
+
+假設下列模型：
+
+```Csharp
+    public class SchoolContext : DbContext
+    {
+        public DbSet<Person> People { get; set; }
+        public DbSet<School> Schools { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<School>().HasMany(s => s.Students).WithOne(s => s.School);
+        }
+    }
+
+    public class Person
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class Student : Person
+    {
+        public School School { get; set; }
+    }
+
+    public class School
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public List<Student> Students { get; set; }
+    }
+```
+
+內容`School`瀏覽的所有人學生可以立即載入使用的數字的模式：
+
+- 使用 cast
+```Csharp
+context.People.Include(person => ((Student)person).School).ToList()
+```
+
+- 使用`as`運算子
+```Csharp
+context.People.Include(person => (person as Student).School).ToList()
+```
+
+- 使用的多載`Include`會接受參數的型別 `string`
+```Csharp
+context.People.Include("Student").ToList()
+```
+
 ### <a name="ignored-includes"></a>忽略包含
 
 如果您變更查詢，使它不會再傳回查詢開始的實體類型的執行個體時，會忽略 include 運算子。
@@ -94,13 +149,174 @@ Entity Framework Core 可讓您在模型中使用的導覽屬性，來載入相�
 
 ## <a name="lazy-loading"></a>消極式載入
 
-EF 核心尚不支援消極式載入。 您可以檢視[消極式載入項目，在我們的待辦項目](https://github.com/aspnet/EntityFramework/issues/3797)追蹤這項功能。
+> [!NOTE]  
+> 在 EF 核心 2.1 中已引入此功能。
+
+若要使用消極式載入最簡單的方式是安裝[Microsoft.EntityFramworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/)封裝，並讓它藉由呼叫`UseLazyLoadingProxies`。 例如: 
+```Csharp
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .UseLazyLoadingProxies()
+        .UseSqlServer(myConnectionString);
+```
+或使用 AddDbContext 時：
+```Csharp
+    .AddDbContext<BloggingContext>(
+        b => b.UseLazyLoadingProxies()
+              .UseSqlServer(myConnectionString));
+```
+EF 核心然後會啟用消極式載入瀏覽的所有屬性會覆寫-也就是說，它必須是`virtual`和可以繼承自一個類別上。 例如，在下列的實體，`Post.Blog`和`Blog.Posts`導覽屬性將會延遲載入。
+```Csharp
+public class Blog
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public virtual ICollection<Post> Posts { get; set; }
+}
+
+public class Post
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+
+    public virtual Blog Blog { get; set; }
+}
+```
+### <a name="lazy-loading-without-proxies"></a>沒有 proxy 的延遲載入
+
+延遲載入 proxy 的運作方式是將，以便`ILazyLoader`中所述，服務到實體，[實體型別建構函式](../modeling/constructors.md)。 例如: 
+```Csharp
+public class Blog
+{
+    private ICollection<Post> _posts;
+
+    public Blog()
+    {
+    }
+
+    private Blog(ILazyLoader lazyLoader)
+    {
+        LazyLoader = lazyLoader;
+    }
+
+    private ILazyLoader LazyLoader { get; set; }
+
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public ICollection<Post> Posts
+    {
+        get => LazyLoader?.Load(this, ref _posts);
+        set => _posts = value;
+    }
+}
+
+public class Post
+{
+    private Blog _blog;
+
+    public Post()
+    {
+    }
+
+    private Post(ILazyLoader lazyLoader)
+    {
+        LazyLoader = lazyLoader;
+    }
+
+    private ILazyLoader LazyLoader { get; set; }
+
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+
+    public Blog Blog
+    {
+        get => LazyLoader?.Load(this, ref _blog);
+        set => _blog = value;
+    }
+}
+```
+這不需要用於繼承的實體類型或為虛擬的導覽屬性，並可讓實體執行個體，以建立`new`延遲載入一次附加至內容。 不過，它需要的參考`ILazyLoader`涉入 EF 核心組件的實體類型的服務。 若要避免此 EF 核心允許`ILazyLoader.Load`無法插入為委派的方法。 例如: 
+```Csharp
+public class Blog
+{
+    private ICollection<Post> _posts;
+
+    public Blog()
+    {
+    }
+
+    private Blog(Action<object, string> lazyLoader)
+    {
+        LazyLoader = lazyLoader;
+    }
+
+    private Action<object, string> LazyLoader { get; set; }
+
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public ICollection<Post> Posts
+    {
+        get => LazyLoader?.Load(this, ref _posts);
+        set => _posts = value;
+    }
+}
+
+public class Post
+{
+    private Blog _blog;
+
+    public Post()
+    {
+    }
+
+    private Post(Action<object, string> lazyLoader)
+    {
+        LazyLoader = lazyLoader;
+    }
+
+    private Action<object, string> LazyLoader { get; set; }
+
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+
+    public Blog Blog
+    {
+        get => LazyLoader?.Load(this, ref _blog);
+        set => _blog = value;
+    }
+}
+```
+使用上方的程式碼`Load`擴充方法，請使用 「 委派 」 的位元會清除：
+```Csharp
+public static class PocoLoadingExtensions
+{
+    public static TRelated Load<TRelated>(
+        this Action<object, string> loader,
+        object entity,
+        ref TRelated navigationField,
+        [CallerMemberName] string navigationName = null)
+        where TRelated : class
+    {
+        loader?.Invoke(entity, navigationName);
+
+        return navigationField;
+    }
+}
+```
+> [!NOTE]  
+> 消極式載入委派建構函式參數必須為"lazyLoader"。 若要使用不同的名稱，這計劃在未來的版本設定。
 
 ## <a name="related-data-and-serialization"></a>相關的資料和序列化
 
 因為 EF 核心會自動修正向上導覽屬性，您可以得到循環物件圖形中。 例如，載入部落格和它相關的文章將會導致參考的文章集合部落格物件。 這些文章中的每個都會有部落格的參考。
 
-某些序列化架構不允許這類循環。 例如，Json.NET 將會擲回下列例外狀況，如果有發生循環。
+某些序列化架構不允許這類循環。 例如，Json.NET 將會擲回下列例外狀況，如果發生循環。
 
 > Newtonsoft.Json.JsonSerializationException： 自我參考型別 'MyApplication.Models.Blog' 屬性 '部落格' 偵測到迴圈。
 

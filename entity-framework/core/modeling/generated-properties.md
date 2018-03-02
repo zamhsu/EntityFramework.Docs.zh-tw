@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: eb082011-11a1-41b4-a108-15daafa03e80
 ms.technology: entity-framework-core
 uid: core/modeling/generated-properties
-ms.openlocfilehash: 2d79bf1339ebe522c39fe8971d908c30e1f4dca0
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 892494461bcf49ee10d05c972da0ba19ca003c35
+ms.sourcegitcommit: 4b7d3d3e258b0d9cb778bb45a9f4a33c0792e38e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="generated-values"></a>產生的值
 
@@ -50,7 +50,7 @@ ms.lasthandoff: 10/27/2017
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，主索引鍵的整數或 GUID 資料類型會有值上產生加入安裝程式。 所有其他屬性沒有值層代將安裝程式。
+依照慣例，非複合主索引鍵的型別 short、 int、 long、 或 Guid 將安裝程式已新增產生的值。 所有其他屬性沒有值層代將安裝程式。
 
 ## <a name="data-annotations"></a>資料註釋
 
@@ -72,7 +72,7 @@ ms.lasthandoff: 10/27/2017
 > [!WARNING]  
 > 這只可讓 EF 知道的值會產生已加入或更新實體，並不保證 EF 將會安裝的實際機制來產生值。 請參閱[上產生的值加入或更新](#value-generated-on-add-or-update)> 一節以取得詳細資料。
 
-## <a name="fluent-api"></a>關於 fluent 應用程式開發介面
+## <a name="fluent-api"></a>Fluent API
 
 若要變更給定屬性的值產生模式，您可以使用 fluent 應用程式開發的應用程式開發介面。
 
@@ -85,7 +85,7 @@ ms.lasthandoff: 10/27/2017
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/ValueGeneratedOnAdd.cs#Sample)]
 
 > [!WARNING]  
-> `ValueGeneratedOnAdd()`只讓 EF 知道的值會產生已加入的實體，並不保證 EF 將會安裝的實際機制來產生值。  請參閱[上產生的值，則新增](#value-generated-on-add)> 一節以取得詳細資料。
+> `ValueGeneratedOnAdd()` 只讓 EF 知道的值會產生已加入的實體，並不保證 EF 將會安裝的實際機制來產生值。  請參閱[上產生的值，則新增](#value-generated-on-add)> 一節以取得詳細資料。
 
 ### <a name="value-generated-on-add-or-update-fluent-api"></a>在產生的值，則新增或更新 (Fluent API)
 
