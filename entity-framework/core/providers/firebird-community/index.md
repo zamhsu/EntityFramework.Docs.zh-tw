@@ -7,10 +7,10 @@ ms.assetid: d0168c04-d30d-4219-98f8-a54690cea3c6
 ms.technology: entity-framework-core
 uid: core/providers/firebird-community/index
 ms.openlocfilehash: 682988a91ef04dbd552588a537f53124b931f17d
-ms.sourcegitcommit: 1cbd3d3cd92bdaf8223b8821c58200bcfed10ede
+ms.sourcegitcommit: 6ed04bb05a3d05c367f0f55616807af2bf4037ae
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/23/2017
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="firebird-ef-core-database-provider"></a>Firebird EF Core 資料庫提供者
 
@@ -18,9 +18,9 @@ ms.lasthandoff: 11/23/2017
 
 > [!NOTE]  
 >
-> 但此提供者不會維護為 Entity Framework Core 專案的一部分。 考慮使用協力廠商提供者時，請務必評估品質、授權、支援等，確保它們符合您的需求。
+> 此提供者不會作為 Entity Framework Core 專案的一部分進行維護。 考慮使用協力廠商提供者時，請務必評估品質、授權、支援等，確保其符合您的需求。
 
-## <a name="install"></a>Install
+## <a name="install"></a>安裝
 
 安裝 [EntityFrameworkCore.FirebirdSQL NuGet 套件](https://www.nuget.org/packages/EntityFrameworkCore.FirebirdSQL)。
 
@@ -39,8 +39,8 @@ Install-Package EntityFrameworkCore.FirebirdSQL
 
 ## <a name="supported-platforms"></a>支援的平台
 
-* .NET Framework (4.5.1 和更新版本)
+* .NET Framework (4.5.1 及更新版本)
 
-* .NET Core
+* .NET 核心
 
-* Mono (4.2.0 和更新版本)
+* Mono (4.2.0 及更新版本)

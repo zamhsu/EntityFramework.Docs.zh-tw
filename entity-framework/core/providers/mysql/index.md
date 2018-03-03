@@ -7,10 +7,10 @@ ms.assetid: 4900b882-79c5-40d2-a44a-ccb0292f6ed9
 ms.technology: entity-framework-core
 uid: core/providers/mysql/index
 ms.openlocfilehash: 1500d017cb463c3f394131a79b9063ff90cce5e2
-ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
+ms.sourcegitcommit: 6ed04bb05a3d05c367f0f55616807af2bf4037ae
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/22/2017
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="mysql-ef-core-database-provider"></a>MySQL EF Core 資料庫提供者
 

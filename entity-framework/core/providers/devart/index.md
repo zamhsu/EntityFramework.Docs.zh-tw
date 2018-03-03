@@ -7,23 +7,23 @@ ms.assetid: aad70a75-d04d-4d63-a489-7f9062a3c73d
 ms.technology: entity-framework-core
 uid: core/providers/devart/index
 ms.openlocfilehash: 04de917b3327a6f544292781bca42a1170c199ad
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.sourcegitcommit: 6ed04bb05a3d05c367f0f55616807af2bf4037ae
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="devart-ef-core-database-providers"></a>Devart EF Core 資料庫提供者
 
 Devart 是提供各種資料庫之資料庫提供者的協力廠商提供者撰寫人員。 深入了解 [devart.com/dotconnect](https://www.devart.com/dotconnect/)。
 
 > [!NOTE]  
-> 但此提供者不會維護為 Entity Framework Core 專案的一部分。 考慮使用協力廠商提供者時，請務必評估品質、授權、支援等，確保它們符合您的需求。
+> 此提供者不會作為 Entity Framework Core 專案的一部分進行維護。 考慮使用協力廠商提供者時，請務必評估品質、授權、支援等，確保其符合您的需求。
 
 ## <a name="paid-versions-only"></a>僅限付費版本
 
 Devart dotConnect 是商用協力廠商提供者。 只有付費版本的 dotConnect 才支援 Entity Framework。
 
-## <a name="install"></a>Install
+## <a name="install"></a>安裝
 
 如需安裝指示，請參閱 [Devart dotConnect 文件](https://www.devart.com/dotconnect/)。
 
@@ -47,5 +47,5 @@ Devart dotConnect 是商用協力廠商提供者。 只有付費版本的 dotCon
 
 ## <a name="supported-platforms"></a>支援的平台
 
-* .NET Framework (4.5.1 和更新版本)
+* .NET Framework (4.5.1 及更新版本)
 * .NET Core 1.0 和更新版本 (Oracle、MySQL、PostgreSQL、SQLite 的提供者)

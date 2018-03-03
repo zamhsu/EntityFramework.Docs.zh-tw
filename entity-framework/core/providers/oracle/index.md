@@ -7,10 +7,10 @@ ms.assetid: bb242065-234a-4a12-800f-3d086f4f134f
 ms.technology: entity-framework-core
 uid: core/providers/oracle/index
 ms.openlocfilehash: b0453f44e755738a9a53c013d5cdfa3d30453cf1
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.sourcegitcommit: 6ed04bb05a3d05c367f0f55616807af2bf4037ae
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="oracle-ef-core-database-provider"></a>Oracle EF Core 資料庫提供者
 
