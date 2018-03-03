@@ -6,11 +6,11 @@ ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 ms.technology: entity-framework-core
 uid: core/modeling/constructors
-ms.openlocfilehash: 2632488569c538a11c7a31a9a866d2fadb29eeb5
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 38ab0c1c3cd8c490875abf30b8478c99bc58630f
+ms.sourcegitcommit: 60b831318c4f5ec99061e8af6a7c9e7c03b3469c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 03/02/2018
 ---
 # <a name="entity-types-with-constructors"></a>使用建構函式的實體類型
 
@@ -96,7 +96,7 @@ public class Post
 ### <a name="read-only-properties"></a>唯讀屬性
 
 一旦透過建構函式設定屬性之後將可以有意義將其中部分為唯讀。 EF 核心支援，但要留意的一些事項：
-* 沒有 getter 的屬性未對應的慣例。 （這樣通常會以對應不應對應，例如計算屬性的屬性。）
+* 沒有 setter 的屬性未對應的慣例。 （這樣通常會以對應不應對應，例如計算屬性的屬性。）
 * 使用自動產生索引鍵的值必須是讀寫，因為插入新的實體時，金鑰產生器所要設定需要的索引鍵值的索引鍵屬性。
 
 避免這些作業的簡單方法是使用私用 setter。 例如: 
