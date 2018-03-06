@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: bc2a2676-bc46-493f-bf49-e3cc97994d57
 ms.technology: entity-framework-core
 uid: core/index
-ms.openlocfilehash: 13de9cf98111b8e253e073c591fcec04206b4c4f
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: c76b4cd318151b502c549fa0a82800f9987ed94c
+ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="entity-framework-core-quick-overview"></a>Entity Framework Core 快速概觀
 
@@ -20,16 +20,18 @@ EF Core 是一種物件關聯式對應程式 (O/RM)，可讓 .NET 開發人員�
 
 如果您要了解如何撰寫程式碼，則建議使用我們的其中一個[快速入門](get-started/index.md)指南開始使用 EF Core。
 
-## <a name="latest-version-ef-core-20"></a>最新版本：EF Core 2.0
+## <a name="what-is-new-in-ef-core"></a>EF Core 的新功能
 
-如果您熟悉 EF Core，而且想要直接跳到新版本的詳細資料：
+若您熟悉 EF Core，並且想要直接跳到最新版本的詳細資料：
 
-- **[EF Core 2.0 中的新功能](what-is-new/index.md)**
-- **[將現有應用程式升級為 EF Core 2.0](miscellaneous/1x-2x-upgrade.md)**
+- **[EF Core 2.1 的新功能 (目前處於預覽階段)](xref:core/what-is-new/ef-core-2.1)**
+- **[EF Core 2.0 的新功能 (最新發行版本)](xref:core/what-is-new/ef-core-2.0)**
+- **[將現有應用程式升級為 EF Core 2.0](xref:core/miscellaneous/1x-2x-upgrade)**
+
 
 ## <a name="get-entity-framework-core"></a>取得 Entity Framework Core
 
-請針對您想要使用的資料庫提供者，[安裝 NuGet 套件](https://docs.nuget.org/ndocs/quickstart/use-a-package)。 例如 在命令列中使用 `dotnet` 工具，於跨平台開發中安裝 SQL Server 提供者：
+請針對您想要使用的資料庫提供者，[安裝 NuGet 套件](https://docs.nuget.org/ndocs/quickstart/use-a-package)。 例如， 在命令列中使用 `dotnet` 工具，於跨平台開發中安裝 SQL Server 提供者：
 
 ``` Console
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer

@@ -6,17 +6,17 @@ ms.date: 10/27/2016
 ms.assetid: 2e007c82-c6e4-45bb-8129-851b79ec1a0a
 ms.technology: entity-framework-core
 uid: core/providers/sql-server/index
-ms.openlocfilehash: b2faf932e0484da4df0c1774afa7ba7ae2d077a5
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: 2ed7c0dd127db03d5e7340fde1ef83cf01b30135
+ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="microsoft-sql-server-ef-core-database-provider"></a>Microsoft SQL Server EF Core 資料庫提供者
 
-此資料庫提供者可讓 Entity Framework Core 與 Microsoft SQL Server (包括 SQL Azure) 搭配使用。 此提供者會作為 [EntityFramework GitHub 專案](https://github.com/aspnet/EntityFramework)的一部分進行維護。
+此資料庫提供者可讓 Entity Framework Core 與 Microsoft SQL Server (包括 SQL Azure) 搭配使用。 [Entity Framework Core 專案](https://github.com/aspnet/EntityFrameworkCore)的維護包含此提供者。
 
-## <a name="install"></a>Install
+## <a name="install"></a>安裝
 
 安裝 [Microsoft.EntityFrameworkCore.SqlServer NuGet 套件](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/)。
 
@@ -41,7 +41,7 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 * .NET Framework (4.5.1 及更新版本)
 
-* .NET Core
+* .NET 核心
 
 * Mono (4.2.0 及更新版本)
 

@@ -6,17 +6,17 @@ ms.date: 10/27/2016
 ms.assetid: 9af0cba7-7605-4f8f-9cfa-dd616fcb880c
 ms.technology: entity-framework-core
 uid: core/providers/in-memory/index
-ms.openlocfilehash: a8e05f50837f3da554b338475d24215706dfa2ec
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: 356af9390a8aafa5afe35f333cd1e6ac1988390d
+ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="ef-core-in-memory-database-provider"></a>EF Core 記憶體中資料庫提供者
 
-此資料庫提供者可讓 Entity Framework Core 搭配使用記憶體內部資料庫。 對使用 Entity Framework Core 的程式碼進行測試時，這十分有用。 此提供者會維護為 [EntityFramework GitHub 專案](https://github.com/aspnet/EntityFramework)的一部分。
+此資料庫提供者可讓 Entity Framework Core 搭配使用記憶體內部資料庫。 雖然記憶體內部模式中的 SQLite 提供者作為關聯式資料庫的替代測試項目可能較為合適，但此資料庫作為測試用途仍相當實用。 [Entity Framework Core 專案](https://github.com/aspnet/EntityFrameworkCore)的維護包含此提供者。
 
-## <a name="install"></a>Install
+## <a name="install"></a>安裝
 
 安裝 [Microsoft.EntityFrameworkCore.InMemory NuGet 套件](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.InMemory/)。
 
@@ -37,10 +37,10 @@ Install-Package Microsoft.EntityFrameworkCore.InMemory
 
 ## <a name="supported-platforms"></a>支援的平台
 
-* .NET Framework (4.5.1 和更新版本)
+* .NET Framework (4.5.1 及更新版本)
 
-* .NET Core
+* .NET 核心
 
-* Mono (4.2.0 和更新版本)
+* Mono (4.2.0 及更新版本)
 
 * 通用 Windows 平台
