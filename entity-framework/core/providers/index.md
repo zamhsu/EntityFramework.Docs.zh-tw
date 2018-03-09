@@ -6,11 +6,11 @@ ms.date: 2/23/2018
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 ms.technology: entity-framework-core
 uid: core/providers/index
-ms.openlocfilehash: 520afe85af5a2eacbfc2764fdc0a8addb78c07ab
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 6311f6a336198b45d307fa8c4318abd2e64e9df0
+ms.sourcegitcommit: fc68321c211aca38f7b9dc3a75677c6ca1b2524b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 03/08/2018
 ---
 # <a name="database-providers"></a>資料庫提供者
 
@@ -71,7 +71,8 @@ install-package provider_package_name
 若您使用相依性插入容器，請在安裝完成後以 `OnConfiguring` 方式或 `AddDbContext` 方式在 `DbContext` 中設定提供者。 例如， 下列程式行會以傳遞的連接字串設定 SQL Server 提供者：
 
 ``` csharp
-  optionsBuilder.UseSqlServer("Server=(localdb)\mssqllocaldb;Database=MyDatabase;Trusted_Connection=True;");
+optionsBuilder.UseSqlServer(
+    "Server=(localdb)\mssqllocaldb;Database=MyDatabase;Trusted_Connection=True;");
 ```  
 
 資料庫提供者能夠延伸 EF Core，來啟用特定資料庫套有的功能。 有些概念通用於大多數資料庫，並且包含在主要 EF Core 元件中。 這類概念包含以 LINQ 表示查詢、異動，以及在從資料庫載入物件之後追蹤其變更。 有些概念是特定提供者所特有。 例如，SQL Server 提供者可讓您[設定記憶體最佳化資料表](xref:core/providers/sql-server/memory-optimized-tables) (SQL Server 特有的功能)。 其他概念是提供者類別特有的。 例如，關聯式資料庫的 EF Core 提供者是根據一般 `Microsoft.EntityFrameworkCore.Relational` 程式庫所建置，而此程式庫提供 API 來設定資料表和資料行對應、外部索引鍵條件約束等等。提供者通常會以 NuGet 套件的形式散發。
