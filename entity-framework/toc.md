@@ -113,21 +113,6 @@
 #### [設計階段服務](core/miscellaneous/cli/services.md)
 
 ### [工具與延伸模組](core/extensions/index.md)
-#### [LLBLGen Pro](core/extensions/llbl-gen-pro.md)
-#### [Devart 實體開發人員](core/extensions/devart-entity-developer.md)
-#### [EFSecondLevelCache.Core](core/extensions/efsecondlevelcache-core.md)
-#### [Geco (反向模型產生器)](core/extensions/geco.md)
-#### [EntityFrameworkCore.Detached](core/extensions/entityframeworkcore-detached.md)
-#### [EntityFrameworkCore.Triggers](core/extensions/entityframeworkcore-triggers.md)
-#### [EntityFrameworkCore.Rx](core/extensions/entityframeworkcore-rx.md)
-#### [EntityFrameworkCore.PrimaryKey](core/extensions/entityframeworkcore-primarykey.md)
-#### [EntityFrameworkCore.TypedOriginalValues](core/extensions/entityframeworkcore-typedoriginalvalues.md)
-#### [EFCore.Practices](core/extensions/efcore-practices.md)
-#### [LinqKit.Microsoft.EntityFrameworkCore](core/extensions/linqkit.md)
-#### [Microsoft.EntityFrameworkCore.AutoHistory](core/extensions/autohistory.md)
-#### [Microsoft.EntityFrameworkCore.DynamicLinq](core/extensions/dynamiclinq.md)
-#### [Microsoft.EntityFrameworkCore.UnitOfWork](core/extensions/unitofwork.md)
-#### [NeinLinq.EntityFrameworkCore](core/extensions/neinlinq.md)
 
 ### 其他
 #### [連接字串](core/miscellaneous/connection-strings.md)
