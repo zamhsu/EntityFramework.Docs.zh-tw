@@ -1,19 +1,132 @@
 ---
 title: "工具和延伸模組 - EF Core"
-author: rowanmiller
+author: ErikEJ
 ms.author: divega
-ms.date: 10/27/2016
-ms.assetid: 97c1ba7d-29a5-46de-a87d-912b52ac242e
+ms.date: 7/3/2018
+ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 ms.technology: entity-framework-core
 uid: core/extensions/index
-ms.openlocfilehash: 2c9b87b376d8da6e9c715227cec243509c8178c6
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 6c8cb3e0d8552f274118e4020b7e2e8009af7e11
+ms.sourcegitcommit: fc68321c211aca38f7b9dc3a75677c6ca1b2524b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 03/08/2018
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
 工具和延伸模組提供 Entity Framework Core 的額外功能。
 
-延伸模組是透過各種來源所建置。 並非所有延伸模組都會維護為 Entity Framework Core 專案的一部分。 考慮使用協力廠商延伸模組時，請務必評估品質、授權、支援等，確保它們符合您的需求。
+> [!IMPORTANT]  
+> 延伸模組以各種來源建置而成，且不屬於 Entity Framework Core 專案維護的一部份。 考慮使用協力廠商延伸模組時，請務必評估品質、授權、合規性、支援等，確保其符合您的需求。
+
+## <a name="tools"></a>工具
+
+### <a name="llblgen-pro"></a>LLBLGen Pro
+
+LLBLGen Pro 是實體模型化解決方案，具備 Entity Framework 與 Entity Framework Core 的支援。 您可加以利用來輕鬆定義實體模型，並將其對應至資料庫，優先使用資料庫或模型後，即可開始直接撰寫查詢。
+
+[網站](https://www.llblgen.com/)
+
+### <a name="devart-entity-developer"></a>Devart Entity Developer
+
+Devart Entity 是功能強大的 ORM 設計工具，適用於 ADO.NET Entity Framework、NHibernate、LinqConnect、Telerik Data Access、LINQ 到 SQL。 您可使用模型優先和資料庫優先方法來設計您的 ORM 模型，並為其產生 C# 或 Visual Basic .NET 程式碼。 其為您帶來新的 ORM 模型設計方式，這不僅提高了生產力，還有助於資料庫應用程式的開發。
+
+[網站](https://www.devart.com/entitydeveloper/)
+
+### <a name="ef-core-power-tools"></a>EF Core Power Tools
+
+Visual Studio 2017+ 延伸模組。 您可從現有的資料庫或 SQL Server Database 專案執行 DbContext 及 POCO 類別的還原工程，並透過各種方式對 DbContext 進行視覺化及檢查。
+
+[GitHub Wiki](https://github.com/ErikEJ/SqlCeToolbox/wiki/EF-Core-Power-Tools)
+
+## <a name="extensions"></a>延伸模組
+
+### <a name="microsoftentityframeworkcoreautohistory"></a>Microsoft.EntityFrameworkCore.AutoHistory
+
+支援自動記錄資料變更歷程記錄的 Microsoft.EntityFrameworkCore 外掛程式。
+
+[GitHub 存放庫](https://github.com/Arch/AutoHistory/)
+
+### <a name="microsoftentityframeworkcoredynamiclinq"></a>Microsoft.EntityFrameworkCore.DynamicLinq
+
+Microsoft.EntityFrameworkCore 的動態 LINQ 延伸模組，可新增非同步支援
+
+ [GitHub 存放庫](https://github.com/StefH/System.Linq.Dynamic.Core/)
+
+### <a name="efcorepractices"></a>EFCore.Practices
+
+嘗試在支援測試的 API 中擷取中上等級的做法 - 包括可掃描 N+1 個查詢的小型架構。
+
+[GitHub 存放庫](https://github.com/riezebosch/efcore-practices/tree/master/src/EFCore.Practices/)
+
+### <a name="efsecondlevelcachecore"></a>EFSecondLevelCache.Core
+
+第二個層級快取程式庫。 第二個層級快取是查詢快取。 EF 命令的結果會存放在快取中，使相同的 EF 命令會從快取擷取其資料，而不必再次向資料庫再次執行命令。
+
+[GitHub 存放庫](https://github.com/VahidN/EFSecondLevelCache.Core/)
+
+### <a name="detachedentityframework"></a>Detached.EntityFramework
+
+載入並儲存整個已中斷連結的實體圖表 (具備子實體與清單的實體)。 此想法出自於 [GraphDiff](https://github.com/refactorthis/GraphDiff/)。 此想法同時也新增了部分外掛程式，來減輕部分工作的重複性，例如稽核與分頁。
+
+[GitHub 存放庫](https://github.com/leonardoporro/Detached/)
+
+### <a name="entityframeworkcoreprimarykey"></a>EntityFrameworkCore.PrimaryKey
+
+從任何實體將主索引鍵 (包含複合索引鍵) 擷取為字典。
+
+[GitHub 存放庫](https://github.com/NickStrupat/EntityFramework.PrimaryKey/)
+
+### <a name="entityframeworkcorerx"></a>EntityFrameworkCore.Rx
+
+Entity Framework 實體之經常性可視項的被動延伸模組包裝函式。
+
+[GitHub 存放庫](https://github.com/NickStrupat/EntityFramework.Rx/)
+
+### <a name="entityframeworkcoretriggers"></a>EntityFrameworkCore.Triggers
+
+為您的實體新增插入、更新及刪除事件的觸發程序。 以下有三種事件，分別為：失敗前、失敗後以及失敗時。
+
+[GitHub 存放庫](https://github.com/NickStrupat/EntityFramework.Triggers/)
+
+### <a name="entityframeworkcoretypedoriginalvalues"></a>EntityFrameworkCore.TypedOriginalValues
+
+為您實體屬性的 OriginalValue 取得具類型的存取權。 支援簡單與複雜的屬性，但不支援瀏覽/集合。
+
+[GitHub 存放庫](https://github.com/NickStrupat/EntityFramework.TypedOriginalValues/)
+
+### <a name="geco"></a>Geco
+
+Geco 提供反向模型產生器，並具有複數/單數支援、以 C# 6.0 插入字串為基礎的可編輯範本，並在 .Net Core 上執行。 其也提供了種子指令碼產生器，具有 SQL 合併指令碼及指令碼執行器。
+
+[Github 存放庫](https://github.com/iQuarc/Geco)
+
+### <a name="linqkitmicrosoftentityframeworkcore"></a>LinqKit.Microsoft.EntityFrameworkCore
+
+LinqKit.Microsoft.EntityFrameworkCore 是一組免費的延伸模組，適用於 LINQ、SQL 及 EntityFrameworkCore 進階使用者。 具備 Include(...) 與 IDbAsync 支援。
+
+[GitHub 存放庫](https://github.com/scottksmith95/LINQKit/)
+
+### <a name="neinlinqentityframeworkcore"></a>NeinLinq.EntityFrameworkCore
+
+NeinLinq.EntityFrameworkCore 為使用 LINQ 提供者提供了實用的延伸模組，例如僅支援 .NET 函式少數子集的 Entity Framework、重複使用函式、重寫查詢、甚至能使 null 不出現，還能使用可翻譯的述詞與選取器來建置動態查詢。
+
+[GitHub 存放庫](https://github.com/axelheer/nein-linq/)
+
+### <a name="microsoftentityframeworkcoreunitofwork"></a>Microsoft.EntityFrameworkCore.UnitOfWork
+
+Microsoft.EntityFrameworkCore 的外掛程式，可支援存放庫、工作模式的單位，以及支援分散式交易的多個資料庫。
+
+[GitHub 存放庫](https://github.com/Arch/UnitOfWork/)
+
+### <a name="entityframeworklazyloading"></a>EntityFramework.LazyLoading
+
+EF Core 1.1 的消極式載入
+
+[GitHub 存放庫](https://github.com/darxis/EntityFramework.LazyLoading)
+
+### <a name="efcorebulkextensions"></a>EFCore.BulkExtensions
+
+適用於大量作業 (插入、更新、刪除) 的 EntityFrameworkCore 延伸模組。
+
+[GitHub 存放庫](https://github.com/borisdj/EFCore.BulkExtensions)

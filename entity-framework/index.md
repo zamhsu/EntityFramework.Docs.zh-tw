@@ -2,15 +2,16 @@
 layout: HubPage
 title: Entity Framework
 author: rowanmiller
+ms.topic: hub-page
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 6bb12583-c39a-454c-8d83-d2a2793ca9ef
 uid: index
-ms.openlocfilehash: b548e3073e539207fc57ce41faca1fa19d11d1ed
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: d8cc62dcab77b52509b8f4bbc0fc153b5f93be2f
+ms.sourcegitcommit: fc68321c211aca38f7b9dc3a75677c6ca1b2524b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 03/08/2018
 ---
 <div id="main" class="v2">
     <div class="container">
@@ -129,7 +130,7 @@ ms.lasthandoff: 10/27/2017
                                             </div>
                                             <div class="cardText">
                                                 <h3>
-                                                    <a href="/ef/core/">開始用</a>
+                                                    <a href="/ef/core/">開始使用</a>
                                                 </h3>
                                                 <p>
                                                     <a href="/ef/core/">概觀</a>

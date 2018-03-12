@@ -4,11 +4,11 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: 076e9251850ba10df323cd25922aa8b95b3a5491
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: db25ed55e3724ee71743e563f39a6e4b16c17589
+ms.sourcegitcommit: fc68321c211aca38f7b9dc3a75677c6ca1b2524b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 03/08/2018
 ---
 <a name="entity-framework-core-tools"></a>Entity Framework Core 工具
 ===========================
@@ -24,15 +24,9 @@ Entity Framework Core 工具可在 EF Core 應用程式開發期間協助您。 
 ----------
 這些工具還支援目標設為 .NET Framework 或 .NET Core 的專案。
 
-如果您專案的目標設為另一個架構 (例如，通用 Windows 或 Xamarin)，則建議建立所支援架構的不同 .NET Standard 專案和跨目標專案。
+若您想要使用類別程式庫，請在可行的情況下使用 .NET Core 或 .NET Framework 類別程式庫。 這會使 .NET 工具產生較少問題。 而如果您想要使用 .NET Standard 類別程式庫，則需要以 .NET Framework 或 .Net Core 為目標的啟動專案，使工具擁有具體的目標平台來上傳您的類別程式庫。 您可使用實際沒有程式碼的虛設專案作為啟動專案，此專案的目的僅是為工具提供目標。
 
-若要將 .NET Core 設為跨目標 (例如，以滑鼠右鍵按一下專案，然後選取 [編輯 \*.csproj]。 更新 `TargetFramework` 屬性，如下所示  (請注意，屬性名稱會變成複數)。
-
-``` xml
-<TargetFrameworks>netcoreapp2.0;netstandard2.0</TargetFrameworks>
-```
-
-如果您要使用 .NET Standard 類別庫，則您的啟始專案目標設為 .NET Framework 或 .NET Core 時不需要跨目標。
+若您的專案將另一個架構設為目標 (例如通用 Windows 或 Xamarin)，則必須建立個別的 .NET Standard 類別程式庫。 在此情況下，請遵循上述指導，並建立可供工具使用的啟動專案。
 
 <a name="startup-and-target-projects"></a>啟始和目標專案
 ---------------------------
