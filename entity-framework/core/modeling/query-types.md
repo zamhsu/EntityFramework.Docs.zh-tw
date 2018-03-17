@@ -6,11 +6,11 @@ ms.date: 2/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 ms.technology: entity-framework-core
 uid: core/modeling/query-types
-ms.openlocfilehash: 19a371c65da33e8209cc1ab3423a67c34ddae61e
-ms.sourcegitcommit: fc68321c211aca38f7b9dc3a75677c6ca1b2524b
+ms.openlocfilehash: dfd08cd1c30debddc79740bbf05c39c22e973855
+ms.sourcegitcommit: 01b5cf3b7c983bcced91e7cc4c78391ced2d2caa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/08/2018
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="query-types"></a>查詢類型
 > [!NOTE]
@@ -20,7 +20,7 @@ ms.lasthandoff: 03/08/2018
 
 在概念上類似於實體類型，包括：
 
-- 它們都是 POCO C# 類型加入至模型中，有兩種```OnModelCreating```使用```ModelBuilder.Query```方法，或透過 DbContext 「 組 」 屬性 (如查詢類型這類屬性型別為```DbQuery<T>```而```DbSet<T>```)。
+- 它們都是 POCO C# 類型加入至模型中，有兩種```OnModelCreating```使用```ModelBuilder.Query```方法，或透過 DbContext 「 組 」 屬性 (如查詢類型這類屬性型別為```DbQuery<T>```而不是```DbSet<T>```)。
 - 它們支援的大部分相同的對應功能，做為一般實體型別。 例如繼承對應、 巡覽 （請參閱下面的 limitiations），然後在關聯式存放區，讓您設定目標資料庫結構描述物件，透過```ToTable```， ```HasColumn``` fluent api 方法 （或資料註解）。
 
 查詢類型會與不同的實體中的類型，它們：
