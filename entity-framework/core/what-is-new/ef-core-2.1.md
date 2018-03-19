@@ -6,11 +6,11 @@ ms.date: 2/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: 1e5e9839bae1e5da4082d90c02d098bb3b2b43bd
-ms.sourcegitcommit: 4b7d3d3e258b0d9cb778bb45a9f4a33c0792e38e
+ms.openlocfilehash: bb1e691e0f22bd36467d58c02bde22c63067207e
+ms.sourcegitcommit: fcaeaf085171dfb5c080ec42df1d1df8dfe204fb
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 03/15/2018
 ---
 # <a name="new-features-in-ef-core-21"></a>EF Core 2.1 中的新功能
 > [!NOTE]  
@@ -124,7 +124,7 @@ var query = context.Customers.Select(
 
 請注意這項查詢只會轉譯成兩個 SQL 查詢：一個用於客戶，另一個用於訂單。
 
-### <a name="ownedattribute"></a>OwnedAttribute
+## <a name="ownedattribute"></a>OwnedAttribute
 
 您現在可以直接對類型標註 `[Owned]`，然後確定擁有者實體已新增至模型，來設定[擁有的實體類型](xref:core/modeling/owned-entities)：
 
@@ -145,7 +145,7 @@ public class Order
 
 ## <a name="database-provider-compatibility"></a>資料庫提供者相容性
 
-EF Core 2.1 已設計成與專為 EF Core 2.0 建立的資料庫提供者相容。 雖然上述某些功能 (例如值轉換) 需要更新的提供者，其他功能 (例如消極式載入) 則受到現有提供者的支援。
+EF Core 2.1 已設計成與專為 EF Core 2.0 建立的資料庫提供者相容。 雖然上述某些功能 (例如值轉換) 需要更新的提供者，但其他功能 (例如消極式載入) 則受到現有提供者的支援。
 
 > [!TIP]
 > 如果您在新功能中發現未預期的不相容或任何問題，或者如果您有相關意見反應，請使用[我們的問題追蹤程式](https://github.com/aspnet/EntityFrameworkCore/issues/new)進行回報。
