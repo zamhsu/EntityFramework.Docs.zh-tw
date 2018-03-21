@@ -4,11 +4,11 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/8/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: 6b278a5ae270b6a84269dffd72eeca609b168cdd
-ms.sourcegitcommit: 3b6159db8a6c0653f13c7b528367b4e69ac3d51e
+ms.openlocfilehash: d950e74ed4cef7d4274aabcf3eda7b0b735574c6
+ms.sourcegitcommit: 2ef0a4a90b01edd22b9206f8729b8de459ef8cab
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/28/2017
+ms.lasthandoff: 03/20/2018
 ---
 <a name="migrations-with-multiple-providers"></a>移轉具有多個提供者
 ==================================
@@ -20,7 +20,7 @@ ms.lasthandoff: 11/28/2017
 
 這是將每個移轉集執行方式之一[分開的組件][ 2]手動加入兩個移轉之間進行切換使用中的提供者 （和移轉組件）。
 
-另一種方法來建立新的型別，便可使用工具更容易衍生自您 DbContext，並覆寫使用中的提供者。 此類型用在設計時新增或套用移轉的時間。
+容易使用工具的另一種方法是建立新的類型，衍生自您 DbContext 和覆寫使用中的提供者。 此類型用在設計時新增或套用移轉的時間。
 
 ``` csharp
 class MySqliteDbContext : MyDbContext
