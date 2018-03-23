@@ -1,16 +1,16 @@
 ---
-title: "從 EF 升級核心 1.0 RTM-RC2 EF 核心"
+title: 從 EF 升級核心 1.0 RTM-RC2 EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: c3c1940b-136d-45d8-aa4f-cb5040f8980a
 ms.technology: entity-framework-core
 uid: core/miscellaneous/rc2-rtm-upgrade
-ms.openlocfilehash: 7a1d85949a5f9e1ad7efdbf585a608d815e8ce63
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 4bb4c5736708413f6581cad250b089b7bc22a559
+ms.sourcegitcommit: 90139dbd6f485473afda0788a5a314c9aa601ea0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="upgrading-from-ef-core-10-rc2-to-rtm"></a>從 EF Core 1.0 RC2 升級至 RTM
 
@@ -44,13 +44,13 @@ Rc2，移轉的資料行定義看起來像`table.Column<string>(nullable: true)`
 
 *  **AspNetUsers**
 
-   * 電子郵件
+   * Email
 
    * NormalizedEmail
 
    * NormalizedUserName
 
-   * UserName
+   * 使用者名稱
 
 初始移轉套用至資料庫時，無法進行這項變更會導致下列的例外狀況。
 
@@ -69,6 +69,9 @@ Rc2，移轉的資料行定義看起來像`table.Column<string>(nullable: true)`
   }
 }
 ```
+
+> [!NOTE]  
+> 自 1.0 版 RTM， [.NET Core SDK](https://www.microsoft.com/net/download/core)已不再支援`project.json`或開發使用 Visual Studio 2015 的.NET Core 應用程式。 建議您[從 project.json 移轉至 csproj](https://docs.microsoft.com/dotnet/articles/core/migration/)。 如果您使用 Visual Studio，我們建議您升級到[Visual Studio 2017](https://www.visualstudio.com/downloads/)。
 
 ## <a name="uwp-add-binding-redirects"></a>UWP： 新增繫結重新導向
 
