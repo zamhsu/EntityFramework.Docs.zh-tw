@@ -1,21 +1,18 @@
 ---
-title: "ASP.NET Core 使用者入門 - 現有的資料庫 - EF Core"
+title: ASP.NET Core 使用者入門 - 現有的資料庫 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
 ms.technology: entity-framework-core
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: afd99d68d2ba25ce58a21dc48d2c7ce27f208807
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: db2469d0badd428734425c1f568667f00bef2f4f
+ms.sourcegitcommit: 90139dbd6f485473afda0788a5a314c9aa601ea0
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>在 ASP.NET Core 上使用 EF Core 搭配現有資料庫的使用者入門
-
-> [!IMPORTANT]  
-> [.NET Core SDK](https://www.microsoft.com/net/download/core) 已不再支援 `project.json` 或 Visual Studio 2015。 針對所有進行 .NET Core 開發的人員，建議[從 project.json 移轉至 csproj](https://docs.microsoft.com/dotnet/articles/core/migration/) 和 [Visual Studio 2017](https://www.visualstudio.com/downloads/)。
 
 在本逐步解說中，您將建置 ASP.NET Core MVC 應用程式，該應用程式將使用 Entity Framework 執行基本的資料存取。 您將會使用反向工程，根據現有的資料庫來建立 Entity Framework 模型。
 
@@ -93,7 +90,7 @@ Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Conn
 如果您收到 `The term 'Scaffold-DbContext' is not recognized as the name of a cmdlet` 的錯誤，請關閉再重新開啟 Visual Studio。
 
 > [!TIP]  
-> 您可以將 `-Tables` 引數加入上述命令，以指定要為哪些資料表產生實體。 例如 `-Tables Blog,Post`.
+> 您可以將 `-Tables` 引數加入上述命令，以指定要為哪些資料表產生實體。 例如， `-Tables Blog,Post`.
 
 反向工程程序會根據現有資料庫的結構描述，建立實體類別 (`Blog.cs` & `Post.cs`) 和衍生的內容 (`BloggingContext.cs`)。
 
@@ -202,6 +199,6 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 * 按一下 [新建]
 * 輸入新部落格的 **URL**，然後按一下 [建立]
 
-![image](_static/create.png)
+![影像](_static/create.png)
 
-![image](_static/index-existing-db.png)
+![影像](_static/index-existing-db.png)
