@@ -1,15 +1,15 @@
 ---
-title: "EF Core 和 EF6 - 哪一個適合您"
+title: EF Core 和 EF6 - 哪一個適合您
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 288f825b-b3e6-4096-971b-d0a1cb96770e
 uid: efcore-and-ef6/choosing
-ms.openlocfilehash: 9a113e0965fa75a03510199fb75165f6e9be0bbd
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: f0a632902384a65ea3cddf752ad262c7a2e89e2e
+ms.sourcegitcommit: 2ef0a4a90b01edd22b9206f8729b8de459ef8cab
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 03/20/2018
 ---
 # <a name="ef-core-and-ef6-which-one-is-right-for-you"></a>EF Core 和 EF6：哪一個適合您
 
@@ -17,13 +17,11 @@ ms.lasthandoff: 10/27/2017
 
 ## <a name="guidance-for-new-applications"></a>新應用程式的指引
 
-因為 EF Core 是新產品，且仍然缺少一些重要的 O/RM 功能，因此對於許多應用程式而言，EF6 仍將是最適合的選擇。
+若您希望能利用 EF Core 的所有功能，且您的應用程式不需要尚未在 EF Core 中實作的任何功能，請考慮為新的應用程式使用 EF Core。
 
-**以下是我們建議使用 EF Core 的應用程式類型：**
+EF6 需要 .NET Framework 4.0 (或更新版本) 且只有在 Windows 上才支援 (也就是說，無法在 .NET Core 上執行且不受其他作業系統的支援)，但對於新的應用程式而言，只要這些限制可接受且應用程式不需要 EF6 無法使用的 EF Core 中之新功能，就仍然是可行的選擇。
 
-* 不需要尚未在 EF Core 中實作之功能的新應用程式。 檢閱[功能比較](features.md)，以了解 EF Core 是否適合您的應用程式。
-
-* 以 .NET Core 為目標的應用程式，例如通用 Windows 平台 (UWP) 和 ASP.NET Core 應用程式。 這些應用程式不能使用 EF6，因為 EF6 需要 .NET Framework (亦即 .NET Framework 4.5)。
+檢閱[功能比較](features.md)，以了解 EF Core 是否適合您的應用程式。
 
 ## <a name="guidance-for-existing-ef6-applications"></a>現有 EF6 應用程式的指引
 
