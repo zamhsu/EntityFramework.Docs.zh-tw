@@ -1,16 +1,16 @@
 ---
-title: "交易的 EF 核心"
+title: 交易的 EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: d3e6515b-8181-482c-a790-c4a6778748c1
 ms.technology: entity-framework-core
 uid: core/saving/transactions
-ms.openlocfilehash: 2dda7b7d58ae058fc2aa89fe16fbf46adc8c6bdc
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: fe4c0d6ad7ccb2e97dc94fbf2eb26a41e7fbcb19
+ms.sourcegitcommit: 7113e8675f26cbb546200824512078bf360225df
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 03/28/2018
 ---
 # <a name="using-transactions"></a>使用交易
 
