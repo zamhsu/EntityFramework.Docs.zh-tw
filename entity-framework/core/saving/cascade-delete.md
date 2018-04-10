@@ -1,5 +1,5 @@
 ---
-title: "串聯刪除-EF 核心"
+title: 串聯刪除-EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -16,7 +16,7 @@ ms.lasthandoff: 02/28/2018
 
 串聯刪除常用於資料庫詞彙來描述可讓刪除的資料列會自動觸發相關的資料列的刪除作業特性。 密切相關的概念也涵蓋在 EF 核心刪除行為是子實體的父系的關聯性時自動刪除已執行過-通常稱為 「 刪除的遺棄項目 」 這個 i。
 
-EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪除行為的組態。 EF 核心也會實作自動設定 [關聯性的 requiredness] 為基礎的每個關聯性的實用的預設刪除行為的慣例 (../modeling/relationships.md#required-and-optional-relationships)。
+EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪除行為的組態。 EF 核心也會實作自動設定 為基礎的每個關聯性的實用的預設刪除行為的慣例 [關聯性的 requiredness] (../modeling/relationships.md#required-and-optional-relationships)。
 
 ## <a name="delete-behaviors"></a>刪除行為
 刪除中所定義的行為*DeleteBehavior*列舉值類型，而且可以傳遞至*OnDelete* fluent API 來控制是否刪除主體/父實體或的英國相依性/子實體的關聯性應該有副作用的相依性/子實體上。
