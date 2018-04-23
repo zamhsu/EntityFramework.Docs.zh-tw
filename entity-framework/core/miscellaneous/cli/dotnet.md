@@ -1,14 +1,14 @@
 ---
-title: ".NET core CLI-EF 核心"
+title: .NET core CLI-EF 核心
 author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: 8a52cb8259bb381729a33a8161aec4b73f69f45d
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 396d31c9d0c0f47d299f49e82e557ed29b8420e7
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/16/2018
 ---
 <a name="ef-core-net-command-line-tools"></a>EF 核心.NET 命令列工具
 ===============================
@@ -65,19 +65,22 @@ dotnet ef
 
 啟始專案是工具在執行您的專案程式碼時所模擬的專案。 它也會預設為目前的目錄中的專案，但可以使用變更**-啟始專案**選項。
 
+> [!NOTE]
+> 比方說，更新 web 應用程式的 EF 核心安裝在不同的專案中的資料庫看起來會像這樣： `dotnet ef database update --project {project-path}` （從您的 web 應用程式目錄）
+
 常用選項：
 
 |    |                                  |                             |
 |:---|:---------------------------------|:----------------------------|
 |    | --json                           | 顯示 JSON 輸出。           |
-| -c | --context \<DBCONTEXT>           | 若要使用 DbContext。       |
+| -c | -內容\<DBCONTEXT >           | 若要使用 DbContext。       |
 | -p | -專案\<專案 >             | 要使用的專案。         |
 | -s | -啟始專案\<專案 >     | 若要使用啟始專案。 |
-|    | --framework \<FRAMEWORK>         | 目標 framework。       |
+|    | -framework\<架構 >         | 目標 framework。       |
 |    | -設定\<設定 > | 要使用的組態。   |
 |    | -執行階段\<識別項 >          | 在執行階段使用。         |
-| -h | --help                           | 顯示說明資訊。      |
-| -v | --verbose                        | 顯示詳細資訊輸出。        |
+| -h | -說明                           | 顯示說明資訊。      |
+| -v | -verbose                        | 顯示詳細資訊輸出。        |
 |    | --no-color                       | 不要以色彩標示輸出。      |
 |    | --prefix-output                  | 輸出層級的前置詞。   |
 
@@ -107,7 +110,7 @@ dotnet ef
 
 |              |                                                                                              |
 |:-------------|:---------------------------------------------------------------------------------------------|
-| \<移轉 > | 在目標移轉。 如果為 0，就會還原所有移轉。 預設的最後一個移轉。 |
+| \<移轉 &GT; | 在目標移轉。 如果為 0，就會還原所有移轉。 預設的最後一個移轉。 |
 
 ### <a name="dotnet-ef-dbcontext-info"></a>dotnet ef dbcontext 資訊
 
@@ -125,20 +128,21 @@ Scaffold DbContext 類型及實體類型的資料庫。
 
 |               |                                                                     |
 |:--------------|:--------------------------------------------------------------------|
-| \<連接 > | 資料庫的連接字串。                              |
-| \<PROVIDER>   | 若要使用提供者。 （例如： Microsoft.EntityFrameworkCore.SqlServer) |
+| \<連接 &GT; | 資料庫的連接字串。                              |
+| \<提供者 &GT;   | 若要使用提供者。 (例如， Microsoft.EntityFrameworkCore.SqlServer) |
 
 選項:
 
 |                 |                                         |                                                                                                  |
 |:----------------|:----------------------------------------|:-------------------------------------------------------------------------------------------------|
-| <nobr>-d</nobr> | --data-annotations                      | 使用屬性，將模型設定 （如果可能的話）。 如果省略，則會使用 fluent 應用程式開發的 API。 |
+| <nobr>-d</nobr> | -資料註解                      | 使用屬性，將模型設定 （如果可能的話）。 如果省略，則會使用 fluent 應用程式開發的 API。 |
 | -c              | -內容\<名稱 >                       | DbContext 名稱。                                                                       |
+|                 | -內容-dir\<路徑 >                   | 將 DbContext 檔案放入目錄。 路徑是相對於專案目錄。             |
 | -f              | --force                                 | 覆寫現有檔案。                                                                        |
 | -o              | -輸出 dir\<路徑 >                    | 將檔案放入目錄。 路徑是相對於專案目錄。                      |
 |                 | <nobr>-結構描述\<SCHEMA_NAME >...</nobr> | 要產生實體類型的資料表結構描述。                                              |
 | -t              | -資料表\<TABLE_NAME >...                | 要產生實體類型的資料表。                                                         |
-|                 | --use-database-names                    | 使用直接從資料庫資料表和資料行名稱。                                           |
+|                 | -使用資料庫名稱                    | 使用直接從資料庫資料表和資料行名稱。                                           |
 
 ### <a name="dotnet-ef-migrations-add"></a>dotnet ef 移轉新增
 
@@ -148,7 +152,7 @@ Scaffold DbContext 類型及實體類型的資料庫。
 
 |         |                            |
 |:--------|:---------------------------|
-| \<NAME> | 移轉程序的名稱。 |
+| \<名稱 &GT; | 移轉程序的名稱。 |
 
 選項:
 
@@ -168,7 +172,7 @@ Scaffold DbContext 類型及實體類型的資料庫。
 
 |    |         |                                                                       |
 |:---|:--------|:----------------------------------------------------------------------|
-| -f | --force | 不會檢查以查看是否移轉套用至資料庫。 |
+| -f | --force | 如果套用至資料庫，請還原移轉。 |
 
 ### <a name="dotnet-ef-migrations-script"></a>dotnet ef 移轉指令碼
 
@@ -179,7 +183,7 @@ Scaffold DbContext 類型及實體類型的資料庫。
 |         |                                                               |
 |:--------|:--------------------------------------------------------------|
 | \<FROM> | 開始移轉。 預設值為 0 （初始資料庫）。 |
-| \<TO>   | 結束的移轉。 預設的最後一個移轉。         |
+| \<若要 &GT;   | 結束的移轉。 預設的最後一個移轉。         |
 
 選項:
 

@@ -1,23 +1,23 @@
 ---
-title: "儲存相關資料的 EF 核心"
+title: 儲存相關資料的 EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 07b6680f-ffcf-412c-9857-f997486b386c
 ms.technology: entity-framework-core
 uid: core/saving/related-data
-ms.openlocfilehash: 078879163002cb66e0f0f439415789963181ec15
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: b0ed25267c85e82db18d8a89693b6040db7e4b34
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="saving-related-data"></a>儲存相關的資料
 
 除了隔離的實體，您也可以將使用模型中定義的關聯性。
 
 > [!TIP]  
-> 您可以檢視這篇文章[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/RelatedData/)GitHub 上。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/RelatedData/) \(英文\)。
 
 ## <a name="adding-a-graph-of-new-entities"></a>加入新的實體圖形
 
@@ -26,6 +26,9 @@ ms.lasthandoff: 10/27/2017
 在下列範例中，部落格和三個相關的文章所有插入資料庫。 找到及加入，因為它們是可透過連線公佈`Blog.Posts`導覽屬性。
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#AddingGraphOfEntities)]
+
+> [!TIP]  
+> 使用 EntityEntry.State 屬性設定只在單一實體的狀態。 例如，`context.Entry(blog).State = EntityState.Modified`。
 
 ## <a name="adding-a-related-entity"></a>新增相關的實體
 
