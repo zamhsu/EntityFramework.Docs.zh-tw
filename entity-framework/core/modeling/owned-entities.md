@@ -1,16 +1,16 @@
 ---
-title: "EF 核心擁有實體型別："
+title: EF 核心擁有實體型別：
 author: julielerman
 ms.author: divega
 ms.date: 2/26/2018
 ms.assetid: 2B0BADCE-E23E-4B28-B8EE-537883E16DF3
 ms.technology: entity-framework-core
 uid: core/modeling/owned-entities
-ms.openlocfilehash: a6823377eb626ca92263c31351e1aef61db5a787
-ms.sourcegitcommit: 4b7d3d3e258b0d9cb778bb45a9f4a33c0792e38e
+ms.openlocfilehash: f2f05499a3e3494f420d916df2db19667a6f1e29
+ms.sourcegitcommit: 26f33758c47399ae933f22fec8e1d19fa7d2c0b7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="owned-entity-types"></a>擁有的實體類型
 
@@ -21,7 +21,7 @@ EF 核心可讓您可以永遠只會出現在導覽屬性的其他實體類型�
 
 ## <a name="explicit-configuration"></a>明確的設定
 
-擁有的實體類型永遠不會包含 EF Core 的模型中的慣例。 您可以使用`OwnsOne`方法中的`OnModelCreating`或加上註解具有型別`OwnedAttrbibute`（EF 核心 2.1 的新） 來設定為擁有的型別類型。
+擁有的實體類型永遠不會包含 EF Core 的模型中的慣例。 您可以使用`OwnsOne`方法中的`OnModelCreating`或加上註解具有型別`OwnedAttribute`（EF 核心 2.1 的新） 來設定為擁有的型別類型。
 
 在此範例中，StreetAddress 是沒有 identity 屬性的類型。 它用做訂單類型的屬性，指定特定訂單的送貨地址。 在`OnModelCreating`，我們使用`OwnsOne`方法，以指定 ShippingAddress 屬性所擁有的實體順序類型。
 

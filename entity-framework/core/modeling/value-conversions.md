@@ -1,16 +1,16 @@
 ---
-title: "值轉換為 EF 核心"
+title: 值轉換為 EF 核心
 author: ajcvickers
 ms.author: divega
 ms.date: 02/19/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 ms.technology: entity-framework-core
 uid: core/modeling/value-conversions
-ms.openlocfilehash: 50acba39cdec16caa9300fcaf47ab6242a4f69fb
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 329d2757059462468ca30772d37789343c03ba7b
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="value-conversions"></a>值的轉換
 
@@ -137,6 +137,6 @@ public class Rider
 
 有幾個已知目前系統的限制值轉換：
 * 如上所述，`null`無法轉換。
-* 目前沒有任何方法可以散佈某個屬性轉換為 multuple 資料行，反之亦然。
+* 目前沒有任何方法可以散佈某個屬性轉換為多個資料行，反之亦然。
 * 使用值的轉換可能會影響 EF 核心能夠將運算式轉譯為 SQL。 這種情況下，將會記錄警告。
 移除這些限制都被視為未來的版本。
