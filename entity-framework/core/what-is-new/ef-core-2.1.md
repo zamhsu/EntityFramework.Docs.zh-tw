@@ -1,22 +1,22 @@
 ---
-title: "EF Core 2.1 中的新功能 - EF Core"
+title: EF Core 2.1 中的新功能 - EF Core
 author: divega
 ms.author: divega
 ms.date: 2/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: bb1e691e0f22bd36467d58c02bde22c63067207e
-ms.sourcegitcommit: fcaeaf085171dfb5c080ec42df1d1df8dfe204fb
+ms.openlocfilehash: db1648095aa4d612af53f4e10a30be36edc40da5
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/15/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="new-features-in-ef-core-21"></a>EF Core 2.1 中的新功能
 > [!NOTE]  
 > 這個版本仍處於預覽狀態。
 
-除了許多微幅改進及超過一百個產品的 Bug 修正，EF Core 2.1 還包含幾項新功能：
+除了許多 Bug 修正和小型的功能和效能增強之外，EF Core 2.1 還包含一些吸引人的新功能：
 
 ## <a name="lazy-loading"></a>消極式載入
 EF Core 現在包含必要的建置組塊，可讓任何人撰寫實體類別，以視需要載入其導覽屬性。 我們也已建立新套件 Microsoft.EntityFrameworkCore.Proxies，該套件利用這些建置組塊來產生以最小修改之實體類別為基礎的消極式載入 Proxy 類別 (例如具有虛擬導覽屬性的類別)。
@@ -71,7 +71,7 @@ GROUP BY [o].[CustomerId], [o].[EmployeeId];
 例如，您可以使用此選項，為 `OnModelCreating` 中的 Post 設定種子資料：
 
 ``` csharp
-modelBuilder.Entity<Post>().SeedData(new Post{ Id = 1, Text = "Hello World!" });
+modelBuilder.Entity<Post>().HasData(new Post{ Id = 1, Text = "Hello World!" });
 ```
 
 如需此主題的詳細資訊，請閱讀[資料植入](xref:core/modeling/data-seeding)一節。  
@@ -143,9 +143,29 @@ public class Order
 }
 ```
 
+## <a name="new-dotnet-ef-global-tool"></a>新的 dotnet-ef 通用工具
+
+_dotnet-ef_ 命令已轉換為 .NET CLI 通用工具，因此不再需要在專案中使用 DotNetCliToolReference 才能使用移轉，或從現有的資料庫建立 DbContext 結構。
+
+## <a name="microsoftentityframeworkcoreabstractions-package"></a>Microsoft.EntityFrameworkCore.Abstractions 套件
+新的套件包含屬性和介面，您可以在專案中使用這些屬性和介面來啟用 EF Core 功能，而不必仰賴整體 EF Core。 例如， Preview 1 中引進的 [Owned] 屬性已移到此處。
+
+## <a name="state-change-events"></a>狀態變更事件
+
+`ChangeTracker` 上的新 `Tracked` 和 `StateChanged` 事件可用於撰寫邏輯，該邏輯會針對進入 DbContext 或改變其狀態的實體進行回應。
+
+## <a name="raw-sql-parameter-analyzer"></a>原始的 SQL 參數分析器
+
+EF Core 隨附一個新的程式碼分析工具，可偵測原始 SQL API (例如 `FromSql` 或 `ExecuteSqlCommand`) 可能不安全的使用方式。 例如， 下列查詢中，您將看到警告，因為 _minAge_ 未參數化：
+
+``` csharp
+var sql = $"SELECT * FROM People WHERE Age > {minAge}";
+var query = context.People.FromSql(sql);
+```
+
 ## <a name="database-provider-compatibility"></a>資料庫提供者相容性
 
-EF Core 2.1 已設計成與專為 EF Core 2.0 建立的資料庫提供者相容。 雖然上述某些功能 (例如值轉換) 需要更新的提供者，但其他功能 (例如消極式載入) 則受到現有提供者的支援。
+EF Core 2.1 已設計成與專為 EF Core 2.0 建立的資料庫提供者相容，或至少需要極少的變更。 雖然上述某些功能 (例如值轉換) 需要更新的提供者，但其他功能 (例如消極式載入) 則受到現有提供者的支援。
 
 > [!TIP]
 > 如果您在新功能中發現未預期的不相容或任何問題，或者如果您有相關意見反應，請使用[我們的問題追蹤程式](https://github.com/aspnet/EntityFrameworkCore/issues/new)進行回報。
