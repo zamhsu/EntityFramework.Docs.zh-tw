@@ -17,6 +17,7 @@
     }
   ],
   "build": {
+    "markdownEngineName": "markdig",
     "content": [
       {
         "files": [
