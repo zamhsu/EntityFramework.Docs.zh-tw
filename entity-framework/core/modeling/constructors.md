@@ -6,11 +6,11 @@ ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 ms.technology: entity-framework-core
 uid: core/modeling/constructors
-ms.openlocfilehash: 3f861d54c5bff637ae28f38b08da7aff7d0ea5c0
-ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
+ms.openlocfilehash: 8cea624c295f99ef54cb8b4758642eade03c235e
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 04/26/2018
 ---
 # <a name="entity-types-with-constructors"></a>使用建構函式的實體類型
 
@@ -40,7 +40,7 @@ public class Blog
 public class Post
 {
     public int Id { get; set; }
-    
+
     public string Title { get; set; }
     public string Content { get; set; }
     public DateTime PostedOn { get; set; }
@@ -135,7 +135,6 @@ public class Post
 
     public Blog Blog { get; set; }
 }
-
 ```
 EF 核心看見為讀寫，也就是說，所有的屬性對應與之前，以及索引鍵可能仍會存放區產生的私用 setter 的屬性。
 

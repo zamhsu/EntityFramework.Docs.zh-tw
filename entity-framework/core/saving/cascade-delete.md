@@ -6,17 +6,17 @@ ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 ms.technology: entity-framework-core
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 1ab9d114e27aac0bec972df631a426c8ce87a518
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 0fc8929c56d4c657b7fb1e3c8e4b1a71659220c9
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/26/2018
 ---
 # <a name="cascade-delete"></a>串聯刪除
 
-串聯刪除常用於資料庫詞彙來描述可讓刪除的資料列會自動觸發相關的資料列的刪除作業特性。 密切相關的概念也涵蓋在 EF 核心刪除行為是子實體的父系的關聯性時自動刪除已執行過-通常稱為 「 刪除的遺棄項目 」 這個 i。
+串聯刪除常用於資料庫詞彙來描述可讓刪除的資料列會自動觸發相關的資料列的刪除作業特性。 密切相關的概念也涵蓋在 EF 核心刪除行為時，自動刪除的子實體已嚴重損毀它的父系的關聯性-這通常稱為 「 刪除的遺棄項目 」。
 
-EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪除行為的組態。 EF 核心也會實作自動設定 為基礎的每個關聯性的實用的預設刪除行為的慣例 [關聯性的 requiredness] (../modeling/relationships.md#required-and-optional-relationships)。
+EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪除行為的組態。 EF 核心也會實作自動設定為基礎的每個關聯性的實用的預設刪除行為的慣例[關聯性的 requiredness](../modeling/relationships.md#required-and-optional-relationships)。
 
 ## <a name="delete-behaviors"></a>刪除行為
 刪除中所定義的行為*DeleteBehavior*列舉值類型，而且可以傳遞至*OnDelete* fluent API 來控制是否刪除主體/父實體或的英國相依性/子實體的關聯性應該有副作用的相依性/子實體上。
@@ -35,10 +35,10 @@ EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪�
 
 | 行為名稱               | 在記憶體中的相依性/子系上的效果    | 在資料庫中的相依性/子系上的效果  |
 |:----------------------------|:---------------------------------------|:---------------------------------------|
-| **Cascade**                 | 刪除實體                   | 刪除實體                   |
+| **重疊顯示**                 | 刪除實體                   | 刪除實體                   |
 | **ClientSetNull** （預設值） | 外部索引鍵屬性會設定為 null | 無                                   |
-| **SetNull**                 | 外部索引鍵屬性會設定為 null | 外部索引鍵屬性會設定為 null |
-| **Restrict**                | 無                                   | 無                                   |
+| **setNull**                 | 外部索引鍵屬性會設定為 null | 外部索引鍵屬性會設定為 null |
+| **限制**                | 無                                   | 無                                   |
 
 它是必要的關聯性 （非可為 null 的外部索引鍵）_不_能夠儲存的 null 外部索引鍵值，而造成下列影響：
 
@@ -46,8 +46,8 @@ EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪�
 |:----------------------|:------------------------------------|:--------------------------------------|
 | **Cascade** （預設值） | 刪除實體                | 刪除實體                  |
 | **ClientSetNull**     | SaveChanges 擲回                  | 無                                  |
-| **SetNull**           | SaveChanges 擲回                  | SaveChanges 擲回                    |
-| **Restrict**          | 無                                | 無                                  |
+| **setNull**           | SaveChanges 擲回                  | SaveChanges 擲回                    |
+| **限制**          | 無                                | 無                                  |
 
 在上述資料表中*無*可能會導致條件約束違規。 比方說，如果主體/子實體已刪除，但若要變更相依/子系的外部索引鍵會採取任何動作，然後資料庫將可能擲回 SaveChanges 上因為外部索引條件約束違規。
 

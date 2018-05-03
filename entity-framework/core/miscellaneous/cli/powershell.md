@@ -5,10 +5,10 @@ ms.author: bricelam
 ms.date: 11/6/2017
 ms.technology: entity-framework-core
 ms.openlocfilehash: a53455a78db4bc504c45abafdacf9a15381f608e
-ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 04/26/2018
 ---
 <a name="ef-core-package-manager-console-tools"></a>EF 核心封裝管理員主控台工具
 =====================================

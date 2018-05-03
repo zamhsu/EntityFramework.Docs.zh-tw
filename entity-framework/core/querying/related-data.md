@@ -1,16 +1,16 @@
 ---
-title: "正在載入相關的資料-EF 核心"
+title: 正在載入相關的資料-EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 ms.technology: entity-framework-core
 uid: core/querying/related-data
-ms.openlocfilehash: 0d7705e0e5368435536e98d319c853ea8c732643
-ms.sourcegitcommit: 8f3be0a2a394253efb653388ec66bda964e5ee1b
+ms.openlocfilehash: 5f1fb9376300739ab0e306d9d60e7ec71aa2d2e7
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/05/2018
+ms.lasthandoff: 04/26/2018
 ---
 # <a name="loading-related-data"></a>載入相關的資料
 
@@ -43,7 +43,7 @@ Entity Framework Core 可讓您在模型中使用的導覽屬性，來載入相�
 [!code-csharp[Main](../../../samples/core/Querying/Querying/RelatedData/Sample.cs#SingleThenInclude)]
 
 > [!NOTE]  
-> 目前版本的 Visual Studio 提供不正確的程式碼完成的選項，而且可能會導致標示有語法錯誤時使用的正確運算式`ThenInclude`之後集合導覽屬性的方法。 這是在 https://github.com/dotnet/roslyn/issues/8237 追蹤 IntelliSense 問題的徵兆。 它可以安全地忽略這些假性的語法錯誤，只要程式碼正確，而且可以成功編譯。 
+> 目前版本的 Visual Studio 提供不正確的程式碼完成的選項，而且可能會導致標示有語法錯誤時使用的正確運算式`ThenInclude`之後集合導覽屬性的方法。 這是發生在追蹤的 IntelliSense 問題的徵兆https://github.com/dotnet/roslyn/issues/8237。 它可以安全地忽略這些假性的語法錯誤，只要程式碼正確，而且可以成功編譯。 
 
 您可以多個呼叫鏈結到`ThenInclude`繼續進一步包括層級的相關資料。
 
@@ -98,19 +98,19 @@ Entity Framework Core 可讓您在模型中使用的導覽屬性，來載入相�
 內容`School`瀏覽的所有人學生可以立即載入使用的數字的模式：
 
 - 使用 cast
-```Csharp
-context.People.Include(person => ((Student)person).School).ToList()
-```
+  ```Csharp
+  context.People.Include(person => ((Student)person).School).ToList()
+  ```
 
 - 使用`as`運算子
-```Csharp
-context.People.Include(person => (person as Student).School).ToList()
-```
+  ```Csharp
+  context.People.Include(person => (person as Student).School).ToList()
+  ```
 
 - 使用的多載`Include`會接受參數的型別 `string`
-```Csharp
-context.People.Include("Student").ToList()
-```
+  ```Csharp
+  context.People.Include("Student").ToList()
+  ```
 
 ### <a name="ignored-includes"></a>忽略包含
 

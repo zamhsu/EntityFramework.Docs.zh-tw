@@ -1,16 +1,16 @@
 ---
-title: "產生的值-EF 核心"
+title: 產生的值-EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: eb082011-11a1-41b4-a108-15daafa03e80
 ms.technology: entity-framework-core
 uid: core/modeling/generated-properties
-ms.openlocfilehash: 892494461bcf49ee10d05c972da0ba19ca003c35
-ms.sourcegitcommit: 4b7d3d3e258b0d9cb778bb45a9f4a33c0792e38e
+ms.openlocfilehash: 88ccc2da3c2b6cbba8920d7113c82e769b459897
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/26/2018
 ---
 # <a name="generated-values"></a>產生的值
 
@@ -28,7 +28,7 @@ ms.lasthandoff: 02/28/2018
 
 根據所使用的資料庫提供者，值可能會產生 EF 或在資料庫中的用戶端。 如果由資料庫所產生的值，然後 EF 可能指派暫存值，當您將實體加入至內容。 然後將由期間的資料庫產生值取代這個暫存值`SaveChanges()`。
 
-如果您加入實體指派給屬性的值的內容，然後 EF 會嘗試插入的值，而不會產生一個新。 屬性會被視為具有值，如果它不指定 CLR 預設值指派 (`null`如`string`，`0`如`int`，`Guid.Empty`如`Guid`等。)。 如需詳細資訊，請參閱[產生屬性的明確值](..\saving\explicit-values-generated-properties.md)。
+如果您加入實體指派給屬性的值的內容，然後 EF 會嘗試插入的值，而不會產生一個新。 屬性會被視為具有值，如果它不指定 CLR 預設值指派 (`null`如`string`，`0`如`int`，`Guid.Empty`如`Guid`等。)。 如需詳細資訊，請參閱[產生屬性的明確值](../saving/explicit-values-generated-properties.md)。
 
 > [!WARNING]  
 > 加入的實體產生值的方式將取決於所使用的資料庫提供者。 資料庫提供者可能會自動設定某些屬性類型，為所產生的值，但有些則可能需要您手動安裝程式如何產生值。
@@ -39,13 +39,13 @@ ms.lasthandoff: 02/28/2018
 
 產生的值上加入或更新，表示每次 （insert 或 update），則會儲存記錄，就會產生新的值。
 
-像`value generated on add`，如果您的實體，而不是所產生的值，將會插入值的新加入的執行個體上指定屬性的值。 它也可更新時，設定明確的值。 如需詳細資訊，請參閱[產生屬性的明確值](..\saving\explicit-values-generated-properties.md)。
+像`value generated on add`，如果您的實體，而不是所產生的值，將會插入值的新加入的執行個體上指定屬性的值。 它也可更新時，設定明確的值。 如需詳細資訊，請參閱[產生屬性的明確值](../saving/explicit-values-generated-properties.md)。
 
-> [!WARNING]  
+> [!WARNING]
 > 如何新增和更新的實體產生值將取決於所使用的資料庫提供者。 而有些則會需要您手動安裝程式如何產生值的資料庫提供者可能會自動安裝程式為某些屬性類型，所產生的值。
->
+> 
 > 例如，當使用 SQL Server`byte[]`屬性設定為產生上新增或更新並標示為並行語彙基元，將會安裝於`rowversion`資料型別-如此將會在資料庫中產生的值。 不過，如果您指定`DateTime`產生屬性上加入或更新，則您必須設定要產生之值的方式。 若要這樣做的一種方式為設定預設值是`GETDATE()`(請參閱[預設值](relational/default-values.md)) 來產生新的資料列的值。 您接著可以使用的資料庫觸發程序期間更新 （例如，下列的範例觸發程序） 產生的值。
->
+> 
 > [!code-sql[Main](../../../samples/core/Modeling/FluentAPI/Samples/ValueGeneratedOnAddOrUpdate.sql)]
 
 ## <a name="conventions"></a>慣例
