@@ -9,11 +9,11 @@ ms.date: 04/05/2017
 ms.assetid: 099d179e-dd7b-4755-8f3c-fcde914bf50b
 ms.technology: entity-framework-core
 uid: core/get-started/netcore/new-db-sqlite
-ms.openlocfilehash: 2511dfa3f3262bb12c2058dc1c402b7dcc4c670d
-ms.sourcegitcommit: 90139dbd6f485473afda0788a5a314c9aa601ea0
+ms.openlocfilehash: fcace3c0f259b1a456d9ca1086e6a1549c070d57
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/23/2018
+ms.lasthandoff: 04/26/2018
 ---
 # <a name="getting-started-with-ef-core-on-net-core-console-app-with-a-new-database"></a>在 .NET Core 主控台應用程式上使用 EF Core 搭配新資料庫的使用者入門
 
@@ -89,13 +89,13 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 
 * 開啟 *Program.cs* 並使用下列程式碼來取代內容：
 
- [!code-csharp[Main](../../../../samples/core/GetStarted/NetCore/ConsoleApp.SQLite/Program.cs)]
+  [!code-csharp[Main](../../../../samples/core/GetStarted/NetCore/ConsoleApp.SQLite/Program.cs)]
 
 * 測試應用程式：
 
- `dotnet run`
+  `dotnet run`
 
- 有一個部落格儲存至資料庫，且所有部落格的詳細資料會在主控台中顯示。
+  有一個部落格儲存至資料庫，且所有部落格的詳細資料會在主控台中顯示。
 
   ``` Console
   ConsoleApp.SQLite>dotnet run

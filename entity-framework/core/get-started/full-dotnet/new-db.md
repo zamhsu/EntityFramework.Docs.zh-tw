@@ -1,5 +1,5 @@
 ---
-title: ".NET Framework 快速入門 - 新資料庫 - EF Core"
+title: .NET Framework 快速入門 - 新資料庫 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -7,10 +7,10 @@ ms.assetid: 52b69727-ded9-4a7b-b8d5-73f3acfbbad3
 ms.technology: entity-framework-core
 uid: core/get-started/full-dotnet/new-db
 ms.openlocfilehash: bd7054c6834ae11bfdc352d63654e4304771e432
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 04/26/2018
 ---
 # <a name="getting-started-with-ef-core-on-net-framework-with-a-new-database"></a>在 .NET Framework 上使用 EF Core 搭配新資料庫的使用者入門
 
@@ -161,4 +161,4 @@ namespace EFGetStarted.ConsoleApp
 
 您會看到有一個部落格儲存至資料庫，然後所有部落格的詳細資料會列印至主控台。
 
-![image](_static/output-new-db.png)
+![影像](_static/output-new-db.png)

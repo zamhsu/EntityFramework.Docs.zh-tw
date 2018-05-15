@@ -1,5 +1,5 @@
 ---
-title: ".NET Framework 快速入門 - 現有的資料庫 - EF Core"
+title: .NET Framework 快速入門 - 現有的資料庫 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -7,10 +7,10 @@ ms.assetid: a29a3d97-b2d8-4d33-9475-40ac67b3b2c6
 ms.technology: entity-framework-core
 uid: core/get-started/full-dotnet/existing-db
 ms.openlocfilehash: 3cd69109e3cf8dbc103f9eea6e2553df17f29a98
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 04/26/2018
 ---
 # <a name="getting-started-with-ef-core-on-net-framework-with-an-existing-database"></a>在 .NET Framework 上使用 EF Core 搭配現有資料庫的使用者入門
 
@@ -198,4 +198,4 @@ namespace EFGetStarted.ConsoleApp.ExistingDb
 
 您會看到有一個部落格儲存至資料庫，然後所有部落格的詳細資料會列印至主控台。
 
-![image](_static/output-existing-db.png)
+![影像](_static/output-existing-db.png)

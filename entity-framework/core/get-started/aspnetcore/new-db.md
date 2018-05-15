@@ -1,5 +1,5 @@
 ---
-title: "ASP.NET Core 使用者入門 - 新資料庫 - EF Core"
+title: ASP.NET Core 使用者入門 - 新資料庫 - EF Core
 author: rick-anderson
 ms.author: riande
 ms.author2: tdykstra
@@ -8,11 +8,11 @@ ms.topic: get-started-article
 ms.assetid: e153627f-f132-4c11-b13c-6c9a607addce
 ms.technology: entity-framework-core
 uid: core/get-started/aspnetcore/new-db
-ms.openlocfilehash: f6ed19d3c5d2ae8d1f5756558e50c1f0dddd2f07
-ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
+ms.openlocfilehash: 80477ca57b8b3df6de8ba3595c9056c6b8412040
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2018
+ms.lasthandoff: 04/26/2018
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-a-new-database"></a>在 ASP.NET Core 上使用 EF Core 搭配新資料庫的使用者入門
 
@@ -65,7 +65,7 @@ ms.lasthandoff: 02/12/2018
 * 輸入 **Model.cs** 作為名稱，然後按一下 [確定]。
 * 以下列程式碼取代檔案的內容：
 
- [!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.NewDb/Models/Model.cs)]
+  [!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.NewDb/Models/Model.cs)]
 
 注意：在實際的應用程式中，您通常會將模型中的每個類別放在不同的檔案中。 為了簡單起見，我們在此教學課程中將所有類別放在同一個檔案中。
 
@@ -78,13 +78,13 @@ ms.lasthandoff: 02/12/2018
 * 開啟 **Startup.cs**
 * 加入下列 `using` 陳述式：
 
- [!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.NewDb/Startup.cs#AddedUsings)]
+  [!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.NewDb/Startup.cs#AddedUsings)]
 
 加入 `AddDbContext` 方法以將它註冊為服務：
 
 * 將下列程式碼加入 `ConfigureServices` 方法：
 
- [!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.NewDb/Startup.cs?name=ConfigureServices&highlight=7-8)]
+  [!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.NewDb/Startup.cs?name=ConfigureServices&highlight=7-8)]
 
 注意：實際的應用程式通常會將連接字串放入到設定檔中。 為了簡單起見，我們在程式碼中加以定義。 如需詳細資訊，請參閱[連接字串](../../miscellaneous/connection-strings.md)。
 
