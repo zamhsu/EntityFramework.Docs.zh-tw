@@ -6,11 +6,11 @@ ms.date: 2/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 ms.technology: entity-framework-core
 uid: core/modeling/query-types
-ms.openlocfilehash: 4e02f106e086d243b23a60c02838f32555be210e
-ms.sourcegitcommit: 26f33758c47399ae933f22fec8e1d19fa7d2c0b7
+ms.openlocfilehash: f16e3a130f3a4f92b2bf6014f2df0ca4eec56a25
+ms.sourcegitcommit: 038acd91ce2f5a28d76dcd2eab72eeba225e366d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/19/2018
+ms.lasthandoff: 05/14/2018
 ---
 # <a name="query-types"></a>查詢類型
 > [!NOTE]
@@ -28,7 +28,10 @@ EF 核心模型可以包含實體類型，除了_查詢類型_，可用來執行
 - 不需要定義的索引鍵。
 - 永遠不會追蹤變更_DbContext_ ，因此會永遠不會插入、 更新或刪除資料庫上。
 - 永遠不會探索到的慣例。
-- 只支援的瀏覽對應功能的子集具體而言，它們可能永遠不會做為關聯性的主要端點。
+- 特別是只支援瀏覽對應功能的子集：
+  - 它們可能永遠不會做為關聯性的主要端點。
+  - 它們只可以包含指向實體參考導覽屬性。
+  - 實體不能包含導覽屬性來查詢類型。
 - 都能解決_ModelBuilder_使用`Query`方法而非`Entity`方法。
 - 對應索引_DbContext_透過屬性的型別`DbQuery<T>`而非 `DbSet<T>`
 - 會對應至資料庫物件使用`ToView`方法，而非`ToTable`。
