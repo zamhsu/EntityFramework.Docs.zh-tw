@@ -6,11 +6,11 @@ ms.date: 02/19/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 ms.technology: entity-framework-core
 uid: core/modeling/value-conversions
-ms.openlocfilehash: 329d2757059462468ca30772d37789343c03ba7b
-ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
+ms.openlocfilehash: 3e97c05a87ad9b4817c03f446031ea6c74704f5b
+ms.sourcegitcommit: 605e42232854ce44bae09624a6eebc35b8e2473b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="value-conversions"></a>值的轉換
 
@@ -60,7 +60,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ## <a name="the-valueconverter-class"></a>ValueConverter 類別
 
-呼叫`HasConversion`如上所示將建立`ValueConverter`執行個體，並將其設定的屬性。 `ValueConverter`改為明確建立。 例如: 
+呼叫`HasConversion`如上所示將建立`ValueConverter`執行個體，並將其設定的屬性。 `ValueConverter`改為明確建立。 例如：
 ```Csharp
 var converter = new ValueConverter<EquineBeast, string>(
     v => v.ToString(),
@@ -78,7 +78,7 @@ modelBuilder
 
 ## <a name="built-in-converters"></a>內建轉換程式
 
-EF 核心隨附一組預先定義的`ValueConverter`中找到的類別`Microsoft.EntityFrameworkCore.Storage.Converters`命名空間。 這些是：
+EF 核心隨附一組預先定義的`ValueConverter`中找到的類別`Microsoft.EntityFrameworkCore.Storage.ValueConversion`命名空間。 這些是：
 * `BoolToZeroOneConverter` 為零，而另一個 Bool
 * `BoolToStringConverter` -字串，例如"Y"和"N"Bool
 * `BoolToTwoValuesConverter` -任何兩個值 Bool
