@@ -1,5 +1,5 @@
 ---
-title: "基本查詢的 EF 核心"
+title: 基本查詢 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -8,22 +8,23 @@ ms.technology: entity-framework-core
 uid: core/querying/basic
 ms.openlocfilehash: 5070faf2aeeffad680e24e7de5a0ffa03a8f0064
 ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052548"
 ---
 # <a name="basic-queries"></a>基本查詢
 
-了解如何使用語言整合 Query (LINQ) 從資料庫載入實體。
+了解如何使用 Language Integrated Query (LINQ) 從資料庫載入實體。
 
 > [!TIP]  
-> 您可以檢視這篇文章[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying)GitHub 上。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
 
 ## <a name="101-linq-samples"></a>101 個 LINQ 範例
 
-此頁面會顯示一些可達到使用 Entity Framework Core 的一般工作的範例。 一組廣泛的範例顯示 LINQ 極限，請參閱[101 個 LINQ 範例](https://code.msdn.microsoft.com/101-LINQ-Samples-3fb9811b)。
+此頁面會顯示可使用 Entity Framework Core 來達成常見工作的一些範例。 如需示範使用 LINQ 可能性的大量範例，請參閱 [101 個 LINQ 範例](https://code.msdn.microsoft.com/101-LINQ-Samples-3fb9811b) \(英文\)。
 
-## <a name="loading-all-data"></a>載入所有的資料
+## <a name="loading-all-data"></a>載入所有資料
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/Basics/Sample.cs)] -->
 ``` csharp

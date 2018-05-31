@@ -1,5 +1,5 @@
 ---
-title: 儲存相關資料的 EF 核心
+title: 儲存相關資料 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -8,56 +8,57 @@ ms.technology: entity-framework-core
 uid: core/saving/related-data
 ms.openlocfilehash: b0ed25267c85e82db18d8a89693b6040db7e4b34
 ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 04/16/2018
+ms.locfileid: "31006646"
 ---
-# <a name="saving-related-data"></a>儲存相關的資料
+# <a name="saving-related-data"></a>儲存相關資料
 
-除了隔離的實體，您也可以將使用模型中定義的關聯性。
+儲存隔離的實體之外，您也可以利用模型中所定義的關聯性。
 
 > [!TIP]  
 > 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/RelatedData/) \(英文\)。
 
-## <a name="adding-a-graph-of-new-entities"></a>加入新的實體圖形
+## <a name="adding-a-graph-of-new-entities"></a>新增新實體的圖表
 
-如果您建立新的數個相關的實體，加入其中的內容將會造成太加入其他。
+如果您建立數個新的相關實體，則將其中一個實體新增至內容中時，也會一併新增其他實體。
 
-在下列範例中，部落格和三個相關的文章所有插入資料庫。 找到及加入，因為它們是可透過連線公佈`Blog.Posts`導覽屬性。
+在下列範例中，會將部落格及三篇相關文章都插入到資料庫中。 系統會找出並新增文章，因為可以透過 `Blog.Posts` 導覽屬性觸達這些文章。
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#AddingGraphOfEntities)]
 
 > [!TIP]  
-> 使用 EntityEntry.State 屬性設定只在單一實體的狀態。 例如，`context.Entry(blog).State = EntityState.Modified`。
+> 請使用 EntityEntry.State 屬性來僅設定單一實體的狀態。 例如，`context.Entry(blog).State = EntityState.Modified`。
 
-## <a name="adding-a-related-entity"></a>新增相關的實體
+## <a name="adding-a-related-entity"></a>新增相關實體
 
-如果您從導覽屬性，已經受到內容追蹤時的實體參考新的實體，將探索到的實體，並插入至資料庫。
+如果您從內容所追蹤實體的導覽屬性參考新的實體，系統將會探索到該實體並插入到資料庫中。
 
-在下列範例中，`post`會插入實體，因為它會加入至`Posts`屬性`blog`從資料庫中提取的實體。
+在下列範例中，會插入 `post` 實體，因為該實體已新增至擷取自資料庫 `blog` 實體的 `Posts` 屬性。
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#AddingRelatedEntity)]
 
 ## <a name="changing-relationships"></a>變更關聯性
 
-如果您變更實體的導覽屬性，對應的變更將會對資料庫中的外部索引鍵資料行。
+如果您變更某個實體的導覽屬性，系統將會對資料庫中的外部索引鍵資料行進行對應的變更。
 
-在下列範例中，`post`實體會更新為隸屬於新`blog`實體因為其`Blog`瀏覽屬性設定為指向`blog`。 請注意，`blog`就也會插入到資料庫，所以它已經受到內容追蹤實體的導覽屬性所參考的新實體 (`post`)。
+在下列範例中，會將 `post` 實體更新成屬於新的 `blog` 實體，因為其 `Blog` 導覽屬性是設定為指向 `blog`。 請注意，系統也會將 `blog` 插入到資料庫中，因為它是內容所追蹤實體 (`post`) 的導覽屬性所參考的新實體。
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#ChangingRelationships)]
 
 ## <a name="removing-relationships"></a>移除關聯性
 
-您可以移除關聯性設為參考導覽`null`，或移除相關的實體集合的巡覽。
+您可以藉由將參考導覽設定為 `null`，或從集合導覽中移除相關實體，來移除關聯性。
 
-移除關聯性可以有相依的實體上的副作用，根據串聯刪除關聯性中設定的行為。
+根據關聯性中所設定的串聯刪除行為，移除關聯性可能會對相依實體產生副作用。
 
-根據預設，針對必要的關聯性，串聯刪除行為設定，將會從資料庫刪除子/相依實體。 選擇性的關聯性的串聯刪除未設定依預設，但將設定外部索引鍵屬性為 null。
+針對必要關聯性，預設會設定串聯刪除行為，系統將會從資料庫中刪除子系/相依實體。 針對選擇性關聯性，預設並不會設定串聯刪除，但外部索引鍵屬性將會設定為 Null。
 
-請參閱[必要和選擇性的關聯性](../modeling/relationships.md#required-and-optional-relationships)若要了解如何設定 requiredness 的關聯性。
+若要了解如何設定關聯性的必要性，請參閱[必要和選擇性關聯性](../modeling/relationships.md#required-and-optional-relationships)。
 
-請參閱[Cascade Delete](cascade-delete.md)的 cascade delete 行為方式的詳細工作，他們可以設定的方式明確及如何選取依慣例。
+如需有關串聯刪除行為如何運作、如何明確設定這些行為及如何依慣例選取這些行為的更多詳細資料，請參閱[串聯刪除](cascade-delete.md)。
 
-在下列範例中，串聯刪除設定之間的關聯性`Blog`和`Post`，因此`post`從資料庫刪除實體。
+在下列範例中，在 `Blog` 與 `Post` 之間的關聯性上已設定串聯刪除，因此會從資料庫中刪除 `post`實體。
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#RemovingRelationships)]

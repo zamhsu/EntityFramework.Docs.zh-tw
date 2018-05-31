@@ -1,5 +1,5 @@
 ---
-title: 串聯刪除-EF 核心
+title: 串聯刪除 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -8,72 +8,73 @@ ms.technology: entity-framework-core
 uid: core/saving/cascade-delete
 ms.openlocfilehash: 0fc8929c56d4c657b7fb1e3c8e4b1a71659220c9
 ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 04/26/2018
+ms.locfileid: "31812673"
 ---
 # <a name="cascade-delete"></a>串聯刪除
 
-串聯刪除常用於資料庫詞彙來描述可讓刪除的資料列會自動觸發相關的資料列的刪除作業特性。 密切相關的概念也涵蓋在 EF 核心刪除行為時，自動刪除的子實體已嚴重損毀它的父系的關聯性-這通常稱為 「 刪除的遺棄項目 」。
+串聯刪除在資料庫術語中常用來描述一種允許在刪除一個資料列時自動觸發刪除相關資料列的特性。 EF Core 刪除行為也涵蓋一個密切相關的概念，就是在子實體與父系的關聯性已被切斷時便自動刪除子實體，這也通稱為「刪除失去關聯的項目」。
 
-EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪除行為的組態。 EF 核心也會實作自動設定為基礎的每個關聯性的實用的預設刪除行為的慣例[關聯性的 requiredness](../modeling/relationships.md#required-and-optional-relationships)。
+EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪除行為。 EF Core 也實作一些慣例，可根據[關聯性的必要性](../modeling/relationships.md#required-and-optional-relationships)，為每個關聯性自動設定實用的預設刪除行為。
 
 ## <a name="delete-behaviors"></a>刪除行為
-刪除中所定義的行為*DeleteBehavior*列舉值類型，而且可以傳遞至*OnDelete* fluent API 來控制是否刪除主體/父實體或的英國相依性/子實體的關聯性應該有副作用的相依性/子實體上。
+定義刪除行為時，是在 *DeleteBehavior* 列舉程式類型中定義，並可傳遞給 *OnDelete* Fluent API，以控制刪除主體/父系實體或切斷與相依/子系實體的關聯性是否應對相依/子系實體造成副作用。
 
-有三個 EF 主體/父實體被刪除或切斷子系關聯性時，可以採取的動作：
-* 您可以刪除子/相依性
-* 您可以將子系的外部索引鍵值為 null
-* 子系會保持不變
+當主體/父系實體被刪除或與子系的關聯性被切斷時，EF 可以採取三個動作：
+* 可以刪除子系/相依項
+* 可以將子系的外部索引鍵設定為 Null
+* 子系保持不變
 
 > [!NOTE]  
-> 當主要實體會刪除使用 EF 核心，而且相依的實體不會載入記憶體中 （也就是追蹤相依性），只會套用在 EF 核心模式中設定刪除行為。 對應的重疊顯示行為必須能夠確保資料不受到內容追蹤資料庫中的安裝程式已套用的必要動作。 如果您使用 EF 核心來建立資料庫時，此重疊顯示行為會為您的安裝程式。
+> 只有在使用 EF Core 來刪除主體實體且已將相依實體載入記憶體中 (亦即針對所追蹤的相依項) 的情況下，才會套用 EF Core 模型中所設定的刪除行為。 必須在資料庫中設定對應的串聯行為，才能確保沒有受到內容追蹤的資料會套用必要的動作。 如果您使用 EF Core 來建立資料庫，將會為您設定此串聯行為。
 
-上述第二個動作，將外部索引鍵的值設定為 null 不是有效，如果外部索引鍵不是可為 null。 （非可為 null 的外部索引鍵就相當於必要的關聯性）。在這些情況下，EF 核心追蹤，外部索引鍵屬性已被標示為 null 呼叫 SaveChanges，因為變更無法保存至資料庫，發生例外狀況在這之前。 這是類似於從資料庫取得條件約束違規。
+就上述第二個動作而言，如果外部索引鍵值不可為 Null，將其設定為 Null 就會無效。 (不可為 Null 的外部索引鍵等同於必要關聯性)。在這些情況下，EF Core 會追蹤外部索引鍵屬性是否被標示為 Null，直到呼叫 SaveChanges 為止，屆時會擲回例外狀況，因為該變更無法保存至資料庫。 這與從資料庫收到條件約束違規類似。
 
-有四個 delete 行為，如下列表格中所列。 選擇性的關聯性 （可為 null 的外部索引鍵） 它_是_能夠儲存的 null 外部索引鍵值，而造成下列影響：
+如下表中所列，有四種刪除行為。 針對選擇性關聯性 (可為空值的外部索引鍵)，您「可以」儲存 Null 外部索引鍵值，這會造成下列影響：
 
-| 行為名稱               | 在記憶體中的相依性/子系上的效果    | 在資料庫中的相依性/子系上的效果  |
+| 行為名稱               | 對記憶體中相依項/子系的影響    | 對資料庫中相依項/子系的影響  |
 |:----------------------------|:---------------------------------------|:---------------------------------------|
-| **重疊顯示**                 | 刪除實體                   | 刪除實體                   |
-| **ClientSetNull** （預設值） | 外部索引鍵屬性會設定為 null | 無                                   |
-| **setNull**                 | 外部索引鍵屬性會設定為 null | 外部索引鍵屬性會設定為 null |
-| **限制**                | 無                                   | 無                                   |
+| **Cascade**                 | 將實體刪除                   | 將實體刪除                   |
+| **ClientSetNull** (預設值) | 將外部索引鍵屬性設定為 Null | 無                                   |
+| **SetNull**                 | 將外部索引鍵屬性設定為 Null | 將外部索引鍵屬性設定為 Null |
+| **Restrict**                | 無                                   | 無                                   |
 
-它是必要的關聯性 （非可為 null 的外部索引鍵）_不_能夠儲存的 null 外部索引鍵值，而造成下列影響：
+針對必要關聯性 (不可為空值的外部索引鍵)，您「無法」儲存 Null 外部索引鍵值，這會造成下列影響：
 
-| 行為名稱         | 在記憶體中的相依性/子系上的效果 | 在資料庫中的相依性/子系上的效果 |
+| 行為名稱         | 對記憶體中相依項/子系的影響 | 對資料庫中相依項/子系的影響 |
 |:----------------------|:------------------------------------|:--------------------------------------|
-| **Cascade** （預設值） | 刪除實體                | 刪除實體                  |
-| **ClientSetNull**     | SaveChanges 擲回                  | 無                                  |
-| **setNull**           | SaveChanges 擲回                  | SaveChanges 擲回                    |
-| **限制**          | 無                                | 無                                  |
+| **Cascade** (預設值) | 將實體刪除                | 將實體刪除                  |
+| **ClientSetNull**     | SaveChanges 擲回例外狀況                  | 無                                  |
+| **SetNull**           | SaveChanges 擲回例外狀況                  | SaveChanges 擲回例外狀況                    |
+| **Restrict**          | 無                                | 無                                  |
 
-在上述資料表中*無*可能會導致條件約束違規。 比方說，如果主體/子實體已刪除，但若要變更相依/子系的外部索引鍵會採取任何動作，然後資料庫將可能擲回 SaveChanges 上因為外部索引條件約束違規。
+在上表中，「無」會造成條件約束違規。 例如，如果將主體/子系實體刪除，但未採取任何動作來變更相依項/子系的外部索引鍵，資料庫將可能因外部條件約速違規而在 SaveChanges 時擲回例外狀況。
 
-在高的層級：
-* 如果您有沒有父代，就無法存在的實體，而且您想要小心，自動刪除子系的 EF，然後使用*Cascade*。
-  * 沒有父代通常使不能存在的實體，使用必要的關聯性， *Cascade*是預設值。
-* 如果您有可能會或可能沒有父代，實體，而且您想 EF 需要小心的 null 外部索引鍵，然後使用*ClientSetNull*
-  * 實體可以存在沒有父代通常使用於選擇性的關聯性，其中*ClientSetNull*是預設值。
-  * 如果您想要同時嘗試甚至傳播到子外部索引鍵的 null 值的資料庫時的子實體未載入，然後使用*SetNull*。 不過，請注意，資料庫必須支援此功能，設定資料庫，就像這樣可能會導致其他限制，這樣實際上會使得這個選項並不實用。 這就是為什麼*SetNull*不是預設值。
-* 如果您不想永遠自動刪除實體或 null 外部索引鍵時自動執行，然後使用 EF 核心*限制*。 請注意，這需要，您的程式碼保持子實體外部索引鍵值同步和手動否則條件約束將會擲回例外狀況。
+概要說明：
+* 如果您有父系不存在便無法存在的實體，而想要讓 EF 負責自動刪除子系，則請使用 *Cascade*。
+  * 父系不存在便無法存在的實體通常會使用必要關聯性，就此關聯性而言，預設值為 *Cascade*。
+* 如果您有父系為可有可無的實體，而想要讓 EF 負責為您將外部索引鍵設定為 Null，則請使用 *ClientSetNull*
+  * 即使父系不存在也能存在的實體通常會使用選擇性關聯性，就此關聯性而言，預設值為 *ClientSetNull*。
+  * 如果您想要讓資料庫在即使未載入子系實體的情況下，也嘗試將 Null 值傳播到子系外部索引鍵，則請使用 *SetNull*。 不過，請注意，資料庫必須要能夠支援此設定，以這種方式設定資料庫可能造成其他限制，這在實務上常常會造成此選項不切實際。 這就是為什麼 *SetNull* 並非預設值的原因。
+* 如果您不想要讓 EF Core 自動刪除實體或自動將外部索引鍵設定為 Null，則請使用 *Restrict*。 請注意，這會要求您的程式碼手動將子系實體與其外部索引鍵值保持同步，否則將會擲回條件約束例外狀況。
 
 > [!NOTE]
-> 在 EF 核心，不同於 EF6，串聯效果不會發生立即，而是只呼叫 SaveChanges 是。
+> 不同於 EF6，在 EF Core 中，串聯影響不會立即發生，而是只有在呼叫 SaveChanges 時才會發生。
 
 > [!NOTE]  
-> **在 EF 核心 2.0 中的變更：**在舊版中，*限制*會導致追蹤的相依實體設為選擇性的外部索引鍵屬性為 null，且預設刪除選擇性的關聯性的行為。 在 EF 核心 2.0 中， *ClientSetNull*已引入來代表該行為，並成為選擇性的關聯性的預設值。 行為*限制*已調整為永遠不會相依的實體上有任何副作用。
+> **EF Core 2.0 中的變更：** 在舊版中，*Restrict* 會導致將所追蹤相依實體中的選擇性外部索引鍵屬性設定為 Null，而且是選擇性關聯性的預設刪除行為。 在 EF Core 2.0 中，則導入了 *ClientSetNull* 來代表該行為，並成為選擇性關聯性的預設值。 *Restrict* 的行為在調整後變成一律不會對相依實體產生任何副作用。
 
 ## <a name="entity-deletion-examples"></a>實體刪除範例
 
-下列程式碼是一部分[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/CascadeDelete/)，可以下載並執行。 此範例會示範當刪除父實體時，每個刪除行為選擇性及必要的關聯性會發生什麼事。
+對於可供下載並執行的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/CascadeDelete/)，以下程式碼是其中的一部分。 此範例示範刪除父系實體時，選擇性和必要關聯性的每個刪除行為會發生什麼情況。
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/CascadeDelete/Sample.cs#DeleteBehaviorVariations)]
 
-讓我們逐步解說來了解這為什麼每個變化。
+讓我們逐步進行每個變化來了解會發生什麼情況。
 
-### <a name="deletebehaviorcascade-with-required-or-optional-relationship"></a>DeleteBehavior.Cascade 必要或選用的關聯性
+### <a name="deletebehaviorcascade-with-required-or-optional-relationship"></a>與必要或選擇性關聯性搭配的 DeleteBehavior.Cascade
 
 ```
   After loading entities:
@@ -97,12 +98,12 @@ EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪�
       Post '1' is in state Detached with FK '1' and no reference to a blog.
 ```
 
-* 部落格會標示為已刪除
-* 文章一開始保持未變更，因為串聯，聯集不會發生直到 SaveChanges
-* SaveChanges 傳送刪除相依項目/子系 （文章） 和然後主體/父 （部落格）
-* 儲存之後，所有實體已卸都離，因為它們現在已從資料庫刪除
+* 部落格會標示為 Deleted
+* 文章一開始會維持 Unchanged，因為串聯會等到執行 SaveChanges 時才發生
+* SaveChanges 會先針對相依項/子系 (文章) 再針對主體/父系 (部落格) 傳送刪除
+* 儲存之後，會將所有實體都中斷連結，因為現在已將它們從資料庫中刪除
 
-### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull 與必要的關聯性
+### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>與必要關聯性搭配的 DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull
 
 ```
   After loading entities:
@@ -121,11 +122,11 @@ EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪�
   SaveChanges threw DbUpdateException: Cannot insert the value NULL into column 'BlogId', table 'EFSaving.CascadeDelete.dbo.Posts'; column does not allow nulls. UPDATE fails. The statement has been terminated.
 ```
 
-* 部落格會標示為已刪除
-* 文章一開始保持未變更，因為串聯，聯集不會發生直到 SaveChanges
-* SaveChanges 嘗試將 post FK 設定為 null，但這會失敗，因為 FK 不是可為 null
+* 部落格會標示為 Deleted
+* 文章一開始會維持 Unchanged，因為串聯會等到執行 SaveChanges 時才發生
+* SaveChanges 會嘗試將文章 FK 設定為 Null，但這會失敗，因為 FK 不可為空值
 
-### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull 與選擇性的關聯性
+### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>與選擇性關聯性搭配的 DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull
 
 ```
   After loading entities:
@@ -149,13 +150,13 @@ EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪�
       Post '1' is in state Unchanged with FK 'null' and no reference to a blog.
 ```
 
-* 部落格會標示為已刪除
-* 文章一開始保持未變更，因為串聯，聯集不會發生直到 SaveChanges
-* SaveChanges 嘗試設定為 null 的兩個相依性/子系 （文章） FK，然後再刪除主體/父 （部落格）
-* 儲存之後，主體/父系 （部落格） 被刪除，但仍然會追蹤相依性/子系 （文章）
-* 追蹤相依性/子系 （文章） 現在有 null FK 值，並已移除其參考已刪除主體/父 （部落格）
+* 部落格會標示為 Deleted
+* 文章一開始會維持 Unchanged，因為串聯會等到執行 SaveChanges 時才發生
+* SaveChanges 會先嘗試將相依項/子系 (文章) 的 FK 都設定為 Null，再刪除主體/父系 (部落格)
+* 儲存之後，會刪除主體/父系 (部落格)，但仍然會追蹤相依項/子系 (文章)
+* 所追蹤相依項/子系 (文章) 的 FK 值現在會是 Null，且系統已移除它們對已刪除主體/父系 (部落格) 的參照
 
-### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>DeleteBehavior.Restrict 必要或選用的關聯性
+### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>與必要或選擇性關聯性搭配的 DeleteBehavior.Restrict
 
 ```
   After loading entities:
@@ -172,19 +173,19 @@ EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪�
   SaveChanges threw InvalidOperationException: The association between entity types 'Blog' and 'Post' has been severed but the foreign key for this relationship cannot be set to null. If the dependent entity should be deleted, then setup the relationship to use cascade deletes.
 ```
 
-* 部落格會標示為已刪除
-* 文章一開始保持未變更，因為串聯，聯集不會發生直到 SaveChanges
-* 因為*限制*告訴 EF 不會自動將 FK 設定為 null，則它仍然非 null，而不儲存的 SaveChanges 擲回
+* 部落格會標示為 Deleted
+* 文章一開始會維持 Unchanged，因為串聯會等到執行 SaveChanges 時才發生
+* 由於 *Restrict* 會告知 EF 不要自動將 FK 設定為 Null，因此它會保持非 Null，而 SaveChanges 則會擲回例外狀況而不進行儲存
 
-## <a name="delete-orphans-examples"></a>刪除孤立的範例
+## <a name="delete-orphans-examples"></a>刪除失去關聯的項目範例
 
-下列程式碼是一部分[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/CascadeDelete/)可以下載可執行的。 此範例會示範切斷父/主體及其子系/相依性之間的關聯性時，每個刪除行為選擇性及必要的關聯性會發生什麼事。 在此範例中，關聯性切斷移除主體/父系 （部落格） 上的集合導覽屬性的相依性/子系 （文章）。 不過，行為會是相同，如果主體/父代參考從相依式改為 nulled 出。
+對於可供下載並執行的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/CascadeDelete/)，以下程式碼是其中的一部分。 此範例示範切斷父系/主體與其子系/相依項之間的關聯性時，選擇性和必要關聯性的每個刪除行為會發生什麼情況。 在此範例中，會藉由從主體/父系 (部落格) 上的集合導覽屬性移除相依項/子系 (文章) 來切斷關聯性。 不過，如果改為將相依項/子系對主體/父系的參考設定為 Null，行為也會相同。
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/CascadeDelete/Sample.cs#DeleteOrphansVariations)]
 
-讓我們逐步解說來了解這為什麼每個變化。
+讓我們逐步進行每個變化來了解會發生什麼情況。
 
-### <a name="deletebehaviorcascade-with-required-or-optional-relationship"></a>DeleteBehavior.Cascade 必要或選用的關聯性
+### <a name="deletebehaviorcascade-with-required-or-optional-relationship"></a>與必要或選擇性關聯性搭配的 DeleteBehavior.Cascade
 
 ```
   After loading entities:
@@ -207,12 +208,12 @@ EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪�
       Post '1' is in state Detached with FK '1' and no reference to a blog.
 ```
 
-* 因為英國關聯性標示為 null FK 文章標示為已修改
-  * 如果 FK 不是可為 null，然後實際的值不會變更即使標示為 null
-* SaveChanges 傳送刪除相依項目/子系 （文章）
-* 儲存之後，相依性/子系 （文章） 會卸離，因為它們現在已從資料庫刪除
+* 文章會標示為 Modified，因為切斷關聯性造成將 FK 標示為 Null
+  * 如果 FK 不可為 Null，則即使將其標示為 Null，實際值也不會變更
+* SaveChanges 會針對相依項/子系 (文章) 傳送刪除
+* 儲存之後，會將相依項/子系 (文章) 中斷連結，因為現在已將它們從資料庫中刪除
 
-### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull 與必要的關聯性
+### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>與必要關聯性搭配的 DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull
 
 ```
   After loading entities:
@@ -231,11 +232,11 @@ EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪�
   SaveChanges threw DbUpdateException: Cannot insert the value NULL into column 'BlogId', table 'EFSaving.CascadeDelete.dbo.Posts'; column does not allow nulls. UPDATE fails. The statement has been terminated.
 ```
 
-* 因為英國關聯性標示為 null FK 文章標示為已修改
-  * 如果 FK 不是可為 null，然後實際的值不會變更即使標示為 null
-* SaveChanges 嘗試將 post FK 設定為 null，但這會失敗，因為 FK 不是可為 null
+* 文章會標示為 Modified，因為切斷關聯性造成將 FK 標示為 Null
+  * 如果 FK 不可為 Null，則即使將其標示為 Null，實際值也不會變更
+* SaveChanges 會嘗試將文章 FK 設定為 Null，但這會失敗，因為 FK 不可為空值
 
-### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull 與選擇性的關聯性
+### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>與選擇性關聯性搭配的 DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull
 
 ```
   After loading entities:
@@ -258,12 +259,12 @@ EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪�
       Post '1' is in state Unchanged with FK 'null' and no reference to a blog.
 ```
 
-* 因為英國關聯性標示為 null FK 文章標示為已修改
-  * 如果 FK 不是可為 null，然後實際的值不會變更即使標示為 null
-* SaveChanges 設定這兩個相依性/子系 （文章） 的 FK 設為 null
-* 儲存之後，現在有相依性/子系 （文章） 的 null FK 值且已移除其參考已刪除主體/父 （部落格）
+* 文章會標示為 Modified，因為切斷關聯性造成將 FK 標示為 Null
+  * 如果 FK 不可為 Null，則即使將其標示為 Null，實際值也不會變更
+* SaveChanges 會將相依項/子系 (文章) 的 FK 都設定為 Null
+* 儲存之後，相依項/子系 (文章) 的 FK 值現在會是 Null，且系統已移除它們對已刪除之主體/父系 (部落格) 的參照
 
-### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>DeleteBehavior.Restrict 必要或選用的關聯性
+### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>與必要或選擇性關聯性搭配的 DeleteBehavior.Restrict
 
 ```
   After loading entities:
@@ -280,13 +281,13 @@ EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪�
   SaveChanges threw InvalidOperationException: The association between entity types 'Blog' and 'Post' has been severed but the foreign key for this relationship cannot be set to null. If the dependent entity should be deleted, then setup the relationship to use cascade deletes.
 ```
 
-* 因為英國關聯性標示為 null FK 文章標示為已修改
-  * 如果 FK 不是可為 null，然後實際的值不會變更即使標示為 null
-* 因為*限制*告訴 EF 不會自動將 FK 設定為 null，則它仍然非 null，而不儲存的 SaveChanges 擲回
+* 文章會標示為 Modified，因為切斷關聯性造成將 FK 標示為 Null
+  * 如果 FK 不可為 Null，則即使將其標示為 Null，實際值也不會變更
+* 由於 *Restrict* 會告知 EF 不要自動將 FK 設定為 Null，因此它會保持非 Null，而 SaveChanges 則會擲回例外狀況而不進行儲存
 
-## <a name="cascading-to-untracked-entities"></a>階層式未被追蹤的實體
+## <a name="cascading-to-untracked-entities"></a>串聯至未追蹤的實體
 
-當您呼叫*SaveChanges*，串聯刪除規則將套用到內容正在追蹤的任何實體。 這是在所有情況的範例中，如上所示，這就是為什麼已產生 sql 陳述式來刪除主體/父 （部落格） 和所有相依項目/子系 （文章）：
+當您呼叫 *SaveChanges* 時，串聯刪除規則將會套用至內容所追蹤的所有實體。 這是上述所有範例中發生的情況，也是為何產生 SQL 來同時刪除主體/父系 (部落格) 及所有相依項/子系 (文章) 的原因：
 
 ```sql
     DELETE FROM [Posts] WHERE [PostId] = 1
@@ -294,10 +295,10 @@ EF 核心實作數個不同的刪除行為，並可讓個別的關聯性的刪�
     DELETE FROM [Blogs] WHERE [BlogId] = 1
 ```
 
-如果只有主體已載入-例如，查詢進行時不含部落格`Include(b => b.Posts)`成也包括文章-然後 SaveChanges 只會產生 SQL 來刪除主體/父系：
+如果只載入主體 (例如對部落格進行查詢時，未使用可一併包含文章的 `Include(b => b.Posts)`)，則 SaveChanges 將只產生 SQL 來刪除主體/父系：
 
 ```sql
     DELETE FROM [Blogs] WHERE [BlogId] = 1
 ```
 
-如果資料庫有對應的重疊顯示行為設定，只會刪除相依項目/子系 （文章）。 如果您使用 EF 來建立資料庫時，此重疊顯示行為會為您的安裝程式。
+只有已在資料庫設定對應的串聯行為時，才會刪除相依項/子系 (文章)。 如果您使用 EF 來建立資料庫，將會為您設定此串聯行為。

@@ -1,5 +1,5 @@
 ---
-title: "追蹤 vs。不是追蹤查詢的 EF 核心"
+title: 追蹤與不追蹤的查詢 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -8,22 +8,23 @@ ms.technology: entity-framework-core
 uid: core/querying/tracking
 ms.openlocfilehash: 9a22c893f3b1e9991560e25e0252287a2844b39e
 ms.sourcegitcommit: 3b6159db8a6c0653f13c7b528367b4e69ac3d51e
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 11/28/2017
+ms.locfileid: "26053958"
 ---
-# <a name="tracking-vs-no-tracking-queries"></a>追蹤 vs。不追蹤查詢
+# <a name="tracking-vs-no-tracking-queries"></a>追蹤與不追蹤的查詢
 
-Entity Framework Core 會保留在其變更追蹤程式中的實體執行個體的相關資訊，請追蹤行為的控制項。 如果在追蹤實體，實體中偵測到的任何變更將會保留在資料庫`SaveChanges()`。 Entity Framework Core 將也 v-table 修正導覽屬性取得追蹤查詢的實體與先前已載入至 DbContext 執行個體的實體。
+追蹤行為可控制 Entity Framework Core 是否將在其變更追蹤程式中保存有關實體執行個體的資訊。 如果追蹤實體，即會在 `SaveChanges()` 期間，將實體中偵測到的任何變更保存於資料庫。 Entity Framework Core 也將在從追蹤查詢中取得的實體，以及先前已載入至 DbContext 執行個體的實體之間修正導覽屬性。
 
 > [!TIP]  
-> 您可以檢視這篇文章[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying)GitHub 上。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
 
 ## <a name="tracking-queries"></a>追蹤查詢
 
-根據預設，追蹤的查詢來傳回實體類型。 這表示您可以對這些實體執行個體中的變更和這些變更已保存`SaveChanges()`。
+預設會追蹤傳回實體類型的查詢。 這表示您可以對那些實體執行個體進行變更，並透過 `SaveChanges()` 來保存那些變更。
 
-在下列範例中，部落格評等的變更會被偵測到並保存到資料庫期間`SaveChanges()`。
+在下列範例中，將會偵測到對部落格評等的變更，並在 `SaveChanges()` 期間將其保存於資料庫。
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs)] -->
 ``` csharp
@@ -35,11 +36,11 @@ using (var context = new BloggingContext())
 }
 ```
 
-## <a name="no-tracking-queries"></a>不追蹤查詢
+## <a name="no-tracking-queries"></a>無追蹤查詢
 
-結果會以唯讀狀態的案例時，則沒有追蹤的查詢會很有用。 它們是更快速地執行，因為不需要安裝程式變更追蹤資訊。
+如果要在唯讀案例中使用結果，則不追蹤的查詢很實用。 它們會以更快的速度執行，因為不需要設定變更追蹤資訊。
 
-您可以交換是沒有追蹤的個別查詢：
+您可以將個別查詢切換為不追蹤：
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs?highlight=4)] -->
 ``` csharp
@@ -51,7 +52,7 @@ using (var context = new BloggingContext())
 }
 ```
 
-您也可以變更預設的追蹤內容執行個體層級的行為：
+您也可以在內容執行個體層級變更預設的追蹤行為：
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs?highlight=3)] -->
 ``` csharp
@@ -64,11 +65,11 @@ using (var context = new BloggingContext())
 ```
 
 > [!NOTE]  
-> 沒有追蹤的查詢仍會執行識別解析內執行查詢。 如果結果集包含同一個實體多次，相同的實體類別的執行個體將會傳回結果集中的每個相符項目。 不過，弱式參考可用來追蹤已傳回的實體。 如果具有相同識別是之前的結果超出範圍，而且執行記憶體回收，可能會收到新的實體執行個體。 如需詳細資訊，請參閱[查詢的運作方式](overview.md)。
+> 不追蹤的查詢仍會在執行查詢內執行識別解析。 如果結果集多次包含同一個實體，則將針對結果集中的每個相符項目傳回實體類別的相同執行個體。 不過，會使用弱式參考來持續追蹤已經傳回的實體。 如果先前具有相同身分識別的結果超出範圍，且執行記憶體回收，您可能會得到新的實體執行個體。 如需詳細資訊，請參閱[查詢的運作方式](overview.md)。
 
 ## <a name="tracking-and-projections"></a>追蹤和預測
 
-即使查詢的結果型別不是實體類型，如果結果包含實體類型仍被追蹤的預設。 在下列查詢中，它會傳回匿名類型的執行個體`Blog`組將追蹤結果中。
+即使查詢的結果類型不是實體類型，但若結果包含實體類型，預設仍將追蹤它們。 下列查詢會傳回匿名類型，並且將在結果集中追蹤 `Blog` 的執行個體。
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs?highlight=7)] -->
 ``` csharp
@@ -84,7 +85,7 @@ using (var context = new BloggingContext())
 }
 ```
 
-如果結果集未包含任何實體類型，則會不執行任何追蹤。 在下列查詢中，它會傳回匿名型別有某些實體 （但實際的實體類型的任何執行個體） 的值，就不追蹤執行。
+如果結果集未包含任何實體類型，則不會執行追蹤。 下列查詢會傳回匿名類型，並具有一些來自實體的值 (但沒有實際實體類型的執行個體)，但不會執行任何追蹤。
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs)] -->
 ``` csharp

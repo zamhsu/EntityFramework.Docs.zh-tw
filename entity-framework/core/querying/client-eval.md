@@ -1,5 +1,5 @@
 ---
-title: "用戶端與伺服器評估-EF 核心"
+title: 用戶端與伺服器評估 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -8,20 +8,21 @@ ms.technology: entity-framework-core
 uid: core/querying/client-eval
 ms.openlocfilehash: e1852b780041e9e92fb4d25129175346e3a601a3
 ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052648"
 ---
 # <a name="client-vs-server-evaluation"></a>用戶端與伺服器評估
 
-Entity Framework Core 支援用戶端和它發送到資料庫的組件上所評估的查詢部分。 這是由資料庫提供者，以判斷查詢的哪些部分會評估在資料庫中。
+Entity Framework Core 支援要在用戶端評估的查詢組件，以及要發送到資料庫的查詢組件。 由資料庫提供者決定將在資料庫中評估查詢的哪些組件。
 
 > [!TIP]  
-> 您可以檢視這篇文章[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying)GitHub 上。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
 
 ## <a name="client-evaluation"></a>用戶端評估
 
-在下列範例中的 helper 方法用來標準化從 SQL Server 資料庫所傳回的部落格的 Url。 SQL Server 提供者會不有任何深入了解如何實作這個方法，因為它不可能將它轉譯為 SQL。 評估查詢的所有其他部分會在資料庫中，但傳遞傳回`URL`透過這個方法不會對用戶端。
+在下列範例中，會使用 Helper 方法來將從 SQL Server 資料庫所傳回部落格的 URL 標準化。 由於 SQL Server 提供者未深入了解此方法的實作方式，因此，無法將它轉譯為 SQL。 查詢的所有其他層面均會在資料庫中進行評估，但透過此方法傳遞所傳回的 `URL` 則會在用戶端執行。
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/ClientEval/Sample.cs?highlight=6)] -->
 ``` csharp
@@ -52,7 +53,7 @@ public static string StandardizeUrl(string url)
 
 ## <a name="disabling-client-evaluation"></a>停用用戶端評估
 
-雖然用戶端評估會非常實用，在某些情況下可能會導致效能不佳。 請考慮下列查詢中，現在在篩選中使用的 helper 方法。 這不能在資料庫中執行，因為所有資料提取到記憶體，然後篩選條件會套用至用戶端。 根據資料，以及多少資料都會被篩選掉的數量，這可能導致效能不佳。
+雖然用戶端評估非常實用，但在某些情況下，可能會導致效能不佳。 請考慮下列查詢，此查詢目前會在篩選條件中使用 Helper 方法。 因為這不能在資料庫中執行，所以會將所有資料提取到記憶體，然後在用戶端套用篩選條件。 根據資料量以及要篩選出多少資料而定，這可能會導致效能不佳。
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/ClientEval/Sample.cs)] -->
 ``` csharp
@@ -61,7 +62,7 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-根據預設，用戶端評估執行時 EF Core 時，會記錄警告。 請參閱[記錄](../miscellaneous/logging.md)檢視記錄輸出的詳細資訊。 用戶端評估擲回或不執行任何動作時，您可以變更此行為。 這是通常在設定為您的內容-選項時`DbContext.OnConfiguring`，或在`Startup.cs`如果您使用 ASP.NET Core。
+根據預設，執行用戶端評估時，EF Core 將會記錄警告。 如需檢視記錄輸出的詳細資訊，請參閱[記錄](../miscellaneous/logging.md)。 您可以變更在用戶端評估發生而擲回或不執行任何動作時的行為。 這通常會在 `DbContext.OnConfiguring` 中為您的內容設定選項時完成，或者，如果您使用 ASP.NET Core，則是在 `Startup.cs` 中完成。
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/ClientEval/ThrowOnClientEval/BloggingContext.cs?highlight=5)] -->
 ``` csharp
