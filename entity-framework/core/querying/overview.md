@@ -1,5 +1,5 @@
 ---
-title: "如何查詢工作的 EF Core"
+title: 查詢的運作方式 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -8,42 +8,43 @@ ms.technology: entity-framework-core
 uid: core/querying/overview
 ms.openlocfilehash: 7fd2940d559f82016d7a8fc3fdcf3af0d5b8bc8f
 ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052868"
 ---
-# <a name="how-queries-work"></a><span data-ttu-id="9fe3d-102">查詢的運作方式</span><span class="sxs-lookup"><span data-stu-id="9fe3d-102">How Queries Work</span></span>
+# <a name="how-queries-work"></a><span data-ttu-id="00242-102">查詢的運作方式</span><span class="sxs-lookup"><span data-stu-id="00242-102">How Queries Work</span></span>
 
-<span data-ttu-id="9fe3d-103">Entity Framework Core 會使用從資料庫查詢資料的語言整合 Query (LINQ)。</span><span class="sxs-lookup"><span data-stu-id="9fe3d-103">Entity Framework Core uses Language Integrate Query (LINQ) to query data from the database.</span></span> <span data-ttu-id="9fe3d-104">LINQ 可讓您使用 C# （或您所選擇的.NET 語言） 撰寫強型別衍生內容和實體類別為基礎的查詢。</span><span class="sxs-lookup"><span data-stu-id="9fe3d-104">LINQ allows you to use C# (or your .NET language of choice) to write strongly typed queries based on your derived context and entity classes.</span></span>
+<span data-ttu-id="00242-103">Entity Framework Core 使用 Language Integrate Query (LINQ) 查詢來自資料庫的資料。</span><span class="sxs-lookup"><span data-stu-id="00242-103">Entity Framework Core uses Language Integrate Query (LINQ) to query data from the database.</span></span> <span data-ttu-id="00242-104">LINQ 可讓您使用 C# (或您選擇的 .NET 語言)，根據衍生內容和實體類別來寫入強型別查詢。</span><span class="sxs-lookup"><span data-stu-id="00242-104">LINQ allows you to use C# (or your .NET language of choice) to write strongly typed queries based on your derived context and entity classes.</span></span>
 
-## <a name="the-life-of-a-query"></a><span data-ttu-id="9fe3d-105">生命週期的查詢</span><span class="sxs-lookup"><span data-stu-id="9fe3d-105">The life of a query</span></span>
+## <a name="the-life-of-a-query"></a><span data-ttu-id="00242-105">查詢的生命週期</span><span class="sxs-lookup"><span data-stu-id="00242-105">The life of a query</span></span>
 
-<span data-ttu-id="9fe3d-106">以下是每個查詢所經歷的程序的高層級概觀。</span><span class="sxs-lookup"><span data-stu-id="9fe3d-106">The following is a high level overview of the process each query goes through.</span></span>
+<span data-ttu-id="00242-106">以下是每個查詢所經歷程序的高階概觀。</span><span class="sxs-lookup"><span data-stu-id="00242-106">The following is a high level overview of the process each query goes through.</span></span>
 
-1. <span data-ttu-id="9fe3d-107">建立表示準備好要處理的資料庫提供者的 Entity Framework Core 處理 LINQ 查詢</span><span class="sxs-lookup"><span data-stu-id="9fe3d-107">The LINQ query is processed by Entity Framework Core to build a representation that is ready to be processed by the database provider</span></span>
-   1. <span data-ttu-id="9fe3d-108">結果會快取，因此不需要每次執行查詢來完成這項處理</span><span class="sxs-lookup"><span data-stu-id="9fe3d-108">The result is cached so that this processing does not need to be done every time the query is executed</span></span>
-2. <span data-ttu-id="9fe3d-109">結果會傳遞至資料庫提供者</span><span class="sxs-lookup"><span data-stu-id="9fe3d-109">The result is passed to the database provider</span></span>
-   1. <span data-ttu-id="9fe3d-110">資料庫提供者會識別查詢的哪些部分可以評估在資料庫中</span><span class="sxs-lookup"><span data-stu-id="9fe3d-110">The database provider identifies which parts of the query can be evaluated in the database</span></span>
-   2. <span data-ttu-id="9fe3d-111">這些組件的查詢會轉譯為資料庫特定的查詢語言 (例如關聯式資料庫的 SQL)</span><span class="sxs-lookup"><span data-stu-id="9fe3d-111">These parts of the query are translated to database specific query language (e.g. SQL for a relational database)</span></span>
-   3. <span data-ttu-id="9fe3d-112">一個或多個查詢會傳送至資料庫而傳回的結果集 （結果會是從資料庫中的實體執行個體的值）</span><span class="sxs-lookup"><span data-stu-id="9fe3d-112">One or more queries are sent to the database and the result set returned (results are values from the database, not entity instances)</span></span>
-3. <span data-ttu-id="9fe3d-113">針對結果集中的每個項目</span><span class="sxs-lookup"><span data-stu-id="9fe3d-113">For each item in the result set</span></span>
-   1. <span data-ttu-id="9fe3d-114">如果這是追蹤查詢，會檢查 EF 如果其資料代表的實體已在變更追蹤程式的內容執行個體</span><span class="sxs-lookup"><span data-stu-id="9fe3d-114">If this is a tracking query, EF checks if the data represents an entity already in the change tracker for the context instance</span></span>
-      * <span data-ttu-id="9fe3d-115">如果是的話，會傳回現有的實體</span><span class="sxs-lookup"><span data-stu-id="9fe3d-115">If so, the existing entity is returned</span></span>
-      * <span data-ttu-id="9fe3d-116">如果不是，建立新的實體，變更追蹤，則安裝程式，並傳回新的實體</span><span class="sxs-lookup"><span data-stu-id="9fe3d-116">If not, a new entity is created, change tracking is setup, and the new entity is returned</span></span>
-   2. <span data-ttu-id="9fe3d-117">如果這不是追蹤查詢，會檢查 EF 如果其資料代表的實體已在設定這個查詢的結果</span><span class="sxs-lookup"><span data-stu-id="9fe3d-117">If this is a no-tracking query, EF checks if the data represents an entity already in the result set for this query</span></span>
-      * <span data-ttu-id="9fe3d-118">如果現有的實體，則會傳回<sup>(1)</sup></span><span class="sxs-lookup"><span data-stu-id="9fe3d-118">If so, the existing entity is returned <sup>(1)</sup></span></span>
-      * <span data-ttu-id="9fe3d-119">如果不是，建立並傳回新的實體</span><span class="sxs-lookup"><span data-stu-id="9fe3d-119">If not, a new entity is created and returned</span></span>
+1. <span data-ttu-id="00242-107">LINQ 查詢會由 Entity Framework Core 所處理，以建置已準備好由資料庫提供者所處理的表示方式</span><span class="sxs-lookup"><span data-stu-id="00242-107">The LINQ query is processed by Entity Framework Core to build a representation that is ready to be processed by the database provider</span></span>
+   1. <span data-ttu-id="00242-108">結果會被快取，因此並不需要在每次執行查詢時進行此處理程序</span><span class="sxs-lookup"><span data-stu-id="00242-108">The result is cached so that this processing does not need to be done every time the query is executed</span></span>
+2. <span data-ttu-id="00242-109">結果會傳遞給資料庫提供者</span><span class="sxs-lookup"><span data-stu-id="00242-109">The result is passed to the database provider</span></span>
+   1. <span data-ttu-id="00242-110">資料庫提供者會識別查詢的哪些組件可在資料庫中評估</span><span class="sxs-lookup"><span data-stu-id="00242-110">The database provider identifies which parts of the query can be evaluated in the database</span></span>
+   2. <span data-ttu-id="00242-111">查詢的這些組件會轉譯為資料庫特定的查詢語言 (例如，針對關聯式資料庫會轉譯為 SQL)</span><span class="sxs-lookup"><span data-stu-id="00242-111">These parts of the query are translated to database specific query language (e.g. SQL for a relational database)</span></span>
+   3. <span data-ttu-id="00242-112">系統會將一或多個查詢傳送到資料庫，並會傳回結果集 (結果是來自資料庫的值，而非實體執行個體)</span><span class="sxs-lookup"><span data-stu-id="00242-112">One or more queries are sent to the database and the result set returned (results are values from the database, not entity instances)</span></span>
+3. <span data-ttu-id="00242-113">針對結果集中的每個項目</span><span class="sxs-lookup"><span data-stu-id="00242-113">For each item in the result set</span></span>
+   1. <span data-ttu-id="00242-114">如果這是追蹤查詢，EF 就會檢查資料是否代表已存在於內容執行個體變更追蹤器中的實體</span><span class="sxs-lookup"><span data-stu-id="00242-114">If this is a tracking query, EF checks if the data represents an entity already in the change tracker for the context instance</span></span>
+      * <span data-ttu-id="00242-115">如果是，就會傳回現有的實體</span><span class="sxs-lookup"><span data-stu-id="00242-115">If so, the existing entity is returned</span></span>
+      * <span data-ttu-id="00242-116">如果不是，則會建立新的實體，設定變更追蹤，並傳回新的實體</span><span class="sxs-lookup"><span data-stu-id="00242-116">If not, a new entity is created, change tracking is setup, and the new entity is returned</span></span>
+   2. <span data-ttu-id="00242-117">如果這是非追蹤查詢，EF 就會檢查資料是否代表已存在於此查詢結果集中的實體</span><span class="sxs-lookup"><span data-stu-id="00242-117">If this is a no-tracking query, EF checks if the data represents an entity already in the result set for this query</span></span>
+      * <span data-ttu-id="00242-118">如果是，就會傳回現有的實體 <sup>(1)</sup></span><span class="sxs-lookup"><span data-stu-id="00242-118">If so, the existing entity is returned <sup>(1)</sup></span></span>
+      * <span data-ttu-id="00242-119">如果不是，則會建立並傳回新的實體</span><span class="sxs-lookup"><span data-stu-id="00242-119">If not, a new entity is created and returned</span></span>
 
-<span data-ttu-id="9fe3d-120"><sup>(1)</sup>沒有追蹤的查詢使用弱式參考來追蹤已傳回的實體。</span><span class="sxs-lookup"><span data-stu-id="9fe3d-120"><sup>(1)</sup> No tracking queries use weak references to keep track of entities that have already been returned.</span></span> <span data-ttu-id="9fe3d-121">如果具有相同識別是之前的結果超出範圍，而且執行記憶體回收，可能會收到新的實體執行個體。</span><span class="sxs-lookup"><span data-stu-id="9fe3d-121">If a previous result with the same identity goes out of scope, and garbage collection runs, you may get a new entity instance.</span></span>
+<span data-ttu-id="00242-120"><sup>(1)</sup> 非追蹤查詢會使用弱式參考來持續追蹤已經傳回的實體。</span><span class="sxs-lookup"><span data-stu-id="00242-120"><sup>(1)</sup> No tracking queries use weak references to keep track of entities that have already been returned.</span></span> <span data-ttu-id="00242-121">如果先前具有相同身分識別的結果超出範圍，且執行記憶體回收，您可能會得到新的實體執行個體。</span><span class="sxs-lookup"><span data-stu-id="00242-121">If a previous result with the same identity goes out of scope, and garbage collection runs, you may get a new entity instance.</span></span>
 
-## <a name="when-queries-are-executed"></a><span data-ttu-id="9fe3d-122">執行查詢時</span><span class="sxs-lookup"><span data-stu-id="9fe3d-122">When queries are executed</span></span>
+## <a name="when-queries-are-executed"></a><span data-ttu-id="00242-122">查詢執行時</span><span class="sxs-lookup"><span data-stu-id="00242-122">When queries are executed</span></span>
 
-<span data-ttu-id="9fe3d-123">當您呼叫 LINQ 運算子時，而只累積在記憶體中表示的查詢。</span><span class="sxs-lookup"><span data-stu-id="9fe3d-123">When you call LINQ operators, you are simply building up an in-memory representation of the query.</span></span> <span data-ttu-id="9fe3d-124">當結果被耗用時，查詢才會傳送到資料庫。</span><span class="sxs-lookup"><span data-stu-id="9fe3d-124">The query is only sent to the database when the results are consumed.</span></span>
+<span data-ttu-id="00242-123">當您呼叫 LINQ 運算子時，只是單純在建置查詢的記憶體內表示方式。</span><span class="sxs-lookup"><span data-stu-id="00242-123">When you call LINQ operators, you are simply building up an in-memory representation of the query.</span></span> <span data-ttu-id="00242-124">只有在取用結果時，才會將查詢傳送到資料庫。</span><span class="sxs-lookup"><span data-stu-id="00242-124">The query is only sent to the database when the results are consumed.</span></span>
 
-<span data-ttu-id="9fe3d-125">造成查詢傳送給資料庫的最常見作業為：</span><span class="sxs-lookup"><span data-stu-id="9fe3d-125">The most common operations that result in the query being sent to the database are:</span></span>
-* <span data-ttu-id="9fe3d-126">逐一查看結果`for`迴圈</span><span class="sxs-lookup"><span data-stu-id="9fe3d-126">Iterating the results in a `for` loop</span></span>
-* <span data-ttu-id="9fe3d-127">使用運算子，例如`ToList`， `ToArray`， `Single`，`Count`</span><span class="sxs-lookup"><span data-stu-id="9fe3d-127">Using an operator such as `ToList`, `ToArray`, `Single`, `Count`</span></span>
-* <span data-ttu-id="9fe3d-128">資料繫結至 UI 查詢的結果</span><span class="sxs-lookup"><span data-stu-id="9fe3d-128">Databinding the results of a query to a UI</span></span>
+<span data-ttu-id="00242-125">以下是導致將查詢傳送到資料庫的最常見作業：</span><span class="sxs-lookup"><span data-stu-id="00242-125">The most common operations that result in the query being sent to the database are:</span></span>
+* <span data-ttu-id="00242-126">在 `for` 迴圈中逐一查看結果</span><span class="sxs-lookup"><span data-stu-id="00242-126">Iterating the results in a `for` loop</span></span>
+* <span data-ttu-id="00242-127">使用 `ToList`、`ToArray`、`Single`、`Count` 之類的運算子</span><span class="sxs-lookup"><span data-stu-id="00242-127">Using an operator such as `ToList`, `ToArray`, `Single`, `Count`</span></span>
+* <span data-ttu-id="00242-128">將查詢的結果資料繫結到 UI</span><span class="sxs-lookup"><span data-stu-id="00242-128">Databinding the results of a query to a UI</span></span>
 
 > [!WARNING]  
-> <span data-ttu-id="9fe3d-129">**一律驗證使用者輸入：**時的 EF 提供從 SQL 資料隱碼攻擊的防護，不會執行輸入的任何一般驗證。</span><span class="sxs-lookup"><span data-stu-id="9fe3d-129">**Always validate user input:** While EF does provide protection from SQL injection attacks, it does not do any general validation of input.</span></span> <span data-ttu-id="9fe3d-130">因此如果值傳遞至應用程式開發介面，在 LINQ 查詢中，指派給等實體屬性，使用來自不受信任的來源則適當的驗證，每個應用程式需求，應該執行。</span><span class="sxs-lookup"><span data-stu-id="9fe3d-130">Therefore if values being passed to APIs, used in LINQ queries, assigned to entity properties, etc., come from an untrusted source then appropriate validation, per your application requirements, should be performed.</span></span> <span data-ttu-id="9fe3d-131">這包括用來以動態方式建構查詢的任何使用者輸入。</span><span class="sxs-lookup"><span data-stu-id="9fe3d-131">This includes any user input used to dynamically construct queries.</span></span> <span data-ttu-id="9fe3d-132">即使使用 LINQ，如果您接受使用者輸入建立運算式，您必須確定比預期運算式只可用於建構。</span><span class="sxs-lookup"><span data-stu-id="9fe3d-132">Even when using LINQ, if you are accepting user input to build expressions you need to make sure than only intended expressions can be constructed.</span></span>
+> <span data-ttu-id="00242-129">**一律驗證使用者輸入：** 儘管 EF 會提供保護以防止受到 SQL 插入式攻擊，它並不會對輸入執行任何一般驗證。</span><span class="sxs-lookup"><span data-stu-id="00242-129">**Always validate user input:** While EF does provide protection from SQL injection attacks, it does not do any general validation of input.</span></span> <span data-ttu-id="00242-130">因此，如果傳遞到 API、用於 LINQ 查詢中、指派給實體屬性等的值是來自不受信任的來源，則應根據您應用程式的需求執行適當的驗證。</span><span class="sxs-lookup"><span data-stu-id="00242-130">Therefore if values being passed to APIs, used in LINQ queries, assigned to entity properties, etc., come from an untrusted source then appropriate validation, per your application requirements, should be performed.</span></span> <span data-ttu-id="00242-131">這包括用來以動態方式建構查詢的任何使用者輸入。</span><span class="sxs-lookup"><span data-stu-id="00242-131">This includes any user input used to dynamically construct queries.</span></span> <span data-ttu-id="00242-132">即使在使用 LINQ 時，如果您接受使用者輸入來建置運算式，就必須確定只會建構預期的運算式。</span><span class="sxs-lookup"><span data-stu-id="00242-132">Even when using LINQ, if you are accepting user input to build expressions you need to make sure than only intended expressions can be constructed.</span></span>
