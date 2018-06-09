@@ -1,25 +1,26 @@
 ---
-title: "記錄-EF 核心"
+title: 記錄-EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: f6e35c6d-45b7-4258-be1d-87c1bb67438d
 ms.technology: entity-framework-core
 uid: core/miscellaneous/logging
-ms.openlocfilehash: 807560e563eddfb72d4286353b1403a0d2e2a441
-ms.sourcegitcommit: 5367516f063cb42804ec92c31cdf76322554f2b5
+ms.openlocfilehash: 60d76bf3360eb47cdd9836494c1f135d1005a215
+ms.sourcegitcommit: 3adf1267be92effc3c9daa893906a7f36834204f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/08/2017
+ms.lasthandoff: 06/08/2018
+ms.locfileid: "35232132"
 ---
 # <a name="logging"></a>記錄
 
 > [!TIP]  
-> 您可以檢視這篇文章[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging)GitHub 上。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging) \(英文\)。
 
 ## <a name="aspnet-core-applications"></a>ASP.NET Core 應用程式
 
-ASP.NET Core 記錄機制會自動整合 EF 核心每當`AddDbContext`或`AddDbContextPool`用。 因此，當使用 ASP.NET Core 時，應該設定記錄中所述[ASP.NET Core 文件](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging?tabs=aspnetcore2x)。
+EF 核心自動記錄與機制整合的 ASP.NET Core 每當`AddDbContext`或`AddDbContextPool`用。 因此，當使用 ASP.NET Core 時，應該設定記錄中所述[ASP.NET Core 文件](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging?tabs=aspnetcore2x)。
 
 ## <a name="other-applications"></a>其他應用程式
 
@@ -36,7 +37,7 @@ ASP.NET Core 記錄機制會自動整合 EF 核心每當`AddDbContext`或`AddDbC
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#DefineLoggerFactory)]
 
-這個單一/全域執行個體應該然後再註冊 EF 核心上`DbContextOptionsBuilder`。 例如：
+這個單一/全域執行個體應該然後再註冊 EF 核心上`DbContextOptionsBuilder`。 例如: 
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#RegisterLoggerFactory)]
 
@@ -45,7 +46,7 @@ ASP.NET Core 記錄機制會自動整合 EF 核心每當`AddDbContext`或`AddDbC
 
 ## <a name="filtering-what-is-logged"></a>篩選記錄的內容
 
-註冊 ILoggerProvider 時將它設定為最簡單的方式來篩選記錄的內容。 例如：
+註冊 ILoggerProvider 時將它設定為最簡單的方式來篩選記錄的內容。 例如: 
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContextWithFiltering.cs#DefineLoggerFactory)]
 
