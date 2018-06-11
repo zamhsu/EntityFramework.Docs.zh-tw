@@ -14,8 +14,8 @@
 
 ### [EF Core 中的新功能](core/what-is-new/index.md)
 #### [EF Core 藍圖](core/what-is-new/roadmap.md)
-#### [EF Core 2.1 (預覽版)](core/what-is-new/ef-core-2.1.md)
-#### [EF Core 2.0 (最新發行)](core/what-is-new/ef-core-2.0.md)
+#### [EF Core 2.1](core/what-is-new/ef-core-2.1.md)
+#### [EF Core 2.0](core/what-is-new/ef-core-2.0.md)
 #### [EF Core 1.1](core/what-is-new/ef-core-1.1.md)
 #### [EF Core 1.0](core/what-is-new/ef-core-1.0.md)
 

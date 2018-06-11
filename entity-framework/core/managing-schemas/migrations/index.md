@@ -1,15 +1,16 @@
 ---
-title: "移轉 - EF Core"
+title: 移轉 - EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
 ms.technology: entity-framework-core
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 24fbe344eba9b99929d905ac2b9e49c68a1a4323
-ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
+ms.openlocfilehash: dd164125c053497af94773011127853ad10d27a6
+ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/22/2017
+ms.lasthandoff: 06/04/2018
+ms.locfileid: "34754505"
 ---
 <a name="migrations"></a>移轉
 ==========
@@ -177,7 +178,7 @@ myDbContext.Database.Migrate();
 ```
 
 > [!WARNING]
-> 請勿在 `Migrate()` 之前呼叫 `EnsureCreated()`。 `EnsureCreated()` 會略過移轉建立結構描述，並導致 `Migrate()` 失敗。
+> 請勿在 `Migrate()` 之前呼叫 `EnsureCreated()`。 `EnsureCreated()` 會略過移轉而建立結構描述，因此造成 `Migrate()` 失敗。
 
 > [!NOTE]
 > 此方法的基礎建立在 `IMigrator` 服務之上，其可用於更進階的案例。 您可以使用 `DbContext.GetService<IMigrator>()` 來加以存取。
