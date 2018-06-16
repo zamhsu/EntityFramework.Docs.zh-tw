@@ -127,7 +127,7 @@
 #### [從 1.0 RC2 升級到 RTM](core/miscellaneous/rc2-rtm-upgrade.md)
 #### [升級到 EF Core 2.0](core/miscellaneous/1x-2x-upgrade.md)
 
-### [⤤ API 參考](https://docs.microsoft.com/dotnet/api/?view=efcore-2.0)
+### [⤤ API 參考](https://docs.microsoft.com/dotnet/api/?view=efcore-2.1)
 
 ## [Entity Framework 6](ef6/index.md)
 ### [⤤ 文件](http://msdn.com/data/ef)
