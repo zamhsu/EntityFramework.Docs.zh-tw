@@ -1,5 +1,5 @@
 ---
-title: "包含與排除類型-EF 核心"
+title: 包含與排除類型-EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052598"
 ---
 # <a name="including--excluding-types"></a><span data-ttu-id="7f7dd-102">包含與排除類型</span><span class="sxs-lookup"><span data-stu-id="7f7dd-102">Including & Excluding Types</span></span>
 

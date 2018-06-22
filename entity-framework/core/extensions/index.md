@@ -1,5 +1,5 @@
 ---
-title: "工具和延伸模組 - EF Core"
+title: 工具和延伸模組 - EF Core
 author: ErikEJ
 ms.author: divega
 ms.date: 7/3/2018
@@ -11,6 +11,7 @@ ms.sourcegitcommit: fc68321c211aca38f7b9dc3a75677c6ca1b2524b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 03/08/2018
+ms.locfileid: "29769435"
 ---
 # <a name="ef-core-tools--extensions"></a><span data-ttu-id="67568-102">EF Core 工具和延伸模組</span><span class="sxs-lookup"><span data-stu-id="67568-102">EF Core Tools & Extensions</span></span>
 

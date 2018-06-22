@@ -1,5 +1,5 @@
 ---
-title: "資料行對應的 EF 核心"
+title: 資料行對應的 EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052898"
 ---
 # <a name="column-mapping"></a><span data-ttu-id="483d8-102">資料行對應</span><span class="sxs-lookup"><span data-stu-id="483d8-102">Column Mapping</span></span>
 

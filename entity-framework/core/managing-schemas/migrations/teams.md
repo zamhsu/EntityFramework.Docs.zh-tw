@@ -1,5 +1,5 @@
 ---
-title: "在小組環境的 EF Core 中移轉"
+title: 在小組環境的 EF Core 中移轉
 author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
@@ -9,6 +9,7 @@ ms.sourcegitcommit: b467368cc350e6059fdc0949e042a41cb11e61d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 11/15/2017
+ms.locfileid: "26053798"
 ---
 <a name="migrations-in-team-environments"></a><span data-ttu-id="f415e-102">在小組環境中的移轉</span><span class="sxs-lookup"><span data-stu-id="f415e-102">Migrations in Team Environments</span></span>
 ===============================

@@ -1,5 +1,5 @@
 ---
-title: "命令列參考 - EF Core"
+title: 命令列參考 - EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
@@ -9,6 +9,7 @@ ms.sourcegitcommit: fc68321c211aca38f7b9dc3a75677c6ca1b2524b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 03/08/2018
+ms.locfileid: "29769400"
 ---
 <a name="entity-framework-core-tools"></a><span data-ttu-id="364f7-102">Entity Framework Core 工具</span><span class="sxs-lookup"><span data-stu-id="364f7-102">Entity Framework Core Tools</span></span>
 ===========================

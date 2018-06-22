@@ -1,5 +1,5 @@
 ---
-title: "資料型別-EF 核心"
+title: 資料型別-EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 860ec5d047342fbc4063a0de881c9861cc1f8813
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 11/05/2017
+ms.locfileid: "26053498"
 ---
 # <a name="data-types"></a><span data-ttu-id="7b9f7-102">資料類型</span><span class="sxs-lookup"><span data-stu-id="7b9f7-102">Data Types</span></span>
 

@@ -11,6 +11,7 @@ ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 04/26/2018
+ms.locfileid: "31812491"
 ---
 # <a name="entity-types-with-constructors"></a><span data-ttu-id="d73e8-102">使用建構函式的實體類型</span><span class="sxs-lookup"><span data-stu-id="d73e8-102">Entity types with constructors</span></span>
 

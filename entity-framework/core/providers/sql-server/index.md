@@ -1,5 +1,5 @@
 ---
-title: "Microsoft SQL Server 資料庫提供者 - EF Core"
+title: Microsoft SQL Server 資料庫提供者 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 02/28/2018
+ms.locfileid: "29678646"
 ---
 # <a name="microsoft-sql-server-ef-core-database-provider"></a><span data-ttu-id="b8771-102">Microsoft SQL Server EF Core 資料庫提供者</span><span class="sxs-lookup"><span data-stu-id="b8771-102">Microsoft SQL Server EF Core Database Provider</span></span>
 

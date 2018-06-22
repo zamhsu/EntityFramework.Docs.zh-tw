@@ -1,5 +1,5 @@
 ---
-title: "UWP 使用者入門 - 新資料庫 - EF Core"
+title: UWP 使用者入門 - 新資料庫 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -12,6 +12,7 @@ ms.sourcegitcommit: 96324e58c02b97277395ed43173bf13ac80d2012
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 12/01/2017
+ms.locfileid: "26049831"
 ---
 # <a name="getting-started-with-ef-core-on-universal-windows-platform-uwp-with-a-new-database"></a><span data-ttu-id="a54c8-102">在通用 Windows 平台 (UWP) 上使用 EF Core 搭配新資料庫的使用者入門</span><span class="sxs-lookup"><span data-stu-id="a54c8-102">Getting Started with EF Core on Universal Windows Platform (UWP) with a New Database</span></span>
 

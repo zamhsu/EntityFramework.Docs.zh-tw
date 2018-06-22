@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26048880"
 ---
 # <a name="querying-data"></a><span data-ttu-id="9c6ab-102">查詢資料</span><span class="sxs-lookup"><span data-stu-id="9c6ab-102">Querying Data</span></span>
 

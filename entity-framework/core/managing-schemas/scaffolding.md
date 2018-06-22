@@ -9,6 +9,7 @@ ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 04/26/2018
+ms.locfileid: "31812660"
 ---
 # <a name="-reverse-engineering"></a><span data-ttu-id="6387e-102">🔧 反向工程</span><span class="sxs-lookup"><span data-stu-id="6387e-102">🔧 Reverse Engineering</span></span>
 

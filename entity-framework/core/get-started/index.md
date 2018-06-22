@@ -1,5 +1,5 @@
 ---
-title: "使用者入門 - EF Core"
+title: 使用者入門 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 02/12/2018
+ms.locfileid: "29152399"
 ---
 # <a name="getting-started-with-entity-framework-core"></a><span data-ttu-id="29eb5-102">Entity Framework Core 使用者入門</span><span class="sxs-lookup"><span data-stu-id="29eb5-102">Getting Started with Entity Framework Core</span></span>
 

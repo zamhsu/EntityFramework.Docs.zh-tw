@@ -1,5 +1,5 @@
 ---
-title: "支援的 .NET 實作 - EF Core"
+title: 支援的 .NET 實作 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 08/30/2017
@@ -10,6 +10,7 @@ ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 02/28/2018
+ms.locfileid: "29678672"
 ---
 # <a name="net-implementations-supported-by-ef-core"></a><span data-ttu-id="749f9-102">EF Core 支援的 .NET 實作</span><span class="sxs-lookup"><span data-stu-id="749f9-102">.NET implementations supported by EF Core</span></span>
 

@@ -9,6 +9,7 @@ ms.sourcegitcommit: 038acd91ce2f5a28d76dcd2eab72eeba225e366d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 05/14/2018
+ms.locfileid: "34163138"
 ---
 <a name="custom-migrations-operations"></a><span data-ttu-id="16926-102">自訂的移轉作業</span><span class="sxs-lookup"><span data-stu-id="16926-102">Custom Migrations Operations</span></span>
 ============================

@@ -1,5 +1,5 @@
 ---
-title: "計算資料行的 EF 核心"
+title: 計算資料行的 EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052478"
 ---
 # <a name="computed-columns"></a><span data-ttu-id="2213a-102">計算資料行</span><span class="sxs-lookup"><span data-stu-id="2213a-102">Computed Columns</span></span>
 

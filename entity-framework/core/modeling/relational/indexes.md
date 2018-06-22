@@ -1,5 +1,5 @@
 ---
-title: "索引的 EF 核心"
+title: 索引的 EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 02/28/2018
+ms.locfileid: "29678995"
 ---
 # <a name="indexes"></a><span data-ttu-id="9192b-102">索引</span><span class="sxs-lookup"><span data-stu-id="9192b-102">Indexes</span></span>
 

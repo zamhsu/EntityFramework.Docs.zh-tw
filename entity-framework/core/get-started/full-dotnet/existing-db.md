@@ -11,6 +11,7 @@ ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 04/26/2018
+ms.locfileid: "31812621"
 ---
 # <a name="getting-started-with-ef-core-on-net-framework-with-an-existing-database"></a><span data-ttu-id="919f5-102">在 .NET Framework 上使用 EF Core 搭配現有資料庫的使用者入門</span><span class="sxs-lookup"><span data-stu-id="919f5-102">Getting started with EF Core on .NET Framework with an Existing Database</span></span>
 

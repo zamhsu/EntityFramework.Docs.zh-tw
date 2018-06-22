@@ -11,6 +11,7 @@ ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 04/26/2018
+ms.locfileid: "31812634"
 ---
 # <a name="generated-values"></a><span data-ttu-id="fc972-102">產生的值</span><span class="sxs-lookup"><span data-stu-id="fc972-102">Generated Values</span></span>
 

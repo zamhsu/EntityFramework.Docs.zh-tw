@@ -1,5 +1,5 @@
 ---
-title: "關聯性的 EF 核心"
+title: 關聯性的 EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26053028"
 ---
 # <a name="relationships"></a><span data-ttu-id="0dbf1-102">關聯性</span><span class="sxs-lookup"><span data-stu-id="0dbf1-102">Relationships</span></span>
 
@@ -23,21 +24,21 @@ ms.lasthandoff: 10/27/2017
 
 <span data-ttu-id="0dbf1-108">有許多的詞彙用於描述關聯性</span><span class="sxs-lookup"><span data-stu-id="0dbf1-108">There are a number of terms used to describe relationships</span></span>
 
-* <span data-ttu-id="0dbf1-109">**相依的實體：**這是包含外部索引鍵屬性的實體。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-109">**Dependent entity:** This is the entity that contains the foreign key property(s).</span></span> <span data-ttu-id="0dbf1-110">有時稱為 'child' 的關聯性。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-110">Sometimes referred to as the 'child' of the relationship.</span></span>
+* <span data-ttu-id="0dbf1-109">**相依的實體：** 這是包含外部索引鍵屬性的實體。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-109">**Dependent entity:** This is the entity that contains the foreign key property(s).</span></span> <span data-ttu-id="0dbf1-110">有時稱為 'child' 的關聯性。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-110">Sometimes referred to as the 'child' of the relationship.</span></span>
 
-* <span data-ttu-id="0dbf1-111">**主要實體：**這是包含的主要/替代索引鍵屬性的實體。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-111">**Principal entity:** This is the entity that contains the primary/alternate key property(s).</span></span> <span data-ttu-id="0dbf1-112">有時稱為 'parent' 的關聯性。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-112">Sometimes referred to as the 'parent' of the relationship.</span></span>
+* <span data-ttu-id="0dbf1-111">**主要實體：** 這是包含的主要/替代索引鍵屬性的實體。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-111">**Principal entity:** This is the entity that contains the primary/alternate key property(s).</span></span> <span data-ttu-id="0dbf1-112">有時稱為 'parent' 的關聯性。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-112">Sometimes referred to as the 'parent' of the relationship.</span></span>
 
-* <span data-ttu-id="0dbf1-113">**外部索引鍵：**中用來儲存與相關實體的主要索引鍵內容值的相依實體屬性。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-113">**Foreign key:** The property(s) in the dependent entity that is used to store the values of the principal key property that the entity is related to.</span></span>
+* <span data-ttu-id="0dbf1-113">**外部索引鍵：** 中用來儲存與相關實體的主要索引鍵內容值的相依實體屬性。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-113">**Foreign key:** The property(s) in the dependent entity that is used to store the values of the principal key property that the entity is related to.</span></span>
 
-* <span data-ttu-id="0dbf1-114">**主體的金鑰：**屬性可唯一識別與主要實體。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-114">**Principal key:** The property(s) that uniquely identifies the principal entity.</span></span> <span data-ttu-id="0dbf1-115">這可能是主索引鍵或替代索引鍵。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-115">This may be the primary key or an alternate key.</span></span>
+* <span data-ttu-id="0dbf1-114">**主體的金鑰：** 屬性可唯一識別與主要實體。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-114">**Principal key:** The property(s) that uniquely identifies the principal entity.</span></span> <span data-ttu-id="0dbf1-115">這可能是主索引鍵或替代索引鍵。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-115">This may be the primary key or an alternate key.</span></span>
 
-* <span data-ttu-id="0dbf1-116">**導覽屬性：**包含相關的公司實體參考的主體和 （或） 相依實體上定義的屬性。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-116">**Navigation property:** A property defined on the principal and/or dependent entity that contains a reference(s) to the related entity(s).</span></span>
+* <span data-ttu-id="0dbf1-116">**導覽屬性：** 包含相關的公司實體參考的主體和 （或） 相依實體上定義的屬性。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-116">**Navigation property:** A property defined on the principal and/or dependent entity that contains a reference(s) to the related entity(s).</span></span>
 
-  * <span data-ttu-id="0dbf1-117">**集合導覽屬性：**導覽屬性，其中包含許多相關實體的參考。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-117">**Collection navigation property:** A navigation property that contains references to many related entities.</span></span>
+  * <span data-ttu-id="0dbf1-117">**集合導覽屬性：** 導覽屬性，其中包含許多相關實體的參考。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-117">**Collection navigation property:** A navigation property that contains references to many related entities.</span></span>
 
-  * <span data-ttu-id="0dbf1-118">**參考導覽屬性：**保留單一相關實體的參考導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-118">**Reference navigation property:** A navigation property that holds a reference to a single related entity.</span></span>
+  * <span data-ttu-id="0dbf1-118">**參考導覽屬性：** 保留單一相關實體的參考導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-118">**Reference navigation property:** A navigation property that holds a reference to a single related entity.</span></span>
 
-  * <span data-ttu-id="0dbf1-119">**反向導覽屬性：**時討論特定的導覽屬性時，此一詞是指關聯性另一端的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-119">**Inverse navigation property:** When discussing a particular navigation property, this term refers to the navigation property on the other end of the relationship.</span></span>
+  * <span data-ttu-id="0dbf1-119">**反向導覽屬性：** 時討論特定的導覽屬性時，此一詞是指關聯性另一端的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="0dbf1-119">**Inverse navigation property:** When discussing a particular navigation property, this term refers to the navigation property on the other end of the relationship.</span></span>
 
 <span data-ttu-id="0dbf1-120">下列程式碼清單會顯示一對多關聯性之間`Blog`和`Post`</span><span class="sxs-lookup"><span data-stu-id="0dbf1-120">The following code listing shows a one-to-many relationship between `Blog` and `Post`</span></span>
 

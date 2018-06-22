@@ -1,5 +1,5 @@
 ---
-title: "從 EF6 移植到 EF Core-驗證需求"
+title: 從 EF6 移植到 EF Core-驗證需求
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -10,6 +10,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052858"
 ---
 # <a name="before-porting-from-ef6-to-ef-core-validate-your-applications-requirements"></a><span data-ttu-id="d206c-102">之前從 EF6 移植到 EF 核心： 驗證您的應用程式需求</span><span class="sxs-lookup"><span data-stu-id="d206c-102">Before porting from EF6 to EF Core: Validate your Application's Requirements</span></span>
 

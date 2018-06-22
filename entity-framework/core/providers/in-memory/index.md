@@ -1,5 +1,5 @@
 ---
-title: "InMemory 資料庫提供者 - EF Core"
+title: InMemory 資料庫提供者 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 02/28/2018
+ms.locfileid: "29678982"
 ---
 # <a name="ef-core-in-memory-database-provider"></a><span data-ttu-id="e9148-102">EF Core 記憶體中資料庫提供者</span><span class="sxs-lookup"><span data-stu-id="e9148-102">EF Core In-Memory Database Provider</span></span>
 

@@ -1,5 +1,5 @@
 ---
-title: "索引鍵 （主要）-EF 核心"
+title: 索引鍵 （主要）-EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052568"
 ---
 # <a name="keys-primary"></a><span data-ttu-id="c4a4c-102">索引鍵 （主要）</span><span class="sxs-lookup"><span data-stu-id="c4a4c-102">Keys (primary)</span></span>
 

@@ -1,5 +1,5 @@
 ---
-title: ".NET Core 使用者入門 - EF Core"
+title: .NET Core 使用者入門 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26048830"
 ---
 # <a name="getting-started-with-ef-core-on-net-core"></a><span data-ttu-id="25efd-102">.NET Core 上的 EF Core 使用者入門</span><span class="sxs-lookup"><span data-stu-id="25efd-102">Getting Started with EF Core on .NET Core</span></span>
 

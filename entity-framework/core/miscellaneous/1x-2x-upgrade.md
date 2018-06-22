@@ -1,5 +1,5 @@
 ---
-title: "從舊版升級至 EF 核心 2 EF 核心"
+title: 從舊版升級至 EF 核心 2 EF 核心
 author: divega
 ms.author: divega
 ms.date: 8/13/2017
@@ -11,6 +11,7 @@ ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 02/28/2018
+ms.locfileid: "29678610"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a><span data-ttu-id="8951d-102">應用程式從舊版升級 EF 核心 2.0</span><span class="sxs-lookup"><span data-stu-id="8951d-102">Upgrading applications from previous versions to EF Core 2.0</span></span>
 

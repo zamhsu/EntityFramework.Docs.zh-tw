@@ -1,5 +1,5 @@
 ---
-title: "EF Core 1.1 中的新增功能 - EF Core"
+title: EF Core 1.1 中的新增功能 - EF Core
 author: divega
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26049671"
 ---
 # <a name="new-features-in-ef-core-11"></a><span data-ttu-id="0737c-102">EF Core 1.1 中的新增功能</span><span class="sxs-lookup"><span data-stu-id="0737c-102">New features in EF Core 1.1</span></span>
 

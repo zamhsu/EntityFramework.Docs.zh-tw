@@ -1,5 +1,5 @@
 ---
-title: "預設值-EF 核心"
+title: 預設值-EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052758"
 ---
 # <a name="default-values"></a><span data-ttu-id="6ff5b-102">預設值</span><span class="sxs-lookup"><span data-stu-id="6ff5b-102">Default Values</span></span>
 

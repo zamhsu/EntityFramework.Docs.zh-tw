@@ -1,5 +1,5 @@
 ---
-title: "管理資料庫結構描述 - EF Core"
+title: 管理資料庫結構描述 - EF Core
 author: bricelam
 ms.author: divega
 ms.date: 10/30/2017
@@ -9,6 +9,7 @@ ms.sourcegitcommit: b467368cc350e6059fdc0949e042a41cb11e61d9
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 11/15/2017
+ms.locfileid: "26049380"
 ---
 # <a name="managing-database-schemas"></a><span data-ttu-id="7328f-102">管理資料庫結構描述</span><span class="sxs-lookup"><span data-stu-id="7328f-102">Managing Database Schemas</span></span>
 <span data-ttu-id="7328f-103">EF Core 提供兩種主要方式來保持 EF Core 模型與資料庫結構描述同步。若要從兩者中進行選擇，請決定 EF Core 模型還是資料庫結構描述為真實來源。</span><span class="sxs-lookup"><span data-stu-id="7328f-103">EF Core provides two primary ways of keeping your EF Core model and database schema in sync. To choose between the two, decide whether your EF Core model or the database schema is the source of truth.</span></span>
