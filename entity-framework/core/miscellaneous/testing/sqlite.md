@@ -1,5 +1,5 @@
 ---
-title: "SQLite-EF 核心的測試"
+title: SQLite-EF 核心的測試
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052698"
 ---
 # <a name="testing-with-sqlite"></a>使用 SQLite 測試
 

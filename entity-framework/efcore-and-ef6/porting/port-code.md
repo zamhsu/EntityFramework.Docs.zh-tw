@@ -1,5 +1,5 @@
 ---
-title: "從 EF6 移植到 EF Core-移植程式碼為基礎的模型"
+title: 從 EF6 移植到 EF Core-移植程式碼為基礎的模型
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -10,6 +10,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052948"
 ---
 # <a name="porting-an-ef6-code-based-model-to-ef-core"></a>移植到 EF Core EF6 程式碼式模型
 

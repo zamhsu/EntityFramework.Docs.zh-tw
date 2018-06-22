@@ -1,5 +1,5 @@
 ---
-title: "InMemory-EF 核心的測試"
+title: InMemory-EF 核心的測試
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: d096484dcf9eff73d9943fa60db7a418b10ca0b3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 01/22/2018
+ms.locfileid: "27995583"
 ---
 # <a name="testing-with-inmemory"></a>使用 InMemory 測試
 

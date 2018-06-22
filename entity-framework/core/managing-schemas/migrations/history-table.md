@@ -1,5 +1,5 @@
 ---
-title: "自訂的移轉歷程記錄資料表 EF 核心"
+title: 自訂的移轉歷程記錄資料表 EF 核心
 author: bricelam
 ms.author: bricelam
 ms.date: 11/7/2017
@@ -9,6 +9,7 @@ ms.sourcegitcommit: b467368cc350e6059fdc0949e042a41cb11e61d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 11/15/2017
+ms.locfileid: "26053808"
 ---
 <a name="custom-migrations-history-table"></a>自訂的移轉歷程記錄資料表
 ===============================

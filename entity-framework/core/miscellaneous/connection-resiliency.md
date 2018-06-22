@@ -1,5 +1,5 @@
 ---
-title: "連接恢復功能的 EF 核心"
+title: 連接恢復功能的 EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 11/15/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 860ec5d047342fbc4063a0de881c9861cc1f8813
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 11/05/2017
+ms.locfileid: "26053528"
 ---
 # <a name="connection-resiliency"></a>連接恢復功能
 

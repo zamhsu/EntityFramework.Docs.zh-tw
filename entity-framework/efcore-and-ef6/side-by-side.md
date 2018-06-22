@@ -1,5 +1,5 @@
 ---
-title: "EF6 和 EF Core - 在相同的應用程式中使用它們"
+title: EF6 和 EF Core - 在相同的應用程式中使用它們
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -10,6 +10,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26054822"
 ---
 # <a name="using-ef-core-and-ef6-in-the-same-application"></a>在相同的應用程式中使用 EF Core 和 EF6
 

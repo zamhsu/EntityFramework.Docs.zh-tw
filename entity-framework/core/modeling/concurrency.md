@@ -1,5 +1,5 @@
 ---
-title: "並行語彙基元-EF 核心"
+title: 並行語彙基元-EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 03/03/2018
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 8f3be0a2a394253efb653388ec66bda964e5ee1b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 03/05/2018
+ms.locfileid: "29745474"
 ---
 # <a name="concurrency-tokens"></a>並行語彙基元
 
@@ -39,7 +40,7 @@ ms.lasthandoff: 03/05/2018
 
 時間戳記是屬性，產生新的值是由資料庫每次插入或更新資料列。 屬性也會被視為並行語彙基元。 這可確保如果其他人已修改的資料列，您嘗試更新您查詢的資料後，就會收到例外狀況。
 
-如何達成這會決定所使用的資料庫提供者。 SQL Server 的時間戳記通常用在*byte []*屬性，將會安裝為*ROWVERSION*資料庫中的資料行。
+如何達成這會決定所使用的資料庫提供者。 SQL Server 的時間戳記通常用在*byte []* 屬性，將會安裝為*ROWVERSION*資料庫中的資料行。
 
 ### <a name="conventions"></a>慣例
 

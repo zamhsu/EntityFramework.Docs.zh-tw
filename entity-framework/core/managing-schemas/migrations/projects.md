@@ -1,5 +1,5 @@
 ---
-title: "移轉具有多個專案的 EF 核心"
+title: 移轉具有多個專案的 EF 核心
 author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
@@ -9,6 +9,7 @@ ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 12/22/2017
+ms.locfileid: "27161223"
 ---
 <a name="using-a-separate-project"></a>使用個別的專案
 ========================

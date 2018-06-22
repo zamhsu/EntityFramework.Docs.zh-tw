@@ -1,5 +1,5 @@
 ---
-title: "繼承 （關聯式資料庫） 的 EF 核心"
+title: 繼承 （關聯式資料庫） 的 EF 核心
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 02/12/2018
+ms.locfileid: "29152351"
 ---
 # <a name="inheritance-relational-database"></a>繼承 （關聯式資料庫）
 

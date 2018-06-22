@@ -1,5 +1,5 @@
 ---
-title: "EF 核心備份欄位-"
+title: EF 核心備份欄位-
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 860ec5d047342fbc4063a0de881c9861cc1f8813
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 11/05/2017
+ms.locfileid: "26053458"
 ---
 # <a name="backing-fields"></a>支援欄位
 
