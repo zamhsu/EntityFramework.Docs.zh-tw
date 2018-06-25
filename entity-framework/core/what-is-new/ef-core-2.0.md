@@ -1,5 +1,5 @@
 ---
-title: "EF Core 2.0 中的新功能 - EF Core"
+title: EF Core 2.0 中的新功能 - EF Core
 author: divega
 ms.author: divega
 ms.date: 02/20/2018
@@ -11,6 +11,7 @@ ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 02/28/2018
+ms.locfileid: "29680019"
 ---
 # <a name="new-features-in-ef-core-20"></a><span data-ttu-id="c55c0-102">EF Core 2.0 中的新功能</span><span class="sxs-lookup"><span data-stu-id="c55c0-102">New features in EF Core 2.0</span></span>
 
