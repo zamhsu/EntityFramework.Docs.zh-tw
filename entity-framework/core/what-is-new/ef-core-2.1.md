@@ -6,20 +6,19 @@ ms.date: 2/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: db1648095aa4d612af53f4e10a30be36edc40da5
-ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
+ms.openlocfilehash: 2372a6b2e3f3b7b1d9214a6ea321fe28cea45fff
+ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 06/04/2018
+ms.locfileid: "34754421"
 ---
 # <a name="new-features-in-ef-core-21"></a>EF Core 2.1 中的新功能
-> [!NOTE]  
-> 這個版本仍處於預覽狀態。
 
 除了許多 Bug 修正和小型的功能和效能增強之外，EF Core 2.1 還包含一些吸引人的新功能：
 
 ## <a name="lazy-loading"></a>消極式載入
-EF Core 現在包含必要的建置組塊，可讓任何人撰寫實體類別，以視需要載入其導覽屬性。 我們也已建立新套件 Microsoft.EntityFrameworkCore.Proxies，該套件利用這些建置組塊來產生以最小修改之實體類別為基礎的消極式載入 Proxy 類別 (例如具有虛擬導覽屬性的類別)。
+EF Core 現在包含必要的建置組塊，可讓任何人撰寫實體類別，以視需要載入其導覽屬性。 我們也已建立新套件 Microsoft.EntityFrameworkCore.Proxies，該套件利用這些建置組塊來產生以最小修改之實體類別為基礎的消極式載入 Proxy 類別 (例如，具有虛擬導覽屬性的類別)。
 
 如需此主題的詳細資訊，請閱讀[消極式載入](xref:core/querying/related-data#lazy-loading)一節。
 
@@ -38,7 +37,7 @@ EF Core 現在包含必要的建置組塊，可讓任何人撰寫實體類別，
 如需此主題的詳細資訊，請閱讀[值轉換](xref:core/modeling/value-conversions)一節。  
 
 ## <a name="linq-groupby-translation"></a>LINQ GroupBy 轉譯
-在 2.1 版之前，EF Core 中的 GroupBy LINQ 運算子永遠會在記憶體內部評估。 我們現在支援在最常見的案例中將它轉譯成 SQL GROUP BY 子句。
+在 2.1 版之前，EF Core 中的 GroupBy LINQ 運算子一律會在記憶體內部評估。 我們現在支援在最常見的案例中將它轉譯成 SQL GROUP BY 子句。
 
 此範例會顯示使用 GroupBy 來計算各種彙總函式的查詢：
 
@@ -124,7 +123,7 @@ var query = context.Customers.Select(
 
 請注意這項查詢只會轉譯成兩個 SQL 查詢：一個用於客戶，另一個用於訂單。
 
-## <a name="ownedattribute"></a>OwnedAttribute
+## <a name="owned-attribute"></a>[Owned] 屬性
 
 您現在可以直接對類型標註 `[Owned]`，然後確定擁有者實體已新增至模型，來設定[擁有的實體類型](xref:core/modeling/owned-entities)：
 
@@ -143,12 +142,14 @@ public class Order
 }
 ```
 
-## <a name="new-dotnet-ef-global-tool"></a>新的 dotnet-ef 通用工具
+## <a name="command-line-tool-dotnet-ef-included-in-net-core-sdk"></a>命令列工具 dotnet-ef 隨附於.NET Core SDK
 
-_dotnet-ef_ 命令已轉換為 .NET CLI 通用工具，因此不再需要在專案中使用 DotNetCliToolReference 才能使用移轉，或從現有的資料庫建立 DbContext 結構。
+_dotnet-ef_ 命令現為 .NET Core SDK 的一部分，因此不再需要在專案中使用 DotNetCliToolReference 才能使用移轉，或從現有的資料庫建立 DbContext 結構。
+
+如需如何啟用不同版本之 .NET Core SDK 和 EF Core 命令列工具的詳細資訊，請參閱[安裝工具](xref:core/miscellaneous/cli/dotnet#installing-the-tools)一節。
 
 ## <a name="microsoftentityframeworkcoreabstractions-package"></a>Microsoft.EntityFrameworkCore.Abstractions 套件
-新的套件包含屬性和介面，您可以在專案中使用這些屬性和介面來啟用 EF Core 功能，而不必仰賴整體 EF Core。 例如， Preview 1 中引進的 [Owned] 屬性已移到此處。
+新的套件包含屬性和介面，您可以在專案中使用這些屬性和介面來啟用 EF Core 功能，而不必仰賴整體 EF Core。 例如，[Owned] 屬性與 ILazyLoader 介面位於此處。
 
 ## <a name="state-change-events"></a>狀態變更事件
 
@@ -165,7 +166,7 @@ var query = context.People.FromSql(sql);
 
 ## <a name="database-provider-compatibility"></a>資料庫提供者相容性
 
-EF Core 2.1 已設計成與專為 EF Core 2.0 建立的資料庫提供者相容，或至少需要極少的變更。 雖然上述某些功能 (例如值轉換) 需要更新的提供者，但其他功能 (例如消極式載入) 則受到現有提供者的支援。
+建議您使用 EF Core 2.1 與已更新或至少測試過可使用 EF Core 2.1 的提供者。
 
 > [!TIP]
 > 如果您在新功能中發現未預期的不相容或任何問題，或者如果您有相關意見反應，請使用[我們的問題追蹤程式](https://github.com/aspnet/EntityFrameworkCore/issues/new)進行回報。

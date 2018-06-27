@@ -6,22 +6,21 @@ ms.date: 02/20/2018
 ms.assetid: 834C9729-7F6E-4355-917D-DE3EE9FE149E
 ms.technology: entity-framework-core
 uid: core/what-is-new/roadmap
-ms.openlocfilehash: 6c10e64a4fa3bf26dc0da64bb9e102c8b76d3a6e
-ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
+ms.openlocfilehash: e23f5d7b1ff95bead310fa8e618a88c161a4e10c
+ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 06/04/2018
+ms.locfileid: "34754440"
 ---
 # <a name="entity-framework-core-roadmap"></a>Entity Framework Core 藍圖
 
 > [!IMPORTANT]
 > 請注意，後續版本的功能集與上市時間，隨時可能會變動，此外，即使我們試圖將此頁面保持在最新狀態，可能還是無法隨時反映我們最新的計劃。
 
-EF Core 2.1 的第二個預覽版於 2018 年 4 月發行。 您現已可於 [EF Core 2.1 中的新功能](xref:core/what-is-new/ef-core-2.1)找到此版本的詳細資訊。
+2018 年 5 月 30 日發行的穩定 EF Core 2.1 版本。 您可於 [EF Core 2.1 的新功能](xref:core/what-is-new/ef-core-2.1)找到此版本的詳細資訊。
 
-我們預計每月還會額外發行 EF Core 2.1 預覽版，並會於 2018 年的第二個日曆季度發行最終版本。
-
-我們尚未完成 2.1 之後下一個版本的[發行計劃](#release-planning-process)。
+我們尚未完成 2.1 之後下一個版本的[發行計劃程序](#release-planning-process)。
 
 ## <a name="schedule"></a>排程
 
