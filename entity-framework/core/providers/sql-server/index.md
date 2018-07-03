@@ -42,7 +42,7 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 * .NET Framework (4.5.1 及更新版本)
 
-* .NET 核心
+* .NET Core
 
 * Mono (4.2.0 及更新版本)
 

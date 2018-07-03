@@ -69,7 +69,7 @@ public class BloggingContext : DbContext
 
 ## <a name="aspnet-core"></a>ASP.NET Core
 
-在 ASP.NET Core 組態系統是非常有彈性，以及連接字串可以儲存在`appsettings.json`，環境變數、 使用者密碼存放區或另一個設定來源。 請參閱[組態區段的 ASP.NET 核心文件](https://docs.asp.net/en/latest/fundamentals/configuration.html)如需詳細資訊。 下列範例顯示連接字串儲存在`appsettings.json`。
+在 ASP.NET Core 組態系統是非常有彈性，以及連接字串可以儲存在`appsettings.json`，環境變數、 使用者密碼存放區或另一個設定來源。 請參閱[組態區段的 ASP.NET Core 文件](https://docs.asp.net/en/latest/fundamentals/configuration.html)如需詳細資訊。 下列範例顯示連接字串儲存在`appsettings.json`。
 
 ``` json
 {
