@@ -1,5 +1,5 @@
 ---
-title: InMemory-EF 核心的測試
+title: InMemory-EF Core 的測試
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -22,7 +22,7 @@ InMemory 提供者時，您想要測試元件使用的近似於連接至實際�
 
 ## <a name="inmemory-is-not-a-relational-database"></a>InMemory 不是關聯式資料庫
 
-EF 核心資料庫提供者可能沒有關聯式資料庫。 InMemory 的設計是為了測試，一般用途的資料庫，而且不是模擬的關聯式資料庫。
+EF Core 資料庫提供者可能沒有關聯式資料庫。 InMemory 的設計是為了測試，一般用途的資料庫，而且不是模擬的關聯式資料庫。
 
 包括的一些範例：
 * InMemory 可讓您儲存違反參考完整性條件約束，關聯式資料庫中的資料。

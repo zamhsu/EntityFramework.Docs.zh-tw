@@ -1,5 +1,5 @@
 ---
-title: 順序-EF 核心
+title: 順序-EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016

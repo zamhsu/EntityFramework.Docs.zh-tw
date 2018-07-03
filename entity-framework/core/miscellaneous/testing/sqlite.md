@@ -1,5 +1,5 @@
 ---
-title: SQLite-EF 核心的測試
+title: SQLite-EF Core 的測試
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016

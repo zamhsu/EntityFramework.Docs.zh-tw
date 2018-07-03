@@ -1,5 +1,5 @@
 ---
-title: 包含與排除內容-EF 核心
+title: 包含與排除內容-EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016

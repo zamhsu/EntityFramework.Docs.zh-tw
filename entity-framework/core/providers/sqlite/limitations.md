@@ -1,5 +1,5 @@
 ---
-title: SQLite 資料庫提供者-限制-EF 核心
+title: SQLite 資料庫提供者-限制-EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 04/09/2017
@@ -13,7 +13,7 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 03/02/2018
 ms.locfileid: "29719481"
 ---
-# <a name="sqlite-ef-core-database-provider-limitations"></a>SQLite EF 核心資料庫提供者的限制
+# <a name="sqlite-ef-core-database-provider-limitations"></a>SQLite EF Core 資料庫提供者的限制
 
 SQLite 提供者有幾項移轉限制。 大部分的這些限制是限制基礎 SQLite database engine 中的結果，並不專屬於 EF。
 

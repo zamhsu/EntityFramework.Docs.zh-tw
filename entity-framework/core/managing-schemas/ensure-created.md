@@ -1,5 +1,5 @@
 ---
-title: "\U0001F527建立和卸除應用程式開發介面的 EF 核心"
+title: "\U0001F527建立和卸除應用程式開發介面的 EF Core"
 author: bricelam
 ms.author: bricelam
 ms.date: 11/10/2017

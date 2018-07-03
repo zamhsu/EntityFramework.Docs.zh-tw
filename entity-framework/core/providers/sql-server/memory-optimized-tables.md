@@ -13,11 +13,11 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
 ms.locfileid: "26052638"
 ---
-# <a name="memory-optimized-tables-support-in-sql-server-ef-core-database-provider"></a>SQL Server EF 核心資料庫提供者的記憶體最佳化資料表支援
+# <a name="memory-optimized-tables-support-in-sql-server-ef-core-database-provider"></a>SQL Server EF Core 資料庫提供者的記憶體最佳化資料表支援
 
 > [!NOTE]  
 >
-> 在 EF 核心 1.1 已引入此功能。
+> 在 EF Core 1.1 已引入此功能。
 
 [記憶體最佳化資料表](https://docs.microsoft.com/sql/relational-databases/in-memory-oltp/memory-optimized-tables)是整個資料表在記憶體中的所在位置的 SQL Server 的功能。 資料表資料的第二個副本保留在磁碟上，但僅做為持久性用途。 記憶體最佳化資料表中的資料只會在資料庫復原時從磁碟中讀取。 例如，伺服器重新啟動後。
 

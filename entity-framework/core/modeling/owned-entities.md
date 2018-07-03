@@ -1,5 +1,5 @@
 ---
-title: EF 核心擁有實體型別：
+title: EF Core 擁有實體型別：
 author: julielerman
 ms.author: divega
 ms.date: 2/26/2018
@@ -15,13 +15,13 @@ ms.lasthandoff: 04/19/2018
 # <a name="owned-entity-types"></a>擁有的實體類型
 
 >[!NOTE]
-> 這項功能是在 EF 核心 2.0 的新功能。
+> 這項功能是在 EF Core 2.0 的新功能。
 
-EF 核心可讓您可以永遠只會出現在導覽屬性的其他實體類型的模型實體類型。 這種讀取稱為_擁有實體類型_。 包含擁有的實體類型的實體為其_擁有者_。
+EF Core 可讓您可以永遠只會出現在導覽屬性的其他實體類型的模型實體類型。 這種讀取稱為_擁有實體類型_。 包含擁有的實體類型的實體為其_擁有者_。
 
 ## <a name="explicit-configuration"></a>明確的設定
 
-擁有的實體類型永遠不會包含 EF Core 的模型中的慣例。 您可以使用`OwnsOne`方法中的`OnModelCreating`或加上註解具有型別`OwnedAttribute`（EF 核心 2.1 的新） 來設定為擁有的型別類型。
+擁有的實體類型永遠不會包含 EF Core 的模型中的慣例。 您可以使用`OwnsOne`方法中的`OnModelCreating`或加上註解具有型別`OwnedAttribute`（EF Core 2.1 的新） 來設定為擁有的型別類型。
 
 在此範例中，StreetAddress 是沒有 identity 屬性的類型。 它用做訂單類型的屬性，指定特定訂單的送貨地址。 在`OnModelCreating`，我們使用`OwnsOne`方法，以指定 ShippingAddress 屬性所擁有的實體順序類型。
 
@@ -67,9 +67,9 @@ public class Order
 
 ## <a name="implicit-keys"></a>隱含索引鍵
 
-在 EF 核心 2.0 和 2.1 中，參考導覽屬性可以指向擁有的型別。 不支援擁有型別的集合。 這些參考擁有類型一律與擁有者有一對一的關聯性，因此它們不需要自己的索引鍵值。 在上述範例中，StreetAddress 型別不必定義索引鍵內容。  
+在 EF Core 2.0 和 2.1 中，參考導覽屬性可以指向擁有的型別。 不支援擁有型別的集合。 這些參考擁有類型一律與擁有者有一對一的關聯性，因此它們不需要自己的索引鍵值。 在上述範例中，StreetAddress 型別不必定義索引鍵內容。  
 
-為了了解如何 EF 核心追蹤這些物件，是可以將主索引鍵會建立為[陰影屬性](xref:core/modeling/shadow-properties)擁有的類型。 擁有型別的執行個體索引鍵的值將會擁有者執行個體的索引鍵的值相同。      
+為了了解如何 EF Core 追蹤這些物件，是可以將主索引鍵會建立為[陰影屬性](xref:core/modeling/shadow-properties)擁有的類型。 擁有型別的執行個體索引鍵的值將會擁有者執行個體的索引鍵的值相同。      
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>擁有與分割資料表的類型對應
 
@@ -78,7 +78,7 @@ public class Order
 > [!TIP]
 > 擁有與分割資料表一起儲存的型別可以是多複雜類型中使用 EF6 非常類似使用。
 
-依照慣例，EF 核心會遵循模式擁有的實體類型的屬性名稱的資料庫資料行_EntityProperty_OwnedEntityProperty_。 因此 StreetAddress 屬性會出現在 「 訂單 」 資料表 ShippingAddress_Street 和 ShippingAddress_City 的名稱。
+依照慣例，EF Core 會遵循模式擁有的實體類型的屬性名稱的資料庫資料行_EntityProperty_OwnedEntityProperty_。 因此 StreetAddress 屬性會出現在 「 訂單 」 資料表 ShippingAddress_Street 和 ShippingAddress_City 的名稱。
 
 您可以將附加`HasColumnName`方法來重新命名這些資料行。 在 StreetAddress 所在的公用屬性的情況下，會對應
 
@@ -96,7 +96,7 @@ modelBuilder.Entity<Order>().OwnsOne(
 
 擁有的實體類型可以是相同的.NET 型別為其他擁有的實體類型，因此.NET 型別可能不夠來識別擁有的型別。
 
-在這些情況下，擁有者從指向擁有的實體屬性會變成_定義巡覽_擁有的實體類型。 EF 核心的觀點而言，定義的導覽是.NET 型別與型別之身分識別的一部分。   
+在這些情況下，擁有者從指向擁有的實體屬性會變成_定義巡覽_擁有的實體類型。 EF Core 的觀點而言，定義的導覽是.NET 型別與型別之身分識別的一部分。   
 
 例如，在下列類別中，ShippingAddress 和 BillingAddress 都屬於相同的.NET 類型，StreetAddress:
 
@@ -109,7 +109,7 @@ public class Order
 }
 ```
 
-若要了解如何 EF 核心會區別這些物件的追蹤執行個體，可能很有用考量定義瀏覽已經成為擁有者的索引鍵與值一起執行個體索引鍵的一部分，並且擁有的類型的.NET 類型。
+若要了解如何 EF Core 會區別這些物件的追蹤執行個體，可能很有用考量定義瀏覽已經成為擁有者的索引鍵與值一起執行個體索引鍵的一部分，並且擁有的類型的.NET 類型。
 
 ## <a name="nested-owned-types"></a>巢狀擁有的型別
 

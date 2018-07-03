@@ -1,5 +1,5 @@
 ---
-title: 連接字串的 EF 核心
+title: 連接字串的 EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -33,7 +33,7 @@ ms.locfileid: "26052528"
 ```
 
 > [!TIP]  
-> `providerName` EF 核心連接字串儲存在 App.config，因為資料庫提供者已透過程式碼不需要設定。
+> `providerName` EF Core 連接字串儲存在 App.config，因為資料庫提供者已透過程式碼不需要設定。
 
 您可以再讀取連接字串使用`ConfigurationManager`API 在您的內容中`OnConfiguring`方法。 您可能需要將參考加入`System.Configuration`framework 組件，可以使用此 API。
 
@@ -69,7 +69,7 @@ public class BloggingContext : DbContext
 
 ## <a name="aspnet-core"></a>ASP.NET Core
 
-在 ASP.NET Core 組態系統是非常有彈性，以及連接字串可以儲存在`appsettings.json`，環境變數、 使用者密碼存放區或另一個設定來源。 請參閱[組態區段的 ASP.NET 核心文件](https://docs.asp.net/en/latest/fundamentals/configuration.html)如需詳細資訊。 下列範例顯示連接字串儲存在`appsettings.json`。
+在 ASP.NET Core 組態系統是非常有彈性，以及連接字串可以儲存在`appsettings.json`，環境變數、 使用者密碼存放區或另一個設定來源。 請參閱[組態區段的 ASP.NET Core 文件](https://docs.asp.net/en/latest/fundamentals/configuration.html)如需詳細資訊。 下列範例顯示連接字串儲存在`appsettings.json`。
 
 ``` json
 {

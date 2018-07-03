@@ -1,5 +1,5 @@
 ---
-title: 並行語彙基元-EF 核心
+title: 並行語彙基元-EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 03/03/2018

@@ -1,5 +1,5 @@
 ---
-title: EF 核心備份欄位-
+title: EF Core 備份欄位-
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -16,7 +16,7 @@ ms.locfileid: "26053458"
 # <a name="backing-fields"></a>支援欄位
 
 > [!NOTE]  
-> 這項功能是在 EF 核心 1.1 的新功能。
+> 這項功能是在 EF Core 1.1 的新功能。
 
 支援欄位允許 EF 讀取及/或寫入欄位，而不是屬性。 這有助於進行應用程式碼，在類別中的封裝 （encapsulation） 用來限制的使用及/或加強周圍資料的存取權的語意，但值應該進行讀取及/或寫入資料庫，而不使用這些限制 /增強功能。
 
