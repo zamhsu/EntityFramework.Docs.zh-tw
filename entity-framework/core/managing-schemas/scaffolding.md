@@ -1,5 +1,5 @@
 ---
-title: "\U0001F527 反向工程的 EF 核心"
+title: "\U0001F527 反向工程的 EF Core"
 author: smitpatel
 ms.author: divega
 ms.date: 10/30/2017

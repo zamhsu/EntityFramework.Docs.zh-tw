@@ -1,5 +1,5 @@
 ---
-title: 自訂的移轉作業-EF 核心
+title: 自訂的移轉作業-EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/7/2017

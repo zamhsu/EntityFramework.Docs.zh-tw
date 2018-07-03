@@ -1,5 +1,5 @@
 ---
-title: 預設結構描述的 EF 核心
+title: 預設結構描述的 EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016

@@ -1,5 +1,5 @@
 ---
-title: 連接字串的 EF 核心
+title: 連接字串的 EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -33,7 +33,7 @@ ms.locfileid: "26052528"
 ```
 
 > [!TIP]  
-> `providerName` EF 核心連接字串儲存在 App.config，因為資料庫提供者已透過程式碼不需要設定。
+> `providerName` EF Core 連接字串儲存在 App.config，因為資料庫提供者已透過程式碼不需要設定。
 
 您可以再讀取連接字串使用`ConfigurationManager`API 在您的內容中`OnConfiguring`方法。 您可能需要將參考加入`System.Configuration`framework 組件，可以使用此 API。
 

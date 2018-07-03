@@ -1,5 +1,5 @@
 ---
-title: 交替執行多個模型與 DbContext 類型相同的 EF 核心
+title: 交替執行多個模型與 DbContext 類型相同的 EF Core
 author: AndriySvyryd
 ms.author: divega
 ms.date: 12/10/2017

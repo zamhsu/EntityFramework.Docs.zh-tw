@@ -1,5 +1,5 @@
 ---
-title: 記錄-EF 核心
+title: 記錄-EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -20,11 +20,11 @@ ms.locfileid: "35232132"
 
 ## <a name="aspnet-core-applications"></a>ASP.NET Core 應用程式
 
-EF 核心自動記錄與機制整合的 ASP.NET Core 每當`AddDbContext`或`AddDbContextPool`用。 因此，當使用 ASP.NET Core 時，應該設定記錄中所述[ASP.NET Core 文件](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging?tabs=aspnetcore2x)。
+EF Core 自動記錄與機制整合的 ASP.NET Core 每當`AddDbContext`或`AddDbContextPool`用。 因此，當使用 ASP.NET Core 時，應該設定記錄中所述[ASP.NET Core 文件](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging?tabs=aspnetcore2x)。
 
 ## <a name="other-applications"></a>其他應用程式
 
-記錄目前的 EF 核心需要其本身設定一或多個 ILoggerProvider ILoggerFactory。 常見的提供者都隨附在下列封裝：
+記錄目前的 EF Core 需要其本身設定一或多個 ILoggerProvider ILoggerFactory。 常見的提供者都隨附在下列封裝：
 
 * [Microsoft.Extensions.Logging.Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/)： 簡單的主控台記錄器。
 * [Microsoft.Extensions.Logging.AzureAppServices](https://www.nuget.org/packages/Microsoft.Extensions.Logging.AzureAppServices/)： 支援 Azure 應用程式服務 '診斷記錄檔' 和 '記錄資料流' 功能。
@@ -37,7 +37,7 @@ EF 核心自動記錄與機制整合的 ASP.NET Core 每當`AddDbContext`或`Add
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#DefineLoggerFactory)]
 
-這個單一/全域執行個體應該然後再註冊 EF 核心上`DbContextOptionsBuilder`。 例如: 
+這個單一/全域執行個體應該然後再註冊 EF Core 上`DbContextOptionsBuilder`。 例如: 
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#RegisterLoggerFactory)]
 
@@ -54,6 +54,6 @@ EF 核心自動記錄與機制整合的 ASP.NET Core 每當`AddDbContext`或`Add
  * 在 'Microsoft.EntityFrameworkCore.Database.Command' 類別
  * 在 「 資訊 」 層級
 
-記錄器類別目錄中的定義 EF 核心`DbLoggerCategory`類別，以讓您輕鬆尋找類別目錄，但這些解析成簡單字串。
+記錄器類別目錄中的定義 EF Core`DbLoggerCategory`類別，以讓您輕鬆尋找類別目錄，但這些解析成簡單字串。
 
 位於基礎的記錄基礎結構的詳細[ASP.NET Core 記錄文件](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging?tabs=aspnetcore2x)。

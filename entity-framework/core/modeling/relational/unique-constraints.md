@@ -1,5 +1,5 @@
 ---
-title: 替代索引鍵 （唯一條件約束）-EF 核心
+title: 替代索引鍵 （唯一條件約束）-EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016

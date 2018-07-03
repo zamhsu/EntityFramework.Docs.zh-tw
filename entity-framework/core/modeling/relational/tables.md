@@ -1,5 +1,5 @@
 ---
-title: 資料表對應的 EF 核心
+title: 資料表對應的 EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016

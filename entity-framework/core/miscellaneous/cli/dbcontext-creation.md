@@ -1,5 +1,5 @@
 ---
-title: 設計階段 DbContext 建立-EF 核心
+title: 設計階段 DbContext 建立-EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 10/27/2017
@@ -14,7 +14,7 @@ ms.locfileid: "30202480"
 ---
 <a name="design-time-dbcontext-creation"></a>設計階段 DbContext 建立
 ==============================
-某些 EF 核心工具命令 (例如，[移轉][ 1]命令) 需要衍生`DbContext`以收集應用程式的相關詳細資料，在設計階段建立的執行個體實體類型和它們如何對應到資料庫結構描述。 在大部分情況下，最好的`DbContext`藉此建立要如何將以類似方式設定[設定在執行階段][2]。
+某些 EF Core 工具命令 (例如，[移轉][ 1]命令) 需要衍生`DbContext`以收集應用程式的相關詳細資料，在設計階段建立的執行個體實體類型和它們如何對應到資料庫結構描述。 在大部分情況下，最好的`DbContext`藉此建立要如何將以類似方式設定[設定在執行階段][2]。
 
 工具會嘗試建立可以使用各種方式`DbContext`:
 

@@ -1,5 +1,5 @@
 ---
-title: 索引鍵 （主要）-EF 核心
+title: 索引鍵 （主要）-EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016

@@ -1,5 +1,5 @@
 ---
-title: 移轉具有多個專案的 EF 核心
+title: 移轉具有多個專案的 EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017

@@ -1,5 +1,5 @@
 ---
-title: Package Manager Console (Visual Studio)-EF 核心
+title: Package Manager Console (Visual Studio)-EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
@@ -11,17 +11,17 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 04/26/2018
 ms.locfileid: "31812556"
 ---
-<a name="ef-core-package-manager-console-tools"></a>EF 核心封裝管理員主控台工具
+<a name="ef-core-package-manager-console-tools"></a>EF Core 封裝管理員主控台工具
 =====================================
-EF 核心封裝管理員主控台 (PMC) 工具，請執行 Visual Studio 內使用 NuGet 的[Package Manager Console][2]。
+EF Core 封裝管理員主控台 (PMC) 工具，請執行 Visual Studio 內使用 NuGet 的[Package Manager Console][2]。
 這些工具會使用 .NET Framework 和 .NET Core 專案。
 
 > [!TIP]
-> 不使用 Visual Studio 嗎？ [EF 核心命令列工具][ 1]是跨平台和在命令提示字元內執行。
+> 不使用 Visual Studio 嗎？ [EF Core 命令列工具][ 1]是跨平台和在命令提示字元內執行。
 
 <a name="installing-the-tools"></a>安裝工具
 --------------------
-安裝 EF 核心封裝管理員主控台工具安裝 Microsoft.EntityFrameworkCore.Tools NuGet 封裝。
+安裝 EF Core 封裝管理員主控台工具安裝 Microsoft.EntityFrameworkCore.Tools NuGet 封裝。
 您可以執行內的下列命令來安裝[Package Manager Console][2]。
 
 ``` powershell

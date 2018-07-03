@@ -1,5 +1,5 @@
 ---
-title: Foreign Key 條件約束的 EF 核心
+title: Foreign Key 條件約束的 EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016

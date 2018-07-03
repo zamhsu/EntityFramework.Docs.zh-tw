@@ -1,5 +1,5 @@
 ---
-title: 最大長度為 EF 核心
+title: 最大長度為 EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
