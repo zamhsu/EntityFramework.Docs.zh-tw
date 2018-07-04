@@ -92,7 +92,7 @@ ms.locfileid: "26053028"
 
 ### <a name="cascade-delete"></a>串聯刪除
 
-依照慣例，cascade delete 將會設定為*Cascade*必要的關聯性和*ClientSetNull*選擇性的關聯性。 *Cascade*表示相依實體也會一併刪除。 *ClientSetNull*方法不會載入記憶體的相依實體將會保留不變且必須以手動方式刪除，或更新為指向有效的主要實體。 載入到記憶體的實體，EF Core 會嘗試將外部索引鍵屬性設定為 null。
+依照慣例，cascade delete 將會設定為*Cascade*必要的關聯性和*ClientSetNull*選擇性的關聯性。 *Cascade*表示相依實體也會一併刪除。 *ClientSetNull*方法不會載入記憶體的相依實體將會保留不變且必須以手動方式刪除，或更新為指向有效的主要實體。 載入到記憶體的實體，EF Core會嘗試將外部索引鍵屬性設定為 null。
 
 請參閱[必要和選擇性的關聯性](#required-and-optional-relationships)必要和選擇性的關聯性之間的差異 > 一節。
 

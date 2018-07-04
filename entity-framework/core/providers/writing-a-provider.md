@@ -15,9 +15,9 @@ ms.locfileid: "29678956"
 ---
 # <a name="writing-a-database-provider"></a>撰寫資料庫提供者
 
-撰寫 Entity Framework Core 資料庫提供者的相關資訊，請參閱[因此您想要撰寫的 EF Core 提供者](https://blog.oneunicorn.com/2016/11/11/so-you-want-to-write-an-ef-core-provider/)由[Arthur Vickers](https://github.com/ajcvickers)。
+撰寫 Entity Framework Core 資料庫提供者的相關資訊，請參閱[因此您想要撰寫的 EF Core提供者](https://blog.oneunicorn.com/2016/11/11/so-you-want-to-write-an-ef-core-provider/)由[Arthur Vickers](https://github.com/ajcvickers)。
 
-EF Core 程式碼基底是開放原始碼，並包含數個可做為參考資料庫提供者。 您可以在 https://github.com/aspnet/EntityFrameworkCore 尋找原始碼。
+EF Core程式碼基底是開放原始碼，並包含數個可做為參考資料庫提供者。 您可以在 https://github.com/aspnet/EntityFrameworkCore 尋找原始碼。
 
 ## <a name="the-providers-beware-label"></a>提供者注意標籤
 
@@ -25,7 +25,7 @@ EF Core 程式碼基底是開放原始碼，並包含數個可做為參考資料
 
 ## <a name="suggested-naming-of-third-party-providers"></a>建議的協力廠商提供者命名
 
-我們建議使用下列命名的 NuGet 封裝。 這是與 EF Core 小組所傳遞的封裝的名稱一致。
+我們建議使用下列命名的 NuGet 封裝。 這是與 EF Core小組所傳遞的封裝的名稱一致。
 
 `<Optional project/company name>.EntityFrameworkCore.<Database engine name>`
 

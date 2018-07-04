@@ -18,7 +18,7 @@ ms.locfileid: "34163196"
 > [!NOTE]  
 > 這項功能是在 EF Core 2.1 中新功能。
 
-資料植入可讓提供初始資料來擴展資料庫。 不同於在 EF6，在 EF Core 植入的資料是做為模型設定一部分實體類型相關聯。 然後 EF Core[移轉](xref:core/managing-schemas/migrations/index)可以自動計算項目插入、 更新或刪除作業必須升級至新版的模型資料庫時套用。
+資料植入可讓提供初始資料來擴展資料庫。 不同於在 EF6，在 EF Core植入的資料是做為模型設定一部分實體類型相關聯。 然後 EF Core[移轉](xref:core/managing-schemas/migrations/index)可以自動計算項目插入、 更新或刪除作業必須升級至新版的模型資料庫時套用。
 
 例如，您可以使用設定的種子資料這`Blog`中`OnModelCreating`:
 

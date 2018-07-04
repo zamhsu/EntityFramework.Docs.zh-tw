@@ -14,7 +14,7 @@ ms.locfileid: "31812686"
 ---
 # <a name="porting-an-ef6-edmx-based-model-to-ef-core"></a>移植到 EF Core EF6 EDMX 型模型
 
-EF Core 不支援模型的 EDMX 檔案格式。 最佳的選項，這些模型中，連接埠是從應用程式資料庫中產生新的程式碼為基礎的模型。
+EF Core不支援模型的 EDMX 檔案格式。 最佳的選項，這些模型中，連接埠是從應用程式資料庫中產生新的程式碼為基礎的模型。
 
 ## <a name="install-ef-core-nuget-packages"></a>安裝 EF Core NuGet 封裝
 
@@ -40,11 +40,11 @@ Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Conn
 
 您現在會從您的應用程式移除 EF6 模型。
 
-它，就可以保留 EF6 NuGet 封裝 (EntityFramework) 安裝，因為 EF Core 和 EF6 可以使用-並存相同的應用程式中。 不過，如果您不打算使用 EF6 應用程式的任何區域中，然後解除安裝封裝有助於讓上需要注意的程式碼片段的編譯錯誤。
+它，就可以保留 EF6 NuGet 封裝 (EntityFramework) 安裝，因為 EF Core和 EF6 可以使用-並存相同的應用程式中。 不過，如果您不打算使用 EF6 應用程式的任何區域中，然後解除安裝封裝有助於讓上需要注意的程式碼片段的編譯錯誤。
 
 ## <a name="update-your-code"></a>更新您的程式碼
 
-此時，它是定址的編譯錯誤，並檢閱看 EF6 和 EF Core 之間的行為變更會影響您的程式碼。
+此時，它是定址的編譯錯誤，並檢閱看 EF6 和 EF Core之間的行為變更會影響您的程式碼。
 
 ## <a name="test-the-port"></a>測試連接埠
 

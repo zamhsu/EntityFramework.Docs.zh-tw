@@ -13,14 +13,14 @@ ms.locfileid: "26053808"
 ---
 <a name="custom-migrations-history-table"></a>自訂的移轉歷程記錄資料表
 ===============================
-根據預設，EF Core 追蹤的哪些移轉已經套用至資料庫所記錄的資料表中的這些`__EFMigrationsHistory`。 基於各種原因，您可能想要自訂此資料表，使其更符合您的需求。
+根據預設，EF Core追蹤的哪些移轉已經套用至資料庫所記錄的資料表中的這些`__EFMigrationsHistory`。 基於各種原因，您可能想要自訂此資料表，使其更符合您的需求。
 
 > [!IMPORTANT]
 > 如果您自訂的移轉歷程記錄資料表*之後*套用移轉，您必須負責更新資料庫中現有的資料表。
 
 <a name="schema-and-table-name"></a>結構描述和資料表名稱
 ----------------------
-您可以變更結構描述和資料表名稱使用`MigrationsHistoryTable()`方法中的`OnConfiguring()`(或`ConfigureServices()`ASP.NET Core 上)。 以下是使用 SQL Server EF Core 提供者的範例。
+您可以變更結構描述和資料表名稱使用`MigrationsHistoryTable()`方法中的`OnConfiguring()`(或`ConfigureServices()`ASP.NET Core 上)。 以下是使用 SQL Server EF Core提供者的範例。
 
 ``` csharp
 protected override void OnConfiguring(DbContextOptionsBuilder options)

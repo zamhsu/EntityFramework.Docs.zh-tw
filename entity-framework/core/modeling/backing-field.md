@@ -1,5 +1,5 @@
 ---
-title: EF Core 備份欄位-
+title: EF Core備份欄位-
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
