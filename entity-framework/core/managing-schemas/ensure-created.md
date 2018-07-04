@@ -1,5 +1,5 @@
 ---
-title: "\U0001F527建立和卸除應用程式開發介面的 EF 核心"
+title: "\U0001F527建立和卸除應用程式開發介面的 EF Core"
 author: bricelam
 ms.author: bricelam
 ms.date: 11/10/2017
@@ -11,10 +11,10 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 11/15/2017
 ms.locfileid: "26053818"
 ---
-# <a name="-create-and-drop-apis"></a><span data-ttu-id="8eca2-102">🔧建立和卸除應用程式開發介面</span><span class="sxs-lookup"><span data-stu-id="8eca2-102">🔧 Create and Drop APIs</span></span>
+# <a name="-create-and-drop-apis"></a><span data-ttu-id="cdacf-102">🔧建立和卸除應用程式開發介面</span><span class="sxs-lookup"><span data-stu-id="cdacf-102">🔧 Create and Drop APIs</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="8eca2-103">本主題尚未撰寫！</span><span class="sxs-lookup"><span data-stu-id="8eca2-103">This topic hasn't been written yet!</span></span> <span data-ttu-id="8eca2-104">您可以追蹤的狀態[問題][ 1]透過我們公用 GitHub 問題追蹤程式。</span><span class="sxs-lookup"><span data-stu-id="8eca2-104">You can track the status of this [issue][1] through our public GitHub issue tracker.</span></span> <span data-ttu-id="8eca2-105">了解如何[參與][ 2] GitHub 上。</span><span class="sxs-lookup"><span data-stu-id="8eca2-105">Learn how you can [contribute][2] on GitHub.</span></span>
+> <span data-ttu-id="cdacf-103">本主題尚未撰寫！</span><span class="sxs-lookup"><span data-stu-id="cdacf-103">This topic hasn't been written yet!</span></span> <span data-ttu-id="cdacf-104">您可以追蹤的狀態[問題][ 1]透過我們公用 GitHub 問題追蹤程式。</span><span class="sxs-lookup"><span data-stu-id="cdacf-104">You can track the status of this [issue][1] through our public GitHub issue tracker.</span></span> <span data-ttu-id="cdacf-105">了解如何[參與][ 2] GitHub 上。</span><span class="sxs-lookup"><span data-stu-id="cdacf-105">Learn how you can [contribute][2] on GitHub.</span></span>
 
 
   [1]: https://github.com/aspnet/EntityFramework.Docs/issues/549
