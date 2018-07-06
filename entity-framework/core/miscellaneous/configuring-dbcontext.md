@@ -15,11 +15,11 @@ ms.locfileid: "29152386"
 ---
 # <a name="configuring-a-dbcontext"></a>設定建立的 DbContext
 
-本文示範基本模式設定`DbContext`透過`DbContextOptions`連接到資料庫，使用特定的 EF Core提供者和選擇性的行為。
+本文示範基本模式設定`DbContext`透過`DbContextOptions`連接到資料庫，使用特定的 EF Core 提供者和選擇性的行為。
 
 ## <a name="design-time-dbcontext-configuration"></a>設計階段 DbContext 組態
 
-EF Core設計階段工具，例如[移轉](xref:core/managing-schemas/migrations/index)必須能夠探索和建立的工作執行個體`DbContext`從中收集有關應用程式的實體類型和它們如何對應到資料庫結構描述的詳細資料的類型。 只要可以輕鬆地建立此工具，此程序可能會自動`DbContext`的方式，它將會設定同樣的方式就會設定在執行階段。
+EF Core 設計階段工具，例如[移轉](xref:core/managing-schemas/migrations/index)必須能夠探索和建立的工作執行個體`DbContext`從中收集有關應用程式的實體類型和它們如何對應到資料庫結構描述的詳細資料的類型。 只要可以輕鬆地建立此工具，此程序可能會自動`DbContext`的方式，它將會設定同樣的方式就會設定在執行階段。
 
 同時提供必要的組態資訊的任何模式`DbContext`可在執行階段，需要使用的工具`DbContext`在設計階段只能處理有限數目的模式。 中詳細說明這些先決條件[設計階段內容建立](xref:core/miscellaneous/cli/dbcontext-creation)> 一節。
 
@@ -30,9 +30,9 @@ EF Core設計階段工具，例如[移轉](xref:core/managing-schemas/migrations
 - 若要使用，資料庫提供者通常會選取叫用方法時，例如`UseSqlServer`或 `UseSqlite`
 - 任何必要的連接字串或資料庫執行個體識別項通常傳遞做為引數給上述提供者選取方法
 - 所有的提供者層級時的選擇性行為選取器，通常也會在提供者選取方法的呼叫鏈結
-- 所有一般 EF Core行為的選取器，通常鏈結提供者選取器方法之前或之後
+- 所有一般 EF Core 行為的選取器，通常鏈結提供者選取器方法之前或之後
 
-下列範例會設定`DbContextOptions`若要使用 SQL Server 提供者，連接中所包含`connectionString`變數、 提供者層級命令逾時和 EF Core行為選取器，讓執行中的所有查詢`DbContext`[否追蹤](xref:core/querying/tracking#no-tracking-queries)預設：
+下列範例會設定`DbContextOptions`若要使用 SQL Server 提供者，連接中所包含`connectionString`變數、 提供者層級命令逾時和 EF Core 行為選取器，讓執行中的所有查詢`DbContext`[否追蹤](xref:core/querying/tracking#no-tracking-queries)預設：
 
 ``` csharp
 optionsBuilder
@@ -166,6 +166,6 @@ var options = serviceProvider.GetService<DbContextOptions<BloggingContext>>();
 
 ## <a name="more-reading"></a>詳細閱讀
 
-* 讀取[開始使用 ASP.NET Core](../get-started/aspnetcore/index.md)如需有關使用 EF 與 ASP.NET Core。
+* 讀取[開始使用 ASP.NET Core](../get-started/aspnetcore/index.md) 如需有關使用 EF 與 ASP.NET Core。
 * 讀取[相依性插入](https://docs.microsoft.com/aspnet/core/fundamentals/dependency-injection)若要深入了解使用 DI。
 * 讀取[測試](testing/index.md)如需詳細資訊。

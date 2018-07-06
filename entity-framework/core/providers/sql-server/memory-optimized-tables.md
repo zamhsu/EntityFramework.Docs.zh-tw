@@ -13,7 +13,7 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/27/2017
 ms.locfileid: "26052638"
 ---
-# <a name="memory-optimized-tables-support-in-sql-server-ef-core-database-provider"></a>SQL Server EF Core資料庫提供者的記憶體最佳化資料表支援
+# <a name="memory-optimized-tables-support-in-sql-server-ef-core-database-provider"></a>SQL Server EF Core 資料庫提供者的記憶體最佳化資料表支援
 
 > [!NOTE]  
 >

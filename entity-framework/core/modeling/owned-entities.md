@@ -8,9 +8,10 @@ ms.technology: entity-framework-core
 uid: core/modeling/owned-entities
 ms.openlocfilehash: f2f05499a3e3494f420d916df2db19667a6f1e29
 ms.sourcegitcommit: 26f33758c47399ae933f22fec8e1d19fa7d2c0b7
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 04/19/2018
+ms.locfileid: "31533878"
 ---
 # <a name="owned-entity-types"></a>擁有的實體類型
 

@@ -13,7 +13,7 @@ ms.locfileid: "30002801"
 ---
 <a name="migrations-with-multiple-providers"></a>移轉具有多個提供者
 ==================================
-[EF Core工具][ 1]只 scaffold 移轉為作用中的提供者。 有時候，不過，您可能想要搭配您 DbContext 使用一個以上的提供者 （例如 Microsoft SQL Server 和 SQLite）。 有兩種方式來處理此情形的移轉。 您可以維護兩個集合的移轉-一個用於每個提供者--或合併至單一設定，可以在同時工作。
+[EF Core 工具][ 1]只 scaffold 移轉為作用中的提供者。 有時候，不過，您可能想要搭配您 DbContext 使用一個以上的提供者 （例如 Microsoft SQL Server 和 SQLite）。 有兩種方式來處理此情形的移轉。 您可以維護兩個集合的移轉-一個用於每個提供者--或合併至單一設定，可以在同時工作。
 
 <a name="two-migration-sets"></a>兩個移轉集合
 ------------------

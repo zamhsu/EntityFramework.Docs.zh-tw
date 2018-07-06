@@ -13,7 +13,7 @@ ms.locfileid: "26053688"
 ---
 <a name="design-time-services"></a>設計階段服務
 ====================
-某些工具使用的服務才會在設計階段使用。 若要防止應用程式正在部署的 EF Core執行階段服務會分開管理這些服務。 若要覆寫其中一個服務 （例如產生移轉檔案服務），將加入的實作`IDesignTimeServices`至您的啟始專案。
+某些工具使用的服務才會在設計階段使用。 若要防止應用程式正在部署的 EF Core 執行階段服務會分開管理這些服務。 若要覆寫其中一個服務 （例如產生移轉檔案服務），將加入的實作`IDesignTimeServices`至您的啟始專案。
 
 ``` csharp
 class MyDesignTimeServices : IDesignTimeServices

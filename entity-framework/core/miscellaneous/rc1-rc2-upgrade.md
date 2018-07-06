@@ -130,7 +130,7 @@ services.AddEntityFrameworkSqlServer()
 
 ## <a name="using-imports-in-projectjson"></a>在 project.json 中使用 「 匯入 」
 
-其中一些 EF Core相依性不支援.NET 標準尚未。 EF Core標準.NET 和.NET Core 專案中的，您可能需要加入 「 匯入 「 加入 project.json 暫時的解決方法。
+其中一些 EF Core相依性不支援.NET 標準尚未。 EF Core 標準.NET 和.NET Core 專案中的，您可能需要加入 「 匯入 「 加入 project.json 暫時的解決方法。
 
 加入時 EF，NuGet 還原 」 會顯示這則錯誤訊息：
 

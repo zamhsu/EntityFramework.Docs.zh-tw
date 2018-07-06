@@ -22,7 +22,7 @@ ms.locfileid: "26052948"
 
 如果您打算使用的移轉，則您也應該安裝`Microsoft.EntityFrameworkCore.Tools`封裝。
 
-它，就可以保留 EF6 NuGet 封裝 (EntityFramework) 安裝，因為 EF Core和 EF6 可以使用-並存相同的應用程式中。 不過，如果您不打算使用 EF6 應用程式的任何區域中，然後解除安裝封裝有助於讓上需要注意的程式碼片段的編譯錯誤。
+它，就可以保留 EF6 NuGet 封裝 (EntityFramework) 安裝，因為 EF Core 和 EF6 可以使用-並存相同的應用程式中。 不過，如果您不打算使用 EF6 應用程式的任何區域中，然後解除安裝封裝有助於讓上需要注意的程式碼片段的編譯錯誤。
 
 ## <a name="swap-namespaces"></a>交換命名空間
 
@@ -30,9 +30,9 @@ ms.locfileid: "26052948"
 
 ## <a name="context-configuration-connection-etc"></a>內容組態 （連線等）。
 
-中所述[確保 EF Core會用於您的應用程式](ensure-requirements.md)，EF Core有較少神奇偵測連接到資料庫。 您必須覆寫`OnConfiguring`上您的衍生的內容，並設定資料庫的連接使用資料庫提供者特定 API 方法。
+中所述[確保 EF Core 會用於您的應用程式](ensure-requirements.md)，EF Core 有較少神奇偵測連接到資料庫。 您必須覆寫`OnConfiguring`上您的衍生的內容，並設定資料庫的連接使用資料庫提供者特定 API 方法。
 
-大部分的 EF6 應用程式的應用程式中儲存連接字串`App/Web.config`檔案。 在 EF Core您讀取此連接字串使用`ConfigurationManager`應用程式開發介面。 您可能需要將參考加入`System.Configuration`framework 組件，可以使用此 API。
+大部分的 EF6 應用程式的應用程式中儲存連接字串`App/Web.config`檔案。 在 EF Core 您讀取此連接字串使用`ConfigurationManager`應用程式開發介面。 您可能需要將參考加入`System.Configuration`framework 組件，可以使用此 API。
 
 ``` csharp
 public class BloggingContext : DbContext

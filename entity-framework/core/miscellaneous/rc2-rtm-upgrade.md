@@ -59,7 +59,7 @@ Rc2，移轉的資料行定義看起來像`table.Column<string>(nullable: true)`
 
 ## <a name="net-core-remove-imports-in-projectjson"></a>.NET core： 在 project.json 中移除 「 匯入 」
 
-如果您已針對.NET Core rc2，您需要新增`imports`加入 project.json 暫時的解決方法的其中一些不支援.NET 標準的 EF Core相依性。 這些是可以立即移除。
+如果您已針對.NET Core rc2，您需要新增`imports`加入 project.json 暫時的解決方法的其中一些不支援.NET 標準的 EF Core 相依性。 這些是可以立即移除。
 
 ``` json
 {
