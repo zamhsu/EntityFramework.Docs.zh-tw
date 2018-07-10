@@ -7,11 +7,12 @@ ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 6bb12583-c39a-454c-8d83-d2a2793ca9ef
 uid: index
-ms.openlocfilehash: d8cc62dcab77b52509b8f4bbc0fc153b5f93be2f
-ms.sourcegitcommit: fc68321c211aca38f7b9dc3a75677c6ca1b2524b
+ms.openlocfilehash: 1f0e33e06f3b39f34eb483786cd34152a1570f54
+ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/08/2018
+ms.lasthandoff: 07/08/2018
+ms.locfileid: "37911742"
 ---
 <div id="main" class="v2">
     <div class="container">
@@ -226,7 +227,7 @@ ms.lasthandoff: 03/08/2018
                                             </div>
                                             <div class="cardText">
                                                 <h3>
-                                                    <a href="https://docs.microsoft.com/dotnet/api/?view=efcore-2.0">⤤ API 參考</a>
+                                                    <a href="https://docs.microsoft.com/dotnet/api/?view=efcore-2.1">⤤ API 參考</a>
                                                 </h3>
                                                 <p>
                                                     <a href="https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext">DbContext</a>
@@ -235,7 +236,7 @@ ms.lasthandoff: 03/08/2018
                                                     <a href="https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbset-1">DbSet&lt;TEntity&gt;</a>
                                                 </p>
                                                 <p>
-                                                    <a href="https://docs.microsoft.com/dotnet/api/?view=efcore-2.0">其他...</a>
+                                                    <a href="https://docs.microsoft.com/dotnet/api/?view=efcore-2.1">其他...</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -258,7 +259,7 @@ ms.lasthandoff: 03/08/2018
                                 </div>
                             </li>
                             <li>
-                                <a href="/ef/ef6/index">
+                                <a href="/ef/ef6/get-started">
                                     <div class="cardSize">
                                         <div class="cardPadding">
                                             <div class="card">
@@ -268,7 +269,7 @@ ms.lasthandoff: 03/08/2018
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>⤤ 開始使用</h3>
+                                                    <h3>開始使用</h3>
                                                     <p>了解如何使用 Entity Framework 6 存取資料。</p>
                                                 </div>
                                             </div>

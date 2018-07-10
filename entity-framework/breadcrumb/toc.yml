@@ -16,7 +16,7 @@
             - name: 新功能
               tocHref: /ef/core/what-is-new/
               topicHref: /ef/core/what-is-new/index
-            - name: 使用者入門
+            - name: 開始使用
               tocHref: /ef/core/get-started/
               topicHref: /ef/core/get-started/index
             - name: 建立模型
@@ -28,9 +28,15 @@
             - name: 儲存資料
               tocHref: /ef/core/saving/
               topicHref: /ef/core/saving/index
+            - name: 支援的 .NET 實作
+              tocHref: /ef/core/platforms/
+              topicHref: /ef/core/platofms/index
             - name: 資料庫提供者
               tocHref: /ef/core/providers/
               topicHref: /ef/core/providers/index
+            - name: 管理資料庫結構描述
+              tocHref: /ef/core/managing-schemas/
+              topicHref: /ef/core/managing-schemas/index
             - name: 命令列參考
               tocHref: /ef/core/miscellaneous/cli/
               topicHref: /ef/core/miscellaneous/cli/index
@@ -43,3 +49,25 @@
         - name: Entity Framework 6
           tocHref: /ef/ef6/
           topicHref: /ef/ef6/index
+          items:
+            - name: 新功能
+              tocHref: /ef/ef6/what-is-new/
+              topicHref: /ef/ef6/what-is-new/index
+            - name: 開始使用
+              tocHref: /ef/ef6/get-started
+              topicHref: /ef/ef6/get-started
+            - name: Fundamentals
+              tocHref: /ef/ef6/fundamentals/
+              topicHref: /ef/ef6/fundamentals/index
+            - name: 建立模型
+              tocHref: /ef/ef6/modeling/
+              topicHref: /ef/ef6/modeling/index
+            - name: 查詢資料
+              tocHref: /ef/ef6/querying/
+              topicHref: /ef/ef6/querying/index
+            - name: 儲存資料
+              tocHref: /ef/ef6/saving/
+              topicHref: /ef/ef6/saving/index
+            - name: 其他資源
+              tocHref: /ef/ef6/resources/
+              topicHref: /ef/ef6/resources/index
