@@ -6,23 +6,23 @@ ms.date: 10/27/2016
 ms.assetid: 05a47de9-1078-488e-a823-b516a4208f33
 ms.technology: entity-framework-core
 uid: core/modeling/relational/columns
-ms.openlocfilehash: 697b966dbac892e332fe65feaa4dd11f00dd8298
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: ac3ab2ce3faa54eb8e862d01dcecb48cb0d1f811
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052898"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949407"
 ---
 # <a name="column-mapping"></a>資料行對應
 
 > [!NOTE]  
-> 本節中的設定是一般適用於關聯式資料庫。 當您安裝的關聯式資料庫提供者，如下所示的擴充方法會變成可用 (因為共用*Microsoft.EntityFrameworkCore.Relational*封裝)。
+> 本節中的組態一般適用於關聯式資料庫。 當您因共用 *Microsoft.EntityFrameworkCore.Relational* 套件而安裝關聯式資料庫提供者時，這裡顯示的擴充方法會變成可用。
 
-資料行對應會識別應該要從查詢並儲存到資料庫中哪些資料行的資料。
+資料行對應會識別哪一個資料行的資料應該從查詢，並儲存到資料庫中。
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，每個屬性會對應至具有相同名稱與屬性資料行的安裝程式。
+依照慣例，請將對應至名稱與屬性相同的資料行設定的每個屬性。
 
 ## <a name="data-annotations"></a>資料註釋
 
@@ -38,9 +38,9 @@ public class Blog
 }
 ```
 
-## <a name="fluent-api"></a>關於 fluent 應用程式開發介面
+## <a name="fluent-api"></a>Fluent API
 
-您可以使用 fluent 應用程式開發的應用程式開發介面來設定屬性所對應的資料行。
+您可以使用 Fluent API 來設定屬性所對應的資料行。
 
 <!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/Relational/Column.cs?highlight=7,8,9)] -->
 ``` csharp

@@ -6,12 +6,12 @@ ms.date: 2/26/2018
 ms.assetid: 2B0BADCE-E23E-4B28-B8EE-537883E16DF3
 ms.technology: entity-framework-core
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 768429b857b09c1974f4ade31b5bbb6b1c7e15c3
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 476a1dcaadcd99eba0cd4f5f0ac40c32a97af5c9
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37911872"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949423"
 ---
 # <a name="owned-entity-types"></a>擁有的實體類型
 
@@ -155,7 +155,7 @@ modelBuilder.Entity<Order>().OwnsOne(p => p.OrderDetails, od =>
 
 您可達到相同的項目使用`OwnedAttribute`OrderDetails 和 StreetAdress 上。
 
-巢狀的擁有類型，除了擁有的類型可以參考的一般實體。 在下列範例中，國家/地區會是一般的 （亦即非屬） 實體：
+巢狀的擁有類型，除了擁有的類型可以參考的一般實體。 在下列範例中，國家/地區會是一般的非擁有實體：
 
 ``` csharp
 public class StreetAddress
@@ -182,7 +182,7 @@ modelBuilder.Entity<Order>().OwnsOne(p => p.OrderDetails, od =>
 
 ## <a name="querying-owned-types"></a>查詢擁有的類型
 
-查詢擁有者時，預設會包含擁有的類型。 您不需要使用`Include`方法，即使擁有的類型會儲存在個別的資料表。 根據之前所述的模型，下列查詢將會提取順序、 OrderDetails 和兩個擁有的 StreeAddresses，從資料庫的所有暫止訂單：
+查詢擁有者時，預設會包含擁有的類型。 您不需要使用`Include`方法，即使擁有的類型會儲存在個別的資料表。 根據之前所述的模型，下列查詢將會提取順序、 OrderDetails 和兩個擁有的 StreetAddresses，從資料庫的所有暫止訂單：
 
 ``` csharp
 var orders = context.Orders.Where(o => o.Status == OrderStatus.Pending);
@@ -194,11 +194,11 @@ var orders = context.Orders.Where(o => o.Status == OrderStatus.Pending);
 
 ### <a name="shortcomings-in-previous-versions"></a>在舊版的缺點
 - 在 EF Core 2.0 中，巡覽至擁有無法在衍生的實體型別宣告實體類型，除非所擁有的實體會明確對應至個別的資料表擁有者階層架構。 EF Core 2.1 中已移除這項限制
- 
+
 ### <a name="current-shortcomings"></a>目前的缺點
 - 包含繼承階層架構可讓您擁有不支援實體類型
 - 擁有的實體類型不能指向集合導覽屬性 （目前支援巡覽的唯一參考）
-- 巡覽至擁有的實體類型不能是 null，除非它們會明確對應至個別的資料表擁有者 
+- 巡覽至擁有的實體類型不能是 null，除非它們會明確對應至個別的資料表擁有者
 - 擁有的實體類型的執行個體不能共用的多個擁有者 （這是無法使用擁有的實體型別實作的值物件的知名案例）
 
 ### <a name="by-design-restrictions"></a>依據設計限制
