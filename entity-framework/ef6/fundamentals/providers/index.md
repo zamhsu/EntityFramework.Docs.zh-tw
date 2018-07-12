@@ -9,14 +9,15 @@ ms.technology: entity-framework-6
 ms.topic: article
 ms.assetid: 7BFB7763-CD6C-4520-93A2-7B265F5FA586
 caps.latest.revision: 3
-ms.openlocfilehash: 9ec7a83e8bdfde2f67b821bbe46dd688f64bc51d
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 8bd5a5a420d741accd1167845575e23c09579ae1
+ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37911632"
+ms.lasthandoff: 07/09/2018
+ms.locfileid: "37914293"
 ---
 # <a name="entity-framework-6-providers"></a>Entity Framework 6 提供者
+> [!NOTE]
 > **僅限 EF6 及更新版本** - Entity Framework 6 已引進此頁面中所討論的功能及 API 等等。 如果您使用的是較早版本，則不適用部分或全部的資訊。
 
 Entity Framework 目前正在開放原始碼授權下進行開發，EF6 和更新版本將不會隨附於 .NET Framework。 這有許多優點，但也需要針對 EF6 組件重建 EF 提供者。 這表示 EF5 和先前版本的 EF 提供者在重建之前將不適用於 EF6。
