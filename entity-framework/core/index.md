@@ -6,18 +6,18 @@ ms.date: 10/27/2016
 ms.assetid: bc2a2676-bc46-493f-bf49-e3cc97994d57
 ms.technology: entity-framework-core
 uid: core/index
-ms.openlocfilehash: 3befcbd3ff3da5dd159e6e6cb5fe7140c81317c2
-ms.sourcegitcommit: a2b38dedc88ca3ccbfe7b1db9602ca02da8294cd
+ms.openlocfilehash: 103e5e069687950a8411f2d92c7b5a191844e0ae
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/31/2018
-ms.locfileid: "34686658"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37948986"
 ---
 # <a name="entity-framework-core-quick-overview"></a>Entity Framework Core 快速概觀
 
 Entity Framework (EF) Core 是常見 Entity Framework 資料存取技術的輕量型、可擴充且跨平台版本。
 
-EF Core 可以當成物件關聯式對應程式 (O/RM)，讓 .NET 開發人員使用 .NET 物件來處理資料庫，而可以省略大部分以往必須自行撰寫的資料存取程式碼。 
+EF Core 可以當成物件關聯式對應程式 (O/RM)，讓 .NET 開發人員使用 .NET 物件來處理資料庫，而可以省略大部分以往必須自行撰寫的資料存取程式碼。
 
 EF Core 支援許多資料庫引擎，如需詳細資料，請參閱[資料庫提供者](providers/index.md)。
 
@@ -33,7 +33,7 @@ EF Core 支援許多資料庫引擎，如需詳細資料，請參閱[資料庫�
 
 ## <a name="get-entity-framework-core"></a>取得 Entity Framework Core
 
-請針對您想要使用的資料庫提供者，[安裝 NuGet 套件](https://docs.nuget.org/ndocs/quickstart/use-a-package)。 例如， 在命令列中使用 `dotnet` 工具，於跨平台開發中安裝 SQL Server 提供者：
+請針對您想要使用的資料庫提供者，[安裝 NuGet 套件](https://docs.nuget.org/ndocs/quickstart/use-a-package)。 例如，在命令列中使用 `dotnet` 工具，於跨平台開發中安裝 SQL Server 提供者：
 
 ``` Console
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer

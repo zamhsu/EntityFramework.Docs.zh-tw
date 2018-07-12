@@ -6,12 +6,12 @@ ms.date: 10/27/2016
 ms.assetid: ef044629-feca-4fd1-a48f-d208daedaf92
 ms.technology: entity-framework-core
 uid: core/saving/index
-ms.openlocfilehash: 9280b9c34b41c0319f918488cd7d28eeceef12e7
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 97d7f1248a8d0adeed9714619c1364fa8f9822db
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26048870"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949391"
 ---
 # <a name="saving-data"></a>儲存資料
 
