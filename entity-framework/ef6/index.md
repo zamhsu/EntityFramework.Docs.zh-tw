@@ -1,20 +1,56 @@
 ---
-title: Entity Framework 6
-author: rowanmiller
+title: Entity Framework 6 快速概觀
+author: divega
+ms.date: 2016-10-23
+ms.prod: entity-framework
 ms.author: divega
-ms.date: 10/27/2016
-ms.assetid: d16eb5be-7e94-477a-84cd-e6dce25df12a
+ms.manager: avickers
 ms.technology: entity-framework-6
+ms.topic: article
+ms.assetid: 8ae74d63-6bad-4686-b325-bbf9d68f3743
+caps.latest.revision: 5
 uid: ef6/index
-ms.openlocfilehash: 235a1404e56b5a78a3ef4f85e37c84a8bde2c014
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: df661f19afdeef53257c86bdd32b1444737c9b0a
+ms.sourcegitcommit: 45494121254ad4fdcec613d1dd22d850068d6f39
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26048900"
+ms.lasthandoff: 07/08/2018
+ms.locfileid: "37913495"
 ---
-# <a name="entity-framework-6"></a>Entity Framework 6
+# <a name="entity-framework-6-quick-overview"></a>Entity Framework 6 快速概觀
 
-Entity Framework 6 (EF6) 是已經過試用並測試的資料存取技術，具有多年的功能和穩定性。 它是在 2008 年當成 .NET Framework 3.5 SP1 和 Visual Studio 2008 SP1 的一部分第一次發行。 從 EF4.1 版開始，它會出貨為 [EntityFramework NuGet 套件](https://www.nuget.org/packages/EntityFramework/)，這目前是 NuGet.org 上的其中一個最常見套件。
+Entity Framework 6 (EF6) 是通過試驗及測試的 .NET 物件關聯式對應程式 (O/RM)，歷經多年的功能開發和穩固。
 
-Entity Framework 6 文件目前位於 [msdn.com/data/ef](http://msdn.com/data/ef)。
+EF6 會實作許多常用的 O/RM 功能：
+- 不相依於任何 EF 類型之「非持續性」(也稱為 "POCO"，代表簡單的 CLR 物件) 實體類別的對應
+- 自動變更追蹤
+- 識別解析和工作單位
+- 積極式、消極式和明確式載入
+- 使用 LINQ (Language INtegrated Query) 的強型別查詢轉譯 
+- 豐富的對應功能，包括下列項目的支援：
+  - 繼承 (每個階層的資料表、每個類型的資料表，以及每個實體類別的資料表)
+  - 複雜類型
+  - 預存程序
+- 用來建立實體模型的視覺化設計工具。
+- 支援透過撰寫程式碼建立實體模型的 "Code First" 體驗。
+- 您可以從現有資料庫產生模型，然後手動進行編輯，也可以從頭開始建立模型，然後用來產生新的資料庫。
+- 與 .NET Framework 應用程式模型 (包括 ASP.NET) 的整合，或透過資料繫結與 WPF 和 WinForms 的整合。
+- 依據 ADO.NET 的資料庫連線和許多提供者可用來連線至 SQL Server、Oracle、MySQL、SQLite、PostgreSQL、DB2 等等。
+
+作為 O/RM，EF6 可減少關聯式與物件導向環境之間的阻抗不相符情況，讓開發人員能夠撰寫使用強型別 .NET 物件 (其代表應用程式網域) 與關聯式資料庫中儲存的資料進行互動的應用程式，因此通常不需要撰寫大部分的資料存取「配管」程式碼。
+
+## <a name="should-i-use-ef6-or-ef-core"></a>我應該使用 EF6 還是 EF Core？
+
+EF Core 是 Entity Framework　的新式輕量型可延伸版本，具有非常類似於 EF6 的功能和優點。
+EF Core 是完全重新撰寫的版本，包含許多 EF6 並未提供的新功能，但它仍然缺少一些 EF6 最先進的對應功能。
+建議您只要功能集符合您的需求，就在新的應用程式中使用 EF Core。
+[比較 EF Core 與 EF6](xref:efcore-and-ef6/index)可更詳細地檢查這項選擇。
+
+## <a name="get-startedef6get-startedmd"></a>[開始使用](~/ef6/get-started.md)
+
+將 EntityFramework NuGet 套件新增至您的專案，或安裝 Entity Framework Tools for Visual Studio。 接著觀看影片、閱讀教學課程和進階文件，以協助您充分利用 Entity Framework 6。
+
+## <a name="past-entity-framework-versions"></a>過去的 Entity Framework 版本
+
+這是適用於最新版 Entity Framework 6 的文件，但其中的大部分內容也適用於過去的版本。
+如需 EF 版本和它們所引進功能的完整清單，請參閱[新功能](~/ef6/what-is-new/index.md)和[過去的版本](~/ef6/what-is-new/past-releases.md)。

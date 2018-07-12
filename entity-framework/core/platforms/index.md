@@ -5,12 +5,12 @@ ms.author: divega
 ms.date: 08/30/2017
 ms.technology: entity-framework-core
 uid: core/platforms/index
-ms.openlocfilehash: 02e9450cb0ead1701da9f58c51bef3031a3be4ed
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 790628c407cc4374fee4ebde8201783955afdcc3
+ms.sourcegitcommit: fd50ac53b93a03825dcbb42ed2e7ca95ca858d5f
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/28/2018
-ms.locfileid: "29678672"
+ms.lasthandoff: 07/07/2018
+ms.locfileid: "37900326"
 ---
 # <a name="net-implementations-supported-by-ef-core"></a>EF Core 支援的 .NET 實作
 
@@ -29,7 +29,7 @@ ms.locfileid: "29678672"
 
 <sup>(2)</sup> 請參閱[比對 EF Core 與 EF6](../../efcore-and-ef6/index.md) 來選擇正確的技術。
 
-<sup>(3)</sup> Xamarin 有一些問題與已知限制，可能會使某些使用 EF Core 2.0 開發的應用程式無法正常運作。 請查看[進行中問題]([](https://github.com/aspnet/entityframeworkCore/issues?q=is%3Aopen+is%3Aissue+label%3Aarea-xamarin))以了解因應措施。
+<sup>(3)</sup> Xamarin 有一些問題與已知限制，可能會使某些使用 EF Core 2.0 開發的應用程式無法正常運作。 請查看[待處理的問題](https://github.com/aspnet/entityframeworkCore/issues?q=is%3Aopen+is%3Aissue+label%3Aarea-xamarin)清單，以了解因應措施。
 
 <sup>(4)</sup> 舊版 EF Core 與 .NET UWP 有許多相容性問題，其中以 .NET Native 工具鏈編譯的應用程式問題最多。 新版 UWP 新增了 .NET Standard 2.0 的支援且包含 .NET Native 2.0，這能夠修正上述提到的大多數相容性問題。 EF Core 2.0.1 已採用 UWP 進行更全面的測試，但測試並非自動進行。
 
