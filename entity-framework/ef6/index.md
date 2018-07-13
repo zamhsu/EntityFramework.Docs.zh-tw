@@ -10,34 +10,34 @@ ms.topic: article
 ms.assetid: 8ae74d63-6bad-4686-b325-bbf9d68f3743
 caps.latest.revision: 5
 uid: ef6/index
-ms.openlocfilehash: df661f19afdeef53257c86bdd32b1444737c9b0a
-ms.sourcegitcommit: 45494121254ad4fdcec613d1dd22d850068d6f39
+ms.openlocfilehash: 7bb51ea82640ef29bb376c2320ea29a81eeb175e
+ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37913495"
+ms.lasthandoff: 07/09/2018
+ms.locfileid: "37914337"
 ---
 # <a name="entity-framework-6-quick-overview"></a>Entity Framework 6 快速概觀
-
 Entity Framework 6 (EF6) 是通過試驗及測試的 .NET 物件關聯式對應程式 (O/RM)，歷經多年的功能開發和穩固。
 
+作為 O/RM，EF6 可減少關聯式與物件導向環境之間的阻抗不相符情況，讓開發人員能夠撰寫使用強型別 .NET 物件 (其代表應用程式網域) 與關聯式資料庫中儲存的資料進行互動的應用程式，因此通常不需要撰寫大部分的資料存取「配管」程式碼。
+
 EF6 會實作許多常用的 O/RM 功能：
-- 不相依於任何 EF 類型之「非持續性」(也稱為 "POCO"，代表簡單的 CLR 物件) 實體類別的對應
+- 對應 [POCO](~/ef6/resources/glossary.md#poco) 實體類別，其不相依於任何 EF 類型
 - 自動變更追蹤
 - 識別解析和工作單位
 - 積極式、消極式和明確式載入
-- 使用 LINQ (Language INtegrated Query) 的強型別查詢轉譯 
+- 使用 LINQ (Language INtegrated Query) 的強型別查詢轉譯
 - 豐富的對應功能，包括下列項目的支援：
+  - 一對一、一對多及多對多關聯性
   - 繼承 (每個階層的資料表、每個類型的資料表，以及每個實體類別的資料表)
   - 複雜類型
   - 預存程序
 - 用來建立實體模型的視覺化設計工具。
-- 支援透過撰寫程式碼建立實體模型的 "Code First" 體驗。
+- 藉由撰寫程式碼來建立實體模型的「Code First」體驗。
 - 您可以從現有資料庫產生模型，然後手動進行編輯，也可以從頭開始建立模型，然後用來產生新的資料庫。
 - 與 .NET Framework 應用程式模型 (包括 ASP.NET) 的整合，或透過資料繫結與 WPF 和 WinForms 的整合。
 - 依據 ADO.NET 的資料庫連線和許多提供者可用來連線至 SQL Server、Oracle、MySQL、SQLite、PostgreSQL、DB2 等等。
-
-作為 O/RM，EF6 可減少關聯式與物件導向環境之間的阻抗不相符情況，讓開發人員能夠撰寫使用強型別 .NET 物件 (其代表應用程式網域) 與關聯式資料庫中儲存的資料進行互動的應用程式，因此通常不需要撰寫大部分的資料存取「配管」程式碼。
 
 ## <a name="should-i-use-ef6-or-ef-core"></a>我應該使用 EF6 還是 EF Core？
 
@@ -48,7 +48,7 @@ EF Core 是完全重新撰寫的版本，包含許多 EF6 並未提供的新功�
 
 ## <a name="get-startedef6get-startedmd"></a>[開始使用](~/ef6/get-started.md)
 
-將 EntityFramework NuGet 套件新增至您的專案，或安裝 Entity Framework Tools for Visual Studio。 接著觀看影片、閱讀教學課程和進階文件，以協助您充分利用 Entity Framework 6。
+將 EntityFramework NuGet 套件新增至您的專案，或安裝 Entity Framework Tools for Visual Studio。 接著觀看影片、閱讀教學課程和進階文件，以協助您充分利用 EF6。
 
 ## <a name="past-entity-framework-versions"></a>過去的 Entity Framework 版本
 

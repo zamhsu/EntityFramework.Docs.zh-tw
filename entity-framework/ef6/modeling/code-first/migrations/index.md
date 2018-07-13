@@ -9,12 +9,12 @@ ms.technology: entity-framework-6
 ms.topic: article
 ms.assetid: 36591d8f-36e1-4835-8a51-90f34f633d1e
 caps.latest.revision: 3
-ms.openlocfilehash: 1941337da55e5bb63efba42360c87c1c0f6ee325
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 5c7431985e2e404060197615bf281fcf3b318403
+ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37911712"
+ms.lasthandoff: 07/09/2018
+ms.locfileid: "37914280"
 ---
 # <a name="code-first-migrations"></a>Code First 移轉
 如果您使用 Code First 工作流程，則建議使用 Code First 移轉來改善應用程式的資料庫結構描述。 移轉會提供一組工具，該工具允許下列項目：
@@ -310,7 +310,7 @@ Code First 移轉在建立這些變更方面做得非常好，但我們可能仍
 
 Code First 移轉將執行移轉管線，但不會實際套用變更，而是將其寫入 .sql 檔案中。 一旦產生指令碼，即會在 Visual Studio 中開啟，供您檢視或儲存。
 
-### <a name="generating-idempotent-scripts-ef6-onwards"></a>產生等冪指令碼 (EF6 之後的版本)
+### <a name="generating-idempotent-scripts"></a>產生等冪指令碼
 
 從 EF6 開始，如果指定 **–SourceMigration $InitialDatabase**，則產生的指令碼	將為「等冪」。 等冪指令碼可以將目前任何版本的資料庫升級至最新版本 (如果使用 **-TargetMigration**，則可以升級指定的版本)。 產生的指令碼包括用於檢查 **\_\_MigrationsHistory** 資料表的邏輯，並僅套用先前未套用的變更。
 

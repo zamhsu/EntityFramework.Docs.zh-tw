@@ -12,14 +12,14 @@
 
 ## [Entity Framework Core](core/index.md)
 
-### [EF Core 中的新功能](core/what-is-new/index.md)
+### [新功能](core/what-is-new/index.md)
 #### [EF Core 藍圖](core/what-is-new/roadmap.md)
 #### [EF Core 2.1](core/what-is-new/ef-core-2.1.md)
 #### [EF Core 2.0](core/what-is-new/ef-core-2.0.md)
 #### [EF Core 1.1](core/what-is-new/ef-core-1.1.md)
 #### [EF Core 1.0](core/what-is-new/ef-core-1.0.md)
 
-### [快速入門](core/get-started/index.md)
+### [開始使用](core/get-started/index.md)
 #### [安裝 EF Core](core/get-started/install/index.md)
 #### [.NET Framework (主控台、WinForms、WPF 等等)](core/get-started/full-dotnet/index.md)
 ##### [.NET Framework - 新資料庫](core/get-started/full-dotnet/new-db.md)
@@ -67,6 +67,16 @@
 ##### [替代索引鍵 (唯一條件約束)](core/modeling/relational/unique-constraints.md)
 ##### [繼承 (關聯式資料庫)](core/modeling/relational/inheritance.md)
 
+### [管理資料庫結構描述](core/managing-schemas/index.md)
+#### [移轉](core/managing-schemas/migrations/index.md)
+##### [小組環境](core/managing-schemas/migrations/teams.md)
+##### [自訂作業](core/managing-schemas/migrations/operations.md)
+##### [使用個別專案](core/managing-schemas/migrations/projects.md)
+##### [多個提供者](core/managing-schemas/migrations/providers.md)
+##### [自訂記錄資料表](core/managing-schemas/migrations/history-table.md)
+#### [🔧建立及卸除 API](core/managing-schemas/ensure-created.md)
+#### [🔧反向工程](core/managing-schemas/scaffolding.md)
+
 ### [查詢資料](core/querying/index.md)
 #### [基本查詢](core/querying/basic.md)
 #### [載入相關資料](core/querying/related-data.md)
@@ -97,23 +107,13 @@
 #### [InMemory (測試用)](core/providers/in-memory/index.md)
 #### [撰寫資料庫提供者](core/providers/writing-a-provider.md)
 
-### [管理資料庫結構描述](core/managing-schemas/index.md)
-#### [移轉](core/managing-schemas/migrations/index.md)
-##### [小組環境](core/managing-schemas/migrations/teams.md)
-##### [自訂作業](core/managing-schemas/migrations/operations.md)
-##### [使用個別專案](core/managing-schemas/migrations/projects.md)
-##### [多個提供者](core/managing-schemas/migrations/providers.md)
-##### [自訂記錄資料表](core/managing-schemas/migrations/history-table.md)
-#### [🔧建立及卸除 API](core/managing-schemas/ensure-created.md)
-#### [🔧反向工程](core/managing-schemas/scaffolding.md)
+### [工具與延伸模組](core/extensions/index.md)
 
 ### [命令列參考](core/miscellaneous/cli/index.md)
 #### [套件管理員主控台 (Visual Studio)](core/miscellaneous/cli/powershell.md)
 #### [.NET Core CLI](core/miscellaneous/cli/dotnet.md)
 #### [設計階段 DbContext 建立](core/miscellaneous/cli/dbcontext-creation.md)
 #### [設計階段服務](core/miscellaneous/cli/services.md)
-
-### [工具與延伸模組](core/extensions/index.md)
 
 ### 其他
 #### [連接字串](core/miscellaneous/connection-strings.md)
@@ -127,8 +127,158 @@
 #### [從 1.0 RC2 升級到 RTM](core/miscellaneous/rc2-rtm-upgrade.md)
 #### [升級到 EF Core 2.0](core/miscellaneous/1x-2x-upgrade.md)
 
-### [⤤ API 參考](https://docs.microsoft.com/dotnet/api/?view=efcore-2.1)
+### [⤤ EF Core API 參考](https://docs.microsoft.com/dotnet/api/?view=efcore-2.1)
 
 ## [Entity Framework 6](ef6/index.md)
-### [⤤ 文件](http://msdn.com/data/ef)
-### [⤤ API 參考](https://msdn.microsoft.com/library/dn223258.aspx)
+
+### [新功能](ef6/what-is-new/index.md)
+#### [藍圖](ef6/what-is-new/roadmap.md)
+#### [過去版本](ef6/what-is-new/past-releases.md)
+#### [升級至 EF6](ef6/what-is-new/upgrading-to-ef6.md)
+#### [Visual Studio 版本](ef6/what-is-new/visual-studio.md)
+
+### [開始使用](ef6/get-started.md)
+
+### [基礎概念](ef6/fundamentals/index.md)
+#### [取得 Entity Framework](ef6/fundamentals/install.md)
+#### [使用 DbContext](ef6/fundamentals/working-with-dbcontext.md)
+#### [了解關聯性](ef6/fundamentals/relationships.md)
+#### [非同步查詢和儲存](ef6/fundamentals/async.md)
+#### 組態
+##### [以程式碼為基礎](ef6/fundamentals/configuring/code-based.md)
+##### [組態檔](ef6/fundamentals/configuring/config-file.md)
+##### [連接字串](ef6/fundamentals/configuring/connection-strings.md)
+##### [相依性解析](ef6/fundamentals/configuring/dependency-resolution.md)
+#### [連線管理](ef6/fundamentals/connection-management.md)
+#### 連線復原能力
+##### [重試邏輯](ef6/fundamentals/connection-resiliency/retry-logic.md)
+##### [交易認可失敗](ef6/fundamentals/connection-resiliency/commit-failures.md)
+#### 資料繫結
+##### [WinForms](ef6/fundamentals/databinding/winforms.md)
+##### [WPF](ef6/fundamentals/databinding/wpf.md)
+#### [已中斷連線的實體](ef6/fundamentals/disconnected-entities/index.md)
+##### [自我追蹤實體](ef6/fundamentals/disconnected-entities/self-tracking-entities/index.md)
+###### [逐步解說](ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough.md)
+#### [記錄與攔截](ef6/fundamentals/logging-and-interception.md)
+#### 效能
+##### [效能考量 (技術白皮書)](ef6/fundamentals/performance/perf-whitepaper.md)
+##### [使用 NGEN](ef6/fundamentals/performance/ngen.md)
+##### [使用預先產生的檢視](ef6/fundamentals/performance/pre-generated-views.md)
+#### [提供者](ef6/fundamentals/providers/index.md)
+##### [EF6 提供者模型](ef6/fundamentals/providers/provider-model.md)
+##### [提供者中的空間支援](ef6/fundamentals/providers/spatial-support.md)
+#### [使用 Proxy](ef6/fundamentals/proxies.md)
+#### 使用 EF6 進行測試
+##### [使用模擬](ef6/fundamentals/testing/mocking.md)
+##### [撰寫自己的測試替身](ef6/fundamentals/testing/writing-test-doubles.md)
+##### [EF4 的可測試性 (文章)](ef6/fundamentals/testing/testability-article.md)
+
+### [建立模型](ef6/modeling/index.md)
+#### 使用 Code First
+##### 工作流程
+###### [使用新的資料庫](ef6/modeling/code-first/workflows/new-database.md)
+###### [使用現有資料庫](ef6/modeling/code-first/workflows/existing-database.md)
+##### [資料註解](ef6/modeling/code-first/data-annotations.md)
+##### [DbSet](ef6/modeling/code-first/dbsets.md)
+##### 資料類型
+###### [列舉](ef6/modeling/code-first/data-types/enums.md)
+###### [空間](ef6/modeling/code-first/data-types/spatial.md)
+##### 慣例
+###### [內建慣例](ef6/modeling/code-first/conventions/built-in.md)
+###### [自訂慣例](ef6/modeling/code-first/conventions/custom.md)
+###### [模型慣例](ef6/modeling/code-first/conventions/model.md)
+##### Fluent 組態
+###### [關聯性](ef6/modeling/code-first/fluent/relationships.md)
+###### [類型與屬性](ef6/modeling/code-first/fluent/types-and-properties.md)
+###### [在 Visual Basic 中使用](ef6/modeling/code-first/fluent/vb.md)
+###### [預存程序對應](ef6/modeling/code-first/fluent/cud-stored-procedures.md)
+##### [移轉](ef6/modeling/code-first/migrations/index.md)
+###### [自動移轉](ef6/modeling/code-first/migrations/automatic.md)
+###### [使用現有資料庫](ef6/modeling/code-first/migrations/existing-database.md)
+###### [自訂移轉記錄](ef6/modeling/code-first/migrations/history-customization.md)
+###### [使用 Migrate.exe](ef6/modeling/code-first/migrations/migrate-exe.md)
+###### [在小組環境中移轉](ef6/modeling/code-first/migrations/teams.md)
+
+#### 使用 EF Designer
+##### 工作流程
+###### [模型優先](ef6/modeling/designer/workflows/model-first.md)
+###### [資料庫優先](ef6/modeling/designer/workflows/database-first.md)
+##### 資料類型
+###### [複雜類型](ef6/modeling/designer/data-types/complex-types.md)
+###### [列舉](ef6/modeling/designer/data-types/enums.md)
+###### [空間](ef6/modeling/designer/data-types/spatial.md)
+##### 分割對應
+###### [實體分割](ef6/modeling/designer/entity-splitting.md)
+###### [資料表分割](ef6/modeling/designer/table-splitting.md)
+##### 繼承對應
+###### [依據階層的資料表](ef6/modeling/designer/inheritance/tph.md)
+###### [依據類型的資料表](ef6/modeling/designer/inheritance/tpt.md)
+##### 對應預存程序
+###### [查詢](ef6/modeling/designer/stored-procedures/query.md)
+###### [更新](ef6/modeling/designer/stored-procedures/cud.md)
+##### [對應關聯性](ef6/modeling/designer/relationships.md)
+##### [多個圖表](ef6/modeling/designer/multiple-diagrams.md)
+##### [選取執行階段版本](ef6/modeling/designer/select-runtime-version.md)
+##### [程式碼產生](ef6/modeling/designer/codegen/index.md)
+###### [舊版 ObjectContext ](ef6/modeling/designer/codegen/legacy-objectcontext.md)
+##### 進階
+###### EDMX 檔案格式
+####### [CSDL 規格](ef6/modeling/designer/advanced/edmx/csdl-spec.md)
+####### [MSL 規格](ef6/modeling/designer/advanced/edmx/msl-spec.md)
+####### [SSDL 規格](ef6/modeling/designer/advanced/edmx/ssdl-spec.md)
+###### [定義查詢](ef6/modeling/designer/advanced/defining-query.md)
+###### [多個結果集](ef6/modeling/designer/advanced/multiple-result-sets.md)
+###### [資料表值函式](ef6/modeling/designer/advanced/tvfs.md)
+##### [鍵盤快速鍵](ef6/modeling/designer/keyboard-shortcuts.md)
+
+### [查詢資料](ef6/querying/index.md)
+#### [Load 方法](ef6/querying/load-method.md)
+#### [本機資料](ef6/querying/local-data.md)
+#### [追蹤和不追蹤查詢](ef6/querying/no-tracking.md)
+#### [使用原始 SQL 查詢](ef6/querying/raw-sql.md)
+#### [查詢相關資料](ef6/querying/related-data.md)
+
+### [儲存資料](ef6/saving/index.md)
+#### 變更追蹤
+##### [自動偵測變更](ef6/saving/change-tracking/auto-detect-changes.md)
+##### [實體狀態](ef6/saving/change-tracking/entity-state.md)
+##### [屬性值](ef6/saving/change-tracking/property-values.md)
+#### [處理並行衝突](ef6/saving/concurrency.md)
+#### [使用交易](ef6/saving/transactions.md)
+#### [資料驗證](ef6/saving/validation.md)
+
+### [其他資源](ef6/resources/index.md)
+#### [部落格](ef6/resources/blogs.md)
+#### [案例研究](ef6/resources/case-studies.md)
+#### [取得協助](ef6/resources/get-help.md)
+#### [字彙](ef6/resources/glossary.md)
+#### [School 範例資料庫](ef6/resources/school-database.md)
+#### [工具與延伸模組](ef6/resources/tools.md)
+#### 授權
+##### EF5
+###### [簡體中文](ef6/resources/licenses/ef5/chs.md)
+###### [繁體中文](ef6/resources/licenses/ef5/cht.md)
+###### [德文](ef6/resources/licenses/ef5/deu.md)
+###### [英文](ef6/resources/licenses/ef5/enu.md)
+###### [西班牙文](ef6/resources/licenses/ef5/esn.md)
+###### [法文](ef6/resources/licenses/ef5/fra.md)
+###### [義大利文](ef6/resources/licenses/ef5/ita.md)
+###### [日文](ef6/resources/licenses/ef5/jpn.md)
+###### [韓文](ef6/resources/licenses/ef5/kor.md)
+###### [俄文](ef6/resources/licenses/ef5/rus.md)
+##### EF6
+###### 發行前版本
+####### [Alpha](ef6/resources/licenses/ef6/prerelease/alpha.md)
+####### [搶鮮版 (Beta) - 候選版](ef6/resources/licenses/ef6/prerelease/beta-rc.md)
+###### [簡體中文](ef6/resources/licenses/ef6/chs.md)
+###### [繁體中文](ef6/resources/licenses/ef6/cht.md)
+###### [德文](ef6/resources/licenses/ef6/deu.md)
+###### [英文](ef6/resources/licenses/ef6/enu.md)
+###### [西班牙文](ef6/resources/licenses/ef6/esn.md)
+###### [法文](ef6/resources/licenses/ef6/fra.md)
+###### [義大利文](ef6/resources/licenses/ef6/ita.md)
+###### [日文](ef6/resources/licenses/ef6/jpn.md)
+###### [韓文](ef6/resources/licenses/ef6/kor.md)
+###### [俄文](ef6/resources/licenses/ef6/rus.md)
+
+### [⤤ EF6 API 參考](https://msdn.microsoft.com/library/dn223258.aspx)
