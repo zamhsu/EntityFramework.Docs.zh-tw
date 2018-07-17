@@ -6,12 +6,12 @@ ms.date: 10/27/2016
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
 ms.technology: entity-framework-core
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: db2469d0badd428734425c1f568667f00bef2f4f
-ms.sourcegitcommit: 90139dbd6f485473afda0788a5a314c9aa601ea0
+ms.openlocfilehash: e28149346ccd7531449ea696505588317471e6dd
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/23/2018
-ms.locfileid: "30151010"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949149"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>在 ASP.NET Core 上使用 EF Core 搭配現有資料庫的使用者入門
 
@@ -91,7 +91,7 @@ Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Conn
 如果您收到 `The term 'Scaffold-DbContext' is not recognized as the name of a cmdlet` 的錯誤，請關閉再重新開啟 Visual Studio。
 
 > [!TIP]  
-> 您可以將 `-Tables` 引數加入上述命令，以指定要為哪些資料表產生實體。 例如， `-Tables Blog,Post`.
+> 您可以將 `-Tables` 引數加入上述命令，以指定要為哪些資料表產生實體。 例如，`-Tables Blog,Post`。
 
 反向工程程序會根據現有資料庫的結構描述，建立實體類別 (`Blog.cs` & `Post.cs`) 和衍生的內容 (`BloggingContext.cs`)。
 
