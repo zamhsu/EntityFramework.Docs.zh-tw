@@ -9,12 +9,12 @@ ms.technology: entity-framework-6
 ms.topic: article
 ms.assetid: 65bb3db2-2226-44af-8864-caa575cf1b46
 caps.latest.revision: 3
-ms.openlocfilehash: f0319e97d8ca8cfc9c90dac51d2ecbe7a29c1929
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 92467e1a93f576eca627cf7b7d2351054a882c2c
+ms.sourcegitcommit: 00cb52625b57c1ea339ded1454179fe89b6bcfea
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37911732"
+ms.lasthandoff: 07/16/2018
+ms.locfileid: "39067543"
 ---
 # <a name="querying-and-finding-entities"></a>查詢和尋找實體
 本主題涵蓋您可以使用 Entity Framework 查詢資料的各種方法，包括 LINQ 和 Find 方法。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
@@ -41,7 +41,7 @@ using (var context = new BloggingContext())
 請注意，DbSet 和 IDbSet 一律會針對資料庫建立查詢，即使傳回的實體已存在於內容中，還是一律會對資料庫來回查詢。 針對資料庫執行查詢的時機：  
 
 - 它是由 **foreach** (C#) 或 **For Each** (Visual Basic) 陳述式所列舉。  
-- 它是由 [ToArray](https://msdn.microsoft.com/library/bb298736)、[ToDictionary](https://msdn.microsoft.com/library/system.linq.enumerable.todictionary)或 ToList[在這裡輸入連結描述](https://msdn.microsoft.com/library/bb342261)等集合作業所列舉。  
+- 它是由 [ToArray](https://msdn.microsoft.com/library/bb298736)、[ToDictionary](https://msdn.microsoft.com/library/system.linq.enumerable.todictionary) 或 [ToList](https://msdn.microsoft.com/library/bb342261) 等集合作業所列舉。  
 - LINQ 運算子 (例如 [First](https://msdn.microsoft.com/library/bb291976) 或 [Any](https://msdn.microsoft.com/library/bb337697)) 是在查詢的最外面部分中指定。  
 - 會呼叫下列方法：DbSet 上的 [Load](https://msdn.microsoft.com/library/system.data.entity.dbextensions.load) 擴充方法、[DbEntityEntry.Reload](https://msdn.microsoft.com/library/system.data.entity.infrastructure.dbentityentry.reload.aspx) 和 Database.ExecuteSqlCommand。  
 
