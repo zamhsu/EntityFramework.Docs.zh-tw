@@ -5,98 +5,80 @@ ms.author: riande
 ms.author2: tdykstra
 description: 使用 .NET Core 搭配 Entity Framework Core 的使用者入門
 keywords: .NET Core, Entity Framework Core, VS Code, Visual Studio Code, Mac, Linux
-ms.date: 04/05/2017
+ms.date: 06/05/2018
 ms.assetid: 099d179e-dd7b-4755-8f3c-fcde914bf50b
 ms.technology: entity-framework-core
 uid: core/get-started/netcore/new-db-sqlite
-ms.openlocfilehash: fcace3c0f259b1a456d9ca1086e6a1549c070d57
-ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
+ms.openlocfilehash: e4eafed037325237345efbc3d7d42b32270a54e3
+ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/26/2018
-ms.locfileid: "31812530"
+ms.lasthandoff: 07/08/2018
+ms.locfileid: "37911498"
 ---
-# <a name="getting-started-with-ef-core-on-net-core-console-app-with-a-new-database"></a><span data-ttu-id="d3e29-104">在 .NET Core 主控台應用程式上使用 EF Core 搭配新資料庫的使用者入門</span><span class="sxs-lookup"><span data-stu-id="d3e29-104">Getting Started with EF Core on .NET Core Console App with a New database</span></span>
+# <a name="getting-started-with-ef-core-on-net-core-console-app-with-a-new-database"></a><span data-ttu-id="df589-104">在 .NET Core 主控台應用程式上使用 EF Core 搭配新資料庫的使用者入門</span><span class="sxs-lookup"><span data-stu-id="df589-104">Getting Started with EF Core on .NET Core Console App with a New database</span></span>
 
-<span data-ttu-id="d3e29-105">在本逐步解說中，您將建置 .NET Core 主控台應用程式，該應用程式將使用 Entity Framework Core 對 SQLite 資料庫執行基本資料存取。</span><span class="sxs-lookup"><span data-stu-id="d3e29-105">In this walkthrough, you will create a .NET Core console app that performs basic data access against a SQLite database using Entity Framework Core.</span></span> <span data-ttu-id="d3e29-106">您將使用移轉，以便從您的模型來建立資料庫。</span><span class="sxs-lookup"><span data-stu-id="d3e29-106">You will use migrations to create the database from your model.</span></span> <span data-ttu-id="d3e29-107">如需使用 ASP.NET Core MVC 的 Visual Studio 版本，請參閱 [ASP.NET Core - 新資料庫](xref:core/get-started/aspnetcore/new-db)。</span><span class="sxs-lookup"><span data-stu-id="d3e29-107">See [ASP.NET Core - New database](xref:core/get-started/aspnetcore/new-db) for a Visual Studio version using ASP.NET Core MVC.</span></span>
+<span data-ttu-id="df589-105">在本逐步解說中，您會建置 .NET Core 主控台應用程式，其會使用 Entity Framework Core 依 SQLite 資料庫執行資料存取。</span><span class="sxs-lookup"><span data-stu-id="df589-105">In this walkthrough, you create a .NET Core console app that performs data access against a SQLite database using Entity Framework Core.</span></span> <span data-ttu-id="df589-106">您會使用移轉從模型建立資料庫。</span><span class="sxs-lookup"><span data-stu-id="df589-106">You use migrations to create the database from the model.</span></span> <span data-ttu-id="df589-107">如需使用 ASP.NET Core MVC 的 Visual Studio 版本，請參閱 [ASP.NET Core - 新資料庫](xref:core/get-started/aspnetcore/new-db)。</span><span class="sxs-lookup"><span data-stu-id="df589-107">See [ASP.NET Core - New database](xref:core/get-started/aspnetcore/new-db) for a Visual Studio version using ASP.NET Core MVC.</span></span>
 
 > [!TIP]  
-> <span data-ttu-id="d3e29-108">您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/NetCore/ConsoleApp.SQLite) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="d3e29-108">You can view this article's [sample](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/NetCore/ConsoleApp.SQLite) on GitHub.</span></span>
+> <span data-ttu-id="df589-108">您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/NetCore/ConsoleApp.SQLite) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="df589-108">You can view this article's [sample](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/NetCore/ConsoleApp.SQLite) on GitHub.</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="d3e29-109">必要條件</span><span class="sxs-lookup"><span data-stu-id="d3e29-109">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="df589-109">必要條件</span><span class="sxs-lookup"><span data-stu-id="df589-109">Prerequisites</span></span>
 
-<span data-ttu-id="d3e29-110">若要完成此逐步解說，必須符合下列必要條件：</span><span class="sxs-lookup"><span data-stu-id="d3e29-110">The following prerequisites are needed to complete this walkthrough:</span></span>
-* <span data-ttu-id="d3e29-111">支援 .NET Core 的作業系統。</span><span class="sxs-lookup"><span data-stu-id="d3e29-111">An operating system that supports .NET Core.</span></span>
-* <span data-ttu-id="d3e29-112">[.NET Core SDK](https://www.microsoft.com/net/core) 2.0 (不過，指示也可用來建立使用先前版的應用程式，且幾乎不必修改)。</span><span class="sxs-lookup"><span data-stu-id="d3e29-112">[The .NET Core SDK](https://www.microsoft.com/net/core) 2.0 (although the instructions can be used to create an application with a previous version with very few modifications).</span></span>
+<span data-ttu-id="df589-110">[.NET Core SDK](https://www.microsoft.com/net/core) 2.1</span><span class="sxs-lookup"><span data-stu-id="df589-110">[The .NET Core SDK](https://www.microsoft.com/net/core) 2.1</span></span>
 
-## <a name="create-a-new-project"></a><span data-ttu-id="d3e29-113">建立新專案</span><span class="sxs-lookup"><span data-stu-id="d3e29-113">Create a new project</span></span>
+## <a name="create-a-new-project"></a><span data-ttu-id="df589-111">建立新專案</span><span class="sxs-lookup"><span data-stu-id="df589-111">Create a new project</span></span>
 
-* <span data-ttu-id="d3e29-114">為您的專案建立新的 `ConsoleApp.SQLite` 資料夾，並使用 `dotnet` 命令將 .NET Core 應用程式填入該資料夾。</span><span class="sxs-lookup"><span data-stu-id="d3e29-114">Create a new `ConsoleApp.SQLite` folder for your project and use the `dotnet` command to populate it with a .NET Core app.</span></span>
+* <span data-ttu-id="df589-112">建立新的主控台專案：</span><span class="sxs-lookup"><span data-stu-id="df589-112">Create a new console project:</span></span>
 
 ``` Console
-mkdir ConsoleApp.SQLite
+dotnet new console -o ConsoleApp.SQLite
 cd ConsoleApp.SQLite/
-dotnet new console
 ```
 
-## <a name="install-entity-framework-core"></a><span data-ttu-id="d3e29-115">安裝 Entity Framework Core</span><span class="sxs-lookup"><span data-stu-id="d3e29-115">Install Entity Framework Core</span></span>
+## <a name="install-entity-framework-core"></a><span data-ttu-id="df589-113">安裝 Entity Framework Core</span><span class="sxs-lookup"><span data-stu-id="df589-113">Install Entity Framework Core</span></span>
 
-<span data-ttu-id="d3e29-116">若要使用 EF Core，請針對您要作為目標的資料庫提供者來安裝套件。</span><span class="sxs-lookup"><span data-stu-id="d3e29-116">To use EF Core, install the package for the database provider(s) you want to target.</span></span> <span data-ttu-id="d3e29-117">本逐步解說使用 SQLite。</span><span class="sxs-lookup"><span data-stu-id="d3e29-117">This walkthrough uses SQLite.</span></span> <span data-ttu-id="d3e29-118">如需可用的提供者清單，請參閱[資料庫提供者](../../providers/index.md)。</span><span class="sxs-lookup"><span data-stu-id="d3e29-118">For a list of available providers see [Database Providers](../../providers/index.md).</span></span>
+<span data-ttu-id="df589-114">若要使用 EF Core，請針對您要作為目標的資料庫提供者來安裝套件。</span><span class="sxs-lookup"><span data-stu-id="df589-114">To use EF Core, install the package for the database provider(s) you want to target.</span></span> <span data-ttu-id="df589-115">本逐步解說使用 SQLite。</span><span class="sxs-lookup"><span data-stu-id="df589-115">This walkthrough uses SQLite.</span></span> <span data-ttu-id="df589-116">如需可用的提供者清單，請參閱[資料庫提供者](../../providers/index.md)。</span><span class="sxs-lookup"><span data-stu-id="df589-116">For a list of available providers see [Database Providers](../../providers/index.md).</span></span>
 
-* <span data-ttu-id="d3e29-119">安裝 Microsoft.EntityFrameworkCore.Sqlite 和 Microsoft.EntityFrameworkCore.Design</span><span class="sxs-lookup"><span data-stu-id="d3e29-119">Install Microsoft.EntityFrameworkCore.Sqlite and Microsoft.EntityFrameworkCore.Design</span></span>
+* <span data-ttu-id="df589-117">安裝 Microsoft.EntityFrameworkCore.Sqlite 和 Microsoft.EntityFrameworkCore.Design</span><span class="sxs-lookup"><span data-stu-id="df589-117">Install Microsoft.EntityFrameworkCore.Sqlite and Microsoft.EntityFrameworkCore.Design</span></span>
 
 ``` Console
 dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 dotnet add package Microsoft.EntityFrameworkCore.Design
 ```
 
-* <span data-ttu-id="d3e29-120">手動編輯 `ConsoleApp.SQLite.csproj`，以將 DotNetCliToolReference 加入 Microsoft.EntityFrameworkCore.Tools.DotNet：</span><span class="sxs-lookup"><span data-stu-id="d3e29-120">Manually edit `ConsoleApp.SQLite.csproj` to add a DotNetCliToolReference to Microsoft.EntityFrameworkCore.Tools.DotNet:</span></span>
+* <span data-ttu-id="df589-118">執行 `dotnet restore` 以安裝新的套件。</span><span class="sxs-lookup"><span data-stu-id="df589-118">Run `dotnet restore` to install the new packages.</span></span>
 
-  ``` xml
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
-  </ItemGroup>
-  ```
+## <a name="create-the-model"></a><span data-ttu-id="df589-119">建立模型</span><span class="sxs-lookup"><span data-stu-id="df589-119">Create the model</span></span>
 
-<span data-ttu-id="d3e29-121">`ConsoleApp.SQLite.csproj` 現在應該會包含下列程式碼：</span><span class="sxs-lookup"><span data-stu-id="d3e29-121">`ConsoleApp.SQLite.csproj` should now contain the following:</span></span>
+<span data-ttu-id="df589-120">定義組成模型的內容和實體類別。</span><span class="sxs-lookup"><span data-stu-id="df589-120">Define a context and entity classes that make up your model.</span></span>
 
-[!code[Main](../../../../samples/core/GetStarted/NetCore/ConsoleApp.SQLite/ConsoleApp.SQLite.csproj)]
-
- <span data-ttu-id="d3e29-122">注意：上列所使用的版本號碼，為發行時正確的版本號碼。</span><span class="sxs-lookup"><span data-stu-id="d3e29-122">Note: The version numbers used above were correct at the time of publishing.</span></span>
-
-*  <span data-ttu-id="d3e29-123">執行 `dotnet restore` 以安裝新的套件。</span><span class="sxs-lookup"><span data-stu-id="d3e29-123">Run `dotnet restore` to install the new packages.</span></span>
-
-## <a name="create-the-model"></a><span data-ttu-id="d3e29-124">建立模型</span><span class="sxs-lookup"><span data-stu-id="d3e29-124">Create the model</span></span>
-
-<span data-ttu-id="d3e29-125">定義組成模型的內容和實體類別。</span><span class="sxs-lookup"><span data-stu-id="d3e29-125">Define a context and entity classes that make up your model.</span></span>
-
-* <span data-ttu-id="d3e29-126">建立具有下列內容的新 *Model.cs* 檔案。</span><span class="sxs-lookup"><span data-stu-id="d3e29-126">Create a new *Model.cs* file with the following contents.</span></span>
+* <span data-ttu-id="df589-121">建立具有下列內容的新 *Model.cs* 檔案。</span><span class="sxs-lookup"><span data-stu-id="df589-121">Create a new *Model.cs* file with the following contents.</span></span>
 
 [!code-csharp[Main](../../../../samples/core/GetStarted/NetCore/ConsoleApp.SQLite/Model.cs)]
 
-<span data-ttu-id="d3e29-127">秘訣：在實際的應用程式中，您會將每個類別放在個別的檔案中，然後將連接字串放在組態檔中。</span><span class="sxs-lookup"><span data-stu-id="d3e29-127">Tip: In a real application you would put each class in a separate file and put the connection string in a configuration file.</span></span> <span data-ttu-id="d3e29-128">為了簡化教學課程，我們會將所有項目放在一個檔案中。</span><span class="sxs-lookup"><span data-stu-id="d3e29-128">To keep the tutorial simple, we are putting everything in one file.</span></span>
+<span data-ttu-id="df589-122">秘訣：在實際的應用程式中，您要將每個類別放在個別檔案中，然後將連接字串放在組態檔中。</span><span class="sxs-lookup"><span data-stu-id="df589-122">Tip: In a real application, you put each class in a separate file and put the connection string in a configuration file.</span></span> <span data-ttu-id="df589-123">為了簡化教學課程，所有項目會統一放在一個檔案中。</span><span class="sxs-lookup"><span data-stu-id="df589-123">To keep the tutorial simple, everything is contained in one file.</span></span>
 
-## <a name="create-the-database"></a><span data-ttu-id="d3e29-129">建立資料庫</span><span class="sxs-lookup"><span data-stu-id="d3e29-129">Create the database</span></span>
+## <a name="create-the-database"></a><span data-ttu-id="df589-124">建立資料庫</span><span class="sxs-lookup"><span data-stu-id="df589-124">Create the database</span></span>
 
-<span data-ttu-id="d3e29-130">一旦有模型之後，就可以使用[移轉](https://docs.microsoft.com/aspnet/core/data/ef-mvc/migrations#introduction-to-migrations)來建立資料庫。</span><span class="sxs-lookup"><span data-stu-id="d3e29-130">Once you have a model, you can use [migrations](https://docs.microsoft.com/aspnet/core/data/ef-mvc/migrations#introduction-to-migrations) to create a database.</span></span>
+<span data-ttu-id="df589-125">一旦有模型後，您就可以使用[移轉](https://docs.microsoft.com/aspnet/core/data/ef-mvc/migrations#introduction-to-migrations)來建立資料庫。</span><span class="sxs-lookup"><span data-stu-id="df589-125">Once you have a model, you use [migrations](https://docs.microsoft.com/aspnet/core/data/ef-mvc/migrations#introduction-to-migrations) to create a database.</span></span>
 
-* <span data-ttu-id="d3e29-131">執行 `dotnet ef migrations add InitialCreate` 以建立移轉的結構，並針對模型建立一組初始的資料表。</span><span class="sxs-lookup"><span data-stu-id="d3e29-131">Run `dotnet ef migrations add InitialCreate` to scaffold a migration and create the initial set of tables for the model.</span></span>
-* <span data-ttu-id="d3e29-132">執行 `dotnet ef database update` 以將新的移轉套用至資料庫。</span><span class="sxs-lookup"><span data-stu-id="d3e29-132">Run `dotnet ef database update` to apply the new migration to the database.</span></span> <span data-ttu-id="d3e29-133">此命令會建立資料庫，然後才套用移轉。</span><span class="sxs-lookup"><span data-stu-id="d3e29-133">This command creates the database before applying migrations.</span></span>
+* <span data-ttu-id="df589-126">執行 `dotnet ef migrations add InitialCreate` 以建立移轉的結構，並針對模型建立一組初始的資料表。</span><span class="sxs-lookup"><span data-stu-id="df589-126">Run `dotnet ef migrations add InitialCreate` to scaffold a migration and create the initial set of tables for the model.</span></span>
+* <span data-ttu-id="df589-127">執行 `dotnet ef database update` 以將新的移轉套用至資料庫。</span><span class="sxs-lookup"><span data-stu-id="df589-127">Run `dotnet ef database update` to apply the new migration to the database.</span></span> <span data-ttu-id="df589-128">此命令會建立資料庫，然後才套用移轉。</span><span class="sxs-lookup"><span data-stu-id="df589-128">This command creates the database before applying migrations.</span></span>
 
-> [!NOTE]  
-> <span data-ttu-id="d3e29-134">在 SQLite 中使用相對路徑時，路徑會相對於應用程式的主要組件。</span><span class="sxs-lookup"><span data-stu-id="d3e29-134">When using relative paths with SQLite, the path will be relative to the application's main assembly.</span></span> <span data-ttu-id="d3e29-135">在此範例中，主要的二進位檔是 `bin/Debug/netcoreapp2.0/ConsoleApp.SQLite.dll`，因此 SQLite 資料庫將位於 `bin/Debug/netcoreapp2.0/blogging.db` 中。</span><span class="sxs-lookup"><span data-stu-id="d3e29-135">In this sample, the main binary is `bin/Debug/netcoreapp2.0/ConsoleApp.SQLite.dll`, so the SQLite database will be in `bin/Debug/netcoreapp2.0/blogging.db`.</span></span>
+<span data-ttu-id="df589-129">*blogging.db*\* SQLite DB 位於專案目錄中。</span><span class="sxs-lookup"><span data-stu-id="df589-129">The *blogging.db*\* SQLite DB is in the project directory.</span></span>
 
-## <a name="use-your-model"></a><span data-ttu-id="d3e29-136">使用您的模型</span><span class="sxs-lookup"><span data-stu-id="d3e29-136">Use your model</span></span>
+## <a name="use-your-model"></a><span data-ttu-id="df589-130">使用您的模型</span><span class="sxs-lookup"><span data-stu-id="df589-130">Use your model</span></span>
 
-* <span data-ttu-id="d3e29-137">開啟 *Program.cs* 並使用下列程式碼來取代內容：</span><span class="sxs-lookup"><span data-stu-id="d3e29-137">Open *Program.cs* and replace the contents with the following code:</span></span>
+* <span data-ttu-id="df589-131">開啟 *Program.cs* 並使用下列程式碼來取代內容：</span><span class="sxs-lookup"><span data-stu-id="df589-131">Open *Program.cs* and replace the contents with the following code:</span></span>
 
   [!code-csharp[Main](../../../../samples/core/GetStarted/NetCore/ConsoleApp.SQLite/Program.cs)]
 
-* <span data-ttu-id="d3e29-138">測試應用程式：</span><span class="sxs-lookup"><span data-stu-id="d3e29-138">Test the app:</span></span>
+* <span data-ttu-id="df589-132">測試應用程式：</span><span class="sxs-lookup"><span data-stu-id="df589-132">Test the app:</span></span>
 
   `dotnet run`
 
-  <span data-ttu-id="d3e29-139">有一個部落格儲存至資料庫，且所有部落格的詳細資料會在主控台中顯示。</span><span class="sxs-lookup"><span data-stu-id="d3e29-139">One blog is saved to the database and the details of all blogs are displayed in the console.</span></span>
+  <span data-ttu-id="df589-133">有一個部落格儲存至資料庫，且所有部落格的詳細資料會在主控台中顯示。</span><span class="sxs-lookup"><span data-stu-id="df589-133">One blog is saved to the database and the details of all blogs are displayed in the console.</span></span>
 
   ``` Console
   ConsoleApp.SQLite>dotnet run
@@ -106,15 +88,15 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
    - http://blogs.msdn.com/adonet
   ```
 
-### <a name="changing-the-model"></a><span data-ttu-id="d3e29-140">變更模型：</span><span class="sxs-lookup"><span data-stu-id="d3e29-140">Changing the model:</span></span>
+### <a name="changing-the-model"></a><span data-ttu-id="df589-134">變更模型：</span><span class="sxs-lookup"><span data-stu-id="df589-134">Changing the model:</span></span>
 
-- <span data-ttu-id="d3e29-141">如果您變更了您的模型，則可以使用 `dotnet ef migrations add` 命令來建立新[移轉](https://docs.microsoft.com/aspnet/core/data/ef-mvc/migrations#introduction-to-migrations)的結構，以對資料庫做出相對應的結構描述變更。</span><span class="sxs-lookup"><span data-stu-id="d3e29-141">If you make changes to your model, you can use the `dotnet ef migrations add` command to scaffold a new [migration](https://docs.microsoft.com/aspnet/core/data/ef-mvc/migrations#introduction-to-migrations)  to make the corresponding schema changes to the database.</span></span> <span data-ttu-id="d3e29-142">檢查完已建立結構的程式碼之後 (並進行任何必要的變更)，就可以使用 `dotnet ef database update` 命令將變更套用至資料庫。</span><span class="sxs-lookup"><span data-stu-id="d3e29-142">Once you have checked the scaffolded code (and made any required changes), you can use the `dotnet ef database update` command to apply the changes to the database.</span></span>
-- <span data-ttu-id="d3e29-143">EF 在資料庫中使用 `__EFMigrationsHistory` 資料表，以確認已經套用至資料庫的移轉。</span><span class="sxs-lookup"><span data-stu-id="d3e29-143">EF uses a `__EFMigrationsHistory` table in the database to keep track of which migrations have already been applied to the database.</span></span>
-- <span data-ttu-id="d3e29-144">由於 SQLite 中的限制，SQLite 不支援所有移轉 (結構描述變更)。</span><span class="sxs-lookup"><span data-stu-id="d3e29-144">SQLite does not support all migrations (schema changes) due to limitations in SQLite.</span></span> <span data-ttu-id="d3e29-145">請參閱 [SQLite 限制](../../providers/sqlite/limitations.md)。</span><span class="sxs-lookup"><span data-stu-id="d3e29-145">See [SQLite Limitations](../../providers/sqlite/limitations.md).</span></span> <span data-ttu-id="d3e29-146">針對新的開發，當模型變更時，請考慮捨棄資料庫並建立一個新的資料庫，而不是使用移轉。</span><span class="sxs-lookup"><span data-stu-id="d3e29-146">For new development, consider dropping the database and creating a new one rather than using migrations when your model changes.</span></span>
+- <span data-ttu-id="df589-135">如果您變更了您的模型，則可以使用 `dotnet ef migrations add` 命令來建立新[移轉](https://docs.microsoft.com/aspnet/core/data/ef-mvc/migrations#introduction-to-migrations)的結構，以對資料庫做出相對應的結構描述變更。</span><span class="sxs-lookup"><span data-stu-id="df589-135">If you make changes to your model, you can use the `dotnet ef migrations add` command to scaffold a new [migration](https://docs.microsoft.com/aspnet/core/data/ef-mvc/migrations#introduction-to-migrations)  to make the corresponding schema changes to the database.</span></span> <span data-ttu-id="df589-136">檢查完已建立結構的程式碼之後 (並進行任何必要的變更)，就可以使用 `dotnet ef database update` 命令將變更套用至資料庫。</span><span class="sxs-lookup"><span data-stu-id="df589-136">Once you have checked the scaffolded code (and made any required changes), you can use the `dotnet ef database update` command to apply the changes to the database.</span></span>
+- <span data-ttu-id="df589-137">EF 在資料庫中使用 `__EFMigrationsHistory` 資料表，以確認已經套用至資料庫的移轉。</span><span class="sxs-lookup"><span data-stu-id="df589-137">EF uses a `__EFMigrationsHistory` table in the database to keep track of which migrations have already been applied to the database.</span></span>
+- <span data-ttu-id="df589-138">由於 SQLite 中的限制，SQLite 不支援所有移轉 (結構描述變更)。</span><span class="sxs-lookup"><span data-stu-id="df589-138">SQLite does not support all migrations (schema changes) due to limitations in SQLite.</span></span> <span data-ttu-id="df589-139">請參閱 [SQLite 限制](../../providers/sqlite/limitations.md)。</span><span class="sxs-lookup"><span data-stu-id="df589-139">See [SQLite Limitations](../../providers/sqlite/limitations.md).</span></span> <span data-ttu-id="df589-140">針對新的開發，當模型變更時，請考慮捨棄資料庫並建立一個新的資料庫，而不是使用移轉。</span><span class="sxs-lookup"><span data-stu-id="df589-140">For new development, consider dropping the database and creating a new one rather than using migrations when your model changes.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="d3e29-147">其他資源</span><span class="sxs-lookup"><span data-stu-id="d3e29-147">Additional Resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="df589-141">其他資源</span><span class="sxs-lookup"><span data-stu-id="df589-141">Additional Resources</span></span>
 
-* <span data-ttu-id="d3e29-148">[.NET Core - 使用 SQLite 的新資料庫](xref:core/get-started/netcore/new-db-sqlite) - 跨平台的主控台 EF 教學課程。</span><span class="sxs-lookup"><span data-stu-id="d3e29-148">[.NET Core - New database with SQLite](xref:core/get-started/netcore/new-db-sqlite) -  a cross-platform console EF tutorial.</span></span>
-* [<span data-ttu-id="d3e29-149">Mac 或 Linux 上的 ASP.NET Core MVC 簡介</span><span class="sxs-lookup"><span data-stu-id="d3e29-149">Introduction to ASP.NET Core MVC on Mac or Linux</span></span>](https://docs.microsoft.com/aspnet/core/tutorials/first-mvc-app-xplat/index)
-* [<span data-ttu-id="d3e29-150">使用 Visual Studio 的 ASP.NET Core MVC 簡介</span><span class="sxs-lookup"><span data-stu-id="d3e29-150">Introduction to ASP.NET Core MVC with Visual Studio</span></span>](https://docs.microsoft.com/aspnet/core/tutorials/first-mvc-app/index)
-* [<span data-ttu-id="d3e29-151">使用 Visual Studio 的 ASP.NET Core 與 Entity Framework Core 的使用者入門</span><span class="sxs-lookup"><span data-stu-id="d3e29-151">Getting started with ASP.NET Core and Entity Framework Core using Visual Studio</span></span>](https://docs.microsoft.com/aspnet/core/data/ef-mvc/index)
+* <span data-ttu-id="df589-142">[.NET Core - 使用 SQLite 的新資料庫](xref:core/get-started/netcore/new-db-sqlite) - 跨平台的主控台 EF 教學課程。</span><span class="sxs-lookup"><span data-stu-id="df589-142">[.NET Core - New database with SQLite](xref:core/get-started/netcore/new-db-sqlite) -  a cross-platform console EF tutorial.</span></span>
+* [<span data-ttu-id="df589-143">Mac 或 Linux 上的 ASP.NET Core MVC 簡介</span><span class="sxs-lookup"><span data-stu-id="df589-143">Introduction to ASP.NET Core MVC on Mac or Linux</span></span>](https://docs.microsoft.com/aspnet/core/tutorials/first-mvc-app-xplat/index)
+* [<span data-ttu-id="df589-144">使用 Visual Studio 的 ASP.NET Core MVC 簡介</span><span class="sxs-lookup"><span data-stu-id="df589-144">Introduction to ASP.NET Core MVC with Visual Studio</span></span>](https://docs.microsoft.com/aspnet/core/tutorials/first-mvc-app/index)
+* [<span data-ttu-id="df589-145">使用 Visual Studio 的 ASP.NET Core 與 Entity Framework Core 的使用者入門</span><span class="sxs-lookup"><span data-stu-id="df589-145">Getting started with ASP.NET Core and Entity Framework Core using Visual Studio</span></span>](https://docs.microsoft.com/aspnet/core/data/ef-mvc/index)
