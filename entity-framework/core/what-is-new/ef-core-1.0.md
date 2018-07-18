@@ -6,12 +6,12 @@ ms.date: 10/27/2016
 ms.assetid: 20A25111-AEBE-4BC2-83A5-3F651952DF72
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-1.0
-ms.openlocfilehash: e5b9e57a01ff302b1d7bd0fc5419aa5b8213865e
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: af7cf490ef2b04afb02461279fbe67c1c7fa3d95
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26049681"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949018"
 ---
 # <a name="features-included-in-ef-core-10"></a>EF Core 1.0 中包含的功能
 
@@ -31,7 +31,7 @@ ms.locfileid: "26049681"
 ### <a name="fluent-api"></a>Fluent API
 可讓您在您的上下文中覆寫 `OnModelCreating` 方法，以進一步設定由慣例所探索到的模型。
 ### <a name="data-annotations"></a>資料註解
-這些屬性可新增到您的實體類別/屬性，而且將會影響 EF 模型 (亦即，新增 [必要] 可讓 EF 知道該屬性是必要屬性)。
+這些屬性可新增到您的實體類別/屬性，且會影響 EF 模型。 例如，新增 `[Required]` 可讓 EF 知道該屬性為必要。
 ### <a name="relational-table-mapping"></a>關聯式資料表對應
 可讓實體對應到資料表/資料行。
 ### <a name="key-value-generation"></a>索引鍵值產生
@@ -51,7 +51,7 @@ ms.locfileid: "26049681"
 ### <a name="model-validation"></a>模型驗證
 偵測模型中的無效模式並提供實用的錯誤訊息。
 
-## <a name="change-tracking"></a>變更追蹤
+## <a name="change-tracking"></a>Change tracking
 ### <a name="snapshot-change-tracking"></a>快照集變更追蹤
 可讓您透過比較目前狀態與原始狀態的複本 (快照集)，來自動偵測實體中的變更。
 ### <a name="notification-change-tracking"></a>通知變更追蹤
@@ -79,7 +79,7 @@ ms.locfileid: "26049681"
 ### <a name="mixed-clientserver-evaluation"></a>混合用戶端/伺服器評估
 可讓查詢包含無法在資料庫中評估因而必須在資料擷取到記憶體之後評估的邏輯。
 ### <a name="notracking"></a>NoTracking
-查詢可讓您在上下文不需要監視對實體執行個體所做的變更 (亦即結果是唯讀的) 時有更快的查詢執行效能。
+查詢可讓您在內容不需要監視對實體執行個體所做的變更 (這在唯讀結果的情況下非常實用) 時，有更快的查詢執行效能。
 ### <a name="eager-loading"></a>積極式載入
 提供 `Include` 與 `ThenInclude` 方法，以識別也應該在查詢時擷取的相關資料。
 ### <a name="async-query"></a>非同步查詢
@@ -100,7 +100,7 @@ ms.locfileid: "26049681"
 連線到 Microsoft SQL Server 2008 與更新的版本。
 ### <a name="sqlite"></a>SQLite
 連線到 SQLite 3 資料庫。
-### <a name="in-memory"></a>In-Memory
+### <a name="in-memory"></a>記憶體內部
 設計為在不需要連線到實際資料庫的情況下輕鬆進行測試。
 ### <a name="3rd-party-providers"></a>協力廠商提供者
 有數個提供者提供其他資料庫引擎。 如需完整清單，請參閱[資料庫提供者](../providers/index.md)。

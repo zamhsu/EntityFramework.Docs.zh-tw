@@ -6,12 +6,12 @@ ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 02d0b6fe2956e819e08e08c9a0658008abd36c34
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 538458cf49ee86b9a5cba2f606adc04e583605e2
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/28/2018
-ms.locfileid: "29680019"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949123"
 ---
 # <a name="new-features-in-ef-core-20"></a>EF Core 2.0 中的新功能
 
@@ -93,7 +93,7 @@ public class BloggingContext : DbContext
     }
 }
 ```
-我們會定義模型層級篩選，以實作 ```Post``` 實體類型執行個體的多租用戶和虛刪除。 請注意如何使用 DbContext 執行個體層級屬性：```TenantId```。 模型層級篩選將使用正確內容執行個體中的值。 也就是執行查詢的項目。
+我們會定義模型層級篩選，以實作 ```Post``` 實體類型執行個體的多租用戶和虛刪除。 請注意如何使用 DbContext 執行個體層級屬性：```TenantId```。 模型層級篩選會使用正確內容執行個體 (即執行查詢的內容執行個體詢) 中的值。
 
 可能會使用 IgnoreQueryFilters() 運算子停用個別 LINQ 查詢的篩選。
 
@@ -134,7 +134,7 @@ var query =
 
 - 依照慣例，產生 SQL 時，方法的名稱會用作函式的名稱 (在此情況下，為使用者定義函式)，但您可以在方法註冊期間覆寫名稱和結構描述
 - 目前只支援純量函式
-- 您必須在資料庫中建立對應的函式，例如 EF Core 移轉不負責建立它
+- 您必須在資料庫中建立對應函式。 EF Core 移轉不負責建立它
 
 ### <a name="self-contained-type-configuration-for-code-first"></a>Code First 的獨立類型組態
 
@@ -177,7 +177,7 @@ services.AddDbContextPool<BloggingContext>(
 新的方法引進 DbContext 的 ```OnConfiguring()``` 方法中可進行作業的一些限制。
 
 > [!WARNING]  
-> 如果您在不應該於要求間共用的衍生 DbContext 類別中維護自己的狀態 (例如私用欄位)，則請避免使用 DbContext 共用。 EF Core 只會重設在將 DbContext 執行個體新增至集區之前所知道的狀態。
+> 如果您在不應該於要求間共用的衍生 DbContext 類別中維護自己的狀態 (例如私用欄位)，請避免使用 DbContext 共用。 EF Core 只會重設在將 DbContext 執行個體新增至集區之前所知道的狀態。
 
 ### <a name="explicitly-compiled-queries"></a>明確地編譯查詢
 
@@ -220,7 +220,7 @@ EF Core 支援透過不同的機制來自動產生索引鍵值。 使用此功�
 
 ### <a name="string-interpolation-in-fromsql-and-executesqlcommand"></a>FromSql 和 ExecuteSqlCommand 中的字串插值
 
-C# 6 已引進「字串插值」，此功能允許 C# 運算式直接內嵌在字串常值中，並提供不錯的方式在執行階段建置字串。 在 EF Core 2.0 中，我們已在接受原始 SQL 字串的兩個主要 API 中新增內插字串的特殊支援：```FromSql``` and ```ExecuteSqlCommand```. 這個新的支援允許以「安全」方式使用 C# 字串插值。 亦即，可防止在執行階段動態建構 SQL 時可能發生的常見 SQL 插入錯誤。
+C# 6 已引進「字串插值」，此功能允許 C# 運算式直接內嵌在字串常值中，並提供不錯的方式在執行階段建置字串。 在 EF Core 2.0 中，我們已在接受原始 SQL 字串的兩個主要 API 中新增內插字串的特殊支援：```FromSql``` and ```ExecuteSqlCommand```. 這個新的支援允許以「安全」方式使用 C# 字串插值。 也就是說，可防止在執行階段動態建構 SQL 時可能發生的常見 SQL 插入錯誤。
 
 請看以下範例：
 
@@ -259,7 +259,7 @@ WHERE ""City"" = @p0
 ``` csharp
 var aCustomers =
     from c in context.Customers
-    where EF.Functions.Like(c.Name, "a%");
+    where EF.Functions.Like(c.Name, "a%")
     select c;
 ```
 

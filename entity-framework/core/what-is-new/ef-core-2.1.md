@@ -6,12 +6,12 @@ ms.date: 2/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: 2372a6b2e3f3b7b1d9214a6ea321fe28cea45fff
-ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
+ms.openlocfilehash: 44cbbc965755a694772dc4336ca2c1efc51fd6cd
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/04/2018
-ms.locfileid: "34754421"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949227"
 ---
 # <a name="new-features-in-ef-core-21"></a>EF Core 2.1 中的新功能
 
@@ -76,7 +76,7 @@ modelBuilder.Entity<Post>().HasData(new Post{ Id = 1, Text = "Hello World!" });
 如需此主題的詳細資訊，請閱讀[資料植入](xref:core/modeling/data-seeding)一節。  
 
 ## <a name="query-types"></a>查詢類型
-EF Core 模型現在可以包含查詢類型。 不同於實體類型，查詢類型並未定義索引鍵，而且無法插入、刪除或更新 (亦即這些類型是唯讀的)，但可以直接由查詢傳回。 查詢類型的一些使用方式情節包括：
+EF Core 模型現在可以包含查詢類型。 不同於實體類型，查詢類型並未定義索引鍵，也無法予以插入、刪除或更新 (亦即這些類型是唯讀的)，但可以直接由查詢傳回。 查詢類型的一些使用方式情節包括：
 
 - 對應至不含主索引鍵的檢視表
 - 對應至不含主索引鍵的資料表
@@ -157,7 +157,7 @@ _dotnet-ef_ 命令現為 .NET Core SDK 的一部分，因此不再需要在專�
 
 ## <a name="raw-sql-parameter-analyzer"></a>原始的 SQL 參數分析器
 
-EF Core 隨附一個新的程式碼分析工具，可偵測原始 SQL API (例如 `FromSql` 或 `ExecuteSqlCommand`) 可能不安全的使用方式。 例如， 下列查詢中，您將看到警告，因為 _minAge_ 未參數化：
+EF Core 隨附一個新的程式碼分析工具，可偵測原始 SQL API (例如 `FromSql` 或 `ExecuteSqlCommand`) 可能不安全的使用方式。 例如，在下列查詢中，因為 _minAge_ 未參數化，所以您會看到警告：
 
 ``` csharp
 var sql = $"SELECT * FROM People WHERE Age > {minAge}";

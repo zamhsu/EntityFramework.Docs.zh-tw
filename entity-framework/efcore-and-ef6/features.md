@@ -1,15 +1,16 @@
 ---
-title: "EF Core 和 EF6 的功能逐一比較"
+title: EF Core 和 EF6 的功能逐一比較
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: f22f29ef-efc0-475d-b0b2-12a054f80f95
 uid: efcore-and-ef6/features
-ms.openlocfilehash: 3f05fbe53439826a4e1e1b188a7c03951dc109ec
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 84b40f03cdab27fd6fc68c5bb65c6e3d238f226a
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37967133"
 ---
 # <a name="ef-core-and-ef6-feature-by-feature-comparison"></a>EF Core 和 EF6 的功能逐一比較
 
@@ -60,10 +61,10 @@ EF Core 行包含功能首次出現時的產品版本號碼。
 | 載入相關資料：消極                            | [是]      | 2.1                                   |
 | 載入相關資料：明確                        | [是]      | 1.1                                   |
 | 原始 SQL 查詢：實體類型                         | [是]      | 1.0                                   |
-| 原始 SQL 查詢：非實體類型 (例如查詢類型)  | [是]      | 2.1                                   |
+| 原始 SQL 查詢：非實體類型 (查詢類型)       | [是]      | 2.1                                   |
 | 原始的 SQL 查詢：使用 LINQ 撰寫                  |          | 1.0                                   |
 | 明確地編譯查詢                           | 差     | 2.0                                   |
-| 以文字為基礎的查詢語言 (例如 Entity SQL)           | 1.0      |                                       |
+| 以文字為基礎的查詢語言 (Entity SQL)                | [是]      |                                       |
 |                                                       |          |                                       |
 | **儲存資料**                                       | **EF6**  | **EF Core**                           |
 | 變更追蹤：快照集                             | [是]      | 1.0                                   |
@@ -83,7 +84,7 @@ EF Core 行包含功能首次出現時的產品版本號碼。
 | 種子資料                                             | [是]      | 2.1                                   |
 | 連線恢復功能                                 | [是]      | 1.1                                   |
 | 生命週期攔截程序 (事件、攔截)                | [是]      |                                       |
-| 簡易記錄 (例如 Database.Log)                    | [是]      |                                       |
+| 簡易記錄 (Database.Log)                         | [是]      |                                       |
 | DbContext 共用                                     |          | 2.0                                   |
 |                                                       |          |                                       |
 | **資料庫提供者**                                | **EF6**  | **EF Core**                           |

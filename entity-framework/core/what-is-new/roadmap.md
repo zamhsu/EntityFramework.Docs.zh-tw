@@ -6,12 +6,12 @@ ms.date: 02/20/2018
 ms.assetid: 834C9729-7F6E-4355-917D-DE3EE9FE149E
 ms.technology: entity-framework-core
 uid: core/what-is-new/roadmap
-ms.openlocfilehash: e23f5d7b1ff95bead310fa8e618a88c161a4e10c
-ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
+ms.openlocfilehash: f319aabb53019e0f153c911dde5814328423081b
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/04/2018
-ms.locfileid: "34754440"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949162"
 ---
 # <a name="entity-framework-core-roadmap"></a>Entity Framework Core 藍圖
 
@@ -54,4 +54,4 @@ EF Core 的發行時間與 [.NET Core 發行時間](https://github.com/dotnet/co
 
 6. **可參與功能開發的人員素質如何，以及如何善用這些資源？** 每位 EF 小組的成員以至於我們的社群參與者，在不同領域各有不同程度的經驗，而我們必須據此進行規劃。 即使我們希望將所有人力皆集中在像是 GroupBy 翻譯或多對多關聯性等特殊功能上，也無法實際付諸行動。
 
-如上所述，此程序會隨著每次發行而變動，而我們也希望在未來為開發人員社群的成員提供更多機會，以為發行計劃投入更多心力，例如將對功能及發行計劃本身之建議草稿的檢閱過程簡化。
+如上所述，此程序會隨著每次發行而變動，而我們也希望未來為開發人員社群的成員提供更多機會，以為發行計劃投入更多心力，例如將對功能及發行計劃本身之建議草稿的檢閱過程簡化。
