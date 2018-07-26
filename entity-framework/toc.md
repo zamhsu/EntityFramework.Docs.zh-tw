@@ -250,6 +250,7 @@
 ### [其他資源](ef6/resources/index.md)
 #### [部落格](ef6/resources/blogs.md)
 #### [案例研究](ef6/resources/case-studies.md)
+#### [參與](ef6/resources/contribute.md)
 #### [取得協助](ef6/resources/get-help.md)
 #### [字彙](ef6/resources/glossary.md)
 #### [School 範例資料庫](ef6/resources/school-database.md)
