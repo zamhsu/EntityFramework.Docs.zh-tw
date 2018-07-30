@@ -11,7 +11,7 @@ ms.assetid: 5bc55bf3-2404-4811-8d13-d2eed822cdc4
 caps.latest.revision: 3
 ms.openlocfilehash: cb9fec7c6804b0e3a53303174fec86f1af65d4ab
 ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 07/08/2018
 ms.locfileid: "39120366"

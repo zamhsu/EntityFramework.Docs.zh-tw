@@ -11,7 +11,7 @@ ms.assetid: db123990-8290-41c8-a41f-494d3f2994f7
 caps.latest.revision: 3
 ms.openlocfilehash: 26da4054d2e4f2e4a3aee7448d87d5cf24a0e2cc
 ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 07/08/2018
 ms.locfileid: "39120235"
