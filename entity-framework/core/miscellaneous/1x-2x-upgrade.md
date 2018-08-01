@@ -6,12 +6,12 @@ ms.date: 8/13/2017
 ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
 ms.technology: entity-framework-core
 uid: core/miscellaneous/1x-2x-upgrade
-ms.openlocfilehash: dca9a3fb9e514b6eb22281a0f0140539681efb71
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: 9be2368159fe7ab7b6951cc14a84ee63762ce90c
+ms.sourcegitcommit: 4467032fd6ca223e5965b59912d74cf88a1dd77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37949252"
+ms.lasthandoff: 08/01/2018
+ms.locfileid: "39388448"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>應用程式從舊版升級 EF Core 2.0
 
@@ -154,7 +154,7 @@ optionsBuilder.UseInMemoryDatabase("MyDatabase");
 
 ### <a name="read-only-api-changes"></a>唯讀 API 變更
 
-`IsReadOnlyBeforeSave``IsReadOnlyAferSave`，並`IsStoreGeneratedAlways`而言已經過時並取代為[BeforeSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L39)並[AfterSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L55)。 這些行為套用至任何屬性 （不只存放區所產生的屬性），並決定將資料庫資料列插入時如何使用屬性的值 (`BeforeSaveBehavior`) 或更新現有資料庫的資料列時 (`AfterSaveBehavior`)。
+`IsReadOnlyBeforeSave``IsReadOnlyAfterSave`，並`IsStoreGeneratedAlways`而言已經過時並取代為[BeforeSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L39)並[AfterSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L55)。 這些行為套用至任何屬性 （不只存放區所產生的屬性），並決定將資料庫資料列插入時如何使用屬性的值 (`BeforeSaveBehavior`) 或更新現有資料庫的資料列時 (`AfterSaveBehavior`)。
 
 屬性標示[ValueGenerated.OnAddOrUpdate](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/ValueGenerated.cs) （例如，適用於計算的資料行） 會根據預設忽略目前的屬性上設定任何值。 這表示存放區所產生的值一律取得不論是否已設定或修改的追蹤實體上的任何值。 可以變更此設定不同`Before\AfterSaveBehavior`。
 

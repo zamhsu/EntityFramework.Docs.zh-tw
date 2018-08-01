@@ -9,12 +9,12 @@ ms.technology: entity-framework-6
 ms.topic: article
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
 caps.latest.revision: 3
-ms.openlocfilehash: 0cc18ee8d1b9d1633535e4b8186ffc4c68daf32b
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 28dab25c7d19a117e594b1761f7bc745b684f7b3
+ms.sourcegitcommit: 5c2634c546720902fe01935f4fc031d73aa3ebde
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120246"
+ms.lasthandoff: 08/01/2018
+ms.locfileid: "39393759"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>關聯性、 導覽屬性和外部索引鍵
 本主題提供 Entity Framework 如何管理實體之間的關聯性的概觀。 它也會提供有關如何對應及操作關聯性的一些指引。
@@ -53,7 +53,7 @@ public class Course
   public virtual Department Department { get; set; }
 }
 
-public class DepartmentID
+public class Department
 {
    public Department()
    {

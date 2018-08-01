@@ -6,12 +6,12 @@ ms.date: 2/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 ms.technology: entity-framework-core
 uid: core/modeling/query-types
-ms.openlocfilehash: 89f5be356654dc02e353441a83e34c90fc727593
-ms.sourcegitcommit: fd50ac53b93a03825dcbb42ed2e7ca95ca858d5f
+ms.openlocfilehash: 5a2cd451da8833daf2c315419559eb4a2c705b13
+ms.sourcegitcommit: 4467032fd6ca223e5965b59912d74cf88a1dd77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/07/2018
-ms.locfileid: "37900300"
+ms.lasthandoff: 08/01/2018
+ms.locfileid: "39388477"
 ---
 # <a name="query-types"></a>查詢類型
 > [!NOTE]
@@ -53,7 +53,7 @@ EF Core 模型可以包含實體類型，除了_查詢類型_，可用來執行�
 下列範例示範如何使用查詢型別來查詢資料庫檢視。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFrameworkCore/tree/dev/samples/QueryTypes) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFrameworkCore/tree/master/samples/QueryTypes) \(英文\)。
 
 首先，我們會定義一個簡單的部落格和後置模型：
 
