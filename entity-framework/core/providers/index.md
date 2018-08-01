@@ -6,12 +6,12 @@ ms.date: 2/23/2018
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 ms.technology: entity-framework-core
 uid: core/providers/index
-ms.openlocfilehash: 6f058698f78c787fc6c313486874b0af2183f97a
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: f51304a20bab2c80d2d546fc4685da0fa28d5f92
+ms.sourcegitcommit: 5c2634c546720902fe01935f4fc031d73aa3ebde
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37949311"
+ms.lasthandoff: 08/01/2018
+ms.locfileid: "39393746"
 ---
 # <a name="database-providers"></a>資料庫提供者
 
@@ -53,7 +53,7 @@ Entity Framework Core 能夠透過稱為資料庫提供者的外掛程式程式�
 Oracle .NET 已宣布將於 2018 第三季左右發行 EF Core 2.0 的第一方提供者。 如需詳細資訊，請參閱其 [.NET Core 與 Entity Framework Core 的方針聲明](http://www.oracle.com/technetwork/topics/dotnet/tech-info/odpnet-dotnet-ef-core-sod-4395108.pdf)。
 請將任何有關此提供者的問題 (包含版本時間軸) 指向 [Oracle 社群網站](https://community.oracle.com/)。
 
-與此同時，EF 小組也生產了[適用於 Oracle 資料庫的範例 EF Core 提供者](https://github.com/aspnet/EntityFrameworkCore/blob/dev/samples/OracleProvider/README.md)。 此專案的目的並非產生 Microsoft 擁有的 EF Core 提供者，而是協助我們找出 EF Core 關聯式與基本功能間須要弭平的隔閡，進而提供更好的 Oracle 支援，並開始為 Oracle 或協力廠商開發 EF Core 的其他 Oracle 提供者。
+與此同時，EF 小組也生產了[適用於 Oracle 資料庫的範例 EF Core 提供者](https://github.com/aspnet/EntityFrameworkCore/tree/master/samples/OracleProvider)。 此專案的目的並非產生 Microsoft 擁有的 EF Core 提供者，而是協助我們找出 EF Core 關聯式與基本功能間須要弭平的隔閡，進而提供更好的 Oracle 支援，並開始為 Oracle 或協力廠商開發 EF Core 的其他 Oracle 提供者。
 
 我們會考慮採用能夠改善範例實作的貢獻。 同時也歡迎並鼓勵社群以範例作為出發點參與，來為 EF Core 建立開放原始碼 Oracle 提供者。
 
