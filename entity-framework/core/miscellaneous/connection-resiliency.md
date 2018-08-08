@@ -6,14 +6,14 @@ ms.date: 11/15/2016
 ms.assetid: e079d4af-c455-4a14-8e15-a8471516d748
 ms.technology: entity-framework-core
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: 34ca1908257ed5544f2e134fa7686c9802fcebea
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: dae646e39b4dbd96b34f47582f9b2aa531cf88a7
+ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37949293"
+ms.lasthandoff: 08/07/2018
+ms.locfileid: "39614333"
 ---
-# <a name="connection-resiliency"></a>連接恢復功能
+# <a name="connection-resiliency"></a>連線復原能力
 
 連接恢復功能會自動重試失敗的資料庫命令。 此功能可以搭配任何資料庫，藉由提供"執行策略 」，封裝的邏輯才能偵測到失敗，然後重試命令。 EF Core 提供者可以提供專門針對其特定的資料庫失敗狀況和最佳的重試原則的執行策略。
 
@@ -39,7 +39,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 ## <a name="execution-strategies-and-transactions"></a>執行策略和交易
 
-會自動重試失敗的執行策略必須要能夠在失敗時重試區塊播放每個作業。 重試啟用時，您透過 EF Core 執行每個作業都會變成其本身可重試作業。 也就是說，每個查詢和每次呼叫`SaveChanges()`將重試做為一個單位發生暫時性失敗。
+會自動重試失敗的執行策略必須要能夠在失敗時的重試區塊中播放每個作業。 重試啟用時，您透過 EF Core 執行每個作業都會變成其本身可重試作業。 也就是說，每個查詢和每次呼叫`SaveChanges()`將重試做為一個單位發生暫時性失敗。
 
 不過，如果您的程式碼會啟動交易，使用`BeginTransaction()`您正在定義您自己的群組作業，也必須被視為一個單位，而且在交易內的所有項目則需要播放應該會發生失敗。 如果您嘗試這樣做，使用執行策略時，您會收到類似下列的例外狀況：
 

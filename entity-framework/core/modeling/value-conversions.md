@@ -6,12 +6,12 @@ ms.date: 02/19/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 ms.technology: entity-framework-core
 uid: core/modeling/value-conversions
-ms.openlocfilehash: 5bfb6111ac450db91f3f1a7074a924a1c8400ce7
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: d5189cef6d44fdf3fd6116a2952ce07ff3a389d4
+ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37949088"
+ms.lasthandoff: 08/07/2018
+ms.locfileid: "39614395"
 ---
 # <a name="value-conversions"></a>值的轉換
 
@@ -28,7 +28,7 @@ ms.locfileid: "37949088"
 
 ## <a name="configuring-a-value-converter"></a>設定的值轉換器
 
-在您的 DbContext 的 OnModelCreating 屬性上定義值的轉換。 例如，請考慮已列舉和實體類型定義為：
+在屬性上定義的值轉換`OnModelCreating`的程式`DbContext`。 例如，請考慮已列舉和實體類型定義為：
 ```Csharp
 public class Rider
 {
@@ -44,7 +44,7 @@ public enum EquineBeast
     Unicorn
 }
 ```
-然後可以定義轉換，在 OnModelCreating 中儲存為字串 （例如，"Donkey"、"騾子"，...） 在資料庫中的列舉值：
+然後可以在定義轉換`OnModelCreating`來儲存列舉值，以在資料庫中的字串 （例如，"Donkey"、"騾子"，...）：
 ```Csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
@@ -132,7 +132,7 @@ public class Rider
     public EquineBeast Mount { get; set; }
 }
 ```
-然後列舉值將會儲存為字串的資料庫沒有任何進一步的設定，在 OnModelCreating 中。
+列舉值將會儲存為字串，而不需要任何進一步的設定，在資料庫中則`OnModelCreating`。
 
 ## <a name="limitations"></a>限制
 

@@ -1,19 +1,19 @@
 ---
-title: 快速概觀 - EF Core
+title: 概觀 - EF Core
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: bc2a2676-bc46-493f-bf49-e3cc97994d57
 ms.technology: entity-framework-core
 uid: core/index
-ms.openlocfilehash: 103e5e069687950a8411f2d92c7b5a191844e0ae
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: d2c40356fc3b37251f95b08ee8bf07ed4eab7b80
+ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37948986"
+ms.lasthandoff: 08/07/2018
+ms.locfileid: "39614304"
 ---
-# <a name="entity-framework-core-quick-overview"></a>Entity Framework Core 快速概觀
+# <a name="entity-framework-core"></a>Entity Framework Core
 
 Entity Framework (EF) Core 是常見 Entity Framework 資料存取技術的輕量型、可擴充且跨平台版本。
 
