@@ -988,7 +988,7 @@ ModificationFunctionMapping 子項目可以用來對應插入、 更新或刪除
 
 **對應**對應規格語言 (MSL) 中的項目包含對應至資料庫的概念模型中定義 （如儲存體模型中所述） 的物件資訊。 如需詳細資訊，請參閱 CSDL 規格和 SSDL 規格。
 
-**對應**項目是對應規格的根項目。 對應規格的 XML 命名空間是http://schemas.microsoft.com/ado/2009/11/mapping/cs。
+**對應**項目是對應規格的根項目。 對應規格的 XML 命名空間是 http://schemas.microsoft.com/ado/2009/11/mapping/cs 。
 
 對應項目可以擁有下列子項目 (依列出的順序)：
 
