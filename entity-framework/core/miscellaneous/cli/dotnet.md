@@ -79,13 +79,13 @@ dotnet ef
 |    |                                  |                             |
 |:---|:---------------------------------|:----------------------------|
 |    | --json                           | 顯示 JSON 輸出。           |
-| -c | --context \<DBCONTEXT> | 要使用的 DbContext。 |
+| -c | --context \<DBCONTEXT>           | 要使用的 DbContext。       |
 | -p | --project \<PROJECT>             | 要使用的專案。         |
-| -s | --startup-project \<PROJECT> | 要使用的啟始專案。 |
+| -s | --startup-project \<PROJECT>     | 要使用的啟始專案。 |
 |    | --framework \<FRAMEWORK>         | 目標 framework。       |
 |    | --configuration \<CONFIGURATION> | 要使用的組態。   |
-|    | --runtime \<IDENTIFIER> | 要使用的執行階段使 |
-| -h | --help	                          | 顯示說明資訊。      |
+|    | --runtime \<IDENTIFIER>          | 要使用的執行階段使         |
+| -h | --help                           | 顯示說明資訊。      |
 | -v | --verbose                        | 顯示詳細資訊輸出。        |
 |    | --no-color                       | 不要以色彩標示輸出。      |
 |    | --prefix-output                  | 輸出層級的前置詞。   |
@@ -135,20 +135,20 @@ Scaffold DbContext 類型及實體類型的資料庫。
 |               |                                                                             |
 |:--------------|:----------------------------------------------------------------------------|
 | \<CONNECTION> | 資料庫的連接字串。                                      |
-| \<PROVIDER> | 要使用提供者 (例如 Microsoft.EntityFrameworkCore.SqlServer)。 |
+| \<PROVIDER>   | 要使用提供者  (例如 Microsoft.EntityFrameworkCore.SqlServer)。 |
 
 選項:
 
 |                 |                                         |                                                                                                  |
 |:----------------|:----------------------------------------|:-------------------------------------------------------------------------------------------------|
-| <nobr>-d</nobr> | --data-annotations | 使用屬性來設定模型 (如果可能的話)。如果省略，則只會使用 fluent API。 |
+| <nobr>-d</nobr> | --data-annotations                      | 使用屬性來設定模型 (如果可能的話)。 如果省略，則只會使用 fluent API。 |
 | -c              | --context \<NAME>                       | DbContext 名稱。                                                                       |
-|                 | --context-dir \<PATH>	                   | 將 DbContext 檔案放入目錄。 路徑是相對於專案目錄。             |
+|                 | --context-dir \<PATH>                   | 將 DbContext 檔案放入目錄。 路徑是相對於專案目錄。             |
 | -f              | --force                                 | 覆寫現有檔案。                                                                        |
-| -o              | --output-dir \<PATH>	                    | 將檔案放入目錄。 路徑是相對於專案目錄。                      |
-|                 | --schema \<SCHEMA_NAME>... | 要產生實體類型的資料表結構描述。                                              |
-| -t              | --table \<TABLE_NAME>...	                | 要產生實體類型的資料表。                                                         |
-|                 | --use-database-names | 直接使用資料庫的資料表與資料行名稱。 |
+| -o              | --output-dir \<PATH>                    | 將檔案放入目錄。 路徑是相對於專案目錄。                      |
+|                 | <nobr>--schema \<SCHEMA_NAME>...</nobr> | 要產生實體類型的資料表結構描述。                                              |
+| -t              | --table \<TABLE_NAME>...                | 要產生實體類型的資料表。                                                         |
+|                 | --use-database-names                    | 直接使用資料庫的資料表與資料行名稱。                                           |
 
 ### <a name="dotnet-ef-migrations-add"></a>dotnet ef 移轉新增
 
@@ -164,7 +164,7 @@ Scaffold DbContext 類型及實體類型的資料庫。
 
 |                 |                                   |                                                                                                                  |
 |:----------------|:----------------------------------|:-----------------------------------------------------------------------------------------------------------------|
-| <nobr>-o</nobr> | --output-dir \<PATH> | 目錄 (以及子命名空間) 使用。 路徑是相對於專案目錄。 預設為「移轉」。 |
+| <nobr>-o</nobr> | <nobr>--output-dir \<PATH></nobr> | 目錄 （以及子命名空間） 使用。 路徑是相對於專案目錄。 預設為 「 移轉 」。 |
 
 ### <a name="dotnet-ef-migrations-list"></a>dotnet ef 移轉清單
 
@@ -189,14 +189,14 @@ Scaffold DbContext 類型及實體類型的資料庫。
 |         |                                                               |
 |:--------|:--------------------------------------------------------------|
 | \<FROM> | 開始移轉。 預設值為 0 （初始資料庫）。 |
-| \<TO> | 結束的移轉。 預設為最後一個移轉。 |
+| \<TO>   | 結束的移轉。 預設為最後一個移轉。         |
 
 選項:
 
 |    |                  |                                                                    |
 |:---|:-----------------|:-------------------------------------------------------------------|
-| -o | --output <FILE> | 要將結果寫入其中的檔案。 |
-| -i | --idempotent | 產生可在任何移轉隨時用在資料庫的指令碼。 |
+| -o | --output \<FILE> | 要將結果寫入其中的檔案。                                   |
+| -i | --idempotent     | 產生可在任何移轉隨時用在資料庫的指令碼。 |
 
 
   [1]: powershell.md
