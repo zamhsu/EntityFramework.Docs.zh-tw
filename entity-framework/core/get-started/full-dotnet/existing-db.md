@@ -2,46 +2,34 @@
 title: .NET Framework 快速入門 - 現有的資料庫 - EF Core
 author: rowanmiller
 ms.author: divega
-ms.date: 10/27/2016
+ms.date: 08/06/2018
 ms.assetid: a29a3d97-b2d8-4d33-9475-40ac67b3b2c6
 ms.technology: entity-framework-core
 uid: core/get-started/full-dotnet/existing-db
-ms.openlocfilehash: 39e77ab8c124df67458cc5fa6db2882b65943ebe
-ms.sourcegitcommit: 4467032fd6ca223e5965b59912d74cf88a1dd77f
+ms.openlocfilehash: d5c548927b736199c7d6fddc9c74139ca5f6614e
+ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/01/2018
-ms.locfileid: "39388464"
+ms.lasthandoff: 08/07/2018
+ms.locfileid: "39614411"
 ---
 # <a name="getting-started-with-ef-core-on-net-framework-with-an-existing-database"></a>在 .NET Framework 上使用 EF Core 搭配現有資料庫的使用者入門
 
-在本逐步解說中，您將建置主控台應用程式，該應用程式將使用 Entity Framework 對 Microsoft SQL Server 資料庫執行基本資料存取。 您將會使用反向工程，根據現有的資料庫來建立 Entity Framework 模型。
+在本教學課程中，您將會建置主控台應用程式，而其使用 Entity Framework 對 Microsoft SQL Server 資料庫執行基本的資料存取。 您會對現有的資料庫進行還原工程，以建立 Entity Framework 模型。
 
-> [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb) \(英文\)。
+[在 GitHub 上檢視此文章的範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb)。
 
 ## <a name="prerequisites"></a>必要條件
 
-若要完成此逐步解說，必須符合下列必要條件：
+* [Visual Studio 2017 15.7 版 (或更新版本)](https://www.visualstudio.com/downloads/)
 
-* [Visual Studio 2017](https://www.visualstudio.com/downloads/) - 至少 15.3 版
+## <a name="create-blogging-database"></a>建立部落格資料庫
 
-* [最新版本的 NuGet 套件管理員](https://dist.nuget.org/index.html) \(英文\)
-
-* [最新版本的 Windows PowerShell](https://docs.microsoft.com/powershell/scripting/setup/installing-windows-powershell)
-
-* [部落格資料庫](#blogging-database)
-
-### <a name="blogging-database"></a>部落格資料庫
-
-本教學課程使用您 LocalDb 執行個體上的**部落格**資料庫作為現有的資料庫。
-
-> [!TIP]  
-> 如果您在另一個教學課程中已經建立**部落格**資料庫，則可以跳過這些步驟。
+本教學課程使用 LocalDb 執行個體上的**部落格**資料庫，作為現有的資料庫。 如果您在另一個教學課程中已建立了**部落格**資料庫，則可跳過這些步驟。
 
 * 開啟 Visual Studio
 
-* [工具] > [連線到資料庫]...
+* [工具] > [連線到資料庫...]
 
 * 選取 [Microsoft SQL Server]，並按一下 [繼續]
 
@@ -53,7 +41,7 @@ ms.locfileid: "39388464"
 
 * 以滑鼠右鍵按一下 [伺服器總管] 中的資料庫，並選取 [新增查詢]
 
-* 將下面列出的指令碼複製到查詢編輯器中
+* 將以下列出的指令碼，複製到查詢編輯器中
 
 * 以滑鼠右鍵按一下查詢編輯器，然後選取 [執行]
 
@@ -61,31 +49,31 @@ ms.locfileid: "39388464"
 
 ## <a name="create-a-new-project"></a>建立新專案
 
-* 開啟 Visual Studio
+* 開啟 Visual Studio 2017
 
-* [檔案] > [新增] > [專案]...
+* [檔案] > [新增] > [專案...]
 
-* 從左側功能表選取 [範本] > [Visual C#] > [Windows]
+* 從左側功能表中，選取 **[已安裝] > [Visual C#] > [Windows Desktop]**
 
-* 選取 [主控台應用程式] 專案範本
+* 選取 [主控台應用程式 (.NET Framework)] 專案範本
 
-* 請確認您的目標為 **.NET Framework 4.6.1** 或更新版本
+* 請確定專案的目標為 **.NET Framework 4.6.1** 或更新版本
 
-* 提供專案名稱，然後按一下 [確定]
+* 將專案命名為 *ConsoleApp.ExistingDb*，然後按一下 [確定]
 
 ## <a name="install-entity-framework"></a>安裝 Entity Framework
 
-若要使用 EF Core，請針對您要作為目標的資料庫提供者來安裝套件。 本逐步解說會使用 SQL Server。 如需可用的提供者清單，請參閱[資料庫提供者](../../providers/index.md)。
+若要使用 EF Core，請針對您要作為目標的資料庫提供者來安裝套件。 本教學課程使用 SQL Server。 如需可用的提供者清單，請參閱[資料庫提供者](../../providers/index.md)。
 
 * [工具] > [NuGet 套件管理員] > [套件管理員主控台]
 
 * 執行 `Install-Package Microsoft.EntityFrameworkCore.SqlServer`
 
-為了要從現有的資料庫啟用反向工程，我們也需要安裝幾個其他的套件。
+在下一個步驟中，您會用到一些 Entity Framework Tools 對資料庫進行還原工程。 因此，也請安裝工具套件。
 
 * 執行 `Install-Package Microsoft.EntityFrameworkCore.Tools`
 
-## <a name="reverse-engineer-your-model"></a>針對您的模型進行反向工程
+## <a name="reverse-engineer-the-model"></a>對模型進行還原工程
 
 現在就可以根據您現有的資料庫來建立 EF 模型。
 
@@ -93,110 +81,45 @@ ms.locfileid: "39388464"
 
 * 執行下列命令，以便從現有的資料庫來建立模型
 
-``` powershell
-Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
-```
+  ``` powershell
+  Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
+  ```
 
-反向工程程序會根據現有資料庫的結構描述，建立實體類別和衍生的內容。 實體類別是簡單的 C# 物件，代表您要查詢和儲存的資料。
+> [!TIP]  
+> 您可以將 `-Tables` 引數新增至上述命令，以指定要為哪些資料表產生實體。 例如，`-Tables Blog,Post`。
 
-<!-- [!code-csharp[Main](samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/Blog.cs)] -->
-``` csharp
-using System;
-using System.Collections.Generic;
+還原工程處理序會根據現有資料庫的結構描述，建立實體類別 (`Blog` 和 `Post`) 與衍生的內容 (`BloggingContext`)。
 
-namespace EFGetStarted.ConsoleApp.ExistingDb
-{
-    public partial class Blog
-    {
-        public Blog()
-        {
-            Post = new HashSet<Post>();
-        }
+實體類別是簡單的 C# 物件，代表您要查詢和儲存的資料。 以下為 `Blog` 與 `Post` 實體類別：
 
-        public int BlogId { get; set; }
-        public string Url { get; set; }
+ [!code-csharp[Main](../../../../samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/Blog.cs)]
 
-        public virtual ICollection<Post> Post { get; set; }
-    }
-}
-```
+[!code-csharp[Main](../../../../samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/Post.cs)]
 
-內容代表資料庫的工作階段，並可讓您查詢和儲存實體類別的執行個體。
+> [!TIP]  
+> 若要啟用延遲載入，可以設定瀏覽屬性 `virtual` (Blog.Post 與 Post.Blog)。
 
-<!-- [!code-csharp[Main](samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/BloggingContext.cs)] -->
-``` csharp
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+該內容代表具備資料庫的工作階段。 其備有多種您可用於查詢及儲存實體類別執行個體的方法。
 
-namespace EFGetStarted.ConsoleApp.ExistingDb
-{
-    public partial class BloggingContext : DbContext
-    {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;");
-        }
+[!code-csharp[Main](../../../../samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/BloggingContext.cs)]
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Blog>(entity =>
-            {
-                entity.Property(e => e.Url).IsRequired();
-            });
+## <a name="use-the-model"></a>使用模型
 
-            modelBuilder.Entity<Post>(entity =>
-            {
-                entity.HasOne(d => d.Blog)
-                    .WithMany(p => p.Post)
-                    .HasForeignKey(d => d.BlogId);
-            });
-        }
-
-        public virtual DbSet<Blog> Blog { get; set; }
-        public virtual DbSet<Post> Post { get; set; }
-    }
-}
-```
-
-## <a name="use-your-model"></a>使用您的模型
-
-您現在可以使用您的模型來執行資料存取。
+您現已可使用模型來執行資料存取。
 
 * 開啟 *Program.cs*
 
 * 以下列程式碼來取代檔案的內容
 
-<!-- [!code-csharp[Main](samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/Program.cs)] -->
-``` csharp
-using System;
-
-namespace EFGetStarted.ConsoleApp.ExistingDb
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            using (var db = new BloggingContext())
-            {
-                db.Blog.Add(new Blog { Url = "http://blogs.msdn.com/adonet" });
-                var count = db.SaveChanges();
-                Console.WriteLine("{0} records saved to database", count);
-
-                Console.WriteLine();
-                Console.WriteLine("All blogs in database:");
-                foreach (var blog in db.Blog)
-                {
-                    Console.WriteLine(" - {0}", blog.Url);
-                }
-            }
-        }
-    }
-}
-```
+  [!code-csharp[Main](../../../../samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/Program.cs)] 
 
 * 偵錯 > 啟動但不偵錯
 
-您會看到有一個部落格儲存至資料庫，然後所有部落格的詳細資料會列印至主控台。
+  您會看到有一個部落格儲存至資料庫，然後所有部落格的詳細資料皆會列印至主控台。
 
-![影像](_static/output-existing-db.png)
+  ![影像](_static/output-existing-db.png)
+
+## <a name="additional-resources"></a>其他資源
+
+* [.NET Framework 上的 EF Core (附新資料庫)](xref:core/get-started/full-dotnet/new-db)
+* [.NET Framework 上的 EF Core (附新資料庫) - SQLite](xref:core/get-started/netcore/new-db-sqlite) - 跨平台主控台 EF 教學課程。
