@@ -2,19 +2,13 @@
 title: 相依性解析-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 32d19ac6-9186-4ae1-8655-64ee49da55d0
-caps.latest.revision: 3
-ms.openlocfilehash: 88fd859b4f9a8069eeb08f32bb1d35ddcd21aec5
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: 45681bb0cedecd502b1968b90b7f682d3257dd23
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "39120567"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42998158"
 ---
 # <a name="dependency-resolution"></a>相依性解析
 > [!NOTE]

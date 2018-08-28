@@ -2,19 +2,13 @@
 title: SSDL 規格-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: a4af4b1a-40f4-48cc-b2e0-fa8f5d9d5419
-caps.latest.revision: 3
-ms.openlocfilehash: a9977c80d9a9401afdcad2284a705bcb28790fb8
-ms.sourcegitcommit: 9ae4473425c5e76337c9d032b0e5dbfedf1fcf57
+ms.openlocfilehash: 35c560d88e5078a7fc4c07b76020f3ad7d0735e1
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "39120539"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995275"
 ---
 # <a name="ssdl-specification"></a>SSDL 規格
 存放結構定義語言 (SSDL) 是一種 XML 架構語言，會描述 Entity Framework 應用程式的儲存體模型。
@@ -638,7 +632,7 @@ SSDL 關聯集會對應至 CSDL 關聯集 AssociationSetMapping 項目。 不過
 | **MaxLength**  | 否          | 參數的長度上限。                                                                                                                                                                                            |
 | **整數位數**  | 否          | 參數的精確度。                                                                                                                                                                                                 |
 | **縮放**      | 否          | 參數的小數位數。                                                                                                                                                                                                     |
-| **SRID**       | 否          | 系統的空間參考識別碼。 僅適用於空間類型的參數。 如需詳細資訊，請參閱 < [SRID](http://en.wikipedia.org/wiki/SRID)並[SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx)。 |
+| **SRID**       | 否          | 系統的空間參考識別碼。 僅適用於空間類型的參數。 如需詳細資訊，請參閱 [SRID](http://en.wikipedia.org/wiki/SRID)並[SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx)。 |
 
 > [!NOTE]
 > 附註屬性 （自訂 XML 屬性） 的任何數字可能會套用至**參數**項目。 不過，自訂屬性不可屬於任何 XML 命名空間，這是保留供 SSDL 使用。 任兩個自訂屬性的完整名稱不能相同。
@@ -725,7 +719,7 @@ A**屬性**項目不能有任何子項目。
 | **縮放**                 | 否          | 對應資料行的小數位數。                                                                                                                                                                                          |
 | **Unicode**               | 否          | **True**或是**False**取決於對應的資料行值是否會儲存為 Unicode 字串。                                                                                                                   |
 | **定序**             | 否          | 指定資料來源中使用之定序順序的字串。                                                                                                                                                   |
-| **SRID**                  | 否          | 系統的空間參考識別碼。 僅適用於空間類型的屬性。 如需詳細資訊，請參閱 < [SRID](http://en.wikipedia.org/wiki/SRID)並[SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx)。 |
+| **SRID**                  | 否          | 系統的空間參考識別碼。 僅適用於空間類型的屬性。 如需詳細資訊，請參閱 [SRID](http://en.wikipedia.org/wiki/SRID)並[SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx)。 |
 | **StoreGeneratedPattern** | 否          | **無**，**身分識別**（如果對應的資料行值是在資料庫中產生的身分識別），或**計算**（如果對應的資料行值會計算資料庫中）。 沒有適用於資料列型別屬性。 |
 
 > [!NOTE]

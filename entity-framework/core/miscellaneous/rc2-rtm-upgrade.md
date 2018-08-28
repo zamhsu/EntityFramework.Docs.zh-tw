@@ -1,17 +1,15 @@
 ---
 title: 從 EF 升級核心 1.0 RTM-RC2 EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: c3c1940b-136d-45d8-aa4f-cb5040f8980a
-ms.technology: entity-framework-core
 uid: core/miscellaneous/rc2-rtm-upgrade
-ms.openlocfilehash: 9561eac253517188251fece9a03f434482246051
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: 1b95b2ab1943dfb541b3a7c873cff3cb4c16d9c1
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37949053"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42998315"
 ---
 # <a name="upgrading-from-ef-core-10-rc2-to-rtm"></a>從 EF Core 1.0 RC2 升級至 RTM
 

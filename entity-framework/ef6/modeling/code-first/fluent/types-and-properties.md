@@ -2,19 +2,13 @@
 title: Fluent API-設定和對應屬性及型別-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 648ed274-c501-4630-88e0-d728ab5c4057
-caps.latest.revision: 3
-ms.openlocfilehash: ec8b484433d13899a88f44e37823dd1a4bed6530
-ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
+ms.openlocfilehash: e65a3f4721e5c28de63d143e1143f3584e145477
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "39120486"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996983"
 ---
 # <a name="fluent-api---configuring-and-mapping-properties-and-types"></a>Fluent API-設定和對應的屬性和類型
 使用 Entity Framework Code First 時的預設行為是將您的 POCO 類別對應到資料表使用一組內建到 EF 的慣例。 有時候，不過，您無法或不想遵循這些慣例，而且必須將實體對應至規範的要求以外的項目。  

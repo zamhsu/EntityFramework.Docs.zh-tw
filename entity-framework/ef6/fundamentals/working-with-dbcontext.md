@@ -2,19 +2,13 @@
 title: 使用 DbContext-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: b0e6bddc-8a87-4d51-b1cb-7756df938c23
-caps.latest.revision: 3
-ms.openlocfilehash: 865c9883ce25f405a173791df4e46b98550cd41f
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: f95f503c4e40e65503d5af0c1b686d0055728bfe
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120227"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42998142"
 ---
 # <a name="working-with-dbcontext"></a>使用 DbContext
 

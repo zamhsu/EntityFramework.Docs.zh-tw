@@ -3,13 +3,12 @@ title: 自訂的移轉作業-EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/7/2017
-ms.technology: entity-framework-core
-ms.openlocfilehash: 510d585534b4809179c905ee5b77cab4209a2b8f
-ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
+ms.openlocfilehash: 33f4fb6dca7c0d2e29abd196194a453f2b390b14
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/07/2018
-ms.locfileid: "39614281"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997090"
 ---
 <a name="custom-migrations-operations"></a>自訂的移轉作業
 ============================

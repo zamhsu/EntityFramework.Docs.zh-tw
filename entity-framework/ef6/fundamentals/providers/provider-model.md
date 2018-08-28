@@ -2,19 +2,13 @@
 title: Entity Framework 6 提供者模型-EF6
 author: divega
 ms.date: 2018-06-27
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 066832F0-D51B-4655-8BE7-C983C557E0E4
-caps.latest.revision: 3
-ms.openlocfilehash: 49b655bdbe1b256b7de517edec84945d1ee06f79
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: ebe9b426b164f619b716ac221d1d94354f8b1fe5
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120248"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997732"
 ---
 # <a name="the-entity-framework-6-provider-model"></a>Entity Framework 6 提供者模型
 

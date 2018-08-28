@@ -2,19 +2,13 @@
 title: 原始 SQL 查詢-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 9e1ee76e-2499-408c-81e8-9b6c5d1945a0
-caps.latest.revision: 3
-ms.openlocfilehash: 1d968604cfa500784c4699b0923512572a06d773
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 99893ca1c634ce6f2e4cf9dcb70b1a1e43532c60
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120337"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995730"
 ---
 # <a name="raw-sql-queries"></a>原始 SQL 查詢
 Entity Framework 可讓您與您的實體類別中使用 LINQ 進行查詢。 不過，可能有您想要使用原始的 SQL 直接對資料庫執行查詢的時間。 這包括呼叫預存程序，可以幫助您目前不支援對應至預存程序的 Code First 模型。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  

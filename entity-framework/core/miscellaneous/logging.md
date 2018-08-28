@@ -1,17 +1,15 @@
 ---
 title: 記錄-EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: f6e35c6d-45b7-4258-be1d-87c1bb67438d
-ms.technology: entity-framework-core
 uid: core/miscellaneous/logging
-ms.openlocfilehash: 60d76bf3360eb47cdd9836494c1f135d1005a215
-ms.sourcegitcommit: 3adf1267be92effc3c9daa893906a7f36834204f
+ms.openlocfilehash: efc78fbada3c59bf9cf2c4cb694835bb5ad60e76
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/08/2018
-ms.locfileid: "35232132"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997001"
 ---
 # <a name="logging"></a>記錄
 
@@ -24,16 +22,16 @@ EF Core 自動記錄與機制整合的 ASP.NET Core 每當`AddDbContext`或`AddD
 
 ## <a name="other-applications"></a>其他應用程式
 
-記錄目前的 EF Core 需要其本身設定一或多個 ILoggerProvider ILoggerFactory。 常見的提供者都隨附在下列封裝：
+記錄目前的 EF Core 需要其本身設定一或多個 ILoggerProvider ILoggerFactory。 常見的提供者都隨附在下列套件：
 
 * [Microsoft.Extensions.Logging.Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/)： 簡單的主控台記錄器。
-* [Microsoft.Extensions.Logging.AzureAppServices](https://www.nuget.org/packages/Microsoft.Extensions.Logging.AzureAppServices/)： 支援 Azure 應用程式服務 '診斷記錄檔' 和 '記錄資料流' 功能。
+* [Microsoft.Extensions.Logging.AzureAppServices](https://www.nuget.org/packages/Microsoft.Extensions.Logging.AzureAppServices/)： 支援 Azure App Service '診斷 logs' 和 '記錄資料流' 功能。
 * [Microsoft.Extensions.Logging.Debug](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug/)： 記錄檔，以使用 System.Diagnostics.Debug.WriteLine() 偵錯工具監視。
 * [Microsoft.Extensions.Logging.EventLog](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventLog/)： 記錄至 Windows 事件記錄檔。
 * [Microsoft.Extensions.Logging.EventSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventSource/)： 支援 EventSource/EventListener。
-* [Microsoft.Extensions.Logging.TraceSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.TraceSource/)： 記錄檔，以使用 System.Diagnostics.TraceSource.TraceEvent() 追蹤接聽程式。
+* [Microsoft.Extensions.Logging.TraceSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.TraceSource/)： 記錄檔，以使用 System.Diagnostics.TraceSource.TraceEvent() 的追蹤接聽程式。
 
-安裝之後適當的封裝，應用程式應該建立 LoggerFactory 單一/全域執行個體。 例如，使用主控台記錄器：
+安裝適當的套件之後, 應用程式應該建立 LoggerFactory / 單一全域執行個體。 例如，使用的主控台記錄器：
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#DefineLoggerFactory)]
 
@@ -50,7 +48,7 @@ EF Core 自動記錄與機制整合的 ASP.NET Core 每當`AddDbContext`或`AddD
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContextWithFiltering.cs#DefineLoggerFactory)]
 
-在此範例中，記錄檔時篩選為傳回只有訊息：
+在此範例中，記錄檔會篩選傳回只有訊息：
  * 在 'Microsoft.EntityFrameworkCore.Database.Command' 類別
  * 在 「 資訊 」 層級
 

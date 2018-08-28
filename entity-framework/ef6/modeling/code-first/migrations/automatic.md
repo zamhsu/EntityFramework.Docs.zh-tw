@@ -2,19 +2,13 @@
 title: 自動的 Code First 移轉 EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 0eb86787-2161-4cb4-9cb8-67c5d6e95650
-caps.latest.revision: 3
-ms.openlocfilehash: 1f6ed728271e38d8e65fcf33fd45c74f085d9178
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: f358a4df04b03399e9e54ffdf0389e43d715af1c
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120331"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996091"
 ---
 # <a name="automatic-code-first-migrations"></a>自動的 Code First 移轉
 自動移轉，可讓您使用 Code First 移轉，而不需要每個您所做的變更在您的專案中的程式碼檔案。 並非所有的變更可以自動套用-資料行重新命名，例如需要使用程式碼為基礎的移轉。

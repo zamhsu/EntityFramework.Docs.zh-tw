@@ -2,19 +2,13 @@
 title: 測試的模擬架構-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
-caps.latest.revision: 3
-ms.openlocfilehash: 7529929a3ed3906e1201c0899f2fb8b959ec9ed2
-ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
+ms.openlocfilehash: abb915f2df5645b3838a659dafc59a2b499b4ee2
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "39120467"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42998209"
 ---
 # <a name="testing-with-a-mocking-framework"></a>測試的模擬架構
 > [!NOTE]

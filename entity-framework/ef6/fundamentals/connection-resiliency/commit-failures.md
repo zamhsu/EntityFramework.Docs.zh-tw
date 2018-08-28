@@ -2,19 +2,13 @@
 title: 處理交易認可失敗 EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 5b1f7a7d-1b24-4645-95ec-5608a31ef577
-caps.latest.revision: 3
-ms.openlocfilehash: 95ac69a005a70f31086bd4d3c0088bd3e82d28e2
-ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
+ms.openlocfilehash: a22a651851bc46e2bf1fe652b3b9a921ec22b70b
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "39120459"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996833"
 ---
 # <a name="handling-transaction-commit-failures"></a>處理交易認可失敗
 > [!NOTE]

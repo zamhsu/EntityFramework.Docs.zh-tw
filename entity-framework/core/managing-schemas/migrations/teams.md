@@ -3,13 +3,12 @@ title: 在小組環境-EF Core 移轉
 author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
-ms.technology: entity-framework-core
-ms.openlocfilehash: cf76df32099c25f33d5d94edf6bccec099cf714a
-ms.sourcegitcommit: de491b0988eab91b84dcbd941b7551e597e9c051
+ms.openlocfilehash: e8ff7f468d5ab6dbd6285f1abf9199e413288d10
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/11/2018
-ms.locfileid: "38228376"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997691"
 ---
 <a name="migrations-in-team-environments"></a>在小組環境中的移轉
 ===============================

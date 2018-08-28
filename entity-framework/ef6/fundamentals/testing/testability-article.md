@@ -2,19 +2,13 @@
 title: 可測試性和 Entity Framework 4.0
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 9430e2ab-261c-4e8e-8545-2ebc52d7a247
-caps.latest.revision: 3
-ms.openlocfilehash: 61773f8a23ff54ddb78aeeb5656c669b12f91478
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 17a9f09022531a81042979464de05fbbd2570759
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120363"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995225"
 ---
 # <a name="testability-and-entity-framework-40"></a>可測試性和 Entity Framework 4.0
 Scott Allen
@@ -979,8 +973,8 @@ IRepository&lt;T&gt;方法會提供一些額外的控制，透過我們的查詢
 -   Martin Fowler 」[模擬 （mock） 不是虛設常式](http://martinfowler.com/articles/mocksArentStubs.html)"
 -   Martin Fowler 」[測試雙精度浮點數](http://martinfowler.com/bliki/TestDouble.html)"
 -   Jeremy Miller"[與互動的測試狀態](http://codebetter.com/blogs/jeremy.miller/articles/129544.aspx)"
--   Moq \<http://code.google.com/p/moq/>
+-   [Moq](http://code.google.com/p/moq/)
 
 ### <a name="biography"></a>自傳
 
-技術人員，在 Pluralsight 的成員和 OdeToCode.com 的創辦人 Scott Allen。 在 15 歲商業軟體開發的詳細資訊，Scott 曾解決方案用於從 8 位元的內嵌裝置，到高度可調整的 ASP.NET web 應用程式的所有項目。 您可以在他的部落格 OdeToCode，或在 Twitter 上透過 Scott \< http://twitter.com/OdeToCode>。
+技術人員，在 Pluralsight 的成員和 OdeToCode.com 的創辦人 Scott Allen。 在 15 歲商業軟體開發的詳細資訊，Scott 曾解決方案用於從 8 位元的內嵌裝置，到高度可調整的 ASP.NET web 應用程式的所有項目。 您可以在他的部落格 OdeToCode，或在 Twitter 上透過 Scott [ http://twitter.com/OdeToCode ](http://twitter.com/OdeToCode)。

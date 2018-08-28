@@ -1,35 +1,33 @@
 ---
 title: 繼承 （關聯式資料庫） 的 EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 9a7c5488-aaf4-4b40-b1ff-f435ff30f6ec
-ms.technology: entity-framework-core
 uid: core/modeling/relational/inheritance
-ms.openlocfilehash: 22eed0002b5903d3cfd18a7e4af0fcd2d46a5c4c
-ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
+ms.openlocfilehash: 019893ec8268ef9e59d581799a13d63610c80616
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2018
-ms.locfileid: "29152351"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996318"
 ---
 # <a name="inheritance-relational-database"></a>繼承 （關聯式資料庫）
 
 > [!NOTE]  
 > 本節中的組態一般適用於關聯式資料庫。 當您因共用 *Microsoft.EntityFrameworkCore.Relational* 套件而安裝關聯式資料庫提供者時，這裡顯示的擴充方法會變成可用。
 
-EF 模型中的繼承用來控制如何在實體類別中的繼承表示在資料庫中。
+EF 模型中的繼承用來控制如何將實體類別中的繼承表示在資料庫中。
 
 > [!NOTE]  
-> 目前，只有每個階層的資料表 (TPH) 模式中實作的 EF Core。 其他常見的模式資料表每個類型 (TPT) 等資料表的個別實體類型 (TPC) 尚無法使用。
+> 目前，只有每個階層的資料表 (TPH) 模式中實作的 EF Core。 其他常見的模式，例如，每一類一表 (TPT) 和每個實體-類一表 (TPC) 尚無法使用。
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，繼承將會使用每個階層資料表 (TPH) 模式對應。 TPH 使用單一資料表儲存在階層中所有類型的資料。 鑑別子資料行用來識別每個資料列都代表哪種類型。
+依照慣例，將使用的每個階層的資料表 (TPH) 模式會對應繼承。 TPH 會使用單一的資料表，儲存在階層中的所有類型的資料。 鑑別子資料行用來識別每個資料列代表哪種類型。
 
 EF Core 只會設定繼承，如果兩個或多個繼承的型別會明確地包含在模型中 (請參閱[繼承](../inheritance.md)如需詳細資訊)。
 
-以下是範例，示範一個簡單的繼承案例及使用 TPH 模式關聯式資料庫資料表中儲存的資料。 *鑑別子*資料行會識別哪一種*部落格*會儲存在每個資料列。
+以下是範例顯示簡單的繼承案例，並儲存在關聯式資料庫資料表中使用 TPH 模式的資料。 *鑑別子*資料行會識別哪一種*部落格*會儲存在每個資料列。
 
 <!-- [!code-csharp[Main](samples/core/relational/Modeling/Conventions/Samples/InheritanceDbSets.cs)] -->
 ``` csharp
@@ -55,11 +53,11 @@ public class RssBlog : Blog
 
 ## <a name="data-annotations"></a>資料註釋
 
-若要設定繼承，您無法使用資料註解。
+您無法使用資料註解來設定繼承。
 
 ## <a name="fluent-api"></a>Fluent API
 
-您可以使用 fluent 應用程式開發的應用程式開發介面來設定的名稱和類型鑑別子資料行以及用來識別階層中的每個類型的值。
+您可以使用 Fluent API，若要設定的名稱和類型的鑑別子資料行以及用來識別階層中的每個類型的值。
 
 <!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/InheritanceTPHDiscriminator.cs?highlight=7,8,9,10)] -->
 ``` csharp
@@ -90,7 +88,7 @@ public class RssBlog : Blog
 
 ## <a name="configuring-the-discriminator-property"></a>設定鑑別子屬性
 
-在上述範例中，鑑別子會建立為[陰影屬性](xref:core/modeling/shadow-properties)在階層的基底實體。 因為這是模型中的屬性，它可以就像其他屬性設定。 例如，若要使用預設值，依慣例鑑別子而設定的最大長度：
+在上述範例中，做為建立鑑別子[陰影屬性](xref:core/modeling/shadow-properties)在階層的基底實體。 因為它是模型中的屬性，可以設定其他屬性一樣。 例如，若要使用預設值，依慣例鑑別子時，設定最大長度：
 
 ```C#
 modelBuilder.Entity<Blog>()
@@ -98,7 +96,7 @@ modelBuilder.Entity<Blog>()
     .HasMaxLength(200);
 ```
 
-鑑別子也可以對應至實際的 CLR 屬性實體中。 例如: 
+鑑別子也可以對應至您的實體中的實際 CLR 屬性。 例如: 
 ```C#
 class MyContext : DbContext
 {
@@ -124,7 +122,7 @@ public class RssBlog : Blog
 }
 ```
 
-結合這兩個條件也可同時將鑑別子對應到實際屬性並加以設定：
+它結合這兩個條件，可以將鑑別子對應至一個真正的屬性，並設定它：
 ```C#
 modelBuilder.Entity<Blog>(b =>
 {

@@ -2,19 +2,13 @@
 title: 連接管理-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: ecaa5a27-b19e-4bf9-8142-a3fb00642270
-caps.latest.revision: 3
-ms.openlocfilehash: 9588ef85435d3c0218defdc098f1e7150fb7ef72
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: dc405e1876edc850ae6e4ce4649da52635d316ae
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "39120558"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997901"
 ---
 # <a name="connection-management"></a>連接管理
 此頁面描述 Entity Framework 的行為，將連接傳遞至內容和功能方面**Database.Connection.Open()** API。  

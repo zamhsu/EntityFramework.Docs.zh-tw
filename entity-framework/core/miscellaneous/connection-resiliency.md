@@ -1,17 +1,15 @@
 ---
 title: 連接恢復功能的 EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 11/15/2016
 ms.assetid: e079d4af-c455-4a14-8e15-a8471516d748
-ms.technology: entity-framework-core
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: dae646e39b4dbd96b34f47582f9b2aa531cf88a7
-ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
+ms.openlocfilehash: d6e31cf2b9b783ea503703536d159b34bf2e18c0
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/07/2018
-ms.locfileid: "39614333"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997186"
 ---
 # <a name="connection-resiliency"></a>連線復原能力
 

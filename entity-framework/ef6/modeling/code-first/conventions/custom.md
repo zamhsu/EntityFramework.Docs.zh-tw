@@ -2,19 +2,13 @@
 title: 自訂程式碼 First 慣例 EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: dd2bdbd9-ae9e-470a-aeb8-d0ba160499b7
-caps.latest.revision: 3
-ms.openlocfilehash: 24d6f1bd5eb2ff8be59b9eedd1c4156709fa42fb
-ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
+ms.openlocfilehash: 79450790c6d3c8ce7fad209e3946e81d3fad4b75
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "39120483"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995824"
 ---
 # <a name="custom-code-first-conventions"></a>自訂程式碼的第一個慣例
 > [!NOTE]

@@ -1,33 +1,31 @@
 ---
 title: 索引的 EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 85b92003-b692-417d-ac1d-76d40dce664b
-ms.technology: entity-framework-core
 uid: core/modeling/indexes
-ms.openlocfilehash: f57b545d53613cec6887734bf434958ee8fff4d8
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 87fe893243377e3ab83d419ae9bedf813ca50c3f
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26054882"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995476"
 ---
 # <a name="indexes"></a>索引
 
-索引是跨多個資料存放區的一般概念。 其資料存放區中的實作可能有所不同，它們用來使資料行 （或一組資料行） 為基礎的查閱更有效率。
+索引是許多資料存放區之間的共通的概念。 其資料存放區中的實作可能有所不同，它們用來讓資料行 （或一組資料行） 為基礎的查閱更有效率。
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，會當做外部索引鍵使用每個屬性 （或屬性集） 中建立索引。
+依照慣例，會建立做為外部索引鍵，每個屬性 （或屬性集） 中的索引。
 
 ## <a name="data-annotations"></a>資料註釋
 
 可以使用資料註解建立索引。
 
-## <a name="fluent-api"></a>關於 fluent 應用程式開發介面
+## <a name="fluent-api"></a>Fluent API
 
-若要在單一屬性上指定的索引，您可以使用 fluent 應用程式開發的應用程式開發介面。 根據預設，索引為非唯一的。
+您可以使用 Fluent API，來指定單一屬性上的索引。 根據預設，索引是非唯一的。
 
 <!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Index.cs?highlight=7,8)] -->
 ``` csharp
@@ -82,4 +80,4 @@ public class Person
 ```
 
 > [!TIP]  
-> 沒有每個相異的屬性集的一個索引。 如果您使用 fluent 應用程式開發的應用程式開發介面來設定索引上的一組屬性已索引定義，藉由慣例或先前的設定，然後將會變更該索引的定義。 這非常有用，如果您想要進一步設定由慣例所建立的索引。
+> 沒有每一組不同的屬性只能有一個索引。 如果您使用 Fluent API 來設定索引上的一組屬性已經有索引定義，藉由慣例或先前的設定，然後您將會變更該索引的定義。 這非常有用，如果您想要進一步設定由慣例所建立的索引。

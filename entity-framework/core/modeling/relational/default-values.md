@@ -1,24 +1,22 @@
 ---
 title: 預設值-EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: e541366a-130f-47dd-9997-1b110a11febe
-ms.technology: entity-framework-core
 uid: core/modeling/relational/default-values
-ms.openlocfilehash: 73b916b6d9f9c984c8ea010f2319eafa7d031a58
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 341f243ddddc345bb4236e5c34f814694b71e32a
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052758"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996248"
 ---
 # <a name="default-values"></a>預設值
 
 > [!NOTE]  
-> 本節中的設定是一般適用於關聯式資料庫。 當您安裝的關聯式資料庫提供者，如下所示的擴充方法會變成可用 (因為共用*Microsoft.EntityFrameworkCore.Relational*封裝)。
+> 本節中的組態一般適用於關聯式資料庫。 當您因共用 *Microsoft.EntityFrameworkCore.Relational* 套件而安裝關聯式資料庫提供者時，這裡顯示的擴充方法會變成可用。
 
-將會插入在插入新資料列，但未指定值的資料行的值為資料行的預設值。
+資料行的預設值是將會插入，如果在插入新的資料列，但未指定值的資料行的值。
 
 ## <a name="conventions"></a>慣例
 
@@ -28,9 +26,9 @@ ms.locfileid: "26052758"
 
 您可以設定使用資料註解的預設值。
 
-## <a name="fluent-api"></a>關於 fluent 應用程式開發介面
+## <a name="fluent-api"></a>Fluent API
 
-您可以使用 fluent 應用程式開發的應用程式開發介面來指定屬性的預設值。
+您可以使用 Fluent API，來指定屬性的預設值。
 
 <!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/Relational/DefaultValue.cs?highlight=9)] -->
 ``` csharp
@@ -54,7 +52,7 @@ public class Blog
 }
 ```
 
-您也可以指定用來計算預設值是 SQL 片段。
+您也可以指定用來計算的預設值的 SQL 片段。
 
 <!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/Relational/DefaultValueSql.cs?highlight=9)] -->
 ``` csharp

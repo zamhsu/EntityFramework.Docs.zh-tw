@@ -1,29 +1,27 @@
 ---
 title: 包含與排除內容-EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: e9dff604-3469-4a05-8f9e-18ac281d82a9
-ms.technology: entity-framework-core
 uid: core/modeling/included-properties
-ms.openlocfilehash: a6eaea4319f6a4d30c223265bf75a88731a38443
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 07b70e4517b67490e04a9ec9fa22b9b5d5217681
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052488"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42998251"
 ---
-# <a name="including--excluding-properties"></a>包含與排除內容
+# <a name="including--excluding-properties"></a>包含與排除屬性
 
-包含模型中的屬性，表示 EF 具有該屬性的相關中繼資料，並將嘗試讀取和寫入自/至資料庫的值。
+包括在模型中的屬性，表示 EF 具有該屬性的相關中繼資料，並會嘗試讀取和寫入，或將資料庫的值。
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，公用屬性 getter 和 setter 將會包含在模型中。
+依照慣例，getter 和 setter 的公用屬性，將會包含在模型中。
 
 ## <a name="data-annotations"></a>資料註釋
 
-若要從模型中排除屬性，您可以使用資料註解。
+若要從模型中排除的屬性，您可以使用資料註解。
 
 <!-- [!code-csharp[Main](samples/core/Modeling/DataAnnotations/Samples/IgnoreProperty.cs?highlight=6)] -->
 ``` csharp
@@ -37,9 +35,9 @@ public class Blog
 }
 ```
 
-## <a name="fluent-api"></a>關於 fluent 應用程式開發介面
+## <a name="fluent-api"></a>Fluent API
 
-若要從模型中排除屬性，您可以使用 fluent 應用程式開發的應用程式開發介面。
+您可以使用 Fluent API，若要從模型中排除的屬性。
 
 <!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/IgnoreProperty.cs?highlight=7,8)] -->
 ``` csharp

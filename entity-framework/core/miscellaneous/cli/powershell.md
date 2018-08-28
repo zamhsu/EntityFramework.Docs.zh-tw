@@ -3,13 +3,12 @@ title: Package Manager Console (Visual Studio)-EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
-ms.technology: entity-framework-core
-ms.openlocfilehash: 0799b0cb7c5d837fdbb7a4af510a9a4d9d34ec1a
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: 6a3594a3535f8de30ec1898fd21cfcbe272f216b
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37949034"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997930"
 ---
 <a name="ef-core-package-manager-console-tools"></a>EF Core 封裝管理員主控台工具
 =====================================
@@ -51,9 +50,9 @@ Get-Help about_EntityFrameworkCore
 
 |                           |                             |
 |:--------------------------|:----------------------------|
-| 內容\<字串 >        | 若要使用 DbContext。       |
+| 內容\<字串 >        | 要使用的 DbContext。       |
 | -專案\<字串 >        | 要使用的專案。         |
-| -啟始專案\<字串 > | 若要使用啟始專案。 |
+| -啟始專案\<字串 > | 要使用的啟始專案。 |
 | -Verbose                  | 顯示詳細資訊輸出。        |
 
 若要顯示命令的說明資訊，請使用 PowerShell 的`Get-Help`命令。
@@ -114,14 +113,14 @@ Get-Help about_EntityFrameworkCore
 |                                          |                                                                                                  |
 |:-----------------------------------------|:-------------------------------------------------------------------------------------------------|
 | <nobr>***Test-connection*** \<字串 ></nobr> | 資料庫連接字串。                                                           |
-| ***-Provider*** \<String>                | 若要使用提供者。 （例如 Microsoft.EntityFrameworkCore.SqlServer）                      |
+| ***-Provider*** \<String>                | 要使用提供者 (例如 Microsoft.EntityFrameworkCore.SqlServer)。                      |
 | -OutputDir\<字串 >                     | 將檔案放入目錄。 路徑是相對於專案目錄。                      |
 | -ContextDir\<字串 >                    | 若要將 DbContext 檔案放在目錄。 路徑是相對於專案目錄。             |
 | 內容\<字串 >                       | 若要產生 DbContext 的名稱。                                                           |
 | 結構描述\<String [] >                     | 要產生的實體類型的資料表結構描述。                                              |
 | -資料表\<String [] >                      | 要產生的實體類型的資料表。                                                         |
-| -DataAnnotations                         | 使用屬性來設定模型 （如果可能的話）。 如果省略，則會使用 fluent API。 |
-| -UseDatabaseNames                        | 使用直接從資料庫資料表和資料行名稱。                                           |
+| -DataAnnotations                         | 使用屬性來設定模型 (如果可能的話)。 如果省略，則只會使用 fluent API。 |
+| -UseDatabaseNames                        | 直接使用資料庫的資料表與資料行名稱。                                           |
 | -Force                                   | 覆寫現有的檔案。                                                                        |
 
 ### <a name="script-migration"></a>Script-Migration
@@ -133,9 +132,9 @@ Get-Help about_EntityFrameworkCore
 |                   |                                                                    |
 |:------------------|:-------------------------------------------------------------------|
 | *-從*\<字串 > | 在開始移轉。 預設值為 0 （初始資料庫）。      |
-| *-至*\<字串 >   | 結束的移轉。 預設的最後一個移轉。              |
-| -具有等冪性       | 產生可用於任何移轉資料庫的指令碼。 |
-| -輸出\<字串 > | 若要將結果寫入檔案。                                   |
+| *-至*\<字串 >   | 結束的移轉。 預設為最後一個移轉。              |
+| -具有等冪性       | 產生可在任何移轉隨時用在資料庫的指令碼。 |
+| -輸出\<字串 > | 要將結果寫入其中的檔案。                                   |
 
 > [!TIP]
 > 收件者，，和輸出參數支援 tab 鍵擴充。
@@ -144,7 +143,7 @@ Get-Help about_EntityFrameworkCore
 
 |                                     |                                                                                                |
 |:------------------------------------|:-----------------------------------------------------------------------------------------------|
-| <nobr>*-移轉*\<字串 ></nobr> | 目標的移轉。 如果為 '0'，就會還原所有移轉作業。 預設的最後一個移轉。 |
+| <nobr>*-移轉*\<字串 ></nobr> | 目標移轉。 如果為 '0'，就會還原所有移轉作業。 預設為最後一個移轉。 |
 
 > [!TIP]
 > 移轉參數支援 tab 鍵擴充。

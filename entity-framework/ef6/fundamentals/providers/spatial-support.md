@@ -2,19 +2,13 @@
 title: 空間類型-EF6 的提供者支援
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 1097cb00-15f5-453d-90ed-bff9403d23e3
-caps.latest.revision: 3
-ms.openlocfilehash: 76020e2a3127b1026a5cb8f032686cc8ce9c0c5f
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 07eeecb5f5e3e3eab8548c4c7c0ed55c5ffb4f31
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120236"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42998283"
 ---
 # <a name="provider-support-for-spatial-types"></a>空間類型的提供者支援
 Entity Framework 支援透過 DbGeography 或 DbGeometry 類別的空間資料使用。 這些類別會依賴資料庫特有的 Entity Framework 提供者所提供的功能。 並非所有提供者支援空間資料及執行可能會有額外的先決條件，例如空間類型組件的安裝。 以下提供有關提供者支援空間類型的詳細資訊。  

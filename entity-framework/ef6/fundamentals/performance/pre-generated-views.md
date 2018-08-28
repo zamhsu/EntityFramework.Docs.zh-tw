@@ -2,19 +2,13 @@
 title: 預先產生的對應檢視-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 917ba9c8-6ddf-4631-ab8c-c4fb378c2fcd
-caps.latest.revision: 3
-ms.openlocfilehash: 9e74176d02afc424118219eec8e016843333cbb8
-ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
+ms.openlocfilehash: 397569ef374cb44d4938f9e201b588a26c408f6e
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "39120474"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996468"
 ---
 # <a name="pre-generated-mapping-views"></a>預先產生的對應檢視
 Entity Framework 可以執行查詢，或將變更儲存至資料來源之前，它必須產生一組對應檢視，來存取資料庫。 這些對應檢視是一組以抽象方式代表資料庫的 Entity SQL 陳述式，中繼資料的快取每個應用程式網域的一部分。 如果您在相同的應用程式定義域中建立多個相同的內容執行個體，它們會重複使用從快取的中繼資料，而不是重新產生它們的對應檢視。 對應檢視表產生是執行第一個查詢的整體成本的重要部分，因為 Entity Framework 可讓您預先產生對應檢視，並將它們包含在已編譯的專案。 如需詳細資訊，請參閱 <<c0> [ 效能考量 (Entity Framework)](~/ef6/fundamentals/performance/perf-whitepaper.md)。

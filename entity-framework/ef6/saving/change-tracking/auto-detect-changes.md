@@ -2,19 +2,13 @@
 title: 自動偵測到變更-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: a8d1488d-9a54-4623-a76b-e81329ff2756
-caps.latest.revision: 3
-ms.openlocfilehash: 62f2f026426346fc1230a2f5743c8cb7d232ec7f
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: bca33e12674c47cc7e047e85b11746c8e39246b4
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120219"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42998095"
 ---
 # <a name="automatic-detect-changes"></a>自動偵測變更
 使用大部分的 POCO 實體時如何變更實體 （以及因此需要哪些更新傳送至資料庫） 的決定會處理偵測變更演算法。 偵測變更的運作方式，藉由偵測實體的目前屬性值與原始查詢或附加實體時，會儲存在快照集的屬性值之間的差異。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  

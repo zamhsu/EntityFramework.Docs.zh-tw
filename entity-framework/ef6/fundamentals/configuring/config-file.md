@@ -2,19 +2,13 @@
 title: 組態檔設定 EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 000044c6-1d32-4cf7-ae1f-ea21d86ebf8f
-caps.latest.revision: 3
-ms.openlocfilehash: 24faed6bdae6cc4b31808dc5bbebddb94128d0d3
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 88c2439f3a89c9fb9ee22f828789df4decf39cc5
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120247"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996499"
 ---
 # <a name="configuration-file-settings"></a>組態檔設定
 Entity Framework 可讓多個組態檔中指定的設定。 EF 遵循 'convention over configuration' 原則的一般情況下： 這篇文章中討論的所有設定的預設行為，您只需要擔心如何變更設定，當預設值不再符合您的需求。  

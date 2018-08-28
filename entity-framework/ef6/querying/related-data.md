@@ -2,19 +2,13 @@
 title: 載入相關實體-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: c8417e18-a2ee-499c-9ce9-2a48cc5b468a
-caps.latest.revision: 3
-ms.openlocfilehash: e7adc9aea11a7a8e9b87b4f9e9120aa7316588db
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 091493f60c732573ca63adb8c65bc28606453d34
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120342"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995921"
 ---
 # <a name="loading-related-entities"></a>載入相關的實體
 Entity Framework 支援三種方式可以載入相關的資料-積極式載入、 消極式載入和明確式載入。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  

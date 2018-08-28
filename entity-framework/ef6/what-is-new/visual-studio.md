@@ -2,19 +2,13 @@
 title: Visual Studio 版本-EF6
 author: divega
 ms.date: 2018-07-05
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 028FF890-4EDB-4F03-AE53-72F9C33EC92F
-caps.latest.revision: 3
-ms.openlocfilehash: 7bd08a46b1d6acc5a565952e834f01546a5262c8
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: aa5409506eeea599421608ddb2dd891df0413961
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120224"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997381"
 ---
 # <a name="visual-studio-releases"></a>Visual Studio 版本
 

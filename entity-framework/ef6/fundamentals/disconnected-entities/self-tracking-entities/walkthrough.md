@@ -2,19 +2,13 @@
 title: 自我追蹤實體的逐步解說-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: b21207c9-1d95-4aa3-ae05-bc5fe300dab0
-caps.latest.revision: 3
-ms.openlocfilehash: d07ae727ffba60a9296b34b9261acd99f7e8e3b6
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 64ca9ae42df1a1c740131e254b8f80f67b2f9f97
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120354"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995417"
 ---
 # <a name="self-tracking-entities-walkthrough"></a>自我追蹤實體的逐步解說
 > [!IMPORTANT]

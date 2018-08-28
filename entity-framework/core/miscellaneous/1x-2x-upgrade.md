@@ -1,17 +1,15 @@
 ---
 title: 從舊版升級至 EF Core 2 EF Core
 author: divega
-ms.author: divega
 ms.date: 8/13/2017
 ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
-ms.technology: entity-framework-core
 uid: core/miscellaneous/1x-2x-upgrade
-ms.openlocfilehash: 9be2368159fe7ab7b6951cc14a84ee63762ce90c
-ms.sourcegitcommit: 4467032fd6ca223e5965b59912d74cf88a1dd77f
+ms.openlocfilehash: 6df57b04808307238287094c285727ececc6c18d
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/01/2018
-ms.locfileid: "39388448"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996810"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>應用程式從舊版升級 EF Core 2.0
 

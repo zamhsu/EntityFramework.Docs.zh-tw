@@ -1,17 +1,15 @@
 ---
 title: 資料行對應的 EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 05a47de9-1078-488e-a823-b516a4208f33
-ms.technology: entity-framework-core
 uid: core/modeling/relational/columns
-ms.openlocfilehash: ac3ab2ce3faa54eb8e862d01dcecb48cb0d1f811
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: bca9ca22d211aa58a3bba00f6e4d54b8fe4a0df8
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37949407"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996200"
 ---
 # <a name="column-mapping"></a>資料行對應
 

@@ -2,19 +2,13 @@
 title: 使用交易-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 0d0f1824-d781-4cb3-8fda-b7eaefced1cd
-caps.latest.revision: 3
-ms.openlocfilehash: 4238c88cc149458ed11b96a0bf9aaed9aac40b2d
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: 20b63c88c41c10b5a69660d5027097c647c7eedd
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "39120570"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997547"
 ---
 # <a name="working-with-transactions"></a>使用交易
 > [!NOTE]

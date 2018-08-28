@@ -3,25 +3,24 @@ title: 移轉具有多個提供者的 EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/8/2017
-ms.technology: entity-framework-core
-ms.openlocfilehash: d950e74ed4cef7d4274aabcf3eda7b0b735574c6
-ms.sourcegitcommit: 2ef0a4a90b01edd22b9206f8729b8de459ef8cab
+ms.openlocfilehash: 7ae695037992323337a780cda29d8c8ed8a13458
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/20/2018
-ms.locfileid: "30002801"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997969"
 ---
 <a name="migrations-with-multiple-providers"></a>移轉具有多個提供者
 ==================================
-[EF Core 工具][ 1]只 scaffold 移轉為作用中的提供者。 有時候，不過，您可能想要搭配您 DbContext 使用一個以上的提供者 （例如 Microsoft SQL Server 和 SQLite）。 有兩種方式來處理此情形的移轉。 您可以維護兩個集合的移轉-一個用於每個提供者--或合併至單一設定，可以在同時工作。
+[EF Core 工具][ 1]只 scaffold 移轉為作用中的提供者。 有時候，不過，您可能想要使用您的 DbContext 中的多個提供者 （例如 Microsoft SQL Server 和 SQLite）。 有兩種方式可使用移轉處理這部分。 您可以維護兩個集合的移轉，另一個用於每個提供者--或合併到單一設定，可以在兩者上工作。
 
 <a name="two-migration-sets"></a>兩個移轉集合
 ------------------
-在第一種方法，您會產生兩個移轉的每個模型變更。
+在第一個方法中，您可以產生兩個移轉的每個模型變更。
 
-這是將每個移轉集執行方式之一[分開的組件][ 2]手動加入兩個移轉之間進行切換使用中的提供者 （和移轉組件）。
+這是輸入每個移轉一組其中一種方式[分開的組件][ 2]和手動切換作用中的提供者 （和移轉的組件） 加入兩個移轉。
 
-容易使用工具的另一種方法是建立新的類型，衍生自您 DbContext 和覆寫使用中的提供者。 此類型用在設計時新增或套用移轉的時間。
+更輕鬆使用這些工具的另一種方法是建立新的型別衍生自您的 DbContext，並會覆寫作用中的提供者。 此類型可用於在設計時新增，或套用移轉的時間。
 
 ``` csharp
 class MySqliteDbContext : MyDbContext
@@ -32,9 +31,9 @@ class MySqliteDbContext : MyDbContext
 ```
 
 > [!NOTE]
-> 因為每個移轉組會使用它自己的 DbContext 類型，這個方法不需要使用個別移轉組件。
+> 由於每個移轉組會使用自己的 DbContext 類型，這個方法不需要使用不同的移轉組件。
 
-當加入新的移轉，會指定內容類型。
+當新增新的移轉，來指定內容類型。
 
 ``` powershell
 Add-Migration InitialCreate -Context MyDbContext -OutputDir Migrations\SqlServerMigrations
@@ -46,13 +45,13 @@ dotnet ef migrations add InitialCreate --context MySqliteDbContext --output-dir 
 ```
 
 > [!TIP]
-> 您不需要指定後續的移轉作業的輸出目錄，因為它們會建立為最後一個同層級。
+> 您不需要指定輸出目錄進行後續的移轉，因為它們會建立為與最後一個同層級。
 
-<a name="one-migration-set"></a>移轉設定
+<a name="one-migration-set"></a>一個移轉組
 -----------------
-如果您不喜歡具有兩個集合的移轉，可以手動將它們結合成單一集合可套用至兩個提供者。
+如果您不喜歡有兩個集合的移轉，可以手動將它們結合成一組可套用至這兩個提供者。
 
-因為提供者會忽略不了解任何附註，註解可以同時存在。 例如，適用於 Microsoft SQL Server 和 SQLite 主索引鍵資料行可能如下所示。
+註解可以同時存在，因為提供者會忽略它並不了解任何註解。 例如，適用於 Microsoft SQL Server 和 SQLite 的主索引鍵資料行可能如下所示。
 
 ``` csharp
 Id = table.Column<int>(nullable: false)
@@ -61,7 +60,7 @@ Id = table.Column<int>(nullable: false)
     .Annotation("Sqlite:Autoincrement", true),
 ```
 
-如果作業只能套用一個提供者 （或它們以不同的方式提供者之間），使用`ActiveProvider`分辨哪一個提供者為作用中的屬性。
+如果作業只能套用一個提供者 （或它們有不同的提供者之間），使用`ActiveProvider`告知哪一個提供者為作用中的屬性。
 
 ``` csharp
 if (migrationBuilder.ActiveProvider == "Microsoft.EntityFrameworkCore.SqlServer")

@@ -2,19 +2,13 @@
 title: 列舉支援-EF 設計工具-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: c6ae6d8f-1ace-47db-ad47-b1718f1ba082
-caps.latest.revision: 3
-ms.openlocfilehash: cbf9b01fcbe21274ff3644c6ae6bc8fdfd338e3b
-ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
+ms.openlocfilehash: d4c5528c4dc13ab7189421feebf84c2cb2f4b2bb
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "39120471"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995633"
 ---
 # <a name="enum-support---ef-designer"></a>列舉支援-EF 設計工具
 > [!NOTE]

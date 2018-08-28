@@ -2,19 +2,13 @@
 title: 連接恢復功能，然後重試邏輯-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 47d68ac1-927e-4842-ab8c-ed8c8698dff2
-caps.latest.revision: 3
-ms.openlocfilehash: 4c6e296ecb8b43468408d359f44fd1d1a6edf864
-ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
+ms.openlocfilehash: 47181292873009c7bce2047787503258ffa35d9d
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "39120466"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997481"
 ---
 # <a name="connection-resiliency-and-retry-logic"></a>連接恢復功能，然後重試邏輯
 > [!NOTE]
