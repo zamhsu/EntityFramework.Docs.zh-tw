@@ -6,16 +6,16 @@ ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 ms.technology: entity-framework-core
 uid: core/querying/raw-sql
-ms.openlocfilehash: 29b7e20e875bf791a88a92636c1df4bc4e31656b
-ms.sourcegitcommit: 038acd91ce2f5a28d76dcd2eab72eeba225e366d
+ms.openlocfilehash: a1d554795dcd8a3e5b44e89ac014f538598461cc
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/14/2018
-ms.locfileid: "34163209"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "42447681"
 ---
 # <a name="raw-sql-queries"></a>原始 SQL 查詢
 
-Entity Framework Core 可讓您在處理關聯式資料庫時，下拉至原始 SQL 查詢。 這在您想要執行的查詢無法使用 LINQ 來表達時，或是使用 LINQ 查詢會導致將無效率的 SQL 傳送到資料庫時非常實用。
+Entity Framework Core 可讓您在處理關聯式資料庫時，下拉至原始 SQL 查詢。 這在您想要執行的查詢無法使用 LINQ 來表達時，或是使用 LINQ 查詢會導致將無效率的 SQL 傳送到資料庫時非常實用。 原始 SQL 查詢可以傳回實體型別，或從 EF Core 2.1 開始，可以傳回屬於您模型之一部分的[查詢型別](xref:core/modeling/query-types)。
 
 > [!TIP]  
 > 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
@@ -23,7 +23,6 @@ Entity Framework Core 可讓您在處理關聯式資料庫時，下拉至原始 
 ## <a name="limitations"></a>限制
 
 使用原始 SQL 查詢時有一些要注意的限制：
-* SQL 查詢只能用來傳回屬於您模型之一部分的實體類型。 我們的待辦項目中有一項增強功能，[將能從原始 SQL 查詢傳回特定類型](https://github.com/aspnet/EntityFramework/issues/1862) \(英文\)。
 
 * SQL 查詢必須傳回實體或查詢類型所有屬性的資料。
 
@@ -33,10 +32,10 @@ Entity Framework Core 可讓您在處理關聯式資料庫時，下拉至原始 
 
 * 傳遞到此方法的 `SELECT` 陳述式通常應該是可組合的：如果 EF Core 必須評估伺服器上的其他查詢運算子 (例如，轉譯在 `FromSql` 之後套用的 LINQ 運算子)，則會將所提供的 SQL 視為子查詢。 這表示所傳遞的 SQL 不應包含在子查詢上無效的任何字元或選項，例如：
   * 結尾的分號
-  * (在 SQL Server 上) 結尾的查詢層級提示，例如：`OPTION (HASH JOIN)`
+  * 在 SQL Server 上，結尾的查詢層級提示 (例如，`OPTION (HASH JOIN)`)
   * (在 SQL Server 上) `SELECT` 子句中未隨附 `TOP 100 PERCENT` 的 `ORDER BY` 子句
 
-* `SELECT` 以外的 SQL 陳述式會自動被辨識為不可組合。 因此，會將預存程序的完整結果一律會傳回用戶端，並會在記憶體內評估於 `FromSql` 之後所套用的任何 LINQ 運算子。 
+* `SELECT` 以外的 SQL 陳述式會自動被辨識為不可組合。 因此，會將預存程序的完整結果一律會傳回用戶端，並會在記憶體內評估於 `FromSql` 之後所套用的任何 LINQ 運算子。
 
 ## <a name="basic-raw-sql-queries"></a>基本的原始 SQL 查詢
 

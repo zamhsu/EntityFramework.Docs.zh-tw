@@ -6,12 +6,12 @@ ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 ms.technology: entity-framework-core
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 0b145217d40027c4b8e4746e9c5651652a28c9eb
-ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
+ms.openlocfilehash: a81b0a26fe98dcc1ddedc11aba2673338c8991e8
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2018
-ms.locfileid: "29152412"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "42447682"
 ---
 # <a name="disconnected-entities"></a>已中斷連線的實體
 
@@ -35,7 +35,7 @@ DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在
 
 ### <a name="with-auto-generated-keys"></a>使用自動產生的索引鍵
 
-自動產生索引鍵的值通常可用來判斷是否需要對實體進行插入或更新。 如果尚未設定索引鍵 (亦即仍具有 CLR 預設值 Null、零等)，則該實體必定是新的而需要插入。 另一方面，如果已設定索引鍵值，則表示實體先前必定已經儲存過，而現在是需要更新。 換句話說，如果索引鍵有值，即表示已對實體進行查詢、傳送給用戶端，而現在是返回來進行更新。
+自動產生索引鍵的值通常可用來判斷是否需要對實體進行插入或更新。 如果尚未設定索引鍵 (亦即，仍具有 CLR 預設值 Null、零等)，則該實體必定是新的而需要插入。 另一方面，如果已設定索引鍵值，則表示實體先前必定已經儲存過，而現在是需要更新。 換句話說，如果索引鍵有值，即表示已對實體進行查詢、傳送給用戶端，而現在是返回來進行更新。
 
 在實體類型為已知的情況下，檢查是否有未設定的索引鍵相當簡單：
 
@@ -128,7 +128,7 @@ Update 會將圖表中任何未設定索引鍵值的實體 (部落格或文章) 
 
 處理刪除可能相當棘手，因為當實體不存在時，常常意謂著應該將其刪除。 其中一個處理此情況的方式是使用「虛刪除」來將實體標示為已刪除，而不是實際進行刪除。 如此一來，刪除就變成與更新相同。 您可以在使用[查詢篩選](xref:core/querying/filters)時實作虛刪除。
 
-針對真實的刪除，常見的模式是使用查詢模式的延伸來執行基本上是圖表差異的操作。例如: 
+針對真實的刪除，常見的模式是使用查詢模式的延伸來執行基本上是圖表差異的操作。例如：
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 

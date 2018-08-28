@@ -6,16 +6,16 @@ ms.date: 10/27/2016
 ms.assetid: de2e34cd-659b-4cab-b5ed-7a979c6bf120
 ms.technology: entity-framework-core
 uid: core/querying/overview
-ms.openlocfilehash: 7fd2940d559f82016d7a8fc3fdcf3af0d5b8bc8f
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 1d28d215302625cf2b6788359527a93a77b7e9fd
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052868"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "42447790"
 ---
 # <a name="how-queries-work"></a>查詢的運作方式
 
-Entity Framework Core 使用 Language Integrate Query (LINQ) 查詢來自資料庫的資料。 LINQ 可讓您使用 C# (或您選擇的 .NET 語言)，根據衍生內容和實體類別來寫入強型別查詢。
+Entity Framework Core 使用 Language Integrated Query (LINQ) 查詢來自資料庫的資料。 LINQ 可讓您使用 C# (或您選擇的 .NET 語言)，根據衍生內容和實體類別來寫入強型別查詢。
 
 ## <a name="the-life-of-a-query"></a>查詢的生命週期
 

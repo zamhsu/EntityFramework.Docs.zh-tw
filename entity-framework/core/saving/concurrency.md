@@ -5,12 +5,12 @@ ms.author: divega
 ms.date: 03/03/2018
 ms.technology: entity-framework-core
 uid: core/saving/concurrency
-ms.openlocfilehash: 288d9c6fced5ebbaa2c366248c68547502c3698e
-ms.sourcegitcommit: 8f3be0a2a394253efb653388ec66bda964e5ee1b
+ms.openlocfilehash: 2d8909585201a45eb020537847800f125b3b0120
+ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/05/2018
-ms.locfileid: "29745473"
+ms.lasthandoff: 06/04/2018
+ms.locfileid: "42447783"
 ---
 # <a name="handling-concurrency-conflicts"></a>處理並行存取衝突
 
@@ -48,7 +48,7 @@ WHERE [PersonId] = @p0 AND [LastName] = @p2;
 
 ## <a name="resolving-concurrency-conflicts"></a>解決並行存取衝突
 
-接續先前的範例，如果一位使用者嘗試儲存對 `Person` 所做的一些變更，但另一位使用者已經變更 `LastName`，系統將會擲回例外狀況。
+接續先前的範例，如果一個使用者嘗試儲存對 `Person` 所做的一些變更，但另一個使用者已經變更 `LastName`，則系統將會擲回例外狀況。
 
 此時，應用程式可以直接通知使用者因變更發生衝突而導致更新失敗，然後繼續進行。 但提示使用者確定此記錄仍代表相同的實際人員並重試作業，可能是較理想的做法。
 

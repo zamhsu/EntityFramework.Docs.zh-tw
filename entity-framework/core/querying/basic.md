@@ -6,12 +6,12 @@ ms.date: 10/27/2016
 ms.assetid: ab6e35f1-397f-41c0-9ef4-85aec5466377
 ms.technology: entity-framework-core
 uid: core/querying/basic
-ms.openlocfilehash: 5070faf2aeeffad680e24e7de5a0ffa03a8f0064
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: eceac81546b23157611edd530b8b71f71e970c1f
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052548"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "42447669"
 ---
 # <a name="basic-queries"></a>基本查詢
 

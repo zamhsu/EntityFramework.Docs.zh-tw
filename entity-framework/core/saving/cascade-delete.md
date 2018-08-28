@@ -6,12 +6,12 @@ ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 ms.technology: entity-framework-core
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 0fc8929c56d4c657b7fb1e3c8e4b1a71659220c9
-ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
+ms.openlocfilehash: 7e1c87ae3a955c22b267a108ea7c2bb504e9acc3
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/26/2018
-ms.locfileid: "31812673"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "42447677"
 ---
 # <a name="cascade-delete"></a>串聯刪除
 
@@ -32,7 +32,10 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 就上述第二個動作而言，如果外部索引鍵值不可為 Null，將其設定為 Null 就會無效。 (不可為 Null 的外部索引鍵等同於必要關聯性)。在這些情況下，EF Core 會追蹤外部索引鍵屬性是否被標示為 Null，直到呼叫 SaveChanges 為止，屆時會擲回例外狀況，因為該變更無法保存至資料庫。 這與從資料庫收到條件約束違規類似。
 
-如下表中所列，有四種刪除行為。 針對選擇性關聯性 (可為空值的外部索引鍵)，您「可以」儲存 Null 外部索引鍵值，這會造成下列影響：
+如下表中所列，有四種刪除行為。
+
+### <a name="optional-relationships"></a>組織關係
+針對選擇性關聯性 (可為空值的外部索引鍵)，您「可以」儲存 Null 外部索引鍵值，這會造成下列影響：
 
 | 行為名稱               | 對記憶體中相依項/子系的影響    | 對資料庫中相依項/子系的影響  |
 |:----------------------------|:---------------------------------------|:---------------------------------------|
@@ -41,6 +44,7 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 | **SetNull**                 | 將外部索引鍵屬性設定為 Null | 將外部索引鍵屬性設定為 Null |
 | **Restrict**                | 無                                   | 無                                   |
 
+### <a name="required-relationships"></a>必要關係
 針對必要關聯性 (不可為空值的外部索引鍵)，您「無法」儲存 Null 外部索引鍵值，這會造成下列影響：
 
 | 行為名稱         | 對記憶體中相依項/子系的影響 | 對資料庫中相依項/子系的影響 |
