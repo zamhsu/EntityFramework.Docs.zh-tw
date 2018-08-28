@@ -1,24 +1,22 @@
 ---
 title: 並行語彙基元-EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 03/03/2018
 ms.assetid: bc8b1cb0-befe-4b67-8004-26e6c5f69385
-ms.technology: entity-framework-core
 uid: core/modeling/concurrency
-ms.openlocfilehash: f3cf28d5c54e63aa76058e9fe1d9f3de5b37d579
-ms.sourcegitcommit: 8f3be0a2a394253efb653388ec66bda964e5ee1b
+ms.openlocfilehash: 0051d416544a11385f99d36e45843c5b20725af7
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/05/2018
-ms.locfileid: "29745474"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994222"
 ---
 # <a name="concurrency-tokens"></a>並行語彙基元
 
 > [!NOTE]
 > 此頁面說明如何設定並行語彙基元。 請參閱[處理並行存取衝突](../saving/concurrency.md)的並行存取控制的 EF Core 及如何處理您的應用程式中的並行存取衝突的範例的運作方式的詳細說明。
 
-屬性設定為並行語彙基元可用於實作開放式並行存取控制。
+屬性設定為並行語彙基元用來實作開放式並行存取控制。
 
 ## <a name="conventions"></a>慣例
 
@@ -26,21 +24,21 @@ ms.locfileid: "29745474"
 
 ## <a name="data-annotations"></a>資料註釋
 
-您可以使用資料註解將屬性設定為並行語彙基元。
+若要將屬性設定為並行語彙基元，您可以使用資料註解。
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Concurrency.cs#ConfigureConcurrencyAnnotations)]
 
 ## <a name="fluent-api"></a>Fluent API
 
-您可以使用 fluent 應用程式開發的應用程式開發介面，將屬性設定為並行語彙基元。
+您可以使用 Fluent API，若要將屬性設定為並行語彙基元。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Concurrency.cs#ConfigureConcurrencyFluent)]
 
 ## <a name="timestamprow-version"></a>時間戳記/資料列版本
 
-時間戳記是屬性，產生新的值是由資料庫每次插入或更新資料列。 屬性也會被視為並行語彙基元。 這可確保如果其他人已修改的資料列，您嘗試更新您查詢的資料後，就會收到例外狀況。
+時間戳記是屬性，其中一個新的值由資料庫產生每次插入或更新資料列。 屬性也會被視為並行語彙基元。 這可確保如果其他人已修改的資料列，您想要更新您查詢資料後，您會收到例外狀況。
 
-如何達成這會決定所使用的資料庫提供者。 SQL Server 的時間戳記通常用在*byte []* 屬性，將會安裝為*ROWVERSION*資料庫中的資料行。
+如何達成這是由所使用的資料庫提供者。 SQL Server 的時間戳記通常用在*byte []* 屬性，將會設定為*ROWVERSION*資料庫中的資料行。
 
 ### <a name="conventions"></a>慣例
 
@@ -48,12 +46,12 @@ ms.locfileid: "29745474"
 
 ### <a name="data-annotations"></a>資料註釋
 
-您可以使用資料註解屬性設定為時間戳記。
+若要將屬性設定為時間戳記，您可以使用資料註解。
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Timestamp.cs#ConfigureTimestampAnnotations)]
 
 ### <a name="fluent-api"></a>Fluent API
 
-您可以使用 fluent 應用程式開發的應用程式開發介面的屬性設定為時間戳記。
+您可以使用 Fluent API 來設定的屬性為時間戳記。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Timestamp.cs#ConfigureTimestampFluent)]

@@ -2,19 +2,13 @@
 title: 空間-EF 設計工具-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 06baa6e1-d680-4a95-845b-81305c87a962
-caps.latest.revision: 3
-ms.openlocfilehash: 2332818275763fd90274f426b7fced4c3c14ac17
-ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
+ms.openlocfilehash: 39fe54ffe9d0ffd1753844f7bffcd1832d82eec5
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "39120455"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994363"
 ---
 # <a name="spatial---ef-designer"></a>空間-EF 設計工具
 > [!NOTE]

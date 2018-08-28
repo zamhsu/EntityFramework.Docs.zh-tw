@@ -1,17 +1,15 @@
 ---
 title: 資料表對應的 EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: c807aa4c-7845-443d-b8d0-bfc9b42691a3
-ms.technology: entity-framework-core
 uid: core/modeling/relational/tables
-ms.openlocfilehash: ef6080b5d543c2a68a680be2b9effc1c9d531030
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: 32c5e3cc0e498005ce8e6be1f1ee7e8ddf9b510d
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37949005"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994133"
 ---
 # <a name="table-mapping"></a>資料表對應
 

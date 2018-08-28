@@ -1,36 +1,34 @@
 ---
 title: Foreign Key 條件約束的 EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: dbaf4bac-1fd5-46c0-ac57-64d7153bc574
-ms.technology: entity-framework-core
 uid: core/modeling/relational/fk-constraints
-ms.openlocfilehash: 726f03e2ee4cd3ec851c9a861b75dd12f9203e9c
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: a83f72b5d832e349fb4a5fb3b2de0b82bd79ef2a
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052738"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42993984"
 ---
-# <a name="foreign-key-constraints"></a>外部索引鍵條件約束
+# <a name="foreign-key-constraints"></a>Foreign Key 條件約束
 
 > [!NOTE]  
-> 本節中的設定是一般適用於關聯式資料庫。 當您安裝的關聯式資料庫提供者，如下所示的擴充方法會變成可用 (因為共用*Microsoft.EntityFrameworkCore.Relational*封裝)。
+> 本節中的組態一般適用於關聯式資料庫。 當您因共用 *Microsoft.EntityFrameworkCore.Relational* 套件而安裝關聯式資料庫提供者時，這裡顯示的擴充方法會變成可用。
 
 針對每個關聯性模型中引進的外部索引鍵條件約束。
 
 ## <a name="conventions"></a>慣例
 
-根據慣例，foreign key 條件約束會命名為`FK_<dependent type name>_<principal type name>_<foreign key property name>`。 複合外部索引鍵`<foreign key property name>`變得的外部索引鍵屬性名稱的底線分隔清單。
+依照慣例，foreign key 條件約束會命名為`FK_<dependent type name>_<principal type name>_<foreign key property name>`。 複合外部索引鍵`<foreign key property name>`成為外部索引鍵屬性名稱的底線分隔清單。
 
 ## <a name="data-annotations"></a>資料註釋
 
 無法使用資料註解來設定外部索引鍵條件約束名稱。
 
-## <a name="fluent-api"></a>關於 fluent 應用程式開發介面
+## <a name="fluent-api"></a>Fluent API
 
-若要設定關聯性的外部索引鍵條件約束名稱，您可以使用 fluent 應用程式開發的應用程式開發介面。
+您可以使用 Fluent API 來設定關聯性的外部索引鍵條件約束名稱。
 
 <!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/Relational/RelationshipConstraintName.cs?highlight=12)] -->
 ``` csharp

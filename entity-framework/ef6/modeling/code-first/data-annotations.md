@@ -2,19 +2,13 @@
 title: First 資料註解-EF6 的程式碼
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-caps.latest.revision: 3
-ms.openlocfilehash: 91d1d8c2608df8f7b38e70b565a4225cf10ae21f
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: 0ab66afa3babafe657b3ddb32c02c3fba0ae310e
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "39120574"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994582"
 ---
 # <a name="code-first-data-annotations"></a>Code First 資料註解
 > [!NOTE]

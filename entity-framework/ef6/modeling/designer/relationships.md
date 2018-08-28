@@ -2,19 +2,13 @@
 title: 關聯性-EF 設計工具-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 402fe960-754b-470f-976b-e5de3e9986b5
-caps.latest.revision: 3
-ms.openlocfilehash: f924945b19dd6d73847ff3ec52c0b5a286c591bb
-ms.sourcegitcommit: 9ae4473425c5e76337c9d032b0e5dbfedf1fcf57
+ms.openlocfilehash: 72efe76956c930a787449e6cce453ab0317adc7c
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "39120538"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994644"
 ---
 # <a name="relationships---ef-designer"></a>關聯性-EF 設計工具
 > [!NOTE]

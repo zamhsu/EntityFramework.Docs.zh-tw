@@ -3,14 +3,13 @@ title: 設計階段 DbContext 建立-EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 10/27/2017
-ms.technology: entity-framework-core
 uid: core/miscellaneous/cli/dbcontext-creation
-ms.openlocfilehash: 648ca990252fb32d8cf181a7ae672d07a81f56bb
-ms.sourcegitcommit: 0935ff275ae739243297f5b97eb21414398125c6
+ms.openlocfilehash: 66fec7605b6ac2da0af1e801f8a1dca0789aea35
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/23/2018
-ms.locfileid: "39201915"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42993714"
 ---
 <a name="design-time-dbcontext-creation"></a>設計階段 DbContext 建立
 ==============================
@@ -22,7 +21,7 @@ ms.locfileid: "39201915"
 -------------------------
 如果您的啟始專案的 ASP.NET Core 應用程式，工具會嘗試從應用程式的服務提供者取得 DbContext 物件。
 
-此工具會先嘗試取得叫用的服務提供者`Program.BuildWebHost()`，並存取`IWebHost.Services`屬性。
+工具會先嘗試叫用來取得服務提供者`Program.BuildWebHost()`，並存取`IWebHost.Services`屬性。
 
 > [!NOTE]
 > 當您建立新的 ASP.NET Core 2.0 應用程式時，預設會包含此攔截程序。 在舊版的 EF Core 與 ASP.NET Core，工具會嘗試叫用`Startup.ConfigureServices`直接為了取得應用程式的服務提供者，但這個模式無法再正常運作中 ASP.NET Core 2.0 應用程式。 如果您要升級為 2.0 的 ASP.NET Core 1.x 應用程式，您可以[修改您`Program`類別，以符合新模式][3]。

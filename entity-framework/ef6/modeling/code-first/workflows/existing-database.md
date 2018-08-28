@@ -2,19 +2,13 @@
 title: 現有的資料庫-EF6 的 code First
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: a7e60b74-973d-4480-868f-500a3899932e
-caps.latest.revision: 3
-ms.openlocfilehash: 47581a7ae9ff534d26ce82365bcbe2b254247495
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 29f959265e0fd0d5e14c156519e6931fd8da0677
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120335"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995086"
 ---
 # <a name="code-first-to-an-existing-database"></a>Code First 至現有的資料庫
 本影片以及逐步說明的逐步解說提供以現有的資料庫為目標的 Code First 開發的簡介。 程式碼第一次可讓您定義您的模型使用 C\#或 VB.Net 類別。 （選擇性） 其他設定可以使用屬性，在您的類別和屬性，或使用 fluent API 來執行。

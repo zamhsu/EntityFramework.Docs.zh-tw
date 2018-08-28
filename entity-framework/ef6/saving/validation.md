@@ -2,19 +2,13 @@
 title: 驗證-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 77d6a095-c0d0-471e-80b9-8f9aea6108b2
-caps.latest.revision: 3
-ms.openlocfilehash: 758865255d7868337dc1d7801bd9ff77f0bb57a9
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: eec834888e2e3efaadc8acf9d4f64307f394ea4a
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "39120563"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994441"
 ---
 # <a name="data-validation"></a>資料驗證
 > [!NOTE]

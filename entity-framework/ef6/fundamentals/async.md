@@ -2,19 +2,13 @@
 title: 非同步查詢並儲存-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-caps.latest.revision: 3
-ms.openlocfilehash: 655676029b3a4e42bbe257ff6091179930b1814e
-ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
+ms.openlocfilehash: 758f8bc3d14fc1f60f14ff14f4251aeed057c518
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "39120458"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994459"
 ---
 # <a name="async-query-and-save"></a>非同步查詢和儲存
 > [!NOTE]
