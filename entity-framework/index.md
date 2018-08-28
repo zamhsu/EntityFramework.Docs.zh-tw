@@ -2,17 +2,15 @@
 layout: HubPage
 title: Entity Framework
 author: rowanmiller
-ms.topic: hub-page
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 6bb12583-c39a-454c-8d83-d2a2793ca9ef
 uid: index
-ms.openlocfilehash: 1f0e33e06f3b39f34eb483786cd34152a1570f54
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 2e58e8d443eb4881a211b20751dddfeba318bfd8
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37911742"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994552"
 ---
 <div id="main" class="v2">
     <div class="container">
