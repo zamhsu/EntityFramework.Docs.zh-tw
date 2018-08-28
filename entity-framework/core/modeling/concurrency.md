@@ -1,59 +1,57 @@
 ---
 title: 並行語彙基元-EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 03/03/2018
 ms.assetid: bc8b1cb0-befe-4b67-8004-26e6c5f69385
-ms.technology: entity-framework-core
 uid: core/modeling/concurrency
-ms.openlocfilehash: f3cf28d5c54e63aa76058e9fe1d9f3de5b37d579
-ms.sourcegitcommit: 8f3be0a2a394253efb653388ec66bda964e5ee1b
+ms.openlocfilehash: 0051d416544a11385f99d36e45843c5b20725af7
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/05/2018
-ms.locfileid: "29745474"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994222"
 ---
-# <a name="concurrency-tokens"></a><span data-ttu-id="09205-102">並行語彙基元</span><span class="sxs-lookup"><span data-stu-id="09205-102">Concurrency Tokens</span></span>
+# <a name="concurrency-tokens"></a><span data-ttu-id="eecec-102">並行語彙基元</span><span class="sxs-lookup"><span data-stu-id="eecec-102">Concurrency Tokens</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="09205-103">此頁面說明如何設定並行語彙基元。</span><span class="sxs-lookup"><span data-stu-id="09205-103">This page documents how to configure concurrency tokens.</span></span> <span data-ttu-id="09205-104">請參閱[處理並行存取衝突](../saving/concurrency.md)的並行存取控制的 EF Core 及如何處理您的應用程式中的並行存取衝突的範例的運作方式的詳細說明。</span><span class="sxs-lookup"><span data-stu-id="09205-104">See [Handling Concurrency Conflicts](../saving/concurrency.md) for a detailed explanation of how concurrency control works on EF Core and examples of how to handle concurrency conflicts in your application.</span></span>
+> <span data-ttu-id="eecec-103">此頁面說明如何設定並行語彙基元。</span><span class="sxs-lookup"><span data-stu-id="eecec-103">This page documents how to configure concurrency tokens.</span></span> <span data-ttu-id="eecec-104">請參閱[處理並行存取衝突](../saving/concurrency.md)的並行存取控制的 EF Core 及如何處理您的應用程式中的並行存取衝突的範例的運作方式的詳細說明。</span><span class="sxs-lookup"><span data-stu-id="eecec-104">See [Handling Concurrency Conflicts](../saving/concurrency.md) for a detailed explanation of how concurrency control works on EF Core and examples of how to handle concurrency conflicts in your application.</span></span>
 
-<span data-ttu-id="09205-105">屬性設定為並行語彙基元可用於實作開放式並行存取控制。</span><span class="sxs-lookup"><span data-stu-id="09205-105">Properties configured as concurrency tokens are used to implement optimistic concurrency control.</span></span>
+<span data-ttu-id="eecec-105">屬性設定為並行語彙基元用來實作開放式並行存取控制。</span><span class="sxs-lookup"><span data-stu-id="eecec-105">Properties configured as concurrency tokens are used to implement optimistic concurrency control.</span></span>
 
-## <a name="conventions"></a><span data-ttu-id="09205-106">慣例</span><span class="sxs-lookup"><span data-stu-id="09205-106">Conventions</span></span>
+## <a name="conventions"></a><span data-ttu-id="eecec-106">慣例</span><span class="sxs-lookup"><span data-stu-id="eecec-106">Conventions</span></span>
 
-<span data-ttu-id="09205-107">依照慣例，屬性會永遠不會設定為並行語彙基元。</span><span class="sxs-lookup"><span data-stu-id="09205-107">By convention, properties are never configured as concurrency tokens.</span></span>
+<span data-ttu-id="eecec-107">依照慣例，屬性會永遠不會設定為並行語彙基元。</span><span class="sxs-lookup"><span data-stu-id="eecec-107">By convention, properties are never configured as concurrency tokens.</span></span>
 
-## <a name="data-annotations"></a><span data-ttu-id="09205-108">資料註釋</span><span class="sxs-lookup"><span data-stu-id="09205-108">Data Annotations</span></span>
+## <a name="data-annotations"></a><span data-ttu-id="eecec-108">資料註釋</span><span class="sxs-lookup"><span data-stu-id="eecec-108">Data Annotations</span></span>
 
-<span data-ttu-id="09205-109">您可以使用資料註解將屬性設定為並行語彙基元。</span><span class="sxs-lookup"><span data-stu-id="09205-109">You can use the Data Annotations to configure a property as a concurrency token.</span></span>
+<span data-ttu-id="eecec-109">若要將屬性設定為並行語彙基元，您可以使用資料註解。</span><span class="sxs-lookup"><span data-stu-id="eecec-109">You can use the Data Annotations to configure a property as a concurrency token.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Concurrency.cs#ConfigureConcurrencyAnnotations)]
 
-## <a name="fluent-api"></a><span data-ttu-id="09205-110">Fluent API</span><span class="sxs-lookup"><span data-stu-id="09205-110">Fluent API</span></span>
+## <a name="fluent-api"></a><span data-ttu-id="eecec-110">Fluent API</span><span class="sxs-lookup"><span data-stu-id="eecec-110">Fluent API</span></span>
 
-<span data-ttu-id="09205-111">您可以使用 fluent 應用程式開發的應用程式開發介面，將屬性設定為並行語彙基元。</span><span class="sxs-lookup"><span data-stu-id="09205-111">You can use the Fluent API to configure a property as a concurrency token.</span></span>
+<span data-ttu-id="eecec-111">您可以使用 Fluent API，若要將屬性設定為並行語彙基元。</span><span class="sxs-lookup"><span data-stu-id="eecec-111">You can use the Fluent API to configure a property as a concurrency token.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Concurrency.cs#ConfigureConcurrencyFluent)]
 
-## <a name="timestamprow-version"></a><span data-ttu-id="09205-112">時間戳記/資料列版本</span><span class="sxs-lookup"><span data-stu-id="09205-112">Timestamp/row version</span></span>
+## <a name="timestamprow-version"></a><span data-ttu-id="eecec-112">時間戳記/資料列版本</span><span class="sxs-lookup"><span data-stu-id="eecec-112">Timestamp/row version</span></span>
 
-<span data-ttu-id="09205-113">時間戳記是屬性，產生新的值是由資料庫每次插入或更新資料列。</span><span class="sxs-lookup"><span data-stu-id="09205-113">A timestamp is a property where a new value is generated by the database every time a row is inserted or updated.</span></span> <span data-ttu-id="09205-114">屬性也會被視為並行語彙基元。</span><span class="sxs-lookup"><span data-stu-id="09205-114">The property is also treated as a concurrency token.</span></span> <span data-ttu-id="09205-115">這可確保如果其他人已修改的資料列，您嘗試更新您查詢的資料後，就會收到例外狀況。</span><span class="sxs-lookup"><span data-stu-id="09205-115">This ensures you will get an exception if anyone else has modified a row that you are trying to update since you queried for the data.</span></span>
+<span data-ttu-id="eecec-113">時間戳記是屬性，其中一個新的值由資料庫產生每次插入或更新資料列。</span><span class="sxs-lookup"><span data-stu-id="eecec-113">A timestamp is a property where a new value is generated by the database every time a row is inserted or updated.</span></span> <span data-ttu-id="eecec-114">屬性也會被視為並行語彙基元。</span><span class="sxs-lookup"><span data-stu-id="eecec-114">The property is also treated as a concurrency token.</span></span> <span data-ttu-id="eecec-115">這可確保如果其他人已修改的資料列，您想要更新您查詢資料後，您會收到例外狀況。</span><span class="sxs-lookup"><span data-stu-id="eecec-115">This ensures you will get an exception if anyone else has modified a row that you are trying to update since you queried for the data.</span></span>
 
-<span data-ttu-id="09205-116">如何達成這會決定所使用的資料庫提供者。</span><span class="sxs-lookup"><span data-stu-id="09205-116">How this is achieved is up to the database provider being used.</span></span> <span data-ttu-id="09205-117">SQL Server 的時間戳記通常用在*byte []* 屬性，將會安裝為*ROWVERSION*資料庫中的資料行。</span><span class="sxs-lookup"><span data-stu-id="09205-117">For SQL Server, timestamp is usually used on a *byte[]* property, which will be setup as a *ROWVERSION* column in the database.</span></span>
+<span data-ttu-id="eecec-116">如何達成這是由所使用的資料庫提供者。</span><span class="sxs-lookup"><span data-stu-id="eecec-116">How this is achieved is up to the database provider being used.</span></span> <span data-ttu-id="eecec-117">SQL Server 的時間戳記通常用在*byte []* 屬性，將會設定為*ROWVERSION*資料庫中的資料行。</span><span class="sxs-lookup"><span data-stu-id="eecec-117">For SQL Server, timestamp is usually used on a *byte[]* property, which will be setup as a *ROWVERSION* column in the database.</span></span>
 
-### <a name="conventions"></a><span data-ttu-id="09205-118">慣例</span><span class="sxs-lookup"><span data-stu-id="09205-118">Conventions</span></span>
+### <a name="conventions"></a><span data-ttu-id="eecec-118">慣例</span><span class="sxs-lookup"><span data-stu-id="eecec-118">Conventions</span></span>
 
-<span data-ttu-id="09205-119">依照慣例，屬性會永遠不會設定為時間戳記。</span><span class="sxs-lookup"><span data-stu-id="09205-119">By convention, properties are never configured as timestamps.</span></span>
+<span data-ttu-id="eecec-119">依照慣例，屬性會永遠不會設定為時間戳記。</span><span class="sxs-lookup"><span data-stu-id="eecec-119">By convention, properties are never configured as timestamps.</span></span>
 
-### <a name="data-annotations"></a><span data-ttu-id="09205-120">資料註釋</span><span class="sxs-lookup"><span data-stu-id="09205-120">Data Annotations</span></span>
+### <a name="data-annotations"></a><span data-ttu-id="eecec-120">資料註釋</span><span class="sxs-lookup"><span data-stu-id="eecec-120">Data Annotations</span></span>
 
-<span data-ttu-id="09205-121">您可以使用資料註解屬性設定為時間戳記。</span><span class="sxs-lookup"><span data-stu-id="09205-121">You can use Data Annotations to configure a property as a timestamp.</span></span>
+<span data-ttu-id="eecec-121">若要將屬性設定為時間戳記，您可以使用資料註解。</span><span class="sxs-lookup"><span data-stu-id="eecec-121">You can use Data Annotations to configure a property as a timestamp.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Timestamp.cs#ConfigureTimestampAnnotations)]
 
-### <a name="fluent-api"></a><span data-ttu-id="09205-122">Fluent API</span><span class="sxs-lookup"><span data-stu-id="09205-122">Fluent API</span></span>
+### <a name="fluent-api"></a><span data-ttu-id="eecec-122">Fluent API</span><span class="sxs-lookup"><span data-stu-id="eecec-122">Fluent API</span></span>
 
-<span data-ttu-id="09205-123">您可以使用 fluent 應用程式開發的應用程式開發介面的屬性設定為時間戳記。</span><span class="sxs-lookup"><span data-stu-id="09205-123">You can use the Fluent API to configure a property as a timestamp.</span></span>
+<span data-ttu-id="eecec-123">您可以使用 Fluent API 來設定的屬性為時間戳記。</span><span class="sxs-lookup"><span data-stu-id="eecec-123">You can use the Fluent API to configure a property as a timestamp.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Timestamp.cs#ConfigureTimestampFluent)]
