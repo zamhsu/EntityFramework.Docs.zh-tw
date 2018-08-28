@@ -2,19 +2,13 @@
 title: 儲存資料 - EF6
 author: divega
 ms.date: 2018-07-05
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: C7744A30-8655-4EF8-8657-F5B796D1EB7E
-caps.latest.revision: 3
-ms.openlocfilehash: f8b503ed5c365658ded9d4bdf3e7bc3eac5e332d
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 7343999011b3872416282582e62023192a09ab86
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37911852"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42993811"
 ---
 # <a name="saving-data-with-entity-framework-6"></a>使用 Entity Framework 6 儲存資料
 

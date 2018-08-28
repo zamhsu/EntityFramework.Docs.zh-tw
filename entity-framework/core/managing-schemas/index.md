@@ -1,15 +1,13 @@
 ---
 title: 管理資料庫結構描述 - EF Core
 author: bricelam
-ms.author: divega
 ms.date: 10/30/2017
-ms.technology: entity-framework-core
-ms.openlocfilehash: 765c80f43832e51471928d5f653aa12c6bd7c7ac
-ms.sourcegitcommit: b467368cc350e6059fdc0949e042a41cb11e61d9
+ms.openlocfilehash: c1ebe33b5575cab76a54721ef86ecbcb7ff8b98b
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2017
-ms.locfileid: "26049380"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994381"
 ---
 # <a name="managing-database-schemas"></a>管理資料庫結構描述
 EF Core 提供兩種主要方式來保持 EF Core 模型與資料庫結構描述同步。若要從兩者中進行選擇，請決定 EF Core 模型還是資料庫結構描述為真實來源。

@@ -1,17 +1,15 @@
 ---
 title: EF Core 的新功能 - EF Core
 author: divega
-ms.author: divega
 ms.date: 02/20/2018
 ms.assetid: C21F89EE-FB08-4ED9-A2A0-76CB7656E6E4
-ms.technology: entity-framework-core
 uid: core/what-is-new/index
-ms.openlocfilehash: 557b973c577b5ed8c0b6bae0582d287ee46b9def
-ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
+ms.openlocfilehash: c550ce65324d78f9fec0a141ce7c3f5982197208
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/04/2018
-ms.locfileid: "34754518"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996104"
 ---
 # <a name="what-is-new-in-ef-core"></a>EF Core 的新功能
 

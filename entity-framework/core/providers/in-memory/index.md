@@ -1,17 +1,15 @@
 ---
 title: InMemory 資料庫提供者 - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 9af0cba7-7605-4f8f-9cfa-dd616fcb880c
-ms.technology: entity-framework-core
 uid: core/providers/in-memory/index
-ms.openlocfilehash: 356af9390a8aafa5afe35f333cd1e6ac1988390d
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: ca802f55d973b9f79073c2507c1e0c7a853a1fce
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/28/2018
-ms.locfileid: "29678982"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42993316"
 ---
 # <a name="ef-core-in-memory-database-provider"></a>EF Core 記憶體中資料庫提供者
 

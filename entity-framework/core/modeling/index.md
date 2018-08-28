@@ -1,17 +1,15 @@
 ---
 title: 建立模型 - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 88253ff3-174e-485c-b3f8-768243d01ee1
-ms.technology: entity-framework-core
 uid: core/modeling/index
-ms.openlocfilehash: 1ad0f6891fbc8ba2e4d102cc9997f053a9dddb66
-ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
+ms.openlocfilehash: 9f702d5833b88e6eb77c0afefdae0ed3bc162ec8
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/26/2018
-ms.locfileid: "31812433"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42993929"
 ---
 # <a name="creating-a-model"></a>建立模型
 

@@ -3,14 +3,13 @@ title: 移轉 - EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
-ms.technology: entity-framework-core
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: dd164125c053497af94773011127853ad10d27a6
-ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
+ms.openlocfilehash: 4a5d6f3798c7af7597f95cebea1aeb9e5e58d277
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/04/2018
-ms.locfileid: "34754505"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996518"
 ---
 <a name="migrations"></a>移轉
 ==========

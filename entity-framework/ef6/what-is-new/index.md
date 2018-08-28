@@ -2,19 +2,13 @@
 title: 新功能 - EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 41d1f86b-ce66-4bf2-8963-48514406fb4c
-caps.latest.revision: 3
-ms.openlocfilehash: dba6403fa341e1abfe8da488a19cf8520e3ea574
-ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
+ms.openlocfilehash: 9eb6a916d36ed41fcaea74564395695c048ab0f5
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "37914172"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996331"
 ---
 # <a name="whats-new-in-ef6"></a>EF6 的新功能
 

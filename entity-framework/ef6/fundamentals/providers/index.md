@@ -2,19 +2,13 @@
 title: Entity Framework 提供者 - EF6
 author: divega
 ms.date: 2018-06-27
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 7BFB7763-CD6C-4520-93A2-7B265F5FA586
-caps.latest.revision: 3
-ms.openlocfilehash: 8bd5a5a420d741accd1167845575e23c09579ae1
-ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
+ms.openlocfilehash: 98dc34591e8b2724401810a13f363382dce53218
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "37914293"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997914"
 ---
 # <a name="entity-framework-6-providers"></a>Entity Framework 6 提供者
 > [!NOTE]

@@ -1,17 +1,15 @@
 ---
 title: .NET Framework 使用者入門 - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 08/06/2018
 ms.assetid: 06f1f18b-3267-4f79-b94e-173f9db0a7cb
-ms.technology: entity-framework-core
 uid: core/get-started/full-dotnet/index
-ms.openlocfilehash: 410a8320d1e36c672f3d69a172719f8b8c47a152
-ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
+ms.openlocfilehash: 6f43873b8a2e578a92fd224e7058ed537f715c69
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/07/2018
-ms.locfileid: "39614375"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995401"
 ---
 # <a name="getting-started-with-ef-core-on-net-framework"></a>.NET Framework 上的 EF Core 使用者入門
 

@@ -1,17 +1,15 @@
 ---
 title: 使用者入門 - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
-ms.technology: entity-framework-core
 uid: core/get-started/index
-ms.openlocfilehash: 6bd9d9cc7dfc08261df2e066071632d9ecdfb548
-ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
+ms.openlocfilehash: 144cc8c8c9979e4ce24260c2975e6b10d4fdbb84
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2018
-ms.locfileid: "29152399"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994919"
 ---
 # <a name="getting-started-with-entity-framework-core"></a>Entity Framework Core 使用者入門
 

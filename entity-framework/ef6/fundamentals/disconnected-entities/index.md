@@ -2,19 +2,13 @@
 title: 使用已中斷連線的實體 - EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 12138003-a373-4817-b1b7-724130202f5f
-caps.latest.revision: 3
-ms.openlocfilehash: 5419215a77b57ab3c92fb88a512510070ea23bd6
-ms.sourcegitcommit: 45494121254ad4fdcec613d1dd22d850068d6f39
+ms.openlocfilehash: b496a9cba48946974844725c5df5e7df7351cf23
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37913439"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42998222"
 ---
 # <a name="working-with-disconnected-entities"></a>使用已中斷連線的實體
 在 Entity Framework 架構應用程式中，內容類別負責偵測套用至追蹤實體的變更。 呼叫 SaveChanges 方法會將內容所追蹤的變更保存到資料庫。 使用多層式架構 (N-Tier) 應用程式時，實體物件通常會在中斷與內容的連線時進行修改；因此您必須決定如何追蹤變更，以及如何將這些變更回報至內容。 本主題討論搭配使用 Entity Framework 與已中斷連線的實體時可用的不同選項。   

@@ -1,17 +1,15 @@
 ---
 title: 安裝 EF Core
 author: divega
-ms.author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
-ms.technology: entity-framework-core
 uid: core/get-started/install/index
-ms.openlocfilehash: 00924af2a7beaba8575e12d91678208b517f1a09
-ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
+ms.openlocfilehash: 30ca81a0ede65506a6684d2322d31332115b1ed3
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/07/2018
-ms.locfileid: "39614268"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996924"
 ---
 # <a name="installing-ef-core"></a>安裝 EF Core
 
