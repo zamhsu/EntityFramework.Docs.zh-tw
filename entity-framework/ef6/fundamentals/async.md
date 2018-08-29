@@ -3,12 +3,12 @@ title: 非同步查詢並儲存-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: 758f8bc3d14fc1f60f14ff14f4251aeed057c518
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 64051dea740b2183cb904d7fb4293d7048c218ca
+ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994459"
+ms.lasthandoff: 08/29/2018
+ms.locfileid: "43152433"
 ---
 # <a name="async-query-and-save"></a>非同步查詢和儲存
 > [!NOTE]
@@ -137,7 +137,7 @@ EF6 導入了非同步查詢並儲存使用的支援[async 和 await 關鍵字](
 
 此程式碼會呼叫**PerformDatabaseOperations**方法，進而省下新**部落格**到資料庫，然後再擷取所有**部落格**從資料庫並列印至**主控台**。 在此之後，程式會寫入到一天中的報價**主控台**。
 
-程式碼是同步，因為我們可以發現下列的執行流程，當我們執行程式：
+程式碼是同步的因為我們可以發現下列的執行流程，當我們執行程式：
 
 1.  **SaveChanges**開始新的推播**部落格**資料庫
 2.  **SaveChanges**完成

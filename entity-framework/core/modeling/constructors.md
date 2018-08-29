@@ -4,12 +4,12 @@ author: ajcvickers
 ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
-ms.openlocfilehash: 0536393d074d82583f47faae13cc22498193cb7e
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 1b36197465fb9a6571a306d36eb1e9d885a5399e
+ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994889"
+ms.lasthandoff: 08/29/2018
+ms.locfileid: "43152461"
 ---
 # <a name="entity-types-with-constructors"></a>實體類型建構函式
 
@@ -25,7 +25,7 @@ ms.locfileid: "42994889"
 
 請考慮一般的部落格/後置模型：
 
-```Csharp
+``` csharp
 public class Blog
 {
     public int Id { get; set; }
@@ -50,7 +50,7 @@ public class Post
 
 當 EF Core 建立這些類型的執行個體時，例如結果的查詢時，它會先呼叫預設的無參數建構函式，然後設定每一個屬性的值從資料庫。 不過，如果 EF Core 找到的參數化建構函式參數名稱和相符的型別對應屬性，則它會改為呼叫這些屬性值的參數化建構函式，並將未明確設定每個屬性。 例如: 
 
-```Csharp
+``` csharp
 public class Blog
 {
     public Blog(int id, string name, string author)
@@ -99,7 +99,7 @@ public class Post
 * 使用自動產生索引鍵的值必須是讀寫，因為需要插入新實體時，金鑰產生器所設定的索引鍵值的索引鍵屬性。
 
 避免這些事情的簡單方法是使用私用 setter。 例如: 
-```Csharp
+``` csharp
 public class Blog
 {
     public Blog(int id, string name, string author)
@@ -139,7 +139,7 @@ EF Core 看見為讀寫，也就是說，所有的屬性對應與之前，以及
 
 使用私用 setter 的替代方法是讓真正唯讀自動屬性，並在 OnModelCreating 中加入更明確的對應。 同樣地，某些屬性可以完全移除，並取代為只有欄位。 例如，請考慮這些實體型別：
 
-```Csharp
+``` csharp
 public class Blog
 {
     private int _id;
@@ -174,7 +174,7 @@ public class Post
 }
 ```
 與此組態在 OnModelCreating 中：
-```Csharp
+``` csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Blog>(
@@ -215,7 +215,7 @@ EF Core 也可以將 「 服務 」 插入到之實體類型的建構函式。 �
 
 例如，插入的 DbContext 可用來選擇性地存取資料庫，以取得相關實體的相關資訊，而不會載入它們全部。 在下列範例中，這用來取得的部落格貼文數目，而不會載入的文章：
 
-```Csharp
+``` csharp
 public class Blog
 {
     public Blog()

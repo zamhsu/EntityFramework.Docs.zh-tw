@@ -4,12 +4,12 @@ author: ajcvickers
 ms.date: 02/19/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/value-conversions
-ms.openlocfilehash: d6b51a0a70ee527844b6fe995f39bec534dbaba8
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 2a1956221ecc920feba796e4d95cc97259e89c53
+ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996284"
+ms.lasthandoff: 08/29/2018
+ms.locfileid: "43152506"
 ---
 # <a name="value-conversions"></a>值的轉換
 
@@ -27,7 +27,7 @@ ms.locfileid: "42996284"
 ## <a name="configuring-a-value-converter"></a>設定的值轉換器
 
 在屬性上定義的值轉換`OnModelCreating`的程式`DbContext`。 例如，請考慮已列舉和實體類型定義為：
-```Csharp
+``` csharp
 public class Rider
 {
     public int Id { get; set; }
@@ -43,7 +43,7 @@ public enum EquineBeast
 }
 ```
 然後可以在定義轉換`OnModelCreating`來儲存列舉值，以在資料庫中的字串 （例如，"Donkey"、"騾子"，...）：
-```Csharp
+``` csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder
@@ -60,7 +60,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 ## <a name="the-valueconverter-class"></a>ValueConverter 類別
 
 呼叫`HasConversion`如上所示將建立`ValueConverter`執行個體，並將它設定的屬性。 `ValueConverter`改為明確建立。 例如: 
-```Csharp
+``` csharp
 var converter = new ValueConverter<EquineBeast, string>(
     v => v.ToString(),
     v => (EquineBeast)Enum.Parse(typeof(EquineBeast), v));
@@ -82,7 +82,7 @@ EF Core 隨附一組預先定義的`ValueConverter`中找到的類別`Microsoft.
 * `BoolToStringConverter` -Bool，例如"Y"和"n 名"的字串
 * `BoolToTwoValuesConverter` -任兩個值 Bool
 * `BytesToStringConverter` Base64 編碼字串的位元組陣列
-* `CastingConverter` -需要的轉換僅 Csharp 轉型
+* `CastingConverter` -需要的轉換型別轉換
 * `CharToStringConverter` -Char 單一字元字串
 * `DateTimeOffsetToBinaryConverter` -二進位編碼的 64 位元值 DateTimeOffset
 * `DateTimeOffsetToBytesConverter` 為位元組陣列 DateTimeOffset
@@ -101,7 +101,7 @@ EF Core 隨附一組預先定義的`ValueConverter`中找到的類別`Microsoft.
 * `TimeSpanToTicksConverter` -要刻度的時間範圍
 
 請注意，`EnumToStringConverter`包含這份清單中。 這表示不需要轉換明確指定，如上所示。 相反地，只要使用內建的轉換器：
-```Csharp
+``` csharp
 var converter = new EnumToStringConverter<EquineBeast>();
 
 modelBuilder
@@ -114,14 +114,14 @@ modelBuilder
 ## <a name="pre-defined-conversions"></a>預先定義的轉換
 
 有內建的轉換子的通用轉換中，則不需要明確指定轉換子。 相反地，只要設定應該使用哪一個提供者類型和 EF 會自動使用適當的內建轉換子。 字串轉換的列舉做為上述範例，但 EF 會實際如果這麼做會自動設定提供者類型：
-```Csharp
+``` csharp
 modelBuilder
     .Entity<Rider>()
     .Property(e => e.Mount)
     .HasConversion<string>();
 ```
 藉由明確指定資料行類型，可以達成相同的動作。 例如，如果實體類型的定義想讓：
-```Csharp
+``` csharp
 public class Rider
 {
     public int Id { get; set; }

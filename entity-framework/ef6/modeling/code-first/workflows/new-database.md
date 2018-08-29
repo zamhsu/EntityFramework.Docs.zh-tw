@@ -3,18 +3,18 @@ title: Code First 至新的資料庫-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 2df6cb0a-7d8b-4e28-9d05-e2b9a90125af
-ms.openlocfilehash: bb44a3300bc8ffc9d7050c4784e7b76b29c61796
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 50c6a4710bc50879304f64e781a46c4836f86882
+ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994614"
+ms.lasthandoff: 08/29/2018
+ms.locfileid: "43152474"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First 至新的資料庫
-本影片以及逐步說明的逐步解說提供目標的新資料庫的 Code First 開發的簡介。 此案例包含目標資料庫不存在和 Code First 會建立或 Code First 會加入新的空白資料庫太資料表。 程式碼第一次可讓您定義您的模型使用 C\#或 VB.Net 類別。 其他設定 （選擇性） 可以使用屬性，在您的類別和屬性，或使用 fluent API 來執行。
+本影片以及逐步說明的逐步解說提供目標的新資料庫的 Code First 開發的簡介。 此案例包含目標資料庫不存在和 Code First 會建立，或空的資料庫，Code First 會新增的新資料表。 程式碼第一次可讓您定義您的模型使用 C\#或 VB.Net 類別。 其他設定 （選擇性） 可以使用屬性，在您的類別和屬性，或使用 fluent API 來執行。
 
 ## <a name="watch-the-video"></a>觀看影片
-這段影片提供目標的新資料庫的 Code First 開發的簡介。 此案例包含目標資料庫不存在和 Code First 會建立或 Code First 會加入新的空白資料庫太資料表。 程式碼第一次可讓您定義您使用 C# 或 VB.Net 類別的模型。 其他設定 （選擇性） 可以使用屬性，在您的類別和屬性，或使用 fluent API 來執行。
+這段影片提供目標的新資料庫的 Code First 開發的簡介。 此案例包含目標資料庫不存在和 Code First 會建立，或空的資料庫，Code First 會新增的新資料表。 程式碼第一次可讓您定義您使用 C# 或 VB.Net 類別的模型。 其他設定 （選擇性） 可以使用屬性，在您的類別和屬性，或使用 fluent API 來執行。
 
 **主講人**[Rowan Miller](http://romiller.com/)
 
