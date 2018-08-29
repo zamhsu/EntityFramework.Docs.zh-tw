@@ -106,6 +106,7 @@
 ##### [SQLite 限制](core/providers/sqlite/limitations.md)
 #### [InMemory (測試用)](core/providers/in-memory/index.md)
 #### [撰寫資料庫提供者](core/providers/writing-a-provider.md)
+#### [會影響提供者的變更](core/providers/provider-log.md)
 
 ### [工具與延伸模組](core/extensions/index.md)
 
@@ -144,7 +145,7 @@
 #### [使用 DbContext](ef6/fundamentals/working-with-dbcontext.md)
 #### [了解關聯性](ef6/fundamentals/relationships.md)
 #### [非同步查詢和儲存](ef6/fundamentals/async.md)
-#### 組態
+#### Configuration
 ##### [以程式碼為基礎](ef6/fundamentals/configuring/code-based.md)
 ##### [組態檔](ef6/fundamentals/configuring/config-file.md)
 ##### [連接字串](ef6/fundamentals/configuring/connection-strings.md)
