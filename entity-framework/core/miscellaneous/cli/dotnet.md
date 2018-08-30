@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: 81427b010f63bdd591ffb9117c1556722313c3fa
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
-ms.translationtype: HT
+ms.openlocfilehash: c70003fc7e2c5381a22d26baacd3d76f32489328
+ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995293"
+ms.lasthandoff: 08/29/2018
+ms.locfileid: "43152410"
 ---
 <a name="ef-core-net-command-line-tools"></a>EF Core.NET 命令列工具
 ===============================
@@ -66,9 +66,9 @@ dotnet ef
 ---------------
 每當您叫用命令時，有兩個專案包含：
 
-目標專案就是新增 (在某些情況下會移除) 任何檔案的位置。 目標專案預設為目前的目錄中的專案，但可以使用來變更<nobr> **-專案**</nobr>選項。
+目標專案就是新增 (在某些情況下會移除) 任何檔案的位置。 目標專案預設為目前的目錄中的專案，但可以使用來變更<nobr> **`--project`** </nobr>選項。
 
-啟始專案是工具在執行您的專案程式碼時所模擬的專案。 它也會預設為目前的目錄中的專案，但可以使用來變更 **-啟動專案**選項。
+啟始專案是工具在執行您的專案程式碼時所模擬的專案。 它也會預設為目前的目錄中的專案，但可以使用來變更**`--startup-project`** 選項。
 
 > [!NOTE]
 > 比方說，更新 web 應用程式的 EF Core 安裝在不同的專案中的資料庫看起來會像這樣： `dotnet ef database update --project {project-path}` （從您的 web 應用程式目錄）
@@ -77,17 +77,17 @@ dotnet ef
 
 |    |                                  |                             |
 |:---|:---------------------------------|:----------------------------|
-|    | --json                           | 顯示 JSON 輸出。           |
-| -c | --context \<DBCONTEXT>           | 要使用的 DbContext。       |
-| -p | --project \<PROJECT>             | 要使用的專案。         |
-| -s | --startup-project \<PROJECT>     | 要使用的啟始專案。 |
-|    | --framework \<FRAMEWORK>         | 目標 framework。       |
-|    | --configuration \<CONFIGURATION> | 要使用的組態。   |
-|    | --runtime \<IDENTIFIER>          | 要使用的執行階段使         |
-| -h | --help                           | 顯示說明資訊。      |
-| -v | --verbose                        | 顯示詳細資訊輸出。        |
-|    | --no-color                       | 沒有以色彩標示輸出。      |
-|    | --prefix-output                  | 輸出層級的前置詞。   |
+|    | `--json`                           | 顯示 JSON 輸出。           |
+| -c | `--context <DBCONTEXT>`           | 要使用的 DbContext。       |
+| -p | `--project <PROJECT>`             | 要使用的專案。         |
+| -s | `--startup-project <PROJECT>`     | 要使用的啟始專案。 |
+|    | `--framework <FRAMEWORK>`         | 目標 framework。       |
+|    | `--configuration <CONFIGURATION>` | 要使用的組態。   |
+|    | `--runtime <IDENTIFIER>`          | 要使用的執行階段使         |
+| -h | `--help`                           | 顯示說明資訊。      |
+| -v | `--verbose`                        | 顯示詳細資訊輸出。        |
+|    | `--no-color`                       | 沒有以色彩標示輸出。      |
+|    | `--prefix-output`                  | 輸出層級的前置詞。   |
 
 
 > [!TIP]
@@ -104,8 +104,8 @@ dotnet ef
 
 |    |           |                                                          |
 |:---|:----------|:---------------------------------------------------------|
-| -f | --force   | 未確認。                                           |
-|    | --dry-run | 顯示哪個資料庫會卸除，但不會卸除它。 |
+| -f | `--force`   | 未確認。                                           |
+|    | `--dry-run` | 顯示哪個資料庫會卸除，但不會卸除它。 |
 
 ### <a name="dotnet-ef-database-update"></a>dotnet ef 資料庫更新
 
@@ -115,7 +115,7 @@ dotnet ef
 
 |              |                                                                                              |
 |:-------------|:---------------------------------------------------------------------------------------------|
-| \<MIGRATION> | 目標移轉。 如果為 0，會還原所有移轉。 預設為最後一個移轉。 |
+| `<MIGRATION>` | 目標移轉。 如果為 0，會還原所有移轉。 預設為最後一個移轉。 |
 
 ### <a name="dotnet-ef-dbcontext-info"></a>dotnet ef dbcontext 資訊
 
@@ -133,21 +133,21 @@ dotnet ef
 
 |               |                                                                             |
 |:--------------|:----------------------------------------------------------------------------|
-| \<CONNECTION> | 資料庫連接字串。                                      |
-| \<PROVIDER>   | 要使用提供者 (例如 Microsoft.EntityFrameworkCore.SqlServer)。 |
+| `<CONNECTION>` | 資料庫連接字串。                                      |
+| `<PROVIDER>`   | 要使用提供者 (例如 Microsoft.EntityFrameworkCore.SqlServer)。 |
 
 選項:
 
 |                 |                                         |                                                                                                  |
 |:----------------|:----------------------------------------|:-------------------------------------------------------------------------------------------------|
-| <nobr>-d</nobr> | --data-annotations                      | 使用屬性來設定模型 (如果可能的話)。 如果省略，則只會使用 fluent API。 |
-| -c              | --context \<NAME>                       | DbContext 的名稱。                                                                       |
-|                 | -內容-dir\<路徑 >                   | 若要將 DbContext 檔案放在目錄。 路徑是相對於專案目錄。             |
-| -f              | --force                                 | 覆寫現有的檔案。                                                                        |
-| -o              | --output-dir \<PATH>                    | 將檔案放入目錄。 路徑是相對於專案目錄。                      |
-|                 | <nobr>--schema \<SCHEMA_NAME>...</nobr> | 要產生的實體類型的資料表結構描述。                                              |
-| -t              | -資料表\<TABLE_NAME >...                | 要產生的實體類型的資料表。                                                         |
-|                 | --use-database-names                    | 直接使用資料庫的資料表與資料行名稱。                                           |
+| <nobr>-d</nobr> | `--data-annotations`                      | 使用屬性來設定模型 (如果可能的話)。 如果省略，則只會使用 fluent API。 |
+| -c              | `--context <NAME>`                       | DbContext 的名稱。                                                                       |
+|                 | `--context-dir <PATH>`                   | 若要將 DbContext 檔案放在目錄。 路徑是相對於專案目錄。             |
+| -f              | `--force`                                 | 覆寫現有的檔案。                                                                        |
+| -o              | `--output-dir <PATH>`                    | 將檔案放入目錄。 路徑是相對於專案目錄。                      |
+|                 | <nobr>`--schema <SCHEMA_NAME>...`</nobr> | 要產生的實體類型的資料表結構描述。                                              |
+| -t              | `--table <TABLE_NAME>`...                | 要產生的實體類型的資料表。                                                         |
+|                 | `--use-database-names`                    | 直接使用資料庫的資料表與資料行名稱。                                           |
 
 ### <a name="dotnet-ef-migrations-add"></a>新增 dotnet ef 移轉
 
@@ -157,13 +157,13 @@ dotnet ef
 
 |         |                            |
 |:--------|:---------------------------|
-| \<NAME> | 移轉名稱。 |
+| `<NAME>` | 移轉名稱。 |
 
 選項:
 
 |                 |                                   |                                                                                                                  |
 |:----------------|:----------------------------------|:-----------------------------------------------------------------------------------------------------------------|
-| <nobr>-o</nobr> | <nobr>--output-dir \<PATH></nobr> | 目錄 （及子命名空間） 使用。 路徑是相對於專案目錄。 預設為 「 移轉 」。 |
+| <nobr>-o</nobr> | <nobr> `--output-dir <PATH>` </nobr> | 目錄 （及子命名空間） 使用。 路徑是相對於專案目錄。 預設為 「 移轉 」。 |
 
 ### <a name="dotnet-ef-migrations-list"></a>dotnet ef migrations 清單
 
@@ -177,7 +177,7 @@ dotnet ef
 
 |    |         |                                                                       |
 |:---|:--------|:----------------------------------------------------------------------|
-| -f | --force | 如果套用至資料庫，請還原移轉。 |
+| -f | `--force` | 如果套用至資料庫，請還原移轉。 |
 
 ### <a name="dotnet-ef-migrations-script"></a>dotnet ef migrations 指令碼
 
@@ -187,15 +187,15 @@ dotnet ef
 
 |         |                                                               |
 |:--------|:--------------------------------------------------------------|
-| \<FROM> | 在開始移轉。 預設值為 0 （初始資料庫）。 |
-| \<若要 &GT;   | 結束的移轉。 預設為最後一個移轉。         |
+| `<FROM>` | 在開始移轉。 預設值為 0 （初始資料庫）。 |
+| `<TO>`   | 結束的移轉。 預設為最後一個移轉。         |
 
 選項:
 
 |    |                  |                                                                    |
 |:---|:-----------------|:-------------------------------------------------------------------|
-| -o | --output \<FILE> | 要將結果寫入其中的檔案。                                   |
-| -i | --idempotent     | 產生可在任何移轉隨時用在資料庫的指令碼。 |
+| -o | `--output <FILE>` | 要將結果寫入其中的檔案。                                   |
+| -i | `--idempotent`     | 產生可在任何移轉隨時用在資料庫的指令碼。 |
 
 
   [1]: powershell.md
