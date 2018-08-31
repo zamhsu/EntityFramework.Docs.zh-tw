@@ -4,12 +4,12 @@ author: divega
 ms.date: 2016-10-23
 ms.assetid: 8ae74d63-6bad-4686-b325-bbf9d68f3743
 uid: ef6/index
-ms.openlocfilehash: 00e5f36788be599ea2e2b44480107f14e2f026c3
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 5218f3f8149b15cb5ad3a14779dfa9c23eb71a0e
+ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998025"
+ms.lasthandoff: 08/29/2018
+ms.locfileid: "43152490"
 ---
 # <a name="entity-framework-6"></a>Entity Framework 6
 Entity Framework 6 (EF6) 是通過試驗及測試的 .NET 物件關聯式對應程式 (O/RM)，歷經多年的功能開發和穩固。
@@ -29,7 +29,7 @@ EF6 會實作許多常用的 O/RM 功能：
   - 預存程序
 - 用來建立實體模型的視覺化設計工具。
 - 藉由撰寫程式碼來建立實體模型的「Code First」體驗。
-- 您可以從現有資料庫產生模型，然後手動進行編輯，也可以從頭開始建立模型，然後用來產生新的資料庫。
+- 您可以從現有資料庫產生模型，然後手動編輯，也可以從頭開始建立模型，然後用來產生新的資料庫。
 - 與 .NET Framework 應用程式模型 (包括 ASP.NET) 的整合，或透過資料繫結與 WPF 和 WinForms 的整合。
 - 依據 ADO.NET 的資料庫連線和許多提供者可用來連線至 SQL Server、Oracle、MySQL、SQLite、PostgreSQL、DB2 等等。
 

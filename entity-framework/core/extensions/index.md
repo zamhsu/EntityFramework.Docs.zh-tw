@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 7/3/2018
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: e9f9a6cbbceeb0379ddb5588b564b0d2a962795f
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e88bd01f79e05a9a3b0c0bbeecca89df178098a6
+ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995509"
+ms.lasthandoff: 08/29/2018
+ms.locfileid: "43152448"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -37,6 +37,12 @@ Devart Entity 是功能強大的 ORM 設計工具，適用於 ADO.NET Entity Fra
 Visual Studio 2017+ 延伸模組。 您可從現有的資料庫或 SQL Server Database 專案執行 DbContext 及 POCO 類別的還原工程，並透過各種方式對 DbContext 進行視覺化及檢查。
 
 [GitHub Wiki](https://github.com/ErikEJ/SqlCeToolbox/wiki/EF-Core-Power-Tools)
+
+### <a name="entity-framework-visual-editor"></a>Entity Framework 視覺效果編輯器
+
+這個 Visual Studio 2017 延伸模組增添了 ORM 設計工具，適用於 Entity Framework 6、Core 2.0 及 Core 2.1 類別的視覺設計。 程式碼會使用 T4 範本來產生，因此能夠完全自訂，以滿足各種需求。 繼承、單向及雙向關聯均有支援，列舉亦然，還能夠對類別進行色彩編碼以及新增文字區塊，以說明設計中可能較不易懂的部分。
+
+[Marketplace](https://marketplace.visualstudio.com/items?itemName=michaelsawczyn.EFDesigner) \(英文\)
 
 ## <a name="extensions"></a>延伸模組
 

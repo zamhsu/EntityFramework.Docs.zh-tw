@@ -2,19 +2,13 @@
 title: 資料繫結與 WPF-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: e90d48e6-bea5-47ef-b756-7b89cce4daf0
-caps.latest.revision: 3
-ms.openlocfilehash: 1756ec14fe83d80199b6040bd345dc2fe6294281
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 0b1f4d5ea204cd80acf42caa499732610daa0e31
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120339"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994819"
 ---
 # <a name="databinding-with-wpf"></a>使用 WPF 資料繫結
 此逐步解說示範如何在 [主版詳細資料] 表單中的 WPF 控制項繫結至 POCO 型別。 應用程式會使用 Entity Framework Api 填入資料庫的資料物件、 追蹤變更，並將資料保存到資料庫。
@@ -292,7 +286,7 @@ EF 可讓您選擇載入相關的實體從資料庫自動第一次存取導覽�
     -   **CategoryProductsViewSource**資源並**productDataGrid**方格會新增至 XAML
     -   此資源的繫結路徑設定為產品
     -   WPF 資料繫結架構可確保與所選分類的產品只有顯示在**productDataGrid**
--   從 工具箱 拖曳** 按鈕**入表單。 設定**名稱**屬性設**buttonSave**並**內容**屬性設**儲存**。
+-   從 工具箱 拖曳 **按鈕**入表單。 設定**名稱**屬性設**buttonSave**並**內容**屬性設**儲存**。
 
 表單看起來應該如下所示：
 
@@ -307,7 +301,7 @@ EF 可讓您選擇載入相關的實體從資料庫自動第一次存取導覽�
 
     ![MainWindowProperties](~/ef6/media/mainwindowproperties.png)
 
--   也加入**按一下 **事件**儲存**按兩下設計工具中的 儲存 按鈕的按鈕。 
+-   也加入**按一下** 事件**儲存**按兩下設計工具中的 儲存 按鈕的按鈕。 
 
 這將帶您前往程式碼後置表單，我們現在要編輯的程式碼，用以 ProductContext 執行資料存取。 更新 MainWindow 的程式碼，如下所示。
 
