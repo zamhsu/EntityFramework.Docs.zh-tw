@@ -1,55 +1,53 @@
 ---
 title: 基本儲存 - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 850d842e-3fad-4ef2-be17-053768e97b9e
-ms.technology: entity-framework-core
 uid: core/saving/basic
-ms.openlocfilehash: ecf8f344a5baae37a5e7255a4affb1085f1b3ff3
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: 23e0e4611f642d59048fca5a808d0782b22caa1e
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "42447748"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994797"
 ---
-# <a name="basic-save"></a><span data-ttu-id="bb032-102">基本儲存</span><span class="sxs-lookup"><span data-stu-id="bb032-102">Basic Save</span></span>
+# <a name="basic-save"></a><span data-ttu-id="42171-102">基本儲存</span><span class="sxs-lookup"><span data-stu-id="42171-102">Basic Save</span></span>
 
-<span data-ttu-id="bb032-103">了解如何使用您的內容和實體類別來新增、修改及移除資料。</span><span class="sxs-lookup"><span data-stu-id="bb032-103">Learn how to add, modify, and remove data using your context and entity classes.</span></span>
+<span data-ttu-id="42171-103">了解如何使用您的內容和實體類別來新增、修改及移除資料。</span><span class="sxs-lookup"><span data-stu-id="42171-103">Learn how to add, modify, and remove data using your context and entity classes.</span></span>
 
 > [!TIP]  
-> <span data-ttu-id="bb032-104">您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Basics/) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="bb032-104">You can view this article's [sample](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Basics/) on GitHub.</span></span>
+> <span data-ttu-id="42171-104">您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Basics/) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="42171-104">You can view this article's [sample](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Basics/) on GitHub.</span></span>
 
-## <a name="adding-data"></a><span data-ttu-id="bb032-105">加入資料</span><span class="sxs-lookup"><span data-stu-id="bb032-105">Adding Data</span></span>
+## <a name="adding-data"></a><span data-ttu-id="42171-105">加入資料</span><span class="sxs-lookup"><span data-stu-id="42171-105">Adding Data</span></span>
 
-<span data-ttu-id="bb032-106">使用 *DbSet.Add* 方法來新增實體類別的新執行個體。</span><span class="sxs-lookup"><span data-stu-id="bb032-106">Use the *DbSet.Add* method to add new instances of your entity classes.</span></span> <span data-ttu-id="bb032-107">當您呼叫 *SaveChanges*時，將會在資料庫中插入資料。</span><span class="sxs-lookup"><span data-stu-id="bb032-107">The data will be inserted in the database when you call *SaveChanges*.</span></span>
+<span data-ttu-id="42171-106">使用 *DbSet.Add* 方法來新增實體類別的新執行個體。</span><span class="sxs-lookup"><span data-stu-id="42171-106">Use the *DbSet.Add* method to add new instances of your entity classes.</span></span> <span data-ttu-id="42171-107">當您呼叫 *SaveChanges*時，將會在資料庫中插入資料。</span><span class="sxs-lookup"><span data-stu-id="42171-107">The data will be inserted in the database when you call *SaveChanges*.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#Add)]
 
 > [!TIP]  
-> <span data-ttu-id="bb032-108">如[相關資料](related-data.md)一節中所述，Add、Attach 及 Update 方法對於傳遞給它們的整個實體圖表都適用。</span><span class="sxs-lookup"><span data-stu-id="bb032-108">The Add, Attach, and Update methods all work on the full graph of entities passed to them, as described in the [Related Data](related-data.md) section.</span></span> <span data-ttu-id="bb032-109">或者，您也可以使用 EntityEntry.State 屬性來僅設定單一實體的狀態。</span><span class="sxs-lookup"><span data-stu-id="bb032-109">Alternately, the EntityEntry.State property can be used to set the state of just a single entity.</span></span> <span data-ttu-id="bb032-110">例如，`context.Entry(blog).State = EntityState.Modified`。</span><span class="sxs-lookup"><span data-stu-id="bb032-110">For example, `context.Entry(blog).State = EntityState.Modified`.</span></span>
+> <span data-ttu-id="42171-108">如[相關資料](related-data.md)一節中所述，Add、Attach 及 Update 方法對於傳遞給它們的整個實體圖表都適用。</span><span class="sxs-lookup"><span data-stu-id="42171-108">The Add, Attach, and Update methods all work on the full graph of entities passed to them, as described in the [Related Data](related-data.md) section.</span></span> <span data-ttu-id="42171-109">或者，您也可以使用 EntityEntry.State 屬性來僅設定單一實體的狀態。</span><span class="sxs-lookup"><span data-stu-id="42171-109">Alternately, the EntityEntry.State property can be used to set the state of just a single entity.</span></span> <span data-ttu-id="42171-110">例如，`context.Entry(blog).State = EntityState.Modified`。</span><span class="sxs-lookup"><span data-stu-id="42171-110">For example, `context.Entry(blog).State = EntityState.Modified`.</span></span>
 
-## <a name="updating-data"></a><span data-ttu-id="bb032-111">更新資料</span><span class="sxs-lookup"><span data-stu-id="bb032-111">Updating Data</span></span>
+## <a name="updating-data"></a><span data-ttu-id="42171-111">更新資料</span><span class="sxs-lookup"><span data-stu-id="42171-111">Updating Data</span></span>
 
-<span data-ttu-id="bb032-112">EF 會針對內容所追蹤的現有實體，自動偵測對實體所進行的變更。</span><span class="sxs-lookup"><span data-stu-id="bb032-112">EF will automatically detect changes made to an existing entity that is tracked by the context.</span></span> <span data-ttu-id="bb032-113">這包括您從資料庫載入/查詢的實體，以及先前新增並儲存至資料庫的實體。</span><span class="sxs-lookup"><span data-stu-id="bb032-113">This includes entities that you load/query from the database, and entities that were previously added and saved to the database.</span></span>
+<span data-ttu-id="42171-112">EF 會針對內容所追蹤的現有實體，自動偵測對實體所進行的變更。</span><span class="sxs-lookup"><span data-stu-id="42171-112">EF will automatically detect changes made to an existing entity that is tracked by the context.</span></span> <span data-ttu-id="42171-113">這包括您從資料庫載入/查詢的實體，以及先前新增並儲存至資料庫的實體。</span><span class="sxs-lookup"><span data-stu-id="42171-113">This includes entities that you load/query from the database, and entities that were previously added and saved to the database.</span></span>
 
-<span data-ttu-id="bb032-114">請直接修改指派給屬性的值，然後呼叫 *SaveChanges*。</span><span class="sxs-lookup"><span data-stu-id="bb032-114">Simply modify the values assigned to properties and then call *SaveChanges*.</span></span>
+<span data-ttu-id="42171-114">請直接修改指派給屬性的值，然後呼叫 *SaveChanges*。</span><span class="sxs-lookup"><span data-stu-id="42171-114">Simply modify the values assigned to properties and then call *SaveChanges*.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#Update)]
 
-## <a name="deleting-data"></a><span data-ttu-id="bb032-115">刪除資料</span><span class="sxs-lookup"><span data-stu-id="bb032-115">Deleting Data</span></span>
+## <a name="deleting-data"></a><span data-ttu-id="42171-115">刪除資料</span><span class="sxs-lookup"><span data-stu-id="42171-115">Deleting Data</span></span>
 
-<span data-ttu-id="bb032-116">使用 *DbSet.Remove* 方法來刪除實體類別的執行個體。</span><span class="sxs-lookup"><span data-stu-id="bb032-116">Use the *DbSet.Remove* method to delete instances of your entity classes.</span></span>
+<span data-ttu-id="42171-116">使用 *DbSet.Remove* 方法來刪除實體類別的執行個體。</span><span class="sxs-lookup"><span data-stu-id="42171-116">Use the *DbSet.Remove* method to delete instances of your entity classes.</span></span>
 
-<span data-ttu-id="bb032-117">如果實體已經存在於資料庫中，在 *SaveChanges* 期間將會予以刪除。</span><span class="sxs-lookup"><span data-stu-id="bb032-117">If the entity already exists in the database, it will be deleted during *SaveChanges*.</span></span> <span data-ttu-id="bb032-118">如果尚未將實體儲存至資料庫 (亦即，其追蹤狀態為已新增)，就會從內容中將其移除，而在呼叫 *SaveChanges* 時，便不再將它插入。</span><span class="sxs-lookup"><span data-stu-id="bb032-118">If the entity has not yet been saved to the database (that is, it is tracked as added) then it will be removed from the context and will no longer be inserted when *SaveChanges* is called.</span></span>
+<span data-ttu-id="42171-117">如果實體已經存在於資料庫中，在 *SaveChanges* 期間將會予以刪除。</span><span class="sxs-lookup"><span data-stu-id="42171-117">If the entity already exists in the database, it will be deleted during *SaveChanges*.</span></span> <span data-ttu-id="42171-118">如果尚未將實體儲存至資料庫 (亦即，其追蹤狀態為已新增)，就會從內容中將其移除，而在呼叫 *SaveChanges* 時，便不再將它插入。</span><span class="sxs-lookup"><span data-stu-id="42171-118">If the entity has not yet been saved to the database (that is, it is tracked as added) then it will be removed from the context and will no longer be inserted when *SaveChanges* is called.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#Remove)]
 
-## <a name="multiple-operations-in-a-single-savechanges"></a><span data-ttu-id="bb032-119">在單一 SaveChanges 中執行多個作業</span><span class="sxs-lookup"><span data-stu-id="bb032-119">Multiple Operations in a single SaveChanges</span></span>
+## <a name="multiple-operations-in-a-single-savechanges"></a><span data-ttu-id="42171-119">在單一 SaveChanges 中執行多個作業</span><span class="sxs-lookup"><span data-stu-id="42171-119">Multiple Operations in a single SaveChanges</span></span>
 
-<span data-ttu-id="bb032-120">您可以將多個新增/更新/移除作業結合成對 *SaveChanges* 的單一呼叫。</span><span class="sxs-lookup"><span data-stu-id="bb032-120">You can combine multiple Add/Update/Remove operations into a single call to *SaveChanges*.</span></span>
+<span data-ttu-id="42171-120">您可以將多個新增/更新/移除作業結合成對 *SaveChanges* 的單一呼叫。</span><span class="sxs-lookup"><span data-stu-id="42171-120">You can combine multiple Add/Update/Remove operations into a single call to *SaveChanges*.</span></span>
 
 > [!NOTE]  
-> <span data-ttu-id="bb032-121">對大多數資料庫提供者來說，*SaveChanges* 為交易式。</span><span class="sxs-lookup"><span data-stu-id="bb032-121">For most database providers, *SaveChanges* is transactional.</span></span> <span data-ttu-id="bb032-122">這意謂著所有作業不是成功就是失敗，作業一律不會只有部分套用的情況。</span><span class="sxs-lookup"><span data-stu-id="bb032-122">This means  all the operations will either succeed or fail and the operations will never be left partially applied.</span></span>
+> <span data-ttu-id="42171-121">對大多數資料庫提供者來說，*SaveChanges* 為交易式。</span><span class="sxs-lookup"><span data-stu-id="42171-121">For most database providers, *SaveChanges* is transactional.</span></span> <span data-ttu-id="42171-122">這意謂著所有作業不是成功就是失敗，作業一律不會只有部分套用的情況。</span><span class="sxs-lookup"><span data-stu-id="42171-122">This means  all the operations will either succeed or fail and the operations will never be left partially applied.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#MultipleOperations)]
