@@ -4,14 +4,13 @@ author: ajcvickers
 ms.author: avickers
 ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
-ms.technology: entity-framework-core
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: a81b0a26fe98dcc1ddedc11aba2673338c8991e8
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: 51367d2619b1943c300f8954123f70b909ad96e7
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "42447682"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994395"
 ---
 # <a name="disconnected-entities"></a>已中斷連線的實體
 
@@ -128,7 +127,7 @@ Update 會將圖表中任何未設定索引鍵值的實體 (部落格或文章) 
 
 處理刪除可能相當棘手，因為當實體不存在時，常常意謂著應該將其刪除。 其中一個處理此情況的方式是使用「虛刪除」來將實體標示為已刪除，而不是實際進行刪除。 如此一來，刪除就變成與更新相同。 您可以在使用[查詢篩選](xref:core/querying/filters)時實作虛刪除。
 
-針對真實的刪除，常見的模式是使用查詢模式的延伸來執行基本上是圖表差異的操作。例如：
+針對真實的刪除，常見的模式是使用查詢模式的延伸來執行基本上是圖表差異的操作。例如: 
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 

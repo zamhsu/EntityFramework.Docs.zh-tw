@@ -1,16 +1,15 @@
 ---
 title: EF Core 和 EF6 的功能逐一比較
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: f22f29ef-efc0-475d-b0b2-12a054f80f95
 uid: efcore-and-ef6/features
-ms.openlocfilehash: 84b40f03cdab27fd6fc68c5bb65c6e3d238f226a
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: ed6ce51e7560e19e0d572f3d81cef7cbb310beec
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37967133"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995331"
 ---
 # <a name="ef-core-and-ef6-feature-by-feature-comparison"></a>EF Core 和 EF6 的功能逐一比較
 

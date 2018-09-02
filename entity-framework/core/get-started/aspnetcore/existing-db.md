@@ -1,17 +1,15 @@
 ---
 title: ASP.NET Core 使用者入門 - 現有的資料庫 - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 08/02/2018
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
-ms.technology: entity-framework-core
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: c231a456abd4c110aba0326821799d6e9d567b3c
-ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
+ms.openlocfilehash: 79a73e38fdc9c4268c21de66571d6272f33e9457
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/07/2018
-ms.locfileid: "39614317"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997032"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>在 ASP.NET Core 上使用 EF Core 搭配現有資料庫的使用者入門
 
@@ -30,7 +28,7 @@ ms.locfileid: "39614317"
 
 ## <a name="create-blogging-database"></a>建立部落格資料庫
 
-本教學課程使用您 LocalDb 執行個體上的**部落格**資料庫作為現有的資料庫。 如果您在另一個教學課程中已經建立**部落格**資料庫，則可以跳過這些步驟。
+本教學課程使用您 LocalDb 執行個體上的**部落格**資料庫作為現有的資料庫。 如果您在另一個教學課程中已建立了**部落格**資料庫，則可跳過這些步驟。
 
 * 開啟 Visual Studio
 * [工具] > [連線到資料庫]

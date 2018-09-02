@@ -1,17 +1,15 @@
 ---
 title: 原始 SQL 查詢 - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
-ms.technology: entity-framework-core
 uid: core/querying/raw-sql
-ms.openlocfilehash: a1d554795dcd8a3e5b44e89ac014f538598461cc
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: 21cb688d6775039def3b0be12768da71b5d96531
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "42447681"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997140"
 ---
 # <a name="raw-sql-queries"></a>原始 SQL 查詢
 

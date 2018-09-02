@@ -1,17 +1,15 @@
 ---
 title: 交易 - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: d3e6515b-8181-482c-a790-c4a6778748c1
-ms.technology: entity-framework-core
 uid: core/saving/transactions
-ms.openlocfilehash: 6e6ded74e15187b387e8e0b2ad00cb47a84ff7e8
-ms.sourcegitcommit: 6cf6493d81b6d81b0b0f37a00e0fc23ec7189158
+ms.openlocfilehash: 7083a1228420416a1b60d9744ca2dad2339be53f
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/12/2018
-ms.locfileid: "42447653"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42993601"
 ---
 # <a name="using-transactions"></a>使用交易
 
@@ -106,4 +104,4 @@ public class BloggingContext : DbContext
    > [!IMPORTANT]  
    > 建議您先測試該 API 是否可與您的提供者正確搭配運作，再倚賴它來管理交易。 如果無法正確搭配運作，建議您與資料庫提供者的維護人員連絡。 
 
-2. 從 2.1 版開始，.NET Core 中的 System.Transactions 實作便不包含對分散式交易的支援，因此您無法使用 `TransactionScope` 或 `CommitableTransaction` 來跨多個資源管理員協調交易。 
+2. 從 2.1 版開始，.NET Core 中的 System.Transactions 實作便不包含對分散式交易的支援，因此您無法使用 `TransactionScope` 或 `CommittableTransaction` 來跨多個資源管理員協調交易。 

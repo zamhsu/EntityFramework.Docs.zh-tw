@@ -1,17 +1,15 @@
 ---
 title: EF Core 1.1 中的新增功能 - EF Core
 author: divega
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: C7FE8C85-445A-4F0C-97EC-CC3F7F1D6F5E
-ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-1.1
-ms.openlocfilehash: 74c1033cab2704bdbb9fa4d3ce111df1f1c29418
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 9f8f2d46f967c7d8ec4f8ea410e51531dfe3ca7b
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26049671"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995431"
 ---
 # <a name="new-features-in-ef-core-11"></a>EF Core 1.1 中的新增功能
 
@@ -21,7 +19,7 @@ ms.locfileid: "26049671"
 ### <a name="mapping-to-memory-optimized-tables-in-sql-server"></a>對應到 SQL Server 中的記憶體最佳化資料表
 您可以將實體所對應的資料表指定為記憶體最佳化。 根據您的模型使用 EF Core 來建立及維護資料庫 (透過移轉或 `Database.EnsureCreated()`)，將為這些實體建立記憶體最佳化資料表。
 
-## <a name="change-tracking"></a>變更追蹤
+## <a name="change-tracking"></a>Change tracking
 ### <a name="additional-change-tracking-apis-from-ef6"></a>來自 EF6 的其他變更追蹤 API
 例如 `Reload`、`GetModifiedProperties`、`GetDatabaseValues` 等。
 

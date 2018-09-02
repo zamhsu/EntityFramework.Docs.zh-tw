@@ -1,17 +1,15 @@
 ---
 title: .NET Framework 快速入門 - 新資料庫 - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 08/06/2018
 ms.assetid: 52b69727-ded9-4a7b-b8d5-73f3acfbbad3
-ms.technology: entity-framework-core
 uid: core/get-started/full-dotnet/new-db
-ms.openlocfilehash: 088ac915041489242eb8090e7bf3a2bdc8036534
-ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
+ms.openlocfilehash: 66d9011a5978fc3d8253a963bdb9df27848e9ff9
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/07/2018
-ms.locfileid: "39614424"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997583"
 ---
 # <a name="getting-started-with-ef-core-on-net-framework-with-a-new-database"></a>在 .NET Framework 上使用 EF Core 搭配新資料庫的使用者入門
 

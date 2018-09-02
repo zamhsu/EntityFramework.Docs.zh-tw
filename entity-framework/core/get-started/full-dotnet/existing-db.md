@@ -1,17 +1,15 @@
 ---
 title: .NET Framework 快速入門 - 現有的資料庫 - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 08/06/2018
 ms.assetid: a29a3d97-b2d8-4d33-9475-40ac67b3b2c6
-ms.technology: entity-framework-core
 uid: core/get-started/full-dotnet/existing-db
-ms.openlocfilehash: d5c548927b736199c7d6fddc9c74139ca5f6614e
-ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
+ms.openlocfilehash: edcdc0b76394c4d604cf43fc170424e474532b17
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/07/2018
-ms.locfileid: "39614411"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42993414"
 ---
 # <a name="getting-started-with-ef-core-on-net-framework-with-an-existing-database"></a>在 .NET Framework 上使用 EF Core 搭配現有資料庫的使用者入門
 

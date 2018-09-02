@@ -1,17 +1,15 @@
 ---
 title: 儲存相關資料 - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 07b6680f-ffcf-412c-9857-f997486b386c
-ms.technology: entity-framework-core
 uid: core/saving/related-data
-ms.openlocfilehash: b0ed25267c85e82db18d8a89693b6040db7e4b34
-ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
+ms.openlocfilehash: 7349c57c0dccd3c911178641d3b34a478a4f6194
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/16/2018
-ms.locfileid: "31006646"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994740"
 ---
 # <a name="saving-related-data"></a>儲存相關資料
 

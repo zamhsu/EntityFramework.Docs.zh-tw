@@ -1,17 +1,15 @@
 ---
 title: 載入相關資料 - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
-ms.technology: entity-framework-core
 uid: core/querying/related-data
-ms.openlocfilehash: 05833055f4744940364da4fdea7ded9a90d67508
-ms.sourcegitcommit: a3aec015e0ad7ee31e0f75f00bbf2d286a3ac5c1
+ms.openlocfilehash: 65cfea07a40939c1c3615c97ec785a4082b21de5
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/18/2018
-ms.locfileid: "42447622"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994784"
 ---
 # <a name="loading-related-data"></a>載入相關資料
 
@@ -153,7 +151,7 @@ public class School
 > [!NOTE]  
 > 此功能是在 EF Core 2.1 中引入。
 
-使用消極式載入的最簡單方式是安裝 [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) \(英文\) 套件，並呼叫 `UseLazyLoadingProxies` 來啟用它。 例如：
+使用消極式載入的最簡單方式是安裝 [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) \(英文\) 套件，並呼叫 `UseLazyLoadingProxies` 來啟用它。 例如: 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder
@@ -187,7 +185,7 @@ public class Post
 ```
 ### <a name="lazy-loading-without-proxies"></a>沒有 Proxy 的消極式載入
 
-消極式載入 Proxy 的運作方式是將 `ILazyLoader` 服務插入至實體，如[實體類型建構函式](../modeling/constructors.md)中所述。 例如：
+消極式載入 Proxy 的運作方式是將 `ILazyLoader` 服務插入至實體，如[實體類型建構函式](../modeling/constructors.md)中所述。 例如: 
 ```csharp
 public class Blog
 {
@@ -240,7 +238,7 @@ public class Post
     }
 }
 ```
-這並不需要實體類型為可繼承的，或是導覽屬性為虛擬的，並且可讓使用 `new` 建立的實體執行個體可以在附加到內容之後進行消極式載入。 不過，它需要對 `ILazyLoader` 服務的參考，這在 [Microsoft.EntityFrameworkCore.Abstractions](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Abstractions/) 套件中定義。 此套件包含最基本的型別集，因此相依於它的影響很小。 不過，若要完全避免對實體型別中任何 EF Core 套件的相依性，您可以將 `ILazyLoader.Load` 方法插入為委派。 例如：
+這並不需要實體類型為可繼承的，或是導覽屬性為虛擬的，並且可讓使用 `new` 建立的實體執行個體可以在附加到內容之後進行消極式載入。 不過，它需要對 `ILazyLoader` 服務的參考，這在 [Microsoft.EntityFrameworkCore.Abstractions](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Abstractions/) 套件中定義。 此套件包含最基本的型別集，因此相依於它的影響很小。 不過，若要完全避免對實體型別中任何 EF Core 套件的相依性，您可以將 `ILazyLoader.Load` 方法插入為委派。 例如: 
 ```csharp
 public class Blog
 {

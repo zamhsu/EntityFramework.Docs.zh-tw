@@ -2,18 +2,15 @@
 title: ASP.NET Core 使用者入門 - 新資料庫 - EF Core
 author: rick-anderson
 ms.author: riande
-ms.author2: tdykstra
 ms.date: 08/03/2018
-ms.topic: get-started-article
 ms.assetid: e153627f-f132-4c11-b13c-6c9a607addce
-ms.technology: entity-framework-core
 uid: core/get-started/aspnetcore/new-db
-ms.openlocfilehash: 9e86bc9cff028ad9791f23cbb45f0a93110c0064
-ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
+ms.openlocfilehash: c6a86dd943dc7fe6f600455fe6743ea01a062aab
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/07/2018
-ms.locfileid: "39614346"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996060"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-a-new-database"></a>在 ASP.NET Core 上使用 EF Core 搭配新資料庫的使用者入門
 
@@ -47,7 +44,7 @@ ms.locfileid: "39614346"
 
 ## <a name="install-entity-framework-core"></a>安裝 Entity Framework Core
 
-若要安裝 EF Core，請為希望作為目標的 EF Core 資料庫提供者，安裝套件。 如需可用的提供者清單，請參閱[資料庫提供者](../../providers/index.md)。 
+若要安裝 EF Core，請為希望作為目標的 EF Core 資料庫提供者，安裝此套件。 如需可用的提供者清單，請參閱[資料庫提供者](../../providers/index.md)。 
 
 在本教學課程中，因為使用 SQL Server，所以無需安裝提供者套件。 [Microsoft.AspnetCore.App 中繼套件](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/metapackage-app?view=aspnetcore-2.1)包含 SQL Server 提供者套件。
 
