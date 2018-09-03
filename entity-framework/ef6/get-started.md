@@ -2,19 +2,13 @@
 title: 開始使用 Entity Framework 6 - EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 66ce9113-81d2-480f-8c16-d00ec405b2f7
-caps.latest.revision: 3
-ms.openlocfilehash: 36857650bc546acd769e629a1e92948a63bfb786
-ms.sourcegitcommit: 00cb52625b57c1ea339ded1454179fe89b6bcfea
+ms.openlocfilehash: 0087899d2fc65bc91ad36e35d5157e50b5c4bd2d
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/16/2018
-ms.locfileid: "39119635"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42998080"
 ---
 # <a name="get-started-with-entity-framework-6"></a>開始使用 Entity Framework 6
 
