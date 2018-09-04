@@ -2,19 +2,13 @@
 title: CSDL 規格-EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: c54255f4-253f-49eb-bec8-ad7927ac2fa3
-caps.latest.revision: 3
-ms.openlocfilehash: 0ece73a19fe7ea244905bccb728ab2a104c5179f
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 88669cf80f9a792fda7d191d9f6be2b1734691df
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39120378"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994725"
 ---
 # <a name="csdl-specification"></a>CSDL 規格
 概念結構定義語言 (CSDL) 是 XML架構語言，可描述組成資料驅動應用程式之概念模型的實體、關聯性和函式。 此概念模型可供 Entity Framework 或 WCF Data Services。 以 CSDL 描述的中繼資料由 Entity Framework 用來對應實體和資料來源的概念模型中定義的關聯性。 如需詳細資訊，請參閱 [SSDL 規格](~/ef6/modeling/designer/advanced/edmx/ssdl-spec.md)並[MSL 規格](~/ef6/modeling/designer/advanced/edmx/msl-spec.md)。
@@ -732,7 +726,7 @@ A **ComplexType**元素可能具有下列子項目 （列出的順序）：
 |:-------------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **名稱**           | [是]         | 實體類型的名稱。                                                                                                                                                                  |
 | **IsFlags**        | 否          | **True**或是**False**，取決於是否列舉型別可用來當做一組旗標。 預設值是 **，則為 False。**                                                                     |
-| **UnderlyingType** | 否          | **Edm.Byte**， **Edm.Int16**， **Edm.Int32**， **Edm.Int64**或是**Edm.SByte**定義類型的值的範圍。   預設基礎列舉項目類型是**Edm.Int32**。 |
+| **UnderlyingType** | 否          | **Edm.Byte**， **Edm.Int16**， **Edm.Int32**， **Edm.Int64**或是**Edm.SByte**定義類型的值的範圍。   預設基礎列舉項目類型是**Edm.Int32.** 。 |
 
  
 
@@ -1671,7 +1665,7 @@ A**結構描述**項目可以包含零個或一個註釋項目。
 
 **結構描述**項目會使用**命名空間**屬性來定義概念模型中的實體類型、 複雜型別和關聯物件的命名空間。 在命名空間中，兩個物件不能有相同的名稱。 命名空間可以跨多個**結構描述**項目和多個.csdl 檔案。
 
-概念模型命名空間是 XML 命名空間的不同**結構描述**項目。 概念模型命名空間 (如所定義**命名空間**屬性) 是實體類型、 複雜型別和關聯型別的邏輯容器。 XML 命名空間 (由**xmlns**屬性) 的**結構描述**項目是子元素和屬性的預設命名空間**結構描述**項目。 XML 命名空間的表單 http://schemas.microsoft.com/ado/YYYY/MM/edm（其中 YYYY 和 MM 表示年和月分別） 是保留供 CSDL。 自訂項目和屬性不能出現在擁有此格式的命名空間中。
+概念模型命名空間是 XML 命名空間的不同**結構描述**項目。 概念模型命名空間 (如所定義**命名空間**屬性) 是實體類型、 複雜型別和關聯型別的邏輯容器。 XML 命名空間 (由**xmlns**屬性) 的**結構描述**項目是子元素和屬性的預設命名空間**結構描述**項目。 XML 命名空間的表單 http://schemas.microsoft.com/ado/YYYY/MM/edm （其中 YYYY 和 MM 表示年和月分別） 是保留供 CSDL。 自訂項目和屬性不能出現在擁有此格式的命名空間中。
 
 ### <a name="applicable-attributes"></a>適用屬性
 
