@@ -3,12 +3,12 @@ title: 關聯性、 導覽屬性和外部索引鍵-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: c1d48f18a7dd25a6a48537f0de5379f861bf447a
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: a1653afd609280ab572ef88a9fcf8a6275b79fd6
+ms.sourcegitcommit: a81aed575372637997b18a0f9466d8fefb33350a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997997"
+ms.lasthandoff: 09/06/2018
+ms.locfileid: "43821396"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>關聯性、 導覽屬性和外部索引鍵
 本主題提供 Entity Framework 如何管理實體之間的關聯性的概觀。 它也會提供有關如何對應及操作關聯性的一些指引。
@@ -71,59 +71,60 @@ public class Department
 
 ## <a name="creating-and-modifying-relationships"></a>建立和修改關聯性
 
-在 *外部索引鍵關聯*，當您變更關聯性，而狀態會變更為 EntityState.Modified EntityState.Unchanged 的相依物件的狀態。 在獨立關聯中，變更關聯性不會更新相依物件的狀態。
+在 *外部索引鍵關聯*，當您變更關聯性，相依物件的狀態`EntityState.Unchanged`狀態會變更為`EntityState.Modified`。 在獨立關聯中，變更關聯性不會更新相依物件的狀態。
 
 下列範例示範如何使用的外部索引鍵屬性和導覽屬性，將相關的物件產生關聯。 與外部索引鍵的關聯，您可以使用任一種方法來變更、 建立或修改關聯性。 使用獨立關聯，則無法使用外部索引鍵屬性。
 
--   將新值指派到外部索引鍵屬性，如下列範例所示。  
-    ``` csharp
-    course.DepartmentID = newCourse.DepartmentID;
-    ```
+- 將新值指派到外部索引鍵屬性，如下列範例所示。  
+  ``` csharp
+  course.DepartmentID = newCourse.DepartmentID;
+  ```
 
--   下列程式碼藉由設定外部索引鍵移除關聯性**null**。 請注意，外部索引鍵屬性必須是可為 null。  
-    ``` csharp
-    course.DepartmentID = null;
-    ```  
-    >[!NOTE]
-    > 如果參考是已加入狀態 （在此範例中，課程物件），參考導覽屬性將不會同步具有新物件的索引鍵值直到呼叫 SaveChanges。 不會同步化是因為物件內容未包含新加入之物件的永久索引鍵，除非先儲存這些索引鍵。 如果您必須有完全同步處理為您設定的關聯性的新物件，使用其中一個下列 methods.*
+- 下列程式碼藉由設定外部索引鍵移除關聯性**null**。 請注意，外部索引鍵屬性必須是可為 null。  
+  ``` csharp
+  course.DepartmentID = null;
+  ```
 
--   將新物件指派給導覽屬性。 下列程式碼會建立 course 之間的關聯性和`department`。 這些物件會附加至內容，如果`course`也會加入至`department.Courses`集合物件和對應外部索引鍵屬性上`course`物件設定為部門的索引鍵的屬性值。  
-    ``` csharp
-    course.Department = department;
-    ```
+  >[!NOTE]
+  > 如果參考是已加入狀態 （在此範例中，課程物件），參考導覽屬性將不會同步具有新物件的索引鍵值直到呼叫 SaveChanges。 不會同步化是因為物件內容未包含新加入之物件的永久索引鍵，除非先儲存這些索引鍵。 如果您必須有完全同步處理為您設定的關聯性的新物件，使用其中一個下列 methods.*
 
- -   若要刪除關聯性，設定的導覽屬性為`null`。 如果您正在使用 Entity Framework 為基礎的.NET 4.0，相關的端必須先載入才能將它設定為 null。 例如:   
-    ``` chsarp
-    context.Entry(course).Reference(c => c.Department).Load();  
-    course.Department = null;
-    ```  
-    從 Entity Framework 5.0，以.NET 4.5 為基礎，您可以設定關聯性設為 null 而不需要載入相關的端。 您也可以設定為 null，使用下列方法目前的值。  
-    ``` csharp
-    context.Entry(course).Reference(c => c.Department).CurrentValue = null;
-    ```
+- 將新物件指派給導覽屬性。 下列程式碼會建立 course 之間的關聯性和`department`。 這些物件會附加至內容，如果`course`也會加入至`department.Courses`集合物件和對應外部索引鍵屬性上`course`物件設定為部門的索引鍵的屬性值。  
+  ``` csharp
+  course.Department = department;
+  ```
 
--   在實體集合中刪除或加入物件。 例如，您可以在其中新增類型的物件`Course`至`department.Courses`集合。 此作業會建立特定之間的關聯性**課程**與特定`department`。 如果這些物件會附加至內容、 部門參考和外部索引鍵屬性上**課程**物件將會設定為適當`department`。  
-    ``` csharp
-    department.Courses.Add(newCourse);
-    ```
+- 若要刪除關聯性，設定的導覽屬性為`null`。 如果您正在使用 Entity Framework 為基礎的.NET 4.0，相關的端必須先載入才能將它設定為 null。 例如:    
+  ``` csharp
+  context.Entry(course).Reference(c => c.Department).Load();
+  course.Department = null;
+  ```
+
+  從 Entity Framework 5.0，以.NET 4.5 為基礎，您可以設定關聯性設為 null 而不需要載入相關的端。 您也可以設定為 null，使用下列方法目前的值。   
+  ``` csharp
+  context.Entry(course).Reference(c => c.Department).CurrentValue = null;
+  ```
+
+- 在實體集合中刪除或加入物件。 例如，您可以在其中新增類型的物件`Course`至`department.Courses`集合。 此作業會建立特定之間的關聯性**課程**與特定`department`。 如果這些物件會附加至內容、 部門參考和外部索引鍵屬性上**課程**物件將會設定為適當`department`。  
+  ``` csharp
+  department.Courses.Add(newCourse);
+  ```
 
 - 使用`ChangeRelationshipState`方法，以變更兩個實體物件之間指定關聯性的狀態。 使用多層式架構應用程式時，將最常使用這個方法和*獨立關聯*（它不能與外部索引鍵關聯）。 此外，才能使用這個方法就必須卸除至`ObjectContext`，如下列範例所示。  
 在下列範例中，沒有講師和課程之間的多對多關聯性。 呼叫`ChangeRelationshipState`方法並傳遞`EntityState.Added`參數，可讓`SchoolContext`知道兩個物件之間的關聯性，已加入：
+  ``` csharp
 
-``` csharp
+  ((IObjectContextAdapter)context).ObjectContext.
+    ObjectStateManager.
+    ChangeRelationshipState(course, instructor, c => c.Instructor, EntityState.Added);
+  ```
 
-       ((IObjectContextAdapter)context).ObjectContext.
-                 ObjectStateManager.
-                  ChangeRelationshipState(course, instructor, c => c.Instructor, EntityState.Added);
-```
+  請注意，如果您要更新 （不只新增） 關聯性，您必須刪除舊的關聯性之後加入新的：
 
-    Note that if you are updating (not just adding) a relationship, you must delete the old relationship after adding the new one:
-
-``` csharp
-       ((IObjectContextAdapter)context).ObjectContext.
-                  ObjectStateManager.
-                  ChangeRelationshipState(course, oldInstructor, c => c.Instructor, EntityState.Deleted);
-```
+  ``` csharp
+  ((IObjectContextAdapter)context).ObjectContext.
+    ObjectStateManager.
+    ChangeRelationshipState(course, oldInstructor, c => c.Instructor, EntityState.Deleted);
+  ```
 
 ## <a name="synchronizing-the-changes-between-the-foreign-keys-and-navigation-properties"></a>同步處理之間的外部索引鍵和導覽屬性的變更
 

@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: ee73940e3c0030b76e73438b1852cc29ebeadb45
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 44b200223153fca44cb2cfa3e78b3bedc7b4a552
+ms.sourcegitcommit: a81aed575372637997b18a0f9466d8fefb33350a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998349"
+ms.lasthandoff: 09/06/2018
+ms.locfileid: "43821331"
 ---
 # <a name="provider-impacting-changes"></a>提供者影響的變更
 
@@ -46,3 +46,8 @@ ms.locfileid: "42998349"
   * 允許在衍生類別中簡化 RelationalTypeMapping 的 2.1 中的變更。 我們不認為這重大提供者，但提供者可以利用這項變更其衍生類型中對應的類別。
 * https://github.com/aspnet/EntityFrameworkCore/pull/12069 -已標記或具名查詢
   * 新增用於標記 LINQ 查詢以及做為 SQL 中的註解會顯示這些標記的基礎結構。 這可能需要以回應 SQL 層代中的提供者。
+* https://github.com/aspnet/EntityFrameworkCore/pull/13115 -支援透過 NTS 的空間資料
+  * 讓型別對應和成員轉譯外部提供者註冊
+    * 提供者必須呼叫基底。FindMapping() 在 ITypeMappingSource 實作，才能正常運作中
+  * 請遵循此模式，以將空間的支援新增至您的提供者的提供者間也保持一致。
+
