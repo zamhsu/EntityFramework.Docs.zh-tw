@@ -3,12 +3,12 @@ title: 資料繫結與 WinForms-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 80fc5062-2f1c-4dbd-ab6e-b99496784b36
-ms.openlocfilehash: 7ceb8e85fe3d8f5ab9a5e58ef9c84599585d8f77
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 071172810f7dac45f42aca0efa7f329bac31e9cd
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994525"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251189"
 ---
 # <a name="databinding-with-winforms"></a>與 WinForms 資料繫結
 此逐步解說示範如何在 [主版詳細資料] 表單的視窗 Forms (WinForms) 控制項繫結至 POCO 型別。 應用程式會使用 Entity Framework 填入資料庫的資料物件、 追蹤變更，並將資料保存到資料庫。
@@ -179,17 +179,17 @@ Visual Studio 隨附安裝的資料庫伺服器是您已安裝的 Visual Studio 
 -   以滑鼠右鍵按一下**資料連線-&gt;新增連接...**
 -   如果您尚未連線至資料庫從伺服器總管之前您必須選取 Microsoft SQL Server 做為資料來源
 
-    ![ChangeDataSource](~/ef6/media/changedatasource.png)
+    ![變更資料來源](~/ef6/media/changedatasource.png)
 
 -   連接到 LocalDB 或 SQL Express，何者而定，您已安裝，然後輸入**產品**做為資料庫名稱
 
-    ![AddConnectionLocalDB](~/ef6/media/addconnectionlocaldb.png)
+    ![新增連線 LocalDB](~/ef6/media/addconnectionlocaldb.png)
 
-    ![AddConnectionExpress](~/ef6/media/addconnectionexpress.png)
+    ![新增連線 Express](~/ef6/media/addconnectionexpress.png)
 
 -   選取  **確定**而且會要求您想要建立新資料庫，請選取**是**
 
-    ![CreateDatabase](~/ef6/media/createdatabase.png)
+    ![建立資料庫](~/ef6/media/createdatabase.png)
 
 -   新資料庫現在會出現在 [伺服器總管] 中，按一下滑鼠右鍵，然後選取**新查詢**
 -   將下列 SQL 複製到新的查詢，然後以滑鼠右鍵按一下查詢並選取**Execute**
@@ -227,11 +227,11 @@ Visual Studio 隨附安裝的資料庫伺服器是您已安裝的 Visual Studio 
 
 -   選取您建立第一個區段中的資料庫連接中，輸入**ProductContext**做為連接字串，然後按一下 [名稱**下一步]**
 
-    ![ChooseYourConnection](~/ef6/media/chooseyourconnection.png)
+    ![選擇您的連線](~/ef6/media/chooseyourconnection.png)
 
 -   按一下 匯入的所有資料表，並按一下 完成 '資料表旁的核取方塊
 
-    ![ChooseYourObjects](~/ef6/media/chooseyourobjects.png)
+    ![選擇您的物件](~/ef6/media/chooseyourobjects.png)
 
 反向工程程序完成後新模型加入您的專案，並讓您檢視在 Entity Framework Designer 中開啟。 App.config 檔案也已新增至您的專案與資料庫的連線詳細資料。
 
@@ -250,7 +250,7 @@ EF 從模型使用 T4 範本產生程式碼。 隨附於 Visual Studio，或從 
 -   開啟**方案總管**並尋找**ProductModel.edmx**檔案
 -   尋找**ProductModel.tt**下 ProductModel.edmx 檔案會進行巢狀檔案
 
-    ![ProductModelTemplate](~/ef6/media/productmodeltemplate.png)
+    ![產品模型範本](~/ef6/media/productmodeltemplate.png)
 
 -   按兩下 ProductModel.tt 檔案在 Visual Studio 編輯器中開啟它
 -   尋找和取代出現兩次的 「**ICollection**"with"**ObservableListSource**"。 這些是位在大約行 296 和 484。
@@ -278,13 +278,13 @@ EF 可讓您選擇載入相關的實體從資料庫自動第一次存取導覽�
 -   在 [選擇資料來源類型] 視窗中，選取**物件**，按一下 [**下一步]**
 -   在 選取資料物件 對話方塊中，展開**WinFormswithEFSample**兩次，然後選取**分類**就不需要選取 Product 資料來源，因為我們會透過該產品的上前往在 類別目錄資料來源上的屬性。
 
-    ![DataSource](~/ef6/media/datasource.png)
+    ![資料來源](~/ef6/media/datasource.png)
 
 -   按一下 **完成。**
     *如果未顯示 資料來源 視窗，選取 * * * 檢視-&gt;其他 Windows-&gt;資料來源**
 -   按 釘選 圖示，讓資料來源 視窗不會不會自動隱藏。 您可能需要按 [重新整理] 按鈕，如果視窗已顯示。
 
-    ![DataSource2](~/ef6/media/datasource2.png)
+    ![資料來源 2](~/ef6/media/datasource2.png)
 
 -   在 [方案總管] 中，按兩下**Form1.cs**設計工具中開啟主要表單的檔案。
 -   選取 **分類**資料來源，並將它拖曳到表單上。 根據預設，新的 DataGridView (**categoryDataGridView**) 並瀏覽工具列上的控制項加入至設計工具。 這些控制項會繫結至 BindingSource (**categoryBindingSource**) 和繫結的巡覽器 (**categoryBindingNavigator**) 一併建立的元件。
@@ -302,7 +302,7 @@ EF 可讓您選擇載入相關的實體從資料庫自動第一次存取導覽�
     到目前為止，我們會與設計工具中的 BindingSource 元件關聯 DataGridView 控制項。 下一節我們將程式碼加入程式碼後置 categoryBindingSource.DataSource 設 DbContext 目前所追蹤之實體的集合。 當我們拖曳和置放的產品，從該類別中，WinForms 之下花了負責設定產品的 categoryBindingSource 和 productsBindingSource.DataMember 屬性 productsBindingSource.DataSource 屬性。 因為此繫結，則會顯示在 productDataGridView 的只有屬於目前選取之分類的產品。
 -   啟用**儲存**上按一下滑鼠右鍵，然後選取 [瀏覽] 工具列按鈕**已啟用**。
 
-    ![Form1 設計工具](~/ef6/media/form1-designer.png)
+    ![1 的表單設計工具](~/ef6/media/form1-designer.png)
 
 -   加入事件處理常式，儲存按兩下按鈕的按鈕。 這將會加入事件處理常式，並將您帶到程式碼後置中，表單。 程式碼**categoryBindingNavigatorSaveItem\_按一下**事件處理常式會新增下一節。
 
@@ -401,12 +401,12 @@ EF 可讓您選擇載入相關的實體從資料庫自動第一次存取導覽�
 
 -   編譯並執行應用程式，您可以測試功能。
 
-    ![Form1BeforeSave](~/ef6/media/form1beforesave.png)
+    ![1 會形成儲存前](~/ef6/media/form1beforesave.png)
 
 -   在儲存之後產生的存放區索引鍵會顯示在螢幕上。
 
-    ![Form1AfterSave](~/ef6/media/form1aftersave.png)
+    ![形成儲存 1 後](~/ef6/media/form1aftersave.png)
 
 -   如果您使用 Code First，則您也會看到所**WinFormswithEFSample.ProductContext**為您建立資料庫。
 
-    ![ServerObjExplorer](~/ef6/media/serverobjexplorer.png)
+    ![Server 物件總管](~/ef6/media/serverobjexplorer.png)

@@ -3,12 +3,12 @@ title: 自訂程式碼 First 慣例 EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: dd2bdbd9-ae9e-470a-aeb8-d0ba160499b7
-ms.openlocfilehash: 79450790c6d3c8ce7fad209e3946e81d3fad4b75
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: a0e8080037cf86640275f498ed159c847ff5c057
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995824"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251059"
 ---
 # <a name="custom-code-first-conventions"></a>自訂程式碼的第一個慣例
 > [!NOTE]
@@ -115,7 +115,7 @@ IsKey 方法的一個有趣的功能是它是加總。 這表示如果您在多�
 
 此程式碼會設定在我們的模型有 int 索引鍵資料行和字串名稱資料行所組成的複合索引鍵的類型。 如果我們在設計工具中檢視模型看起來應該像這樣：
 
-![compositeKey](~/ef6/media/compositekey.png)
+![複合索引鍵](~/ef6/media/compositekey.png)
 
 屬性的慣例的另一個範例是設定在我的模型對應至 SQL Server 中的 datetime2 類型，而不是日期時間中的所有日期時間屬性。 您可以使用下列來達到此目的：
 
@@ -292,7 +292,7 @@ ToTable 的另一個重要層面是，如果您必須明確地將型別對應至
 
 上述程式碼會對應至資料表結構看起來如下所示：
 
-![tptExample](~/ef6/media/tptexample.jpg)
+![tpt 範例](~/ef6/media/tptexample.jpg)
 
 您可以避免這項目，並維護預設 TPH 對應，透過幾種方式：
 

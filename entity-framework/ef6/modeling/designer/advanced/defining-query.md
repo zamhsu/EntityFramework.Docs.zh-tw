@@ -3,12 +3,12 @@ title: 定義查詢-EF 設計工具-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: e52a297e-85aa-42f6-a922-ba960f8a4b22
-ms.openlocfilehash: 60d5310589bb9bc3fdb971673422e80537357e55
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 8415a265cdbe078422e0467ee97da955a81b873d
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996303"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250968"
 ---
 # <a name="defining-query---ef-designer"></a>定義查詢-EF 設計工具
 本逐步解說示範如何將定義要使用 EF 設計工具的模型類型的查詢和對應的實體。 定義查詢通常用來提供資料庫檢視，提供類似功能，但該檢視定義在模型中，不是資料庫。 定義查詢可讓您執行 SQL 陳述式中指定**DefiningQuery** .edmx 檔案的項目。 如需詳細資訊，請參閱 < **DefiningQuery**中[SSDL 規格](~/ef6/modeling/designer/advanced/edmx/ssdl-spec.md)。
@@ -54,11 +54,11 @@ ms.locfileid: "42996303"
 -   在 [方案總管] 中，以滑鼠右鍵按一下**DefiningQueryModel.edmx**檔案，然後選取**開啟方式...**.
 -   選取  **XML （文字） 編輯器**。
 
-    ![XMLEditor](~/ef6/media/xmleditor.png)
+    ![XML 編輯器](~/ef6/media/xmleditor.png)
 
 -   按一下 **是**出現提示時出現下列訊息：
 
-    ![Warning2](~/ef6/media/warning2.png)
+    ![警告 2](~/ef6/media/warning2.png)
 
  
 
@@ -136,7 +136,7 @@ ms.locfileid: "42996303"
 -   按兩下 DefiningQueryModel.edmx。
 -   假設**是**出現下列訊息：
 
-    ![Warning2](~/ef6/media/warning2.png)
+    ![警告 2](~/ef6/media/warning2.png)
 
  
 
@@ -172,7 +172,7 @@ Entity Designer 中，提供用於編輯模型的設計介面，會顯示。
     **對應詳細資料** 視窗隨即顯示。
 -   選取  **GradeReport**從**&lt;將資料表或檢視&gt;** 下拉式清單中 (位於**資料表**s)。  
     預設對應之間的概念和儲存體**GradeReport**實體類型會出現。  
-    ![MappingDetails3](~/ef6/media/mappingdetails.png)
+    ![對應 Details3](~/ef6/media/mappingdetails.png)
 
 如此一來， **EntitySetMapping**項目加入.edmx 檔的 mapping 區段。 
 

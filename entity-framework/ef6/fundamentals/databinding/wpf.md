@@ -3,12 +3,12 @@ title: 資料繫結與 WPF-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: e90d48e6-bea5-47ef-b756-7b89cce4daf0
-ms.openlocfilehash: 0b1f4d5ea204cd80acf42caa499732610daa0e31
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e6df90db17d39d3aa91275800a6414fed40fb5db
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994819"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251150"
 ---
 # <a name="databinding-with-wpf"></a>使用 WPF 資料繫結
 此逐步解說示範如何在 [主版詳細資料] 表單中的 WPF 控制項繫結至 POCO 型別。 應用程式會使用 Entity Framework Api 填入資料庫的資料物件、 追蹤變更，並將資料保存到資料庫。
@@ -142,17 +142,17 @@ Visual Studio 隨附安裝的資料庫伺服器是您已安裝的 Visual Studio 
 -   以滑鼠右鍵按一下**資料連線-&gt;新增連接...**
 -   如果您尚未連線至資料庫從伺服器總管之前您必須選取 Microsoft SQL Server 做為資料來源
 
-    ![ChangeDataSource](~/ef6/media/changedatasource.png)
+    ![變更資料來源](~/ef6/media/changedatasource.png)
 
 -   連接到 LocalDB 或 SQL Express，何者而定，您已安裝，然後輸入**產品**做為資料庫名稱
 
-    ![AddConnectionLocalDB](~/ef6/media/addconnectionlocaldb.png)
+    ![新增連線 LocalDB](~/ef6/media/addconnectionlocaldb.png)
 
-    ![AddConnectionExpress](~/ef6/media/addconnectionexpress.png)
+    ![新增連線 Express](~/ef6/media/addconnectionexpress.png)
 
 -   選取  **確定**而且會要求您想要建立新資料庫，請選取**是**
 
-    ![CreateDatabase](~/ef6/media/createdatabase.png)
+    ![建立資料庫](~/ef6/media/createdatabase.png)
 
 -   新資料庫現在會出現在 [伺服器總管] 中，按一下滑鼠右鍵，然後選取**新查詢**
 -   將下列 SQL 複製到新的查詢，然後以滑鼠右鍵按一下查詢並選取**Execute**
@@ -186,15 +186,15 @@ Visual Studio 隨附安裝的資料庫伺服器是您已安裝的 Visual Studio 
 -   這會啟動**Entity Data Model 精靈**
 -   選取 **從資料庫產生**，按一下 **下一步**
 
-    ![ChooseModelContents](~/ef6/media/choosemodelcontents.png)
+    ![選擇模型內容](~/ef6/media/choosemodelcontents.png)
 
 -   選取您建立第一個區段中的資料庫連接中，輸入**ProductContext**做為連接字串，然後按一下 [名稱**下一步]**
 
-    ![ChooseYourConnection](~/ef6/media/chooseyourconnection.png)
+    ![選擇您的連線](~/ef6/media/chooseyourconnection.png)
 
 -   按一下 匯入的所有資料表，並按一下 完成 '資料表旁的核取方塊
 
-    ![ChooseYourObjects](~/ef6/media/chooseyourobjects.png)
+    ![選擇您的物件](~/ef6/media/chooseyourobjects.png)
 
 反向工程程序完成後新模型加入您的專案，並讓您檢視在 Entity Framework Designer 中開啟。 App.config 檔案也已新增至您的專案與資料庫的連線詳細資料。
 
@@ -213,7 +213,7 @@ EF 從模型使用 T4 範本產生程式碼。 隨附於 Visual Studio，或從 
 -   開啟**方案總管**並尋找**ProductModel.edmx**檔案
 -   尋找**ProductModel.tt**下 ProductModel.edmx 檔案會進行巢狀檔案
 
-    ![WpfProductModelTemplate](~/ef6/media/wpfproductmodeltemplate.png)
+    ![WPF 產品模型範本](~/ef6/media/wpfproductmodeltemplate.png)
 
 -   按兩下 ProductModel.tt 檔案在 Visual Studio 編輯器中開啟它
 -   尋找和取代出現兩次的 「**ICollection**"with"**ObservableCollection**"。 這些是大約位於線條 296 及 484。
@@ -244,19 +244,19 @@ EF 可讓您選擇載入相關的實體從資料庫自動第一次存取導覽�
 -   在 [選取資料物件] 對話方塊中，展開**WPFwithEFSample**兩個時間和選取**類別**  
     *若要選取不需要**產品**資料來源，因為我們會透過**產品**的屬性**分類**資料來源*  
 
-    ![SelectDataObjects](~/ef6/media/selectdataobjects.png)
+    ![選取資料物件](~/ef6/media/selectdataobjects.png)
 
 -   按一下 **完成。**
 -   [資料來源] 視窗會開啟 [MainWindow.xaml] 視窗旁邊*如果未顯示 [資料來源] 視窗，選取**檢視-&gt;其他 Windows-&gt;資料來源***
 -   按 釘選 圖示，讓資料來源 視窗不會不會自動隱藏。 您可能需要按 [重新整理] 按鈕，如果視窗已顯示。
 
-    ![DataSources](~/ef6/media/datasources.png)
+    ![Data Sources](~/ef6/media/datasources.png)
 
 -   選取 * * 類別 * * 資料來源，並將它拖曳到表單上。
 
 下列狀況時拖曳的項目此來源：
 
--   **CategoryViewSource**資源和 * * categoryDataGrid * * 控制項已加入至 XAML。 如需 DataViewSources 的詳細資訊，請參閱http://bea.stollnitz.com/blog/?p=387。
+-   **CategoryViewSource**資源和 * * categoryDataGrid * * 控制項已加入至 XAML。 如需 DataViewSources 的詳細資訊，請參閱 http://bea.stollnitz.com/blog/?p=387。
 -   在父格線項目上的 DataContext 屬性設定為"{StaticResource **categoryViewSource** }"。  **CategoryViewSource**資源做為外部的繫結來源\\父格線項目。 內部的格線項目則會繼承的 DataContext 值從父代 （categoryDataGrid 的 ItemsSource 屬性設定為"{Binding}"） 的方格。 
 
 ``` xml
@@ -286,7 +286,7 @@ EF 可讓您選擇載入相關的實體從資料庫自動第一次存取導覽�
     -   **CategoryProductsViewSource**資源並**productDataGrid**方格會新增至 XAML
     -   此資源的繫結路徑設定為產品
     -   WPF 資料繫結架構可確保與所選分類的產品只有顯示在**productDataGrid**
--   從 工具箱 拖曳 **按鈕**入表單。 設定**名稱**屬性設**buttonSave**並**內容**屬性設**儲存**。
+-   從 工具箱 拖曳** 按鈕**入表單。 設定**名稱**屬性設**buttonSave**並**內容**屬性設**儲存**。
 
 表單看起來應該如下所示：
 
@@ -299,9 +299,9 @@ EF 可讓您選擇載入相關的實體從資料庫自動第一次存取導覽�
 -   在 XAML 視窗中，按一下**&lt;視窗**項目，這會選取的主視窗
 -   在 **屬性**視窗中選擇**事件**右上方，然後按兩下右側的文字方塊**Loaded**標籤
 
-    ![MainWindowProperties](~/ef6/media/mainwindowproperties.png)
+    ![主視窗屬性](~/ef6/media/mainwindowproperties.png)
 
--   也加入**按一下** 事件**儲存**按兩下設計工具中的 儲存 按鈕的按鈕。 
+-   也加入**按一下 **事件**儲存**按兩下設計工具中的 儲存 按鈕的按鈕。 
 
 這將帶您前往程式碼後置表單，我們現在要編輯的程式碼，用以 ProductContext 執行資料存取。 更新 MainWindow 的程式碼，如下所示。
 
@@ -385,10 +385,10 @@ EF 可讓您選擇載入相關的實體從資料庫自動第一次存取導覽�
 -   編譯並執行應用程式。 如果您使用 Code First，則您會看到**WPFwithEFSample.ProductContext**為您建立資料庫。
 -   在下方方格中的最上層方格和產品名稱中輸入類別名稱*輸入不是任何項目識別碼資料行，因為資料庫會產生主要金鑰*
 
-    ![Screen1](~/ef6/media/screen1.png)
+    ![與新的分類和產品的主視窗](~/ef6/media/screen1.png)
 
 -   按下**儲存** 按鈕，將資料儲存至資料庫
 
 DbContext 的呼叫後方**SaveChanges**（），這些 Id 會填入資料庫產生值。 因為我們會呼叫**重新整理**（) 之後**SaveChanges**（) **DataGrid**控制項會更新含有新值。
 
-![Screen2](~/ef6/media/screen2.png)
+![具有識別碼填入的主視窗](~/ef6/media/screen2.png)

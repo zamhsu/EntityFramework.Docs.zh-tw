@@ -3,19 +3,19 @@ title: 設計工具的實體分割-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: aa2dd48a-1f0e-49dd-863d-d6b4f5834832
-ms.openlocfilehash: 214561f0a0381bced3ceae0b6acfcd45f5dd65c5
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 06199be977276cd3656e2550df79bac24276ec51
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995615"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250592"
 ---
 # <a name="designer-entity-splitting"></a>分割的實體設計工具
 本逐步解說示範如何透過修改模型使用 Entity Framework Designer （EF 設計工具），將實體類型對應至兩個資料表。 當多個資料表共用共同的索引鍵時，您可以將實體對應至多個資料表。 適用於將實體類型對應至兩個資料表的概念，很容易擴大為將實體類型對應至兩個以上的資料表。
 
 下圖顯示使用 EF 設計工具時所使用的主視窗。
 
-![EFDesigner](~/ef6/media/efdesigner.png)
+![EF Designer](~/ef6/media/efdesigner.png)
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -93,7 +93,7 @@ Entity Designer 中，提供用於編輯模型的設計介面，會顯示。
 -   在設計介面上選取**PersonInfo**實體，然後按**刪除**鍵盤上的按鈕。
 -   按一下 **否**詢問您是否要移除時**PersonInfo**資料表從模型中，我們即將將其對應至**人員**實體。
 
-    ![DeleteTables](~/ef6/media/deletetables.png)
+    ![刪除資料表](~/ef6/media/deletetables.png)
 
 接下來的步驟需要**對應詳細資料**視窗。 如果看不到這個視窗，以滑鼠右鍵按一下設計介面，然後選取**對應詳細資料**。
 
@@ -103,7 +103,7 @@ Entity Designer 中，提供用於編輯模型的設計介面，會顯示。
 
 **Person**實體類型現在已對應至**人員**並**PersonInfo**資料表。
 
-![Mapping2](~/ef6/media/mapping2.png)
+![對應 2](~/ef6/media/mapping2.png)
 
 ## <a name="use-the-model"></a>使用模型
 
@@ -136,9 +136,9 @@ Entity Designer 中，提供用於編輯模型的設計介面，會顯示。
 
 -   下列兩個**插入**陳述式所執行的結果執行內容。Savechanges （)。 他們所採取的資料**Person**實體並將它之間分割**人員**並**PersonInfo**資料表。
 
-    ![Insert1](~/ef6/media/insert1.png)
+    ![插入 1](~/ef6/media/insert1.png)
 
-    ![Insert2](~/ef6/media/insert2.png)
+    ![插入 2](~/ef6/media/insert2.png)
 -   下列**選取**執行結果列舉資料庫中的人員。 它結合了將資料從**Person**並**PersonInfo**資料表。
 
     ![選用版](~/ef6/media/select.png)

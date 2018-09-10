@@ -3,12 +3,12 @@ title: 每個模型的 EF6 的多個圖表
 author: divega
 ms.date: 2016-10-23
 ms.assetid: b95db5c8-de8d-43bd-9ccc-5df6a5e25e1b
-ms.openlocfilehash: f27afbd3b44ff3eb8044ab960f10b2856a603ee3
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e23bf92ce3199b2162ca9a42bd0f797375179d77
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993774"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250955"
 ---
 # <a name="multiple-diagrams-per-model"></a>每個模型的多個圖表
 > [!NOTE]
@@ -39,7 +39,7 @@ EF 設計工具是由下列元件所組成：
 
 下列螢幕擷取畫面顯示在 EF 設計工具中開啟.edmx 檔案。 螢幕擷取畫面顯示的視覺化設計介面 （左邊） 和**模型瀏覽器**視窗 （右邊）。
 
-![EFDesigner2](~/ef6/media/efdesigner2.png)
+![EF 設計工具 2](~/ef6/media/efdesigner2.png)
 
 若要復原在 EF 設計工具中進行的操作，請按一下 CTRL-Z。
 

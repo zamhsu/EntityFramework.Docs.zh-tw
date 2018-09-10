@@ -3,12 +3,12 @@ title: 自動的 Code First 移轉 EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 0eb86787-2161-4cb4-9cb8-67c5d6e95650
-ms.openlocfilehash: f358a4df04b03399e9e54ffdf0389e43d715af1c
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 256d1c774a2165dc12daf3d04550566c1a44b751
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996091"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250448"
 ---
 # <a name="automatic-code-first-migrations"></a>自動的 Code First 移轉
 自動移轉，可讓您使用 Code First 移轉，而不需要每個您所做的變更在您的專案中的程式碼檔案。 並非所有的變更可以自動套用-資料行重新命名，例如需要使用程式碼為基礎的移轉。
@@ -85,7 +85,7 @@ ms.locfileid: "42996091"
 
 -   執行您的應用程式，您會看到**MigrationsAutomaticCodeDemo.BlogContext**為您建立資料庫。
 
-    ![DatabaseLocalDB](~/ef6/media/databaselocaldb.png)
+    ![資料庫 LocalDB](~/ef6/media/databaselocaldb.png)
 
 ## <a name="enabling-migrations"></a>啟用移轉
 

@@ -3,12 +3,12 @@ title: 設計工具的 TPH 繼承-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 72d26a8e-20ab-4500-bd13-394a08e73394
-ms.openlocfilehash: 9a546f6450b5aa3b03c062d1ab2c6f9257ba8292
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 1eb935414b20d6e93e9d470ccc845bc13626ed3a
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995000"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250838"
 ---
 # <a name="designer-tph-inheritance"></a>設計工具的 TPH 繼承
 此逐步解說示範如何實作 Entity Framework Designer （EF 設計工具） 的概念模型中的每個階層的資料表 (TPH) 繼承。 TPH 繼承會使用一個資料庫資料表來維護繼承階層架構中的實體類型的所有資料。
@@ -54,7 +54,7 @@ Entity Designer 中，提供用於編輯模型的設計介面，會顯示。 您
 
 也就是如何**人員**資料表會尋找資料庫中。
 
-![PersonTable](~/ef6/media/persontable.png) 
+![Person 資料表](~/ef6/media/persontable.png) 
 
 ## <a name="implement-table-per-hierarchy-inheritance"></a>實作每個階層的資料表繼承
 
@@ -94,14 +94,14 @@ Entity Designer 中，提供用於編輯模型的設計介面，會顯示。 您
 -   在 **運算子**資料行**對應詳細資料**視窗中，選取 = 從下拉式清單。
 -   在 **值/屬性**資料行中輸入**講師**。 最後的結果應該如下所示：
 
-    ![MappingDetails2](~/ef6/media/mappingdetails2.png)
+    ![對應詳細資料](~/ef6/media/mappingdetails2.png)
 
 -   重複這些步驟**學生**實體類型，但請相等條件**學生**值。  
     *我們想要移除的原因**鑑別子**屬性，是因為您不能超過一次對應資料表資料行。本專欄將用於條件式對應，因此無法用於屬性以及對應。它可以用於兩者，如果條件使用的唯一方式**Is Null**或是**Is Not Null**比較。*
 
 現已實作每個階層的資料表繼承。
 
-![FinalTPH](~/ef6/media/finaltph.png)
+![最終 TPH](~/ef6/media/finaltph.png)
 
 ## <a name="use-the-model"></a>使用模型
 

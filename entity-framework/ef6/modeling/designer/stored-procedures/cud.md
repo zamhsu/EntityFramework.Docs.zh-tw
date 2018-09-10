@@ -3,12 +3,12 @@ title: 設計工具的 CUD 預存程序-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 1e773972-2da5-45e0-85a2-3cf3fbcfa5cf
-ms.openlocfilehash: 7a3176e1057816dd11ced5fc545aa3baa672bd03
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 36c9b97b77fec30136cba1d850a0259c689e69ae
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993885"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250916"
 ---
 # <a name="designer-cud-stored-procedures"></a>設計工具的 CUD 預存程序
 此逐步解說顯示如何將對應建立\\插入、 更新和刪除 (CUD) 作業的實體類型使用 Entity Framework Designer （EF 設計工具） 的預存程序。  根據預設，Entity Framework 會自動產生 CUD 作業的 SQL 陳述式，但您也可以將預存程序對應至這些作業。  
@@ -54,7 +54,7 @@ var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]");
 -   此外，請選取下的下列預存程序**預存程序和函式**節點： **DeletePerson**， **InsertPerson**，和**UpdatePerson**. 
 -   從 Visual Studio 2012 EF 設計工具支援大量匯入預存程序。 **匯入選取的預存程序和函式的實體模型到**依預設會勾選。 在此範例中，我們有預存程序插入、 更新和刪除實體類型，因為我們不想要匯入它們，並將取消核取此核取方塊。 
 
-    ![ImportSProcs](~/ef6/media/importsprocs.jpg)
+    ![匯入 S 程序](~/ef6/media/importsprocs.jpg)
 
 -   按一下 [ **完成**]。
     EF 設計工具中，可提供用於編輯模型的設計介面，會顯示。
@@ -72,7 +72,7 @@ var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]");
 -   按 **Enter** 鍵。
 -   根據預設， **NewPersonID**對應到實體索引鍵**PersonID**。 請注意，箭頭表示對應方向：為屬性提供結果資料行的值。
 
-    ![MappingDetails](~/ef6/media/mappingdetails.png)
+    ![對應詳細資料](~/ef6/media/mappingdetails.png)
 
 -   按一下  **&lt;選取更新函式&gt;** ，然後選取**UpdatePerson**從產生的下拉式清單。
 -   預存程序參數與實體屬性之間的預設對應隨即出現。

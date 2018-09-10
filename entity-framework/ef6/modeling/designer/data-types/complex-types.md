@@ -3,19 +3,19 @@ title: 複雜型別-EF 設計工具-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 9a8228ef-acfd-4575-860d-769d2c0e18a1
-ms.openlocfilehash: d35504cbe60823249d54385962568802b3e41308
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 2a516bd14131fd035a4d005e0fdf140f7ff4d65f
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994849"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250825"
 ---
 # <a name="complex-types---ef-designer"></a>複雜型別-EF 設計工具
 本主題說明如何將使用 Entity Framework Designer （EF 設計工具） 的複雜型別對應，以及如何查詢實體包含複雜型別的屬性。
 
 下圖顯示使用 EF 設計工具時所使用的主視窗。
 
-![EFDesigner](~/ef6/media/efdesigner.png)
+![EF Designer](~/ef6/media/efdesigner.png)
 
 > [!NOTE]
 > 當您建置概念模型時，未對應的實體和關聯有關的警告可能會出現在 錯誤清單。 您可以忽略這些警告，因為錯誤您選擇從模型產生資料庫之後，就會消失。
@@ -45,7 +45,7 @@ ms.locfileid: "42994849"
 
 新建立型別的複雜屬性會取代已選取的屬性。 所有屬性對應均會保留。
 
-![Refactor2](~/ef6/media/refactor2.png)
+![重構 2](~/ef6/media/refactor2.png)
 
 ## <a name="create-a-new-complex-type"></a>建立新的複雜型別
 
@@ -53,7 +53,7 @@ ms.locfileid: "42994849"
 
 以滑鼠右鍵按一下**複雜型別**資料夾 模型瀏覽器中，指向**AddNew 複雜型別...**. 或者，您可以選取**複雜型別**資料夾，然後按**插入**鍵盤上。
 
-![AddNewComplextype](~/ef6/media/addnewcomplextype.png)
+![加入新複雜型別](~/ef6/media/addnewcomplextype.png)
 
 含有預設名稱的新屬性隨即會加入到該複雜型別。 您現在可以將屬性加入類型。
 
@@ -65,7 +65,7 @@ ms.locfileid: "42994849"
 
 -   以滑鼠右鍵按一下 模型瀏覽器中的複雜類型，指向**新增**，再指向**純量屬性**或**複雜屬性**，然後選取所需的屬性類型。 或者，您可以在這裡選取的複雜類型，然後按**插入**鍵盤上。  
 
-    ![AddPropertiestoComplexType](~/ef6/media/addpropertiestocomplextype.png)
+    ![將屬性加入至複雜型別](~/ef6/media/addpropertiestocomplextype.png)
 
     含有預設名稱的新屬性隨即會加入至該複雜型別。
 
@@ -108,7 +108,7 @@ ms.locfileid: "42994849"
     所有純量屬性的下拉式清單便會顯示。
 7.  選取適當的屬性。
 
-    ![MapComplexType](~/ef6/media/mapcomplextype.png)
+    ![複雜型別對應](~/ef6/media/mapcomplextype.png)
 
 8.  針對每一個資料表資料行重複步驟 6 和 7。
 
@@ -121,14 +121,14 @@ ms.locfileid: "42994849"
 
 -   按兩下您想要對應至複雜型別匯入函式。
 
-    ![FunctionImports](~/ef6/media/functionimports.png)
+    ![函式匯入](~/ef6/media/functionimports.png)
 
 -   填入新函式匯入的設定，如下所示：
     -   指定您要為其建立中的之函式匯入的預存程序**預存程序名稱**欄位。 此欄位是下拉式清單，其中顯示儲存體模型中所有的預存程序。
     -   指定的名稱中的函式匯入**Function Import 名稱**欄位。
     -   選取 **複雜**做為傳回類型然後再從下拉式清單選擇適當的型別來指定特定的複雜傳回型別。
 
-        ![EditFunctionImport](~/ef6/media/editfunctionimport.png)
+        ![編輯函式匯入](~/ef6/media/editfunctionimport.png)
 
 -   按一下 [確定 **Deploying Office Solutions**]。
     這個函式匯入項目便會在概念模型中建立。

@@ -3,29 +3,29 @@ title: First 資料註解-EF6 的程式碼
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 0ab66afa3babafe657b3ddb32c02c3fba0ae310e
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 57e2b988f81d9c82e10a07a5cd4f3a1decfd838a
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994582"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251202"
 ---
 # <a name="code-first-data-annotations"></a>Code First 資料註解
 > [!NOTE]
-> **EF4.1 及更新版本僅**-功能、 Api、 Entity Framework 4.1 中導入等本頁所述。 如果您使用的是較早版本，則不適用部分或全部的資訊。
+> **EF4.1 及更新版本僅**-功能、 Api、 Entity Framework 4.1 中導入等本頁所述。 如果您使用較早版本，部分或所有的這項資訊不適用於。
 
-此頁面上的內容是來自和文章作者： Julie Lerman 原始撰寫 (\<http://thedatafarm.com>)。
+此頁面上的內容是來自原始寫入，作者： Julie Lerman 的發行項 (\<http://thedatafarm.com>)。
 
-Entity Framework Code First 可讓您使用您自己的網域類別，代表模型 EF 依賴執行查詢時，變更追蹤和更新函式。 程式碼首先會利用稱為慣例優於組態的程式設計模式。 這表示該程式碼首先會假設您的類別都遵循的慣例，EF 會使用。 在此情況下，EF 將能夠運作，它需要執行其作業的詳細資訊。 不過，如果您的類別並不遵守這些慣例，您可以將組態新增至您的類別，為 EF 提供所需的資訊。
+Entity Framework Code First 可讓您使用您自己的網域類別，代表模型執行查詢時，EF 相依於變更追蹤，以及更新函式。 程式碼首先會利用程式設計的模式稱為 'convention over configuration'。 程式碼第一次會假設您的類別遵循的慣例，Entity framework，並且在此情況下，便會自動生效時如何執行的作業。 不過，如果您的類別並不遵守這些慣例，您能夠將設定新增至您的類別，為 EF 提供的必要資訊。
 
-程式碼首先提供兩種方式可將這些設定新增至您的類別。 其中一個使用簡單的屬性，稱為 DataAnnotations，另一個是第一次使用程式碼是 Fluent API，可讓您在程式碼中，以命令方式描述設定。
+程式碼首先提供兩種方式可將這些設定新增至您的類別。 其中一個使用簡單的屬性，稱為 DataAnnotations，且第二個使用 Code First 的 Fluent API，可讓您在程式碼中，以命令方式描述設定。
 
 這篇文章將著重在使用 DataAnnotations （在 System.ComponentModel.DataAnnotations 命名空間中），若要設定您的類別 – 反白顯示最常需要的組態。 DataAnnotations 也會辨識由數項.NET 應用程式，例如 ASP.NET MVC 可讓這些應用程式運用相同的註釋的用戶端驗證。
 
 
 ## <a name="the-model"></a>模型
 
-我將示範如何撰寫程式碼使用類別的簡單組的第一個 DataAnnotations： 部落格和文章。
+我將示範如何使用一對簡單類別的程式碼第一次 DataAnnotations： 部落格和文章。
 
 ``` csharp
     public class Blog
@@ -47,15 +47,15 @@ Entity Framework Code First 可讓您使用您自己的網域類別，代表模�
     }
 ```
 
-如有需要，部落格和後置類別方便遵循程式碼的第一個慣例，且需要協助使用它們的 EF 不調整。 但是，您也可以使用 註解，提供詳細資訊以 EF 的類別和它們對應到資料庫。
+如有需要，部落格和後置類別方便遵循程式碼的第一個慣例，且需要未調整，若要啟用 EF 的相容性。 不過，您也可以使用註解提供給 EF 的詳細資訊，相關的類別和它們所對應的資料庫。
 
  
 
 ## <a name="key"></a>Key
 
-Entity Framework 依賴具有索引鍵的值，它會追蹤實體的每個實體。 其中一個程式碼首先取決於的慣例是如何表示哪一個屬性是在每個程式碼的第一個類別中的索引鍵。 該慣例是尋找一個名為 「 識別碼 」，或結合了 「 識別碼 」，例如 「 BlogId"與類別名稱的其中一個屬性。 屬性會對應至資料庫中的主索引鍵資料行。
+Entity Framework 依賴具有索引鍵的值會用於追蹤的實體，每個實體。 Code First 一個慣例是隱含的索引鍵屬性;第一次程式碼會尋找名為 「 識別碼 」 或類別名稱和 「 識別碼 」，例如"BlogId 」 的組合的屬性。 這個屬性會對應至資料庫中的主索引鍵資料行。
 
-部落格和後置類別都遵循這個慣例。 但是，如果它們並未呢？ 如果部落格已使用名稱*PrimaryTrackingKey*改為或甚至*foo*嗎？ 如果程式碼第一次找不到符合此慣例的屬性則會因為 Entity Framework 的需求，您必須有索引鍵屬性來擲回例外狀況。 您可以使用索引鍵的註解來指定要用作 EntityKey 的哪一個屬性。
+部落格和後置類別都遵循這個慣例。 如果它們沒有嗎？ 如果部落格已使用名稱*PrimaryTrackingKey*相反的或甚至*foo*嗎？ 如果程式碼第一次找不到符合此慣例的屬性則會因為 Entity Framework 的需求，您必須有索引鍵屬性來擲回例外狀況。 您可以使用索引鍵的註解來指定要用作 EntityKey 的哪一個屬性。
 
 ``` csharp
     public class Blog
@@ -68,13 +68,13 @@ Entity Framework 依賴具有索引鍵的值，它會追蹤實體的每個實體
     }
 ```
 
-如果您是第一次使用程式碼是資料庫產生功能、 部落格資料表擁有名為 PrimaryTrackingKey 也定義預設做為身分識別的主要索引鍵資料行。
+如果您是第一次使用程式碼是資料庫產生功能、 部落格資料表擁有名為 PrimaryTrackingKey，預設也定義為 Identity 的主索引鍵資料行。
 
-![jj591583_figure01](~/ef6/media/jj591583-figure01.png)
+![部落格資料表具有主索引鍵](~/ef6/media/jj591583-figure01.png)
 
 ### <a name="composite-keys"></a>複合索引鍵
 
-Entity Framework 支援複合索引鍵-多個屬性所組成的主索引鍵。 例如，您可能會有的 Passport 類別，其主索引鍵為 PassportNumber 和 IssuingCountry 的組合。
+Entity Framework 支援複合索引鍵-多個屬性所組成的主索引鍵。 例如，您可能有其主索引鍵是 PassportNumber 和組合 IssuingCountry Passport 類別。
 
 ``` csharp
     public class Passport
@@ -88,11 +88,11 @@ Entity Framework 支援複合索引鍵-多個屬性所組成的主索引鍵。 �
     }
 ```
 
-如果您嘗試並使用上述的類別，您會得到 InvalidOperationExceptions 指出; EF 模型中
+嘗試在您的 EF 模型中使用上述的類別會導致`InvalidOperationException`:
 
 *無法判斷複合主索引鍵排序類型 'Passport'。使用 ColumnAttribute 或 HasKey 方法來指定複合主索引鍵的順序。*
 
-當您有複合索引鍵時，Entity Framework 會要求您定義的索引鍵屬性的順序。 您可以使用資料行註解，以指定的順序。
+若要使用複合索引鍵，Entity Framework 會要求您定義的順序索引鍵的屬性。 您可以使用資料行註解，以指定的順序來執行這項操作。
 
 >[!NOTE]
 > 將順序值是相對的 （而非以索引為基礎） 讓您可以使用任何值。 例如，100 和 200 可接受來取代 1 和 2。
@@ -148,7 +148,7 @@ Entity Framework 支援複合索引鍵-多個屬性所組成的主索引鍵。 �
 
 任何其他含應用程式中的程式碼或標記變更，在 MVC 應用程式將會執行用戶端驗證，甚至以動態方式建置訊息使用的屬性和註釋名稱。
 
-![jj591583_figure02](~/ef6/media/jj591583-figure02.png)
+![建立頁面，其標題是必要的錯誤](~/ef6/media/jj591583-figure02.png)
 
 必要的屬性也會影響所產生的資料庫，藉由對應的內容不可為 null。 請注意，[標題] 欄位已變更為"not null"。
 
@@ -157,7 +157,7 @@ Entity Framework 支援複合索引鍵-多個屬性所組成的主索引鍵。 �
 
  
 
-![jj591583_figure03](~/ef6/media/jj591583-figure03.png)
+![部落格資料表](~/ef6/media/jj591583-figure03.png)
 
  
 
@@ -174,7 +174,7 @@ MaxLength 與 MinLength 屬性可讓您指定額外的屬性驗證，就像您�
 
 MaxLength 註解會影響資料庫，藉由設定屬性的長度為 10。
 
-![jj591583_figure04](~/ef6/media/jj591583-figure04.png)
+![顯示最大長度 BloggerName 資料行上的部落格資料表](~/ef6/media/jj591583-figure04.png)
 
 MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證，再以動態方式建立一則錯誤訊息: 「 BloggerName 欄位必須是字串或陣列類型最大長度為 '10'。 」該訊息是有點長。 許多註釋可讓您與 ErrorMessage 屬性中指定的錯誤訊息。
 
@@ -185,7 +185,7 @@ MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證�
 
 您也可以指定錯誤訊息所需的註解中。
 
-![jj591583_figure05](~/ef6/media/jj591583-figure05.png)
+![建立具有自訂錯誤訊息的網頁](~/ef6/media/jj591583-figure05.png)
 
  
 
@@ -243,7 +243,7 @@ MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證�
 
 在資料庫中，部落格資料表將包含的所有部落格，包括其 BlogDetail; 屬性所包含的屬性的屬性。 根據預設，每一個前面加上複雜類型，也就是 BlogDetail 的名稱。
 
-![jj591583_figure06](~/ef6/media/jj591583-figure06.png)
+![具有複雜類型的部落格資料表](~/ef6/media/jj591583-figure06.png)
 
 另一個有趣的註解是，雖然 DateCreated 屬性定義為不可為 null 的日期時間，在類別中，相關的資料庫欄位是可為 null。 如果您想要影響的資料庫結構描述，您必須使用必要的註解。
 
@@ -284,7 +284,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
 在第一次建立資料庫資料表中的 不可為 null 的時間戳記資料行的程式碼中的結果。
 
-![jj591583_figure07](~/ef6/media/jj591583-figure07.png)
+![部落格與時間戳記資料行的資料表](~/ef6/media/jj591583-figure07.png)
 
  
 
@@ -310,7 +310,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
 已重新產生之後，以下是資料表。 資料表名稱已變更為 InternalBlogs，描述複雜型別資料行現在已 BlogDescription。 因為註解中指定的名稱，程式碼第一次不會使用資料行名稱開頭為複雜型別名稱的慣例。
 
-![jj591583_figure08](~/ef6/media/jj591583-figure08.png)
+![部落格資料表和資料行重新命名](~/ef6/media/jj591583-figure08.png)
 
  
 
@@ -418,7 +418,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
 在資料庫中的條件約束會顯示 InternalBlogs.PrimaryTrackingKey Posts.BlogId 之間的關聯性。 
 
-![jj591583_figure09](~/ef6/media/jj591583-figure09.png)
+![InternalBlogs.PrimaryTrackingKey 和 Posts.BlogId 之間的關聯性](~/ef6/media/jj591583-figure09.png)
 
 當您有多個類別之間的關聯性時，會使用 InverseProperty。
 
@@ -443,7 +443,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
 程式碼第一次不能符合其本身上的兩個類別中的屬性。 貼文的資料庫資料表應該有一個外部索引鍵的 CreatedBy 人員和另一個用於 UpdatedBy 人員但程式碼第一次會建立四個外部索引鍵屬性將會： 人\_識別碼、 人員\_Id1、 CreatedBy\_識別碼和UpdatedBy\_識別碼。
 
-![jj591583_figure10](~/ef6/media/jj591583-figure10.png)
+![張貼額外的外部索引鍵的資料表](~/ef6/media/jj591583-figure10.png)
 
 若要修正這些問題，您可以使用 InverseProperty 註解來指定屬性的對齊方式。
 
@@ -457,7 +457,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
 親自轉交 PostsWritten 屬性會知道這是指 Post 型別，因為它會建置 Post.CreatedBy 的關聯性。 同樣地，PostsUpdated 將會連接到 Post.UpdatedBy。 程式碼第一次不會產生額外的外部索引鍵。
 
-![jj591583_figure11](~/ef6/media/jj591583-figure11.png)
+![貼文資料表，而不需要額外的外部索引鍵](~/ef6/media/jj591583-figure11.png)
 
  
 

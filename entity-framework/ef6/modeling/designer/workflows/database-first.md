@@ -3,12 +3,12 @@ title: Database First-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: cc6ffdb3-388d-4e79-a201-01ec2577c949
-ms.openlocfilehash: c60108c09fcbaaa1f86e77fa52cb13fe018975e1
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 93ae5729e487ed9be3972ac78d599dbea19ed458
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995906"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251085"
 ---
 # <a name="database-first"></a>第一次資料庫
 本影片以及逐步說明的逐步解說提供使用 Entity Framework 資料庫優先開發的簡介。 資料庫第一次可讓您進行反向工程，從現有的資料庫模型。 模型會儲存在 EDMX 檔案 （副檔名為.edmx），及可以檢視和編輯 Entity Framework 設計工具中。 從 EDMX 檔案，會自動產生應用程式中與您互動的類別。
@@ -46,17 +46,17 @@ Visual Studio 隨附安裝的資料庫伺服器是您已安裝的 Visual Studio 
 -   以滑鼠右鍵按一下**資料連線-&gt;新增連接...**
 -   如果您尚未連線至資料庫從伺服器總管之前您必須選取 Microsoft SQL Server 做為資料來源
 
-    ![SelectDataSource](~/ef6/media/selectdatasource.png)
+    ![選取資料來源](~/ef6/media/selectdatasource.png)
 
 -   連接到 LocalDB 或 SQL Express，何者而定，您已安裝，然後輸入**DatabaseFirst.Blogging**做為資料庫名稱
 
-    ![SqlExpressConnectionDF](~/ef6/media/sqlexpressconnectiondf.png)
+    ![Sql Express 連接 DF](~/ef6/media/sqlexpressconnectiondf.png)
 
-    ![LocalDBConnectionDF](~/ef6/media/localdbconnectiondf.png)
+    ![LocalDB 連接 DF](~/ef6/media/localdbconnectiondf.png)
 
 -   選取  **確定**而且會要求您想要建立新資料庫，請選取**是**
 
-    ![CreateDatabaseDialog](~/ef6/media/createdatabasedialog.png)
+    ![建立資料庫 對話方塊](~/ef6/media/createdatabasedialog.png)
 
 -   新資料庫現在會出現在 [伺服器總管] 中，按一下滑鼠右鍵，然後選取**新查詢**
 -   將下列 SQL 複製到新的查詢，然後以滑鼠右鍵按一下查詢並選取**Execute**
@@ -101,21 +101,21 @@ CREATE TABLE [dbo].[Posts] (
 -   這會啟動**Entity Data Model 精靈**
 -   選取 **從資料庫產生**，按一下 **下一步**
 
-    ![WizardStep1](~/ef6/media/wizardstep1.png)
+    ![精靈步驟 1](~/ef6/media/wizardstep1.png)
 
 -   選取您建立第一個區段中的資料庫連接中，輸入**為 [bloggingcontext]** 做為連接字串，然後按一下 [名稱**下一步]**
 
-    ![WizardStep2](~/ef6/media/wizardstep2.png)
+    ![精靈步驟 2](~/ef6/media/wizardstep2.png)
 
 -   按一下 匯入的所有資料表，並按一下 完成 '資料表旁的核取方塊
 
-    ![WizardStep3](~/ef6/media/wizardstep3.png)
+    ![Krok 3](~/ef6/media/wizardstep3.png)
 
  
 
 反向工程程序完成後新模型加入您的專案，並讓您檢視在 Entity Framework Designer 中開啟。 App.config 檔案也已新增至您的專案與資料庫的連線詳細資料。
 
-![ModelInitial](~/ef6/media/modelinitial.png)
+![建立初始的模型](~/ef6/media/modelinitial.png)
 
 ### <a name="additional-steps-in-visual-studio-2010"></a>Visual Studio 2010 中的其他步驟
 
@@ -135,7 +135,7 @@ CREATE TABLE [dbo].[Posts] (
 -   選取 **線上範本**從左側的功能表，並搜尋**DbContext**
 -   選取 EF **5.x 適用於 C 的 DbContext Generator\#**，輸入**BloggingModel**做為名稱，然後按一下**新增**
 
-    ![DbContextTemplate](~/ef6/media/dbcontexttemplate.png)
+    ![DbContext 範本](~/ef6/media/dbcontexttemplate.png)
 
  
 
@@ -145,7 +145,7 @@ CREATE TABLE [dbo].[Posts] (
 
 *這個螢幕擷取畫面是來自 Visual Studio 2012 中，如果您使用 Visual Studio 2010 BloggingModel.tt 且 BloggingModel.Context.tt 檔案將會直接在您的專案之下，而非巢狀於 EDMX 檔之下。*
 
-![GeneratedClassesDF](~/ef6/media/generatedclassesdf.png)
+![產生的類別 DF](~/ef6/media/generatedclassesdf.png)
 
  
 
@@ -217,7 +217,7 @@ CREATE TABLE [dbo].[Users]
 -   在 [更新精靈] 核取方塊中，資料表旁的 [新增] 索引標籤中，這表示我們想要從結構描述中加入任何新的資料表。
     *[重新整理] 索引標籤會顯示任何現有的資料表，將會檢查變更期間更新模型中。刪除索引標籤會顯示已移除從結構描述，也會移除從模型更新一部分的任何資料表。這些兩個索引標籤上的資訊會自動偵測，並提供僅供參考之用，您無法變更任何設定。*
 
-    ![RefreshWizard](~/ef6/media/refreshwizard.png)
+    ![重新整理精靈](~/ef6/media/refreshwizard.png)
 
 -   按一下 [完成]，在 [更新精靈]
 
@@ -225,7 +225,7 @@ CREATE TABLE [dbo].[Users]
 
 模型現在會更新以包含新的使用者實體會對應到使用者資料表，我們新增至資料庫。
 
-![ModelUpdated](~/ef6/media/modelupdated.png)
+![更新的模型](~/ef6/media/modelupdated.png)
 
 ## <a name="summary"></a>總結
 

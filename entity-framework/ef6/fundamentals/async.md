@@ -3,12 +3,12 @@ title: 非同步查詢並儲存-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: 64051dea740b2183cb904d7fb4293d7048c218ca
-ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
+ms.openlocfilehash: 35604fc16ea37415d39801831aa162d0d42c2a2f
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/29/2018
-ms.locfileid: "43152433"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250747"
 ---
 # <a name="async-query-and-save"></a>非同步查詢和儲存
 > [!NOTE]
@@ -145,7 +145,7 @@ EF6 導入了非同步查詢並儲存使用的支援[async 和 await 關鍵字](
 4.  查詢會傳回，而且結果會寫入**主控台**
 5.  每日會寫入至**主控台**
 
-![SyncOutput](~/ef6/media/syncoutput.png) 
+![同步處理輸出](~/ef6/media/syncoutput.png) 
 
  
 
@@ -227,7 +227,7 @@ EF6 導入了非同步查詢並儲存使用的支援[async 和 await 關鍵字](
 4.  所有的查詢**部落格**傳送至資料庫*同樣地，managed 的執行緒沒有執行其他工作，而查詢則會處理在資料庫中。因為所有其他執行完成之後，執行緒將會就中止等候呼叫不過。*
 5.  查詢會傳回，而且結果會寫入**主控台**
 
-![AsyncOutput](~/ef6/media/asyncoutput.png) 
+![非同步輸出](~/ef6/media/asyncoutput.png) 
 
  
 

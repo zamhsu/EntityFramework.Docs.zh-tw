@@ -3,12 +3,12 @@ title: Entity Framework 設計工具的鍵盤快速鍵 EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 3c76cdd5-17c5-4c54-a6a5-cf21b974636b
-ms.openlocfilehash: 70c9705956b58f4d00908dd9cca6ad0e0a078fc6
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e3a9d968c26841c143b1b7b0ba9a168ecd13f469
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997759"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251124"
 ---
 # <a name="entity-framework-designer-keyboard-shortcuts"></a>Entity Framework 設計工具的鍵盤快速鍵
 此頁面提供鍵盤 shorcuts Entity Framework Tools for Visual Studio 的各種畫面中所提供的清單。
@@ -17,7 +17,7 @@ ms.locfileid: "42997759"
 
 ### <a name="step-one-choose-model-contents"></a>第一步： 選擇模型內容
 
-![WizardOne](~/ef6/media/wizardone.png)
+![精靈的其中一個](~/ef6/media/wizardone.png)
 
 | 快速鍵  | 動作                                                     | 注意                                               |
 |:----------|:-----------------------------------------------------------|:----------------------------------------------------|
@@ -27,7 +27,7 @@ ms.locfileid: "42997759"
 
 ### <a name="step-two-choose-your-connection"></a>第二個步驟： 選擇您的連線
 
-![WizardTwo](~/ef6/media/wizardtwo.png)
+![精靈的兩個](~/ef6/media/wizardtwo.png)
 
 | 快速鍵  | 動作                                                     | 注意                                                   |
 |:----------|:-----------------------------------------------------------|:--------------------------------------------------------|
@@ -41,7 +41,7 @@ ms.locfileid: "42997759"
 
 ### <a name="step-three-choose-your-version"></a>步驟三： 選擇您的版本
 
-![WizardThree](~/ef6/media/wizardthree.png)
+![精靈的三個](~/ef6/media/wizardthree.png)
 
 | 快速鍵  | 動作                                             | 注意                                                                                 |
 |:----------|:---------------------------------------------------|:--------------------------------------------------------------------------------------|
@@ -51,7 +51,7 @@ ms.locfileid: "42997759"
 
 ### <a name="step-four-choose-your-database-objects-and-settings"></a>步驟四： 選擇您的資料庫物件和設定
 
-![WizardFour](~/ef6/media/wizardfour.png)
+![精靈的四個](~/ef6/media/wizardfour.png)
 
 | 快速鍵  | 動作                                                                                    | 注意                                                               |
 |:----------|:------------------------------------------------------------------------------------------|:--------------------------------------------------------------------|
@@ -70,7 +70,7 @@ ms.locfileid: "42997759"
 
 ## <a name="ef-designer-surface"></a>EF 設計工具介面
 
-![DesignerSurface](~/ef6/media/designersurface.png)
+![設計工具介面](~/ef6/media/designersurface.png)
 
 | 快速鍵                                                                                | 動作                      | 注意                                                                                                                                                                                                                               |
 |:----------------------------------------------------------------------------------------|:----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -113,7 +113,7 @@ ms.locfileid: "42997759"
 
 ## <a name="mapping-details-window"></a>對應詳細資料視窗
 
-![MappingDetailsShortcuts](~/ef6/media/mappingdetailsshortcuts.png)
+![對應詳細資料的捷徑](~/ef6/media/mappingdetailsshortcuts.png)
 
 | 快速鍵                  | 動作         | 注意                                                                                                                                 |
 |:--------------------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------------------|

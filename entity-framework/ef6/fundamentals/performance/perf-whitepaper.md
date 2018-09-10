@@ -3,12 +3,12 @@ title: EF4、 EF5，與 EF6 的效能考量
 author: divega
 ms.date: 2016-10-23
 ms.assetid: d6d5a465-6434-45fa-855d-5eb48c61a2ea
-ms.openlocfilehash: f71a13ec06ad46259b3f33216367723b53314a5c
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 3ec061559f6ad7cbdce59118c13543d9993ec5a5
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996744"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251306"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>EF 4、 5 和 6 的效能考量
 David Obando、 Eric Dettinger 和其他項目
@@ -181,7 +181,7 @@ Entity Framework 有快取的內建以下列形式：
 
 沒有使用尋找時所要採取的效能考量。 根據預設，這個方法的引動過程將會觸發物件快取驗證，以便偵測仍在等待認可到資料庫的變更。 此程序可能非常昂貴，如果有非常大量的物件快取中，或加入物件快取的大型物件圖形中的物件，但它可以也停用。 在某些情況下，您可能會感覺透過一個級距中呼叫方法，當您停用自動偵測尋找的差異變更。 尚未第二個量級被認為當物件實際上是與快取中物件具有要從資料庫擷取時。 以下是與使用一些我們 microbenchmarks，以毫秒表示，負載為 5000 實體所做的度量的範例圖表：
 
-![Net45LogScale](~/ef6/media/net45logscale.png ".NET 4.5-對數刻度")
+![.NET 4.5 對數刻度](~/ef6/media/net45logscale.png ".NET 4.5-對數刻度")
 
 停用偵測變更的尋找範例：
 
@@ -825,9 +825,9 @@ var q = context.InvokeProductsForCategoryCQ("Beverages");
 | EF6 | DbContext Linq 查詢                 | 3420      | 47652864 |
 | EF6 | ObjectContext Linq 查詢不追蹤 | 3593      | 45260800 |
 
-![EF5Micro5000Warm](~/ef6/media/ef5micro5000warm.png)
+![EF5 微基準測試，5000 暖的反覆項目](~/ef6/media/ef5micro5000warm.png)
 
-![EF6Micro5000Warm](~/ef6/media/ef6micro5000warm.png)
+![EF6 微基準測試，5000 暖的反覆項目](~/ef6/media/ef6micro5000warm.png)
 
 Microbenchmarks 非常非常敏感的程式碼的小型變更。 在這個案例中，Entity Framework 5 的成本與 Entity Framework 6 之間的差異是由於新增[攔截](~/ef6/fundamentals/logging-and-interception.md)並[異動改進](~/ef6/saving/transactions.md)。 這些 microbenchmarks 數字，不過，會放大的願景，到非常小的片段，Entity Framework 的作用。 從 Entity Framework 5 升級至 Entity Framework 6 的暖查詢的真實世界案例不會看到效能變差。
 
@@ -858,9 +858,9 @@ Microbenchmarks 非常非常敏感的程式碼的小型變更。 在這個案例
 | EF6 | DbContext Linq 查詢                        | 1290      | 47529984 |
 
 
-![EF5WarmQuery1000](~/ef6/media/ef5warmquery1000.png)
+![EF5 暖查詢 1000年反覆項目](~/ef6/media/ef5warmquery1000.png)
 
-![EF6WarmQuery1000](~/ef6/media/ef6warmquery1000.png)
+![EF6 暖查詢 1000年反覆項目](~/ef6/media/ef6warmquery1000.png)
 
 > [!NOTE]
 > 為求完整性，我們加入我們在 EntityCommand 執行 Entity SQL 查詢的其中一種變化。 不過，因為結果不會針對這類查詢具體化，比較不一定是蘋果對蘋果。 測試包含最接近的近似值具體化嘗試進行了比較。

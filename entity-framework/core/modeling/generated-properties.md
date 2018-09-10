@@ -4,18 +4,21 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: eb082011-11a1-41b4-a108-15daafa03e80
 uid: core/modeling/generated-properties
-ms.openlocfilehash: a3656eb1d2dc79ceead04e3a142a58e8afb3cbce
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 9ecfa924a0614f327f0bd202cb7dda95bea810af
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996773"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250695"
 ---
 # <a name="generated-values"></a>產生的值
 
 ## <a name="value-generation-patterns"></a>值，產生的模式
 
-有三種可用於屬性的值產生模式。
+有三種可用於屬性的值產生模式：
+* 沒有值產生
+* 新增產生的值
+* 產生的值上新增或更新
 
 ### <a name="no-value-generation"></a>沒有值產生
 

@@ -3,12 +3,12 @@ title: Entity Framework 6 提供者模型-EF6
 author: divega
 ms.date: 2018-06-27
 ms.assetid: 066832F0-D51B-4655-8BE7-C983C557E0E4
-ms.openlocfilehash: e8b0552ec083d8ab276aa9de109650f423160269
-ms.sourcegitcommit: a81aed575372637997b18a0f9466d8fefb33350a
+ms.openlocfilehash: 7d9e2f49b9ef59fb63b024646911ec0d8dfcfc60
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/06/2018
-ms.locfileid: "43821383"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251098"
 ---
 # <a name="the-entity-framework-6-provider-model"></a>Entity Framework 6 提供者模型
 
@@ -24,13 +24,13 @@ Entity Framework 提供者模型可讓 Entity Framework，可搭配不同類型�
 
 EF 提供者其實這些服務 （適用於基底類別），從擴充或實作 （適用於介面） 的 CLR 型別所定義的提供者特定服務的集合。 這些服務的兩個是基本和所需的 EF 完全運作。 有些則是選擇性的只需要特定的功能是必要和/或目標的特定資料庫伺服器無法使用這些服務的預設實作會實作。
 
-### <a name="fundamental-provider-types"></a>基本的提供者類型
+## <a name="fundamental-provider-types"></a>基本的提供者類型
 
-#### <a name="dbproviderfactory"></a>DbProviderFactory
+### <a name="dbproviderfactory"></a>DbProviderFactory
 
 EF 取決於衍生自特定型別[System.Data.Common.DbProviderFactory](http://msdn.microsoft.com/en-us/library/system.data.common.dbproviderfactory.aspx)執行所有的低層級的資料庫存取權。 DbProviderFactory 不是實際的 EF 的一部分，而是改為在.NET Framework 中的 ADO.NET 提供者做為進入點的類別可以使用 EF，其他的 O/RMs 或直接由應用程式來取得執行個體的連接、 命令、 參數和其他的 ADO.NET 抽象概念，在提供者無關的方式。 DbProviderFactory 的詳細資訊位於[ADO.NET 的 MSDN 文件](http://msdn.microsoft.com/en-us/library/a6cd7c08.aspx)。
 
-#### <a name="dbproviderservices"></a>DbProviderServices
+### <a name="dbproviderservices"></a>DbProviderServices
 
 EF 取決於特定的型別衍生自 DbProviderServices 提供額外的功能所需的 EF，上方已 ADO.NET 提供者所提供的功能。 在較舊版本的 EF DbProviderServices 類別是.NET Framework 的一部分，並 System.Data.Common 命名空間中找不到。 開始使用 EF6 這個類別現在是 EntityFramework.dll 的一部分，並在 System.Data.Entity.Core.Common 命名空間。
 
@@ -38,33 +38,33 @@ EF 取決於特定的型別衍生自 DbProviderServices 提供額外的功能所
 
 在較舊版本的 EF 從 ADO.NET 提供者直接取得要使用的 DbProviderServices 實作。 這是由轉換為 IServiceProvider DbProviderFactory，呼叫 GetService 方法。 這與緊密結合 EF 提供者的 DbProviderFactory。 此結合禁止 EF 中移出.NET Framework，因此 EF6 的這個緊密結合已移除，並直接在應用程式的組態檔或程式碼為基礎，現在已註冊的 DbProviderServices 實作更多詳細資料中所述的組態_註冊的 DbProviderServices_下一節。
 
-### <a name="additional-services"></a>其他服務
+## <a name="additional-services"></a>其他服務
 
 除了上面所述的基本服務還有許多其他服務 EF 使用，也就是一律或有時提供者專屬。 DbProviderServices 實作可以提供這些服務的預設提供者特定實作。 應用程式也可以覆寫的實作，這些服務，或提供實作，當 DbProviderServices 類型不會提供預設值。 這描述更詳細地_解析其他服務_下一節。
 
 以下列出提供者可能會感興趣的提供者的其他服務類型。 每個服務類型的更多詳細可以找到 API 文件中。
 
-#### <a name="idbexecutionstrategy"></a>IDbExecutionStrategy
+### <a name="idbexecutionstrategy"></a>IDbExecutionStrategy
 
 這是選擇性的服務，可讓提供者，以針對資料庫執行查詢和命令時，實作重試或其他行為。 如果不提供實作，然後 EF 將只執行命令，並傳播擲回任何例外狀況。 適用於 SQL Server 會提供重試原則，也就是特別有用，例如 SQL Azure 的雲端式資料庫伺服器上執行時使用此服務。
 
-#### <a name="idbconnectionfactory"></a>IDbConnectionFactory
+### <a name="idbconnectionfactory"></a>IDbConnectionFactory
 
 這是選擇性的服務，可讓提供者來指定資料庫名稱時的慣例來建立 DbConnection 物件。 請注意，雖然這項服務的 DbProviderServices 實作，它已因為 EF 4.1 存在，而且也可以明確地設定組態檔中或在程式碼，即可解決。 提供者只會有機會解決這項服務，如果它註冊為預設的提供者 (請參閱_的預設提供者_下方)，如果預設連接 factory 尚未設定其他位置。
 
-#### <a name="dbspatialservices"></a>DbSpatialServices
+### <a name="dbspatialservices"></a>DbSpatialServices
 
 這是選擇性的服務，可讓提供者將 geography 和 geometry 空間類型的支援。 為了讓應用程式使用 EF 使用的空間類型，必須提供這項服務的實作。 DbSptialServices 要求有兩種。 首先，提供者特定的空間服務要求使用 DbProviderInfo 物件 (其中包含非變異名稱和資訊清單語彙基元) 做為索引鍵。 第二，DbSpatialServices 可要求沒有索引鍵。 這用來解決 「 全域空間提供者 」 時，建立獨立的 DbGeography 或 DbGeometry 類型使用。
 
-#### <a name="migrationsqlgenerator"></a>MigrationSqlGenerator
+### <a name="migrationsqlgenerator"></a>MigrationSqlGenerator
 
 這是選擇性的服務，可讓用於 Code First 所建立和修改資料庫結構描述中使用 SQL 產生的 EF 移轉。 實作，才能支援移轉。 如果未提供實作，然後它會也可用時使用資料庫初始設定式或 Database.Create; 方法建立資料庫。
 
-#### <a name="funcdbconnection-string-historycontextfactory"></a>L o c k < DbConnection HistoryContextFactory 的字串 >
+### <a name="funcdbconnection-string-historycontextfactory"></a>L o c k < DbConnection HistoryContextFactory 的字串 >
 
 這是選擇性的服務，可讓提供者來設定對應至 HistoryContext`__MigrationHistory`使用 EF 移轉的資料表。 HistoryContext 是程式碼的第一個 DbContext，可以使用一般的 fluent API 來變更資料表和資料行對應規格的名稱等項目進行設定。 如果該提供者支援所有的預設資料表和資料行對應，可能會針對給定的資料庫伺服器運作這項服務由 EF 傳回所有提供者的預設實作。 在此情況下提供者不會不需要提供此服務的實作。
 
-#### <a name="idbproviderfactoryresolver"></a>IDbProviderFactoryResolver
+### <a name="idbproviderfactoryresolver"></a>IDbProviderFactoryResolver
 
 這是選擇性的服務，從指定的 DbConnection 物件取得正確的 DbProviderFactory。 這項服務由 EF 傳回所有提供者的預設實作是適用於所有提供者。 不過，.NET 4 上執行時，DbProviderFactory 不是可公開存取一個如果其 DbConnections。 因此，EF 會使用一些啟發學習法來搜尋已註冊的提供者，以尋找相符項目。 很可能對於某些提供者將會失敗的這些啟發學習法，而在此情況下，提供者應該提供新的實作。
 

@@ -3,12 +3,12 @@ title: 使用 migrate.exe-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 989ea862-e936-4c85-926a-8cfbef5df5b8
-ms.openlocfilehash: 39740578e4a8c2d5400bcabbcb107baf0648fba5
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 8f0ff6d472c39eaf000c31783fe7a769c8746fec
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993495"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251111"
 ---
 # <a name="using-migrateexe"></a>使用 migrate.exe
 Code First 移轉可以用來更新資料庫，以從在 visual studio，但也可以透過命令列工具 migrate.exe 執行。 此頁面會提供如何使用 migrate.exe 執行對資料庫的移轉的快速概觀。
@@ -26,16 +26,14 @@ Code First 移轉可以用來更新資料庫，以從在 visual studio，但也�
 
 | .NET 4.5                                   | .NET 4.0                                   |
 |:-------------------------------------------|:-------------------------------------------|
-| ![Net45Files](~/ef6/media/net45files.png)  | ![Net40Files](~/ef6/media/net40files.png)  |
+| ![.NET 4.5 檔案](~/ef6/media/net45files.png)  | ![.NET 4.0 檔案](~/ef6/media/net40files.png)  |
 
 > [!NOTE]
 > migrate.exe 不支援 x64 的組件。
 
-## <a name="using-migrateexe"></a>使用 Migrate.exe
-
 一旦您已經移動 migrate.exe 到正確的資料夾，則您應該能夠使用它來執行對資料庫的移轉。 此公用程式設計來執行的只是執行移轉。 它無法產生遷移，或建立的 SQL 指令碼。
 
-### <a name="see-options"></a>請參閱選項
+## <a name="see-options"></a>請參閱選項
 
 ``` console
 Migrate.exe /?
@@ -43,7 +41,7 @@ Migrate.exe /?
 
 上述會顯示與此公用程式，請注意，您必須在相同的位置，您在此工作順序執行 migrate.exe EntityFramework.dll 相關聯的 [說明] 頁面。
 
-### <a name="migrate-to-the-latest-migration"></a>移轉至最新的移轉
+## <a name="migrate-to-the-latest-migration"></a>移轉至最新的移轉
 
 ``` console
 Migrate.exe MyMvcApplication.dll /startupConfigurationFile=”..\\web.config”
@@ -51,7 +49,7 @@ Migrate.exe MyMvcApplication.dll /startupConfigurationFile=”..\\web.config”
 
 當執行 migrate.exe 只有必要的參數組件，也就是包含您嘗試執行的移轉作業的組件，但它會使用所有的慣例基礎設定值，如果您未指定組態檔。
 
-### <a name="migrate-to-a-specific-migration"></a>移轉至特定的移轉
+## <a name="migrate-to-a-specific-migration"></a>移轉至特定的移轉
 
 ``` console
 Migrate.exe MyApp.exe /startupConfigurationFile=”MyApp.exe.config” /targetMigration=”AddTitle”
@@ -59,7 +57,7 @@ Migrate.exe MyApp.exe /startupConfigurationFile=”MyApp.exe.config” /targetMi
 
 如果您想要執行至特定移轉的移轉，您可以指定移轉的名稱。 這會視需要執行所有先前移轉作業之前取得與指定的移轉。
 
-### <a name="specify-working-directory"></a>指定工作目錄
+## <a name="specify-working-directory"></a>指定工作目錄
 
 ``` console
 Migrate.exe MyApp.exe /startupConfigurationFile=”MyApp.exe.config” /startupDirectory=”c:\\MyApp”
@@ -67,7 +65,7 @@ Migrate.exe MyApp.exe /startupConfigurationFile=”MyApp.exe.config” /startupD
 
 如果您的組件有相依性，或讀取之工作目錄相對的檔案，則您必須設定 startupDirectory。
 
-### <a name="specify-migration-configuration-to-use"></a>指定要使用的移轉設定
+## <a name="specify-migration-configuration-to-use"></a>指定要使用的移轉設定
 
 ``` console
 Migrate.exe MyAssembly CustomConfig /startupConfigurationFile=”..\\web.config”
@@ -75,7 +73,7 @@ Migrate.exe MyAssembly CustomConfig /startupConfigurationFile=”..\\web.config�
 
 如果您有多個移轉組態類別，類別繼承自 DbMigrationConfiguration，然後您要指定這被要用於此執行。 這是藉由提供選擇性的第二個參數，不含上述做為參數指定。
 
-### <a name="provide-connection-string"></a>提供連接字串
+## <a name="provide-connection-string"></a>提供連接字串
 
 ``` console
 Migrate.exe BlogDemo.dll /connectionString=”Data Source=localhost;Initial Catalog=BlogDemo;Integrated Security=SSPI” /connectionProviderName=”System.Data.SqlClient”

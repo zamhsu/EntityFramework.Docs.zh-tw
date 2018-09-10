@@ -3,12 +3,12 @@ title: 現有的資料庫-EF6 的 code First
 author: divega
 ms.date: 2016-10-23
 ms.assetid: a7e60b74-973d-4480-868f-500a3899932e
-ms.openlocfilehash: 29f959265e0fd0d5e14c156519e6931fd8da0677
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: fedfb921919582e2cdb5f3bc497f11889b972ad6
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995086"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251072"
 ---
 # <a name="code-first-to-an-existing-database"></a>Code First 至現有的資料庫
 本影片以及逐步說明的逐步解說提供以現有的資料庫為目標的 Code First 開發的簡介。 程式碼第一次可讓您定義您的模型使用 C\#或 VB.Net 類別。 （選擇性） 其他設定可以使用屬性，在您的類別和屬性，或使用 fluent API 來執行。
@@ -33,15 +33,15 @@ ms.locfileid: "42995086"
 -   以滑鼠右鍵按一下**資料連線-&gt;新增連接...**
 -   如果您尚未連線至資料庫，以從**伺服器總管**您必須選取才能**Microsoft SQL Server**做為資料來源
 
-    ![SelectDataSource](~/ef6/media/selectdatasource.png)
+    ![選取資料來源](~/ef6/media/selectdatasource.png)
 
 -   連線到您的 LocalDB 執行個體，然後輸入**部落格**做為資料庫名稱
 
-    ![LocalDBConnection](~/ef6/media/localdbconnection.png)
+    ![LocalDB 連接](~/ef6/media/localdbconnection.png)
 
 -   選取  **確定**而且會要求您想要建立新資料庫，請選取**是**
 
-    ![CreateDatabaseDialog](~/ef6/media/createdatabasedialog.png)
+    ![建立資料庫 對話方塊](~/ef6/media/createdatabasedialog.png)
 
 -   新資料庫現在會出現在 [伺服器總管] 中，按一下滑鼠右鍵，然後選取**新查詢**
 -   將下列 SQL 複製到新的查詢，然後以滑鼠右鍵按一下查詢並選取**Execute**
@@ -92,15 +92,15 @@ VALUES ('.NET Framework Blog', 'http://blogs.msdn.com/dotnet/')
 -   這會啟動**Entity Data Model 精靈**
 -   選取  **Code First 從資料庫**，按一下 **下一步**
 
-    ![WizardOneCFE](~/ef6/media/wizardonecfe.png)
+    ![精靈一 CFE](~/ef6/media/wizardonecfe.png)
 
 -   選取您在第一節中建立資料庫的連接，然後按一下**下一步**
 
-    ![WizardTwoCFE](~/ef6/media/wizardtwocfe.png)
+    ![精靈的兩個 CFE](~/ef6/media/wizardtwocfe.png)
 
 -   按一下核取方塊旁**資料表**匯入的所有資料表，並按一下**完成**
 
-    ![WizardThreeCFE](~/ef6/media/wizardthreecfe.png)
+    ![精靈的三個 CFE](~/ef6/media/wizardthreecfe.png)
 
 反向工程程序完成的項目數目將已加入至專案，讓我們看一下什麼已加入。
 

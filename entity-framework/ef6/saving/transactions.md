@@ -3,12 +3,12 @@ title: 使用交易-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 0d0f1824-d781-4cb3-8fda-b7eaefced1cd
-ms.openlocfilehash: 20b63c88c41c10b5a69660d5027097c647c7eedd
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 26473e1e52a6044babc717d5b158ad73aac5c738
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997547"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250604"
 ---
 # <a name="working-with-transactions"></a>使用交易
 > [!NOTE]
@@ -198,7 +198,7 @@ namespace TransactionsExamples
 
 ### <a name="connection-resiliency"></a>連線復原能力  
 
-新的連接恢復功能不適用於使用者起始交易。 如需詳細資訊，請參閱 <<c0> [ 重試執行策略限制](~/ef6/fundamentals/connection-resiliency/retry-logic.md#limitations)。  
+新的連接恢復功能不適用於使用者起始交易。 如需詳細資訊，請參閱 <<c0> [ 重試執行策略](~/ef6/fundamentals/connection-resiliency/retry-logic.md#user-initiated-transactions-are-not-supported)。  
 
 ### <a name="asynchronous-programming"></a>非同步程式設計  
 

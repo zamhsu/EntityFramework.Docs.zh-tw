@@ -3,12 +3,12 @@ title: Code First 至新的資料庫-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 2df6cb0a-7d8b-4e28-9d05-e2b9a90125af
-ms.openlocfilehash: 50c6a4710bc50879304f64e781a46c4836f86882
-ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
+ms.openlocfilehash: 8ed1bfbc3536acc0d83b9c8ecdd180aeb44eff83
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/29/2018
-ms.locfileid: "43152474"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251046"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First 至新的資料庫
 本影片以及逐步說明的逐步解說提供目標的新資料庫的 Code First 開發的簡介。 此案例包含目標資料庫不存在和 Code First 會建立，或空的資料庫，Code First 會新增的新資料表。 程式碼第一次可讓您定義您的模型使用 C\#或 VB.Net 類別。 其他設定 （選擇性） 可以使用屬性，在您的類別和屬性，或使用 fluent API 來執行。
@@ -199,13 +199,13 @@ Press any key to exit...
 -   以滑鼠右鍵按一下**資料連接**，然後選取**新增連接...**
 -   如果您尚未連線至資料庫從伺服器總管之前您必須選取 Microsoft SQL Server 做為資料來源
 
-    ![SelectDataSource](~/ef6/media/selectdatasource.png)
+    ![選取資料來源](~/ef6/media/selectdatasource.png)
 
 -   連接到 LocalDB 或 SQL Express，何者而定，您已安裝
 
 我們現在可以檢查 Code First 建立的結構描述。
 
-![SchemaInitial](~/ef6/media/schemainitial.png)
+![初始的結構描述](~/ef6/media/schemainitial.png)
 
 DbContext 出哪些類別，以查看我們所定義的 DbSet 屬性包含在模型中。 然後，它會使用一組預設的 Code First 慣例決定資料表和資料行的名稱，判斷資料型別中，尋找主索引鍵等。 稍後在本逐步解說中，我們將探討如何覆寫這些慣例。
 
@@ -266,7 +266,7 @@ namespace CodeFirstNewDatabaseSample.Migrations
 
 新的 [Url] 資料行現在已新增至部落格資料庫的資料表中:
 
-![SchemaWithUrl](~/ef6/media/schemawithurl.png)
+![使用 Url 的結構描述](~/ef6/media/schemawithurl.png)
 
 ## <a name="6-data-annotations"></a>6.資料註釋
 
@@ -316,7 +316,7 @@ public class User
 
 新的資料表現在已新增至資料庫：
 
-![SchemaWithUsers](~/ef6/media/schemawithusers.png)
+![與使用者的結構描述](~/ef6/media/schemawithusers.png)
 
 是支援的 EF 的註解的完整清單：
 
@@ -365,7 +365,7 @@ public class BloggingContext : DbContext
 
 {3&gt;displayname&lt;3} 資料行現在已重新命名以顯示\_名稱：
 
-![SchemaWithDisplayNameRenamed](~/ef6/media/schemawithdisplaynamerenamed.png)
+![重新命名的顯示名稱的結構描述](~/ef6/media/schemawithdisplaynamerenamed.png)
 
 ## <a name="summary"></a>總結
 

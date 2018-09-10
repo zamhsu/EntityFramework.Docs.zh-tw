@@ -3,12 +3,12 @@ title: 還原成在 Entity Framework Designer EF6 的 ObjectContext
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 36550569-a1de-47cb-ba6d-544794ffd500
-ms.openlocfilehash: b52bfc36c97e1a3c7cd2d3716feb1ae48c68a56e
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e90af3e973c71e2ce872e3edc24aafc1b2ccce0f
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997308"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250331"
 ---
 # <a name="reverting-to-objectcontext-in-entity-framework-designer"></a>還原成 Entity Framework 設計工具中的 ObjectContext
 與上一個版本的 Entity Framework 的模型，建立與 EF 設計工具會產生衍生自 ObjectContext 的內容和實體類別，衍生自 EntityObject。
@@ -23,11 +23,11 @@ Visual Studio 2012 中，您會取得所有新的模型使用 EF 設計工具建
 
 產生的衍生 DbContext 及 POCO 類別由您的專案中的兩個.tt 檔案中，如果您展開 [方案總管] 中的.edmx 檔案，您會看到這些檔案。 刪除兩個專案中。
 
-![CodeGenFiles](~/ef6/media/codegenfiles.png)
+![程式碼的一般檔案](~/ef6/media/codegenfiles.png)
 
 如果您使用 VB.NET 您必須選取**顯示所有檔案**按鈕，即可查看巢狀的檔案。
 
-![ShowAllFiles](~/ef6/media/showallfiles.png)
+![顯示所有檔案](~/ef6/media/showallfiles.png)
 
 ### <a name="2-re-enable-objectcontext-code-generation"></a>2.重新啟用 ObjectContext 的程式碼產生
 
@@ -35,4 +35,4 @@ Visual Studio 2012 中，您會取得所有新的模型使用 EF 設計工具建
 
 在 [屬性] 視窗變更**程式碼產生策略**從**無**來**預設**。
 
-![CodeGenStrategy](~/ef6/media/codegenstrategy.png)
+![程式碼的一般策略](~/ef6/media/codegenstrategy.png)

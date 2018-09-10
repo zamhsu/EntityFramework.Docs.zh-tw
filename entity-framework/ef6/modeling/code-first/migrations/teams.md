@@ -3,12 +3,12 @@ title: 在小組環境-EF6 code First 移轉
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
-ms.openlocfilehash: 42f52e63fd6cfc1f02d6a721594f4a161eea9a7b
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 31f8476c64d36d4d1cf3d18deb59ebc482dcc975
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997295"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251228"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>在小組環境中的 code First 移轉
 > [!NOTE]
@@ -54,7 +54,7 @@ ms.locfileid: "42997295"
 
 當您第一次移轉新增至您的專案時，您會執行類似**Add-migration 第一個**在套件管理員主控台。 下圖是此命令會執行的高層級步驟。
 
-![FirstMigration](~/ef6/media/firstmigration.png)
+![第一次移轉](~/ef6/media/firstmigration.png)
 
 目前的模型會計算從您的程式碼 (1)。 模型的差異 (2) 然後計算所需的資料庫物件，因為這是第一次移轉模型不同只會使用空的模型進行比較。 必要的變更會傳遞至程式碼產生器，以建置必要的移轉程式碼 (3) 接著會新增至您的 Visual Studio 方案 (4)。
 
@@ -66,7 +66,7 @@ ms.locfileid: "42997295"
 
 稍後再回來，並對您的模型進行一些變更 – 在我們的範例中我們將新增**Url**屬性設**部落格**。 例如您想再發出命令**Add-migration AddUrl**若要建立要套用對應的資料庫移轉的結構變更。 下圖是此命令會執行的高層級步驟。
 
-![SecondMigration](~/ef6/media/secondmigration.png)
+![第二次移轉](~/ef6/media/secondmigration.png)
 
 如同過去的時間，目前的模型會計算從程式碼 (1)。 不過，這次有現有的移轉因此先前的模型會從最新的移轉 (2)。 這兩種模型是 diffed 以尋找所需的資料庫變更 (3)，然後在程序完成之前一樣。
 
@@ -96,14 +96,14 @@ ms.locfileid: "42997295"
 
 我們會將追蹤 EF 模型，並透過一些變更的移轉作業。 起始點，這兩個開發人員有同步處理至原始檔控制儲存機制，如下圖所示。
 
-![StartingPoint](~/ef6/media/startingpoint.png)
+![起點](~/ef6/media/startingpoint.png)
 
 開發人員\#1 和開發人員\#2 現在會對 EF 模型，在其本機程式碼基底。 開發人員\#1 多**分級**屬性設**部落格**– 並產生**AddRating**將變更套用至資料庫的移轉。 開發人員\#2 加入**讀者**屬性設**部落格**– 並產生對應**AddReaders**移轉。 這兩個開發人員執行**Update-database**以將變更套用至本機資料庫，然後再繼續開發應用程式。
 
 > [!NOTE]
 > 移轉前面會加上時間戳記，因此我們的圖形表示，開發人員 AddReaders 遷移\#2 AddRating 移轉後來自開發人員\#1。 是否開發人員\#1 或\#2 產生移轉的第一個會在一個小組或合併它們，我們將探討下一節中的程序中的問題並沒有差別。
 
-![LocalChanges](~/ef6/media/localchanges.png)
+![本機變更](~/ef6/media/localchanges.png)
 
 很幸運了開發人員每天\#1，進而將其變更送出第一次。 因為沒有其他人已簽入，因為它們同步處理其儲存機制，他們可以只提交其變更，而不執行任何合併。
 
@@ -147,7 +147,7 @@ ms.locfileid: "42997295"
 
 以下是開發人員的狀態\#2 的本機程式碼基底之後使用這種方法。
 
-![MergeMigration](~/ef6/media/mergemigration.png)
+![合併移轉](~/ef6/media/mergemigration.png)
 
 ### <a name="option-2-update-the-model-snapshot-in-the-last-migration"></a>選項 2： 更新模型中的快照集的最後一個移轉
 
@@ -176,7 +176,7 @@ ms.locfileid: "42997295"
 
 以下是開發人員的狀態\#2 的本機程式碼基底之後使用這種方法。
 
-![UpdatedMetadata](~/ef6/media/updatedmetadata.png)
+![更新的中繼資料](~/ef6/media/updatedmetadata.png)
 
 ## <a name="summary"></a>總結
 

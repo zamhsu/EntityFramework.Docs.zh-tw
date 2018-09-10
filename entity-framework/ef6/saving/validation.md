@@ -3,12 +3,12 @@ title: 驗證-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 77d6a095-c0d0-471e-80b9-8f9aea6108b2
-ms.openlocfilehash: eec834888e2e3efaadc8acf9d4f64307f394ea4a
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 65639b0f91f54ee2cd1336f6b6cd4caf45ede680
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994441"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251020"
 ---
 # <a name="data-validation"></a>資料驗證
 > [!NOTE]
@@ -54,7 +54,7 @@ Entity Framework 提供許多驗證功能，可以透過餵送到用戶端驗證
 
 沒有額外的程式碼或標記變更應用程式中的，現有的 MVC 應用程式會執行用戶端驗證，甚至以動態方式建置訊息使用的屬性和註釋名稱。
 
-![figure01](~/ef6/media/figure01.png)
+![圖 1](~/ef6/media/figure01.png)
 
 貼文中傳回的這個建立檢視的方法，將新的部落格儲存至資料庫中，使用 Entity Framework，但 MVC 的用戶端驗證，就會觸發應用程式到達該程式碼之前。
 
@@ -153,7 +153,7 @@ ValidationResult 建構函式會接受字串，表示錯誤訊息和表示與驗
 
 不同於 Fluent API 所提供的驗證，此驗證的結果也會辨識由檢視而且我稍早用來加入 ModelState 錯誤的例外狀況處理常式是不必要。 因為在 ValidationResult 中設定這兩個屬性名稱，MVC HtmlHelpers 會顯示錯誤訊息，這兩個屬性。
 
-![figure02](~/ef6/media/figure02.png)
+![圖 2](~/ef6/media/figure02.png)
 
 ## <a name="dbcontextvalidateentity"></a>DbContext.ValidateEntity
 

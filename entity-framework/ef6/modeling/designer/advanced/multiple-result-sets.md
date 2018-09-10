@@ -3,12 +3,12 @@ title: 預存程序包含多個結果集-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 1b3797f9-cd3d-4752-a55e-47b84b399dc1
-ms.openlocfilehash: bb104ac5f584d26d279259a173de9afe3f018968
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 56c28f05bd7efe1b54d6cadd32afe0e9c6cf38b5
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996171"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251007"
 ---
 # <a name="stored-procedures-with-multiple-result-sets"></a>多個結果集的預存程序
 有時候在使用預存程序，您將需要傳回多個結果集。 此案例中常用來減少資料庫的撰寫單一畫面所需的往返。 之前 EF5，Entity Framework 可讓呼叫的預存程序，但只會傳回第一個結果集，以呼叫程式碼。
@@ -104,7 +104,7 @@ Translate 方法會接受我們收到我們執行此程序、 EntitySet 名稱�
 -   若要這樣做，您需要將預存程序加入至模型，您需要單一結果集查詢。
 -   一旦您擁有這則需要以滑鼠右鍵按一下您的模型，然後選取**開啟方式...** 然後**Xml**
 
-    ![OpenAs](~/ef6/media/openas.png)
+    ![開啟為](~/ef6/media/openas.png)
 
 在您具備模型開啟為 XML，則您需要執行下列步驟：
 

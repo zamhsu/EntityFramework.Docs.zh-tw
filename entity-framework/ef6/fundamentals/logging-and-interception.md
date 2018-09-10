@@ -3,12 +3,12 @@ title: 記錄和攔截資料庫作業-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: b5ee7eb1-88cc-456e-b53c-c67e24c3f8ca
-ms.openlocfilehash: 2e16502abf54be3f3b2f63fe69d2605ef13dea27
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 9a8be81af45d9f27caa8c26f66d219dc568b6604
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994631"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251267"
 ---
 # <a name="logging-and-intercepting-database-operations"></a>記錄和攔截資料庫作業
 > [!NOTE]
@@ -36,8 +36,6 @@ using (var context = new BlogContext())
 ```  
 
 請注意該內容。Console.Write 設 Database.Log。 這是所有所需的 SQL 記錄至主控台。  
-
-### <a name="example-output"></a>範例輸出  
 
 讓我們加入一些簡單的查詢/插入/更新程式碼，以便我們可以看到一些輸出：  
 
@@ -98,7 +96,7 @@ WHERE @@ROWCOUNT > 0 AND [Id] = scope_identity()
 
 （請注意，這是假設已發生任何資料庫初始設定的輸出。 如果資料庫初始化時也不已經發生則會有更多的輸出顯示所有工作的移轉會在幕後，檢查或建立新的資料庫。）  
 
-### <a name="what-gets-logged"></a>取得記錄的內容？  
+## <a name="what-gets-logged"></a>取得記錄的內容？  
 
 將記錄記錄屬性時設定下列各項：  
 
@@ -124,7 +122,7 @@ WHERE @@ROWCOUNT > 0 AND [Id] = scope_identity()
     - 請注意的 FK 和 Title 屬性的參數詳細資料  
     - 請注意這些命令會以非同步方式執行  
 
-### <a name="logging-to-different-places"></a>記錄到不同的地方  
+## <a name="logging-to-different-places"></a>記錄到不同的地方  
 
 記錄至如上所示的主控台是超級簡單。 它也很容易使用各種記錄記憶體、 檔案等等的[TextWriter](https://msdn.microsoft.com/library/system.io.textwriter.aspx)。  
 
@@ -147,7 +145,7 @@ var logger = new MyLogger();
 context.Database.Log = s => logger.Log("EFApp", s);
 ```  
 
-### <a name="result-logging"></a>結果記錄  
+## <a name="result-logging"></a>結果記錄  
 
 預設記錄器記錄命令文字 (SQL)、 參數和 「 執行 」 列加上時間戳記之前的命令傳送至資料庫。 「 已完成 」 包含已耗用時間的資料行是記錄的執行下列命令。  
 
@@ -155,11 +153,11 @@ context.Database.Log = s => logger.Log("EFApp", s);
 
 「 已完成 」 列包含不同的資訊，根據命令和已成功執行的類型。  
 
-#### <a name="successful-execution"></a>成功執行  
+### <a name="successful-execution"></a>成功執行  
 
 若是成功完成輸出的命令是 「 x ms 結果中的已完成: 」 後面的結果為何的某些指示。 傳回結果的資料讀取器的命令的指示是種[DbDataReader](https://msdn.microsoft.com/library/system.data.common.dbdatareader.aspx)傳回。 傳回整數值，例如更新的命令如上所示的結果所示的命令會為整數。  
 
-#### <a name="failed-execution"></a>執行失敗  
+### <a name="failed-execution"></a>執行失敗  
 
 如需藉由擲回例外狀況失敗的命令，輸出會包含例外狀況的訊息。 比方說，使用 SqlQuery 來查詢存在的資料表會記錄檔中的結果輸出類似如下：  
 
@@ -169,7 +167,7 @@ SELECT * from ThisTableIsMissing
 -- Failed in 1 ms with error: Invalid object name 'ThisTableIsMissing'.
 ```  
 
-#### <a name="canceled-execution"></a>已取消的執行  
+### <a name="canceled-execution"></a>已取消的執行  
 
 非同步命令取消工作時，結果可能會失敗並發生例外狀況，因為這是什麼基礎 ADO.NET 提供者通常會嘗試取消時。 如果這不會發生，且工作已完全取消，則輸出會看起來像這樣：  
 
@@ -180,8 +178,6 @@ update Blogs set Title = 'No' where Id = -1
 ```  
 
 ## <a name="changing-log-content-and-formatting"></a>變更記錄檔的內容和格式  
-
-### <a name="databaselogformatter"></a>DatabaseLogFormatter  
 
 在幕後屬性會使 Database.Log DatabaseLogFormatter 物件使用。 這個物件有效地繫結的委派，接受字串和 DbContext IDbCommandInterceptor 實作 （如下所示）。 這表示，在 DatabaseLogFormatter 會呼叫方法之前和之後執行命令的 EF。 這些 DatabaseLogFormatter 方法收集和記錄檔輸出格式化並將它傳送給委派。  
 

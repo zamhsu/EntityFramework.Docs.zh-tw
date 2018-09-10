@@ -3,12 +3,12 @@ title: 處理交易認可失敗 EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 5b1f7a7d-1b24-4645-95ec-5608a31ef577
-ms.openlocfilehash: a22a651851bc46e2bf1fe652b3b9a921ec22b70b
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: f912777104c2e925122c05046d4d65660de8b8a8
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996833"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250852"
 ---
 # <a name="handling-transaction-commit-failures"></a>處理交易認可失敗
 > [!NOTE]
@@ -50,23 +50,23 @@ public class MyConfiguration : DbConfiguration
 
 EF 6.1 之前沒有機制可用來處理 EF 產品中的認可失敗。 有數種方式來處理這種情況下，可以套用到舊版的 EF6:  
 
-### <a name="option-1---do-nothing"></a>選項 1-不執行任何動作  
+* 選項 1-不執行任何動作  
 
-在交易認可期間連線失敗的可能性很低，因此可能會接受您的應用程式如果實際上會發生此狀況就會失敗。  
+  在交易認可期間連線失敗的可能性很低，因此可能會接受您的應用程式如果實際上會發生此狀況就會失敗。  
 
-## <a name="option-2---use-the-database-to-reset-state"></a>選項 2-使用資料庫來重設狀態  
+* 選項 2-使用資料庫來重設狀態  
 
-1. 捨棄目前的 DbContext  
-2. 建立新的 DbContext，並從資料庫中還原應用程式的狀態  
-3. 通知使用者，最後一個作業可能無法順利完成  
+  1. 捨棄目前的 DbContext  
+  2. 建立新的 DbContext，並從資料庫中還原應用程式的狀態  
+  3. 通知使用者，最後一個作業可能無法順利完成  
 
-## <a name="option-3---manually-track-the-transaction"></a>選項 3-手動追蹤交易  
+* 選項 3-手動追蹤交易  
 
-1. 加入用來追蹤交易狀態的資料庫中的非追蹤資料表。  
-2. 將資料列插入資料表中每一筆交易的開頭。  
-3. 如果連線失敗的認可，則會檢查資料庫中對應的資料列存在。  
-    - 如果資料列存在時，會繼續正常執行，因為交易已成功認可  
-    - 如果資料列不存在，請重試目前的作業使用執行策略。  
-4. 如果認可成功，刪除對應的資料列，以避免資料表的成長。  
+  1. 加入用來追蹤交易狀態的資料庫中的非追蹤資料表。  
+  2. 將資料列插入資料表中每一筆交易的開頭。  
+  3. 如果連線失敗的認可，則會檢查資料庫中對應的資料列存在。  
+     - 如果資料列存在時，會繼續正常執行，因為交易已成功認可  
+     - 如果資料列不存在，請重試目前的作業使用執行策略。  
+  4. 如果認可成功，刪除對應的資料列，以避免資料表的成長。  
 
 [此部落格文章](http://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx)包含範例程式碼在 SQL Azure 上完成這項作業。  

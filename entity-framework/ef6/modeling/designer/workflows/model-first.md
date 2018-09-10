@@ -3,12 +3,12 @@ title: 第一次-模型 EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
-ms.openlocfilehash: c21592b27fa752532f5ede5923d0bd751f0bf372
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 3dd0eba29619f09995d7009dd29462c14bde98c4
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998111"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251137"
 ---
 # <a name="model-first"></a>第一次建立模型
 本影片以及逐步說明的逐步解說提供使用 Entity Framework 模型優先開發的簡介。 第一次模型可讓您建立新的模型使用 Entity Framework Designer，然後透過模型產生資料庫結構描述。 模型會儲存在 EDMX 檔案 （副檔名為.edmx），及可以檢視和編輯 Entity Framework 設計工具中。 從 EDMX 檔案，會自動產生應用程式中與您互動的類別。
@@ -45,7 +45,7 @@ ms.locfileid: "42998111"
 -   請輸入**BloggingModel**作為名稱，然後按一下**確定**，這會啟動 Entity Data Model 精靈
 -   選取 **空的模型**，按一下 **完成**
 
-    ![CreateEmptyModel](~/ef6/media/createemptymodel.png)
+    ![建立空的模型](~/ef6/media/createemptymodel.png)
 
 Entity Framework 設計工具會開啟空白的模型。 現在我們可以開始將實體、 屬性和關聯加入至模型。
 
@@ -55,7 +55,7 @@ Entity Framework 設計工具會開啟空白的模型。 現在我們可以開�
 -   以滑鼠右鍵按一下設計介面，然後選取**加入新-&gt;實體...**
 -   輸入**部落格**做為實體名稱並**BlogId**做為索引鍵的名稱，然後按一下 **[確定]**
 
-    ![AddBlogEntity](~/ef6/media/addblogentity.png)
+    ![加入實體部落格](~/ef6/media/addblogentity.png)
 
 -   以滑鼠右鍵按一下設計介面，然後選取新的實體**加入新-&gt;純量屬性**，輸入**名稱**做為屬性的名稱。
 -   重複此程序，新增**Url**屬性。
@@ -71,11 +71,11 @@ Entity Framework 設計工具會開啟空白的模型。 現在我們可以開�
     *這表示，部落格有許多文章和文章屬於一個部落格*
 -   請確定**外部索引鍵屬性加入 'Post' 實體**核取方塊，然後按一下  **確定**
 
-    ![AddAssociationMF](~/ef6/media/addassociationmf.png)
+    ![新增關聯 MF](~/ef6/media/addassociationmf.png)
 
 我們現在有簡單的模型，我們可以產生的資料庫，並使用來讀取和寫入資料。
 
-![ModelInitial](~/ef6/media/modelinitial.png)
+![建立初始的模型](~/ef6/media/modelinitial.png)
 
 ### <a name="additional-steps-in-visual-studio-2010"></a>Visual Studio 2010 中的其他步驟
 
@@ -95,7 +95,7 @@ Entity Framework 設計工具會開啟空白的模型。 現在我們可以開�
 -   選取 **線上範本**從左側的功能表，並搜尋**DbContext**
 -   選取 EF **5.x 適用於 C 的 DbContext Generator\#**，輸入**BloggingModel**做為名稱，然後按一下**新增**
 
-    ![DbContextTemplate](~/ef6/media/dbcontexttemplate.png)
+    ![DbContext 範本](~/ef6/media/dbcontexttemplate.png)
 
 ## <a name="3-generating-the-database"></a>3.產生資料庫
 
@@ -111,9 +111,9 @@ Visual Studio 隨附安裝的資料庫伺服器是您已安裝的 Visual Studio 
 -   以滑鼠右鍵按一下設計介面，並選取**從模型產生資料庫...**
 -   按一下 **新增連接...** 指定 LocalDB 或 SQL Express，Visual studio 版本而定，您會使用，請輸入**ModelFirst.Blogging**做為資料庫名稱。
 
-    ![LocalDBConnectionMF](~/ef6/media/localdbconnectionmf.png)
+    ![LocalDB 連接 MF](~/ef6/media/localdbconnectionmf.png)
 
-    ![SqlExpressConnectionMF](~/ef6/media/sqlexpressconnectionmf.png)
+    ![Sql Express 連接 MF](~/ef6/media/sqlexpressconnectionmf.png)
 
 -   選取  **確定**而且會要求您想要建立新資料庫，請選取**是**
 -   選取 [**下一步]** 和 Entity Framework 設計工具會在計算指令碼來建立資料庫結構描述
@@ -126,7 +126,7 @@ Visual Studio 隨附安裝的資料庫伺服器是您已安裝的 Visual Studio 
 
 *這個螢幕擷取畫面是來自 Visual Studio 2012 中，如果您使用 Visual Studio 2010 BloggingModel.tt 且 BloggingModel.Context.tt 檔案將會直接在您的專案之下，而非巢狀於 EDMX 檔之下。*
 
-![GeneratedClasses](~/ef6/media/generatedclasses.png)
+![產生的類別](~/ef6/media/generatedclasses.png)
 
 在 Program.cs 中實作的 Main 方法，如下所示。 此程式碼會建立我們的內容的新執行個體，然後用它來插入新的部落格 然後它會使用 LINQ 查詢來擷取依字母順序排序項目所使用的資料庫中的所有部落格。
 
@@ -180,7 +180,7 @@ Press any key to exit...
 
 -   加入新**使用者**實體名稱取代**Username**做為索引鍵的名稱和**字串**做為索引鍵的屬性類型
 
-    ![AddUserEntity](~/ef6/media/adduserentity.png)
+    ![新增使用者實體](~/ef6/media/adduserentity.png)
 
 -   以滑鼠右鍵按一下**使用者名稱**屬性，在設計介面，然後選取**屬性**，在 屬性 視窗變更**MaxLength**設為  **50** 
     *這會限制可以儲存為 50 個字元的使用者名稱中的資料*

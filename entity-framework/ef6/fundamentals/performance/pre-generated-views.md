@@ -3,12 +3,12 @@ title: 預先產生的對應檢視-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 917ba9c8-6ddf-4631-ab8c-c4fb378c2fcd
-ms.openlocfilehash: 397569ef374cb44d4938f9e201b588a26c408f6e
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: c2ad7125122c04af238e8fdd07da2c6c308a2756
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996468"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250760"
 ---
 # <a name="pre-generated-mapping-views"></a>預先產生的對應檢視
 Entity Framework 可以執行查詢，或將變更儲存至資料來源之前，它必須產生一組對應檢視，來存取資料庫。 這些對應檢視是一組以抽象方式代表資料庫的 Entity SQL 陳述式，中繼資料的快取每個應用程式網域的一部分。 如果您在相同的應用程式定義域中建立多個相同的內容執行個體，它們會重複使用從快取的中繼資料，而不是重新產生它們的對應檢視。 對應檢視表產生是執行第一個查詢的整體成本的重要部分，因為 Entity Framework 可讓您預先產生對應檢視，並將它們包含在已編譯的專案。 如需詳細資訊，請參閱 <<c0> [ 效能考量 (Entity Framework)](~/ef6/fundamentals/performance/perf-whitepaper.md)。
@@ -20,11 +20,11 @@ Entity Framework 可以執行查詢，或將變更儲存至資料來源之前，
 -   針對**Code First**模型以滑鼠右鍵按一下包含您的 DbContext 類別的程式碼檔案。
 -   針對**EF 設計工具**模型以滑鼠右鍵按一下您的 EDMX 檔案。
 
-![generateViews](~/ef6/media/generateviews.png)
+![產生檢視](~/ef6/media/generateviews.png)
 
 一旦完成此程序就會產生如下所示的類別
 
-![generatedViews](~/ef6/media/generatedviews.png)
+![產生的檢視表](~/ef6/media/generatedviews.png)
 
 現在當您執行 EF 應用程式會使用此類別來載入所需的檢視。 如果您的模型變更，而且您不重新產生這個類別 EF 會擲回例外狀況。
 

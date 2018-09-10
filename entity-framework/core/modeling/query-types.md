@@ -4,12 +4,12 @@ author: anpete
 ms.date: 2/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 uid: core/modeling/query-types
-ms.openlocfilehash: bacb121ca00a9b0aa00bfe201de4f95113472d70
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 54d960e2e2236e2d4185dedc48f51035f5c10e93
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996695"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250721"
 ---
 # <a name="query-types"></a>查詢類型
 > [!NOTE]
@@ -17,12 +17,14 @@ ms.locfileid: "42996695"
 
 EF Core 模型可以包含實體類型，除了_查詢類型_，可用來執行資料庫查詢不會對應到實體類型的資料。
 
-查詢類型會有許多相似處與實體類型：
+## <a name="compare-query-types-to-entity-types"></a>比較查詢類型，與實體類型
 
-- 它們也可以加入至模型可能是在`OnModelCreating`，或透過 「 設定 」 上的屬性衍生_DbContext_。
-- 它們支援許多相同的對應功能，像是繼承對應，導覽屬性 （請參閱下面的限制），並在 關聯式存放區，讓您設定的目標資料庫物件和透過 fluent API 方法或資料註解的資料行。
+查詢類型如下所示的實體類型中，它們：
 
-不過它們是不同於實體中的型別，它們：
+- 可以是加入至模型中`OnModelCreating`或透過 「 設定 」 上的屬性衍生_DbContext_。
+- 支援許多相同的對應功能，例如繼承對應和導覽屬性。 在關聯式存放區，他們可以設定的目標資料庫物件和透過 fluent API 方法或資料註解的資料行。
+
+不過，它們是不同於實體中的型別，它們：
 
 - 不需要定義的索引鍵。
 - 會永遠不會追蹤變更_DbContext_ ，因此會永遠不會插入、 更新或刪除資料庫。
@@ -36,6 +38,8 @@ EF Core 模型可以包含實體類型，除了_查詢類型_，可用來執行�
 - 會對應至使用的資料庫物件`ToView`方法，而非`ToTable`。
 - 可對應到_定義查詢_-定義查詢是次要的查詢，可做為查詢類型的資料來源模型中宣告。
 
+## <a name="usage-scenarios"></a>使用案例
+
 查詢類型的主要使用案例包括：
 
 - 臨機操作做為傳回型別`FromSql()`查詢。
@@ -43,8 +47,9 @@ EF Core 模型可以包含實體類型，除了_查詢類型_，可用來執行�
 - 沒有定義主索引鍵的資料表的對應。
 - 對應至模型中定義的查詢。
 
-> [!TIP]
-> 對應至資料庫物件的查詢類型用來達成`ToView`fluent API。 EF Core 的觀點而言，此方法中指定的資料庫物件是_檢視_，這表示它會被視為唯讀查詢來源而且無法更新目標的、 插入或刪除作業。 不過，這不表示資料庫物件實際上需要為資料庫檢視，-它也可以將視為唯讀的資料庫資料表。 相反地，實體類型 EF Core 假設中指定的資料庫物件`ToTable`方法可用來當做_資料表_，這表示它可以當做查詢來源，但是也鎖定更新刪除和插入作業。 事實上，您可以在其中指定的名稱中的資料庫檢視`ToTable`和所有項目應可正常運作，只要檢視已成為可更新資料庫。
+## <a name="mapping-to-database-objects"></a>對應至資料庫物件
+
+對應至資料庫物件的查詢類型用來達成`ToView`fluent API。 EF Core 的觀點而言，此方法中指定的資料庫物件是_檢視_，這表示它會被視為唯讀查詢來源而且無法更新目標的、 插入或刪除作業。 不過，這不表示資料庫物件實際上需要為資料庫檢視，-它也可以將視為唯讀的資料庫資料表。 相反地，實體類型 EF Core 假設中指定的資料庫物件`ToTable`方法可用來當做_資料表_，這表示它可以當做查詢來源，但是也鎖定更新刪除和插入作業。 事實上，您可以在其中指定的名稱中的資料庫檢視`ToTable`和所有項目應可正常運作，只要檢視已成為可更新資料庫。
 
 ## <a name="example"></a>範例
 

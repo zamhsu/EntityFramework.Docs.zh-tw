@@ -3,12 +3,12 @@ title: 自我追蹤實體的逐步解說-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: b21207c9-1d95-4aa3-ae05-bc5fe300dab0
-ms.openlocfilehash: 64ca9ae42df1a1c740131e254b8f80f67b2f9f97
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 1c450bbb20c246d9b9d58707ac03eb48eadfa970
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995417"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251280"
 ---
 # <a name="self-tracking-entities-walkthrough"></a>自我追蹤實體的逐步解說
 > [!IMPORTANT]
@@ -142,7 +142,7 @@ Visual Studio 隨附安裝的資料庫伺服器是您已安裝的 Visual Studio 
 -   選取  **STETemplate.tt**檔案
 -   按一下下拉式箭號旁**新增**按鈕，然後選取**加入做為連結**
 
-    ![AddLinkedTemplate](~/ef6/media/addlinkedtemplate.png)
+    ![新增連結的範本](~/ef6/media/addlinkedtemplate.png)
 
 我們也要確定內容相同的命名空間中產生實體類別。 這只會減少 using 陳述式，我們需要新增在我們的應用程式的數目。
 
@@ -552,4 +552,4 @@ Press any key to exit...
 -   以滑鼠右鍵按一下**STESample.WPFTest**專案中**方案總管**，然後選取**偵錯-&gt;開始新執行個體**
 -   您可以管理使用螢幕的資料，並將它儲存服務會使用透過**儲存**按鈕
 
-![WPF](~/ef6/media/wpf.png)
+![WPF 主視窗](~/ef6/media/wpf.png)

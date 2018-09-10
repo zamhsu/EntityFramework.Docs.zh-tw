@@ -3,12 +3,12 @@ title: 關聯性、 導覽屬性和外部索引鍵-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: a1653afd609280ab572ef88a9fcf8a6275b79fd6
-ms.sourcegitcommit: a81aed575372637997b18a0f9466d8fefb33350a
+ms.openlocfilehash: 53f428360be4ea2e11a42676d22e584633ceedbc
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/06/2018
-ms.locfileid: "43821396"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251215"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>關聯性、 導覽屬性和外部索引鍵
 本主題提供 Entity Framework 如何管理實體之間的關聯性的概觀。 它也會提供有關如何對應及操作關聯性的一些指引。
@@ -19,7 +19,7 @@ ms.locfileid: "43821396"
 
 下圖顯示兩個參與的資料表，一個對多關聯性。 **課程**資料表會是相依的資料表，因為它包含**DepartmentID**其連結至的資料行**部門**資料表。
 
-![Database2](~/ef6/media/database2.png)
+![部門和 Course 資料表](~/ef6/media/database2.png)
 
 在 Entity Framework 中，實體可以與其他機構可透過關聯或關係。 每個關聯性包含兩端，描述實體類型，而該關聯性中的兩個實體的類型 （一個、 零或一，或多個）。 關聯性可能會受到所參考的條件約束，當中會描述關聯性中的結尾是主要角色，也是相依角色。
 
@@ -33,7 +33,7 @@ ms.locfileid: "43821396"
 
 下圖顯示使用 Entity Framework 設計工具建立概念模型。 模型包含兩個參與一對多關聯性的實體。 這兩個實體都有導覽屬性。 **Course** depend 實體，且具有**DepartmentID**定義的外部索引鍵屬性。
 
-![RelationshipEFDesigner](~/ef6/media/relationshipefdesigner.png)
+![具有導覽屬性的部門和 Course 資料表](~/ef6/media/relationshipefdesigner.png)
 
 下列程式碼片段會顯示使用 Code First 所建立的相同模型。
 

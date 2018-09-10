@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 44b200223153fca44cb2cfa3e78b3bedc7b4a552
-ms.sourcegitcommit: a81aed575372637997b18a0f9466d8fefb33350a
+ms.openlocfilehash: 5da1043310e2858638c81a0654a9cab23e39c220
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/06/2018
-ms.locfileid: "43821331"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250812"
 ---
 # <a name="provider-impacting-changes"></a>提供者影響的變更
 
@@ -19,9 +19,9 @@ ms.locfileid: "43821331"
 
 我們會將此記錄檔開頭 2.1 2.2 的變更。 我們用之前 2.1 [ `providers-beware` ](https://github.com/aspnet/EntityFrameworkCore/labels/providers-beware)並[ `providers-fyi` ](https://github.com/aspnet/EntityFrameworkCore/labels/providers-fyi)上我們的問題和提取要求標籤。
 
-### <a name="21-----22"></a>2.1---> 2.2
+## <a name="21-----22"></a>2.1---> 2.2
 
-#### <a name="test-only-changes"></a>僅限測試的變更
+### <a name="test-only-changes"></a>僅限測試的變更
 
 * https://github.com/aspnet/EntityFrameworkCore/pull/12057 -在測試中允許可自訂的 SQL 分隔符號
   * 測試可讓非嚴格的浮動點比較 BuiltInDataTypesTestBase 中的變更
@@ -40,7 +40,7 @@ ms.locfileid: "43821331"
   * 這項變更會包含可能需要提供者，以因應一些測試重構
 
 
-#### <a name="test-and-product-code-changes"></a>測試和產品程式碼變更
+### <a name="test-and-product-code-changes"></a>測試和產品程式碼變更
 
 * https://github.com/aspnet/EntityFrameworkCore/pull/12109 -彙總 RelationalTypeMapping.Clone 方法
   * 允許在衍生類別中簡化 RelationalTypeMapping 的 2.1 中的變更。 我們不認為這重大提供者，但提供者可以利用這項變更其衍生類型中對應的類別。
@@ -50,4 +50,5 @@ ms.locfileid: "43821331"
   * 讓型別對應和成員轉譯外部提供者註冊
     * 提供者必須呼叫基底。FindMapping() 在 ITypeMappingSource 實作，才能正常運作中
   * 請遵循此模式，以將空間的支援新增至您的提供者的提供者間也保持一致。
-
+* https://github.com/aspnet/EntityFrameworkCore/pull/13199 新增服務提供者建立的增強型偵錯
+  * 可讓實作新的介面，可協助人員了解內部的服務提供者正在重新建置 DbContextOptionsExtensions

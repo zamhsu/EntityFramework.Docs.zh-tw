@@ -3,12 +3,12 @@ title: 連接恢復功能，然後重試邏輯-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 47d68ac1-927e-4842-ab8c-ed8c8698dff2
-ms.openlocfilehash: 47181292873009c7bce2047787503258ffa35d9d
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: d7e58abfa17c5537cdc9b0068e7c2a3c2e390038
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997481"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250513"
 ---
 # <a name="connection-resiliency-and-retry-logic"></a>連接恢復功能，然後重試邏輯
 > [!NOTE]
@@ -68,11 +68,9 @@ SqlAzureExecutionStrategy 會重試，立即超出暫時性失敗的情況，但
 
 執行策略只會重試的例外狀況，通常是 tansient 數量有限，仍必須處理其他錯誤，以及攔截 RetryLimitExceeded 例外狀況，若要解決錯誤並非暫時性或花太多時間的位置案例它本身。  
 
-## <a name="limitations"></a>限制  
-
 使用重試的執行策略時，有一些已知的限制：  
 
-### <a name="streaming-queries-are-not-supported"></a>不支援資料流的查詢  
+## <a name="streaming-queries-are-not-supported"></a>不支援資料流的查詢  
 
 根據預設，EF6 和更新版本將查詢結果，而不是這些資料流緩衝區。 如果您想要有結果串流處理您可以使用 AsStreaming 方法來變更 LINQ to Entities 查詢，為資料流。  
 
@@ -88,11 +86,9 @@ using (var db = new BloggingContext())
 
 不支援資料流，註冊時的重試執行策略。 因為執行所傳回的結果的 「 連線無法卸除部分，就會有這項限制。 當發生這種情況時，EF 必須重新執行整個查詢，但有沒有可靠的方式就知道已傳回的結果 （資料可能已變更，因為傳送初始查詢，結果可能的傳回順序不同，結果可能不需要的唯一識別碼等等。)。  
 
-### <a name="user-initiated-transactions-not-supported"></a>使用者起始的交易不支援  
+## <a name="user-initiated-transactions-are-not-supported"></a>不支援使用者起始交易  
 
 當您已設定導致重試執行策略時，有一些限制，有關使用交易。  
-
-#### <a name="whats-supported-efs-default-transaction-behavior"></a>支援的項目： EF 的預設交易行為  
 
 根據預設，EF 會執行交易內的任何資料庫更新。 您不需要採取任何動作來啟用此功能，EF 一律自動執行這個工作。  
 
@@ -106,8 +102,6 @@ using (var db = new BloggingContext())
     db.SaveChanges();
 }
 ```  
-
-#### <a name="whats-not-supported-user-initiated-transactions"></a>不支援的功能： 使用者啟動的交易  
 
 在不使用重試執行策略，您可以將多個作業包裝在單一交易中。 比方說，下列程式碼會包裝在單一交易中兩個 SaveChanges 呼叫。 如果任一項操作的任何部分再失敗的變更都不會套用。  
 
@@ -130,9 +124,7 @@ using (var db = new BloggingContext())
 
 不支援時使用的重試執行策略，因為 EF 不知道的任何先前的作業，以及如何重試它們。 例如，如果第二個 SaveChanges 失敗然後 EF 不會再有重試第一次的 SaveChanges 呼叫所需的資訊。  
 
-#### <a name="possible-workarounds"></a>可能的因應措施  
-
-##### <a name="suspend-execution-strategy"></a>暫停執行策略  
+### <a name="workaround-suspend-execution-strategy"></a>因應措施： 暫停執行策略  
 
 一個可能的因應措施是暫止正在重試執行策略需要使用使用者的程式碼片段的起始交易。 若要這樣做最簡單的方式是加入 SuspendExecutionStrategy 旗標，以您的程式碼基礎組態類別，並將變更執行策略 lambda，來設定旗標時，傳回的預設值 (非 retying) 執行策略。  
 
@@ -193,7 +185,7 @@ using (var db = new BloggingContext())
 }
 ```  
 
-##### <a name="manually-call-execution-strategy"></a>以手動方式呼叫執行策略  
+### <a name="workaround-manually-call-execution-strategy"></a>因應措施： 以手動方式呼叫的執行策略  
 
 另一個選項是邏輯的手動使用執行策略，並提供完整來執行，以便它可以重試一次的所有項目如果其中一個作業失敗。 我們仍需要暫停執行策略-使用此技術-如上所示，如此可重試程式碼區塊內使用的任何內容不會嘗試重試一次。  
 

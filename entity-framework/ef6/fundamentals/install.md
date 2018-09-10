@@ -3,12 +3,12 @@ title: 取得 Entity Framework 的 EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 122c38a2-f9e8-4ecc-9c72-a83bc9af7814
-ms.openlocfilehash: 91b78e56f60edf7ebc8769b1c385f8547f63cd3d
-ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
+ms.openlocfilehash: 601f8d123d5494be6a658da1c4ad3743ed50385c
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/29/2018
-ms.locfileid: "43152384"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250877"
 ---
 # <a name="get-entity-framework"></a>取得 Entity Framework
 Entity Framework 是組成的 EF 工具適用於 Visual Studio 和 EF 執行階段。
@@ -27,7 +27,7 @@ Entity Framework Tools for Visual Studio 包含 EF 設計工具和 EF 模型精�
 
 您可以安裝 EntityFramework 套件上按一下滑鼠右鍵**參考**專案的資料夾，然後選取**管理 NuGet 套件...**
 
-![ManageNuGetPackages](~/ef6/media/managenugetpackages.png)
+![管理 NuGet 封裝](~/ef6/media/managenugetpackages.png)
 
 ### <a name="installing-from-package-manager-console"></a>從 套件管理員主控台安裝
 
@@ -55,7 +55,7 @@ Install-Package EntityFramework -Version <number>
 
 若要安裝的 EntityFramework 您可以選取最新的預覽版**包含發行前版本**在 [管理 NuGet 封裝] 視窗。 如果不有可用的任何發行前版本將會自動取得最新版的 Entity Framework 的完整支援的版本。
 
-![IncludePreRelease](~/ef6/media/includeprerelease.png)
+![包含發行前版本](~/ef6/media/includeprerelease.png)
 
 或者，您可以執行下列命令[Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)。
 

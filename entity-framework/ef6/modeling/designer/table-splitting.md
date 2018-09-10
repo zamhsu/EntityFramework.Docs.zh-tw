@@ -3,12 +3,12 @@ title: 設計工具的資料表分割-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 452f17c3-9f26-4de4-9894-8bc036e23b0f
-ms.openlocfilehash: 87b6e1bd0374f77dfffab342c659cf4e16c8a337
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: f07aeb0aa679f6fa8131c667ac808f17c3f03f20
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994499"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250981"
 ---
 # <a name="designer-table-splitting"></a>分割的資料表設計工具
 本逐步解說示範如何將多個實體類型對應至單一資料表中，透過修改模型使用 Entity Framework Designer （EF 設計工具）。
@@ -17,7 +17,7 @@ ms.locfileid: "42994499"
 
 下圖顯示使用 EF 設計工具時所使用的主視窗。
 
-![EFDesigner](~/ef6/media/efdesigner.png)
+![EF Designer](~/ef6/media/efdesigner.png)
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -130,8 +130,8 @@ Entity Designer 中，提供用於編輯模型的設計介面，會顯示。 您
 
 -   下列**選取**由於執行內容而執行。People.FirstOrDefault() 和選取的資料行對應至**人員**
 
-    ![Select1](~/ef6/media/select1.png)
+    ![選取 [1]](~/ef6/media/select1.png)
 
 -   下列**選取 **因為存取導覽屬性 existingPerson.Instructor 執行，並選取 只是資料行對應至**HireInfo**
 
-    ![Select2](~/ef6/media/select2.png)
+    ![選取 [2]](~/ef6/media/select2.png)
