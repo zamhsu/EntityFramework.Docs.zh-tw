@@ -3,61 +3,61 @@ title: 自我追蹤實體的逐步解說-EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: b21207c9-1d95-4aa3-ae05-bc5fe300dab0
-ms.openlocfilehash: 64ca9ae42df1a1c740131e254b8f80f67b2f9f97
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 1c450bbb20c246d9b9d58707ac03eb48eadfa970
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995417"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251280"
 ---
-# <a name="self-tracking-entities-walkthrough"></a><span data-ttu-id="0b217-102">自我追蹤實體的逐步解說</span><span class="sxs-lookup"><span data-stu-id="0b217-102">Self-Tracking Entities Walkthrough</span></span>
+# <a name="self-tracking-entities-walkthrough"></a><span data-ttu-id="29cb9-102">自我追蹤實體的逐步解說</span><span class="sxs-lookup"><span data-stu-id="29cb9-102">Self-Tracking Entities Walkthrough</span></span>
 > [!IMPORTANT]
-> <span data-ttu-id="0b217-103">我們不再建議使用自我追蹤實體範本。</span><span class="sxs-lookup"><span data-stu-id="0b217-103">We no longer recommend using the self-tracking-entities template.</span></span> <span data-ttu-id="0b217-104">繼續提供該範本只是為了支援現有應用程式。</span><span class="sxs-lookup"><span data-stu-id="0b217-104">It will only continue to be available to support existing applications.</span></span> <span data-ttu-id="0b217-105">如果您的應用程式需要使用已中斷連線的實體圖形，請考慮使用 [Trackable Entities](http://trackableentities.github.io/) (可追蹤的實體) 之類的其他替代項目，這是一項類似於自我追蹤實體的技術，可由社群更積極地進行開發或使用低層級變更追蹤 API 來撰寫自訂程式碼。</span><span class="sxs-lookup"><span data-stu-id="0b217-105">If your application requires working with disconnected graphs of entities, consider other alternatives such as [Trackable Entities](http://trackableentities.github.io/), which is a technology similar to Self-Tracking-Entities that is more actively developed by the community, or writing custom code using the low-level change tracking APIs.</span></span>
+> <span data-ttu-id="29cb9-103">我們不再建議使用自我追蹤實體範本。</span><span class="sxs-lookup"><span data-stu-id="29cb9-103">We no longer recommend using the self-tracking-entities template.</span></span> <span data-ttu-id="29cb9-104">繼續提供該範本只是為了支援現有應用程式。</span><span class="sxs-lookup"><span data-stu-id="29cb9-104">It will only continue to be available to support existing applications.</span></span> <span data-ttu-id="29cb9-105">如果您的應用程式需要使用已中斷連線的實體圖形，請考慮使用 [Trackable Entities](http://trackableentities.github.io/) (可追蹤的實體) 之類的其他替代項目，這是一項類似於自我追蹤實體的技術，可由社群更積極地進行開發或使用低層級變更追蹤 API 來撰寫自訂程式碼。</span><span class="sxs-lookup"><span data-stu-id="29cb9-105">If your application requires working with disconnected graphs of entities, consider other alternatives such as [Trackable Entities](http://trackableentities.github.io/), which is a technology similar to Self-Tracking-Entities that is more actively developed by the community, or writing custom code using the low-level change tracking APIs.</span></span>
 
-<span data-ttu-id="0b217-106">本逐步解說將示範 Windows Communication Foundation (WCF) 服務會公開傳回實體圖形作業的案例。</span><span class="sxs-lookup"><span data-stu-id="0b217-106">This walkthrough demonstrates the scenario in which a Windows Communication Foundation (WCF) service exposes an operation that returns an entity graph.</span></span> <span data-ttu-id="0b217-107">接著，用戶端應用程式會操作該圖形並提交修改至服務作業的驗證，並將更新儲存至資料庫，使用 Entity Framework。</span><span class="sxs-lookup"><span data-stu-id="0b217-107">Next, a client application manipulates that graph and submits the modifications to a service operation that validates and saves the updates to a database using Entity Framework.</span></span>
+<span data-ttu-id="29cb9-106">本逐步解說將示範 Windows Communication Foundation (WCF) 服務會公開傳回實體圖形作業的案例。</span><span class="sxs-lookup"><span data-stu-id="29cb9-106">This walkthrough demonstrates the scenario in which a Windows Communication Foundation (WCF) service exposes an operation that returns an entity graph.</span></span> <span data-ttu-id="29cb9-107">接著，用戶端應用程式會操作該圖形並提交修改至服務作業的驗證，並將更新儲存至資料庫，使用 Entity Framework。</span><span class="sxs-lookup"><span data-stu-id="29cb9-107">Next, a client application manipulates that graph and submits the modifications to a service operation that validates and saves the updates to a database using Entity Framework.</span></span>
 
-<span data-ttu-id="0b217-108">完成本逐步解說之前請確定您閱讀[自我追蹤實體](index.md)頁面。</span><span class="sxs-lookup"><span data-stu-id="0b217-108">Before completing this walkthrough make sure you read the [Self-Tracking Entities](index.md) page.</span></span>
+<span data-ttu-id="29cb9-108">完成本逐步解說之前請確定您閱讀[自我追蹤實體](index.md)頁面。</span><span class="sxs-lookup"><span data-stu-id="29cb9-108">Before completing this walkthrough make sure you read the [Self-Tracking Entities](index.md) page.</span></span>
 
-<span data-ttu-id="0b217-109">這個逐步解說會完成下列動作：</span><span class="sxs-lookup"><span data-stu-id="0b217-109">This walkthrough completes the following actions:</span></span>
+<span data-ttu-id="29cb9-109">這個逐步解說會完成下列動作：</span><span class="sxs-lookup"><span data-stu-id="29cb9-109">This walkthrough completes the following actions:</span></span>
 
--   <span data-ttu-id="0b217-110">建立可存取的資料庫。</span><span class="sxs-lookup"><span data-stu-id="0b217-110">Creates a database to access.</span></span>
--   <span data-ttu-id="0b217-111">建立包含模型的類別庫。</span><span class="sxs-lookup"><span data-stu-id="0b217-111">Creates a class library that contains the model.</span></span>
--   <span data-ttu-id="0b217-112">交換 Self-Tracking Entity Generator 範本。</span><span class="sxs-lookup"><span data-stu-id="0b217-112">Swaps to the Self-Tracking Entity Generator template.</span></span>
--   <span data-ttu-id="0b217-113">將實體類別移至個別的專案中。</span><span class="sxs-lookup"><span data-stu-id="0b217-113">Moves the entity classes to a separate project.</span></span>
--   <span data-ttu-id="0b217-114">建立 WCF 服務公開查詢和儲存實體的作業。</span><span class="sxs-lookup"><span data-stu-id="0b217-114">Creates a WCF service that exposes operations to query and save entities.</span></span>
--   <span data-ttu-id="0b217-115">建立用戶端應用程式 （主控台和 WPF） 取用服務。</span><span class="sxs-lookup"><span data-stu-id="0b217-115">Creates client applications (Console and WPF) that consume the service.</span></span>
+-   <span data-ttu-id="29cb9-110">建立可存取的資料庫。</span><span class="sxs-lookup"><span data-stu-id="29cb9-110">Creates a database to access.</span></span>
+-   <span data-ttu-id="29cb9-111">建立包含模型的類別庫。</span><span class="sxs-lookup"><span data-stu-id="29cb9-111">Creates a class library that contains the model.</span></span>
+-   <span data-ttu-id="29cb9-112">交換 Self-Tracking Entity Generator 範本。</span><span class="sxs-lookup"><span data-stu-id="29cb9-112">Swaps to the Self-Tracking Entity Generator template.</span></span>
+-   <span data-ttu-id="29cb9-113">將實體類別移至個別的專案中。</span><span class="sxs-lookup"><span data-stu-id="29cb9-113">Moves the entity classes to a separate project.</span></span>
+-   <span data-ttu-id="29cb9-114">建立 WCF 服務公開查詢和儲存實體的作業。</span><span class="sxs-lookup"><span data-stu-id="29cb9-114">Creates a WCF service that exposes operations to query and save entities.</span></span>
+-   <span data-ttu-id="29cb9-115">建立用戶端應用程式 （主控台和 WPF） 取用服務。</span><span class="sxs-lookup"><span data-stu-id="29cb9-115">Creates client applications (Console and WPF) that consume the service.</span></span>
 
-<span data-ttu-id="0b217-116">我們將使用第一個資料庫在此逐步解說中，但相同的技巧同樣適用於第一個模型。</span><span class="sxs-lookup"><span data-stu-id="0b217-116">We'll use Database First in this walkthrough but the same techniques apply equally to Model First.</span></span>
+<span data-ttu-id="29cb9-116">我們將使用第一個資料庫在此逐步解說中，但相同的技巧同樣適用於第一個模型。</span><span class="sxs-lookup"><span data-stu-id="29cb9-116">We'll use Database First in this walkthrough but the same techniques apply equally to Model First.</span></span>
 
-## <a name="pre-requisites"></a><span data-ttu-id="0b217-117">必要條件</span><span class="sxs-lookup"><span data-stu-id="0b217-117">Pre-Requisites</span></span>
+## <a name="pre-requisites"></a><span data-ttu-id="29cb9-117">必要條件</span><span class="sxs-lookup"><span data-stu-id="29cb9-117">Pre-Requisites</span></span>
 
-<span data-ttu-id="0b217-118">若要完成此逐步解說，您必須 Visual Studio 的最新版本。</span><span class="sxs-lookup"><span data-stu-id="0b217-118">To complete this walkthrough you will need a recent version of Visual Studio.</span></span>
+<span data-ttu-id="29cb9-118">若要完成此逐步解說，您必須 Visual Studio 的最新版本。</span><span class="sxs-lookup"><span data-stu-id="29cb9-118">To complete this walkthrough you will need a recent version of Visual Studio.</span></span>
 
-## <a name="create-a-database"></a><span data-ttu-id="0b217-119">建立資料庫</span><span class="sxs-lookup"><span data-stu-id="0b217-119">Create a Database</span></span>
+## <a name="create-a-database"></a><span data-ttu-id="29cb9-119">建立資料庫</span><span class="sxs-lookup"><span data-stu-id="29cb9-119">Create a Database</span></span>
 
-<span data-ttu-id="0b217-120">Visual Studio 隨附安裝的資料庫伺服器是您已安裝的 Visual Studio 版本而有所不同：</span><span class="sxs-lookup"><span data-stu-id="0b217-120">The database server that is installed with Visual Studio is different depending on the version of Visual Studio you have installed:</span></span>
+<span data-ttu-id="29cb9-120">Visual Studio 隨附安裝的資料庫伺服器是您已安裝的 Visual Studio 版本而有所不同：</span><span class="sxs-lookup"><span data-stu-id="29cb9-120">The database server that is installed with Visual Studio is different depending on the version of Visual Studio you have installed:</span></span>
 
--   <span data-ttu-id="0b217-121">如果您使用 Visual Studio 2012，則您將會建立新的 LocalDB 資料庫。</span><span class="sxs-lookup"><span data-stu-id="0b217-121">If you are using Visual Studio 2012 then you'll be creating a LocalDB database.</span></span>
--   <span data-ttu-id="0b217-122">如果您使用 Visual Studio 2010 將會建立 SQL Express 資料庫。</span><span class="sxs-lookup"><span data-stu-id="0b217-122">If you are using Visual Studio 2010 you'll be creating a SQL Express database.</span></span>
+-   <span data-ttu-id="29cb9-121">如果您使用 Visual Studio 2012，則您將會建立新的 LocalDB 資料庫。</span><span class="sxs-lookup"><span data-stu-id="29cb9-121">If you are using Visual Studio 2012 then you'll be creating a LocalDB database.</span></span>
+-   <span data-ttu-id="29cb9-122">如果您使用 Visual Studio 2010 將會建立 SQL Express 資料庫。</span><span class="sxs-lookup"><span data-stu-id="29cb9-122">If you are using Visual Studio 2010 you'll be creating a SQL Express database.</span></span>
 
-<span data-ttu-id="0b217-123">接下來產生的資料庫。</span><span class="sxs-lookup"><span data-stu-id="0b217-123">Let's go ahead and generate the database.</span></span>
+<span data-ttu-id="29cb9-123">接下來產生的資料庫。</span><span class="sxs-lookup"><span data-stu-id="29cb9-123">Let's go ahead and generate the database.</span></span>
 
--   <span data-ttu-id="0b217-124">開啟 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0b217-124">Open Visual Studio</span></span>
--   <span data-ttu-id="0b217-125">**檢視-&gt;伺服器總管**</span><span class="sxs-lookup"><span data-stu-id="0b217-125">**View -&gt; Server Explorer**</span></span>
--   <span data-ttu-id="0b217-126">以滑鼠右鍵按一下**資料連線-&gt;新增連接...**</span><span class="sxs-lookup"><span data-stu-id="0b217-126">Right click on **Data Connections -&gt; Add Connection…**</span></span>
--   <span data-ttu-id="0b217-127">如果您尚未連線至資料庫從伺服器總管之前您必須選取**Microsoft SQL Server**做為資料來源</span><span class="sxs-lookup"><span data-stu-id="0b217-127">If you haven’t connected to a database from Server Explorer before you’ll need to select **Microsoft SQL Server** as the data source</span></span>
--   <span data-ttu-id="0b217-128">連接到 LocalDB 或 SQL Express，何者而定，您已安裝</span><span class="sxs-lookup"><span data-stu-id="0b217-128">Connect to either LocalDB or SQL Express, depending on which one you have installed</span></span>
--   <span data-ttu-id="0b217-129">請輸入**STESample**做為資料庫名稱</span><span class="sxs-lookup"><span data-stu-id="0b217-129">Enter **STESample** as the database name</span></span>
--   <span data-ttu-id="0b217-130">選取  **確定**而且會要求您想要建立新資料庫，請選取**是**</span><span class="sxs-lookup"><span data-stu-id="0b217-130">Select **OK** and you will be asked if you want to create a new database, select **Yes**</span></span>
--   <span data-ttu-id="0b217-131">在 伺服器總管現在會顯示新的資料庫</span><span class="sxs-lookup"><span data-stu-id="0b217-131">The new database will now appear in Server Explorer</span></span>
--   <span data-ttu-id="0b217-132">如果您使用 Visual Studio 2012</span><span class="sxs-lookup"><span data-stu-id="0b217-132">If you are using Visual Studio 2012</span></span>
-    -   <span data-ttu-id="0b217-133">以滑鼠右鍵按一下伺服器總管 中的資料庫，然後選取**新查詢**</span><span class="sxs-lookup"><span data-stu-id="0b217-133">Right-click on the database in Server Explorer and select **New Query**</span></span>
-    -   <span data-ttu-id="0b217-134">將下列 SQL 複製到新的查詢，然後以滑鼠右鍵按一下查詢並選取**Execute**</span><span class="sxs-lookup"><span data-stu-id="0b217-134">Copy the following SQL into the new query, then right-click on the query and select **Execute**</span></span>
--   <span data-ttu-id="0b217-135">如果您使用 Visual Studio 2010</span><span class="sxs-lookup"><span data-stu-id="0b217-135">If you are using Visual Studio 2010</span></span>
-    -   <span data-ttu-id="0b217-136">選取 **資料集&gt;Transact SQL 編輯器-&gt;新增查詢連接...**</span><span class="sxs-lookup"><span data-stu-id="0b217-136">Select **Data -&gt; Transact SQL Editor -&gt; New Query Connection...**</span></span>
-    -   <span data-ttu-id="0b217-137">請輸入 **。\\SQLEXPRESS**作為伺服器名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="0b217-137">Enter **.\\SQLEXPRESS** as the server name and click **OK**</span></span>
-    -   <span data-ttu-id="0b217-138">選取  **STESample**資料庫從下拉式清單頂端的查詢編輯器</span><span class="sxs-lookup"><span data-stu-id="0b217-138">Select the **STESample** database from the drop down at the top of the query editor</span></span>
-    -   <span data-ttu-id="0b217-139">將下列 SQL 複製到新的查詢，然後以滑鼠右鍵按一下查詢並選取**執行 SQL**</span><span class="sxs-lookup"><span data-stu-id="0b217-139">Copy the following SQL into the new query, then right-click on the query and select **Execute SQL**</span></span>
+-   <span data-ttu-id="29cb9-124">開啟 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="29cb9-124">Open Visual Studio</span></span>
+-   <span data-ttu-id="29cb9-125">**檢視-&gt;伺服器總管**</span><span class="sxs-lookup"><span data-stu-id="29cb9-125">**View -&gt; Server Explorer**</span></span>
+-   <span data-ttu-id="29cb9-126">以滑鼠右鍵按一下**資料連線-&gt;新增連接...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-126">Right click on **Data Connections -&gt; Add Connection…**</span></span>
+-   <span data-ttu-id="29cb9-127">如果您尚未連線至資料庫從伺服器總管之前您必須選取**Microsoft SQL Server**做為資料來源</span><span class="sxs-lookup"><span data-stu-id="29cb9-127">If you haven’t connected to a database from Server Explorer before you’ll need to select **Microsoft SQL Server** as the data source</span></span>
+-   <span data-ttu-id="29cb9-128">連接到 LocalDB 或 SQL Express，何者而定，您已安裝</span><span class="sxs-lookup"><span data-stu-id="29cb9-128">Connect to either LocalDB or SQL Express, depending on which one you have installed</span></span>
+-   <span data-ttu-id="29cb9-129">請輸入**STESample**做為資料庫名稱</span><span class="sxs-lookup"><span data-stu-id="29cb9-129">Enter **STESample** as the database name</span></span>
+-   <span data-ttu-id="29cb9-130">選取  **確定**而且會要求您想要建立新資料庫，請選取**是**</span><span class="sxs-lookup"><span data-stu-id="29cb9-130">Select **OK** and you will be asked if you want to create a new database, select **Yes**</span></span>
+-   <span data-ttu-id="29cb9-131">在 伺服器總管現在會顯示新的資料庫</span><span class="sxs-lookup"><span data-stu-id="29cb9-131">The new database will now appear in Server Explorer</span></span>
+-   <span data-ttu-id="29cb9-132">如果您使用 Visual Studio 2012</span><span class="sxs-lookup"><span data-stu-id="29cb9-132">If you are using Visual Studio 2012</span></span>
+    -   <span data-ttu-id="29cb9-133">以滑鼠右鍵按一下伺服器總管 中的資料庫，然後選取**新查詢**</span><span class="sxs-lookup"><span data-stu-id="29cb9-133">Right-click on the database in Server Explorer and select **New Query**</span></span>
+    -   <span data-ttu-id="29cb9-134">將下列 SQL 複製到新的查詢，然後以滑鼠右鍵按一下查詢並選取**Execute**</span><span class="sxs-lookup"><span data-stu-id="29cb9-134">Copy the following SQL into the new query, then right-click on the query and select **Execute**</span></span>
+-   <span data-ttu-id="29cb9-135">如果您使用 Visual Studio 2010</span><span class="sxs-lookup"><span data-stu-id="29cb9-135">If you are using Visual Studio 2010</span></span>
+    -   <span data-ttu-id="29cb9-136">選取 **資料集&gt;Transact SQL 編輯器-&gt;新增查詢連接...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-136">Select **Data -&gt; Transact SQL Editor -&gt; New Query Connection...**</span></span>
+    -   <span data-ttu-id="29cb9-137">請輸入 **。\\SQLEXPRESS**作為伺服器名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="29cb9-137">Enter **.\\SQLEXPRESS** as the server name and click **OK**</span></span>
+    -   <span data-ttu-id="29cb9-138">選取  **STESample**資料庫從下拉式清單頂端的查詢編輯器</span><span class="sxs-lookup"><span data-stu-id="29cb9-138">Select the **STESample** database from the drop down at the top of the query editor</span></span>
+    -   <span data-ttu-id="29cb9-139">將下列 SQL 複製到新的查詢，然後以滑鼠右鍵按一下查詢並選取**執行 SQL**</span><span class="sxs-lookup"><span data-stu-id="29cb9-139">Copy the following SQL into the new query, then right-click on the query and select **Execute SQL**</span></span>
 
 ``` SQL
     CREATE TABLE [dbo].[Blogs] (
@@ -83,106 +83,106 @@ ms.locfileid: "42995417"
     INSERT INTO [dbo].[Posts] ([Title], [Content], [BlogId]) VALUES (N'What is New', N'More interesting stuff...', 1)
 ```
 
-## <a name="create-the-model"></a><span data-ttu-id="0b217-140">建立模型</span><span class="sxs-lookup"><span data-stu-id="0b217-140">Create the Model</span></span>
+## <a name="create-the-model"></a><span data-ttu-id="29cb9-140">建立模型</span><span class="sxs-lookup"><span data-stu-id="29cb9-140">Create the Model</span></span>
 
-<span data-ttu-id="0b217-141">首先，我們必須要將此模型的專案。</span><span class="sxs-lookup"><span data-stu-id="0b217-141">First up, we need a project to put the model in.</span></span>
+<span data-ttu-id="29cb9-141">首先，我們必須要將此模型的專案。</span><span class="sxs-lookup"><span data-stu-id="29cb9-141">First up, we need a project to put the model in.</span></span>
 
--   <span data-ttu-id="0b217-142">**檔案-&gt;新增-&gt;專案...**</span><span class="sxs-lookup"><span data-stu-id="0b217-142">**File -&gt; New -&gt; Project...**</span></span>
--   <span data-ttu-id="0b217-143">選取  **Visual C\#** 從左窗格中，然後**類別庫**</span><span class="sxs-lookup"><span data-stu-id="0b217-143">Select **Visual C\#** from the left pane and then **Class Library**</span></span>
--   <span data-ttu-id="0b217-144">請輸入**STESample**作為名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="0b217-144">Enter **STESample** as the name and click **OK**</span></span>
+-   <span data-ttu-id="29cb9-142">**檔案-&gt;新增-&gt;專案...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-142">**File -&gt; New -&gt; Project...**</span></span>
+-   <span data-ttu-id="29cb9-143">選取  **Visual C\#** 從左窗格中，然後**類別庫**</span><span class="sxs-lookup"><span data-stu-id="29cb9-143">Select **Visual C\#** from the left pane and then **Class Library**</span></span>
+-   <span data-ttu-id="29cb9-144">請輸入**STESample**作為名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="29cb9-144">Enter **STESample** as the name and click **OK**</span></span>
 
-<span data-ttu-id="0b217-145">現在我們將建立簡單的模型來存取資料庫的 EF 設計工具中：</span><span class="sxs-lookup"><span data-stu-id="0b217-145">Now we'll create a simple model in the EF Designer to access our database:</span></span>
+<span data-ttu-id="29cb9-145">現在我們將建立簡單的模型來存取資料庫的 EF 設計工具中：</span><span class="sxs-lookup"><span data-stu-id="29cb9-145">Now we'll create a simple model in the EF Designer to access our database:</span></span>
 
--   <span data-ttu-id="0b217-146">**專案-&gt;加入新項目...**</span><span class="sxs-lookup"><span data-stu-id="0b217-146">**Project -&gt; Add New Item...**</span></span>
--   <span data-ttu-id="0b217-147">選取 **資料**從左窗格中，然後**ADO.NET 實體資料模型**</span><span class="sxs-lookup"><span data-stu-id="0b217-147">Select **Data** from the left pane and then **ADO.NET Entity Data Model**</span></span>
--   <span data-ttu-id="0b217-148">請輸入**BloggingModel**作為名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="0b217-148">Enter **BloggingModel** as the name and click **OK**</span></span>
--   <span data-ttu-id="0b217-149">選取 **從資料庫產生**，按一下 **下一步**</span><span class="sxs-lookup"><span data-stu-id="0b217-149">Select **Generate from database** and click **Next**</span></span>
--   <span data-ttu-id="0b217-150">輸入您在上一節中建立資料庫的連接資訊</span><span class="sxs-lookup"><span data-stu-id="0b217-150">Enter the connection information for the database that you created in the previous section</span></span>
--   <span data-ttu-id="0b217-151">請輸入**為 [bloggingcontext]** 做為連接字串，然後按一下 [名稱**下一步]**</span><span class="sxs-lookup"><span data-stu-id="0b217-151">Enter **BloggingContext** as the name for the connection string and click **Next**</span></span>
--   <span data-ttu-id="0b217-152">核取方塊旁**資料表**，按一下 **完成**</span><span class="sxs-lookup"><span data-stu-id="0b217-152">Check the box next to **Tables** and click **Finish**</span></span>
+-   <span data-ttu-id="29cb9-146">**專案-&gt;加入新項目...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-146">**Project -&gt; Add New Item...**</span></span>
+-   <span data-ttu-id="29cb9-147">選取 **資料**從左窗格中，然後**ADO.NET 實體資料模型**</span><span class="sxs-lookup"><span data-stu-id="29cb9-147">Select **Data** from the left pane and then **ADO.NET Entity Data Model**</span></span>
+-   <span data-ttu-id="29cb9-148">請輸入**BloggingModel**作為名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="29cb9-148">Enter **BloggingModel** as the name and click **OK**</span></span>
+-   <span data-ttu-id="29cb9-149">選取 **從資料庫產生**，按一下 **下一步**</span><span class="sxs-lookup"><span data-stu-id="29cb9-149">Select **Generate from database** and click **Next**</span></span>
+-   <span data-ttu-id="29cb9-150">輸入您在上一節中建立資料庫的連接資訊</span><span class="sxs-lookup"><span data-stu-id="29cb9-150">Enter the connection information for the database that you created in the previous section</span></span>
+-   <span data-ttu-id="29cb9-151">請輸入**為 [bloggingcontext]** 做為連接字串，然後按一下 [名稱**下一步]**</span><span class="sxs-lookup"><span data-stu-id="29cb9-151">Enter **BloggingContext** as the name for the connection string and click **Next**</span></span>
+-   <span data-ttu-id="29cb9-152">核取方塊旁**資料表**，按一下 **完成**</span><span class="sxs-lookup"><span data-stu-id="29cb9-152">Check the box next to **Tables** and click **Finish**</span></span>
 
-## <a name="swap-to-ste-code-generation"></a><span data-ttu-id="0b217-153">切換至 STE 程式碼產生</span><span class="sxs-lookup"><span data-stu-id="0b217-153">Swap to STE Code Generation</span></span>
+## <a name="swap-to-ste-code-generation"></a><span data-ttu-id="29cb9-153">切換至 STE 程式碼產生</span><span class="sxs-lookup"><span data-stu-id="29cb9-153">Swap to STE Code Generation</span></span>
 
-<span data-ttu-id="0b217-154">現在，我們需要停用的預設程式碼產生和自我追蹤實體的交換。</span><span class="sxs-lookup"><span data-stu-id="0b217-154">Now we need to disable the default code generation and swap to Self-Tracking Entities.</span></span>
+<span data-ttu-id="29cb9-154">現在，我們需要停用的預設程式碼產生和自我追蹤實體的交換。</span><span class="sxs-lookup"><span data-stu-id="29cb9-154">Now we need to disable the default code generation and swap to Self-Tracking Entities.</span></span>
 
-### <a name="if-you-are-using-visual-studio-2012"></a><span data-ttu-id="0b217-155">如果您使用 Visual Studio 2012</span><span class="sxs-lookup"><span data-stu-id="0b217-155">If you are using Visual Studio 2012</span></span>
+### <a name="if-you-are-using-visual-studio-2012"></a><span data-ttu-id="29cb9-155">如果您使用 Visual Studio 2012</span><span class="sxs-lookup"><span data-stu-id="29cb9-155">If you are using Visual Studio 2012</span></span>
 
--   <span data-ttu-id="0b217-156">依序展開**BloggingModel.edmx**中**方案總管**並刪除**BloggingModel.tt**並**BloggingModel.Context.tt** 
-    *這會停用的預設程式碼產生*</span><span class="sxs-lookup"><span data-stu-id="0b217-156">Expand **BloggingModel.edmx** in **Solution Explorer** and delete the **BloggingModel.tt** and **BloggingModel.Context.tt**
+-   <span data-ttu-id="29cb9-156">依序展開**BloggingModel.edmx**中**方案總管**並刪除**BloggingModel.tt**並**BloggingModel.Context.tt** 
+    *這會停用的預設程式碼產生*</span><span class="sxs-lookup"><span data-stu-id="29cb9-156">Expand **BloggingModel.edmx** in **Solution Explorer** and delete the **BloggingModel.tt** and **BloggingModel.Context.tt**
 *This will disable the default code generation*</span></span>
--   <span data-ttu-id="0b217-157">以滑鼠右鍵按一下介面，然後選取 EF 設計工具上的空白區域**加入的程式碼產生項目...**</span><span class="sxs-lookup"><span data-stu-id="0b217-157">Right-click an empty area on the EF Designer surface and select **Add Code Generation Item...**</span></span>
--   <span data-ttu-id="0b217-158">選取 **線上**左的窗格中搜尋**STE 產生器**</span><span class="sxs-lookup"><span data-stu-id="0b217-158">Select **Online** from the left pane and search for **STE Generator**</span></span>
--   <span data-ttu-id="0b217-159">選取  **STE 適用於 C 的產生器\#** 範本，輸入**STETemplate**做為名稱，然後按一下**新增**</span><span class="sxs-lookup"><span data-stu-id="0b217-159">Select the **STE Generator for C\#** template, enter **STETemplate** as the name and click **Add**</span></span>
--   <span data-ttu-id="0b217-160">**STETemplate.tt**並**STETemplate.Context.tt**檔案會新增 BloggingModel.edmx 檔案巢狀</span><span class="sxs-lookup"><span data-stu-id="0b217-160">The **STETemplate.tt** and **STETemplate.Context.tt** files are added nested under the BloggingModel.edmx file</span></span>
+-   <span data-ttu-id="29cb9-157">以滑鼠右鍵按一下介面，然後選取 EF 設計工具上的空白區域**加入的程式碼產生項目...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-157">Right-click an empty area on the EF Designer surface and select **Add Code Generation Item...**</span></span>
+-   <span data-ttu-id="29cb9-158">選取 **線上**左的窗格中搜尋**STE 產生器**</span><span class="sxs-lookup"><span data-stu-id="29cb9-158">Select **Online** from the left pane and search for **STE Generator**</span></span>
+-   <span data-ttu-id="29cb9-159">選取  **STE 適用於 C 的產生器\#** 範本，輸入**STETemplate**做為名稱，然後按一下**新增**</span><span class="sxs-lookup"><span data-stu-id="29cb9-159">Select the **STE Generator for C\#** template, enter **STETemplate** as the name and click **Add**</span></span>
+-   <span data-ttu-id="29cb9-160">**STETemplate.tt**並**STETemplate.Context.tt**檔案會新增 BloggingModel.edmx 檔案巢狀</span><span class="sxs-lookup"><span data-stu-id="29cb9-160">The **STETemplate.tt** and **STETemplate.Context.tt** files are added nested under the BloggingModel.edmx file</span></span>
 
-### <a name="if-you-are-using-visual-studio-2010"></a><span data-ttu-id="0b217-161">如果您使用 Visual Studio 2010</span><span class="sxs-lookup"><span data-stu-id="0b217-161">If you are using Visual Studio 2010</span></span>
+### <a name="if-you-are-using-visual-studio-2010"></a><span data-ttu-id="29cb9-161">如果您使用 Visual Studio 2010</span><span class="sxs-lookup"><span data-stu-id="29cb9-161">If you are using Visual Studio 2010</span></span>
 
--   <span data-ttu-id="0b217-162">以滑鼠右鍵按一下介面，然後選取 EF 設計工具上的空白區域**加入的程式碼產生項目...**</span><span class="sxs-lookup"><span data-stu-id="0b217-162">Right-click an empty area on the EF Designer surface and select **Add Code Generation Item...**</span></span>
--   <span data-ttu-id="0b217-163">選取 **程式碼**從左窗格中，然後**ADO.NET Self-Tracking Entity Generator**</span><span class="sxs-lookup"><span data-stu-id="0b217-163">Select **Code** from the left pane and then **ADO.NET Self-Tracking Entity Generator**</span></span>
--   <span data-ttu-id="0b217-164">請輸入**STETemplate**作為名稱，然後按一下**新增**</span><span class="sxs-lookup"><span data-stu-id="0b217-164">Enter **STETemplate** as the name and click **Add**</span></span>
--   <span data-ttu-id="0b217-165">**STETemplate.tt**並**STETemplate.Context.tt**檔案會直接新增至您的專案</span><span class="sxs-lookup"><span data-stu-id="0b217-165">The **STETemplate.tt** and **STETemplate.Context.tt** files are added directly to your project</span></span>
+-   <span data-ttu-id="29cb9-162">以滑鼠右鍵按一下介面，然後選取 EF 設計工具上的空白區域**加入的程式碼產生項目...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-162">Right-click an empty area on the EF Designer surface and select **Add Code Generation Item...**</span></span>
+-   <span data-ttu-id="29cb9-163">選取 **程式碼**從左窗格中，然後**ADO.NET Self-Tracking Entity Generator**</span><span class="sxs-lookup"><span data-stu-id="29cb9-163">Select **Code** from the left pane and then **ADO.NET Self-Tracking Entity Generator**</span></span>
+-   <span data-ttu-id="29cb9-164">請輸入**STETemplate**作為名稱，然後按一下**新增**</span><span class="sxs-lookup"><span data-stu-id="29cb9-164">Enter **STETemplate** as the name and click **Add**</span></span>
+-   <span data-ttu-id="29cb9-165">**STETemplate.tt**並**STETemplate.Context.tt**檔案會直接新增至您的專案</span><span class="sxs-lookup"><span data-stu-id="29cb9-165">The **STETemplate.tt** and **STETemplate.Context.tt** files are added directly to your project</span></span>
 
-## <a name="move-entity-types-into-separate-project"></a><span data-ttu-id="0b217-166">將實體類型移至不同的專案</span><span class="sxs-lookup"><span data-stu-id="0b217-166">Move Entity Types into Separate Project</span></span>
+## <a name="move-entity-types-into-separate-project"></a><span data-ttu-id="29cb9-166">將實體類型移至不同的專案</span><span class="sxs-lookup"><span data-stu-id="29cb9-166">Move Entity Types into Separate Project</span></span>
 
-<span data-ttu-id="0b217-167">若要使用自我追蹤實體用戶端應用程式需要從我們的模型產生實體類別的存取權。</span><span class="sxs-lookup"><span data-stu-id="0b217-167">To use Self-Tracking Entities our client application needs access to the entity classes generated from our model.</span></span> <span data-ttu-id="0b217-168">因為我們不想要公開 （expose） 用戶端應用程式的整個模型，所以我們要進入個別的專案中的實體類別。</span><span class="sxs-lookup"><span data-stu-id="0b217-168">Because we don't want to expose the whole model to the client application we're going to move the entity classes into a separate project.</span></span>
+<span data-ttu-id="29cb9-167">若要使用自我追蹤實體用戶端應用程式需要從我們的模型產生實體類別的存取權。</span><span class="sxs-lookup"><span data-stu-id="29cb9-167">To use Self-Tracking Entities our client application needs access to the entity classes generated from our model.</span></span> <span data-ttu-id="29cb9-168">因為我們不想要公開 （expose） 用戶端應用程式的整個模型，所以我們要進入個別的專案中的實體類別。</span><span class="sxs-lookup"><span data-stu-id="29cb9-168">Because we don't want to expose the whole model to the client application we're going to move the entity classes into a separate project.</span></span>
 
-<span data-ttu-id="0b217-169">第一步是停止現有的專案中產生實體類別：</span><span class="sxs-lookup"><span data-stu-id="0b217-169">The first step is to stop generating entity classes in the existing project:</span></span>
+<span data-ttu-id="29cb9-169">第一步是停止現有的專案中產生實體類別：</span><span class="sxs-lookup"><span data-stu-id="29cb9-169">The first step is to stop generating entity classes in the existing project:</span></span>
 
--   <span data-ttu-id="0b217-170">以滑鼠右鍵按一下**STETemplate.tt**中**方案總管**，然後選取**屬性**</span><span class="sxs-lookup"><span data-stu-id="0b217-170">Right-click on **STETemplate.tt** in **Solution Explorer** and select **Properties**</span></span>
--   <span data-ttu-id="0b217-171">在 **屬性**視窗中清除**TextTemplatingFileGenerator**從**CustomTool**屬性</span><span class="sxs-lookup"><span data-stu-id="0b217-171">In the **Properties** window clear **TextTemplatingFileGenerator** from the **CustomTool** property</span></span>
--   <span data-ttu-id="0b217-172">依序展開**STETemplate.tt**中**方案總管 中**刪除其下的巢狀的所有檔案</span><span class="sxs-lookup"><span data-stu-id="0b217-172">Expand **STETemplate.tt** in **Solution Explorer** and delete all files nested under it</span></span>
+-   <span data-ttu-id="29cb9-170">以滑鼠右鍵按一下**STETemplate.tt**中**方案總管**，然後選取**屬性**</span><span class="sxs-lookup"><span data-stu-id="29cb9-170">Right-click on **STETemplate.tt** in **Solution Explorer** and select **Properties**</span></span>
+-   <span data-ttu-id="29cb9-171">在 **屬性**視窗中清除**TextTemplatingFileGenerator**從**CustomTool**屬性</span><span class="sxs-lookup"><span data-stu-id="29cb9-171">In the **Properties** window clear **TextTemplatingFileGenerator** from the **CustomTool** property</span></span>
+-   <span data-ttu-id="29cb9-172">依序展開**STETemplate.tt**中**方案總管 中**刪除其下的巢狀的所有檔案</span><span class="sxs-lookup"><span data-stu-id="29cb9-172">Expand **STETemplate.tt** in **Solution Explorer** and delete all files nested under it</span></span>
 
-<span data-ttu-id="0b217-173">接下來，我們即將加入新的專案，並在其中產生實體類別</span><span class="sxs-lookup"><span data-stu-id="0b217-173">Next, we are going to add a new project and generate the entity classes in it</span></span>
+<span data-ttu-id="29cb9-173">接下來，我們即將加入新的專案，並在其中產生實體類別</span><span class="sxs-lookup"><span data-stu-id="29cb9-173">Next, we are going to add a new project and generate the entity classes in it</span></span>
 
--   <span data-ttu-id="0b217-174">**檔案-&gt;新增-&gt;專案...**</span><span class="sxs-lookup"><span data-stu-id="0b217-174">**File -&gt; Add -&gt; Project...**</span></span>
--   <span data-ttu-id="0b217-175">選取  **Visual C\#** 從左窗格中，然後**類別庫**</span><span class="sxs-lookup"><span data-stu-id="0b217-175">Select **Visual C\#** from the left pane and then **Class Library**</span></span>
--   <span data-ttu-id="0b217-176">請輸入**STESample.Entities**作為名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="0b217-176">Enter **STESample.Entities** as the name and click **OK**</span></span>
--   <span data-ttu-id="0b217-177">**專案-&gt;加入現有項目...**</span><span class="sxs-lookup"><span data-stu-id="0b217-177">**Project -&gt; Add Existing Item...**</span></span>
--   <span data-ttu-id="0b217-178">瀏覽至**STESample**專案資料夾</span><span class="sxs-lookup"><span data-stu-id="0b217-178">Navigate to the **STESample** project folder</span></span>
--   <span data-ttu-id="0b217-179">若要檢視選取**的所有檔案 (\*。\*)**</span><span class="sxs-lookup"><span data-stu-id="0b217-179">Select to view **All Files (\*.\*)**</span></span>
--   <span data-ttu-id="0b217-180">選取  **STETemplate.tt**檔案</span><span class="sxs-lookup"><span data-stu-id="0b217-180">Select the **STETemplate.tt** file</span></span>
--   <span data-ttu-id="0b217-181">按一下下拉式箭號旁**新增**按鈕，然後選取**加入做為連結**</span><span class="sxs-lookup"><span data-stu-id="0b217-181">Click on the drop down arrow next to the **Add** button and select **Add As Link**</span></span>
+-   <span data-ttu-id="29cb9-174">**檔案-&gt;新增-&gt;專案...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-174">**File -&gt; Add -&gt; Project...**</span></span>
+-   <span data-ttu-id="29cb9-175">選取  **Visual C\#** 從左窗格中，然後**類別庫**</span><span class="sxs-lookup"><span data-stu-id="29cb9-175">Select **Visual C\#** from the left pane and then **Class Library**</span></span>
+-   <span data-ttu-id="29cb9-176">請輸入**STESample.Entities**作為名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="29cb9-176">Enter **STESample.Entities** as the name and click **OK**</span></span>
+-   <span data-ttu-id="29cb9-177">**專案-&gt;加入現有項目...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-177">**Project -&gt; Add Existing Item...**</span></span>
+-   <span data-ttu-id="29cb9-178">瀏覽至**STESample**專案資料夾</span><span class="sxs-lookup"><span data-stu-id="29cb9-178">Navigate to the **STESample** project folder</span></span>
+-   <span data-ttu-id="29cb9-179">若要檢視選取**的所有檔案 (\*。\*)**</span><span class="sxs-lookup"><span data-stu-id="29cb9-179">Select to view **All Files (\*.\*)**</span></span>
+-   <span data-ttu-id="29cb9-180">選取  **STETemplate.tt**檔案</span><span class="sxs-lookup"><span data-stu-id="29cb9-180">Select the **STETemplate.tt** file</span></span>
+-   <span data-ttu-id="29cb9-181">按一下下拉式箭號旁**新增**按鈕，然後選取**加入做為連結**</span><span class="sxs-lookup"><span data-stu-id="29cb9-181">Click on the drop down arrow next to the **Add** button and select **Add As Link**</span></span>
 
-    ![AddLinkedTemplate](~/ef6/media/addlinkedtemplate.png)
+    ![新增連結的範本](~/ef6/media/addlinkedtemplate.png)
 
-<span data-ttu-id="0b217-183">我們也要確定內容相同的命名空間中產生實體類別。</span><span class="sxs-lookup"><span data-stu-id="0b217-183">We're also going to make sure the entity classes get generated in the same namespace as the context.</span></span> <span data-ttu-id="0b217-184">這只會減少 using 陳述式，我們需要新增在我們的應用程式的數目。</span><span class="sxs-lookup"><span data-stu-id="0b217-184">This just reduces the number of using statements we need to add throughout our application.</span></span>
+<span data-ttu-id="29cb9-183">我們也要確定內容相同的命名空間中產生實體類別。</span><span class="sxs-lookup"><span data-stu-id="29cb9-183">We're also going to make sure the entity classes get generated in the same namespace as the context.</span></span> <span data-ttu-id="29cb9-184">這只會減少 using 陳述式，我們需要新增在我們的應用程式的數目。</span><span class="sxs-lookup"><span data-stu-id="29cb9-184">This just reduces the number of using statements we need to add throughout our application.</span></span>
 
--   <span data-ttu-id="0b217-185">以滑鼠右鍵按一下連結**STETemplate.tt**中**方案總管**，然後選取**屬性**</span><span class="sxs-lookup"><span data-stu-id="0b217-185">Right-click on the linked **STETemplate.tt** in **Solution Explorer** and select **Properties**</span></span>
--   <span data-ttu-id="0b217-186">在 [**屬性**] 視窗中設定**自訂工具命名空間**到**STESample**</span><span class="sxs-lookup"><span data-stu-id="0b217-186">In the **Properties** window set **Custom Tool Namespace** to **STESample**</span></span>
+-   <span data-ttu-id="29cb9-185">以滑鼠右鍵按一下連結**STETemplate.tt**中**方案總管**，然後選取**屬性**</span><span class="sxs-lookup"><span data-stu-id="29cb9-185">Right-click on the linked **STETemplate.tt** in **Solution Explorer** and select **Properties**</span></span>
+-   <span data-ttu-id="29cb9-186">在 [**屬性**] 視窗中設定**自訂工具命名空間**到**STESample**</span><span class="sxs-lookup"><span data-stu-id="29cb9-186">In the **Properties** window set **Custom Tool Namespace** to **STESample**</span></span>
 
-<span data-ttu-id="0b217-187">STE 範本所產生的程式碼將會需要的參考**System.Runtime.Serialization**以編譯。</span><span class="sxs-lookup"><span data-stu-id="0b217-187">The code generated by the STE template will need a reference to **System.Runtime.Serialization** in order to compile.</span></span> <span data-ttu-id="0b217-188">此程式庫所需的 WCF **DataContract**並**DataMember**可序列化的實體類型所使用的屬性。</span><span class="sxs-lookup"><span data-stu-id="0b217-188">This library is needed for the WCF **DataContract** and **DataMember** attributes that are used on the serializable entity types.</span></span>
+<span data-ttu-id="29cb9-187">STE 範本所產生的程式碼將會需要的參考**System.Runtime.Serialization**以編譯。</span><span class="sxs-lookup"><span data-stu-id="29cb9-187">The code generated by the STE template will need a reference to **System.Runtime.Serialization** in order to compile.</span></span> <span data-ttu-id="29cb9-188">此程式庫所需的 WCF **DataContract**並**DataMember**可序列化的實體類型所使用的屬性。</span><span class="sxs-lookup"><span data-stu-id="29cb9-188">This library is needed for the WCF **DataContract** and **DataMember** attributes that are used on the serializable entity types.</span></span>
 
--   <span data-ttu-id="0b217-189">以滑鼠右鍵按一下**STESample.Entities**專案中**方案總管**，然後選取**加入參考...**</span><span class="sxs-lookup"><span data-stu-id="0b217-189">Right click on the **STESample.Entities** project in **Solution Explorer** and select **Add Reference...**</span></span>
-    -   <span data-ttu-id="0b217-190">在 Visual Studio 2012-核取方塊旁**System.Runtime.Serialization** ，按一下  **確定**</span><span class="sxs-lookup"><span data-stu-id="0b217-190">In Visual Studio 2012 - check the box next to **System.Runtime.Serialization** and click **OK**</span></span>
-    -   <span data-ttu-id="0b217-191">在 Visual Studio 2010-選取**System.Runtime.Serialization** ，按一下  **確定**</span><span class="sxs-lookup"><span data-stu-id="0b217-191">In Visual Studio 2010 - select **System.Runtime.Serialization** and click **OK**</span></span>
+-   <span data-ttu-id="29cb9-189">以滑鼠右鍵按一下**STESample.Entities**專案中**方案總管**，然後選取**加入參考...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-189">Right click on the **STESample.Entities** project in **Solution Explorer** and select **Add Reference...**</span></span>
+    -   <span data-ttu-id="29cb9-190">在 Visual Studio 2012-核取方塊旁**System.Runtime.Serialization** ，按一下  **確定**</span><span class="sxs-lookup"><span data-stu-id="29cb9-190">In Visual Studio 2012 - check the box next to **System.Runtime.Serialization** and click **OK**</span></span>
+    -   <span data-ttu-id="29cb9-191">在 Visual Studio 2010-選取**System.Runtime.Serialization** ，按一下  **確定**</span><span class="sxs-lookup"><span data-stu-id="29cb9-191">In Visual Studio 2010 - select **System.Runtime.Serialization** and click **OK**</span></span>
 
-<span data-ttu-id="0b217-192">最後，我們的內容中的專案將會需要的實體類型的參考。</span><span class="sxs-lookup"><span data-stu-id="0b217-192">Finally, the project with our context in it will need a reference to the entity types.</span></span>
+<span data-ttu-id="29cb9-192">最後，我們的內容中的專案將會需要的實體類型的參考。</span><span class="sxs-lookup"><span data-stu-id="29cb9-192">Finally, the project with our context in it will need a reference to the entity types.</span></span>
 
--   <span data-ttu-id="0b217-193">以滑鼠右鍵按一下**STESample**專案中**方案總管**，然後選取**加入參考...**</span><span class="sxs-lookup"><span data-stu-id="0b217-193">Right click on the **STESample** project in **Solution Explorer** and select **Add Reference...**</span></span>
-    -   <span data-ttu-id="0b217-194">在 Visual Studio 2012-選取**解決方案**從左窗格中，核取方塊旁**STESample.Entities**按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="0b217-194">In Visual Studio 2012 - select **Solution** from the left pane, check the box next to **STESample.Entities** and click **OK**</span></span>
-    -   <span data-ttu-id="0b217-195">在 Visual Studio 2010-選取**專案**索引標籤上，選取**STESample.Entities**按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="0b217-195">In Visual Studio 2010 - select the **Projects** tab, select **STESample.Entities** and click **OK**</span></span>
+-   <span data-ttu-id="29cb9-193">以滑鼠右鍵按一下**STESample**專案中**方案總管**，然後選取**加入參考...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-193">Right click on the **STESample** project in **Solution Explorer** and select **Add Reference...**</span></span>
+    -   <span data-ttu-id="29cb9-194">在 Visual Studio 2012-選取**解決方案**從左窗格中，核取方塊旁**STESample.Entities**按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="29cb9-194">In Visual Studio 2012 - select **Solution** from the left pane, check the box next to **STESample.Entities** and click **OK**</span></span>
+    -   <span data-ttu-id="29cb9-195">在 Visual Studio 2010-選取**專案**索引標籤上，選取**STESample.Entities**按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="29cb9-195">In Visual Studio 2010 - select the **Projects** tab, select **STESample.Entities** and click **OK**</span></span>
 
 >[!NOTE]
-> <span data-ttu-id="0b217-196">將實體類型移到個別的專案的另一個選項是將範本檔案，而不是將其連結從其預設位置。</span><span class="sxs-lookup"><span data-stu-id="0b217-196">Another option for moving the entity types to a separate project is to move the template file, rather than linking it from its default location.</span></span> <span data-ttu-id="0b217-197">如果您這麼做，您必須更新**inputFile**變數的範本，以提供 edmx 檔案的相對路徑 (在此範例中會 **...\\BloggingModel.edmx**)。</span><span class="sxs-lookup"><span data-stu-id="0b217-197">If you do this, you will need to update the **inputFile** variable in the template to provide the relative path to the edmx file (in this example that would be **..\\BloggingModel.edmx**).</span></span>
+> <span data-ttu-id="29cb9-196">將實體類型移到個別的專案的另一個選項是將範本檔案，而不是將其連結從其預設位置。</span><span class="sxs-lookup"><span data-stu-id="29cb9-196">Another option for moving the entity types to a separate project is to move the template file, rather than linking it from its default location.</span></span> <span data-ttu-id="29cb9-197">如果您這麼做，您必須更新**inputFile**變數的範本，以提供 edmx 檔案的相對路徑 (在此範例中會 **...\\BloggingModel.edmx**)。</span><span class="sxs-lookup"><span data-stu-id="29cb9-197">If you do this, you will need to update the **inputFile** variable in the template to provide the relative path to the edmx file (in this example that would be **..\\BloggingModel.edmx**).</span></span>
 
-## <a name="create-a-wcf-service"></a><span data-ttu-id="0b217-198">建立 WCF 服務</span><span class="sxs-lookup"><span data-stu-id="0b217-198">Create a WCF Service</span></span>
+## <a name="create-a-wcf-service"></a><span data-ttu-id="29cb9-198">建立 WCF 服務</span><span class="sxs-lookup"><span data-stu-id="29cb9-198">Create a WCF Service</span></span>
 
-<span data-ttu-id="0b217-199">現在就可以開始新增 WCF 服務，以公開我們的資料，我們先建立專案。</span><span class="sxs-lookup"><span data-stu-id="0b217-199">Now it's time to add a WCF Service to expose our data, we'll start by creating the project.</span></span>
+<span data-ttu-id="29cb9-199">現在就可以開始新增 WCF 服務，以公開我們的資料，我們先建立專案。</span><span class="sxs-lookup"><span data-stu-id="29cb9-199">Now it's time to add a WCF Service to expose our data, we'll start by creating the project.</span></span>
 
--   <span data-ttu-id="0b217-200">**檔案-&gt;新增-&gt;專案...**</span><span class="sxs-lookup"><span data-stu-id="0b217-200">**File -&gt; Add -&gt; Project...**</span></span>
--   <span data-ttu-id="0b217-201">選取  **Visual C\#** 從左窗格中，然後**WCF 服務應用程式**</span><span class="sxs-lookup"><span data-stu-id="0b217-201">Select **Visual C\#** from the left pane and then **WCF Service Application**</span></span>
--   <span data-ttu-id="0b217-202">請輸入**STESample.Service**作為名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="0b217-202">Enter **STESample.Service** as the name and click **OK**</span></span>
--   <span data-ttu-id="0b217-203">將參考加入**System.Data.Entity**組件</span><span class="sxs-lookup"><span data-stu-id="0b217-203">Add a reference to the **System.Data.Entity** assembly</span></span>
--   <span data-ttu-id="0b217-204">將參考加入**STESample**並**STESample.Entities**專案</span><span class="sxs-lookup"><span data-stu-id="0b217-204">Add a reference to the **STESample** and **STESample.Entities** projects</span></span>
+-   <span data-ttu-id="29cb9-200">**檔案-&gt;新增-&gt;專案...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-200">**File -&gt; Add -&gt; Project...**</span></span>
+-   <span data-ttu-id="29cb9-201">選取  **Visual C\#** 從左窗格中，然後**WCF 服務應用程式**</span><span class="sxs-lookup"><span data-stu-id="29cb9-201">Select **Visual C\#** from the left pane and then **WCF Service Application**</span></span>
+-   <span data-ttu-id="29cb9-202">請輸入**STESample.Service**作為名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="29cb9-202">Enter **STESample.Service** as the name and click **OK**</span></span>
+-   <span data-ttu-id="29cb9-203">將參考加入**System.Data.Entity**組件</span><span class="sxs-lookup"><span data-stu-id="29cb9-203">Add a reference to the **System.Data.Entity** assembly</span></span>
+-   <span data-ttu-id="29cb9-204">將參考加入**STESample**並**STESample.Entities**專案</span><span class="sxs-lookup"><span data-stu-id="29cb9-204">Add a reference to the **STESample** and **STESample.Entities** projects</span></span>
 
-<span data-ttu-id="0b217-205">我們需要將 EF 連接字串複製到此專案，以便在執行階段找到。</span><span class="sxs-lookup"><span data-stu-id="0b217-205">We need to copy the EF connection string to this project so that it is found at runtime.</span></span>
+<span data-ttu-id="29cb9-205">我們需要將 EF 連接字串複製到此專案，以便在執行階段找到。</span><span class="sxs-lookup"><span data-stu-id="29cb9-205">We need to copy the EF connection string to this project so that it is found at runtime.</span></span>
 
--   <span data-ttu-id="0b217-206">開啟**App.Config**適用於檔案 * * STESample * * 專案和複製**connectionStrings**項目</span><span class="sxs-lookup"><span data-stu-id="0b217-206">Open the **App.Config** file for the **STESample **project and copy the **connectionStrings** element</span></span>
--   <span data-ttu-id="0b217-207">貼上**connectionStrings**元素的子元素當做**configuration**項目**Web.Config**中的檔案**STESample.Service**專案</span><span class="sxs-lookup"><span data-stu-id="0b217-207">Paste the **connectionStrings** element as a child element of the **configuration** element of the **Web.Config** file in the **STESample.Service** project</span></span>
+-   <span data-ttu-id="29cb9-206">開啟**App.Config**適用於檔案 \* \* STESample \* \* 專案和複製**connectionStrings**項目</span><span class="sxs-lookup"><span data-stu-id="29cb9-206">Open the **App.Config** file for the \*\*STESample \*\*project and copy the **connectionStrings** element</span></span>
+-   <span data-ttu-id="29cb9-207">貼上**connectionStrings**元素的子元素當做**configuration**項目**Web.Config**中的檔案**STESample.Service**專案</span><span class="sxs-lookup"><span data-stu-id="29cb9-207">Paste the **connectionStrings** element as a child element of the **configuration** element of the **Web.Config** file in the **STESample.Service** project</span></span>
 
-<span data-ttu-id="0b217-208">現在就可以開始實作實際的服務。</span><span class="sxs-lookup"><span data-stu-id="0b217-208">Now it's time to implement the actual service.</span></span>
+<span data-ttu-id="29cb9-208">現在就可以開始實作實際的服務。</span><span class="sxs-lookup"><span data-stu-id="29cb9-208">Now it's time to implement the actual service.</span></span>
 
--   <span data-ttu-id="0b217-209">開啟**IService1.cs**並取代為下列程式碼的內容</span><span class="sxs-lookup"><span data-stu-id="0b217-209">Open **IService1.cs** and replace the contents with the following code</span></span>
+-   <span data-ttu-id="29cb9-209">開啟**IService1.cs**並取代為下列程式碼的內容</span><span class="sxs-lookup"><span data-stu-id="29cb9-209">Open **IService1.cs** and replace the contents with the following code</span></span>
 
 ``` csharp
     using System.Collections.Generic;
@@ -202,7 +202,7 @@ ms.locfileid: "42995417"
     }
 ```
 
--   <span data-ttu-id="0b217-210">開啟**Service1.svc**並取代為下列程式碼的內容</span><span class="sxs-lookup"><span data-stu-id="0b217-210">Open **Service1.svc** and replace the contents with the following code</span></span>
+-   <span data-ttu-id="29cb9-210">開啟**Service1.svc**並取代為下列程式碼的內容</span><span class="sxs-lookup"><span data-stu-id="29cb9-210">Open **Service1.svc** and replace the contents with the following code</span></span>
 
 ``` csharp
     using System;
@@ -255,24 +255,24 @@ ms.locfileid: "42995417"
     }
 ```
 
-## <a name="consume-the-service-from-a-console-application"></a><span data-ttu-id="0b217-211">取用的主控台應用程式的服務</span><span class="sxs-lookup"><span data-stu-id="0b217-211">Consume the Service from a Console Application</span></span>
+## <a name="consume-the-service-from-a-console-application"></a><span data-ttu-id="29cb9-211">取用的主控台應用程式的服務</span><span class="sxs-lookup"><span data-stu-id="29cb9-211">Consume the Service from a Console Application</span></span>
 
-<span data-ttu-id="0b217-212">讓我們建立使用我們的服務的主控台應用程式。</span><span class="sxs-lookup"><span data-stu-id="0b217-212">Let's create a console application that uses our service.</span></span>
+<span data-ttu-id="29cb9-212">讓我們建立使用我們的服務的主控台應用程式。</span><span class="sxs-lookup"><span data-stu-id="29cb9-212">Let's create a console application that uses our service.</span></span>
 
--   <span data-ttu-id="0b217-213">**檔案-&gt;新增-&gt;專案...**</span><span class="sxs-lookup"><span data-stu-id="0b217-213">**File -&gt; New -&gt; Project...**</span></span>
--   <span data-ttu-id="0b217-214">選取  **Visual C\#** 從左窗格中，然後**主控台應用程式**</span><span class="sxs-lookup"><span data-stu-id="0b217-214">Select **Visual C\#** from the left pane and then **Console Application**</span></span>
--   <span data-ttu-id="0b217-215">請輸入**STESample.ConsoleTest**作為名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="0b217-215">Enter **STESample.ConsoleTest** as the name and click **OK**</span></span>
--   <span data-ttu-id="0b217-216">將參考加入**STESample.Entities**專案</span><span class="sxs-lookup"><span data-stu-id="0b217-216">Add a reference to the **STESample.Entities** project</span></span>
+-   <span data-ttu-id="29cb9-213">**檔案-&gt;新增-&gt;專案...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-213">**File -&gt; New -&gt; Project...**</span></span>
+-   <span data-ttu-id="29cb9-214">選取  **Visual C\#** 從左窗格中，然後**主控台應用程式**</span><span class="sxs-lookup"><span data-stu-id="29cb9-214">Select **Visual C\#** from the left pane and then **Console Application**</span></span>
+-   <span data-ttu-id="29cb9-215">請輸入**STESample.ConsoleTest**作為名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="29cb9-215">Enter **STESample.ConsoleTest** as the name and click **OK**</span></span>
+-   <span data-ttu-id="29cb9-216">將參考加入**STESample.Entities**專案</span><span class="sxs-lookup"><span data-stu-id="29cb9-216">Add a reference to the **STESample.Entities** project</span></span>
 
-<span data-ttu-id="0b217-217">我們需要我們的 WCF 服務的服務參考</span><span class="sxs-lookup"><span data-stu-id="0b217-217">We need a service reference to our WCF service</span></span>
+<span data-ttu-id="29cb9-217">我們需要我們的 WCF 服務的服務參考</span><span class="sxs-lookup"><span data-stu-id="29cb9-217">We need a service reference to our WCF service</span></span>
 
--   <span data-ttu-id="0b217-218">以滑鼠右鍵按一下**STESample.ConsoleTest**專案中**方案總管**，然後選取**加入服務參考...**</span><span class="sxs-lookup"><span data-stu-id="0b217-218">Right-click the **STESample.ConsoleTest** project in **Solution Explorer** and select **Add Service Reference...**</span></span>
--   <span data-ttu-id="0b217-219">按一下 **探索**</span><span class="sxs-lookup"><span data-stu-id="0b217-219">Click **Discover**</span></span>
--   <span data-ttu-id="0b217-220">請輸入**BloggingService**作為命名空間，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="0b217-220">Enter **BloggingService** as the namespace and click **OK**</span></span>
+-   <span data-ttu-id="29cb9-218">以滑鼠右鍵按一下**STESample.ConsoleTest**專案中**方案總管**，然後選取**加入服務參考...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-218">Right-click the **STESample.ConsoleTest** project in **Solution Explorer** and select **Add Service Reference...**</span></span>
+-   <span data-ttu-id="29cb9-219">按一下 **探索**</span><span class="sxs-lookup"><span data-stu-id="29cb9-219">Click **Discover**</span></span>
+-   <span data-ttu-id="29cb9-220">請輸入**BloggingService**作為命名空間，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="29cb9-220">Enter **BloggingService** as the namespace and click **OK**</span></span>
 
-<span data-ttu-id="0b217-221">現在我們可以撰寫一些程式碼來取用服務。</span><span class="sxs-lookup"><span data-stu-id="0b217-221">Now we can write some code to consume the service.</span></span>
+<span data-ttu-id="29cb9-221">現在我們可以撰寫一些程式碼來取用服務。</span><span class="sxs-lookup"><span data-stu-id="29cb9-221">Now we can write some code to consume the service.</span></span>
 
--   <span data-ttu-id="0b217-222">開啟**Program.cs**並取代為下列程式碼的內容。</span><span class="sxs-lookup"><span data-stu-id="0b217-222">Open **Program.cs** and replace the contents with the following code.</span></span>
+-   <span data-ttu-id="29cb9-222">開啟**Program.cs**並取代為下列程式碼的內容。</span><span class="sxs-lookup"><span data-stu-id="29cb9-222">Open **Program.cs** and replace the contents with the following code.</span></span>
 
 ``` csharp
     using STESample.ConsoleTest.BloggingService;
@@ -399,11 +399,11 @@ ms.locfileid: "42995417"
     }
 ```
 
-<span data-ttu-id="0b217-223">您現在可以執行應用程式來查看運作狀況。</span><span class="sxs-lookup"><span data-stu-id="0b217-223">You can now run the application to see it in action.</span></span>
+<span data-ttu-id="29cb9-223">您現在可以執行應用程式來查看運作狀況。</span><span class="sxs-lookup"><span data-stu-id="29cb9-223">You can now run the application to see it in action.</span></span>
 
--   <span data-ttu-id="0b217-224">以滑鼠右鍵按一下**STESample.ConsoleTest**專案中**方案總管**，然後選取**偵錯-&gt;開始新執行個體**</span><span class="sxs-lookup"><span data-stu-id="0b217-224">Right-click the **STESample.ConsoleTest** project in **Solution Explorer** and select **Debug -&gt; Start new instance**</span></span>
+-   <span data-ttu-id="29cb9-224">以滑鼠右鍵按一下**STESample.ConsoleTest**專案中**方案總管**，然後選取**偵錯-&gt;開始新執行個體**</span><span class="sxs-lookup"><span data-stu-id="29cb9-224">Right-click the **STESample.ConsoleTest** project in **Solution Explorer** and select **Debug -&gt; Start new instance**</span></span>
 
-<span data-ttu-id="0b217-225">當應用程式執行時，您會看到下列輸出。</span><span class="sxs-lookup"><span data-stu-id="0b217-225">You'll see the following output when the application executes.</span></span>
+<span data-ttu-id="29cb9-225">當應用程式執行時，您會看到下列輸出。</span><span class="sxs-lookup"><span data-stu-id="29cb9-225">You'll see the following output when the application executes.</span></span>
 
 ```
 Initial Data:
@@ -435,24 +435,24 @@ ADO.NET Blog
 Press any key to exit...
 ```
 
-## <a name="consume-the-service-from-a-wpf-application"></a><span data-ttu-id="0b217-226">使用 WPF 應用程式服務</span><span class="sxs-lookup"><span data-stu-id="0b217-226">Consume the Service from a WPF Application</span></span>
+## <a name="consume-the-service-from-a-wpf-application"></a><span data-ttu-id="29cb9-226">使用 WPF 應用程式服務</span><span class="sxs-lookup"><span data-stu-id="29cb9-226">Consume the Service from a WPF Application</span></span>
 
-<span data-ttu-id="0b217-227">讓我們建立使用我們的服務的 WPF 應用程式。</span><span class="sxs-lookup"><span data-stu-id="0b217-227">Let's create a WPF application that uses our service.</span></span>
+<span data-ttu-id="29cb9-227">讓我們建立使用我們的服務的 WPF 應用程式。</span><span class="sxs-lookup"><span data-stu-id="29cb9-227">Let's create a WPF application that uses our service.</span></span>
 
--   <span data-ttu-id="0b217-228">**檔案-&gt;新增-&gt;專案...**</span><span class="sxs-lookup"><span data-stu-id="0b217-228">**File -&gt; New -&gt; Project...**</span></span>
--   <span data-ttu-id="0b217-229">選取  **Visual C\#** 從左窗格中，然後**WPF 應用程式**</span><span class="sxs-lookup"><span data-stu-id="0b217-229">Select **Visual C\#** from the left pane and then **WPF Application**</span></span>
--   <span data-ttu-id="0b217-230">請輸入**STESample.WPFTest**作為名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="0b217-230">Enter **STESample.WPFTest** as the name and click **OK**</span></span>
--   <span data-ttu-id="0b217-231">將參考加入**STESample.Entities**專案</span><span class="sxs-lookup"><span data-stu-id="0b217-231">Add a reference to the **STESample.Entities** project</span></span>
+-   <span data-ttu-id="29cb9-228">**檔案-&gt;新增-&gt;專案...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-228">**File -&gt; New -&gt; Project...**</span></span>
+-   <span data-ttu-id="29cb9-229">選取  **Visual C\#** 從左窗格中，然後**WPF 應用程式**</span><span class="sxs-lookup"><span data-stu-id="29cb9-229">Select **Visual C\#** from the left pane and then **WPF Application**</span></span>
+-   <span data-ttu-id="29cb9-230">請輸入**STESample.WPFTest**作為名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="29cb9-230">Enter **STESample.WPFTest** as the name and click **OK**</span></span>
+-   <span data-ttu-id="29cb9-231">將參考加入**STESample.Entities**專案</span><span class="sxs-lookup"><span data-stu-id="29cb9-231">Add a reference to the **STESample.Entities** project</span></span>
 
-<span data-ttu-id="0b217-232">我們需要我們的 WCF 服務的服務參考</span><span class="sxs-lookup"><span data-stu-id="0b217-232">We need a service reference to our WCF service</span></span>
+<span data-ttu-id="29cb9-232">我們需要我們的 WCF 服務的服務參考</span><span class="sxs-lookup"><span data-stu-id="29cb9-232">We need a service reference to our WCF service</span></span>
 
--   <span data-ttu-id="0b217-233">以滑鼠右鍵按一下**STESample.WPFTest**專案中**方案總管**，然後選取**加入服務參考...**</span><span class="sxs-lookup"><span data-stu-id="0b217-233">Right-click the **STESample.WPFTest** project in **Solution Explorer** and select **Add Service Reference...**</span></span>
--   <span data-ttu-id="0b217-234">按一下 **探索**</span><span class="sxs-lookup"><span data-stu-id="0b217-234">Click **Discover**</span></span>
--   <span data-ttu-id="0b217-235">請輸入**BloggingService**作為命名空間，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="0b217-235">Enter **BloggingService** as the namespace and click **OK**</span></span>
+-   <span data-ttu-id="29cb9-233">以滑鼠右鍵按一下**STESample.WPFTest**專案中**方案總管**，然後選取**加入服務參考...**</span><span class="sxs-lookup"><span data-stu-id="29cb9-233">Right-click the **STESample.WPFTest** project in **Solution Explorer** and select **Add Service Reference...**</span></span>
+-   <span data-ttu-id="29cb9-234">按一下 **探索**</span><span class="sxs-lookup"><span data-stu-id="29cb9-234">Click **Discover**</span></span>
+-   <span data-ttu-id="29cb9-235">請輸入**BloggingService**作為命名空間，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="29cb9-235">Enter **BloggingService** as the namespace and click **OK**</span></span>
 
-<span data-ttu-id="0b217-236">現在我們可以撰寫一些程式碼來取用服務。</span><span class="sxs-lookup"><span data-stu-id="0b217-236">Now we can write some code to consume the service.</span></span>
+<span data-ttu-id="29cb9-236">現在我們可以撰寫一些程式碼來取用服務。</span><span class="sxs-lookup"><span data-stu-id="29cb9-236">Now we can write some code to consume the service.</span></span>
 
--   <span data-ttu-id="0b217-237">開啟**MainWindow.xaml**並取代為下列程式碼的內容。</span><span class="sxs-lookup"><span data-stu-id="0b217-237">Open **MainWindow.xaml** and replace the contents with the following code.</span></span>
+-   <span data-ttu-id="29cb9-237">開啟**MainWindow.xaml**並取代為下列程式碼的內容。</span><span class="sxs-lookup"><span data-stu-id="29cb9-237">Open **MainWindow.xaml** and replace the contents with the following code.</span></span>
 
 ``` xaml
     <Window
@@ -496,7 +496,7 @@ Press any key to exit...
     </Window>
 ```
 
--   <span data-ttu-id="0b217-238">開啟 MainWindow 的程式碼後置 (**MainWindow.xaml.cs**)，並取代為下列程式碼的內容</span><span class="sxs-lookup"><span data-stu-id="0b217-238">Open the code behind for MainWindow (**MainWindow.xaml.cs**) and replace the contents with the following code</span></span>
+-   <span data-ttu-id="29cb9-238">開啟 MainWindow 的程式碼後置 (**MainWindow.xaml.cs**)，並取代為下列程式碼的內容</span><span class="sxs-lookup"><span data-stu-id="29cb9-238">Open the code behind for MainWindow (**MainWindow.xaml.cs**) and replace the contents with the following code</span></span>
 
 ``` csharp
     using STESample.WPFTest.BloggingService;
@@ -548,9 +548,9 @@ Press any key to exit...
     }
 ```
 
-<span data-ttu-id="0b217-239">您現在可以執行應用程式來查看運作狀況。</span><span class="sxs-lookup"><span data-stu-id="0b217-239">You can now run the application to see it in action.</span></span>
+<span data-ttu-id="29cb9-239">您現在可以執行應用程式來查看運作狀況。</span><span class="sxs-lookup"><span data-stu-id="29cb9-239">You can now run the application to see it in action.</span></span>
 
--   <span data-ttu-id="0b217-240">以滑鼠右鍵按一下**STESample.WPFTest**專案中**方案總管**，然後選取**偵錯-&gt;開始新執行個體**</span><span class="sxs-lookup"><span data-stu-id="0b217-240">Right-click the **STESample.WPFTest** project in **Solution Explorer** and select **Debug -&gt; Start new instance**</span></span>
--   <span data-ttu-id="0b217-241">您可以管理使用螢幕的資料，並將它儲存服務會使用透過**儲存**按鈕</span><span class="sxs-lookup"><span data-stu-id="0b217-241">You can manipulate the data using the screen and save it via the service using the **Save** button</span></span>
+-   <span data-ttu-id="29cb9-240">以滑鼠右鍵按一下**STESample.WPFTest**專案中**方案總管**，然後選取**偵錯-&gt;開始新執行個體**</span><span class="sxs-lookup"><span data-stu-id="29cb9-240">Right-click the **STESample.WPFTest** project in **Solution Explorer** and select **Debug -&gt; Start new instance**</span></span>
+-   <span data-ttu-id="29cb9-241">您可以管理使用螢幕的資料，並將它儲存服務會使用透過**儲存**按鈕</span><span class="sxs-lookup"><span data-stu-id="29cb9-241">You can manipulate the data using the screen and save it via the service using the **Save** button</span></span>
 
-![WPF](~/ef6/media/wpf.png)
+![WPF 主視窗](~/ef6/media/wpf.png)
