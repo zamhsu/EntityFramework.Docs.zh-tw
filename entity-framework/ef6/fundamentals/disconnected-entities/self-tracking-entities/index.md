@@ -3,12 +3,12 @@ title: 自我追蹤實體 - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 5e60f5be-7bbb-4bf8-835e-0ac808d6c84a
-ms.openlocfilehash: 8b555d211facd737aedf120a1ecfdc88d3903107
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: bd22df9e14fe71ae065baf1d747b1642dd7bafce
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998012"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250857"
 ---
 # <a name="self-tracking-entities"></a>自我追蹤實體
 
@@ -28,7 +28,7 @@ ms.locfileid: "42998012"
 
 若要開始使用，請前往[自我追蹤實體逐步解說](walkthrough.md)頁面。  
 
-## <a name="considerations-when-working-with-self-tracking-entities"></a>使用自我追蹤實體時的考量  
+## <a name="functional-considerations-when-working-with-self-tracking-entities"></a>使用自我追蹤實體時的功能考量  
 > [!IMPORTANT]
 > 我們不再建議使用自我追蹤實體範本。 繼續提供該範本只是為了支援現有應用程式。 如果您的應用程式需要使用已中斷連線的實體圖形，請考慮使用 [Trackable Entities](http://trackableentities.github.io/) (可追蹤的實體) 之類的其他替代項目，這是一項類似於自我追蹤實體的技術，可由社群更積極地進行開發或使用低層級變更追蹤 API 來撰寫自訂程式碼。
 
@@ -46,7 +46,7 @@ ms.locfileid: "42998012"
 - 系統不會啟用自我追蹤實體來執行消極式載入。  
 - 自我追蹤實體不支援 ASP.NET 狀態管理物件的二進位序列化和序列化。 不過，您可以自訂範本，以便加入二進位序列化支援。 如需詳細資訊，請參閱[使用二進位序列化和 ViewState 搭配自我追蹤實體](http://go.microsoft.com/fwlink/?LinkId=199208)。  
 
-### <a name="security-considerations"></a>安全性考量  
+## <a name="security-considerations"></a>安全性考量  
 
 下列是使用自我追蹤實體時應該列入考慮的安全性考量：  
 

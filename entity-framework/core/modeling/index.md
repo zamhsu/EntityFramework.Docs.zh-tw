@@ -4,14 +4,14 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 88253ff3-174e-485c-b3f8-768243d01ee1
 uid: core/modeling/index
-ms.openlocfilehash: 9f702d5833b88e6eb77c0afefdae0ed3bc162ec8
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e4eed480178ce43cbc5ece8db8e584032da7b2b9
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993929"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250344"
 ---
-# <a name="creating-a-model"></a>建立模型
+# <a name="creating-and-configuring-a-model"></a>建立和設定模型
 
 Entity Framework 會使用一組慣例，根據您實體類別的圖形建置模型。 您可以指定其他組態來補充及 (或) 覆寫慣例探索到的項目。
 
@@ -20,9 +20,7 @@ Entity Framework 會使用一組慣例，根據您實體類別的圖形建置模
 > [!TIP]  
 > 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples)。
 
-## <a name="methods-of-configuration"></a>組態方法
-
-### <a name="fluent-api"></a>Fluent API
+## <a name="use-fluent-api-to-configure-a-model"></a>使用 Fluent API 設定模型
 
 您可以覆寫衍生內容中的 `OnModelCreating` 方法，並使用 `ModelBuilder API` 來設定模型。 這是最強大的組態方法，讓您能夠指定組態而不修改實體類別。 Fluent API 組態具有最高的優先順序，且會覆寫慣例及資料註解。
 
@@ -42,7 +40,7 @@ Entity Framework 會使用一組慣例，根據您實體類別的圖形建置模
     }
 ```
 
-### <a name="data-annotations"></a>資料註釋
+## <a name="use-data-annotations-to-configure-a-model"></a>使用資料註解
 
 您也可以將屬性 (又稱資料註解) 套用到類別及屬性。 資料註解會覆寫慣例，但會受到 Fluent API 組態覆寫。
 

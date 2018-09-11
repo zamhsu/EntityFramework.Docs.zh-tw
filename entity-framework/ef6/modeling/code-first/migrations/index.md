@@ -3,12 +3,12 @@ title: Code First 移轉 - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 36591d8f-36e1-4835-8a51-90f34f633d1e
-ms.openlocfilehash: 216f850fb906cfc4b68eae76ae11ff167ed835ea
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 6c530545968a26d13051d1e682557092bde13bb0
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993380"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251033"
 ---
 # <a name="code-first-migrations"></a>Code First 移轉
 如果您使用 Code First 工作流程，則建議使用 Code First 移轉來改善應用程式的資料庫結構描述。 移轉會提供一組工具，該工具允許下列項目：
@@ -84,7 +84,7 @@ ms.locfileid: "42993380"
 
 -   執行您的應用程式，而且您將會看到 **MigrationsCodeDemo.BlogContext** 資料庫已建立。
 
-    ![DatabaseLocalDB](~/ef6/media/databaselocaldb.png)
+    ![資料庫  LocalDB](~/ef6/media/databaselocaldb.png)
 
 ## <a name="enabling-migrations"></a>啟用移轉
 
@@ -107,7 +107,7 @@ ms.locfileid: "42993380"
 -   **組態類別**。 這個類別可讓您設定移轉對內容的運作方式。 在此逐步解說中，我們將只使用預設組態。
     「由於專案中只有一個單一 Code First 內容，因此 Enable-Migrations 已自動填入此組態適用的內容類型。」
 -   **InitialCreate 移轉**。 產生此移轉是因為在我們啟用移轉之前，Code First 已為我們建立了資料庫。 這個包含 scaffold 移轉中的程式碼，表示已在資料庫中建立的物件。 在本案例中，即是包含 **BlogId** 和 **Name** 資料行的 **Blog** 資料表。 檔案名稱包含時間戳記，以協助排序。
-    「如果尚未建立資料庫，則不會將此 InitialCreate 移轉新增至專案中。反之，在我們第一次呼叫 Add-Migration 時，建立這些資料表的程式碼將會建立至新的移轉中。」*
+    「如果尚未建立資料庫，則不會將此 InitialCreate 移轉新增至專案中。反之，在我們第一次呼叫 Add-Migration 時，建立這些資料表的程式碼將會建立至新的移轉中。」
 
 ### <a name="multiple-models-targeting-the-same-database"></a>針對相同資料庫的多個模型
 
@@ -299,7 +299,7 @@ Code First 移轉在建立這些變更方面做得非常好，但我們可能仍
 如果其他開發人員希望在其電腦上進行這些變更，他們可以在我們檢查對原始檔控制的變更後同步。 一旦他們擁有了我們的新移轉，他們就可以執行 Update-Database 命令以在本機套用變更。 但是，如果我們想將這些變更推送至測試伺服器並生產，我們可能需要能夠遞交給 DBA 的 SQL 指令碼。
 
 -   請執行 **Update-database** 命令，但這次請指定 **–Script** 旗標，以便將變更寫入至指令碼，而非套用。 我們也會指定來源和目標移轉以產生指令碼。 我們希望指令碼從空的資料庫 (**$InitialDatabase**) 移轉至最新版本 (移轉 **AddPostAbstract**)。
-    「如果您未指定目標移轉，則移轉會使用最新的移轉作為目標。如果您未指定來源移轉，則移轉會使用資料庫的目前狀態。」*
+    「如果您未指定目標移轉，則移轉會使用最新的移轉作為目標。如果您未指定來源移轉，則移轉會使用資料庫的目前狀態。」
 -   在套件管理員主控台中執行 **Update-Database -Script -SourceMigration: $InitialDatabase -TargetMigration: AddPostAbstract** 命令
 
 Code First 移轉將執行移轉管線，但不會實際套用變更，而是將其寫入 .sql 檔案中。 一旦產生指令碼，即會在 Visual Studio 中開啟，供您檢視或儲存。

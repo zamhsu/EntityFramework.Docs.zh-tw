@@ -3,12 +3,12 @@ title: 設計工具程式碼產生範本 - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 56e00fa2-f9f0-48b3-8006-f8266ca7e74b
-ms.openlocfilehash: 29e28dd4ebe0e5e6e3cddacb1d34202c2010f389
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e4d4aaa647baca9f85b85db1aadaade37abd6ff2
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994867"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251163"
 ---
 # <a name="designer-code-generation-templates"></a>設計工具程式碼產生範本
 當您使用 Entity Framework Designer 建立模型時，會自動為您產生類別和衍生的內容。 除了預設程式碼產生之外，我們也提供許多範本，可用於自訂產生的程式碼。 這些範本會以 T4 文字範本的形式提供，讓您可根據需要來自訂範本。
@@ -151,7 +151,7 @@ DbContext 產生器現在是用於在新應用程式中產生 POCO 類別的建�
 
 若要開始使用程式碼產生範本，請以滑鼠右鍵按一下 EF Designer 中設計介面上的空白點，然後選取 [新增程式碼產生項目...]。
 
-![Add_Code_Gen_Item](~/ef6/media/add-code-gen-item.png)
+![新增程式碼產生項目](~/ef6/media/add-code-gen-item.png)
 
 如果您已經安裝要使用的範本 (或者已包含在 Visual Studio 中)，則範本將在左側功能表的 [程式碼] 或 [資料] 區段下可用。
 
@@ -166,8 +166,8 @@ DbContext 產生器現在是用於在新應用程式中產生 POCO 類別的建�
 > [!NOTE]
 > 對於在 Visual Studio 2012 中建立的模型，您將需要刪除用於預設程式碼產生的範本，否則您將產生重複的類別和內容。 預設檔案為 **&lt;模型名稱&gt;.tt** 和 **&lt;模型名稱&gt;.context.tt**。 
 
-![VS2012_Templates](~/ef6/media/vs2012-templates.png)
+![VS2012 範本](~/ef6/media/vs2012-templates.png)
 
 如果您使用 Visual Studio 2010，tt 檔案會直接新增至您的專案。  
 
-![VS2010_Templates](~/ef6/media/vs2010-templates.png)
+![VS2010 範本](~/ef6/media/vs2010-templates.png)
