@@ -1,14 +1,14 @@
 ---
 title: 在小組環境-EF6 code First 移轉
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
-ms.openlocfilehash: 31f8476c64d36d4d1cf3d18deb59ebc482dcc975
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: f5216a80928625040d6719f0e97ae786e5e33e05
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251228"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490502"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>在小組環境中的 code First 移轉
 > [!NOTE]

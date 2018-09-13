@@ -1,14 +1,14 @@
 ---
 title: School 範例資料庫 EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: e83a6a06-e63b-4530-8656-614bf609b12b
-ms.openlocfilehash: 4d113a7a3159edfa3d586e571c69b05b35434edf
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 1e9dc98edb8590021bbf3393e9edda1929d505e0
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997746"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490710"
 ---
 # <a name="school-sample-database"></a>School 範例資料庫
 本主題包含的結構描述和 School 資料庫的資料。 範例 School 資料庫可在各種不同的位置，在 Entity Framework 文件。  

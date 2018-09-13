@@ -1,14 +1,14 @@
 ---
 title: 資料表值函式 (Tvf)-EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: f019c97b-87b0-4e93-98f4-2c539f77b2dc
-ms.openlocfilehash: f4b8c1bd442bac67a06584bd23c040381374f303
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 6130e6bd550497509f3dcc0242077046d12c601a
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993243"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489319"
 ---
 # <a name="table-valued-functions-tvfs"></a>資料表值函式 (Tvf)
 > [!NOTE]

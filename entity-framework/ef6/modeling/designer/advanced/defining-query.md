@@ -1,14 +1,14 @@
 ---
 title: 定義查詢-EF 設計工具-EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: e52a297e-85aa-42f6-a922-ba960f8a4b22
-ms.openlocfilehash: 8415a265cdbe078422e0467ee97da955a81b873d
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: b1589dc12ccb50754c2e950932a2d82bc4869f6b
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250968"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489468"
 ---
 # <a name="defining-query---ef-designer"></a>定義查詢-EF 設計工具
 本逐步解說示範如何將定義要使用 EF 設計工具的模型類型的查詢和對應的實體。 定義查詢通常用來提供資料庫檢視，提供類似功能，但該檢視定義在模型中，不是資料庫。 定義查詢可讓您執行 SQL 陳述式中指定**DefiningQuery** .edmx 檔案的項目。 如需詳細資訊，請參閱 < **DefiningQuery**中[SSDL 規格](~/ef6/modeling/designer/advanced/edmx/ssdl-spec.md)。

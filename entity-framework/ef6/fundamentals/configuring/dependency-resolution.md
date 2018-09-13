@@ -1,14 +1,14 @@
 ---
 title: 相依性解析-EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 32d19ac6-9186-4ae1-8655-64ee49da55d0
-ms.openlocfilehash: c6c56c3048e17a5c888ffe564e7606abf8b0c4ed
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 6082124481f5795bbcb62fff2bb6a58ecdcb48e4
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251241"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490957"
 ---
 # <a name="dependency-resolution"></a>相依性解析
 > [!NOTE]

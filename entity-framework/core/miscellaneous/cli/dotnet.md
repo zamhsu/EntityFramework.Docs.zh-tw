@@ -2,14 +2,14 @@
 title: .NET core CLI-EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 11/6/2017
+ms.date: 11/06/2017
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: c70003fc7e2c5381a22d26baacd3d76f32489328
-ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
+ms.openlocfilehash: 3534336f1caeed96079b35c739d694a536919020
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/29/2018
-ms.locfileid: "43152410"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489605"
 ---
 <a name="ef-core-net-command-line-tools"></a>EF Core.NET 命令列工具
 ===============================

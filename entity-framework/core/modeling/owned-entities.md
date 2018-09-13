@@ -1,15 +1,15 @@
 ---
 title: EF Core 擁有實體型別：
 author: julielerman
-ms.date: 2/26/2018
+ms.date: 02/26/2018
 ms.assetid: 2B0BADCE-E23E-4B28-B8EE-537883E16DF3
 uid: core/modeling/owned-entities
-ms.openlocfilehash: afbc853feab56d31a8ceba0da05fe6dc508b65bb
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 1104a8a9a4540e33624fad69c47f2f950c6669bf
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994065"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489410"
 ---
 # <a name="owned-entity-types"></a>擁有的實體類型
 

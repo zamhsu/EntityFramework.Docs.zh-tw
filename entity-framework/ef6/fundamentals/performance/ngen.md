@@ -1,14 +1,14 @@
 ---
 title: Ngen-EF6 的改善啟動效能
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: dc6110a0-80a0-4370-8190-cea942841cee
-ms.openlocfilehash: 324769ca6ee95e1576cf03d20e569f8b24778119
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 2e9a93c7741046da25b890fed084a6b280bf5643
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998331"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489956"
 ---
 # <a name="improving-startup-performance-with-ngen"></a>使用 NGen 的改善啟動效能
 > [!NOTE]

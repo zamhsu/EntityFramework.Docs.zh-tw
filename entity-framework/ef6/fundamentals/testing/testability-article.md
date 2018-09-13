@@ -1,14 +1,14 @@
 ---
 title: 可測試性和 Entity Framework 4.0
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 9430e2ab-261c-4e8e-8545-2ebc52d7a247
-ms.openlocfilehash: 2a2384c7868ae3cf6af4f915c06ae9fdb622634c
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 0ddf72ab46e2d67dc8a9cf75cbd40430352c5210
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251319"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490528"
 ---
 # <a name="testability-and-entity-framework-40"></a>可測試性和 Entity Framework 4.0
 Scott Allen

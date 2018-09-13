@@ -1,14 +1,14 @@
 ---
 title: 資料繫結與 WPF-EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: e90d48e6-bea5-47ef-b756-7b89cce4daf0
-ms.openlocfilehash: e6df90db17d39d3aa91275800a6414fed40fb5db
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 5bd4a9b98a12de41e4ec37c2cc7dbdc537210893
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251150"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490222"
 ---
 # <a name="databinding-with-wpf"></a>使用 WPF 資料繫結
 此逐步解說示範如何在 [主版詳細資料] 表單中的 WPF 控制項繫結至 POCO 型別。 應用程式會使用 Entity Framework Api 填入資料庫的資料物件、 追蹤變更，並將資料保存到資料庫。

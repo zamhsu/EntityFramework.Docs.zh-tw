@@ -1,14 +1,14 @@
 ---
 title: 程式碼第一次慣例 EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: bc644573-c2b2-4ed7-8745-3c37c41058ad
-ms.openlocfilehash: c5fa580879a4b53fed34d94b737988875f38c62c
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 4d03a32db5d84eb37c22617a95005b272172a65d
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995522"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490993"
 ---
 # <a name="code-first-conventions"></a>程式碼的第一個慣例
 Code First 能讓您藉由使用 C# 或 Visual Basic.NET 類別，描述模型。 模型的基本形狀會偵測到使用的慣例。 慣例是用來自動設定概念模型時使用 Code First，根據類別定義的規則的集合。 System.Data.Entity.ModelConfiguration.Conventions 命名空間中定義的慣例。  

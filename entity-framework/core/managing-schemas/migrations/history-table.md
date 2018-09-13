@@ -2,13 +2,13 @@
 title: 自訂的移轉歷程記錄資料表 EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 11/7/2017
-ms.openlocfilehash: 7ee76cadd6fac4ec403918e88460e43067ae5815
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.date: 11/07/2017
+ms.openlocfilehash: 1a253972a8f4e410421ec8a77c079e588d368819
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995692"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45488812"
 ---
 <a name="custom-migrations-history-table"></a>自訂的移轉歷程記錄資料表
 ===============================

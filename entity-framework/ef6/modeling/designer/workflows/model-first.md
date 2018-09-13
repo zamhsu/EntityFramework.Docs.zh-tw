@@ -1,14 +1,14 @@
 ---
 title: 第一次-模型 EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
-ms.openlocfilehash: 3dd0eba29619f09995d7009dd29462c14bde98c4
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 8e010f95db40261073b4af80a3c0e3225a2cd1cf
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251137"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490476"
 ---
 # <a name="model-first"></a>第一次建立模型
 本影片以及逐步說明的逐步解說提供使用 Entity Framework 模型優先開發的簡介。 第一次模型可讓您建立新的模型使用 Entity Framework Designer，然後透過模型產生資料庫結構描述。 模型會儲存在 EDMX 檔案 （副檔名為.edmx），及可以檢視和編輯 Entity Framework 設計工具中。 從 EDMX 檔案，會自動產生應用程式中與您互動的類別。

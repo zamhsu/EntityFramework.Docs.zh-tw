@@ -1,14 +1,14 @@
 ---
 title: VB.NET-EF6 使用 Fluent API
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 763dc6a2-764a-4600-896c-f6f13abf56ec
-ms.openlocfilehash: b21ee872034ca3c82ec793835476d79585a1018b
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: cbdd32696fb88d3de6cf1966040e5dda49fe19cd
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993477"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489463"
 ---
 # <a name="fluent-api-with-vbnet"></a>VB.NET 使用 Fluent API
 程式碼第一次可讓您定義您的模型使用 C\#或 VB.NET 類別。 其他設定 （選擇性） 可以使用屬性，在您的類別和屬性，或使用 fluent API 來執行。 本逐步解說示範如何執行使用 VB.NET 的 fluent API 組態。

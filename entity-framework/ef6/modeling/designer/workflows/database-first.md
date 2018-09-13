@@ -1,14 +1,14 @@
 ---
 title: Database First-EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: cc6ffdb3-388d-4e79-a201-01ec2577c949
-ms.openlocfilehash: 93ae5729e487ed9be3972ac78d599dbea19ed458
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: b499dea02cbeaa64f6ef87bf89cc739110c8b560
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251085"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490918"
 ---
 # <a name="database-first"></a>第一次資料庫
 本影片以及逐步說明的逐步解說提供使用 Entity Framework 資料庫優先開發的簡介。 資料庫第一次可讓您進行反向工程，從現有的資料庫模型。 模型會儲存在 EDMX 檔案 （副檔名為.edmx），及可以檢視和編輯 Entity Framework 設計工具中。 從 EDMX 檔案，會自動產生應用程式中與您互動的類別。

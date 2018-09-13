@@ -1,15 +1,15 @@
 ---
 title: 查詢類型-EF Core
 author: anpete
-ms.date: 2/26/2018
+ms.date: 02/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 uid: core/modeling/query-types
-ms.openlocfilehash: 54d960e2e2236e2d4185dedc48f51035f5c10e93
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 3328082dbc62aa80eb5fb29d2e57df1eef248d1f
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250721"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489488"
 ---
 # <a name="query-types"></a>查詢類型
 > [!NOTE]

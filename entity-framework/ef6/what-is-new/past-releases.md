@@ -1,14 +1,14 @@
 ---
 title: Entity Framework-EF6 的過去版本
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 1060bb99-765f-4f32-aaeb-d6635d3dbd3e
-ms.openlocfilehash: 01a73558f9a8ef49ef20e4673001fd096d2aafb8
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 4c711bb48938e5c0432881c61766b0bff66498f2
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998270"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490138"
 ---
 # <a name="past-releases-of-entity-framework"></a>過去的 Entity Framework 的版本
 

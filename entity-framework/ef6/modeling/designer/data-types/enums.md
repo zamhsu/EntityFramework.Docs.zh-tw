@@ -1,14 +1,14 @@
 ---
 title: 列舉支援-EF 設計工具-EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: c6ae6d8f-1ace-47db-ad47-b1718f1ba082
-ms.openlocfilehash: a94a497e8c5b3213dd7eb4215de90164d437507d
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 4c2562ade28dc30df20eb2a35c179582bf6e0777
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250631"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490788"
 ---
 # <a name="enum-support---ef-designer"></a>列舉支援-EF 設計工具
 > [!NOTE]

@@ -1,14 +1,14 @@
 ---
 title: 連接恢復功能，然後重試邏輯-EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 47d68ac1-927e-4842-ab8c-ed8c8698dff2
-ms.openlocfilehash: d7e58abfa17c5537cdc9b0068e7c2a3c2e390038
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 09ebed18b43f864af36b6931f45638f3a3056229
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250513"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490801"
 ---
 # <a name="connection-resiliency-and-retry-logic"></a>連接恢復功能，然後重試邏輯
 > [!NOTE]

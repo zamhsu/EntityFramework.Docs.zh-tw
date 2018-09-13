@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 5da1043310e2858638c81a0654a9cab23e39c220
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: a637e5e2f75e16bc7b11b1a51abcbe16274a1c75
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250812"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490764"
 ---
 # <a name="provider-impacting-changes"></a>提供者影響的變更
 
@@ -52,3 +52,7 @@ ms.locfileid: "44250812"
   * 請遵循此模式，以將空間的支援新增至您的提供者的提供者間也保持一致。
 * https://github.com/aspnet/EntityFrameworkCore/pull/13199 新增服務提供者建立的增強型偵錯
   * 可讓實作新的介面，可協助人員了解內部的服務提供者正在重新建置 DbContextOptionsExtensions
+* https://github.com/aspnet/EntityFrameworkCore/pull/13289 -新增 CanConnect API 使用的健康狀態檢查
+  * 此提取要求將加入的概念`CanConnect`這會由 ASP.NET Core 健全狀況檢查，來判斷資料庫是否可用。 根據預設，關聯式的實作只會呼叫`Exist`，但如有必要，提供者可以實作不同的項目。 非關聯式的提供者必須實作新的 API，讓健康情況檢查，才能使用。
+* https://github.com/aspnet/EntityFrameworkCore/pull/13306 -更新基底 RelationalTypeMapping 不設定 DbParameter 大小
+  * 停止設定預設的大小，因為它可能會造成截斷。 提供者可能需要新增自己的邏輯，如果需要設定大小。

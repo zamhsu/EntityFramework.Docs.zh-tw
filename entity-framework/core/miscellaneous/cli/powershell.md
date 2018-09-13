@@ -2,13 +2,13 @@
 title: Package Manager Console (Visual Studio)-EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 11/6/2017
-ms.openlocfilehash: 6a3594a3535f8de30ec1898fd21cfcbe272f216b
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.date: 11/06/2017
+ms.openlocfilehash: 3d57a1665da2c94c55981d17e041b0ef74282496
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997930"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490845"
 ---
 <a name="ef-core-package-manager-console-tools"></a>EF Core 封裝管理員主控台工具
 =====================================

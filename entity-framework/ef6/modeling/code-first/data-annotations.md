@@ -1,14 +1,14 @@
 ---
 title: First 資料註解-EF6 的程式碼
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 57e2b988f81d9c82e10a07a5cd4f3a1decfd838a
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 38ae52543ed99e5a1c1da7d19a2e15d168e3a1bd
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251202"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490101"
 ---
 # <a name="code-first-data-annotations"></a>Code First 資料註解
 > [!NOTE]

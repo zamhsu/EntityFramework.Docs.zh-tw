@@ -1,14 +1,14 @@
 ---
 title: 記錄和攔截資料庫作業-EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: b5ee7eb1-88cc-456e-b53c-c67e24c3f8ca
-ms.openlocfilehash: 9a8be81af45d9f27caa8c26f66d219dc568b6604
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 3f06e073f3ab6e46883663620219e302d5db1d60
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251267"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490075"
 ---
 # <a name="logging-and-intercepting-database-operations"></a>記錄和攔截資料庫作業
 > [!NOTE]

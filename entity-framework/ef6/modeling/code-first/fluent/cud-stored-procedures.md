@@ -1,14 +1,14 @@
 ---
 title: 程式碼的第一個 Insert、 Update 和 Delete 預存程序-EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 9a7ae7f9-4072-4843-877d-506dd7eef576
-ms.openlocfilehash: a0448fb44dabb2e03b2358aa7b4f69d92cffa15a
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: bfc56671814aec1965ac054ff901297e5cdbbecb
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994569"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489618"
 ---
 # <a name="code-first-insert-update-and-delete-stored-procedures"></a>程式碼的第一個 Insert、 Update 和 Delete 預存程序
 > [!NOTE]

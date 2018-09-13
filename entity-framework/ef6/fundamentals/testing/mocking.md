@@ -1,14 +1,14 @@
 ---
 title: 測試的模擬架構-EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
-ms.openlocfilehash: abb915f2df5645b3838a659dafc59a2b499b4ee2
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: b50d0afb52ae1c496f2734ecc015cdaaa060aff7
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998209"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489969"
 ---
 # <a name="testing-with-a-mocking-framework"></a>測試的模擬架構
 > [!NOTE]

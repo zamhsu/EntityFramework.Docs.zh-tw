@@ -1,14 +1,14 @@
 ---
 title: 處理並行衝突-EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
-ms.openlocfilehash: f233af217287dd6bf35e5b7fea8e44974168b312
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 81ae186201fdfac331b1d4e7836b222545fe78b5
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997806"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489150"
 ---
 # <a name="handling-concurrency-conflicts"></a>處理並行存取衝突
 開放式並行存取包括樂觀地嘗試將您的實體儲存到該處的資料實體之後並未變更，希望在資料庫已載入。 事實上，如果資料已變更，則會擲回例外狀況，您必須解決衝突，然後再嘗試再次儲存。 本主題涵蓋如何處理 Entity Framework 中的這類例外狀況。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  

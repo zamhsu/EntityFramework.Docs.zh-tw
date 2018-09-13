@@ -1,14 +1,14 @@
 ---
 title: Visual Studio 版本-EF6
 author: divega
-ms.date: 2018-07-05
+ms.date: 07/05/2018
 ms.assetid: 028FF890-4EDB-4F03-AE53-72F9C33EC92F
-ms.openlocfilehash: aa5409506eeea599421608ddb2dd891df0413961
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: d104236ac5c8877da421ba10de9827f17937a9ec
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997381"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489917"
 ---
 # <a name="visual-studio-releases"></a>Visual Studio 版本
 

@@ -1,14 +1,14 @@
 ---
 title: 設計工具的實體分割-EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: aa2dd48a-1f0e-49dd-863d-d6b4f5834832
-ms.openlocfilehash: 06199be977276cd3656e2550df79bac24276ec51
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: ba1895ae491cec909ff88a8784eea82f1876f595
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250592"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490842"
 ---
 # <a name="designer-entity-splitting"></a>分割的實體設計工具
 本逐步解說示範如何透過修改模型使用 Entity Framework Designer （EF 設計工具），將實體類型對應至兩個資料表。 當多個資料表共用共同的索引鍵時，您可以將實體對應至多個資料表。 適用於將實體類型對應至兩個資料表的概念，很容易擴大為將實體類型對應至兩個以上的資料表。

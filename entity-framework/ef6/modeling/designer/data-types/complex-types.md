@@ -1,14 +1,14 @@
 ---
 title: 複雜型別-EF 設計工具-EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 9a8228ef-acfd-4575-860d-769d2c0e18a1
-ms.openlocfilehash: 2a516bd14131fd035a4d005e0fdf140f7ff4d65f
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: a3c5578acee23688c04772d2dd0a2221779af562
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250825"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489904"
 ---
 # <a name="complex-types---ef-designer"></a>複雜型別-EF 設計工具
 本主題說明如何將使用 Entity Framework Designer （EF 設計工具） 的複雜型別對應，以及如何查詢實體包含複雜型別的屬性。

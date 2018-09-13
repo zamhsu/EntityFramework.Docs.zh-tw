@@ -1,14 +1,14 @@
 ---
 title: 與現有的資料庫-EF6 code First 移轉
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: f0cc4f93-67dd-4664-9753-0a9f913814db
-ms.openlocfilehash: 06aabf3f57ca451f4d9cba469f6de40fd9aa8f23
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 77370ec7d922b8324b924a0b4aca3e58f5ec6066
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998193"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490567"
 ---
 # <a name="code-first-migrations-with-an-existing-database"></a>與現有的資料庫的 code First 移轉
 > [!NOTE]
