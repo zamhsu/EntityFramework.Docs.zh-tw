@@ -1,14 +1,14 @@
 ---
 title: 還原成在 Entity Framework Designer EF6 的 ObjectContext
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 36550569-a1de-47cb-ba6d-544794ffd500
-ms.openlocfilehash: e90af3e973c71e2ce872e3edc24aafc1b2ccce0f
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 3e436f0d9cf94720be9c424b327816438d571ae8
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250331"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45488935"
 ---
 # <a name="reverting-to-objectcontext-in-entity-framework-designer"></a>還原成 Entity Framework 設計工具中的 ObjectContext
 與上一個版本的 Entity Framework 的模型，建立與 EF 設計工具會產生衍生自 ObjectContext 的內容和實體類別，衍生自 EntityObject。

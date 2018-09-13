@@ -1,14 +1,14 @@
 ---
 title: 設計工具的 CUD 預存程序-EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 1e773972-2da5-45e0-85a2-3cf3fbcfa5cf
-ms.openlocfilehash: 36c9b97b77fec30136cba1d850a0259c689e69ae
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 35a00aa817c8643352c517c233977efd49e3baac
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250916"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489553"
 ---
 # <a name="designer-cud-stored-procedures"></a>設計工具的 CUD 預存程序
 此逐步解說顯示如何將對應建立\\插入、 更新和刪除 (CUD) 作業的實體類型使用 Entity Framework Designer （EF 設計工具） 的預存程序。  根據預設，Entity Framework 會自動產生 CUD 作業的 SQL 陳述式，但您也可以將預存程序對應至這些作業。  
