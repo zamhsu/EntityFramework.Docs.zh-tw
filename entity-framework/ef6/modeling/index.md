@@ -1,14 +1,14 @@
 ---
 title: 建立模型 - EF6
 author: divega
-ms.date: 2018-07-05
+ms.date: 07/05/2018
 ms.assetid: 4890228E-CEA1-4595-B8AD-CA81253F8767
-ms.openlocfilehash: c4455da306f4dd1defa0e273123e4e5e2949e5d7
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: b0b9125acb7dccbedf06b64513c0b2b2c4d8e1b1
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250786"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489709"
 ---
 # <a name="creating-a-model"></a>建立模型
 

@@ -1,15 +1,15 @@
 ---
 title: 資料庫提供者 - EF Core
 author: rowanmiller
-ms.date: 2/23/2018
+ms.date: 02/23/2018
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/providers/index
-ms.openlocfilehash: ebb0c2cae0bf83084fe9e80cbdac87623cb12529
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 796cc63dd47bb340d83fd64ad6bf954be4d9c60e
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994164"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490060"
 ---
 # <a name="database-providers"></a>資料庫提供者
 

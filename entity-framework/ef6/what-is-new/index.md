@@ -1,14 +1,14 @@
 ---
 title: 新功能 - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 41d1f86b-ce66-4bf2-8963-48514406fb4c
-ms.openlocfilehash: 9eb6a916d36ed41fcaea74564395695c048ab0f5
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: fcd6339f67a1512dd66220c59537d12cf0b22620
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996331"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490294"
 ---
 # <a name="whats-new-in-ef6"></a>EF6 的新功能
 

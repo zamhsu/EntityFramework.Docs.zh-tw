@@ -1,14 +1,14 @@
 ---
 title: 自我追蹤實體 - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 5e60f5be-7bbb-4bf8-835e-0ac808d6c84a
-ms.openlocfilehash: bd22df9e14fe71ae065baf1d747b1642dd7bafce
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 3575977ceabe7d93ac48d5fac253eac1341e2353
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250857"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489696"
 ---
 # <a name="self-tracking-entities"></a>自我追蹤實體
 

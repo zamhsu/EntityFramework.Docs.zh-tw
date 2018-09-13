@@ -2,13 +2,13 @@
 title: 命令列參考 - EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 11/6/2017
-ms.openlocfilehash: 757d6562f5d3bcd4f026def02f208f5827786873
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.date: 11/06/2017
+ms.openlocfilehash: d43b01fc61bb1c9b678e12e41c27d7efe9a59fa5
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997066"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490359"
 ---
 <a name="entity-framework-core-tools"></a>Entity Framework Core 工具
 ===========================
