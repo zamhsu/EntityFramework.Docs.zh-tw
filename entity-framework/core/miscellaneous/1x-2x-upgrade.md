@@ -4,45 +4,38 @@ author: divega
 ms.date: 08/13/2017
 ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
 uid: core/miscellaneous/1x-2x-upgrade
-ms.openlocfilehash: f0d85b3ba22c09d2bd48e8b34ed628a7474322d3
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 5371c8f3b7c6102c621296bbae145d13779e0c6e
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490489"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283767"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>應用程式從舊版升級 EF Core 2.0
 
 我們已大幅改善我們的現有 Api 和 2.0 的行為的機會。 有幾個可能需要修改現有的應用程式程式碼的增強功能，雖然我們相信大部分的應用程式的影響會很低，在大部分情況下，需要只重新編譯和極少引導式的變更，來取代過時的 Api。
 
-## <a name="procedures-common-to-all-applications"></a>程序通用的所有應用程式
-
 可能需要更新現有的應用程式為 EF Core 2.0:
 
-1. 升級為支援.NET Standard 2.0 的應用程式的目標.NET 平台。 請參閱[支援的平台](../platforms/index.md)如需詳細資訊。
+1. 升級為支援.NET Standard 2.0 的應用程式的目標.NET 實作。 請參閱[支援的.NET 實作](../platforms/index.md)如需詳細資訊。
 
 2. 識別目標資料庫的 EF Core 2.0 相容的提供者。 請參閱[EF Core 2.0 需要 2.0 資料庫提供者](#ef-core-20-requires-a-20-database-provider)下方。
 
 3. 將所有 EF Core 封裝 （執行階段和工具） 都升級為 2.0。 請參閱[安裝 EF Core](../get-started/install/index.md)如需詳細資訊。
 
-4. 進行任何必要的程式碼變更，以補償的重大變更。 請參閱[的重大變更](#breaking-changes)節以取得詳細資料。
+4. 進行任何必要的程式碼變更，以彌補這份文件的其餘部分中所述的重大變更。
 
-## <a name="aspnet-core-applications"></a>ASP.NET Core 應用程式
+## <a name="aspnet-core-now-includes-ef-core"></a>ASP.NET Core 現在包含 EF Core
 
-1. 請參閱特別[新的模式，來初始化應用程式的服務提供者](#new-way-of-getting-application-services)如下所述。
+除了協力廠商資料庫提供者之外，將目標設為 ASP.NET Core 2.0 的應用程式還可以使用 EF Core 2.0，而且沒有其他相依性。 不過，目標為舊版的 ASP.NET Core 應用程式必須升級至 ASP.NET Core 2.0，才能使用 EF Core 2.0。 如需升級為 2.0 的 ASP.NET Core 應用程式的詳細資訊，請參閱[ASP.NET Core 上的文件主體](https://docs.microsoft.com/aspnet/core/migration/1x-to-2x/)。
 
-> [!TIP]  
-> 這個新模式更新為 2.0 的應用程式會強烈建議您，而且在 Entity Framework Core 移轉之類的產品功能才能運作必要的採用。 其他常見的替代做法是[實作*IDesignTimeDbContextFactory\<TContext >*](xref:core/miscellaneous/cli/dbcontext-creation#from-a-design-time-factory)。
-
-2. 除了協力廠商資料庫提供者之外，將目標設為 ASP.NET Core 2.0 的應用程式還可以使用 EF Core 2.0，而且沒有其他相依性。 不過，目標為舊版的 ASP.NET Core 應用程式必須升級至 ASP.NET Core 2.0，才能使用 EF Core 2.0。 如需升級為 2.0 的 ASP.NET Core 應用程式的詳細資訊，請參閱[ASP.NET Core 上的文件主體](https://docs.microsoft.com/aspnet/core/migration/1x-to-2x/)。
-
-## <a name="new-way-of-getting-application-services"></a>取得應用程式服務的新方式
+## <a name="new-way-of-getting-application-services-in-aspnet-core"></a>取得 ASP.NET Core 中的應用程式服務的新方式
 
 已更新 ASP.NET Core web 應用程式的建議的模式 2.0 中斷 1.x 中使用的 EF Core 的設計階段邏輯的方式。 先前在設計階段 EF Core 會嘗試叫用`Startup.ConfigureServices`直接才能存取應用程式的服務提供者。 在 ASP.NET Core 2.0 中，設定初始化之外`Startup`類別。 通常使用 EF Core 應用程式存取其連接字串從組態中，因此`Startup`本身已足夠。 如果您升級 ASP.NET Core 1.x 應用程式，您可能會收到下列錯誤時使用的 EF Core 工具。
 
 > 在 'ApplicationContext' 上找不到沒有無參數建構函式。 加入 'ApplicationContext' 中的無參數建構函式，或新增的 'IDesignTimeDbContextFactory&lt;ApplicationContext&gt;' 與 'ApplicationContext' 相同的組件中
 
-新的設計階段攔截已加入 ASP.NET Core 2.0 的預設範本中。 靜態`Program.BuildWebHost`方法可讓在設計階段存取應用程式的服務提供者的 EF Core。 如果您要升級的 ASP.NET Core 1.x 應用程式，您必須更新您`Program`類別，如下所示。
+新的設計階段攔截已加入 ASP.NET Core 2.0 的預設範本中。 靜態`Program.BuildWebHost`方法可讓在設計階段存取應用程式的服務提供者的 EF Core。 如果您要升級的 ASP.NET Core 1.x 應用程式，您必須更新`Program`為如下所示的類別。
 
 ``` csharp
 using Microsoft.AspNetCore;
@@ -64,6 +57,8 @@ namespace AspNetCoreDotNetCore2._0App
     }
 }
 ```
+
+這個新模式更新為 2.0 的應用程式會強烈建議您，而且在 Entity Framework Core 移轉之類的產品功能才能運作必要的採用。 其他常見的替代做法是[實作*IDesignTimeDbContextFactory\<TContext >*](xref:core/miscellaneous/cli/dbcontext-creation#from-a-design-time-factory)。
 
 ## <a name="idbcontextfactory-renamed"></a>重新命名的 IDbContextFactory
 

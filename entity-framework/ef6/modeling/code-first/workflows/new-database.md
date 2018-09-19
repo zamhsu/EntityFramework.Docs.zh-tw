@@ -3,12 +3,12 @@ title: Code First 至新的資料庫-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 2df6cb0a-7d8b-4e28-9d05-e2b9a90125af
-ms.openlocfilehash: 6572574ad36094ac0960c429cfa8606b6aebb492
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: a19db575b685cde98509fff4a0efaf26106b26bc
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490739"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46284118"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First 至新的資料庫
 本影片以及逐步說明的逐步解說提供目標的新資料庫的 Code First 開發的簡介。 此案例包含目標資料庫不存在和 Code First 會建立，或空的資料庫，Code First 會新增的新資料表。 程式碼第一次可讓您定義您的模型使用 C\#或 VB.Net 類別。 其他設定 （選擇性） 可以使用屬性，在您的類別和屬性，或使用 fluent API 來執行。
@@ -18,13 +18,13 @@ ms.locfileid: "45490739"
 
 **主講人**[Rowan Miller](http://romiller.com/)
 
-**視訊**: [WMV](http://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.wmv) | [MP4](http://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-mp4Video-CodeFirstNewDatabase.m4v) | [WMV (ZIP)](http://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.zip)
+**視訊**: [WMV](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.wmv) | [MP4](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-mp4Video-CodeFirstNewDatabase.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.zip)
 
 ## <a name="pre-requisites"></a>必要條件
 
 您必須至少是 Visual studio 2010 或 Visual Studio 2012 安裝完成本逐步解說。
 
-如果您使用 Visual Studio 2010，您也必須有[NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)安裝。
+如果您使用 Visual Studio 2010，您也必須有[NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)安裝。
 
 ## <a name="1-create-the-application"></a>1.建立應用程式
 
@@ -71,7 +71,7 @@ public class Post
 我們現在正在使用 Entity Framework 中的類型，因此我們需要加入 EntityFramework NuGet 套件。
 
 -   **專案 –&gt;管理 NuGet 封裝...**
-    注意： 如果您沒有**管理 NuGet 套件...** 您應該安裝的選項[最新版的 NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
+    注意： 如果您沒有**管理 NuGet 套件...** 您應該安裝的選項[最新版的 NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
 -   選取 [ **Online** ] 索引標籤
 -   選取  **EntityFramework**封裝
 -   按一下 **安裝**

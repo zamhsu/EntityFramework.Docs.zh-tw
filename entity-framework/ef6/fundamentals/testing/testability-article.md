@@ -3,12 +3,12 @@ title: 可測試性和 Entity Framework 4.0
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9430e2ab-261c-4e8e-8545-2ebc52d7a247
-ms.openlocfilehash: 0ddf72ab46e2d67dc8a9cf75cbd40430352c5210
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: aec177438004fd255bef85a5e5047cf6b5a6f782
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490528"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46284040"
 ---
 # <a name="testability-and-entity-framework-40"></a>可測試性和 Entity Framework 4.0
 Scott Allen
@@ -198,7 +198,7 @@ Fowler 會使用名稱消極式載入來描述 」 物件不包含的所有資�
 
 **圖 1**
 
-注意： 如果您想要先開發的 EDM 模型，就可以清除，產生在 EDM 中的 POCO 程式碼。 您可以使用 Data Programmability 小組所提供的 Visual Studio 2010 擴充功能來這樣做。 若要下載擴充功能，啟動擴充管理員，從 Visual Studio 中的 [工具] 功能表並搜尋 「 POCO"（請參閱圖 2） 的線上資源庫中的範本。 有數個 POCO 範本，可供使用 EF 的。 如需有關如何使用範本的詳細資訊，請參閱 「[逐步解說： POCO Entity framework 的範本](http://blogs.msdn.com/adonet/pages/walkthrough-poco-template-for-the-entity-framework.aspx)"。
+注意： 如果您想要先開發的 EDM 模型，就可以清除，產生在 EDM 中的 POCO 程式碼。 您可以使用 Data Programmability 小組所提供的 Visual Studio 2010 擴充功能來這樣做。 若要下載擴充功能，啟動擴充管理員，從 Visual Studio 中的 [工具] 功能表並搜尋 「 POCO"（請參閱圖 2） 的線上資源庫中的範本。 有數個 POCO 範本，可供使用 EF 的。 如需有關如何使用範本的詳細資訊，請參閱 「[逐步解說： POCO Entity framework 的範本](https://blogs.msdn.com/adonet/pages/walkthrough-poco-template-for-the-entity-framework.aspx)"。
 
 ![ef test_02](~/ef6/media/eftest-02.png)
 
@@ -964,11 +964,11 @@ IRepository&lt;T&gt;方法會提供一些額外的控制，透過我們的查詢
 -   Robert C.Martin，「[單一責任原則](http://www.objectmentor.com/resources/articles/srp.pdf)"
 -   Martin Fowler[模式目錄](http://www.martinfowler.com/eaaCatalog/index.html)從*的企業應用程式架構模式*
 -   Griffin Caprio 」[相依性插入](https://msdn.microsoft.com/magazine/cc163739.aspx)"
--   資料可程式性的部落格，「[逐步解說： 測試為導向的開發與 Entity Framework 4.0](http://blogs.msdn.com/adonet/pages/walkthrough-test-driven-development-with-the-entity-framework-4-0.aspx)"。
--   資料可程式性的部落格，「[使用的儲存機制和工作單位模式與 Entity Framework 4.0](http://blogs.msdn.com/adonet/archive/2009/06/16/using-repository-and-unit-of-work-patterns-with-entity-framework-4-0.aspx)"
+-   資料可程式性的部落格，「[逐步解說： 測試為導向的開發與 Entity Framework 4.0](https://blogs.msdn.com/adonet/pages/walkthrough-test-driven-development-with-the-entity-framework-4-0.aspx)"。
+-   資料可程式性的部落格，「[使用的儲存機制和工作單位模式與 Entity Framework 4.0](https://blogs.msdn.com/adonet/archive/2009/06/16/using-repository-and-unit-of-work-patterns-with-entity-framework-4-0.aspx)"
 -   Dave Astels 」 [BDD 入門](http://blog.daveastels.com/files/BDD_Intro.pdf)"
 -   Aaron Jensen 」[簡介機器規格](http://codebetter.com/blogs/aaron.jensen/archive/2008/05/08/introducing-machine-specifications-or-mspec-for-short.aspx)"
--   Eric Lee 」 [BDD 使用 MSTest](http://blogs.msdn.com/elee/archive/2009/01/20/bdd-with-mstest.aspx)"
+-   Eric Lee 」 [BDD 使用 MSTest](https://blogs.msdn.com/elee/archive/2009/01/20/bdd-with-mstest.aspx)"
 -   Eric Evans 」[網域導向設計](http://books.google.com/books?id=7dlaMs0SECsC&printsec=frontcover&dq=evans%20domain%20driven%20design&hl=en&ei=cHztS6C8KIaglAfA_dS1CA&sa=X&oi=book_result&ct=result&resnum=1&ved=0CCoQ6AEwAA)"
 -   Martin Fowler 」[模擬 （mock） 不是虛設常式](http://martinfowler.com/articles/mocksArentStubs.html)"
 -   Martin Fowler 」[測試雙精度浮點數](http://martinfowler.com/bliki/TestDouble.html)"

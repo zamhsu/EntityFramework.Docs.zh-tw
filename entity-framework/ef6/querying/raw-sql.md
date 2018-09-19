@@ -3,12 +3,12 @@ title: 原始 SQL 查詢-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9e1ee76e-2499-408c-81e8-9b6c5d1945a0
-ms.openlocfilehash: 6b00648939ccedffeed09b4e1d6e8d70fa262a36
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 168aee67186535bf2a50705e86bfc5a88147e369
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490580"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283780"
 ---
 # <a name="raw-sql-queries"></a>原始 SQL 查詢
 Entity Framework 可讓您與您的實體類別中使用 LINQ 進行查詢。 不過，可能有您想要使用原始的 SQL 直接對資料庫執行查詢的時間。 這包括呼叫預存程序，可以幫助您目前不支援對應至預存程序的 Code First 模型。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
@@ -82,4 +82,4 @@ using (var context = new BloggingContext())
 
 ### <a name="output-parameters"></a>輸出參數  
 
-如果 output 參數使用，直到已完全讀取結果，將無法使用它們的值。 這是因為基礎行為的 DbDataReader，請參閱 <<c0> [ 擷取的資料使用 DataReader](http://go.microsoft.com/fwlink/?LinkID=398589)如需詳細資訊。  
+如果 output 參數使用，直到已完全讀取結果，將無法使用它們的值。 這是因為基礎行為的 DbDataReader，請參閱 <<c0> [ 擷取的資料使用 DataReader](https://go.microsoft.com/fwlink/?LinkID=398589)如需詳細資訊。  

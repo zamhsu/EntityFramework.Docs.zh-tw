@@ -3,12 +3,12 @@ title: Entity Framework 6 提供者模型-EF6
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 066832F0-D51B-4655-8BE7-C983C557E0E4
-ms.openlocfilehash: 13276feb0b22ea8068d7e1f645d48a3d41d77cdf
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: de2e0a24f1b5f67d28cb831491b50d32f45af60a
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490168"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283923"
 ---
 # <a name="the-entity-framework-6-provider-model"></a>Entity Framework 6 提供者模型
 
@@ -28,13 +28,13 @@ EF 提供者其實這些服務 （適用於基底類別），從擴充或實作 
 
 ### <a name="dbproviderfactory"></a>DbProviderFactory
 
-EF 取決於衍生自特定型別[System.Data.Common.DbProviderFactory](http://msdn.microsoft.com/en-us/library/system.data.common.dbproviderfactory.aspx)執行所有的低層級的資料庫存取權。 DbProviderFactory 不是實際的 EF 的一部分，而是改為在.NET Framework 中的 ADO.NET 提供者做為進入點的類別可以使用 EF，其他的 O/RMs 或直接由應用程式來取得執行個體的連接、 命令、 參數和其他的 ADO.NET 抽象概念，在提供者無關的方式。 DbProviderFactory 的詳細資訊位於[ADO.NET 的 MSDN 文件](http://msdn.microsoft.com/en-us/library/a6cd7c08.aspx)。
+EF 取決於衍生自特定型別[System.Data.Common.DbProviderFactory](https://msdn.microsoft.com/en-us/library/system.data.common.dbproviderfactory.aspx)執行所有的低層級的資料庫存取權。 DbProviderFactory 不是實際的 EF 的一部分，而是改為在.NET Framework 中的 ADO.NET 提供者做為進入點的類別可以使用 EF，其他的 O/RMs 或直接由應用程式來取得執行個體的連接、 命令、 參數和其他的 ADO.NET 抽象概念，在提供者無關的方式。 DbProviderFactory 的詳細資訊位於[ADO.NET 的 MSDN 文件](https://msdn.microsoft.com/en-us/library/a6cd7c08.aspx)。
 
 ### <a name="dbproviderservices"></a>DbProviderServices
 
 EF 取決於特定的型別衍生自 DbProviderServices 提供額外的功能所需的 EF，上方已 ADO.NET 提供者所提供的功能。 在較舊版本的 EF DbProviderServices 類別是.NET Framework 的一部分，並 System.Data.Common 命名空間中找不到。 開始使用 EF6 這個類別現在是 EntityFramework.dll 的一部分，並在 System.Data.Entity.Core.Common 命名空間。
 
-更多詳細的 DbProviderServices 實作基本的功能都位於[MSDN](http://msdn.microsoft.com/en-us/library/ee789835.aspx)。 不過請注意，截至撰寫這項資訊不會更新 EF6 雖然大部分的概念是仍然有效。 SQL Server 和 SQL Server Compact 的 DbProviderServices 實作也已簽入至[開放原始碼程式碼基底](https://github.com/aspnet/EntityFramework6/)，可做為其他實作的實用參考。
+更多詳細的 DbProviderServices 實作基本的功能都位於[MSDN](https://msdn.microsoft.com/en-us/library/ee789835.aspx)。 不過請注意，截至撰寫這項資訊不會更新 EF6 雖然大部分的概念是仍然有效。 SQL Server 和 SQL Server Compact 的 DbProviderServices 實作也已簽入至[開放原始碼程式碼基底](https://github.com/aspnet/EntityFramework6/)，可做為其他實作的實用參考。
 
 在較舊版本的 EF 從 ADO.NET 提供者直接取得要使用的 DbProviderServices 實作。 這是由轉換為 IServiceProvider DbProviderFactory，呼叫 GetService 方法。 這與緊密結合 EF 提供者的 DbProviderFactory。 此結合禁止 EF 中移出.NET Framework，因此 EF6 的這個緊密結合已移除，並直接在應用程式的組態檔或程式碼為基礎，現在已註冊的 DbProviderServices 實作更多詳細資料中所述的組態_註冊的 DbProviderServices_下一節。
 
@@ -88,7 +88,7 @@ _型別_字串必須是要使用的 DbProviderServices 實作的組件限定的�
 
 ### <a name="code-based-registration"></a>程式碼架構註冊
 
-從 EF6 的提供者可以也使用註冊的程式碼。 這可讓 EF 用不需要變更應用程式的組態檔的提供者。 若要使用的程式碼為基礎的組態應用程式應該建立 DbConfiguration 類別中所述[程式碼為基礎的設定文件](http://msdn.com/data/jj680699)。 DbConfiguration 類別的建構函式應該都會接著呼叫 SetProviderServices 註冊 EF 提供者。 例如: 
+從 EF6 的提供者可以也使用註冊的程式碼。 這可讓 EF 用不需要變更應用程式的組態檔的提供者。 若要使用的程式碼為基礎的組態應用程式應該建立 DbConfiguration 類別中所述[程式碼為基礎的設定文件](https://msdn.com/data/jj680699)。 DbConfiguration 類別的建構函式應該都會接著呼叫 SetProviderServices 註冊 EF 提供者。 例如: 
 
 ``` csharp
 public class MyConfiguration : DbConfiguration

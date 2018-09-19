@@ -3,12 +3,12 @@ title: VB.NET-EF6 使用 Fluent API
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 763dc6a2-764a-4600-896c-f6f13abf56ec
-ms.openlocfilehash: cbdd32696fb88d3de6cf1966040e5dda49fe19cd
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 6aa74fa72296f66f0b069b9b5ee7e2e016570525
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489463"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283741"
 ---
 # <a name="fluent-api-with-vbnet"></a>VB.NET 使用 Fluent API
 程式碼第一次可讓您定義您的模型使用 C\#或 VB.NET 類別。 其他設定 （選擇性） 可以使用屬性，在您的類別和屬性，或使用 fluent API 來執行。 本逐步解說示範如何執行使用 VB.NET 的 fluent API 組態。
@@ -22,7 +22,7 @@ ms.locfileid: "45489463"
 
 您必須至少是 Visual studio 2010 或 Visual Studio 2012 安裝完成本逐步解說。
 
-如果您使用 Visual Studio 2010，您也必須有[NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)安裝
+如果您使用 Visual Studio 2010，您也必須有[NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)安裝
 
 ## <a name="create-the-application"></a>建立應用程式
 
@@ -139,7 +139,7 @@ ms.locfileid: "45489463"
 
 -   * * 專案 –&gt; **管理 NuGet 封裝...**
 > [!NOTE]
-> 如果您沒有**管理 NuGet 套件...** 您應該安裝的選項[最新版的 NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
+> 如果您沒有**管理 NuGet 套件...** 您應該安裝的選項[最新版的 NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
 -   選取 [ **Online** ] 索引標籤
 -   選取  **EntityFramework**封裝
 -   按一下 **安裝**

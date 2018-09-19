@@ -3,12 +3,12 @@ title: 設計工具的查詢預存程序-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9554ed25-c5c1-43be-acad-5da37739697f
-ms.openlocfilehash: 6284b10261e6f3b9bf69d1c15e121988e4976d48
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 04478ea1c8cd43a7ba4ee788e464992af3de7f64
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489943"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283897"
 ---
 # <a name="designer-query-stored-procedures"></a>設計工具的查詢預存程序
 此逐步解說示範如何使用 Entity Framework Designer （EF 設計工具） 載入模型匯入預存程序，然後呼叫 匯入的預存程序來擷取結果。 
@@ -100,4 +100,4 @@ The department name is Engineering
 <a name="output-parameters"></a>輸出參數
 -----------------
 
-如果 output 參數使用，直到已完全讀取結果，將無法使用它們的值。 這是因為基礎行為的 DbDataReader，請參閱 <<c0> [ 擷取的資料使用 DataReader](http://go.microsoft.com/fwlink/?LinkID=398589)如需詳細資訊。
+如果 output 參數使用，直到已完全讀取結果，將無法使用它們的值。 這是因為基礎行為的 DbDataReader，請參閱 <<c0> [ 擷取的資料使用 DataReader](https://go.microsoft.com/fwlink/?LinkID=398589)如需詳細資訊。

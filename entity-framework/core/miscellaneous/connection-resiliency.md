@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 11/15/2016
 ms.assetid: e079d4af-c455-4a14-8e15-a8471516d748
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: d6e31cf2b9b783ea503703536d159b34bf2e18c0
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: d5101d0622ddc2c90ddded16b9ec6cc4eb814c36
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997186"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283832"
 ---
 # <a name="connection-resiliency"></a>連線復原能力
 
@@ -49,7 +49,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 ## <a name="transaction-commit-failure-and-the-idempotency-issue"></a>交易認可失敗且等冪性問題
 
-一般情況下，連接失敗時目前交易已回復。 不過，如果交易時，會中斷連線的認可產生交易的狀態不明。 請參閱此[部落格文章](http://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx)如需詳細資訊。
+一般情況下，連接失敗時目前交易已回復。 不過，如果交易時，會中斷連線的認可產生交易的狀態不明。 請參閱此[部落格文章](https://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx)如需詳細資訊。
 
 根據預設，執行策略會重試此作業視為交易已回復，但如果不是這會導致例外狀況如果新的資料庫狀態不相容，或可能會導致**資料損毀**如果作業不需要特定的狀態，例如，當插入新的資料列，以自動產生索引鍵的值。
 

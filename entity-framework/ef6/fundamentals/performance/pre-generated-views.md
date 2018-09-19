@@ -3,19 +3,19 @@ title: 預先產生的對應檢視-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 917ba9c8-6ddf-4631-ab8c-c4fb378c2fcd
-ms.openlocfilehash: cb374d007252710b42c31061bf15d7d32af0db27
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: da5d59ba5a899a0ee3a1eec3db0da1b4ece871d8
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489241"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46284105"
 ---
 # <a name="pre-generated-mapping-views"></a>預先產生的對應檢視
 Entity Framework 可以執行查詢，或將變更儲存至資料來源之前，它必須產生一組對應檢視，來存取資料庫。 這些對應檢視是一組以抽象方式代表資料庫的 Entity SQL 陳述式，中繼資料的快取每個應用程式網域的一部分。 如果您在相同的應用程式定義域中建立多個相同的內容執行個體，它們會重複使用從快取的中繼資料，而不是重新產生它們的對應檢視。 對應檢視表產生是執行第一個查詢的整體成本的重要部分，因為 Entity Framework 可讓您預先產生對應檢視，並將它們包含在已編譯的專案。 如需詳細資訊，請參閱 <<c0> [ 效能考量 (Entity Framework)](~/ef6/fundamentals/performance/perf-whitepaper.md)。
 
 ## <a name="generating-mapping-views-with-the-ef-power-tools"></a>產生對應 EF Power tools 檢視
 
-預先產生檢視表的最簡單方式是使用[EF Power Tools](http://visualstudiogallery.msdn.microsoft.com/72a60b14-1581-4b9b-89f2-846072eff19d)。 一旦您已安裝的 Power Tools 就會產生檢視表的功能表選項，如下所示。
+預先產生檢視表的最簡單方式是使用[EF Power Tools](https://visualstudiogallery.msdn.microsoft.com/72a60b14-1581-4b9b-89f2-846072eff19d)。 一旦您已安裝的 Power Tools 就會產生檢視表的功能表選項，如下所示。
 
 -   針對**Code First**模型以滑鼠右鍵按一下包含您的 DbContext 類別的程式碼檔案。
 -   針對**EF 設計工具**模型以滑鼠右鍵按一下您的 EDMX 檔案。

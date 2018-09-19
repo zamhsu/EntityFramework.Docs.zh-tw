@@ -3,12 +3,12 @@ title: 第一次-模型 EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
-ms.openlocfilehash: 8e010f95db40261073b4af80a3c0e3225a2cd1cf
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: d429d5ea590b22c77f3f7f0bcfbd5dfc0a3e0049
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490476"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283871"
 ---
 # <a name="model-first"></a>第一次建立模型
 本影片以及逐步說明的逐步解說提供使用 Entity Framework 模型優先開發的簡介。 第一次模型可讓您建立新的模型使用 Entity Framework Designer，然後透過模型產生資料庫結構描述。 模型會儲存在 EDMX 檔案 （副檔名為.edmx），及可以檢視和編輯 Entity Framework 設計工具中。 從 EDMX 檔案，會自動產生應用程式中與您互動的類別。
@@ -18,13 +18,13 @@ ms.locfileid: "45490476"
 
 **主講人**[Rowan Miller](http://romiller.com/)
 
-**視訊**: [WMV](http://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv) | [MP4](http://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v) | [WMV (ZIP)](http://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
+**視訊**: [WMV](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv) | [MP4](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
 
 ## <a name="pre-requisites"></a>必要條件
 
 您必須擁有 Visual Studio 2010 或 Visual Studio 2012 安裝完成本逐步解說。
 
-如果您使用 Visual Studio 2010，您也必須有[NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)安裝。
+如果您使用 Visual Studio 2010，您也必須有[NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)安裝。
 
 ## <a name="1-create-the-application"></a>1.建立應用程式
 
@@ -84,7 +84,7 @@ Entity Framework 設計工具會開啟空白的模型。 現在我們可以開�
 首先，我們要從 NuGet 取得最新版的 Entity Framework。
 
 -   **專案 –&gt;管理 NuGet 封裝...** 
-    *如果您沒有**管理 NuGet 套件...** 選項，您應該安裝[最新版的 NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)*
+    *如果您沒有**管理 NuGet 套件...** 選項，您應該安裝[最新版的 NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)*
 -   選取 [ **Online** ] 索引標籤
 -   選取  **EntityFramework**封裝
 -   按一下 **安裝**

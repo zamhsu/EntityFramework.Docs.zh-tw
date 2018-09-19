@@ -3,12 +3,12 @@ title: 以模型為基礎的慣例-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0fc4eef8-29b8-4192-9c77-08fd33d3db3a
-ms.openlocfilehash: fb79164f71cb3afff705a83f5078a13d043abca8
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 80b722730b4ca6c9d00a8611b6c9027e8bc9fe61
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490931"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283703"
 ---
 # <a name="model-based-conventions"></a>以模型為基礎的慣例
 > [!NOTE]
@@ -146,7 +146,7 @@ public class ForeignKeyNamingConvention : IStoreModelConvention<AssociationType>
 
 ## <a name="extending-existing-conventions"></a>擴充現有的慣例   
 
-如果您要撰寫的慣例是類似於其中的慣例，Entity Framework 已套用到您的模型，您一律可以擴充該慣例，以避免從頭重寫程式。  這個範例是要取代現有的識別碼符合與自訂的慣例。   若要覆寫索引鍵的慣例的另一個好處是，覆寫的方法會取得已偵測到或明確設定沒有索引鍵時，才呼叫。 一份慣例，Entity Framework 使用，請參閱這裡： [ http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx ](http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx)。  
+如果您要撰寫的慣例是類似於其中的慣例，Entity Framework 已套用到您的模型，您一律可以擴充該慣例，以避免從頭重寫程式。  這個範例是要取代現有的識別碼符合與自訂的慣例。   若要覆寫索引鍵的慣例的另一個好處是，覆寫的方法會取得已偵測到或明確設定沒有索引鍵時，才呼叫。 一份慣例，Entity Framework 使用，請參閱這裡： [ http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx ](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx)。  
 
 ``` csharp
 using System.Data.Entity;
@@ -209,4 +209,4 @@ public class BlogContext : DbContext
 
 ## <a name="notes"></a>注意  
 
-MSDN 文件中有一份由 Entity Framework 目前套用的慣例： [ http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx ](http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx)。  這份清單會直接提取自我們的原始程式碼。  Entity Framework 6 的原始程式碼位於[GitHub](https://github.com/aspnet/entityframework6/)和許多 Entity Framework 所使用的慣例都是不錯起點的自訂模型基礎的慣例。  
+MSDN 文件中有一份由 Entity Framework 目前套用的慣例： [ http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx ](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx)。  這份清單會直接提取自我們的原始程式碼。  Entity Framework 6 的原始程式碼位於[GitHub](https://github.com/aspnet/entityframework6/)和許多 Entity Framework 所使用的慣例都是不錯起點的自訂模型基礎的慣例。  

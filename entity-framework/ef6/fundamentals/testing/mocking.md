@@ -3,12 +3,12 @@ title: 測試的模擬架構-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
-ms.openlocfilehash: b50d0afb52ae1c496f2734ecc015cdaaa060aff7
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 20799b55b2dffe27637c4fb84df06cee174e6dd9
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489969"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46284092"
 ---
 # <a name="testing-with-a-mocking-framework"></a>測試的模擬架構
 > [!NOTE]
@@ -235,7 +235,7 @@ Entity Framework 6 引進了一組延伸方法，可用來以非同步方式執�
 
 因為 Entity Framework 查詢會使用 LINQ，IQueryable 和 IEnumerable 上定義的擴充方法。 不過，因為它們只設計來搭配 Entity Framework 您可能會收到下列錯誤，如果您嘗試在 LINQ 查詢無法在 Entity Framework 查詢上使用這些：
 
-> 來源 IQueryable 不實作 IDbAsyncEnumerable{0}。 實作 IDbAsyncEnumerable 的來源可以用於 Entity Framework 的非同步作業。 如需詳細資訊，請參閱[ http://go.microsoft.com/fwlink/?LinkId=287068 ](http://go.microsoft.com/fwlink/?LinkId=287068)。  
+> 來源 IQueryable 不實作 IDbAsyncEnumerable{0}。 實作 IDbAsyncEnumerable 的來源可以用於 Entity Framework 的非同步作業。 如需詳細資訊，請參閱[ http://go.microsoft.com/fwlink/?LinkId=287068 ](https://go.microsoft.com/fwlink/?LinkId=287068)。  
 
 儘管對 EF 查詢執行時，才會支援非同步方法，您可能想要針對記憶體中執行測試的雙精度浮點數的 DbSet 時在您的單元測試中使用它們。  
 

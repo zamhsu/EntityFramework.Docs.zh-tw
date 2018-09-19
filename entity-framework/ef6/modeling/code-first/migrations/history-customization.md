@@ -3,12 +3,12 @@ title: 自訂的移轉歷程記錄資料表-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: ed5518f0-a9a6-454e-9e98-a4fa7748c8d0
-ms.openlocfilehash: 6644bf2b0ac703a9f3a779b17b31d79d40cc5b69
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: e3faefc4b812ec4bc440ed2bb48747053d8cb1b3
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489204"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283689"
 ---
 # <a name="customizing-the-migrations-history-table"></a>自訂的移轉歷程記錄資料表
 > [!NOTE]
@@ -69,7 +69,7 @@ ms.locfileid: "45489204"
     }
 ```
 
-您自訂的 HistoryContext 準備就緒後，您需要讓 EF 知道它來註冊它透過[程式碼為基礎的組態](http://msdn.com/data/jj680699):
+您自訂的 HistoryContext 準備就緒後，您需要讓 EF 知道它來註冊它透過[程式碼為基礎的組態](https://msdn.com/data/jj680699):
 
 ``` csharp
     using System.Data.Entity;

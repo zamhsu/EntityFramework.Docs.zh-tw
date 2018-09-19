@@ -3,12 +3,12 @@ title: 自動的 Code First 移轉 EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0eb86787-2161-4cb4-9cb8-67c5d6e95650
-ms.openlocfilehash: 21f77ef49db2485047292b3928b4f63d49dbb180
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 2713afaf09707b7696e90464aac9945c2d82d274
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489982"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283910"
 ---
 # <a name="automatic-code-first-migrations"></a>自動的 Code First 移轉
 自動移轉，可讓您使用 Code First 移轉，而不需要每個您所做的變更在您的專案中的程式碼檔案。 並非所有的變更可以自動套用-資料行重新命名，例如需要使用程式碼為基礎的移轉。
@@ -97,7 +97,7 @@ ms.locfileid: "45489982"
     public string Url { get; set; }
 ```
 
-如果您再次執行該應用程式，您將會收到 InvalidOperationException，指出*自資料庫建立以來，支援 'BlogContext' 內容的模型已變更。請考慮使用 Code First 移轉來更新資料庫」(* [*http://go.microsoft.com/fwlink/?LinkId=238269*](http://go.microsoft.com/fwlink/?LinkId=238269)*)。*
+如果您再次執行該應用程式，您將會收到 InvalidOperationException，指出*自資料庫建立以來，支援 'BlogContext' 內容的模型已變更。請考慮使用 Code First 移轉來更新資料庫」(* [*http://go.microsoft.com/fwlink/?LinkId=238269*](https://go.microsoft.com/fwlink/?LinkId=238269)*)。*
 
 如例外狀況所示，現在可以開始使用 Code First 移轉。 因為我們想要使用自動移轉，所以我們要指定 **– EnableAutomaticMigrations**切換。
 
