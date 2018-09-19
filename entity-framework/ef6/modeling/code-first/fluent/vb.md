@@ -3,43 +3,43 @@ title: VB.NET-EF6 使用 Fluent API
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 763dc6a2-764a-4600-896c-f6f13abf56ec
-ms.openlocfilehash: cbdd32696fb88d3de6cf1966040e5dda49fe19cd
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 6aa74fa72296f66f0b069b9b5ee7e2e016570525
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489463"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283741"
 ---
-# <a name="fluent-api-with-vbnet"></a><span data-ttu-id="59ef9-102">VB.NET 使用 Fluent API</span><span class="sxs-lookup"><span data-stu-id="59ef9-102">Fluent API with VB.NET</span></span>
-<span data-ttu-id="59ef9-103">程式碼第一次可讓您定義您的模型使用 C\#或 VB.NET 類別。</span><span class="sxs-lookup"><span data-stu-id="59ef9-103">Code First allows you to define your model using C\# or VB.NET classes.</span></span> <span data-ttu-id="59ef9-104">其他設定 （選擇性） 可以使用屬性，在您的類別和屬性，或使用 fluent API 來執行。</span><span class="sxs-lookup"><span data-stu-id="59ef9-104">Additional configuration can optionally be performed using attributes on your classes and properties or by using a fluent API.</span></span> <span data-ttu-id="59ef9-105">本逐步解說示範如何執行使用 VB.NET 的 fluent API 組態。</span><span class="sxs-lookup"><span data-stu-id="59ef9-105">This walkthrough shows how to perform fluent API configuration using VB.NET.</span></span>
+# <a name="fluent-api-with-vbnet"></a><span data-ttu-id="b069c-102">VB.NET 使用 Fluent API</span><span class="sxs-lookup"><span data-stu-id="b069c-102">Fluent API with VB.NET</span></span>
+<span data-ttu-id="b069c-103">程式碼第一次可讓您定義您的模型使用 C\#或 VB.NET 類別。</span><span class="sxs-lookup"><span data-stu-id="b069c-103">Code First allows you to define your model using C\# or VB.NET classes.</span></span> <span data-ttu-id="b069c-104">其他設定 （選擇性） 可以使用屬性，在您的類別和屬性，或使用 fluent API 來執行。</span><span class="sxs-lookup"><span data-stu-id="b069c-104">Additional configuration can optionally be performed using attributes on your classes and properties or by using a fluent API.</span></span> <span data-ttu-id="b069c-105">本逐步解說示範如何執行使用 VB.NET 的 fluent API 組態。</span><span class="sxs-lookup"><span data-stu-id="b069c-105">This walkthrough shows how to perform fluent API configuration using VB.NET.</span></span>
 
-<span data-ttu-id="59ef9-106">此頁面會假設您有基本的了解的程式碼第一次。</span><span class="sxs-lookup"><span data-stu-id="59ef9-106">This page assumes you have a basic understanding of Code First.</span></span> <span data-ttu-id="59ef9-107">請參閱下列逐步解說，如需詳細資訊，在第一個程式碼：</span><span class="sxs-lookup"><span data-stu-id="59ef9-107">Check out the following walkthroughs for more information on Code First:</span></span>
+<span data-ttu-id="b069c-106">此頁面會假設您有基本的了解的程式碼第一次。</span><span class="sxs-lookup"><span data-stu-id="b069c-106">This page assumes you have a basic understanding of Code First.</span></span> <span data-ttu-id="b069c-107">請參閱下列逐步解說，如需詳細資訊，在第一個程式碼：</span><span class="sxs-lookup"><span data-stu-id="b069c-107">Check out the following walkthroughs for more information on Code First:</span></span>
 
--   [<span data-ttu-id="59ef9-108">Code First 至新的資料庫</span><span class="sxs-lookup"><span data-stu-id="59ef9-108">Code First to a New Database</span></span>](~/ef6/modeling/code-first/workflows/new-database.md)
--   [<span data-ttu-id="59ef9-109">Code First 至現有的資料庫</span><span class="sxs-lookup"><span data-stu-id="59ef9-109">Code First to an Existing Database</span></span>](~/ef6/modeling/code-first/workflows/existing-database.md)
+-   [<span data-ttu-id="b069c-108">Code First 至新的資料庫</span><span class="sxs-lookup"><span data-stu-id="b069c-108">Code First to a New Database</span></span>](~/ef6/modeling/code-first/workflows/new-database.md)
+-   [<span data-ttu-id="b069c-109">Code First 至現有的資料庫</span><span class="sxs-lookup"><span data-stu-id="b069c-109">Code First to an Existing Database</span></span>](~/ef6/modeling/code-first/workflows/existing-database.md)
 
-## <a name="pre-requisites"></a><span data-ttu-id="59ef9-110">必要條件</span><span class="sxs-lookup"><span data-stu-id="59ef9-110">Pre-Requisites</span></span>
+## <a name="pre-requisites"></a><span data-ttu-id="b069c-110">必要條件</span><span class="sxs-lookup"><span data-stu-id="b069c-110">Pre-Requisites</span></span>
 
-<span data-ttu-id="59ef9-111">您必須至少是 Visual studio 2010 或 Visual Studio 2012 安裝完成本逐步解說。</span><span class="sxs-lookup"><span data-stu-id="59ef9-111">You will need to have at least Visual Studio 2010 or Visual Studio 2012 installed to complete this walkthrough.</span></span>
+<span data-ttu-id="b069c-111">您必須至少是 Visual studio 2010 或 Visual Studio 2012 安裝完成本逐步解說。</span><span class="sxs-lookup"><span data-stu-id="b069c-111">You will need to have at least Visual Studio 2010 or Visual Studio 2012 installed to complete this walkthrough.</span></span>
 
-<span data-ttu-id="59ef9-112">如果您使用 Visual Studio 2010，您也必須有[NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)安裝</span><span class="sxs-lookup"><span data-stu-id="59ef9-112">If you are using Visual Studio 2010, you will also need to have [NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) installed</span></span>
+<span data-ttu-id="b069c-112">如果您使用 Visual Studio 2010，您也必須有[NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)安裝</span><span class="sxs-lookup"><span data-stu-id="b069c-112">If you are using Visual Studio 2010, you will also need to have [NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) installed</span></span>
 
-## <a name="create-the-application"></a><span data-ttu-id="59ef9-113">建立應用程式</span><span class="sxs-lookup"><span data-stu-id="59ef9-113">Create the Application</span></span>
+## <a name="create-the-application"></a><span data-ttu-id="b069c-113">建立應用程式</span><span class="sxs-lookup"><span data-stu-id="b069c-113">Create the Application</span></span>
 
-<span data-ttu-id="59ef9-114">為了簡單起見，我們要建置基本的主控台應用程式，會使用 Code First 來執行資料存取。</span><span class="sxs-lookup"><span data-stu-id="59ef9-114">To keep things simple we’re going to build a basic console application that uses Code First to perform data access.</span></span>
+<span data-ttu-id="b069c-114">為了簡單起見，我們要建置基本的主控台應用程式，會使用 Code First 來執行資料存取。</span><span class="sxs-lookup"><span data-stu-id="b069c-114">To keep things simple we’re going to build a basic console application that uses Code First to perform data access.</span></span>
 
--   <span data-ttu-id="59ef9-115">開啟 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="59ef9-115">Open Visual Studio</span></span>
--   <span data-ttu-id="59ef9-116">**檔案-&gt;新增-&gt;專案...**</span><span class="sxs-lookup"><span data-stu-id="59ef9-116">**File -&gt; New -&gt; Project…**</span></span>
--   <span data-ttu-id="59ef9-117">選取  **Windows**從左側的功能表和**主控台應用程式**</span><span class="sxs-lookup"><span data-stu-id="59ef9-117">Select **Windows** from the left menu and **Console Application**</span></span>
--   <span data-ttu-id="59ef9-118">請輸入**CodeFirstVBSample**做為名稱</span><span class="sxs-lookup"><span data-stu-id="59ef9-118">Enter **CodeFirstVBSample** as the name</span></span>
--   <span data-ttu-id="59ef9-119">選取 [確定]</span><span class="sxs-lookup"><span data-stu-id="59ef9-119">Select **OK**</span></span>
+-   <span data-ttu-id="b069c-115">開啟 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="b069c-115">Open Visual Studio</span></span>
+-   <span data-ttu-id="b069c-116">**檔案-&gt;新增-&gt;專案...**</span><span class="sxs-lookup"><span data-stu-id="b069c-116">**File -&gt; New -&gt; Project…**</span></span>
+-   <span data-ttu-id="b069c-117">選取  **Windows**從左側的功能表和**主控台應用程式**</span><span class="sxs-lookup"><span data-stu-id="b069c-117">Select **Windows** from the left menu and **Console Application**</span></span>
+-   <span data-ttu-id="b069c-118">請輸入**CodeFirstVBSample**做為名稱</span><span class="sxs-lookup"><span data-stu-id="b069c-118">Enter **CodeFirstVBSample** as the name</span></span>
+-   <span data-ttu-id="b069c-119">選取 [確定]</span><span class="sxs-lookup"><span data-stu-id="b069c-119">Select **OK**</span></span>
 
-## <a name="define-the-model"></a><span data-ttu-id="59ef9-120">定義模型</span><span class="sxs-lookup"><span data-stu-id="59ef9-120">Define the Model</span></span>
+## <a name="define-the-model"></a><span data-ttu-id="b069c-120">定義模型</span><span class="sxs-lookup"><span data-stu-id="b069c-120">Define the Model</span></span>
 
-<span data-ttu-id="59ef9-121">在此步驟中，您將定義 POCO VB.NET 代表概念模型實體類型。</span><span class="sxs-lookup"><span data-stu-id="59ef9-121">In this step you will define VB.NET POCO entity types that represent the conceptual model.</span></span> <span data-ttu-id="59ef9-122">類別不需要衍生自任何基底類別或實作任何介面。</span><span class="sxs-lookup"><span data-stu-id="59ef9-122">The classes do not need to derive from any base classes or implement any interfaces.</span></span>
+<span data-ttu-id="b069c-121">在此步驟中，您將定義 POCO VB.NET 代表概念模型實體類型。</span><span class="sxs-lookup"><span data-stu-id="b069c-121">In this step you will define VB.NET POCO entity types that represent the conceptual model.</span></span> <span data-ttu-id="b069c-122">類別不需要衍生自任何基底類別或實作任何介面。</span><span class="sxs-lookup"><span data-stu-id="b069c-122">The classes do not need to derive from any base classes or implement any interfaces.</span></span>
 
--   <span data-ttu-id="59ef9-123">將新類別加入專案中，輸入**SchoolModel**的類別名稱</span><span class="sxs-lookup"><span data-stu-id="59ef9-123">Add a new class to the project, enter **SchoolModel** for the class name</span></span>
--   <span data-ttu-id="59ef9-124">取代為下列程式碼中的新類別的內容</span><span class="sxs-lookup"><span data-stu-id="59ef9-124">Replace the contents of the new class with the following code</span></span>
+-   <span data-ttu-id="b069c-123">將新類別加入專案中，輸入**SchoolModel**的類別名稱</span><span class="sxs-lookup"><span data-stu-id="b069c-123">Add a new class to the project, enter **SchoolModel** for the class name</span></span>
+-   <span data-ttu-id="b069c-124">取代為下列程式碼中的新類別的內容</span><span class="sxs-lookup"><span data-stu-id="b069c-124">Replace the contents of the new class with the following code</span></span>
 
 ``` vb
    Public Class Department
@@ -133,21 +133,21 @@ ms.locfileid: "45489463"
     End Class
 ```
 
-## <a name="define-a-derived-context"></a><span data-ttu-id="59ef9-125">定義衍生的內容</span><span class="sxs-lookup"><span data-stu-id="59ef9-125">Define a Derived Context</span></span>
+## <a name="define-a-derived-context"></a><span data-ttu-id="b069c-125">定義衍生的內容</span><span class="sxs-lookup"><span data-stu-id="b069c-125">Define a Derived Context</span></span>
 
-<span data-ttu-id="59ef9-126">我們即將開始使用從 Entity Framework 的類型，因此我們需要加入 EntityFramework NuGet 套件。</span><span class="sxs-lookup"><span data-stu-id="59ef9-126">We’re about to start to using types from the Entity Framework so we need to add the EntityFramework NuGet package.</span></span>
+<span data-ttu-id="b069c-126">我們即將開始使用從 Entity Framework 的類型，因此我們需要加入 EntityFramework NuGet 套件。</span><span class="sxs-lookup"><span data-stu-id="b069c-126">We’re about to start to using types from the Entity Framework so we need to add the EntityFramework NuGet package.</span></span>
 
--   <span data-ttu-id="59ef9-127">\* \* 專案 –&gt; **管理 NuGet 封裝...**</span><span class="sxs-lookup"><span data-stu-id="59ef9-127">\*\*Project –&gt; **Manage NuGet Packages…**</span></span>
+-   <span data-ttu-id="b069c-127">\* \* 專案 –&gt; **管理 NuGet 封裝...**</span><span class="sxs-lookup"><span data-stu-id="b069c-127">\*\*Project –&gt; **Manage NuGet Packages…**</span></span>
 > [!NOTE]
-> <span data-ttu-id="59ef9-128">如果您沒有**管理 NuGet 套件...**</span><span class="sxs-lookup"><span data-stu-id="59ef9-128">If you don’t have the **Manage NuGet Packages…**</span></span> <span data-ttu-id="59ef9-129">您應該安裝的選項[最新版的 NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)</span><span class="sxs-lookup"><span data-stu-id="59ef9-129">option you should install the [latest version of NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)</span></span>
--   <span data-ttu-id="59ef9-130">選取 [ **Online** ] 索引標籤</span><span class="sxs-lookup"><span data-stu-id="59ef9-130">Select the **Online** tab</span></span>
--   <span data-ttu-id="59ef9-131">選取  **EntityFramework**封裝</span><span class="sxs-lookup"><span data-stu-id="59ef9-131">Select the **EntityFramework** package</span></span>
--   <span data-ttu-id="59ef9-132">按一下 **安裝**</span><span class="sxs-lookup"><span data-stu-id="59ef9-132">Click **Install**</span></span>
+> <span data-ttu-id="b069c-128">如果您沒有**管理 NuGet 套件...**</span><span class="sxs-lookup"><span data-stu-id="b069c-128">If you don’t have the **Manage NuGet Packages…**</span></span> <span data-ttu-id="b069c-129">您應該安裝的選項[最新版的 NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)</span><span class="sxs-lookup"><span data-stu-id="b069c-129">option you should install the [latest version of NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)</span></span>
+-   <span data-ttu-id="b069c-130">選取 [ **Online** ] 索引標籤</span><span class="sxs-lookup"><span data-stu-id="b069c-130">Select the **Online** tab</span></span>
+-   <span data-ttu-id="b069c-131">選取  **EntityFramework**封裝</span><span class="sxs-lookup"><span data-stu-id="b069c-131">Select the **EntityFramework** package</span></span>
+-   <span data-ttu-id="b069c-132">按一下 **安裝**</span><span class="sxs-lookup"><span data-stu-id="b069c-132">Click **Install**</span></span>
 
-<span data-ttu-id="59ef9-133">現在就可以開始定義 衍生的內容，表示與資料庫，讓我們可以查詢和儲存資料的工作階段。</span><span class="sxs-lookup"><span data-stu-id="59ef9-133">Now it’s time to define a derived context, which represents a session with the database, allowing us to query and save data.</span></span> <span data-ttu-id="59ef9-134">我們會定義的內容衍生自 System.Data.Entity.DbContext 並公開 （expose） 的具類型的 DbSet&lt;TEntity&gt;我們的模型中每個類別。</span><span class="sxs-lookup"><span data-stu-id="59ef9-134">We define a context that derives from System.Data.Entity.DbContext and exposes a typed DbSet&lt;TEntity&gt; for each class in our model.</span></span>
+<span data-ttu-id="b069c-133">現在就可以開始定義 衍生的內容，表示與資料庫，讓我們可以查詢和儲存資料的工作階段。</span><span class="sxs-lookup"><span data-stu-id="b069c-133">Now it’s time to define a derived context, which represents a session with the database, allowing us to query and save data.</span></span> <span data-ttu-id="b069c-134">我們會定義的內容衍生自 System.Data.Entity.DbContext 並公開 （expose） 的具類型的 DbSet&lt;TEntity&gt;我們的模型中每個類別。</span><span class="sxs-lookup"><span data-stu-id="b069c-134">We define a context that derives from System.Data.Entity.DbContext and exposes a typed DbSet&lt;TEntity&gt; for each class in our model.</span></span>
 
--   <span data-ttu-id="59ef9-135">將新類別加入專案中，輸入**SchoolContext**的類別名稱</span><span class="sxs-lookup"><span data-stu-id="59ef9-135">Add a new class to the project, enter **SchoolContext** for the class name</span></span>
--   <span data-ttu-id="59ef9-136">取代為下列程式碼中的新類別的內容</span><span class="sxs-lookup"><span data-stu-id="59ef9-136">Replace the contents of the new class with the following code</span></span>
+-   <span data-ttu-id="b069c-135">將新類別加入專案中，輸入**SchoolContext**的類別名稱</span><span class="sxs-lookup"><span data-stu-id="b069c-135">Add a new class to the project, enter **SchoolContext** for the class name</span></span>
+-   <span data-ttu-id="b069c-136">取代為下列程式碼中的新類別的內容</span><span class="sxs-lookup"><span data-stu-id="b069c-136">Replace the contents of the new class with the following code</span></span>
 
 ``` vb
     Imports System.Data.Entity
@@ -169,11 +169,11 @@ ms.locfileid: "45489463"
     End Class
 ```
 
-## <a name="configuring-with-the-fluent-api"></a><span data-ttu-id="59ef9-137">使用 Fluent API 設定</span><span class="sxs-lookup"><span data-stu-id="59ef9-137">Configuring with the Fluent API</span></span>
+## <a name="configuring-with-the-fluent-api"></a><span data-ttu-id="b069c-137">使用 Fluent API 設定</span><span class="sxs-lookup"><span data-stu-id="b069c-137">Configuring with the Fluent API</span></span>
 
-<span data-ttu-id="59ef9-138">本節示範如何使用 fluent Api，將屬性對應到資料行對應，以及資料表之間的關聯性的資料表類型設定\\模型中的型別。</span><span class="sxs-lookup"><span data-stu-id="59ef9-138">This section demonstrates how to use the fluent APIs to configure types to tables mapping, properties to columns mapping, and relationships between tables\\type in your model.</span></span> <span data-ttu-id="59ef9-139">透過 fluent API 公開**DbModelBuilder**輸入，並且藉由覆寫最常存取**OnModelCreating**方法**DbContext**。</span><span class="sxs-lookup"><span data-stu-id="59ef9-139">The fluent API is exposed through the **DbModelBuilder** type and is most commonly accessed by overriding the **OnModelCreating** method on **DbContext**.</span></span>
+<span data-ttu-id="b069c-138">本節示範如何使用 fluent Api，將屬性對應到資料行對應，以及資料表之間的關聯性的資料表類型設定\\模型中的型別。</span><span class="sxs-lookup"><span data-stu-id="b069c-138">This section demonstrates how to use the fluent APIs to configure types to tables mapping, properties to columns mapping, and relationships between tables\\type in your model.</span></span> <span data-ttu-id="b069c-139">透過 fluent API 公開**DbModelBuilder**輸入，並且藉由覆寫最常存取**OnModelCreating**方法**DbContext**。</span><span class="sxs-lookup"><span data-stu-id="b069c-139">The fluent API is exposed through the **DbModelBuilder** type and is most commonly accessed by overriding the **OnModelCreating** method on **DbContext**.</span></span>
 
--   <span data-ttu-id="59ef9-140">複製下列程式碼，並將它加入**OnModelCreating**方法上定義**SchoolContext**類別的註解會說明每個對應的功能</span><span class="sxs-lookup"><span data-stu-id="59ef9-140">Copy the following code and add it to the **OnModelCreating** method defined on the **SchoolContext** class The comments explain what each mapping does</span></span>
+-   <span data-ttu-id="b069c-140">複製下列程式碼，並將它加入**OnModelCreating**方法上定義**SchoolContext**類別的註解會說明每個對應的功能</span><span class="sxs-lookup"><span data-stu-id="b069c-140">Copy the following code and add it to the **OnModelCreating** method defined on the **SchoolContext** class The comments explain what each mapping does</span></span>
 
 ``` vb
 ' Configure Code First to ignore PluralizingTableName convention
@@ -363,12 +363,12 @@ modelBuilder.Entity(Of Course)().
     WillCascadeOnDelete(False)
 ```
 
-## <a name="using-the-model"></a><span data-ttu-id="59ef9-141">使用模型</span><span class="sxs-lookup"><span data-stu-id="59ef9-141">Using the Model</span></span>
+## <a name="using-the-model"></a><span data-ttu-id="b069c-141">使用模型</span><span class="sxs-lookup"><span data-stu-id="b069c-141">Using the Model</span></span>
 
-<span data-ttu-id="59ef9-142">讓我們執行一些資料存取使用**SchoolContext**若要查看作用中的模型。</span><span class="sxs-lookup"><span data-stu-id="59ef9-142">Let's perform some data access using the **SchoolContext** to see out model in action.</span></span>
+<span data-ttu-id="b069c-142">讓我們執行一些資料存取使用**SchoolContext**若要查看作用中的模型。</span><span class="sxs-lookup"><span data-stu-id="b069c-142">Let's perform some data access using the **SchoolContext** to see out model in action.</span></span>
 
--   <span data-ttu-id="59ef9-143">開啟 Module1.vb 檔案，其中定義 Main 函式</span><span class="sxs-lookup"><span data-stu-id="59ef9-143">Open the Module1.vb file where the Main function is defined</span></span>
--   <span data-ttu-id="59ef9-144">複製並貼上下列 Module1 定義</span><span class="sxs-lookup"><span data-stu-id="59ef9-144">Copy and paste the following Module1 definition</span></span>
+-   <span data-ttu-id="b069c-143">開啟 Module1.vb 檔案，其中定義 Main 函式</span><span class="sxs-lookup"><span data-stu-id="b069c-143">Open the Module1.vb file where the Main function is defined</span></span>
+-   <span data-ttu-id="b069c-144">複製並貼上下列 Module1 定義</span><span class="sxs-lookup"><span data-stu-id="b069c-144">Copy and paste the following Module1 definition</span></span>
 
 ``` vb
 Imports System.Data.Entity
@@ -408,7 +408,7 @@ Module Module1
 End Module
 ```
 
-<span data-ttu-id="59ef9-145">您現在可以執行應用程式，並加以測試。</span><span class="sxs-lookup"><span data-stu-id="59ef9-145">You can now run the application and test it out.</span></span>
+<span data-ttu-id="b069c-145">您現在可以執行應用程式，並加以測試。</span><span class="sxs-lookup"><span data-stu-id="b069c-145">You can now run the application and test it out.</span></span>
 
 ```
 Enter a name for a new Department: Computing
