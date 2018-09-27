@@ -18,7 +18,7 @@ ms.locfileid: "42993662"
 > [!NOTE]
 > 這些文章有尚未更新從 EF Core 1.1，而且已有重大變更自那時起[問題 681](https://github.com/aspnet/EntityFramework.Docs/issues/681)正在追蹤更新這份文件。
 
-EF Core 程式碼基底是開放原始碼，並包含數個可做為參考資料庫提供者。 您可以找到原始程式碼https://github.com/aspnet/EntityFrameworkCore。 它也可能有助於查看程式碼常用的協力廠商提供者，例如[Npgsql](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL)， [Pomelo MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)，並[SQL Server Compact](https://github.com/ErikEJ/EntityFramework.SqlServerCompact)。 特別是，這些專案已設定，以從擴充，並在 NuGet 上執行我們所發行的功能測試。 強烈建議這種安裝程式。
+EF Core 程式碼基底是開放原始碼，並包含數個可做為參考資料庫提供者。 您可以找到原始程式碼 https://github.com/aspnet/EntityFrameworkCore 。 它也可能有助於查看程式碼常用的協力廠商提供者，例如[Npgsql](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL)， [Pomelo MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)，並[SQL Server Compact](https://github.com/ErikEJ/EntityFramework.SqlServerCompact)。 特別是，這些專案已設定，以從擴充，並在 NuGet 上執行我們所發行的功能測試。 強烈建議這種安裝程式。
 
 ## <a name="keeping-up-to-date-with-provider-changes"></a>保持最新提供者變更
 
