@@ -3,12 +3,12 @@ title: 組態檔設定 EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 000044c6-1d32-4cf7-ae1f-ea21d86ebf8f
-ms.openlocfilehash: 949ad4f030205753c5fbf9b95f4d183d8c0d1fe7
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: faba4e406b9f26f5bed6149f75c59da362d84692
+ms.sourcegitcommit: 15022dd06d919c29b1189c82611ea32f9fdc6617
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490868"
+ms.lasthandoff: 09/27/2018
+ms.locfileid: "47415779"
 ---
 # <a name="configuration-file-settings"></a>組態檔設定
 Entity Framework 可讓多個組態檔中指定的設定。 EF 遵循 'convention over configuration' 原則的一般情況下： 這篇文章中討論的所有設定的預設行為，您只需要擔心如何變更設定，當預設值不再符合您的需求。  
@@ -153,7 +153,7 @@ EF 設計工具基礎模型使用特殊的 EF 連接字串。 例如:
 
 安裝 EF NuGet 套件時的預設連線處理站已註冊指向 SQL Express 或 LocalDB，取決於哪一個已安裝。  
 
-若要設定的連線處理站，您可以指定中的組件限定的類型名稱**deafultConnectionFactory**項目。  
+若要設定的連線處理站，您可以指定中的組件限定的類型名稱**defaultConnectionFactory**項目。  
 
 > [!NOTE]
 > 組件限定的名稱是命名空間限定的名稱，後面接著逗號，再型別所在的組件。 您可以選擇性地也指定的組件版本、 文化特性和公開金鑰語彙基元。  

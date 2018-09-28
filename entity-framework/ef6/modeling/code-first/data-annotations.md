@@ -3,12 +3,12 @@ title: First 資料註解-EF6 的程式碼
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 38ae52543ed99e5a1c1da7d19a2e15d168e3a1bd
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 54e27f1b866da14d68db66ca5eca5a6dde819e26
+ms.sourcegitcommit: 15022dd06d919c29b1189c82611ea32f9fdc6617
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490101"
+ms.lasthandoff: 09/27/2018
+ms.locfileid: "47415805"
 ---
 # <a name="code-first-data-annotations"></a>Code First 資料註解
 > [!NOTE]
@@ -319,13 +319,13 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 重要的資料庫功能是能夠有計算屬性。 如果您對應 Code First 類別，藉此資料表包含計算資料行，您不想要嘗試更新這些資料行的 Entity Framework。 但您想 EF 來插入或更新的資料之後，從資料庫傳回這些值。 您可以使用 DatabaseGenerated 註解來標示那些屬性，在您的類別，以及計算列舉。 其他列舉都是無和身分識別。
 
 ``` csharp
-    [DatabaseGenerated(DatabaseGenerationOption.Computed)]
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime DateCreated { get; set; }
 ```
 
 您可以使用程式碼第一次產生資料庫時，產生位元組或時間戳記資料行上的資料庫，否則您應該只使用這個選項指向現有的資料庫，因為程式碼第一次將無法判斷計算資料行的公式。
 
-您閱讀上述，根據預設，是一個整數的索引鍵屬性，將會成為在資料庫中的識別索引鍵。 這會是 DatabaseGenerated 設 DatabaseGenerationOption.Identity 相同。 如果您不想要識別索引鍵，值可以設 DatabaseGenerationOption.None。
+您閱讀上述，根據預設，是一個整數的索引鍵屬性，將會成為在資料庫中的識別索引鍵。 這會是 DatabaseGenerated 設 DatabaseGeneratedOption.Identity 相同。 如果您不想要識別索引鍵，值可以設 DatabaseGeneratedOption.None。
 
  
 
