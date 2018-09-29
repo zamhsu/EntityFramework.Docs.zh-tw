@@ -3,12 +3,13 @@ title: 移轉具有多個專案的 EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
-ms.openlocfilehash: 76e88dd486b1c53dc69a24e35710511bf9cb673b
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+uid: core/managing-schemas/migrations/projects
+ms.openlocfilehash: 30a6afad1488e74ce2585be3d780186311379a97
+ms.sourcegitcommit: ad1bdea58ed35d0f19791044efe9f72f94189c18
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997983"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47447140"
 ---
 <a name="using-a-separate-project"></a>使用個別的專案
 ========================
