@@ -3,12 +3,12 @@ title: 使用 migrate.exe-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 989ea862-e936-4c85-926a-8cfbef5df5b8
-ms.openlocfilehash: 6e9880523bbcf2fe55390a447241e59723a0967f
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: cf6c3a0a256730b24addf1012d6ff53b17035cd4
+ms.sourcegitcommit: c568d33214fc25c76e02c8529a29da7a356b37b4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490210"
+ms.lasthandoff: 09/30/2018
+ms.locfileid: "47459535"
 ---
 # <a name="using-migrateexe"></a>使用 migrate.exe
 Code First 移轉可以用來更新資料庫，以從在 visual studio，但也可以透過命令列工具 migrate.exe 執行。 此頁面會提供如何使用 migrate.exe 執行對資料庫的移轉的快速概觀。
@@ -24,9 +24,9 @@ Code First 移轉可以用來更新資料庫，以從在 visual studio，但也�
 
 如果您的應用程式的目標.NET 4 中，而且不 4.5，則您必須複製**Redirect.config**做為位置以及與將它重新命名**migrate.exe.config**。這是使 migrate.exe 取得正確的繫結重新導向，若要能夠找出 Entity Framework 組件。
 
-| .NET 4.5                                   | .NET 4.0                                   |
-|:-------------------------------------------|:-------------------------------------------|
-| ![.NET 4.5 檔案](~/ef6/media/net45files.png)  | ![.NET 4.0 檔案](~/ef6/media/net40files.png)  |
+| .NET 4.5                                      | .NET 4.0                                      |
+|:----------------------------------------------|:----------------------------------------------|
+| ![.NET 4.5 檔案](~/ef6/media/net45files.png) | ![.NET 4.0 檔案](~/ef6/media/net40files.png) |
 
 > [!NOTE]
 > migrate.exe 不支援 x64 的組件。

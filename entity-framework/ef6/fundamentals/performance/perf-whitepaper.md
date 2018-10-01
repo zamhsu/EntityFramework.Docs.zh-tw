@@ -3,12 +3,12 @@ title: EF4、 EF5，與 EF6 的效能考量
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d6d5a465-6434-45fa-855d-5eb48c61a2ea
-ms.openlocfilehash: a58461a6d18d9d53c002b5d45cecbff7b0cdf81e
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: fb184fe8720b552a2050607bb17648f0413c31d1
+ms.sourcegitcommit: c568d33214fc25c76e02c8529a29da7a356b37b4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490255"
+ms.lasthandoff: 09/30/2018
+ms.locfileid: "47459587"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>EF 4、 5 和 6 的效能考量
 David Obando、 Eric Dettinger 和其他項目
@@ -88,11 +88,11 @@ Entity Framework 6 不足的頻外版本且不需依賴.NET 所隨附的 Entity 
 
 ### <a name="23-using-pre-generated-views-to-decrease-model-load-time"></a>2.3 使用 Pre-Generated 檢視，以減少模型載入時間
 
-#### <a name="231-pre-generated-views-using-the-entity-framework-power-tools"></a>2.3.1 使用 Entity Framework Power Tools 預先產生檢視
+如需如何使用 Entity Framework 6 的預先產生的檢視的詳細資訊，請造訪[Pre-Generated 對應檢視](~/ef6/fundamentals/performance/pre-generated-views.md)
 
-您也可以考慮使用 Entity Framework Power Tools 產生 EDMX 和 Code First 模型的檢視模型類別檔案上按一下滑鼠右鍵，並使用 Entity Framework 功能表，選取 「 產生檢視 」。 Entity Framework Power Tools 只能在 DbContext 衍生內容上運作，以及位於\< http://visualstudiogallery.msdn.microsoft.com/72a60b14-1581-4b9b-89f2-846072eff19d>。
+#### <a name="231-pre-generated-views-using-the-entity-framework-power-tools-community-edition"></a>2.3.1 使用 Entity Framework Power Tools Community Edition 的預先產生檢視
 
-如需如何使用 Entity Framework 6 的預先產生的檢視的詳細資訊，請造訪[Pre-Generated 對應檢視](~/ef6/fundamentals/performance/pre-generated-views.md)。
+您可以使用[Entity Framework 6 Power Tools Community Edition](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition)來產生 EDMX 和 Code First 模型的檢視模型類別檔案上按一下滑鼠右鍵，然後使用 [Entity Framework] 功能表選取 「 產生檢視 」。 Entity Framework Power Tools Community Edition 只能用於 DbContext 衍生的內容。
 
 #### <a name="232-how-to-use-pre-generated-views-with-a-model-created-by-edmgen"></a>2.3.2 如何使用 EDMGen 所建立的模型中的預先產生的檢視
 
@@ -100,26 +100,20 @@ EDMGen 是公用程式隨附於.NET，並使用 Entity Framework 4 和 5，但�
 
 如果您手動編輯模型的結構描述檔案，您必須重新產生檢視檔案。 您可以執行使用 EDMGen **/mode:ViewGeneration**旗標。
 
-如需進一步的參考，請參閱[如何： Pre-Generate 檢視，以改善查詢效能](https://msdn.microsoft.com/library/bb896240.aspx)。
-
 #### <a name="233-how-to-use-pre-generated-views-with-an-edmx-file"></a>2.3.3 如何 Pre-Generated 檢視使用 EDMX 檔案
 
 您也可以使用 EDMGen 來產生的 EDMX 檔案的檢視表-先前參考的 MSDN 主題描述如何新增建置前事件，若要這樣做-這是複雜但有某些情況下，而不可能。 它是通常更容易使用 T4 範本產生檢視，當模型處於 edmx 檔案。
 
-ADO.NET 小組部落格有某篇文章說明如何使用 T4 範本產生檢視表 ( \< http://blogs.msdn.com/b/adonet/archive/2008/06/20/how-to-use-a-t4-template-for-view-generation.aspx>)。 這篇文章包含可以下載並加入至專案的範本。 範本是針對 Entity Framework 的第一個版本撰寫的因此它們不保證適用於 Entity Framework 的最新版本。 不過，您可以下載較新的一組檢視產生範本，針對 Entity Framework 4 和 5from Visual Studio 組件庫：
+ADO.NET 小組部落格有某篇文章說明如何使用 T4 範本產生檢視表 ( \<http://blogs.msdn.com/b/adonet/archive/2008/06/20/how-to-use-a-t4-template-for-view-generation.aspx>)。 這篇文章包含可以下載並加入至專案的範本。 範本是針對 Entity Framework 的第一個版本撰寫的因此它們不保證適用於 Entity Framework 的最新版本。 不過，您可以下載較新的一組檢視產生範本，針對 Entity Framework 4 和 5from Visual Studio 組件庫：
 
 -   VB.NET: \<http://visualstudiogallery.msdn.microsoft.com/118b44f2-1b91-4de2-a584-7a680418941d>
 -   C\#: \<http://visualstudiogallery.msdn.microsoft.com/ae7730ce-ddab-470f-8456-1b313cd2c44d>
 
-如果您使用 Entity Framework 6 您可以檢視產生 T4 範本從取得 Visual Studio 組件庫，在\< http://visualstudiogallery.msdn.microsoft.com/18a7db90-6705-4d19-9dd1-0a6c23d0751f>。
-
-#### <a name="234-how-to-use-pre-generated-views-with-a-code-first-model"></a>2.3.4 如何使用 Code First 模型的 Pre-Generated 檢視
-
-它也可使用的第一個程式碼的專案中的預先產生的檢視。 Entity Framework Power Tools 都能夠產生檢視檔案的第一個程式碼專案。 您可以在 Visual Studio 組件庫中找到 Entity Framework Power Tools \< http://visualstudiogallery.msdn.microsoft.com/72a60b14-1581-4b9b-89f2-846072eff19d/>。
+如果您使用 Entity Framework 6 您可以檢視產生 T4 範本從取得 Visual Studio 組件庫，在\<http://visualstudiogallery.msdn.microsoft.com/18a7db90-6705-4d19-9dd1-0a6c23d0751f>。
 
 ### <a name="24-reducing-the-cost-of-view-generation"></a>2.4 減少檢視產生的成本
 
-使用預先產生的檢視，會同時從模型載入 （執行階段） 的檢視表產生成本移到編譯時間中。 雖然這可改善啟動效能，在執行階段，則會在您在開發時仍發生檢視產生的痛苦。 有數個其他的竅門，幫助降低成本的檢視表產生，在編譯時期和執行的階段。
+使用預先產生的檢視時，會將檢視表 （執行階段） 從載入的模型產生的成本移至設計階段。 雖然這可改善啟動效能，在執行階段，則會在您在開發時仍發生檢視產生的痛苦。 有數個其他的竅門，幫助降低成本的檢視表產生，在編譯時期和執行的階段。
 
 #### <a name="241-using-foreign-key-associations-to-reduce-view-generation-cost"></a>2.4.1 使用外部索引鍵關聯，以減少檢視產生的成本
 
@@ -139,12 +133,12 @@ ADO.NET 小組部落格有某篇文章說明如何使用 T4 範本產生檢視�
 
 根據預設，當使用 EDMGen 或實體設計工具在 Visual Studio 中，取得 Fk，它只需要 Fk 和 IAs 之間切換單一核取方塊或命令列旗標。
 
-如果您有大型的 Code First 模型時，使用獨立關聯將會有檢視表產生相同的效果。 雖然有些開發人員會認為這到處其物件模型，您可以避免這種影響加上您相依的物件類別的外部索引鍵屬性。 您可以找到更多有關這個主題進行\< http://blog.oneunicorn.com/2011/12/11/whats-the-deal-with-mapping-foreign-keys-using-the-entity-framework/>。
+如果您有大型的 Code First 模型時，使用獨立關聯將會有檢視表產生相同的效果。 雖然有些開發人員會認為這到處其物件模型，您可以避免這種影響加上您相依的物件類別的外部索引鍵屬性。 您可以找到更多有關這個主題進行\<http://blog.oneunicorn.com/2011/12/11/whats-the-deal-with-mapping-foreign-keys-using-the-entity-framework/>。
 
 | 使用時      | 請執行                                                                                                                                                                                                                                                                                                                              |
 |:----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Entity Designer | 新增兩個實體之間的關聯之後, 請確定您已參考條件約束。 參考條件約束會告知 Entity Framework 使用外部索引鍵，而不是獨立的關聯。 如需其他詳細資料請造訪\< http://blogs.msdn.com/b/efdesign/archive/2009/03/16/foreign-keys-in-the-entity-framework.aspx>。 |
-| EDMGen          | 當使用 EDMGen 從資料庫產生您的檔案，將遵守您的外部索引鍵，並加入至這類模型。 如需 EDMGen 所公開的不同選項的詳細資訊請造訪[ http://msdn.microsoft.com/library/bb387165.aspx ](https://msdn.microsoft.com/library/bb387165.aspx)。                           |
+| Entity Designer | 新增兩個實體之間的關聯之後, 請確定您已參考條件約束。 參考條件約束會告知 Entity Framework 使用外部索引鍵，而不是獨立的關聯。 如需其他詳細資料請造訪\<http://blogs.msdn.com/b/efdesign/archive/2009/03/16/foreign-keys-in-the-entity-framework.aspx>。 |
+| EDMGen          | 當使用 EDMGen 從資料庫產生您的檔案，將遵守您的外部索引鍵，並加入至這類模型。 如需 EDMGen 所公開的不同選項的詳細資訊請造訪[http://msdn.microsoft.com/library/bb387165.aspx](https://msdn.microsoft.com/library/bb387165.aspx)。                           |
 | Code First      | 請參閱 「 關聯性慣例 」 一節[程式碼的第一個慣例](~/ef6/modeling/code-first/conventions/built-in.md)主題以取得有關如何使用 Code First 時，包含相依物件上的外部索引鍵屬性的資訊。                                                                                              |
 
 #### <a name="242-moving-your-model-to-a-separate-assembly"></a>2.4.2 將模型移至不同的組件
@@ -268,7 +262,7 @@ AggregatingSubtotals 查詢是最複雜的測試使用的查詢。 如預期般�
 
 我們的測試顯示，使用 CompiledQuery 帶來的優點 7 %autocompiled 透過 LINQ 查詢;這表示，您會縮短 7%的時間執行的程式碼，從 Entity Framework 堆疊;它並不表示您的應用程式將會更快 7%。 一般而言，撰寫和維護 EF 5.0 CompiledQuery 物件的成本可能不值得相較於優點的麻煩。 您的級距可能有所不同，因此執行這個選項，如果您的專案需要額外的推播。 請注意，CompiledQueries 只與 ObjectContext 衍生模型相容，並且與 DbContext 衍生模式不相容。
 
-如需有關建立和叫用 CompiledQuery 的詳細資訊，請參閱 <<c0> [ 編譯的查詢 (LINQ to Entities)](https://msdn.microsoft.com/library/bb896297.aspx)。
+如需有關建立和叫用 CompiledQuery 的詳細資訊，請參閱 <<c0> [編譯的查詢 (LINQ to Entities)](https://msdn.microsoft.com/library/bb896297.aspx)。
 
 有兩個您必須進行時使用 CompiledQuery 時，也就是需要使用靜態的執行個體和問題具備複合性的考量。 以下遵循深入的說明，這些兩個考量。
 
@@ -404,7 +398,7 @@ Entity Framework 也支援中繼資料快取。 這基本上跨不同的連線�
 4.  ItemCollection 會定期檢查使用中。 如果判斷該工作區未存取最近，它會標示為清理在下一步 的快取掃掠。
 5.  只建立 EntityConnection 會 （但不會初始化中的項目集合，直到開啟連接） 建立的中繼資料快取。 此工作區會保留於記憶體中，直到快取演算法可讓您決定不是 「 使用中 」。
 
-客戶諮詢小組已撰寫描述保存 ItemCollection 的參考，以使用大型模型時，避免 「 取代 」 的部落格文章： \< http://blogs.msdn.com/b/appfabriccat/archive/2010/10/22/metadataworkspace-reference-in-wcf-services.aspx>。
+客戶諮詢小組已撰寫描述保存 ItemCollection 的參考，以使用大型模型時，避免 「 取代 」 的部落格文章： \<http://blogs.msdn.com/b/appfabriccat/archive/2010/10/22/metadataworkspace-reference-in-wcf-services.aspx>。
 
 #### <a name="342-the-relationship-between-metadata-caching-and-query-plan-caching"></a>3.4.2 中繼資料快取和查詢計畫快取之間的關聯性
 
@@ -419,7 +413,7 @@ Entity Framework 也支援中繼資料快取。 這基本上跨不同的連線�
 #### <a name="351-additional-references-for-results-caching-with-the-wrapping-provider"></a>3.5.1 其他參考資料與換行的提供者快取的結果
 
 -   Julie Lerman 寫過 < 第二層快取 Entity Framework 和 Windows Azure 中 「 MSDN 文件，包括如何更新範例包裝提供者，以使用 Windows Server AppFabric 快取： [https://msdn.microsoft.com/magazine/hh394143.aspx](https://msdn.microsoft.com/magazine/hh394143.aspx)
--   如果您正在使用 Entity Framework 5，在小組部落格有某篇文章說明如何使用 Entity Framework 5 的快取提供者執行的工作： \< http://blogs.msdn.com/b/adonet/archive/2010/09/13/ef-caching-with-jarek-kowalski-s-provider.aspx>。 它也包含可協助執行自動化新增至您的專案第 2 個層級快取的 T4 範本。
+-   如果您正在使用 Entity Framework 5，在小組部落格有某篇文章說明如何使用 Entity Framework 5 的快取提供者執行的工作： \<http://blogs.msdn.com/b/adonet/archive/2010/09/13/ef-caching-with-jarek-kowalski-s-provider.aspx>。 它也包含可協助執行自動化新增至您的專案第 2 個層級快取的 T4 範本。
 
 ## <a name="4-autocompiled-queries"></a>4 個 Autocompiled 查詢
 
@@ -879,15 +873,15 @@ Microbenchmarks 非常非常敏感的程式碼的小型變更。 在這個案例
 
 如果您的模型使用 TPT 繼承，產生的查詢將會比使用其他繼承策略，這可能會導致儲存區上的執行時間較長上產生的更為複雜。  它通常會比較長 TPT 模型，產生查詢，具體化結果的物件。
 
-請參閱的 < 效能考量當 Entity Framework 中使用 （每個類型的資料表） TPT 繼承 > MSDN 部落格文章： \< http://blogs.msdn.com/b/adonet/archive/2010/08/17/performance-considerations-when-using-tpt-table-per-type-inheritance-in-the-entity-framework.aspx>。
+請參閱的 < 效能考量當 Entity Framework 中使用 （每個類型的資料表） TPT 繼承 > MSDN 部落格文章： \<http://blogs.msdn.com/b/adonet/archive/2010/08/17/performance-considerations-when-using-tpt-table-per-type-inheritance-in-the-entity-framework.aspx>。
 
 #### <a name="711-------avoiding-tpt-in-model-first-or-code-first-applications"></a>7.1.1 Model First 或 Code First 應用程式中避免 TPT
 
 當您建立模型以覆蓋現有資料庫具有 TPT 結構描述時，您不需要許多選項。 但在建立時使用 Model First 或 Code First 應用程式，您應該避免 TPT 繼承，基於效能考量。
 
-當您使用第一個模型的實體設計工具精靈 中時，您會收到的任何繼承的 TPT 模型中。 如果您想要切換成使用 Model First TPH 繼承策略，您可以使用 「 實體設計工具資料庫產生 Power Pack 」 可從 Visual Studio 組件庫 ( \< http://visualstudiogallery.msdn.microsoft.com/df3541c3-d833-4b65-b942-989e7ec74c87/>)。
+當您使用第一個模型的實體設計工具精靈 中時，您會收到的任何繼承的 TPT 模型中。 如果您想要切換成使用 Model First TPH 繼承策略，您可以使用 「 實體設計工具資料庫產生 Power Pack 」 可從 Visual Studio 組件庫 ( \<http://visualstudiogallery.msdn.microsoft.com/df3541c3-d833-4b65-b942-989e7ec74c87/>)。
 
-當使用 Code First 來設定模型的對應具有繼承，EF 會使用預設的 TPH，因此繼承階層架構中的所有實體將會都對應到相同的資料表。 請參閱 MSDN Magazine 中的 「 程式碼第一次在實體 Framework4.1"發行項"對應使用 Fluent API 」 一節 ( [ http://msdn.microsoft.com/magazine/hh126815.aspx ](https://msdn.microsoft.com/magazine/hh126815.aspx)) 如需詳細資訊。
+當使用 Code First 來設定模型的對應具有繼承，EF 會使用預設的 TPH，因此繼承階層架構中的所有實體將會都對應到相同的資料表。 請參閱 MSDN Magazine 中的 「 程式碼第一次在實體 Framework4.1"發行項"對應使用 Fluent API 」 一節 ( [http://msdn.microsoft.com/magazine/hh126815.aspx](https://msdn.microsoft.com/magazine/hh126815.aspx)) 如需詳細資訊。
 
 ### <a name="72-------upgrading-from-ef4-to-improve-model-generation-time"></a>7.2 升級從 EF4 來改善模型的產生時間
 
@@ -907,7 +901,7 @@ Microbenchmarks 非常非常敏感的程式碼的小型變更。 在這個案例
 
 ### <a name="73-------splitting-large-models-with-database-first-and-model-first"></a>7.3 先分割大型模型與資料庫和 Model First
 
-模型大小增加時，在設計工具介面變得雜亂且難以使用。 我們通常會視為具有 300 個以上的實體太大，無法有效地使用設計工具的模型。 下列部落格文章說明用來分割大型模型的數個選項： \< http://blogs.msdn.com/b/adonet/archive/2008/11/25/working-with-large-models-in-entity-framework-part-2.aspx>。
+模型大小增加時，在設計工具介面變得雜亂且難以使用。 我們通常會視為具有 300 個以上的實體太大，無法有效地使用設計工具的模型。 下列部落格文章說明用來分割大型模型的數個選項： \<http://blogs.msdn.com/b/adonet/archive/2008/11/25/working-with-large-models-in-entity-framework-part-2.aspx>。
 
 文章針對 Entity Framework 的第一個版本所撰寫，但步驟仍然適用。
 
@@ -923,7 +917,7 @@ Microbenchmarks 非常非常敏感的程式碼的小型變更。 在這個案例
 
 Entity Framework 可讓您使用自訂資料類別加上您的資料模型，而不需要對資料類別本身進行任何修改。 這表示您可以使用「單純」(plain-old) CLR 物件 (POCO)，例如現有的網域物件，加上您的資料模型。 這些 POCO 資料類別 （也稱為非持續物件），這會對應到資料模型中定義的實體，支援的大部分相同的查詢、 插入、 更新和刪除行為 Entity Data Model 工具所產生的實體類型。
 
-Entity Framework 也可以建立衍生自您的 POCO 類型，您想要啟用功能，例如消極式載入和自動變更追蹤 POCO 實體時所使用的 proxy 類別。 您的 POCO 類別必須符合特定需求，才能讓 Entity Framework，才可使用 proxy，如下所述： [ http://msdn.microsoft.com/library/dd468057.aspx ](https://msdn.microsoft.com/library/dd468057.aspx)。
+Entity Framework 也可以建立衍生自您的 POCO 類型，您想要啟用功能，例如消極式載入和自動變更追蹤 POCO 實體時所使用的 proxy 類別。 您的 POCO 類別必須符合特定需求，才能讓 Entity Framework，才可使用 proxy，如下所述： [http://msdn.microsoft.com/library/dd468057.aspx](https://msdn.microsoft.com/library/dd468057.aspx)。
 
 機會追蹤 proxy 會通知物件狀態管理員每任何的次實體的屬性有變更，其值，讓 Entity Framework 知道您的實體的實際狀態的時間。 這是藉由將通知事件加入至您的屬性 setter 方法的主體並處理這類事件的物件狀態管理員。 請注意，建立 proxy 實體通常會是成本高於建立非 proxy 的 POCO 實體，因為已新增的 Entity Framework 所建立的事件集。
 
@@ -1149,7 +1143,7 @@ using (NorthwindEntities context = new NorthwindEntities())
 
 Entity Framework 目前不支援純量或複雜屬性的消極式的載入。 不過，在您用來有資料表，其中包含大型的物件，例如 BLOB 的情況下，您可以使用資料表分割分成個別的實體中的較大的屬性。 例如，假設您有 Product 資料表包含 varbinary photo 資料行。 如果您沒有經常需要存取這個屬性，在查詢中的，您可以使用資料表分割，以便納入實體，您通常需要的部分。 當您明確需要時，將只會載入代表產品相片的實體。
 
-說明如何啟用資料表分割的絕佳資源是 Gil Fink 「 資料表分割中實體架構 」 部落格文章： \< http://blogs.microsoft.co.il/blogs/gilf/archive/2009/10/13/table-splitting-in-entity-framework.aspx>。
+說明如何啟用資料表分割的絕佳資源是 Gil Fink 「 資料表分割中實體架構 」 部落格文章： \<http://blogs.microsoft.co.il/blogs/gilf/archive/2009/10/13/table-splitting-in-entity-framework.aspx>。
 
 ## <a name="9-other-considerations"></a>9 其他考量
 
@@ -1187,7 +1181,7 @@ finally
 }
 ```
 
-關閉前 AutoDetectChanges，最好了解這可能會導致失去其同時可追蹤特定資訊將會在實體的變更的 Entity Framework。 如果不正確地處理，這可能造成資料不一致，在您的應用程式。 如需有關如何關閉 AutoDetectChanges 的詳細資訊，請閱讀\< http://blog.oneunicorn.com/2012/03/12/secrets-of-detectchanges-part-3-switching-off-automatic-detectchanges/>。
+關閉前 AutoDetectChanges，最好了解這可能會導致失去其同時可追蹤特定資訊將會在實體的變更的 Entity Framework。 如果不正確地處理，這可能造成資料不一致，在您的應用程式。 如需有關如何關閉 AutoDetectChanges 的詳細資訊，請閱讀\<http://blog.oneunicorn.com/2012/03/12/secrets-of-detectchanges-part-3-switching-off-automatic-detectchanges/>。
 
 ### <a name="93------context-per-request"></a>9.3 每個要求的內容
 
@@ -1234,7 +1228,7 @@ Entity Framework 內容應該要當做存留較短的執行個體，以提供最
 
 Entity Framework 6 引進了支援的執行在.NET 4.5 或更新版本時的非同步作業。 大部分的情況下，使 IO 的應用程式相關的競爭會受益於最多使用非同步查詢並儲存作業。 如果您的應用程式不會發生從 IO 爭用，非同步處理使用，在最佳的情況下，以同步方式執行和傳回結果，在相同的時間與同步呼叫，或最糟的情況、 只是延後執行非同步工作，並新增額外的 time 完成您的案例。
 
-如需如何非同步的程式設計工作可協助您決定是否非同步會改善您的應用程式的效能請瀏覽[ http://msdn.microsoft.com/library/hh191443.aspx ](https://msdn.microsoft.com/library/hh191443.aspx)。 如需使用 Entity Framework 上的非同步作業的詳細資訊，請參閱 <<c0> [ 非同步查詢和儲存](~/ef6/fundamentals/async.md
+如需如何非同步的程式設計工作可協助您決定是否非同步會改善您的應用程式的效能請瀏覽[http://msdn.microsoft.com/library/hh191443.aspx](https://msdn.microsoft.com/library/hh191443.aspx)。 如需使用 Entity Framework 上的非同步作業的詳細資訊，請參閱 <<c0> [ 非同步查詢和儲存](~/ef6/fundamentals/async.md
 )。
 
 ### <a name="96------ngen"></a>9.6 NGEN
@@ -1255,17 +1249,17 @@ Code First 方法是，它的核心，複雜的實體資料模型產生器。 En
 
 ### <a name="101-using-the-visual-studio-profiler"></a>10.1 使用 Visual Studio Profiler
 
-如果您有使用 Entity Framework 的效能問題，您可以使用像建置到 Visual Studio 分析工具，以查看應用程式花費的時間。 這是我們用來產生圓形圖 」 瀏覽 ADO.NET Entity Framework 的效能-第 1 部分 」 部落格文章中的工具 ( \< http://blogs.msdn.com/b/adonet/archive/2008/02/04/exploring-the-performance-of-the-ado-net-entity-framework-part-1.aspx>)說明 Entity Framework 要花費在它在冷和暖查詢期間的時間。
+如果您有使用 Entity Framework 的效能問題，您可以使用像建置到 Visual Studio 分析工具，以查看應用程式花費的時間。 這是我們用來產生圓形圖 」 瀏覽 ADO.NET Entity Framework 的效能-第 1 部分 」 部落格文章中的工具 ( \<http://blogs.msdn.com/b/adonet/archive/2008/02/04/exploring-the-performance-of-the-ado-net-entity-framework-part-1.aspx>)說明 Entity Framework 要花費在它在冷和暖查詢期間的時間。
 
-資料和模型化客戶諮詢小組所撰寫的 「 使用 Visual Studio 2010 Profiler 分析 Entity Framework 」 部落格文章顯示如何它們使用分析工具來調查效能問題的真實世界範例。  \<http://blogs.msdn.com/b/dmcat/archive/2010/04/30/profiling-entity-framework-using-the-visual-studio-2010-profiler.aspx>。 這篇文章是針對 windows 應用程式所撰寫。 如果您要分析 web 應用程式的 Windows 效能記錄程式 (WPR) 和 Windows Performance Analyzer (WPA) 工具可能會優於從 Visual Studio 工作運作。 WPR 和 WPA 屬於 Windows 效能工具組所附含的 Windows 評定及部署套件 ( [ http://www.microsoft.com/en-US/download/details.aspx?id=39982 ](https://www.microsoft.com/en-US/download/details.aspx?id=39982))。
+資料和模型化客戶諮詢小組所撰寫的 「 使用 Visual Studio 2010 Profiler 分析 Entity Framework 」 部落格文章顯示如何它們使用分析工具來調查效能問題的真實世界範例。  \<http://blogs.msdn.com/b/dmcat/archive/2010/04/30/profiling-entity-framework-using-the-visual-studio-2010-profiler.aspx>。 這篇文章是針對 windows 應用程式所撰寫。 如果您要分析 web 應用程式的 Windows 效能記錄程式 (WPR) 和 Windows Performance Analyzer (WPA) 工具可能會優於從 Visual Studio 工作運作。 WPR 和 WPA 屬於 Windows 效能工具組所附含的 Windows 評定及部署套件 ( [http://www.microsoft.com/en-US/download/details.aspx?id=39982](https://www.microsoft.com/en-US/download/details.aspx?id=39982))。
 
 ### <a name="102-applicationdatabase-profiling"></a>10.2 應用程式/資料庫程式碼剖析
 
 內建於 Visual Studio 分析工具等工具會告訴您應用程式花費的時間。  程式碼剖析工具的另一種是可用的執行動態分析執行中應用程式，在實際執行或根據需求，進入生產階段前的，並尋找常見的錯誤和反向模式的資料庫存取權。
 
-兩個販售的分析工具是 Entity Framework Profiler ( \< http://efprof.com>) ORMProfiler 和 ( \< http://ormprofiler.com>)。
+兩個販售的分析工具是 Entity Framework Profiler ( \<http://efprof.com>) ORMProfiler 和 ( \<http://ormprofiler.com>)。
 
-如果您的應用程式是使用 Code First 在 MVC 應用程式，您可以使用 StackExchange 的 MiniProfiler。 Scott Hanselman 說明這項工具在他的部落格： \< http://www.hanselman.com/blog/NuGetPackageOfTheWeek9ASPNETMiniProfilerFromStackExchangeRocksYourWorld.aspx>。
+如果您的應用程式是使用 Code First 在 MVC 應用程式，您可以使用 StackExchange 的 MiniProfiler。 Scott Hanselman 說明這項工具在他的部落格： \<http://www.hanselman.com/blog/NuGetPackageOfTheWeek9ASPNETMiniProfilerFromStackExchangeRocksYourWorld.aspx>。
 
 如需有關您的應用程式資料庫活動，Julie Lerman 的 MSDN Magazine 文章標題，請參閱程式碼剖析[Entity Framework 中的分析資料庫活動](https://msdn.microsoft.com/magazine/gg490349.aspx)。
 
@@ -1296,7 +1290,7 @@ Code First 方法是，它的核心，複雜的實體資料模型產生器。 En
   </interceptors>
 ```
 
-如需有關如何不需要重新編譯移至 新增記錄\< http://blog.oneunicorn.com/2014/02/09/ef-6-1-turning-on-logging-without-recompiling/>。
+如需有關如何不需要重新編譯移至 新增記錄\<http://blog.oneunicorn.com/2014/02/09/ef-6-1-turning-on-logging-without-recompiling/>。
 
 ## <a name="11-appendix"></a>11 的附錄
 
