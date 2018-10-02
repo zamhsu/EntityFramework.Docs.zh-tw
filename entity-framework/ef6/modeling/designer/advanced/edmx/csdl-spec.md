@@ -3,12 +3,12 @@ title: CSDL 規格-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: c54255f4-253f-49eb-bec8-ad7927ac2fa3
-ms.openlocfilehash: f5bf0dc75a8195e9af979c9e044f36171f46c9b7
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 438af83b8a1ad51ee8414341181412e950d0e117
+ms.sourcegitcommit: 29f928a6116771fe78f306846e6f2d45cbe8d1f4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490515"
+ms.lasthandoff: 10/01/2018
+ms.locfileid: "47460146"
 ---
 # <a name="csdl-specification"></a>CSDL 規格
 概念結構定義語言 (CSDL) 是 XML架構語言，可描述組成資料驅動應用程式之概念模型的實體、關聯性和函式。 此概念模型可供 Entity Framework 或 WCF Data Services。 以 CSDL 描述的中繼資料由 Entity Framework 用來對應實體和資料來源的概念模型中定義的關聯性。 如需詳細資訊，請參閱 [SSDL 規格](~/ef6/modeling/designer/advanced/edmx/ssdl-spec.md)並[MSL 規格](~/ef6/modeling/designer/advanced/edmx/msl-spec.md)。
@@ -1138,7 +1138,7 @@ A**參數**項目 (為子系**函式**項目) 概念模型中定義之函式的�
    Year(CurrentDateTime()) - Year(cast(Instructor.HireDate as DateTime))
    </DefiningExpression>
  </Function>
-``` 
+```
 
  
 
