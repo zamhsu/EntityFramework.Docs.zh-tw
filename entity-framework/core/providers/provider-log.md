@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: fa1362c84cb1954360d337670fb5fef21e5cf165
-ms.sourcegitcommit: 15022dd06d919c29b1189c82611ea32f9fdc6617
+ms.openlocfilehash: f5a16e13de7f3b892cfb9b7ecb76e4973c175812
+ms.sourcegitcommit: ae399f9f3d1bae2c446b552247bd3af3ca5a2cf9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/27/2018
-ms.locfileid: "47415740"
+ms.lasthandoff: 10/04/2018
+ms.locfileid: "48575622"
 ---
 # <a name="provider-impacting-changes"></a>提供者影響的變更
 
@@ -59,3 +59,4 @@ ms.locfileid: "47415740"
 * https://github.com/aspnet/EntityFrameworkCore/pull/13372 -RevEng： 一定要指定十進位資料行的資料行類型
   * Scaffold 程式碼，而不是設定依照慣例，一律先設定十進位資料行的資料行類型。
   * 提供者應該不需要在其端上的任何變更。
+* https://github.com/aspnet/EntityFrameworkCore/pull/13469 -將 CaseExpression 加入產生案例 SQL 運算式

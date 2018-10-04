@@ -3,12 +3,12 @@ title: 資料繫結與 WPF-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e90d48e6-bea5-47ef-b756-7b89cce4daf0
-ms.openlocfilehash: 5bd4a9b98a12de41e4ec37c2cc7dbdc537210893
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 1933988277d3be8fecc02fced3293f2b7f80c901
+ms.sourcegitcommit: ae399f9f3d1bae2c446b552247bd3af3ca5a2cf9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490222"
+ms.lasthandoff: 10/04/2018
+ms.locfileid: "48575661"
 ---
 # <a name="databinding-with-wpf"></a>使用 WPF 資料繫結
 此逐步解說示範如何在 [主版詳細資料] 表單中的 WPF 控制項繫結至 POCO 型別。 應用程式會使用 Entity Framework Api 填入資料庫的資料物件、 追蹤變更，並將資料保存到資料庫。
@@ -31,7 +31,7 @@ DbContext API 介面時您應該使用**物件**選項建立新的資料來源�
 
 您必須有 Visual Studio 2013，才能完成此逐步解說安裝的 Visual Studio 2012 或 Visual Studio 2010。
 
-如果您使用 Visual Studio 2010，您也必須安裝 NuGet。 如需詳細資訊，請參閱 <<c0> [ 安裝 NuGet](http://docs.nuget.org/docs/start-here/installing-nuget)。  
+如果您使用 Visual Studio 2010，您也必須安裝 NuGet。 如需詳細資訊，請參閱 <<c0> [ 安裝 NuGet](https://docs.microsoft.com/nuget/install-nuget-client-tools)。  
 
 ## <a name="create-the-application"></a>建立應用程式
 
@@ -252,12 +252,12 @@ EF 可讓您選擇載入相關的實體從資料庫自動第一次存取導覽�
 
     ![Data Sources](~/ef6/media/datasources.png)
 
--   選取 * * 類別 * * 資料來源，並將它拖曳到表單上。
+-   選取 **分類**資料來源，並將它拖曳到表單上。
 
 下列狀況時拖曳的項目此來源：
 
--   **CategoryViewSource**資源和 * * categoryDataGrid * * 控制項已加入至 XAML。 如需 DataViewSources 的詳細資訊，請參閱 http://bea.stollnitz.com/blog/?p=387。
--   在父格線項目上的 DataContext 屬性設定為"{StaticResource **categoryViewSource** }"。  **CategoryViewSource**資源做為外部的繫結來源\\父格線項目。 內部的格線項目則會繼承的 DataContext 值從父代 （categoryDataGrid 的 ItemsSource 屬性設定為"{Binding}"） 的方格。 
+-   **CategoryViewSource**資源並**categoryDataGrid**控制項已加入至 XAML 
+-   在父格線項目上的 DataContext 屬性設定為"{StaticResource **categoryViewSource** }"。 **CategoryViewSource**資源做為外部的繫結來源\\父格線項目。 內部的格線項目然後繼承的 DataContext 值從父代 （categoryDataGrid 的 ItemsSource 屬性設定為"{Binding}"） 的方格
 
 ``` xml
     <Window.Resources>
@@ -282,7 +282,7 @@ EF 可讓您選擇載入相關的實體從資料庫自動第一次存取導覽�
 
 既然我們已經讓我們來顯示類別目錄方格加入顯示相關聯的產品詳細資料方格。
 
--   選取 * * 產品 * * 從下的屬性 * * 類別 * * 資料來源，並將它拖曳到表單上。
+-   選取 **產品**屬性從底下**分類**資料來源，並將它拖曳到表單上。
     -   **CategoryProductsViewSource**資源並**productDataGrid**方格會新增至 XAML
     -   此資源的繫結路徑設定為產品
     -   WPF 資料繫結架構可確保與所選分類的產品只有顯示在**productDataGrid**
@@ -305,7 +305,7 @@ EF 可讓您選擇載入相關的實體從資料庫自動第一次存取導覽�
 
 這將帶您前往程式碼後置表單，我們現在要編輯的程式碼，用以 ProductContext 執行資料存取。 更新 MainWindow 的程式碼，如下所示。
 
-程式碼會宣告的長時間執行執行個體**ProductContext**。 **ProductContext**物件用來查詢，並將資料儲存至資料庫。 **處置**上的 （) **ProductContext**執行個體接著呼叫來自覆寫**OnClosing**方法。 程式碼註解提供程式碼所執行的作業的相關詳細資料。
+程式碼會宣告的長時間執行執行個體**ProductContext**。 **ProductContext**物件用來查詢，並將資料儲存至資料庫。 **Dispose （)** 上**ProductContext**執行個體然後，呼叫來自覆寫**OnClosing**方法。 程式碼註解提供程式碼所執行的作業的相關詳細資料。
 
 ``` csharp
     using System.Data.Entity;
@@ -389,6 +389,10 @@ EF 可讓您選擇載入相關的實體從資料庫自動第一次存取導覽�
 
 -   按下**儲存** 按鈕，將資料儲存至資料庫
 
-DbContext 的呼叫後方**SaveChanges**（），這些 Id 會填入資料庫產生值。 因為我們會呼叫**重新整理**（) 之後**SaveChanges**（) **DataGrid**控制項會更新含有新值。
+DbContext 的呼叫後方**savechanges （)**，識別碼會填入資料庫產生值。 因為我們會呼叫**Refresh()** 之後**savechanges （)** **DataGrid**控制項會更新含有新值。
 
 ![具有識別碼填入的主視窗](~/ef6/media/screen2.png)
+
+## <a name="additional-resources"></a>其他資源
+
+若要深入了解集合使用 WPF 資料繫結，請參閱[本主題](https://docs.microsoft.com/dotnet/framework/wpf/data/data-binding-overview#binding-to-collections)WPF 文件中。  
