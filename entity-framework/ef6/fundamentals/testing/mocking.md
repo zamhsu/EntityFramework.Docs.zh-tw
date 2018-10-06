@@ -3,12 +3,12 @@ title: 測試的模擬架構-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
-ms.openlocfilehash: 20799b55b2dffe27637c4fb84df06cee174e6dd9
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: 80fd97073744be40d66c09706d3513dba18e724d
+ms.sourcegitcommit: 7a7da65404c9338e1e3df42576a13be536a6f95f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46284092"
+ms.lasthandoff: 10/06/2018
+ms.locfileid: "48834717"
 ---
 # <a name="testing-with-a-mocking-framework"></a>測試的模擬架構
 > [!NOTE]
@@ -212,7 +212,7 @@ namespace TestingDemo
             mockSet.As<IQueryable<Blog>>().Setup(m => m.Provider).Returns(data.Provider);
             mockSet.As<IQueryable<Blog>>().Setup(m => m.Expression).Returns(data.Expression);
             mockSet.As<IQueryable<Blog>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Blog>>().Setup(m => m.GetEnumerator()).Returns(0 => data.GetEnumerator());
+            mockSet.As<IQueryable<Blog>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
             var mockContext = new Mock<BloggingContext>();
             mockContext.Setup(c => c.Blogs).Returns(mockSet.Object);

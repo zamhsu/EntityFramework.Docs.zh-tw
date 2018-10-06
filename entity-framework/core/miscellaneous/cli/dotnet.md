@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 09/20/2018
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: fad64c692273f58580c4b986e10f481402a222d8
-ms.sourcegitcommit: c568d33214fc25c76e02c8529a29da7a356b37b4
+ms.openlocfilehash: 87b9c73e32eddbf48cd3408de93245d9974efdce
+ms.sourcegitcommit: 7a7da65404c9338e1e3df42576a13be536a6f95f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/30/2018
-ms.locfileid: "47459550"
+ms.lasthandoff: 10/06/2018
+ms.locfileid: "48834782"
 ---
 # <a name="entity-framework-core-tools-reference---net-cli"></a>Entity Framework Core 工具參考.NET CLI
 
@@ -189,7 +189,7 @@ dotnet ef database update 20180904195021_InitialCreate
 
 ## <a name="dotnet-ef-dbcontext-scaffold"></a>dotnet ef dbcontext scaffold
 
-產生的程式碼`DbContext`和資料庫的實體類型。
+產生的程式碼`DbContext`和資料庫的實體類型。 為了讓這個命令來產生實體類型，資料庫資料表必須有主索引鍵。
 
 引數：
 
