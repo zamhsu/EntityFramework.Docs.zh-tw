@@ -3,12 +3,12 @@ title: Entity Framework 詞彙 EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 3f05ffdd-49bc-499c-9732-4a368bf5d2d7
-ms.openlocfilehash: 298913891fb372bf57d7504c5a54f1dc83ea1a80
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 9ed7a2d841c625de35de57edb4e57e69b89a3db9
+ms.sourcegitcommit: 5d74ac575f813110db6d870720f50dd7606446bc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490675"
+ms.lasthandoff: 10/09/2018
+ms.locfileid: "48881263"
 ---
 # <a name="entity-framework-glossary"></a>Entity Framework 詞彙
 ## <a name="code-first"></a>Code First
@@ -60,7 +60,7 @@ API 可用來設定 Code First 模型。
 參考另一個實體的實體屬性。 例如，產品包含的類別目錄 」 瀏覽屬性，而類別包含的產品導覽屬性。
 
 ## <a name="poco"></a>POCO
-純舊 CLR 物件的首字母縮寫。 簡單的使用者具有的類別，沒有與任何架構的相依性。 EF 內容中不是衍生自 EntityObject，實體類別會實作任何介面，或攜帶在 EF 中定義任何屬性。 這種分離持續性架構的實體類別也會稱為 「 「 持續 」。  
+純舊 CLR 物件的首字母縮寫。 簡單的使用者具有的類別，沒有與任何架構的相依性。 在 EF，不是衍生自 EntityObject、 會實作任何介面或攜帶在 EF 中定義任何屬性的實體類別的內容。 這種分離持續性架構的實體類別也會稱為 「 「 持續 」。  
 
 ## <a name="relationship-inverse"></a>關聯性反向
 相反的另一端的關聯性，例如，產品。分類和分類。產品。
