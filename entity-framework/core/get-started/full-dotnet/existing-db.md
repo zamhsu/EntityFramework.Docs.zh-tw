@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 08/06/2018
 ms.assetid: a29a3d97-b2d8-4d33-9475-40ac67b3b2c6
 uid: core/get-started/full-dotnet/existing-db
-ms.openlocfilehash: edcdc0b76394c4d604cf43fc170424e474532b17
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: b9e079f88dd35016407b19bb627f8bd46edb3d4c
+ms.sourcegitcommit: ad1bdea58ed35d0f19791044efe9f72f94189c18
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993414"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47447153"
 ---
 # <a name="getting-started-with-ef-core-on-net-framework-with-an-existing-database"></a>在 .NET Framework 上使用 EF Core 搭配現有資料庫的使用者入門
 
@@ -117,7 +117,8 @@ ms.locfileid: "42993414"
 
   ![影像](_static/output-existing-db.png)
 
-## <a name="additional-resources"></a>其他資源
+## <a name="next-steps"></a>後續步驟
 
-* [.NET Framework 上的 EF Core (附新資料庫)](xref:core/get-started/full-dotnet/new-db)
-* [.NET Framework 上的 EF Core (附新資料庫) - SQLite](xref:core/get-started/netcore/new-db-sqlite) - 跨平台主控台 EF 教學課程。
+如需如何建立內容和實體類別的詳細資訊，請參閱下列文章：
+* [Entity Framework Core 工具參考 - .NET CLI](xref:core/miscellaneous/cli/dotnet#dotnet-ef-dbcontext-scaffold)
+* [Entity Framework Core 工具參考 - 套件管理員主控台](xref:core/miscellaneous/cli/powershell#scaffold-dbcontext)

@@ -1,45 +1,27 @@
 ---
-title: 命令列參考 - EF Core
+title: Entity Framework Core 工具參考 - EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 11/06/2017
-ms.openlocfilehash: d43b01fc61bb1c9b678e12e41c27d7efe9a59fa5
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.date: 09/19/2018
+uid: core/miscellaneous/cli/index
+ms.openlocfilehash: 9fcb452c2798a3d07e39cbcc3c34629dca4394ff
+ms.sourcegitcommit: ad1bdea58ed35d0f19791044efe9f72f94189c18
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490359"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47447114"
 ---
-<a name="entity-framework-core-tools"></a>Entity Framework Core 工具
-===========================
-Entity Framework Core 工具可在 EF Core 應用程式開發期間協助您。 它們主要用來將資料庫結構描述反向工程以支援 DbContext 和實體類型，以及管理「移轉」。
+# <a name="entity-framework-core-tools-reference"></a>Entity Framework Core 工具參考
 
-[EF Core 套件管理員主控台 (PMC) 工具][1]提供 Visual Studio 內的更好經驗。 使用 NuGet 的[套件管理員主控台][2]來執行它們。 這些工具會使用 .NET Framework 和 .NET Core 專案。
+Entity Framework Core 工具有助於設計階段開發工作。 它們主要用來管理「移轉」以及將資料庫結構描述反向工程以支援 `DbContext` 和實體類型。
 
-[EF Core .NET 命令列工具][3]是 [.NET Core 命令列介面 (CLI) 工具][4]的延伸模組，而後者跨平台，而且可以在 Visual Studio 外部執行。 這些工具需要 .NET Core SDK 專案 (專案檔中含 `Sdk="Microsoft.NET.Sdk"` 或類似項目的專案)。
+* [EF Core 套件管理員主控台工具](powershell.md) 是在 Visual Studio 中的[套件管理器主控台](https://docs.microsoft.com/nuget/tools/package-manager-console)執行。 這些工具會使用 .NET Framework 和 .NET Core 專案。
 
-這兩個工具都會公開相同的功能。 如果您要在 Visual Studio 中進行開發，則建議使用 PMC 工具，因為它們提供更加整合的體驗。
+* [EF Core .NET 命令列介面 (CLI) 工具](dotnet.md) 是跨平台 [.NET Core CLI 工具](https://docs.microsoft.com/dotnet/core/tools/)的擴充功能。 這些工具需要 .NET Core SDK 專案 (專案檔中含 `Sdk="Microsoft.NET.Sdk"` 或類似項目的專案)。
 
-<a name="frameworks"></a>架構
-----------
-這些工具還支援目標設為 .NET Framework 或 .NET Core 的專案。
+這兩個工具都會公開相同的功能。 如果您要在 Visual Studio 中進行開發，則建議使用**套件管理員主控台**工具，因為它們提供更加整合的體驗。
 
-若您想要使用類別程式庫，請在可行的情況下使用 .NET Core 或 .NET Framework 類別程式庫。 這會使 .NET 工具產生較少問題。 而如果您想要使用 .NET Standard 類別程式庫，則需要以 .NET Framework 或 .Net Core 為目標的啟動專案，使工具擁有具體的目標平台來上傳您的類別程式庫。 您可使用實際沒有程式碼的虛設專案作為啟動專案，此專案的目的僅是為工具提供目標。
+## <a name="next-steps"></a>後續步驟
 
-若您的專案將另一個架構設為目標 (例如通用 Windows 或 Xamarin)，則必須建立個別的 .NET Standard 類別程式庫。 在此情況下，請遵循上述指導，並建立可供工具使用的啟動專案。
-
-<a name="startup-and-target-projects"></a>啟始和目標專案
----------------------------
-只要您叫用命令，就會包含兩個專案：目標專案和啟始專案。
-
-目標專案就是新增 (在某些情況下會移除) 任何檔案的位置。
-
-啟始專案是工具在執行您的專案程式碼時所模擬的專案。
-
-目標專案和啟始專案可以相同。
-
-
-  [1]: powershell.md
-  [2]: https://docs.microsoft.com/nuget/tools/package-manager-console
-  [3]: dotnet.md
-  [4]: https://docs.microsoft.com/dotnet/core/tools/
+* [EF Core 套件管理員主控台工具參考](powershell.md)
+* [EF Core .NET CLI 工具參考](dotnet.md)

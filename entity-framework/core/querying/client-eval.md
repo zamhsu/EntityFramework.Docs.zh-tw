@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 8b6697cc-7067-4dc2-8007-85d80503d123
 uid: core/querying/client-eval
-ms.openlocfilehash: 78f8d9576748a725634665f915def80b5a13820c
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 47e22be274d02b5221c638d07151d9607aa7e24f
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997873"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250799"
 ---
 # <a name="client-vs-server-evaluation"></a>用戶端與伺服器評估
 
@@ -49,7 +49,7 @@ public static string StandardizeUrl(string url)
 }
 ```
 
-## <a name="disabling-client-evaluation"></a>停用用戶端評估
+## <a name="client-evaluation-performance-issues"></a>用戶端評估效能問題
 
 雖然用戶端評估非常實用，但在某些情況下，可能會導致效能不佳。 請考慮下列查詢，此查詢目前會在篩選條件中使用 Helper 方法。 因為這不能在資料庫中執行，所以會將所有資料提取到記憶體，然後在用戶端套用篩選條件。 根據資料量以及要篩選出多少資料而定，這可能會導致效能不佳。
 
@@ -60,7 +60,13 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-根據預設，執行用戶端評估時，EF Core 將會記錄警告。 如需檢視記錄輸出的詳細資訊，請參閱[記錄](../miscellaneous/logging.md)。 您可以變更在用戶端評估發生而擲回或不執行任何動作時的行為。 這通常會在 `DbContext.OnConfiguring` 中為您的內容設定選項時完成，或者，如果您使用 ASP.NET Core，則是在 `Startup.cs` 中完成。
+## <a name="client-evaluation-logging"></a>用戶端評估記錄
+
+根據預設，執行用戶端評估時，EF Core 將會記錄警告。 如需檢視記錄輸出的詳細資訊，請參閱[記錄](../miscellaneous/logging.md)。 
+
+## <a name="optional-behavior-throw-an-exception-for-client-evaluation"></a>選擇性行為：針對用戶端評估擲回例外狀況
+
+您可以變更在用戶端評估發生而擲回或不執行任何動作時的行為。 這通常會在 `DbContext.OnConfiguring` 中為您的內容設定選項時完成，或者，如果您使用 ASP.NET Core，則是在 `Startup.cs` 中完成。
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/ClientEval/ThrowOnClientEval/BloggingContext.cs?highlight=5)] -->
 ``` csharp
