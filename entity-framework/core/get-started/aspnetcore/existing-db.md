@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 08/02/2018
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: 79a73e38fdc9c4268c21de66571d6272f33e9457
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 84e2e4bc1bdc774fa059fa893e0f8ac128931feb
+ms.sourcegitcommit: ad1bdea58ed35d0f19791044efe9f72f94189c18
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997032"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47447179"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>在 ASP.NET Core 上使用 EF Core 搭配現有資料庫的使用者入門
 
@@ -171,6 +171,12 @@ public partial class BloggingContext : DbContext
 * 按一下 [新建]
 * 輸入新部落格的 **URL**，然後按一下 [建立]
 
-![影像](_static/create.png)
+  ![建立頁面](_static/create.png)
 
-![影像](_static/index-existing-db.png)
+  ![索引頁面](_static/index-existing-db.png)
+
+## <a name="next-steps"></a>後續步驟
+
+如需如何建立內容和實體類別的詳細資訊，請參閱下列文章：
+* [Entity Framework Core 工具參考 - .NET CLI](xref:core/miscellaneous/cli/dotnet#dotnet-ef-dbcontext-scaffold)
+* [Entity Framework Core 工具參考 - 套件管理員主控台](xref:core/miscellaneous/cli/powershell#scaffold-dbcontext)
