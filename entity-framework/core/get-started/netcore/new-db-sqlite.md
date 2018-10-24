@@ -6,12 +6,12 @@ description: 使用 .NET Core 搭配 Entity Framework Core 的使用者入門
 ms.date: 08/03/2018
 ms.assetid: 099d179e-dd7b-4755-8f3c-fcde914bf50b
 uid: core/get-started/netcore/new-db-sqlite
-ms.openlocfilehash: 51f5752eebce5603c663072f7b36dfecd4ddf227
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: ec20040917a2bca8177924b6905b1cd79e5cd9da
+ms.sourcegitcommit: 7a7da65404c9338e1e3df42576a13be536a6f95f
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993688"
+ms.lasthandoff: 10/06/2018
+ms.locfileid: "48834730"
 ---
 # <a name="getting-started-with-ef-core-on-net-core-console-app-with-a-new-database"></a>在 .NET Core 主控台應用程式上使用 EF Core 搭配新資料庫的使用者入門
 
@@ -29,12 +29,19 @@ ms.locfileid: "42993688"
 
   ``` Console
   dotnet new console -o ConsoleApp.SQLite
+  ```
+## <a name="change-the-current-directory"></a>變更目前的目錄
+
+在後續步驟中，我們需要對應用程式發出 `dotnet` 命令。
+
+* 我們會將目前的目錄變更為應用程式目錄，如下所示：
+
+  ``` Console
   cd ConsoleApp.SQLite/
   ```
-
 ## <a name="install-entity-framework-core"></a>安裝 Entity Framework Core
 
-若要使用 EF Core，請針對您要作為目標的資料庫提供者來安裝套件。 此逐步解說使用 SQLite。 如需可用的提供者清單，請參閱[資料庫提供者](../../providers/index.md)。
+若要使用 EF Core，請針對您要作為目標的資料庫提供者來安裝套件。 本逐步解說使用 SQLite。 如需可用的提供者清單，請參閱[資料庫提供者](../../providers/index.md)。
 
 * 安裝 Microsoft.EntityFrameworkCore.Sqlite 和 Microsoft.EntityFrameworkCore.Design
 
@@ -57,7 +64,7 @@ ms.locfileid: "42993688"
 
 ## <a name="create-the-database"></a>建立資料庫
 
-一旦有模型後，您就可以使用[移轉](https://docs.microsoft.com/aspnet/core/data/ef-mvc/migrations#introduction-to-migrations)來建立資料庫。
+一旦有模型後，您就可以使用[移轉](xref:core/managing-schemas/migrations/index)來建立資料庫。
 
 * 執行 `dotnet ef migrations add InitialCreate` 以建立移轉的結構，並針對模型建立一組初始的資料表。
 * 執行 `dotnet ef database update` 以將新的移轉套用至資料庫。 此命令會建立資料庫，然後才套用移轉。
@@ -70,7 +77,7 @@ ms.locfileid: "42993688"
 
   [!code-csharp[Main](../../../../samples/core/GetStarted/NetCore/ConsoleApp.SQLite/Program.cs)]
 
-* 測試應用程式：
+* 從主控台測試應用程式。 請參閱 [Visual Studio 注意事項](#vs) 以透過 Visual Studio 執行應用程式。
 
   `dotnet run`
 
@@ -86,12 +93,24 @@ ms.locfileid: "42993688"
 
 ### <a name="changing-the-model"></a>變更模型：
 
-- 若要變更模型，您可以使用 `dotnet ef migrations add` 命令來建立新的[移轉](https://docs.microsoft.com/aspnet/core/data/ef-mvc/migrations#introduction-to-migrations)支架。 一旦檢查支架程式碼 (並進行任何必要的變更)，您就可以使用 `dotnet ef database update` 命令將結構描述變更套用到資料庫。
+- 若要變更模型，您可以使用 `dotnet ef migrations add` 命令來建立新的[移轉](xref:core/managing-schemas/migrations/index)支架。 一旦檢查支架程式碼 (並進行任何必要的變更)，您就可以使用 `dotnet ef database update` 命令將結構描述變更套用到資料庫。
 - EF Core 在資料庫中使用 `__EFMigrationsHistory` 資料表，以追蹤已套用到資料庫的移轉。
 - SQLite 資料庫引擎不支援大部分其他關聯式資料庫所支援的特定結構描述變更。 例如，不支援 `DropColumn` 作業。 EF Core 移轉將會產生這些作業的程式碼。 但若您嘗試將它們套用到資料庫或產生指令碼，EF Core 會擲回例外狀況。 請參閱 [SQLite 限制](../../providers/sqlite/limitations.md)。 針對新的開發，當模型變更時，請考慮捨棄資料庫並建立一個新的資料庫，而不是使用移轉。
 
+<a name="vs"></a>
+### <a name="run-from-visual-studio"></a>透過 Visual Studio 來執行
+
+若要透過 Visual Studio 執行此範例，您必須將工作目錄手動設定為專案的根目錄。 如果您未設定工作目錄，就會擲回下列 `Microsoft.Data.Sqlite.SqliteException`：`SQLite Error 1: 'no such table: Blogs'`。
+
+若要設定工作目錄：
+
+* 在 [方案總管] 中，以滑鼠右鍵按一下專案，然後選取 [屬性]。
+* 選取左窗格中的 [偵錯] 索引標籤。
+* 將**工作目錄**設定為專案目錄。
+* 儲存變更。
+
 ## <a name="additional-resources"></a>其他資源
 
-* [Mac 或 Linux 上的 ASP.NET Core MVC 簡介](https://docs.microsoft.com/aspnet/core/tutorials/first-mvc-app-xplat/index)
-* [使用 Visual Studio 的 ASP.NET Core MVC 簡介](https://docs.microsoft.com/aspnet/core/tutorials/first-mvc-app/index)
-* [使用 Visual Studio 的 ASP.NET Core 與 Entity Framework Core 的使用者入門](https://docs.microsoft.com/aspnet/core/data/ef-mvc/index)
+* [教學課程：開始使用 ASP.NET Core 上的 EF Core 與使用 SQLite 的新資料庫](xref:core/get-started/aspnetcore/new-db)
+* [教學課程：開始使用 ASP.NET Core 中的 Razor Pages](https://docs.microsoft.com/aspnet/core/tutorials/razor-pages/razor-pages-start)
+* [教學課程：ASP.NET Core 中的 Razor Pages 與 Entity Framework Core](https://docs.microsoft.com/aspnet/core/data/ef-rp/intro)

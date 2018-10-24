@@ -4,12 +4,12 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 8ae74d63-6bad-4686-b325-bbf9d68f3743
 uid: ef6/index
-ms.openlocfilehash: 35292d2a724d02ecdc96b53550858eb0b6dd79d1
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 1efadf4484a13d5df2a2f11aad3d0e8f9ceff543
+ms.sourcegitcommit: 8b42045cd21f80f425a92f5e4e9dd4972a31720b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489228"
+ms.lasthandoff: 10/14/2018
+ms.locfileid: "49315629"
 ---
 # <a name="entity-framework-6"></a>Entity Framework 6
 Entity Framework 6 (EF6) 是通過試驗及測試的 .NET 物件關聯式對應程式 (O/RM)，歷經多年的功能開發和穩固。
@@ -37,7 +37,7 @@ EF6 會實作許多常用的 O/RM 功能：
 
 EF Core 是 Entity Framework　的新式輕量型可延伸版本，具有非常類似於 EF6 的功能和優點。
 EF Core 是完全重新撰寫的版本，包含許多 EF6 並未提供的新功能，但它仍然缺少一些 EF6 最先進的對應功能。
-建議您只要功能集符合您的需求，就在新的應用程式中使用 EF Core。
+如果功能集符合您的需求，請考慮在新的應用程式中使用 EF Core。
 [比較 EF Core 與 EF6](xref:efcore-and-ef6/index)可更詳細地檢查這項選擇。
 
 ## <a name="get-startedef6get-startedmd"></a>[開始使用](~/ef6/get-started.md)
