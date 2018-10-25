@@ -5,12 +5,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a6b9cd22-6803-4c6c-a4d4-21147c0a81cb
 uid: efcore-and-ef6/index
-ms.openlocfilehash: 8568f0a3c6c4585c4fe05508fd610614107c8f66
-ms.sourcegitcommit: 8b42045cd21f80f425a92f5e4e9dd4972a31720b
+ms.openlocfilehash: 0f9f0d4708fa283855eddf2cfc231b37356e413e
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2018
-ms.locfileid: "49315642"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022346"
 ---
 # <a name="compare-ef-core--ef6"></a>比較 EF Core 與 EF6
 
@@ -73,7 +73,7 @@ EF Core 行表示功能首次出現所在的產品版本。
 
 ### <a name="querying-data"></a>查詢資料
 
-| **功能                                             | **EF6**  | **EF Core**                           |
+| **功能**                                           | **EF6**  | **EF Core**                           |
 |:------------------------------------------------------|:---------|:--------------------------------------|
 | LINQ 查詢                                          | [是]      | 1.0 (針對複雜查詢仍在進行中) |
 | 可讀取產生的 SQL                                | 差     | 1.0                                   |
@@ -147,7 +147,7 @@ EF Core 行表示功能首次出現所在的產品版本。
 ## <a name="guidance-for-new-applications"></a>新應用程式的指引
 
 如果下列兩個條件成立，請考慮為新應用程式使用 EF Core：
-* 該應用程式需要 .NET Core 的功能。 如需詳細資訊，請參閱[在 .NET Core 和 .NET Framework 之間為伺服器應用程式進行選擇](https://docs.microsoft.com/en-us/dotnet/standard/choosing-core-framework-server)。
+* 該應用程式需要 .NET Core 的功能。 如需詳細資訊，請參閱[在 .NET Core 和 .NET Framework 之間為伺服器應用程式進行選擇](https://docs.microsoft.com/dotnet/standard/choosing-core-framework-server)。
 * EF Core 支援應用程式所需的所有功能。 若缺少所需功能，請查看 [EF Core 藍圖](xref:core/what-is-new/roadmap) 了解將來是否有計劃可支援該功能。 
 
 如果下列兩個條件成立，請考慮使用 EF6：

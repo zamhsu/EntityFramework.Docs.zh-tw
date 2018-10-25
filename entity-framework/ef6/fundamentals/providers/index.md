@@ -3,12 +3,12 @@ title: Entity Framework 提供者 - EF6
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 7BFB7763-CD6C-4520-93A2-7B265F5FA586
-ms.openlocfilehash: c9afb32caeeef5111b32251c62019460b62f48b3
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 0cfe6c30d6533b0207f78a031d342847a7f68632
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489436"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022219"
 ---
 # <a name="entity-framework-6-providers"></a>Entity Framework 6 提供者
 > [!NOTE]
@@ -68,7 +68,7 @@ app.config 或 web.config 中的 EF 提供者註冊具有下列格式：
 
 ### <a name="code-based-registration"></a>程式碼架構註冊
 
-從 Entity Framework 6 開始，可以在程式碼中指定 EF 的整個應用程式組態。 如需完整的詳細料，請參閱 _[Entity Framework 程式碼架構組態](https://msdn.microsoft.com/en-us/data/jj680699)_。 使用程式碼架構組態註冊 EF 提供者的一般方式是建立衍生自 System.Data.Entity.DbConfiguration 的新類別，並將它放在與您的 DbContext 類別相同的組件中。 DbConfiguratio 類別接著應該在其建構函式中註冊提供者。 例如，若要註冊 SQL Compact 提供者，DbConfiguration 類別看起來像這樣：
+從 Entity Framework 6 開始，可以在程式碼中指定 EF 的整個應用程式組態。 如需完整的詳細料，請參閱 _[Entity Framework 程式碼架構組態](https://msdn.microsoft.com/data/jj680699)_。 使用程式碼架構組態註冊 EF 提供者的一般方式是建立衍生自 System.Data.Entity.DbConfiguration 的新類別，並將它放在與您的 DbContext 類別相同的組件中。 DbConfiguratio 類別接著應該在其建構函式中註冊提供者。 例如，若要註冊 SQL Compact 提供者，DbConfiguration 類別看起來像這樣：
 
 ``` csharp
     public class MyConfiguration : DbConfiguration

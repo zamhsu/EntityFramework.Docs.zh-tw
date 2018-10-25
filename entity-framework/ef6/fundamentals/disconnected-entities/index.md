@@ -3,21 +3,21 @@ title: 使用已中斷連線的實體 - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 12138003-a373-4817-b1b7-724130202f5f
-ms.openlocfilehash: beb3847ce507a2112ac0d396a2023c7c4e2fca7d
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 11ca2a9a4161e02d32d98bf03dd4cf28545334b7
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489930"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022167"
 ---
 # <a name="working-with-disconnected-entities"></a>使用已中斷連線的實體
 在 Entity Framework 架構應用程式中，內容類別負責偵測套用至追蹤實體的變更。 呼叫 SaveChanges 方法會將內容所追蹤的變更保存到資料庫。 使用多層式架構 (N-Tier) 應用程式時，實體物件通常會在中斷與內容的連線時進行修改；因此您必須決定如何追蹤變更，以及如何將這些變更回報至內容。 本主題討論搭配使用 Entity Framework 與已中斷連線的實體時可用的不同選項。   
 
 ## <a name="web-service-frameworks"></a>Web 服務架構
 
-Web 服務技術通常支援一些模式，而這些模式可用來保存已中斷連線之個別物件的變更。 例如，ASP.NET Web API 可讓您選寫控制器動作的程式碼，其中包含 EF 的呼叫，用來保存對資料庫上的物件所做的變更。 事實上，Visual Studio 中的 Web API 工具可讓您輕鬆地從 Entity Framework 6 模型中 Scaffold Web API 控制器。 如需詳細資訊，請參閱[搭配使用 Web API 與 Entity Framework 6](https://docs.microsoft.com/en-us/aspnet/web-api/overview/data/using-web-api-with-entity-framework/)。   
+Web 服務技術通常支援一些模式，而這些模式可用來保存已中斷連線之個別物件的變更。 例如，ASP.NET Web API 可讓您選寫控制器動作的程式碼，其中包含 EF 的呼叫，用來保存對資料庫上的物件所做的變更。 事實上，Visual Studio 中的 Web API 工具可讓您輕鬆地從 Entity Framework 6 模型中 Scaffold Web API 控制器。 如需詳細資訊，請參閱[搭配使用 Web API 與 Entity Framework 6](https://docs.microsoft.com/aspnet/web-api/overview/data/using-web-api-with-entity-framework/)。   
 
-在過去，已有數項其他的 Web 服務技術提供與 Entity Framework 的整合，例如 [WCF Data Services](https://docs.microsoft.com/dotnet/framework/data/wcf/create-a-data-service-using-an-adonet-ef-data-wcf) 和 [RIA Services](https://docs.microsoft.com/en-us/previous-versions/dotnet/wcf-ria/ee707344(v=vs.91))。
+在過去，已有數項其他的 Web 服務技術提供與 Entity Framework 的整合，例如 [WCF Data Services](https://docs.microsoft.com/dotnet/framework/data/wcf/create-a-data-service-using-an-adonet-ef-data-wcf) 和 [RIA Services](https://docs.microsoft.com/previous-versions/dotnet/wcf-ria/ee707344(v=vs.91))。
 
 ## <a name="low-level-ef-apis"></a>低層級 EF API
 
