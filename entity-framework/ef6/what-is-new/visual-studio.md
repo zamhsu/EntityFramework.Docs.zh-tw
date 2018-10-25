@@ -3,12 +3,12 @@ title: Visual Studio 版本-EF6
 author: divega
 ms.date: 07/05/2018
 ms.assetid: 028FF890-4EDB-4F03-AE53-72F9C33EC92F
-ms.openlocfilehash: d104236ac5c8877da421ba10de9827f17937a9ec
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 16bcdc6d0e7c5632d4f4c06ba285a7a666f24204
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489917"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022245"
 ---
 # <a name="visual-studio-releases"></a>Visual Studio 版本
 
@@ -41,7 +41,7 @@ ms.locfileid: "45489917"
 
 ## <a name="visual-studio-2013"></a>Visual Studio 2013
 - 此版本的 Visual Studio 包含和舊版本的 Entity Framework 工具和執行階段。
-建議您升級至 Entity Framework Tools 6.1.3，使用[安裝程式](https://www.microsoft.com/en-us/download/details.aspx?id=40762)提供 Microsoft 下載中心取得。
+建議您升級至 Entity Framework Tools 6.1.3，使用[安裝程式](https://www.microsoft.com/download/details.aspx?id=40762)提供 Microsoft 下載中心取得。
 請參閱[過去釋放](~/ef6/what-is-new/past-releases.md#ef-613)如需詳細資訊，這些版本上。
 - 加入新的專案使用的已升級的 EF 工具中的 Entity Framework 會自動將新增 EF 6.1.3 NuGet 套件。
 您可以手動安裝，或線上升級至任何可用的 EF NuGet 套件。
@@ -52,7 +52,7 @@ ms.locfileid: "45489917"
 ## <a name="visual-studio-2012"></a>Visual Studio 2012
 
 - 此版本的 Visual Studio 包含和舊版本的 Entity Framework 工具和執行階段。
-建議您升級至 Entity Framework Tools 6.1.3，使用[安裝程式](https://www.microsoft.com/en-us/download/details.aspx?id=40762)提供 Microsoft 下載中心取得。
+建議您升級至 Entity Framework Tools 6.1.3，使用[安裝程式](https://www.microsoft.com/download/details.aspx?id=40762)提供 Microsoft 下載中心取得。
 請參閱[過去釋放](~/ef6/what-is-new/past-releases.md#ef-613)如需詳細資訊，這些版本上。
 - 加入新的專案使用的已升級的 EF 工具中的 Entity Framework 會自動將新增 EF 6.1.3 NuGet 套件。
 您可以手動安裝，或線上升級至任何可用的 EF NuGet 套件。

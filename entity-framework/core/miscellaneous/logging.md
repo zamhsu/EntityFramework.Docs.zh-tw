@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f6e35c6d-45b7-4258-be1d-87c1bb67438d
 uid: core/miscellaneous/logging
-ms.openlocfilehash: efc78fbada3c59bf9cf2c4cb694835bb5ad60e76
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 65501b5ac03ae544c51b7fc1a07fa9eea849f1e3
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997001"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022141"
 ---
 # <a name="logging"></a>記錄
 
@@ -18,7 +18,7 @@ ms.locfileid: "42997001"
 
 ## <a name="aspnet-core-applications"></a>ASP.NET Core 應用程式
 
-EF Core 自動記錄與機制整合的 ASP.NET Core 每當`AddDbContext`或`AddDbContextPool`用。 因此，當使用 ASP.NET Core 時，應該設定記錄中所述[ASP.NET Core 文件](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging?tabs=aspnetcore2x)。
+EF Core 自動記錄與機制整合的 ASP.NET Core 每當`AddDbContext`或`AddDbContextPool`用。 因此，當使用 ASP.NET Core 時，應該設定記錄中所述[ASP.NET Core 文件](https://docs.microsoft.com/aspnet/core/fundamentals/logging?tabs=aspnetcore2x)。
 
 ## <a name="other-applications"></a>其他應用程式
 
@@ -54,4 +54,4 @@ EF Core 自動記錄與機制整合的 ASP.NET Core 每當`AddDbContext`或`AddD
 
 記錄器類別目錄中的定義 EF Core`DbLoggerCategory`類別，以讓您輕鬆尋找類別目錄，但這些解析成簡單字串。
 
-位於基礎的記錄基礎結構的詳細[ASP.NET Core 記錄文件](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging?tabs=aspnetcore2x)。
+位於基礎的記錄基礎結構的詳細[ASP.NET Core 記錄文件](https://docs.microsoft.com/aspnet/core/fundamentals/logging?tabs=aspnetcore2x)。

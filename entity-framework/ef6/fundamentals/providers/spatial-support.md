@@ -3,12 +3,12 @@ title: 空間類型-EF6 的提供者支援
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 1097cb00-15f5-453d-90ed-bff9403d23e3
-ms.openlocfilehash: ffd22222f59a541d8135d3738d37a7e8f5dc5d7c
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 9c00e82c663daec219fe649a8d889afcc81564f7
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489748"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022271"
 ---
 # <a name="provider-support-for-spatial-types"></a>空間類型的提供者支援
 Entity Framework 支援透過 DbGeography 或 DbGeometry 類別的空間資料使用。 這些類別會依賴資料庫特有的 Entity Framework 提供者所提供的功能。 並非所有提供者支援空間資料及執行可能會有額外的先決條件，例如空間類型組件的安裝。 以下提供有關提供者支援空間類型的詳細資訊。  
@@ -56,4 +56,4 @@ SQL Server 空間的支援取決於低層級，SQL Server 特定型別 SqlGeogra
 
 安裝 Visual Studio 時通常也會安裝 SQL Server 的版本，且這會包含將 microsoft.sqlserver.types.dll 安裝。  
 
-如果您要使用空間的類型，在電腦上未安裝 SQL Server，或從 SQL Server 安裝中排除空間型別，則您必須手動進行安裝。 類型可以使用安裝`SQLSysClrTypes.msi`，這是 Microsoft SQL Server Feature Pack 的一部分。 空間類型是 SQL Server 特定版本，因此我們建議[搜尋 「 SQL Server 功能套件 」](https://www.microsoft.com/en-us/search/result.aspx?q=sql+server+feature+pack)在 Microsoft 下載中心取得，然後選取，然後下載對應的選項，您將使用的 SQL Server 的版本。
+如果您要使用空間的類型，在電腦上未安裝 SQL Server，或從 SQL Server 安裝中排除空間型別，則您必須手動進行安裝。 類型可以使用安裝`SQLSysClrTypes.msi`，這是 Microsoft SQL Server Feature Pack 的一部分。 空間類型是 SQL Server 特定版本，因此我們建議[搜尋 「 SQL Server 功能套件 」](https://www.microsoft.com/search/result.aspx?q=sql+server+feature+pack)在 Microsoft 下載中心取得，然後選取，然後下載對應的選項，您將使用的 SQL Server 的版本。

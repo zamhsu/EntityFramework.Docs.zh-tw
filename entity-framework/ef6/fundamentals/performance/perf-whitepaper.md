@@ -3,12 +3,12 @@ title: EF4、 EF5，與 EF6 的效能考量
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d6d5a465-6434-45fa-855d-5eb48c61a2ea
-ms.openlocfilehash: fb184fe8720b552a2050607bb17648f0413c31d1
-ms.sourcegitcommit: c568d33214fc25c76e02c8529a29da7a356b37b4
+ms.openlocfilehash: c87c1412cb23abf232663d7e4f44eef5f7818ea2
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/30/2018
-ms.locfileid: "47459587"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022385"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>EF 4、 5 和 6 的效能考量
 David Obando、 Eric Dettinger 和其他項目
@@ -33,7 +33,7 @@ Entity Framework 6 不足的頻外版本且不需依賴.NET 所隨附的 Entity 
 
 ## <a name="2-cold-vs-warm-query-execution"></a>2.冷 vs。暖的查詢執行
 
-第一次的任何查詢對給定的模型，Entity Framework 會大量載入和驗證模型，在幕後的工作。 我們經常參考此第一個查詢做為 「 冷 」 的查詢。  針對已經載入模型進行進一步查詢稱為 「 暖 」 查詢，並更快。
+第一次的任何查詢對給定的模型，Entity Framework 會大量載入和驗證模型，在幕後的工作。 我們經常參考此第一個查詢做為 「 冷 」 的查詢。  針對已經載入模型進行進一步查詢稱為 「 暖 」 查詢，並更快。
 
 讓我們花時間的執行查詢，使用 Entity Framework 時的高階檢視，並查看其中 Entity Framework 6 改善項目。
 
@@ -145,7 +145,7 @@ ADO.NET 小組部落格有某篇文章說明如何使用 T4 範本產生檢視�
 
 當您的模型直接包含在您的應用程式專案，並產生透過建置前事件或 T4 範本檢視時，檢視產生和驗證就會進行時就會重建專案，即使模型沒有變更。 如果您將模型移至不同的組件，並從您的應用程式專案參考它，您可以您的應用程式進行其他變更，而無須重新建置專案包含模型項目。
 
-*注意：* 時移動您的模型，來分隔組件，請記得將此模型的連接字串複製到用戶端專案的應用程式組態檔。
+*注意︰*  時移動您的模型，來分隔組件，請記得將此模型的連接字串複製到用戶端專案的應用程式組態檔。
 
 #### <a name="243-disable-validation-of-an-edmx-based-model"></a>2.4.3 停用的 edmx 式模型的驗證
 
@@ -180,10 +180,10 @@ Entity Framework 有快取的內建以下列形式：
 停用偵測變更的尋找範例：
 
 ``` csharp
-    context.Configuration.AutoDetectChangesEnabled = false;
-    var product = context.Products.Find(productId);
-    context.Configuration.AutoDetectChangesEnabled = true;
-    ...
+    context.Configuration.AutoDetectChangesEnabled = false;
+    var product = context.Products.Find(productId);
+    context.Configuration.AutoDetectChangesEnabled = true;
+    ...
 ```
 
 您必須使用 Find 方法時，請考慮為：
@@ -201,7 +201,7 @@ Entity Framework 有快取的內建以下列形式：
 
 ### <a name="32-query-plan-caching"></a>3.2，查詢計畫快取
 
-第一次執行查詢時，會經過內部的計劃編譯器概念的查詢轉譯為存放區命令 (例如，T-SQL 時對 SQL Server 執行所執行)。  如果已啟用查詢計畫快取下, 一次查詢執行存放區命令會擷取直接從執行，並計劃編譯器略過的查詢計畫快取。
+第一次執行查詢時，會經過內部的計劃編譯器概念的查詢轉譯為存放區命令 (例如，T-SQL 時對 SQL Server 執行所執行)。  如果已啟用查詢計畫快取下, 一次查詢執行存放區命令會擷取直接從執行，並計劃編譯器略過的查詢計畫快取。
 
 查詢計畫快取會共用相同的 AppDomain 內的 ObjectContext 執行個體。 您不需要保留的 ObjectContext 執行個體，才會受益於查詢計畫快取。
 
@@ -211,22 +211,22 @@ Entity Framework 有快取的內建以下列形式：
 -   根據預設，查詢計劃啟用快取 Entity SQL 查詢，是否執行了 EntityCommand 來透過或 ObjectQuery。 它也會啟用預設 linq to Entities 查詢中在.NET 4.5 中，Entity Framework 和 Entity Framework 6
     -   查詢計畫快取可停用 （在 EntityCommand 或 ObjectQuery） EnablePlanCaching 屬性設定為 false。 例如: 
 ``` csharp
-                    var query = from customer in context.Customer
-                                where customer.CustomerId == id
-                                select new
-                                {
-                                    customer.CustomerId,
-                                    customer.Name
-                                };
-                    ObjectQuery oQuery = query as ObjectQuery;
-                    oQuery.EnablePlanCaching = false;
+                    var query = from customer in context.Customer
+                                where customer.CustomerId == id
+                                select new
+                                {
+                                    customer.CustomerId,
+                                    customer.Name
+                                };
+                    ObjectQuery oQuery = query as ObjectQuery;
+                    oQuery.EnablePlanCaching = false;
 ```
 -   參數化查詢，只要變更參數的值會仍然達到快取的查詢。 不過，變更參數的 facet （比方說，大小、 有效位數或小數位數） 會叫用快取中的不同項目。
 -   使用 Entity SQL，查詢字串時的索引鍵的一部分。 所有變更查詢會導致不同的快取的項目，即使查詢的功能相同。 這包括變更大小寫或空白字元。
 -   使用 LINQ 時，會處理查詢時產生索引鍵的一部分。 LINQ 運算式變更將會因此產生不同的金鑰。
 -   其他技術可能會限制;如需詳細資訊，請參閱 Autocompiled 查詢。
 
-#### <a name="322------cache-eviction-algorithm"></a>3.2.2 快取收回演算法
+#### <a name="322-cache-eviction-algorithm"></a>3.2.2 快取收回演算法
 
 了解內部演算法運作方式如何協助您找出何時要啟用或停用查詢計畫快取。 清除演算法如下所示：
 
@@ -238,11 +238,11 @@ Entity Framework 有快取的內建以下列形式：
 
 請注意，快取收回計時器已開始時快取中，有 800 的實體，但快取只會清理此計時器就會啟動後的 60 秒。 這表示最多 60 秒拓展您的快取可能會相當龐大。
 
-#### <a name="323-------test-metrics-demonstrating-query-plan-caching-performance"></a>3.2.3 測試示範查詢計劃快取效能度量
+#### <a name="323-test-metrics-demonstrating-query-plan-caching-performance"></a>3.2.3 測試示範查詢計劃快取效能度量
 
 為了示範應用程式的效能上的快取的查詢計劃的效果，我們執行測試我們用來執行對 Navision 模型的 Entity SQL 查詢的數目。 請參閱附錄 Navision 模型所執行的查詢類型的描述。 在此測試中，我們會先逐一查看查詢的清單並將它們新增至快取 （如果已啟用快取） 一次執行每一個。 這個步驟是 untimed。 接下來，我們進入睡眠狀態以允許快取掃掠，以進行應用程式; 超過 60 秒的主執行緒最後，我們逐一查看清單的第 2 個開始執行快取的查詢。 此外，他的 SQL Server 計畫快取中排清之前執行查詢的每個集時，讓我們取得準確的時間會反映指定的查詢計劃快取的優點。
 
-##### <a name="3231-------test-results"></a>3.2.3.1 測試結果
+##### <a name="3231-test-results"></a>3.2.3.1 測試結果
 
 | 測試                                                                   | EF5 無快取 | EF5 快取 | EF6 沒有快取 | 快取的 EF6 |
 |:-----------------------------------------------------------------------|:-------------|:-----------|:-------------|:-----------|
@@ -266,7 +266,7 @@ AggregatingSubtotals 查詢是最複雜的測試使用的查詢。 如預期般�
 
 有兩個您必須進行時使用 CompiledQuery 時，也就是需要使用靜態的執行個體和問題具備複合性的考量。 以下遵循深入的說明，這些兩個考量。
 
-#### <a name="331-------use-static-compiledquery-instances"></a>3.3.1 使用靜態 CompiledQuery 執行個體
+#### <a name="331-use-static-compiledquery-instances"></a>3.3.1 使用靜態 CompiledQuery 執行個體
 
 編譯的 LINQ 查詢作業非常耗時，因為我們不想這麼做，每次我們要從資料庫擷取資料。 CompiledQuery 執行個體可讓您一次編譯及執行多次，但您必須小心，並重複使用相同的 CompiledQuery 執行個體而不是不斷地編譯它每次採購。 使用儲存 CompiledQuery 執行個體的靜態成員會變成必要的;否則，您不會看到任何好處。
 
@@ -292,7 +292,7 @@ AggregatingSubtotals 查詢是最複雜的測試使用的查詢。 如預期般�
 
 在此情況下，您將建立新的 CompiledQuery 執行個體即時，每次呼叫的方法。 而不是所擷取的查詢計劃快取存放區命令看到效能優勢，CompiledQuery 會瀏覽計劃編譯器，每次建立新的執行個體。 事實上，您將會到處查詢計劃快取與新的 CompiledQuery 項目每次呼叫的方法。
 
-相反地，您會想要建立靜態的執行個體的已編譯的查詢，以便每次呼叫方法時，會叫用相同的已編譯的查詢。 其中一種方式，這是由物件內容的成員身分加入 CompiledQuery 執行個體。  您接著可以事項的一些更乾淨藉由存取 CompiledQuery 透過 helper 方法：
+相反地，您會想要建立靜態的執行個體的已編譯的查詢，以便每次呼叫方法時，會叫用相同的已編譯的查詢。 其中一種方式，這是由物件內容的成員身分加入 CompiledQuery 執行個體。  您接著可以事項的一些更乾淨藉由存取 CompiledQuery 透過 helper 方法：
 
 ``` csharp
     public partial class NorthwindEntities : ObjectContext
@@ -311,10 +311,10 @@ AggregatingSubtotals 查詢是最複雜的測試使用的查詢。 如預期般�
 這個 helper 方法會叫用，如下所示：
 
 ``` csharp
-    this.productsGrid.DataSource = context.GetProductsForCategory(selectedCategory);
+    this.productsGrid.DataSource = context.GetProductsForCategory(selectedCategory);
 ```
 
-#### <a name="332-------composing-over-a-compiledquery"></a>3.3.2 撰寫透過 CompiledQuery
+#### <a name="332-composing-over-a-compiledquery"></a>3.3.2 撰寫透過 CompiledQuery
 
 撰寫任何 LINQ 查詢的功能非常有用。若要這樣做，您只需叫用方法之後 IQueryable 這類*skip （)* 或是*count （)*。 不過，所以基本上會傳回新的 IQueryable 物件。 沒有要阻止您技術上透過 CompiledQuery 撰寫項目，這樣會導致產生新的 IQueryable 物件所需要傳遞計劃編譯器透過一次。
 
@@ -345,7 +345,7 @@ AggregatingSubtotals 查詢是最複雜的測試使用的查詢。 如預期般�
     }
 ```
 
- 若要避免此重新編譯，您可以重新撰寫 CompiledQuery，若要篩選條件納入考量：
+ 若要避免此重新編譯，您可以重新撰寫 CompiledQuery，若要篩選條件納入考量：
 
 ``` csharp
     private static readonly Func<NorthwindEntities, int, int?, string, IQueryable<Customer>> customersForEmployeeWithFiltersCQ = CompiledQuery.Compile(
@@ -377,7 +377,7 @@ AggregatingSubtotals 查詢是最複雜的測試使用的查詢。 如預期般�
     }
 ```
 
- 的代價就是產生的存放區命令永遠會篩選具有 null 檢查，但這些應該是相當簡單的資料庫伺服器，以最佳化：
+ 的代價就是產生的存放區命令永遠會篩選具有 null 檢查，但這些應該是相當簡單的資料庫伺服器，以最佳化：
 
 ``` SQL
 ...
@@ -572,7 +572,7 @@ using (var context = new MyContext())
 
 ### <a name="51-disabling-change-tracking-to-reduce-state-management-overhead"></a>5.1 停用變更追蹤來減少狀態管理負荷
 
-如果您是在唯讀案例中，而且想要避免 ObjectStateManager 中載入之物件的額外負荷，您可以發出 「 追蹤 」 的查詢。  在查詢層級，可以停用變更追蹤。
+如果您是在唯讀案例中，而且想要避免 ObjectStateManager 中載入之物件的額外負荷，您可以發出 「 追蹤 」 的查詢。  在查詢層級，可以停用變更追蹤。
 
 請注意，停用變更追蹤，您會有效地關閉物件快取。 當您查詢實體時，我們無法從 ObjectStateManager 提取先前具體化查詢結果來略過具體化。 如果您要重複查詢相同的實體，在相同的內容，您實際上可能會看到受益於啟用變更追蹤效能。
 
@@ -610,7 +610,7 @@ using (var context = new MyContext())
                                 select p;
 ```
 
-### <a name="52-test-metrics-demonstrating-the-performance-benefit-of-notracking-queries"></a>5.2 測試示範 NoTracking 查詢的效能優勢的度量
+### <a name="52test-metrics-demonstrating-the-performance-benefit-of-notracking-queries"></a>5.2 測試示範 NoTracking 查詢的效能優勢的度量
 
 在這項測試，我們討論代價是藉由比較追蹤 NoTracking Navision 模型的查詢填入 ObjectStateManager。 請參閱附錄 Navision 模型所執行的查詢類型的描述。 在此測試中，我們會逐一查看查詢的清單，並一次執行每一個。 我們使用"AppendOnly 」 的預設合併選項執行兩種變化的測試使用 NoTracking 查詢一次，一次。 我們執行了每個變化 3 次，並且需要執行的平均值。 測試之間我們會清除 SQL Server 上的查詢快取，並壓縮 tempdb 執行下列命令：
 
@@ -643,7 +643,7 @@ Entity Framework 提供數個不同的方式，來查詢。 我們將看看下�
 -   SqlQuery。
 -   CompiledQuery。
 
-### <a name="61-------linq-to-entities-queries"></a>6.1 LINQ to Entities 查詢
+### <a name="61-linq-to-entities-queries"></a>6.1 LINQ to Entities 查詢
 
 ``` csharp
 var q = context.Products.Where(p => p.Category.CategoryName == "Beverages");
@@ -662,7 +662,7 @@ var q = context.Products.Where(p => p.Category.CategoryName == "Beverages");
     -   使用 DefaultIfEmpty OUTER JOIN 的查詢模式會導致更複雜的查詢比簡單的外部聯結陳述式，在 Entity SQL。
     -   您仍然無法使用 LIKE 與一般的模式比對。
 
-### <a name="62-------no-tracking-linq-to-entities-queries"></a>6.2 沒有追蹤 LINQ to Entities 查詢
+### <a name="62-no-tracking-linq-to-entities-queries"></a>6.2 沒有追蹤 LINQ to Entities 查詢
 
 當內容衍生的 ObjectContext:
 
@@ -699,7 +699,7 @@ var q = context.Products.Where(p => p.Category.CategoryName == "Beverages").Sele
 
 這個特定的查詢未明確指定所 NoTracking，但因為它不會具體化有已知的物件狀態管理員然後具體化的結果型別不會追蹤。
 
-### <a name="63-------entity-sql-over-an-objectquery"></a>6.3 entity SQL 的 ObjectQuery
+### <a name="63-entity-sql-over-an-objectquery"></a>6.3 entity SQL 的 ObjectQuery
 
 ``` csharp
 ObjectQuery<Product> products = context.Products.Where("it.Category.CategoryName = 'Beverages'");
@@ -715,7 +715,7 @@ ObjectQuery<Product> products = context.Products.Where("it.Category.CategoryName
 
 -   包含文字的查詢字串，其為更容易發生使用者錯誤比語言內建的查詢建構。
 
-### <a name="64-------entity-sql-over-an-entity-command"></a>6.4 entity SQL 的實體命令
+### <a name="64-entity-sql-over-an-entity-command"></a>6.4 entity SQL 的實體命令
 
 ``` csharp
 EntityCommand cmd = eConn.CreateCommand();
@@ -740,7 +740,7 @@ using (EntityDataReader reader = cmd.ExecuteReader(CommandBehavior.SequentialAcc
 -   不適合用於 CUD 作業。
 -   結果會不會自動具體化，而且必須從 資料讀取器讀取。
 
-### <a name="65-------sqlquery-and-executestorequery"></a>6.5 SqlQuery 和 ExecuteStoreQuery
+### <a name="65-sqlquery-and-executestorequery"></a>6.5 SqlQuery 和 ExecuteStoreQuery
 
 在資料庫上 SqlQuery:
 
@@ -778,7 +778,7 @@ var beverages = context.ExecuteStoreQuery<Product>(
 -   查詢會繫結至特定的後端，使用存放區語意，而不是概念性的語意。
 -   有繼承時，手動的查詢需要處理要求的型別對應條件。
 
-### <a name="66-------compiledquery"></a>6.6 CompiledQuery
+### <a name="66-compiledquery"></a>6.6 CompiledQuery
 
 ``` csharp
 private static readonly Func<NorthwindEntities, string, IQueryable<Product>> productsForCategoryCQ = CompiledQuery.Compile(
@@ -801,7 +801,7 @@ var q = context.InvokeProductsForCategoryCQ("Beverages");
 -   在已編譯的查詢上撰寫時，遺失的效能改善。
 -   無法為 CompiledQuery-例如，匿名型別的投影寫入一些 LINQ 查詢。
 
-### <a name="67-------performance-comparison-of-different-query-options"></a>6.7 不同的查詢選項效能比較
+### <a name="67-performance-comparison-of-different-query-options"></a>6.7 不同的查詢選項效能比較
 
 其中內容建立而不逾時的簡單 microbenchmarks 暫停測試。 我們測量 5000 次查詢的非快取在受控制的環境中的實體集。 這些識別碼會採取與警告： 不會反映實際的應用程式中，所產生的數字，而它們是非常精確的測量的效能差異，當比較不同的查詢選項時，還有多少蘋果對蘋果，但不包括建立新的內容的成本。
 
@@ -863,7 +863,7 @@ Microbenchmarks 非常非常敏感的程式碼的小型變更。 在這個案例
 
 ## <a name="7-design-time-performance-considerations"></a>7 設計時間效能考量
 
-### <a name="71-------inheritance-strategies"></a>7.1 繼承策略
+### <a name="71-inheritance-strategies"></a>7.1 繼承策略
 
 另一個使用 Entity Framework 時的效能考量是您所使用的繼承策略。 Entity Framework 支援 3 個基本類型的繼承和其組合：
 
@@ -871,11 +871,11 @@ Microbenchmarks 非常非常敏感的程式碼的小型變更。 在這個案例
 -   每個型別 (TPT) – 其中每個類型會有自己的資料表在資料庫資料表子資料表只會定義父資料表不包含的資料行。
 -   每個類別 (TPC) – 每一種類型其中有它自己的完整資料表在資料庫資料表子資料表定義他們的所有欄位，包括父型別中定義的。
 
-如果您的模型使用 TPT 繼承，產生的查詢將會比使用其他繼承策略，這可能會導致儲存區上的執行時間較長上產生的更為複雜。  它通常會比較長 TPT 模型，產生查詢，具體化結果的物件。
+如果您的模型使用 TPT 繼承，產生的查詢將會比使用其他繼承策略，這可能會導致儲存區上的執行時間較長上產生的更為複雜。  它通常會比較長 TPT 模型，產生查詢，具體化結果的物件。
 
 請參閱的 < 效能考量當 Entity Framework 中使用 （每個類型的資料表） TPT 繼承 > MSDN 部落格文章： \<http://blogs.msdn.com/b/adonet/archive/2010/08/17/performance-considerations-when-using-tpt-table-per-type-inheritance-in-the-entity-framework.aspx>。
 
-#### <a name="711-------avoiding-tpt-in-model-first-or-code-first-applications"></a>7.1.1 Model First 或 Code First 應用程式中避免 TPT
+#### <a name="711-avoiding-tpt-in-model-first-or-code-first-applications"></a>7.1.1 Model First 或 Code First 應用程式中避免 TPT
 
 當您建立模型以覆蓋現有資料庫具有 TPT 結構描述時，您不需要許多選項。 但在建立時使用 Model First 或 Code First 應用程式，您應該避免 TPT 繼承，基於效能考量。
 
@@ -883,7 +883,7 @@ Microbenchmarks 非常非常敏感的程式碼的小型變更。 在這個案例
 
 當使用 Code First 來設定模型的對應具有繼承，EF 會使用預設的 TPH，因此繼承階層架構中的所有實體將會都對應到相同的資料表。 請參閱 MSDN Magazine 中的 「 程式碼第一次在實體 Framework4.1"發行項"對應使用 Fluent API 」 一節 ( [http://msdn.microsoft.com/magazine/hh126815.aspx](https://msdn.microsoft.com/magazine/hh126815.aspx)) 如需詳細資訊。
 
-### <a name="72-------upgrading-from-ef4-to-improve-model-generation-time"></a>7.2 升級從 EF4 來改善模型的產生時間
+### <a name="72-upgrading-from-ef4-to-improve-model-generation-time"></a>7.2 升級從 EF4 來改善模型的產生時間
 
 安裝 Visual Studio 2010 SP1 時，Entity Framework 5 和 6，及做為 Entity Framework 4 的更新可用的模型產生存放區層 (SSDL) 的演算法，SQL Server 特定改進。 下列的測試結果時產生非常大的模型中，在此情況下 Navision 模型，示範改進。 如需進一步瞭解羰旓紵 C。
 
@@ -899,13 +899,13 @@ Microbenchmarks 非常非常敏感的程式碼的小型變更。 在這個案例
 
 值得注意的是，當產生的 SSDL，負載幾乎完全花費在 SQL 伺服器上，等候用戶端開發電腦時閒置來自伺服器的結果。 Dba 應該特別喜歡這項改善。 另外值得注意的是基本上模型產生的全部費用現在會在檢視表產生。
 
-### <a name="73-------splitting-large-models-with-database-first-and-model-first"></a>7.3 先分割大型模型與資料庫和 Model First
+### <a name="73-splitting-large-models-with-database-first-and-model-first"></a>7.3 先分割大型模型與資料庫和 Model First
 
 模型大小增加時，在設計工具介面變得雜亂且難以使用。 我們通常會視為具有 300 個以上的實體太大，無法有效地使用設計工具的模型。 下列部落格文章說明用來分割大型模型的數個選項： \<http://blogs.msdn.com/b/adonet/archive/2008/11/25/working-with-large-models-in-entity-framework-part-2.aspx>。
 
 文章針對 Entity Framework 的第一個版本所撰寫，但步驟仍然適用。
 
-### <a name="74-------performance-considerations-with-the-entity-data-source-control"></a>7.4 實體資料來源控制項的效能考量
+### <a name="74-performance-considerations-with-the-entity-data-source-control"></a>7.4 實體資料來源控制項的效能考量
 
 我們已了解在多執行緒的效能和壓力測試的情況下使用 EntityDataSource 控制項的 web 應用程式的效能大幅降低的位置。 根本原因是，EntityDataSource 重複 MetadataWorkspace.LoadFromAssembly 上呼叫的 Web 應用程式，以探索要做為實體型別所參考的組件。
 
@@ -913,7 +913,7 @@ Microbenchmarks 非常非常敏感的程式碼的小型變更。 在這個案例
 
 將 ContextTypeName 欄位時，也可防止功能性的問題，其中在.NET 4.0 中的 EntityDataSource 時擲回 ReflectionTypeLoadException 它無法透過反映的組件載入的類型。 在.NET 4.5 中已修正此問題。
 
-### <a name="75-------poco-entities-and-change-tracking-proxies"></a>7.5 的 POCO 實體和變更追蹤 proxy
+### <a name="75-poco-entities-and-change-tracking-proxies"></a>7.5 的 POCO 實體和變更追蹤 proxy
 
 Entity Framework 可讓您使用自訂資料類別加上您的資料模型，而不需要對資料類別本身進行任何修改。 這表示您可以使用「單純」(plain-old) CLR 物件 (POCO)，例如現有的網域物件，加上您的資料模型。 這些 POCO 資料類別 （也稱為非持續物件），這會對應到資料模型中定義的實體，支援的大部分相同的查詢、 插入、 更新和刪除行為 Entity Data Model 工具所產生的實體類型。
 
@@ -1089,7 +1089,7 @@ WHERE [Extent1].[CustomerID] = @EntityKeyValue1',N'@EntityKeyValue1 nchar(5)',@E
 | 遠離您的資料庫執行的程式碼嗎？ （增加的網路延遲）  | **否**-當網路延遲不是問題，請使用消極式載入可能會簡化您的程式碼。 請記住，您的應用程式的拓撲，可能會變更，因此不需要資料庫相近，授與。 <br/> <br/> **是**-網路問題時，只有您可以決定更加符合您的案例。 通常積極式載入會是較佳因為它需要較少的來回行程。                                                                                                                                                                                                      |
 
 
-#### <a name="822-------performance-concerns-with-multiple-includes"></a>8.2.2 使用多個包含效能考量
+#### <a name="822-performance-concerns-with-multiple-includes"></a>8.2.2 使用多個包含效能考量
 
 我們聽到了涉及伺服器回應時間問題的效能問題，問題的來源時經常使用多個 Include 陳述式查詢。 雖然在查詢中包括相關的實體是功能強大，務必了解在幕後的事情。
 
@@ -1147,7 +1147,7 @@ Entity Framework 目前不支援純量或複雜屬性的消極式的載入。 �
 
 ## <a name="9-other-considerations"></a>9 其他考量
 
-### <a name="91------server-garbage-collection"></a>9.1 伺服器記憶體回收
+### <a name="91-server-garbage-collection"></a>9.1 伺服器記憶體回收
 
 某些使用者可能會遇到限制他們預期的記憶體回收行程的設定不正確的平行處理原則的資源爭用。 每當 EF 會在多執行緒案例中，或在任何應用程式，類似於伺服器端系統，請務必啟用伺服器記憶體回收。 這是透過簡單的設定，在您的應用程式組態檔中：
 
@@ -1162,7 +1162,7 @@ Entity Framework 目前不支援純量或複雜屬性的消極式的載入。 �
 
 這應該減少執行緒爭用，並在 CPU 飽和的情況下最多 30%的增加您的輸送量。 一般而言，您一定要測試您的應用程式的運作方式使用傳統記憶體回收 （其進一步調整 UI 和用戶端端案例中） 以及伺服器記憶體回收。
 
-### <a name="92------autodetectchanges"></a>9.2 AutoDetectChanges
+### <a name="92-autodetectchanges"></a>9.2 AutoDetectChanges
 
 如先前所述，Entity Framework 可能會顯示效能問題，當物件快取具有許多實體。 某些作業，例如 Add、 Remove、 尋找、 項目和 SaveChanges，觸發程序呼叫 DetectChanges，這可能會耗用大量的基礎物件快取已變成多大的 CPU。 這是物件快取，物件狀態管理員嘗試將保持同步處理每個執行的作業內容，以便能夠在各式各樣的案例下正確確保產生的資料越好。
 
@@ -1183,11 +1183,11 @@ finally
 
 關閉前 AutoDetectChanges，最好了解這可能會導致失去其同時可追蹤特定資訊將會在實體的變更的 Entity Framework。 如果不正確地處理，這可能造成資料不一致，在您的應用程式。 如需有關如何關閉 AutoDetectChanges 的詳細資訊，請閱讀\<http://blog.oneunicorn.com/2012/03/12/secrets-of-detectchanges-part-3-switching-off-automatic-detectchanges/>。
 
-### <a name="93------context-per-request"></a>9.3 每個要求的內容
+### <a name="93-context-per-request"></a>9.3 每個要求的內容
 
 Entity Framework 內容應該要當做存留較短的執行個體，以提供最佳效能體驗。 內容應該是短暫存留時間，並捨棄，並因此實作非常輕量和 reutilize 盡可能的中繼資料。 在 web 案例中很重要要謹記在心，在單一要求的持續時間超過沒有內容。 同樣地，在非 web 案例中，內容應捨棄根據不同的層級的快取在 Entity Framework 了解。 一般而言，其中一個應該避免在整個生命週期的應用程式，以及每個執行緒的內容和靜態內容的內容執行個體。
 
-### <a name="94------database-null-semantics"></a>9.4 資料庫 null 語意
+### <a name="94-database-null-semantics"></a>9.4 資料庫 null 語意
 
 預設的 entity Framework 會產生具有 C 的 SQL 程式碼\#null 比較語意。 請考慮下列範例查詢：
 
@@ -1224,18 +1224,18 @@ Entity Framework 內容應該要當做存留較短的執行個體，以提供最
 
 在上述範例查詢中，效能差異雖然很低於 2 %microbenchmark，在受控制的環境中執行中。
 
-### <a name="95------async"></a>9.5 非同步
+### <a name="95-async"></a>9.5 非同步
 
 Entity Framework 6 引進了支援的執行在.NET 4.5 或更新版本時的非同步作業。 大部分的情況下，使 IO 的應用程式相關的競爭會受益於最多使用非同步查詢並儲存作業。 如果您的應用程式不會發生從 IO 爭用，非同步處理使用，在最佳的情況下，以同步方式執行和傳回結果，在相同的時間與同步呼叫，或最糟的情況、 只是延後執行非同步工作，並新增額外的 time 完成您的案例。
 
 如需如何非同步的程式設計工作可協助您決定是否非同步會改善您的應用程式的效能請瀏覽[http://msdn.microsoft.com/library/hh191443.aspx](https://msdn.microsoft.com/library/hh191443.aspx)。 如需使用 Entity Framework 上的非同步作業的詳細資訊，請參閱 <<c0> [ 非同步查詢和儲存](~/ef6/fundamentals/async.md
 )。
 
-### <a name="96------ngen"></a>9.6 NGEN
+### <a name="96-ngen"></a>9.6 NGEN
 
 Entity Framework 6 不會在.NET framework 的預設安裝中。 因此，Entity Framework 組件不會根據預設，這表示所有 Entity Framework 程式碼，受都限於相同 JIT'ing 成本為其他 MSIL 組件的 NGEN。 這可能會降低的 F5 體驗，同時開發以及您在生產環境中的應用程式的冷啟動。 若要降低 CPU 和記憶體的成本 JIT'ing 就建議您在 Entity Framework 映像為適當的 NGEN。 如需有關如何改善使用 NGEN 的 Entity Framework 6 的啟動效能的詳細資訊，請參閱 < [ngen 改善啟動效能](~/ef6/fundamentals/performance/ngen.md)。
 
-### <a name="97------code-first-versus-edmx"></a>9.7 版，code First 與 EDMX
+### <a name="97-code-first-versus-edmx"></a>9.7 版，code First 與 EDMX
 
 問題有關的阻抗不相符的物件導向程式設計與由概念模型 （物件）、 儲存結構描述 (database) 和之間的對應的記憶體中表示的關聯式資料庫之間的 entity Framework 原因兩個。 此中繼資料會呼叫簡短的實體資料模型或 EDM。 此 EDM 中，從 Entity Framework 會衍生往返的資料的檢視，從資料庫的記憶體中的物件，並備份。
 
@@ -1251,11 +1251,11 @@ Code First 方法是，它的核心，複雜的實體資料模型產生器。 En
 
 如果您有使用 Entity Framework 的效能問題，您可以使用像建置到 Visual Studio 分析工具，以查看應用程式花費的時間。 這是我們用來產生圓形圖 」 瀏覽 ADO.NET Entity Framework 的效能-第 1 部分 」 部落格文章中的工具 ( \<http://blogs.msdn.com/b/adonet/archive/2008/02/04/exploring-the-performance-of-the-ado-net-entity-framework-part-1.aspx>)說明 Entity Framework 要花費在它在冷和暖查詢期間的時間。
 
-資料和模型化客戶諮詢小組所撰寫的 「 使用 Visual Studio 2010 Profiler 分析 Entity Framework 」 部落格文章顯示如何它們使用分析工具來調查效能問題的真實世界範例。  \<http://blogs.msdn.com/b/dmcat/archive/2010/04/30/profiling-entity-framework-using-the-visual-studio-2010-profiler.aspx>。 這篇文章是針對 windows 應用程式所撰寫。 如果您要分析 web 應用程式的 Windows 效能記錄程式 (WPR) 和 Windows Performance Analyzer (WPA) 工具可能會優於從 Visual Studio 工作運作。 WPR 和 WPA 屬於 Windows 效能工具組所附含的 Windows 評定及部署套件 ( [http://www.microsoft.com/en-US/download/details.aspx?id=39982](https://www.microsoft.com/en-US/download/details.aspx?id=39982))。
+資料和模型化客戶諮詢小組所撰寫的 「 使用 Visual Studio 2010 Profiler 分析 Entity Framework 」 部落格文章顯示如何它們使用分析工具來調查效能問題的真實世界範例。  \<http://blogs.msdn.com/b/dmcat/archive/2010/04/30/profiling-entity-framework-using-the-visual-studio-2010-profiler.aspx>. 這篇文章是針對 windows 應用程式所撰寫。 如果您要分析 web 應用程式的 Windows 效能記錄程式 (WPR) 和 Windows Performance Analyzer (WPA) 工具可能會優於從 Visual Studio 工作運作。 WPR 和 WPA 屬於 Windows 效能工具組所附含的 Windows 評定及部署套件 ( [http://www.microsoft.com/download/details.aspx?id=39982](https://www.microsoft.com/download/details.aspx?id=39982))。
 
 ### <a name="102-applicationdatabase-profiling"></a>10.2 應用程式/資料庫程式碼剖析
 
-內建於 Visual Studio 分析工具等工具會告訴您應用程式花費的時間。  程式碼剖析工具的另一種是可用的執行動態分析執行中應用程式，在實際執行或根據需求，進入生產階段前的，並尋找常見的錯誤和反向模式的資料庫存取權。
+內建於 Visual Studio 分析工具等工具會告訴您應用程式花費的時間。  程式碼剖析工具的另一種是可用的執行動態分析執行中應用程式，在實際執行或根據需求，進入生產階段前的，並尋找常見的錯誤和反向模式的資料庫存取權。
 
 兩個販售的分析工具是 Entity Framework Profiler ( \<http://efprof.com>) ORMProfiler 和 ( \<http://ormprofiler.com>)。
 
@@ -1298,9 +1298,9 @@ Code First 方法是，它的核心，複雜的實體資料模型產生器。 En
 
 這種環境會使用從用戶端應用程式在不同電腦上的資料庫中的 2 機器安裝程式。 機器會位於相同的機架，因此網路延遲是相對較低，但比單一電腦環境更逼真。
 
-#### <a name="1111-------app-server"></a>11.1.1 應用程式伺服器
+#### <a name="1111-app-server"></a>11.1.1 應用程式伺服器
 
-##### <a name="11111------software-environment"></a>11.1.1.1 軟體環境
+##### <a name="11111-software-environment"></a>11.1.1.1 軟體環境
 
 -   Entity Framework 4 的軟體環境
     -   作業系統名稱： Windows Server 2008 R2 Enterprise SP1。
@@ -1310,26 +1310,26 @@ Code First 方法是，它的核心，複雜的實體資料模型產生器。 En
     -   作業系統名稱： Windows 8.1 企業版
     -   Visual Studio 2013 – Ultimate。
 
-##### <a name="11112------hardware-environment"></a>11.1.1.2 硬體環境
+##### <a name="11112-hardware-environment"></a>11.1.1.2 硬體環境
 
 -   雙處理器: @ 2.27 GHz 的 intel （) mhz,8 CPU L5520 W3530、 2261 Mhz8 GHz、 4 個核心、 84 邏輯處理器。
 -   2412 GB RamRAM。
 -   136 GB SCSI250GB SATA 7200 rpm 3 GB/s 磁碟機將分割成 4 個磁碟分割。
 
-#### <a name="1112-------db-server"></a>11.1.2 DB 伺服器
+#### <a name="1112-db-server"></a>11.1.2 DB 伺服器
 
-##### <a name="11121------software-environment"></a>11.1.2.1 軟體環境
+##### <a name="11121-software-environment"></a>11.1.2.1 軟體環境
 
 -   作業系統名稱： Windows Server 2008 R28.1 Enterprise SP1。
 -   SQL Server 2008 R22012。
 
-##### <a name="11122------hardware-environment"></a>11.1.2.2 硬體環境
+##### <a name="11122-hardware-environment"></a>11.1.2.2 硬體環境
 
 -   單一處理器： Intel （) mhz,8 CPU 2.27 GHz L5520，2261 MhzES-1620 0 @ 3.60 GHz，4 個核心，8 的邏輯處理器。
 -   824 GB RamRAM。
 -   465 GB ATA500GB SATA 7200 rpm 6 GB/s 磁碟機將分割成 4 個磁碟分割。
 
-### <a name="112------b-query-performance-comparison-tests"></a>11.2 B.查詢效能比較測試
+### <a name="112-b-query-performance-comparison-tests"></a>11.2 B.查詢效能比較測試
 
 Northwind 模型用來執行這些測試。 使用 Entity Framework 設計工具，從資料庫產生。 然後，下列程式碼可用來比較查詢執行選項的效能：
 
@@ -1519,7 +1519,7 @@ Navision 資料庫是用來示範 Microsoft Dynamics – 導覽大型資料庫 �
   </Query>
 ```
 
-##### <a name="11312-singleaggregating"></a>11.3.1.2 SingleAggregating
+##### <a name="11312singleaggregating"></a>11.3.1.2 SingleAggregating
 
 一般的 BI 查詢多個彙總，但沒有小計 （單一查詢）
 
@@ -1540,7 +1540,7 @@ Navision 資料庫是用來示範 Microsoft Dynamics – 導覽大型資料庫 �
   </Function>
 ```
 
-##### <a name="11313-aggregatingsubtotals"></a>11.3.1.3 AggregatingSubtotals
+##### <a name="11313aggregatingsubtotals"></a>11.3.1.3 AggregatingSubtotals
 
 BI 查詢與彙總小計 （透過所有的聯集）
 
