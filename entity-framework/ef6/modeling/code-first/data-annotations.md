@@ -3,12 +3,12 @@ title: First 資料註解-EF6 的程式碼
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 54e27f1b866da14d68db66ca5eca5a6dde819e26
-ms.sourcegitcommit: 15022dd06d919c29b1189c82611ea32f9fdc6617
+ms.openlocfilehash: 8d85ef85f56a23d9b3b526554417dc9dd360e139
+ms.sourcegitcommit: 39080d38e1adea90db741257e60dc0e7ed08aa82
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/27/2018
-ms.locfileid: "47415805"
+ms.lasthandoff: 11/03/2018
+ms.locfileid: "50980037"
 ---
 # <a name="code-first-data-annotations"></a>Code First 資料註解
 > [!NOTE]
@@ -30,26 +30,26 @@ Entity Framework Code First 可讓您使用您自己的網域類別，代表模�
 ``` csharp
     public class Blog
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string BloggerName { get; set;}
-        public virtual ICollection<Post> Posts { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string BloggerName { get; set;}
+        public virtual ICollection<Post> Posts { get; set; }
     }
 
     public class Post
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public DateTime DateCreated { get; set; }
-        public string Content { get; set; }
-        public int BlogId { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public DateTime DateCreated { get; set; }
+        public string Content { get; set; }
+        public int BlogId { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 ```
 
 如有需要，部落格和後置類別方便遵循程式碼的第一個慣例，且需要未調整，若要啟用 EF 的相容性。 不過，您也可以使用註解提供給 EF 的詳細資訊，相關的類別和它們所對應的資料庫。
 
- 
+ 
 
 ## <a name="key"></a>Key
 
@@ -60,11 +60,11 @@ Entity Framework 依賴具有索引鍵的值會用於追蹤的實體，每個實
 ``` csharp
     public class Blog
     {
-        [Key]
-        public int PrimaryTrackingKey { get; set; }
-        public string Title { get; set; }
-        public string BloggerName { get; set;}
-        public virtual ICollection<Post> Posts { get; set; }
+        [Key]
+        public int PrimaryTrackingKey { get; set; }
+        public string Title { get; set; }
+        public string BloggerName { get; set;}
+        public virtual ICollection<Post> Posts { get; set; }
     }
 ```
 
@@ -155,11 +155,11 @@ Entity Framework 支援複合索引鍵-多個屬性所組成的主索引鍵。 �
 >[!NOTE]
 > 在某些情況下它可能無法在資料庫中是不可為 null，即使需要此屬性，資料行。 比方說，當使用 TPH 繼承策略資料的多個類型會儲存在單一資料表。 如果衍生型別包含必要的屬性資料行無法進行不可為 null 因為並非所有的型別階層架構中會有這個屬性。
 
- 
+ 
 
 ![部落格資料表](~/ef6/media/jj591583-figure03.png)
 
- 
+ 
 
 ## <a name="maxlength-and-minlength"></a>MaxLength 與 MinLength
 
@@ -187,7 +187,7 @@ MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證�
 
 ![建立具有自訂錯誤訊息的網頁](~/ef6/media/jj591583-figure05.png)
 
- 
+ 
 
 ## <a name="notmapped"></a>NotMapped
 
@@ -204,7 +204,7 @@ MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證�
     }
 ```
 
- 
+ 
 
 ## <a name="complextype"></a>ComplexType
 
@@ -215,12 +215,12 @@ MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證�
     {
         public DateTime? DateCreated { get; set; }
 
-        [MaxLength(250)]
-        public string Description { get; set; }
+        [MaxLength(250)]
+        public string Description { get; set; }
     }
 ```
 
-請注意 BlogDetails 沒有任何類型的索引鍵屬性。 在 網域導向設計，BlogDetails 被指值的物件。 Entity Framework 會將稱為複雜類型的值物件。  複雜型別無法自行追蹤。
+請注意 BlogDetails 沒有任何類型的索引鍵屬性。 在 網域導向設計，BlogDetails 被指值的物件。 Entity Framework 會將稱為複雜類型的值物件。  複雜型別無法自行追蹤。
 
 不過部落格類別，它將會追蹤部落格物件的一部分的 BlogDetails 中的屬性。 為了讓第一次將此辨識的程式碼，您必須將 BlogDetails 類別標示為 ComplexType。
 
@@ -230,15 +230,15 @@ MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證�
     {
         public DateTime? DateCreated { get; set; }
 
-        [MaxLength(250)]
-        public string Description { get; set; }
+        [MaxLength(250)]
+        public string Description { get; set; }
     }
 ```
 
 現在您可以新增屬性來表示該部落格 BlogDetails 部落格類別中。
 
 ``` csharp
-        public BlogDetails BlogDetail { get; set; }
+        public BlogDetails BlogDetail { get; set; }
 ```
 
 在資料庫中，部落格資料表將包含的所有部落格，包括其 BlogDetail; 屬性所包含的屬性的屬性。 根據預設，每一個前面加上複雜類型，也就是 BlogDetail 的名稱。
@@ -247,7 +247,7 @@ MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證�
 
 另一個有趣的註解是，雖然 DateCreated 屬性定義為不可為 null 的日期時間，在類別中，相關的資料庫欄位是可為 null。 如果您想要影響的資料庫結構描述，您必須使用必要的註解。
 
- 
+ 
 
 ## <a name="concurrencycheck"></a>ConcurrencyCheck
 
@@ -256,11 +256,11 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 我們來看看 ConcurrencyCheck 藉由將 BloggerName 屬性的運作方式。
 
 ``` csharp
-    [ConcurrencyCheck, MaxLength(10, ErrorMessage="BloggerName must be 10 characters or less"),MinLength(5)]
+    [ConcurrencyCheck, MaxLength(10, ErrorMessage="BloggerName must be 10 characters or less"),MinLength(5)]
     public string BloggerName { get; set; }
 ```
 
-當呼叫 SaveChanges 時，由於 ConcurrencyCheck 上的註解 BloggerName 欄位中，該屬性的原始值將用於更新。 此命令會嘗試找出正確的資料列篩選的索引鍵的值不僅在 BloggerName 的原始值。  以下是 傳送到資料庫的更新命令的重要部分，其中您可以看到此命令會更新資料列具有 PrimaryTrackingKey 是 1 到"Julie"，也就是原始的值，該部落格已從資料庫擷取時的 BloggerName。
+當呼叫 SaveChanges 時，由於 ConcurrencyCheck 上的註解 BloggerName 欄位中，該屬性的原始值將用於更新。 此命令會嘗試找出正確的資料列篩選的索引鍵的值不僅在 BloggerName 的原始值。  以下是 傳送到資料庫的更新命令的重要部分，其中您可以看到此命令會更新資料列具有 PrimaryTrackingKey 是 1 到"Julie"，也就是原始的值，該部落格已從資料庫擷取時的 BloggerName。
 
 ``` SQL
     where (([PrimaryTrackingKey] = @4) and ([BloggerName] = @5))
@@ -269,7 +269,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
 如果有人變更過該部落格部落客名稱在此同時，這項更新將會失敗，您會收到要處理 DbUpdateConcurrencyException。
 
- 
+ 
 
 ## <a name="timestamp"></a>時間戳記
 
@@ -286,7 +286,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
 ![部落格與時間戳記資料行的資料表](~/ef6/media/jj591583-figure07.png)
 
- 
+ 
 
 ## <a name="table-and-column"></a>資料表和資料行
 
@@ -302,7 +302,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 資料行註解是更多的精英中指定的對應資料行的屬性。 您可以規定名稱、 資料型別或甚至是將資料行出現在資料表中的順序。 以下是資料行屬性的範例。
 
 ``` csharp
-    [Column(“BlogDescription", TypeName="ntext")]
+    [Column("BlogDescription", TypeName="ntext")]
     public String Description {get;set;}
 ```
 
@@ -312,7 +312,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
 ![部落格資料表和資料行重新命名](~/ef6/media/jj591583-figure08.png)
 
- 
+ 
 
 ## <a name="databasegenerated"></a>DatabaseGenerated
 
@@ -327,7 +327,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
 您閱讀上述，根據預設，是一個整數的索引鍵屬性，將會成為在資料庫中的識別索引鍵。 這會是 DatabaseGenerated 設 DatabaseGeneratedOption.Identity 相同。 如果您不想要識別索引鍵，值可以設 DatabaseGeneratedOption.None。
 
- 
+ 
 
 ## <a name="index"></a>索引
 
@@ -389,7 +389,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
     }
 ```
 
- 
+ 
 
 ## <a name="relationship-attributes-inverseproperty-and-foreignkey"></a>屬性關聯性： InverseProperty 和 ForeignKey
 
@@ -398,25 +398,25 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
 程式碼的第一個慣例會負責在您的模型中，最常見的關聯性，但有某些情況下，它需要說明的位置。
 
-變更建立問題貼文及其關聯性的部落格類別中的索引鍵屬性名稱。 
+變更建立問題貼文及其關聯性的部落格類別中的索引鍵屬性名稱。 
 
 產生時的資料庫，程式碼第一次看到 BlogId 類別中的屬性後，並會將它，它符合類別名稱加上 「 識別碼 」，為部落格類別的外部索引鍵的慣例所辨識。 但是，部落格類別中沒有 BlogId 屬性。 這個解決方法是建立貼文中的導覽屬性，並使用外部索引 DataAnnotation 協助先了解如何建置這兩個類別之間的關聯性的程式碼 — 使用 Post.BlogId 屬性，以及如何指定條件約束中的資料庫。
 
 ``` csharp
     public class Post
     {
-            public int Id { get; set; }
-            public string Title { get; set; }
-            public DateTime DateCreated { get; set; }
-            public string Content { get; set; }
-            public int BlogId { get; set; }
-            [ForeignKey("BlogId")]
-            public Blog Blog { get; set; }
-            public ICollection<Comment> Comments { get; set; }
+            public int Id { get; set; }
+            public string Title { get; set; }
+            public DateTime DateCreated { get; set; }
+            public string Content { get; set; }
+            public int BlogId { get; set; }
+            [ForeignKey("BlogId")]
+            public Blog Blog { get; set; }
+            public ICollection<Comment> Comments { get; set; }
     }
 ```
 
-在資料庫中的條件約束會顯示 InternalBlogs.PrimaryTrackingKey Posts.BlogId 之間的關聯性。 
+在資料庫中的條件約束會顯示 InternalBlogs.PrimaryTrackingKey Posts.BlogId 之間的關聯性。 
 
 ![InternalBlogs.PrimaryTrackingKey 和 Posts.BlogId 之間的關聯性](~/ef6/media/jj591583-figure09.png)
 
@@ -434,10 +434,10 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 ``` csharp
     public class Person
     {
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public List<Post> PostsWritten { get; set; }
-            public List<Post> PostsUpdated { get; set; }
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public List<Post> PostsWritten { get; set; }
+            public List<Post> PostsUpdated { get; set; }
     }
 ```
 
@@ -459,7 +459,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
 ![貼文資料表，而不需要額外的外部索引鍵](~/ef6/media/jj591583-figure11.png)
 
- 
+ 
 
 ## <a name="summary"></a>總結
 
