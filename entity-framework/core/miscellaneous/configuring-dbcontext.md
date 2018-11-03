@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: 393349c05ffaf42c6d2520e73abce23def6becc0
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: f5a9ae17471391442170d8c40264e4db6922cb08
+ms.sourcegitcommit: 39080d38e1adea90db741257e60dc0e7ed08aa82
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995934"
+ms.lasthandoff: 11/03/2018
+ms.locfileid: "50979998"
 ---
 # <a name="configuring-a-dbcontext"></a>設定 DbContext
 
@@ -25,7 +25,7 @@ EF Core 設計階段工具，例如[移轉](xref:core/managing-schemas/migration
 
 `DbContext` 必須具有執行個體的`DbContextOptions`才能執行任何工作。 `DbContextOptions`這類執行個體帶有的組態資訊：
 
-- 若要使用，資料庫提供者通常會選取叫用方法時，例如`UseSqlServer`或 `UseSqlite`
+- 若要使用，資料庫提供者通常會選取叫用方法時，這類`UseSqlServer`或`UseSqlite`。 這些擴充方法需要對應的提供者套件，例如`Microsoft.EntityFrameworkCore.SqlServer`或`Microsoft.EntityFrameworkCore.Sqlite`。 方法的定義位於`Microsoft.EntityFrameworkCore`命名空間。
 - 任何必要的連接字串或識別項的資料庫執行個體，通常會傳遞做為引數至上述提供者選取方法
 - 所有提供者層級選擇性行為的選取器，通常也會在提供者選取方法的呼叫鏈結
 - 所有一般 EF Core 行為的選取器，通常鏈結提供者選取器方法之前或之後
