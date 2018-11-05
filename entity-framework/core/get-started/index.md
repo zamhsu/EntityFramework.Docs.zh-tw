@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: c8d53b47d215c0db673c9058e9d78a7e2e7b895f
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 744ea587207775f3a5b9f7b14ba5959c55539c13
+ms.sourcegitcommit: 39080d38e1adea90db741257e60dc0e7ed08aa82
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250734"
+ms.lasthandoff: 11/03/2018
+ms.locfileid: "50980011"
 ---
 # <a name="getting-started-with-entity-framework-core"></a>Entity Framework Core 使用者入門
 
@@ -19,7 +19,7 @@ ms.locfileid: "44250734"
 
 ## <a name="step-by-step-tutorials"></a>逐步教學課程
 
-這些入門教學課程不需要事先了解 Entity Framework Core 或特定 IDE。 這些教學課程會帶您逐步建立簡單的應用程式，以查詢和儲存資料庫中的資料。 我們提供了多項教學課程，協助您在各種作業系統及應用程式類型上開始著手。
+這些入門教學課程不要求必須事先了解 Entity Framework Core 或任何特定 IDE。 這些教學課程會帶您逐步建立簡單的應用程式，以查詢和儲存資料庫中的資料。 我們提供了多項教學課程，協助您在各種作業系統及應用程式類型上開始著手。
 
 Entity Framework Core 可根據現有資料庫建立模型，或根據您的模型為您建立資料庫。 教學課程會示範這兩種方法。
 
