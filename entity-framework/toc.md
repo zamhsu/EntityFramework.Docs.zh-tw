@@ -72,7 +72,7 @@
 ##### [使用個別專案](core/managing-schemas/migrations/projects.md)
 ##### [多個提供者](core/managing-schemas/migrations/providers.md)
 ##### [自訂記錄資料表](core/managing-schemas/migrations/history-table.md)
-#### [🔧建立及卸除 API](core/managing-schemas/ensure-created.md)
+#### [建立及卸除 API](core/managing-schemas/ensure-created.md)
 #### [🔧反向工程](core/managing-schemas/scaffolding.md)
 
 ### [查詢資料](core/querying/index.md)
