@@ -2,28 +2,28 @@
 title: 建立和卸除 Api-EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 11/10/2017
-ms.openlocfilehash: 336f6fd655603a2474a58dfef377e121d9b04c3a
-ms.sourcegitcommit: a088421ecac4f5dc5213208170490181ae2f5f0f
+ms.date: 11/7/2018
+ms.openlocfilehash: 40d9e3aa0aba1bf2bc341f01dd815ed7cb7b48fa
+ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/08/2018
-ms.locfileid: "51285635"
+ms.lasthandoff: 11/15/2018
+ms.locfileid: "51688625"
 ---
 # <a name="create-and-drop-apis"></a>建立和卸除 Api
 
-EnsureCreated 和 EnsureDeleted 方法提供的輕量型替代品[移轉](migrations/index.md)管理資料庫結構描述。 當資料是暫時性的且可以卸除結構描述變更時，這是在案例中有用的。 比方說在原型設計，在測試中，或用於本機快取。
+EnsureCreated 和 EnsureDeleted 方法提供的輕量型替代品[移轉](migrations/index.md)管理資料庫結構描述。 當資料是暫時性的且可以卸除結構描述變更時，這些方法是在案例中有用的。 比方說在原型設計，在測試中，或用於本機快取。
 
-某些提供者 （尤其是非關聯式的） 不支援移轉。 對於這些 EnsureCreated 通常是最簡單的方式，來初始化資料庫結構描述。
+某些提供者 （尤其是非關聯式的） 不支援移轉。 對於這些提供者，EnsureCreated 通常是最簡單的方式，來初始化資料庫結構描述。
 
 > [!WARNING]
 > EnsureCreated 的移轉，以及不合作無間。 如果您使用移轉，請勿使用 EnsureCreated 來初始化結構描述。
 
-從 EnsureCreated 轉換到移轉不是順暢的體驗。 為了達成此目的的 simpelest 方式是卸除資料庫，並重新建立它使用移轉。 如果您預期在未來使用移轉，最好是剛開始移轉，而不是使用 EnsureCreated。
+從 EnsureCreated 轉換到移轉不是順暢的體驗。 簡單的方法是卸除資料庫，並重新建立它使用移轉。 如果您預期在未來使用移轉，最好是剛開始移轉，而不是使用 EnsureCreated。
 
 ## <a name="ensuredeleted"></a>EnsureDeleted
 
-若有的話，EnsureDeleted 方法將會卸除資料庫。 如果您沒有適當權限，則會擲回例外狀況。
+若有的話，EnsureDeleted 方法將會卸除資料庫。 如果您沒有適當的權限，則會擲回例外狀況。
 
 ``` csharp
 // Drop the database if it exists

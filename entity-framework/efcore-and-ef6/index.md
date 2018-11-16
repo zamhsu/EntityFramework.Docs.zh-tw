@@ -5,12 +5,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a6b9cd22-6803-4c6c-a4d4-21147c0a81cb
 uid: efcore-and-ef6/index
-ms.openlocfilehash: 0f9f0d4708fa283855eddf2cfc231b37356e413e
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: d5fe9b388707f653fdeb2d6a5daa7215ced71c1d
+ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022346"
+ms.lasthandoff: 11/15/2018
+ms.locfileid: "51688715"
 ---
 # <a name="compare-ef-core--ef6"></a>比較 EF Core 與 EF6
 
@@ -57,7 +57,7 @@ EF Core 行表示功能首次出現所在的產品版本。
 | 金鑰產生：資料庫                              | [是]      | 1.0                                   |
 | 金鑰產生：用戶端                                |          | 1.0                                   |
 | 複雜/擁有的型別                                   | [是]      | 2.0                                   |
-| 空間資料                                          | [是]      |                                       |
+| 空間資料                                          | [是]      | 2.2                                   |
 | 模型的圖形化視覺效果                      | [是]      |                                       |
 | 圖形化模型編輯器                                | [是]      |                                       |
 | 模型格式：程式碼                                    | [是]      | 1.0                                   |
