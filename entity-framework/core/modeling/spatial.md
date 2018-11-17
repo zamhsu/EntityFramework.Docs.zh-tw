@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: 49c18758af2f2383ea082ead2f6df4c022152b36
-ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
-ms.translationtype: HT
+ms.openlocfilehash: cf488c6b7d94ca19018efe1c23ff410fe7eb594b
+ms.sourcegitcommit: 81c53ac43d8f15b900f117294ec71dc49fe028fa
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51688782"
+ms.lasthandoff: 11/16/2018
+ms.locfileid: "51817906"
 ---
 # <a name="spatial-data"></a>空間資料
 
@@ -310,4 +310,5 @@ Polygon.NumInteriorRings | ✔ | ✔ | ✔ | ✔
 
 * [SQL Server 中的空間資料](https://docs.microsoft.com/sql/relational-databases/spatial/spatial-data-sql-server)
 * [SpatiaLite 首頁](https://www.gaia-gis.it/fossil/libspatialite)
+* [Npgsql 空間的文件](http://www.npgsql.org/efcore/mapping/nts.html)
 * [PostGIS 文件](http://postgis.net/documentation/)
