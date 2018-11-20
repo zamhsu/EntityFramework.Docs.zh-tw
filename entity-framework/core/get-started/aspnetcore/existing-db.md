@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 08/02/2018
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: bba2742c3f3b6da93dd4b4f170a3878fc0473bc8
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: 23cd53b0e162afc5db0243b7032bb9c5f18bfb35
+ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022193"
+ms.lasthandoff: 11/15/2018
+ms.locfileid: "51688689"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>在 ASP.NET Core 上使用 EF Core 搭配現有資料庫的使用者入門
 
@@ -178,5 +178,6 @@ public partial class BloggingContext : DbContext
 ## <a name="next-steps"></a>後續步驟
 
 如需如何建立內容和實體類別的詳細資訊，請參閱下列文章：
+* [反向工程](xref:core/managing-schemas/scaffolding)
 * [Entity Framework Core 工具參考 - .NET CLI](xref:core/miscellaneous/cli/dotnet#dotnet-ef-dbcontext-scaffold)
 * [Entity Framework Core 工具參考 - 套件管理員主控台](xref:core/miscellaneous/cli/powershell#scaffold-dbcontext)
