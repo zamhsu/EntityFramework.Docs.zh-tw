@@ -3,12 +3,12 @@ title: Fluent API-設定和對應屬性及型別-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 648ed274-c501-4630-88e0-d728ab5c4057
-ms.openlocfilehash: 031376d2fc4778e6f0fa2434ab7ccfd45d436c4a
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 7371cc99142ccf8fc6bea237d7d58d1e67fcecec
+ms.sourcegitcommit: 75f8a179ac9a70ad390fc7ab2a6c5e714e701b8b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490177"
+ms.lasthandoff: 11/27/2018
+ms.locfileid: "52339799"
 ---
 # <a name="fluent-api---configuring-and-mapping-properties-and-types"></a>Fluent API-設定和對應的屬性和類型
 使用 Entity Framework Code First 時的預設行為是將您的 POCO 類別對應到資料表使用一組內建到 EF 的慣例。 有時候，不過，您無法或不想遵循這些慣例，而且必須將實體對應至規範的要求以外的項目。  
@@ -24,7 +24,7 @@ Code first fluent API 最常存取藉由覆寫[OnModelCreating](https://msdn.mic
 從 EF6 與您可以使用 HasDefaultSchema 方法上 DbModelBuilder 來指定要用於所有資料表、 預存程序等資料庫結構描述。您明確設定不同的結構描述的任何物件，將會覆寫此預設設定。  
 
 ``` csharp
-modelBuilder.HasDefaultSchema(“sales”);
+modelBuilder.HasDefaultSchema("sales");
 ```  
 
 ### <a name="custom-conventions-ef6-onwards"></a>自訂慣例 (EF6 之後版本)  
