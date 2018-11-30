@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: 744ea587207775f3a5b9f7b14ba5959c55539c13
-ms.sourcegitcommit: 39080d38e1adea90db741257e60dc0e7ed08aa82
+ms.openlocfilehash: b846d63f2c285a43d60eecfb2be3d460a5d31924
+ms.sourcegitcommit: 064b09431f05848830e145a6cd65cad58881557c
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/03/2018
-ms.locfileid: "50980011"
+ms.lasthandoff: 11/28/2018
+ms.locfileid: "52552590"
 ---
 # <a name="getting-started-with-entity-framework-core"></a>Entity Framework Core 使用者入門
 
@@ -23,17 +23,17 @@ ms.locfileid: "50980011"
 
 Entity Framework Core 可根據現有資料庫建立模型，或根據您的模型為您建立資料庫。 教學課程會示範這兩種方法。
 
-* .NET Framework (主控台應用程式、WinForms、WPF)
-  * [新資料庫](full-dotnet/new-db.md)
-  * [現有資料庫](full-dotnet/existing-db.md)
-* .NET Core (Windows、macOS、Linux)
+* .NET Core 主控台應用程式
   * [新資料庫](netcore/new-db-sqlite.md)
-* ASP.NET Core
+* ASP.NET Core 應用程式
   * [新資料庫](aspnetcore/new-db.md)
   * [現有資料庫](aspnetcore/existing-db.md)
   * [EF Core 與 Razor Pages](/aspnet/core/data/ef-rp/intro)
-* 通用 Windows 平台 (UWP)
+* 通用 Windows 平台 (UWP) 應用程式
   * [新資料庫](uwp/getting-started.md)
+* .NET Framework 應用程式
+  * [新資料庫](full-dotnet/new-db.md)
+  * [現有資料庫](full-dotnet/existing-db.md)
 
 > [!NOTE]  
 > 這些教學課程及隨附的範例已升級為使用 EF Core 2.1。 不過，在大多數情況下，只要對指示進行最少的修改，應該就能夠建立使用舊版本的應用程式。 
