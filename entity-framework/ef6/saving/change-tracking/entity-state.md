@@ -3,12 +3,12 @@ title: 使用實體狀態-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: acb27f46-3f3a-4179-874a-d6bea5d7120c
-ms.openlocfilehash: c1dde7810d1dfa8a73e6bd2cf091b24be6b865d8
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: ef0e8d5a5a9d66adab7046088c49d8cd472edc8a
+ms.sourcegitcommit: e5f9ca4aa41e64141fa63a1e5fcf4d4775d67d24
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490639"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52899648"
 ---
 # <a name="working-with-entity-states"></a>使用實體狀態
 本主題會討論如何加入及附加實體內容和 Entity Framework 如何處理這些 SaveChanges 期間。
@@ -71,7 +71,6 @@ using (var context = new BloggingContext())
     blog.Owner = new User { UserName = "johndoe1987" };
 
     // Add a new Post by adding to the collection of a tracked Blog
-    var blog = context.Blogs.Find(2);
     blog.Posts.Add(new Post { Name = "How to Add Entities" });
 
     context.SaveChanges();
