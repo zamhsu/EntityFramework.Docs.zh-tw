@@ -4,12 +4,12 @@ author: anpete
 ms.date: 02/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 uid: core/modeling/query-types
-ms.openlocfilehash: 3328082dbc62aa80eb5fb29d2e57df1eef248d1f
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: cb391343e6f24092ae0874003c0ef2935dd4e03f
+ms.sourcegitcommit: 8dd71a57a01c439431164c163a0722877d0e5cd8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489488"
+ms.lasthandoff: 12/07/2018
+ms.locfileid: "53028176"
 ---
 # <a name="query-types"></a>查詢類型
 > [!NOTE]
@@ -56,28 +56,28 @@ EF Core 模型可以包含實體類型，除了_查詢類型_，可用來執行�
 下列範例示範如何使用查詢型別來查詢資料庫檢視。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFrameworkCore/tree/master/samples/QueryTypes) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/QueryTypes) \(英文\)。
 
 首先，我們會定義一個簡單的部落格和後置模型：
 
-[!code-csharp[Main](../../../efcore-repo/samples/QueryTypes/Program.cs#Entities)]
+[!code-csharp[Main](../../../samples/core/QueryTypes/Program.cs#Entities)]
 
 接下來，我們會定義簡單的資料庫檢視，讓我們查詢每個部落格相關聯的貼文數目：
 
-[!code-csharp[Main](../../../efcore-repo/samples/QueryTypes/Program.cs#View)]
+[!code-csharp[Main](../../../samples/core/QueryTypes/Program.cs#View)]
 
 接下來，我們會定義類別以包裝資料庫檢視的結果：
 
-[!code-csharp[Main](../../../efcore-repo/samples/QueryTypes/Program.cs#QueryType)]
+[!code-csharp[Main](../../../samples/core/QueryTypes/Program.cs#QueryType)]
 
 接下來，我們設定中的查詢類型_OnModelCreating_使用`modelBuilder.Query<T>`API。
 我們可以使用標準的 fluent 組態 Api 來設定查詢類型的對應：
 
-[!code-csharp[Main](../../../efcore-repo/samples/QueryTypes/Program.cs#Configuration)]
+[!code-csharp[Main](../../../samples/core/QueryTypes/Program.cs#Configuration)]
 
 最後，我們可以查詢資料庫檢視，以標準方式：
 
-[!code-csharp[Main](../../../efcore-repo/samples/QueryTypes/Program.cs#Query)]
+[!code-csharp[Main](../../../samples/core/QueryTypes/Program.cs#Query)]
 
 > [!TIP]
 > 請注意，我們也已定義的內容層級查詢屬性 (DbQuery) 做為查詢對這種類型的根。
