@@ -3,12 +3,12 @@ title: 升級至 Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 29958ae5-85d3-4585-9ba6-550b8ec9393a
-ms.openlocfilehash: 2e2dacfe67238bdb7fd1f31f784319049f0f2cb0
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 711f1940080de27bd23cb8f641a5c7f2711dd65b
+ms.sourcegitcommit: a6082a2caee62029f101eb1000656966195cd6ee
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490944"
+ms.lasthandoff: 12/10/2018
+ms.locfileid: "53182003"
 ---
 # <a name="upgrading-to-entity-framework-6"></a>升級至 Entity Framework 6
 
@@ -66,20 +66,20 @@ DbContext 和第一個程式碼類型的命名空間都沒有變更。 這表示
 
 命名空間變更的一般規則是 System.Data.* 中的任何型別會移至 System.Data.Entity.Core.*。 換句話說，只需要插入**Entity.Core。** 之後 System.Data。 例如: 
 
-- System.Data.EntityException = > System.Data。**Entity.Core。** EntityException  
-- System.Data.Objects.ObjectContext = > System.Data。**Entity.Core。** Objects.ObjectContext  
-- System.Data.Objects.DataClasses.RelationshipManager = > System.Data。**Entity.Core。** Objects.DataClasses.RelationshipManager  
+- System.Data.EntityException = > System.Data。**Entity.Core**。EntityException  
+- System.Data.Objects.ObjectContext = > System.Data。**Entity.Core**。Objects.ObjectContext  
+- System.Data.Objects.DataClasses.RelationshipManager = > System.Data。**Entity.Core**。Objects.DataClasses.RelationshipManager  
 
 這些型別是在*Core*命名空間因為不會針對大部分的 DbContext 應用程式的直接用。 屬於 System.Data.Entity.dll 某些類型仍用於通常和直接 DbContext 為基礎的應用程式，並因此不已移到*Core*命名空間。 這些是：
 
-- System.Data.EntityState = > System.Data。**實體。** EntityState  
+- System.Data.EntityState = > System.Data。**實體**。EntityState  
 - System.Data.Objects.DataClasses.EdmFunctionAttribute = > System.Data。**Entity.DbFunctionAttribute**  
   > [!NOTE]
   > 這個類別已重新命名;使用舊名稱的類別仍然存在，且可運作，但它現在會標示為過時。  
 - System.Data.Objects.EntityFunctions = > System.Data。**Entity.DbFunctions**  
   > [!NOTE]
   > 這個類別已重新命名;使用舊名稱的類別仍然存在，且可運作，但它現在會標示為已過時）。  
-- 空間的類別 （例如 DbGeography、 DbGeometry） 已從 System.Data.Spatial = > System.Data。**實體。** 空間
+- 空間的類別 （例如 DbGeography、 DbGeometry） 已從 System.Data.Spatial = > System.Data。**實體**。空間
 
 > [!NOTE]
 > System.Data 命名空間中的某些類型是在 System.Data.dll 中不是 EF 組件。 未將這些型別，因此其命名空間保持不變。
