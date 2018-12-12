@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 07/03/2018
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 1edc7a20f54b2d26f899c93e98dfaf6d62c29f86
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 67eae6cb943b974cc9cd581b8054836d2e37b1e9
+ms.sourcegitcommit: a6082a2caee62029f101eb1000656966195cd6ee
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490723"
+ms.lasthandoff: 12/10/2018
+ms.locfileid: "53181990"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -43,6 +43,19 @@ Visual Studio 2017+ 延伸模組。 您可從現有的資料庫或 SQL Server Da
 這個 Visual Studio 2017 延伸模組增添了 ORM 設計工具，適用於 Entity Framework 6、Core 2.0 及 Core 2.1 類別的視覺設計。 程式碼會使用 T4 範本來產生，因此能夠完全自訂，以滿足各種需求。 繼承、單向及雙向關聯均有支援，列舉亦然，還能夠對類別進行色彩編碼以及新增文字區塊，以說明設計中可能較不易懂的部分。
 
 [Marketplace](https://marketplace.visualstudio.com/items?itemName=michaelsawczyn.EFDesigner) \(英文\)
+
+### <a name="catfactory"></a>CatFactory
+
+CatFactory 是 .NET Core 及 Entity Framework Core 的 Scaffolding 引擎。 CatFactory 的概念為從 SQL Server 執行個體匯出現有的資料庫，接著搭配資料庫模型中的代表、Scaffold 實體、組態、存放庫及更多。
+
+[GitHub 存放庫](https://github.com/hherzl/CatFactory.EntityFrameworkCore)
+
+### <a name="loresofts-entity-framework-core-generator"></a>LoreSoft 的 Entity Framework Core Generator
+
+Entity Framework Core Generator (efg) 是可以從現有資料庫產生 EF Core 模型的 .NET Core CLI 工具，更像是 `dotnet ef dbcontext scaffold`。 不過，其不同處為它也支援安全的程式碼 [regeneration](https://efg.loresoft.com/en/latest/regeneration/) (重新產生)。 重新產生可透過區域取代或剖析對應檔案達成。 此工具也支援產生檢視模型、驗證及物件對應程式程式碼。 如需詳細資訊，請參閱教學課程及產品文件連結。
+
+[教學課程](http://www.loresoft.com/Generate-ASP-NET-Web-API)
+[文件](https://efg.loresoft.com/en/latest/)
 
 ## <a name="extensions"></a>延伸模組
 
