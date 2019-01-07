@@ -5,12 +5,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 6bb12583-c39a-454c-8d83-d2a2793ca9ef
 uid: index
-ms.openlocfilehash: 2846545bdd7f29ba620592dacd288e3feb9ce6c4
-ms.sourcegitcommit: 064b09431f05848830e145a6cd65cad58881557c
+ms.openlocfilehash: f49db30ccc3a2017a8deba0dea1861071322d623
+ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/28/2018
-ms.locfileid: "52552564"
+ms.lasthandoff: 01/06/2019
+ms.locfileid: "54058710"
 ---
 <div id="main" class="v2">
     <div class="container">
@@ -96,7 +96,7 @@ ms.locfileid: "52552564"
                                                 </div>
                                                 <div class="cardText">
                                                     <h3>移植至 EF Core</h3>
-                                                    <p>將 EF 6 應用程式移植至 EF Core 並將它結束的指引。</p>
+                                                    <p>將現有的 EF 6 應用程式移植至 EF Core 的指導方針。</p>
                                                 </div>
                                             </div>
                                         </div>
