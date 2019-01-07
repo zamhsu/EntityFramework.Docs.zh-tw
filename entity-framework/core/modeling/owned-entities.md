@@ -5,12 +5,12 @@ ms.author: ansvyryd
 ms.date: 02/26/2018
 ms.assetid: 2B0BADCE-E23E-4B28-B8EE-537883E16DF3
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 58da3b6b951b3fa4aa04ec75f5759555c1f0cde5
-ms.sourcegitcommit: 39080d38e1adea90db741257e60dc0e7ed08aa82
+ms.openlocfilehash: fe7e07b8bd483fb3f9b672ee78ef7541f06a21a4
+ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/03/2018
-ms.locfileid: "50980024"
+ms.lasthandoff: 01/06/2019
+ms.locfileid: "54058769"
 ---
 # <a name="owned-entity-types"></a>擁有的實體類型
 
@@ -50,7 +50,7 @@ EF Core 可讓您可以永遠只會出現在導覽屬性的其他實體類型的
 ## <a name="collections-of-owned-types"></a>擁有的類型集合
 
 >[!NOTE]
-> 這項功能是在 EF Core 2.2 的新功能。
+> 此為 EF Core 2.2 中的新功能。
 
 若要設定擁有類型的集合`OwnsMany`應該用於`OnModelCreating`。 不過的主索引鍵不會設定依照慣例，因此它必須明確加以指定。 通常會使用複雜的金鑰，這些類型的合併的擁有者和其他的唯一屬性也可以在陰影狀態中的外部索引鍵的實體：
 
@@ -126,4 +126,4 @@ EF Core 可讓您可以永遠只會出現在導覽屬性的其他實體類型的
 
 ### <a name="shortcomings-in-previous-versions"></a>在舊版的缺點
 - 在 EF Core 2.0 中，巡覽至擁有無法在衍生的實體型別宣告實體類型，除非所擁有的實體會明確對應至個別的資料表擁有者階層架構。 EF Core 2.1 中已移除這項限制
-- 支援 en-us EF Core 2.0 和 2.1 唯一參考巡覽至擁有的類型。 EF Core 2.2 中已移除這項限制
+- 在 EF Core 2.0 和 2.1 的唯一參考所支援的擁有類型的導覽。 EF Core 2.2 中已移除這項限制

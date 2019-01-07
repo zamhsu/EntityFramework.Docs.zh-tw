@@ -3,12 +3,12 @@ title: 非同步查詢並儲存-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: 4ed4f5c13341f33ccff8325a5ddacd8f7b195a76
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: de702365251fd05c423c8590ccaefa7d8542ad02
+ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283819"
+ms.lasthandoff: 01/06/2019
+ms.locfileid: "54058756"
 ---
 # <a name="async-query-and-save"></a>非同步查詢和儲存
 > [!NOTE]
@@ -76,7 +76,7 @@ EF6 導入了非同步查詢並儲存使用的支援[async 和 await 關鍵字](
     }
 ```
 
- 
+ 
 
 ## <a name="create-a-synchronous-program"></a>建立同步的程式
 
@@ -96,7 +96,6 @@ EF6 導入了非同步查詢並儲存使用的支援[async 和 await 關鍵字](
             {
                 PerformDatabaseOperations();
 
-                Console.WriteLine();
                 Console.WriteLine("Quote of the day");
                 Console.WriteLine(" Don't worry about the world coming to an end today... ");
                 Console.WriteLine(" It's already tomorrow in Australia.");
@@ -115,16 +114,18 @@ EF6 導入了非同步查詢並儲存使用的支援[async 和 await 關鍵字](
                     {
                         Name = "Test Blog #" + (db.Blogs.Count() + 1)
                     });
+                    Console.WriteLine("Calling SaveChanges.");
                     db.SaveChanges();
+                    Console.WriteLine("SaveChanges completed.");
 
                     // Query for all blogs ordered by name
+                    Console.WriteLine("Executing query.");
                     var blogs = (from b in db.Blogs
                                 orderby b.Name
                                 select b).ToList();
 
                     // Write all blogs out to Console
-                    Console.WriteLine();
-                    Console.WriteLine("All blogs:");
+                    Console.WriteLine("Query completed with following results:");
                     foreach (var blog in blogs)
                     {
                         Console.WriteLine(" " + blog.Name);
@@ -145,20 +146,20 @@ EF6 導入了非同步查詢並儲存使用的支援[async 和 await 關鍵字](
 4.  查詢會傳回，而且結果會寫入**主控台**
 5.  每日會寫入至**主控台**
 
-![同步處理輸出](~/ef6/media/syncoutput.png) 
+![同步處理輸出](~/ef6/media/syncoutput.png) 
 
- 
+ 
 
 ## <a name="making-it-asynchronous"></a>讓非同步
 
 既然我們已啟動並執行程式，我們可以開始進行使用新的 async 和 await 關鍵字。 我們已對 Program.cs 中的下列變更
 
-1.  第 2 行： Using 陳述式**System.Data.Entity**命名空間可讓我們存取 EF 的非同步擴充方法。
-2.  第 4 行： Using 陳述式**System.Threading.Tasks**命名空間可讓我們使用**工作**型別。
-3.  行 12 & 18： 我們會擷取以監視進度的工作**PerformSomeDatabaseOperations** （第 12 行），然後封鎖程式執行此工作完成一次的所有工作的程式完成 （第 18 行）。
-4.  第 25 行： 我們已更新**PerformSomeDatabaseOperations**標示為**非同步**，並傳回**工作**。
-5.  第 35 行： 正在現在呼叫 SaveChanges 的非同步版本，並等候其完成。
-6.  列 42： 正在現在呼叫 ToList 的非同步版本，並等候結果。
+1.  第 2 行：Using 陳述式**System.Data.Entity**命名空間可讓我們存取 EF 的非同步擴充方法。
+2.  第 4 行：Using 陳述式**System.Threading.Tasks**命名空間可讓我們使用**工作**型別。
+3.  12 和 18 列：我們會擷取以監視進度的工作**PerformSomeDatabaseOperations** （第 12 行），然後封鎖程式執行此工作完成一次的所有工作的程式完成 （第 18 行）。
+4.  第 25 行：我們已更新**PerformSomeDatabaseOperations**標示為**非同步**，並傳回**工作**。
+5.  第 35 行：現在正在呼叫 SaveChanges 的非同步版本，並等候其完成。
+6.  42 命令列：現在，我們正在撥打 ToList 和等候結果的非同步版本。
 
 如 System.Data.Entity 命名空間中可用的擴充方法的完整清單，請參閱 QueryableExtensions 類別。 *您也需要將 「 使用 System.Data.Entity 」 使用陳述式。*
 
@@ -227,9 +228,9 @@ EF6 導入了非同步查詢並儲存使用的支援[async 和 await 關鍵字](
 4.  所有的查詢**部落格**傳送至資料庫*同樣地，managed 的執行緒沒有執行其他工作，而查詢則會處理在資料庫中。因為所有其他執行完成之後，執行緒將會就中止等候呼叫不過。*
 5.  查詢會傳回，而且結果會寫入**主控台**
 
-![非同步輸出](~/ef6/media/asyncoutput.png) 
+![非同步輸出](~/ef6/media/asyncoutput.png) 
 
- 
+ 
 
 ## <a name="the-takeaway"></a>因此請了解
 

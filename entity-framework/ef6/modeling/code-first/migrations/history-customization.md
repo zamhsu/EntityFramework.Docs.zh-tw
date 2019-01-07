@@ -3,12 +3,12 @@ title: 自訂的移轉歷程記錄資料表-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: ed5518f0-a9a6-454e-9e98-a4fa7748c8d0
-ms.openlocfilehash: e3faefc4b812ec4bc440ed2bb48747053d8cb1b3
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: eb19f367611a86f685557a6741a5f2f0bad6b718
+ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283689"
+ms.lasthandoff: 01/06/2019
+ms.locfileid: "54058743"
 ---
 # <a name="customizing-the-migrations-history-table"></a>自訂的移轉歷程記錄資料表
 > [!NOTE]
@@ -19,7 +19,7 @@ ms.locfileid: "46283689"
 
 ## <a name="what-is-migrations-history-table"></a>什麼是移轉歷程記錄資料表？
 
-移轉歷程記錄資料表是使用 Code First 移轉來儲存移轉套用至資料庫的詳細資料的資料表。 在資料庫中資料表的名稱是預設\_ \_MigrationHistory 它也會建立和套用第一個移轉執行資料庫時。 Entity Framework 5 在這個資料表會是系統資料表，如果應用程式使用 Microsoft Sql Server 資料庫。 這已但是變更在 Entity Framework 6 中，移轉歷程記錄資料表不再標示為系統資料表。
+移轉歷程記錄資料表是使用 Code First 移轉來儲存移轉套用至資料庫的詳細資料的資料表。 在資料庫中資料表的名稱是預設\_ \_MigrationHistory，而且它會建立時套用到資料庫的第一次移轉。 Entity Framework 5 在這個資料表會是系統資料表，如果應用程式使用 Microsoft Sql Server 資料庫。 這已但是變更在 Entity Framework 6 中，移轉歷程記錄資料表不再標示為系統資料表。
 
 ## <a name="why-customize-migrations-history-table"></a>為何要進行自訂的移轉歷程記錄資料表嗎？
 
@@ -43,7 +43,7 @@ ms.locfileid: "46283689"
 >[!NOTE]
 > 通常當您設定 EF 模型不需要呼叫基底。從覆寫的 OnModelCreating 方法因為 DbContext.OnModelCreating() 具有空白主體的 onmodelcreating （)。 這不是大小寫設定的移轉歷程記錄資料表時。 在此情況下第一個 onmodelcreating （） 覆寫中的做法是呼叫基底。在 onmodelcreating （)。 這會設定移轉歷程記錄資料表，然後調整覆寫方法中的預設方式。
 
-例如，假設您想要重新命名移轉歷程記錄資料表，並將它放至稱為"admin"的自訂結構描述。 此外，想要您重新命名 MigrationId 資料行移轉至您的 DBA\_識別碼。  您可以建立下列類別衍生自 HistoryContext 來達到此目的設定：
+例如，假設您想要重新命名移轉歷程記錄資料表，並將它放至稱為"admin"的自訂結構描述。 此外，想要您重新命名 MigrationId 資料行移轉至您的 DBA\_識別碼。  您可以建立下列類別衍生自 HistoryContext 來達到此目的設定：
 
 ``` csharp
     using System.Data.Common;
