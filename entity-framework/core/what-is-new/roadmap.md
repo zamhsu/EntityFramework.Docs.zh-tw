@@ -4,27 +4,53 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 834C9729-7F6E-4355-917D-DE3EE9FE149E
 uid: core/what-is-new/roadmap
-ms.openlocfilehash: a12d628a28515f0c6710bfa59bc6dcdf41fcb58b
-ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
+ms.openlocfilehash: f18de8e8cb4fbe81bb2f983a00c9dd2f46be6073
+ms.sourcegitcommit: a6082a2caee62029f101eb1000656966195cd6ee
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51688585"
+ms.lasthandoff: 12/10/2018
+ms.locfileid: "53182016"
 ---
 # <a name="entity-framework-core-roadmap"></a>Entity Framework Core 藍圖
 
 > [!IMPORTANT]
 > 請注意，後續版本的功能集與上市時間，隨時可能會變動，此外，即使我們試圖將此頁面保持在最新狀態，可能還是無法隨時反映我們最新的計劃。
 
-### <a name="ef-core-22"></a>EF Core 2.2
-
-此版本將包含許多 Bug 修正，還有相對較少的新功能。 此版本預計於 2018 年年底推出。 [EF Core 2.2 的新功能](xref:core/what-is-new/ef-core-2.2)包含此版本的詳細資料。 
-
 ### <a name="ef-core-30"></a>EF Core 3.0
 
-我們預計讓主要的 EF Core 版本與 .NET Core 3.0 及 ASP.NET 3.0 一致，但尚未完成其[發行計劃程序](#release-planning-process)。
+儘管您已購買 EF Core 2.2，我們的主要焦點現在是 EF Core 3.0，這對應至 .NET Core 3.0 與 ASP.NET 3.0 版。
 
-使用[問題追蹤器中的這項查詢](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+milestone%3A3.0.0+sort%3Areactions-%2B1-desc)，可查看暫時指派到 3.0 的工作項目。
+我們尚未完成任何新功能，因此在 2018 年 12 月 [發佈到 NuGet Gallery 的 EF Core 3.0 Preview 1 套件](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/3.0.0-preview.18572.1) 只包含[錯誤 (Bug) 修正、小幅改進與為了針對 3.0 工作做準備所進行的變更](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aissue+milestone%3A3.0.0+is%3Aclosed+label%3Aclosed-fixed)。
+
+事實上，我們仍必須精簡我們的 3.0 [版本規劃](#release-planning-process)，以確認我們有可在配置時間內完成的正確功能集。
+當我們有更清楚的資訊時將與您分享，這裡僅提供概略方向與我們要處理的工作：
+
+- **LINQ 改善 ([#12795](https://github.com/aspnet/EntityFrameworkCore/issues/12795))**：LINQ 可讓您以偏好的語言撰寫資料庫查詢，進而利用豐富的型別資訊優勢來取得 IntelliSense 與編譯階段型別檢查。
+  但是 LINQ 也可以讓您撰寫不限數目的複雜查詢，這通常是 LINQ 提供者所面臨的艱難挑戰。
+  在 EF Core 的前幾個版本中，我們透過搞清楚查詢的哪些部分可以轉譯為 SQL，接著允許查詢的剩餘部分在用戶端上的記憶體中執行來克服其中的一些問題。
+  這個用戶端執行在某些案例中是令人滿意的，但在其他案例中會導致無效率的查詢，而在應用程式部署到生產階段之前，您可能無法發現這種無效率的查詢。
+  在 EF Core 3.0 中，我們計畫變更我們的 LINQ 實作，以及測試它的方式。
+  目標是讓它更強固 (例如，避免補充版本發行中的查詢中斷)、能夠正確將更多運算式轉譯為 SQL、在更多案例中產生有效率的查詢，以及防止為偵測到無效率查詢的情況。
+
+- **Cosmos DB 支援 ([#8443](https://github.com/aspnet/EntityFrameworkCore/issues/8443))**：我們正在處理適用於 EF Core 的 Cosmos DB 提供者，以讓開發人員熟悉 EF 程式設計模型，以輕鬆地使用 Azure Cosmos DB 做為應用程式資料庫。
+  目標是讓 .NET 開發人員能更輕鬆地發揮 Cosmos DB 的優點，例如全球散發、「一律可用」可用性、彈性的延展能力，以及低延遲。
+  提供者將啟用大部分的 EF Core 功能，例如自動變更追蹤、LINQ 與值轉換 (根據 Cosmos DB 中的 SQL API)。 我們在 EF Core 2.2 之前開始此工作，而且[我們已建立一些預覽版提供者供使用](https://blogs.msdn.microsoft.com/dotnet/2018/10/17/announcing-entity-framework-core-2-2-preview-3/)。
+  新的計畫是以 EF Core 3.0 為基礎繼續開發提供者。   
+
+- **C# 8.0 支援 ([#12047](https://github.com/aspnet/EntityFrameworkCore/issues/12047))**：我們想要讓客戶利用 [C# 8.0 中的新功能](https://blogs.msdn.microsoft.com/dotnet/2018/11/12/building-c-8-0/)，例如非同步串流 (包括 await for each) 與可為 Null 值參考類型 (當使用 EF Core 時)。
+
+- **反向工程資料庫檢視到查詢類型 ([#1679](https://github.com/aspnet/EntityFrameworkCore/issues/1679))**：在 EF Core 2.1 中，我們已加入對查詢類型的支援，它可以代表可從資料庫讀取但無法上傳的資料。
+  查詢類型非常適用於對應資料庫檢視，因此在 EF Core 3.0 中，我們想要將針對資料庫檢視建立查詢類型的作業自動化。
+
+- **屬性包實體 ([#13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) 與 [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914))**：此功能是有關於啟用會在已編製索引之屬性內而非正常屬性內存放資料的實體，也有關於能夠使用相同.NET 類別的執行個體 (可能是像 `Dictionary<string, object>` 這麼簡單的東西) 以代表相同 EF Core 模型中的不同實體類型。
+  此功能是在不需要聯結實體的情況下支援多對多關聯性的墊腳石，這是使用者最希望擁有的 EF Core 改良功能。
+
+- **.NET Core 上的 EF 6.3 ([EF6 #271](https://github.com/aspnet/EntityFramework6/issues/271))**：我們了解許多現有的應用程式都使用舊版 EF，而且因為要獲得 .NET Core 的優點而將它們移植到 EF Core 有時候需要非常多的精力。
+  因此，我們會讓下一個版本的 EF 6 能夠在 .NET Core 3.0 上直執行。
+  我們這樣做的原因是要讓您能以變更最小的方式移植現有的應用程式。
+  將有一些限制 (例如，它將需要新的提供者，將不會啟用 SQL Server 的空間支援)，而且沒有針對 EF 6 規劃的新功能。
+
+同時，您可以使用[問題追蹤器中的此查詢](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+milestone%3A3.0.0+sort%3Areactions-%2B1-desc)來查看暫時指派到 3.0 的工作項目。
 
 ## <a name="schedule"></a>排程
 
