@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 834C9729-7F6E-4355-917D-DE3EE9FE149E
 uid: core/what-is-new/roadmap
-ms.openlocfilehash: f18de8e8cb4fbe81bb2f983a00c9dd2f46be6073
-ms.sourcegitcommit: a6082a2caee62029f101eb1000656966195cd6ee
+ms.openlocfilehash: 7eba9e1a8e145ef407f844ff3a3ab3069495b7ae
+ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/10/2018
-ms.locfileid: "53182016"
+ms.lasthandoff: 01/06/2019
+ms.locfileid: "54058730"
 ---
 # <a name="entity-framework-core-roadmap"></a>Entity Framework Core 藍圖
 

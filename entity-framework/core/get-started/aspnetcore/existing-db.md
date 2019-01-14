@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 08/02/2018
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: 23cd53b0e162afc5db0243b7032bb9c5f18bfb35
-ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
+ms.openlocfilehash: c8acb95395968f710e6b896de6c3598cb7b23676
+ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51688689"
+ms.lasthandoff: 01/06/2019
+ms.locfileid: "54058782"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>在 ASP.NET Core 上使用 EF Core 搭配現有資料庫的使用者入門
 
@@ -48,7 +48,7 @@ ms.locfileid: "51688689"
 * [檔案] > [新增] > [專案...]
 * 從左側功能表中，選取 **[已安裝] > [Visual C#] > [Web]**
 * 選取 [ASP.NET Core Web 應用程式] 專案範本
-* 輸入 **EFGetStarted.AspNetCore.ExistingDb** 作為名稱，然後按一下 [確定]
+* 輸入 **EFGetStarted.AspNetCore.ExistingDb** 做為名稱 (它必須與程式碼中稍後使用的命名空間完全相符) 並按一下 [確定] 
 * 等候 [新增 ASP.NET Core Web 應用程式] 對話方塊出現
 * 請確定目標架構下拉式清單設定為 **.NET Core**，然後版本下拉式清單設定為 **ASP.NET Core 2.1**
 * 選取 [Web 應用程式 (模型-檢視-控制器)] 範本

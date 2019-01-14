@@ -5,12 +5,12 @@ ms.author: riande
 ms.date: 08/03/2018
 ms.assetid: e153627f-f132-4c11-b13c-6c9a607addce
 uid: core/get-started/aspnetcore/new-db
-ms.openlocfilehash: 2248c60045a914c902f1c958a86c69b283abd722
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: 4734586adc89e9c1d866a1b4accd8b5e51fe2bb0
+ms.sourcegitcommit: ebf661025d2ad2b62466fa7bf0e0772a7811cbe7
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022232"
+ms.lasthandoff: 01/11/2019
+ms.locfileid: "54211162"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-a-new-database"></a>在 ASP.NET Core 上使用 EF Core 搭配新資料庫的使用者入門
 
@@ -54,7 +54,7 @@ ms.locfileid: "50022232"
   * 確認 [驗證] 已設為 [無任何驗證]
   * 按一下 [確定] 
 
-警告：如果您針對 [驗證] 使用 [個別使用者帳戶] 而不是 [無]，則系統會將 Entity Framework Core 模型新增至 `Models\IdentityModel.cs` 中的專案。 您可利用在本教學課程中所學到的技術，選擇新增第二個模型，或是擴充此現有模型以包含您的實體類別。
+警告:如果您針對 [驗證] 使用 [個別使用者帳戶] 而不是 [無]，則系統會將 Entity Framework Core 模型新增至 `Models\IdentityModel.cs` 中的專案。 您可利用在本教學課程中所學到的技術，選擇新增第二個模型，或是擴充此現有模型以包含您的實體類別。
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -201,7 +201,7 @@ ms.locfileid: "50022232"
 Scaffolding 引擎會建立下列檔案：
 
 * 控制器 (*Controllers/BlogsController.cs*)
-* [建立]、[刪除]、[詳細資料]、[編輯] 和 [索引] 頁面的 Razor 檢視 (_Views/Movies/*.cshtml_)
+* [建立]、[刪除]、[詳細資料]、[編輯] 和 [索引] 頁面的 Razor 檢視 (_Views/Blogs/*.cshtml_)
 
 ## <a name="run-the-application"></a>執行應用程式
 
@@ -228,6 +228,6 @@ dotnet run
 
 ## <a name="additional-resources"></a>其他資源
 
-* [教學課程：開始使用 .NET Core 上的 EF Core 與使用 SQLite 的新資料庫](xref:core/get-started/netcore/new-db-sqlite)
+* [教學課程：在 ASP.NET Core 上使用 EF Core 搭配新資料庫的使用者入門](xref:core/get-started/netcore/new-db-sqlite)
 * [教學課程：開始使用 ASP.NET Core 中的 Razor Pages](https://docs.microsoft.com/aspnet/core/tutorials/razor-pages/razor-pages-start)
 * [教學課程：ASP.NET Core 中的 Razor Pages 與 Entity Framework Core](https://docs.microsoft.com/aspnet/core/data/ef-rp/intro)
