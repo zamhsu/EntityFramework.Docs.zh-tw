@@ -5,12 +5,12 @@ ms.author: ansvyryd
 ms.date: 11/02/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/data-seeding
-ms.openlocfilehash: 8f28dfea12461572ade8fbf3910ebd216dafb389
-ms.sourcegitcommit: fa863883f1193d2118c2f9cee90808baa5e3e73e
+ms.openlocfilehash: 1c450b142573368d043430f55a3144b6696a8691
+ms.sourcegitcommit: b4a5ed177b86bf7f81602106dab6b4acc18dfc18
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52857425"
+ms.lasthandoff: 01/15/2019
+ms.locfileid: "54316630"
 ---
 # <a name="data-seeding"></a>資料植入
 
@@ -55,6 +55,8 @@ ms.locfileid: "52857425"
 > 如果您要自動化的部署過程中套用移轉即可[建立的 SQL 指令碼](xref:core/managing-schemas/migrations/index#generate-sql-scripts)，可以預覽之前執行。
 
 或者，您可以使用`context.Database.EnsureCreated()`來建立新的資料庫包含種子資料，例如針對測試資料庫，或使用的記憶體提供者或任何非關聯性的資料庫。 請注意，如果資料庫已經存在，`EnsureCreated()`都不會更新資料庫中的結構描述或種子資料。 關聯式資料庫，您不應該呼叫`EnsureCreated()`如果您打算使用移轉。
+
+### <a name="limitations-of-model-seed-data"></a>模型種子資料的限制
 
 這種類型的種子資料由管理移轉，需要產生而不需要連線到資料庫的指令碼，以更新資料庫中的資料。 這具有一些限制︰
 * 主索引鍵值，就必須指定即使通常會由資料庫產生。 它會用來偵測之間移轉的資料變更。
