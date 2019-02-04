@@ -3,12 +3,12 @@ title: Entity Framework 6 提供者模型-EF6
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 066832F0-D51B-4655-8BE7-C983C557E0E4
-ms.openlocfilehash: d07a8689fe968bb1512095a59a61abc7ac346a31
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: 8cbf6f87e0936f374c3d8a0c15a0e1d9c828f764
+ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022320"
+ms.lasthandoff: 02/03/2019
+ms.locfileid: "55668748"
 ---
 # <a name="the-entity-framework-6-provider-model"></a>Entity Framework 6 提供者模型
 
@@ -28,7 +28,7 @@ EF 提供者其實這些服務 （適用於基底類別），從擴充或實作 
 
 ### <a name="dbproviderfactory"></a>DbProviderFactory
 
-EF 取決於衍生自特定型別[System.Data.Common.DbProviderFactory](https://msdn.microsoft.com/library/system.data.common.dbproviderfactory.aspx)執行所有的低層級的資料庫存取權。 DbProviderFactory 不是實際的 EF 的一部分，而是改為在.NET Framework 中的 ADO.NET 提供者做為進入點的類別可以使用 EF，其他的 O/RMs 或直接由應用程式來取得執行個體的連接、 命令、 參數和其他的 ADO.NET 抽象概念，在提供者無關的方式。 DbProviderFactory 的詳細資訊位於[ADO.NET 的 MSDN 文件](https://msdn.microsoft.com/library/a6cd7c08.aspx)。
+EF 取決於衍生自特定型別[System.Data.Common.DbProviderFactory](https://msdn.microsoft.com/library/system.data.common.dbproviderfactory.aspx)執行所有的低層級的資料庫存取權。 DbProviderFactory 不是實際的 EF 的一部分，而是改為在.NET Framework 中的 ADO.NET 提供者做為進入點的類別可以使用 EF，其他的 O/RMs 或直接由應用程式來取得執行個體的連接、 命令、 參數和其他的 ADO.NET 抽象概念，在提供者無關的方式。 DbProviderFactory 的詳細資訊可在[ADO.NET 的 MSDN 文件](https://msdn.microsoft.com/library/a6cd7c08.aspx)。
 
 ### <a name="dbproviderservices"></a>DbProviderServices
 

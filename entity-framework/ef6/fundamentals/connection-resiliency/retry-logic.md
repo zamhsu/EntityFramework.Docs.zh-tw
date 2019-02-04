@@ -3,12 +3,12 @@ title: 連接恢復功能，然後重試邏輯-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 47d68ac1-927e-4842-ab8c-ed8c8698dff2
-ms.openlocfilehash: 09ebed18b43f864af36b6931f45638f3a3056229
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 7d6aa870cc32a2b344457fbb04525a7c2c8d1c61
+ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490801"
+ms.lasthandoff: 02/03/2019
+ms.locfileid: "55668761"
 ---
 # <a name="connection-resiliency-and-retry-logic"></a>連接恢復功能，然後重試邏輯
 > [!NOTE]
@@ -124,7 +124,7 @@ using (var db = new BloggingContext())
 
 不支援時使用的重試執行策略，因為 EF 不知道的任何先前的作業，以及如何重試它們。 例如，如果第二個 SaveChanges 失敗然後 EF 不會再有重試第一次的 SaveChanges 呼叫所需的資訊。  
 
-### <a name="workaround-suspend-execution-strategy"></a>因應措施： 暫停執行策略  
+### <a name="workaround-suspend-execution-strategy"></a>因應措施：暫停執行策略  
 
 一個可能的因應措施是暫止正在重試執行策略需要使用使用者的程式碼片段的起始交易。 若要這樣做最簡單的方式是加入 SuspendExecutionStrategy 旗標，以您的程式碼基礎組態類別，並將變更執行策略 lambda，來設定旗標時，傳回的預設值 (非 retying) 執行策略。  
 
@@ -149,7 +149,7 @@ namespace Demo
         {
             get
             {
-                return (bool?)CallContext.LogicalGetData("SuspendExecutionStrategy")  false;
+                return (bool?)CallContext.LogicalGetData("SuspendExecutionStrategy") ?? false;
             }
             set
             {
@@ -185,7 +185,7 @@ using (var db = new BloggingContext())
 }
 ```  
 
-### <a name="workaround-manually-call-execution-strategy"></a>因應措施： 以手動方式呼叫的執行策略  
+### <a name="workaround-manually-call-execution-strategy"></a>因應措施：以手動方式呼叫執行策略  
 
 另一個選項是邏輯的手動使用執行策略，並提供完整來執行，以便它可以重試一次的所有項目如果其中一個作業失敗。 我們仍需要暫停執行策略-使用此技術-如上所示，如此可重試程式碼區塊內使用的任何內容不會嘗試重試一次。  
 
