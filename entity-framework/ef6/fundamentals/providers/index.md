@@ -3,12 +3,12 @@ title: Entity Framework 提供者 - EF6
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 7BFB7763-CD6C-4520-93A2-7B265F5FA586
-ms.openlocfilehash: 0cfe6c30d6533b0207f78a031d342847a7f68632
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: f6e34d1273bd1004ce9d1610ce3613068088eb5e
+ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022219"
+ms.lasthandoff: 02/03/2019
+ms.locfileid: "55668735"
 ---
 # <a name="entity-framework-6-providers"></a>Entity Framework 6 提供者
 > [!NOTE]
@@ -31,13 +31,13 @@ Entity Framework 目前正在開放原始碼授權下進行開發，EF6 和更�
 *   [**CData Software 提供者**](http://www.cdata.com/ado/)
     *   有來自 [CData Software](http://www.cdata.com/ado/) 且適用於各種資料存放區的協力廠商提供者，包括 Salesforce、 Azure 表格儲存體、MySql 等等
 *   **Firebird 提供者**
-    *   以 [NuGet 套件](http://www.nuget.org/packages/FirebirdSql.Data.FirebirdClient/)的形式提供給您
+    *   以 [NuGet 套件](https://www.nuget.org/packages/EntityFramework.Firebird/)的形式提供給您
 *   **Visual Fox Pro 提供者**
     *   以 [NuGet 套件](https://www.nuget.org/packages/VFPEntityFrameworkProvider2/)的形式提供給您
 *   **MySQL**
-    *   [MySQL Connector/Net](http://dev.mysql.com/downloads/connector/net/)
+    *   [MySQL Connector/NET for Entity Framework](https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework60.html)
 *   **PostgreSQL**
-    *   Npgsql 是以 [NuGet 套件](http://www.nuget.org/packages/Npgsql.EF6/)的形式提供給您
+    *   Npgsql 是以 [NuGet 套件](https://www.nuget.org/packages/EntityFramework6.Npgsql/)的形式提供給您
 *   **Oracle**
     *   ODP.NET 是以 [NuGet 套件](https://www.nuget.org/packages/Oracle.ManagedDataAccess.EntityFramework/)的形式提供給您
 

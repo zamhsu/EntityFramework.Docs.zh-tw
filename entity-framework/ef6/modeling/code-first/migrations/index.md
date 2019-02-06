@@ -3,12 +3,12 @@ title: Code First 移轉 - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 36591d8f-36e1-4835-8a51-90f34f633d1e
-ms.openlocfilehash: f408ef861a2992783142fa1483d1433ca710399a
-ms.sourcegitcommit: 15022dd06d919c29b1189c82611ea32f9fdc6617
+ms.openlocfilehash: e5a91af73bab9d45b0f1f4242ce503c6b6f407f6
+ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/27/2018
-ms.locfileid: "47415792"
+ms.lasthandoff: 02/03/2019
+ms.locfileid: "55668696"
 ---
 # <a name="code-first-migrations"></a>Code First 移轉
 如果您使用 Code First 工作流程，則建議使用 Code First 移轉來改善應用程式的資料庫結構描述。 移轉會提供一組工具，該工具允許下列項目：
@@ -237,7 +237,7 @@ Code First 移轉在建立這些變更方面做得非常好，但我們可能仍
 
 已編輯的移轉已準備好，現在請使用 **Update-Database** 將資料庫保持最新狀態。 這次讓我們指定 **–Verbose** 旗標，讓您可以看到 Code First 移轉正在執行的 SQL。
 
--   在套件管理員主控台中執行 **-Verbose** 命令。
+-   在套件管理員主控台中執行 **Update-Database –Verbose** 命令。
 
 ## <a name="data-motion--custom-sql"></a>資料動作/自訂 SQL
 
@@ -280,7 +280,7 @@ Code First 移轉在建立這些變更方面做得非常好，但我們可能仍
 
 已編輯的移轉看起來一切良好，現在請使用 **Update-Database** 將資料庫保持最新狀態。 我們將會指定 **–Verbose** 旗標，讓我們能夠查看為資料庫執行的 SQL。
 
--   在套件管理員主控台中執行 **-Verbose** 命令。
+-   在套件管理員主控台中執行 **Update-Database –Verbose** 命令。
 
 ## <a name="migrate-to-a-specific-version-including-downgrade"></a>移轉至特定版本 (包括降級)
 
@@ -288,7 +288,7 @@ Code First 移轉在建立這些變更方面做得非常好，但我們可能仍
 
 假設我們想要在執行 **AddBlogUrl** 移轉後，將資料庫移轉到其原先的狀態。 我們可以使用 **–TargetMigration** 參數來降級至此移轉。
 
--   在套件管理員主控台中執行 **Update-Database –TargetMigration: AddBlogUrl** 命令。
+-   在套件管理員主控台中執行 **Update-Database –TargetMigration:AddBlogUrl** 命令。
 
 此命令會為我們的  **AddBlogAbstract** 和  **AddPostClass** 移轉執行向下指令碼。
 
@@ -300,7 +300,7 @@ Code First 移轉在建立這些變更方面做得非常好，但我們可能仍
 
 -   請執行 **Update-database** 命令，但這次請指定 **–Script** 旗標，以便將變更寫入至指令碼，而非套用。 我們也會指定來源和目標移轉以產生指令碼。 我們希望指令碼從空的資料庫 (**$InitialDatabase**) 移轉至最新版本 (移轉 **AddPostAbstract**)。
     「如果您未指定目標移轉，則移轉會使用最新的移轉作為目標。如果您未指定來源移轉，則移轉會使用資料庫的目前狀態。」
--   在套件管理員主控台中執行 **Update-Database -Script -SourceMigration: $InitialDatabase -TargetMigration: AddPostAbstract** 命令
+-   在套件管理員主控台中執行 **Update-Database -Script -SourceMigration: $InitialDatabase -TargetMigration:AddPostAbstract** 命令
 
 Code First 移轉將執行移轉管線，但不會實際套用變更，而是將其寫入 .sql 檔案中。 一旦產生指令碼，即會在 Visual Studio 中開啟，供您檢視或儲存。
 
@@ -330,7 +330,7 @@ Code First 移轉將執行移轉管線，但不會實際套用變更，而是將
         {
             static void Main(string[] args)
             {
-                Database.SetInitializer(new MigrateDatabaseToLatestVersion\<BlogContext, Configuration>());
+                Database.SetInitializer(new MigrateDatabaseToLatestVersion<BlogContext, Configuration>());
 
                 using (var db = new BlogContext())
                 {
