@@ -4,12 +4,12 @@ author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: 58c79d477d590eea355a922b3e1233bbecb305cc
-ms.sourcegitcommit: a6082a2caee62029f101eb1000656966195cd6ee
+ms.openlocfilehash: 5ebc4edba07063ad5e77154adcde5f2664c0d748
+ms.sourcegitcommit: 85d17524d8e022f933cde7fc848313f57dfd3eb8
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/10/2018
-ms.locfileid: "53181977"
+ms.lasthandoff: 02/06/2019
+ms.locfileid: "55760518"
 ---
 # <a name="installing-entity-framework-core"></a>安裝 Entity Framework Core
 
