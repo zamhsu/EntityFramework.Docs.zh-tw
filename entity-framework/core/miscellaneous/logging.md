@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f6e35c6d-45b7-4258-be1d-87c1bb67438d
 uid: core/miscellaneous/logging
-ms.openlocfilehash: 65501b5ac03ae544c51b7fc1a07fa9eea849f1e3
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: 0a996403afdbe076b1690c98eeb305b40c4d1f4a
+ms.sourcegitcommit: 109a16478de498b65717a6e09be243647e217fb3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022141"
+ms.lasthandoff: 02/10/2019
+ms.locfileid: "55985570"
 ---
 # <a name="logging"></a>記錄
 
@@ -24,12 +24,15 @@ EF Core 自動記錄與機制整合的 ASP.NET Core 每當`AddDbContext`或`AddD
 
 記錄目前的 EF Core 需要其本身設定一或多個 ILoggerProvider ILoggerFactory。 常見的提供者都隨附在下列套件：
 
-* [Microsoft.Extensions.Logging.Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/)： 簡單的主控台記錄器。
-* [Microsoft.Extensions.Logging.AzureAppServices](https://www.nuget.org/packages/Microsoft.Extensions.Logging.AzureAppServices/)： 支援 Azure App Service '診斷 logs' 和 '記錄資料流' 功能。
-* [Microsoft.Extensions.Logging.Debug](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug/)： 記錄檔，以使用 System.Diagnostics.Debug.WriteLine() 偵錯工具監視。
-* [Microsoft.Extensions.Logging.EventLog](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventLog/)： 記錄至 Windows 事件記錄檔。
-* [Microsoft.Extensions.Logging.EventSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventSource/)： 支援 EventSource/EventListener。
-* [Microsoft.Extensions.Logging.TraceSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.TraceSource/)： 記錄檔，以使用 System.Diagnostics.TraceSource.TraceEvent() 的追蹤接聽程式。
+* [Microsoft.Extensions.Logging.Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/):簡單的主控台記錄器。
+* [Microsoft.Extensions.Logging.AzureAppServices](https://www.nuget.org/packages/Microsoft.Extensions.Logging.AzureAppServices/):支援 Azure App Service '診斷 logs' 和 '記錄資料流' 功能。
+* [Microsoft.Extensions.Logging.Debug](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug/):若要使用 System.Diagnostics.Debug.WriteLine() 偵錯工具監視的記錄檔。
+* [Microsoft.Extensions.Logging.EventLog](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventLog/):Windows 事件記錄檔的記錄檔。
+* [Microsoft.Extensions.Logging.EventSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventSource/):支援 EventSource/EventListener。
+* [Microsoft.Extensions.Logging.TraceSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.TraceSource/):若要使用 System.Diagnostics.TraceSource.TraceEvent() 的追蹤接聽程式的記錄檔。
+
+> [!NOTE]
+> 下列程式碼範例會使用`ConsoleLoggerProvider`有 2.2 版已而言已經過時的建構函式。 適當取代過時的記錄 Api 可在 3.0 版。 在此同時，它是放心忽略，並隱藏警告。
 
 安裝適當的套件之後, 應用程式應該建立 LoggerFactory / 單一全域執行個體。 例如，使用的主控台記錄器：
 
@@ -43,6 +46,9 @@ EF Core 自動記錄與機制整合的 ASP.NET Core 每當`AddDbContext`或`AddD
 > 它是非常重要的是，應用程式不會建立新的 ILoggerFactory 執行個體，每個內容執行個體。 這樣會導致記憶體流失和效能不佳。
 
 ## <a name="filtering-what-is-logged"></a>篩選記錄的內容
+
+> [!NOTE]
+> 下列程式碼範例會使用`ConsoleLoggerProvider`有 2.2 版已而言已經過時的建構函式。 適當取代過時的記錄 Api 可在 3.0 版。 在此同時，它是放心忽略，並隱藏警告。
 
 註冊 ILoggerProvider 時將它設定為最簡單的方式來篩選記錄的內容。 例如: 
 
