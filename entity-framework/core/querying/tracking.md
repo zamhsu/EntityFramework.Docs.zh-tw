@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: e17e060c-929f-4180-8883-40c438fbcc01
 uid: core/querying/tracking
-ms.openlocfilehash: 985adc795f379199a3bacc985843f32f3168cf64
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 6c5d516fcb3950ae168860029660e1b1061546b8
+ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993351"
+ms.lasthandoff: 02/03/2019
+ms.locfileid: "55668774"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>追蹤與不追蹤的查詢
 
@@ -63,7 +63,7 @@ using (var context = new BloggingContext())
 ```
 
 > [!NOTE]  
-> 不追蹤的查詢仍會在執行查詢內執行識別解析。 如果結果集多次包含同一個實體，則將針對結果集中的每個相符項目傳回實體類別的相同執行個體。 不過，會使用弱式參考來持續追蹤已經傳回的實體。 如果先前具有相同身分識別的結果超出範圍，且執行記憶體回收，您可能會得到新的實體執行個體。 如需詳細資訊，請參閱[查詢的運作方式](overview.md)。
+> 不追蹤的查詢仍會在執行查詢內，進行識別解析。 如果結果集多次包含同一個實體，則將針對結果集中的每個相符項目傳回實體類別的相同執行個體。 不過，會使用弱式參考來持續追蹤已經傳回的實體。 如果先前具有相同身分識別的結果超出範圍，且執行記憶體回收，您可能會得到新的實體執行個體。 如需詳細資訊，請參閱[查詢的運作方式](overview.md)。
 
 ## <a name="tracking-and-projections"></a>追蹤和預測
 
