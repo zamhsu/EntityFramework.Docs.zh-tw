@@ -5,7 +5,8 @@
       "docset_name": "ef",
       "build_source_folder": "entity-framework",
       "build_output_subfolder": "ef",
-      "locale": "zh-TW",
+      "locale": "zh-tw",
+      "version": 0,
       "open_to_public_contributors": true,
       "type_mapping": {
         "Conceptual": "Content",
@@ -27,10 +28,11 @@
   "continue_with_document_error": true,
   "skip_source_output_uploading": false,
   "need_preview_pull_request": true,
+  "need_pr_comments": false,
   "dependent_repositories": [
     {
       "path_to_root": "_themes",
-      "url": "https://github.com/Microsoft/templates.docs.msft.zh-TW",
+      "url": "https://github.com/Microsoft/templates.docs.msft.zh-tw",
       "branch": "master",
       "branch_mapping": {}
     },
