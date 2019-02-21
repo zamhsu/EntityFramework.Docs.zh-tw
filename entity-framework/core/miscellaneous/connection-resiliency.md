@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 11/15/2016
 ms.assetid: e079d4af-c455-4a14-8e15-a8471516d748
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: 729cf9b8c038ea2adba8c79c68d9f6fb1676fefa
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: 6d8cf117dfd94524a53e10bb4a23c2a44c4c8e7b
+ms.sourcegitcommit: 33b2e84dae96040f60a613186a24ff3c7b00b6db
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022180"
+ms.lasthandoff: 02/21/2019
+ms.locfileid: "56459168"
 ---
 # <a name="connection-resiliency"></a>連線復原能力
 
@@ -17,9 +17,21 @@ ms.locfileid: "50022180"
 
 例如，SQL Server 提供者會包含專為 SQL Server （包括 SQL Azure） 的執行策略。 它會知道可以重試例外狀況類型，並有合理的預設值的最大重試，重試等之間的延遲。
 
-設定您內容的選項時，將指定的執行策略。 這是通常位於`OnConfiguring`方法在衍生的內容中，或在`Startup.cs`ASP.NET Core 應用程式。
+設定您內容的選項時，將指定的執行策略。 這是通常位於`OnConfiguring`您衍生內容的方法：
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#OnConfiguring)]
+
+或在`Startup.cs`ASP.NET Core 應用程式：
+
+``` csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext<PicnicContext>(
+        options => options.UseSqlServer(
+            "<connection string>",
+            providerOptions => providerOptions.EnableRetryOnFailure()));
+}
+```
 
 ## <a name="custom-execution-strategy"></a>自訂的執行策略
 
@@ -41,7 +53,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 不過，如果您的程式碼會啟動交易，使用`BeginTransaction()`您正在定義您自己的群組作業，也必須被視為一個單位，而且在交易內的所有項目則需要播放應該會發生失敗。 如果您嘗試這樣做，使用執行策略時，您會收到類似下列的例外狀況：
 
-> InvalidOperationException： 設定的執行策略 'SqlServerRetryingExecutionStrategy' 不支援使用者起始的異動。 使用 'DbContext.Database.CreateExecutionStrategy()' 所傳回的執行策略，將異動中的所有作業當做一個可重試的單位來執行。
+> InvalidOperationException:已設定的執行策略 'SqlServerRetryingExecutionStrategy' 不支援使用者起始的異動。 使用 'DbContext.Database.CreateExecutionStrategy()' 所傳回的執行策略，將異動中的所有作業當做一個可重試的單位來執行。
 
 解決方法是以代表所有項目需要執行的委派，以手動方式叫用的執行策略。 如果發生暫時性失敗，執行策略會再叫用委派一次。
 

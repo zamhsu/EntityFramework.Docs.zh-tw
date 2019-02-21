@@ -3,19 +3,19 @@ title: EF4、 EF5，與 EF6 的效能考量
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d6d5a465-6434-45fa-855d-5eb48c61a2ea
-ms.openlocfilehash: c87c1412cb23abf232663d7e4f44eef5f7818ea2
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: 4c1f03533cf6df49555c3ef8d09d5949b9a3335c
+ms.sourcegitcommit: 33b2e84dae96040f60a613186a24ff3c7b00b6db
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022385"
+ms.lasthandoff: 02/21/2019
+ms.locfileid: "56459207"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>EF 4、 5 和 6 的效能考量
 David Obando、 Eric Dettinger 和其他項目
 
-發行日期： 4 月 2012
+發行日期：2012 年 4 月
 
-上次更新日期： 2014 年
+上次更新日期：2014 年
 
 ------------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ Entity Framework 6 不足的頻外版本且不需依賴.NET 所隨附的 Entity 
 |:-----------------------------------------------------------------------------------------------------|:--------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `using(var db = new MyContext())` <br/> `{`                                                          | 內容建立          | Medium                                                                                                                                                                                                                                                                                                                                                                                                                        | Medium                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `  var q1 = ` <br/> `    from c in db.Customers` <br/> `    where c.Id == id1` <br/> `    select c;` | 查詢運算式建立 | 低                                                                                                                                                                                                                                                                                                                                                                                                                           | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `  var c1 = q1.First();`                                                                             | LINQ 查詢執行      | 中繼資料載入： 高但快取 <br/> -檢視產生： 可能很高，但快取 <br/> 參數的評估： 中型 <br/> -Query 轉譯： 中型 <br/> -具體化程式都會產生： 中度，但快取 <br/> -資料庫執行查詢： 可能會很高 <br/> + C <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> 物件具體化： 中型 <br/> 身分識別查閱： 中型 | 中繼資料載入： 高但快取 <br/> -檢視產生： 可能很高，但快取 <br/> 參數的評估： 低 <br/> -Query 轉譯： 中度，但快取 <br/> -具體化程式都會產生： 中度，但快取 <br/> -資料庫執行查詢： 可能會很高 （較佳的查詢，在某些情況下） <br/> + C <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> 物件具體化： 中型 <br/> 身分識別查閱： 中型 | 中繼資料載入： 高但快取 <br/> -檢視產生： 中度，但快取 <br/> 參數的評估： 低 <br/> -Query 轉譯： 中度，但快取 <br/> -具體化程式都會產生： 中度，但快取 <br/> -資料庫執行查詢： 可能會很高 （較佳的查詢，在某些情況下） <br/> + C <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> 物件具體化： 中度 （更快速比 EF5） <br/> 身分識別查閱： 中型 |
+| `  var c1 = q1.First();`                                                                             | LINQ 查詢執行      | 中繼資料載入：高，但快取 <br/> 檢視產生：極高，但快取 <br/> 參數的評估：Medium <br/> 查詢翻譯：Medium <br/> -具體化程式都會產生：但快取中 <br/> 執行資料庫查詢：可能會很高 <br/> + C <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> 物件具體化：Medium <br/> 身分識別查閱：Medium | 中繼資料載入：高，但快取 <br/> 檢視產生：極高，但快取 <br/> 參數的評估：低 <br/> 查詢翻譯：但快取中 <br/> -具體化程式都會產生：但快取中 <br/> 執行資料庫查詢：可能會很高 （較佳的查詢，在某些情況下） <br/> + C <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> 物件具體化：Medium <br/> 身分識別查閱：Medium | 中繼資料載入：高，但快取 <br/> 檢視產生：但快取中 <br/> 參數的評估：低 <br/> 查詢翻譯：但快取中 <br/> -具體化程式都會產生：但快取中 <br/> 執行資料庫查詢：可能會很高 （較佳的查詢，在某些情況下） <br/> + C <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> 物件具體化：中型 （更 EF5） <br/> 身分識別查閱：Medium |
 | `}`                                                                                                  | Connection.Close          | 低                                                                                                                                                                                                                                                                                                                                                                                                                           | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 
@@ -53,7 +53,7 @@ Entity Framework 6 不足的頻外版本且不需依賴.NET 所隨附的 Entity 
 |:-----------------------------------------------------------------------------------------------------|:--------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `using(var db = new MyContext())` <br/> `{`                                                          | 內容建立          | Medium                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Medium                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `  var q1 = ` <br/> `    from c in db.Customers` <br/> `    where c.Id == id1` <br/> `    select c;` | 查詢運算式建立 | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `  var c1 = q1.First();`                                                                             | LINQ 查詢執行      | 中繼資料~~載入~~查閱：~~高但快取~~低 <br/> -檢視~~代~~查閱：~~可能很高，但快取~~低 <br/> 參數的評估： 中型 <br/> -Query~~翻譯~~查閱： 中型 <br/> -具體化程式都會~~代~~查閱：~~中型但快取~~低 <br/> -資料庫執行查詢： 可能會很高 <br/> + C <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> 物件具體化： 中型 <br/> 身分識別查閱： 中型 | 中繼資料~~載入~~查閱：~~高但快取~~低 <br/> -檢視~~代~~查閱：~~可能很高，但快取~~低 <br/> 參數的評估： 低 <br/> -Query~~翻譯~~查閱：~~中型但快取~~低 <br/> -具體化程式都會~~代~~查閱：~~中型但快取~~低 <br/> -資料庫執行查詢： 可能會很高 （較佳的查詢，在某些情況下） <br/> + C <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> 物件具體化： 中型 <br/> 身分識別查閱： 中型 | 中繼資料~~載入~~查閱：~~高但快取~~低 <br/> -檢視~~代~~查閱：~~中型但快取~~低 <br/> 參數的評估： 低 <br/> -Query~~翻譯~~查閱：~~中型但快取~~低 <br/> -具體化程式都會~~代~~查閱：~~中型但快取~~低 <br/> -資料庫執行查詢： 可能會很高 （較佳的查詢，在某些情況下） <br/> + C <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> 物件具體化： 中度 （更快速比 EF5） <br/> 身分識別查閱： 中型 |
+| `  var c1 = q1.First();`                                                                             | LINQ 查詢執行      | 中繼資料~~載入~~查閱：~~高，但快取~~低 <br/> -檢視~~產生~~查閱：~~可能很高，但快取~~低 <br/> 參數的評估：Medium <br/> -Query~~翻譯~~查閱：Medium <br/> -具體化程式都會~~產生~~查閱：~~中度，但快取~~低 <br/> 執行資料庫查詢：可能會很高 <br/> + C <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> 物件具體化：Medium <br/> 身分識別查閱：Medium | 中繼資料~~載入~~查閱：~~高，但快取~~低 <br/> -檢視~~產生~~查閱：~~可能很高，但快取~~低 <br/> 參數的評估：低 <br/> -Query~~翻譯~~查閱：~~中度，但快取~~低 <br/> -具體化程式都會~~產生~~查閱：~~中度，但快取~~低 <br/> 執行資料庫查詢：可能會很高 （較佳的查詢，在某些情況下） <br/> + C <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> 物件具體化：Medium <br/> 身分識別查閱：Medium | 中繼資料~~載入~~查閱：~~高，但快取~~低 <br/> -檢視~~產生~~查閱：~~中度，但快取~~低 <br/> 參數的評估：低 <br/> -Query~~翻譯~~查閱：~~中度，但快取~~低 <br/> -具體化程式都會~~產生~~查閱：~~中度，但快取~~低 <br/> 執行資料庫查詢：可能會很高 （較佳的查詢，在某些情況下） <br/> + C <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> 物件具體化：中型 （更 EF5） <br/> 身分識別查閱：Medium |
 | `}`                                                                                                  | Connection.Close          | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 
@@ -207,7 +207,7 @@ Entity Framework 有快取的內建以下列形式：
 
 #### <a name="321-some-notes-about-query-plan-caching"></a>3.2.1 某些查詢計劃快取的注意事項
 
--   查詢計畫快取會共用所有的查詢類型： Entity SQL，LINQ to Entities，和 CompiledQuery 物件。
+-   查詢計畫快取會共用所有的查詢類型：Entity SQL，LINQ to Entities，和 CompiledQuery 物件。
 -   根據預設，查詢計劃啟用快取 Entity SQL 查詢，是否執行了 EntityCommand 來透過或 ObjectQuery。 它也會啟用預設 linq to Entities 查詢中在.NET 4.5 中，Entity Framework 和 Entity Framework 6
     -   查詢計畫快取可停用 （在 EntityCommand 或 ObjectQuery） EnablePlanCaching 屬性設定為 false。 例如: 
 ``` csharp
@@ -319,8 +319,6 @@ AggregatingSubtotals 查詢是最複雜的測試使用的查詢。 如預期般�
 撰寫任何 LINQ 查詢的功能非常有用。若要這樣做，您只需叫用方法之後 IQueryable 這類*skip （)* 或是*count （)*。 不過，所以基本上會傳回新的 IQueryable 物件。 沒有要阻止您技術上透過 CompiledQuery 撰寫項目，這樣會導致產生新的 IQueryable 物件所需要傳遞計劃編譯器透過一次。
 
 某些元件，將使用撰寫 IQueryable 的物件，以啟用進階的功能。 例如，ASP。NET 的 GridView 可以是資料繫結至 IQueryable 物件透過 SelectMethod 屬性。 然後 GridView 會撰寫此 IQueryable 物件，以允許排序和分頁資料模型。 如您所見，使用 CompiledQuery gridview 不會叫用已編譯的查詢，但會產生新的 autocompiled 查詢。
-
-客戶諮詢小組討論此主題中其 「 潛在效能問題與編譯的 LINQ 查詢重新編譯 」 部落格文章： <http://blogs.msdn.com/b/appfabriccat/archive/2010/08/06/potential-performance-issues-with-compiled-linq-query-re-compiles.aspx>。
 
 其中您可能會遇到這個問題的一個位置時，漸進式的篩選器新增至查詢。 例如，假設您有使用選用的篩選條件 （例如，國家/地區和 OrdersCount） 的數個下拉式清單 [客戶] 頁面。 您可以撰寫 IQueryable 結果的 CompiledQuery，這些篩選器，但這樣做會導致新的查詢進行計劃編譯器，每次您執行它。
 
@@ -649,7 +647,7 @@ Entity Framework 提供數個不同的方式，來查詢。 我們將看看下�
 var q = context.Products.Where(p => p.Category.CategoryName == "Beverages");
 ```
 
-**專業人員**
+**Pros**
 
 -   適用於 CUD 作業。
 -   完全具體化的物件。
@@ -678,7 +676,7 @@ var q = context.Products.AsNoTracking()
                         .Where(p => p.Category.CategoryName == "Beverages");
 ```
 
-**專業人員**
+**Pros**
 
 -   透過一般 LINQ 查詢改善的效能。
 -   完全具體化的物件。
@@ -705,7 +703,7 @@ var q = context.Products.Where(p => p.Category.CategoryName == "Beverages").Sele
 ObjectQuery<Product> products = context.Products.Where("it.Category.CategoryName = 'Beverages'");
 ```
 
-**專業人員**
+**Pros**
 
 -   適用於 CUD 作業。
 -   完全具體化的物件。
@@ -730,7 +728,7 @@ using (EntityDataReader reader = cmd.ExecuteReader(CommandBehavior.SequentialAcc
 }
 ```
 
-**專業人員**
+**Pros**
 
 -   支援查詢計畫快取中 （計畫快取會支援.NET 4.5 中的所有其他查詢類型） 的.NET 4.0。
 
@@ -766,7 +764,7 @@ var beverages = context.ExecuteStoreQuery<Product>(
 );
 ```
 
-**專業人員**
+**Pros**
 
 -   通常最快的效能因為計劃編譯器會略過。
 -   完全具體化的物件。
@@ -789,7 +787,7 @@ private static readonly Func<NorthwindEntities, string, IQueryable<Product>> pro
 var q = context.InvokeProductsForCategoryCQ("Beverages");
 ```
 
-**專業人員**
+**Pros**
 
 -   透過一般 LINQ 查詢，以提供最多 7%的效能改進。
 -   完全具體化的物件。
@@ -891,10 +889,10 @@ Microbenchmarks 非常非常敏感的程式碼的小型變更。 在這個案例
 
 | 組態                              | 耗用時間的細項                                                                                                                                               |
 |:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Visual Studio 2010 中，Entity Framework 4     | SSDL 產生： 2 小時 27 分鐘 <br/> 對應層代： 1 秒 <br/> CSDL 產生： 1 秒 <br/> ObjectLayer 產生： 1 秒 <br/> 檢視表產生： 2 小時 14 分鐘 |
-| Visual Studio 2010 SP1 中，Entity Framework 4 | SSDL 產生： 1 秒 <br/> 對應層代： 1 秒 <br/> CSDL 產生： 1 秒 <br/> ObjectLayer 產生： 1 秒 <br/> 檢視表產生： 1 小時 53 分鐘   |
-| Visual Studio 2013 中，Entity Framework 5     | SSDL 產生： 1 秒 <br/> 對應層代： 1 秒 <br/> CSDL 產生： 1 秒 <br/> ObjectLayer 產生： 1 秒 <br/> 檢視表產生： 65 分鐘    |
-| Visual Studio 2013 中，Entity Framework 6     | SSDL 產生： 1 秒 <br/> 對應層代： 1 秒 <br/> CSDL 產生： 1 秒 <br/> ObjectLayer 產生： 1 秒 <br/> 檢視表產生： 28 秒。   |
+| Visual Studio 2010 中，Entity Framework 4     | SSDL 產生：2 小時 27 分鐘 <br/> 產生的對應：1 秒 <br/> CSDL 產生：1 秒 <br/> ObjectLayer 產生：1 秒 <br/> 檢視表產生：2 小時 14 分鐘 |
+| Visual Studio 2010 SP1 中，Entity Framework 4 | SSDL 產生：1 秒 <br/> 產生的對應：1 秒 <br/> CSDL 產生：1 秒 <br/> ObjectLayer 產生：1 秒 <br/> 檢視表產生：1 小時 53 分鐘   |
+| Visual Studio 2013 中，Entity Framework 5     | SSDL 產生：1 秒 <br/> 產生的對應：1 秒 <br/> CSDL 產生：1 秒 <br/> ObjectLayer 產生：1 秒 <br/> 檢視表產生：65 分鐘    |
+| Visual Studio 2013 中，Entity Framework 6     | SSDL 產生：1 秒 <br/> 產生的對應：1 秒 <br/> CSDL 產生：1 秒 <br/> ObjectLayer 產生：1 秒 <br/> 檢視表產生：28 秒。   |
 
 
 值得注意的是，當產生的 SSDL，負載幾乎完全花費在 SQL 伺服器上，等候用戶端開發電腦時閒置來自伺服器的結果。 Dba 應該特別喜歡這項改善。 另外值得注意的是基本上模型產生的全部費用現在會在檢視表產生。
@@ -1231,7 +1229,7 @@ Entity Framework 6 引進了支援的執行在.NET 4.5 或更新版本時的非�
 如需如何非同步的程式設計工作可協助您決定是否非同步會改善您的應用程式的效能請瀏覽[http://msdn.microsoft.com/library/hh191443.aspx](https://msdn.microsoft.com/library/hh191443.aspx)。 如需使用 Entity Framework 上的非同步作業的詳細資訊，請參閱 <<c0> [ 非同步查詢和儲存](~/ef6/fundamentals/async.md
 )。
 
-### <a name="96-ngen"></a>9.6 NGEN
+### <a name="96-ngen"></a>9.6      NGEN
 
 Entity Framework 6 不會在.NET framework 的預設安裝中。 因此，Entity Framework 組件不會根據預設，這表示所有 Entity Framework 程式碼，受都限於相同 JIT'ing 成本為其他 MSIL 組件的 NGEN。 這可能會降低的 F5 體驗，同時開發以及您在生產環境中的應用程式的冷啟動。 若要降低 CPU 和記憶體的成本 JIT'ing 就建議您在 Entity Framework 映像為適當的 NGEN。 如需有關如何改善使用 NGEN 的 Entity Framework 6 的啟動效能的詳細資訊，請參閱 < [ngen 改善啟動效能](~/ef6/fundamentals/performance/ngen.md)。
 
@@ -1303,16 +1301,16 @@ Code First 方法是，它的核心，複雜的實體資料模型產生器。 En
 ##### <a name="11111-software-environment"></a>11.1.1.1 軟體環境
 
 -   Entity Framework 4 的軟體環境
-    -   作業系統名稱： Windows Server 2008 R2 Enterprise SP1。
+    -   作業系統名稱：Windows Server 2008 R2 Enterprise SP1。
     -   Visual 的 Studio 2010 – Ultimate。
     -   Visual Studio 2010 SP1 （僅適用於某些比較）。
 -   Entity Framework 5 和 6 軟體環境
-    -   作業系統名稱： Windows 8.1 企業版
+    -   作業系統名稱：Windows 8.1 Enterprise
     -   Visual Studio 2013 – Ultimate。
 
 ##### <a name="11112-hardware-environment"></a>11.1.1.2 硬體環境
 
--   雙處理器: @ 2.27 GHz 的 intel （) mhz,8 CPU L5520 W3530、 2261 Mhz8 GHz、 4 個核心、 84 邏輯處理器。
+-   雙處理器：    @ 2.27 GHz 的 intel （) mhz,8 CPU L5520 W3530、 2261 Mhz8 GHz、 4 個核心、 84 邏輯處理器。
 -   2412 GB RamRAM。
 -   136 GB SCSI250GB SATA 7200 rpm 3 GB/s 磁碟機將分割成 4 個磁碟分割。
 
@@ -1320,12 +1318,12 @@ Code First 方法是，它的核心，複雜的實體資料模型產生器。 En
 
 ##### <a name="11121-software-environment"></a>11.1.2.1 軟體環境
 
--   作業系統名稱： Windows Server 2008 R28.1 Enterprise SP1。
--   SQL Server 2008 R22012。
+-   作業系統名稱：Windows Server 2008 R28.1 Enterprise SP1。
+-   SQL Server 2008 R22012.
 
 ##### <a name="11122-hardware-environment"></a>11.1.2.2 硬體環境
 
--   單一處理器： Intel （) mhz,8 CPU 2.27 GHz L5520，2261 MhzES-1620 0 @ 3.60 GHz，4 個核心，8 的邏輯處理器。
+-   單一處理器：Intel （) mhz,8 CPU 2.27 GHz L5520、 2261 MhzES-1620 0 @ 3.60 GHz、 4 個核心、 8 的邏輯處理器。
 -   824 GB RamRAM。
 -   465 GB ATA500GB SATA 7200 rpm 6 GB/s 磁碟機將分割成 4 個磁碟分割。
 
@@ -1510,7 +1508,7 @@ Navision 資料庫是用來示範 Microsoft Dynamics – 導覽大型資料庫 �
 
 簡單的查閱查詢沒有彙總
 
--   計數： 16232
+-   計數:16232
 -   範例：
 
 ``` xml
@@ -1523,7 +1521,7 @@ Navision 資料庫是用來示範 Microsoft Dynamics – 導覽大型資料庫 �
 
 一般的 BI 查詢多個彙總，但沒有小計 （單一查詢）
 
--   計數： 2313年
+-   計數:2313
 -   範例：
 
 ``` xml
@@ -1544,7 +1542,7 @@ Navision 資料庫是用來示範 Microsoft Dynamics – 導覽大型資料庫 �
 
 BI 查詢與彙總小計 （透過所有的聯集）
 
--   計數： 178
+-   計數:178
 -   範例：
 
 ``` xml
