@@ -6,12 +6,12 @@ description: 使用 .NET Core 搭配 Entity Framework Core 的使用者入門
 ms.date: 08/03/2018
 ms.assetid: 099d179e-dd7b-4755-8f3c-fcde914bf50b
 uid: core/get-started/netcore/new-db-sqlite
-ms.openlocfilehash: 6cebe14e179cb6998592f5d3823c114b3bda0138
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: a0df80a8fe96be4f8cc3177919e2b087e14cb49c
+ms.sourcegitcommit: 735715f10cc8a231c213e4f055d79f0effd86570
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022307"
+ms.lasthandoff: 02/16/2019
+ms.locfileid: "56325323"
 ---
 # <a name="getting-started-with-ef-core-on-net-core-console-app-with-a-new-database"></a>在 .NET Core 主控台應用程式上使用 EF Core 搭配新資料庫的使用者入門
 
@@ -60,7 +60,7 @@ ms.locfileid: "50022307"
 
   [!code-csharp[Main](../../../../samples/core/GetStarted/NetCore/ConsoleApp.SQLite/Model.cs)]
 
-祕訣：在實際的應用程式中，您會將每個類別放在不同的檔案中，然後將連接字串放在設定檔或環境變數中。 為了簡化教學課程，所有項目會統一放在一個檔案中。
+提示：在實際的應用程式中，您會將每個類別放在不同的檔案中，然後將連接字串放在設定檔或環境變數中。 為了簡化教學課程，所有項目會統一放在一個檔案中。
 
 ## <a name="create-the-database"></a>建立資料庫
 
@@ -69,7 +69,7 @@ ms.locfileid: "50022307"
 * 執行 `dotnet ef migrations add InitialCreate` 以建立移轉的結構，並針對模型建立一組初始的資料表。
 * 執行 `dotnet ef database update` 以將新的移轉套用至資料庫。 此命令會建立資料庫，然後才套用移轉。
 
-*blogging.db** SQLite DB 位於專案目錄中。
+*blogging.db* SQLite DB 位於專案目錄中。
 
 ## <a name="use-the-model"></a>使用模型
 
@@ -111,6 +111,6 @@ ms.locfileid: "50022307"
 
 ## <a name="additional-resources"></a>其他資源
 
-* [教學課程：開始使用 ASP.NET Core 上的 EF Core 與使用 SQLite 的新資料庫](xref:core/get-started/aspnetcore/new-db)
+* [教學課程：在 ASP.NET Core 上使用 EF Core 搭配新資料庫 (使用 SQLite) 的使用者入門](xref:core/get-started/aspnetcore/new-db)
 * [教學課程：開始使用 ASP.NET Core 中的 Razor Pages](https://docs.microsoft.com/aspnet/core/tutorials/razor-pages/razor-pages-start)
 * [教學課程：ASP.NET Core 中的 Razor Pages 與 Entity Framework Core](https://docs.microsoft.com/aspnet/core/data/ef-rp/intro)

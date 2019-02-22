@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 834C9729-7F6E-4355-917D-DE3EE9FE149E
 uid: core/what-is-new/roadmap
-ms.openlocfilehash: 7eba9e1a8e145ef407f844ff3a3ab3069495b7ae
-ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
+ms.openlocfilehash: 9064b323c11282418f2bedf70f874d45c18bb78a
+ms.sourcegitcommit: 735715f10cc8a231c213e4f055d79f0effd86570
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/06/2019
-ms.locfileid: "54058730"
+ms.lasthandoff: 02/16/2019
+ms.locfileid: "56325336"
 ---
 # <a name="entity-framework-core-roadmap"></a>Entity Framework Core 藍圖
 
@@ -56,7 +56,7 @@ ms.locfileid: "54058730"
 
 EF Core 的發行時間與 [.NET Core 發行時間](https://github.com/dotnet/core/blob/master/roadmap.md)及 [ASP.NET Core 發行時間](https://github.com/aspnet/Home/wiki/Roadmap)保持同步。
 
-## <a name="backlog"></a>待辦項目
+## <a name="backlog"></a>Backlog
 
 我們問題追蹤器中的[待辦項目里程碑](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+milestone%3ABacklog+sort%3Areactions-%2B1-desc)，包含我們希望有朝一日能努力解決，或認為社群中有人能處理的問題。
 歡迎客戶提交意見，並針對這些問題投票。
