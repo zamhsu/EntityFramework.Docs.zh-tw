@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: a87eca72aa58487415eea11e4f83de1a19e73506
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: cda5cc170646abc3e9d9a70d729237c01f028259
+ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022333"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "57463200"
 ---
 # <a name="provider-impacting-changes"></a>提供者影響的變更
 
@@ -19,7 +19,15 @@ ms.locfileid: "50022333"
 
 我們會將此記錄檔開頭 2.1 2.2 的變更。 我們用之前 2.1 [ `providers-beware` ](https://github.com/aspnet/EntityFrameworkCore/labels/providers-beware)並[ `providers-fyi` ](https://github.com/aspnet/EntityFrameworkCore/labels/providers-fyi)上我們的問題和提取要求標籤。
 
-## <a name="21-----22"></a>2.1---> 2.2
+## <a name="22-----30"></a>2.2 ---> 3.0
+
+* https://github.com/aspnet/EntityFrameworkCore/pull/14022
+  * 移除過時的 Api 和摺疊的選擇性參數多載
+  * Removed DatabaseColumn.GetUnderlyingStoreType()
+* https://github.com/aspnet/EntityFrameworkCore/pull/14589
+  * 移除過時的 Api
+
+## <a name="21-----22"></a>2.1 ---> 2.2
 
 ### <a name="test-only-changes"></a>僅限測試的變更
 
@@ -56,7 +64,7 @@ ms.locfileid: "50022333"
   * 此提取要求將加入的概念`CanConnect`這會由 ASP.NET Core 健全狀況檢查，來判斷資料庫是否可用。 根據預設，關聯式的實作只會呼叫`Exist`，但如有必要，提供者可以實作不同的項目。 非關聯式的提供者必須實作新的 API，讓健康情況檢查，才能使用。
 * [https://github.com/aspnet/EntityFrameworkCore/pull/13306](https://github.com/aspnet/EntityFrameworkCore/pull/13306) -更新基底 RelationalTypeMapping 不設定 DbParameter 大小
   * 停止設定預設的大小，因為它可能會造成截斷。 提供者可能需要新增自己的邏輯，如果需要設定大小。
-* [https://github.com/aspnet/EntityFrameworkCore/pull/13372](https://github.com/aspnet/EntityFrameworkCore/pull/13372) -RevEng： 一定要指定十進位資料行的資料行類型
+* https://github.com/aspnet/EntityFrameworkCore/pull/13372 -RevEng:一定要指定十進位資料行的資料行類型
   * Scaffold 程式碼，而不是設定依照慣例，一律先設定十進位資料行的資料行類型。
   * 提供者應該不需要在其端上的任何變更。
 * [https://github.com/aspnet/EntityFrameworkCore/pull/13469](https://github.com/aspnet/EntityFrameworkCore/pull/13469) -將 CaseExpression 加入產生案例 SQL 運算式

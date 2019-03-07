@@ -3,12 +3,12 @@ title: First 資料註解-EF6 的程式碼
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 8d85ef85f56a23d9b3b526554417dc9dd360e139
-ms.sourcegitcommit: 39080d38e1adea90db741257e60dc0e7ed08aa82
+ms.openlocfilehash: e6b017306b4f66f5bac2a9964e11391da28ceb40
+ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/03/2018
-ms.locfileid: "50980037"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "57463278"
 ---
 # <a name="code-first-data-annotations"></a>Code First 資料註解
 > [!NOTE]
@@ -25,7 +25,7 @@ Entity Framework Code First 可讓您使用您自己的網域類別，代表模�
 
 ## <a name="the-model"></a>模型
 
-我將示範如何使用一對簡單類別的程式碼第一次 DataAnnotations： 部落格和文章。
+我將示範如何使用一對簡單類別的程式碼第一次 DataAnnotations:部落格和文章。
 
 ``` csharp
     public class Blog
@@ -176,7 +176,7 @@ MaxLength 註解會影響資料庫，藉由設定屬性的長度為 10。
 
 ![顯示最大長度 BloggerName 資料行上的部落格資料表](~/ef6/media/jj591583-figure04.png)
 
-MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證，再以動態方式建立一則錯誤訊息: 「 BloggerName 欄位必須是字串或陣列類型最大長度為 '10'。 」該訊息是有點長。 許多註釋可讓您與 ErrorMessage 屬性中指定的錯誤訊息。
+MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證，再以動態方式建立一則錯誤訊息：「 BloggerName 欄位必須是字串或陣列類型最大長度為 '10'。 」該訊息是有點長。 許多註釋可讓您與 ErrorMessage 屬性中指定的錯誤訊息。
 
 ``` csharp
     [MaxLength(10, ErrorMessage="BloggerName must be 10 characters or less"),MinLength(5)]
@@ -245,9 +245,6 @@ MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證�
 
 ![具有複雜類型的部落格資料表](~/ef6/media/jj591583-figure06.png)
 
-另一個有趣的註解是，雖然 DateCreated 屬性定義為不可為 null 的日期時間，在類別中，相關的資料庫欄位是可為 null。 如果您想要影響的資料庫結構描述，您必須使用必要的註解。
-
- 
 
 ## <a name="concurrencycheck"></a>ConcurrencyCheck
 
@@ -271,7 +268,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
  
 
-## <a name="timestamp"></a>時間戳記
+## <a name="timestamp"></a>TimeStamp
 
 就較常使用的並行存取檢查的 rowversion 或時間戳記欄位。 但是，而不是使用 ConcurrencyCheck 註釋，您可以使用更特定的時間戳記註解，只要將屬性的型別是位元組陣列。 程式碼第一次將時間戳記屬性視為相同 ConcurrencyCheck 屬性，但它也會確保程式碼第一次會產生的資料庫欄位是不可為 null。 您只能有一個時間戳記屬性中指定的類別。
 
@@ -374,7 +371,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
 ### <a name="multiple-column-indexes"></a>多個資料行索引
 
-跨越多個資料行的索引已指定在多個索引註解中使用相同的名稱，指定的資料表。 當您建立多重資料行索引時，您必須指定在索引中的資料行的順序。 比方說，下列程式碼會建立多重資料行索引上**分級**並**BlogId**呼叫**IX\_BlogAndRating**。 **BlogId**是在索引中的第一個資料行和**分級**是第二個。
+跨越多個資料行的索引已指定在多個索引註解中使用相同的名稱，指定的資料表。 當您建立多重資料行索引時，您必須指定在索引中的資料行的順序。 比方說，下列程式碼會建立多重資料行索引上**分級**並**BlogId**呼叫**IX\_BlogIdAndRating**。 **BlogId**是在索引中的第一個資料行和**分級**是第二個。
 
 ``` csharp
     public class Post
@@ -391,7 +388,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
  
 
-## <a name="relationship-attributes-inverseproperty-and-foreignkey"></a>屬性關聯性： InverseProperty 和 ForeignKey
+## <a name="relationship-attributes-inverseproperty-and-foreignkey"></a>關聯性的屬性：InverseProperty 和 ForeignKey
 
 > [!NOTE]
 > 此頁面提供有關設定 Code First 模型使用資料註解中的關聯性資訊。 如需 EF 以及如何存取和操作資料使用關聯性的關聯性的一般資訊，請參閱[關聯性和導覽屬性](~/ef6/fundamentals/relationships.md)。 *
@@ -441,7 +438,7 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
     }
 ```
 
-程式碼第一次不能符合其本身上的兩個類別中的屬性。 貼文的資料庫資料表應該有一個外部索引鍵的 CreatedBy 人員和另一個用於 UpdatedBy 人員但程式碼第一次會建立四個外部索引鍵屬性將會： 人\_識別碼、 人員\_Id1、 CreatedBy\_識別碼和UpdatedBy\_識別碼。
+程式碼第一次不能符合其本身上的兩個類別中的屬性。 貼文的資料庫資料表應該有一個外部索引鍵，用於 CreatedBy person，一個用於 UpdatedBy 人員，但程式碼首先會建立四個外部索引鍵屬性：個人\_識別碼，Person\_Id1、 CreatedBy\_識別碼和 UpdatedBy\_識別碼。
 
 ![張貼額外的外部索引鍵的資料表](~/ef6/media/jj591583-figure10.png)
 
