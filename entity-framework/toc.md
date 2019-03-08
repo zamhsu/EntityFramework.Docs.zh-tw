@@ -11,7 +11,10 @@
 ## [Entity Framework Core](core/index.md)
 
 ### [新功能](core/what-is-new/index.md)
-#### [EF Core 藍圖](core/what-is-new/roadmap.md)
+#### [藍圖](core/what-is-new/roadmap.md)
+#### [EF Core 3.0 (目前處於預覽階段)](core/what-is-new/ef-core-3.0/index.md)
+##### [新功能](core/what-is-new/ef-core-3.0/features.md)
+##### [重大變更](core/what-is-new/ef-core-3.0/breaking-changes.md)
 #### [EF Core 2.2 (最新的穩定版本)](core/what-is-new/ef-core-2.2.md)
 #### [EF Core 2.1](core/what-is-new/ef-core-2.1.md)
 #### [EF Core 2.0](core/what-is-new/ef-core-2.0.md)
