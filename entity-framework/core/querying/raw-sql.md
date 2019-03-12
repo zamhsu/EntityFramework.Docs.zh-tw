@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 343162596780e6146b57f73a38221701009cd855
-ms.sourcegitcommit: 85d17524d8e022f933cde7fc848313f57dfd3eb8
+ms.openlocfilehash: ad7ac3099cfd4c49b88acfbbff61f2af9294b6ec
+ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/06/2019
-ms.locfileid: "55760505"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "57463239"
 ---
 # <a name="raw-sql-queries"></a>原始 SQL 查詢
 
@@ -140,4 +140,6 @@ var blogs = context.Blogs
 * `SELECT` 以外的 SQL 陳述式會自動被辨識為不可組合。 因此，會將預存程序的完整結果一律會傳回用戶端，並會在記憶體內評估於 `FromSql` 之後所套用的任何 LINQ 運算子。
 
 > [!WARNING]  
-> **一律針對原始 SQL 查詢使用參數化：** 接受原始 SQL 字串 (例如 `FromSql` 和 `ExecuteSqlCommand`) 的 API，能使值輕鬆地作為參數傳遞。 除了驗證使用者輸入之外，請一律針對用於 SQL 查詢/命令中的任何值使用參數化。 如果您使用字串串連來以動態方式建置查詢字串的任何部分，則必須負責驗證所有輸入以防止受到 SQL 插入式攻擊。
+> **一律針對原始 SQL 查詢使用參數化：** 除了驗證使用者輸入之外，請一律針對用於 SQL 查詢/命令中的任何值使用參數化。 接受原始 SQL 字串 (例如 `FromSql` 和 `ExecuteSqlCommand`) 的 API，能使值輕鬆地作為參數傳遞。 接受 FormattableString 的 `FromSql` 和 `ExecuteSqlCommand` 多載，也允許使用字串插補語法，藉此有助於防止受到 SQL 插入式攻擊。 
+> 
+> 如果您使用字串串連或插補來動態建置查詢字串的任一部分，或是將使用者輸入傳遞至陳述式或預存程序以便將這些輸入當做動態 SQL 來執行，則必須負責驗證所有輸入以防止受到 SQL 插入式攻擊。

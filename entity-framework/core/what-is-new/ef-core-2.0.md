@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: b52b1fe6b2d5a585f4d55b0299891f61cbc968a3
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: b5ac31722f49589f1494a3d8d1c8a7011a4cf9ce
+ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997566"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "57463265"
 ---
 # <a name="new-features-in-ef-core-20"></a>EF Core 2.0 中的新功能
 
@@ -179,7 +179,7 @@ services.AddDbContextPool<BloggingContext>(
 
 ### <a name="explicitly-compiled-queries"></a>明確地編譯查詢
 
-這是設計成提供高延展案例優點的第二個選擇加入的效能功能。
+這是第二個選擇加入的效能功能，專為高延展案例提供助益而設計。
 
 舊版 EF 以及 LINQ to SQL 中已提供手動或明確已編譯的查詢 API，允許應用程式快取查詢的轉譯，這樣只要將它們計算一次，就能執行多次。
 
