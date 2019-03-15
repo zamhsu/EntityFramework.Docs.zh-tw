@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: ad7ac3099cfd4c49b88acfbbff61f2af9294b6ec
-ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
+ms.openlocfilehash: 0ad43db794902cf1f46bfe8f117fbd36e06f3c44
+ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2019
-ms.locfileid: "57463239"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "57829170"
 ---
 # <a name="raw-sql-queries"></a>原始 SQL 查詢
 
@@ -96,7 +96,7 @@ var blogs = context.Blogs
 
 使用 `FromSql()` 的查詢就如同 EF Core 中所有其他的 LINQ 查詢一般，遵循完全相同的變更追蹤規則。 例如，若查詢投影實體類型，就會依預設追蹤結果。  
 
-以下範例會使用從資料表值函式 (TVF) 選取的原始 SQL 查詢，然後透過 teh 呼叫 .AsNoTracking() 來停用變更追蹤：
+以下範例會使用從資料表值函式 (TVF) 選取的原始 SQL 查詢，然後透過 呼叫 .AsNoTracking() 來停用變更追蹤：
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
