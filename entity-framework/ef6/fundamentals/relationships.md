@@ -3,12 +3,12 @@ title: 關聯性、 導覽屬性和外部索引鍵-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: 46c2d11b5704ec7ae82a423ae042b87f5efe436f
-ms.sourcegitcommit: 8b42045cd21f80f425a92f5e4e9dd4972a31720b
+ms.openlocfilehash: 416eb1fb590330ba292a858347e26b83dddc74df
+ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2018
-ms.locfileid: "49315655"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "57829196"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>關聯性、 導覽屬性和外部索引鍵
 本主題提供 Entity Framework 如何管理實體之間的關聯性的概觀。 它也會提供有關如何對應及操作關聯性的一些指引。
@@ -29,7 +29,7 @@ ms.locfileid: "49315655"
 
 當外部索引鍵資料行不包含在模型中時，關聯資訊被管理做為獨立的物件。 關聯性會追蹤透過物件參考，而不是外部索引鍵屬性。 這種類型的關聯稱為*獨立關聯*。 若要修改的最常見方式*獨立關聯*是修改針對參與關聯的每個實體所產生的導覽屬性。
 
-您可以選擇在模型中使用一種或兩種關聯類型。 不過，如果您有連接只包含外部索引鍵的聯結資料表的純粹多對多關聯性時，EF 會使用獨立關聯來管理這類多對多關聯性。   
+您可以選擇在模型中使用一種或兩種關聯類型。 不過，如果您有連接只包含外部索引鍵的聯結資料表的純粹多對多關聯性時，EF 會使用獨立關聯來管理這類多對多關聯性。   
 
 下圖顯示使用 Entity Framework 設計工具建立概念模型。 模型包含兩個參與一對多關聯性的實體。 這兩個實體都有導覽屬性。 **Course** depend 實體，且具有**DepartmentID**定義的外部索引鍵屬性。
 
@@ -51,7 +51,7 @@ public class Department
 {
    public Department()
    {
-     this.Course = new HashSet<Course>();
+     this.Courses = new HashSet<Course>();
    }  
    public int DepartmentID { get; set; }
    public string Name { get; set; }
