@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: cda5cc170646abc3e9d9a70d729237c01f028259
-ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
+ms.openlocfilehash: 70fe2d934901f5366c96904b08f49a35f6590b47
+ms.sourcegitcommit: 6c4e06bc62d98442530e93a44725e38e59483d42
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2019
-ms.locfileid: "57463200"
+ms.lasthandoff: 03/18/2019
+ms.locfileid: "58131398"
 ---
 # <a name="provider-impacting-changes"></a>提供者影響的變更
 
@@ -26,6 +26,8 @@ ms.locfileid: "57463200"
   * Removed DatabaseColumn.GetUnderlyingStoreType()
 * https://github.com/aspnet/EntityFrameworkCore/pull/14589
   * 移除過時的 Api
+* https://github.com/aspnet/EntityFrameworkCore/pull/15044
+  * 子類別的 CharTypeMapping 可能已損毀，因為在基底實作中修正一些 bug 所需的行為變更。
 
 ## <a name="21-----22"></a>2.1 ---> 2.2
 

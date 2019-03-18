@@ -3,16 +3,16 @@ title: Entity Framework 詞彙 EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 3f05ffdd-49bc-499c-9732-4a368bf5d2d7
-ms.openlocfilehash: 9ed7a2d841c625de35de57edb4e57e69b89a3db9
-ms.sourcegitcommit: 5d74ac575f813110db6d870720f50dd7606446bc
+ms.openlocfilehash: 4e42e5870879524b814cecdc361e688d36f0180f
+ms.sourcegitcommit: 6c4e06bc62d98442530e93a44725e38e59483d42
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2018
-ms.locfileid: "48881263"
+ms.lasthandoff: 03/18/2019
+ms.locfileid: "58131392"
 ---
 # <a name="entity-framework-glossary"></a>Entity Framework 詞彙
 ## <a name="code-first"></a>Code First
-建立 Entity Framework 模型使用的程式碼。 目標模型可以和現有的資料庫或新的資料庫。
+建立 Entity Framework 模型使用的程式碼。 模型可以將現有的資料庫或新的資料庫為目標。
 
 ## <a name="context"></a>內容
 類別，表示與資料庫，可讓您查詢和儲存資料的工作階段。 內容是衍生自 DbContext 或 ObjectContext 的類別。
