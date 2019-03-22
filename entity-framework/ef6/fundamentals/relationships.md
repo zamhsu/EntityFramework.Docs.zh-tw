@@ -3,12 +3,12 @@ title: 關聯性、 導覽屬性和外部索引鍵-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: 416eb1fb590330ba292a858347e26b83dddc74df
-ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
+ms.openlocfilehash: 8292ae7af8d760240715854611d92ab340bf1ca7
+ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/14/2019
-ms.locfileid: "57829196"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58319188"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>關聯性、 導覽屬性和外部索引鍵
 本主題提供 Entity Framework 如何管理實體之間的關聯性的概觀。 它也會提供有關如何對應及操作關聯性的一些指引。
@@ -147,7 +147,7 @@ public class Department
 
 ## <a name="loading-related-objects"></a>載入相關物件
 
-您最常使用的 Entity Framework 中使用導覽屬性載入與所定義的關聯所傳回的實體的實體。 如需詳細資訊，請參閱 <<c0> [ 載入相關物件](~/ef6/querying/related-data.md)。
+Entity Framework 中您經常使用導覽屬性載入與所定義的關聯所傳回的實體的實體。 如需詳細資訊，請參閱 <<c0> [ 載入相關物件](~/ef6/querying/related-data.md)。
 
 > [!NOTE]
 > 在外部索引鍵關聯中，當您載入相依物件的相關端時，相關物件將根據目前在記憶體中之相依外部索引鍵值來載入：

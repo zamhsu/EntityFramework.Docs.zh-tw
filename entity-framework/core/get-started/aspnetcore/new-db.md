@@ -5,12 +5,12 @@ ms.author: riande
 ms.date: 08/03/2018
 ms.assetid: e153627f-f132-4c11-b13c-6c9a607addce
 uid: core/get-started/aspnetcore/new-db
-ms.openlocfilehash: 4734586adc89e9c1d866a1b4accd8b5e51fe2bb0
-ms.sourcegitcommit: ebf661025d2ad2b62466fa7bf0e0772a7811cbe7
+ms.openlocfilehash: 25e5a683acf4bbed0b978cc6a80f1b50a0b64ca1
+ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/11/2019
-ms.locfileid: "54211162"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58319175"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-a-new-database"></a>在 ASP.NET Core 上使用 EF Core 搭配新資料庫的使用者入門
 
@@ -54,7 +54,7 @@ ms.locfileid: "54211162"
   * 確認 [驗證] 已設為 [無任何驗證]
   * 按一下 [確定] 
 
-警告:如果您針對 [驗證] 使用 [個別使用者帳戶] 而不是 [無]，則系統會將 Entity Framework Core 模型新增至 `Models\IdentityModel.cs` 中的專案。 您可利用在本教學課程中所學到的技術，選擇新增第二個模型，或是擴充此現有模型以包含您的實體類別。
+警告：如果您針對 [驗證] 使用 [個別使用者帳戶] 而不是 [無]，則系統會將 Entity Framework Core 模型新增至 `Models\IdentityModel.cs` 中的專案。 您可利用在本教學課程中所學到的技術，選擇新增第二個模型，或是擴充此現有模型以包含您的實體類別。
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -114,9 +114,9 @@ ms.locfileid: "54211162"
 
 ## <a name="register-the-context-with-dependency-injection"></a>使用相依性插入來註冊內容
 
-服務 (例如 `BloggingContext`) 是在應用程式啟動期間使用[相依性插入](http://docs.asp.net/en/latest/fundamentals/dependency-injection.html)來註冊。 接著，系統會透過建構函式參數或屬性，將這些服務提供給需要的元件 (例如 MVC 控制器)。
+若要為 MVC 控制器提供 `BloggingContext`，請在 `Startup.cs` 中將其註冊為服務。
 
-若要為 MVC 控制器提供 `BloggingContext`，請將其註冊為服務。
+服務 (例如 `BloggingContext`) 均會在應用程式啟動期間以[相依性插入](http://docs.asp.net/en/latest/fundamentals/dependency-injection.html)註冊，使其能自動獲提供透過建構函式參數與屬性取用服務 (例如 MVC 控制器) 的元件。
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 

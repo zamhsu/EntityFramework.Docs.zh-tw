@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: 4e042acb805c743ee794f4e61105b8d2136973b1
-ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
+ms.openlocfilehash: 6beaebf2c6859fcf91e963bfae02f029f8f51147
+ms.sourcegitcommit: 6c4e06bc62d98442530e93a44725e38e59483d42
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/03/2019
-ms.locfileid: "55668722"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58131445"
 ---
 # <a name="loading-related-data"></a>載入相關資料
 
@@ -52,7 +52,7 @@ Entity Framework Core 可讓您在模型中使用導覽屬性來載入相關實�
 
 [!code-csharp[Main](../../../samples/core/Querying/Querying/RelatedData/Sample.cs#IncludeTree)]
 
-您可能會想要針對所包括的其中一個實體包含多個相關實體。 例如，查詢 `Blog` 時，您會包括 `Posts`，接著想要同時包含 `Posts` 的 `Author` 和 `Tags`。 若要執行此動作，您必須指定每個從根開始的包含路徑。 例如，`Blog -> Posts -> Author` 和 `Blog -> Posts -> Tags`。 這不表示您將會收到多餘的聯結，在大部分情況下，EF 會在產生 SQL 時合併聯結。
+您可能會想要針對所包括的其中一個實體包含多個相關實體。 例如，查詢 `Blogs` 時，您包括了 `Posts`，接著想要同時包含 `Posts` 的 `Author` 和 `Tags`。 若要執行此動作，您必須指定每個從根開始的包含路徑。 例如，`Blog -> Posts -> Author` 和 `Blog -> Posts -> Tags`。 這不表示您將會收到多餘的聯結，在大部分情況下，EF 會在產生 SQL 時合併聯結。
 
 [!code-csharp[Main](../../../samples/core/Querying/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
 

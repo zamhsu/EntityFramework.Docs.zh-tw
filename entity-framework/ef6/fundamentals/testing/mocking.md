@@ -3,12 +3,12 @@ title: 測試的模擬架構-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
-ms.openlocfilehash: 80fd97073744be40d66c09706d3513dba18e724d
-ms.sourcegitcommit: 7a7da65404c9338e1e3df42576a13be536a6f95f
+ms.openlocfilehash: 3d39b41018beb70b72105dfb2fe4d61afc0b0525
+ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2018
-ms.locfileid: "48834717"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58319201"
 ---
 # <a name="testing-with-a-mocking-framework"></a>測試的模擬架構
 > [!NOTE]
@@ -21,7 +21,7 @@ ms.locfileid: "48834717"
 有兩種不同的方法，可用來建立您的內容是記憶體中的舊版。  
 
 - **建立您自己的測試替身**– 這種方法涉及撰寫您自己的記憶體中實作您的內容和 DbSets。 這可讓您控制類別如何運作，但是可以寫入和擁有合理的程式碼牽涉到很多。  
-- **使用模擬的架構來建立測試替身**– 使用模擬的架構 （例如 Moq) 您可以有您的記憶體中實作內容並在執行階段以動態方式建立您的設定。  
+- **使用模擬的架構來建立測試替身**– 使用模擬的架構 （例如 Moq) 您可以讓您的內容和設定在執行階段以動態方式建立您的記憶體中實作。  
 
 這篇文章將會處理使用的模擬架構。 建立您自己的測試替身請參閱[測試您自己的測試替身](writing-test-doubles.md)。  
 

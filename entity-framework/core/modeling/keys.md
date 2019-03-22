@@ -4,16 +4,18 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 912ffef7-86a0-4cdc-a776-55f907459d20
 uid: core/modeling/keys
-ms.openlocfilehash: 9e6946100ebabc6ba57cb792b3672219098b1e21
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 6272e323b83ccab2ed060a2ebbde1d1e8e353d66
+ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994017"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58319162"
 ---
 # <a name="keys-primary"></a>索引鍵 （主要）
 
-索引鍵做為主要的唯一識別碼，每個實體執行個體。 使用關聯式資料庫時這會對應至的概念*主索引鍵*。 您也可以設定不是主索引鍵的唯一識別碼 (請參閱[替代索引鍵](alternate-keys.md)如需詳細資訊)。
+索引鍵做為主要的唯一識別碼，每個實體執行個體。 使用關聯式資料庫時這會對應至的概念*主索引鍵*。 您也可以設定不是主索引鍵的唯一識別碼 (請參閱[替代索引鍵](alternate-keys.md)如需詳細資訊)。 
+
+其中一種下列方法可用來安裝/建立主索引鍵。
 
 ## <a name="conventions"></a>慣例
 

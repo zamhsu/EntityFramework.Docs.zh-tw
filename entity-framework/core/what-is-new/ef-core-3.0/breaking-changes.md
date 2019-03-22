@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 748db8a71a04a2d696ef21a03319906b9fc776be
-ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
+ms.openlocfilehash: 534ac95cccc03e9797ba766e601e2fe86eaf8061
+ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/14/2019
-ms.locfileid: "57829222"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58319214"
 ---
 # <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>EF Core 3.0 (目前為預覽版) 包含的中斷性變更
 
@@ -25,7 +25,7 @@ ms.locfileid: "57829222"
 [追蹤問題 #14935](https://github.com/aspnet/EntityFrameworkCore/issues/14935)
 [另請參閱問題 #12795](https://github.com/aspnet/EntityFrameworkCore/issues/12795)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+這項變更將於 EF Core 3.0-preview 4 中引進。
 
 **舊行為**
 
@@ -55,7 +55,7 @@ ms.locfileid: "57829222"
 
 [追蹤問題 Announcements#325](https://github.com/aspnet/Announcements/issues/325)
 
-此變更已於 ASP.NET Core 3.0-preview 1 推出。 
+這項變更已於 ASP.NET Core 3.0-preview 1 推出。 
 
 **舊行為**
 
@@ -67,9 +67,9 @@ ms.locfileid: "57829222"
 
 **原因**
 
-在此變更之前，取得 EF Core 會根據應用程式是否以 ASP.NET Core 和 SQL Server 為目標而需要不同的步驟。 此外，升級 ASP.NET Core 會強制升級 EF Core 和 SQL Server 提供者，這不一定符合需求。
+在這項變更之前，取得 EF Core 會根據應用程式是否以 ASP.NET Core 和 SQL Server 為目標而需要不同的步驟。 此外，升級 ASP.NET Core 會強制升級 EF Core 和 SQL Server 提供者，這不一定符合需求。
 
-透過此變更，取得 EF Core 的體驗對所有提供者、支援的 .NET 實作和應用程式類型都相同。
+透過這項變更，取得 EF Core 的體驗對所有提供者、支援的 .NET 實作和應用程式類型都相同。
 開發人員現在也可以精確控制何時升級 EF Core 和 EF Core 資料提供者。
 
 **風險降低**
@@ -80,7 +80,7 @@ ms.locfileid: "57829222"
 
 [追蹤問題 #14523](https://github.com/aspnet/EntityFrameworkCore/issues/14523)
 
-此變更已於 EF Core 3.0-preview 3 推出。
+這項變更已於 EF Core 3.0-preview 3 推出。
 
 **舊行為**
 
@@ -92,7 +92,7 @@ ms.locfileid: "57829222"
 
 **原因**
 
-此變更的目的是為了減少 `Info` 記錄層級的干擾。
+這項變更的目的是為了減少 `Info` 記錄層級的干擾。
 
 **風險降低**
 
@@ -110,7 +110,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 [追蹤問題 #12378](https://github.com/aspnet/EntityFrameworkCore/issues/12378)
 
-此變更已於 EF Core 3.0-preview 2 推出。
+這項變更已於 EF Core 3.0-preview 2 推出。
 
 **舊行為**
 
@@ -123,7 +123,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 **原因**
 
-此變更的目的是為了防止在將某個 `DbContext` 執行個體先前追蹤的實體移至不同的 `DbContext` 執行個體時，錯誤地把暫存索引鍵值變成永久值。 
+這項變更的目的是為了防止在將某個 `DbContext` 執行個體先前追蹤的實體移至不同的 `DbContext` 執行個體時，錯誤地把暫存索引鍵值變成永久值。 
 
 **風險降低**
 
@@ -138,7 +138,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 [追蹤問題 #14616](https://github.com/aspnet/EntityFrameworkCore/issues/14616)
 
-此變更已於 EF Core 3.0-preview 3 推出。
+這項變更已於 EF Core 3.0-preview 3 推出。
 
 **舊行為**
 
@@ -152,11 +152,11 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 **原因**
 
-此變更的目的是為了更輕鬆一致地使用中斷連接的實體圖形，同時使用存放區產生的索引鍵。
+這項變更的目的是為了更輕鬆一致地使用中斷連接的實體圖形，同時使用存放區產生的索引鍵。
 
 **風險降低**
 
-如果實體類型已設定為使用產生的索引鍵，但針對新的執行個體明確設定了索引鍵值，此變更可能會中斷應用程式。
+如果實體類型已設定為使用產生的索引鍵，但針對新的執行個體明確設定了索引鍵值，這項變更可能會中斷應用程式。
 修正方法是明確設定索引鍵屬性不使用產生的值。
 例如，使用 Fluent API：
 
@@ -178,7 +178,7 @@ public string Id { get; set; }
 
 [追蹤問題 #10114](https://github.com/aspnet/EntityFrameworkCore/issues/10114)
 
-此變更已於 EF Core 3.0-preview 3 推出。
+這項變更已於 EF Core 3.0-preview 3 推出。
 
 **舊行為**
 
@@ -191,7 +191,7 @@ public string Id { get; set; }
 
 **原因**
 
-此變更的目的是為了改善資料繫結和稽核情節的體驗，在這些情節中了解呼叫 `SaveChanges`「之前」將刪除哪些實體是很重要的。
+這項變更的目的是為了改善資料繫結和稽核情節的體驗，在這些情節中了解呼叫 `SaveChanges`「之前」將刪除哪些實體是很重要的。
 
 **風險降低**
 
@@ -207,7 +207,7 @@ context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
 [追蹤問題 #14194](https://github.com/aspnet/EntityFrameworkCore/issues/14194)
 
-此變更已於 EF Core 3.0-preview 3 推出。
+這項變更已於 EF Core 3.0-preview 3 推出。
 
 **舊行為**
 
@@ -221,7 +221,7 @@ context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
 **原因**
 
-此變更的目的是為了降低查詢類型用途的混淆。
+這項變更的目的是為了降低查詢類型用途的混淆。
 具體來說，它們是無索引鍵的實體類型，因此本質上是唯讀的，但不應該只因為實體類型必須是唯讀就使用。
 同樣地，它們通常會對應至檢視，但這只是因為檢視通常未定義索引鍵。
 
@@ -239,7 +239,7 @@ API 的下列組件現已淘汰：
 [追蹤問題 #9148](https://github.com/aspnet/EntityFrameworkCore/issues/9148)
 [追蹤問題 #14153](https://github.com/aspnet/EntityFrameworkCore/issues/14153)
 
-此變更已於 EF Core 3.0-preview 3 推出。
+這項變更已於 EF Core 3.0-preview 3 推出。
 
 **舊行為**
 
@@ -284,7 +284,7 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
 
 **原因**
 
-此變更的目的是為了更清楚地劃分設定自有類型本身，以及設定自有類型的「關聯性」。
+這項變更的目的是為了更清楚地劃分設定自有類型本身，以及設定自有類型的「關聯性」。
 如此可避免 `HasForeignKey` 等方法的模稜兩可和混淆。
 
 **風險降低**
@@ -295,7 +295,7 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
 
 [追蹤問題 #13274](https://github.com/aspnet/EntityFrameworkCore/issues/13274)
 
-此變更已於 EF Core 3.0-preview 3 推出。
+這項變更已於 EF Core 3.0-preview 3 推出。
 
 **舊行為**
 
@@ -354,7 +354,7 @@ public class Order
 
 **原因**
 
-此變更的目的是為了避免錯誤地在自有類型上定義主索引鍵屬性。
+這項變更的目的是為了避免錯誤地在自有類型上定義主索引鍵屬性。
 
 **風險降低**
 
@@ -364,7 +364,7 @@ public class Order
 
 [追蹤問題 #6872](https://github.com/aspnet/EntityFrameworkCore/issues/6872)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+這項變更將於 EF Core 3.0-preview 4 中引進。
 
 **舊行為**
 
@@ -377,7 +377,7 @@ public class Order
 
 **原因**
 
-此變更的目的是為了讓記憶體內部索引鍵產生與實際資料庫索引鍵產生更加一致，並改善在使用記憶體內部資料庫時隔離個別測試的能力。
+這項變更的目的是為了讓記憶體內部索引鍵產生與實際資料庫索引鍵產生更加一致，並改善在使用記憶體內部資料庫時隔離個別測試的能力。
 
 **風險降低**
 
@@ -388,7 +388,7 @@ public class Order
 
 [追蹤問題 #12430](https://github.com/aspnet/EntityFrameworkCore/issues/12430)
 
-此變更已於 EF Core 3.0-preview 2 推出。
+這項變更已於 EF Core 3.0-preview 2 推出。
 
 **舊行為**
 
@@ -402,7 +402,7 @@ public class Order
 
 **原因**
 
-此變更的目的是為了防止 EF Core 預設在執行涉及實體的資料庫作業時，錯誤地觸發商務邏輯。
+這項變更的目的是為了防止 EF Core 預設在執行涉及實體的資料庫作業時，錯誤地觸發商務邏輯。
 
 **風險降低**
 
@@ -417,7 +417,7 @@ modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruct
 
 [追蹤問題 #12523](https://github.com/aspnet/EntityFrameworkCore/issues/12523)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+這項變更將於 EF Core 3.0-preview 4 中引進。
 
 **舊行為**
 
@@ -430,7 +430,7 @@ modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruct
 
 **原因**
 
-此變更的目的是為了避免在只能有一個正確欄位的情況下，自動使用某個欄位而非另一個欄位。
+這項變更的目的是為了避免在只能有一個正確欄位的情況下，自動使用某個欄位而非另一個欄位。
 
 **風險降低**
 
@@ -448,7 +448,7 @@ modelBuilder
 
 [追蹤問題 #14756](https://github.com/aspnet/EntityFrameworkCore/issues/14756)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+這項變更將於 EF Core 3.0-preview 4 中引進。
 
 **舊行為**
 
@@ -470,7 +470,7 @@ EF Core 3.0 不會要求這些服務必須存在於應用程式的 DI 容器中�
 
 [追蹤問題 #13552](https://github.com/aspnet/EntityFrameworkCore/issues/13552)
 
-此變更已於 EF Core 3.0-preview 3 推出。
+這項變更已於 EF Core 3.0-preview 3 推出。
 
 **舊行為**
 
@@ -488,7 +488,7 @@ EF Core 3.0 不會要求這些服務必須存在於應用程式的 DI 容器中�
 
 **原因**
 
-此變更的目的是為了改善使用 `context.Entry` 的預設效能。
+這項變更的目的是為了改善使用 `context.Entry` 的預設效能。
 
 **風險降低**
 
@@ -498,7 +498,7 @@ EF Core 3.0 不會要求這些服務必須存在於應用程式的 DI 容器中�
 
 [追蹤問題 #14617](https://github.com/aspnet/EntityFrameworkCore/issues/14617)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+這項變更將於 EF Core 3.0-preview 4 中引進。
 
 **舊行為**
 
@@ -511,7 +511,7 @@ EF Core 3.0 不會要求這些服務必須存在於應用程式的 DI 容器中�
 
 **原因**
 
-此變更是因為用戶端產生的 `string`/`byte[]` 值通常不太有用，而且預設行為使它很難以一般方式來推論產生的索引鍵值。
+這項變更是因為用戶端產生的 `string`/`byte[]` 值通常不太有用，而且預設行為使它很難以一般方式來推論產生的索引鍵值。
 
 **風險降低**
 
@@ -536,7 +536,7 @@ public string Id { get; set; }
 
 [追蹤問題 #14698](https://github.com/aspnet/EntityFrameworkCore/issues/14698)
 
-此變更已於 EF Core 3.0-preview 3 推出。
+這項變更已於 EF Core 3.0-preview 3 推出。
 
 **舊行為**
 
@@ -548,11 +548,11 @@ public string Id { get; set; }
 
 **原因**
 
-此變更的目的是為了允許記錄器與 `DbContext` 執行個體產生關聯，這可啟用其他功能，並避免某些異常行為案例，例如內部服務提供者遽增。
+這項變更的目的是為了允許記錄器與 `DbContext` 執行個體產生關聯，這可啟用其他功能，並避免某些異常行為案例，例如內部服務提供者遽增。
 
 **風險降低**
 
-此變更不應影響應用程式程式碼，除非在 EF Core 內部服務提供者上使用自訂服務註冊該程式碼。
+這項變更不應影響應用程式程式碼，除非在 EF Core 內部服務提供者上使用自訂服務註冊該程式碼。
 但這並不常見。
 在這些情況下，大部分的項目仍會運作，但相依於 `ILoggerFactory` 的任何單一服務需要變更，才能以不同方式取得 `ILoggerFactory`。
 
@@ -562,7 +562,7 @@ public string Id { get; set; }
 
 [追蹤問題 #13552](https://github.com/aspnet/EntityFrameworkCore/issues/13552)
 
-此變更已於 EF Core 3.0-preview 3 推出。
+這項變更已於 EF Core 3.0-preview 3 推出。
 
 **舊行為**
 
@@ -574,7 +574,7 @@ public string Id { get; set; }
 
 **原因**
 
-此變更是因為這些介面在概念上是一個介面。
+這項變更是因為這些介面在概念上是一個介面。
 
 **風險降低**
 
@@ -584,7 +584,7 @@ public string Id { get; set; }
 
 [追蹤問題 #12780](https://github.com/aspnet/EntityFrameworkCore/issues/12780)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+這項變更將於 EF Core 3.0-preview 4 中引進。
 
 **舊行為**
 
@@ -601,7 +601,7 @@ Proxy 會改為假設如有非 Null 值，會載入參考導覽；如果不是�
 
 **原因**
 
-此變更的目的是為了在已處置的 `DbContext` 執行個體上嘗試消極式載入時，使行為一致且正確。
+這項變更的目的是為了在已處置的 `DbContext` 執行個體上嘗試消極式載入時，使行為一致且正確。
 
 **風險降低**
 
@@ -611,7 +611,7 @@ Proxy 會改為假設如有非 Null 值，會載入參考導覽；如果不是�
 
 [追蹤問題 #10236](https://github.com/aspnet/EntityFrameworkCore/issues/10236)
 
-此變更已於 EF Core 3.0-preview 3 推出。
+這項變更已於 EF Core 3.0-preview 3 推出。
 
 **舊行為**
 
@@ -623,7 +623,7 @@ Proxy 會改為假設如有非 Null 值，會載入參考導覽；如果不是�
 
 **原因**
 
-此變更的目的是為了透過更明確公開此異常案例，藉以開發更完善的應用程式程式碼。
+這項變更的目的是為了透過更明確公開此異常案例，藉以開發更完善的應用程式程式碼。
 
 **風險降低**
 
@@ -643,7 +643,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 [追蹤問題 #9171](https://github.com/aspnet/EntityFrameworkCore/issues/9171)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+這項變更將於 EF Core 3.0-preview 4 中引進。
 
 **舊行為**
 
@@ -653,7 +653,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 modelBuilder.Entity<Samurai>().HasOne("Entrance").WithOne();
 ```
 
-程式碼看起來像是它使用 `Entrance` 瀏覽屬性將 `Samuri` 與一些其他實體類型相關，這可能是私用屬性。
+程式碼看起來像是它使用 `Entrance` 瀏覽屬性將 `Samurai` 與一些其他實體類型相關，這可能是私用屬性。
 
 在現實中，此程式碼會在不使用瀏覽屬性的情況下嘗試建立與一些實體 (稱為 `Entrance`) 的關係。
 
@@ -680,7 +680,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 [追蹤問題 #9913](https://github.com/aspnet/EntityFrameworkCore/issues/9913)
 
-此變更已於 EF Core 3.0-preview 2 推出。
+這項變更已於 EF Core 3.0-preview 2 推出。
 
 **舊行為**
 
@@ -703,7 +703,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 [追蹤問題 #11811](https://github.com/aspnet/EntityFrameworkCore/issues/11811)
 
-此變更已於 EF Core 3.0-preview 3 推出。
+這項變更已於 EF Core 3.0-preview 3 推出。
 
 **舊行為**
 
@@ -716,7 +716,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 **原因**
 
 目前無法將衍生類型對應至不同的資料表。
-此變更可避免未來有效執行時的中斷情況。
+這項變更可避免未來有效執行時的中斷情況。
 
 **風險降低**
 
@@ -726,7 +726,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 [追蹤問題 #12366](https://github.com/aspnet/EntityFrameworkCore/issues/12366)
 
-此變更已於 EF Core 3.0-preview 3 推出。
+這項變更已於 EF Core 3.0-preview 3 推出。
 
 **舊行為**
 
@@ -739,7 +739,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 **原因**
 
-此變更的目的是為了能夠使用 `Includes` 將所有資料庫提供者的索引 API 合併到一個位置。
+這項變更的目的是為了能夠使用 `Includes` 將所有資料庫提供者的索引 API 合併到一個位置。
 
 **風險降低**
 
@@ -749,7 +749,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 [追蹤問題 #12151](https://github.com/aspnet/EntityFrameworkCore/issues/12151)
 
-此變更已於 EF Core 3.0-preview 3 推出。
+這項變更已於 EF Core 3.0-preview 3 推出。
 
 **舊行為**
 
@@ -761,7 +761,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 **原因**
 
-此變更是因為 EF Core 預設會使用 `SQLitePCLRaw.bundle_e_sqlite3`，這也表示預設會開啟 FK 強制，而不需要在每次開啟連線時明確啟用。
+這項變更是因為 EF Core 預設會使用 `SQLitePCLRaw.bundle_e_sqlite3`，這也表示預設會開啟 FK 強制，而不需要在每次開啟連線時明確啟用。
 
 **風險降低**
 
@@ -780,8 +780,88 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 **原因**
 
-此變更的目的是為了讓用於 iOS 的 SQLite 版本與其他平台一致。
+這項變更的目的是為了讓用於 iOS 的 SQLite 版本與其他平台一致。
 
 **風險降低**
 
 若要在 iOS 上使用原生 SQLite 版本，請設定 `Microsoft.Data.Sqlite` 使用不同的 `SQLitePCLRaw` 套件組合。
+
+## <a name="char-values-are-now-stored-as-text-on-sqlite"></a>Char 值現在於 SQLite 上會儲存為文字
+
+[追蹤問題 #15020](https://github.com/aspnet/EntityFrameworkCore/issues/15020)
+
+這項變更已於 EF Core 3.0-preview 4 推出。
+
+**舊行為**
+
+Char 值原先在 SQLite 上儲存為整數值。 舉例來說，char 值 *A* 原先會儲存為整數值 65。
+
+**新行為**
+
+Char 值現在會儲存為 TEXT。
+
+**原因**
+
+將值儲存為 TEXT 不但更加自然，也使資料庫與其他技術的相容性更高。
+
+**風險降低**
+
+您可以參考以下方式執行 SQL，來將現有的資料庫移轉至新的格式。
+
+``` sql
+UPDATE MyTable
+SET CharColumn = char(CharColumn)
+WHERE typeof(CharColumn) = 'integer';
+```
+
+在 EF Core 中，您也可以在這些屬性上設定值轉換器來繼續使用原本的行為。
+
+``` csharp
+modelBuilder
+    .Entity<MyEntity>()
+    .Property(e => e.CharProperty)
+    .HasConversion(
+        c => (long)c,
+        i => (char)i);
+```
+
+Microsoft.Data.Sqlite 也保留了讀取 INTEGER 和 TEXT 欄位字元值的功能，所以部分案例可能不需要任何動作。
+
+## <a name="migration-ids-are-now-generated-using-the-invariant-cultures-calendar"></a>移轉識別碼現在會使用不因文化特性而異的行事曆產生
+
+[追蹤問題 #12978](https://github.com/aspnet/EntityFrameworkCore/issues/12978)
+
+這項變更已於 EF Core 3.0-preview 4 推出。
+
+**舊行為**
+
+移轉識別碼原先會使用目前文化特性 (Culture) 的行事曆產生。
+
+**新行為**
+
+移轉識別碼現在一律會使用不因文化特性而異的行事曆 (西曆) 產生。
+
+**原因**
+
+更新資料庫或解決合併衝突時，移轉的順序相當重要。 使用無差異的行事曆可避免順序問題，使小組成員系統行事曆不同的問題不會發生。
+
+**風險降低**
+
+這項變更會影響年份大於西曆行事曆的非西曆行事曆使用者 (例如泰國佛曆)。 現有的移轉識別碼必須更新，以使新的移轉會在現有的移轉之後排序。
+
+您可在移轉設計工具檔案的移轉屬性中找到移轉識別碼。
+
+``` diff
+ [DbContext(typeof(MyDbContext))]
+-[Migration("25620318122820_MyMigration")]
++[Migration("20190318122820_MyMigration")]
+ partial class MyMigration
+ {
+```
+
+移轉歷程記錄資料表也必須更新。
+
+``` sql
+UPDATE __EFMigrationsHistory
+SET MigrationId = CONCAT(LEFT(MigrationId, 4)  - 543, SUBSTRING(MigrationId, 4, 150))
+```
