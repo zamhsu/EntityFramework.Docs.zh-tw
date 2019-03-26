@@ -3,12 +3,12 @@ title: 使用您自己的測試替身-EF6 測試
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 16a8b7c0-2d23-47f4-9cc0-e2eb2e738ca3
-ms.openlocfilehash: 2158dc73585c2720e7293096b0478c73edf522d9
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 9db56e28cd89084fece36c3e5a2c1b4495991d01
+ms.sourcegitcommit: 645785187ae23ddf7d7b0642c7a4da5ffb0c7f30
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490905"
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58419727"
 ---
 # <a name="testing-with-your-own-test-doubles"></a>使用您自己的測試替身進行測試
 > [!NOTE]
@@ -43,7 +43,7 @@ ms.locfileid: "45490905"
 
 ## <a name="creating-a-context-interface"></a>建立內容介面  
 
-我們要查看測試服務會使用 EF 模型。 若要能在我們的 EF 內容取代為測試版記憶體中，我們會定義介面我們 EF 內容 （和其記憶體雙精度浮點數） 都將 imeplement。  
+我們要查看測試服務會使用 EF 模型。 若要能在我們的 EF 內容取代為測試版記憶體中，我們會定義我們 EF 內容 （和其記憶體雙精度浮點數） 會實作的介面。
 
 我們要測試此服務將查詢和修改使用我們的內容的 DbSet 屬性的資料，並同時也呼叫 SaveChanges 將變更推送至資料庫。 因此我們加入這些成員在介面上。  
 

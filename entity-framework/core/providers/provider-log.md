@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 0f8389decbc1995cc629d24c5baa197255cd328a
-ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
+ms.openlocfilehash: 1133976d8d25e4099b64a1a30a8d2066ff3f6cd7
+ms.sourcegitcommit: 645785187ae23ddf7d7b0642c7a4da5ffb0c7f30
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58319136"
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58419662"
 ---
 # <a name="provider-impacting-changes"></a>提供者影響的變更
 
@@ -20,6 +20,8 @@ ms.locfileid: "58319136"
 我們會將此記錄檔開頭 2.1 2.2 的變更。 我們用之前 2.1 [ `providers-beware` ](https://github.com/aspnet/EntityFrameworkCore/labels/providers-beware)並[ `providers-fyi` ](https://github.com/aspnet/EntityFrameworkCore/labels/providers-fyi)上我們的問題和提取要求標籤。
 
 ## <a name="22-----30"></a>2.2 ---> 3.0
+
+請注意，許多[重大變更的應用程式層級](../what-is-new/ef-core-3.0/breaking-changes.md)也會影響提供者。
 
 * https://github.com/aspnet/EntityFrameworkCore/pull/14022
   * 移除過時的 Api 和摺疊的選擇性參數多載
@@ -30,6 +32,35 @@ ms.locfileid: "58319136"
   * 子類別的 CharTypeMapping 可能已損毀，因為在基底實作中修正一些 bug 所需的行為變更。
 * https://github.com/aspnet/EntityFrameworkCore/pull/15090
   * 新增 IDatabaseModelFactory 基底類別，並加以更新，以使用參數物件來降低未來的符號。
+* https://github.com/aspnet/EntityFrameworkCore/pull/15123
+  * 若要降低未來的符號用於 MigrationsSqlGenerator 參數物件。
+* https://github.com/aspnet/EntityFrameworkCore/pull/14972
+  * 記錄層級明確設定所需的某些變更可能會使用提供者的 Api。 具體來說，如果提供者直接使用記錄基礎結構，則這項變更可能會中斷使用。 此外，使用的基礎結構 （這會是公用的） 的提供者從現在開始會需要衍生自`LoggingDefinitions`或`RelationalLoggingDefinitions`。 請參閱 SQL Server 和範例的記憶體提供者。
+* https://github.com/aspnet/EntityFrameworkCore/pull/15091
+  * 核心、 關聯式和抽象概念的資源字串現在是公用的。
+  * `CoreLoggerExtensions` 和`RelationalLoggerExtensions`現在是公用。 當記錄會在核心或關聯性層級定義的事件時，提供者應該使用這些 Api。 不會存取記錄資源直接;這些是仍內部。
+  * `IRawSqlCommandBuilder` 已從單一服務為範圍的服務
+  * `IMigrationsSqlGenerator` 已從單一服務為範圍的服務
+* https://github.com/aspnet/EntityFrameworkCore/pull/14706
+  * 建置關聯式命令的基礎結構具有已變成公用，因此將它安全地提供者使用，並稍微重構。
+  * `IRelationalCommandBuilderFactory`已從單一服務為範圍的服務
+  * `IShaperCommandContextFactory` 已從單一服務為範圍的服務
+  * `ISelectExpressionFactory` 已從單一服務為範圍的服務
+* https://github.com/aspnet/EntityFrameworkCore/pull/14733
+  * `ILazyLoader` 已從範圍的服務變更為暫時性的服務
+* https://github.com/aspnet/EntityFrameworkCore/pull/14610
+  * `IUpdateSqlGenerator` 已從範圍的服務變更為單一服務
+  * 此外，`ISingletonUpdateSqlGenerator`已移除
+* https://github.com/aspnet/EntityFrameworkCore/pull/15067
+  * 許多提供者所使用的內部程式碼現在已公開
+  * 它不應該再參考 necssary`IndentedStringBuilder`因為它有已從分解出來公開它的位置
+  * 用法`NonCapturingLazyInitializer`應該取代成`LazyInitializer`從 BCL
+* https://github.com/aspnet/EntityFrameworkCore/pull/14608
+  * 這項變更會完整涵蓋應用程式的重大變更文件中。 對於提供者，這可能是多個影響，因為測試的 EF core 通常會導致達到此限制，因此為了達到這個較少可能已變更的測試基礎結構。
+* https://github.com/aspnet/EntityFrameworkCore/issues/13961
+  * `EntityMaterializerSource` 已簡化，
+* https://github.com/aspnet/EntityFrameworkCore/pull/14895
+  * StartsWith 轉譯已變更的提供者可能希望/需要因應方式
 
 ## <a name="21-----22"></a>2.1 ---> 2.2
 
