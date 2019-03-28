@@ -88,7 +88,20 @@
         "core/**/**.md": "entity-framework-core",
         "ef6/**/**.md": "entity-framework-6",
         "efcore-and-ef6/**/**.md": "entity-framework-core"
-      }      
+      },
+      "open_to_public_contributors": {
+	      "core/managing-schemas/**.md": false,
+        "core/miscellaneous/**.md": false,
+        "core/modeling/**.md": false,
+        "core/providers/**.md": false,
+        "ef6/fundamentals/**.md": false,
+        "ef6/modeling/**.md": false,
+        "ef6/querying/**.md": false,
+        "ef6/resources/**.md": false,
+        "ef6/saving/**.md": false,
+        "ef6/what-is-new/**.md": false,
+        "efcore-and-ef6/porting/**.md": false
+      }
     },
     "dest": "_site",
     "template": [
