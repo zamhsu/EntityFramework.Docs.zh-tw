@@ -99,7 +99,7 @@ ms.locfileid: "58419662"
   * 此提取要求將加入的概念`CanConnect`這會由 ASP.NET Core 健全狀況檢查，來判斷資料庫是否可用。 根據預設，關聯式的實作只會呼叫`Exist`，但如有必要，提供者可以實作不同的項目。 非關聯式的提供者必須實作新的 API，讓健康情況檢查，才能使用。
 * [https://github.com/aspnet/EntityFrameworkCore/pull/13306](https://github.com/aspnet/EntityFrameworkCore/pull/13306) -更新基底 RelationalTypeMapping 不設定 DbParameter 大小
   * 停止設定預設的大小，因為它可能會造成截斷。 提供者可能需要新增自己的邏輯，如果需要設定大小。
-* https://github.com/aspnet/EntityFrameworkCore/pull/13372 -RevEng:一定要指定十進位資料行的資料行類型
+* (https://github.com/aspnet/EntityFrameworkCore/pull/13372) -RevEng:一定要指定十進位資料行的資料行類型
   * Scaffold 程式碼，而不是設定依照慣例，一律先設定十進位資料行的資料行類型。
   * 提供者應該不需要在其端上的任何變更。
 * [https://github.com/aspnet/EntityFrameworkCore/pull/13469](https://github.com/aspnet/EntityFrameworkCore/pull/13469) -將 CaseExpression 加入產生案例 SQL 運算式
