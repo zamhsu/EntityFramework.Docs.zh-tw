@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 1133976d8d25e4099b64a1a30a8d2066ff3f6cd7
-ms.sourcegitcommit: 645785187ae23ddf7d7b0642c7a4da5ffb0c7f30
+ms.openlocfilehash: 229c15ec0402e1706318593a099236f723d80595
+ms.sourcegitcommit: ab847dd881d51122e695b7cd8c025fcf3a5a9033
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/25/2019
-ms.locfileid: "58419662"
+ms.lasthandoff: 03/30/2019
+ms.locfileid: "58678384"
 ---
 # <a name="provider-impacting-changes"></a>提供者影響的變更
 
@@ -61,6 +61,10 @@ ms.locfileid: "58419662"
   * `EntityMaterializerSource` 已簡化，
 * https://github.com/aspnet/EntityFrameworkCore/pull/14895
   * StartsWith 轉譯已變更的提供者可能希望/需要因應方式
+* https://github.com/aspnet/EntityFrameworkCore/pull/15168
+  * 慣例設定服務已變更。 現在應該是提供者繼承自 「 ProviderConventionSet"或"RelationalConventionSet 」。
+  * 自訂可以透過新增`IConventionSetCustomizer`服務，但這要使用其他擴充功能，不提供者。
+  * 在執行階段使用的慣例應該解決從`IConventionSetBuilder`。
 
 ## <a name="21-----22"></a>2.1 ---> 2.2
 
