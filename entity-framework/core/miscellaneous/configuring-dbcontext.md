@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: f5a9ae17471391442170d8c40264e4db6922cb08
-ms.sourcegitcommit: 39080d38e1adea90db741257e60dc0e7ed08aa82
+ms.openlocfilehash: 9400fe8ea817b6aca0fb63c1de05ffe1dc997b2f
+ms.sourcegitcommit: a8b04050033c5dc46c076b7e21b017749e0967a8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/03/2018
-ms.locfileid: "50979998"
+ms.lasthandoff: 04/02/2019
+ms.locfileid: "58868005"
 ---
 # <a name="configuring-a-dbcontext"></a>設定 DbContext
 
@@ -161,6 +161,27 @@ using (var context = serviceProvider.GetService<BloggingContext>())
 
 var options = serviceProvider.GetService<DbContextOptions<BloggingContext>>();
 ```
+## <a name="avoiding-dbcontext-threading-issues"></a>避免使用 DbContext 執行緒問題
+
+Entity Framework Core 不支援在同一個執行的多個平行作業`DbContext`執行個體。 並行存取可能會導致未定義的行為、 應用程式當機和資料損毀。 因此請務必一律使用分隔`DbContext`平行執行的作業的執行個體。 
+
+有可以在同一個 inadvernetly 導致並行存取的常見錯誤`DbContext`執行個體：
+
+### <a name="forgetting-to-await-the-completion-of-an-asynchronous-operation-before-starting-any-other-operation-on-the-same-dbcontext"></a>忘了將等候的非同步作業開始的相同 DbContext 上的任何其他作業之前完成
+
+非同步方法可讓 EF Core 來起始以非封鎖方式存取資料庫的作業。 但是，如果呼叫端不會等待完成的其中一種方法，並繼續執行其他作業`DbContext`，則狀態`DbContext`可以，（和很有可能會） 損毀。 
+
+一律立即等候 EF Core 的非同步方法。  
+
+### <a name="implicitly-sharing-dbcontext-instances-across-multiple-threads-via-dependency-injection"></a>以隱含方式跨多個執行緒，透過相依性插入共用 DbContext 執行個體
+
+[ `AddDbContext` ](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext)擴充方法註冊`DbContext`類型[具範圍存留期](https://docs .microsoft.com/aspnet/core/fundamentals/dependency-injection#service-lifetimes)預設。 
+
+這是安全的 ASP.NET Core 應用程式中的並行存取問題，因為只有一個執行緒在指定時間內，執行每個用戶端要求，而且每個要求會取得不同的相依性插入範圍 (並因此個別`DbContext`執行個體）。
+
+不過，明確地平行執行多個執行緒的任何程式碼應該確保`DbContext`執行個體不是以往 accesed 同時。
+
+使用相依性插入，這可藉由任一註冊內容為已設定領域及建立範圍 (使用`IServiceScopeFactory`) 為每個執行緒，或藉由註冊`DbContext`為暫時性 (使用的多載`AddDbContext`後者會採用`ServiceLifetime`參數)。
 
 ## <a name="more-reading"></a>詳細閱讀
 

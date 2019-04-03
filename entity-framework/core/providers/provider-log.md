@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 229c15ec0402e1706318593a099236f723d80595
-ms.sourcegitcommit: ab847dd881d51122e695b7cd8c025fcf3a5a9033
+ms.openlocfilehash: 9ef87a737111053df0359f3b2d7a4f82d25c578a
+ms.sourcegitcommit: a8b04050033c5dc46c076b7e21b017749e0967a8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/30/2019
-ms.locfileid: "58678384"
+ms.lasthandoff: 04/02/2019
+ms.locfileid: "58867940"
 ---
 # <a name="provider-impacting-changes"></a>提供者影響的變更
 
@@ -43,9 +43,6 @@ ms.locfileid: "58678384"
   * `IMigrationsSqlGenerator` 已從單一服務為範圍的服務
 * https://github.com/aspnet/EntityFrameworkCore/pull/14706
   * 建置關聯式命令的基礎結構具有已變成公用，因此將它安全地提供者使用，並稍微重構。
-  * `IRelationalCommandBuilderFactory`已從單一服務為範圍的服務
-  * `IShaperCommandContextFactory` 已從單一服務為範圍的服務
-  * `ISelectExpressionFactory` 已從單一服務為範圍的服務
 * https://github.com/aspnet/EntityFrameworkCore/pull/14733
   * `ILazyLoader` 已從範圍的服務變更為暫時性的服務
 * https://github.com/aspnet/EntityFrameworkCore/pull/14610
