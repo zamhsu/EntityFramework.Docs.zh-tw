@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 0ad43db794902cf1f46bfe8f117fbd36e06f3c44
-ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
+ms.openlocfilehash: 3024c0101c9d886ef844d1b7dc85aaf1be27e86b
+ms.sourcegitcommit: ce44f85a5bce32ef2d3d09b7682108d3473511b3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/14/2019
-ms.locfileid: "57829170"
+ms.lasthandoff: 04/04/2019
+ms.locfileid: "58914074"
 ---
 # <a name="raw-sql-queries"></a>原始 SQL 查詢
 
@@ -64,7 +64,7 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-您也可以建構 DbParameter，並將它提供為參數值。 這可讓您在 SQL 查詢字串中使用具名參數。
+您也可以建構 DbParameter，並將其提供為參數值：
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
@@ -72,6 +72,17 @@ var user = new SqlParameter("user", "johndoe");
 
 var blogs = context.Blogs
     .FromSql("EXECUTE dbo.GetMostPopularBlogsForUser @user", user)
+    .ToList();
+```
+
+這可讓您在 SQL 查詢字串中使用具名的參數，這在當預存程序具有選擇性參數時會很有幫助：
+
+<!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
+``` csharp
+var user = new SqlParameter("user", "johndoe");
+
+var blogs = context.Blogs
+    .FromSql("EXECUTE dbo.GetMostPopularBlogs @filterByUser=@user", user)
     .ToList();
 ```
 
@@ -132,7 +143,7 @@ var blogs = context.Blogs
 
 * SQL 查詢不能包含相關資料。 不過，在許多情況下，您可以使用 `Include` 運算子來傳回相關資料以在查詢上方進行撰寫 (請參閱[包含相關資料](#including-related-data))。
 
-* 傳遞到此方法的 `SELECT` 陳述式通常應該是可組合的：如果 EF Core 必須評估伺服器上的其他查詢運算子 (例如，轉譯在 `FromSql` 之後套用的 LINQ 運算子)，則會將所提供的 SQL 視為子查詢。 這表示所傳遞的 SQL 不應包含在子查詢上無效的任何字元或選項，例如：
+* `SELECT` 傳遞到此方法的陳述式通常應該為可組合：如果 EF Core 必須評估伺服器上的其他查詢運算子 (例如，轉譯在 `FromSql` 之後套用的 LINQ 運算子)，則會將所提供的 SQL 視為子查詢。 這表示所傳遞的 SQL 不應包含在子查詢上無效的任何字元或選項，例如：
   * 結尾的分號
   * 在 SQL Server 上，結尾的查詢層級提示 (例如，`OPTION (HASH JOIN)`)
   * (在 SQL Server 上) `SELECT` 子句中未隨附 `TOP 100 PERCENT` 的 `ORDER BY` 子句
