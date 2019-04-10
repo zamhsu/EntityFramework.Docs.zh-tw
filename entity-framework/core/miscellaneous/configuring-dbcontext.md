@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: 9400fe8ea817b6aca0fb63c1de05ffe1dc997b2f
-ms.sourcegitcommit: a8b04050033c5dc46c076b7e21b017749e0967a8
+ms.openlocfilehash: 0350b25d0d0efe05df7cb9e93a3f4ae2d864fd63
+ms.sourcegitcommit: 47e0a66a136e743a815d099d2bee5f0da1a068c6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/02/2019
-ms.locfileid: "58868005"
+ms.lasthandoff: 04/09/2019
+ms.locfileid: "59363933"
 ---
 # <a name="configuring-a-dbcontext"></a>設定 DbContext
 
@@ -175,7 +175,7 @@ Entity Framework Core 不支援在同一個執行的多個平行作業`DbContext
 
 ### <a name="implicitly-sharing-dbcontext-instances-across-multiple-threads-via-dependency-injection"></a>以隱含方式跨多個執行緒，透過相依性插入共用 DbContext 執行個體
 
-[ `AddDbContext` ](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext)擴充方法註冊`DbContext`類型[具範圍存留期](https://docs .microsoft.com/aspnet/core/fundamentals/dependency-injection#service-lifetimes)預設。 
+[ `AddDbContext` ](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext)擴充方法註冊`DbContext`類型[具範圍存留期](https://docs.microsoft.com/aspnet/core/fundamentals/dependency-injection#service-lifetimes)預設。 
 
 這是安全的 ASP.NET Core 應用程式中的並行存取問題，因為只有一個執行緒在指定時間內，執行每個用戶端要求，而且每個要求會取得不同的相依性插入範圍 (並因此個別`DbContext`執行個體）。
 
