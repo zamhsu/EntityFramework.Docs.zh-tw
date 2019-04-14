@@ -65,6 +65,7 @@
 #### [值轉換](core/modeling/value-conversions.md)
 #### [資料植入](core/modeling/data-seeding.md)
 #### [實體類型建構函式](core/modeling/constructors.md)
+#### [資料表分割](core/modeling/table-splitting.md)
 #### [擁有的實體類型](core/modeling/owned-entities.md)
 #### [查詢類型](core/modeling/query-types.md)
 #### [以相同 DbContext 替代模型](core/modeling/dynamic-model.md)
