@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 0d0590f1-1ea3-4d5c-8f44-db17395cd3f3
 uid: core/miscellaneous/testing/in-memory
-ms.openlocfilehash: 2754d1deba98fcee0eb88669293b2197545c8874
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 8aaea52f22954ef6a2b7d9b9c5627597c61ac644
+ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997888"
+ms.lasthandoff: 04/14/2019
+ms.locfileid: "59562542"
 ---
 # <a name="testing-with-inmemory"></a>使用 InMemory 進行測試
 
@@ -64,6 +64,6 @@ EF Core 資料庫提供者可能沒有關聯式資料庫。 InMemory 設計為�
 以下是使用 InMemory 資料庫的測試類別的範例。 每個測試方法指定唯一的資料庫名稱，這表示每一種方法有它自己的 InMemory 資料庫。
 
 >[!TIP]
-> 若要使用`.UseInMemoryDatabase()`擴充方法，參考的 NuGet 套件`Microsoft.EntityFrameworkCore.InMemory`。
+> 若要使用`.UseInMemoryDatabase()`擴充方法，參考的 NuGet 套件[Microsoft.EntityFrameworkCore.InMemory](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.InMemory/)。
 
 [!code-csharp[Main](../../../../samples/core/Miscellaneous/Testing/TestProject/InMemory/BlogServiceTests.cs)]
