@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/05/2018
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 5ae06a4342a556936dc44c5bf6622814eaad4733
-ms.sourcegitcommit: 7a7da65404c9338e1e3df42576a13be536a6f95f
+ms.openlocfilehash: b94ac567644a9d98a05a40857cc072c500203370
+ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2018
-ms.locfileid: "48834743"
+ms.lasthandoff: 04/14/2019
+ms.locfileid: "59562555"
 ---
 <a name="migrations"></a>移轉
 ==========
@@ -47,8 +47,8 @@ dotnet ef migrations add InitialCreate
 
 會新增三個檔案到您**移轉**目錄下的專案：
 
-* **00000000000000_InitialCreate.cs** - 主要移轉檔案。 包含套用移轉 (在 `Up()` 中) 及予以反轉 (在 `Down()` 中) 的必要作業。
-* **00000000000000_InitialCreate.Designer.cs** - 移轉中繼資料檔案。 包含 EF 使用的資訊。
+* **XXXXXXXXXXXXXX_InitialCreate.cs** - 主要移轉檔案。 包含套用移轉 (在 `Up()` 中) 及予以反轉 (在 `Down()` 中) 的必要作業。
+* **XXXXXXXXXXXXXX_InitialCreate.Designer.cs** - 移轉中繼資料檔案。 包含 EF 使用的資訊。
 * **MyContextModelSnapshot.cs** - 您目前模型的快照集。 用來決定新增下一個移轉時所要變更的項目。
 
 檔案名稱中的時間戳記有助於使其依時間先後順序排列，以便您查看變更的進展。

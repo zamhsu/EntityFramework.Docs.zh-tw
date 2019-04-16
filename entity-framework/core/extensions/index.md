@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 01/07/2019
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 414773284df7c208b9a2acf0536fda459bdf775b
-ms.sourcegitcommit: 7bde8e6ad3c4565a4638646ce04bcf5e66f7b5fd
+ms.openlocfilehash: d432ca36c166f7baf71253709bf58b1f5428a11a
+ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/07/2019
-ms.locfileid: "54069226"
+ms.lasthandoff: 04/14/2019
+ms.locfileid: "59562503"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -40,7 +40,7 @@ EF Core Power Tools 是 Visual Studio 2017 延伸模組，在簡單使用者介�
 
 ### <a name="entity-framework-visual-editor"></a>Entity Framework 視覺效果編輯器
 
-Entity Framework 視覺效果編輯器是 Visual Studio 2017 延伸模組，為 EF 6 和 EF Core 類別的視覺效果設計新增 ORM 設計工具。 因為程式碼會透過 T4 範本產生，所以能加以自訂來滿足各種需求。 它支援繼承、單向及雙向關聯、列舉，還能夠對類別進行色彩編碼以及新增文字區塊，以說明設計中可能較不易懂的部分。
+Entity Framework 視覺效果編輯器是 Visual Studio 延伸模組，為 EF 6 和 EF Core 類別的視覺效果設計新增 ORM 設計工具。 因為程式碼會透過 T4 範本產生，所以能加以自訂來滿足各種需求。 它支援繼承、單向及雙向關聯、列舉，還能夠對類別進行色彩編碼以及新增文字區塊，以說明設計中可能較不易懂的部分。
 
 [Marketplace](https://marketplace.visualstudio.com/items?itemName=michaelsawczyn.EFDesigner) \(英文\)
 
