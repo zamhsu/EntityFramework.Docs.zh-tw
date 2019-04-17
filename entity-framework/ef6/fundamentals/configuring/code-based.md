@@ -3,12 +3,12 @@ title: 程式碼為基礎的組態-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 13886d24-2c74-4a00-89eb-aa0dee328d83
-ms.openlocfilehash: c317f112f713612f7b9aef3764a0bd004fef5424
-ms.sourcegitcommit: 735715f10cc8a231c213e4f055d79f0effd86570
+ms.openlocfilehash: 079a4ab30af74eac8b1f51ece5801ff40a867a29
+ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2019
-ms.locfileid: "56325349"
+ms.lasthandoff: 04/16/2019
+ms.locfileid: "59619281"
 ---
 # <a name="code-based-configuration"></a>程式碼為基礎的組態
 > [!NOTE]
@@ -57,7 +57,7 @@ namespace MyNamespace
 
 有一些在不可能將 DbConfiguration 類別放在與您的 DbContext 類別相同的組件的情況。 例如，您可能會有兩個 DbContext 類別每個不同的組件中。 有兩個選項可處理此。  
 
-第一個選項是使用組態檔來指定要使用 DbConfiguration 執行個體。 若要這樣做，請設定 entityFramework 區段的 codeConfigurationType 屬性。 例如:   
+第一個選項是使用組態檔來指定要使用 DbConfiguration 執行個體。 若要這樣做，請設定 entityFramework 區段的 codeConfigurationType 屬性。 例如：  
 
 ``` xml
 <entityFramework codeConfigurationType="MyNamespace.MyDbConfiguration, MyAssembly">
@@ -106,7 +106,7 @@ public class MyContextContext : DbContext
 - 在應用程式啟動 （之前使用 EF） 外掛程式或提供者應該註冊這個事件的事件處理常式方法。 （請注意，這必須進行應用程式使用 EF 之前）。  
 - 事件處理常式會針對每個服務，需要更換 ReplaceService 呼叫。  
 
-比方說，repalce IDbConnectionFactory 和 DbProviderService 您會註冊一個處理常式，如下所示：  
+比方說，您會取代 IDbConnectionFactory 和 DbProviderService 註冊的處理常式，如下所示：  
 
 ``` csharp
 DbConfiguration.Loaded += (_, a) =>
