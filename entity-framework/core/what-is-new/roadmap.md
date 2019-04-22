@@ -4,19 +4,19 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 834C9729-7F6E-4355-917D-DE3EE9FE149E
 uid: core/what-is-new/roadmap
-ms.openlocfilehash: f466d112e5ed8661ad1e2d91079c1c01d34b9002
-ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
+ms.openlocfilehash: e9d1a707c643036fa15b1e0e46730eadefd65518
+ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2019
-ms.locfileid: "57463226"
+ms.lasthandoff: 04/14/2019
+ms.locfileid: "59562464"
 ---
 # <a name="entity-framework-core-roadmap"></a>Entity Framework Core 藍圖
 
 > [!IMPORTANT]
 > 請注意，後續版本的功能集與上市時間，隨時可能會變動，此外，即使我們試圖將此頁面保持在最新狀態，可能還是無法隨時反映我們最新的計劃。
 
-### <a name="ef-core-30"></a>EF Core 3.0
+## <a name="ef-core-30"></a>EF Core 3.0
 
 EF Core 2.2 已然問世，我們現在的主要焦點為 EF Core 3.0。
 如需該版本中包含規劃的[新功能](xref:core/what-is-new/ef-core-3.0/features)和目的性的[中斷性變更](xref:core/what-is-new/ef-core-3.0/breaking-changes)等資訊，請參閱 [EF Core 3.0 的新功能](xref:core/what-is-new/ef-core-3.0/index)。
