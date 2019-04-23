@@ -4,146 +4,146 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 0ff736a3-f1b0-4b58-a49c-4a7094bd6935
 uid: core/modeling/relationships
-ms.openlocfilehash: a53a862cc2443a1c4461aa287def100284635f26
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 9ef1a9269fc99f5b27a81c11a161ed5f9d74180d
+ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994938"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59929933"
 ---
-# <a name="relationships"></a><span data-ttu-id="605f6-102">關聯性</span><span class="sxs-lookup"><span data-stu-id="605f6-102">Relationships</span></span>
+# <a name="relationships"></a><span data-ttu-id="218f8-102">關聯性</span><span class="sxs-lookup"><span data-stu-id="218f8-102">Relationships</span></span>
 
-<span data-ttu-id="605f6-103">關聯性會定義兩個實體如何與彼此相關。</span><span class="sxs-lookup"><span data-stu-id="605f6-103">A relationship defines how two entities relate to each other.</span></span> <span data-ttu-id="605f6-104">在關聯式資料庫中，這被以外部索引鍵條件約束。</span><span class="sxs-lookup"><span data-stu-id="605f6-104">In a relational database, this is represented by a foreign key constraint.</span></span>
+<span data-ttu-id="218f8-103">關聯性會定義兩個實體如何與彼此相關。</span><span class="sxs-lookup"><span data-stu-id="218f8-103">A relationship defines how two entities relate to each other.</span></span> <span data-ttu-id="218f8-104">在關聯式資料庫中，這被以外部索引鍵條件約束。</span><span class="sxs-lookup"><span data-stu-id="218f8-104">In a relational database, this is represented by a foreign key constraint.</span></span>
 
 > [!NOTE]  
-> <span data-ttu-id="605f6-105">大部分的這篇文章中的範例會使用一個對多關聯性，來示範概念。</span><span class="sxs-lookup"><span data-stu-id="605f6-105">Most of the samples in this article use a one-to-many relationship to demonstrate concepts.</span></span> <span data-ttu-id="605f6-106">如需一對一和多對多關聯性的範例，請參閱[其他關聯性模式](#other-relationship-patterns)文章的最後一節。</span><span class="sxs-lookup"><span data-stu-id="605f6-106">For examples of one-to-one and many-to-many relationships see the [Other Relationship Patterns](#other-relationship-patterns) section at the end of the article.</span></span>
+> <span data-ttu-id="218f8-105">大部分的這篇文章中的範例會使用一個對多關聯性，來示範概念。</span><span class="sxs-lookup"><span data-stu-id="218f8-105">Most of the samples in this article use a one-to-many relationship to demonstrate concepts.</span></span> <span data-ttu-id="218f8-106">如需一對一和多對多關聯性的範例，請參閱[其他關聯性模式](#other-relationship-patterns)文章的最後一節。</span><span class="sxs-lookup"><span data-stu-id="218f8-106">For examples of one-to-one and many-to-many relationships see the [Other Relationship Patterns](#other-relationship-patterns) section at the end of the article.</span></span>
 
-## <a name="definition-of-terms"></a><span data-ttu-id="605f6-107">詞彙定義</span><span class="sxs-lookup"><span data-stu-id="605f6-107">Definition of Terms</span></span>
+## <a name="definition-of-terms"></a><span data-ttu-id="218f8-107">詞彙定義</span><span class="sxs-lookup"><span data-stu-id="218f8-107">Definition of Terms</span></span>
 
-<span data-ttu-id="605f6-108">有幾個名詞，用來描述關聯性</span><span class="sxs-lookup"><span data-stu-id="605f6-108">There are a number of terms used to describe relationships</span></span>
+<span data-ttu-id="218f8-108">有幾個名詞，用來描述關聯性</span><span class="sxs-lookup"><span data-stu-id="218f8-108">There are a number of terms used to describe relationships</span></span>
 
-* <span data-ttu-id="605f6-109">**相依的實體：** 這是包含外部索引鍵屬性的實體。</span><span class="sxs-lookup"><span data-stu-id="605f6-109">**Dependent entity:** This is the entity that contains the foreign key property(s).</span></span> <span data-ttu-id="605f6-110">有時稱為 「 子 」 的關聯性。</span><span class="sxs-lookup"><span data-stu-id="605f6-110">Sometimes referred to as the 'child' of the relationship.</span></span>
+* <span data-ttu-id="218f8-109">**相依的實體：** 這是包含外部索引鍵屬性的實體。</span><span class="sxs-lookup"><span data-stu-id="218f8-109">**Dependent entity:** This is the entity that contains the foreign key property(s).</span></span> <span data-ttu-id="218f8-110">有時稱為 「 子 」 的關聯性。</span><span class="sxs-lookup"><span data-stu-id="218f8-110">Sometimes referred to as the 'child' of the relationship.</span></span>
 
-* <span data-ttu-id="605f6-111">**主要實體：** 這是包含的主要/替代索引鍵屬性的實體。</span><span class="sxs-lookup"><span data-stu-id="605f6-111">**Principal entity:** This is the entity that contains the primary/alternate key property(s).</span></span> <span data-ttu-id="605f6-112">有時稱為 'parent' 的關聯性。</span><span class="sxs-lookup"><span data-stu-id="605f6-112">Sometimes referred to as the 'parent' of the relationship.</span></span>
+* <span data-ttu-id="218f8-111">**主要實體：** 這是包含的主要/替代索引鍵屬性的實體。</span><span class="sxs-lookup"><span data-stu-id="218f8-111">**Principal entity:** This is the entity that contains the primary/alternate key property(s).</span></span> <span data-ttu-id="218f8-112">有時稱為 'parent' 的關聯性。</span><span class="sxs-lookup"><span data-stu-id="218f8-112">Sometimes referred to as the 'parent' of the relationship.</span></span>
 
-* <span data-ttu-id="605f6-113">**外部索引鍵：** 中用來儲存與相關實體的主要索引鍵屬性的值為相依實體屬性。</span><span class="sxs-lookup"><span data-stu-id="605f6-113">**Foreign key:** The property(s) in the dependent entity that is used to store the values of the principal key property that the entity is related to.</span></span>
+* <span data-ttu-id="218f8-113">**外部索引鍵：** 在用來儲存與相關實體的主要索引鍵屬性的值為相依實體屬性。</span><span class="sxs-lookup"><span data-stu-id="218f8-113">**Foreign key:** The property(s) in the dependent entity that is used to store the values of the principal key property that the entity is related to.</span></span>
 
-* <span data-ttu-id="605f6-114">**主體的金鑰：** 唯一識別主要實體的屬性。</span><span class="sxs-lookup"><span data-stu-id="605f6-114">**Principal key:** The property(s) that uniquely identifies the principal entity.</span></span> <span data-ttu-id="605f6-115">這可能是主索引鍵或替代索引鍵。</span><span class="sxs-lookup"><span data-stu-id="605f6-115">This may be the primary key or an alternate key.</span></span>
+* <span data-ttu-id="218f8-114">**主體的金鑰：** 屬性，這些屬性可唯一識別主要實體。</span><span class="sxs-lookup"><span data-stu-id="218f8-114">**Principal key:** The property(s) that uniquely identifies the principal entity.</span></span> <span data-ttu-id="218f8-115">這可能是主索引鍵或替代索引鍵。</span><span class="sxs-lookup"><span data-stu-id="218f8-115">This may be the primary key or an alternate key.</span></span>
 
-* <span data-ttu-id="605f6-116">**導覽屬性：** 包含相關的公司實體參考的主體和 （或） 相依實體上定義的屬性。</span><span class="sxs-lookup"><span data-stu-id="605f6-116">**Navigation property:** A property defined on the principal and/or dependent entity that contains a reference(s) to the related entity(s).</span></span>
+* <span data-ttu-id="218f8-116">**導覽屬性：** 主體和 （或） 相依實體，其中包含相關的公司實體參考上定義的屬性。</span><span class="sxs-lookup"><span data-stu-id="218f8-116">**Navigation property:** A property defined on the principal and/or dependent entity that contains a reference(s) to the related entity(s).</span></span>
 
-  * <span data-ttu-id="605f6-117">**集合導覽屬性：** 包含許多相關的實體參考的瀏覽屬性。</span><span class="sxs-lookup"><span data-stu-id="605f6-117">**Collection navigation property:** A navigation property that contains references to many related entities.</span></span>
+  * <span data-ttu-id="218f8-117">**集合導覽屬性：** 瀏覽屬性，其中包含許多相關實體的參考。</span><span class="sxs-lookup"><span data-stu-id="218f8-117">**Collection navigation property:** A navigation property that contains references to many related entities.</span></span>
 
-  * <span data-ttu-id="605f6-118">**參考導覽屬性：** 保留單一相關實體的參考的瀏覽屬性。</span><span class="sxs-lookup"><span data-stu-id="605f6-118">**Reference navigation property:** A navigation property that holds a reference to a single related entity.</span></span>
+  * <span data-ttu-id="218f8-118">**參考導覽屬性：** 保留單一相關實體的參考導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="218f8-118">**Reference navigation property:** A navigation property that holds a reference to a single related entity.</span></span>
 
-  * <span data-ttu-id="605f6-119">**反向的導覽屬性：** 時討論特定的導覽屬性，這個詞彙是指關聯性另一端的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="605f6-119">**Inverse navigation property:** When discussing a particular navigation property, this term refers to the navigation property on the other end of the relationship.</span></span>
+  * <span data-ttu-id="218f8-119">**反向的導覽屬性：** 在討論時有特定的導覽屬性，這個詞彙是指關聯性另一端的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="218f8-119">**Inverse navigation property:** When discussing a particular navigation property, this term refers to the navigation property on the other end of the relationship.</span></span>
 
-<span data-ttu-id="605f6-120">下列程式碼清單會顯示一對多關聯性之間`Blog`和 `Post`</span><span class="sxs-lookup"><span data-stu-id="605f6-120">The following code listing shows a one-to-many relationship between `Blog` and `Post`</span></span>
+<span data-ttu-id="218f8-120">下列程式碼清單會顯示一對多關聯性之間`Blog`和 `Post`</span><span class="sxs-lookup"><span data-stu-id="218f8-120">The following code listing shows a one-to-many relationship between `Blog` and `Post`</span></span>
 
-* <span data-ttu-id="605f6-121">`Post` 是相依實體</span><span class="sxs-lookup"><span data-stu-id="605f6-121">`Post` is the dependent entity</span></span>
+* <span data-ttu-id="218f8-121">`Post` 是相依實體</span><span class="sxs-lookup"><span data-stu-id="218f8-121">`Post` is the dependent entity</span></span>
 
-* <span data-ttu-id="605f6-122">`Blog` 是主要實體</span><span class="sxs-lookup"><span data-stu-id="605f6-122">`Blog` is the principal entity</span></span>
+* <span data-ttu-id="218f8-122">`Blog` 是主要實體</span><span class="sxs-lookup"><span data-stu-id="218f8-122">`Blog` is the principal entity</span></span>
 
-* <span data-ttu-id="605f6-123">`Post.BlogId` 外部索引鍵</span><span class="sxs-lookup"><span data-stu-id="605f6-123">`Post.BlogId` is the foreign key</span></span>
+* <span data-ttu-id="218f8-123">`Post.BlogId` 外部索引鍵</span><span class="sxs-lookup"><span data-stu-id="218f8-123">`Post.BlogId` is the foreign key</span></span>
 
-* <span data-ttu-id="605f6-124">`Blog.BlogId` 是 （在此情況下它是主索引鍵，而不是替代索引鍵） 的主體金鑰</span><span class="sxs-lookup"><span data-stu-id="605f6-124">`Blog.BlogId` is the principal key (in this case it is a primary key rather than an alternate key)</span></span>
+* <span data-ttu-id="218f8-124">`Blog.BlogId` 是 （在此情況下它是主索引鍵，而不是替代索引鍵） 的主體金鑰</span><span class="sxs-lookup"><span data-stu-id="218f8-124">`Blog.BlogId` is the principal key (in this case it is a primary key rather than an alternate key)</span></span>
 
-* <span data-ttu-id="605f6-125">`Post.Blog` 是參考導覽屬性</span><span class="sxs-lookup"><span data-stu-id="605f6-125">`Post.Blog` is a reference navigation property</span></span>
+* <span data-ttu-id="218f8-125">`Post.Blog` 是參考導覽屬性</span><span class="sxs-lookup"><span data-stu-id="218f8-125">`Post.Blog` is a reference navigation property</span></span>
 
-* <span data-ttu-id="605f6-126">`Blog.Posts` 集合導覽屬性</span><span class="sxs-lookup"><span data-stu-id="605f6-126">`Blog.Posts` is a collection navigation property</span></span>
+* <span data-ttu-id="218f8-126">`Blog.Posts` 集合導覽屬性</span><span class="sxs-lookup"><span data-stu-id="218f8-126">`Blog.Posts` is a collection navigation property</span></span>
 
-* <span data-ttu-id="605f6-127">`Post.Blog` 是的反向的導覽屬性`Blog.Posts`（反之亦然）</span><span class="sxs-lookup"><span data-stu-id="605f6-127">`Post.Blog` is the inverse navigation property of `Blog.Posts` (and vice versa)</span></span>
+* <span data-ttu-id="218f8-127">`Post.Blog` 是的反向的導覽屬性`Blog.Posts`（反之亦然）</span><span class="sxs-lookup"><span data-stu-id="218f8-127">`Post.Blog` is the inverse navigation property of `Blog.Posts` (and vice versa)</span></span>
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/Relationships/Full.cs#Entities)]
 
-## <a name="conventions"></a><span data-ttu-id="605f6-128">慣例</span><span class="sxs-lookup"><span data-stu-id="605f6-128">Conventions</span></span>
+## <a name="conventions"></a><span data-ttu-id="218f8-128">慣例</span><span class="sxs-lookup"><span data-stu-id="218f8-128">Conventions</span></span>
 
-<span data-ttu-id="605f6-129">依照慣例，在類型上探索到的導覽屬性時，將會建立關聯性。</span><span class="sxs-lookup"><span data-stu-id="605f6-129">By convention, a relationship will be created when there is a navigation property discovered on a type.</span></span> <span data-ttu-id="605f6-130">屬性會被視為一個導覽屬性，如果它所指向的類型不能為純量型別對應目前的資料庫提供者。</span><span class="sxs-lookup"><span data-stu-id="605f6-130">A property is considered a navigation property if the type it points to can not be mapped as a scalar type by the current database provider.</span></span>
+<span data-ttu-id="218f8-129">依照慣例，在類型上探索到的導覽屬性時，將會建立關聯性。</span><span class="sxs-lookup"><span data-stu-id="218f8-129">By convention, a relationship will be created when there is a navigation property discovered on a type.</span></span> <span data-ttu-id="218f8-130">屬性會被視為一個導覽屬性，如果它所指向的類型不能為純量型別對應目前的資料庫提供者。</span><span class="sxs-lookup"><span data-stu-id="218f8-130">A property is considered a navigation property if the type it points to can not be mapped as a scalar type by the current database provider.</span></span>
 
 > [!NOTE]  
-> <span data-ttu-id="605f6-131">慣例所探索到的關聯性會一律以目標主要實體的主索引鍵。</span><span class="sxs-lookup"><span data-stu-id="605f6-131">Relationships that are discovered by convention will always target the primary key of the principal entity.</span></span> <span data-ttu-id="605f6-132">為目標的其他索引鍵，額外的組態必須使用 Fluent API 執行。</span><span class="sxs-lookup"><span data-stu-id="605f6-132">To target an alternate key, additional configuration must be performed using the Fluent API.</span></span>
+> <span data-ttu-id="218f8-131">慣例所探索到的關聯性會一律以目標主要實體的主索引鍵。</span><span class="sxs-lookup"><span data-stu-id="218f8-131">Relationships that are discovered by convention will always target the primary key of the principal entity.</span></span> <span data-ttu-id="218f8-132">為目標的其他索引鍵，額外的組態必須使用 Fluent API 執行。</span><span class="sxs-lookup"><span data-stu-id="218f8-132">To target an alternate key, additional configuration must be performed using the Fluent API.</span></span>
 
-### <a name="fully-defined-relationships"></a><span data-ttu-id="605f6-133">完整定義的關聯性</span><span class="sxs-lookup"><span data-stu-id="605f6-133">Fully Defined Relationships</span></span>
+### <a name="fully-defined-relationships"></a><span data-ttu-id="218f8-133">完整定義的關聯性</span><span class="sxs-lookup"><span data-stu-id="218f8-133">Fully Defined Relationships</span></span>
 
-<span data-ttu-id="605f6-134">關聯性的最常見的模式是將這兩個端點的關聯性和相依的實體類別中定義的外部索引鍵屬性定義的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="605f6-134">The most common pattern for relationships is to have navigation properties defined on both ends of the relationship and a foreign key property defined in the dependent entity class.</span></span>
+<span data-ttu-id="218f8-134">關聯性的最常見的模式是將這兩個端點的關聯性和相依的實體類別中定義的外部索引鍵屬性定義的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="218f8-134">The most common pattern for relationships is to have navigation properties defined on both ends of the relationship and a foreign key property defined in the dependent entity class.</span></span>
 
-* <span data-ttu-id="605f6-135">如果兩個類型之間找到對導覽屬性，則它們會被設定為相同關聯性的反向的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="605f6-135">If a pair of navigation properties is found between two types, then they will be configured as inverse navigation properties of the same relationship.</span></span>
+* <span data-ttu-id="218f8-135">如果兩個類型之間找到對導覽屬性，則它們會被設定為相同關聯性的反向的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="218f8-135">If a pair of navigation properties is found between two types, then they will be configured as inverse navigation properties of the same relationship.</span></span>
 
-* <span data-ttu-id="605f6-136">如果相依的實體包含屬性，名為`<primary key property name>`， `<navigation property name><primary key property name>`，或`<principal entity name><primary key property name>`接著，它會設定為外部索引鍵。</span><span class="sxs-lookup"><span data-stu-id="605f6-136">If the dependent entity contains a property named `<primary key property name>`, `<navigation property name><primary key property name>`, or `<principal entity name><primary key property name>` then it will be configured as the foreign key.</span></span>
+* <span data-ttu-id="218f8-136">如果相依的實體包含屬性，名為`<primary key property name>`， `<navigation property name><primary key property name>`，或`<principal entity name><primary key property name>`接著，它會設定為外部索引鍵。</span><span class="sxs-lookup"><span data-stu-id="218f8-136">If the dependent entity contains a property named `<primary key property name>`, `<navigation property name><primary key property name>`, or `<principal entity name><primary key property name>` then it will be configured as the foreign key.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/Relationships/Full.cs?name=Entities&highlight=6,15,16)]
 
 > [!WARNING]  
-> <span data-ttu-id="605f6-137">如果有多個定義兩個類型之間的導覽屬性 (也就是指向彼此的巡覽的多個不同的組)，然後依照慣例建立任何關聯性和您必須手動將其設定為識別如何導覽屬性配對。</span><span class="sxs-lookup"><span data-stu-id="605f6-137">If there are multiple navigation properties defined between two types (that is, more than one distinct pair of navigations that point to each other), then no relationships will be created by convention and you will need to manually configure them to identify how the navigation properties pair up.</span></span>
+> <span data-ttu-id="218f8-137">如果有多個定義兩個類型之間的導覽屬性 (也就是指向彼此的巡覽的多個不同的組)，然後依照慣例建立任何關聯性和您必須手動將其設定為識別如何導覽屬性配對。</span><span class="sxs-lookup"><span data-stu-id="218f8-137">If there are multiple navigation properties defined between two types (that is, more than one distinct pair of navigations that point to each other), then no relationships will be created by convention and you will need to manually configure them to identify how the navigation properties pair up.</span></span>
 
-### <a name="no-foreign-key-property"></a><span data-ttu-id="605f6-138">沒有外部索引鍵屬性</span><span class="sxs-lookup"><span data-stu-id="605f6-138">No Foreign Key Property</span></span>
+### <a name="no-foreign-key-property"></a><span data-ttu-id="218f8-138">沒有外部索引鍵屬性</span><span class="sxs-lookup"><span data-stu-id="218f8-138">No Foreign Key Property</span></span>
 
-<span data-ttu-id="605f6-139">雖然建議有相依的實體類別中定義的外部索引鍵屬性，並不需要。</span><span class="sxs-lookup"><span data-stu-id="605f6-139">While it is recommended to have a foreign key property defined in the dependent entity class, it is not required.</span></span> <span data-ttu-id="605f6-140">如果不找到任何外部索引鍵屬性，則會介紹陰影的外部索引鍵屬性同名`<navigation property name><principal key property name>`(請參閱 <<c2> [ 遮蔽屬性](shadow-properties.md)如需詳細資訊)。</span><span class="sxs-lookup"><span data-stu-id="605f6-140">If no foreign key property is found, a shadow foreign key property will be introduced with the name `<navigation property name><principal key property name>` (see [Shadow Properties](shadow-properties.md) for more information).</span></span>
+<span data-ttu-id="218f8-139">雖然建議有相依的實體類別中定義的外部索引鍵屬性，並不需要。</span><span class="sxs-lookup"><span data-stu-id="218f8-139">While it is recommended to have a foreign key property defined in the dependent entity class, it is not required.</span></span> <span data-ttu-id="218f8-140">如果不找到任何外部索引鍵屬性，則會介紹陰影的外部索引鍵屬性同名`<navigation property name><principal key property name>`(請參閱 <<c2> [ 遮蔽屬性](shadow-properties.md)如需詳細資訊)。</span><span class="sxs-lookup"><span data-stu-id="218f8-140">If no foreign key property is found, a shadow foreign key property will be introduced with the name `<navigation property name><principal key property name>` (see [Shadow Properties](shadow-properties.md) for more information).</span></span>
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/Relationships/NoForeignKey.cs?name=Entities&highlight=6,15)]
 
-### <a name="single-navigation-property"></a><span data-ttu-id="605f6-141">單一導覽屬性</span><span class="sxs-lookup"><span data-stu-id="605f6-141">Single Navigation Property</span></span>
+### <a name="single-navigation-property"></a><span data-ttu-id="218f8-141">單一導覽屬性</span><span class="sxs-lookup"><span data-stu-id="218f8-141">Single Navigation Property</span></span>
 
-<span data-ttu-id="605f6-142">包括一個導覽屬性 （未反轉的導覽中和任何外部索引鍵屬性），就足以具有由慣例定義關聯性。</span><span class="sxs-lookup"><span data-stu-id="605f6-142">Including just one navigation property (no inverse navigation, and no foreign key property) is enough to have a relationship defined by convention.</span></span> <span data-ttu-id="605f6-143">您也可以有單一導覽屬性和外部索引鍵屬性。</span><span class="sxs-lookup"><span data-stu-id="605f6-143">You can also have a single navigation property and a foreign key property.</span></span>
+<span data-ttu-id="218f8-142">包括一個導覽屬性 （未反轉的導覽中和任何外部索引鍵屬性），就足以具有由慣例定義關聯性。</span><span class="sxs-lookup"><span data-stu-id="218f8-142">Including just one navigation property (no inverse navigation, and no foreign key property) is enough to have a relationship defined by convention.</span></span> <span data-ttu-id="218f8-143">您也可以有單一導覽屬性和外部索引鍵屬性。</span><span class="sxs-lookup"><span data-stu-id="218f8-143">You can also have a single navigation property and a foreign key property.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/Relationships/OneNavigation.cs?name=Entities&highlight=6)]
 
-### <a name="cascade-delete"></a><span data-ttu-id="605f6-144">串聯刪除</span><span class="sxs-lookup"><span data-stu-id="605f6-144">Cascade Delete</span></span>
+### <a name="cascade-delete"></a><span data-ttu-id="218f8-144">串聯刪除</span><span class="sxs-lookup"><span data-stu-id="218f8-144">Cascade Delete</span></span>
 
-<span data-ttu-id="605f6-145">依照慣例，串聯刪除將會設定為*Cascade*必要的關聯性並*ClientSetNull*選擇性的關聯性。</span><span class="sxs-lookup"><span data-stu-id="605f6-145">By convention, cascade delete will be set to *Cascade* for required relationships and *ClientSetNull* for optional relationships.</span></span> <span data-ttu-id="605f6-146">*Cascade*表示也會刪除相依實體。</span><span class="sxs-lookup"><span data-stu-id="605f6-146">*Cascade* means dependent entities are also deleted.</span></span> <span data-ttu-id="605f6-147">*ClientSetNull*方法不會載入到記憶體的相依實體將會保留不變且必須以手動方式刪除，或更新為指向有效的主體實體。</span><span class="sxs-lookup"><span data-stu-id="605f6-147">*ClientSetNull* means that dependent entities that are not loaded into memory will remain unchanged and must be manually deleted, or updated to point to a valid principal entity.</span></span> <span data-ttu-id="605f6-148">載入到記憶體的實體，EF Core 會嘗試將外部索引鍵屬性設定為 null。</span><span class="sxs-lookup"><span data-stu-id="605f6-148">For entities that are loaded into memory, EF Core will attempt to set the foreign key properties to null.</span></span>
+<span data-ttu-id="218f8-145">依照慣例，串聯刪除將會設定為*Cascade*必要的關聯性並*ClientSetNull*選擇性的關聯性。</span><span class="sxs-lookup"><span data-stu-id="218f8-145">By convention, cascade delete will be set to *Cascade* for required relationships and *ClientSetNull* for optional relationships.</span></span> <span data-ttu-id="218f8-146">*Cascade*表示也會刪除相依實體。</span><span class="sxs-lookup"><span data-stu-id="218f8-146">*Cascade* means dependent entities are also deleted.</span></span> <span data-ttu-id="218f8-147">*ClientSetNull*方法不會載入到記憶體的相依實體將會保留不變且必須以手動方式刪除，或更新為指向有效的主體實體。</span><span class="sxs-lookup"><span data-stu-id="218f8-147">*ClientSetNull* means that dependent entities that are not loaded into memory will remain unchanged and must be manually deleted, or updated to point to a valid principal entity.</span></span> <span data-ttu-id="218f8-148">載入到記憶體的實體，EF Core 會嘗試將外部索引鍵屬性設定為 null。</span><span class="sxs-lookup"><span data-stu-id="218f8-148">For entities that are loaded into memory, EF Core will attempt to set the foreign key properties to null.</span></span>
 
-<span data-ttu-id="605f6-149">請參閱[必要和選擇性的關聯性](#required-and-optional-relationships)一節以取得必要和選擇性的關聯性之間的差異。</span><span class="sxs-lookup"><span data-stu-id="605f6-149">See the [Required and Optional Relationships](#required-and-optional-relationships) section for the difference between required and optional relationships.</span></span>
+<span data-ttu-id="218f8-149">請參閱[必要和選擇性的關聯性](#required-and-optional-relationships)一節以取得必要和選擇性的關聯性之間的差異。</span><span class="sxs-lookup"><span data-stu-id="218f8-149">See the [Required and Optional Relationships](#required-and-optional-relationships) section for the difference between required and optional relationships.</span></span>
 
-<span data-ttu-id="605f6-150">請參閱[串聯刪除](../saving/cascade-delete.md)的更多詳細的不同刪除行為和使用慣例的預設值。</span><span class="sxs-lookup"><span data-stu-id="605f6-150">See [Cascade Delete](../saving/cascade-delete.md) for more details about the different delete behaviors and the defaults used by convention.</span></span>
+<span data-ttu-id="218f8-150">請參閱[串聯刪除](../saving/cascade-delete.md)的更多詳細的不同刪除行為和使用慣例的預設值。</span><span class="sxs-lookup"><span data-stu-id="218f8-150">See [Cascade Delete](../saving/cascade-delete.md) for more details about the different delete behaviors and the defaults used by convention.</span></span>
 
-## <a name="data-annotations"></a><span data-ttu-id="605f6-151">資料註釋</span><span class="sxs-lookup"><span data-stu-id="605f6-151">Data Annotations</span></span>
+## <a name="data-annotations"></a><span data-ttu-id="218f8-151">資料註釋</span><span class="sxs-lookup"><span data-stu-id="218f8-151">Data Annotations</span></span>
 
-<span data-ttu-id="605f6-152">有兩個可用來設定關聯性的資料註解`[ForeignKey]`和`[InverseProperty]`。</span><span class="sxs-lookup"><span data-stu-id="605f6-152">There are two data annotations that can be used to configure relationships, `[ForeignKey]` and `[InverseProperty]`.</span></span>
+<span data-ttu-id="218f8-152">有兩個可用來設定關聯性的資料註解`[ForeignKey]`和`[InverseProperty]`。</span><span class="sxs-lookup"><span data-stu-id="218f8-152">There are two data annotations that can be used to configure relationships, `[ForeignKey]` and `[InverseProperty]`.</span></span> <span data-ttu-id="218f8-153">這些是用於`System.ComponentModel.DataAnnotations.Schema`命名空間。</span><span class="sxs-lookup"><span data-stu-id="218f8-153">These are available in the `System.ComponentModel.DataAnnotations.Schema` namespace.</span></span>
 
-### <a name="foreignkey"></a><span data-ttu-id="605f6-153">[ForeignKey]</span><span class="sxs-lookup"><span data-stu-id="605f6-153">[ForeignKey]</span></span>
+### <a name="foreignkey"></a><span data-ttu-id="218f8-154">[ForeignKey]</span><span class="sxs-lookup"><span data-stu-id="218f8-154">[ForeignKey]</span></span>
 
-<span data-ttu-id="605f6-154">若要設定哪些屬性應為外部索引鍵屬性用於指定的關聯性，您可以使用資料註解。</span><span class="sxs-lookup"><span data-stu-id="605f6-154">You can use the Data Annotations to configure which property should be used as the foreign key property for a given relationship.</span></span> <span data-ttu-id="605f6-155">這通常是依照慣例找不到外部索引鍵屬性時。</span><span class="sxs-lookup"><span data-stu-id="605f6-155">This is typically done when the foreign key property is not discovered by convention.</span></span>
+<span data-ttu-id="218f8-155">若要設定哪些屬性應為外部索引鍵屬性用於指定的關聯性，您可以使用資料註解。</span><span class="sxs-lookup"><span data-stu-id="218f8-155">You can use the Data Annotations to configure which property should be used as the foreign key property for a given relationship.</span></span> <span data-ttu-id="218f8-156">這通常是依照慣例找不到外部索引鍵屬性時。</span><span class="sxs-lookup"><span data-stu-id="218f8-156">This is typically done when the foreign key property is not discovered by convention.</span></span>
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/ForeignKey.cs?name=Entities&highlight=17)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/ForeignKey.cs?highlight=30)]
 
 > [!TIP]  
-> <span data-ttu-id="605f6-156">`[ForeignKey]`可以在其中一個關聯性中的導覽屬性上放置註解。</span><span class="sxs-lookup"><span data-stu-id="605f6-156">The `[ForeignKey]` annotation can be placed on either navigation property in the relationship.</span></span> <span data-ttu-id="605f6-157">它不需要相依的實體類別中的導覽屬性上移。</span><span class="sxs-lookup"><span data-stu-id="605f6-157">It does not need to go on the navigation property in the dependent entity class.</span></span>
+> <span data-ttu-id="218f8-157">`[ForeignKey]`可以在其中一個關聯性中的導覽屬性上放置註解。</span><span class="sxs-lookup"><span data-stu-id="218f8-157">The `[ForeignKey]` annotation can be placed on either navigation property in the relationship.</span></span> <span data-ttu-id="218f8-158">它不需要相依的實體類別中的導覽屬性上移。</span><span class="sxs-lookup"><span data-stu-id="218f8-158">It does not need to go on the navigation property in the dependent entity class.</span></span>
 
-### <a name="inverseproperty"></a><span data-ttu-id="605f6-158">[InverseProperty]</span><span class="sxs-lookup"><span data-stu-id="605f6-158">[InverseProperty]</span></span>
+### <a name="inverseproperty"></a><span data-ttu-id="218f8-159">[InverseProperty]</span><span class="sxs-lookup"><span data-stu-id="218f8-159">[InverseProperty]</span></span>
 
-<span data-ttu-id="605f6-159">若要設定的相依及主體實體的導覽屬性如何配對，您可以使用資料註解。</span><span class="sxs-lookup"><span data-stu-id="605f6-159">You can use the Data Annotations to configure how navigation properties on the dependent and principal entities pair up.</span></span> <span data-ttu-id="605f6-160">這通常是多個對兩個實體類型之間的導覽屬性時。</span><span class="sxs-lookup"><span data-stu-id="605f6-160">This is typically done when there is more than one pair of navigation properties between two entity types.</span></span>
+<span data-ttu-id="218f8-160">若要設定的相依及主體實體的導覽屬性如何配對，您可以使用資料註解。</span><span class="sxs-lookup"><span data-stu-id="218f8-160">You can use the Data Annotations to configure how navigation properties on the dependent and principal entities pair up.</span></span> <span data-ttu-id="218f8-161">這通常是多個對兩個實體類型之間的導覽屬性時。</span><span class="sxs-lookup"><span data-stu-id="218f8-161">This is typically done when there is more than one pair of navigation properties between two entity types.</span></span>
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/InverseProperty.cs?name=Entities&highlight=20,23)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/InverseProperty.cs?highlight=33,36)]
 
-## <a name="fluent-api"></a><span data-ttu-id="605f6-161">Fluent API</span><span class="sxs-lookup"><span data-stu-id="605f6-161">Fluent API</span></span>
+## <a name="fluent-api"></a><span data-ttu-id="218f8-162">Fluent API</span><span class="sxs-lookup"><span data-stu-id="218f8-162">Fluent API</span></span>
 
-<span data-ttu-id="605f6-162">若要設定關聯性，Fluent API 中，您會開始藉由識別組成關聯性的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="605f6-162">To configure a relationship in the Fluent API, you start by identifying the navigation properties that make up the relationship.</span></span> <span data-ttu-id="605f6-163">`HasOne` 或`HasMany`識別您開始組態的實體類型上的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="605f6-163">`HasOne` or `HasMany` identifies the navigation property on the entity type you are beginning the configuration on.</span></span> <span data-ttu-id="605f6-164">您接著鏈結的呼叫`WithOne`或`WithMany`識別反向導覽。</span><span class="sxs-lookup"><span data-stu-id="605f6-164">You then chain a call to `WithOne` or `WithMany` to identify the inverse navigation.</span></span> <span data-ttu-id="605f6-165">`HasOne`/`WithOne` 用於參考導覽屬性和`HasMany` / `WithMany`用於集合導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="605f6-165">`HasOne`/`WithOne` are used for reference navigation properties and `HasMany`/`WithMany` are used for collection navigation properties.</span></span>
+<span data-ttu-id="218f8-163">若要設定關聯性，Fluent API 中，您會開始藉由識別組成關聯性的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="218f8-163">To configure a relationship in the Fluent API, you start by identifying the navigation properties that make up the relationship.</span></span> <span data-ttu-id="218f8-164">`HasOne` 或`HasMany`識別您開始組態的實體類型上的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="218f8-164">`HasOne` or `HasMany` identifies the navigation property on the entity type you are beginning the configuration on.</span></span> <span data-ttu-id="218f8-165">您接著鏈結的呼叫`WithOne`或`WithMany`識別反向導覽。</span><span class="sxs-lookup"><span data-stu-id="218f8-165">You then chain a call to `WithOne` or `WithMany` to identify the inverse navigation.</span></span> <span data-ttu-id="218f8-166">`HasOne`/`WithOne` 用於參考導覽屬性和`HasMany` / `WithMany`用於集合導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="218f8-166">`HasOne`/`WithOne` are used for reference navigation properties and `HasMany`/`WithMany` are used for collection navigation properties.</span></span>
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/NoForeignKey.cs?name=Model&highlight=8,9,10)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/NoForeignKey.cs?highlight=14-16)]
 
-### <a name="single-navigation-property"></a><span data-ttu-id="605f6-166">單一導覽屬性</span><span class="sxs-lookup"><span data-stu-id="605f6-166">Single Navigation Property</span></span>
+### <a name="single-navigation-property"></a><span data-ttu-id="218f8-167">單一導覽屬性</span><span class="sxs-lookup"><span data-stu-id="218f8-167">Single Navigation Property</span></span>
 
-<span data-ttu-id="605f6-167">如果您只需要一個導覽屬性，則有無參數多載`WithOne`和`WithMany`。</span><span class="sxs-lookup"><span data-stu-id="605f6-167">If you only have one navigation property then there are parameterless overloads of `WithOne` and `WithMany`.</span></span> <span data-ttu-id="605f6-168">這表示有在概念上是參考或關聯性另一端的集合，但未包含在實體類別中的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="605f6-168">This indicates that there is conceptually a reference or collection on the other end of the relationship, but there is no navigation property included in the entity class.</span></span>
+<span data-ttu-id="218f8-168">如果您只需要一個導覽屬性，則有無參數多載`WithOne`和`WithMany`。</span><span class="sxs-lookup"><span data-stu-id="218f8-168">If you only have one navigation property then there are parameterless overloads of `WithOne` and `WithMany`.</span></span> <span data-ttu-id="218f8-169">這表示有在概念上是參考或關聯性另一端的集合，但未包含在實體類別中的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="218f8-169">This indicates that there is conceptually a reference or collection on the other end of the relationship, but there is no navigation property included in the entity class.</span></span>
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/OneNavigation.cs?name=Model&highlight=10)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/OneNavigation.cs?highlight=14-16)]
 
-### <a name="foreign-key"></a><span data-ttu-id="605f6-169">外部索引鍵</span><span class="sxs-lookup"><span data-stu-id="605f6-169">Foreign Key</span></span>
+### <a name="foreign-key"></a><span data-ttu-id="218f8-170">外部索引鍵</span><span class="sxs-lookup"><span data-stu-id="218f8-170">Foreign Key</span></span>
 
-<span data-ttu-id="605f6-170">您可以使用 Fluent API，若要設定哪些屬性應為外部索引鍵屬性用於指定的關聯性。</span><span class="sxs-lookup"><span data-stu-id="605f6-170">You can use the Fluent API to configure which property should be used as the foreign key property for a given relationship.</span></span>
+<span data-ttu-id="218f8-171">您可以使用 Fluent API，若要設定哪些屬性應為外部索引鍵屬性用於指定的關聯性。</span><span class="sxs-lookup"><span data-stu-id="218f8-171">You can use the Fluent API to configure which property should be used as the foreign key property for a given relationship.</span></span>
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/ForeignKey.cs?name=Model&highlight=11)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/ForeignKey.cs?highlight=17)]
 
-<span data-ttu-id="605f6-171">下列程式碼清單示範如何設定複合外部索引鍵。</span><span class="sxs-lookup"><span data-stu-id="605f6-171">The following code listing shows how to configure a composite foreign key.</span></span>
+<span data-ttu-id="218f8-172">下列程式碼清單示範如何設定複合外部索引鍵。</span><span class="sxs-lookup"><span data-stu-id="218f8-172">The following code listing shows how to configure a composite foreign key.</span></span>
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/CompositeForeignKey.cs?name=Model&highlight=13)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/CompositeForeignKey.cs?highlight=20)]
 
-<span data-ttu-id="605f6-172">您可以使用的字串多載`HasForeignKey(...)`若要設定陰影屬性作為外部索引鍵 (請參閱 <<c2> [ 遮蔽屬性](shadow-properties.md)如需詳細資訊)。</span><span class="sxs-lookup"><span data-stu-id="605f6-172">You can use the string overload of `HasForeignKey(...)` to configure a shadow property as a foreign key (see [Shadow Properties](shadow-properties.md) for more information).</span></span> <span data-ttu-id="605f6-173">我們建議您明確地將陰影屬性加入模型之前使用的外部索引鍵 （如下所示）。</span><span class="sxs-lookup"><span data-stu-id="605f6-173">We recommend explicitly adding the shadow property to the model before using it as a foreign key (as shown below).</span></span>
+<span data-ttu-id="218f8-173">您可以使用的字串多載`HasForeignKey(...)`若要設定陰影屬性作為外部索引鍵 (請參閱 <<c2> [ 遮蔽屬性](shadow-properties.md)如需詳細資訊)。</span><span class="sxs-lookup"><span data-stu-id="218f8-173">You can use the string overload of `HasForeignKey(...)` to configure a shadow property as a foreign key (see [Shadow Properties](shadow-properties.md) for more information).</span></span> <span data-ttu-id="218f8-174">我們建議您明確地將陰影屬性加入模型之前使用的外部索引鍵 （如下所示）。</span><span class="sxs-lookup"><span data-stu-id="218f8-174">We recommend explicitly adding the shadow property to the model before using it as a foreign key (as shown below).</span></span>
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/ShadowForeignKey.cs#Sample)]
 
-### <a name="principal-key"></a><span data-ttu-id="605f6-174">主體金鑰</span><span class="sxs-lookup"><span data-stu-id="605f6-174">Principal Key</span></span>
+### <a name="principal-key"></a><span data-ttu-id="218f8-175">主體金鑰</span><span class="sxs-lookup"><span data-stu-id="218f8-175">Principal Key</span></span>
 
-<span data-ttu-id="605f6-175">如果您想要參考的屬性以外的主索引鍵的外部索引鍵時，您可以使用 Fluent API 來設定主體的索引鍵屬性關聯性。</span><span class="sxs-lookup"><span data-stu-id="605f6-175">If you want the foreign key to reference a property other than the primary key, you can use the Fluent API to configure the principal key property for the relationship.</span></span> <span data-ttu-id="605f6-176">主體的金鑰會自動設定的屬性是做為替代索引鍵的安裝程式 (請參閱[替代索引鍵](alternate-keys.md)如需詳細資訊)。</span><span class="sxs-lookup"><span data-stu-id="605f6-176">The property that you configure as the principal key will automatically be setup as an alternate key (see [Alternate Keys](alternate-keys.md) for more information).</span></span>
+<span data-ttu-id="218f8-176">如果您想要參考的屬性以外的主索引鍵的外部索引鍵時，您可以使用 Fluent API 來設定主體的索引鍵屬性關聯性。</span><span class="sxs-lookup"><span data-stu-id="218f8-176">If you want the foreign key to reference a property other than the primary key, you can use the Fluent API to configure the principal key property for the relationship.</span></span> <span data-ttu-id="218f8-177">主體的金鑰會自動設定的屬性是做為替代索引鍵的安裝程式 (請參閱[替代索引鍵](alternate-keys.md)如需詳細資訊)。</span><span class="sxs-lookup"><span data-stu-id="218f8-177">The property that you configure as the principal key will automatically be setup as an alternate key (see [Alternate Keys](alternate-keys.md) for more information).</span></span>
 
 <!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/PrincipalKey.cs?highlight=11)] -->
 ``` csharp
@@ -182,7 +182,7 @@ public class RecordOfSale
 }
 ```
 
-<span data-ttu-id="605f6-177">下列程式碼清單示範如何設定複合的主體索引鍵。</span><span class="sxs-lookup"><span data-stu-id="605f6-177">The following code listing shows how to configure a composite principal key.</span></span>
+<span data-ttu-id="218f8-178">下列程式碼清單示範如何設定複合的主體索引鍵。</span><span class="sxs-lookup"><span data-stu-id="218f8-178">The following code listing shows how to configure a composite principal key.</span></span>
 
 <!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/CompositePrincipalKey.cs?highlight=11)] -->
 ``` csharp
@@ -224,11 +224,11 @@ public class RecordOfSale
 ```
 
 > [!WARNING]  
-> <span data-ttu-id="605f6-178">您可以在其中指定主體的索引鍵屬性的順序必須符合指定的外部索引鍵的順序。</span><span class="sxs-lookup"><span data-stu-id="605f6-178">The order in which you specify principal key properties must match the order in which they are specified for the foreign key.</span></span>
+> <span data-ttu-id="218f8-179">您可以在其中指定主體的索引鍵屬性的順序必須符合指定的外部索引鍵的順序。</span><span class="sxs-lookup"><span data-stu-id="218f8-179">The order in which you specify principal key properties must match the order in which they are specified for the foreign key.</span></span>
 
-### <a name="required-and-optional-relationships"></a><span data-ttu-id="605f6-179">必要和選擇性的關聯性</span><span class="sxs-lookup"><span data-stu-id="605f6-179">Required and Optional Relationships</span></span>
+### <a name="required-and-optional-relationships"></a><span data-ttu-id="218f8-180">必要和選擇性的關聯性</span><span class="sxs-lookup"><span data-stu-id="218f8-180">Required and Optional Relationships</span></span>
 
-<span data-ttu-id="605f6-180">您可以使用 Fluent API 來設定關聯性是否必要或選擇性。</span><span class="sxs-lookup"><span data-stu-id="605f6-180">You can use the Fluent API to configure whether the relationship is required or optional.</span></span> <span data-ttu-id="605f6-181">最後這會控制外部索引鍵屬性是必要或選擇性。</span><span class="sxs-lookup"><span data-stu-id="605f6-181">Ultimately this controls whether the foreign key property is required or optional.</span></span> <span data-ttu-id="605f6-182">當您使用陰影狀態外部索引鍵，這是最有用。</span><span class="sxs-lookup"><span data-stu-id="605f6-182">This is most useful when you are using a shadow state foreign key.</span></span> <span data-ttu-id="605f6-183">如果您有在您實體類別中的外部索引鍵屬性，則關聯性的 requiredness 取決於外部索引鍵屬性是必要或選擇性 (請參閱[必要和選擇性屬性](required-optional.md)如需詳細資訊資訊）。</span><span class="sxs-lookup"><span data-stu-id="605f6-183">If you have a foreign key property in your entity class then the requiredness of the relationship is determined based on whether the foreign key property is required or optional (see [Required and Optional properties](required-optional.md) for more information).</span></span>
+<span data-ttu-id="218f8-181">您可以使用 Fluent API 來設定關聯性是否必要或選擇性。</span><span class="sxs-lookup"><span data-stu-id="218f8-181">You can use the Fluent API to configure whether the relationship is required or optional.</span></span> <span data-ttu-id="218f8-182">最後這會控制外部索引鍵屬性是必要或選擇性。</span><span class="sxs-lookup"><span data-stu-id="218f8-182">Ultimately this controls whether the foreign key property is required or optional.</span></span> <span data-ttu-id="218f8-183">當您使用陰影狀態外部索引鍵，這是最有用。</span><span class="sxs-lookup"><span data-stu-id="218f8-183">This is most useful when you are using a shadow state foreign key.</span></span> <span data-ttu-id="218f8-184">如果您有在您實體類別中的外部索引鍵屬性，則關聯性的 requiredness 取決於外部索引鍵屬性是必要或選擇性 (請參閱[必要和選擇性屬性](required-optional.md)如需詳細資訊資訊）。</span><span class="sxs-lookup"><span data-stu-id="218f8-184">If you have a foreign key property in your entity class then the requiredness of the relationship is determined based on whether the foreign key property is required or optional (see [Required and Optional properties](required-optional.md) for more information).</span></span>
 
 <!-- [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/Required.cs?highlight=11)] -->
 ``` csharp
@@ -264,11 +264,11 @@ public class Post
 }
 ```
 
-### <a name="cascade-delete"></a><span data-ttu-id="605f6-184">串聯刪除</span><span class="sxs-lookup"><span data-stu-id="605f6-184">Cascade Delete</span></span>
+### <a name="cascade-delete"></a><span data-ttu-id="218f8-185">串聯刪除</span><span class="sxs-lookup"><span data-stu-id="218f8-185">Cascade Delete</span></span>
 
-<span data-ttu-id="605f6-185">您可以使用 Fluent API 來明確設定指定的關聯性的串聯刪除行為。</span><span class="sxs-lookup"><span data-stu-id="605f6-185">You can use the Fluent API to configure the cascade delete behavior for a given relationship explicitly.</span></span>
+<span data-ttu-id="218f8-186">您可以使用 Fluent API 來明確設定指定的關聯性的串聯刪除行為。</span><span class="sxs-lookup"><span data-stu-id="218f8-186">You can use the Fluent API to configure the cascade delete behavior for a given relationship explicitly.</span></span>
 
-<span data-ttu-id="605f6-186">請參閱[串聯刪除](../saving/cascade-delete.md)上儲存的資料區段的每個選項的詳細討論。</span><span class="sxs-lookup"><span data-stu-id="605f6-186">See [Cascade Delete](../saving/cascade-delete.md) on the Saving Data section for a detailed discussion of each option.</span></span>
+<span data-ttu-id="218f8-187">請參閱[串聯刪除](../saving/cascade-delete.md)上儲存的資料區段的每個選項的詳細討論。</span><span class="sxs-lookup"><span data-stu-id="218f8-187">See [Cascade Delete](../saving/cascade-delete.md) on the Saving Data section for a detailed discussion of each option.</span></span>
 
 <!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/CascadeDelete.cs?highlight=11)] -->
 ``` csharp
@@ -305,11 +305,11 @@ public class Post
 }
 ```
 
-## <a name="other-relationship-patterns"></a><span data-ttu-id="605f6-187">其他關聯性模式</span><span class="sxs-lookup"><span data-stu-id="605f6-187">Other Relationship Patterns</span></span>
+## <a name="other-relationship-patterns"></a><span data-ttu-id="218f8-188">其他關聯性模式</span><span class="sxs-lookup"><span data-stu-id="218f8-188">Other Relationship Patterns</span></span>
 
-### <a name="one-to-one"></a><span data-ttu-id="605f6-188">一對一</span><span class="sxs-lookup"><span data-stu-id="605f6-188">One-to-one</span></span>
+### <a name="one-to-one"></a><span data-ttu-id="218f8-189">一對一</span><span class="sxs-lookup"><span data-stu-id="218f8-189">One-to-one</span></span>
 
-<span data-ttu-id="605f6-189">一對一關聯性兩端有參考導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="605f6-189">One to one relationships have a reference navigation property on both sides.</span></span> <span data-ttu-id="605f6-190">它們會遵循相同的慣例，作為一對多關聯性，但唯一索引在外部索引鍵屬性，以確保只有一個相依與每個主體中引進。</span><span class="sxs-lookup"><span data-stu-id="605f6-190">They follow the same conventions as one-to-many relationships, but a unique index is introduced on the foreign key property to ensure only one dependent is related to each principal.</span></span>
+<span data-ttu-id="218f8-190">一對一關聯性兩端有參考導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="218f8-190">One to one relationships have a reference navigation property on both sides.</span></span> <span data-ttu-id="218f8-191">它們會遵循相同的慣例，作為一對多關聯性，但唯一索引在外部索引鍵屬性，以確保只有一個相依與每個主體中引進。</span><span class="sxs-lookup"><span data-stu-id="218f8-191">They follow the same conventions as one-to-many relationships, but a unique index is introduced on the foreign key property to ensure only one dependent is related to each principal.</span></span>
 
 <!-- [!code-csharp[Main](samples/core/Modeling/Conventions/Samples/Relationships/OneToOne.cs?highlight=6,15,16)] -->
 ``` csharp
@@ -333,11 +333,11 @@ public class BlogImage
 ```
 
 > [!NOTE]  
-> <span data-ttu-id="605f6-191">EF 會選擇其中一個是它能夠偵測到外部索引鍵屬性為基礎的相依實體。</span><span class="sxs-lookup"><span data-stu-id="605f6-191">EF will choose one of the entities to be the dependent based on its ability to detect a foreign key property.</span></span> <span data-ttu-id="605f6-192">如果錯誤的實體會被選為相依，您可以使用 Fluent API，若要修正此問題。</span><span class="sxs-lookup"><span data-stu-id="605f6-192">If the wrong entity is chosen as the dependent, you can use the Fluent API to correct this.</span></span>
+> <span data-ttu-id="218f8-192">EF 會選擇其中一個是它能夠偵測到外部索引鍵屬性為基礎的相依實體。</span><span class="sxs-lookup"><span data-stu-id="218f8-192">EF will choose one of the entities to be the dependent based on its ability to detect a foreign key property.</span></span> <span data-ttu-id="218f8-193">如果錯誤的實體會被選為相依，您可以使用 Fluent API，若要修正此問題。</span><span class="sxs-lookup"><span data-stu-id="218f8-193">If the wrong entity is chosen as the dependent, you can use the Fluent API to correct this.</span></span>
 
-<span data-ttu-id="605f6-193">設定使用 Fluent API 的關聯性，當您使用`HasOne`和`WithOne`方法。</span><span class="sxs-lookup"><span data-stu-id="605f6-193">When configuring the relationship with the Fluent API, you use the `HasOne` and `WithOne` methods.</span></span>
+<span data-ttu-id="218f8-194">設定使用 Fluent API 的關聯性，當您使用`HasOne`和`WithOne`方法。</span><span class="sxs-lookup"><span data-stu-id="218f8-194">When configuring the relationship with the Fluent API, you use the `HasOne` and `WithOne` methods.</span></span>
 
-<span data-ttu-id="605f6-194">設定您要指定的相依實體型別-外部索引鍵時注意到提供給泛型參數`HasForeignKey`在下方的清單。</span><span class="sxs-lookup"><span data-stu-id="605f6-194">When configuring the foreign key you need to specify the dependent entity type - notice the generic parameter provided to `HasForeignKey` in the listing below.</span></span> <span data-ttu-id="605f6-195">在一對多關聯性很顯然，參考導覽的實體是相依，而與該集合是主體。</span><span class="sxs-lookup"><span data-stu-id="605f6-195">In a one-to-many relationship it is clear that the entity with the reference navigation is the dependent and the one with the collection is the principal.</span></span> <span data-ttu-id="605f6-196">但這不是因此在一對一關聯性; 因此不需要明確地定義它。</span><span class="sxs-lookup"><span data-stu-id="605f6-196">But this is not so in a one-to-one relationship - hence the need to explicitly define it.</span></span>
+<span data-ttu-id="218f8-195">設定您要指定的相依實體型別-外部索引鍵時注意到提供給泛型參數`HasForeignKey`在下方的清單。</span><span class="sxs-lookup"><span data-stu-id="218f8-195">When configuring the foreign key you need to specify the dependent entity type - notice the generic parameter provided to `HasForeignKey` in the listing below.</span></span> <span data-ttu-id="218f8-196">在一對多關聯性很顯然，參考導覽的實體是相依，而與該集合是主體。</span><span class="sxs-lookup"><span data-stu-id="218f8-196">In a one-to-many relationship it is clear that the entity with the reference navigation is the dependent and the one with the collection is the principal.</span></span> <span data-ttu-id="218f8-197">但這不是因此在一對一關聯性; 因此不需要明確地定義它。</span><span class="sxs-lookup"><span data-stu-id="218f8-197">But this is not so in a one-to-one relationship - hence the need to explicitly define it.</span></span>
 
 <!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/OneToOne.cs?highlight=11)] -->
 ``` csharp
@@ -374,9 +374,9 @@ public class BlogImage
 }
 ```
 
-### <a name="many-to-many"></a><span data-ttu-id="605f6-197">多對多</span><span class="sxs-lookup"><span data-stu-id="605f6-197">Many-to-many</span></span>
+### <a name="many-to-many"></a><span data-ttu-id="218f8-198">多對多</span><span class="sxs-lookup"><span data-stu-id="218f8-198">Many-to-many</span></span>
 
-<span data-ttu-id="605f6-198">尚不支援多對多關聯性，而不需要實體類別，以代表聯結的資料表。</span><span class="sxs-lookup"><span data-stu-id="605f6-198">Many-to-many relationships without an entity class to represent the join table are not yet supported.</span></span> <span data-ttu-id="605f6-199">不過，您可以透過包含聯結資料表的對應兩個個別一對多關聯性的實體類別來表示多對多關聯性。</span><span class="sxs-lookup"><span data-stu-id="605f6-199">However, you can represent a many-to-many relationship by including an entity class for the join table and mapping two separate one-to-many relationships.</span></span>
+<span data-ttu-id="218f8-199">尚不支援多對多關聯性，而不需要實體類別，以代表聯結的資料表。</span><span class="sxs-lookup"><span data-stu-id="218f8-199">Many-to-many relationships without an entity class to represent the join table are not yet supported.</span></span> <span data-ttu-id="218f8-200">不過，您可以透過包含聯結資料表的對應兩個個別一對多關聯性的實體類別來表示多對多關聯性。</span><span class="sxs-lookup"><span data-stu-id="218f8-200">However, you can represent a many-to-many relationship by including an entity class for the join table and mapping two separate one-to-many relationships.</span></span>
 
 <!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/ManyToMany.cs?highlight=11,12,13,14,16,17,18,19,39,40,41,42,43,44,45,46)] -->
 ``` csharp
