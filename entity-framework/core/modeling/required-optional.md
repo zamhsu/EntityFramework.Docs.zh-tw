@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: ddaa0a54-9f43-4c34-aae3-f95c96c69842
 uid: core/modeling/required-optional
-ms.openlocfilehash: b6716a5b03e1afc2933e317d606ef50f986c22c7
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 564d9e62e2ed4f1a52b569630ed4994529e31dc1
+ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995493"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59929806"
 ---
 # <a name="required-and-optional-properties"></a>必要和選擇性的屬性
 
@@ -26,37 +26,11 @@ ms.locfileid: "42995493"
 
 您可以使用資料註解表示是必要屬性。
 
-<!-- [!code-csharp[Main](samples/core/Modeling/DataAnnotations/Samples/Required.cs?highlight=4)] -->
-``` csharp
-public class Blog
-{
-    public int BlogId { get; set; }
-    [Required]
-    public string Url { get; set; }
-}
-```
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Required.cs?highlight=14)]
 
 ## <a name="fluent-api"></a>Fluent API
 
 您可以使用 Fluent API，以表示所需的屬性。
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Required.cs?highlight=7,8,9)] -->
-``` csharp
-class MyContext : DbContext
-{
-    public DbSet<Blog> Blogs { get; set; }
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Required.cs?highlight=11-13)]
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Blog>()
-            .Property(b => b.Url)
-            .IsRequired();
-    }
-}
-
-public class Blog
-{
-    public int BlogId { get; set; }
-    public string Url { get; set; }
-}
-```

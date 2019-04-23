@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 0ff736a3-f1b0-4b58-a49c-4a7094bd6935
 uid: core/modeling/relationships
-ms.openlocfilehash: a53a862cc2443a1c4461aa287def100284635f26
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 9ef1a9269fc99f5b27a81c11a161ed5f9d74180d
+ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994938"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59929933"
 ---
 # <a name="relationships"></a>關聯性
 
@@ -26,17 +26,17 @@ ms.locfileid: "42994938"
 
 * **主要實體：** 這是包含的主要/替代索引鍵屬性的實體。 有時稱為 'parent' 的關聯性。
 
-* **外部索引鍵：** 中用來儲存與相關實體的主要索引鍵屬性的值為相依實體屬性。
+* **外部索引鍵：** 在用來儲存與相關實體的主要索引鍵屬性的值為相依實體屬性。
 
-* **主體的金鑰：** 唯一識別主要實體的屬性。 這可能是主索引鍵或替代索引鍵。
+* **主體的金鑰：** 屬性，這些屬性可唯一識別主要實體。 這可能是主索引鍵或替代索引鍵。
 
-* **導覽屬性：** 包含相關的公司實體參考的主體和 （或） 相依實體上定義的屬性。
+* **導覽屬性：** 主體和 （或） 相依實體，其中包含相關的公司實體參考上定義的屬性。
 
-  * **集合導覽屬性：** 包含許多相關的實體參考的瀏覽屬性。
+  * **集合導覽屬性：** 瀏覽屬性，其中包含許多相關實體的參考。
 
-  * **參考導覽屬性：** 保留單一相關實體的參考的瀏覽屬性。
+  * **參考導覽屬性：** 保留單一相關實體的參考導覽屬性。
 
-  * **反向的導覽屬性：** 時討論特定的導覽屬性，這個詞彙是指關聯性另一端的導覽屬性。
+  * **反向的導覽屬性：** 在討論時有特定的導覽屬性，這個詞彙是指關聯性另一端的導覽屬性。
 
 下列程式碼清單會顯示一對多關聯性之間`Blog`和 `Post`
 
@@ -98,13 +98,13 @@ ms.locfileid: "42994938"
 
 ## <a name="data-annotations"></a>資料註釋
 
-有兩個可用來設定關聯性的資料註解`[ForeignKey]`和`[InverseProperty]`。
+有兩個可用來設定關聯性的資料註解`[ForeignKey]`和`[InverseProperty]`。 這些是用於`System.ComponentModel.DataAnnotations.Schema`命名空間。
 
 ### <a name="foreignkey"></a>[ForeignKey]
 
 若要設定哪些屬性應為外部索引鍵屬性用於指定的關聯性，您可以使用資料註解。 這通常是依照慣例找不到外部索引鍵屬性時。
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/ForeignKey.cs?name=Entities&highlight=17)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/ForeignKey.cs?highlight=30)]
 
 > [!TIP]  
 > `[ForeignKey]`可以在其中一個關聯性中的導覽屬性上放置註解。 它不需要相依的實體類別中的導覽屬性上移。
@@ -113,29 +113,29 @@ ms.locfileid: "42994938"
 
 若要設定的相依及主體實體的導覽屬性如何配對，您可以使用資料註解。 這通常是多個對兩個實體類型之間的導覽屬性時。
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/InverseProperty.cs?name=Entities&highlight=20,23)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/InverseProperty.cs?highlight=33,36)]
 
 ## <a name="fluent-api"></a>Fluent API
 
 若要設定關聯性，Fluent API 中，您會開始藉由識別組成關聯性的導覽屬性。 `HasOne` 或`HasMany`識別您開始組態的實體類型上的導覽屬性。 您接著鏈結的呼叫`WithOne`或`WithMany`識別反向導覽。 `HasOne`/`WithOne` 用於參考導覽屬性和`HasMany` / `WithMany`用於集合導覽屬性。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/NoForeignKey.cs?name=Model&highlight=8,9,10)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/NoForeignKey.cs?highlight=14-16)]
 
 ### <a name="single-navigation-property"></a>單一導覽屬性
 
 如果您只需要一個導覽屬性，則有無參數多載`WithOne`和`WithMany`。 這表示有在概念上是參考或關聯性另一端的集合，但未包含在實體類別中的導覽屬性。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/OneNavigation.cs?name=Model&highlight=10)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/OneNavigation.cs?highlight=14-16)]
 
 ### <a name="foreign-key"></a>外部索引鍵
 
 您可以使用 Fluent API，若要設定哪些屬性應為外部索引鍵屬性用於指定的關聯性。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/ForeignKey.cs?name=Model&highlight=11)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/ForeignKey.cs?highlight=17)]
 
 下列程式碼清單示範如何設定複合外部索引鍵。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/CompositeForeignKey.cs?name=Model&highlight=13)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/CompositeForeignKey.cs?highlight=20)]
 
 您可以使用的字串多載`HasForeignKey(...)`若要設定陰影屬性作為外部索引鍵 (請參閱 <<c2> [ 遮蔽屬性](shadow-properties.md)如需詳細資訊)。 我們建議您明確地將陰影屬性加入模型之前使用的外部索引鍵 （如下所示）。
 

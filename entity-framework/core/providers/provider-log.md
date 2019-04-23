@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 9ef87a737111053df0359f3b2d7a4f82d25c578a
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: 61a58bd6119763d90731fac62343b983af510cb6
+ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/18/2019
-ms.locfileid: "58867940"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59929871"
 ---
 # <a name="provider-impacting-changes"></a>提供者影響的變更
 
@@ -62,6 +62,7 @@ ms.locfileid: "58867940"
   * 慣例設定服務已變更。 現在應該是提供者繼承自 「 ProviderConventionSet"或"RelationalConventionSet 」。
   * 自訂可以透過新增`IConventionSetCustomizer`服務，但這要使用其他擴充功能，不提供者。
   * 在執行階段使用的慣例應該解決從`IConventionSetBuilder`。
+* https://github.com/aspnet/EntityFrameworkCore/pull/15288 資料植入已重構為公用 API，以避免需要使用的內部型別。 因為植入由基底的關聯式類別關聯式，所有提供者，這只應影響非關聯式的提供者。
 
 ## <a name="21-----22"></a>2.1 ---> 2.2
 
@@ -82,7 +83,6 @@ ms.locfileid: "58867940"
   * 使用這些測試的提供者可能需要做出回應
 * [https://github.com/aspnet/EntityFrameworkCore/pull/12141](https://github.com/aspnet/EntityFrameworkCore/pull/12141) -傳回集區，而不是功能測試在處置內容
   * 這項變更會包含可能需要提供者，以因應一些測試重構
-
 
 ### <a name="test-and-product-code-changes"></a>測試和產品程式碼變更
 
