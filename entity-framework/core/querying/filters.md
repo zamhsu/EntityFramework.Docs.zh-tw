@@ -3,14 +3,17 @@ title: 全域查詢篩選條件 - EF Core
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 201292a440d37d240f31452eaebb23dcd4aee1a6
-ms.sourcegitcommit: 8dd71a57a01c439431164c163a0722877d0e5cd8
+ms.openlocfilehash: 4afc9fb0338d34845639d57013ac710445321940
+ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/07/2018
-ms.locfileid: "53028163"
+ms.lasthandoff: 04/14/2019
+ms.locfileid: "59562438"
 ---
 # <a name="global-query-filters"></a>全域查詢篩選條件
+
+> [!NOTE]
+> 此功能是在 EF Core 2.0 中引入。
 
 全域查詢篩選條件是中繼資料模型 (通常位於 *OnModelCreating*) 中套用到實體類型的 LINQ 查詢述詞 (布林運算式通常會傳遞到 LINQ *Where* 查詢運算子)。 這類篩選會自動套用至任何涉及這些「實體類型」(包含間接參考的「實體類型」) 的 LINQ 查詢 (例如，使用 Include 或直接導覽屬性參考)。 此功能的一些常見應用如下：
 

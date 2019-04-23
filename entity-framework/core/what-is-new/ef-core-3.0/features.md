@@ -5,10 +5,10 @@ ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
 ms.openlocfilehash: 7501a806271c9734e85e31845f260f2d512da077
-ms.sourcegitcommit: a8b04050033c5dc46c076b7e21b017749e0967a8
+ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/02/2019
+ms.lasthandoff: 04/18/2019
 ms.locfileid: "58867953"
 ---
 # <a name="new-features-included-in-ef-core-30-currently-in-preview"></a>EF Core 3.0 (目前為預覽版) 中包含的新功能
