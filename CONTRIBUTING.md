@@ -1,10 +1,10 @@
 ---
 ms.openlocfilehash: 79a2a10cae9f8a5541bca132e407d4abbe95e093
-ms.sourcegitcommit: ce44f85a5bce32ef2d3d09b7682108d3473511b3
+ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/04/2019
-ms.locfileid: "58914100"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59929884"
 ---
 # <a name="contributing-to-the-entity-framework-documentation"></a>貢獻 Entity Framework 文件
 
