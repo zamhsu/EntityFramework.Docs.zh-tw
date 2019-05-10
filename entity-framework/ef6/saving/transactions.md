@@ -3,12 +3,12 @@ title: 使用交易-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0d0f1824-d781-4cb3-8fda-b7eaefced1cd
-ms.openlocfilehash: 7197733ab25c8475746e7863963384730919e3ff
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 96cfff4cca59ab27dd68f50d0260e90902e33a92
+ms.sourcegitcommit: eefcab31142f61a7aaeac03ea90dcd39f158b8b8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489774"
+ms.lasthandoff: 04/29/2019
+ms.locfileid: "64873240"
 ---
 # <a name="working-with-transactions"></a>使用交易
 > [!NOTE]
@@ -39,7 +39,7 @@ Entity Framework 不會包裝在交易中的查詢。
 
 從 EF6 framework 現在提供：  
 
-1. **Database.BeginTransaction()** ： 啟動與完成在現有的 DbContext – 可讓數個作業結合在相同交易內的交易本身使用者更容易的方法，因此所有認可或全部回復為其中一個。 它也可讓使用者更輕鬆地指定交易的隔離等級。  
+1. **Database.BeginTransaction()** :較簡單的方法，讓使用者啟動和完成在現有的 DbContext – 可讓數個作業結合在相同交易內的交易本身，因此所有認可或回復，做為其中所有。 它也可讓使用者更輕鬆地指定交易的隔離等級。  
 2. **Database.UseTransaction()** ： 可讓使用 Entity Framework 之外啟動的交易 DbContext。  
 
 ### <a name="combining-several-operations-into-one-transaction-within-the-same-context"></a>結合到一個異動相同內容中的數個作業  
@@ -126,7 +126,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
-sing System.Transactions;
+using System.Transactions;
 
 namespace TransactionsExamples
 {

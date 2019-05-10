@@ -4,12 +4,12 @@ author: ajcvickers
 ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
-ms.openlocfilehash: 1b36197465fb9a6571a306d36eb1e9d885a5399e
-ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
+ms.openlocfilehash: 5bf49718f02c1860871b1f4c255ec4d98fce2fc7
+ms.sourcegitcommit: 960e42a01b3a2f76da82e074f64f52252a8afecc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/29/2018
-ms.locfileid: "43152461"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65405251"
 ---
 # <a name="entity-types-with-constructors"></a>實體類型建構函式
 
@@ -90,7 +90,7 @@ public class Post
 * 並非所有屬性都必須能夠建構函式參數。 比方說，Post.Content 是未設定屬性的任何建構函式參數，因此 EF Core 之後呼叫建構函式以一般方式將設定。
 * 參數型別和名稱必須符合屬性類型和名稱，不同之處在於屬性時可能會使用 pascal 命名法大小寫的參數是依照 camel 命名法大小寫。
 * EF Core 無法設定 （例如部落格或上述文章） 的導覽屬性使用建構函式。
-* 建構函式可以是公用、 私用，或有任何其他的協助工具。
+* 建構函式可以是公用、 私用，或有任何其他的協助工具。 不過，消極式載入 proxy 需要建構函式是從繼承的 proxy 類別來存取。 這通常表示讓公用或受保護。
 
 ### <a name="read-only-properties"></a>唯讀屬性
 

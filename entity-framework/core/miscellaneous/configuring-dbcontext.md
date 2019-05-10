@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: 0350b25d0d0efe05df7cb9e93a3f4ae2d864fd63
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: 316d363d4a1b8a909efc1c32b492280c0d16cb4e
+ms.sourcegitcommit: 960e42a01b3a2f76da82e074f64f52252a8afecc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/18/2019
-ms.locfileid: "59363933"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65405213"
 ---
 # <a name="configuring-a-dbcontext"></a>設定 DbContext
 
@@ -163,7 +163,13 @@ var options = serviceProvider.GetService<DbContextOptions<BloggingContext>>();
 ```
 ## <a name="avoiding-dbcontext-threading-issues"></a>避免使用 DbContext 執行緒問題
 
-Entity Framework Core 不支援在同一個執行的多個平行作業`DbContext`執行個體。 並行存取可能會導致未定義的行為、 應用程式當機和資料損毀。 因此請務必一律使用分隔`DbContext`平行執行的作業的執行個體。 
+Entity Framework Core 不支援在同一個執行的多個平行作業`DbContext`執行個體。 這包括任何明確的並行使用，從多個執行緒和平行執行非同步查詢。 因此，一定要`await`async 立即呼叫，或使用不同`DbContext`平行執行的作業的執行個體。
+
+當 EF Core 偵測到嘗試使用`DbContext`執行個體同時，您會看到`InvalidOperationException`使用如下的訊息： 
+
+> 第二個作業會啟動在先前的作業完成之前在此內容上。 這種情形通常因不同的執行緒使用的相同 DbContext 執行個體，不過執行個體成員都不保證是安全執行緒。
+
+當未偵測到並行存取，它會導致未定義的行為、 應用程式當機和資料損毀。
 
 有可以在同一個 inadvernetly 導致並行存取的常見錯誤`DbContext`執行個體：
 
