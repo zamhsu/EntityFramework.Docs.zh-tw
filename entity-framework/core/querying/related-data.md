@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: e98e2e601203db7ea3d3344ddc7b7e0aff7f2143
-ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
+ms.openlocfilehash: 590d16902329ffb3fff8026f8dfdcfc887f6dea3
+ms.sourcegitcommit: eefcab31142f61a7aaeac03ea90dcd39f158b8b8
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/14/2019
-ms.locfileid: "59562516"
+ms.lasthandoff: 04/29/2019
+ms.locfileid: "64873196"
 ---
 # <a name="loading-related-data"></a>載入相關資料
 
@@ -334,3 +334,5 @@ public void ConfigureServices(IServiceCollection services)
     ...
 }
 ```
+
+另一個替代方式為使用 `[JsonIgnore]` 屬性裝飾導覽屬性的其中一個，它會指示 Json.NET 序列化時不要周遊該導覽屬性。

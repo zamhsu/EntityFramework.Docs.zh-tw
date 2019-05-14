@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 4b251638de43af6525f3e6faa0bd4113ab1714b9
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: b1b5e286e08a8b6b4efe225a176e76023f9fdd20
+ms.sourcegitcommit: 960e42a01b3a2f76da82e074f64f52252a8afecc
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59619255"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65405236"
 ---
 # <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>EF Core 3.0 (目前為預覽版) 包含的中斷性變更
 
@@ -76,6 +76,35 @@ ms.locfileid: "59619255"
 
 若要在 ASP.NET Core 3.0 應用程式或其他支援的應用程式中使用 EF Core，請明確將套件參考加入應用程式會使用的 EF Core 資料庫提供者。
 
+## <a name="the-ef-core-command-line-tool-dotnet-ef-is-no-longer-part-of-the-net-core-sdk"></a>EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分
+
+[追蹤問題 #14016](https://github.com/aspnet/EntityFrameworkCore/issues/14016)
+
+EF Core 3.0 preview 4 和對應的 .NET Core SDK 版本中引進了這項變更。
+
+**舊行為**
+
+在 3.0 之前，`dotnet ef` 工具包含在 .NET Core SDK，並可以輕易地從任何專案的命令列使用，而不需要額外步驟。 
+
+**新行為**
+
+從 3.0 開始，.NET SDK 不包含 `dotnet ef` 工具，因此您必須明確地將它安裝為本機或全域工具才能使用。 
+
+**原因**
+
+這項變更可讓我們將 `dotnet ef` 當作 NuGet 上一般的 .NET CLI 工具來散發和更新，這點與 EF Core 3.0 一律當作 NuGet 套件散發的事實一致。
+
+**風險降低**
+
+若要能夠管理移轉或支撐 `DbContext`，請使用 `dotnet tool install` 命令安裝 `dotnet-ef`。
+例如，若要將它安裝為全域工具，您可以鍵入這個命令：
+
+  ``` console
+  $ dotnet tool install --global dotnet-ef --version <exact-version>
+  ```
+
+您也可以在還原專案相依性時取得它作為本機工具 (該專案是使用[工具資訊清單檔](https://github.com/dotnet/cli/issues/10288)將它宣告為工具相依性)。
+
 ## <a name="fromsql-executesql-and-executesqlasync-have-been-renamed"></a>FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名
 
 [追蹤問題 #10996](https://github.com/aspnet/EntityFrameworkCore/issues/10996)
@@ -109,7 +138,7 @@ context.Products.FromSqlInterpolated(
 
 **原因**
 
-類似這類的方法多載，會在意圖呼叫插入字串方法時，容易不小心呼叫原始字串方法，反之亦然。
+像這樣的方法多載，使得原本要呼叫插入字串方法很容易意外呼叫原始字串方法，或反之。
 這可能會導致查詢在應該參數化時不進行參數化。
 
 **風險降低**
@@ -602,7 +631,7 @@ using (new TransactionScope())
 
 **原因**
 
-此變更允許在相同 `TransactionScope` 中使用多個內容。 新行為也與 EF6 相符。
+此變更允許在相同 `TransactionScope` 中使用多個內容。 新的行為也符合 EF6。
 
 **風險降低**
 
@@ -660,7 +689,7 @@ using (new TransactionScope())
 
 **新行為**
 
-從 EF Core 3.0 開始，如果屬性的支援欄位已知，則一律會使用支援欄位來讀取和寫入該屬性。
+從 EF Core 3.0 開始，如果屬性的支援欄位已知，則 EF Core 會一律使用支援欄位來讀取和寫入該屬性。
 如果應用程式需要將額外的行為編碼到 getter 或 setter 方法中，這可能會導致應用程式中斷。
 
 **原因**
