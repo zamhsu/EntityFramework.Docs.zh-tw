@@ -3,12 +3,12 @@ title: EF4、 EF5，與 EF6 的效能考量
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d6d5a465-6434-45fa-855d-5eb48c61a2ea
-ms.openlocfilehash: 4c1f03533cf6df49555c3ef8d09d5949b9a3335c
-ms.sourcegitcommit: 33b2e84dae96040f60a613186a24ff3c7b00b6db
+ms.openlocfilehash: f8fa1001c85366e169cf50e89efdb65bd92b671e
+ms.sourcegitcommit: f277883a5ed28eba57d14aaaf17405bc1ae9cf94
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/21/2019
-ms.locfileid: "56459207"
+ms.lasthandoff: 05/18/2019
+ms.locfileid: "65874616"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>EF 4、 5 和 6 的效能考量
 David Obando、 Eric Dettinger 和其他項目
@@ -119,9 +119,9 @@ ADO.NET 小組部落格有某篇文章說明如何使用 T4 範本產生檢視�
 
 我們看到其中切換關聯外部索引鍵關聯將模型從獨立關聯中，大幅改善在檢視表產生所花費的時間的案例數目。
 
-為了示範這項改進，我們會使用 EDMGen 產生 Navision 模型的兩個版本。 *注意： seeappendix Cfor Navision 模型的描述。* 針對此練習，因為其非常大量的實體和它們之間的關聯性的有趣 Navision 模型。
+為了示範這項改進，我們會使用 EDMGen 產生 Navision 模型的兩個版本。 *注意： 請參閱附錄 C Navision 模型的描述。* 針對此練習，因為其非常大量的實體和它們之間的關聯性的有趣 Navision 模型。
 
-使用外部索引鍵關聯所產生的極大的模型的一個版本和其他已產生使用獨立關聯。 此外，我們再逾時產生每個模型的檢視所需的時間。 實體 Framework5 測試會使用類別 EntityViewGenerator GenerateViews() 方法來產生檢視，而 Entity Framework 6 測試用來從類別 storagemappingitemcollection 由 GenerateViews() 方法。 這由於程式碼重構 Entity Framework 6 程式碼基底中發生。
+使用外部索引鍵關聯所產生的極大的模型的一個版本和其他已產生使用獨立關聯。 此外，我們再逾時產生每個模型的檢視所需的時間。 Entity Framework 5 測試會用來產生檢視，而 Entity Framework 6 測試用來從類別 storagemappingitemcollection 由 GenerateViews() 方法類別 EntityViewGenerator GenerateViews() 方法。 這由於程式碼重構 Entity Framework 6 程式碼基底中發生。
 
 使用 Entity Framework 5，外部索引鍵之模型的檢視表產生可以採用 65 分鐘實驗室機器中。 它的未知多久得花上產生使用獨立關聯模型的檢視。 我們保留超過一個月，我們的實驗室，安裝每月更新的電腦已重新開機前執行的測試。
 
@@ -240,7 +240,7 @@ Entity Framework 有快取的內建以下列形式：
 
 #### <a name="323-test-metrics-demonstrating-query-plan-caching-performance"></a>3.2.3 測試示範查詢計劃快取效能度量
 
-為了示範應用程式的效能上的快取的查詢計劃的效果，我們執行測試我們用來執行對 Navision 模型的 Entity SQL 查詢的數目。 請參閱附錄 Navision 模型所執行的查詢類型的描述。 在此測試中，我們會先逐一查看查詢的清單並將它們新增至快取 （如果已啟用快取） 一次執行每一個。 這個步驟是 untimed。 接下來，我們進入睡眠狀態以允許快取掃掠，以進行應用程式; 超過 60 秒的主執行緒最後，我們逐一查看清單的第 2 個開始執行快取的查詢。 此外，他的 SQL Server 計畫快取中排清之前執行查詢的每個集時，讓我們取得準確的時間會反映指定的查詢計劃快取的優點。
+為了示範應用程式的效能上的快取的查詢計劃的效果，我們執行測試我們用來執行對 Navision 模型的 Entity SQL 查詢的數目。 請參閱附錄 Navision 模型所執行的查詢類型的描述。 在此測試中，我們會先逐一查看查詢的清單並將它們新增至快取 （如果已啟用快取） 一次執行每一個。 這個步驟是 untimed。 接下來，我們進入睡眠狀態以允許快取掃掠，以進行應用程式; 超過 60 秒的主執行緒最後，我們逐一查看清單的第 2 個開始執行快取的查詢。 此外，SQL Server 計畫快取排清之前執行查詢的每個集時，讓我們取得準確的時間會反映指定的查詢計劃快取的優點。
 
 ##### <a name="3231-test-results"></a>3.2.3.1 測試結果
 
@@ -487,7 +487,7 @@ for (var i = 0; i < count; ++i)
 
 ``` csharp
 var customers = context.Customers.OrderBy(c => c.LastName);
-for (var i = 0; i \< count; ++i)
+for (var i = 0; i < count; ++i)
 {
     var currentCustomer = customers.Skip(() => i).FirstOrDefault();
     ProcessCustomer(currentCustomer);
