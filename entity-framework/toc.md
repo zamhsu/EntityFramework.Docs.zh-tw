@@ -30,6 +30,7 @@
 #### [.NET Core](core/get-started/netcore/index.md)
 ##### [新資料庫](core/get-started/netcore/new-db-sqlite.md)
 #### [ASP.NET Core](core/get-started/aspnetcore/index.md)
+##### [⤤ 互動式教學課程](/learn/modules/persist-data-ef-core/)
 ##### [新資料庫](core/get-started/aspnetcore/new-db.md)
 ##### [現有資料庫](core/get-started/aspnetcore/existing-db.md)
 ##### [⤤ EF Core 與 Razor Pages](/aspnet/core/data/ef-rp/intro)
