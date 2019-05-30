@@ -62,7 +62,7 @@ ms.locfileid: "59929871"
   * 慣例設定服務已變更。 現在應該是提供者繼承自 「 ProviderConventionSet"或"RelationalConventionSet 」。
   * 自訂可以透過新增`IConventionSetCustomizer`服務，但這要使用其他擴充功能，不提供者。
   * 在執行階段使用的慣例應該解決從`IConventionSetBuilder`。
-* https://github.com/aspnet/EntityFrameworkCore/pull/15288 資料植入已重構為公用 API，以避免需要使用的內部型別。 因為植入由基底的關聯式類別關聯式，所有提供者，這只應影響非關聯式的提供者。
+* [https://github.com/aspnet/EntityFrameworkCore/pull/15288](https://github.com/aspnet/EntityFrameworkCore/pull/15288) 資料植入已重構為公用 API，以避免需要使用的內部型別。 因為植入由基底的關聯式類別關聯式，所有提供者，這只應影響非關聯式的提供者。
 
 ## <a name="21-----22"></a>2.1 ---> 2.2
 
