@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 09/19/2018
 uid: core/miscellaneous/cli/index
-ms.openlocfilehash: 9fcb452c2798a3d07e39cbcc3c34629dca4394ff
-ms.sourcegitcommit: ad1bdea58ed35d0f19791044efe9f72f94189c18
+ms.openlocfilehash: 13e80f740bc5ce3404e8dba40b65ec872c5e3f90
+ms.sourcegitcommit: ea1cdec0b982b922a59b9d9301d3ed2b94baca0f
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47447114"
+ms.lasthandoff: 05/31/2019
+ms.locfileid: "66452263"
 ---
 # <a name="entity-framework-core-tools-reference"></a>Entity Framework Core 工具參考
 
