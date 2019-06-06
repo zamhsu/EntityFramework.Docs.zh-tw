@@ -5,32 +5,32 @@ ms.author: riande
 ms.date: 08/03/2018
 ms.assetid: e153627f-f132-4c11-b13c-6c9a607addce
 uid: core/get-started/aspnetcore/new-db
-ms.openlocfilehash: fbc1a00d6d6d0624bcbbfa1e51f4e21a915baaaa
-ms.sourcegitcommit: f277883a5ed28eba57d14aaaf17405bc1ae9cf94
+ms.openlocfilehash: 2eb1668b8c077fabc9cb21088452fd1bead7ff22
+ms.sourcegitcommit: ea1cdec0b982b922a59b9d9301d3ed2b94baca0f
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/18/2019
-ms.locfileid: "65874571"
+ms.lasthandoff: 05/31/2019
+ms.locfileid: "66452245"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-a-new-database"></a>在 ASP.NET Core 上使用 EF Core 搭配新資料庫的使用者入門
 
-在本教學課程中，您將會建置 ASP.NET Core MVC 應用程式，而其使用 Entity Framework Core 執行基本的資料存取。 本教學課程會使用移轉以從資料模型建立資料庫。
+在此教學課程中，您將會建置 ASP.NET Core MVC 應用程式，而其使用 Entity Framework Core 執行基本的資料存取。 此教學課程會使用移轉以從資料模型建立資料庫。
 
-若要遵循本教學課程，您可以在 Windows 上使用 Visual Studio 2017 或在 Windows、macOS 或 Linux 上使用 .NET Core CLI。
+若要遵循此教學課程，您可以在 Windows 上使用 Visual Studio 2017 或在 Windows、macOS 或 Linux 上使用 .NET Core CLI。
 
 在 GitHub 上檢視此文章的範例：
 * [搭配使用 Visual Studio 2017 與 SQL Server](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.NewDb)
 * [搭配使用 .NET Core CLI 與 SQLite](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.NewDb.Sqlite)。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 安裝下列軟體：
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [Visual Studio 2017 15.7 版或更新版本](https://www.visualstudio.com/downloads/)以及下列工作負載：
-  * **ASP.NET 與網頁程式開發** (位在 [Web & Cloud] \(Web 與雲端) 下)
-  * **.NET Core 跨平台開發** (位在 [其他工具組] 下)
+  * **ASP.NET 與網頁程式開發** (位在 [Web & Cloud] \(Web 與雲端)  下)
+  * **.NET Core 跨平台開發** (位在 [其他工具組]  下)
 * [.NET Core 2.1 SDK](https://www.microsoft.com/net/download/core)。
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
@@ -44,17 +44,17 @@ ms.locfileid: "65874571"
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 開啟 Visual Studio 2017
-* [檔案] > [新增] > [專案]
-* 從左側功能表選取 [已安裝] > [Visual C#] > [.NET Core]。
-* 選取 [ASP.NET Core Web 應用程式]。
-* 輸入 **EFGetStarted.AspNetCore.NewDb** 作為名稱，然後按一下 [確定]。
-* 在 [新增 ASP.NET Core Web 應用程式] 對話方塊中：
+* [檔案] > [新增] > [專案] 
+* 從左側功能表選取 [已安裝] > [Visual C#] > [.NET Core]  。
+* 選取 [ASP.NET Core Web 應用程式]  。
+* 輸入 **EFGetStarted.AspNetCore.NewDb** 作為名稱，然後按一下 [確定]  。
+* 在 [新增 ASP.NET Core Web 應用程式]  對話方塊中：
   * 確認下拉式清單中已選取 **NET Core** 和 **ASP.NET Core 2.1** 選項
-  * 選取 [Web 應用程式 (模型-檢視-控制器)] 專案範本
-  * 確認 [驗證] 已設為 [無任何驗證]
+  * 選取 [Web 應用程式 (模型-檢視-控制器)]  專案範本
+  * 確認 [驗證]  已設為 [無任何驗證] 
   * 按一下 [確定] 
 
-警告：如果您針對 [驗證] 使用 [個別使用者帳戶] 而不是 [無]，則系統會將 Entity Framework Core 模型新增至 `Models\IdentityModel.cs` 中的專案。 您可利用在本教學課程中所學到的技術，選擇新增第二個模型，或是擴充此現有模型以包含您的實體類別。
+警告：如果您針對 [驗證]  使用 [個別使用者帳戶]  而不是 [無]  ，則系統會將 Entity Framework Core 模型新增至 `Models\IdentityModel.cs` 中的專案。 您可利用在此教學課程中所學到的技術，選擇新增第二個模型，或是擴充此現有模型以包含您的實體類別。
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -76,11 +76,11 @@ ms.locfileid: "65874571"
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-在本教學課程中，因為使用 SQL Server，所以無需安裝提供者套件。 [Microsoft.AspnetCore.App 中繼套件](https://docs.microsoft.com/aspnet/core/fundamentals/metapackage-app?view=aspnetcore-2.1)包含 SQL Server 提供者套件。
+在此教學課程中，因為使用 SQL Server，所以無需安裝提供者套件。 [Microsoft.AspnetCore.App 中繼套件](https://docs.microsoft.com/aspnet/core/fundamentals/metapackage-app?view=aspnetcore-2.1)包含 SQL Server 提供者套件。
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-本教學課程會使用 SQLite，因為它可以在 .NET Core 支援的所有平台上執行。
+此教學課程會使用 SQLite，因為它可以在 .NET Core 支援的所有平台上執行。
 
 * 執行下列命令以安裝 SQLite 提供者：
 
@@ -96,8 +96,8 @@ ms.locfileid: "65874571"
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 以滑鼠右鍵按一下 [Models] 資料夾，然後選取 [新增] > [類別]。
-* 輸入 **Model.cs** 作為名稱，然後按一下 [確定]。
+* 以滑鼠右鍵按一下 [Models]  資料夾，然後選取 [新增] > [類別]  。
+* 輸入 **Model.cs** 作為名稱，然後按一下 [確定]  。
 * 以下列程式碼取代檔案的內容：
 
   [!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.NewDb/Models/Model.cs)]
@@ -110,7 +110,7 @@ ms.locfileid: "65874571"
 
 ---
 
-生產環境應用程式通常會將每個類別放在不同的檔案中。 為了簡單起見，本教學課程會將這些類別置於同一個檔案中。
+生產環境應用程式通常會將每個類別放在不同的檔案中。 為了簡單起見，此教學課程會將這些類別置於同一個檔案中。
 
 ## <a name="register-the-context-with-dependency-injection"></a>使用相依性插入來註冊內容
 
@@ -140,7 +140,7 @@ ms.locfileid: "65874571"
 
 ---
 
-生產環境應用程式一般會將連接字串放在設定檔或環境變數中。 為了簡單起見，本教學課程將其定義在程式碼中。 如需詳細資訊，請參閱[連接字串](../../miscellaneous/connection-strings.md)。
+生產環境應用程式一般會將連接字串放在設定檔或環境變數中。 為了簡單起見，此教學課程將其定義在程式碼中。 如需詳細資訊，請參閱[連接字串](../../miscellaneous/connection-strings.md)。
 
 ## <a name="create-the-database"></a>建立資料庫
 
@@ -148,7 +148,7 @@ ms.locfileid: "65874571"
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* [工具] > [NuGet 套件管理員] > [套件管理員主控台]
+* [工具] > [NuGet 套件管理員] > [套件管理員主控台] 
 * 執行下列命令：
 
   ```powershell
@@ -179,10 +179,10 @@ ms.locfileid: "65874571"
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 [方案總管] 中以滑鼠右鍵按一下 [Controllers] 資料夾，然後選取 [新增] > [控制器]。
-* 選取 [使用 Entity Framework 執行檢視的 MVC 控制器]，然後按一下 [新增]。
-* 將 [模型類別] 設為 [Blog]，並將 [資料內容類別] 設為 [BloggingContext]。
-* 按一下 [加入] 。
+* 在 [方案總管]  中以滑鼠右鍵按一下 [Controllers]  資料夾，然後選取 [新增] > [控制器]  。
+* 選取 [使用 Entity Framework 執行檢視的 MVC 控制器]  ，然後按一下 [新增]  。
+* 將 [模型類別]  設為 [Blog]  ，並將 [資料內容類別]  設為 [BloggingContext]  。
+* 按一下 [加入]  。
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -218,16 +218,20 @@ dotnet run
 
 * 巡覽至 `/Blogs`
 
-* 使用 [建立新項目] 連結來建立一些部落格項目。
+* 使用 [建立新項目]  連結來建立一些部落格項目。
 
   ![建立頁面](_static/create.png)
 
-* 測試 [詳細資料]、[編輯] 和 [刪除] 連結。
+* 測試 [詳細資料]  、[編輯]  和 [刪除]  連結。
 
   ![索引頁面](_static/index-new-db.png)
 
-## <a name="additional-resources"></a>其他資源
+## <a name="additional-tutorials"></a>其他教學課程
 
-* [教學課程：在 ASP.NET Core 上使用 EF Core 搭配新資料庫的使用者入門](xref:core/get-started/netcore/new-db-sqlite)
-* [開始使用 ASP.NET Core 中的 Razor Pages](/aspnet/core/tutorials/razor-pages/razor-pages-start) 或 [ASP.NET Core MVC 使用者入門](/aspnet/core/tutorials/first-mvc-app/start-mvc)
-* [教學課程：ASP.NET Core 中的 Razor Pages 與 Entity Framework Core](https://docs.microsoft.com/aspnet/core/data/ef-rp/intro) 或[開始在 ASP.NET MVC Web 應用程式中使用 EF Core](/aspnet/core/data/ef-mvc/intro)
+* [開始在 ASP.NET Core 上使用 EF Core 搭配新資料庫](xref:core/get-started/netcore/new-db-sqlite)
+* ASP.NET Core MVC：
+  * [開始使用 ASP.NET Core MVC](/aspnet/core/tutorials/first-mvc-app/start-mvc)
+  * [開始在 ASP.NET MVC Web 應用程式中使用 EF Core](/aspnet/core/data/ef-mvc/intro)
+* [Razor Pages](/aspnet/core/razor-pages/index)：
+  * [開始在 ASP.NET Core 中使用 Razor Pages](/aspnet/core/tutorials/razor-pages/razor-pages-start)
+  * [ASP.NET Core 中的 Razor Pages 與 Entity Framework Core](https://docs.microsoft.com/aspnet/core/data/ef-rp/intro)
