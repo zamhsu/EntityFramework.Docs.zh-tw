@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 0ff736a3-f1b0-4b58-a49c-4a7094bd6935
 uid: core/modeling/relationships
-ms.openlocfilehash: 9ef1a9269fc99f5b27a81c11a161ed5f9d74180d
-ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
+ms.openlocfilehash: 793401362788e865c89ce01b6246b1ba14c36c8a
+ms.sourcegitcommit: 8b9568211d37a1c36da9533fa1ac2ef063b0bf8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2019
-ms.locfileid: "59929933"
+ms.lasthandoff: 06/08/2019
+ms.locfileid: "66815006"
 ---
 # <a name="relationships"></a>關聯性
 
@@ -140,6 +140,12 @@ ms.locfileid: "59929933"
 您可以使用的字串多載`HasForeignKey(...)`若要設定陰影屬性作為外部索引鍵 (請參閱 <<c2> [ 遮蔽屬性](shadow-properties.md)如需詳細資訊)。 我們建議您明確地將陰影屬性加入模型之前使用的外部索引鍵 （如下所示）。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/ShadowForeignKey.cs#Sample)]
+
+### <a name="without-navigation-property"></a>不含導覽屬性
+
+您不一定需要提供的瀏覽屬性。 您可以只需要提供外部索引鍵，其中一端的關聯性。
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/NoNavigation.cs?highlight=14-17)]
 
 ### <a name="principal-key"></a>主體金鑰
 
