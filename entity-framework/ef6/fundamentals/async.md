@@ -3,12 +3,12 @@ title: 非同步查詢並儲存-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: 89c7b9d533d37b4c9e123f37d8ab27c67ba26cc8
-ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
+ms.openlocfilehash: 8c72012be4b77ff31faf909bf02035865521a640
+ms.sourcegitcommit: 7c5c5e09a4d2671d7461e027837966c4ff91e398
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/03/2019
-ms.locfileid: "55668709"
+ms.lasthandoff: 06/15/2019
+ms.locfileid: "67148493"
 ---
 # <a name="async-query-and-save"></a>非同步查詢和儲存
 > [!NOTE]
@@ -41,7 +41,7 @@ EF6 導入了非同步查詢並儲存使用的支援[async 和 await 關鍵字](
     -   在 [方案總管] 中，以滑鼠右鍵按一下**AsyncDemo**專案
     -   選取**管理 NuGet 封裝...**
     -   在 [管理 NuGet 套件] 對話方塊中，選取**線上**索引標籤，然後選擇**EntityFramework**封裝
-    -   按一下 [安裝] 。
+    -   按一下 [安裝]  。
 -   新增**Model.cs**替換為下列實作的類別
 
 ``` csharp
@@ -223,7 +223,7 @@ EF6 導入了非同步查詢並儲存使用的支援[async 和 await 關鍵字](
 
 1.  **SaveChanges**開始新的推播**部落格**資料庫*之後傳送命令到資料庫不再計算目前 managed 執行緒上所需時間。**PerformDatabaseOperations**方法會傳回 （即使它尚未完成執行時），在 Main 方法中的程式流程會繼續。*
 2.  **每日寫入至主控台**
-    因為沒有其他工作的 Main 方法中執行時，managed 的執行緒會封鎖在等候資料庫作業完成之前呼叫。完成後的其餘部分我們**PerformDatabaseOperations**就會執行。
+    因為沒有其他工作的 Main 方法中執行時，managed 的執行緒會封鎖在等候資料庫作業完成之前呼叫。完成後的其餘部分我們**PerformDatabaseOperations**就會執行。 
 3.  **SaveChanges**完成
 4.  所有的查詢**部落格**傳送至資料庫*同樣地，managed 的執行緒沒有執行其他工作，而查詢則會處理在資料庫中。因為所有其他執行完成之後，執行緒將會就中止等候呼叫不過。*
 5.  查詢會傳回，而且結果會寫入**主控台**
