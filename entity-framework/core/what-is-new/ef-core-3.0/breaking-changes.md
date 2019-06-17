@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: faae0153e0f2bdd42d3b316582dfcab88d9ceb5b
-ms.sourcegitcommit: ea1cdec0b982b922a59b9d9301d3ed2b94baca0f
+ms.openlocfilehash: 9112d8d235237e68232aac54453d584af0edb524
+ms.sourcegitcommit: b188194a1901f4d086d05765cbc5c9b8c9dc5eed
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/31/2019
-ms.locfileid: "66452294"
+ms.lasthandoff: 06/11/2019
+ms.locfileid: "66829495"
 ---
 # <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>EF Core 3.0 (目前為預覽版) 包含的中斷性變更
 
@@ -25,11 +25,11 @@ ms.locfileid: "66452294"
 [追蹤問題 #14935](https://github.com/aspnet/EntityFrameworkCore/issues/14935)
 [另請參閱問題 #12795](https://github.com/aspnet/EntityFrameworkCore/issues/12795)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+此變更已於 EF Core 3.0-preview 4 推出。
 
 **舊行為**
 
-3.0 以前，在 EF Core 無法將屬於查詢的運算式轉換成 SQL 或參數時，它會自動在用戶端評估運算式。
+3\.0 以前，在 EF Core 無法將屬於查詢的運算式轉換成 SQL 或參數時，它會自動在用戶端評估運算式。
 根據預設，對可能相當耗費資源的運算式進行用戶端評估只會觸發警告。
 
 **新行為**
@@ -67,9 +67,9 @@ ms.locfileid: "66452294"
 
 **原因**
 
-在此變更之前，取得 EF Core 會根據應用程式是否以 ASP.NET Core 和 SQL Server 為目標而需要不同的步驟。 此外，升級 ASP.NET Core 會強制升級 EF Core 和 SQL Server 提供者，這不一定符合需求。
+在這項變更之前，取得 EF Core 會根據應用程式是否以 ASP.NET Core 和 SQL Server 為目標而需要不同的步驟。 此外，升級 ASP.NET Core 會強制升級 EF Core 和 SQL Server 提供者，這不一定符合需求。
 
-透過此變更，取得 EF Core 的體驗對所有提供者、支援的 .NET 實作和應用程式類型都相同。
+透過這項變更，取得 EF Core 的體驗對所有提供者、支援的 .NET 實作和應用程式類型都相同。
 開發人員現在也可以精確控制何時升級 EF Core 和 EF Core 資料提供者。
 
 **風險降低**
@@ -80,7 +80,7 @@ ms.locfileid: "66452294"
 
 [追蹤問題 #14016](https://github.com/aspnet/EntityFrameworkCore/issues/14016)
 
-EF Core 3.0 preview 4 和對應的 .NET Core SDK 版本中引進了此變更。
+此變更已於 EF Core 3.0-preview 4 和對應的 .NET Core SDK 版本推出。
 
 **舊行為**
 
@@ -92,7 +92,7 @@ EF Core 3.0 preview 4 和對應的 .NET Core SDK 版本中引進了此變更。
 
 **原因**
 
-此變更可讓我們將 `dotnet ef` 當作 NuGet 上一般的 .NET CLI 工具來散發和更新，這點與 EF Core 3.0 一律當作 NuGet 套件散發的事實一致。
+這項變更可讓我們將 `dotnet ef` 當作 NuGet 上一般的 .NET CLI 工具來散發和更新，這點與 EF Core 3.0 一律當作 NuGet 套件散發的事實一致。
 
 **風險降低**
 
@@ -145,6 +145,28 @@ context.Products.FromSqlInterpolated(
 
 切換至使用新的方法名稱。
 
+## <a name="fromsql-methods-can-only-be-specified-on-query-roots"></a>FromSql 方法只能在查詢根目錄上指定
+
+[追蹤問題 #15704](https://github.com/aspnet/EntityFrameworkCore/issues/15704)
+
+此變更已於 EF Core 3.0-preview 6 推出。
+
+**舊行為**
+
+在 EF Core 3.0 之前，可以在查詢中的任何位置指定 `FromSql` 方法。
+
+**新行為**
+
+從 EF Core 3.0 開始，新的 `FromSqlRaw` 與 `FromSqlInterpolated` 方法 (取代 `FromSql`) 只能在查詢根目錄上指定，亦即直接在 `DbSet<>` 上指定。 嘗試在其他任何位置指定它們，將會導致編譯錯誤。
+
+**原因**
+
+在 `DbSet` 以外的任何地方指定 `FromSql` 沒有新增的意義或附加價值，而且在某些情況下可能會導致模稜兩可。
+
+**風險降低**
+
+`FromSql` 引動過程應該直接移至它們適用的 `DbSet`。
+
 ## <a name="query-execution-is-logged-at-debug-level"></a>查詢執行會在 Debug 層級記錄
 
 [追蹤問題 #14523](https://github.com/aspnet/EntityFrameworkCore/issues/14523)
@@ -161,7 +183,7 @@ context.Products.FromSqlInterpolated(
 
 **原因**
 
-此變更的目的是為了減少 `Info` 記錄層級的干擾。
+這項變更的目的是為了減少 `Info` 記錄層級的干擾。
 
 **風險降低**
 
@@ -192,7 +214,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 **原因**
 
-此變更的目的是為了防止在將某個 `DbContext` 執行個體先前追蹤的實體移至不同的 `DbContext` 執行個體時，錯誤地把暫存索引鍵值變成永久值。 
+這項變更的目的是為了防止在將某個 `DbContext` 執行個體先前追蹤的實體移至不同的 `DbContext` 執行個體時，錯誤地把暫存索引鍵值變成永久值。 
 
 **風險降低**
 
@@ -221,11 +243,11 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 **原因**
 
-此變更的目的是為了更輕鬆一致地使用中斷連接的實體圖形，同時使用存放區產生的索引鍵。
+這項變更的目的是為了更輕鬆一致地使用中斷連接的實體圖形，同時使用存放區產生的索引鍵。
 
 **風險降低**
 
-如果實體類型已設定為使用產生的索引鍵，但針對新的執行個體明確設定了索引鍵值，此變更可能會中斷應用程式。
+如果實體類型已設定為使用產生的索引鍵，但針對新的執行個體明確設定了索引鍵值，這項變更可能會中斷應用程式。
 修正方法是明確設定索引鍵屬性不使用產生的值。
 例如，使用 Fluent API：
 
@@ -260,7 +282,7 @@ public string Id { get; set; }
 
 **原因**
 
-此變更的目的是為了改善資料繫結和稽核情節的體驗，在這些情節中了解呼叫 `SaveChanges`「之前」  將刪除哪些實體是很重要的。
+這項變更的目的是為了改善資料繫結和稽核情節的體驗，在這些情節中了解呼叫 `SaveChanges`「之前」  將刪除哪些實體是很重要的。
 
 **風險降低**
 
@@ -276,7 +298,7 @@ context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
 [追蹤問題 #12661](https://github.com/aspnet/EntityFrameworkCore/issues/12661)
 
-此變更將於 EF Core 3.0-preview 5 中引進。
+此變更已於 EF Core 3.0-preview 5 推出。
 
 **舊行為**
 
@@ -288,7 +310,7 @@ context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
 **原因**
 
-此變更可藉由直覺方式提升使用 `DeleteBehavior` 的體驗，而不會發生非預期的副作用。
+這項變更可藉由直覺方式提升使用 `DeleteBehavior` 的體驗，而不會發生非預期的副作用。
 
 **風險降低**
 
@@ -312,7 +334,7 @@ context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
 **原因**
 
-此變更的目的是為了降低查詢類型用途的混淆。
+這項變更的目的是為了降低查詢類型用途的混淆。
 具體來說，它們是無索引鍵的實體類型，因此本質上是唯讀的，但不應該只因為實體類型必須是唯讀就使用。
 同樣地，它們通常會對應至檢視，但這只是因為檢視通常未定義索引鍵。
 
@@ -375,7 +397,7 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
 
 **原因**
 
-此變更的目的是為了更清楚地劃分設定自有類型本身，以及設定自有類型的「關聯性」  。
+這項變更的目的是為了更清楚地劃分設定自有類型本身，以及設定自有類型的「關聯性」  。
 如此可避免 `HasForeignKey` 等方法的模稜兩可和混淆。
 
 **風險降低**
@@ -386,7 +408,7 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
 
 [追蹤問題 #9005](https://github.com/aspnet/EntityFrameworkCore/issues/9005)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+此變更已於 EF Core 3.0-preview 4 推出。
 
 **舊行為**
 
@@ -421,7 +443,7 @@ public class OrderDetails
 
 [追蹤問題 #14154](https://github.com/aspnet/EntityFrameworkCore/issues/14154)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+此變更已於 EF Core 3.0-preview 4 推出。
 
 **舊行為**
 
@@ -456,7 +478,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 **原因**
 
-此變更的目的，是為了避免在僅更新對應至相同資料表的其中一個實體時，出現過時的並行語彙基元值。
+這項變更的目的，是為了避免在僅更新對應至相同資料表的其中一個實體時，出現過時的並行語彙基元值。
 
 **風險降低**
 
@@ -473,7 +495,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 [追蹤問題 #13998](https://github.com/aspnet/EntityFrameworkCore/issues/13998)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+此變更已於 EF Core 3.0-preview 4 推出。
 
 **舊行為**
 
@@ -594,7 +616,7 @@ public class Order
 
 **原因**
 
-此變更的目的是為了避免錯誤地在自有類型上定義主索引鍵屬性。
+這項變更的目的是為了避免錯誤地在自有類型上定義主索引鍵屬性。
 
 **風險降低**
 
@@ -604,7 +626,7 @@ public class Order
 
 [追蹤問題 #14218](https://github.com/aspnet/EntityFrameworkCore/issues/14218)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+此變更已於 EF Core 3.0-preview 4 推出。
 
 **舊行為**
 
@@ -656,7 +678,7 @@ using (new TransactionScope())
 
 [追蹤問題 #6872](https://github.com/aspnet/EntityFrameworkCore/issues/6872)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+此變更已於 EF Core 3.0-preview 4 推出。
 
 **舊行為**
 
@@ -669,7 +691,7 @@ using (new TransactionScope())
 
 **原因**
 
-此變更的目的是為了讓記憶體內部索引鍵產生與實際資料庫索引鍵產生更加一致，並改善在使用記憶體內部資料庫時隔離個別測試的能力。
+這項變更的目的是為了讓記憶體內部索引鍵產生與實際資料庫索引鍵產生更加一致，並改善在使用記憶體內部資料庫時隔離個別測試的能力。
 
 **風險降低**
 
@@ -694,11 +716,11 @@ using (new TransactionScope())
 
 **原因**
 
-此變更的目的是為了防止 EF Core 預設在執行涉及實體的資料庫作業時，錯誤地觸發商務邏輯。
+這項變更的目的是為了防止 EF Core 預設在執行涉及實體的資料庫作業時，錯誤地觸發商務邏輯。
 
 **風險降低**
 
-透過在 modelBuilder Fluent API 中設定屬性存取模式可以還原 3.0 以前的行為。
+透過在 `ModelBuilder` 上設定屬性存取模式可以還原 3.0 以前的行為。
 例如：
 
 ```C#
@@ -709,7 +731,7 @@ modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruct
 
 [追蹤問題 #12523](https://github.com/aspnet/EntityFrameworkCore/issues/12523)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+此變更已於 EF Core 3.0-preview 4 推出。
 
 **舊行為**
 
@@ -722,7 +744,7 @@ modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruct
 
 **原因**
 
-此變更的目的是為了避免在只能有一個正確欄位的情況下，自動使用某個欄位而非另一個欄位。
+這項變更的目的是為了避免在只能有一個正確欄位的情況下，自動使用某個欄位而非另一個欄位。
 
 **風險降低**
 
@@ -738,7 +760,7 @@ modelBuilder
 
 ## <a name="field-only-property-names-should-match-the-field-name"></a>僅限欄位的屬性名稱應與欄位名稱相符
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+此變更已於 EF Core 3.0-preview 4 推出。
 
 **舊行為**
 
@@ -786,7 +808,7 @@ modelBuilder
 
 [追蹤問題 #14756](https://github.com/aspnet/EntityFrameworkCore/issues/14756)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+此變更已於 EF Core 3.0-preview 4 推出。
 
 **舊行為**
 
@@ -826,7 +848,7 @@ EF Core 3.0 不會要求這些服務必須存在於應用程式的 DI 容器中�
 
 **原因**
 
-此變更的目的是為了改善使用 `context.Entry` 的預設效能。
+這項變更的目的是為了改善使用 `context.Entry` 的預設效能。
 
 **風險降低**
 
@@ -836,7 +858,7 @@ EF Core 3.0 不會要求這些服務必須存在於應用程式的 DI 容器中�
 
 [追蹤問題 #14617](https://github.com/aspnet/EntityFrameworkCore/issues/14617)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+此變更已於 EF Core 3.0-preview 4 推出。
 
 **舊行為**
 
@@ -849,7 +871,7 @@ EF Core 3.0 不會要求這些服務必須存在於應用程式的 DI 容器中�
 
 **原因**
 
-此變更是因為用戶端產生的 `string`/`byte[]` 值通常不太有用，而且預設行為使它很難以一般方式來推論產生的索引鍵值。
+這項變更是因為用戶端產生的 `string`/`byte[]` 值通常不太有用，而且預設行為使它很難以一般方式來推論產生的索引鍵值。
 
 **風險降低**
 
@@ -886,11 +908,11 @@ public string Id { get; set; }
 
 **原因**
 
-此變更的目的是為了允許記錄器與 `DbContext` 執行個體產生關聯，這可啟用其他功能，並避免某些異常行為案例，例如內部服務提供者遽增。
+這項變更的目的是為了允許記錄器與 `DbContext` 執行個體產生關聯，這可啟用其他功能，並避免某些異常行為案例，例如內部服務提供者遽增。
 
 **風險降低**
 
-此變更不應影響應用程式程式碼，除非在 EF Core 內部服務提供者上使用自訂服務註冊該程式碼。
+這項變更不應影響應用程式程式碼，除非在 EF Core 內部服務提供者上使用自訂服務註冊該程式碼。
 但這並不常見。
 在這些情況下，大部分的項目仍會運作，但相依於 `ILoggerFactory` 的任何單一服務需要變更，才能以不同方式取得 `ILoggerFactory`。
 
@@ -912,7 +934,7 @@ public string Id { get; set; }
 
 **原因**
 
-此變更是因為這些介面在概念上是一個介面。
+這項變更是因為這些介面在概念上是一個介面。
 
 **風險降低**
 
@@ -922,7 +944,7 @@ public string Id { get; set; }
 
 [追蹤問題 #12780](https://github.com/aspnet/EntityFrameworkCore/issues/12780)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+此變更已於 EF Core 3.0-preview 4 推出。
 
 **舊行為**
 
@@ -939,7 +961,7 @@ Proxy 會改為假設如有非 Null 值，會載入參考導覽；如果不是�
 
 **原因**
 
-此變更的目的是為了在已處置的 `DbContext` 執行個體上嘗試消極式載入時，使行為一致且正確。
+這項變更的目的是為了在已處置的 `DbContext` 執行個體上嘗試消極式載入時，使行為一致且正確。
 
 **風險降低**
 
@@ -961,7 +983,7 @@ Proxy 會改為假設如有非 Null 值，會載入參考導覽；如果不是�
 
 **原因**
 
-此變更的目的是為了透過更明確公開此異常案例，藉以開發更完善的應用程式程式碼。
+這項變更的目的是為了透過更明確公開此異常案例，藉以開發更完善的應用程式程式碼。
 
 **風險降低**
 
@@ -981,7 +1003,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 [追蹤問題 #9171](https://github.com/aspnet/EntityFrameworkCore/issues/9171)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+此變更已於 EF Core 3.0-preview 4 推出。
 
 **舊行為**
 
@@ -1018,7 +1040,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 [追蹤問題 #15184](https://github.com/aspnet/EntityFrameworkCore/issues/15184)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+此變更已於 EF Core 3.0-preview 4 推出。
 
 **舊行為**
 
@@ -1036,13 +1058,13 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 **原因**
 
-此變更可降低叫用這些方法時產生的堆積配置數目，可改善一般效能。
+這項變更可降低叫用這些方法時產生的堆積配置數目，可改善一般效能。
 
 **風險降低**
 
 僅等待上述 API 的應用程式只需要重新編譯，而不需要變更來源。
 更複雜的使用方式 (例如將傳回的 `Task` 傳遞給 `Task.WhenAny()`) 通常需要藉由呼叫 `AsTask()` 將傳回的 `ValueTask<T>` 轉換為 `Task<T>`。
-請注意，這會抵消此變更所帶來的配置減少。
+請注意，這會抵消這項變更所帶來的配置減少。
 
 ## <a name="the-relationaltypemapping-annotation-is-now-just-typemapping"></a>Relational:TypeMapping 註解現僅為 TypeMapping
 
@@ -1084,7 +1106,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 **原因**
 
 目前無法將衍生類型對應至不同的資料表。
-此變更可避免未來有效執行時的中斷情況。
+這項變更可避免未來有效執行時的中斷情況。
 
 **風險降低**
 
@@ -1107,7 +1129,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 **原因**
 
-此變更的目的是為了能夠使用 `Include` 將所有資料庫提供者的索引 API 合併到一個位置。
+這項變更的目的是為了能夠使用 `Include` 將所有資料庫提供者的索引 API 合併到一個位置。
 
 **風險降低**
 
@@ -1117,7 +1139,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 [追蹤問題 #214](https://github.com/aspnet/EntityFrameworkCore/issues/214)
 
-此變更將於 EF Core 3.0-preview 4 中引進。
+此變更已於 EF Core 3.0-preview 4 推出。
 
 **新行為**
 
@@ -1131,7 +1153,29 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 **原因**
 
-此變更可簡化上述介面的實作。
+這項變更可簡化上述介面的實作。
+
+**風險降低**
+
+使用新的擴充方法。
+
+## <a name="provider-specific-metadata-api-changes"></a>提供者特定的中繼資料 API 變更
+
+[追蹤問題 #214](https://github.com/aspnet/EntityFrameworkCore/issues/214)
+
+此變更已於 EF Core 3.0-preview 6 推出。
+
+**新行為**
+
+提供者特定的擴充方法會壓平合併：
+
+* `IProperty.Relational().ColumnName` -> `IProperty.GetColumnName()`
+* `IEntityType.SqlServer().IsMemoryOptimized` -> `IEntityType.GetSqlServerIsMemoryOptimized()`
+* `PropertyBuilder.UseSqlServerIdentityColumn()` -> `PropertyBuilder.ForSqlServerUseIdentityColumn()`
+
+**原因**
+
+此變更可簡化上述延伸方法的實作。
 
 **風險降低**
 
@@ -1153,7 +1197,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 **原因**
 
-此變更是因為 EF Core 預設會使用 `SQLitePCLRaw.bundle_e_sqlite3`，這也表示預設會開啟 FK 強制，而不需要在每次開啟連線時明確啟用。
+這項變更是因為 EF Core 預設會使用 `SQLitePCLRaw.bundle_e_sqlite3`，這也表示預設會開啟 FK 強制，而不需要在每次開啟連線時明確啟用。
 
 **風險降低**
 
@@ -1172,7 +1216,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 **原因**
 
-此變更的目的是為了讓用於 iOS 的 SQLite 版本與其他平台一致。
+這項變更的目的是為了讓用於 iOS 的 SQLite 版本與其他平台一致。
 
 **風險降低**
 
@@ -1190,7 +1234,7 @@ GUID 值先前在 SQLite 上的儲存形式為 BLOB 值。
 
 **新行為**
 
-GUID 值現在的儲存形式為 TEXT。
+GUID 值現在會儲存為 TEXT。
 
 **原因**
 
