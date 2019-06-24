@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: 7bb39d260f700e5087673e92a50377dc68151710
-ms.sourcegitcommit: 85ccc9ed42d4aaf7525c6312058c5c9ebdaed3ae
+ms.openlocfilehash: 52a8527170845d3e73ebcec518713ade3f3844f0
+ms.sourcegitcommit: 06073f8efde97dd5f540dbfb69f574d8380566fe
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2018
-ms.locfileid: "50191338"
+ms.lasthandoff: 06/24/2019
+ms.locfileid: "67333846"
 ---
 # <a name="connection-strings"></a>連接字串
 
@@ -77,7 +77,7 @@ public class BloggingContext : DbContext
 }
 ```
 
-內容通常會設定於`Startup.cs`正在從組態讀取的連接字串。 附註`GetConnectionString()`方法會尋找其索引鍵的組態值`ConnectionStrings:<connection string name>`。 您需要匯入[Microsoft.Extensions.Configuration](https://docs.microsoft.com/dotnet/api/microsoft.extensions.configuration)若要使用此擴充方法的命名空間。
+內容通常會設定於`Startup.cs`正在從組態讀取的連接字串。 附註`GetConnectionString()`方法會尋找其索引鍵的組態值`ConnectionStrings:<connection string name>`。 您需要匯入[Microsoft.Extensions.Configuration](https://docs.microsoft.com/dotnet/api/microsoft.extensions.configuration)才能使用此延伸模組方法的命名空間。
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)
