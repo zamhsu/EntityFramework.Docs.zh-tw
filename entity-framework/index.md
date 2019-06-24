@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: 6bb12583-c39a-454c-8d83-d2a2793ca9ef
 uid: index
 ms.openlocfilehash: f49db30ccc3a2017a8deba0dea1861071322d623
-ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
+ms.sourcegitcommit: 06073f8efde97dd5f540dbfb69f574d8380566fe
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/06/2019
-ms.locfileid: "54058710"
+ms.lasthandoff: 06/24/2019
+ms.locfileid: "67333810"
 ---
 <div id="main" class="v2">
     <div class="container">
