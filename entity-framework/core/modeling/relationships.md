@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 0ff736a3-f1b0-4b58-a49c-4a7094bd6935
 uid: core/modeling/relationships
-ms.openlocfilehash: 793401362788e865c89ce01b6246b1ba14c36c8a
-ms.sourcegitcommit: 8b9568211d37a1c36da9533fa1ac2ef063b0bf8c
+ms.openlocfilehash: 3731d30a15222a18ad6c729e010b9bf0994c82b2
+ms.sourcegitcommit: 83c1e2fc034e5eb1fec1ebabc8d629ffcc7c0632
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/08/2019
-ms.locfileid: "66815006"
+ms.lasthandoff: 06/25/2019
+ms.locfileid: "67351354"
 ---
 # <a name="relationships"></a>關聯性
 
@@ -394,7 +394,7 @@ class MyContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<PostTag>()
-            .HasKey(t => new { t.PostId, t.TagId });
+            .HasKey(pt => new { pt.PostId, pt.TagId });
 
         modelBuilder.Entity<PostTag>()
             .HasOne(pt => pt.Post)

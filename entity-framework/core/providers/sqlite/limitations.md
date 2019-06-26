@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 04/09/2017
 ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: ce834d60b9ceb4c414f097f2d86254cc5edd958f
-ms.sourcegitcommit: 645785187ae23ddf7d7b0642c7a4da5ffb0c7f30
+ms.openlocfilehash: eaa7d5b1496172e4f3821433a1cd098ee7e8b737
+ms.sourcegitcommit: 9bd64a1a71b7f7aeb044aeecc7c4785b57db1ec9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/25/2019
-ms.locfileid: "58419701"
+ms.lasthandoff: 06/26/2019
+ms.locfileid: "67394807"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>SQLite EF Core 資料庫提供者的限制
 
@@ -22,6 +22,25 @@ SQLite 提供者有幾項移轉限制。 這些限制大部分都是基礎的 SQ
 * 結構描述
 * 序列
 * 計算資料行
+
+## <a name="query-limitations"></a>查詢限制
+
+SQLite 原生不支援下列資料類型。 EF Core 可以讀取和寫入這些類型，並查詢是否相等的值 (`where e.Property == value`) 也是支援。 其他作業，不過，例如比較和排序會需要用戶端上的評估。
+
+* DateTimeOffset
+* Decimal
+* TimeSpan
+* UInt64
+
+而不是`DateTimeOffset`，我們建議使用日期時間值。 當處理多個時區，我們建議將值轉換成 UTC，然後再儲存，並再轉換回適當的時區。
+
+`Decimal`類型提供高層級的有效位數。 如果您不需要該層級的有效位數，不過，建議改為使用雙引號。 您可以使用[值轉換器](../../modeling/value-conversions.md)繼續使用在類別中的十進位。
+
+``` csharp
+modelBuilder.Entity<MyEntity>()
+    .Property(e => e.DecimalProperty)
+    .HasConversion<double>();
+```
 
 ## <a name="migrations-limitations"></a>移轉限制
 
