@@ -3,12 +3,12 @@ title: 使用屬性值-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e3278b4b-9378-4fdb-923d-f64d80aaae70
-ms.openlocfilehash: 97902021a671dea9854a365dc2f10eaecb9e5ab8
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: afde503bb4ed15fcf83a57053541cd5da8c89835
+ms.sourcegitcommit: 50521b4a2f71139e6a7210a69ac73da582ef46cf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45488827"
+ms.lasthandoff: 06/27/2019
+ms.locfileid: "67416676"
 ---
 # <a name="working-with-property-values"></a>使用屬性值
 大部分的情況下 Entity Framework 會負責追蹤狀態、 原始值，以及您的實體執行個體的屬性目前值。 不過，可能有某些情況下-例如中斷連線的案例-您想要用來檢視或處理 EF 具有屬性的相關資訊。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
@@ -35,7 +35,7 @@ using (var context = new BloggingContext())
     string currentName1 = context.Entry(blog).Property(u => u.Name).CurrentValue;
 
     // Set the Name property to a new value
-    context.Entry(name).Property(u => u.Name).CurrentValue = "My Fancy Blog";
+    context.Entry(blog).Property(u => u.Name).CurrentValue = "My Fancy Blog";
 
     // Read the current value of the Name property using a string for the property name
     object currentName2 = context.Entry(blog).Property("Name").CurrentValue;
@@ -55,7 +55,7 @@ using (var context = new BloggingContext())
 
 ## <a name="getting-and-setting-the-current-value-of-an-unmapped-property"></a>取得和設定目前未對應的屬性的值  
 
-也可以讀取此屬性，不會對應到資料庫的目前值。 未對應的範例可能是屬性的部落格上的 RssLink 屬性。 這個值可能會根據 BlogId，計算，因此不需要儲存在資料庫中。 例如:   
+也可以讀取此屬性，不會對應到資料庫的目前值。 未對應的範例可能是屬性的部落格上的 RssLink 屬性。 這個值可能會根據 BlogId，計算，因此不需要儲存在資料庫中。 例如:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -71,7 +71,7 @@ using (var context = new BloggingContext())
 
 如果屬性會公開 setter，也可以設定目前的值。  
 
-執行 Entity Framework 驗證未對應的屬性時，讀取未對應之屬性的值很有用。 基於相同原因可以讀取和設定都沒有目前追蹤內容的實體屬性的目前值。 例如:   
+執行 Entity Framework 驗證未對應的屬性時，讀取未對應之屬性的值很有用。 基於相同原因可以讀取和設定都沒有目前追蹤內容的實體屬性的目前值。 例如:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -167,7 +167,7 @@ public static void PrintValues(DbPropertyValues values)
 
 ## <a name="setting-current-or-original-values-from-another-object"></a>設定目前或原始值，從另一個物件  
 
-另一個物件的值複製，可以更新追蹤的實體的目前或原始值。 例如:   
+另一個物件的值複製，可以更新追蹤的實體的目前或原始值。 例如:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -214,7 +214,7 @@ Property Name has value My Boring Blog
 
 ## <a name="setting-current-or-original-values-from-a-dictionary"></a>字典中的設定目前或原始值  
 
-字典或一些其他資料結構的值複製，可以更新追蹤的實體的目前或原始值。 例如:   
+字典或一些其他資料結構的值複製，可以更新追蹤的實體的目前或原始值。 例如:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -242,7 +242,7 @@ using (var context = new BloggingContext())
 
 ## <a name="setting-current-or-original-values-from-a-dictionary-using-property"></a>字典中使用屬性的設定目前或原始值  
 
-使用 CurrentValues 或 OriginalValues 如上所示的替代方法是使用屬性方法來設定每個屬性的值。 當您需要設定複雜屬性的值，這很適合。 例如:   
+使用 CurrentValues 或 OriginalValues 如上所示的替代方法是使用屬性方法來設定每個屬性的值。 當您需要設定複雜屬性的值，這很適合。 例如:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -270,7 +270,7 @@ using (var context = new BloggingContext())
 
 ## <a name="creating-a-cloned-object-containing-current-original-or-database-values"></a>建立複製的物件，包含目前、 原始或資料庫值  
 
-DbPropertyValues 物件傳回 CurrentValues，OriginalValues，或 GetDatabaseValues 可用來建立實體的複製品。 此複本將會包含用來建立它的 DbPropertyValues 物件的屬性值。 例如:   
+DbPropertyValues 物件傳回 CurrentValues，OriginalValues，或 GetDatabaseValues 可用來建立實體的複製品。 此複本將會包含用來建立它的 DbPropertyValues 物件的屬性值。 例如:  
 
 ``` csharp
 using (var context = new BloggingContext())
