@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: bc2a2676-bc46-493f-bf49-e3cc97994d57
 uid: core/index
-ms.openlocfilehash: fa0695be29668789a179f9a0d6330f3361dbac29
-ms.sourcegitcommit: 6c4e06bc62d98442530e93a44725e38e59483d42
+ms.openlocfilehash: 0e35a2b3f89c92b717b8e05c8fa3ae5af5ce8fd3
+ms.sourcegitcommit: 06073f8efde97dd5f540dbfb69f574d8380566fe
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/17/2019
-ms.locfileid: "58131422"
+ms.lasthandoff: 06/24/2019
+ms.locfileid: "67333784"
 ---
 # <a name="entity-framework-core"></a>Entity Framework Core
 
@@ -23,7 +23,7 @@ EF Core 支援許多資料庫引擎，如需詳細資料，請參閱[資料庫�
 
 運用 EF Core，使用模型來執行資料存取。 模型包含多個實體類別以及一個代表含資料庫之工作階段的內容物件，可讓您查詢和儲存資料。 若要深入了解，請參閱[建立模型](modeling/index.md)。
 
-您可以從現有資料庫產生模型、撰寫符合您資料庫模型的程式碼，或使用「EF 移轉」從您的模型建立資料庫，然後讓它隨著您模型隨時間的變更逐步發展。
+您可以從現有資料庫產生模型、撰寫符合您資料庫的模型程式碼，或使用[EF 移轉](managing-schemas/migrations/index.md)來從您的模型建立資料庫，然後讓它隨著您模型的變更逐步發展。
 
 ``` csharp
 using Microsoft.EntityFrameworkCore;

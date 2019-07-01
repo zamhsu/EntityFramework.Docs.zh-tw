@@ -6,16 +6,16 @@ description: 使用 .NET Core 搭配 Entity Framework Core 的使用者入門
 ms.date: 08/03/2018
 ms.assetid: 099d179e-dd7b-4755-8f3c-fcde914bf50b
 uid: core/get-started/netcore/new-db-sqlite
-ms.openlocfilehash: a0df80a8fe96be4f8cc3177919e2b087e14cb49c
-ms.sourcegitcommit: 735715f10cc8a231c213e4f055d79f0effd86570
+ms.openlocfilehash: e6996630e399659807d23304993c8e19c11ca6f5
+ms.sourcegitcommit: 83c1e2fc034e5eb1fec1ebabc8d629ffcc7c0632
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2019
-ms.locfileid: "56325323"
+ms.lasthandoff: 06/25/2019
+ms.locfileid: "67351332"
 ---
 # <a name="getting-started-with-ef-core-on-net-core-console-app-with-a-new-database"></a>在 .NET Core 主控台應用程式上使用 EF Core 搭配新資料庫的使用者入門
 
-在此教學課程中，您會建置 .NET Core 主控台應用程式，它會使用 Entity Framework Core 對 SQLite 資料庫執行資料存取。 您會使用移轉從模型建立資料庫。 如需使用 ASP.NET Core MVC 的 Visual Studio 版本，請參閱 [ASP.NET Core - 新資料庫](xref:core/get-started/aspnetcore/new-db)。
+在此教學課程中，您會建置 .NET Core 主控台應用程式，它會使用 Entity Framework Core 對 SQLite 資料庫執行資料存取。 您會使用[移轉](xref:core/managing-schemas/migrations/index)從模型建立資料庫。 如需使用 ASP.NET Core MVC 的 Visual Studio 版本，請參閱 [ASP.NET Core - 新資料庫](xref:core/get-started/aspnetcore/new-db)。
 
 [在 GitHub 上檢視此文章的範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/NetCore/ConsoleApp.SQLite)。
 
@@ -104,8 +104,8 @@ ms.locfileid: "56325323"
 
 若要設定工作目錄：
 
-* 在 [方案總管] 中，以滑鼠右鍵按一下專案，然後選取 [屬性]。
-* 選取左窗格中的 [偵錯] 索引標籤。
+* 在 [方案總管]  中，以滑鼠右鍵按一下專案，然後選取 [屬性]  。
+* 選取左窗格中的 [偵錯]  索引標籤。
 * 將**工作目錄**設定為專案目錄。
 * 儲存變更。
 
