@@ -2,14 +2,14 @@
 title: EF Core 工具參考 (.NET CLI)-EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 09/20/2018
+ms.date: 07/11/2019
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: 959785c7b10ca668f3691106f62076d538978c03
-ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
+ms.openlocfilehash: 05c5f89fc79556e72a7e629c147aa817fe7d1a6b
+ms.sourcegitcommit: e90d6cfa3e96f10b8b5275430759a66a0c714ed1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51688663"
+ms.lasthandoff: 07/17/2019
+ms.locfileid: "68286458"
 ---
 # <a name="entity-framework-core-tools-reference---net-cli"></a>Entity Framework Core 工具參考.NET CLI
 
@@ -23,9 +23,28 @@ Entity Framework Core 的命令列介面 (CLI) 工具會執行設計階段開發
 
 安裝程序需視專案類型和版本而定：
 
+* EF Core 3.x
 * ASP.NET Core 2.1 和更新版本
 * EF Core 2.x
 * EF Core 1.x
+
+### <a name="ef-core-3x"></a>EF Core 3.x
+
+* `dotnet ef` 必須安裝做為全域或本機的工具。 大部分的開發人員將會安裝`dotnet ef`做為全域的工具，使用下列命令：
+
+  ``` console
+    $ dotnet tool install --global dotnet-ef --version 3.0.0-*
+  ```
+
+  您也可以使用`dotnet ef`為本機的工具。 若要使用它做為本機的工具，還原專案相依性，將其宣告為使用工具相依性[工具資訊清單檔](https://github.com/dotnet/cli/issues/10288)。
+
+* 安裝[.NET Core SDK 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0))。 SDK 有即使您擁有最新版本的 Visual Studio 安裝。
+
+* 安裝最新`Microsoft.EntityFrameworkCore.Design`封裝。
+
+  ``` Console
+  dotnet add package Microsoft.EntityFrameworkCore.Design
+  ```
 
 ### <a name="aspnet-core-21"></a>ASP.NET Core 2.1 +
 
@@ -37,7 +56,7 @@ Entity Framework Core 的命令列介面 (CLI) 工具會執行設計階段開發
 
 `dotnet ef`命令會包含在.NET Core SDK，但若要啟用命令，您必須安裝`Microsoft.EntityFrameworkCore.Design`封裝。
 
-* 安裝目前[.NET Core SDK](https://www.microsoft.com/net/download/core)。 即便您有最新版本的 Visual Studio 2017 也必須安裝該 SDK。
+* 安裝目前[.NET Core SDK](https://www.microsoft.com/net/download/core)。 SDK 有即使您擁有最新版本的 Visual Studio 安裝。
 
 * 安裝最新的穩定`Microsoft.EntityFrameworkCore.Design`封裝。
 
@@ -51,7 +70,7 @@ Entity Framework Core 的命令列介面 (CLI) 工具會執行設計階段開發
 
 * 設定要使用 2.1.200 SDK 版本的應用程式修改其[global.json](/dotnet/core/tools/global-json)檔案。 此檔案通常會包含在方案目錄 （一個以上專案） 中。
 
-* 編輯專案檔，並新增`Microsoft.EntityFrameworkCore.Tools.DotNet`做為`DotNetCliToolReference`項目。 指定的最新的 1.x 版本，例如： 1.1.6。 請參閱專案檔範例，本節結尾處。
+* 編輯專案檔，並新增`Microsoft.EntityFrameworkCore.Tools.DotNet`做為`DotNetCliToolReference`項目。 指定的最新的 1.x 版本，例如：1.1.6。 請參閱專案檔範例，本節結尾處。
 
 * 安裝的最新的 1.x 版本`Microsoft.EntityFrameworkCore.Design`套件，例如：
 
@@ -137,10 +156,10 @@ CLI 工具適用於.NET Core 專案和.NET Framework 專案。 .NET Standard 類
 
 ## <a name="common-options"></a>常見的選項
 
-|                   | 選項                            | 描述                                                                                                                                                                                                                                                   |
+|                   | 選項                            | 說明                                                                                                                                                                                                                                                   |
 |:------------------|:----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |                   | `--json`                          | 顯示 JSON 輸出。                                                                                                                                                                                                                                             |
-| <nobr>`-c`</nobr> | `--context <DBCONTEXT>`           | `DbContext`類別使用。 只有或與命名空間完整限定的類別名稱。  如果省略這個選項，EF Core 會發現內容類別。 如果有多個內容類別，這個選項是必要的。                                            |
+| <nobr>`-c`</nobr> | `--context <DBCONTEXT>`           | 要使用的 `DbContext` 類別。 只有或與命名空間完整限定的類別名稱。  如果省略這個選項，EF Core 會發現內容類別。 如果有多個內容類別，這個選項是必要的。                                            |
 | `-p`              | `--project <PROJECT>`             | 目標專案的專案資料夾的相對路徑。  預設值為目前的資料夾。                                                                                                                                                              |
 | `-s`              | `--startup-project <PROJECT>`     | 啟始專案的專案資料夾的相對路徑。 預設值為目前的資料夾。                                                                                                                                                              |
 |                   | `--framework <FRAMEWORK>`         | [目標 Framework Moniker](/dotnet/standard/frameworks#supported-target-framework-versions) for[目標 framework](/dotnet/standard/frameworks)。  專案檔會指定多個目標架構，而且您想要選取其中一個時，會使用它。 |
@@ -193,14 +212,14 @@ dotnet ef database update 20180904195021_InitialCreate
 
 引數：
 
-| 引數       | 描述                                                                                                                                                                                                             |
+| 引數       | 說明                                                                                                                                                                                                             |
 |:---------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<CONNECTION>` | 資料庫連接字串。 針對 ASP.NET Core 2.x 專案，此值可以是*名稱 =\<的連接字串名稱 >*。 在此情況下，名稱來自於 專案設定的組態來源。 |
+| `<CONNECTION>` | 資料庫連接字串。 針對 ASP.NET Core 2.x 專案，此值可以是*名稱 =\<的連接字串名稱 >* 。 在此情況下，名稱來自於 專案設定的組態來源。 |
 | `<PROVIDER>`   | 要使用提供者 通常這是 NuGet 套件的名稱，例如： `Microsoft.EntityFrameworkCore.SqlServer`。                                                                                           |
 
 選項:
 
-|                 | 選項                                   | 描述                                                                                                                                                                    |
+|                 | 選項                                   | 說明                                                                                                                                                                    |
 |:----------------|:-----------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>-d</nobr> | `--data-annotations`                     | 使用屬性來設定模型 (如果可能的話)。 如果省略這個選項，則會使用 fluent API。                                                                |
 | `-c`            | `--context <NAME>`                       | 名稱`DbContext`類別來產生。                                                                                                                                 |
@@ -235,7 +254,7 @@ dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Tr
 
 選項:
 
-|                   | 選項                             | 描述                                                                                                      |
+|                   | 選項                             | 說明                                                                                                      |
 |:------------------|:-----------------------------------|:-----------------------------------------------------------------------------------------------------------------|
 | <nobr>`-o`</nobr> | <nobr>`--output-dir <PATH>`</nobr> | 目錄 （及子命名空間） 使用。 路徑是相對於專案目錄。 預設為 「 移轉 」。 |
 
@@ -249,7 +268,7 @@ dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Tr
 
 選項:
 
-|                   | 選項    | 描述                                                                     |
+|                   | 選項    | 說明                                                                     |
 |:------------------|:----------|:--------------------------------------------------------------------------------|
 | <nobr>`-f`</nobr> | `--force` | 還原移轉 （回復已套用至資料庫的變更）。 |
 

@@ -3,18 +3,18 @@ title: First 資料註解-EF6 的程式碼
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: e6b017306b4f66f5bac2a9964e11391da28ceb40
-ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
+ms.openlocfilehash: fcd01aef7303573001460b352f8099b2cc6e224a
+ms.sourcegitcommit: e90d6cfa3e96f10b8b5275430759a66a0c714ed1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2019
-ms.locfileid: "57463278"
+ms.lasthandoff: 07/17/2019
+ms.locfileid: "68286471"
 ---
 # <a name="code-first-data-annotations"></a>Code First 資料註解
 > [!NOTE]
 > **EF4.1 及更新版本僅**-功能、 Api、 Entity Framework 4.1 中導入等本頁所述。 如果您使用較早版本，部分或所有的這項資訊不適用於。
 
-此頁面上的內容是來自原始寫入，作者： Julie Lerman 的發行項 (\<http://thedatafarm.com>)。
+此頁面上的內容是來自原始寫入，作者： Julie Lerman 的發行項 (\<http://thedatafarm.com>) 。
 
 Entity Framework Code First 可讓您使用您自己的網域類別，代表模型執行查詢時，EF 相依於變更追蹤，以及更新函式。 程式碼首先會利用程式設計的模式稱為 'convention over configuration'。 程式碼第一次會假設您的類別遵循的慣例，Entity framework，並且在此情況下，便會自動生效時如何執行的作業。 不過，如果您的類別並不遵守這些慣例，您能夠將設定新增至您的類別，為 EF 提供的必要資訊。
 
@@ -146,7 +146,7 @@ Entity Framework 支援複合索引鍵-多個屬性所組成的主索引鍵。 �
     public string Title { get; set; }
 ```
 
-任何其他含應用程式中的程式碼或標記變更，在 MVC 應用程式將會執行用戶端驗證，甚至以動態方式建置訊息使用的屬性和註釋名稱。
+沒有額外的程式碼或應用程式中的標記變更，在 MVC 應用程式會執行用戶端驗證，甚至以動態方式建置訊息使用的屬性和註釋名稱。
 
 ![建立頁面，其標題是必要的錯誤](~/ef6/media/jj591583-figure02.png)
 

@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: 52a8527170845d3e73ebcec518713ade3f3844f0
-ms.sourcegitcommit: 06073f8efde97dd5f540dbfb69f574d8380566fe
+ms.openlocfilehash: c306f9ca7a51fc9e3db18e883fd44f56dd1a3cb4
+ms.sourcegitcommit: e90d6cfa3e96f10b8b5275430759a66a0c714ed1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67333846"
+ms.lasthandoff: 07/17/2019
+ms.locfileid: "68286453"
 ---
 # <a name="connection-strings"></a>連接字串
 
@@ -17,7 +17,7 @@ ms.locfileid: "67333846"
 
 ## <a name="net-framework-applications"></a>.NET framework 應用程式
 
-.NET framework 應用程式，例如 WinForms、 WPF、 主控台和 ASP.NET 4 中，已嘗試且測試過的連接字串模式。 連接字串應該將您的應用程式的 App.config 檔 (Web.config 如果您使用 ASP.NET)。 如果您的連接字串中包含機密資訊，例如使用者名稱和密碼，您可以保護的組態檔中使用內容[受保護的組態](https://docs.microsoft.com/dotnet/framework/data/adonet/connection-strings-and-configuration-files#encrypting-configuration-file-sections-using-protected-configuration)。
+.NET framework 應用程式，例如 WinForms、 WPF、 主控台和 ASP.NET 4 中，已嘗試且測試過的連接字串模式。 連接字串應該新增至您的應用程式的 App.config 檔 (Web.config 如果您使用 ASP.NET)。 如果您的連接字串中包含機密資訊，例如使用者名稱和密碼，您可以保護的組態檔中使用內容[受保護的組態](https://docs.microsoft.com/dotnet/framework/data/adonet/connection-strings-and-configuration-files#encrypting-configuration-file-sections-using-protected-configuration)。
 
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -31,7 +31,7 @@ ms.locfileid: "67333846"
 ```
 
 > [!TIP]  
-> `providerName` EF Core 連接字串儲存在 App.config，因為資料庫提供者已透過程式碼不需要設定。
+>           `providerName` EF Core 連接字串儲存在 App.config，因為資料庫提供者已透過程式碼不需要設定。
 
 您可以接著讀取連接字串使用`ConfigurationManager`在您的內容中的 API`OnConfiguring`方法。 您可能需要將參考加入`System.Configuration`framework 組件，若要能夠使用此 API。
 
