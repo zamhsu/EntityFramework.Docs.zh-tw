@@ -4,38 +4,38 @@ author: divega
 ms.date: 08/13/2017
 ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
 uid: core/miscellaneous/1x-2x-upgrade
-ms.openlocfilehash: 5371c8f3b7c6102c621296bbae145d13779e0c6e
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: 1222f10811914f65822a49e18522c287ece12174
+ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283767"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68306493"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>應用程式從舊版升級 EF Core 2.0
 
-我們已大幅改善我們的現有 Api 和 2.0 的行為的機會。 有幾個可能需要修改現有的應用程式程式碼的增強功能，雖然我們相信大部分的應用程式的影響會很低，在大部分情況下，需要只重新編譯和極少引導式的變更，來取代過時的 Api。
+我們已在2.0 中大幅縮小現有 Api 和行為的機會。 有一些改良功能可能需要修改現有的應用程式程式碼, 但我們相信大部分的應用程式都會造成影響, 而在大部分情況下, 只需要重新編譯和最小的引導式變更來取代已淘汰的 Api。
 
 可能需要更新現有的應用程式為 EF Core 2.0:
 
-1. 升級為支援.NET Standard 2.0 的應用程式的目標.NET 實作。 請參閱[支援的.NET 實作](../platforms/index.md)如需詳細資訊。
+1. 將應用程式的目標 .NET 執行升級為支援 .NET Standard 2.0 的其中一個。 如需詳細資訊, 請參閱[支援的 .Net 部署](../platforms/index.md)。
 
 2. 識別目標資料庫的 EF Core 2.0 相容的提供者。 請參閱[EF Core 2.0 需要 2.0 資料庫提供者](#ef-core-20-requires-a-20-database-provider)下方。
 
 3. 將所有 EF Core 封裝 （執行階段和工具） 都升級為 2.0。 請參閱[安裝 EF Core](../get-started/install/index.md)如需詳細資訊。
 
-4. 進行任何必要的程式碼變更，以彌補這份文件的其餘部分中所述的重大變更。
+4. 進行任何必要的程式碼變更, 以補償本檔其餘部分所述的重大變更。
 
 ## <a name="aspnet-core-now-includes-ef-core"></a>ASP.NET Core 現在包含 EF Core
 
 除了協力廠商資料庫提供者之外，將目標設為 ASP.NET Core 2.0 的應用程式還可以使用 EF Core 2.0，而且沒有其他相依性。 不過，目標為舊版的 ASP.NET Core 應用程式必須升級至 ASP.NET Core 2.0，才能使用 EF Core 2.0。 如需升級為 2.0 的 ASP.NET Core 應用程式的詳細資訊，請參閱[ASP.NET Core 上的文件主體](https://docs.microsoft.com/aspnet/core/migration/1x-to-2x/)。
 
-## <a name="new-way-of-getting-application-services-in-aspnet-core"></a>取得 ASP.NET Core 中的應用程式服務的新方式
+## <a name="new-way-of-getting-application-services-in-aspnet-core"></a>在 ASP.NET Core 中取得應用程式服務的新方式
 
 已更新 ASP.NET Core web 應用程式的建議的模式 2.0 中斷 1.x 中使用的 EF Core 的設計階段邏輯的方式。 先前在設計階段 EF Core 會嘗試叫用`Startup.ConfigureServices`直接才能存取應用程式的服務提供者。 在 ASP.NET Core 2.0 中，設定初始化之外`Startup`類別。 通常使用 EF Core 應用程式存取其連接字串從組態中，因此`Startup`本身已足夠。 如果您升級 ASP.NET Core 1.x 應用程式，您可能會收到下列錯誤時使用的 EF Core 工具。
 
-> 在 'ApplicationContext' 上找不到沒有無參數建構函式。 加入 'ApplicationContext' 中的無參數建構函式，或新增的 'IDesignTimeDbContextFactory&lt;ApplicationContext&gt;' 與 'ApplicationContext' 相同的組件中
+> ' ApplicationCoNtext ' 上找不到無參數的函數。 請將無參數的函式新增至 ' ApplicationCoNtext ', 或在與&lt;'&gt;ApplicationCoNtext ' 相同的元件中加入 ' IDesignTimeDbCoNtextFactory ApplicationCoNtext ' 的執行
 
-新的設計階段攔截已加入 ASP.NET Core 2.0 的預設範本中。 靜態`Program.BuildWebHost`方法可讓在設計階段存取應用程式的服務提供者的 EF Core。 如果您要升級的 ASP.NET Core 1.x 應用程式，您必須更新`Program`為如下所示的類別。
+新的設計階段攔截已加入 ASP.NET Core 2.0 的預設範本中。 靜態`Program.BuildWebHost`方法可讓在設計階段存取應用程式的服務提供者的 EF Core。 如果您要升級 ASP.NET Core 1.x 應用程式, 您將需要更新`Program`類別, 如下所示。
 
 ``` csharp
 using Microsoft.AspNetCore;
@@ -58,21 +58,21 @@ namespace AspNetCoreDotNetCore2._0App
 }
 ```
 
-這個新模式更新為 2.0 的應用程式會強烈建議您，而且在 Entity Framework Core 移轉之類的產品功能才能運作必要的採用。 其他常見的替代做法是[實作*IDesignTimeDbContextFactory\<TContext >*](xref:core/miscellaneous/cli/dbcontext-creation#from-a-design-time-factory)。
+強烈建議您在將應用程式更新為2.0 時採用這個新模式, 這是為了讓 Entity Framework Core 遷移的產品功能正常執行所需。 另一個常見的替代方法[是*執行\<IDesignTimeDbCoNtextFactory TCoNtext >* ](xref:core/miscellaneous/cli/dbcontext-creation#from-a-design-time-factory)。
 
-## <a name="idbcontextfactory-renamed"></a>重新命名的 IDbContextFactory
+## <a name="idbcontextfactory-renamed"></a>IDbCoNtextFactory 已重新命名
 
-為了支援各種不同的應用程式模式，並讓使用者更充分掌控如何他們`DbContext`用在設計階段，我們，在過去，提供了`IDbContextFactory<TContext>`介面。 EF Core 工具將在設計階段探索實作這個介面，在您的專案，並使用它來建立`DbContext`物件。
+為了支援不同的應用程式模式, 並讓使用者更能控制其`DbContext`在設計階段的使用方式, 我們在過去已`IDbContextFactory<TContext>`提供介面。 EF Core 工具將在設計階段探索實作這個介面，在您的專案，並使用它來建立`DbContext`物件。
 
-此介面有誤導嘗試重新將它用於其他某些使用者的一般名稱`DbContext`-建立案例。 當 EF 工具然後嘗試在設計階段中使用它們的實作而遇到導致類似的命令`Update-Database`或`dotnet ef database update`失敗。
+此介面具有非常一般的名稱, 會誤導某些使用者嘗試重新使用它來進行其他`DbContext`建立的案例。 當 EF 工具在設計階段嘗試使用其實作為, 並導致像或`Update-Database` `dotnet ef database update`之類的命令失敗時, 就會攔截到防護。
 
-為了進行通訊的這個介面的強式設計階段語意，我們有它重新命名為`IDesignTimeDbContextFactory<TContext>`。
+為了傳達此介面的強式設計階段語義, 我們已將它重新命名為`IDesignTimeDbContextFactory<TContext>`。
 
-2.0 版本`IDbContextFactory<TContext>`仍然存在，但已標記為過時。
+若為2.0 版本, `IDbContextFactory<TContext>`仍然存在, 但標示為過時。
 
-## <a name="dbcontextfactoryoptions-removed"></a>DbContextFactoryOptions 移除
+## <a name="dbcontextfactoryoptions-removed"></a>DbCoNtextFactoryOptions 已移除
 
-由於 ASP.NET Core 2.0 變更上面所述的情況下，我們發現`DbContextFactoryOptions`已不再需要針對新`IDesignTimeDbContextFactory<TContext>`介面。 以下是您應該改為使用替代項目。
+由於 ASP.NET Core 2.0 變更上面所述的情況下，我們發現`DbContextFactoryOptions`已不再需要針對新`IDesignTimeDbContextFactory<TContext>`介面。 以下是您應該改為使用的替代方案。
 
 | DbContextFactoryOptions | 替代函式                                                  |
 |:------------------------|:-------------------------------------------------------------|
@@ -80,84 +80,84 @@ namespace AspNetCoreDotNetCore2._0App
 | ContentRootPath         | Directory.GetCurrentDirectory()                              |
 | EnvironmentName         | Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") |
 
-## <a name="design-time-working-directory-changed"></a>設計階段工作目錄變更
+## <a name="design-time-working-directory-changed"></a>設計階段工作目錄已變更
 
-ASP.NET Core 2.0 變更也會需要所使用的工作目錄`dotnet ef`能配合執行您的應用程式時，Visual Studio 所用的工作目錄。 這一個可預見的副作用是現在，檔名相對於專案目錄，而非輸出目錄像以往的 SQLite。
+ASP.NET Core 2.0 變更也會需要所使用的工作目錄`dotnet ef`能配合執行您的應用程式時，Visual Studio 所用的工作目錄。 其中一個可觀察的副作用是, SQLite 檔案名現在是相對於專案目錄, 而不是輸出目錄, 如同它們的作用。
 
 ## <a name="ef-core-20-requires-a-20-database-provider"></a>EF Core 2.0 需要 2.0 資料庫提供者
 
 EF Core 2.0 我們進行了許多簡單化和增強功能的方式資料庫提供者中運作。 這表示 EF Core 2.0 1.0.x 和 1.1.x 提供者將無法運作。
 
-在 SQL Server 和 SQLite 提供者隨附的 EF 小組和 2.0 版則會做為一部分的 2.0 版。 開放原始碼協力廠商提供者[SQL Compact](https://github.com/ErikEJ/EntityFramework.SqlServerCompact)， [PostgreSQL](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL)，並[MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)正在更新為 2.0。 對於所有其他的提供者，請連絡提供者撰寫人員。
+SQL Server 和 SQLite 提供者都是由 EF 小組隨附, 而2.0 版本則會在2.0 版本中提供。 適用于[SQL Compact](https://github.com/ErikEJ/EntityFramework.SqlServerCompact)、[于 postgresql](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL)和[MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)的開放原始碼協力廠商提供者正在更新2.0。 對於所有其他提供者, 請洽詢提供者寫入器。
 
 ## <a name="logging-and-diagnostics-events-have-changed"></a>記錄和診斷事件已變更
 
-注意： 這些變更應該不會影響大部分的應用程式程式碼。
+注意: 這些變更應該不會影響大部分的應用程式程式碼。
 
-若要傳送訊息的事件識別碼[ILogger](https://github.com/aspnet/Logging/blob/dev/src/Microsoft.Extensions.Logging.Abstractions/ILogger.cs) 2.0 中已經變更。 在 EF Core 程式碼中，事件識別碼現在是唯一的。 例如，這些訊息現在也遵循 MVC 所使用結構化記錄的標準模式。
+傳送至[ILogger](https://github.com/aspnet/Logging/blob/dev/src/Microsoft.Extensions.Logging.Abstractions/ILogger.cs)的訊息事件識別碼在2.0 中已變更。 在 EF Core 程式碼中，事件識別碼現在是唯一的。 例如，這些訊息現在也遵循 MVC 所使用結構化記錄的標準模式。
 
 記錄器類別也已經變更。 現在已有一組類別可透過 [DbLoggerCategory](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/DbLoggerCategory.cs) 進行存取。
 
-[DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md)事件現在會使用相同的事件識別碼名稱作為對應`ILogger`訊息。 事件裝載是所有的名義型別類型衍生自[EventData](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/EventData.cs)。
+[DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md)事件現在會使用與對應`ILogger`訊息相同的事件識別碼名稱。 事件裝載是衍生自[EventData](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/EventData.cs)的所有名義類型。
 
-事件識別碼、 內容類型和類別目錄會記載於[CoreEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/CoreEventId.cs)並[RelationalEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore.Relational/Diagnostics/RelationalEventId.cs)類別。
+事件識別碼、裝載類型和類別記載于[CoreEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/CoreEventId.cs)和[RelationalEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore.Relational/Diagnostics/RelationalEventId.cs)類別中。
 
-識別碼也已從 Microsoft.EntityFrameworkCore.Infraestructure 新 Microsoft.EntityFrameworkCore.Diagnostics 命名空間。
+識別碼也已從 Microsoft.entityframeworkcore 移至新的 Microsoft.entityframeworkcore. Diagnostics 命名空間。
 
 ## <a name="ef-core-relational-metadata-api-changes"></a>EF Core 關聯式中繼資料 API 變更
 
-EF Core 2.0 現在會為使用的每個不同提供者建置不同的 [IModel](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IModel.cs)。 應用程式通常可以看到這項作業。 這已加速簡化較低階中繼資料 API；因此，任何對_一般關聯式中繼資料概念_的存取一律是透過 `.Relational` 呼叫來進行，而非 `.SqlServer`、`.Sqlite` 等等。比方說，1.1.x 如下的程式碼：
+EF Core 2.0 現在會為使用的每個不同提供者建置不同的 [IModel](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IModel.cs)。 應用程式通常可以看到這項作業。 這已加速簡化較低階中繼資料 API；因此，任何對_一般關聯式中繼資料概念_的存取一律是透過 `.Relational` 呼叫來進行，而非 `.SqlServer`、`.Sqlite` 等等。例如, 1.1. x 程式碼, 如下所示:
 
 ``` csharp
 var tableName = context.Model.FindEntityType(typeof(User)).SqlServer().TableName;
 ```
 
-現在應該撰寫像這樣：
+現在應如下所示撰寫:
 
 ``` csharp
 var tableName = context.Model.FindEntityType(typeof(User)).Relational().TableName;
 ```
 
-而不是使用類似的方法`ForSqlServerToTable`，擴充方法現在都可寫入目前使用中的提供者為基礎的條件式程式碼。 例如: 
+擴充方法現在可以根據`ForSqlServerToTable`目前使用中的提供者來撰寫條件式程式碼, 而不是使用這類方法。 例如：
 
 ```C#
 modelBuilder.Entity<User>().ToTable(
     Database.IsSqlServer() ? "SqlServerName" : "OtherName");
 ```
 
-請注意，這項變更僅適用於已定義的 Api/metadata_所有_關聯式的提供者。 API 和中繼資料會保持不變時它是單一提供者所特有。 例如，叢集的索引是特定 SQL Server，因此`ForSqlServerIsClustered`和`.SqlServer().IsClustered()`仍可使用。
+請注意, 這種變更僅適用于針對_所有_關聯式提供者所定義的 api/中繼資料。 當 API 和中繼資料僅適用于單一提供者時, 它會維持不變。 例如, 叢集索引是 SQL server 特有的, 因此`ForSqlServerIsClustered`和`.SqlServer().IsClustered()`仍然必須使用。
 
-## <a name="dont-take-control-of-the-ef-service-provider"></a>不需要 EF 服務提供者的控制項
+## <a name="dont-take-control-of-the-ef-service-provider"></a>不要接管 EF 服務提供者的控制權
 
-EF Core 會使用內部`IServiceProvider`（相依性插入容器） 內部實作。 應用程式應該允許建立和管理在特殊情況下除外此提供者的 EF Core。 強烈建議您移除的任何呼叫`UseInternalServiceProvider`。 如果應用程式需要呼叫`UseInternalServiceProvider`，則請考慮[提出問題](https://github.com/aspnet/EntityFramework/Issues)以便我們可以調查其他方式來處理您的案例。
+EF Core 在內部執行`IServiceProvider`中使用內部 (相依性插入容器)。 應用程式應該允許建立和管理在特殊情況下除外此提供者的 EF Core。 強烈建議您移除對`UseInternalServiceProvider`的任何呼叫。 如果應用程式需要呼叫`UseInternalServiceProvider`, 請考慮提出[問題](https://github.com/aspnet/EntityFramework/Issues), 讓我們可以調查其他處理您案例的方式。
 
-呼叫`AddEntityFramework`， `AddEntityFrameworkSqlServer`，除非，應用程式程式碼不需要等`UseInternalServiceProvider`也稱為。 移除任何現有的呼叫`AddEntityFramework`或是`AddEntityFrameworkSqlServer`等`AddDbContext`應該仍可用於相同的方式和以前一樣。
+除非`AddEntityFramework`也`AddEntityFrameworkSqlServer`呼叫, 否則`UseInternalServiceProvider`應用程式代碼不需要呼叫、等等。 移除對`AddEntityFramework`或`AddEntityFrameworkSqlServer`的任何現有呼叫等等`AddDbContext` , 其使用方式仍應與之前相同。
 
-## <a name="in-memory-databases-must-be-named"></a>記憶體中資料庫必須命名為
+## <a name="in-memory-databases-must-be-named"></a>記憶體內部資料庫必須命名為
 
-已移除未命名的全域記憶體中資料庫，而是必須命名為記憶體中的所有資料庫。 例如: 
+已移除全域未命名的記憶體內部資料庫, 而是必須將所有記憶體中的資料庫命名為。 例如：
 
 ``` csharp
 optionsBuilder.UseInMemoryDatabase("MyDatabase");
 ```
 
-這會建立/使用名稱為"MyDatabase"的資料庫。 如果`UseInMemoryDatabase`會再次呼叫相同的名稱，則相同的記憶體中資料庫將會使用，讓它可以由多個內容執行個體共用。
+這會建立/使用名為 "MyDatabase" 的資料庫。 如果`UseInMemoryDatabase`使用相同的名稱再次呼叫, 則會使用相同的記憶體內部資料庫, 讓多個內容實例能夠共用它。
 
 ## <a name="read-only-api-changes"></a>唯讀 API 變更
 
-`IsReadOnlyBeforeSave``IsReadOnlyAfterSave`，並`IsStoreGeneratedAlways`而言已經過時並取代為[BeforeSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L39)並[AfterSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L55)。 這些行為套用至任何屬性 （不只存放區所產生的屬性），並決定將資料庫資料列插入時如何使用屬性的值 (`BeforeSaveBehavior`) 或更新現有資料庫的資料列時 (`AfterSaveBehavior`)。
+`IsReadOnlyBeforeSave`、 `IsReadOnlyAfterSave`和`IsStoreGeneratedAlways`已過時, 並已取代為[BeforeSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L39)和[AfterSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L55)。 這些行為適用于任何屬性 (而不只是存放區產生的屬性), 並決定在插入至資料庫資料列 (`BeforeSaveBehavior`) 或更新現有的資料庫資料列 (`AfterSaveBehavior`) 時, 應該如何使用屬性的值。
 
-屬性標示[ValueGenerated.OnAddOrUpdate](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/ValueGenerated.cs) （例如，適用於計算的資料行） 會根據預設忽略目前的屬性上設定任何值。 這表示存放區所產生的值一律取得不論是否已設定或修改的追蹤實體上的任何值。 可以變更此設定不同`Before\AfterSaveBehavior`。
+標記為[ValueGenerated. OnAddOrUpdate](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/ValueGenerated.cs) (例如, 針對計算資料行) 的屬性預設會忽略屬性上目前設定的任何值。 這表示不論是否已在追蹤的實體上設定或修改任何值, 一律會取得存放區產生的值。 這可以藉由設定不同`Before\AfterSaveBehavior`的來變更。
 
-## <a name="new-clientsetnull-delete-behavior"></a>新的 ClientSetNull 刪除行為
+## <a name="new-clientsetnull-delete-behavior"></a>新的 Deletebehavior.clientsetnull 刪除行為
 
-在舊版中， [DeleteBehavior.Restrict](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/DeleteBehavior.cs)有實體的行為內容追蹤多個已關閉相符`SetNull`語意。 在 EF Core 2.0 中，新`ClientSetNull`為選擇性的關聯性的預設值已經導入行為。 這種行為有`SetNull`追蹤實體的語意和`Restrict`建立使用 EF Core 資料庫的行為。 在我們的經驗，這些是追蹤的實體和資料庫必須是/實用的行為。 `DeleteBehavior.Restrict` 現在適用於追蹤的實體時為選擇性的關聯性。
+在舊版中, [deletebehavior.setnull](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/DeleteBehavior.cs)會針對內容所追蹤的實體行為, 這些專案會有更多`SetNull`的已關閉符合的語義。 在 EF Core 2.0 中，新`ClientSetNull`為選擇性的關聯性的預設值已經導入行為。 這種行為有`SetNull`追蹤實體的語意和`Restrict`建立使用 EF Core 資料庫的行為。 在我們的經驗中, 這些是追蹤實體和資料庫最預期/實用的行為。 `DeleteBehavior.Restrict`針對選擇性關聯性設定時, 現在會接受追蹤的實體。
 
-## <a name="provider-design-time-packages-removed"></a>移除的提供者設計階段套件
+## <a name="provider-design-time-packages-removed"></a>已移除提供者設計階段套件
 
-`Microsoft.EntityFrameworkCore.Relational.Design`已移除套件。 它的內容合併至`Microsoft.EntityFrameworkCore.Relational`和`Microsoft.EntityFrameworkCore.Design`。
+已`Microsoft.EntityFrameworkCore.Relational.Design`移除封裝。 其內容已合併至`Microsoft.EntityFrameworkCore.Relational`和。 `Microsoft.EntityFrameworkCore.Design`
 
-這會傳播到提供者設計階段套件。 這些套件 (`Microsoft.EntityFrameworkCore.Sqlite.Design`，`Microsoft.EntityFrameworkCore.SqlServer.Design`等等) 已移除和其內容合併到主要提供者套件。
+這會傳播到提供者設計階段套件。 這些套件 (`Microsoft.EntityFrameworkCore.Sqlite.Design`、 `Microsoft.EntityFrameworkCore.SqlServer.Design`等) 已移除, 且其內容會合並到主要提供者封裝中。
 
 若要啟用`Scaffold-DbContext`或`dotnet ef dbcontext scaffold`在 EF Core 2.0 中，您只需要參考單一提供者封裝：
 

@@ -1,38 +1,38 @@
 ---
-title: 連接恢復功能，然後重試邏輯-EF6
+title: 連接復原和重試邏輯-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 47d68ac1-927e-4842-ab8c-ed8c8698dff2
-ms.openlocfilehash: 7d6aa870cc32a2b344457fbb04525a7c2c8d1c61
-ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
+ms.openlocfilehash: a01216c3399ca4a04943563435eacd0047337a5f
+ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/03/2019
-ms.locfileid: "55668761"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68306580"
 ---
-# <a name="connection-resiliency-and-retry-logic"></a>連接恢復功能，然後重試邏輯
+# <a name="connection-resiliency-and-retry-logic"></a>連接復原和重試邏輯
 > [!NOTE]
 > **僅限 EF6 及更新版本** - Entity Framework 6 已引進此頁面中所討論的功能及 API 等等。 如果您使用的是較早版本，則不適用部分或全部的資訊。  
 
-連接至資料庫伺服器的應用程式一直容易因為後端失敗和網路不穩定的連線中斷。 不過，在基礎的 LAN 環境中針對專用的資料庫伺服器使用這些錯誤很少，額外的邏輯來處理這些失敗通常並不必要的。 雲端的興起是以基礎資料庫伺服器，例如 Windows Azure SQL Database 和連線現在是較常見的連線中斷，進行較不可靠的網路。 這可能是服務的因為防禦性技術，雲端資料庫使用，以確保公平性，例如連線節流，或造成間歇性的逾時和其他暫時性錯誤的網路不穩定。  
+連接到資料庫伺服器的應用程式一律會因為後端失敗和網路不穩定而受到連線中斷的影響。 不過, 在以 LAN 為基礎的環境中, 針對專用的資料庫伺服器運作時, 這些錯誤很罕見, 但通常不需要額外的邏輯來處理這些失敗。 隨著以雲端為基礎的資料庫伺服器 (例如 Windows Azure SQL Database 和連線較不可靠的網路) 的增加, 現在更常發生連接中斷的情況。 這可能是因為雲端資料庫用來確保服務公平的防禦技術, 例如連線節流, 或網路中的不穩定造成間歇的超時和其他暫時性錯誤。  
 
-連接恢復功能是指自動重試失敗，因為這些連線中斷的任何命令的 ef 的能力。  
+「連接復原」是指 EF 自動重試因這些連接中斷而失敗的任何命令的能力。  
 
 ## <a name="execution-strategies"></a>執行策略  
 
-連接重試是由負責 IDbExecutionStrategy 介面的實作。 IDbExecutionStrategy 的實作會負責接受作業，並發生例外狀況時，判斷是否適合重試它是否正在重試。 有四個隨附於 EF 的執行策略：  
+IDbExecutionStrategy 介面的執行會負責連接重試。 IDbExecutionStrategy 的執行會負責接受作業, 如果發生例外狀況, 則判斷重試是否適當, 並在其為時重試。 EF 隨附四個執行策略:  
 
-1. **DefaultExecutionStrategy**： 此執行策略不會重試任何作業，它是 sql server 以外的資料庫的預設值。  
-2. **DefaultSqlExecutionStrategy**： 這是預設會使用內部執行策略。 此策略不會重試根本，不過，它會換行可能是暫時性，通知使用者他們可能會想要啟用連線恢復功能的任何例外狀況。  
-3. **DbExecutionStrategy**： 這個類別是適合的基底類別做為其他的執行策略，包括您自己自訂的。 它會實作指數重試原則，其中初始的重試發生零延遲和延遲會增加以指數方式叫用的最大重試計數為止。 這個類別具有一種抽象的 ShouldRetryOn 方法可以實作在衍生的執行策略，以控制應該重試的例外狀況。  
-4. **SqlAzureExecutionStrategy**： 繼承自 DbExecutionStrategy 此執行策略，且將重新嘗試已知是可能是暫時性的使用 Azure SQL Database 時的例外狀況。
+1. **DefaultExecutionStrategy**: 此執行策略不會重試任何作業, 而是 sql server 以外的資料庫的預設值。  
+2. **DefaultSqlExecutionStrategy**: 這是預設使用的內部執行策略。 這種策略根本不會重試, 不過, 它會包裝任何可能是暫時性的例外狀況, 以通知使用者他們可能想要啟用連接恢復功能。  
+3. **DbExecutionStrategy**: 這個類別適合做為其他執行策略的基類, 包括您自己的自訂。 它會執行指數重試原則, 其中會以零延遲進行初始重試, 而延遲會以指數方式增加, 直到達到最大重試次數為止。 這個類別具有抽象的 ShouldRetryOn 方法, 可在衍生的執行策略中執行, 以控制應該重試的例外狀況。  
+4. **SqlAzureExecutionStrategy**: 此執行策略會繼承自 DbExecutionStrategy, 並會在使用 Azure SQL Database 時, 在已知可能會暫時性的例外狀況上重試。
 
 > [!NOTE]
-> 2 和 4 的執行策略會包含在 EF，EntityFramework.SqlServer 組件中所隨附的 Sql Server 提供者，而且設計用於搭配 SQL Server。  
+> 執行策略2和4包含在 EF 隨附的 Sql Server 提供者中, 這是在 EntityFramework 中, 而且是設計用來與 SQL Server 搭配使用。  
 
 ## <a name="enabling-an-execution-strategy"></a>啟用執行策略  
 
-告知 EF 來使用執行策略的最簡單方式是使用 SetExecutionStrategy 方法[DbConfiguration](~/ef6/fundamentals/configuring/code-based.md)類別：  
+告訴 EF 使用執行策略最簡單的方式, 就是使用[DbConfiguration](~/ef6/fundamentals/configuring/code-based.md)類別的 SetExecutionStrategy 方法:  
 
 ``` csharp
 public class MyConfiguration : DbConfiguration
@@ -44,13 +44,13 @@ public class MyConfiguration : DbConfiguration
 }
 ```  
 
-此程式碼會告知 EF 來連接到 SQL Server 時，使用 SqlAzureExecutionStrategy。  
+此程式碼會指示 EF 在連接到 SQL Server 時使用 SqlAzureExecutionStrategy。  
 
 ## <a name="configuring-the-execution-strategy"></a>設定執行策略  
 
-SqlAzureExecutionStrategy 的建構函式可以接受兩個參數，MaxRetryCount 和 MaxDelay。 MaxRetry 計數已重試策略的最大次數。 MaxDelay 是 TimeSpan，代表將會使用執行策略的重試之間的延遲上限。  
+SqlAzureExecutionStrategy 的構造函式可以接受兩個參數: MaxRetryCount 和 MaxDelay。 MaxRetry count 是此策略將重試的次數上限。 MaxDelay 是一個 TimeSpan, 代表執行策略將使用的重試之間的最大延遲。  
 
-若要設為 1 和最大延遲為 30 秒的重試次數上限，您需要下列 execue:  
+若要將重試次數上限設為 1, 並將最大延遲設定為30秒, 您可以執行下列動作:  
 
 ``` csharp
 public class MyConfiguration : DbConfiguration
@@ -64,15 +64,15 @@ public class MyConfiguration : DbConfiguration
 }
 ```  
 
-SqlAzureExecutionStrategy 會重試，立即超出暫時性失敗的情況，但將會再延遲之間每次重試之前的最大重試限制在第一次，或總時間達到最大延遲。  
+SqlAzureExecutionStrategy 將會在第一次發生暫時性失敗時立即重試, 但會延遲每次重試之間的時間, 直到超過最大重試次數或總延遲數上限為止。  
 
-執行策略只會重試的例外狀況，通常是 tansient 數量有限，仍必須處理其他錯誤，以及攔截 RetryLimitExceeded 例外狀況，若要解決錯誤並非暫時性或花太多時間的位置案例它本身。  
+執行策略只會重試有限數目的例外狀況, 通常是暫時性的, 您仍然需要處理其他錯誤, 並在錯誤不是暫時性或需要太久的情況下攔截例外狀況 (RetryLimitExceeded exception)直接.  
 
-使用重試的執行策略時，有一些已知的限制：  
+使用重試執行策略時, 有一些已知的限制:  
 
-## <a name="streaming-queries-are-not-supported"></a>不支援資料流的查詢  
+## <a name="streaming-queries-are-not-supported"></a>不支援串流查詢  
 
-根據預設，EF6 和更新版本將查詢結果，而不是這些資料流緩衝區。 如果您想要有結果串流處理您可以使用 AsStreaming 方法來變更 LINQ to Entities 查詢，為資料流。  
+根據預設, EF6 和更新版本會緩衝查詢結果, 而不是串流處理。 如果您想要將結果串流處理, 您可以使用 AsStreaming 方法, 將 LINQ to Entities 查詢變更為資料流程。  
 
 ``` csharp
 using (var db = new BloggingContext())
@@ -84,15 +84,15 @@ using (var db = new BloggingContext())
 }
 ```  
 
-不支援資料流，註冊時的重試執行策略。 因為執行所傳回的結果的 「 連線無法卸除部分，就會有這項限制。 當發生這種情況時，EF 必須重新執行整個查詢，但有沒有可靠的方式就知道已傳回的結果 （資料可能已變更，因為傳送初始查詢，結果可能的傳回順序不同，結果可能不需要的唯一識別碼等等。)。  
+註冊重試執行策略時, 不支援串流處理。 這項限制存在的原因是, 連接可能會在傳回的結果中捨棄部分方式。 發生這種情況時, EF 需要重新執行整個查詢, 但沒有可靠的方法可以得知已經傳回的結果 (資料可能會在傳送初始查詢後變更, 結果可能會以不同的順序傳回, 結果可能不會有唯一識別碼等等)。  
 
-## <a name="user-initiated-transactions-are-not-supported"></a>不支援使用者起始交易  
+## <a name="user-initiated-transactions-are-not-supported"></a>不支援使用者起始的交易  
 
-當您已設定導致重試執行策略時，有一些限制，有關使用交易。  
+當您設定了會導致重試的執行策略時, 使用交易時, 會有一些限制。  
 
-根據預設，EF 會執行交易內的任何資料庫更新。 您不需要採取任何動作來啟用此功能，EF 一律自動執行這個工作。  
+根據預設, EF 會在交易內執行任何資料庫更新。 您不需要採取任何動作來啟用此功能, 因此 EF 一律會自動執行此作業。  
 
-例如，下列程式碼 SaveChanges 是自動在交易中執行。 如果 SaveChanges 後插入的新站台的其中一個，則會復原交易而且不需要變更套用至資料庫失敗。 內容也是處於允許套用所做的變更重試一次呼叫 SaveChanges 的狀態。  
+例如, 在下列程式碼中, 會在交易內自動執行 SaveChanges。 如果 SaveChanges 在插入其中一個新網站之後失敗, 則會回復交易, 而且不會對資料庫套用任何變更。 內容也會停留在允許再次呼叫 SaveChanges 以重試套用變更的狀態。  
 
 ``` csharp
 using (var db = new BloggingContext())
@@ -103,7 +103,7 @@ using (var db = new BloggingContext())
 }
 ```  
 
-在不使用重試執行策略，您可以將多個作業包裝在單一交易中。 比方說，下列程式碼會包裝在單一交易中兩個 SaveChanges 呼叫。 如果任一項操作的任何部分再失敗的變更都不會套用。  
+當不使用重試執行策略時, 您可以在單一交易中包裝多個作業。 例如, 下列程式碼會將兩個 SaveChanges 呼叫包裝在單一交易中。 如果任一作業的任何部分失敗, 則不會套用任何變更。  
 
 ``` csharp
 using (var db = new BloggingContext())
@@ -122,11 +122,11 @@ using (var db = new BloggingContext())
 }
 ```  
 
-不支援時使用的重試執行策略，因為 EF 不知道的任何先前的作業，以及如何重試它們。 例如，如果第二個 SaveChanges 失敗然後 EF 不會再有重試第一次的 SaveChanges 呼叫所需的資訊。  
+使用重試執行策略時, 不支援這種作法, 因為 EF 並不知道任何先前的作業, 以及如何重試它們。 例如, 如果第二個 SaveChanges 失敗, 則 EF 不再具有重試第一個 SaveChanges 呼叫所需的資訊。  
 
 ### <a name="workaround-suspend-execution-strategy"></a>因應措施：暫停執行策略  
 
-一個可能的因應措施是暫止正在重試執行策略需要使用使用者的程式碼片段的起始交易。 若要這樣做最簡單的方式是加入 SuspendExecutionStrategy 旗標，以您的程式碼基礎組態類別，並將變更執行策略 lambda，來設定旗標時，傳回的預設值 (非 retying) 執行策略。  
+其中一個可行的因應措施是針對需要使用使用者起始之交易的程式碼段, 暫停重試執行策略。 若要這麼做, 最簡單的方法是將 SuspendExecutionStrategy 旗標新增至您的程式碼型設定類別, 並變更執行策略 lambda, 以在設定旗標時傳回預設 (非 retying) 執行策略。  
 
 ``` csharp
 using System.Data.Entity;
@@ -160,9 +160,9 @@ namespace Demo
 }
 ```  
 
-請注意，我們使用 CallContext 儲存旗標值。 這會提供類似執行緒區域儲存區的功能，但會安全地使用非同步程式碼-包含非同步查詢並儲存使用 Entity Framework。  
+請注意, 我們會使用 CallCoNtext 來儲存旗標值。 這可提供與執行緒本機儲存體類似的功能, 但可安全地與非同步程式碼搭配使用, 包括非同步查詢和使用 Entity Framework 儲存。  
 
-我們現在可以暫停執行策略，使用使用者起始的交易的程式碼區段。  
+我們現在可以暫止使用使用者起始的交易之程式碼區段的執行策略。  
 
 ``` csharp
 using (var db = new BloggingContext())
@@ -185,11 +185,11 @@ using (var db = new BloggingContext())
 }
 ```  
 
-### <a name="workaround-manually-call-execution-strategy"></a>因應措施：以手動方式呼叫執行策略  
+### <a name="workaround-manually-call-execution-strategy"></a>因應措施：手動呼叫執行策略  
 
-另一個選項是邏輯的手動使用執行策略，並提供完整來執行，以便它可以重試一次的所有項目如果其中一個作業失敗。 我們仍需要暫停執行策略-使用此技術-如上所示，如此可重試程式碼區塊內使用的任何內容不會嘗試重試一次。  
+另一個選項是手動使用執行策略, 並為它提供要執行的整組邏輯, 讓它可以在其中一個作業失敗時重試所有動作。 我們仍然需要使用上述技術來暫停執行策略, 以便可重試的程式碼區塊內使用的任何內容都不會嘗試重試。  
 
-請注意，應重試的程式碼區塊內建構任何內容。 這可確保，我們已開始初始狀態，以便每次重試。  
+請注意, 應該在要重試的程式碼區塊內建立任何內容。 這可確保每次重試都會以全新狀態開始。  
 
 ``` csharp
 var executionStrategy = new SqlAzureExecutionStrategy();
