@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 3024c0101c9d886ef844d1b7dc85aaf1be27e86b
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: 91592ea9f7c73f10446993282c1874c852000871
+ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/18/2019
-ms.locfileid: "58914074"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68306550"
 ---
 # <a name="raw-sql-queries"></a>原始 SQL 查詢
 
@@ -146,11 +146,11 @@ var blogs = context.Blogs
 * 傳遞到此方法的 `SELECT` 陳述式通常應該是可組合的：如果 EF Core 必須評估伺服器上的其他查詢運算子 (例如，轉譯在 `FromSql` 之後套用的 LINQ 運算子)，則會將所提供的 SQL 視為子查詢。 這表示所傳遞的 SQL 不應包含在子查詢上無效的任何字元或選項，例如：
   * 結尾的分號
   * 在 SQL Server 上，結尾的查詢層級提示 (例如，`OPTION (HASH JOIN)`)
-  * (在 SQL Server 上) `SELECT` 子句中未隨附 `TOP 100 PERCENT` 的 `ORDER BY` 子句
+  * 在 SQL Server 上，`SELECT` 子句中未隨附 `OFFSET 0` 或 `TOP 100 PERCENT` 的 `ORDER BY` 子句
 
 * `SELECT` 以外的 SQL 陳述式會自動被辨識為不可組合。 因此，會將預存程序的完整結果一律會傳回用戶端，並會在記憶體內評估於 `FromSql` 之後所套用的任何 LINQ 運算子。
 
 > [!WARNING]  
-> **一律針對原始 SQL 查詢使用參數化：** 除了驗證使用者輸入之外，請一律針對用於 SQL 查詢/命令中的任何值使用參數化。 接受原始 SQL 字串 (例如 `FromSql` 和 `ExecuteSqlCommand`) 的 API，能使值輕鬆地作為參數傳遞。 接受 FormattableString 的 `FromSql` 和 `ExecuteSqlCommand` 多載，也允許使用字串插補語法，藉此有助於防止受到 SQL 插入式攻擊。 
+> **一律針對原始 SQL 查詢使用參數化：** 除了驗證使用者輸入之外，請一律針對用於 SQL 查詢/命令中的任何值使用參數化。 接受原始 SQL 字串 (例如 `FromSql` 和 `ExecuteSqlCommand`) 的 API，能使值輕鬆地作為參數傳遞。 接受 FormattableString 的 `FromSql` 和 `ExecuteSqlCommand` 多載，也允許使用字串插補語法，以協助防止 SQL 插入式攻擊。 
 > 
 > 如果您使用字串串連或插補來動態建置查詢字串的任一部分，或是將使用者輸入傳遞至陳述式或預存程序以便將這些輸入當做動態 SQL 來執行，則必須負責驗證所有輸入以防止受到 SQL 插入式攻擊。

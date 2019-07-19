@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: dcbea1a2aab5baea35f81500bb7bb5482695d778
-ms.sourcegitcommit: 812010a35afe902d8c4bb03a67d575f8e91b5ec0
+ms.openlocfilehash: 7cc0bd3946be2e63d9fb46a023bf6abe750ae0e3
+ms.sourcegitcommit: e90d6cfa3e96f10b8b5275430759a66a0c714ed1
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67506257"
+ms.lasthandoff: 07/17/2019
+ms.locfileid: "68286486"
 ---
 # <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>EF Core 3.0 (目前為預覽版) 包含的中斷性變更
 
@@ -96,11 +96,10 @@ ms.locfileid: "67506257"
 
 **風險降低**
 
-若要能夠管理移轉或支撐 `DbContext`，請使用 `dotnet tool install` 命令安裝 `dotnet-ef`。
-例如，若要將它安裝為全域工具，您可以鍵入這個命令：
+若要能夠管理移轉或支撐 `DbContext`，請安裝 `dotnet-ef` 作為全域工具：
 
   ``` console
-  $ dotnet tool install --global dotnet-ef --version <exact-version>
+    $ dotnet tool install --global dotnet-ef --version 3.0.0-*
   ```
 
 您也可以在還原專案相依性時取得它作為本機工具 (該專案是使用[工具資訊清單檔](https://github.com/dotnet/cli/issues/10288)將它宣告為工具相依性)。
@@ -1313,6 +1312,28 @@ Microsoft.Data.Sqlite 也保留了讀取 INTEGER 和 TEXT 欄位字元值的功�
 UPDATE __EFMigrationsHistory
 SET MigrationId = CONCAT(LEFT(MigrationId, 4)  - 543, SUBSTRING(MigrationId, 4, 150))
 ```
+
+## <a name="userownumberforpaging-has-been-removed"></a>已移除 UseRowNumberForPaging
+
+[追蹤問題 #16400](https://github.com/aspnet/EntityFrameworkCore/issues/16400)
+
+此變更已於 EF Core 3.0-preview 6 推出。
+
+**舊行為**
+
+在 EF Core 3.0 之前，`UseRowNumberForPaging` 可用來問與 SQL Server 2008 相容的分頁產生 SQL。
+
+**新行為**
+
+從 EF Core 3.0 開始，EF 將只會針對與新版 SQL Server 相容的分頁產生 SQL。 
+
+**原因**
+
+我們正在進行此變更，因為 [SQL Server 2008 不再是支援的產品](https://blogs.msdn.microsoft.com/sqlreleaseservices/end-of-mainstream-support-for-sql-server-2008-and-sql-server-2008-r2/) \(英文\) 且更新此功能以搭配 EF Core 3.0 中的查詢變更使用是一個大工程。
+
+**風險降低**
+
+我們建議更新為新版 SQL Server，或使用較高的相容性層級，以支援產生的 SQL。 儘管如此，若您無法這樣做，請[在追蹤問題下註解](https://github.com/aspnet/EntityFrameworkCore/issues/16400)並提供詳細資料。 我們可能會根據意見反應重新審視此決定。
 
 ## <a name="extension-infometadata-has-been-removed-from-idbcontextoptionsextension"></a>已從 IDbContextOptionsExtension 移除延伸模組資訊/中繼資料
 
