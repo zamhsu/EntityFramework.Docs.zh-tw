@@ -4,12 +4,12 @@ author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: 5ebc4edba07063ad5e77154adcde5f2664c0d748
-ms.sourcegitcommit: 85d17524d8e022f933cde7fc848313f57dfd3eb8
+ms.openlocfilehash: db1b83a9222e00a5e226a134085b18247b31f29a
+ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/06/2019
-ms.locfileid: "55760518"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68306478"
 ---
 # <a name="installing-entity-framework-core"></a>安裝 Entity Framework Core
 
@@ -47,9 +47,9 @@ ms.locfileid: "55760518"
 
 ### <a name="visual-studio-nuget-package-manager-dialog"></a>Visual Studio NuGet 套件管理員對話方塊
 
-* 從 Visual Studio 功能表選取 [專案] > [管理 NuGet 套件]
+* 從 Visual Studio 功能表選取 [專案] > [管理 NuGet 套件] 
 
-* 按一下 [瀏覽] 或 [更新] 索引標籤
+* 按一下 [瀏覽]  或 [更新]  索引標籤
 
 * 若要安裝或更新 SQL Server 提供者，請選取 `Microsoft.EntityFrameworkCore.SqlServer` 套件並確認。
 
@@ -57,7 +57,7 @@ ms.locfileid: "55760518"
 
 ### <a name="visual-studio-nuget-package-manager-console"></a>Visual Studio NuGet 套件管理員主控台
 
-* 從 Visual Studio 功能表選取 [工具] > [NuGet 套件管理員] > [套件管理員主控台]
+* 從 Visual Studio 功能表選取 [工具] > [NuGet 套件管理員] > [套件管理員主控台] 
 
 * 若要安裝 SQL Server 提供者，請在套件管理員主控台中執行以下命令：
 
@@ -94,7 +94,7 @@ ms.locfileid: "55760518"
 
 目前版本的 .NET Core SDK 雖包含 `dotnet ef` 命令，但您必須安裝 `Microsoft.EntityFrameworkCore.Design` 套件才能啟用特殊專案上的命令：
 
- ``` Console    
+``` Console 
 dotnet add package Microsoft.EntityFrameworkCore.Design 
 ``` 
 
