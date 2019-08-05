@@ -1,17 +1,18 @@
 ---
 title: ASP.NET Core 使用者入門 - 現有的資料庫 - EF Core
 author: rowanmiller
+description: 在 ASP.NET Core 上使用 EF Core 搭配現有資料庫的使用者入門
 ms.date: 08/02/2018
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: c8acb95395968f710e6b896de6c3598cb7b23676
-ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
+ms.openlocfilehash: 6b0ed0a9222644bee31d23234aa27b2084137f4a
+ms.sourcegitcommit: 755a15a789631cc4ea581e2262a2dcc49c219eef
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/06/2019
-ms.locfileid: "54058782"
+ms.lasthandoff: 07/25/2019
+ms.locfileid: "68497517"
 ---
-# <a name="getting-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>在 ASP.NET Core 上使用 EF Core 搭配現有資料庫的使用者入門
+# <a name="get-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>在 ASP.NET Core 上使用 EF Core 搭配現有資料庫的使用者入門
 
 在本教學課程中，您將會建置 ASP.NET Core MVC 應用程式，而其使用 Entity Framework Core 執行基本的資料存取。 您將會對現有的資料庫進行還原工程，建立 Entity Framework 模型。
 
@@ -22,8 +23,8 @@ ms.locfileid: "54058782"
 安裝下列軟體：
 
 * [Visual Studio 2017 15.7](https://www.visualstudio.com/downloads/) 與這些工作負載：
-  * **ASP.NET 與網頁程式開發** (位在 [Web & Cloud] \(Web 與雲端) 下)
-  * **.NET Core 跨平台開發** (位在 [其他工具組] 下)
+  * **ASP.NET 與網頁程式開發** (位在 [Web & Cloud] \(Web 與雲端)  下)
+  * **.NET Core 跨平台開發** (位在 [其他工具組]  下)
 * [.NET Core 2.1 SDK](https://www.microsoft.com/net/download/core)。
 
 ## <a name="create-blogging-database"></a>建立部落格資料庫
@@ -31,28 +32,28 @@ ms.locfileid: "54058782"
 本教學課程使用您 LocalDb 執行個體上的**部落格**資料庫作為現有的資料庫。 如果您在另一個教學課程中已建立了**部落格**資料庫，則可跳過這些步驟。
 
 * 開啟 Visual Studio
-* [工具] > [連線到資料庫]
-* 選取 [Microsoft SQL Server]，並按一下 [繼續]
+* [工具] > [連線到資料庫] 
+* 選取 [Microsoft SQL Server]  ，並按一下 [繼續] 
 * 輸入 **(localdb)\mssqllocaldb** 作為**伺服器名稱**
-* 輸入 **master** 作為**資料庫名稱**，並按一下 [確定]
-* master 資料庫現在會顯示在 [伺服器總管] 中的 [資料連線] 下
-* 以滑鼠右鍵按一下 [伺服器總管] 中的資料庫，並選取 [新增查詢]
+* 輸入 **master** 作為**資料庫名稱**，並按一下 [確定] 
+* master 資料庫現在會顯示在 [伺服器總管]  中的 [資料連線]  下
+* 以滑鼠右鍵按一下 [伺服器總管]  中的資料庫，並選取 [新增查詢] 
 * 將以下列出的指令碼，複製到查詢編輯器中
-* 以滑鼠右鍵按一下查詢編輯器，然後選取 [執行]
+* 以滑鼠右鍵按一下查詢編輯器，然後選取 [執行] 
 
 [!code-sql[Main](../_shared/create-blogging-database-script.sql)]
 
 ## <a name="create-a-new-project"></a>建立新專案
 
 * 開啟 Visual Studio 2017
-* [檔案] > [新增] > [專案...]
+* [檔案] > [新增] > [專案...] 
 * 從左側功能表中，選取 **[已安裝] > [Visual C#] > [Web]**
-* 選取 [ASP.NET Core Web 應用程式] 專案範本
-* 輸入 **EFGetStarted.AspNetCore.ExistingDb** 做為名稱 (它必須與程式碼中稍後使用的命名空間完全相符) 並按一下 [確定] 
-* 等候 [新增 ASP.NET Core Web 應用程式] 對話方塊出現
+* 選取 [ASP.NET Core Web 應用程式]  專案範本
+* 輸入 **EFGetStarted.AspNetCore.ExistingDb** 做為名稱 (它必須與程式碼中稍後使用的命名空間完全相符) 並按一下 [確定]  
+* 等候 [新增 ASP.NET Core Web 應用程式]  對話方塊出現
 * 請確定目標架構下拉式清單設定為 **.NET Core**，然後版本下拉式清單設定為 **ASP.NET Core 2.1**
-* 選取 [Web 應用程式 (模型-檢視-控制器)] 範本
-* 確認 [驗證] 已設為 [無驗證]
+* 選取 [Web 應用程式 (模型-檢視-控制器)]  範本
+* 確認 [驗證]  已設為 [無驗證] 
 * 按一下 [確定] 
 
 ## <a name="install-entity-framework-core"></a>安裝 Entity Framework Core
@@ -65,7 +66,7 @@ ms.locfileid: "54058782"
 
 現在就可以根據您現有的資料庫來建立 EF 模型。
 
-* [工具] –> [NuGet 套件管理員] –> [套件管理員主控台]
+* [工具] –> [NuGet 套件管理員] –> [套件管理員主控台] 
 * 執行下列命令，以便從現有的資料庫來建立模型：
 
 ``` powershell
@@ -156,20 +157,20 @@ public partial class BloggingContext : DbContext
 
 ## <a name="create-a-controller-and-views"></a>建立控制器和檢視
 
-* 在 [方案總管] 中以滑鼠右鍵按一下 [Controllers] 資料夾，然後選取 [新增] > [控制器]
-* 選取 [使用 Entity Framework 執行檢視的 MVC 控制器] 並按一下 [確定]
-* 將 [模型類別] 設為 [Blog]，並將 [資料內容類別] 設為 [BloggingContext]
-* 按一下 [新增]
+* 在 [方案總管]  中以滑鼠右鍵按一下 [Controllers]  資料夾，然後選取 [新增] > [控制器] 
+* 選取 [使用 Entity Framework 執行檢視的 MVC 控制器]  並按一下 [確定] 
+* 將 [模型類別]  設為 [Blog]  ，並將 [資料內容類別]  設為 [BloggingContext] 
+* 按一下 [新增] 
 
 ## <a name="run-the-application"></a>執行應用程式
 
 您現在可以執行應用程式來查看運作狀況。
 
-* [偵錯] > [啟動但不偵錯]
+* [偵錯] > [啟動但不偵錯] 
 * 應用程式會在網頁瀏覽器中建置及開啟
 * 巡覽至 `/Blogs`
-* 按一下 [新建]
-* 輸入新部落格的 **URL**，然後按一下 [建立]
+* 按一下 [新建] 
+* 輸入新部落格的 **URL**，然後按一下 [建立] 
 
   ![建立頁面](_static/create.png)
 

@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 7cc0bd3946be2e63d9fb46a023bf6abe750ae0e3
-ms.sourcegitcommit: e90d6cfa3e96f10b8b5275430759a66a0c714ed1
+ms.openlocfilehash: c73663412efcd93c04892f193d4f5a2485724e22
+ms.sourcegitcommit: 755a15a789631cc4ea581e2262a2dcc49c219eef
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/17/2019
-ms.locfileid: "68286486"
+ms.lasthandoff: 07/25/2019
+ms.locfileid: "68497533"
 ---
 # <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>EF Core 3.0 (目前為預覽版) 包含的中斷性變更
 
@@ -20,7 +20,59 @@ ms.locfileid: "68286486"
 這些變更預期只會影響[提供者變更](../../providers/provider-log.md)底下記載的資料庫提供者。
 本文不會記載從某一 3.0 預覽版引進另一個 3.0 預覽版的新功能中斷。
 
-## <a name="linq-queries-are-no-longer-evaluated-on-the-client"></a>不會再於用戶端評估 LINQ 查詢
+## <a name="summary"></a>總結
+
+| **重大變更**                                                                                               | **影響** |
+|:------------------------------------------------------------------------------------------------------------------|------------|
+| [不會再於用戶端評估 LINQ 查詢](#linq-queries-are-no-longer-evaluated-on-the-client)         | High       |
+| [EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分](#dotnet-ef) | High      |
+| [FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名](#fromsql) | High      |
+| [查詢類型已與實體類型合併](#qt) | High      |
+| [Entity Framework Core 不再屬於 ASP.NET Core 共用架構](#no-longer) | Medium      |
+| [根據預設，串聯刪除現在會立即發生](#cascade) | Medium      |
+| [DeleteBehavior.Restrict 具有更簡潔的語意](#deletebehavior) | Medium      |
+| [自有類型關聯性的設定 API 已變更](#config) | Medium      |
+| [各個屬性會使用獨立的記憶體內部整數索引鍵產生](#each) | Medium      |
+| [中繼資料 API 變更](#metadata-api-changes) | Medium      |
+| [提供者獨有的中繼資料 API 變更](#provider) | Medium      |
+| [已移除 UseRowNumberForPaging](#urn) | Medium      |
+| [FromSql 方法只能在查詢根目錄上指定](#fromsql) | 低      |
+| [~~查詢執行會在偵錯層級記錄~~已還原](#qe) | 低      |
+| [實體執行個體上不會再設定暫存索引鍵值](#tkv) | 低      |
+| [DetectChanges 接受存放區產生的索引鍵值](#dc) | 低      |
+| [現在可以選用與主體共用資料表的相依實體](#de) | 低      |
+| [所有與並行語彙基元資料行共用資料表的實體，都必須將其對應到屬性](#aes) | 低      |
+| [未對應類型的繼承屬性，現在會對應到所有衍生類型的單一資料行](#ip) | 低      |
+| [外部索引鍵屬性慣例不會再比對與主體屬性相同的名稱](#fkp) | 低      |
+| [如果在 TransactionScope 完成之前未再使用，資料庫連線現在會關閉](#dbc) | 低      |
+| [根據預設，會使用支援欄位](#backing-fields-are-used-by-default) | 低      |
+| [找到多個相容的支援欄位時擲回](#throw-if-multiple-compatible-backing-fields-are-found) | 低      |
+| [僅欄位的屬性名稱應與欄位名稱相符](#field-only-property-names-should-match-the-field-name) | 低      |
+| [AddDbContext/AddDbContextPool 再也不會呼叫 AddLogging 與 AddMemoryCache](#adddbc) | 低      |
+| [DbContext.Entry 現在會執行本機 DetectChanges](#dbe) | 低      |
+| [根據預設，字串和位元組陣列索引鍵不會由用戶端產生](#string-and-byte-array-keys-are-not-client-generated-by-default) | 低      |
+| [ILoggerFactory 現在是限定範圍的服務](#ilf) | 低      |
+| [消極式載入 Proxy 不再假設導覽屬性已完全載入](#lazy-loading-proxies-no-longer-assume-navigation-properties-are-fully-loaded) | 低      |
+| [現在根據預設，過度建立內部服務提供者會是錯誤](#excessive-creation-of-internal-service-providers-is-now-an-error-by-default) | 低      |
+| [使用單一字串呼叫的 HasOne/HasMany 新行為](#nbh) | 低      |
+| [數個非同步方法的傳回型別已從 Task 變更為 ValueTask](#rtnt) | 低      |
+| [Relational:TypeMapping 註解現在變成只有 TypeMapping](#rtt) | 低      |
+| [衍生類型上的 ToTable 會擲回例外狀況](#totable-on-a-derived-type-throws-an-exception) | 低      |
+| [EF Core 不會再為 SQLite FK 強制傳送 pragma](#pragma) | 低      |
+| [Microsoft.EntityFrameworkCore.Sqlite 現在相依於 SQLitePCLRaw.bundle_e_sqlite3](#sqlite3) | 低      |
+| [GUID 值現在於 SQLite 上的儲存形式為 TEXT](#guid) | 低      |
+| [Char 值現在於 SQLite 上的儲存形式為 TEXT](#char) | 低      |
+| [移轉識別碼現在會使用不因文化特性而異的行事曆來產生](#migid) | 低      |
+| [已從 IDbContextOptionsExtension 移除延伸模組資訊/中繼資料](#xinfo) | 低      |
+| [已為 LogQueryPossibleExceptionWithAggregateOperator 重新命名](#lqpe) | 低      |
+| [讓 API 的外部索引鍵限制式名稱更清楚](#clarify) | 低      |
+| [IRelationalDatabaseCreator.HasTables/HasTablesAsync 已設為公用](#irdc2) | 低      |
+| [Microsoft.EntityFrameworkCore.Design 現在是 DevelopmentDependency 套件](#dip) | 低      |
+| [SQLitePCL.raw 已更新為 2.0.0 版](#SQLitePCL) | 低      |
+| [NetTopologySuite 已更新為 2.0.0 版](#NetTopologySuite) | 低      |
+| [必須設定多個不明確的自我參考關聯性](#mersa) | 低      |
+
+### <a name="linq-queries-are-no-longer-evaluated-on-the-client"></a>不會再於用戶端評估 LINQ 查詢
 
 [追蹤問題 #14935](https://github.com/aspnet/EntityFrameworkCore/issues/14935)
 [另請參閱問題 #12795](https://github.com/aspnet/EntityFrameworkCore/issues/12795)
@@ -51,7 +103,8 @@ ms.locfileid: "68286486"
 
 如果無法完整轉譯查詢，請以可轉譯的格式來重寫查詢，或是使用 `AsEnumerable()`、`ToList()` 或類似函數來明確將資料帶回用戶端，以便接著使用 LINQ-to-Objects 加以處理。
 
-## <a name="entity-framework-core-is-no-longer-part-of-the-aspnet-core-shared-framework"></a>Entity Framework Core 不再屬於 ASP.NET Core 共用架構
+<a name="no-longer"></a>
+### <a name="entity-framework-core-is-no-longer-part-of-the-aspnet-core-shared-framework"></a>Entity Framework Core 不再屬於 ASP.NET Core 共用架構
 
 [追蹤問題 Announcements#325](https://github.com/aspnet/Announcements/issues/325)
 
@@ -76,7 +129,8 @@ ms.locfileid: "68286486"
 
 若要在 ASP.NET Core 3.0 應用程式或其他支援的應用程式中使用 EF Core，請明確將套件參考加入應用程式會使用的 EF Core 資料庫提供者。
 
-## <a name="the-ef-core-command-line-tool-dotnet-ef-is-no-longer-part-of-the-net-core-sdk"></a>EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分
+<a name="dotnet-ef"></a>
+### <a name="the-ef-core-command-line-tool-dotnet-ef-is-no-longer-part-of-the-net-core-sdk"></a>EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分
 
 [追蹤問題 #14016](https://github.com/aspnet/EntityFrameworkCore/issues/14016)
 
@@ -104,7 +158,8 @@ ms.locfileid: "68286486"
 
 您也可以在還原專案相依性時取得它作為本機工具 (該專案是使用[工具資訊清單檔](https://github.com/dotnet/cli/issues/10288)將它宣告為工具相依性)。
 
-## <a name="fromsql-executesql-and-executesqlasync-have-been-renamed"></a>FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名
+<a name="fromsql"></a>
+### <a name="fromsql-executesql-and-executesqlasync-have-been-renamed"></a>FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名
 
 [追蹤問題 #10996](https://github.com/aspnet/EntityFrameworkCore/issues/10996)
 
@@ -144,7 +199,9 @@ context.Products.FromSqlInterpolated(
 
 切換至使用新的方法名稱。
 
-## <a name="fromsql-methods-can-only-be-specified-on-query-roots"></a>FromSql 方法只能在查詢根目錄上指定
+<a name="fromsql"></a>
+
+### <a name="fromsql-methods-can-only-be-specified-on-query-roots"></a>FromSql 方法只能在查詢根目錄上指定
 
 [追蹤問題 #15704](https://github.com/aspnet/EntityFrameworkCore/issues/15704)
 
@@ -166,7 +223,9 @@ context.Products.FromSqlInterpolated(
 
 `FromSql` 引動過程應該直接移至它們適用的 `DbSet`。
 
-## <a name="query-execution-is-logged-at-debug-level-reverted"></a>~~查詢執行會在偵錯層級記錄~~已還原
+<a name="qe"></a>
+
+### <a name="query-execution-is-logged-at-debug-level-reverted"></a>~~查詢執行會在偵錯層級記錄~~已還原
 
 [追蹤問題 #14523](https://github.com/aspnet/EntityFrameworkCore/issues/14523)
 
@@ -180,7 +239,9 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         .ConfigureWarnings(c => c.Log((RelationalEventId.CommandExecuting, LogLevel.Debug)));
 ```
 
-## <a name="temporary-key-values-are-no-longer-set-onto-entity-instances"></a>實體執行個體上不會再設定暫存索引鍵值
+<a name="tkv"></a>
+
+### <a name="temporary-key-values-are-no-longer-set-onto-entity-instances"></a>實體執行個體上不會再設定暫存索引鍵值
 
 [追蹤問題 #12378](https://github.com/aspnet/EntityFrameworkCore/issues/12378)
 
@@ -208,7 +269,9 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 * 從實體的追蹤資訊取得實際暫存索引鍵值。
 例如，`context.Entry(blog).Property(e => e.Id).CurrentValue` 會傳回暫存值，即使尚未設定 `blog.Id` 本身也一樣。
 
-## <a name="detectchanges-honors-store-generated-key-values"></a>DetectChanges 接受存放區產生的索引鍵值
+<a name="dc"></a>
+
+### <a name="detectchanges-honors-store-generated-key-values"></a>DetectChanges 接受存放區產生的索引鍵值
 
 [追蹤問題 #14616](https://github.com/aspnet/EntityFrameworkCore/issues/14616)
 
@@ -247,8 +310,8 @@ modelBuilder
 [DatabaseGenerated(DatabaseGeneratedOption.None)]
 public string Id { get; set; }
 ```
-
-## <a name="cascade-deletions-now-happen-immediately-by-default"></a>現在預設會立即發生串聯刪除
+<a name="cascade"></a>
+### <a name="cascade-deletions-now-happen-immediately-by-default"></a>現在預設會立即發生串聯刪除
 
 [追蹤問題 #10114](https://github.com/aspnet/EntityFrameworkCore/issues/10114)
 
@@ -276,8 +339,8 @@ public string Id { get; set; }
 context.ChangeTracker.CascadeDeleteTiming = CascadeTiming.OnSaveChanges;
 context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 ```
-
-## <a name="deletebehaviorrestrict-has-cleaner-semantics"></a>DeleteBehavior.Restrict 具有更簡潔的語意
+<a name="deletebehavior"></a>
+### <a name="deletebehaviorrestrict-has-cleaner-semantics"></a>DeleteBehavior.Restrict 具有更簡潔的語意
 
 [追蹤問題 #12661](https://github.com/aspnet/EntityFrameworkCore/issues/12661)
 
@@ -299,7 +362,8 @@ context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
 使用 `DeleteBehavior.ClientNoAction` 可以還原舊行為。
 
-## <a name="query-types-are-consolidated-with-entity-types"></a>查詢類型會與實體類型合併
+<a name="qt"></a>
+### <a name="query-types-are-consolidated-with-entity-types"></a>查詢類型會與實體類型合併
 
 [追蹤問題 #14194](https://github.com/aspnet/EntityFrameworkCore/issues/14194)
 
@@ -329,7 +393,8 @@ API 的下列組件現已淘汰：
 * **`DbQuery<>`** - 應改用 `DbSet<>`。
 * **`DbContext.Query<>()`** - 應改用 `DbContext.Set<>()`。
 
-## <a name="configuration-api-for-owned-type-relationships-has-changed"></a>自有類型關聯性的設定 API 已變更
+<a name="config"></a>
+### <a name="configuration-api-for-owned-type-relationships-has-changed"></a>自有類型關聯性的設定 API 已變更
 
 [追蹤問題 #12444](https://github.com/aspnet/EntityFrameworkCore/issues/12444)
 [追蹤問題 #9148](https://github.com/aspnet/EntityFrameworkCore/issues/9148)
@@ -387,7 +452,9 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
 
 將自有類型關聯性的設定變更為使用新的 API 介面，如上述範例所示。
 
-## <a name="dependent-entities-sharing-the-table-with-the-principal-are-now-optional"></a>現在可選用以主體來共用資料表的相依實體
+<a name="de"></a>
+
+### <a name="dependent-entities-sharing-the-table-with-the-principal-are-now-optional"></a>現在可選用以主體來共用資料表的相依實體
 
 [追蹤問題 #9005](https://github.com/aspnet/EntityFrameworkCore/issues/9005)
 
@@ -422,7 +489,9 @@ public class OrderDetails
 
 如果您的模型具有與所有選擇性資料行共用相依資料表，但指向該資料表的導覽不預期為 `null`，則應修改應用程式，以處理當導覽為 `null` 時的情況。 如果這不可行，則應將必要屬性新增至實體類型，或至少應有一個屬性指派其非 `null` 的值。
 
-## <a name="all-entities-sharing-a-table-with-a-concurrency-token-column-have-to-map-it-to-a-property"></a>共用具有並行語彙基元資料行的所有實體，都必須將其對應至屬性
+<a name="aes"></a>
+
+### <a name="all-entities-sharing-a-table-with-a-concurrency-token-column-have-to-map-it-to-a-property"></a>共用具有並行語彙基元資料行的所有實體，都必須將其對應至屬性
 
 [追蹤問題 #14154](https://github.com/aspnet/EntityFrameworkCore/issues/14154)
 
@@ -474,7 +543,9 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-## <a name="inherited-properties-from-unmapped-types-are-now-mapped-to-a-single-column-for-all-derived-types"></a>未對應類型的繼承屬性，現在會對應至所有衍生類型的單一資料行
+<a name="ip"></a>
+
+### <a name="inherited-properties-from-unmapped-types-are-now-mapped-to-a-single-column-for-all-derived-types"></a>未對應類型的繼承屬性，現在會對應至所有衍生類型的單一資料行
 
 [追蹤問題 #13998](https://github.com/aspnet/EntityFrameworkCore/issues/13998)
 
@@ -537,7 +608,9 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-## <a name="the-foreign-key-property-convention-no-longer-matches-same-name-as-the-principal-property"></a>外部索引鍵屬性慣例不會再比對與主體屬性相同的名稱
+<a name="fkp"></a>
+
+### <a name="the-foreign-key-property-convention-no-longer-matches-same-name-as-the-principal-property"></a>外部索引鍵屬性慣例不會再比對與主體屬性相同的名稱
 
 [追蹤問題 #13274](https://github.com/aspnet/EntityFrameworkCore/issues/13274)
 
@@ -605,7 +678,9 @@ public class Order
 
 如果屬性預定會作為外部索引鍵，並因此成為主索引鍵的一部分，請明確進行這類設定。
 
-## <a name="database-connection-is-now-closed-if-not-used-anymore-before-the-transactionscope-has-been-completed"></a>如果在 TransactionScope 完成之前未再使用，則資料庫連線現在已關閉
+<a name="dbc"></a>
+
+### <a name="database-connection-is-now-closed-if-not-used-anymore-before-the-transactionscope-has-been-completed"></a>如果在 TransactionScope 完成之前未再使用，則資料庫連線現在已關閉
 
 [追蹤問題 #14218](https://github.com/aspnet/EntityFrameworkCore/issues/14218)
 
@@ -657,7 +732,9 @@ using (new TransactionScope())
 }
 ```
 
-## <a name="each-property-uses-independent-in-memory-integer-key-generation"></a>每個屬性會使用獨立的記憶體內部整數索引鍵產生
+<a name="each"></a>
+
+### <a name="each-property-uses-independent-in-memory-integer-key-generation"></a>每個屬性會使用獨立的記憶體內部整數索引鍵產生
 
 [追蹤問題 #6872](https://github.com/aspnet/EntityFrameworkCore/issues/6872)
 
@@ -681,7 +758,7 @@ using (new TransactionScope())
 這可能會中斷需要設定特定記憶體內部索引鍵值的應用程式。
 請考慮改為不依賴特定索引鍵值，或更新以符合新行為。
 
-## <a name="backing-fields-are-used-by-default"></a>預設會使用支援欄位
+### <a name="backing-fields-are-used-by-default"></a>預設會使用支援欄位
 
 [追蹤問題 #12430](https://github.com/aspnet/EntityFrameworkCore/issues/12430)
 
@@ -710,7 +787,7 @@ using (new TransactionScope())
 modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction);
 ```
 
-## <a name="throw-if-multiple-compatible-backing-fields-are-found"></a>找到多個相容的支援欄位時擲回
+### <a name="throw-if-multiple-compatible-backing-fields-are-found"></a>找到多個相容的支援欄位時擲回
 
 [追蹤問題 #12523](https://github.com/aspnet/EntityFrameworkCore/issues/12523)
 
@@ -741,7 +818,7 @@ modelBuilder
     .HasField("_id");
 ```
 
-## <a name="field-only-property-names-should-match-the-field-name"></a>僅限欄位的屬性名稱應與欄位名稱相符
+### <a name="field-only-property-names-should-match-the-field-name"></a>僅限欄位的屬性名稱應與欄位名稱相符
 
 此變更已於 EF Core 3.0-preview 4 推出。
 
@@ -787,7 +864,9 @@ modelBuilder
     .HasField("_id");
 ```
 
-## <a name="adddbcontextadddbcontextpool-no-longer-call-addlogging-and-addmemorycache"></a>AddDbContext/AddDbContextPool 再也不會呼叫 AddLogging 與 AddMemoryCache
+<a name="adddbc"></a>
+
+### <a name="adddbcontextadddbcontextpool-no-longer-call-addlogging-and-addmemorycache"></a>AddDbContext/AddDbContextPool 再也不會呼叫 AddLogging 與 AddMemoryCache
 
 [追蹤問題 #14756](https://github.com/aspnet/EntityFrameworkCore/issues/14756)
 
@@ -809,7 +888,9 @@ EF Core 3.0 不會要求這些服務必須存在於應用程式的 DI 容器中�
 
 若您的應用程式需要這些服務，請使用  [AddLogging](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.loggingservicecollectionextensions.addlogging) 或 [AddMemoryCache](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.memorycacheservicecollectionextensions.addmemorycache) 明確地向 DI 容器註冊它們。
 
-## <a name="dbcontextentry-now-performs-a-local-detectchanges"></a>DbContext.Entry 現在會執行本機 DetectChanges
+<a name="dbe"></a>
+
+### <a name="dbcontextentry-now-performs-a-local-detectchanges"></a>DbContext.Entry 現在會執行本機 DetectChanges
 
 [追蹤問題 #13552](https://github.com/aspnet/EntityFrameworkCore/issues/13552)
 
@@ -837,7 +918,7 @@ EF Core 3.0 不會要求這些服務必須存在於應用程式的 DI 容器中�
 
 在呼叫 `Entry` 之前明確呼叫 `ChgangeTracker.DetectChanges()` 可確保 3.0 以前的行為。
 
-## <a name="string-and-byte-array-keys-are-not-client-generated-by-default"></a>字串和位元組陣列索引鍵預設不是由用戶端產生
+### <a name="string-and-byte-array-keys-are-not-client-generated-by-default"></a>字串和位元組陣列索引鍵預設不是由用戶端產生
 
 [追蹤問題 #14617](https://github.com/aspnet/EntityFrameworkCore/issues/14617)
 
@@ -875,7 +956,9 @@ modelBuilder
 public string Id { get; set; }
 ```
 
-## <a name="iloggerfactory-is-now-a-scoped-service"></a>ILoggerFactory 現在是限定範圍的服務
+<a name="ilf"></a>
+
+### <a name="iloggerfactory-is-now-a-scoped-service"></a>ILoggerFactory 現在是限定範圍的服務
 
 [追蹤問題 #14698](https://github.com/aspnet/EntityFrameworkCore/issues/14698)
 
@@ -901,7 +984,7 @@ public string Id { get; set; }
 
 如果您遇到上述情況，請在 [EF Core GitHub 問題追蹤器](https://github.com/aspnet/EntityFrameworkCore/issues)上提出問題，讓我們知道您使用 `ILoggerFactory` 的方式，以便進一步了解未來如何才不會再次中斷。
 
-## <a name="lazy-loading-proxies-no-longer-assume-navigation-properties-are-fully-loaded"></a>消極式載入 Proxy 停止假設導覽屬性已完全載入
+### <a name="lazy-loading-proxies-no-longer-assume-navigation-properties-are-fully-loaded"></a>消極式載入 Proxy 停止假設導覽屬性已完全載入
 
 [追蹤問題 #12780](https://github.com/aspnet/EntityFrameworkCore/issues/12780)
 
@@ -928,7 +1011,7 @@ Proxy 會改為假設如有非 Null 值，會載入參考導覽；如果不是�
 
 將應用程式程式碼更新為不要嘗試對已處置的內容進行消極式載入，或將此設定為不執行任何作業，如例外狀況訊息中所述。
 
-## <a name="excessive-creation-of-internal-service-providers-is-now-an-error-by-default"></a>過度建立內部服務提供者現在預設是錯誤
+### <a name="excessive-creation-of-internal-service-providers-is-now-an-error-by-default"></a>過度建立內部服務提供者現在預設是錯誤
 
 [追蹤問題 #10236](https://github.com/aspnet/EntityFrameworkCore/issues/10236)
 
@@ -960,7 +1043,9 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 }
 ```
 
-## <a name="new-behavior-for-hasonehasmany-called-with-a-single-string"></a>使用單一字串呼叫之 HasOne/HasMany 的新行為
+<a name="nbh"></a>
+
+### <a name="new-behavior-for-hasonehasmany-called-with-a-single-string"></a>使用單一字串呼叫之 HasOne/HasMany 的新行為
 
 [追蹤問題 #9171](https://github.com/aspnet/EntityFrameworkCore/issues/9171)
 
@@ -997,7 +1082,9 @@ modelBuilder.Entity<Samurai>().HasOne("Entrance").WithOne();
 modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 ```
 
-## <a name="the-return-type-for-several-async-methods-has-been-changed-from-task-to-valuetask"></a>數個非同步方法的傳回類型已從 Task 變更為 ValueTask
+<a name="rtnt"></a>
+
+### <a name="the-return-type-for-several-async-methods-has-been-changed-from-task-to-valuetask"></a>數個非同步方法的傳回類型已從 Task 變更為 ValueTask
 
 [追蹤問題 #15184](https://github.com/aspnet/EntityFrameworkCore/issues/15184)
 
@@ -1027,7 +1114,9 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 更複雜的使用方式 (例如將傳回的 `Task` 傳遞給 `Task.WhenAny()`) 通常需要藉由呼叫 `AsTask()` 將傳回的 `ValueTask<T>` 轉換為 `Task<T>`。
 請注意，這會抵消這項變更所帶來的配置減少。
 
-## <a name="the-relationaltypemapping-annotation-is-now-just-typemapping"></a>Relational:TypeMapping 註解現僅為 TypeMapping
+<a name="rtt"></a>
+
+### <a name="the-relationaltypemapping-annotation-is-now-just-typemapping"></a>Relational:TypeMapping 註解現僅為 TypeMapping
 
 [追蹤問題 #9913](https://github.com/aspnet/EntityFrameworkCore/issues/9913)
 
@@ -1050,7 +1139,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 這只會中斷直接將類型對應當做註解存取的應用程式，但這並不常見。
 最適當的修正動作是使用 API 介面存取類型對應，而不是直接使用註解。
 
-## <a name="totable-on-a-derived-type-throws-an-exception"></a>衍生類型上的 ToTable 會擲回例外狀況 
+### <a name="totable-on-a-derived-type-throws-an-exception"></a>衍生類型上的 ToTable 會擲回例外狀況 
 
 [追蹤問題 #11811](https://github.com/aspnet/EntityFrameworkCore/issues/11811)
 
@@ -1073,7 +1162,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 避免嘗試將衍生類型對應至其他資料表。
 
-## <a name="forsqlserverhasindex-replaced-with-hasindex"></a>ForSqlServerHasIndex 已取代為 HasIndex 
+### <a name="forsqlserverhasindex-replaced-with-hasindex"></a>ForSqlServerHasIndex 已取代為 HasIndex 
 
 [追蹤問題 #12366](https://github.com/aspnet/EntityFrameworkCore/issues/12366)
 
@@ -1096,7 +1185,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 使用新的 API，如上所示。
 
-## <a name="metadata-api-changes"></a>中繼資料 API 變更
+### <a name="metadata-api-changes"></a>中繼資料 API 變更
 
 [追蹤問題 #214](https://github.com/aspnet/EntityFrameworkCore/issues/214)
 
@@ -1120,7 +1209,9 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 使用新的擴充方法。
 
-## <a name="provider-specific-metadata-api-changes"></a>提供者特定的中繼資料 API 變更
+<a name="provider"></a>
+
+### <a name="provider-specific-metadata-api-changes"></a>提供者特定的中繼資料 API 變更
 
 [追蹤問題 #214](https://github.com/aspnet/EntityFrameworkCore/issues/214)
 
@@ -1142,7 +1233,9 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 使用新的擴充方法。
 
-## <a name="ef-core-no-longer-sends-pragma-for-sqlite-fk-enforcement"></a>EF Core 不會再傳送 SQLite FK 強制的 pragma
+<a name="pragma"></a>
+
+### <a name="ef-core-no-longer-sends-pragma-for-sqlite-fk-enforcement"></a>EF Core 不會再傳送 SQLite FK 強制的 pragma
 
 [追蹤問題 #12151](https://github.com/aspnet/EntityFrameworkCore/issues/12151)
 
@@ -1165,7 +1258,9 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 根據預設，會在預設用於 EF Core 的 SQLitePCLRaw.bundle_e_sqlite3 中啟用外部索引鍵。
 在其他情況下，則可以藉由在您的連接字串中指定 `Foreign Keys=True` 來啟用外部索引鍵。
 
-## <a name="microsoftentityframeworkcoresqlite-now-depends-on-sqlitepclrawbundleesqlite3"></a>Microsoft.EntityFrameworkCore.Sqlite 現在相依於 SQLitePCLRaw.bundle_e_sqlite3
+<a name="sqlite3"></a>
+
+### <a name="microsoftentityframeworkcoresqlite-now-depends-on-sqlitepclrawbundleesqlite3"></a>Microsoft.EntityFrameworkCore.Sqlite 現在相依於 SQLitePCLRaw.bundle_e_sqlite3
 
 **舊行為**
 
@@ -1183,7 +1278,9 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 若要在 iOS 上使用原生 SQLite 版本，請設定 `Microsoft.Data.Sqlite` 使用不同的 `SQLitePCLRaw` 套件組合。
 
-## <a name="guid-values-are-now-stored-as-text-on-sqlite"></a>GUID 值現在於 SQLite 上的儲存形式為 TEXT
+<a name="guid"></a>
+
+### <a name="guid-values-are-now-stored-as-text-on-sqlite"></a>GUID 值現在於 SQLite 上的儲存形式為 TEXT
 
 [追蹤問題 #15078](https://github.com/aspnet/EntityFrameworkCore/issues/15078)
 
@@ -1233,7 +1330,9 @@ modelBuilder
 
 Microsoft.Data.Sqlite 依然可以同時從 BLOB 及 TEXT 資料行讀取 GUID 值；但因為參數和常數的預設格式已變更，所以您可能需要對多數涉及 GUID 的案例採取動作。
 
-## <a name="char-values-are-now-stored-as-text-on-sqlite"></a>Char 值現在於 SQLite 上會儲存為文字
+<a name="char"></a>
+
+### <a name="char-values-are-now-stored-as-text-on-sqlite"></a>Char 值現在於 SQLite 上會儲存為文字
 
 [追蹤問題 #15020](https://github.com/aspnet/EntityFrameworkCore/issues/15020)
 
@@ -1274,7 +1373,9 @@ modelBuilder
 
 Microsoft.Data.Sqlite 也保留了讀取 INTEGER 和 TEXT 欄位字元值的功能，所以部分案例可能不需要任何動作。
 
-## <a name="migration-ids-are-now-generated-using-the-invariant-cultures-calendar"></a>移轉識別碼現在會使用不因文化特性而異的行事曆產生
+<a name="migid"></a>
+
+### <a name="migration-ids-are-now-generated-using-the-invariant-cultures-calendar"></a>移轉識別碼現在會使用不因文化特性而異的行事曆產生
 
 [追蹤問題 #12978](https://github.com/aspnet/EntityFrameworkCore/issues/12978)
 
@@ -1313,7 +1414,9 @@ UPDATE __EFMigrationsHistory
 SET MigrationId = CONCAT(LEFT(MigrationId, 4)  - 543, SUBSTRING(MigrationId, 4, 150))
 ```
 
-## <a name="userownumberforpaging-has-been-removed"></a>已移除 UseRowNumberForPaging
+<a name="urn"></a>
+
+### <a name="userownumberforpaging-has-been-removed"></a>已移除 UseRowNumberForPaging
 
 [追蹤問題 #16400](https://github.com/aspnet/EntityFrameworkCore/issues/16400)
 
@@ -1335,7 +1438,9 @@ SET MigrationId = CONCAT(LEFT(MigrationId, 4)  - 543, SUBSTRING(MigrationId, 4, 
 
 我們建議更新為新版 SQL Server，或使用較高的相容性層級，以支援產生的 SQL。 儘管如此，若您無法這樣做，請[在追蹤問題下註解](https://github.com/aspnet/EntityFrameworkCore/issues/16400)並提供詳細資料。 我們可能會根據意見反應重新審視此決定。
 
-## <a name="extension-infometadata-has-been-removed-from-idbcontextoptionsextension"></a>已從 IDbContextOptionsExtension 移除延伸模組資訊/中繼資料
+<a name="xinfo"></a>
+
+### <a name="extension-infometadata-has-been-removed-from-idbcontextoptionsextension"></a>已從 IDbContextOptionsExtension 移除延伸模組資訊/中繼資料
 
 [追蹤問題 #16119](https://github.com/aspnet/EntityFrameworkCore/issues/16119)
 
@@ -1359,7 +1464,9 @@ SET MigrationId = CONCAT(LEFT(MigrationId, 4)  - 543, SUBSTRING(MigrationId, 4, 
 更新延伸模組以遵循新模式。
 您可以在 EF Core 原始程式碼中各種不同延伸模組之 `IDbContextOptionsExtension` 的許多實作中找到範例。
 
-## <a name="logquerypossibleexceptionwithaggregateoperator-has-been-renamed"></a>已重新命名 LogQueryPossibleExceptionWithAggregateOperator
+<a name="lqpe"></a>
+
+### <a name="logquerypossibleexceptionwithaggregateoperator-has-been-renamed"></a>已重新命名 LogQueryPossibleExceptionWithAggregateOperator
 
 [追蹤問題 #10985](https://github.com/aspnet/EntityFrameworkCore/issues/10985)
 
@@ -1377,7 +1484,9 @@ SET MigrationId = CONCAT(LEFT(MigrationId, 4)  - 543, SUBSTRING(MigrationId, 4, 
 
 使用新的名稱。 (注意，事件識別碼未變更。)
 
-## <a name="clarify-api-for-foreign-key-constraint-names"></a>讓 API 的外部索引鍵限制式名稱更清楚
+<a name="clarify"></a>
+
+### <a name="clarify-api-for-foreign-key-constraint-names"></a>讓 API 的外部索引鍵限制式名稱更清楚
 
 [追蹤問題 #10730](https://github.com/aspnet/EntityFrameworkCore/issues/10730)
 
@@ -1407,7 +1516,9 @@ var constraintName = myForeignKey.ConstraintName;
 
 使用新的名稱。
 
-## <a name="irelationaldatabasecreatorhastableshastablesasync-have-been-made-public"></a>IRelationalDatabaseCreator.HasTables/HasTablesAsync 已設定為公用
+<a name="irdc2"></a>
+
+### <a name="irelationaldatabasecreatorhastableshastablesasync-have-been-made-public"></a>IRelationalDatabaseCreator.HasTables/HasTablesAsync 已設定為公用
 
 [追蹤問題 #15997](https://github.com/aspnet/EntityFrameworkCore/issues/15997)
 
@@ -1429,7 +1540,9 @@ var constraintName = myForeignKey.ConstraintName;
 
 變更任何覆寫的可存取性。
 
-## <a name="microsoftentityframeworkcoredesign-is-now-a-developmentdependency-package"></a>Microsoft.EntityFrameworkCore.Design 現在是 DevelopmentDependency 套件
+<a name="dip"></a>
+
+### <a name="microsoftentityframeworkcoredesign-is-now-a-developmentdependency-package"></a>Microsoft.EntityFrameworkCore.Design 現在是 DevelopmentDependency 套件
 
 [追蹤問題 #11506](https://github.com/aspnet/EntityFrameworkCore/issues/11506)
 
@@ -1459,7 +1572,9 @@ var constraintName = myForeignKey.ConstraintName;
 </PackageReference>
 ```
 
-## <a name="sqlitepclraw-updated-to-version-200"></a>SQLitePCL.raw 已更新為 2.0.0 版
+<a name="SQLitePCL"></a>
+
+### <a name="sqlitepclraw-updated-to-version-200"></a>SQLitePCL.raw 已更新為 2.0.0 版
 
 [追蹤問題 #14824](https://github.com/aspnet/EntityFrameworkCore/issues/14824)
 
@@ -1481,8 +1596,9 @@ Microsoft.EntityFrameworkCore.Sqlite 先前相依於 SQLitePCL.raw 的 1.1.12 �
 
 SQLitePCL.raw version 2.0.0 包括一些中斷性變更。 如需詳細資訊，請參閱[版本資訊](https://github.com/ericsink/SQLitePCL.raw/blob/v2/v2.md) \(英文\)。
 
+<a name="NetTopologySuite"></a>
 
-## <a name="nettopologysuite-updated-to-version-200"></a>NetTopologySuite 已更新為 2.0.0 版
+### <a name="nettopologysuite-updated-to-version-200"></a>NetTopologySuite 已更新為 2.0.0 版
 
 [追蹤問題 #14825](https://github.com/aspnet/EntityFrameworkCore/issues/14825)
 
@@ -1503,3 +1619,50 @@ NetTopologySuite 2.0.0 版旨在解決 EF Core 使用者遇到的數個可用性
 **風險降低**
 
 NetTopologySuite 2.0.0 版包括一些中斷性變更。 如需詳細資訊，請參閱[版本資訊](https://www.nuget.org/packages/NetTopologySuite/2.0.0-pre001) \(英文\)。
+
+<a name="mersa"></a>
+
+### <a name="multiple-ambiguous-self-referencing-relationships-must-be-configured"></a>必須設定多個不明確的自我參考關聯性 
+
+[追蹤問題 #13573](https://github.com/aspnet/EntityFrameworkCore/issues/13573)
+
+此變更已於 EF Core 3.0-preview 6 推出。
+
+**舊行為**
+
+具有多個自我參考單向導覽屬性和相符 FK 的實體類型，不當設定為單一關聯性。 例如：
+
+```C#
+public class User 
+{
+        public Guid Id { get; set; }
+        public User CreatedBy { get; set; }
+        public User UpdatedBy { get; set; }
+        public Guid CreatedById { get; set; }
+        public Guid? UpdatedById { get; set; }
+}
+```
+
+**新行為**
+
+這種情況現在會在模型建立過程中偵測到，而且會擲回例外狀況，指出模型不明確。
+
+**原因**
+
+產生的模型不明確，在這種情況下通常會有錯誤。
+
+**風險降低**
+
+使用關聯性的完整設定。 例如：
+
+```C#
+modelBuilder
+     .Entity<User>()
+     .HasOne(e => e.CreatedBy)
+     .WithMany();
+ 
+ modelBuilder
+     .Entity<User>()
+     .HasOne(e => e.UpdatedBy)
+     .WithMany();
+```
