@@ -124,7 +124,7 @@ WHERE @@ROWCOUNT > 0 AND [Id] = scope_identity()
 
 ## <a name="logging-to-different-places"></a>記錄到不同的位置  
 
-如上所示, 登入主控台非常簡單。 藉由使用不同種類的「類型」, 也很容易就能記錄到記憶體[](https://msdn.microsoft.com/library/system.io.textwriter.aspx)、檔案等等。  
+如上所示, 登入主控台非常簡單。 藉由使用不同種類的「類型」, 也很容易就能記錄到記憶體[檔案等等](https://msdn.microsoft.com/library/system.io.textwriter.aspx)、。  
 
 如果您很熟悉 LINQ to SQL, 您可能會注意到 LINQ to SQL 中的 Log 屬性設為實際的「無效」物件 (例如, Console)。在 EF 中, Log 屬性會設定為可接受字串的方法 (例如、Console. Write 或 Console。 這種情況的原因是要接受可做為字串接收的任何委派, 以將 EF 與「解除耦合」分離。 例如, 假設您已經有一些記錄架構, 而且它會定義一種記錄方法, 如下所示:  
 
