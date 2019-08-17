@@ -4,43 +4,43 @@ author: bricelam
 ms.author: bricelam
 ms.date: 07/11/2019
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: 05c5f89fc79556e72a7e629c147aa817fe7d1a6b
-ms.sourcegitcommit: e90d6cfa3e96f10b8b5275430759a66a0c714ed1
+ms.openlocfilehash: 0278353640ea242df9e6ee5278c9dda78bfd341b
+ms.sourcegitcommit: 7b7f774a5966b20d2aed5435a672a1edbe73b6fb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/17/2019
-ms.locfileid: "68286458"
+ms.lasthandoff: 08/17/2019
+ms.locfileid: "69565276"
 ---
-# <a name="entity-framework-core-tools-reference---net-cli"></a>Entity Framework Core 工具參考.NET CLI
+# <a name="entity-framework-core-tools-reference---net-cli"></a>Entity Framework Core 工具參考-.NET CLI
 
-Entity Framework Core 的命令列介面 (CLI) 工具會執行設計階段開發工作。 例如，建立[移轉](/aspnet/core/data/ef-mvc/migrations?view=aspnetcore-2.0#introduction-to-migrations)、 套用移轉，並產生程式碼在現有的資料庫為基礎的模型。 命令是跨平台的延伸模組[dotnet](/dotnet/core/tools)命令，也就是組件的[.NET Core SDK](https://www.microsoft.com/net/core)。 這些工具會使用.NET Core 專案。
+適用于 Entity Framework Core 執行設計階段開發工作的命令列介面 (CLI) 工具。 例如, 他們會針對以現有資料庫為基礎的模型建立[遷移](/aspnet/core/data/ef-mvc/migrations?view=aspnetcore-2.0#introduction-to-migrations)、套用遷移, 以及產生程式碼。 這些命令是跨平臺[dotnet](/dotnet/core/tools)命令的延伸模組, 它是[.NET Core SDK](https://www.microsoft.com/net/core)的一部分。 這些工具會使用 .NET Core 專案。
 
-如果您使用 Visual Studio，我們建議您[Package Manager Console 工具](powershell.md)改為：
-* 它們會自動使用目前的專案中選取**Package Manager Console**而不需要您手動切換目錄。
-* 它們會自動開啟命令完成之後，命令所產生的檔案。
+如果您使用 Visual Studio, 建議改用[套件管理員主控台工具](powershell.md):
+* 它們會自動使用在 [**套件管理員主控台**] 中選取的目前專案, 而不需要您手動切換目錄。
+* 在命令完成之後, 它們會自動開啟命令所產生的檔案。
 
 ## <a name="installing-the-tools"></a>安裝工具
 
-安裝程序需視專案類型和版本而定：
+安裝程式視專案類型和版本而定:
 
-* EF Core 3.x
-* ASP.NET Core 2.1 和更新版本
-* EF Core 2.x
-* EF Core 1.x
+* EF Core 3。x
+* ASP.NET Core 2.1 版和更新版本
+* EF Core 2。x
+* EF Core 1。x
 
-### <a name="ef-core-3x"></a>EF Core 3.x
+### <a name="ef-core-3x"></a>EF Core 3。x
 
-* `dotnet ef` 必須安裝做為全域或本機的工具。 大部分的開發人員將會安裝`dotnet ef`做為全域的工具，使用下列命令：
+* `dotnet ef`必須安裝為全域或本機工具。 大部分的開發人員`dotnet ef`都會使用下列命令來安裝為通用工具:
 
   ``` console
-    $ dotnet tool install --global dotnet-ef --version 3.0.0-*
+  dotnet tool install --global dotnet-ef --version 3.0.0-*
   ```
 
-  您也可以使用`dotnet ef`為本機的工具。 若要使用它做為本機的工具，還原專案相依性，將其宣告為使用工具相依性[工具資訊清單檔](https://github.com/dotnet/cli/issues/10288)。
+  您也可以使用`dotnet ef`做為本機工具。 若要使用它做為本機工具, 請使用[工具資訊清單](https://github.com/dotnet/cli/issues/10288)檔, 將宣告為工具相依性的專案的相依性還原。
 
-* 安裝[.NET Core SDK 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0))。 SDK 有即使您擁有最新版本的 Visual Studio 安裝。
+* 安裝[.NET Core SDK 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0))。 即使您有最新版本的 Visual Studio, 也必須安裝 SDK。
 
-* 安裝最新`Microsoft.EntityFrameworkCore.Design`封裝。
+* 安裝最新`Microsoft.EntityFrameworkCore.Design`的套件。
 
   ``` Console
   dotnet add package Microsoft.EntityFrameworkCore.Design
@@ -48,37 +48,37 @@ Entity Framework Core 的命令列介面 (CLI) 工具會執行設計階段開發
 
 ### <a name="aspnet-core-21"></a>ASP.NET Core 2.1 +
 
-* 安裝目前[.NET Core SDK](https://www.microsoft.com/net/download/core)。 即便您有最新版本的 Visual Studio 2017 也必須安裝該 SDK。
+* 安裝目前的[.NET Core SDK](https://www.microsoft.com/net/download/core)。 即便您有最新版本的 Visual Studio 2017 也必須安裝該 SDK。
 
-  這是因為，只需要針對 ASP.NET Core 2.1 +`Microsoft.EntityFrameworkCore.Design`套件包含在[Microsoft.AspNetCore.App 中繼套件](/aspnet/core/fundamentals/metapackage-app)。
+  這是 ASP.NET Core 2.1 + 所需的所有功能, 因為`Microsoft.EntityFrameworkCore.Design`此套件包含在[AspNetCore 應用程式中繼套件](/aspnet/core/fundamentals/metapackage-app)中。
 
-### <a name="ef-core-2x-not-aspnet-core"></a>EF Core 2.x (非 ASP.NET Core)
+### <a name="ef-core-2x-not-aspnet-core"></a>EF Core 2.x (不 ASP.NET Core)
 
-`dotnet ef`命令會包含在.NET Core SDK，但若要啟用命令，您必須安裝`Microsoft.EntityFrameworkCore.Design`封裝。
+這些`dotnet ef`命令包含在 .NET Core SDK 中, 但若要啟用您必須`Microsoft.EntityFrameworkCore.Design`安裝套件的命令。
 
-* 安裝目前[.NET Core SDK](https://www.microsoft.com/net/download/core)。 SDK 有即使您擁有最新版本的 Visual Studio 安裝。
+* 安裝目前的[.NET Core SDK](https://www.microsoft.com/net/download/core)。 即使您有最新版本的 Visual Studio, 也必須安裝 SDK。
 
-* 安裝最新的穩定`Microsoft.EntityFrameworkCore.Design`封裝。
+* 安裝最新的`Microsoft.EntityFrameworkCore.Design`穩定套件。
 
   ``` Console
   dotnet add package Microsoft.EntityFrameworkCore.Design
   ```
 
-### <a name="ef-core-1x"></a>EF Core 1.x
+### <a name="ef-core-1x"></a>EF Core 1。x
 
-* 安裝.NET Core SDK 版本 2.1.200。 更新的版本不相容的 EF Core 1.0 和 1.1 版的 CLI 工具。
+* 安裝 .NET Core SDK 版本2.1.200。 較新的版本與適用于 EF Core 1.0 和1.1 的 CLI 工具不相容。
 
-* 設定要使用 2.1.200 SDK 版本的應用程式修改其[global.json](/dotnet/core/tools/global-json)檔案。 此檔案通常會包含在方案目錄 （一個以上專案） 中。
+* 將應用程式設定為使用 2.1.200 SDK 版本, 方法是修改其[global. json](/dotnet/core/tools/global-json)檔案。 這個檔案通常會包含在方案目錄中 (專案上方的一個)。
 
-* 編輯專案檔，並新增`Microsoft.EntityFrameworkCore.Tools.DotNet`做為`DotNetCliToolReference`項目。 指定的最新的 1.x 版本，例如：1.1.6。 請參閱專案檔範例，本節結尾處。
+* 編輯專案檔並加入`Microsoft.EntityFrameworkCore.Tools.DotNet` `DotNetCliToolReference`做為專案。 指定最新的1.x 版, 例如:1.1.6. 請參閱本節結尾的專案檔範例。
 
-* 安裝的最新的 1.x 版本`Microsoft.EntityFrameworkCore.Design`套件，例如：
+* 安裝`Microsoft.EntityFrameworkCore.Design`套件的最新1.x 版, 例如:
 
   ```console
   dotnet add package Microsoft.EntityFrameworkCore.Design -v 1.1.6
   ```
 
-  加入這兩個套件參考，專案檔看起來像這樣：
+  新增這兩個套件參考時, 專案檔看起來會像這樣:
 
   ``` xml
   <Project Sdk="Microsoft.NET.Sdk">
@@ -98,18 +98,18 @@ Entity Framework Core 的命令列介面 (CLI) 工具會執行設計階段開發
   </Project>
   ```
 
-  使用的套件參考`PrivateAssets="All"`不公開參考此專案的專案。 這項限制是特別適用於通常只能用在開發期間的套件。
+  具有`PrivateAssets="All"`的套件參考不會公開至參考此專案的專案。 這種限制特別適用于通常只會在開發期間使用的封裝。
 
 ### <a name="verify-installation"></a>確認安裝
 
-執行下列命令來確認已正確安裝 EF Core CLI 工具：
+執行下列命令, 確認已正確安裝 EF Core CLI 工具:
 
   ``` Console
   dotnet restore
   dotnet ef
   ```
 
-命令的輸出會識別使用中工具的版本：
+命令的輸出會識別使用中的工具版本:
 
 ```console
 
@@ -125,178 +125,178 @@ Entity Framework Core .NET Command-line Tools 2.1.3-rtm-32065
 <Usage documentation follows, not shown.>
 ```
 
-## <a name="using-the-tools"></a>使用的工具
+## <a name="using-the-tools"></a>使用工具
 
-之前使用的工具，您可能必須建立啟始專案，或將環境設定。
+使用工具之前, 您可能必須建立啟始專案或設定環境。
 
 ### <a name="target-project-and-startup-project"></a>目標專案和啟始專案
 
-命令是指*專案*並*啟始專案*。
+這些命令會參考*專案*和*啟始專案*。
 
-* *專案*也稱為*目標專案*因為它是命令新增或移除檔案的位置。 根據預設，在目前的目錄中的專案會是目標專案。 您也可以使用為目標的專案指定不同的專案<nobr> `--project` </nobr>選項。
+* *專案*也稱為「*目標專案*」, 因為它是命令新增或移除檔案的位置。 根據預設, 目前目錄中的專案是目標專案。 您可以使用<nobr>`--project`</nobr>選項, 將不同的專案指定為目標專案。
 
-* *啟始專案*是指的工具建置和執行。 工具必須執行的應用程式程式碼，在設計階段，以取得專案中，例如資料庫連接字串和設定模型的相關資訊。 根據預設，在目前的目錄中的專案是啟始專案。 您也可以使用為啟始專案指定不同的專案<nobr> `--startup-project` </nobr>選項。
+* *啟始專案*是工具所建立和執行的專案。 這些工具必須在設計階段執行應用程式程式碼, 以取得專案的相關資訊, 例如資料庫連接字串和模型的設定。 根據預設, 目前目錄中的專案是啟始專案。 您可以使用<nobr>`--startup-project`</nobr>選項, 將不同的專案指定為啟始專案。
 
-啟始專案和目標專案通常是相同的專案。 典型的案例，其中兩者就會不同的專案時：
+啟始專案和目標專案通常是相同的專案。 一般情況下, 它們是個別的專案, 如下所示:
 
-* EF Core 內容和實體類別是.NET Core 類別庫中。
-* .NET Core 主控台應用程式或 web 應用程式參考類別庫。
+* EF Core 內容和實體類別位於 .NET Core 類別庫中。
+* .NET Core 主控台應用程式或 web 應用程式會參考類別庫。
 
-它也可[移轉程式碼置於不同於 EF Core 內容的類別庫](xref:core/managing-schemas/migrations/projects)。
+您也可以[將遷移程式碼放在與 EF Core 內容不同的類別庫中](xref:core/managing-schemas/migrations/projects)。
 
-### <a name="other-target-frameworks"></a>其他的目標架構
+### <a name="other-target-frameworks"></a>其他目標 framework
 
-CLI 工具適用於.NET Core 專案和.NET Framework 專案。 .NET Standard 類別庫中有 EF Core 模型的應用程式可能沒有將.NET Core 或.NET Framework 專案。 比方說，這是 Xamarin 與通用 Windows 平台的應用程式，則為 true。 在此情況下，您可以建立其唯一目的是要做為啟始專案之工具的.NET Core 主控台應用程式專案。 專案可以是使用實際沒有程式碼的虛設專案&mdash;只需要用它來提供這項工具的目標。
+CLI 工具適用于 .NET Core 專案和 .NET Framework 專案。 在 .NET Standard 類別庫中具有 EF Core 模型的應用程式, 可能沒有 .NET Core 或 .NET Framework 專案。 例如, 這適用于 Xamarin 和通用 Windows 平臺應用程式。 在這種情況下, 您可以建立 .NET Core 主控台應用程式專案, 其目的只是要作為工具的啟始專案。 專案可以是沒有實際程式碼&mdash;的虛擬專案, 只需要提供工具的目標。
 
-為何需要一個 dummy 專案？ 如先前所述，這些工具必須在設計階段中執行應用程式程式碼。 若要這樣做，請他們需要使用.NET Core 執行階段。 .NET Core 或.NET Framework 為目標的專案中的 EF Core 模型時，EF Core 工具會借用從專案的執行階段。 如果是.NET Standard 類別庫中的 EF Core 模型，它們不能這麼做。 .NET Standard 並不是實際的.NET 實作;它是一組.NET 實作必須支援的 Api 的規格。 因此.NET Standard 是不夠的 EF Core 工具來執行應用程式程式碼。 您建立來做為啟始專案的虛設專案提供具體的目標平台工具可以在其中載入.NET Standard 類別庫。
+為什麼需要虛擬專案？ 如先前所述, 工具必須在設計階段執行應用程式程式碼。 若要這麼做, 他們必須使用 .NET Core 執行時間。 當 EF Core 模型位於以 .NET Core 或 .NET Framework 為目標的專案中時, EF Core 工具會從專案借用執行時間。 如果 EF Core 模型位於 .NET Standard 類別庫中, 他們就無法這麼做。 .NET Standard 不是實際的 .NET 執行;這是一組 .NET 部署必須支援之 Api 的規格。 因此 .NET Standard 並不足以讓 EF Core 工具執行應用程式程式碼。 您建立用來做為啟始專案的虛設專案, 會提供可讓工具載入 .NET Standard 類別庫的具體目標平臺。
 
 ### <a name="aspnet-core-environment"></a>ASP.NET Core 環境
 
-指定 ASP.NET Core 專案的環境，請設定**ASPNETCORE_ENVIRONMENT**執行命令之前的環境變數。
+若要指定 ASP.NET Core 專案的環境, 請先設定**ASPNETCORE_ENVIRONMENT**環境變數, 再執行命令。
 
-## <a name="common-options"></a>常見的選項
+## <a name="common-options"></a>一般選項
 
-|                   | 選項                            | 說明                                                                                                                                                                                                                                                   |
+|                   | 選項                            | 描述                                                                                                                                                                                                                                                   |
 |:------------------|:----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |                   | `--json`                          | 顯示 JSON 輸出。                                                                                                                                                                                                                                             |
-| <nobr>`-c`</nobr> | `--context <DBCONTEXT>`           | 要使用的 `DbContext` 類別。 只有或與命名空間完整限定的類別名稱。  如果省略這個選項，EF Core 會發現內容類別。 如果有多個內容類別，這個選項是必要的。                                            |
-| `-p`              | `--project <PROJECT>`             | 目標專案的專案資料夾的相對路徑。  預設值為目前的資料夾。                                                                                                                                                              |
-| `-s`              | `--startup-project <PROJECT>`     | 啟始專案的專案資料夾的相對路徑。 預設值為目前的資料夾。                                                                                                                                                              |
-|                   | `--framework <FRAMEWORK>`         | [目標 Framework Moniker](/dotnet/standard/frameworks#supported-target-framework-versions) for[目標 framework](/dotnet/standard/frameworks)。  專案檔會指定多個目標架構，而且您想要選取其中一個時，會使用它。 |
-|                   | `--configuration <CONFIGURATION>` | 組建組態，例如：`Debug`或`Release`。                                                                                                                                                                                                   |
-|                   | `--runtime <IDENTIFIER>`          | 若要還原套件的目標執行階段識別項。 如需執行階段識別項 (RID) 清單，請參閱 [RID 目錄](/dotnet/core/rid-catalog)。                                                                                                      |
+| <nobr>`-c`</nobr> | `--context <DBCONTEXT>`           | 要使用的 `DbContext` 類別。 僅限類別名稱, 或使用命名空間完整限定。  如果省略此選項, EF Core 會尋找內容類別。 如果有多個內容類別, 則需要此選項。                                            |
+| `-p`              | `--project <PROJECT>`             | 目標專案之專案資料夾的相對路徑。  預設值為目前的資料夾。                                                                                                                                                              |
+| `-s`              | `--startup-project <PROJECT>`     | 啟始專案之專案資料夾的相對路徑。 預設值為目前的資料夾。                                                                                                                                                              |
+|                   | `--framework <FRAMEWORK>`         | [目標 framework](/dotnet/standard/frameworks)的[目標 framework 標記](/dotnet/standard/frameworks#supported-target-framework-versions)。  當專案檔指定多個目標架構, 而您想要選取其中一個時, 請使用。 |
+|                   | `--configuration <CONFIGURATION>` | 組建設定, 例如: `Debug`或。 `Release`                                                                                                                                                                                                   |
+|                   | `--runtime <IDENTIFIER>`          | 要為其還原封裝的目標執行時間識別碼。 如需執行階段識別項 (RID) 清單，請參閱 [RID 目錄](/dotnet/core/rid-catalog)。                                                                                                      |
 | `-h`              | `--help`                          | 顯示說明資訊。                                                                                                                                                                                                                                        |
 | `-v`              | `--verbose`                       | 顯示詳細資訊輸出。                                                                                                                                                                                                                                          |
-|                   | `--no-color`                      | 沒有以色彩標示輸出。                                                                                                                                                                                                                                        |
-|                   | `--prefix-output`                 | 輸出層級的前置詞。                                                                                                                                                                                                                                     |
+|                   | `--no-color`                      | 不要將輸出著色。                                                                                                                                                                                                                                        |
+|                   | `--prefix-output`                 | 具有層級的前置詞輸出。                                                                                                                                                                                                                                     |
 
-## <a name="dotnet-ef-database-drop"></a>dotnet ef 資料庫卸除
+## <a name="dotnet-ef-database-drop"></a>dotnet ef 資料庫捨棄
 
-卸除資料庫。
+卸載資料庫。
 
 選項:
 
 |                   | 選項                   | 描述                                              |
 |:------------------|:-------------------------|:---------------------------------------------------------|
-| <nobr>`-f`</nobr> | <nobr>`--force`</nobr>   | 未確認。                                           |
-|                   | <nobr>`--dry-run`</nobr> | 顯示哪個資料庫會卸除，但不會卸除它。 |
+| <nobr>`-f`</nobr> | <nobr>`--force`</nobr>   | 不要確認。                                           |
+|                   | <nobr>`--dry-run`</nobr> | 顯示要捨棄的資料庫, 但不要卸載它。 |
 
 ## <a name="dotnet-ef-database-update"></a>dotnet ef 資料庫更新
 
-最後一個移轉，或指定的移轉，請更新資料庫。
+將資料庫更新為上次遷移或指定的遷移。
 
 引數：
 
 | 引數      | 描述                                                                                                                                                                                                                                                     |
 |:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<MIGRATION>` | 目標移轉。 移轉可能會識別，依名稱或識別碼。 數字 0 是特殊案例，這表示*第一個移轉之前，先*並造成所有移轉到還原作業。 如果未不指定任何移轉，則此命令預設的最後一個移轉。 |
+| `<MIGRATION>` | 目標移轉。 可以依名稱或識別碼來識別遷移。 數位0是特殊案例, 表示*第一次遷移之前*, 並會還原所有遷移。 如果未指定任何遷移, 此命令會預設為上次遷移。 |
 
-下列範例會更新資料庫，以指定的移轉。 第一個是使用移轉名稱和第二個會使用移轉識別碼：
+下列範例會將資料庫更新為指定的遷移。 第一個使用「遷移名稱」, 第二個使用「遷移識別碼」:
 
 ```console
 dotnet ef database update InitialCreate
 dotnet ef database update 20180904195021_InitialCreate
 ```
 
-## <a name="dotnet-ef-dbcontext-info"></a>dotnet ef dbcontext 資訊
+## <a name="dotnet-ef-dbcontext-info"></a>dotnet ef dbcoNtext 資訊
 
-取得有關的資訊`DbContext`型別。
+取得類型的`DbContext`相關資訊。
 
-## <a name="dotnet-ef-dbcontext-list"></a>dotnet ef dbcontext 清單
+## <a name="dotnet-ef-dbcontext-list"></a>dotnet ef dbcoNtext 清單
 
-列出可用`DbContext`型別。
+列出可用`DbContext`的類型。
 
-## <a name="dotnet-ef-dbcontext-scaffold"></a>dotnet ef dbcontext scaffold
+## <a name="dotnet-ef-dbcontext-scaffold"></a>dotnet ef dbcoNtext scaffold
 
-產生的程式碼`DbContext`和資料庫的實體類型。 為了讓這個命令來產生實體類型，資料庫資料表必須有主索引鍵。
+為資料庫的`DbContext`和實體類型產生程式碼。 為了讓這個命令產生實體類型, 資料庫資料表必須有主鍵。
 
 引數：
 
-| 引數       | 說明                                                                                                                                                                                                             |
+| 引數       | 描述                                                                                                                                                                                                             |
 |:---------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<CONNECTION>` | 資料庫連接字串。 針對 ASP.NET Core 2.x 專案，此值可以是*名稱 =\<的連接字串名稱 >* 。 在此情況下，名稱來自於 專案設定的組態來源。 |
-| `<PROVIDER>`   | 要使用提供者 通常這是 NuGet 套件的名稱，例如： `Microsoft.EntityFrameworkCore.SqlServer`。                                                                                           |
+| `<CONNECTION>` | 資料庫的連接字串。 針對 ASP.NET Core 2.x 專案, 此值可以是*name =\<連接字串的名稱 >* 。 在此情況下, 此名稱來自針對專案所設定的設定來源。 |
+| `<PROVIDER>`   | 要使用提供者 這通常是 NuGet 套件的名稱, 例如: `Microsoft.EntityFrameworkCore.SqlServer`。                                                                                           |
 
 選項:
 
-|                 | 選項                                   | 說明                                                                                                                                                                    |
+|                 | 選項                                   | 描述                                                                                                                                                                    |
 |:----------------|:-----------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-d</nobr> | `--data-annotations`                     | 使用屬性來設定模型 (如果可能的話)。 如果省略這個選項，則會使用 fluent API。                                                                |
-| `-c`            | `--context <NAME>`                       | 名稱`DbContext`類別來產生。                                                                                                                                 |
-|                 | `--context-dir <PATH>`                   | 將目錄`DbContext`類別檔案中的。 路徑是相對於專案目錄。 命名空間被衍生自資料夾名稱。                                 |
-| `-f`            | `--force`                                | 覆寫現有的檔案。                                                                                                                                                      |
-| `-o`            | `--output-dir <PATH>`                    | 若要將實體類別檔案放在目錄。 路徑是相對於專案目錄。                                                                                       |
-|                 | <nobr>`--schema <SCHEMA_NAME>...`</nobr> | 要產生的實體類型的資料表結構描述。 若要指定多個結構描述，請重複`--schema`針對每個。 如果省略這個選項，則會包含 所有結構描述。          |
-| `-t`            | `--table <TABLE_NAME>`...                | 要產生的實體類型的資料表。 若要指定多個資料表，請重複`-t`或`--table`針對每個。 如果省略這個選項，則所有資料表都都包含在內。                |
-|                 | `--use-database-names`                   | 完全依照其出現在資料庫中，請使用資料表和資料行的名稱。 如果省略這個選項，則資料庫名稱會變更為更密切符合 C# 命名樣式慣例。 |
+| <nobr>-d</nobr> | `--data-annotations`                     | 使用屬性來設定模型 (如果可能的話)。 如果省略此選項, 則只會使用 Fluent API。                                                                |
+| `-c`            | `--context <NAME>`                       | 要產生的`DbContext`類別名稱。                                                                                                                                 |
+|                 | `--context-dir <PATH>`                   | 要放置`DbContext`類別檔案的目錄。 路徑相對於專案目錄。 命名空間是從資料夾名稱衍生而來。                                 |
+| `-f`            | `--force`                                | 覆寫現有檔案。                                                                                                                                                      |
+| `-o`            | `--output-dir <PATH>`                    | 要在其中放置實體類別檔案的目錄。 路徑相對於專案目錄。                                                                                       |
+|                 | <nobr>`--schema <SCHEMA_NAME>...`</nobr> | 要為其產生實體類型的資料表架構。 若要指定多個架構`--schema` , 請為每個架構重複。 如果省略此選項, 則會包含所有架構。          |
+| `-t`            | `--table <TABLE_NAME>`...                | 要為其產生實體類型的資料表。 若要指定多個資料表`-t` , `--table`請針對每個資料表重複或。 如果省略此選項, 則會包含所有資料表。                |
+|                 | `--use-database-names`                   | 使用資料表和資料行名稱, 就像在資料庫中所出現的一樣。 如果省略此選項, 資料庫名稱就會變更, 以更嚴格地C#符合名稱樣式慣例。 |
 
-下列範例則所有的結構描述和資料表，並將新的檔案放在*模型*資料夾。
+下列範例會 scaffold 所有架構和資料表, 並將新檔案放在 [*模型*] 資料夾中。
 
 ```console
 dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models
 ```
 
-下列範例則選取的資料表，並建立具有指定名稱的個別資料夾的內容：
+下列範例只會 scaffold 選取的資料表, 並在具有指定名稱的另一個資料夾中建立內容:
 
 ```console
 dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models -t Blog -t Post --context-dir Context -c BlogContext
 ```
 
-## <a name="dotnet-ef-migrations-add"></a>新增 dotnet ef 移轉
+## <a name="dotnet-ef-migrations-add"></a>dotnet ef 遷移新增
 
-加入新的移轉。
+加入新的遷移。
 
 引數：
 
-| 引數 | 描述                |
+| 引數 | 說明                |
 |:---------|:---------------------------|
-| `<NAME>` | 移轉名稱。 |
+| `<NAME>` | 遷移的名稱。 |
 
 選項:
 
 |                   | 選項                             | 說明                                                                                                      |
 |:------------------|:-----------------------------------|:-----------------------------------------------------------------------------------------------------------------|
-| <nobr>`-o`</nobr> | <nobr>`--output-dir <PATH>`</nobr> | 目錄 （及子命名空間） 使用。 路徑是相對於專案目錄。 預設為 「 移轉 」。 |
+| <nobr>`-o`</nobr> | <nobr>`--output-dir <PATH>`</nobr> | 要使用的目錄 (和子命名空間)。 路徑相對於專案目錄。 預設為「遷移」。 |
 
-## <a name="dotnet-ef-migrations-list"></a>dotnet ef migrations 清單
+## <a name="dotnet-ef-migrations-list"></a>dotnet ef 遷移清單
 
-列出可用的移轉。
+列出可用的遷移。
 
-## <a name="dotnet-ef-migrations-remove"></a>dotnet ef migrations 移除
+## <a name="dotnet-ef-migrations-remove"></a>dotnet ef 遷移移除
 
-移除最後一個移轉 （回復移轉已完成的程式碼變更）。
+移除上一次的遷移作業 (復原已針對遷移完成的程式碼變更)。
 
 選項:
 
-|                   | 選項    | 說明                                                                     |
+|                   | 選項    | 描述                                                                     |
 |:------------------|:----------|:--------------------------------------------------------------------------------|
-| <nobr>`-f`</nobr> | `--force` | 還原移轉 （回復已套用至資料庫的變更）。 |
+| <nobr>`-f`</nobr> | `--force` | 還原遷移 (復原已套用至資料庫的變更)。 |
 
-## <a name="dotnet-ef-migrations-script"></a>dotnet ef migrations 指令碼
+## <a name="dotnet-ef-migrations-script"></a>dotnet ef 遷移腳本
 
-產生 SQL 指令碼從移轉。
+從遷移產生 SQL 腳本。
 
 引數：
 
-| 引數 | 描述                                                                                                                                                   |
+| 引數 | 說明                                                                                                                                                   |
 |:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<FROM>` | 在開始移轉。 移轉可能會識別，依名稱或識別碼。 數字 0 是特殊案例，這表示*第一個移轉之前，先*。 預設值為 0。 |
-| `<TO>`   | 結束的移轉。 預設為最後一個移轉。                                                                                                         |
+| `<FROM>` | 開始的遷移。 可以依名稱或識別碼來識別遷移。 數位0是特殊案例, 表示*第一次遷移之前*。 預設為0。 |
+| `<TO>`   | 結束遷移。 預設為最後一個移轉。                                                                                                         |
 
 選項:
 
-|                   | 選項            | 描述                                                        |
+|                   | 選項            | 說明                                                        |
 |:------------------|:------------------|:-------------------------------------------------------------------|
-| <nobr>`-o`</nobr> | `--output <FILE>` | 要寫入的指令碼檔案。                                   |
+| <nobr>`-o`</nobr> | `--output <FILE>` | 要寫入腳本的檔案。                                   |
 | `-i`              | `--idempotent`    | 產生可在任何移轉隨時用在資料庫的指令碼。 |
 
-下列範例會建立為 InitialCreate 移轉指令碼：
+下列範例會建立 InitialCreate 遷移的腳本:
 
 ```console
 dotnet ef migrations script 0 InitialCreate
 ```
 
-下列範例會建立為 InitialCreate 移轉之後用於所有移轉的指令碼。
+下列範例會針對 InitialCreate 遷移之後的所有遷移建立腳本。
 
 ```console
 dotnet ef migrations script 20180904195021_InitialCreate
