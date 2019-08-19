@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/05/2018
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: b94ac567644a9d98a05a40857cc072c500203370
-ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
+ms.openlocfilehash: 7d97551044ae4a8fc42d1676199da884f3e2994d
+ms.sourcegitcommit: 7b7f774a5966b20d2aed5435a672a1edbe73b6fb
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/14/2019
-ms.locfileid: "59562555"
+ms.lasthandoff: 08/17/2019
+ms.locfileid: "69565254"
 ---
 <a name="migrations"></a>移轉
 ==========
@@ -71,7 +71,7 @@ dotnet ef database update
 <a name="customize-migration-code"></a>自訂移轉程式碼
 ------------------------
 
-對您的 EF Core 模型進行變更後，資料庫結構描述會失去同步。若要將其更新為最新狀態，請新增另一個移轉。 您能夠以類似版本控制系統中認可訊息的方式來使用移轉名稱。 例如，如果變更是要檢閱的新實體類別，您可以選擇像是 AddProductReviews 的名稱。
+對您的 EF Core 模型進行變更後，資料庫結構描述會失去同步。若要將其更新為最新狀態，請新增另一個移轉。 您能夠以類似版本控制系統中認可訊息的方式來使用移轉名稱。 例如，如果變更是要檢閱的新實體類別，您可以選擇像是 AddProductReviews  的名稱。
 
 ``` powershell
 Add-Migration AddProductReviews
@@ -191,7 +191,7 @@ dotnet ef migrations script
 ---------------------------
 某些應用程式在啟動或初次執行期間，可能會想要在執行階段套用移轉。 請使用 `Migrate()` 方法來執行此動作。
 
-此方法的基礎建立在 `IMigrator` 服務之上，其可用於更進階的案例。 您可以使用 `DbContext.GetService<IMigrator>()` 來加以存取。
+此方法的基礎建立在 `IMigrator` 服務之上，其可用於更進階的案例。 您可以使用 `myDbContext.GetInfrastructure().GetService<IMigrator>()` 來加以存取。
 
 ``` csharp
 myDbContext.Database.Migrate();
@@ -204,4 +204,4 @@ myDbContext.Database.Migrate();
 <a name="next-steps"></a>後續步驟
 ----------
 
-如需詳細資訊，請參閱<xref:core/miscellaneous/cli/index>。
+如需詳細資訊，請參閱 <xref:core/miscellaneous/cli/index>。
