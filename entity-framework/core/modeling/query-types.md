@@ -4,12 +4,12 @@ author: anpete
 ms.date: 02/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 uid: core/modeling/query-types
-ms.openlocfilehash: 6f0f860c6a4e619e13d55e6207234a8b5261ee09
-ms.sourcegitcommit: d1230e34673b8323a227ab37958dfa77f3684728
+ms.openlocfilehash: c023d442b0fa2728bd20694a55ebb3a7b5c0efd1
+ms.sourcegitcommit: 87e72899d17602f7526d6ccd22f3c8ee844145df
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/19/2019
-ms.locfileid: "68330802"
+ms.lasthandoff: 08/20/2019
+ms.locfileid: "69628417"
 ---
 # <a name="query-types"></a>查詢類型
 > [!NOTE]
@@ -75,7 +75,9 @@ EF Core 模型可以包含實體類型，除了_查詢類型_，可用來執行�
 
 [!code-csharp[Main](../../../samples/core/QueryTypes/Program.cs#Configuration)]
 
-接下來, 我們會`DbContext`設定, 以`DbQuery<T>`包含:[!code-csharp[Main](../../../samples/core/QueryTypes/Program.cs#DbQuery)]
+接下來, 我們會`DbContext`設定, 以`DbQuery<T>`包含:
+
+[!code-csharp[Main](../../../samples/core/QueryTypes/Program.cs#DbQuery)]
 
 最後，我們可以查詢資料庫檢視，以標準方式：
 
