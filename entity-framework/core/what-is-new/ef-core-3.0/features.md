@@ -4,59 +4,59 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
-ms.openlocfilehash: 7501a806271c9734e85e31845f260f2d512da077
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: a71aa01e81d9830d7b9e6cb01c200851100a15df
+ms.sourcegitcommit: 87e72899d17602f7526d6ccd22f3c8ee844145df
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/18/2019
-ms.locfileid: "58867953"
+ms.lasthandoff: 08/20/2019
+ms.locfileid: "69628421"
 ---
-# <a name="new-features-included-in-ef-core-30-currently-in-preview"></a><span data-ttu-id="1b6b6-102">EF Core 3.0 (目前為預覽版) 中包含的新功能</span><span class="sxs-lookup"><span data-stu-id="1b6b6-102">New features included in EF Core 3.0 (currently in preview)</span></span>
+# <a name="new-features-included-in-ef-core-30-currently-in-preview"></a><span data-ttu-id="deace-102">EF Core 3.0 (目前為預覽版) 中包含的新功能</span><span class="sxs-lookup"><span data-stu-id="deace-102">New features included in EF Core 3.0 (currently in preview)</span></span>
 
 > [!IMPORTANT]
-> <span data-ttu-id="1b6b6-103">請注意，後續版本的功能集與上市時間，隨時可能會變動，此外，即使我們試圖將此頁面保持在最新狀態，可能還是無法隨時反映我們最新的計劃。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-103">Please note that the feature sets and schedules of future releases are always subject to change, and although we will try to keep this page up to date, it may not reflect our latest plans at all times.</span></span>
+> <span data-ttu-id="deace-103">請注意，後續版本的功能集與上市時間，隨時可能會變動，此外，即使我們試圖將此頁面保持在最新狀態，可能還是無法隨時反映我們最新的計劃。</span><span class="sxs-lookup"><span data-stu-id="deace-103">Please note that the feature sets and schedules of future releases are always subject to change, and although we will try to keep this page up to date, it may not reflect our latest plans at all times.</span></span>
 
-<span data-ttu-id="1b6b6-104">下列清單包含為 EF Core 3.0 新規劃的重要功能。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-104">The following list includes the major new features planned for EF Core 3.0.</span></span>
-<span data-ttu-id="1b6b6-105">大部分功能並未包含在目前的預覽版中，但隨著逐步往 RTM 發展，多數功能終將能夠使用。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-105">Most of these features are not included in the current preview, but will become available as we make progress towards RTM.</span></span>
+<span data-ttu-id="deace-104">下列清單包含為 EF Core 3.0 新規劃的重要功能。</span><span class="sxs-lookup"><span data-stu-id="deace-104">The following list includes the major new features planned for EF Core 3.0.</span></span>
+<span data-ttu-id="deace-105">大部分功能並未包含在目前的預覽版中，但隨著逐步往 RTM 發展，多數功能終將能夠使用。</span><span class="sxs-lookup"><span data-stu-id="deace-105">Most of these features are not included in the current preview, but will become available as we make progress towards RTM.</span></span>
 
-<span data-ttu-id="1b6b6-106">原因是在發行的一開始，我們即著重於實作規劃的[中斷性變更](xref:core/what-is-new/ef-core-3.0/breaking-changes)。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-106">The reason is that at the beginning of the release we are focusing on implementing planned [breaking changes](xref:core/what-is-new/ef-core-3.0/breaking-changes).</span></span>
-<span data-ttu-id="1b6b6-107">許多中斷性變更本身使得 EF Core 有所改善。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-107">Many of these breaking changes are improvements to EF Core on their own.</span></span>
-<span data-ttu-id="1b6b6-108">此外，還需要更多重大變更，以便改善能更加詳盡。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-108">Many others are required to unblock further improvements.</span></span> 
+<span data-ttu-id="deace-106">原因是在發行的一開始，我們即著重於實作規劃的[中斷性變更](xref:core/what-is-new/ef-core-3.0/breaking-changes)。</span><span class="sxs-lookup"><span data-stu-id="deace-106">The reason is that at the beginning of the release we are focusing on implementing planned [breaking changes](xref:core/what-is-new/ef-core-3.0/breaking-changes).</span></span>
+<span data-ttu-id="deace-107">許多中斷性變更本身使得 EF Core 有所改善。</span><span class="sxs-lookup"><span data-stu-id="deace-107">Many of these breaking changes are improvements to EF Core on their own.</span></span>
+<span data-ttu-id="deace-108">此外，還需要更多重大變更，以便改善能更加詳盡。</span><span class="sxs-lookup"><span data-stu-id="deace-108">Many others are required to unblock further improvements.</span></span> 
 
-<span data-ttu-id="1b6b6-109">如需 Bug 修正和開發中增強功能的完整清單，您可以在[我們的問題追蹤中查看此查詢](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+milestone%3A3.0.0+sort%3Areactions-%2B1-desc)。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-109">For a complete list of bug fixes and enhancements underway, you can see [this query in our issue tracker](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+milestone%3A3.0.0+sort%3Areactions-%2B1-desc).</span></span>
+<span data-ttu-id="deace-109">如需 Bug 修正和開發中增強功能的完整清單，您可以在[我們的問題追蹤中查看此查詢](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+milestone%3A3.0.0+sort%3Areactions-%2B1-desc)。</span><span class="sxs-lookup"><span data-stu-id="deace-109">For a complete list of bug fixes and enhancements underway, you can see [this query in our issue tracker](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+milestone%3A3.0.0+sort%3Areactions-%2B1-desc).</span></span>
 
-## <a name="linq-improvements"></a><span data-ttu-id="1b6b6-110">LINQ 改善</span><span class="sxs-lookup"><span data-stu-id="1b6b6-110">LINQ improvements</span></span> 
+## <a name="linq-improvements"></a><span data-ttu-id="deace-110">LINQ 改善</span><span class="sxs-lookup"><span data-stu-id="deace-110">LINQ improvements</span></span> 
 
-[<span data-ttu-id="1b6b6-111">追蹤問題 #12795</span><span class="sxs-lookup"><span data-stu-id="1b6b6-111">Tracking Issue #12795</span></span>](https://github.com/aspnet/EntityFrameworkCore/issues/12795)
+[<span data-ttu-id="deace-111">追蹤問題 #12795</span><span class="sxs-lookup"><span data-stu-id="deace-111">Tracking Issue #12795</span></span>](https://github.com/aspnet/EntityFrameworkCore/issues/12795)
 
-<span data-ttu-id="1b6b6-112">已著手進行這項功能的開發，但未包含在目前的預覽版中。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-112">Work on this feature has started but it isn't included in the current preview.</span></span>
+<span data-ttu-id="deace-112">已著手進行這項功能的開發，但未包含在目前的預覽版中。</span><span class="sxs-lookup"><span data-stu-id="deace-112">Work on this feature has started but it isn't included in the current preview.</span></span>
 
-<span data-ttu-id="1b6b6-113">LINQ 可讓您以偏好的語言撰寫資料庫查詢，進而利用豐富的型別資訊優勢來取得 IntelliSense 與編譯階段型別檢查。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-113">LINQ enables you to write database queries without leaving your language of choice, taking advantage of rich type information to get IntelliSense and compile-time type checking.</span></span>
-<span data-ttu-id="1b6b6-114">但是 LINQ 也可以讓您撰寫不限數目的複雜查詢，這通常是 LINQ 提供者所面臨的艱難挑戰。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-114">But LINQ also enables you to write an unlimited number of complicated queries, and that has always been a huge challenge for LINQ providers.</span></span>
-<span data-ttu-id="1b6b6-115">在 EF Core 的前幾個版本中，我們透過搞清楚查詢的哪些部分可以轉譯為 SQL，接著允許查詢的剩餘部分在用戶端上的記憶體中執行來克服其中的一些問題。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-115">In the first few versions of EF Core, we solved that in part by figuring out what portions of a query could be translated to SQL, and then by allowing the rest of the query to execute in memory on the client.</span></span>
-<span data-ttu-id="1b6b6-116">這個用戶端執行在某些案例中是令人滿意的，但在其他案例中會導致無效率的查詢，而在應用程式部署到生產階段之前，您可能無法發現這種無效率的查詢。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-116">This client-side execution can be desirable in some situations, but in many other cases it can result in inefficient queries that may not be identified until an application is deployed to production.</span></span>
-<span data-ttu-id="1b6b6-117">在 EF Core 3.0 中，我們計劃在 LINQ 實作的運作方式及其測試方式進行重大變更。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-117">In EF Core 3.0, we're planning to make profound changes to how our LINQ implementation works, and how we test it.</span></span>
-<span data-ttu-id="1b6b6-118">目標是讓它更強固 (例如避免中斷修補程式版本中的查詢)、能夠將更多運算式正確地轉譯為 SQL、在更多案例中產生有效率的查詢，以及防止未偵測到無效率查詢的情況。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-118">The goals are to make it more robust (for example, to avoid breaking queries in patch releases), to enable translating more expressions correctly into SQL, to generate efficient queries in more cases, and to prevent inefficient queries from going undetected.</span></span>
+<span data-ttu-id="deace-113">LINQ 可讓您以偏好的語言撰寫資料庫查詢，進而利用豐富的型別資訊優勢來取得 IntelliSense 與編譯階段型別檢查。</span><span class="sxs-lookup"><span data-stu-id="deace-113">LINQ enables you to write database queries without leaving your language of choice, taking advantage of rich type information to get IntelliSense and compile-time type checking.</span></span>
+<span data-ttu-id="deace-114">但是 LINQ 也可以讓您撰寫不限數目的複雜查詢，這通常是 LINQ 提供者所面臨的艱難挑戰。</span><span class="sxs-lookup"><span data-stu-id="deace-114">But LINQ also enables you to write an unlimited number of complicated queries, and that has always been a huge challenge for LINQ providers.</span></span>
+<span data-ttu-id="deace-115">在 EF Core 的前幾個版本中，我們透過搞清楚查詢的哪些部分可以轉譯為 SQL，接著允許查詢的剩餘部分在用戶端上的記憶體中執行來克服其中的一些問題。</span><span class="sxs-lookup"><span data-stu-id="deace-115">In the first few versions of EF Core, we solved that in part by figuring out what portions of a query could be translated to SQL, and then by allowing the rest of the query to execute in memory on the client.</span></span>
+<span data-ttu-id="deace-116">這個用戶端執行在某些案例中是令人滿意的，但在其他案例中會導致無效率的查詢，而在應用程式部署到生產階段之前，您可能無法發現這種無效率的查詢。</span><span class="sxs-lookup"><span data-stu-id="deace-116">This client-side execution can be desirable in some situations, but in many other cases it can result in inefficient queries that may not be identified until an application is deployed to production.</span></span>
+<span data-ttu-id="deace-117">在 EF Core 3.0 中，我們計劃在 LINQ 實作的運作方式及其測試方式進行重大變更。</span><span class="sxs-lookup"><span data-stu-id="deace-117">In EF Core 3.0, we're planning to make profound changes to how our LINQ implementation works, and how we test it.</span></span>
+<span data-ttu-id="deace-118">目標是讓它更強固 (例如避免中斷修補程式版本中的查詢)、能夠將更多運算式正確地轉譯為 SQL、在更多案例中產生有效率的查詢，以及防止未偵測到無效率查詢的情況。</span><span class="sxs-lookup"><span data-stu-id="deace-118">The goals are to make it more robust (for example, to avoid breaking queries in patch releases), to enable translating more expressions correctly into SQL, to generate efficient queries in more cases, and to prevent inefficient queries from going undetected.</span></span>
 
-## <a name="cosmos-db-support"></a><span data-ttu-id="1b6b6-119">Cosmos DB 支援</span><span class="sxs-lookup"><span data-stu-id="1b6b6-119">Cosmos DB support</span></span> 
+## <a name="cosmos-db-support"></a><span data-ttu-id="deace-119">Cosmos DB 支援</span><span class="sxs-lookup"><span data-stu-id="deace-119">Cosmos DB support</span></span> 
 
-[<span data-ttu-id="1b6b6-120">追蹤問題 #8443</span><span class="sxs-lookup"><span data-stu-id="1b6b6-120">Tracking Issue #8443</span></span>](https://github.com/aspnet/EntityFrameworkCore/issues/8443)
+[<span data-ttu-id="deace-120">追蹤問題 #8443</span><span class="sxs-lookup"><span data-stu-id="deace-120">Tracking Issue #8443</span></span>](https://github.com/aspnet/EntityFrameworkCore/issues/8443)
 
-<span data-ttu-id="1b6b6-121">這項功能包含在目前的預覽版中，但尚未完成。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-121">This feature is included in the current preview, but isn't complete yet.</span></span> 
+<span data-ttu-id="deace-121">這項功能包含在目前的預覽版中，但尚未完成。</span><span class="sxs-lookup"><span data-stu-id="deace-121">This feature is included in the current preview, but isn't complete yet.</span></span> 
 
-<span data-ttu-id="1b6b6-122">我們正在處理適用於 EF Core 的 Cosmos DB 提供者，以讓開發人員熟悉 EF 程式設計模型，以輕鬆地使用 Azure Cosmos DB 做為應用程式資料庫。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-122">We're working on a Cosmos DB provider for EF Core, to enable developers familiar with the EF programing model to easily target Azure Cosmos DB as an application database.</span></span>
-<span data-ttu-id="1b6b6-123">目標是讓 .NET 開發人員能更輕鬆地發揮 Cosmos DB 的一些優點，例如全域散發、"Always On" 可用性、彈性的延展性，以及低延遲。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-123">The goal is to make some of the advantages of Cosmos DB, like global distribution, "always on" availability, elastic scalability, and low latency, even more accessible to .NET developers.</span></span>
-<span data-ttu-id="1b6b6-124">提供者將啟用大部分的 EF Core 功能，例如自動變更追蹤、LINQ 與值轉換 (根據 Cosmos DB 中的 SQL API)。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-124">The provider will enable most EF Core features, like automatic change tracking, LINQ, and value conversions, against the SQL API in Cosmos DB.</span></span>
-<span data-ttu-id="1b6b6-125">我們在 EF Core 2.2 之前開始此工作，而且[我們已建立一些預覽版提供者供使用](https://blogs.msdn.microsoft.com/dotnet/2018/10/17/announcing-entity-framework-core-2-2-preview-3/)。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-125">We started this effort before EF Core 2.2, and [we have made some preview versions of the provider available](https://blogs.msdn.microsoft.com/dotnet/2018/10/17/announcing-entity-framework-core-2-2-preview-3/).</span></span>
-<span data-ttu-id="1b6b6-126">新的計畫是以 EF Core 3.0 為基礎繼續開發提供者。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-126">The new plan is to continue developing the provider alongside EF Core 3.0.</span></span> 
+<span data-ttu-id="deace-122">我們正在處理適用於 EF Core 的 Cosmos DB 提供者，以讓開發人員熟悉 EF 程式設計模型，以輕鬆地使用 Azure Cosmos DB 做為應用程式資料庫。</span><span class="sxs-lookup"><span data-stu-id="deace-122">We're working on a Cosmos DB provider for EF Core, to enable developers familiar with the EF programing model to easily target Azure Cosmos DB as an application database.</span></span>
+<span data-ttu-id="deace-123">目標是讓 .NET 開發人員能更輕鬆地發揮 Cosmos DB 的一些優點，例如全域散發、"Always On" 可用性、彈性的延展性，以及低延遲。</span><span class="sxs-lookup"><span data-stu-id="deace-123">The goal is to make some of the advantages of Cosmos DB, like global distribution, "always on" availability, elastic scalability, and low latency, even more accessible to .NET developers.</span></span>
+<span data-ttu-id="deace-124">提供者將啟用大部分的 EF Core 功能，例如自動變更追蹤、LINQ 與值轉換 (根據 Cosmos DB 中的 SQL API)。</span><span class="sxs-lookup"><span data-stu-id="deace-124">The provider will enable most EF Core features, like automatic change tracking, LINQ, and value conversions, against the SQL API in Cosmos DB.</span></span>
+<span data-ttu-id="deace-125">我們在 EF Core 2.2 之前開始此工作，而且[我們已建立一些預覽版提供者供使用](https://blogs.msdn.microsoft.com/dotnet/2018/10/17/announcing-entity-framework-core-2-2-preview-3/)。</span><span class="sxs-lookup"><span data-stu-id="deace-125">We started this effort before EF Core 2.2, and [we have made some preview versions of the provider available](https://blogs.msdn.microsoft.com/dotnet/2018/10/17/announcing-entity-framework-core-2-2-preview-3/).</span></span>
+<span data-ttu-id="deace-126">新的計畫是以 EF Core 3.0 為基礎繼續開發提供者。</span><span class="sxs-lookup"><span data-stu-id="deace-126">The new plan is to continue developing the provider alongside EF Core 3.0.</span></span> 
 
-## <a name="dependent-entities-sharing-the-table-with-the-principal-are-now-optional"></a><span data-ttu-id="1b6b6-127">現在可選用以主體來共用資料表的相依實體</span><span class="sxs-lookup"><span data-stu-id="1b6b6-127">Dependent entities sharing the table with the principal are now optional</span></span>
+## <a name="dependent-entities-sharing-the-table-with-the-principal-are-now-optional"></a><span data-ttu-id="deace-127">現在可選用以主體來共用資料表的相依實體</span><span class="sxs-lookup"><span data-stu-id="deace-127">Dependent entities sharing the table with the principal are now optional</span></span>
 
-[<span data-ttu-id="1b6b6-128">追蹤問題 #9005</span><span class="sxs-lookup"><span data-stu-id="1b6b6-128">Tracking Issue #9005</span></span>](https://github.com/aspnet/EntityFrameworkCore/issues/9005)
+[<span data-ttu-id="deace-128">追蹤問題 #9005</span><span class="sxs-lookup"><span data-stu-id="deace-128">Tracking Issue #9005</span></span>](https://github.com/aspnet/EntityFrameworkCore/issues/9005)
 
-<span data-ttu-id="1b6b6-129">這項功能將於 EF Core 3.0-preview 4 中引進。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-129">This feature will be introduced in EF Core 3.0-preview 4.</span></span>
+<span data-ttu-id="deace-129">這項功能將於 EF Core 3.0-preview 4 中引進。</span><span class="sxs-lookup"><span data-stu-id="deace-129">This feature will be introduced in EF Core 3.0-preview 4.</span></span>
 
-<span data-ttu-id="1b6b6-130">請考慮下列模型：</span><span class="sxs-lookup"><span data-stu-id="1b6b6-130">Consider the following model:</span></span>
+<span data-ttu-id="deace-130">請考慮下列模型：</span><span class="sxs-lookup"><span data-stu-id="deace-130">Consider the following model:</span></span>
 ```C#
 public class Order
 {
@@ -65,6 +65,7 @@ public class Order
     public OrderDetails Details { get; set; }
 }
 
+[Owned]
 public class OrderDetails
 {
     public int Id { get; set; }
@@ -72,48 +73,49 @@ public class OrderDetails
 }
 ```
 
-<span data-ttu-id="1b6b6-131">從 EF Core 3.0 開始，如果 `OrderDetails` 由 `Order` 擁有，或明確對應至相同的資料表，您將能夠新增 `Order` 而不需要 `OrderDetails` 及其所有的 `OrderDetails` 屬性，但是主索引鍵將對應至可為 Null 的資料行。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-131">Starting with EF Core 3.0, if `OrderDetails` is owned by `Order` or explicitly mapped to the same table it will be possible to add an `Order` without an `OrderDetails` and all of the `OrderDetails` properties except the primary key will be mapped to nullable columns.</span></span>
-<span data-ttu-id="1b6b6-132">查詢時，如果任何必要的屬性不具有值，或如果其具有主索引鍵以外的不必要屬性，且所有屬性都是 `null`，則 EF Core 會將 `OrderDetails` 設為 `null`。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-132">When querying EF Core will set `OrderDetails` to `null` if any of its required properties doesn't have a value or if it has no required properties besides the primary key and all properties are `null`.</span></span>
+<span data-ttu-id="deace-131">從 EF Core 3.0 開始，如果 `OrderDetails` 由 `Order` 所擁有，或明確地對應到相同的資料表，即可新增 `Order` 而無需 `OrderDetails` 及所有 `OrderDetails` 屬性，但主索引鍵將會對應至可為 Null 的資料行。</span><span class="sxs-lookup"><span data-stu-id="deace-131">Starting with EF Core 3.0, if `OrderDetails` is owned by `Order` or explicitly mapped to the same table, it will be possible to add an `Order` without an `OrderDetails` and all of the `OrderDetails` properties, except the primary key will be mapped to nullable columns.</span></span>
 
-## <a name="c-80-support"></a><span data-ttu-id="1b6b6-133">C# 8.0 支援</span><span class="sxs-lookup"><span data-stu-id="1b6b6-133">C# 8.0 support</span></span>
+<span data-ttu-id="deace-132">進行查詢時，如果任何其必要的屬性不具有值，或如果其具有主索引鍵以外的非必要屬性，且所有屬性皆為 `null`，則 EF Core 會將 `OrderDetails` 設定為 `null`。</span><span class="sxs-lookup"><span data-stu-id="deace-132">When querying, EF Core will set `OrderDetails` to `null` if any of its required properties doesn't have a value, or if it has no required properties besides the primary key and all properties are `null`.</span></span>
 
-<span data-ttu-id="1b6b6-134">[追蹤問題 #12047](https://github.com/aspnet/EntityFrameworkCore/issues/12047)
-[追蹤問題 #10347](https://github.com/aspnet/EntityFrameworkCore/issues/10347)</span><span class="sxs-lookup"><span data-stu-id="1b6b6-134">[Tracking Issue #12047](https://github.com/aspnet/EntityFrameworkCore/issues/12047)
+## <a name="c-80-support"></a><span data-ttu-id="deace-133">C# 8.0 支援</span><span class="sxs-lookup"><span data-stu-id="deace-133">C# 8.0 support</span></span>
+
+<span data-ttu-id="deace-134">[追蹤問題 #12047](https://github.com/aspnet/EntityFrameworkCore/issues/12047)
+[追蹤問題 #10347](https://github.com/aspnet/EntityFrameworkCore/issues/10347)</span><span class="sxs-lookup"><span data-stu-id="deace-134">[Tracking Issue #12047](https://github.com/aspnet/EntityFrameworkCore/issues/12047)
 [Tracking Issue #10347](https://github.com/aspnet/EntityFrameworkCore/issues/10347)</span></span>
 
-<span data-ttu-id="1b6b6-135">已著手進行這項功能的開發，但未包含在目前的預覽版中。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-135">Work on this feature has started but it isn't included in the current preview.</span></span>
+<span data-ttu-id="deace-135">已著手進行這項功能的開發，但未包含在目前的預覽版中。</span><span class="sxs-lookup"><span data-stu-id="deace-135">Work on this feature has started but it isn't included in the current preview.</span></span>
 
-<span data-ttu-id="1b6b6-136">我們想要讓客戶在使用 EF Core 時，能夠利用 [C# 8.0 即將推出的一些新功能](https://blogs.msdn.microsoft.com/dotnet/2018/11/12/building-c-8-0/)，例如非同步串流 (包括 `await foreach`) 與可為 Null 的參考型別。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-136">We want our customers to take advantage of some of the [new features coming in C# 8.0](https://blogs.msdn.microsoft.com/dotnet/2018/11/12/building-c-8-0/) like async streams (including `await foreach`) and nullable reference types while using EF Core.</span></span>
+<span data-ttu-id="deace-136">我們想要讓客戶在使用 EF Core 時，能夠利用 [C# 8.0 即將推出的一些新功能](https://blogs.msdn.microsoft.com/dotnet/2018/11/12/building-c-8-0/)，例如非同步串流 (包括 `await foreach`) 與可為 Null 的參考型別。</span><span class="sxs-lookup"><span data-stu-id="deace-136">We want our customers to take advantage of some of the [new features coming in C# 8.0](https://blogs.msdn.microsoft.com/dotnet/2018/11/12/building-c-8-0/) like async streams (including `await foreach`) and nullable reference types while using EF Core.</span></span>
 
-## <a name="reverse-engineering-of-database-views"></a><span data-ttu-id="1b6b6-137">資料庫檢視的反向工程</span><span class="sxs-lookup"><span data-stu-id="1b6b6-137">Reverse engineering of database views</span></span>
+## <a name="reverse-engineering-of-database-views"></a><span data-ttu-id="deace-137">資料庫檢視的反向工程</span><span class="sxs-lookup"><span data-stu-id="deace-137">Reverse engineering of database views</span></span>
 
-[<span data-ttu-id="1b6b6-138">追蹤問題 #1679</span><span class="sxs-lookup"><span data-stu-id="1b6b6-138">Tracking Issue #1679</span></span>](https://github.com/aspnet/EntityFrameworkCore/issues/1679)
+[<span data-ttu-id="deace-138">追蹤問題 #1679</span><span class="sxs-lookup"><span data-stu-id="deace-138">Tracking Issue #1679</span></span>](https://github.com/aspnet/EntityFrameworkCore/issues/1679)
 
-<span data-ttu-id="1b6b6-139">這項功能並未包含在目前的預覽版中。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-139">This feature isn't included in the current preview.</span></span>
+<span data-ttu-id="deace-139">這項功能並未包含在目前的預覽版中。</span><span class="sxs-lookup"><span data-stu-id="deace-139">This feature isn't included in the current preview.</span></span>
 
-<span data-ttu-id="1b6b6-140">[查詢類型](xref:core/modeling/query-types)已於 EF Core 2.1 中推出，並在 EF Core 3.0 中視為沒有索引鍵的實體類型，這些類型代表可從資料庫讀取但無法更新的資料。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-140">[Query types](xref:core/modeling/query-types), introduced in EF Core 2.1 and considered entity types without keys in EF Core 3.0, represent data that can be read from the database, but cannot be updated.</span></span>
-<span data-ttu-id="1b6b6-141">此特性讓它們非常適用於大多時候的資料庫檢視，因此我們想要在對資料庫檢視進行反向工程時，將沒有索引鍵的實體類型建立作業自動化。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-141">This characteristic makes them an excellent fit for database views in most scenarios, so we plan to automate the creation of entity types without keys when reverse engineering database views.</span></span>
+<span data-ttu-id="deace-140">[查詢類型](xref:core/modeling/query-types)已於 EF Core 2.1 中推出，並在 EF Core 3.0 中視為沒有索引鍵的實體類型，這些類型代表可從資料庫讀取但無法更新的資料。</span><span class="sxs-lookup"><span data-stu-id="deace-140">[Query types](xref:core/modeling/query-types), introduced in EF Core 2.1 and considered entity types without keys in EF Core 3.0, represent data that can be read from the database, but cannot be updated.</span></span>
+<span data-ttu-id="deace-141">此特性讓它們非常適用於大多時候的資料庫檢視，因此我們想要在對資料庫檢視進行反向工程時，將沒有索引鍵的實體類型建立作業自動化。</span><span class="sxs-lookup"><span data-stu-id="deace-141">This characteristic makes them an excellent fit for database views in most scenarios, so we plan to automate the creation of entity types without keys when reverse engineering database views.</span></span>
 
-## <a name="property-bag-entities"></a><span data-ttu-id="1b6b6-142">屬性包實體</span><span class="sxs-lookup"><span data-stu-id="1b6b6-142">Property bag entities</span></span>
+## <a name="property-bag-entities"></a><span data-ttu-id="deace-142">屬性包實體</span><span class="sxs-lookup"><span data-stu-id="deace-142">Property bag entities</span></span>
 
-<span data-ttu-id="1b6b6-143">[追蹤問題 #13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) 和 [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)</span><span class="sxs-lookup"><span data-stu-id="1b6b6-143">[Tracking Issue #13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) and [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)</span></span>
+<span data-ttu-id="deace-143">[追蹤問題 #13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) 和 [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)</span><span class="sxs-lookup"><span data-stu-id="deace-143">[Tracking Issue #13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) and [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)</span></span>
 
-<span data-ttu-id="1b6b6-144">已著手進行這項功能的開發，但未包含在目前的預覽版中。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-144">Work on this feature has started but it isn't included in the current preview.</span></span> 
+<span data-ttu-id="deace-144">已著手進行這項功能的開發，但未包含在目前的預覽版中。</span><span class="sxs-lookup"><span data-stu-id="deace-144">Work on this feature has started but it isn't included in the current preview.</span></span> 
 
-<span data-ttu-id="1b6b6-145">此功能是有關於啟用會在已編製索引之屬性內而非正常屬性內存放資料的實體，也有關於能夠使用相同.NET 類別的執行個體 (可能是像 `Dictionary<string, object>` 這麼簡單的東西) 以代表相同 EF Core 模型中的不同實體類型。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-145">This feature is about enabling entities that store data in indexed properties instead of regular properties, and also about being able to use instances of the same .NET class (potentially something as simple as a `Dictionary<string, object>`) to represent different entity types in the same EF Core model.</span></span>
-<span data-ttu-id="1b6b6-146">此功能是在不需要聯結實體的情況下支援多對多關聯性 ([問題 #1368](https://github.com/aspnet/EntityFrameworkCore/issues/1368)) 的墊腳石，這是使用者最希望擁有的 EF Core 改良功能。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-146">This feature is a stepping stone to support many-to-many relationships without a join entity ([issue #1368](https://github.com/aspnet/EntityFrameworkCore/issues/1368)), which is one of the most requested improvements for EF Core.</span></span>
+<span data-ttu-id="deace-145">此功能是有關於啟用會在已編製索引之屬性內而非正常屬性內存放資料的實體，也有關於能夠使用相同.NET 類別的執行個體 (可能是像 `Dictionary<string, object>` 這麼簡單的東西) 以代表相同 EF Core 模型中的不同實體類型。</span><span class="sxs-lookup"><span data-stu-id="deace-145">This feature is about enabling entities that store data in indexed properties instead of regular properties, and also about being able to use instances of the same .NET class (potentially something as simple as a `Dictionary<string, object>`) to represent different entity types in the same EF Core model.</span></span>
+<span data-ttu-id="deace-146">此功能是在不需要聯結實體的情況下支援多對多關聯性 ([問題 #1368](https://github.com/aspnet/EntityFrameworkCore/issues/1368)) 的墊腳石，這是使用者最希望擁有的 EF Core 改良功能。</span><span class="sxs-lookup"><span data-stu-id="deace-146">This feature is a stepping stone to support many-to-many relationships without a join entity ([issue #1368](https://github.com/aspnet/EntityFrameworkCore/issues/1368)), which is one of the most requested improvements for EF Core.</span></span>
 
-## <a name="ef-63-on-net-core"></a><span data-ttu-id="1b6b6-147">.NET Core 上的 EF 6.3</span><span class="sxs-lookup"><span data-stu-id="1b6b6-147">EF 6.3 on .NET Core</span></span>
+## <a name="ef-63-on-net-core"></a><span data-ttu-id="deace-147">.NET Core 上的 EF 6.3</span><span class="sxs-lookup"><span data-stu-id="deace-147">EF 6.3 on .NET Core</span></span>
 
-[<span data-ttu-id="1b6b6-148">追蹤問題 EF6#271</span><span class="sxs-lookup"><span data-stu-id="1b6b6-148">Tracking Issue EF6#271</span></span>](https://github.com/aspnet/EntityFramework6/issues/271)
+[<span data-ttu-id="deace-148">追蹤問題 EF6#271</span><span class="sxs-lookup"><span data-stu-id="deace-148">Tracking Issue EF6#271</span></span>](https://github.com/aspnet/EntityFramework6/issues/271)
 
-<span data-ttu-id="1b6b6-149">已著手進行這項功能的開發，但未包含在目前的預覽版中。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-149">Work on this feature has started but it isn't included in the current preview.</span></span> 
+<span data-ttu-id="deace-149">已著手進行這項功能的開發，但未包含在目前的預覽版中。</span><span class="sxs-lookup"><span data-stu-id="deace-149">Work on this feature has started but it isn't included in the current preview.</span></span> 
 
-<span data-ttu-id="1b6b6-150">我們了解許多現有的應用程式都使用舊版 EF，而且因為要獲得 .NET Core 的優點而將它們移植到 EF Core 有時候需要非常多的精力。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-150">We understand that many existing applications use previous versions of EF, and that porting them to EF Core only to take advantage of .NET Core can sometimes require a significant effort.</span></span>
-<span data-ttu-id="1b6b6-151">因此，我們會讓下一個版本的 EF 6 能夠在 .NET Core 3.0 上直執行。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-151">For that reason, we will be adapting the next version of EF 6 to run on .NET Core 3.0.</span></span>
-<span data-ttu-id="1b6b6-152">我們這樣做的原因是要讓您能以變更最小的方式移植現有的應用程式。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-152">We are doing this to facilitate porting existing applications with minimal changes.</span></span>
-<span data-ttu-id="1b6b6-153">但免不了有些限制。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-153">There are going to be some limitations.</span></span> <span data-ttu-id="1b6b6-154">例如：</span><span class="sxs-lookup"><span data-stu-id="1b6b6-154">For example:</span></span>
-- <span data-ttu-id="1b6b6-155">除了 .NET Core 包含的 SQL Server 支援，新的提供者還必須使用其他資料庫</span><span class="sxs-lookup"><span data-stu-id="1b6b6-155">It will require new providers to work with other databases besides the included SQL Server support on .NET Core</span></span>
-- <span data-ttu-id="1b6b6-156">SQL Server 的空間支援將不會啟用</span><span class="sxs-lookup"><span data-stu-id="1b6b6-156">Spatial support with SQL Server won't be enabled</span></span>
+<span data-ttu-id="deace-150">我們了解許多現有的應用程式都使用舊版 EF，而且因為要獲得 .NET Core 的優點而將它們移植到 EF Core 有時候需要非常多的精力。</span><span class="sxs-lookup"><span data-stu-id="deace-150">We understand that many existing applications use previous versions of EF, and that porting them to EF Core only to take advantage of .NET Core can sometimes require a significant effort.</span></span>
+<span data-ttu-id="deace-151">因此，我們會讓下一個版本的 EF 6 能夠在 .NET Core 3.0 上直執行。</span><span class="sxs-lookup"><span data-stu-id="deace-151">For that reason, we will be adapting the next version of EF 6 to run on .NET Core 3.0.</span></span>
+<span data-ttu-id="deace-152">我們這樣做的原因是要讓您能以變更最小的方式移植現有的應用程式。</span><span class="sxs-lookup"><span data-stu-id="deace-152">We are doing this to facilitate porting existing applications with minimal changes.</span></span>
+<span data-ttu-id="deace-153">但免不了有些限制。</span><span class="sxs-lookup"><span data-stu-id="deace-153">There are going to be some limitations.</span></span> <span data-ttu-id="deace-154">例如：</span><span class="sxs-lookup"><span data-stu-id="deace-154">For example:</span></span>
+- <span data-ttu-id="deace-155">除了 .NET Core 包含的 SQL Server 支援，新的提供者還必須使用其他資料庫</span><span class="sxs-lookup"><span data-stu-id="deace-155">It will require new providers to work with other databases besides the included SQL Server support on .NET Core</span></span>
+- <span data-ttu-id="deace-156">SQL Server 的空間支援將不會啟用</span><span class="sxs-lookup"><span data-stu-id="deace-156">Spatial support with SQL Server won't be enabled</span></span>
 
-<span data-ttu-id="1b6b6-157">另請注意，EF 6 目前並未規劃任何新功能。</span><span class="sxs-lookup"><span data-stu-id="1b6b6-157">Note also that there are no new features planned for EF 6 at this point.</span></span>
+<span data-ttu-id="deace-157">另請注意，EF 6 目前並未規劃任何新功能。</span><span class="sxs-lookup"><span data-stu-id="deace-157">Note also that there are no new features planned for EF 6 at this point.</span></span>
