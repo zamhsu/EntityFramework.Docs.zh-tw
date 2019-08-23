@@ -3,12 +3,12 @@ title: 使用 WinForms 進行資料系結-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80fc5062-2f1c-4dbd-ab6e-b99496784b36
-ms.openlocfilehash: ad55ef4d496bbfe30eafcab9811c92989066519f
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.openlocfilehash: 3c7c58f5ded29c136bbdca1d81c64b07c53ce583
+ms.sourcegitcommit: 7391cc31193c1216ec9ed485709042ad0c2106cf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306555"
+ms.lasthandoff: 08/23/2019
+ms.locfileid: "69985475"
 ---
 # <a name="databinding-with-winforms"></a>使用 WinForms 進行資料系結
 此逐步解說示範如何將 POCO 類型系結至「主要-詳細資料」表單中的 Window Forms (WinForms) 控制項。 應用程式會使用 Entity Framework, 以資料庫中的資料填入物件、追蹤變更, 並將資料保存至資料庫。
@@ -29,14 +29,14 @@ ms.locfileid: "68306555"
 -   **檔案-&gt;新增-&gt;專案 ...。**
 -   在左窗格中選取 [ **windows** ], 然後在右窗格中選取 [ **windows FormsApplication** ]
 -   輸入**WinFormswithEFSample**作為名稱
--   選取 [確定] 
+-   選取 [確定]
 
 ## <a name="install-the-entity-framework-nuget-package"></a>安裝 Entity Framework NuGet 套件
 
 -   在方案總管中, 以滑鼠右鍵按一下**WinFormswithEFSample**專案
 -   選取 [**管理 NuGet 套件 ...** ]
 -   在 [管理 NuGet 套件] 對話方塊中, 選取 [**線上**] 索引標籤, 然後選擇 [ **EntityFramework** ] 套件
--   按一下 [安裝]  。  
+-   按一下 [安裝]。  
     > [!NOTE]
     > 除了 EntityFramework 元件之外, 也會新增 System.workflow.componentmodel.activity. DataAnnotations 的參考。 如果專案具有 system.string 實體的參考, 則會在安裝 EntityFramework 封裝時將它移除。 System.web 元件不再用於 Entity Framework 6 應用程式。
 
@@ -280,8 +280,8 @@ EF 會使用 T4 範本從您的模型產生程式碼。 隨附于 Visual Studio 
 
     ![資料來源](~/ef6/media/datasource.png)
 
--   按一下 **[完成]。** 如果 [*資料來源] 視窗未顯示, 請選取 [流覽-&gt;其他視窗-&gt;資料來源]* 
-    *
+-   按一下 **[完成]。**
+    如果 [資料來源] 視窗未顯示, 請選取 [ **View&gt; -其他視窗&gt; -資料來源**]
 -   按釘選圖示, 讓 [資料來源] 視窗不會自動隱藏。 如果視窗已經是可見的, 您可能需要按 [重新整理] 按鈕。
 
     ![資料來源2](~/ef6/media/datasource2.png)
@@ -297,7 +297,7 @@ EF 會使用 T4 範本從您的模型產生程式碼。 隨附于 Visual Studio 
     -   以滑鼠右鍵按一下 DataGridView 控制項, 然後選取 [**編輯資料行**]。
     -   選取 [ **ProductId** ] 資料行, 並將**ReadOnly**設定為**True**。
     -   選取 [**類別**清單] 資料行, 然後按 [**移除**] 按鈕。 對 [**類別**] 資料行執行相同的動作。
-    -   按 [確定]  。
+    -   按 [確定]。
 
     到目前為止, 我們在設計工具中將 DataGridView 控制項與 BindingSource 元件相關聯。 在下一節中, 我們將在程式碼後置中新增程式碼, 將 categoryBindingSource 設定為 DbCoNtext 目前所追蹤的實體集合。 當我們從類別下拖放產品時, WinForms 會負責將 productsBindingSource 屬性設定為 categoryBindingSource, 並將 productsBindingSource 屬性設為 Products。 因為此系結, 所以只有屬於目前所選分類的產品才會顯示在 productDataGridView 中。
 -   按一下滑鼠右鍵並選取 [**已啟用**], 以啟用導覽工具列上的 [**儲存**] 按鈕。
