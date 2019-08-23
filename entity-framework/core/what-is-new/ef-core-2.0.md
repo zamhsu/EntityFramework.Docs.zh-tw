@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: b5ac31722f49589f1494a3d8d1c8a7011a4cf9ce
-ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
+ms.openlocfilehash: 2712845512d9eb349ef3a7e14f4365327db0fcd6
+ms.sourcegitcommit: 7b7f774a5966b20d2aed5435a672a1edbe73b6fb
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2019
-ms.locfileid: "57463265"
+ms.lasthandoff: 08/17/2019
+ms.locfileid: "69565333"
 ---
 # <a name="new-features-in-ef-core-20"></a>EF Core 2.0 中的新功能
 
@@ -32,6 +32,7 @@ modelBuilder.Entity<Product>()
 modelBuilder.Entity<Product>().ToTable("Products");
 modelBuilder.Entity<ProductDetails>().ToTable("Products");
 ```
+如需此功能的詳細資訊，請詳讀[資料表分割章節](xref:core/modeling/table-splitting)。
 
 ### <a name="owned-types"></a>擁有的類型
 
@@ -91,7 +92,7 @@ public class BloggingContext : DbContext
     }
 }
 ```
-我們會定義模型層級篩選，以實作 ```Post``` 實體類型執行個體的多租用戶和虛刪除。 請注意如何使用 DbContext 執行個體層級屬性：```TenantId```。 模型層級篩選會使用正確內容執行個體 (即執行查詢的內容執行個體詢) 中的值。
+我們會定義模型層級篩選，以實作 `Post` 實體類型執行個體的多租用戶和虛刪除。 請注意如何使用 DbContext 執行個體層級屬性：`TenantId`。 模型層級篩選會使用正確內容執行個體 (即執行查詢的內容執行個體詢) 中的值。
 
 可能會使用 IgnoreQueryFilters() 運算子停用個別 LINQ 查詢的篩選。
 
@@ -159,7 +160,7 @@ builder.ApplyConfiguration(new CustomerConfiguration());
 
 在 ASP.NET Core 應用程式中使用 EF Core 的基本模式，通常包含將自訂 DbContext 類型註冊到相依性插入系統，以及稍後透過控制器中的建構函式參數來取得該類型的執行個體。 這表示會為每個要求建立新的 DbContext 執行個體。
 
-在 2.0 版中，我們引進在相依性插入中註冊自訂 DbContext 類型的新方式，而相依性插入會以透明方式引進可重複使用 DbContext 執行個體的集區中。 若要使用 DbContext 共用，請在服務註冊期間使用 ```AddDbContextPool```，而非 ```AddDbContext```：
+在 2.0 版中，我們引進在相依性插入中註冊自訂 DbContext 類型的新方式，而相依性插入會以透明方式引進可重複使用 DbContext 執行個體的集區中。 若要使用 DbContext 共用，請在服務註冊期間使用 `AddDbContextPool`，而非 `AddDbContext`：
 
 ``` csharp
 services.AddDbContextPool<BloggingContext>(
@@ -172,7 +173,7 @@ services.AddDbContextPool<BloggingContext>(
 
 ### <a name="limitations"></a>限制
 
-新的方法引進 DbContext 的 ```OnConfiguring()``` 方法中可進行作業的一些限制。
+新的方法引進 DbContext 的 `OnConfiguring()` 方法中可進行作業的一些限制。
 
 > [!WARNING]  
 > 如果您在不應該於要求間共用的衍生 DbContext 類別中維護自己的狀態 (例如私用欄位)，請避免使用 DbContext 共用。 EF Core 只會重設在將 DbContext 執行個體新增至集區之前所知道的狀態。
@@ -218,7 +219,7 @@ EF Core 支援透過不同的機制來自動產生索引鍵值。 使用此功�
 
 ### <a name="string-interpolation-in-fromsql-and-executesqlcommand"></a>FromSql 和 ExecuteSqlCommand 中的字串插值
 
-C# 6 已引進「字串插值」，此功能允許 C# 運算式直接內嵌在字串常值中，並提供不錯的方式在執行階段建置字串。 在 EF Core 2.0 中，我們已在接受原始 SQL 字串的兩個主要 API 中新增內插字串的特殊支援：```FromSql``` and ```ExecuteSqlCommand```. 這個新的支援允許以「安全」方式使用 C# 字串插值。 也就是說，可防止在執行階段動態建構 SQL 時可能發生的常見 SQL 插入錯誤。
+C# 6 已引進「字串插值」，此功能允許 C# 運算式直接內嵌在字串常值中，並提供不錯的方式在執行階段建置字串。 在 EF Core 2.0 中，我們已在接受原始 SQL 字串的兩個主要 API 中新增內插字串的特殊支援：`FromSql` and `ExecuteSqlCommand`. 這個新的支援允許以「安全」方式使用 C# 字串插值。 也就是說，可防止在執行階段動態建構 SQL 時可能發生的常見 SQL 插入錯誤。
 
 請看以下範例：
 

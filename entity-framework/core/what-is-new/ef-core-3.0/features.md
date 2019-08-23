@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
-ms.openlocfilehash: 7501a806271c9734e85e31845f260f2d512da077
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: a71aa01e81d9830d7b9e6cb01c200851100a15df
+ms.sourcegitcommit: 87e72899d17602f7526d6ccd22f3c8ee844145df
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/18/2019
-ms.locfileid: "58867953"
+ms.lasthandoff: 08/20/2019
+ms.locfileid: "69628421"
 ---
 # <a name="new-features-included-in-ef-core-30-currently-in-preview"></a>EF Core 3.0 (目前為預覽版) 中包含的新功能
 
@@ -65,6 +65,7 @@ public class Order
     public OrderDetails Details { get; set; }
 }
 
+[Owned]
 public class OrderDetails
 {
     public int Id { get; set; }
@@ -72,8 +73,9 @@ public class OrderDetails
 }
 ```
 
-從 EF Core 3.0 開始，如果 `OrderDetails` 由 `Order` 擁有，或明確對應至相同的資料表，您將能夠新增 `Order` 而不需要 `OrderDetails` 及其所有的 `OrderDetails` 屬性，但是主索引鍵將對應至可為 Null 的資料行。
-查詢時，如果任何必要的屬性不具有值，或如果其具有主索引鍵以外的不必要屬性，且所有屬性都是 `null`，則 EF Core 會將 `OrderDetails` 設為 `null`。
+從 EF Core 3.0 開始，如果 `OrderDetails` 由 `Order` 所擁有，或明確地對應到相同的資料表，即可新增 `Order` 而無需 `OrderDetails` 及所有 `OrderDetails` 屬性，但主索引鍵將會對應至可為 Null 的資料行。
+
+進行查詢時，如果任何其必要的屬性不具有值，或如果其具有主索引鍵以外的非必要屬性，且所有屬性皆為 `null`，則 EF Core 會將 `OrderDetails` 設定為 `null`。
 
 ## <a name="c-80-support"></a>C# 8.0 支援
 

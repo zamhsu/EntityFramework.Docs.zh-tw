@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: c73663412efcd93c04892f193d4f5a2485724e22
-ms.sourcegitcommit: 755a15a789631cc4ea581e2262a2dcc49c219eef
+ms.openlocfilehash: 884cc6611b986fb213d99d3d2fc69d7bebe34aa2
+ms.sourcegitcommit: 7b7f774a5966b20d2aed5435a672a1edbe73b6fb
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/25/2019
-ms.locfileid: "68497533"
+ms.lasthandoff: 08/17/2019
+ms.locfileid: "69565325"
 ---
 # <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>EF Core 3.0 (目前為預覽版) 包含的中斷性變更
 
@@ -25,6 +25,7 @@ ms.locfileid: "68497533"
 | **重大變更**                                                                                               | **影響** |
 |:------------------------------------------------------------------------------------------------------------------|------------|
 | [不會再於用戶端評估 LINQ 查詢](#linq-queries-are-no-longer-evaluated-on-the-client)         | High       |
+| [EF Core 3.0 以 .NET Standard 2.1 為目標，而非以 .NET Standard 2.0 為目標](#netstandard21) | High      |
 | [EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分](#dotnet-ef) | High      |
 | [FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名](#fromsql) | High      |
 | [查詢類型已與實體類型合併](#qt) | High      |
@@ -33,6 +34,7 @@ ms.locfileid: "68497533"
 | [DeleteBehavior.Restrict 具有更簡潔的語意](#deletebehavior) | Medium      |
 | [自有類型關聯性的設定 API 已變更](#config) | Medium      |
 | [各個屬性會使用獨立的記憶體內部整數索引鍵產生](#each) | Medium      |
+| [無追蹤查詢已不再執行身分識別解析](#notrackingresolution) | Medium      |
 | [中繼資料 API 變更](#metadata-api-changes) | Medium      |
 | [提供者獨有的中繼資料 API 變更](#provider) | Medium      |
 | [已移除 UseRowNumberForPaging](#urn) | Medium      |
@@ -102,6 +104,29 @@ ms.locfileid: "68497533"
 **風險降低**
 
 如果無法完整轉譯查詢，請以可轉譯的格式來重寫查詢，或是使用 `AsEnumerable()`、`ToList()` 或類似函數來明確將資料帶回用戶端，以便接著使用 LINQ-to-Objects 加以處理。
+
+<a name="netstandard21"></a>
+### <a name="ef-core-30-targets-net-standard-21-rather-than-net-standard-20"></a>EF Core 3.0 以 .NET Standard 2.1 為目標，而非以 .NET Standard 2.0 為目標
+
+[追蹤問題 #15498](https://github.com/aspnet/EntityFrameworkCore/issues/15498)
+
+此變更已於 EF Core 3.0-preview 7 推出。
+
+**舊行為**
+
+在 3.0 之前，EF Core 以 .NET Standard 2.0 為目標，且執行於支援該標準的所有平台上，包括 .NET Framework。
+
+**新行為**
+
+從 3.0 開始，EF Core 以 .NET Standard 2.1 為目標，且執行於支援此標準的所有平台上。 這不包括 .NET Framework。
+
+**原因**
+
+此為跨 .NET 技術的策略性決策之一部分，著重於 .NET Core 與其他現代化 .NET 平台 (例如 Xamarin) 的能力。
+
+**風險降低**
+
+請考慮移至現代化的 .NET 平台。 如果無法如此做，請繼續使用 EF Core 2.1 或 EF Core 2.2，這兩者皆支援 .NET Framework。
 
 <a name="no-longer"></a>
 ### <a name="entity-framework-core-is-no-longer-part-of-the-aspnet-core-shared-framework"></a>Entity Framework Core 不再屬於 ASP.NET Core 共用架構
@@ -222,6 +247,34 @@ context.Products.FromSqlInterpolated(
 **風險降低**
 
 `FromSql` 引動過程應該直接移至它們適用的 `DbSet`。
+
+<a name="notrackingresolution"></a>
+### <a name="no-tracking-queries-no-longer-perform-identity-resolution"></a>無追蹤查詢已不再執行身分識別解析
+
+[追蹤問題 #13518](https://github.com/aspnet/EntityFrameworkCore/issues/13518)
+
+此變更已於 EF Core 3.0-preview 6 推出。
+
+**舊行為**
+
+在 EF Core 3.0 之前，每次出現具有給定類型與識別碼的實體時，皆會使用相同的實體執行個體。 如此符合追蹤查詢的行為。 例如，下列查詢︰
+
+```C#
+var results = context.Products.Include(e => e.Category).AsNoTracking().ToList();
+```
+會為每個與給定類別相關聯的 `Product`，傳回相同的 `Category` 執行個體。
+
+**新行為**
+
+從 EF Core 3.0 開始，當具有給定類型與識別碼的實體，出現在傳回圖形的不同位置時，將會建立不同的實體執行個體。 例如，即使當兩個產品與相同的類別相關聯，上述查詢現在會為每個 `Category` 傳回新的 `Product` 執行個體。
+
+**原因**
+
+身分識別解析 (也就是，決定實體與之前所發生的實體具有相同的類型與識別碼) 會加入額外的效能與記憶體負荷。 這通常會執行為何一開始就使用無追蹤查詢的計數器。 此外，雖然身分識別解析有時非常有用，但若實體要序列化並會傳送給用戶端 (對無追蹤查詢而言很常見)，則不需要。
+
+**風險降低**
+
+若需要身分識別解析，請使用追蹤查詢。
 
 <a name="qe"></a>
 
@@ -1222,8 +1275,8 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 提供者特定的擴充方法會壓平合併：
 
 * `IProperty.Relational().ColumnName` -> `IProperty.GetColumnName()`
-* `IEntityType.SqlServer().IsMemoryOptimized` -> `IEntityType.GetSqlServerIsMemoryOptimized()`
-* `PropertyBuilder.UseSqlServerIdentityColumn()` -> `PropertyBuilder.ForSqlServerUseIdentityColumn()`
+* `IEntityType.SqlServer().IsMemoryOptimized` -> `IEntityType.IsMemoryOptimized()`
+* `PropertyBuilder.UseSqlServerIdentityColumn()` -> `PropertyBuilder.UseIdentityColumn()`
 
 **原因**
 
@@ -1260,7 +1313,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 <a name="sqlite3"></a>
 
-### <a name="microsoftentityframeworkcoresqlite-now-depends-on-sqlitepclrawbundleesqlite3"></a>Microsoft.EntityFrameworkCore.Sqlite 現在相依於 SQLitePCLRaw.bundle_e_sqlite3
+### <a name="microsoftentityframeworkcoresqlite-now-depends-on-sqlitepclrawbundle_e_sqlite3"></a>Microsoft.EntityFrameworkCore.Sqlite 現在相依於 SQLitePCLRaw.bundle_e_sqlite3
 
 **舊行為**
 
