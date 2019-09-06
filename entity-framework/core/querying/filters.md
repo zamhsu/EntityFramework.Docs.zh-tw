@@ -3,12 +3,12 @@ title: 全域查詢篩選條件 - EF Core
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: e1cb9f5afc54aaa12e5880ace606277b00911c06
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
-ms.translationtype: HT
+ms.openlocfilehash: c9bbb8a5889834ea078ddb7e432863b3d0cf2ffe
+ms.sourcegitcommit: 0cc9578fd49802789a00c0044b4e57325476ca2e
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306465"
+ms.lasthandoff: 09/04/2019
+ms.locfileid: "70271450"
 ---
 # <a name="global-query-filters"></a>全域查詢篩選條件
 
@@ -41,6 +41,9 @@ ms.locfileid: "68306465"
 
 > [!TIP]
 > 請注意 DbContext 執行個體層級欄位的使用方式：`_tenantId` 用來設定目前的租用戶。 模型層級篩選將會使用正確內容執行個體 (亦即，執行查詢的執行個體) 中的值。
+
+> [!NOTE]
+> 目前不能在相同的實體上定義多個查詢篩選準則-只會套用最後一個。 不過，您可以使用邏輯_AND_運算子（[ `&&`中C#](https://docs.microsoft.com/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-)的）定義具有多個條件的單一篩選。
 
 ## <a name="disabling-filters"></a>停用篩選條件
 

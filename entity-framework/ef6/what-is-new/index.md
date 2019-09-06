@@ -3,12 +3,12 @@ title: 新功能 - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 41d1f86b-ce66-4bf2-8963-48514406fb4c
-ms.openlocfilehash: fcd6339f67a1512dd66220c59537d12cf0b22620
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 01dc618954da5dbd12fbd37c2c47701ce251be92
+ms.sourcegitcommit: 0cc9578fd49802789a00c0044b4e57325476ca2e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490294"
+ms.lasthandoff: 09/04/2019
+ms.locfileid: "70271447"
 ---
 # <a name="whats-new-in-ef6"></a>EF6 的新功能
 
@@ -29,7 +29,7 @@ ms.locfileid: "45490294"
 - 從現有資料庫產生模型時，SQL Server 效能降低的因應措施 [#4](https://github.com/aspnet/entityframework6/issues/4)
 - 支援為 SQL Server 上的大型模型更新模型[#185](https://github.com/aspnet/EntityFramework6/issues/185)
 
-EF Tools 這個新版本中的另一項改進，是在新專案中建立模型時，安裝 EF 6.2 執行階段。 利用舊版的 Visual Studio，就可以安裝 NuGet 套件的對應版本來使用 EF 6.2 執行階段 (以及 EF 的任何過去版本)。
+EF Tools 這個新版本有另一項功能改進，就是在新專案中建立模型時，會安裝 EF 6.2 執行階段。 利用舊版的 Visual Studio，就可以安裝 NuGet 套件的對應版本來使用 EF 6.2 執行階段 (以及 EF 的任何過去版本)。
 
 ### <a name="ef-62-runtime"></a>EF 6.2 執行階段
 
@@ -44,7 +44,7 @@ EF 6.2 執行階段已於 2017 年 10 月發行至 NuGet。
 - Migrate.exe 現在支援 -script 選項 [#240](https://github.com/aspnet/EntityFramework6/issues/240)
 - EF6 現在可以使用 SQL Server 中的序列所產生的索引鍵值 [#165](https://github.com/aspnet/EntityFramework6/issues/165)
 - SQL Azure 執行策略之暫時性錯誤的更新清單 [#83](https://github.com/aspnet/EntityFramework6/issues/83)
-- Bug：重試查詢或 SQL 命令失敗，並顯示「SqlParameter 已由另一個 SqlParameterCollection 所包含」 [#81](https://github.com/aspnet/EntityFramework6/issues/81)
+- Bug：重試查詢或 SQL 命令失敗，並顯示「SqlParameter 已包含在另一個 SqlParameterCollection 中」[#81](https://github.com/aspnet/EntityFramework6/issues/81)
 - Bug：DbQuery.ToString() 評估經常在偵錯工具中逾時 [#73](https://github.com/aspnet/EntityFramework6/issues/73)
 
 ## <a name="future-releases"></a>未來版本
