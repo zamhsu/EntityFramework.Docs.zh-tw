@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
-ms.openlocfilehash: a71aa01e81d9830d7b9e6cb01c200851100a15df
-ms.sourcegitcommit: 87e72899d17602f7526d6ccd22f3c8ee844145df
-ms.translationtype: HT
+ms.openlocfilehash: d61fa884f4669daa220ffc96ae59dd63518e6d5a
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/20/2019
-ms.locfileid: "69628421"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921680"
 ---
 # <a name="new-features-included-in-ef-core-30-currently-in-preview"></a>EF Core 3.0 (目前為預覽版) 中包含的新功能
 
@@ -94,15 +94,6 @@ public class OrderDetails
 
 [查詢類型](xref:core/modeling/query-types)已於 EF Core 2.1 中推出，並在 EF Core 3.0 中視為沒有索引鍵的實體類型，這些類型代表可從資料庫讀取但無法更新的資料。
 此特性讓它們非常適用於大多時候的資料庫檢視，因此我們想要在對資料庫檢視進行反向工程時，將沒有索引鍵的實體類型建立作業自動化。
-
-## <a name="property-bag-entities"></a>屬性包實體
-
-[追蹤問題 #13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) 和 [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)
-
-已著手進行這項功能的開發，但未包含在目前的預覽版中。 
-
-此功能是有關於啟用會在已編製索引之屬性內而非正常屬性內存放資料的實體，也有關於能夠使用相同.NET 類別的執行個體 (可能是像 `Dictionary<string, object>` 這麼簡單的東西) 以代表相同 EF Core 模型中的不同實體類型。
-此功能是在不需要聯結實體的情況下支援多對多關聯性 ([問題 #1368](https://github.com/aspnet/EntityFrameworkCore/issues/1368)) 的墊腳石，這是使用者最希望擁有的 EF Core 改良功能。
 
 ## <a name="ef-63-on-net-core"></a>.NET Core 上的 EF 6.3
 

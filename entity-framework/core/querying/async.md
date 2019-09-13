@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 01/24/2017
 ms.assetid: b6429b14-cba0-4af4-878f-b829777c89cb
 uid: core/querying/async
-ms.openlocfilehash: de00e25279e29355a4eb3e55597a8578ceccecb6
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
-ms.translationtype: HT
+ms.openlocfilehash: 415c57df599f1cb1a255f01d1072890fedfd6d2b
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993561"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921685"
 ---
 # <a name="asynchronous-queries"></a>非同步查詢
 
@@ -23,4 +23,4 @@ Entity Framework Core 提供一組非同步擴充方法，這組方法可用來�
 > [!IMPORTANT]  
 > EF Core 非同步擴充方法定義於 `Microsoft.EntityFrameworkCore` 命名空間中。 您必須先匯入此命名空間，才能使用方法。
 
-[!code-csharp[Main](../../../samples/core/Querying/Querying/Async/Sample.cs#Sample)]
+[!code-csharp[Main](../../../samples/core/Querying/Async/Sample.cs#Sample)]

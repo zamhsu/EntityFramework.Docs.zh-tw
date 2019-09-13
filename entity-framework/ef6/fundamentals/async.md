@@ -3,12 +3,12 @@ title: 非同步查詢和儲存-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: bf2039110962e8dd114242dcd0b9454963750774
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.openlocfilehash: ae578976ffc88b407ef0aaa0017935005bedd093
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306588"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921621"
 ---
 # <a name="async-query-and-save"></a>非同步查詢和儲存
 > [!NOTE]
@@ -221,12 +221,14 @@ EF6 引進了非同步查詢的支援, 並使用 .NET 4.5 中引進的[async 和
 
 既然程式碼是非同步, 我們就可以在執行程式時觀察到不同的執行流程:
 
-1.  在命令傳送到資料庫之後, **SaveChanges**會開始*將新的**Blog**推送至資料庫, 目前的受控執行緒上不再需要計算時間。**PerformDatabaseOperations**方法會傳回 （即使它尚未完成執行時），在 Main 方法中的程式流程會繼續。*
-2.  **每日寫入至主控台**
-    *因為沒有其他工作的 Main 方法中執行時，managed 的執行緒會封鎖在等候資料庫作業完成之前呼叫。完成後, 將會執行 **PerformDatabaseOperations** 的其餘部分*。
-3.  **SaveChanges**完成
-4.  所有**blog**的查詢都會再次傳送至資料庫 *, 而在資料庫中處理查詢時, managed 執行緒可以免費執行其他工作。由於所有其他的執行都已完成, 因此執行緒只會在等候呼叫時暫停。*
-5.  查詢傳回並將結果寫入**主控台**
+1. **SaveChanges**會開始將新的**Blog**推送至資料庫  
+    *將命令傳送至資料庫之後，目前的受控執行緒上就不再需要計算時間。PerformDatabaseOperations**方法會傳回 （即使它尚未完成執行時），在 Main 方法中的程式流程會繼續。*
+2. **日期的引號會寫入主控台**  
+    *由於 Main 方法中沒有其他要執行的工作，因此在資料庫作業完成之前，managed 執行緒會在等候呼叫上遭到封鎖。完成後, 將會執行 **PerformDatabaseOperations** 的其餘部分*。
+3.  **SaveChanges**完成  
+4.  所有**blog**的查詢都會傳送到資料庫  
+    *同樣地，在資料庫中處理查詢時，managed 執行緒也可以自由執行其他工作。由於所有其他的執行都已完成，因此執行緒只會在等候呼叫時暫停。*
+5.  查詢傳回並將結果寫入**主控台**  
 
 ![非同步輸出](~/ef6/media/asyncoutput.png) 
 

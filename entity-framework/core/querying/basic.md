@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: ab6e35f1-397f-41c0-9ef4-85aec5466377
 uid: core/querying/basic
-ms.openlocfilehash: 6a381f419cb0958ea0835070e22fe7a3212457d7
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
-ms.translationtype: HT
+ms.openlocfilehash: 49daa0d37175244617993cc6e911cbd59d27079f
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993701"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921745"
 ---
 # <a name="basic-queries"></a>基本查詢
 
@@ -24,7 +24,7 @@ ms.locfileid: "42993701"
 
 ## <a name="loading-all-data"></a>載入所有資料
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/Basics/Sample.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/Basics/Sample.cs)] -->
 ``` csharp
 using (var context = new BloggingContext())
 {
@@ -34,7 +34,7 @@ using (var context = new BloggingContext())
 
 ## <a name="loading-a-single-entity"></a>載入單一實體
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/Basics/Sample.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/Basics/Sample.cs)] -->
 ``` csharp
 using (var context = new BloggingContext())
 {
@@ -45,7 +45,7 @@ using (var context = new BloggingContext())
 
 ## <a name="filtering"></a>篩選
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/Basics/Sample.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/Basics/Sample.cs)] -->
 ``` csharp
 using (var context = new BloggingContext())
 {
