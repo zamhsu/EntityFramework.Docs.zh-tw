@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 884cc6611b986fb213d99d3d2fc69d7bebe34aa2
-ms.sourcegitcommit: 7b7f774a5966b20d2aed5435a672a1edbe73b6fb
-ms.translationtype: HT
+ms.openlocfilehash: 10a0f0edc5f98baea26b1a5b9c0aa869b1df01af
+ms.sourcegitcommit: df181e201365c20610ba56dcd5c5ed30cfda00c2
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/17/2019
-ms.locfileid: "69565325"
+ms.lasthandoff: 09/15/2019
+ms.locfileid: "70997849"
 ---
 # <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>EF Core 3.0 (目前為預覽版) 包含的中斷性變更
 
@@ -22,13 +22,13 @@ ms.locfileid: "69565325"
 
 ## <a name="summary"></a>總結
 
-| **重大變更**                                                                                               | **影響** |
+| **重大變更**                                                                                               | **產生** |
 |:------------------------------------------------------------------------------------------------------------------|------------|
-| [不會再於用戶端評估 LINQ 查詢](#linq-queries-are-no-longer-evaluated-on-the-client)         | High       |
-| [EF Core 3.0 以 .NET Standard 2.1 為目標，而非以 .NET Standard 2.0 為目標](#netstandard21) | High      |
-| [EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分](#dotnet-ef) | High      |
-| [FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名](#fromsql) | High      |
-| [查詢類型已與實體類型合併](#qt) | High      |
+| [不會再於用戶端評估 LINQ 查詢](#linq-queries-are-no-longer-evaluated-on-the-client)         | 高       |
+| [EF Core 3.0 以 .NET Standard 2.1 為目標，而非以 .NET Standard 2.0 為目標](#netstandard21) | 高      |
+| [EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分](#dotnet-ef) | 高      |
+| [FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名](#fromsql) | 高      |
+| [查詢類型已與實體類型合併](#qt) | 高      |
 | [Entity Framework Core 不再屬於 ASP.NET Core 共用架構](#no-longer) | Medium      |
 | [根據預設，串聯刪除現在會立即發生](#cascade) | Medium      |
 | [DeleteBehavior.Restrict 具有更簡潔的語意](#deletebehavior) | Medium      |
@@ -257,7 +257,7 @@ context.Products.FromSqlInterpolated(
 
 **舊行為**
 
-在 EF Core 3.0 之前，每次出現具有給定類型與識別碼的實體時，皆會使用相同的實體執行個體。 如此符合追蹤查詢的行為。 例如，下列查詢︰
+在 EF Core 3.0 之前，每次出現具有給定類型與識別碼的實體時，皆會使用相同的實體執行個體。 如此符合追蹤查詢的行為。 例如，下列查詢：
 
 ```C#
 var results = context.Products.Include(e => e.Category).AsNoTracking().ToList();
@@ -381,7 +381,7 @@ public string Id { get; set; }
 
 **原因**
 
-這項變更的目的是為了改善資料繫結和稽核情節的體驗，在這些情節中了解呼叫 `SaveChanges`「之前」  將刪除哪些實體是很重要的。
+這項變更的目的是為了改善資料繫結和稽核情節的體驗，在這些情節中了解呼叫 `SaveChanges`「之前」將刪除哪些實體是很重要的。
 
 **風險降低**
 
@@ -498,7 +498,7 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
 
 **原因**
 
-這項變更的目的是為了更清楚地劃分設定自有類型本身，以及設定自有類型的「關聯性」  。
+這項變更的目的是為了更清楚地劃分設定自有類型本身，以及設定自有類型的「關聯性」。
 如此可避免 `HasForeignKey` 等方法的模稜兩可和混淆。
 
 **風險降低**
@@ -908,7 +908,7 @@ modelBuilder
 **風險降低**
 
 僅限欄位屬性必須命名為與其所對應欄位相同的名稱。
-在之後的 EF Core 3.0 預覽中，我們計劃重新啟用明確設定與屬性名稱不同的欄位名稱：
+在3.0 以後的 EF Core 版本中，我們計畫重新啟用明確設定與屬性名稱不同的功能變數名稱（請參閱問題[#15307](https://github.com/aspnet/EntityFrameworkCore/issues/15307)）：
 
 ```C#
 modelBuilder
