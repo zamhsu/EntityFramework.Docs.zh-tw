@@ -4,21 +4,17 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 10a0f0edc5f98baea26b1a5b9c0aa869b1df01af
-ms.sourcegitcommit: df181e201365c20610ba56dcd5c5ed30cfda00c2
+ms.openlocfilehash: 04487291f24bb702dad4b497c34234afdd5e3c9a
+ms.sourcegitcommit: d01fc19aa42ca34c3bebccbc96ee26d06fcecaa2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/15/2019
-ms.locfileid: "70997849"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71005591"
 ---
-# <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>EF Core 3.0 (目前為預覽版) 包含的中斷性變更
-
-> [!IMPORTANT]
-> 請注意，後續版本的功能集與上市時間，隨時可能會變動，此外，即使我們試圖將此頁面保持在最新狀態，可能還是無法隨時反映我們最新的計劃。
-
-當您將針對 EF Core 2.2.x 開發的應用程式升級為 3.0.0 時，下列 API 和行為變更可能會中斷這些應用程式。
+# <a name="breaking-changes-included-in-ef-core-30"></a>EF Core 3.0 中包含的重大變更
+下列 API 和行為變更可能會在將現有的應用程式升級至3.0.0 時中斷。
 這些變更預期只會影響[提供者變更](../../providers/provider-log.md)底下記載的資料庫提供者。
-本文不會記載從某一 3.0 預覽版引進另一個 3.0 預覽版的新功能中斷。
+從 3.0 preview 中斷至另一個 3.0 preview 未記載于此處。
 
 ## <a name="summary"></a>總結
 

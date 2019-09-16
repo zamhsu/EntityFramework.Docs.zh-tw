@@ -4,60 +4,83 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
-ms.openlocfilehash: d61fa884f4669daa220ffc96ae59dd63518e6d5a
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: 528733d6eec33de2c9538541a6ed5be704b9d433
+ms.sourcegitcommit: d01fc19aa42ca34c3bebccbc96ee26d06fcecaa2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921680"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71005561"
 ---
-# <a name="new-features-included-in-ef-core-30-currently-in-preview"></a>EF Core 3.0 (目前為預覽版) 中包含的新功能
-
-> [!IMPORTANT]
-> 請注意，後續版本的功能集與上市時間，隨時可能會變動，此外，即使我們試圖將此頁面保持在最新狀態，可能還是無法隨時反映我們最新的計劃。
+# <a name="new-features-included-in-ef-core-30"></a>EF Core 3.0 中包含的新功能
 
 下列清單包含為 EF Core 3.0 新規劃的重要功能。
-大部分功能並未包含在目前的預覽版中，但隨著逐步往 RTM 發展，多數功能終將能夠使用。
 
-原因是在發行的一開始，我們即著重於實作規劃的[中斷性變更](xref:core/what-is-new/ef-core-3.0/breaking-changes)。
-許多中斷性變更本身使得 EF Core 有所改善。
-此外，還需要更多重大變更，以便改善能更加詳盡。 
-
-如需 Bug 修正和開發中增強功能的完整清單，您可以在[我們的問題追蹤中查看此查詢](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+milestone%3A3.0.0+sort%3Areactions-%2B1-desc)。
+EF Core 3.0 是一個主要版本，也包含許多[重大變更](xref:core/what-is-new/ef-core-3.0/breaking-changes)，也就是可能對現有應用程式造成負面影響的 API 改進。  
 
 ## <a name="linq-improvements"></a>LINQ 改善 
 
-[追蹤問題 #12795](https://github.com/aspnet/EntityFrameworkCore/issues/12795)
+LINQ 可讓您撰寫資料庫查詢，而不需要離開您所選擇的語言，利用豐富型別資訊來提供 IntelliSense 和編譯時間型別檢查。
+但是 LINQ 也可以讓您撰寫不限數目的複雜查詢，其中包含任意運算式（方法呼叫或作業）。
+處理所有這些組合一直是 LINQ 提供者的重大挑戰。
+在 EF Core 3.0 中，我們已重寫 LINQ 執行，讓您能夠將更多運算式轉譯為 SQL，以在更多情況下產生有效率的查詢，以避免無法偵測到效率不佳的查詢，並讓我們更輕鬆地引進新的查詢功能和效能 improvementswithout 中斷現有的應用程式和資料提供者。
 
-已著手進行這項功能的開發，但未包含在目前的預覽版中。
+### <a name="client-evaluation"></a>用戶端評估
 
-LINQ 可讓您以偏好的語言撰寫資料庫查詢，進而利用豐富的型別資訊優勢來取得 IntelliSense 與編譯階段型別檢查。
-但是 LINQ 也可以讓您撰寫不限數目的複雜查詢，這通常是 LINQ 提供者所面臨的艱難挑戰。
-在 EF Core 的前幾個版本中，我們透過搞清楚查詢的哪些部分可以轉譯為 SQL，接著允許查詢的剩餘部分在用戶端上的記憶體中執行來克服其中的一些問題。
-這個用戶端執行在某些案例中是令人滿意的，但在其他案例中會導致無效率的查詢，而在應用程式部署到生產階段之前，您可能無法發現這種無效率的查詢。
-在 EF Core 3.0 中，我們計劃在 LINQ 實作的運作方式及其測試方式進行重大變更。
-目標是讓它更強固 (例如避免中斷修補程式版本中的查詢)、能夠將更多運算式正確地轉譯為 SQL、在更多案例中產生有效率的查詢，以及防止未偵測到無效率查詢的情況。
+EF Core 3.0 中的主要設計變更，必須與它如何處理無法轉譯成 SQL 或參數的 LINQ 運算式有關：
+
+在前幾個版本中，EF Core 只會找出查詢的哪些部分可以轉譯成 SQL，並在用戶端上執行查詢的其餘部分。
+在某些情況下，這種類型的用戶端執行可能是必要的，但在許多其他情況下，它可能會導致沒有效率的查詢。
+例如，如果 EF Core 2.2 無法轉譯`Where()`呼叫中的述詞，它會執行不含篩選的 SQL 語句、讀取資料庫中所有的資料列，然後在記憶體中進行篩選。
+如果資料庫包含少量的資料列，這可能是可接受的，但如果資料庫包含大量或多個資料列，則會導致嚴重的效能問題，甚至是應用程式失敗。
+在 EF Core 3.0 中，我們已將用戶端評估限制為僅適用于最上層投射（最後一個`Select()`呼叫）。
+當 EF Core 3.0 偵測到無法在查詢中的任何地方轉譯的運算式時，就會擲回執行時間例外狀況。
 
 ## <a name="cosmos-db-support"></a>Cosmos DB 支援 
 
-[追蹤問題 #8443](https://github.com/aspnet/EntityFrameworkCore/issues/8443)
-
-這項功能包含在目前的預覽版中，但尚未完成。 
-
-我們正在處理適用於 EF Core 的 Cosmos DB 提供者，以讓開發人員熟悉 EF 程式設計模型，以輕鬆地使用 Azure Cosmos DB 做為應用程式資料庫。
+適用于 EF Core 的 Cosmos DB 提供者可讓熟悉 EF 程式設計模型的開發人員輕鬆地以應用程式資料庫為目標 Azure Cosmos DB。
 目標是讓 .NET 開發人員能更輕鬆地發揮 Cosmos DB 的一些優點，例如全域散發、"Always On" 可用性、彈性的延展性，以及低延遲。
 提供者將啟用大部分的 EF Core 功能，例如自動變更追蹤、LINQ 與值轉換 (根據 Cosmos DB 中的 SQL API)。
-我們在 EF Core 2.2 之前開始此工作，而且[我們已建立一些預覽版提供者供使用](https://blogs.msdn.microsoft.com/dotnet/2018/10/17/announcing-entity-framework-core-2-2-preview-3/)。
-新的計畫是以 EF Core 3.0 為基礎繼續開發提供者。 
+
+## <a name="c-80-support"></a>C# 8.0 支援
+
+EF Core 3.0 會利用8.0 中C#的一些新功能：
+
+### <a name="asynchronous-streams"></a>非同步資料流
+
+非同步查詢結果現在會使用新的標準`IAsyncEnumerable<T>`介面公開，並可使用`await foreach`加以取用。
+
+``` csharp
+var orders = 
+  from o in context.Orders
+  where o.Status == OrderStatus.Pending
+  select o;
+
+await foreach(var o in orders)
+{
+  Proccess(o);
+} 
+```
+
+### <a name="nullable-reference-types"></a>可為 Null 的參考型別 
+
+當您的程式碼中啟用這項新功能時，EF Core 可能會導致參考類型的屬性（例如，字串或導覽屬性等基本類型）的 null 屬性，決定資料庫中資料行和關聯性的 null 屬性。
+
+## <a name="interception"></a>攔截
+
+EF Core 3.0 中的新攔截 API，可讓您以程式設計方式觀察和修改低層級資料庫作業的結果，這是 EF Core 正常運作的一部分，例如開啟連接、initating 交易，以及執行命令。 
+
+## <a name="reverse-engineering-of-database-views"></a>資料庫檢視的反向工程
+
+沒有索引鍵的實體類型（先前稱為[查詢類型](xref:core/modeling/query-types)）代表可從資料庫讀取但無法更新的資料。
+這項特性讓它們成為在大多數情況下對應資料庫檢視的絕佳大小，因此，我們會在反向工程資料庫流覽時，自動建立不含索引鍵的實體類型。
 
 ## <a name="dependent-entities-sharing-the-table-with-the-principal-are-now-optional"></a>現在可選用以主體來共用資料表的相依實體
 
-[追蹤問題 #9005](https://github.com/aspnet/EntityFrameworkCore/issues/9005)
+從 EF Core 3.0 開始，如果 `OrderDetails` 由 `Order` 所擁有，或明確地對應到相同的資料表，即可新增 `Order` 而無需 `OrderDetails` 及所有 `OrderDetails` 屬性，但主索引鍵將會對應至可為 Null 的資料行。
 
-這項功能將於 EF Core 3.0-preview 4 中引進。
+進行查詢時，如果任何其必要的屬性不具有值，或如果其具有主索引鍵以外的非必要屬性，且所有屬性皆為 `null`，則 EF Core 會將 `OrderDetails` 設定為 `null`。
 
-請考慮下列模型：
-```C#
+``` csharp
 public class Order
 {
     public int Id { get; set; }
@@ -73,39 +96,17 @@ public class OrderDetails
 }
 ```
 
-從 EF Core 3.0 開始，如果 `OrderDetails` 由 `Order` 所擁有，或明確地對應到相同的資料表，即可新增 `Order` 而無需 `OrderDetails` 及所有 `OrderDetails` 屬性，但主索引鍵將會對應至可為 Null 的資料行。
-
-進行查詢時，如果任何其必要的屬性不具有值，或如果其具有主索引鍵以外的非必要屬性，且所有屬性皆為 `null`，則 EF Core 會將 `OrderDetails` 設定為 `null`。
-
-## <a name="c-80-support"></a>C# 8.0 支援
-
-[追蹤問題 #12047](https://github.com/aspnet/EntityFrameworkCore/issues/12047)
-[追蹤問題 #10347](https://github.com/aspnet/EntityFrameworkCore/issues/10347)
-
-已著手進行這項功能的開發，但未包含在目前的預覽版中。
-
-我們想要讓客戶在使用 EF Core 時，能夠利用 [C# 8.0 即將推出的一些新功能](https://blogs.msdn.microsoft.com/dotnet/2018/11/12/building-c-8-0/)，例如非同步串流 (包括 `await foreach`) 與可為 Null 的參考型別。
-
-## <a name="reverse-engineering-of-database-views"></a>資料庫檢視的反向工程
-
-[追蹤問題 #1679](https://github.com/aspnet/EntityFrameworkCore/issues/1679)
-
-這項功能並未包含在目前的預覽版中。
-
-[查詢類型](xref:core/modeling/query-types)已於 EF Core 2.1 中推出，並在 EF Core 3.0 中視為沒有索引鍵的實體類型，這些類型代表可從資料庫讀取但無法更新的資料。
-此特性讓它們非常適用於大多時候的資料庫檢視，因此我們想要在對資料庫檢視進行反向工程時，將沒有索引鍵的實體類型建立作業自動化。
-
 ## <a name="ef-63-on-net-core"></a>.NET Core 上的 EF 6.3
 
-[追蹤問題 EF6#271](https://github.com/aspnet/EntityFramework6/issues/271)
-
-已著手進行這項功能的開發，但未包含在目前的預覽版中。 
-
 我們了解許多現有的應用程式都使用舊版 EF，而且因為要獲得 .NET Core 的優點而將它們移植到 EF Core 有時候需要非常多的精力。
-因此，我們會讓下一個版本的 EF 6 能夠在 .NET Core 3.0 上直執行。
-我們這樣做的原因是要讓您能以變更最小的方式移植現有的應用程式。
-但免不了有些限制。 例如：
-- 除了 .NET Core 包含的 SQL Server 支援，新的提供者還必須使用其他資料庫
+基於這個理由，我們已啟用 EF 6 的 newewst 版本，以便在 .NET Core 3.0 上執行。
+有一些限制，例如：
+- 需要新的提供者，才能在 .NET Core 上工作
 - SQL Server 的空間支援將不會啟用
 
-另請注意，EF 6 目前並未規劃任何新功能。
+## <a name="postponed-features"></a>延後的功能
+
+原先規劃用於 EF Core 3.0 的一些功能已延後到未來的版本： 
+
+- 能夠在遷移中忽略模型的各個部分， [#2725](https://github.com/aspnet/EntityFrameworkCore/issues/2725)追蹤。
+- 屬性包實體，由兩個不同的問題所追蹤： [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)關於共用類型實體，以及有關索引屬性對應支援的[#13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) 。
