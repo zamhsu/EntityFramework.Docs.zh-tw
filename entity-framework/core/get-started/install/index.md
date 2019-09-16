@@ -4,12 +4,12 @@ author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: db1b83a9222e00a5e226a134085b18247b31f29a
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.openlocfilehash: 62194d1db4efcdaed53ca0e14f160315f8e3cf03
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306478"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921762"
 ---
 # <a name="installing-entity-framework-core"></a>安裝 Entity Framework Core
 
@@ -19,9 +19,9 @@ ms.locfileid: "68306478"
 
 * 例如，您可以使用 EF Core 開發以 .NET Core 為目標的應用程式。 建置 .NET Core 應用程式需要 [.NET Core SDK](https://dotnet.microsoft.com/download)。 此外，您也可以使用 Visual Studio、Visual Studio for Mac 或 Visual Studio Code 等開發環境。 如需詳細資訊，請參閱 [.NET Core 使用者入門](/dotnet/core/get-started)。
 
-* 您可以搭配 Visual Studio 使用 EF Core，來開發以 Windows 上 .NET Framework 4.6.1 或更新版本為目標的應用程式。 建議使用最新版本的 Visual Studio。 若您想要使用較舊版本，例如 Visual Studio 2015，請務必[將 NuGet 用戶端升級至 3.6.0 版](https://www.nuget.org/downloads)，以搭配 .NET Standard 2.0 程式庫使用。
+* 您可以搭配 Visual Studio 使用 EF Core，來開發以 Windows 上 .NET Framework 4.6.1 或更新版本為目標的應用程式。 建議使用最新版的 [Visual Studio](https://visualstudio.microsoft.com/vs)。 若您想要使用較舊版本，例如 Visual Studio 2015，請務必[將 NuGet 用戶端升級至 3.6.0 版](https://www.nuget.org/downloads)，以搭配 .NET Standard 2.0 程式庫使用。
 
-* EF Core 可在其他的 .NET 實作上執行，像是 Xamarin 及 .NET Native。 但實踐這些實作有執行階段的限制，其可能影響 EF Core 在應用程式上的運作。 如需詳細資訊，請參閱 [EF Core 支援的 .NET 實作](xref:core/platforms/index)。
+* EF Core 可在其他的 .NET 實作上執行，像是 [Xamarin](https://dotnet.microsoft.com/apps/xamarin) 及 .NET Native。 但實踐這些實作有執行階段的限制，其可能影響 EF Core 在應用程式上的運作。 如需詳細資訊，請參閱 [EF Core 支援的 .NET 實作](xref:core/platforms/index)。
 
 * 最後，不同的資料庫提供者可能需要特定的資料庫引擎版本、.NET 實作或作業系統。 請確認有可用且能為您應用程式支援正確環境的 [EF Core 資料庫提供者](xref:core/providers/index)可用。
 

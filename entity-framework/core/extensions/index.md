@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 01/07/2019
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 08231cd93002a6d1b3cebe20f4f7cf57ea085af2
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.openlocfilehash: 43b98c1f09a89f7e5451e28cbf2f78a2cb1040e5
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306411"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921770"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -168,3 +168,9 @@ EF Core 的高效能第二層查詢快取。
 使用高效能批次作業延伸您的 DbContext：BulkSaveChanges、BulkInsert、BulkUpdate、BulkDelete、BulkMerge 等。
 
 [網站](https://entityframework-extensions.net/)
+
+### <a name="reconciler"></a>協調器
+
+插入、更新及移除各自的實體，藉此將存放區中的實體圖表更新為指定的圖表。
+
+[GitHub 存放庫](https://github.com/jtheisen/reconciler)
