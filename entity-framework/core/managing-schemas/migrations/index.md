@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/05/2018
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 7d97551044ae4a8fc42d1676199da884f3e2994d
-ms.sourcegitcommit: 7b7f774a5966b20d2aed5435a672a1edbe73b6fb
+ms.openlocfilehash: ffa9a34f13ab29f0ba93f9fd1f469398630604ce
+ms.sourcegitcommit: d01fc19aa42ca34c3bebccbc96ee26d06fcecaa2
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/17/2019
-ms.locfileid: "69565254"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71005451"
 ---
 <a name="migrations"></a>移轉
 ==========
@@ -25,6 +25,9 @@ ms.locfileid: "69565254"
 * [還原移轉](#revert-a-migration)。 復原資料庫變更。
 * [產生 SQL 指令碼](#generate-sql-scripts)。 您需要指令碼以更新生產環境資料庫，或者針對移轉程式碼進行疑難排解。
 * [在執行階段套用移轉](#apply-migrations-at-runtime)。 當設計階段更新以及執行指令碼都不是最佳選項時，請呼叫 `Migrate()` 方法。
+
+> [!TIP]
+> 如果 `DbContext` 與啟始專案位於不同的組件中，您可以在[套件管理員主控台工具](xref:core/miscellaneous/cli/powershell#target-and-startup-project)或 [.NET Core CLI 工具](xref:core/miscellaneous/cli/dotnet#target-project-and-startup-project)中明確指定目標和啟始專案。
 
 <a name="install-the-tools"></a>安裝工具
 -----------------
