@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: 16600ccbb1194d584fae15671118d9c046f1f637
-ms.sourcegitcommit: 06073f8efde97dd5f540dbfb69f574d8380566fe
-ms.translationtype: HT
+ms.openlocfilehash: 5f97015f0228387574e3a19fb20cae1bdb403410
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67333850"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149172"
 ---
 # <a name="new-features-in-ef-core-21"></a>EF Core 2.1 中的新功能
 
@@ -81,7 +81,7 @@ EF Core 模型現在可以包含查詢類型。 不同於實體類型，查詢�
 - 對應至模型中已定義的查詢
 - 作為 `FromSql()` 查詢的傳回型別
 
-如需此主題的詳細資訊，請閱讀[查詢類型](xref:core/modeling/query-types)一節。
+如需此主題的詳細資訊，請閱讀[查詢類型](xref:core/modeling/keyless-entity-types)一節。
 
 ## <a name="include-for-derived-types"></a>隨附於衍生類型
 現在，當您為 `Include` 方法撰寫運算式時，您可以指定只在衍生類型上定義的導覽屬性。 針對 `Include` 的強型別版本，我們支援使用明確轉換或 `as` 運算子。 我們現在也支援參考 `Include` 的字串版本中衍生類型上所定義的導覽屬性名稱：
