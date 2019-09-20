@@ -5,48 +5,49 @@ ms.author: ansvyryd
 ms.date: 04/10/2019
 ms.assetid: 0EC2CCE1-BD55-45D8-9EA9-20634987F094
 uid: core/modeling/table-splitting
-ms.openlocfilehash: 4a0bfaf017106a0bfdff084b1c472bdc17459a89
-ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
+ms.openlocfilehash: 684fcfbb66debfd1b89e23c8aaf0a32909378c6b
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/14/2019
-ms.locfileid: "59562582"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149191"
 ---
-# <a name="table-splitting"></a><span data-ttu-id="d08c8-102">資料表分割</span><span class="sxs-lookup"><span data-stu-id="d08c8-102">Table Splitting</span></span>
+# <a name="table-splitting"></a><span data-ttu-id="42075-102">資料表分割</span><span class="sxs-lookup"><span data-stu-id="42075-102">Table Splitting</span></span>
 
 >[!NOTE]
-> <span data-ttu-id="d08c8-103">這項功能是在 EF Core 2.0 的新功能。</span><span class="sxs-lookup"><span data-stu-id="d08c8-103">This feature is new in EF Core 2.0.</span></span>
+> <span data-ttu-id="42075-103">這項功能是在 EF Core 2.0 的新功能。</span><span class="sxs-lookup"><span data-stu-id="42075-103">This feature is new in EF Core 2.0.</span></span>
 
-<span data-ttu-id="d08c8-104">EF Core，可讓兩個或多個實體對應至單一資料列。</span><span class="sxs-lookup"><span data-stu-id="d08c8-104">EF Core allows to map two or more entities to a single row.</span></span> <span data-ttu-id="d08c8-105">這就叫做_資料表分割_或是_資料表共用_。</span><span class="sxs-lookup"><span data-stu-id="d08c8-105">This is called _table splitting_ or _table sharing_.</span></span>
+<span data-ttu-id="42075-104">EF Core 允許將兩個或多個實體對應至單一資料列。</span><span class="sxs-lookup"><span data-stu-id="42075-104">EF Core allows to map two or more entities to a single row.</span></span> <span data-ttu-id="42075-105">這稱為「_資料表分割_」或「_資料表共用_」。</span><span class="sxs-lookup"><span data-stu-id="42075-105">This is called _table splitting_ or _table sharing_.</span></span>
 
-## <a name="configuration"></a><span data-ttu-id="d08c8-106">組態</span><span class="sxs-lookup"><span data-stu-id="d08c8-106">Configuration</span></span>
+## <a name="configuration"></a><span data-ttu-id="42075-106">Configuration</span><span class="sxs-lookup"><span data-stu-id="42075-106">Configuration</span></span>
 
-<span data-ttu-id="d08c8-107">若要使用資料表分割的實體類型必須對應至相同的資料表，具有主索引鍵對應至相同的資料行和至少一個設定一個實體類型的主索引鍵與另一個在相同的資料表之間的關聯性。</span><span class="sxs-lookup"><span data-stu-id="d08c8-107">To use table splitting the entity types need to be mapped to the same table, have the primary keys mapped to the same columns and at least one relationship configured between the primary key of one entity type and another in the same table.</span></span>
+<span data-ttu-id="42075-107">若要使用資料表分割，必須將實體類型對應至相同的資料表，請將主鍵對應至相同的資料行，並且至少在一個實體類型的主鍵與相同資料表中的另一個關聯性之間設定一個關聯性。</span><span class="sxs-lookup"><span data-stu-id="42075-107">To use table splitting the entity types need to be mapped to the same table, have the primary keys mapped to the same columns and at least one relationship configured between the primary key of one entity type and another in the same table.</span></span>
 
-<span data-ttu-id="d08c8-108">資料表分割的常見案例更高的效能或封裝，以使用資料表中的資料行子集。</span><span class="sxs-lookup"><span data-stu-id="d08c8-108">A common scenario for table splitting is using only a subset of the columns in the table for greater performance or encapsulation.</span></span>
+<span data-ttu-id="42075-108">資料表分割的常見案例是只使用資料表中的資料行子集，以獲得更佳的效能或封裝。</span><span class="sxs-lookup"><span data-stu-id="42075-108">A common scenario for table splitting is using only a subset of the columns in the table for greater performance or encapsulation.</span></span>
 
-<span data-ttu-id="d08c8-109">在此範例中`Order`代表子集`DetailedOrder`。</span><span class="sxs-lookup"><span data-stu-id="d08c8-109">In this example `Order` represents a subset of `DetailedOrder`.</span></span>
+<span data-ttu-id="42075-109">在此範例`Order`中，表示的`DetailedOrder`子集。</span><span class="sxs-lookup"><span data-stu-id="42075-109">In this example `Order` represents a subset of `DetailedOrder`.</span></span>
 
 [!code-csharp[Order](../../../samples/core/Modeling/TableSplitting/Order.cs?name=Order)]
 
 [!code-csharp[DetailedOrder](../../../samples/core/Modeling/TableSplitting/DetailedOrder.cs?name=DetailedOrder)]
 
-<span data-ttu-id="d08c8-110">在我們呼叫除了必要的組態`HasBaseType((string)null)`不必對應`DetailedOrder`中的相同階層`Order`。</span><span class="sxs-lookup"><span data-stu-id="d08c8-110">In addition to the required configuration we call `HasBaseType((string)null)` to avoid mapping `DetailedOrder` in the same hierarchy as `Order`.</span></span>
+<span data-ttu-id="42075-110">除了所需的設定之外，我們`Property(o => o.Status).HasColumnName("Status")`也`Order.Status`會`DetailedOrder.Status`呼叫來對應至與相同的資料行。</span><span class="sxs-lookup"><span data-stu-id="42075-110">In addition to the required configuration we call `Property(o => o.Status).HasColumnName("Status")` to map `DetailedOrder.Status` to the same column as `Order.Status`.</span></span>
 
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting&highlight=3)]
 
-<span data-ttu-id="d08c8-111">請參閱[完整的範例專案](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting)詳細內容。</span><span class="sxs-lookup"><span data-stu-id="d08c8-111">See the [full sample project](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) for more context.</span></span>
+> [!TIP]
+> <span data-ttu-id="42075-111">如需詳細內容，請參閱[完整的範例專案](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting)。</span><span class="sxs-lookup"><span data-stu-id="42075-111">See the [full sample project](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) for more context.</span></span>
 
-## <a name="usage"></a><span data-ttu-id="d08c8-112">使用量</span><span class="sxs-lookup"><span data-stu-id="d08c8-112">Usage</span></span>
+## <a name="usage"></a><span data-ttu-id="42075-112">使用量</span><span class="sxs-lookup"><span data-stu-id="42075-112">Usage</span></span>
 
-<span data-ttu-id="d08c8-113">儲存及查詢使用資料表分割的實體都在相同的方式與其他實體，唯一的差別在於，必須插入追蹤共用資料列的所有實體。</span><span class="sxs-lookup"><span data-stu-id="d08c8-113">Saving and querying entities using table splitting is done in the same way as other entities, the only difference is that all entities sharing a row must be tracked for the insert.</span></span>
+<span data-ttu-id="42075-113">使用資料表分割來儲存和查詢實體的方式與其他實體相同。</span><span class="sxs-lookup"><span data-stu-id="42075-113">Saving and querying entities using table splitting is done in the same way as other entities.</span></span> <span data-ttu-id="42075-114">從 EF Core 3.0 開始，相依實體參考可以是`null`。</span><span class="sxs-lookup"><span data-stu-id="42075-114">And starting with EF Core 3.0 the dependent entity reference can be `null`.</span></span> <span data-ttu-id="42075-115">如果相依實體所使用的所有資料行都`NULL`是資料庫，則查詢時將不會建立它的實例。</span><span class="sxs-lookup"><span data-stu-id="42075-115">If all of the columns used by the dependent entity are `NULL` is the database then no instance for it will be created when queried.</span></span> <span data-ttu-id="42075-116">這也會發生在所有屬性都是選擇性的，而且`null`設定為，這可能不是預期的。</span><span class="sxs-lookup"><span data-stu-id="42075-116">This would also happen all of the properties are optional and set to `null`, which might not be expected.</span></span>
 
 [!code-csharp[Usage](../../../samples/core/Modeling/TableSplitting/Program.cs?name=Usage)]
 
-## <a name="concurrency-tokens"></a><span data-ttu-id="d08c8-114">並行語彙基元</span><span class="sxs-lookup"><span data-stu-id="d08c8-114">Concurrency tokens</span></span>
+## <a name="concurrency-tokens"></a><span data-ttu-id="42075-117">並行標記</span><span class="sxs-lookup"><span data-stu-id="42075-117">Concurrency tokens</span></span>
 
-<span data-ttu-id="d08c8-115">如果任何共用資料表的實體類型並行語彙基元它必須包含在所有其他實體類型，以避免過時的並行語彙基元的值，只是其中一個實體對應至相同的資料表更新時。</span><span class="sxs-lookup"><span data-stu-id="d08c8-115">If any of the entity types sharing a table has a concurrency token then it must be included in all other entity types to avoid a stale concurrency token value when only one of the entities mapped to the same table is updated.</span></span>
+<span data-ttu-id="42075-118">如果共用資料表的任何實體類型具有並行 token，則必須將它包含在所有其他實體類型中，以避免只有對應到相同資料表的其中一個實體更新時，才會有過時的並行標記值。</span><span class="sxs-lookup"><span data-stu-id="42075-118">If any of the entity types sharing a table has a concurrency token then it must be included in all other entity types to avoid a stale concurrency token value when only one of the entities mapped to the same table is updated.</span></span>
 
-<span data-ttu-id="d08c8-116">若要避免將其公開到使用的程式碼就可以建立一個陰影狀態中的。</span><span class="sxs-lookup"><span data-stu-id="d08c8-116">To avoid exposing it to the consuming code it's possible the create one in shadow-state.</span></span>
+<span data-ttu-id="42075-119">為了避免將它公開給取用的程式碼，您可以在陰影狀態中建立一個。</span><span class="sxs-lookup"><span data-stu-id="42075-119">To avoid exposing it to the consuming code it's possible the create one in shadow-state.</span></span>
 
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=ConcurrencyToken&highlight=2)]
