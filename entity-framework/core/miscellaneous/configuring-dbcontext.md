@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: ddabf825ef23c2ec07efcde390df7d0cf48db33c
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.openlocfilehash: 734acad86e364abbfd1522fe79d4a847b1acfb52
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306515"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149030"
 ---
 # <a name="configuring-a-dbcontext"></a>設定 DbCoNtext
 
@@ -191,6 +191,5 @@ Entity Framework Core 不支援在相同`DbContext`的實例上執行多個平�
 
 ## <a name="more-reading"></a>閱讀更多
 
-* 讀取[開始使用 ASP.NET Core](../get-started/aspnetcore/index.md) 如需有關使用 EF 與 ASP.NET Core。
 * 若要深入瞭解如何使用 DI, 請參閱相依性[插入](https://docs.microsoft.com/aspnet/core/fundamentals/dependency-injection)。
 * 如需詳細資訊, 請參閱[測試](testing/index.md)。

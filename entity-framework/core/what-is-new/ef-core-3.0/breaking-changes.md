@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 04487291f24bb702dad4b497c34234afdd5e3c9a
-ms.sourcegitcommit: d01fc19aa42ca34c3bebccbc96ee26d06fcecaa2
+ms.openlocfilehash: 1f63593631017a61c39ccab9216adbc4663700e7
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/16/2019
-ms.locfileid: "71005591"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71148902"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>EF Core 3.0 中包含的重大變更
 下列 API 和行為變更可能會在將現有的應用程式升級至3.0.0 時中斷。
@@ -20,11 +20,11 @@ ms.locfileid: "71005591"
 
 | **重大變更**                                                                                               | **產生** |
 |:------------------------------------------------------------------------------------------------------------------|------------|
-| [不會再於用戶端評估 LINQ 查詢](#linq-queries-are-no-longer-evaluated-on-the-client)         | 高       |
-| [EF Core 3.0 以 .NET Standard 2.1 為目標，而非以 .NET Standard 2.0 為目標](#netstandard21) | 高      |
-| [EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分](#dotnet-ef) | 高      |
-| [FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名](#fromsql) | 高      |
-| [查詢類型已與實體類型合併](#qt) | 高      |
+| [不會再於用戶端評估 LINQ 查詢](#linq-queries-are-no-longer-evaluated-on-the-client)         | High       |
+| [EF Core 3.0 以 .NET Standard 2.1 為目標，而非以 .NET Standard 2.0 為目標](#netstandard21) | High      |
+| [EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分](#dotnet-ef) | High      |
+| [FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名](#fromsql) | High      |
+| [查詢類型已與實體類型合併](#qt) | High      |
 | [Entity Framework Core 不再屬於 ASP.NET Core 共用架構](#no-longer) | Medium      |
 | [根據預設，串聯刪除現在會立即發生](#cascade) | Medium      |
 | [DeleteBehavior.Restrict 具有更簡潔的語意](#deletebehavior) | Medium      |
@@ -420,7 +420,7 @@ context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
 **舊行為**
 
-在 EF Core 3.0 以前，[查詢類型](xref:core/modeling/query-types)可讓您查詢未以結構化方式定義主索引鍵的資料。
+在 EF Core 3.0 以前，[查詢類型](xref:core/modeling/keyless-entity-types)可讓您查詢未以結構化方式定義主索引鍵的資料。
 換句話說，查詢類型是用於對應沒有索引鍵的實體類型 (較有可能來自檢視，但也有可能來自資料表)，而一般實體類型是用於索引鍵可供使用時 (較有可能來自資料表，但也有可能來自檢視)。
 
 **新行為**
@@ -873,7 +873,7 @@ modelBuilder
 
 **舊行為**
 
-在 EF Core 3.0 以前，屬性可透過字串值指定，且如果在 CLR 類型上找不到具有該名稱的屬性，EF Core 會嘗試使用慣例規則將其與欄位比對。
+在 EF Core 3.0 之前，屬性可以由字串值指定，而且如果在 .NET 類型上找不到具有該名稱的屬性，則 EF Core 會嘗試使用慣例規則將它與欄位進行比對。
 ```C#
 private class Blog
 {

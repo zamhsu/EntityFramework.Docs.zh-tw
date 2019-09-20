@@ -4,16 +4,16 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 7a0df6fb656be58103971f45b9e12e9f1383311f
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: b0c9ba1bb452e47e8348d000e3f7b88cc2730d8e
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921723"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149307"
 ---
 # <a name="raw-sql-queries"></a>原始 SQL 查詢
 
-Entity Framework Core 可讓您在處理關聯式資料庫時，下拉至原始 SQL 查詢。 這在您想要執行的查詢無法使用 LINQ 來表達時，或是使用 LINQ 查詢會導致 SQL 查詢沒有效率時，會非常實用。 原始 SQL 查詢可以傳回實體型別，或從 EF Core 2.1 開始，可以傳回屬於您模型之一部分的[查詢型別](xref:core/modeling/query-types)。
+Entity Framework Core 可讓您在處理關聯式資料庫時，下拉至原始 SQL 查詢。 這在您想要執行的查詢無法使用 LINQ 來表達時，或是使用 LINQ 查詢會導致 SQL 查詢沒有效率時，會非常實用。 原始 SQL 查詢可以傳回實體類型，或從 EF Core 2.1 開始，這是您模型中的[無索引鍵實體類型](xref:core/modeling/keyless-entity-types)。
 
 > [!TIP]  
 > 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。

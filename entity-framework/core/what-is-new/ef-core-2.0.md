@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 28b2180e898b91d233b590b1639674a464f8c679
-ms.sourcegitcommit: 0cc9578fd49802789a00c0044b4e57325476ca2e
+ms.openlocfilehash: 781578d9de05895cdbc777aa53c3f6d6f9777869
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/04/2019
-ms.locfileid: "70271425"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149045"
 ---
 # <a name="new-features-in-ef-core-20"></a>EF Core 2.0 中的新功能
 
@@ -36,7 +36,7 @@ modelBuilder.Entity<ProductDetails>().ToTable("Products");
 
 ### <a name="owned-types"></a>擁有的類型
 
-擁有的實體類型可以與另一個擁有的實體類型共用相同的 CLR 類型，但因為只有根據 CLR 類型並無法識別它，所以必須從另一個實體類型進行導覽。 包含定義導覽的實體是擁有者。 查詢擁有者時，預設會包含擁有的類型。
+擁有的實體類型可以與另一個擁有的實體類型共用相同的 .NET 類型，但因為它不能只由 .NET 類型識別，所以必須從另一個實體類型進行導覽。 包含定義導覽的實體是擁有者。 查詢擁有者時，預設會包含擁有的類型。
 
 依照慣例，將為擁有的類型建立陰影主索引鍵，而且會使用資料表分割將它對應至與擁有者相同的資料表。 這允許使用擁有的類型，其類似在 EF6 中如何使用複雜類型：
 

@@ -5,48 +5,49 @@ ms.author: ansvyryd
 ms.date: 04/10/2019
 ms.assetid: 0EC2CCE1-BD55-45D8-9EA9-20634987F094
 uid: core/modeling/table-splitting
-ms.openlocfilehash: 4a0bfaf017106a0bfdff084b1c472bdc17459a89
-ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
+ms.openlocfilehash: 684fcfbb66debfd1b89e23c8aaf0a32909378c6b
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/14/2019
-ms.locfileid: "59562582"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149191"
 ---
 # <a name="table-splitting"></a>資料表分割
 
 >[!NOTE]
 > 這項功能是在 EF Core 2.0 的新功能。
 
-EF Core，可讓兩個或多個實體對應至單一資料列。 這就叫做_資料表分割_或是_資料表共用_。
+EF Core 允許將兩個或多個實體對應至單一資料列。 這稱為「_資料表分割_」或「_資料表共用_」。
 
-## <a name="configuration"></a>組態
+## <a name="configuration"></a>Configuration
 
-若要使用資料表分割的實體類型必須對應至相同的資料表，具有主索引鍵對應至相同的資料行和至少一個設定一個實體類型的主索引鍵與另一個在相同的資料表之間的關聯性。
+若要使用資料表分割，必須將實體類型對應至相同的資料表，請將主鍵對應至相同的資料行，並且至少在一個實體類型的主鍵與相同資料表中的另一個關聯性之間設定一個關聯性。
 
-資料表分割的常見案例更高的效能或封裝，以使用資料表中的資料行子集。
+資料表分割的常見案例是只使用資料表中的資料行子集，以獲得更佳的效能或封裝。
 
-在此範例中`Order`代表子集`DetailedOrder`。
+在此範例`Order`中，表示的`DetailedOrder`子集。
 
 [!code-csharp[Order](../../../samples/core/Modeling/TableSplitting/Order.cs?name=Order)]
 
 [!code-csharp[DetailedOrder](../../../samples/core/Modeling/TableSplitting/DetailedOrder.cs?name=DetailedOrder)]
 
-在我們呼叫除了必要的組態`HasBaseType((string)null)`不必對應`DetailedOrder`中的相同階層`Order`。
+除了所需的設定之外，我們`Property(o => o.Status).HasColumnName("Status")`也`Order.Status`會`DetailedOrder.Status`呼叫來對應至與相同的資料行。
 
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting&highlight=3)]
 
-請參閱[完整的範例專案](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting)詳細內容。
+> [!TIP]
+> 如需詳細內容，請參閱[完整的範例專案](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting)。
 
 ## <a name="usage"></a>使用量
 
-儲存及查詢使用資料表分割的實體都在相同的方式與其他實體，唯一的差別在於，必須插入追蹤共用資料列的所有實體。
+使用資料表分割來儲存和查詢實體的方式與其他實體相同。 從 EF Core 3.0 開始，相依實體參考可以是`null`。 如果相依實體所使用的所有資料行都`NULL`是資料庫，則查詢時將不會建立它的實例。 這也會發生在所有屬性都是選擇性的，而且`null`設定為，這可能不是預期的。
 
 [!code-csharp[Usage](../../../samples/core/Modeling/TableSplitting/Program.cs?name=Usage)]
 
-## <a name="concurrency-tokens"></a>並行語彙基元
+## <a name="concurrency-tokens"></a>並行標記
 
-如果任何共用資料表的實體類型並行語彙基元它必須包含在所有其他實體類型，以避免過時的並行語彙基元的值，只是其中一個實體對應至相同的資料表更新時。
+如果共用資料表的任何實體類型具有並行 token，則必須將它包含在所有其他實體類型中，以避免只有對應到相同資料表的其中一個實體更新時，才會有過時的並行標記值。
 
-若要避免將其公開到使用的程式碼就可以建立一個陰影狀態中的。
+為了避免將它公開給取用的程式碼，您可以在陰影狀態中建立一個。
 
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=ConcurrencyToken&highlight=2)]

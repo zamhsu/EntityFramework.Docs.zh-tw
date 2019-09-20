@@ -1,23 +1,23 @@
 ---
-title: 連接字串的 EF Core
+title: 連接字串-EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: c306f9ca7a51fc9e3db18e883fd44f56dd1a3cb4
-ms.sourcegitcommit: e90d6cfa3e96f10b8b5275430759a66a0c714ed1
+ms.openlocfilehash: ed89d6d09b15b0dea7fd8bc3ff3e3f631495ecb7
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/17/2019
-ms.locfileid: "68286453"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149122"
 ---
 # <a name="connection-strings"></a>連接字串
 
-大部分的資料庫提供者需要某種形式的連接字串以連接到資料庫。 有時候此連接字串包含要保護的機密資訊。 此外，您可能也需要變更連接字串，當您在環境中，例如開發、 測試和生產環境之間移動您的應用程式。
+大部分的資料庫提供者都需要某種形式的連接字串，才能連接到資料庫。 有時候，此連接字串會包含需要保護的機密資訊。 當您在環境之間移動應用程式時，您可能也需要變更連接字串，例如開發、測試和實際執行。
 
-## <a name="net-framework-applications"></a>.NET framework 應用程式
+## <a name="winforms--wpf-applications"></a>WPF 應用程式的 WinForms &
 
-.NET framework 應用程式，例如 WinForms、 WPF、 主控台和 ASP.NET 4 中，已嘗試且測試過的連接字串模式。 連接字串應該新增至您的應用程式的 App.config 檔 (Web.config 如果您使用 ASP.NET)。 如果您的連接字串中包含機密資訊，例如使用者名稱和密碼，您可以保護的組態檔中使用內容[受保護的組態](https://docs.microsoft.com/dotnet/framework/data/adonet/connection-strings-and-configuration-files#encrypting-configuration-file-sections-using-protected-configuration)。
+WinForms、WPF 和 ASP.NET 4 應用程式已嘗試並測試連接字串模式。 如果您使用 ASP.NET，則應該將連接字串新增至應用程式的 app.config 檔案（web.config）。 如果您的連接字串包含敏感性資訊，例如使用者名稱和密碼，您可以使用[秘密管理員工具](https://docs.microsoft.com/aspnet/core/security/app-secrets#secret-manager)來保護設定檔的內容。
 
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -31,9 +31,9 @@ ms.locfileid: "68286453"
 ```
 
 > [!TIP]  
->           `providerName` EF Core 連接字串儲存在 App.config，因為資料庫提供者已透過程式碼不需要設定。
+> 在`providerName` app.config 中儲存的 EF Core 連接字串上不需要此設定，因為資料庫提供者是透過程式碼來設定。
 
-您可以接著讀取連接字串使用`ConfigurationManager`在您的內容中的 API`OnConfiguring`方法。 您可能需要將參考加入`System.Configuration`framework 組件，若要能夠使用此 API。
+接著，您可以在內容的`ConfigurationManager` `OnConfiguring`方法中使用 API 來讀取連接字串。 您可能需要加入`System.Configuration`架構元件的參考，才能夠使用此 API。
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -50,7 +50,7 @@ public class BloggingContext : DbContext
 
 ## <a name="universal-windows-platform-uwp"></a>通用 Windows 平台 (UWP)
 
-在 UWP 應用程式中的連接字串通常是只會指定本機檔案名稱的 SQLite 連線。 它們通常不包含機密資訊，並不需要變更，因為應用程式的部署。 因此，這些連接字串通常沒什麼問題可以留在程式碼，如下所示。 如果您想要移出程式碼 UWP 支援設定的概念，請參閱[UWP 文件中的 [應用程式設定] 區段](https://docs.microsoft.com/windows/uwp/app-settings/store-and-retrieve-app-data)如需詳細資訊。
+UWP 應用程式中的連接字串通常是只指定本機檔案名的 SQLite 連接。 它們通常不包含機密資訊，而且不需要在部署應用程式時變更。 因此，這些連接字串通常會留在程式碼中，如下所示。 如果您想要將它們移出程式碼，UWP 會支援設定的概念，請參閱[uwp 檔的應用程式設定一節](https://docs.microsoft.com/windows/uwp/app-settings/store-and-retrieve-app-data)，以取得詳細資料。
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -67,7 +67,7 @@ public class BloggingContext : DbContext
 
 ## <a name="aspnet-core"></a>ASP.NET Core
 
-在 ASP.NET Core 組態系統是非常有彈性，以及連接字串可以儲存在`appsettings.json`，環境變數、 使用者密碼存放區或另一個設定來源。 請參閱[組態區段的 ASP.NET Core 文件](https://docs.asp.net/en/latest/fundamentals/configuration.html)如需詳細資訊。 下列範例顯示連接字串儲存在`appsettings.json`。
+在 ASP.NET Core 設定系統非常有彈性，且連接字串可以儲存在、環境變數`appsettings.json`、使用者秘密存放區或其他設定來源中。 如需詳細資訊，請參閱[ASP.NET Core 檔的設定一節](https://docs.asp.net/en/latest/fundamentals/configuration.html)。 下列範例會顯示中`appsettings.json`儲存的連接字串。
 
 ``` json
 {
@@ -77,7 +77,7 @@ public class BloggingContext : DbContext
 }
 ```
 
-內容通常會設定於`Startup.cs`正在從組態讀取的連接字串。 附註`GetConnectionString()`方法會尋找其索引鍵的組態值`ConnectionStrings:<connection string name>`。 您需要匯入[Microsoft.Extensions.Configuration](https://docs.microsoft.com/dotnet/api/microsoft.extensions.configuration)才能使用此延伸模組方法的命名空間。
+內容通常會在中設定`Startup.cs` ，且連接字串會從設定中讀取。 請注意`GetConnectionString()` ，方法會尋找其金鑰為`ConnectionStrings:<connection string name>`的設定值。 您需要匯入設定[命名空間](https://docs.microsoft.com/dotnet/api/microsoft.extensions.configuration)，才能使用此擴充方法。
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)

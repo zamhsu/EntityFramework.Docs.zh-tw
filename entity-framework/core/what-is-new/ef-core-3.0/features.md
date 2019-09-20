@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
-ms.openlocfilehash: 528733d6eec33de2c9538541a6ed5be704b9d433
-ms.sourcegitcommit: d01fc19aa42ca34c3bebccbc96ee26d06fcecaa2
+ms.openlocfilehash: d938f17daecd5031147951d0018602c5635de41d
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/16/2019
-ms.locfileid: "71005561"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149093"
 ---
 # <a name="new-features-included-in-ef-core-30"></a>EF Core 3.0 中包含的新功能
 
@@ -57,7 +57,7 @@ var orders =
 
 await foreach(var o in orders)
 {
-  Proccess(o);
+  Process(o);
 } 
 ```
 
@@ -71,7 +71,7 @@ EF Core 3.0 中的新攔截 API，可讓您以程式設計方式觀察和修改�
 
 ## <a name="reverse-engineering-of-database-views"></a>資料庫檢視的反向工程
 
-沒有索引鍵的實體類型（先前稱為[查詢類型](xref:core/modeling/query-types)）代表可從資料庫讀取但無法更新的資料。
+沒有索引鍵的實體類型（先前稱為[查詢類型](xref:core/modeling/keyless-entity-types)）代表可從資料庫讀取但無法更新的資料。
 這項特性讓它們成為在大多數情況下對應資料庫檢視的絕佳大小，因此，我們會在反向工程資料庫流覽時，自動建立不含索引鍵的實體類型。
 
 ## <a name="dependent-entities-sharing-the-table-with-the-principal-are-now-optional"></a>現在可選用以主體來共用資料表的相依實體
@@ -108,5 +108,5 @@ public class OrderDetails
 
 原先規劃用於 EF Core 3.0 的一些功能已延後到未來的版本： 
 
-- 能夠在遷移中忽略模型的各個部分， [#2725](https://github.com/aspnet/EntityFrameworkCore/issues/2725)追蹤。
-- 屬性包實體，由兩個不同的問題所追蹤： [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)關於共用類型實體，以及有關索引屬性對應支援的[#13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) 。
+- 能夠在遷移中忽略模型的各個部分，以[#2725](https://github.com/aspnet/EntityFrameworkCore/issues/2725)的方式進行追蹤。
+- 屬性包實體，視為兩個不同的問題來追蹤： [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)關於共用類型實體，以及有關索引屬性對應支援的[#13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) 。
