@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 775a929982b9f4fb10aad9cd43bbb555ce632ad1
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: afe2c865305ade93dd10c8838b80c8b4177e7e8e
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149021"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197192"
 ---
 # <a name="reverse-engineering"></a>反向工程
 
@@ -121,13 +121,12 @@ dotnet ef dbcontext scaffold ... --context-dir Data --output-dir Models
 
 最後，模型是用來產生程式碼。 對應的實體類型類別、流暢的 API 和資料批註會 scaffold，以便從您的應用程式重新建立相同的模型。
 
-## <a name="what-doesnt-work"></a>什麼不適用
+## <a name="limitations"></a>限制
 
-並非有關模型的所有專案都可以使用資料庫架構來表示。 例如，有關[**繼承**](../modeling/inheritance.md)階層、[**擁有類型**](../modeling/owned-entities.md)和[**資料表分割**](../modeling/table-splitting.md)的資訊並不會出現在資料庫架構中。 因此，這些結構永遠不會進行反向工程。
-
-此外，EF Core 提供者可能不支援**某些資料行類型**。 這些資料行不會包含在模型中。
-
-您可以在 EF Core 模型中定義[**並行標記**](../modeling/concurrency.md)，以防止兩個使用者同時更新相同的實體。 某些資料庫具有特殊類型來表示這種類型的資料行（例如，SQL Server 中的 rowversion），在此情況下，我們可以對這項資訊進行反向工程。不過，其他並行存取權杖將不會進行反向工程。
+* 並非有關模型的所有專案都可以使用資料庫架構來表示。 例如，有關[**繼承**](../modeling/inheritance.md)階層、[**擁有類型**](../modeling/owned-entities.md)和[**資料表分割**](../modeling/table-splitting.md)的資訊並不會出現在資料庫架構中。 因此，這些結構永遠不會進行反向工程。
+* 此外，EF Core 提供者可能不支援**某些資料行類型**。 這些資料行不會包含在模型中。
+* 您可以在 EF Core 模型中定義[**並行標記**](../modeling/concurrency.md)，以防止兩個使用者同時更新相同的實體。 某些資料庫具有特殊類型來表示這種類型的資料行（例如，SQL Server 中的 rowversion），在此情況下，我們可以對這項資訊進行反向工程。不過，其他並行存取權杖將不會進行反向工程。
+* 反向工程目前不支援[8 可為 Null 的C#參考型別功能](/dotnet/csharp/tutorials/nullable-reference-types)：EF Core 一律會C#產生假設功能已停用的程式碼。 例如，可為 null 的文字資料行將會 scaffold 為具有`string`類型的`string?`屬性，而不是用來設定是否需要屬性的流暢 API 或資料批註。 您可以編輯 scaffold 程式碼，並將其C#取代為 null 屬性注釋。 由問題[#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)追蹤可為 null 之參考型別的樣板支援。
 
 ## <a name="customizing-the-model"></a>自訂模型
 

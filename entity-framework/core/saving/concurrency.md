@@ -3,12 +3,12 @@ title: 處理並行存取衝突 - EF Core
 author: rowanmiller
 ms.date: 03/03/2018
 uid: core/saving/concurrency
-ms.openlocfilehash: e050b17bfa31a4785161c700bc0355e83162b405
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
-ms.translationtype: HT
+ms.openlocfilehash: 4d6ff24e58caa0b228e9c1e4313beda78d1025fc
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993108"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197827"
 ---
 # <a name="handling-concurrency-conflicts"></a>處理並行存取衝突
 
@@ -16,7 +16,7 @@ ms.locfileid: "42993108"
 > 本頁記載並行存取在 EF Core 中的運作方式，以及如何處理您應用程式中的並行存取衝突。 如需有關如何在模型中設定並行存取語彙基元的詳細資料，請參閱[並行存取語彙基元](xref:core/modeling/concurrency)。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Concurrency/) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Concurrency/) \(英文\)。
 
 「資料庫並行存取」係指多個處理程序或使用者同時存取或變更資料庫中的相同資料。 「並行存取控制」係指在發生並行變更時用來確保資料一致性的特定機制。
 
@@ -71,4 +71,4 @@ WHERE [PersonId] = @p0 AND [LastName] = @p2;
 
 在下列範例中，`Person.FirstName` 和 `Person.LastName` 被設定為並行存取語彙基元。 在您包含應用程式特定邏輯以選擇所要儲存值的位置中，有一個 `// TODO:` 註解。
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Concurrency/Sample.cs?name=ConcurrencyHandlingCode&highlight=34-35)]
+[!code-csharp[Main](../../../samples/core/Saving/Concurrency/Sample.cs?name=ConcurrencyHandlingCode&highlight=34-35)]

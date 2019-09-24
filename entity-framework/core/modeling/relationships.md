@@ -1,157 +1,157 @@
 ---
-title: 關聯性的 EF Core
+title: 關聯性-EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 0ff736a3-f1b0-4b58-a49c-4a7094bd6935
 uid: core/modeling/relationships
-ms.openlocfilehash: 3731d30a15222a18ad6c729e010b9bf0994c82b2
-ms.sourcegitcommit: 83c1e2fc034e5eb1fec1ebabc8d629ffcc7c0632
+ms.openlocfilehash: 1e9c62bec47263ef452c7ac425a0bb446f9371d8
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/25/2019
-ms.locfileid: "67351354"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197647"
 ---
 # <a name="relationships"></a>關聯性
 
-關聯性會定義兩個實體如何與彼此相關。 在關聯式資料庫中，這被以外部索引鍵條件約束。
+關聯性會定義兩個實體之間的關聯性。 在關係資料庫中，這是以 foreign key 條件約束來表示。
 
 > [!NOTE]  
-> 大部分的這篇文章中的範例會使用一個對多關聯性，來示範概念。 如需一對一和多對多關聯性的範例，請參閱[其他關聯性模式](#other-relationship-patterns)文章的最後一節。
+> 本文中的大部分範例都會使用一對多關聯性來示範概念。 如需一對一和多對多關聯性的範例，請參閱本文結尾的[其他關聯性模式](#other-relationship-patterns)一節。
 
-## <a name="definition-of-terms"></a>詞彙定義
+## <a name="definition-of-terms"></a>詞彙的定義
 
-有幾個名詞，用來描述關聯性
+有數個詞彙用來描述關聯性
 
-* **相依的實體：** 這是包含外部索引鍵屬性的實體。 有時稱為 「 子 」 的關聯性。
+* **相依實體：** 這是包含外鍵屬性的實體。 有時稱為關聯性的「子系」。
 
-* **主要實體：** 這是包含的主要/替代索引鍵屬性的實體。 有時稱為 'parent' 的關聯性。
+* **主體實體：** 這是包含主要/替代索引鍵屬性的實體。 有時稱為關聯性的「父系」。
 
-* **外部索引鍵：** 在用來儲存與相關實體的主要索引鍵屬性的值為相依實體屬性。
+* **外鍵：** 相依實體中的屬性，用來儲存與實體相關之主要索引鍵屬性的值。
 
-* **主體的金鑰：** 屬性，這些屬性可唯一識別主要實體。 這可能是主索引鍵或替代索引鍵。
+* **主要金鑰：** 可唯一識別主體實體的屬性。 這可能是主要金鑰或替代索引鍵。
 
-* **導覽屬性：** 主體和 （或） 相依實體，其中包含相關的公司實體參考上定義的屬性。
+* **導覽屬性：** 在主體和/或相依實體上定義的屬性，其中包含相關實體的參考。
 
-  * **集合導覽屬性：** 瀏覽屬性，其中包含許多相關實體的參考。
+  * **集合導覽屬性：** 導覽屬性，其中包含許多相關實體的參考。
 
-  * **參考導覽屬性：** 保留單一相關實體的參考導覽屬性。
+  * **參考導覽屬性：** 保存單一相關實體之參考的導覽屬性。
 
-  * **反向的導覽屬性：** 在討論時有特定的導覽屬性，這個詞彙是指關聯性另一端的導覽屬性。
+  * **反向導覽屬性：** 在討論特定導覽屬性時，此詞彙是指關聯性另一端的導覽屬性。
 
-下列程式碼清單會顯示一對多關聯性之間`Blog`和 `Post`
+下列程式代碼清單顯示與之間`Blog`的一對多關聯性`Post`
 
-* `Post` 是相依實體
+* `Post`是相依實體
 
-* `Blog` 是主要實體
+* `Blog`是主體實體
 
-* `Post.BlogId` 外部索引鍵
+* `Post.BlogId`是外鍵
 
-* `Blog.BlogId` 是 （在此情況下它是主索引鍵，而不是替代索引鍵） 的主體金鑰
+* `Blog.BlogId`是主要金鑰（在此案例中，它是主鍵，而不是替代索引鍵）
 
-* `Post.Blog` 是參考導覽屬性
+* `Post.Blog`是參考導覽屬性
 
-* `Blog.Posts` 集合導覽屬性
+* `Blog.Posts`是集合導覽屬性
 
-* `Post.Blog` 是的反向的導覽屬性`Blog.Posts`（反之亦然）
+* `Post.Blog`是的`Blog.Posts`反向導覽屬性（反之亦然）
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/Relationships/Full.cs#Entities)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs#Entities)]
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，在類型上探索到的導覽屬性時，將會建立關聯性。 屬性會被視為一個導覽屬性，如果它所指向的類型不能為純量型別對應目前的資料庫提供者。
+依照慣例，在類型上發現導覽屬性時，將會建立關聯性。 如果所指向的型別無法由目前的資料庫提供者對應為純量型別，則會將屬性視為導覽屬性。
 
 > [!NOTE]  
-> 慣例所探索到的關聯性會一律以目標主要實體的主索引鍵。 為目標的其他索引鍵，額外的組態必須使用 Fluent API 執行。
+> 依照慣例探索到的關聯性一律會以主體實體的主要金鑰為目標。 若要以替代金鑰為目標，必須使用流暢的 API 來執行其他設定。
 
 ### <a name="fully-defined-relationships"></a>完整定義的關聯性
 
-關聯性的最常見的模式是將這兩個端點的關聯性和相依的實體類別中定義的外部索引鍵屬性定義的導覽屬性。
+關聯性最常見的模式是讓關聯性兩端定義的導覽屬性，以及相依實體類別中定義的外鍵屬性。
 
-* 如果兩個類型之間找到對導覽屬性，則它們會被設定為相同關聯性的反向的導覽屬性。
+* 如果在兩個類型之間找到一對導覽屬性，則會將它們設定為相同關聯性的反向導覽屬性。
 
-* 如果相依的實體包含屬性，名為`<primary key property name>`， `<navigation property name><primary key property name>`，或`<principal entity name><primary key property name>`接著，它會設定為外部索引鍵。
+* 如果相依實體包含名為`<primary key property name>`、或`<principal entity name><primary key property name>`的`<navigation property name><primary key property name>`屬性，則會將它設定為外鍵。
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/Relationships/Full.cs?name=Entities&highlight=6,15,16)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs?name=Entities&highlight=6,15,16)]
 
 > [!WARNING]  
-> 如果有多個定義兩個類型之間的導覽屬性 (也就是指向彼此的巡覽的多個不同的組)，然後依照慣例建立任何關聯性和您必須手動將其設定為識別如何導覽屬性配對。
+> 如果在兩個類型之間定義了多個導覽屬性（也就是多個彼此指向的不同流覽），則不會依照慣例建立關聯性，而且您必須手動設定它們，以識別導覽屬性配對。
 
-### <a name="no-foreign-key-property"></a>沒有外部索引鍵屬性
+### <a name="no-foreign-key-property"></a>沒有外鍵屬性
 
-雖然建議有相依的實體類別中定義的外部索引鍵屬性，並不需要。 如果不找到任何外部索引鍵屬性，則會介紹陰影的外部索引鍵屬性同名`<navigation property name><principal key property name>`(請參閱 <<c2> [ 遮蔽屬性](shadow-properties.md)如需詳細資訊)。
+雖然建議在相依實體類別中定義外鍵屬性，但它並不是必要的。 如果找不到任何外鍵屬性，則會以名稱`<navigation property name><principal key property name>`引進陰影外鍵屬性（如需詳細資訊，請參閱[陰影屬性](shadow-properties.md)）。
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/Relationships/NoForeignKey.cs?name=Entities&highlight=6,15)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/NoForeignKey.cs?name=Entities&highlight=6,15)]
 
 ### <a name="single-navigation-property"></a>單一導覽屬性
 
-包括一個導覽屬性 （未反轉的導覽中和任何外部索引鍵屬性），就足以具有由慣例定義關聯性。 您也可以有單一導覽屬性和外部索引鍵屬性。
+只包含一個導覽屬性（沒有反向導覽，而且沒有外鍵屬性）就足以擁有依照慣例定義的關聯性。 您也可以有一個導覽屬性和一個外鍵屬性。
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/Relationships/OneNavigation.cs?name=Entities&highlight=6)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/OneNavigation.cs?name=Entities&highlight=6)]
 
 ### <a name="cascade-delete"></a>串聯刪除
 
-依照慣例，串聯刪除將會設定為*Cascade*必要的關聯性並*ClientSetNull*選擇性的關聯性。 *Cascade*表示也會刪除相依實體。 *ClientSetNull*方法不會載入到記憶體的相依實體將會保留不變且必須以手動方式刪除，或更新為指向有效的主體實體。 載入到記憶體的實體，EF Core 會嘗試將外部索引鍵屬性設定為 null。
+依照慣例，串聯刪除會針對必要關聯性設定為*cascade* ，並針對選擇性關聯性*deletebehavior.clientsetnull* 。 *Cascade*表示也會刪除相依的實體。 *Deletebehavior.clientsetnull*表示未載入記憶體的相依實體會維持不變，必須手動刪除或更新，以指向有效的主體實體。 若為載入記憶體中的實體，EF Core 會嘗試將外鍵屬性設定為 null。
 
-請參閱[必要和選擇性的關聯性](#required-and-optional-relationships)一節以取得必要和選擇性的關聯性之間的差異。
+如需必要和選擇性關聯性之間的差異，請參閱[必要和選擇性關聯](#required-and-optional-relationships)性一節。
 
-請參閱[串聯刪除](../saving/cascade-delete.md)的更多詳細的不同刪除行為和使用慣例的預設值。
+如需不同刪除行為和慣例所使用之預設值的詳細資訊，請參閱[Cascade Delete](../saving/cascade-delete.md) 。
 
 ## <a name="data-annotations"></a>資料註釋
 
-有兩個可用來設定關聯性的資料註解`[ForeignKey]`和`[InverseProperty]`。 這些是用於`System.ComponentModel.DataAnnotations.Schema`命名空間。
+有兩個可用來設定關聯`[ForeignKey]`性的資料批註：和。 `[InverseProperty]` 這些可在`System.ComponentModel.DataAnnotations.Schema`命名空間中取得。
 
 ### <a name="foreignkey"></a>[ForeignKey]
 
-若要設定哪些屬性應為外部索引鍵屬性用於指定的關聯性，您可以使用資料註解。 這通常是依照慣例找不到外部索引鍵屬性時。
+您可以使用資料批註來設定應該使用哪一個屬性做為指定關聯性的外鍵屬性。 這通常是在不依照慣例探索外鍵屬性時進行。
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/ForeignKey.cs?highlight=30)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/ForeignKey.cs?highlight=30)]
 
 > [!TIP]  
-> `[ForeignKey]`可以在其中一個關聯性中的導覽屬性上放置註解。 它不需要相依的實體類別中的導覽屬性上移。
+> `[ForeignKey]`批註可以放在關聯性中的任一導覽屬性上。 不需要移至相依實體類別中的導覽屬性。
 
 ### <a name="inverseproperty"></a>[InverseProperty]
 
-若要設定的相依及主體實體的導覽屬性如何配對，您可以使用資料註解。 這通常是多個對兩個實體類型之間的導覽屬性時。
+您可以使用資料批註來設定相依和主體實體上的導覽屬性如何配對。 當兩個實體類型之間有一對以上的導覽屬性時，通常就會執行這項作業。
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/InverseProperty.cs?highlight=33,36)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/InverseProperty.cs?highlight=33,36)]
 
 ## <a name="fluent-api"></a>Fluent API
 
-若要設定關聯性，Fluent API 中，您會開始藉由識別組成關聯性的導覽屬性。 `HasOne` 或`HasMany`識別您開始組態的實體類型上的導覽屬性。 您接著鏈結的呼叫`WithOne`或`WithMany`識別反向導覽。 `HasOne`/`WithOne` 用於參考導覽屬性和`HasMany` / `WithMany`用於集合導覽屬性。
+若要在流暢的 API 中設定關聯性，您一開始會先識別構成關聯性的導覽屬性。 `HasOne`或者`HasMany` ，在您開始設定的實體類型上，識別導覽屬性。 接著，您可以將呼叫`WithOne`連結`WithMany`至或，以識別反向導覽。 `HasOne`/`WithOne`用於參考導覽屬性，並`HasMany` / `WithMany`用於集合導覽屬性。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/NoForeignKey.cs?highlight=14-16)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoForeignKey.cs?highlight=14-16)]
 
 ### <a name="single-navigation-property"></a>單一導覽屬性
 
-如果您只需要一個導覽屬性，則有無參數多載`WithOne`和`WithMany`。 這表示有在概念上是參考或關聯性另一端的集合，但未包含在實體類別中的導覽屬性。
+如果您只有一個導覽屬性，則會有和`WithOne` `WithMany`的無參數多載。 這表示概念上的另一端有參考或集合，但實體類別中沒有包含任何導覽屬性。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/OneNavigation.cs?highlight=14-16)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/OneNavigation.cs?highlight=14-16)]
 
-### <a name="foreign-key"></a>外部索引鍵
+### <a name="foreign-key"></a>外鍵
 
-您可以使用 Fluent API，若要設定哪些屬性應為外部索引鍵屬性用於指定的關聯性。
+您可以使用流暢的 API 來設定應該使用哪一個屬性做為指定之關聯性的外鍵屬性。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/ForeignKey.cs?highlight=17)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ForeignKey.cs?highlight=17)]
 
-下列程式碼清單示範如何設定複合外部索引鍵。
+下列程式代碼清單顯示如何設定複合外鍵。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/CompositeForeignKey.cs?highlight=20)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositeForeignKey.cs?highlight=20)]
 
-您可以使用的字串多載`HasForeignKey(...)`若要設定陰影屬性作為外部索引鍵 (請參閱 <<c2> [ 遮蔽屬性](shadow-properties.md)如需詳細資訊)。 我們建議您明確地將陰影屬性加入模型之前使用的外部索引鍵 （如下所示）。
+您可以使用的字串`HasForeignKey(...)`多載，將陰影屬性設定為外鍵（如需詳細資訊，請參閱[陰影屬性](shadow-properties.md)）。 我們建議您先將 shadow 屬性明確加入至模型，再將其當做外鍵使用（如下所示）。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/ShadowForeignKey.cs#Sample)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ShadowForeignKey.cs#Sample)]
 
-### <a name="without-navigation-property"></a>不含導覽屬性
+### <a name="without-navigation-property"></a>沒有導覽屬性
 
-您不一定需要提供的瀏覽屬性。 您可以只需要提供外部索引鍵，其中一端的關聯性。
+您不一定需要提供導覽屬性。 您可以直接在關聯性的一端提供外鍵。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/NoNavigation.cs?highlight=14-17)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoNavigation.cs?highlight=14-17)]
 
-### <a name="principal-key"></a>主體金鑰
+### <a name="principal-key"></a>主要金鑰
 
-如果您想要參考的屬性以外的主索引鍵的外部索引鍵時，您可以使用 Fluent API 來設定主體的索引鍵屬性關聯性。 主體的金鑰會自動設定的屬性是做為替代索引鍵的安裝程式 (請參閱[替代索引鍵](alternate-keys.md)如需詳細資訊)。
+如果您想要外鍵參考主鍵以外的屬性，您可以使用流暢的 API 來設定關聯性的主體索引鍵屬性。 您設定為主體金鑰的屬性會自動設定為替代金鑰（如需詳細資訊，請參閱[替代金鑰](alternate-keys.md)）。
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/PrincipalKey.cs?highlight=11)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Relationships/PrincipalKey.cs?highlight=11)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -188,9 +188,9 @@ public class RecordOfSale
 }
 ```
 
-下列程式碼清單示範如何設定複合的主體索引鍵。
+下列程式代碼清單顯示如何設定複合主體索引鍵。
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/CompositePrincipalKey.cs?highlight=11)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Relationships/CompositePrincipalKey.cs?highlight=11)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -230,13 +230,13 @@ public class RecordOfSale
 ```
 
 > [!WARNING]  
-> 您可以在其中指定主體的索引鍵屬性的順序必須符合指定的外部索引鍵的順序。
+> 指定主體索引鍵屬性的順序必須符合為外鍵指定的順序。
 
 ### <a name="required-and-optional-relationships"></a>必要和選擇性的關聯性
 
-您可以使用 Fluent API 來設定關聯性是否必要或選擇性。 最後這會控制外部索引鍵屬性是必要或選擇性。 當您使用陰影狀態外部索引鍵，這是最有用。 如果您有在您實體類別中的外部索引鍵屬性，則關聯性的 requiredness 取決於外部索引鍵屬性是必要或選擇性 (請參閱[必要和選擇性屬性](required-optional.md)如需詳細資訊資訊）。
+您可以使用流暢的 API 來設定關聯性是否為必要或選擇性。 最後，這會控制外鍵屬性是否為必要或選擇性。 當您使用陰影狀態外鍵時，這是最有用的。 如果您的實體類別中有外鍵屬性，則關聯性的必要性取決於外鍵屬性是否為必要或選擇性（如需詳細資訊，請參閱[必要和選擇性屬性](required-optional.md)）。
 
-<!-- [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/Required.cs?highlight=11)] -->
+<!-- [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/Required.cs?highlight=11)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -272,11 +272,11 @@ public class Post
 
 ### <a name="cascade-delete"></a>串聯刪除
 
-您可以使用 Fluent API 來明確設定指定的關聯性的串聯刪除行為。
+您可以使用流暢的 API，為指定的關聯性明確設定串聯刪除行為。
 
-請參閱[串聯刪除](../saving/cascade-delete.md)上儲存的資料區段的每個選項的詳細討論。
+如需每個選項的詳細討論，請參閱儲存資料的重迭[刪除](../saving/cascade-delete.md)一節。
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/CascadeDelete.cs?highlight=11)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Relationships/CascadeDelete.cs?highlight=11)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -315,9 +315,9 @@ public class Post
 
 ### <a name="one-to-one"></a>一對一
 
-一對一關聯性兩端有參考導覽屬性。 它們會遵循相同的慣例，作為一對多關聯性，但唯一索引在外部索引鍵屬性，以確保只有一個相依與每個主體中引進。
+一對一關聯性在兩端都有參考導覽屬性。 它們遵循與一對多關聯性相同的慣例，但是在外鍵屬性上引進了唯一的索引，以確保只有一個相依性與每個主體相關。
 
-<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/Samples/Relationships/OneToOne.cs?highlight=6,15,16)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/Relationships/OneToOne.cs?highlight=6,15,16)] -->
 ``` csharp
 public class Blog
 {
@@ -339,13 +339,13 @@ public class BlogImage
 ```
 
 > [!NOTE]  
-> EF 會選擇其中一個是它能夠偵測到外部索引鍵屬性為基礎的相依實體。 如果錯誤的實體會被選為相依，您可以使用 Fluent API，若要修正此問題。
+> EF 會根據其偵測外鍵屬性的能力，選擇要相依的其中一個實體。 如果選擇錯誤的實體做為相依專案，您可以使用流暢的 API 來修正此問題。
 
-設定使用 Fluent API 的關聯性，當您使用`HasOne`和`WithOne`方法。
+設定與流暢 API 的關聯性時，您會使用`HasOne`和`WithOne`方法。
 
-設定您要指定的相依實體型別-外部索引鍵時注意到提供給泛型參數`HasForeignKey`在下方的清單。 在一對多關聯性很顯然，參考導覽的實體是相依，而與該集合是主體。 但這不是因此在一對一關聯性; 因此不需要明確地定義它。
+設定外鍵時，您需要指定相依實體類型-請注意下列清單中提供給`HasForeignKey`的泛型參數。 在一對多關聯性中，明確地指出具有參考導覽的實體是相依的，而具有該集合的實體是主體。 但這並不是一對一關聯性，因此需要明確定義。
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/OneToOne.cs?highlight=11)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Relationships/OneToOne.cs?highlight=11)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -382,9 +382,9 @@ public class BlogImage
 
 ### <a name="many-to-many"></a>多對多
 
-尚不支援多對多關聯性，而不需要實體類別，以代表聯結的資料表。 不過，您可以透過包含聯結資料表的對應兩個個別一對多關聯性的實體類別來表示多對多關聯性。
+尚未支援多對多關聯性，但沒有實體類別來表示聯結資料表。 不過，您可以藉由包含聯結資料表的實體類別並對應兩個不同的一對多關聯性，來代表多對多關聯性。
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/ManyToMany.cs?highlight=11,12,13,14,16,17,18,19,39,40,41,42,43,44,45,46)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?highlight=11,12,13,14,16,17,18,19,39,40,41,42,43,44,45,46)] -->
 ``` csharp
 class MyContext : DbContext
 {

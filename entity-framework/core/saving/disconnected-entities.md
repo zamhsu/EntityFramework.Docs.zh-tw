@@ -5,12 +5,12 @@ ms.author: avickers
 ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 51367d2619b1943c300f8954123f70b909ad96e7
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
-ms.translationtype: HT
+ms.openlocfilehash: 070f2ad396ec21858096c29413ac80bdf8547328
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994395"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197805"
 ---
 # <a name="disconnected-entities"></a>已中斷連線的實體
 
@@ -19,7 +19,7 @@ DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在
 不過，有時會在查詢實體時使用一個內容執行個體，然後儲存時又使用不同的執行個體。 這通常發生在「已中斷連線」的案例中，例如 Web 應用程式，其中會在要求中對實體進行查詢、傳送給用戶端、修改、傳回給伺服器，然後再儲存。 在此情況下，第二個內容執行個體必須知道實體是新的 (應該插入) 還是現有的 (應該更新)。
 
 > [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Disconnected/) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) \(英文\)。
 
 > [!TIP]
 > 對於具有指定主索引鍵值的任何實體，EF Core 只能追蹤其中一個執行個體。 若要避免此情況成為問題，最佳方式就是針對每個工作單位都使用短期內容，讓內容從空白開始、有實體與其連結、儲存這些實體，然後再處置及捨棄內容。
@@ -38,11 +38,11 @@ DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在
 
 在實體類型為已知的情況下，檢查是否有未設定的索引鍵相當簡單：
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#IsItNewSimple)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#IsItNewSimple)]
 
 不過，EF 針對所有實體類型和索引鍵類型也提供一個內建的方法來執行此操作：
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#IsItNewGeneral)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#IsItNewGeneral)]
 
 > [!TIP]  
 > 只要內容一追蹤實體，就會立即設定索引鍵，即使該實體處於 Added 狀態時也一樣。 周遊實體圖表並判斷要針對每個實體執行什麼動作時 (例如使用 TrackGraph API 時)，這會很有幫助。 使用索引鍵值時，應該只以這裡所示的方式在發出任何呼叫來追蹤實體「之前」使用。
@@ -55,7 +55,7 @@ DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在
 
 若要查詢實體，請直接使用 Find 方法：
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#IsItNewQuery)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#IsItNewQuery)]
 
 本文件的範圍不包含顯示從用戶端傳遞旗標的完整程式碼。 在 Web 應用程式中，這通常意謂著針對不同的動作發出不同的要求，或是在要求中傳遞某種狀態，再於控制器中擷取該狀態。
 
@@ -63,20 +63,20 @@ DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在
 
 如果已知所需的是插入還是更新，便可適當地使用 Add 或 Update：
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertAndUpdateSingleEntity)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertAndUpdateSingleEntity)]
 
 不過，如果實體使用自動產生的索引鍵值，則 Update 方法對這兩種情況都適用：
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntity)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntity)]
 
 Update 方法通常會將實體標示為要進行更新，而不是插入。 不過，如果實體有自動產生的索引鍵，且尚未設定任何索引鍵值，就會改為將實體標示為要進行插入。
 
 > [!TIP]  
 > 這是在 EF Core 2.0 中所導入的行為。 在舊版中，一律是必須明確選擇 Add 或 Update。
 
-如果實體未使用自動產生的金鑰，應用程式就必須判斷是應該插入還是更新實體：例如：
+如果實體未使用自動產生的索引鍵，則應用程式必須決定是否要插入或更新實體：例如：
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntityWithFind)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntityWithFind)]
 
 步驟如下：
 * 如果 Find 傳回 Null，即表示資料庫尚未包含具有此識別碼的部落格，因此我們會呼叫 Add 來將它標示為要進行插入。
@@ -97,17 +97,17 @@ Update 方法通常會將實體標示為要進行更新，而不是插入。 不
 
 其中一個使用圖表的範例就是將部落格連同其相關文章集合一起進行插入或更新。 如果圖表中的所有實體都應該進行插入，或是全部都應該進行更新，則程序會與上述單一實體的程序相同。 例如，部落格和文章中圖表的建立方式如果像這樣：
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#CreateBlogAndPosts)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#CreateBlogAndPosts)]
 
 則插入方式可以像這樣：
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertGraph)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertGraph)]
 
 對 Add 的呼叫會將部落格及所有文章標示為要進行插入。
 
 同樣地，如果圖表中的所有實體都需要進行更新，則可以使用 Update：
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#UpdateGraph)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#UpdateGraph)]
 
 部落格及其文章將會標示為要進行更新。
 
@@ -115,26 +115,26 @@ Update 方法通常會將實體標示為要進行更新，而不是插入。 不
 
 使用自動產生的索引鍵時，可同樣使用 Update 來進行插入和更新，即使圖表包含需要插入與需要更新的混合實體時也一樣：
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateGraph)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateGraph)]
 
 Update 會將圖表中任何未設定索引鍵值的實體 (部落格或文章) 標示為要進行插入，所有其他實體則標示為要進行更新。
 
 與之前相同，未使用自動產生的索引鍵時，可以使用查詢和某些處理：
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateGraphWithFind)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateGraphWithFind)]
 
 ## <a name="handling-deletes"></a>處理刪除
 
 處理刪除可能相當棘手，因為當實體不存在時，常常意謂著應該將其刪除。 其中一個處理此情況的方式是使用「虛刪除」來將實體標示為已刪除，而不是實際進行刪除。 如此一來，刪除就變成與更新相同。 您可以在使用[查詢篩選](xref:core/querying/filters)時實作虛刪除。
 
-針對真實的刪除，常見的模式是使用查詢模式的延伸來執行基本上是圖表差異的操作。例如: 
+針對真實的刪除，常見的模式是使用查詢模式的延伸來執行基本上是圖表差異的操作。例如：
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 
 ## <a name="trackgraph"></a>TrackGraph
 
 就內部而言，Add、Attach 及 Update 會使用圖表周遊搭配針對每個實體所做的判斷，亦即應該將實體標示為 Added (要進行插入)、Modified (要進行更新)、Unchanged (不進行任何動作) 還是 Deleted (要進行刪除)。 這個機制會透過 TrackGraph API 公開。 例如，假設當用戶端傳回實體圖表時，會在每個實體上設定指出處理方式的旗標。 接著，便可使用 TrackGraph 來處理此旗標：
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#TrackGraph)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#TrackGraph)]
 
 為了範例簡便起見，旗標僅顯示為實體的一部分。 一般而言，旗標會是 DTO 或要求中所包含某個其他狀態的一部分。

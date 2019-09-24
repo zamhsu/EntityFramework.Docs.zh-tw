@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 9d2e647f-29e4-483b-af00-74269eb06e8f
 uid: core/modeling/relational/data-types
-ms.openlocfilehash: d667cbcb821e321faed36d097b531c7c55b81248
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: 26664ebe18abcdeaa2b9c8dc23a6410204f53c8e
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149167"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197189"
 ---
 # <a name="data-types"></a>資料類型
 
@@ -30,10 +30,10 @@ ms.locfileid: "71149167"
 
 例如`Url` ，下列程式碼會將設定為非 unicode 字串，其最大`200`長度為，並`Rating`將設定`5`為有效位數`2`和小數位數。
 
-[!code-csharp[Main](../../../../samples/core/Modeling/DataAnnotations/Samples/Relational/DataType.cs?name=Entities&highlight=4,6)]
+[!code-csharp[Main](../../../../samples/core/Modeling/DataAnnotations/Relational/DataType.cs?name=Entities&highlight=4,6)]
 
 ## <a name="fluent-api"></a>Fluent API
 
 您也可以使用流暢的 API 來為數據行指定相同的資料類型。
 
-[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Samples/Relational/DataType.cs?name=Model&highlight=9-10)]
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Relational/DataType.cs?name=Model&highlight=9-10)]

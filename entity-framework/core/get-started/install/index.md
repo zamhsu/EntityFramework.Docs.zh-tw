@@ -4,22 +4,22 @@ author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: 62194d1db4efcdaed53ca0e14f160315f8e3cf03
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: eb808dd9d9b1b214947524cd83999f67be9cc0ff
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921762"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149071"
 ---
 # <a name="installing-entity-framework-core"></a>安裝 Entity Framework Core
 
 ## <a name="prerequisites"></a>必要條件
 
-* 因為 EF Core 是 [.NET Standard 2.0](/dotnet/standard/net-standard) 程式庫。 所以 EF Core 需要支援 .NET Standard 2.0 的 .NET 實作才可執行。 其他 .NET Standard 2.0 程式庫也可以參考 EF Core。 
+* 因為 EF Core 是 [.NET Standard 2.1](/dotnet/standard/net-standard) 程式庫。 所以 EF Core 需要支援 .NET Standard 2.1 的 .NET 實作才可執行。 其他 .NET Standard 2.1 程式庫也可以參考 EF Core。 
 
 * 例如，您可以使用 EF Core 開發以 .NET Core 為目標的應用程式。 建置 .NET Core 應用程式需要 [.NET Core SDK](https://dotnet.microsoft.com/download)。 此外，您也可以使用 Visual Studio、Visual Studio for Mac 或 Visual Studio Code 等開發環境。 如需詳細資訊，請參閱 [.NET Core 使用者入門](/dotnet/core/get-started)。
 
-* 您可以搭配 Visual Studio 使用 EF Core，來開發以 Windows 上 .NET Framework 4.6.1 或更新版本為目標的應用程式。 建議使用最新版的 [Visual Studio](https://visualstudio.microsoft.com/vs)。 若您想要使用較舊版本，例如 Visual Studio 2015，請務必[將 NuGet 用戶端升級至 3.6.0 版](https://www.nuget.org/downloads)，以搭配 .NET Standard 2.0 程式庫使用。
+* 您可以與 Visual Studio 搭配使用 EF Core 來開發 Windows 上的應用程式。 建議使用最新版的 [Visual Studio](https://visualstudio.microsoft.com/vs)。
 
 * EF Core 可在其他的 .NET 實作上執行，像是 [Xamarin](https://dotnet.microsoft.com/apps/xamarin) 及 .NET Native。 但實踐這些實作有執行階段的限制，其可能影響 EF Core 在應用程式上的運作。 如需詳細資訊，請參閱 [EF Core 支援的 .NET 實作](xref:core/platforms/index)。
 
@@ -133,16 +133,3 @@ Install-Package Microsoft.EntityFrameworkCore.Tools
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     ```
 
-* 以 .NET Framework 為目標的應用程式可能必須變更為使用 .NET Standard 2.0 程式庫：
-
-  * 編輯專案檔，並確定下列項目出現在初始屬性群組中：
-
-    ``` xml
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    ```
-
-  * 針對測試專案，也請確定下列項目存在：
-
-    ``` xml
-    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-    ```

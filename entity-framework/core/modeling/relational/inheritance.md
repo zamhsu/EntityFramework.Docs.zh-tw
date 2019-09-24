@@ -4,32 +4,32 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 9a7c5488-aaf4-4b40-b1ff-f435ff30f6ec
 uid: core/modeling/relational/inheritance
-ms.openlocfilehash: 2d0a2abc554f5f115479f886ca3f9f4f01b80b5b
-ms.sourcegitcommit: ea1cdec0b982b922a59b9d9301d3ed2b94baca0f
+ms.openlocfilehash: a7fb19f9c86d1768967d172c006eb5d894254e0c
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/31/2019
-ms.locfileid: "66452289"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71196939"
 ---
-# <a name="inheritance-relational-database"></a>繼承 （關聯式資料庫）
+# <a name="inheritance-relational-database"></a>繼承 (關聯式資料庫)
 
 > [!NOTE]  
 > 本節中的組態一般適用於關聯式資料庫。 當您因共用 *Microsoft.EntityFrameworkCore.Relational* 套件而安裝關聯式資料庫提供者時，這裡顯示的擴充方法會變成可用。
 
-EF 模型中的繼承用來控制如何將實體類別中的繼承表示在資料庫中。
+EF 模型中的繼承是用來控制實體類別中的繼承在資料庫中的呈現方式。
 
 > [!NOTE]  
-> 目前，只有每個階層的資料表 (TPH) 模式中實作的 EF Core。 其他常見的模式，例如，每一類一表 (TPT) 和每個實體-類一表 (TPC) 尚無法使用。
+> 目前，只有每個階層的資料表 (TPH) 模式中實作的 EF Core。 其他常見的模式（例如，每個類型的資料表（TPT）和每個具體的資料表類型（TPC））尚無法使用。
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，將使用的每個階層的資料表 (TPH) 模式會對應繼承。 TPH 會使用單一的資料表，儲存在階層中的所有類型的資料。 鑑別子資料行用來識別每個資料列代表哪種類型。
+依照慣例，會使用每個階層的資料表（TPH）模式來對應繼承。 TPH 會使用單一資料表來儲存階層中所有類型的資料。 鑒別子資料行是用來識別每個資料列所代表的類型。
 
 EF Core 只會設定繼承，如果兩個或多個繼承的型別會明確地包含在模型中 (請參閱[繼承](../inheritance.md)如需詳細資訊)。
 
-以下是範例顯示簡單的繼承案例，並儲存在關聯式資料庫資料表中使用 TPH 模式的資料。 *鑑別子*資料行會識別哪一種*部落格*會儲存在每個資料列。
+以下範例顯示簡單的繼承案例，以及使用 TPH 模式儲存在關係資料庫資料表中的資料。 *鑒別*子資料行會識別每個資料列中所儲存的*Blog*類型。
 
-<!-- [!code-csharp[Main](samples/core/relational/Modeling/Conventions/Samples/InheritanceDbSets.cs)] -->
+<!-- [!code-csharp[Main](samples/core/relational/Modeling/Conventions/InheritanceDbSets.cs)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -52,17 +52,17 @@ public class RssBlog : Blog
 ![影像](_static/inheritance-tph-data.png)
 
 >[!NOTE]
-> 使用 TPH 對應時，資料庫資料行會自動進行視需要的可為 null。
+> 使用 TPH 對應時，視需要自動將資料庫資料行設為可為 null。
 
 ## <a name="data-annotations"></a>資料註釋
 
-您無法使用資料註解來設定繼承。
+您不能使用資料批註來設定繼承。
 
 ## <a name="fluent-api"></a>Fluent API
 
-您可以使用 Fluent API，若要設定的名稱和類型的鑑別子資料行以及用來識別階層中的每個類型的值。
+您可以使用流暢的 API 來設定鑒別子資料行的名稱和類型，以及用來識別階層中每個類型的值。
 
-<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/InheritanceTPHDiscriminator.cs?highlight=7,8,9,10)] -->
+<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/InheritanceTPHDiscriminator.cs?highlight=7,8,9,10)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -89,9 +89,9 @@ public class RssBlog : Blog
 }
 ```
 
-## <a name="configuring-the-discriminator-property"></a>設定鑑別子屬性
+## <a name="configuring-the-discriminator-property"></a>設定鑒別子屬性
 
-在上述範例中，做為建立鑑別子[陰影屬性](xref:core/modeling/shadow-properties)在階層的基底實體。 因為它是模型中的屬性，可以設定其他屬性一樣。 例如，若要使用預設值，依慣例鑑別子時，設定最大長度：
+在上述範例中，會在階層的基底實體上建立鑒別子做為[陰影屬性](xref:core/modeling/shadow-properties)。 由於它是模型中的屬性，因此可以像其他屬性一樣進行設定。 例如，若要設定預設值時使用的最大長度（依慣例鑒別子）：
 
 ```C#
 modelBuilder.Entity<Blog>()
@@ -99,7 +99,7 @@ modelBuilder.Entity<Blog>()
     .HasMaxLength(200);
 ```
 
-鑑別子也可以對應至您的實體中的實際 CLR 屬性。 例如:
+鑒別子也可以對應至實體中的實際 CLR 屬性。 例如：
 ```C#
 class MyContext : DbContext
 {
@@ -125,7 +125,7 @@ public class RssBlog : Blog
 }
 ```
 
-它結合這兩個條件，可以將鑑別子對應至一個真正的屬性，並設定它：
+將這兩個專案結合在一起，可以將鑒別子對應到 real 屬性並加以設定：
 ```C#
 modelBuilder.Entity<Blog>(b =>
 {

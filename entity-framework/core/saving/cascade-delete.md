@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 15b7e69676ef9aeb70121fcec404c34a17e5e2bb
-ms.sourcegitcommit: 8d04a2ad98036f32ca70c77ce3040c5edb1cdf82
-ms.translationtype: HT
+ms.openlocfilehash: ec04de4eab2a28e3aa81ff27accef4fc11c83995
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44384835"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197800"
 ---
 # <a name="cascade-delete"></a>串聯刪除
 
@@ -38,9 +38,9 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 | 行為名稱               | 對記憶體中相依項/子系的影響    | 對資料庫中相依項/子系的影響  |
 |:----------------------------|:---------------------------------------|:---------------------------------------|
 | **Cascade**                 | 將實體刪除                   | 將實體刪除                   |
-| **ClientSetNull** (預設值) | 將外部索引鍵屬性設定為 Null | 無                                   |
+| **ClientSetNull** (預設值) | 將外部索引鍵屬性設定為 Null | None                                   |
 | **SetNull**                 | 將外部索引鍵屬性設定為 Null | 將外部索引鍵屬性設定為 Null |
-| **Restrict**                | 無                                   | 無                                   |
+| **Restrict**                | None                                   | None                                   |
 
 ### <a name="required-relationships"></a>必要關係
 針對必要關聯性 (不可為空值的外部索引鍵)，您「無法」儲存 Null 外部索引鍵值，這會造成下列影響：
@@ -48,9 +48,9 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 | 行為名稱         | 對記憶體中相依項/子系的影響 | 對資料庫中相依項/子系的影響 |
 |:----------------------|:------------------------------------|:--------------------------------------|
 | **Cascade** (預設值) | 將實體刪除                | 將實體刪除                  |
-| **ClientSetNull**     | SaveChanges 擲回例外狀況                  | 無                                  |
+| **ClientSetNull**     | SaveChanges 擲回例外狀況                  | None                                  |
 | **SetNull**           | SaveChanges 擲回例外狀況                  | SaveChanges 擲回例外狀況                    |
-| **Restrict**          | 無                                | 無                                  |
+| **Restrict**          | None                                | None                                  |
 
 在上表中，「無」會造成條件約束違規。 例如，如果將主體/子系實體刪除，但未採取任何動作來變更相依項/子系的外部索引鍵，資料庫將可能因外部條件約速違規而在 SaveChanges 時擲回例外狀況。
 
@@ -66,13 +66,13 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 > 不同於 EF6，在 EF Core 中，串聯影響不會立即發生，而是只有在呼叫 SaveChanges 時才會發生。
 
 > [!NOTE]  
-> **EF Core 2.0 中的變更：** 在舊版中，*Restrict* 會導致將所追蹤相依實體中的選擇性外部索引鍵屬性設定為 Null，而且是選擇性關聯性的預設刪除行為。 在 EF Core 2.0 中，則導入了 *ClientSetNull* 來代表該行為，並成為選擇性關聯性的預設值。 *Restrict* 的行為在調整後變成一律不會對相依實體產生任何副作用。
+> **EF Core 2.0 中的變更：** 在舊版中，[*限制*] 會使追蹤相依實體中的選擇性外鍵屬性設定為 null，而且是選擇性關聯性的預設刪除行為。 在 EF Core 2.0 中，則導入了 *ClientSetNull* 來代表該行為，並成為選擇性關聯性的預設值。 *Restrict* 的行為在調整後變成一律不會對相依實體產生任何副作用。
 
 ## <a name="entity-deletion-examples"></a>實體刪除範例
 
-對於可供下載並執行的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/CascadeDelete/)，以下程式碼是其中的一部分。 此範例示範刪除父系實體時，選擇性和必要關聯性的每個刪除行為會發生什麼情況。
+對於可供下載並執行的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/CascadeDelete/)，以下程式碼是其中的一部分。 此範例示範刪除父系實體時，選擇性和必要關聯性的每個刪除行為會發生什麼情況。
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/CascadeDelete/Sample.cs#DeleteBehaviorVariations)]
+[!code-csharp[Main](../../../samples/core/Saving/CascadeDelete/Sample.cs#DeleteBehaviorVariations)]
 
 讓我們逐步進行每個變化來了解會發生什麼情況。
 
@@ -181,9 +181,9 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ## <a name="delete-orphans-examples"></a>刪除失去關聯的項目範例
 
-對於可供下載並執行的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/CascadeDelete/)，以下程式碼是其中的一部分。 此範例示範切斷父系/主體與其子系/相依項之間的關聯性時，選擇性和必要關聯性的每個刪除行為會發生什麼情況。 在此範例中，會藉由從主體/父系 (部落格) 上的集合導覽屬性移除相依項/子系 (文章) 來切斷關聯性。 不過，如果改為將相依項/子系對主體/父系的參考設定為 Null，行為也會相同。
+對於可供下載並執行的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/CascadeDelete/)，以下程式碼是其中的一部分。 此範例示範切斷父系/主體與其子系/相依項之間的關聯性時，選擇性和必要關聯性的每個刪除行為會發生什麼情況。 在此範例中，會藉由從主體/父系 (部落格) 上的集合導覽屬性移除相依項/子系 (文章) 來切斷關聯性。 不過，如果改為將相依項/子系對主體/父系的參考設定為 Null，行為也會相同。
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/CascadeDelete/Sample.cs#DeleteOrphansVariations)]
+[!code-csharp[Main](../../../samples/core/Saving/CascadeDelete/Sample.cs#DeleteOrphansVariations)]
 
 讓我們逐步進行每個變化來了解會發生什麼情況。
 

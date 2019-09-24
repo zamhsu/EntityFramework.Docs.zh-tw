@@ -1,33 +1,33 @@
 ---
-title: 包含與排除類型-EF Core
+title: 包括 & 排除類型-EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: cbe6935e-2679-4b77-8914-a8d772240cf1
 uid: core/modeling/included-types
-ms.openlocfilehash: f533b24312af37634ce4957e43c39ce776bf0bf0
-ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
+ms.openlocfilehash: ca83b1c432bdf4853dba81e12ec4a739bc8218dc
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2019
-ms.locfileid: "59929793"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197383"
 ---
 # <a name="including--excluding-types"></a>包含與排除類型
 
-納入模型表示 EF 相關的中繼資料的輸入，然後將嘗試讀取和寫入，或將資料庫的執行個體中的型別。
+在模型中包含類型，表示 EF 具有該類型的中繼資料，並會嘗試從資料庫讀取及寫入實例。
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，會在中公開的型別`DbSet`在您的內容上的屬性都包含在您的模型。 此外，型別中所述`OnModelCreating`方法也會包含在內。 最後，以遞迴方式瀏覽探索到的類型的導覽屬性，即可找到任何型別也會包含在模型中。
+依照慣例，在內容的`DbSet`屬性中公開的類型會包含在您的模型中。 此外，也包含`OnModelCreating`方法中所述的類型。 最後，以遞迴方式探索已探索類型的導覽屬性所找到的任何類型也會包含在模型中。
 
-**例如，下列程式碼清單中會探索所有的三種類型：**
+**例如，在下列程式碼中，會探索所有三種類型：**
 
-* `Blog` 因為它會公開在`DbSet`內容上的屬性
+* `Blog`因為它是在內容的`DbSet`屬性中公開
 
-* `Post` 因為它透過探索`Blog.Posts`導覽屬性
+* `Post`因為它是透過`Blog.Posts`導覽屬性來探索的
 
-* `AuditEntry` 因為它被提及中 `OnModelCreating`
+* `AuditEntry`因為已在中提及`OnModelCreating`
 
-<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/Samples/IncludedTypes.cs?highlight=3,7,16)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/IncludedTypes.cs?highlight=3,7,16)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -66,12 +66,12 @@ public class AuditEntry
 
 ## <a name="data-annotations"></a>資料註釋
 
-若要從模型中排除的型別，您可以使用資料註解。
+您可以使用資料批註，從模型中排除型別。
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/IgnoreType.cs?highlight=20)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IgnoreType.cs?highlight=20)]
 
 ## <a name="fluent-api"></a>Fluent API
 
-您可以使用 Fluent API，若要從模型中排除的型別。
+您可以使用流暢的 API，從模型中排除型別。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/IgnoreType.cs?highlight=12)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IgnoreType.cs?highlight=12)]

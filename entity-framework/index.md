@@ -5,12 +5,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 6bb12583-c39a-454c-8d83-d2a2793ca9ef
 uid: index
-ms.openlocfilehash: f49db30ccc3a2017a8deba0dea1861071322d623
-ms.sourcegitcommit: 06073f8efde97dd5f540dbfb69f574d8380566fe
+ms.openlocfilehash: 0a2d71b435d9886990ccb17e99a4a9363ff994f3
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67333810"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149249"
 ---
 <div id="main" class="v2">
     <div class="container">
@@ -162,18 +162,6 @@ ms.locfileid: "67333810"
                                                     <a href="/ef/core/get-started/">教學課程</a>
                                                 </h3>
                                                 <p>
-                                                    <a href="/ef/core/get-started/full-dotnet/">.NET Framework</a>
-                                                </p>
-                                                <p>
-                                                    <a href="/ef/core/get-started/netcore/">.NET Core</a>
-                                                </p>
-                                                <p>
-                                                    <a href="/ef/core/get-started/aspnetcore/">ASP.NET Core</a>
-                                                </p>
-                                                <p>
-                                                    <a href="/ef/core/get-started/uwp/">UWP</a>
-                                                </p>
-                                                <p>
                                                     <a href="/ef/core/get-started/">其他...</a>
                                                 </p>
                                             </div>
@@ -205,6 +193,9 @@ ms.locfileid: "67333810"
                                                 </p>
                                                 <p>
                                                     <a href="/ef/core/providers/sqlite/">SQLite</a>
+                                                </p>
+                                                <p>
+                                                    <a href="/ef/core/providers/cosmos/">Cosmos</a>
                                                 </p>
                                                 <p>
                                                     <a href="/ef/core/providers/">其他...</a>

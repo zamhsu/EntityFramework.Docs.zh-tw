@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3f1993c2-cdf5-425b-bac2-a2665a20322b
 uid: core/saving/explicit-values-generated-properties
-ms.openlocfilehash: 00abef4d1208400ff68ced0a241b98b8dc9be5c0
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
-ms.translationtype: HT
+ms.openlocfilehash: d6aa9a0a9ce34e09a39026ad7ea9195b6777858c
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997849"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197865"
 ---
 # <a name="setting-explicit-values-for-generated-properties"></a>為產生的屬性設定明確值
 
@@ -18,25 +18,25 @@ ms.locfileid: "42997849"
 在一些情況下，您可能會想要為產生的屬性設定明確值，而不是使用產生的值。
 
 > [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/ExplicitValuesGenerateProperties/) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/ExplicitValuesGenerateProperties/) \(英文\)。
 
 ## <a name="the-model"></a>模型
 
 本文中使用的模型包含單一 `Employee` 實體。
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/Employee.cs#Sample)]
+[!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/Employee.cs#Sample)]
 
 ## <a name="saving-an-explicit-value-during-add"></a>在新增期間儲存明確值
 
 `Employee.EmploymentStarted` 屬性已設定為採用資料庫為新實體產生的值 (使用預設值)。
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/EmployeeContext.cs#EmploymentStarted)]
+[!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/EmployeeContext.cs#EmploymentStarted)]
 
 下列程式碼會將兩個員工插入到資料庫中。
 * 針對第一個員工，由於未指派任何值給 `Employee.EmploymentStarted` 屬性，因此它會維持設定為 `DateTime` 的 CLR 預設值。
 * 針對第二個員工，我們已設定明確值 `1-Jan-2000`。
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/Sample.cs#EmploymentStarted)]
+[!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/Sample.cs#EmploymentStarted)]
 
 輸出顯示資料庫為第一個員工產生了一個值，而我們的明確值則用於第二個員工。
 
@@ -54,7 +54,7 @@ ms.locfileid: "42997849"
 > [!NOTE]  
 > 在我們的待辦項目上有一個在 SQL Server 提供者內自動進行此操作的[功能要求](https://github.com/aspnet/EntityFramework/issues/703)。
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/Sample.cs#EmployeeId)]
+[!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/Sample.cs#EmployeeId)]
 
 輸出顯示所提供的識別碼已儲存至資料庫。
 
@@ -67,23 +67,23 @@ ms.locfileid: "42997849"
 
 `Employee.LastPayRaise` 屬性已設定為採用資料庫在更新期間產生的值。
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/EmployeeContext.cs#LastPayRaise)]
+[!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/EmployeeContext.cs#LastPayRaise)]
 
 > [!NOTE]  
 > 根據預設，如果您嘗試針對已設定為要在更新期間產生的屬性儲存明確值，EF Core 將會擲回例外狀況。 若要避免此問題，您必須降到較低層級的中繼資料 API 並設定 `AfterSaveBehavior` (如以上所示)。
 
 > [!NOTE]  
-> **EF Core 2.0 中的變更：** 在舊版中，是透過 `IsReadOnlyAfterSave` 旗標來控制儲存後的行為。 此旗標已淘汰並被 `AfterSaveBehavior` 取代。
+> **EF Core 2.0 中的變更：** 在先前的版本中，會透過`IsReadOnlyAfterSave`旗標控制之後的儲存行為。 此旗標已淘汰並被 `AfterSaveBehavior` 取代。
 
 資料庫中也有一個可在 `UPDATE` 作業期間為 `LastPayRaise` 資料行產生值的觸發程序。
 
-[!code-sql[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/employee_UPDATE.sql)]
+[!code-sql[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/employee_UPDATE.sql)]
 
 下列程式碼會為資料庫中的兩個員工加薪。
 * 針對第一個員工，由於未指派任何值給 `Employee.LastPayRaise` 屬性，因此它會維持設定為 Null。
 * 針對第二個員工，我們已將明確值設定為一週前 (回溯加薪日期)。
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/Sample.cs#LastPayRaise)]
+[!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/Sample.cs#LastPayRaise)]
 
 輸出顯示資料庫為第一個員工產生了一個值，而我們的明確值則用於第二個員工。
 

@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 02/23/2018
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/providers/index
-ms.openlocfilehash: 3748496db89c110d55a0876727e33e1f3ec987d9
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: 096d68f814e279bd224dfc50111d6576ab5eb223
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/18/2019
-ms.locfileid: "58914087"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149234"
 ---
 # <a name="database-providers"></a>資料庫提供者
 
@@ -21,10 +21,10 @@ Entity Framework Core 能夠透過稱為資料庫提供者的外掛程式程式�
 
 | NuGet 封裝                                                                                                        | 支援的資料庫引擎 | 維護程式/廠商                                                           | 注意/需求 | 實用連結                                                                                                                                                                                       |
 |:---------------------------------------------------------------------------------------------------------------------|:---------------------------|:------------------------------------------------------------------------------|:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer)    | SQL Server 2008 及更新版本    | [EF Core 專案](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) |                      | [docs](xref:core/providers/sql-server/index)                                                                                                                                                       |
+| [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer)    | SQL Server 2012 及更新版本    | [EF Core 專案](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) |                      | [docs](xref:core/providers/sql-server/index)                                                                                                                                                       |
 | [Microsoft.EntityFrameworkCore.Sqlite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite)          | SQLite 3.7 及更新版本         | [EF Core 專案](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) |                      | [docs](xref:core/providers/sqlite/index)                                                                                                                                                           |
 | [Microsoft.EntityFrameworkCore.InMemory](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.InMemory)      | EF Core 記憶體內部資料庫 | [EF Core 專案](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) | 僅供測試     | [docs](xref:core/providers/in-memory/index)                                                                                                                                                        |
-| [Microsoft.EntityFrameworkCore.Cosmos](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Cosmos)          | Azure Cosmos DB SQL API    | [EF Core 專案](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) | 只有預覽         | [部落格](https://blogs.msdn.microsoft.com/dotnet/2018/10/17/announcing-entity-framework-core-2-2-preview-3/)                                                                                         |
+| [Microsoft.EntityFrameworkCore.Cosmos](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Cosmos)          | Azure Cosmos DB SQL API    | [EF Core 專案](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) |                      | [docs](xref:core/providers/cosmos/index)                                                                                         |
 | [Npgsql.EntityFrameworkCore.PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL)        | PostgreSQL                 | [Npgsql 開發小組](https://github.com/npgsql)                          |                      | [docs](http://www.npgsql.org/efcore/index.html)                                                                                                                                                    |
 | [Pomelo.EntityFrameworkCore.MySql](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql)                  | MySQL、MariaDB             | [Pomelo Foundation 專案](https://github.com/PomeloFoundation)              |                      | [讀我檔案](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql/blob/master/README.md)                                                                                               |
 | [Pomelo.EntityFrameworkCore.MyCat](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MyCat)                  | MyCAT 伺服器               | [Pomelo Foundation 專案](https://github.com/PomeloFoundation)              | 只有發行前版本      | [讀我檔案](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MyCat/blob/master/README.md)                                                                                               |
@@ -51,10 +51,6 @@ Entity Framework Core 能夠透過稱為資料庫提供者的外掛程式程式�
 我們正為 Cosmos DB 中的 SQL API 開發 EF Core 提供者。
 這會是我們產生的首個完整文件導向資料庫提供者，而我們會從這次實踐中得到的經驗會用來改善 EF Core 未來版本 (可能還有其他非關聯性提供者) 的設計。
 您可在 [NuGet 資源庫](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Cosmos)取得預覽。
-
-### <a name="oracle-first-party-provider"></a>Oracle 第一方提供者
-Oracle .NET 小組已發行[適用於 EF Core 的 Oracle 提供者](https://www.nuget.org/packages/Oracle.EntityFrameworkCore/)搶鮮版 (Beta)。
-請將任何有關此提供者的問題 (包含版本時間軸) 指向 [Oracle 社群網站](https://community.oracle.com/)。
 
 ## <a name="adding-a-database-provider-to-your-application"></a>將資料庫提供者新增至應用程式
 

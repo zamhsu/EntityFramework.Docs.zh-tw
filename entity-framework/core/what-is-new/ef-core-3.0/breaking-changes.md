@@ -4,16 +4,16 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 1f63593631017a61c39ccab9216adbc4663700e7
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: f7c241159c689d4648b2778b53e50c22f580deb0
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71148902"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197918"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>EF Core 3.0 中包含的重大變更
 下列 API 和行為變更可能會在將現有的應用程式升級至3.0.0 時中斷。
-這些變更預期只會影響[提供者變更](../../providers/provider-log.md)底下記載的資料庫提供者。
+這些變更預期只會影響[提供者變更](xref:core/providers/provider-log)底下記載的資料庫提供者。
 從 3.0 preview 中斷至另一個 3.0 preview 未記載于此處。
 
 ## <a name="summary"></a>總結
@@ -23,6 +23,7 @@ ms.locfileid: "71148902"
 | [不會再於用戶端評估 LINQ 查詢](#linq-queries-are-no-longer-evaluated-on-the-client)         | High       |
 | [EF Core 3.0 以 .NET Standard 2.1 為目標，而非以 .NET Standard 2.0 為目標](#netstandard21) | High      |
 | [EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分](#dotnet-ef) | High      |
+| [DetectChanges 接受存放區產生的索引鍵值](#dc) | High      |
 | [FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名](#fromsql) | High      |
 | [查詢類型已與實體類型合併](#qt) | High      |
 | [Entity Framework Core 不再屬於 ASP.NET Core 共用架構](#no-longer) | Medium      |
@@ -37,7 +38,6 @@ ms.locfileid: "71148902"
 | [FromSql 方法只能在查詢根目錄上指定](#fromsql) | 低      |
 | [~~查詢執行會在偵錯層級記錄~~已還原](#qe) | 低      |
 | [實體執行個體上不會再設定暫存索引鍵值](#tkv) | 低      |
-| [DetectChanges 接受存放區產生的索引鍵值](#dc) | 低      |
 | [現在可以選用與主體共用資料表的相依實體](#de) | 低      |
 | [所有與並行語彙基元資料行共用資料表的實體，都必須將其對應到屬性](#aes) | 低      |
 | [未對應類型的繼承屬性，現在會對應到所有衍生類型的單一資料行](#ip) | 低      |
@@ -69,6 +69,7 @@ ms.locfileid: "71148902"
 | [SQLitePCL.raw 已更新為 2.0.0 版](#SQLitePCL) | 低      |
 | [NetTopologySuite 已更新為 2.0.0 版](#NetTopologySuite) | 低      |
 | [必須設定多個不明確的自我參考關聯性](#mersa) | 低      |
+| [DbFunction。架構為 null 或空字串，將其設定為模型的預設架構](#udf-empty-string) | 低      |
 
 ### <a name="linq-queries-are-no-longer-evaluated-on-the-client"></a>不會再於用戶端評估 LINQ 查詢
 
@@ -174,7 +175,7 @@ ms.locfileid: "71148902"
 若要能夠管理移轉或支撐 `DbContext`，請安裝 `dotnet-ef` 作為全域工具：
 
   ``` console
-    $ dotnet tool install --global dotnet-ef --version 3.0.0-*
+    $ dotnet tool install --global dotnet-ef
   ```
 
 您也可以在還原專案相依性時取得它作為本機工具 (該專案是使用[工具資訊清單檔](https://github.com/dotnet/cli/issues/10288)將它宣告為工具相依性)。
@@ -1714,4 +1715,39 @@ modelBuilder
      .Entity<User>()
      .HasOne(e => e.UpdatedBy)
      .WithMany();
+```
+
+<a name="udf-empty-string"></a>
+### <a name="dbfunctionschema-being-null-or-empty-string-configures-it-to-be-in-models-default-schema"></a>DbFunction。架構為 null 或空字串，將其設定為模型的預設架構
+
+[追蹤問題 #12757](https://github.com/aspnet/EntityFrameworkCore/issues/12757)
+
+此變更已於 EF Core 3.0-preview 7 推出。
+
+**舊行為**
+
+以架構為空字串所設定的 DbFunction，在沒有架構的情況下被視為內建函數。 例如，下列程式碼會`DatePart`將 CLR 函數`DATEPART`對應至 SqlServer 上的內建函數。
+
+```C#
+[DbFunction("DATEPART", Schema = "")]
+public static int? DatePart(string datePartArg, DateTime? date) => throw new Exception();
+
+```
+
+**新行為**
+
+所有的 DbFunction 對應都會被視為對應至使用者定義的函數。 因此，空的字串值會將函數放在模型的預設架構內。 這可能是透過 Fluent API `modelBuilder.HasDefaultSchema()` `dbo`明確設定的架構，否則為。
+
+**原因**
+
+先前的架構是空的，這是將該函式內建的方法，但該邏輯僅適用于 SqlServer，其中內建函數不屬於任何架構。
+
+**風險降低**
+
+手動設定 DbFunction 的轉譯，以將其對應至內建函數。
+
+```C#
+modelBuilder
+    .HasDbFunction(typeof(MyContext).GetMethod(nameof(MyContext.DatePart)))
+    .HasTranslation(args => SqlFunctionExpression.Create("DatePart", args, typeof(int?), null));
 ```

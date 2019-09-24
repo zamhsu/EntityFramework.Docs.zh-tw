@@ -4,25 +4,25 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 850d842e-3fad-4ef2-be17-053768e97b9e
 uid: core/saving/basic
-ms.openlocfilehash: 23e0e4611f642d59048fca5a808d0782b22caa1e
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
-ms.translationtype: HT
+ms.openlocfilehash: 6f72458504a9dbe99038af7cfd23b6991258f6b8
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994797"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197784"
 ---
 # <a name="basic-save"></a>基本儲存
 
 了解如何使用您的內容和實體類別來新增、修改及移除資料。
 
 > [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Basics/) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/) \(英文\)。
 
 ## <a name="adding-data"></a>加入資料
 
 使用 *DbSet.Add* 方法來新增實體類別的新執行個體。 當您呼叫 *SaveChanges*時，將會在資料庫中插入資料。
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#Add)]
+[!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#Add)]
 
 > [!TIP]  
 > 如[相關資料](related-data.md)一節中所述，Add、Attach 及 Update 方法對於傳遞給它們的整個實體圖表都適用。 或者，您也可以使用 EntityEntry.State 屬性來僅設定單一實體的狀態。 例如，`context.Entry(blog).State = EntityState.Modified`。
@@ -33,7 +33,7 @@ EF 會針對內容所追蹤的現有實體，自動偵測對實體所進行的�
 
 請直接修改指派給屬性的值，然後呼叫 *SaveChanges*。
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#Update)]
+[!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#Update)]
 
 ## <a name="deleting-data"></a>刪除資料
 
@@ -41,7 +41,7 @@ EF 會針對內容所追蹤的現有實體，自動偵測對實體所進行的�
 
 如果實體已經存在於資料庫中，在 *SaveChanges* 期間將會予以刪除。 如果尚未將實體儲存至資料庫 (亦即，其追蹤狀態為已新增)，就會從內容中將其移除，而在呼叫 *SaveChanges* 時，便不再將它插入。
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#Remove)]
+[!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#Remove)]
 
 ## <a name="multiple-operations-in-a-single-savechanges"></a>在單一 SaveChanges 中執行多個作業
 
@@ -50,4 +50,4 @@ EF 會針對內容所追蹤的現有實體，自動偵測對實體所進行的�
 > [!NOTE]  
 > 對大多數資料庫提供者來說，*SaveChanges* 為交易式。 這意謂著所有作業不是成功就是失敗，作業一律不會只有部分套用的情況。
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Basics/Sample.cs#MultipleOperations)]
+[!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#MultipleOperations)]
