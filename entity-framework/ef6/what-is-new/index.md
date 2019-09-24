@@ -1,56 +1,32 @@
 ---
 title: 新功能 - EF6
 author: divega
-ms.date: 10/23/2016
+ms.date: 09/12/2019
 ms.assetid: 41d1f86b-ce66-4bf2-8963-48514406fb4c
-ms.openlocfilehash: 01dc618954da5dbd12fbd37c2c47701ce251be92
-ms.sourcegitcommit: 0cc9578fd49802789a00c0044b4e57325476ca2e
+ms.openlocfilehash: 568790d9c9bb7dd2213907bef8fa090710cd3ba0
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/04/2019
-ms.locfileid: "70271447"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149120"
 ---
-# <a name="whats-new-in-ef6"></a><span data-ttu-id="60711-102">EF6 的新功能</span><span class="sxs-lookup"><span data-stu-id="60711-102">What's New in EF6</span></span>
+# <a name="whats-new-in-ef6"></a><span data-ttu-id="89cf0-102">EF6 的新功能</span><span class="sxs-lookup"><span data-stu-id="89cf0-102">What's New in EF6</span></span>
 
-<span data-ttu-id="60711-103">強烈建議您使用 Entity Framework 的最新發行版本，以確保您取得最新的功能和最高的穩定性。</span><span class="sxs-lookup"><span data-stu-id="60711-103">We highly recommend that you use the latest released version of Entity Framework to ensure you get the latest features and the highest stability.</span></span>
-<span data-ttu-id="60711-104">不過，我們了解您可能需要使用先前的版本，或者可能想要體驗最新發行前版本中的新改善。</span><span class="sxs-lookup"><span data-stu-id="60711-104">However, we realize that you may need to use a previous version, or that you may want to experiment with new improvements in the latest pre-release.</span></span>
-<span data-ttu-id="60711-105">若要安裝特定版本的 EF，請參閱[取得 Entity Framework](~/ef6/fundamentals/install.md)。</span><span class="sxs-lookup"><span data-stu-id="60711-105">To install specific versions of EF, see [Get Entity Framework](~/ef6/fundamentals/install.md).</span></span>
+<span data-ttu-id="89cf0-103">強烈建議您使用 Entity Framework 的最新發行版本，以確保您取得最新的功能和最高的穩定性。</span><span class="sxs-lookup"><span data-stu-id="89cf0-103">We highly recommend that you use the latest released version of Entity Framework to ensure you get the latest features and the highest stability.</span></span>
+<span data-ttu-id="89cf0-104">不過，我們了解您可能需要使用先前的版本，或者可能想要體驗最新發行前版本中的新改善。</span><span class="sxs-lookup"><span data-stu-id="89cf0-104">However, we realize that you may need to use a previous version, or that you may want to experiment with new improvements in the latest pre-release.</span></span>
+<span data-ttu-id="89cf0-105">若要安裝特定版本的 EF，請參閱[取得 Entity Framework](~/ef6/fundamentals/install.md)。</span><span class="sxs-lookup"><span data-stu-id="89cf0-105">To install specific versions of EF, see [Get Entity Framework](~/ef6/fundamentals/install.md).</span></span>
 
-<span data-ttu-id="60711-106">此頁面記每個新版本所包含的功能。</span><span class="sxs-lookup"><span data-stu-id="60711-106">This page documents the features that are included on each new release.</span></span>
+## <a name="ef-630"></a><span data-ttu-id="89cf0-106">EF 6.3.0</span><span class="sxs-lookup"><span data-stu-id="89cf0-106">EF 6.3.0</span></span>
 
-## <a name="recent-releases"></a><span data-ttu-id="60711-107">最新發行</span><span class="sxs-lookup"><span data-stu-id="60711-107">Recent releases</span></span>
+<span data-ttu-id="89cf0-107">EF 6.3.0 執行階段已於 2019 年 9 月發行至 NuGet。</span><span class="sxs-lookup"><span data-stu-id="89cf0-107">The EF 6.3.0 runtime was released to NuGet in September 2019.</span></span> <span data-ttu-id="89cf0-108">此版本主要目標為將使用 EF 6 的現有應用程式促進移轉至 .NET Core 3.0。</span><span class="sxs-lookup"><span data-stu-id="89cf0-108">The main goal of this release was to facilitate migrating existing applications that use EF 6 to .NET Core 3.0.</span></span> <span data-ttu-id="89cf0-109">社群也貢獻了一些 Bug 修正和增強功能。</span><span class="sxs-lookup"><span data-stu-id="89cf0-109">The community has also contributed several bug fixes and enhancements.</span></span> <span data-ttu-id="89cf0-110">有關詳細資料，請參閱每個 6.3.0 [里程碑](https://github.com/aspnet/EntityFramework6/milestones?state=closed)中已關閉的問題。</span><span class="sxs-lookup"><span data-stu-id="89cf0-110">See the issues closed in each 6.3.0 [milestone](https://github.com/aspnet/EntityFramework6/milestones?state=closed) for details.</span></span> <span data-ttu-id="89cf0-111">以下是一些較需注意的事項：</span><span class="sxs-lookup"><span data-stu-id="89cf0-111">Here are some of the more notable ones:</span></span>
 
-### <a name="ef-tools-update-in-visual-studio-2017-157"></a><span data-ttu-id="60711-108">Visual Studio 2017 15.7 中的 EF 工具更新</span><span class="sxs-lookup"><span data-stu-id="60711-108">EF Tools Update in Visual Studio 2017 15.7</span></span>
+- <span data-ttu-id="89cf0-112">支援 .NET Core 3.0</span><span class="sxs-lookup"><span data-stu-id="89cf0-112">Support for .NET Core 3.0</span></span>
+  - <span data-ttu-id="89cf0-113">現在，除了 .NET Framework 4.x 以外，EntityFramework 套件也針對 .NET Standard 2.1</span><span class="sxs-lookup"><span data-stu-id="89cf0-113">The EntityFramework package now targets .NET Standard 2.1 in addition to .NET Framework 4.x</span></span>
+  - <span data-ttu-id="89cf0-114">移轉命令已重寫為在程序外執行，並可使用 SDK 樣式的專案</span><span class="sxs-lookup"><span data-stu-id="89cf0-114">The migrations commands have been rewritten to execute out of process and work with SDK-style projects</span></span>
+- <span data-ttu-id="89cf0-115">支援 SQL Server HierarchyId</span><span class="sxs-lookup"><span data-stu-id="89cf0-115">Support for SQL Server HierarchyId</span></span>
+- <span data-ttu-id="89cf0-116">已改善與 Roslyn 和 NuGet PackageReference 的相容性</span><span class="sxs-lookup"><span data-stu-id="89cf0-116">Improved compatibility with Roslyn and NuGet PackageReference</span></span>
+- <span data-ttu-id="89cf0-117">已新增 ef6.exe，用於從組件啟用、新增、撰寫指令碼並套用移轉。</span><span class="sxs-lookup"><span data-stu-id="89cf0-117">Added ef6.exe for enabling, adding, scripting, and applying migrations from assemblies.</span></span> <span data-ttu-id="89cf0-118">此項目取代 migrate.exe</span><span class="sxs-lookup"><span data-stu-id="89cf0-118">This replaces migrate.exe</span></span>
 
-<span data-ttu-id="60711-109">在 2018 年 5 月，我們在 Visual Studio 2017 15.7 中發行了 EF Tools 的更新版本。</span><span class="sxs-lookup"><span data-stu-id="60711-109">In May 2018, we released an updated version of the EF Tools as part of Visual Studio 2017 15.7.</span></span>
-<span data-ttu-id="60711-110">其中包含一些常見難題的改善：</span><span class="sxs-lookup"><span data-stu-id="60711-110">It includes improvements for some common pain points:</span></span>
+## <a name="past-releases"></a><span data-ttu-id="89cf0-119">過去版本</span><span class="sxs-lookup"><span data-stu-id="89cf0-119">Past Releases</span></span>
 
-- <span data-ttu-id="60711-111">修正使用者介面協助工具的數個 Bug</span><span class="sxs-lookup"><span data-stu-id="60711-111">Fixes for several user interface accessibility bugs</span></span>
-- <span data-ttu-id="60711-112">從現有資料庫產生模型時，SQL Server 效能降低的因應措施 [#4](https://github.com/aspnet/entityframework6/issues/4)</span><span class="sxs-lookup"><span data-stu-id="60711-112">Workaround for SQL Server performance regression when generating models from existing databases [#4](https://github.com/aspnet/entityframework6/issues/4)</span></span>
-- <span data-ttu-id="60711-113">支援為 SQL Server 上的大型模型更新模型[#185](https://github.com/aspnet/EntityFramework6/issues/185)</span><span class="sxs-lookup"><span data-stu-id="60711-113">Support for updating models for larger models on SQL Server [#185](https://github.com/aspnet/EntityFramework6/issues/185)</span></span>
-
-<span data-ttu-id="60711-114">EF Tools 這個新版本有另一項功能改進，就是在新專案中建立模型時，會安裝 EF 6.2 執行階段。</span><span class="sxs-lookup"><span data-stu-id="60711-114">Another improvement in this new version of EF Tools is that it installs the EF 6.2 runtime when creating a model in a new project.</span></span> <span data-ttu-id="60711-115">利用舊版的 Visual Studio，就可以安裝 NuGet 套件的對應版本來使用 EF 6.2 執行階段 (以及 EF 的任何過去版本)。</span><span class="sxs-lookup"><span data-stu-id="60711-115">With older versions of Visual Studio, it is possible to use the EF 6.2 runtime (as well as any past version of EF) by installing the corresponding version of the NuGet package.</span></span>
-
-### <a name="ef-62-runtime"></a><span data-ttu-id="60711-116">EF 6.2 執行階段</span><span class="sxs-lookup"><span data-stu-id="60711-116">EF 6.2 Runtime</span></span>
-
-<span data-ttu-id="60711-117">EF 6.2 執行階段已於 2017 年 10 月發行至 NuGet。</span><span class="sxs-lookup"><span data-stu-id="60711-117">The EF 6.2 runtime was released to NuGet in October of 2017.</span></span>
-<span data-ttu-id="60711-118">絕大部分歸功於開放原始碼參與者社群的努力，EF 6.2 包含許多 [Bug 修正](https://github.com/aspnet/entityframework6/issues?utf8=%E2%9C%93&q=is%3Aissue%20milestone%3A6.2.0%20is%3Aclosed%20label%3Aclosed-fixed%20-label%3Aarea-tools%20label%3Atype-bug)和[產品增強功能](https://github.com/aspnet/entityframework6/issues?utf8=%E2%9C%93&q=is%3Aissue%20milestone%3A6.2.0%20is%3Aclosed%20label%3Aclosed-fixed%20-label%3Aarea-tools%20label%3Atype-enhancement%20)。</span><span class="sxs-lookup"><span data-stu-id="60711-118">Thanks in great part to the efforts our community of open source contributors, EF 6.2 includes numerous [bugs fixes](https://github.com/aspnet/entityframework6/issues?utf8=%E2%9C%93&q=is%3Aissue%20milestone%3A6.2.0%20is%3Aclosed%20label%3Aclosed-fixed%20-label%3Aarea-tools%20label%3Atype-bug) and [product enhancements](https://github.com/aspnet/entityframework6/issues?utf8=%E2%9C%93&q=is%3Aissue%20milestone%3A6.2.0%20is%3Aclosed%20label%3Aclosed-fixed%20-label%3Aarea-tools%20label%3Atype-enhancement%20).</span></span>
-
-<span data-ttu-id="60711-119">以下是影響 EF 6.2 執行階段之最重要變更的簡短清單：</span><span class="sxs-lookup"><span data-stu-id="60711-119">Here is a brief list of the most important changes affecting the EF 6.2 runtime:</span></span>
-
-- <span data-ttu-id="60711-120">從永續性快取載入完成的 Code First 模型來減少啟動時間 [#275](https://github.com/aspnet/EntityFramework6/issues/275)</span><span class="sxs-lookup"><span data-stu-id="60711-120">Reduce start up time by loading finished code first models from a persistent cache [#275](https://github.com/aspnet/EntityFramework6/issues/275)</span></span>
-- <span data-ttu-id="60711-121">Fluent API 用來定義索引 [#274](https://github.com/aspnet/EntityFramework6/issues/274)</span><span class="sxs-lookup"><span data-stu-id="60711-121">Fluent API to define indexes [#274](https://github.com/aspnet/EntityFramework6/issues/274)</span></span>
-- <span data-ttu-id="60711-122">DbFunctions.Like() 用來讓您撰寫在 SQL 中轉譯為 LIKE 的 LINQ 查詢 [#241](https://github.com/aspnet/EntityFramework6/issues/241)</span><span class="sxs-lookup"><span data-stu-id="60711-122">DbFunctions.Like() to enable writing LINQ queries that translate to LIKE in SQL [#241](https://github.com/aspnet/EntityFramework6/issues/241)</span></span>
-- <span data-ttu-id="60711-123">Migrate.exe 現在支援 -script 選項 [#240](https://github.com/aspnet/EntityFramework6/issues/240)</span><span class="sxs-lookup"><span data-stu-id="60711-123">Migrate.exe now supports -script option [#240](https://github.com/aspnet/EntityFramework6/issues/240)</span></span>
-- <span data-ttu-id="60711-124">EF6 現在可以使用 SQL Server 中的序列所產生的索引鍵值 [#165](https://github.com/aspnet/EntityFramework6/issues/165)</span><span class="sxs-lookup"><span data-stu-id="60711-124">EF6 can now work with key values generated by a sequence in SQL Server [#165](https://github.com/aspnet/EntityFramework6/issues/165)</span></span>
-- <span data-ttu-id="60711-125">SQL Azure 執行策略之暫時性錯誤的更新清單 [#83](https://github.com/aspnet/EntityFramework6/issues/83)</span><span class="sxs-lookup"><span data-stu-id="60711-125">Update list of transient errors for SQL Azure Execution Strategy [#83](https://github.com/aspnet/EntityFramework6/issues/83)</span></span>
-- <span data-ttu-id="60711-126">Bug：重試查詢或 SQL 命令失敗，並顯示「SqlParameter 已包含在另一個 SqlParameterCollection 中」[#81](https://github.com/aspnet/EntityFramework6/issues/81)</span><span class="sxs-lookup"><span data-stu-id="60711-126">Bug: Retrying queries or SQL commands fails with "The SqlParameter is already contained by another SqlParameterCollection" [#81](https://github.com/aspnet/EntityFramework6/issues/81)</span></span>
-- <span data-ttu-id="60711-127">Bug：DbQuery.ToString() 評估經常在偵錯工具中逾時 [#73](https://github.com/aspnet/EntityFramework6/issues/73)</span><span class="sxs-lookup"><span data-stu-id="60711-127">Bug: Evaluation of DbQuery.ToString() frequently times out in the debugger [#73](https://github.com/aspnet/EntityFramework6/issues/73)</span></span>
-
-## <a name="future-releases"></a><span data-ttu-id="60711-128">未來版本</span><span class="sxs-lookup"><span data-stu-id="60711-128">Future Releases</span></span>
-
-<span data-ttu-id="60711-129">如需 EF6 未來版本的資訊，請查看我們的[藍圖](roadmap.md)。</span><span class="sxs-lookup"><span data-stu-id="60711-129">For information on future version of EF6, please look at our [Roadmap](roadmap.md).</span></span>
-
-## <a name="past-releases"></a><span data-ttu-id="60711-130">過去版本</span><span class="sxs-lookup"><span data-stu-id="60711-130">Past Releases</span></span>
-
-<span data-ttu-id="60711-131">[過去版本](past-releases.md)頁面包含所有舊版 EF 與每一版所引進之主要功能的封存。</span><span class="sxs-lookup"><span data-stu-id="60711-131">The [Past Releases](past-releases.md) page contains an archive of all previous versions of EF and the major features that were introduced on each release.</span></span>
+<span data-ttu-id="89cf0-120">[過去版本](past-releases.md)頁面包含所有舊版 EF 與每一版所引進之主要功能的封存。</span><span class="sxs-lookup"><span data-stu-id="89cf0-120">The [Past Releases](past-releases.md) page contains an archive of all previous versions of EF and the major features that were introduced on each release.</span></span>

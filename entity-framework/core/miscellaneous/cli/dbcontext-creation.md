@@ -2,39 +2,67 @@
 title: 設計階段 DbContext 建立-EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 10/27/2017
+ms.date: 09/16/2019
 uid: core/miscellaneous/cli/dbcontext-creation
-ms.openlocfilehash: 66fec7605b6ac2da0af1e801f8a1dca0789aea35
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: f83d4b16227d114a1cac1514667484a908fea4ac
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993714"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197570"
 ---
-<a name="design-time-dbcontext-creation"></a><span data-ttu-id="21f25-102">設計階段 DbContext 建立</span><span class="sxs-lookup"><span data-stu-id="21f25-102">Design-time DbContext Creation</span></span>
+<a name="design-time-dbcontext-creation"></a><span data-ttu-id="96a68-102">設計階段 DbContext 建立</span><span class="sxs-lookup"><span data-stu-id="96a68-102">Design-time DbContext Creation</span></span>
 ==============================
-<span data-ttu-id="21f25-103">某些 EF Core 工具命令 (例如，[移轉][ 1]命令) 需要衍生`DbContext`以收集應用程式的相關詳細資料，在設計階段建立的執行個體實體類型和它們如何對應到資料庫結構描述。</span><span class="sxs-lookup"><span data-stu-id="21f25-103">Some of the EF Core Tools commands (for example, the [Migrations][1] commands) require a derived `DbContext` instance to be created at design time in order to gather details about the application's entity types and how they map to a database schema.</span></span> <span data-ttu-id="21f25-104">在大部分情況下，最好可`DbContext`藉此建立設定類似的方式，是它會如何[設定在執行階段][2]。</span><span class="sxs-lookup"><span data-stu-id="21f25-104">In most cases, it is desirable that the `DbContext` thereby created is configured in a similar way to how it would be [configured at run time][2].</span></span>
+<span data-ttu-id="96a68-103">某些 EF Core 工具命令（例如，[遷移][1]命令）需要在設計階段建立衍生`DbContext`實例，才能收集應用程式實體類型的詳細資料，以及它們如何對應到資料庫架構。</span><span class="sxs-lookup"><span data-stu-id="96a68-103">Some of the EF Core Tools commands (for example, the [Migrations][1] commands) require a derived `DbContext` instance to be created at design time in order to gather details about the application's entity types and how they map to a database schema.</span></span> <span data-ttu-id="96a68-104">在大部分的情況下，最好是以`DbContext`類似于[在執行時間設定][2]它的方式來設定建立的。</span><span class="sxs-lookup"><span data-stu-id="96a68-104">In most cases, it is desirable that the `DbContext` thereby created is configured in a similar way to how it would be [configured at run time][2].</span></span>
 
-<span data-ttu-id="21f25-105">有的各種工具會嘗試建立`DbContext`:</span><span class="sxs-lookup"><span data-stu-id="21f25-105">There are various ways the tools try to create the `DbContext`:</span></span>
+<span data-ttu-id="96a68-105">工具有各種方式可嘗試建立`DbContext`：</span><span class="sxs-lookup"><span data-stu-id="96a68-105">There are various ways the tools try to create the `DbContext`:</span></span>
 
-<a name="from-application-services"></a><span data-ttu-id="21f25-106">從應用程式服務</span><span class="sxs-lookup"><span data-stu-id="21f25-106">From application services</span></span>
+<a name="from-application-services"></a><span data-ttu-id="96a68-106">從應用程式服務</span><span class="sxs-lookup"><span data-stu-id="96a68-106">From application services</span></span>
 -------------------------
-<span data-ttu-id="21f25-107">如果您的啟始專案的 ASP.NET Core 應用程式，工具會嘗試從應用程式的服務提供者取得 DbContext 物件。</span><span class="sxs-lookup"><span data-stu-id="21f25-107">If your startup project is an ASP.NET Core app, the tools try to obtain the DbContext object from the application's service provider.</span></span>
+<span data-ttu-id="96a68-107">如果您的啟始專案使用[ASP.NET Core Web 主機][3]或[.Net Core 泛型主機][4]，則工具會嘗試從應用程式的服務提供者取得 DbCoNtext 物件。</span><span class="sxs-lookup"><span data-stu-id="96a68-107">If your startup project uses the [ASP.NET Core Web Host][3] or [.NET Core Generic Host][4], the tools try to obtain the DbContext object from the application's service provider.</span></span>
 
-<span data-ttu-id="21f25-108">工具會先嘗試叫用來取得服務提供者`Program.BuildWebHost()`，並存取`IWebHost.Services`屬性。</span><span class="sxs-lookup"><span data-stu-id="21f25-108">The tools first try to obtain the service provider by invoking `Program.BuildWebHost()` and accessing the `IWebHost.Services` property.</span></span>
+<span data-ttu-id="96a68-108">這些工具會先藉由叫用`Program.CreateHostBuilder()`、呼叫`Build()`，然後存取`Services`屬性，來嘗試取得服務提供者。</span><span class="sxs-lookup"><span data-stu-id="96a68-108">The tools first try to obtain the service provider by invoking `Program.CreateHostBuilder()`, calling `Build()`, then accessing the `Services` property.</span></span>
+
+``` csharp
+public class Program
+{
+    public static void Main(string[] args)
+        => CreateHostBuilder(args).Build().Run();
+
+    // EF Core uses this method at design time to access the DbContext
+    public static IHostBuilder CreateHostBuilder(string[] args)
+        => Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(
+                webBuilder => webBuilder.UseStartup<Startup>());
+}
+
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+        => services.AddDbContext<ApplicationDbContext>();
+}
+
+public class ApplicationDbContext : DbContext
+{
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
+    {
+    }
+}
+```
 
 > [!NOTE]
-> <span data-ttu-id="21f25-109">當您建立新的 ASP.NET Core 2.0 應用程式時，預設會包含此攔截程序。</span><span class="sxs-lookup"><span data-stu-id="21f25-109">When you create a new ASP.NET Core 2.0 application, this hook is included by default.</span></span> <span data-ttu-id="21f25-110">在舊版的 EF Core 與 ASP.NET Core，工具會嘗試叫用`Startup.ConfigureServices`直接為了取得應用程式的服務提供者，但這個模式無法再正常運作中 ASP.NET Core 2.0 應用程式。</span><span class="sxs-lookup"><span data-stu-id="21f25-110">In previous versions of EF Core and ASP.NET Core, the tools try to invoke `Startup.ConfigureServices` directly in order to obtain the application's service provider, but this pattern no longer works correctly in ASP.NET Core 2.0 applications.</span></span> <span data-ttu-id="21f25-111">如果您要升級為 2.0 的 ASP.NET Core 1.x 應用程式，您可以[修改您`Program`類別，以符合新模式][3]。</span><span class="sxs-lookup"><span data-stu-id="21f25-111">If you are upgrading an ASP.NET Core 1.x application to 2.0, you can [modify your `Program` class to follow the new pattern][3].</span></span>
+> <span data-ttu-id="96a68-109">當您建立新的 ASP.NET Core 應用程式時，預設會包含此攔截。</span><span class="sxs-lookup"><span data-stu-id="96a68-109">When you create a new ASP.NET Core application, this hook is included by default.</span></span>
 
-<span data-ttu-id="21f25-112">`DbContext`本身和其建構函式中的任何相依性必須註冊為應用程式的服務提供者中的服務。</span><span class="sxs-lookup"><span data-stu-id="21f25-112">The `DbContext` itself and any dependencies in its constructor need to be registered as services in the application's service provider.</span></span> <span data-ttu-id="21f25-113">這可以輕鬆地讓達成[建構函式`DbContext`採用的執行個體`DbContextOptions<TContext>`做為引數][ 4]並使用[`AddDbContext<TContext>`方法][5].</span><span class="sxs-lookup"><span data-stu-id="21f25-113">This can be easily achieved by having [a constructor on the `DbContext` that takes an instance of `DbContextOptions<TContext>` as an argument][4] and using the [`AddDbContext<TContext>` method][5].</span></span>
+<span data-ttu-id="96a68-110">`DbContext`本身和其任何函式中的任何相依性都必須在應用程式的服務提供者中註冊為服務。</span><span class="sxs-lookup"><span data-stu-id="96a68-110">The `DbContext` itself and any dependencies in its constructor need to be registered as services in the application's service provider.</span></span> <span data-ttu-id="96a68-111">[在接受實例`DbContext` `DbContextOptions<TContext>` ][5] [做為引數並使用方法的上，就可以輕鬆達成此目的。`AddDbContext<TContext>` ][6]</span><span class="sxs-lookup"><span data-stu-id="96a68-111">This can be easily achieved by having [a constructor on the `DbContext` that takes an instance of `DbContextOptions<TContext>` as an argument][5] and using the [`AddDbContext<TContext>` method][6].</span></span>
 
-<a name="using-a-constructor-with-no-parameters"></a><span data-ttu-id="21f25-114">使用不含參數的建構函式</span><span class="sxs-lookup"><span data-stu-id="21f25-114">Using a constructor with no parameters</span></span>
+<a name="using-a-constructor-with-no-parameters"></a><span data-ttu-id="96a68-112">使用不含參數的函式</span><span class="sxs-lookup"><span data-stu-id="96a68-112">Using a constructor with no parameters</span></span>
 --------------------------------------
-<span data-ttu-id="21f25-115">如果無法從應用程式服務提供者取得 DbContext，這些工具尋找衍生`DbContext`專案內的型別。</span><span class="sxs-lookup"><span data-stu-id="21f25-115">If the DbContext can't be obtained from the application service provider, the tools look for the derived `DbContext` type inside the project.</span></span> <span data-ttu-id="21f25-116">然後嘗試建立使用不含參數的建構函式的執行個體。</span><span class="sxs-lookup"><span data-stu-id="21f25-116">Then they try to create an instance using a constructor with no parameters.</span></span> <span data-ttu-id="21f25-117">如果這是預設建構函式`DbContext`設定時，使用[ `OnConfiguring` ] [ 6]方法。</span><span class="sxs-lookup"><span data-stu-id="21f25-117">This can be the default constructor if the `DbContext` is configured using the [`OnConfiguring`][6] method.</span></span>
+<span data-ttu-id="96a68-113">如果無法從應用程式服務提供者取得 DbCoNtext，工具會在專案內尋找衍生`DbContext`的型別。</span><span class="sxs-lookup"><span data-stu-id="96a68-113">If the DbContext can't be obtained from the application service provider, the tools look for the derived `DbContext` type inside the project.</span></span> <span data-ttu-id="96a68-114">然後，他們會嘗試使用不含參數的函式來建立實例。</span><span class="sxs-lookup"><span data-stu-id="96a68-114">Then they try to create an instance using a constructor with no parameters.</span></span> <span data-ttu-id="96a68-115">如果`DbContext` [是`OnConfiguring`][7]使用方法設定，這可以是預設的函式。</span><span class="sxs-lookup"><span data-stu-id="96a68-115">This can be the default constructor if the `DbContext` is configured using the [`OnConfiguring`][7] method.</span></span>
 
-<a name="from-a-design-time-factory"></a><span data-ttu-id="21f25-118">從設計階段處理站</span><span class="sxs-lookup"><span data-stu-id="21f25-118">From a design-time factory</span></span>
+<a name="from-a-design-time-factory"></a><span data-ttu-id="96a68-116">從設計階段 factory</span><span class="sxs-lookup"><span data-stu-id="96a68-116">From a design-time factory</span></span>
 --------------------------
-<span data-ttu-id="21f25-119">您也可以告訴工具如何藉由實作來建立您的 DbContext`IDesignTimeDbContextFactory<TContext>`介面： 如果實作此介面的類別將找到在相同的專案衍生的`DbContext`或在應用程式的啟始專案，這些工具略過改為建立 DbContext 和使用的設計階段處理站的其他方法。</span><span class="sxs-lookup"><span data-stu-id="21f25-119">You can also tell the tools how to create your DbContext by implementing the `IDesignTimeDbContextFactory<TContext>` interface: If a class implementing this interface is found in either the same project as the derived `DbContext` or in the application's startup project, the tools bypass the other ways of creating the DbContext and use the design-time factory instead.</span></span>
+<span data-ttu-id="96a68-117">您也可以藉由執行`IDesignTimeDbContextFactory<TContext>`介面，告訴工具如何建立您的 DbCoNtext：如果在與衍生`DbContext`的或應用程式啟始專案相同的專案中找到實此介面的類別，則工具會略過其他建立 DbCoNtext 的方式，並改用設計階段 factory。</span><span class="sxs-lookup"><span data-stu-id="96a68-117">You can also tell the tools how to create your DbContext by implementing the `IDesignTimeDbContextFactory<TContext>` interface: If a class implementing this interface is found in either the same project as the derived `DbContext` or in the application's startup project, the tools bypass the other ways of creating the DbContext and use the design-time factory instead.</span></span>
 
 ``` csharp
 using Microsoft.EntityFrameworkCore;
@@ -57,14 +85,15 @@ namespace MyProject
 ```
 
 > [!NOTE]
-> <span data-ttu-id="21f25-120">`args`參數是目前未使用。</span><span class="sxs-lookup"><span data-stu-id="21f25-120">The `args` parameter is currently unused.</span></span> <span data-ttu-id="21f25-121">沒有[問題][7]追蹤指定的設計階段引數，從工具的能力。</span><span class="sxs-lookup"><span data-stu-id="21f25-121">There is [an issue][7] tracking the ability to specify design-time arguments from the tools.</span></span>
+> <span data-ttu-id="96a68-118">`args`參數目前未使用。</span><span class="sxs-lookup"><span data-stu-id="96a68-118">The `args` parameter is currently unused.</span></span> <span data-ttu-id="96a68-119">追蹤從工具指定設計階段引數的能力時發生[問題][8]。</span><span class="sxs-lookup"><span data-stu-id="96a68-119">There is [an issue][8] tracking the ability to specify design-time arguments from the tools.</span></span>
 
-<span data-ttu-id="21f25-122">設計階段處理站可以是特別有用，如果您要以不同的方式設定的設計階段和執行階段的 DbContext，如果`DbContext`建構函式會採用額外的參數不在中註冊 DI，如果您未使用 DI，或者某些原因不想已`BuildWebHost`方法在 ASP.NET Core 應用程式的`Main`類別。</span><span class="sxs-lookup"><span data-stu-id="21f25-122">A design-time factory can be especially useful if you need to configure the DbContext differently for design time than at run time, if the `DbContext` constructor takes additional parameters are not registered in DI, if you are not using DI at all, or if for some reason you prefer not to have a `BuildWebHost` method in your ASP.NET Core application's `Main` class.</span></span>
+<span data-ttu-id="96a68-120">如果您需要在設計階段中以不同的方式設定 DbCoNtext，而不是在執行時間時， `DbContext`如果您不是在 di 中註冊其他參數，則設計階段 factory 會特別有用，如果您不是使用 di，或針對某些您偏好不要在 ASP.NET Core `BuildWebHost` `Main`應用程式類別中使用方法的原因。</span><span class="sxs-lookup"><span data-stu-id="96a68-120">A design-time factory can be especially useful if you need to configure the DbContext differently for design time than at run time, if the `DbContext` constructor takes additional parameters are not registered in DI, if you are not using DI at all, or if for some reason you prefer not to have a `BuildWebHost` method in your ASP.NET Core application's `Main` class.</span></span>
 
   [1]: xref:core/managing-schemas/migrations/index
   [2]: xref:core/miscellaneous/configuring-dbcontext
-  [3]: https://docs.microsoft.com/aspnet/core/migration/1x-to-2x/#update-main-method-in-programcs
-  [4]: xref:core/miscellaneous/configuring-dbcontext#constructor-argument
-  [5]: xref:core/miscellaneous/configuring-dbcontext#using-dbcontext-with-dependency-injection
-  [6]: xref:core/miscellaneous/configuring-dbcontext#onconfiguring
-  [7]: https://github.com/aspnet/EntityFrameworkCore/issues/8332
+  [3]: /aspnet/core/fundamentals/host/web-host
+  [4]: /aspnet/core/fundamentals/host/generic-host
+  [5]: xref:core/miscellaneous/configuring-dbcontext#constructor-argument
+  [6]: xref:core/miscellaneous/configuring-dbcontext#using-dbcontext-with-dependency-injection
+  [7]: xref:core/miscellaneous/configuring-dbcontext#onconfiguring
+  [8]: https://github.com/aspnet/EntityFrameworkCore/issues/8332

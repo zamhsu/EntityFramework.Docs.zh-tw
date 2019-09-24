@@ -4,88 +4,88 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3f1993c2-cdf5-425b-bac2-a2665a20322b
 uid: core/saving/explicit-values-generated-properties
-ms.openlocfilehash: 00abef4d1208400ff68ced0a241b98b8dc9be5c0
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
-ms.translationtype: HT
+ms.openlocfilehash: d6aa9a0a9ce34e09a39026ad7ea9195b6777858c
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997849"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197865"
 ---
-# <a name="setting-explicit-values-for-generated-properties"></a><span data-ttu-id="bffa6-102">為產生的屬性設定明確值</span><span class="sxs-lookup"><span data-stu-id="bffa6-102">Setting Explicit Values for Generated Properties</span></span>
+# <a name="setting-explicit-values-for-generated-properties"></a><span data-ttu-id="95f1f-102">為產生的屬性設定明確值</span><span class="sxs-lookup"><span data-stu-id="95f1f-102">Setting Explicit Values for Generated Properties</span></span>
 
-<span data-ttu-id="bffa6-103">產生的屬性係指其值會在新增和/或更新實體時產生 (由 EF 或資料庫產生) 的屬性。</span><span class="sxs-lookup"><span data-stu-id="bffa6-103">A generated property is a property whose value is generated (either by EF or the database) when the entity is added and/or updated.</span></span> <span data-ttu-id="bffa6-104">如需詳細資訊，請參閱[產生的屬性](../modeling/generated-properties.md)。</span><span class="sxs-lookup"><span data-stu-id="bffa6-104">See [Generated Properties](../modeling/generated-properties.md) for more information.</span></span>
+<span data-ttu-id="95f1f-103">產生的屬性係指其值會在新增和/或更新實體時產生 (由 EF 或資料庫產生) 的屬性。</span><span class="sxs-lookup"><span data-stu-id="95f1f-103">A generated property is a property whose value is generated (either by EF or the database) when the entity is added and/or updated.</span></span> <span data-ttu-id="95f1f-104">如需詳細資訊，請參閱[產生的屬性](../modeling/generated-properties.md)。</span><span class="sxs-lookup"><span data-stu-id="95f1f-104">See [Generated Properties](../modeling/generated-properties.md) for more information.</span></span>
 
-<span data-ttu-id="bffa6-105">在一些情況下，您可能會想要為產生的屬性設定明確值，而不是使用產生的值。</span><span class="sxs-lookup"><span data-stu-id="bffa6-105">There may be situations where you want to set an explicit value for a generated property, rather than having one generated.</span></span>
+<span data-ttu-id="95f1f-105">在一些情況下，您可能會想要為產生的屬性設定明確值，而不是使用產生的值。</span><span class="sxs-lookup"><span data-stu-id="95f1f-105">There may be situations where you want to set an explicit value for a generated property, rather than having one generated.</span></span>
 
 > [!TIP]  
-> <span data-ttu-id="bffa6-106">您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/ExplicitValuesGenerateProperties/) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="bffa6-106">You can view this article's [sample](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/ExplicitValuesGenerateProperties/) on GitHub.</span></span>
+> <span data-ttu-id="95f1f-106">您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/ExplicitValuesGenerateProperties/) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="95f1f-106">You can view this article's [sample](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/ExplicitValuesGenerateProperties/) on GitHub.</span></span>
 
-## <a name="the-model"></a><span data-ttu-id="bffa6-107">模型</span><span class="sxs-lookup"><span data-stu-id="bffa6-107">The model</span></span>
+## <a name="the-model"></a><span data-ttu-id="95f1f-107">模型</span><span class="sxs-lookup"><span data-stu-id="95f1f-107">The model</span></span>
 
-<span data-ttu-id="bffa6-108">本文中使用的模型包含單一 `Employee` 實體。</span><span class="sxs-lookup"><span data-stu-id="bffa6-108">The model used in this article contains a single `Employee` entity.</span></span>
+<span data-ttu-id="95f1f-108">本文中使用的模型包含單一 `Employee` 實體。</span><span class="sxs-lookup"><span data-stu-id="95f1f-108">The model used in this article contains a single `Employee` entity.</span></span>
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/Employee.cs#Sample)]
+[!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/Employee.cs#Sample)]
 
-## <a name="saving-an-explicit-value-during-add"></a><span data-ttu-id="bffa6-109">在新增期間儲存明確值</span><span class="sxs-lookup"><span data-stu-id="bffa6-109">Saving an explicit value during add</span></span>
+## <a name="saving-an-explicit-value-during-add"></a><span data-ttu-id="95f1f-109">在新增期間儲存明確值</span><span class="sxs-lookup"><span data-stu-id="95f1f-109">Saving an explicit value during add</span></span>
 
-<span data-ttu-id="bffa6-110">`Employee.EmploymentStarted` 屬性已設定為採用資料庫為新實體產生的值 (使用預設值)。</span><span class="sxs-lookup"><span data-stu-id="bffa6-110">The `Employee.EmploymentStarted` property is configured to have values generated by the database for new entities (using a default value).</span></span>
+<span data-ttu-id="95f1f-110">`Employee.EmploymentStarted` 屬性已設定為採用資料庫為新實體產生的值 (使用預設值)。</span><span class="sxs-lookup"><span data-stu-id="95f1f-110">The `Employee.EmploymentStarted` property is configured to have values generated by the database for new entities (using a default value).</span></span>
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/EmployeeContext.cs#EmploymentStarted)]
+[!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/EmployeeContext.cs#EmploymentStarted)]
 
-<span data-ttu-id="bffa6-111">下列程式碼會將兩個員工插入到資料庫中。</span><span class="sxs-lookup"><span data-stu-id="bffa6-111">The following code inserts two employees into the database.</span></span>
-* <span data-ttu-id="bffa6-112">針對第一個員工，由於未指派任何值給 `Employee.EmploymentStarted` 屬性，因此它會維持設定為 `DateTime` 的 CLR 預設值。</span><span class="sxs-lookup"><span data-stu-id="bffa6-112">For the first, no value is assigned to `Employee.EmploymentStarted` property, so it remains set to the CLR default value for `DateTime`.</span></span>
-* <span data-ttu-id="bffa6-113">針對第二個員工，我們已設定明確值 `1-Jan-2000`。</span><span class="sxs-lookup"><span data-stu-id="bffa6-113">For the second, we have set an explicit value of `1-Jan-2000`.</span></span>
+<span data-ttu-id="95f1f-111">下列程式碼會將兩個員工插入到資料庫中。</span><span class="sxs-lookup"><span data-stu-id="95f1f-111">The following code inserts two employees into the database.</span></span>
+* <span data-ttu-id="95f1f-112">針對第一個員工，由於未指派任何值給 `Employee.EmploymentStarted` 屬性，因此它會維持設定為 `DateTime` 的 CLR 預設值。</span><span class="sxs-lookup"><span data-stu-id="95f1f-112">For the first, no value is assigned to `Employee.EmploymentStarted` property, so it remains set to the CLR default value for `DateTime`.</span></span>
+* <span data-ttu-id="95f1f-113">針對第二個員工，我們已設定明確值 `1-Jan-2000`。</span><span class="sxs-lookup"><span data-stu-id="95f1f-113">For the second, we have set an explicit value of `1-Jan-2000`.</span></span>
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/Sample.cs#EmploymentStarted)]
+[!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/Sample.cs#EmploymentStarted)]
 
-<span data-ttu-id="bffa6-114">輸出顯示資料庫為第一個員工產生了一個值，而我們的明確值則用於第二個員工。</span><span class="sxs-lookup"><span data-stu-id="bffa6-114">Output shows that the database generated a value for the first employee and our explicit value was used for the second.</span></span>
+<span data-ttu-id="95f1f-114">輸出顯示資料庫為第一個員工產生了一個值，而我們的明確值則用於第二個員工。</span><span class="sxs-lookup"><span data-stu-id="95f1f-114">Output shows that the database generated a value for the first employee and our explicit value was used for the second.</span></span>
 
 ``` Console
 1: John Doe, 1/26/2017 12:00:00 AM
 2: Jane Doe, 1/1/2000 12:00:00 AM
 ```
 
-### <a name="explicit-values-into-sql-server-identity-columns"></a><span data-ttu-id="bffa6-115">將明確值插入到 SQL Server IDENTITY 資料行中</span><span class="sxs-lookup"><span data-stu-id="bffa6-115">Explicit values into SQL Server IDENTITY columns</span></span>
+### <a name="explicit-values-into-sql-server-identity-columns"></a><span data-ttu-id="95f1f-115">將明確值插入到 SQL Server IDENTITY 資料行中</span><span class="sxs-lookup"><span data-stu-id="95f1f-115">Explicit values into SQL Server IDENTITY columns</span></span>
 
-<span data-ttu-id="bffa6-116">依照慣例，`Employee.EmployeeId` 屬性是一個存放區產生的 `IDENTITY` 資料行。</span><span class="sxs-lookup"><span data-stu-id="bffa6-116">By convention the `Employee.EmployeeId` property is a store generated `IDENTITY` column.</span></span>
+<span data-ttu-id="95f1f-116">依照慣例，`Employee.EmployeeId` 屬性是一個存放區產生的 `IDENTITY` 資料行。</span><span class="sxs-lookup"><span data-stu-id="95f1f-116">By convention the `Employee.EmployeeId` property is a store generated `IDENTITY` column.</span></span>
 
-<span data-ttu-id="bffa6-117">就大多數情況而言，上面所示的方法對索引鍵屬性都適用。</span><span class="sxs-lookup"><span data-stu-id="bffa6-117">For most situations, the approach shown above will work for key properties.</span></span> <span data-ttu-id="bffa6-118">不過，若要將明確值插入到 SQL Server `IDENTITY` 資料行中，您將必須在呼叫 `SaveChanges()` 之前，先手動啟用 `IDENTITY_INSERT`。</span><span class="sxs-lookup"><span data-stu-id="bffa6-118">However, to insert explicit values into a SQL Server `IDENTITY` column, you need to manually enable `IDENTITY_INSERT` before calling `SaveChanges()`.</span></span>
+<span data-ttu-id="95f1f-117">就大多數情況而言，上面所示的方法對索引鍵屬性都適用。</span><span class="sxs-lookup"><span data-stu-id="95f1f-117">For most situations, the approach shown above will work for key properties.</span></span> <span data-ttu-id="95f1f-118">不過，若要將明確值插入到 SQL Server `IDENTITY` 資料行中，您將必須在呼叫 `SaveChanges()` 之前，先手動啟用 `IDENTITY_INSERT`。</span><span class="sxs-lookup"><span data-stu-id="95f1f-118">However, to insert explicit values into a SQL Server `IDENTITY` column, you need to manually enable `IDENTITY_INSERT` before calling `SaveChanges()`.</span></span>
 
 > [!NOTE]  
-> <span data-ttu-id="bffa6-119">在我們的待辦項目上有一個在 SQL Server 提供者內自動進行此操作的[功能要求](https://github.com/aspnet/EntityFramework/issues/703)。</span><span class="sxs-lookup"><span data-stu-id="bffa6-119">We have a [feature request](https://github.com/aspnet/EntityFramework/issues/703) on our backlog to do this automatically within the SQL Server provider.</span></span>
+> <span data-ttu-id="95f1f-119">在我們的待辦項目上有一個在 SQL Server 提供者內自動進行此操作的[功能要求](https://github.com/aspnet/EntityFramework/issues/703)。</span><span class="sxs-lookup"><span data-stu-id="95f1f-119">We have a [feature request](https://github.com/aspnet/EntityFramework/issues/703) on our backlog to do this automatically within the SQL Server provider.</span></span>
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/Sample.cs#EmployeeId)]
+[!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/Sample.cs#EmployeeId)]
 
-<span data-ttu-id="bffa6-120">輸出顯示所提供的識別碼已儲存至資料庫。</span><span class="sxs-lookup"><span data-stu-id="bffa6-120">Output shows that the supplied ids were saved to the database.</span></span>
+<span data-ttu-id="95f1f-120">輸出顯示所提供的識別碼已儲存至資料庫。</span><span class="sxs-lookup"><span data-stu-id="95f1f-120">Output shows that the supplied ids were saved to the database.</span></span>
 
 ``` Console
 100: John Doe
 101: Jane Doe
 ```
 
-## <a name="setting-an-explicit-value-during-update"></a><span data-ttu-id="bffa6-121">在更新期間設定明確值</span><span class="sxs-lookup"><span data-stu-id="bffa6-121">Setting an explicit value during update</span></span>
+## <a name="setting-an-explicit-value-during-update"></a><span data-ttu-id="95f1f-121">在更新期間設定明確值</span><span class="sxs-lookup"><span data-stu-id="95f1f-121">Setting an explicit value during update</span></span>
 
-<span data-ttu-id="bffa6-122">`Employee.LastPayRaise` 屬性已設定為採用資料庫在更新期間產生的值。</span><span class="sxs-lookup"><span data-stu-id="bffa6-122">The `Employee.LastPayRaise` property is configured to have values generated by the database during updates.</span></span>
+<span data-ttu-id="95f1f-122">`Employee.LastPayRaise` 屬性已設定為採用資料庫在更新期間產生的值。</span><span class="sxs-lookup"><span data-stu-id="95f1f-122">The `Employee.LastPayRaise` property is configured to have values generated by the database during updates.</span></span>
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/EmployeeContext.cs#LastPayRaise)]
-
-> [!NOTE]  
-> <span data-ttu-id="bffa6-123">根據預設，如果您嘗試針對已設定為要在更新期間產生的屬性儲存明確值，EF Core 將會擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="bffa6-123">By default, EF Core will throw an exception if you try to save an explicit value for a property that is configured to be generated during update.</span></span> <span data-ttu-id="bffa6-124">若要避免此問題，您必須降到較低層級的中繼資料 API 並設定 `AfterSaveBehavior` (如以上所示)。</span><span class="sxs-lookup"><span data-stu-id="bffa6-124">To avoid this, you need to drop down to the lower level metadata API and set the `AfterSaveBehavior` (as shown above).</span></span>
+[!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/EmployeeContext.cs#LastPayRaise)]
 
 > [!NOTE]  
-> <span data-ttu-id="bffa6-125">**EF Core 2.0 中的變更：** 在舊版中，是透過 `IsReadOnlyAfterSave` 旗標來控制儲存後的行為。</span><span class="sxs-lookup"><span data-stu-id="bffa6-125">**Changes in EF Core 2.0:** In previous releases the after-save behavior was controlled through the `IsReadOnlyAfterSave` flag.</span></span> <span data-ttu-id="bffa6-126">此旗標已淘汰並被 `AfterSaveBehavior` 取代。</span><span class="sxs-lookup"><span data-stu-id="bffa6-126">This flag has been obsoleted and replaced by `AfterSaveBehavior`.</span></span>
+> <span data-ttu-id="95f1f-123">根據預設，如果您嘗試針對已設定為要在更新期間產生的屬性儲存明確值，EF Core 將會擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="95f1f-123">By default, EF Core will throw an exception if you try to save an explicit value for a property that is configured to be generated during update.</span></span> <span data-ttu-id="95f1f-124">若要避免此問題，您必須降到較低層級的中繼資料 API 並設定 `AfterSaveBehavior` (如以上所示)。</span><span class="sxs-lookup"><span data-stu-id="95f1f-124">To avoid this, you need to drop down to the lower level metadata API and set the `AfterSaveBehavior` (as shown above).</span></span>
 
-<span data-ttu-id="bffa6-127">資料庫中也有一個可在 `UPDATE` 作業期間為 `LastPayRaise` 資料行產生值的觸發程序。</span><span class="sxs-lookup"><span data-stu-id="bffa6-127">There is also a trigger in the database to generate values for the `LastPayRaise` column during `UPDATE` operations.</span></span>
+> [!NOTE]  
+> <span data-ttu-id="95f1f-125">**EF Core 2.0 中的變更：** 在先前的版本中，會透過`IsReadOnlyAfterSave`旗標控制之後的儲存行為。</span><span class="sxs-lookup"><span data-stu-id="95f1f-125">**Changes in EF Core 2.0:** In previous releases the after-save behavior was controlled through the `IsReadOnlyAfterSave` flag.</span></span> <span data-ttu-id="95f1f-126">此旗標已淘汰並被 `AfterSaveBehavior` 取代。</span><span class="sxs-lookup"><span data-stu-id="95f1f-126">This flag has been obsoleted and replaced by `AfterSaveBehavior`.</span></span>
 
-[!code-sql[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/employee_UPDATE.sql)]
+<span data-ttu-id="95f1f-127">資料庫中也有一個可在 `UPDATE` 作業期間為 `LastPayRaise` 資料行產生值的觸發程序。</span><span class="sxs-lookup"><span data-stu-id="95f1f-127">There is also a trigger in the database to generate values for the `LastPayRaise` column during `UPDATE` operations.</span></span>
 
-<span data-ttu-id="bffa6-128">下列程式碼會為資料庫中的兩個員工加薪。</span><span class="sxs-lookup"><span data-stu-id="bffa6-128">The following code increases the salary of two employees in the database.</span></span>
-* <span data-ttu-id="bffa6-129">針對第一個員工，由於未指派任何值給 `Employee.LastPayRaise` 屬性，因此它會維持設定為 Null。</span><span class="sxs-lookup"><span data-stu-id="bffa6-129">For the first, no value is assigned to `Employee.LastPayRaise` property, so it remains set to null.</span></span>
-* <span data-ttu-id="bffa6-130">針對第二個員工，我們已將明確值設定為一週前 (回溯加薪日期)。</span><span class="sxs-lookup"><span data-stu-id="bffa6-130">For the second, we have set an explicit value of one week ago (back dating the pay raise).</span></span>
+[!code-sql[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/employee_UPDATE.sql)]
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/ExplicitValuesGenerateProperties/Sample.cs#LastPayRaise)]
+<span data-ttu-id="95f1f-128">下列程式碼會為資料庫中的兩個員工加薪。</span><span class="sxs-lookup"><span data-stu-id="95f1f-128">The following code increases the salary of two employees in the database.</span></span>
+* <span data-ttu-id="95f1f-129">針對第一個員工，由於未指派任何值給 `Employee.LastPayRaise` 屬性，因此它會維持設定為 Null。</span><span class="sxs-lookup"><span data-stu-id="95f1f-129">For the first, no value is assigned to `Employee.LastPayRaise` property, so it remains set to null.</span></span>
+* <span data-ttu-id="95f1f-130">針對第二個員工，我們已將明確值設定為一週前 (回溯加薪日期)。</span><span class="sxs-lookup"><span data-stu-id="95f1f-130">For the second, we have set an explicit value of one week ago (back dating the pay raise).</span></span>
 
-<span data-ttu-id="bffa6-131">輸出顯示資料庫為第一個員工產生了一個值，而我們的明確值則用於第二個員工。</span><span class="sxs-lookup"><span data-stu-id="bffa6-131">Output shows that the database generated a value for the first employee and our explicit value was used for the second.</span></span>
+[!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/Sample.cs#LastPayRaise)]
+
+<span data-ttu-id="95f1f-131">輸出顯示資料庫為第一個員工產生了一個值，而我們的明確值則用於第二個員工。</span><span class="sxs-lookup"><span data-stu-id="95f1f-131">Output shows that the database generated a value for the first employee and our explicit value was used for the second.</span></span>
 
 ``` Console
 1: John Doe, 1/26/2017 12:00:00 AM
