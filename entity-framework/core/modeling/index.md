@@ -1,15 +1,15 @@
 ---
-title: 建立模型 - EF Core
+title: 建立和設定模型 - EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 88253ff3-174e-485c-b3f8-768243d01ee1
 uid: core/modeling/index
-ms.openlocfilehash: 78a8ffd2393a914edf737104f14e41f8a9074ad5
-ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
+ms.openlocfilehash: 5b886226b16b5b1a1f01e6040e58d92ae8678d29
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2019
-ms.locfileid: "59929894"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197314"
 ---
 # <a name="creating-and-configuring-a-model"></a>建立和設定模型
 
@@ -24,10 +24,10 @@ Entity Framework 會使用一組慣例，根據您實體類別的圖形建置模
 
 您可以覆寫衍生內容中的  `OnModelCreating` 方法，並用  `ModelBuilder API` 來設定模型。 這是最強大的組態方法，讓您能夠指定組態而不修改實體類別。 Fluent API 組態具有最高的優先順序，且會覆寫慣例及資料註解。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Required.cs?highlight=11-13)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Required.cs?highlight=11-13)]
 
 ## <a name="use-data-annotations-to-configure-a-model"></a>使用資料註解
 
 您也可以將屬性 (又稱資料註解) 套用到類別及屬性。 資料註解會覆寫慣例，但會受到 Fluent API 組態覆寫。
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Required.cs?highlight=14)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Required.cs?highlight=14)]

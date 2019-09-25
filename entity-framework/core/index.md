@@ -1,15 +1,15 @@
 ---
-title: 概觀 - EF Core
+title: Entity Framework Core 概觀
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: bc2a2676-bc46-493f-bf49-e3cc97994d57
 uid: core/index
-ms.openlocfilehash: 0e35a2b3f89c92b717b8e05c8fa3ae5af5ce8fd3
-ms.sourcegitcommit: 06073f8efde97dd5f540dbfb69f574d8380566fe
+ms.openlocfilehash: 0107a520e5a698eaf76426b63c6f784392559167
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67333784"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71196981"
 ---
 # <a name="entity-framework-core"></a>Entity Framework Core
 

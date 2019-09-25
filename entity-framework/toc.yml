@@ -1,33 +1,32 @@
 - name: Entity Framework
   href: index.md
   items:
-    - name: 比較 EF Core 與 EF6
-      href: efcore-and-ef6/index.md
+    - name: EF Core 與 EF6
       items:
-        - name: 相同應用程式中的 EF6 與 EF Core
-          href: efcore-and-ef6/side-by-side.md
+        - name: 比較 EF Core 與 EF6
+          href: efcore-and-ef6/index.md
         - name: 從 EF6 移植至 EF Core
-          href: efcore-and-ef6/porting/index.md
           items:
-            - name: 驗證需求
-              href: efcore-and-ef6/porting/ensure-requirements.md
-            - name: 移植 EDMX 式模型
+            - name: 總覽
+              href: efcore-and-ef6/porting/index.md
+            - name: 移植 EDMX 型模型
               href: efcore-and-ef6/porting/port-edmx.md
-            - name: 移植程式碼式模型
+            - name: 移植程式碼型模型
               href: efcore-and-ef6/porting/port-code.md
+        - name: 在相同應用程式中使用 EF6 與 EF Core
+          href: efcore-and-ef6/side-by-side.md
     - name: Entity Framework Core
-      href: core/index.md
       items:
+        - name: 總覽
+          href: core/index.md
         - name: 新功能
-          href: core/what-is-new/index.md
           items:
-            - name: 藍圖
-              href: core/what-is-new/roadmap.md
-            - name: EF Core 3.0 (最新版本)
-              href: core/what-is-new/ef-core-3.0/index.md
+            - name: 總覽
+              href: core/what-is-new/index.md
+            - name: EF Core 3.0
               items:
                 - name: 新功能
-                  href: core/what-is-new/ef-core-3.0/features.md
+                  href: core/what-is-new/ef-core-3.0/index.md
                 - name: 重大變更
                   href: core/what-is-new/ef-core-3.0/breaking-changes.md
             - name: EF Core 2.2
@@ -49,8 +48,9 @@
                 - name: 從 1.x 至 2.0
                   href: core/miscellaneous/1x-2x-upgrade.md
         - name: 開始使用
-          href: core/get-started/index.md
           items:
+            - name: EF Core 教學課程
+              href: core/get-started/index.md
             - name: 安裝 EF Core
               href: core/get-started/install/index.md
             - name: ⤤ ASP.NET Core 教學課程
@@ -64,17 +64,21 @@
             - name: 連線復原能力
               href: core/miscellaneous/connection-resiliency.md
             - name: 測試
-              href: core/miscellaneous/testing/index.md
               items:
+                - name: 總覽
+                  href: core/miscellaneous/testing/index.md
                 - name: 使用 SQLite 進行測試
                   href: core/miscellaneous/testing/sqlite.md
                 - name: 使用 InMemory 進行測試
                   href: core/miscellaneous/testing/in-memory.md
             - name: 設定 DbContext
               href: core/miscellaneous/configuring-dbcontext.md
+            - name: 可為 Null 的參考型別
+              href: core/miscellaneous/nullable-reference-types.md
         - name: 建立模型
-          href: core/modeling/index.md
           items:
+            - name: 總覽
+              href: core/modeling/index.md
             - name: 包含與排除類型
               href: core/modeling/included-types.md
             - name: 包含與排除屬性
@@ -83,7 +87,7 @@
               href: core/modeling/keys.md
             - name: 產生的值
               href: core/modeling/generated-properties.md
-            - name: 必要/選用屬性
+            - name: 必要和選用屬性
               href: core/modeling/required-optional.md
             - name: 長度上限
               href: core/modeling/max-length.md
@@ -118,8 +122,9 @@
             - name: 空間資料 (GIS)
               href: core/modeling/spatial.md
             - name: 關聯式資料庫模型化
-              href: core/modeling/relational/index.md
               items:
+                - name: 總覽
+                  href: core/modeling/relational/index.md
                 - name: 資料表對應
                   href: core/modeling/relational/tables.md
                 - name: 資料行對應
@@ -145,11 +150,13 @@
                 - name: 繼承 (關聯式資料庫)
                   href: core/modeling/relational/inheritance.md
         - name: 管理資料庫結構描述
-          href: core/managing-schemas/index.md
           items:
+            - name: 總覽
+              href: core/managing-schemas/index.md
             - name: 移轉
-              href: core/managing-schemas/migrations/index.md
               items:
+                - name: 概觀
+                  href: core/managing-schemas/migrations/index.md
                 - name: 小組環境
                   href: core/managing-schemas/migrations/teams.md
                 - name: 自訂作業
@@ -165,8 +172,9 @@
             - name: 還原工程 (Scaffolding)
               href: core/managing-schemas/scaffolding.md
         - name: 查詢資料
-          href: core/querying/index.md
           items:
+            - name: 總覽
+              href: core/querying/index.md
             - name: 基本查詢
               href: core/querying/basic.md
             - name: 載入相關資料
@@ -186,8 +194,9 @@
             - name: 查詢標籤
               href: core/querying/tags.md
         - name: 儲存資料
-          href: core/saving/index.md
           items:
+            - name: 總覽
+              href: core/saving/index.md
             - name: 基本儲存
               href: core/saving/basic.md
             - name: 相關資料
@@ -207,21 +216,25 @@
         - name: 支援的 .NET 實作
           href: core/platforms/index.md
         - name: 資料庫提供者
-          href: core/providers/index.md
           items:
+            - name: 總覽
+              href: core/providers/index.md
             - name: Microsoft SQL Server
-              href: core/providers/sql-server/index.md
               items:
+                - name: 總覽
+                  href: core/providers/sql-server/index.md
                 - name: 經記憶體最佳化的資料表
                   href: core/providers/sql-server/memory-optimized-tables.md
             - name: SQLite
-              href: core/providers/sqlite/index.md
               items:
+                - name: 總覽
+                  href: core/providers/sqlite/index.md
                 - name: SQLite 限制
                   href: core/providers/sqlite/limitations.md
             - name: Cosmos
-              href: core/providers/cosmos/index.md
               items:
+                - name: 總覽
+                  href: core/providers/cosmos/index.md
                 - name: 使用非結構化資料
                   href: core/providers/cosmos/unstructured-data.md
                 - name: Cosmos 限制
@@ -235,8 +248,9 @@
         - name: 工具與延伸模組
           href: core/extensions/index.md
         - name: 命令列參考
-          href: core/miscellaneous/cli/index.md
           items:
+            - name: 總覽
+              href: core/miscellaneous/cli/index.md
             - name: 套件管理員主控台 (Visual Studio)
               href: core/miscellaneous/cli/powershell.md
             - name: .NET Core CLI
@@ -248,11 +262,13 @@
         - name: ⤤ EF Core API 參考
           href: 'https://docs.microsoft.com/dotnet/api/?view=efcore-2.1'
     - name: Entity Framework 6
-      href: ef6/index.md
       items:
+        - name: 總覽
+          href: ef6/index.md
         - name: 新功能
-          href: ef6/what-is-new/index.md
           items:
+            - name: 總覽
+              href: ef6/what-is-new/index.md
             - name: 過去版本
               href: ef6/what-is-new/past-releases.md
             - name: 升級至 EF6
@@ -262,7 +278,6 @@
         - name: 開始使用
           href: ef6/get-started.md
         - name: 基礎
-          href: ef6/fundamentals/index.md
           items:
             - name: 取得 Entity Framework
               href: ef6/fundamentals/install.md
@@ -297,11 +312,13 @@
                 - name: WPF
                   href: ef6/fundamentals/databinding/wpf.md
             - name: 已中斷連線的實體
-              href: ef6/fundamentals/disconnected-entities/index.md
               items:
+                - name: 總覽
+                  href: ef6/fundamentals/disconnected-entities/index.md
                 - name: 自我追蹤實體
-                  href: ef6/fundamentals/disconnected-entities/self-tracking-entities/index.md
                   items:
+                    - name: 總覽
+                      href: ef6/fundamentals/disconnected-entities/self-tracking-entities/index.md
                     - name: 逐步解說
                       href: ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough.md
             - name: 記錄與攔截
@@ -315,8 +332,9 @@
                 - name: 使用預先產生的檢視
                   href: ef6/fundamentals/performance/pre-generated-views.md
             - name: 提供者
-              href: ef6/fundamentals/providers/index.md
               items:
+                - name: 總覽
+                  href: ef6/fundamentals/providers/index.md
                 - name: EF6 提供者模型
                   href: ef6/fundamentals/providers/provider-model.md
                 - name: 提供者中的空間支援
@@ -332,8 +350,9 @@
                 - name: EF4 的可測試性 (文章)
                   href: ef6/fundamentals/testing/testability-article.md
         - name: 建立模型
-          href: ef6/modeling/index.md
           items:
+            - name: 總覽
+              href: ef6/modeling/index.md
             - name: 使用 Code First
               items:
                 - name: 工作流程
@@ -371,8 +390,9 @@
                     - name: 預存程序對應
                       href: ef6/modeling/code-first/fluent/cud-stored-procedures.md
                 - name: 移轉
-                  href: ef6/modeling/code-first/migrations/index.md
                   items:
+                    - name: 總覽
+                      href: ef6/modeling/code-first/migrations/index.md
                     - name: 自動移轉
                       href: ef6/modeling/code-first/migrations/automatic.md
                     - name: 使用現有資料庫
@@ -424,8 +444,9 @@
                 - name: 選取執行階段版本
                   href: ef6/modeling/designer/select-runtime-version.md
                 - name: 程式碼產生
-                  href: ef6/modeling/designer/codegen/index.md
                   items:
+                    - name: 總覽
+                      href: ef6/modeling/designer/codegen/index.md
                     - name: 舊版 ObjectContext
                       href: ef6/modeling/designer/codegen/legacy-objectcontext.md
                 - name: 進階
@@ -447,8 +468,9 @@
                 - name: 鍵盤快速鍵
                   href: ef6/modeling/designer/keyboard-shortcuts.md
         - name: 查詢資料
-          href: ef6/querying/index.md
           items:
+            - name: 總覽
+              href: ef6/querying/index.md
             - name: 載入方法
               href: ef6/querying/load-method.md
             - name: 本機資料
@@ -460,8 +482,9 @@
             - name: 查詢相關資料
               href: ef6/querying/related-data.md
         - name: 儲存資料
-          href: ef6/saving/index.md
           items:
+            - name: 總覽
+              href: ef6/saving/index.md
             - name: 變更追蹤
               items:
                 - name: 自動偵測變更
@@ -477,7 +500,6 @@
             - name: 資料驗證
               href: ef6/saving/validation.md
         - name: 其他資源
-          href: ef6/resources/index.md
           items:
             - name: 部落格
               href: ef6/resources/blogs.md
