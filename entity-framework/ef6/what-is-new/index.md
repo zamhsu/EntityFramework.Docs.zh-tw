@@ -4,12 +4,12 @@ author: divega
 ms.date: 09/12/2019
 ms.assetid: 41d1f86b-ce66-4bf2-8963-48514406fb4c
 uid: ef6/what-is-new/index
-ms.openlocfilehash: bb7038764644682c2149a8a500f342804d01f3d2
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: c49f4cba0066d1e218f11c3959d96f9cafa913f4
+ms.sourcegitcommit: 7bc43f21e7bdd64926314ea949aae689f1911956
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71198047"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71266787"
 ---
 # <a name="whats-new-in-ef6"></a>EF6 的新功能
 
@@ -22,8 +22,9 @@ ms.locfileid: "71198047"
 EF 6.3.0 執行階段已於 2019 年 9 月發行至 NuGet。 此版本主要目標為將使用 EF 6 的現有應用程式促進移轉至 .NET Core 3.0。 社群也貢獻了一些 Bug 修正和增強功能。 有關詳細資料，請參閱每個 6.3.0 [里程碑](https://github.com/aspnet/EntityFramework6/milestones?state=closed)中已關閉的問題。 以下是一些較需注意的事項：
 
 - 支援 .NET Core 3.0
-  - 現在，除了 .NET Framework 4.x 以外，EntityFramework 套件也針對 .NET Standard 2.1
-  - 移轉命令已重寫為在程序外執行，並可使用 SDK 樣式的專案
+  - 現在除了 .NET Framework 4.x 以外，EntityFramework 套件也以 .NET Standard 2.1 為目標。
+  - 這表示 EF 6.3 可以跨平台，在 Windows 以外的其他作業系統上獲得支援，例如 Linux 和 macOS。
+  - 移轉命令已經過重寫，改為在處理序外執行，並使用 SDK 樣式的專案。
 - 支援 SQL Server HierarchyId
 - 已改善與 Roslyn 和 NuGet PackageReference 的相容性
 - 已新增 `ef6.exe` 公用程式，用於從組件啟用、新增、撰寫指令碼並套用移轉。 這取代了 `migrate.exe`
@@ -37,12 +38,12 @@ EF 6.3.0 執行階段已於 2019 年 9 月發行至 NuGet。 此版本主要目�
 在專案檔中，連結的檔案看起來像下面這樣：
 
 ``` csproj 
-&lt;ItemGroup&gt;
-  &lt;EntityDeploy Include="..\EdmxDesignHost\Entities.edmx" Link="Model\Entities.edmx" /&gt;
-  &lt;Compile Include="..\EdmxDesignHost\Entities.Context.cs" Link="Model\Entities.Context.cs" /&gt;
-  &lt;Compile Include="..\EdmxDesignHost\Thing.cs" Link="Model\Thing.cs" /&gt;
-  &lt;Compile Include="..\EdmxDesignHost\Person.cs" Link="Model\Person.cs" /&gt;
-&lt;/ItemGroup&gt;
+<ItemGroup>
+  <EntityDeploy Include="..\EdmxDesignHost\Entities.edmx" Link="Model\Entities.edmx" />
+  <Compile Include="..\EdmxDesignHost\Entities.Context.cs" Link="Model\Entities.Context.cs" />
+  <Compile Include="..\EdmxDesignHost\Thing.cs" Link="Model\Thing.cs" />
+  <Compile Include="..\EdmxDesignHost\Person.cs" Link="Model\Person.cs" />
+</ItemGroup>
 ```
 
 請注意，EDMX 檔案是使用 EntityDeploy 建置動作連結的。 這是特殊 MSBuild 工作 (現在包括在 EF 6.3 套件中)，它會負責新增 EF 模組到目標組件作為內嵌資源 (或將它複製為輸出資料夾中的檔案，視 EDMX 中的中繼資料成品處理設定而定)。 如需有關如何設定的詳細資訊，請參閱我們的 [EDMX .NET Core 範例](https://aka.ms/EdmxDotNetCoreSample)。

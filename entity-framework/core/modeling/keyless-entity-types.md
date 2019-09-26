@@ -5,16 +5,16 @@ ms.author: ansvyryd
 ms.date: 02/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 uid: core/modeling/keyless-entity-types
-ms.openlocfilehash: b968ac9602b9aa1f1c1e3181b6b76a64394d70f0
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: e78b9f91fd2505de300ced7b5e73291b5d1ad3b4
+ms.sourcegitcommit: 7bc43f21e7bdd64926314ea949aae689f1911956
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71150840"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71266767"
 ---
 # <a name="keyless-entity-types"></a>無索引鍵實體類型
 > [!NOTE]
-> 此功能是 EF Core 2.1 中的新功能。 在3.0 之前，它們稱為查詢類型
+> 這項功能已在 EF Core 2.1 中的查詢類型名稱下新增。 在 EF Core 3.0 中，概念已重新命名為無索引鍵的實體類型。
 
 除了一般實體類型之外，EF Core 模型也可以包含_無索引鍵的實體類型_，可用來對不包含索引鍵值的資料執行資料庫查詢。
 
@@ -56,7 +56,7 @@ ms.locfileid: "71150840"
 下列範例顯示如何使用無索引鍵實體類型來查詢資料庫檢視。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/QueryTypes) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/KeylessEntityTypes) \(英文\)。
 
 首先，我們會定義一個簡單的部落格和後置模型：
 
