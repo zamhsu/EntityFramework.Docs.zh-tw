@@ -4,12 +4,12 @@ author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: eb808dd9d9b1b214947524cd83999f67be9cc0ff
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: 7bdedf563b7d919ba334db79af73c3eed3ba4129
+ms.sourcegitcommit: 2caec1e63f2ce1d9439ef6193df5a77da2fedd0f
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149071"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71317572"
 ---
 # <a name="installing-entity-framework-core"></a>安裝 Entity Framework Core
 
@@ -17,7 +17,7 @@ ms.locfileid: "71149071"
 
 * 因為 EF Core 是 [.NET Standard 2.1](/dotnet/standard/net-standard) 程式庫。 所以 EF Core 需要支援 .NET Standard 2.1 的 .NET 實作才可執行。 其他 .NET Standard 2.1 程式庫也可以參考 EF Core。 
 
-* 例如，您可以使用 EF Core 開發以 .NET Core 為目標的應用程式。 建置 .NET Core 應用程式需要 [.NET Core SDK](https://dotnet.microsoft.com/download)。 此外，您也可以使用 Visual Studio、Visual Studio for Mac 或 Visual Studio Code 等開發環境。 如需詳細資訊，請參閱 [.NET Core 使用者入門](/dotnet/core/get-started)。
+* 例如，您可以使用 EF Core 開發以 .NET Core 為目標的應用程式。 建置 .NET Core 應用程式需要 [.NET Core SDK](https://dotnet.microsoft.com/download)。 此外，您也可以使用 [Visual Studio](https://visualstudio.microsoft.com/vs)、[Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac) 或 [Visual Studio Code](https://code.visualstudio.com) 等開發環境。 如需詳細資訊，請參閱 [.NET Core 使用者入門](/dotnet/core/get-started)。
 
 * 您可以與 Visual Studio 搭配使用 EF Core 來開發 Windows 上的應用程式。 建議使用最新版的 [Visual Studio](https://visualstudio.microsoft.com/vs)。
 
