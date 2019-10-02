@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/index
-ms.openlocfilehash: ebebbf286d9d8e06492a3c664799e1127c7dc8c0
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: ce53d0fa21acfd52dc5e8b37911202cab02f00c8
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197916"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813467"
 ---
 # <a name="new-features-in-entity-framework-core-30"></a>Entity Framework Core 3.0 中的新功能
 
@@ -82,7 +82,7 @@ var orders =
   where o.Status == OrderStatus.Pending
   select o;
 
-await foreach(var o in orders)
+await foreach(var o in orders.AsAsyncEnumerable())
 {
   Process(o);
 } 
