@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: ebec5775770c0f1e297eaaf35bf644c605a69afc
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: d8f52edfdf4bd7776ab8d81185c867cbfd7bcf44
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197767"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813602"
 ---
 # <a name="raw-sql-queries"></a>原始 SQL 查詢
 
@@ -62,7 +62,6 @@ var blogs = context.Blogs
 
 > [!NOTE]
 > 在3.0 版之前， `FromSqlRaw`和`FromSqlInterpolated`是兩個名`FromSql`為的多載。 如需詳細資訊，請參閱[先前的版本一節](#previous-versions)。
-
 
 <!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
@@ -172,6 +171,6 @@ var blogs = context.Blogs
 
 * 請注意，SQL Server 不允許撰寫預存程序呼叫，因此嘗試將其他查詢運算子套用至這類呼叫將會導致不正確 SQL。 在用戶端評估之後`AsEnumerable()` ，可能會引進查詢運算子。
 
-# <a name="previous-versions"></a>舊版本
+## <a name="previous-versions"></a>舊版本
 
 EF Core 2.2 版和更早版本有兩`FromSql`個名為的多載，其行為`FromSqlRaw`方式`FromSqlInterpolated`與較新的和相同。 如此一來，當意圖呼叫插入字串方法時，就很容易不小心呼叫未經處理的字串方法，另一種方法則是這樣。 這可能會導致查詢在應該參數化時不進行參數化。

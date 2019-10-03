@@ -1,15 +1,15 @@
 ---
 title: 使用可為 null 的參考型別-EF Core
 author: roji
-ms.date: 9/9/2019
+ms.date: 09/09/2019
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 1aa49f1ed518dfe4c13976cef8e868f58d12d5a3
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: ab35e63a6eeb2f02ed07a715fd65855b4d30eaf5
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71204414"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813450"
 ---
 # <a name="working-with-nullable-reference-types"></a>使用可為 Null 的參考型別
 

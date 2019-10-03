@@ -4,12 +4,12 @@ author: divega
 ms.date: 08/13/2017
 ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
 uid: core/miscellaneous/1x-2x-upgrade
-ms.openlocfilehash: 1222f10811914f65822a49e18522c287ece12174
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.openlocfilehash: 42e59b47f569ef6fcf72fc5bd5f94d3e9d807a24
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306493"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813576"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>應用程式從舊版升級 EF Core 2.0
 
@@ -94,19 +94,19 @@ SQL Server 和 SQLite 提供者都是由 EF 小組隨附, 而2.0 版本則會在
 
 注意: 這些變更應該不會影響大部分的應用程式程式碼。
 
-傳送至[ILogger](https://github.com/aspnet/Logging/blob/dev/src/Microsoft.Extensions.Logging.Abstractions/ILogger.cs)的訊息事件識別碼在2.0 中已變更。 在 EF Core 程式碼中，事件識別碼現在是唯一的。 例如，這些訊息現在也遵循 MVC 所使用結構化記錄的標準模式。
+傳送至[ILogger](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.ilogger)的訊息事件識別碼在2.0 中已變更。 在 EF Core 程式碼中，事件識別碼現在是唯一的。 例如，這些訊息現在也遵循 MVC 所使用結構化記錄的標準模式。
 
-記錄器類別也已經變更。 現在已有一組類別可透過 [DbLoggerCategory](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/DbLoggerCategory.cs) 進行存取。
+記錄器類別也已經變更。 現在已有一組類別可透過 [DbLoggerCategory](https://github.com/aspnet/EntityFrameworkCore/blob/rel/2.0.0/src/EFCore/DbLoggerCategory.cs) 進行存取。
 
-[DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md)事件現在會使用與對應`ILogger`訊息相同的事件識別碼名稱。 事件裝載是衍生自[EventData](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/EventData.cs)的所有名義類型。
+[DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md)事件現在會使用與對應`ILogger`訊息相同的事件識別碼名稱。 事件裝載是衍生自[EventData](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.diagnostics.eventdata)的所有名義類型。
 
-事件識別碼、裝載類型和類別記載于[CoreEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/CoreEventId.cs)和[RelationalEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore.Relational/Diagnostics/RelationalEventId.cs)類別中。
+事件識別碼、裝載類型和類別記載于[CoreEventId](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.diagnostics.coreeventid)和[RelationalEventId](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.diagnostics.relationaleventid)類別中。
 
 識別碼也已從 Microsoft.entityframeworkcore 移至新的 Microsoft.entityframeworkcore. Diagnostics 命名空間。
 
 ## <a name="ef-core-relational-metadata-api-changes"></a>EF Core 關聯式中繼資料 API 變更
 
-EF Core 2.0 現在會為使用的每個不同提供者建置不同的 [IModel](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IModel.cs)。 應用程式通常可以看到這項作業。 這已加速簡化較低階中繼資料 API；因此，任何對_一般關聯式中繼資料概念_的存取一律是透過 `.Relational` 呼叫來進行，而非 `.SqlServer`、`.Sqlite` 等等。例如, 1.1. x 程式碼, 如下所示:
+EF Core 2.0 現在會為使用的每個不同提供者建置不同的 [IModel](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.metadata.imodel)。 應用程式通常可以看到這項作業。 這已加速簡化較低階中繼資料 API；因此，任何對_一般關聯式中繼資料概念_的存取一律是透過 `.Relational` 呼叫來進行，而非 `.SqlServer`、`.Sqlite` 等等。例如, 1.1. x 程式碼, 如下所示:
 
 ``` csharp
 var tableName = context.Model.FindEntityType(typeof(User)).SqlServer().TableName;
@@ -118,7 +118,7 @@ var tableName = context.Model.FindEntityType(typeof(User)).SqlServer().TableName
 var tableName = context.Model.FindEntityType(typeof(User)).Relational().TableName;
 ```
 
-擴充方法現在可以根據`ForSqlServerToTable`目前使用中的提供者來撰寫條件式程式碼, 而不是使用這類方法。 例如：
+擴充方法現在可以根據`ForSqlServerToTable`目前使用中的提供者來撰寫條件式程式碼, 而不是使用這類方法。 例如:
 
 ```C#
 modelBuilder.Entity<User>().ToTable(
@@ -135,7 +135,7 @@ EF Core 在內部執行`IServiceProvider`中使用內部 (相依性插入容器)
 
 ## <a name="in-memory-databases-must-be-named"></a>記憶體內部資料庫必須命名為
 
-已移除全域未命名的記憶體內部資料庫, 而是必須將所有記憶體中的資料庫命名為。 例如：
+已移除全域未命名的記憶體內部資料庫, 而是必須將所有記憶體中的資料庫命名為。 例如:
 
 ``` csharp
 optionsBuilder.UseInMemoryDatabase("MyDatabase");
@@ -145,13 +145,13 @@ optionsBuilder.UseInMemoryDatabase("MyDatabase");
 
 ## <a name="read-only-api-changes"></a>唯讀 API 變更
 
-`IsReadOnlyBeforeSave`、 `IsReadOnlyAfterSave`和`IsStoreGeneratedAlways`已過時, 並已取代為[BeforeSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L39)和[AfterSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L55)。 這些行為適用于任何屬性 (而不只是存放區產生的屬性), 並決定在插入至資料庫資料列 (`BeforeSaveBehavior`) 或更新現有的資料庫資料列 (`AfterSaveBehavior`) 時, 應該如何使用屬性的值。
+`IsReadOnlyBeforeSave`、 `IsReadOnlyAfterSave`和`IsStoreGeneratedAlways`已過時, 並已取代為[BeforeSaveBehavior](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.metadata.iproperty.beforesavebehavior)和[AfterSaveBehavior](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.metadata.iproperty.aftersavebehavior)。 這些行為適用于任何屬性 (而不只是存放區產生的屬性), 並決定在插入至資料庫資料列 (`BeforeSaveBehavior`) 或更新現有的資料庫資料列 (`AfterSaveBehavior`) 時, 應該如何使用屬性的值。
 
-標記為[ValueGenerated. OnAddOrUpdate](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/ValueGenerated.cs) (例如, 針對計算資料行) 的屬性預設會忽略屬性上目前設定的任何值。 這表示不論是否已在追蹤的實體上設定或修改任何值, 一律會取得存放區產生的值。 這可以藉由設定不同`Before\AfterSaveBehavior`的來變更。
+標記為[ValueGenerated. OnAddOrUpdate](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.metadata.valuegenerated) (例如, 針對計算資料行) 的屬性預設會忽略屬性上目前設定的任何值。 這表示不論是否已在追蹤的實體上設定或修改任何值, 一律會取得存放區產生的值。 這可以藉由設定不同`Before\AfterSaveBehavior`的來變更。
 
 ## <a name="new-clientsetnull-delete-behavior"></a>新的 Deletebehavior.clientsetnull 刪除行為
 
-在舊版中, [deletebehavior.setnull](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/DeleteBehavior.cs)會針對內容所追蹤的實體行為, 這些專案會有更多`SetNull`的已關閉符合的語義。 在 EF Core 2.0 中，新`ClientSetNull`為選擇性的關聯性的預設值已經導入行為。 這種行為有`SetNull`追蹤實體的語意和`Restrict`建立使用 EF Core 資料庫的行為。 在我們的經驗中, 這些是追蹤實體和資料庫最預期/實用的行為。 `DeleteBehavior.Restrict`針對選擇性關聯性設定時, 現在會接受追蹤的實體。
+在舊版中, [deletebehavior.setnull](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.deletebehavior)會針對內容所追蹤的實體行為, 這些專案會有更多`SetNull`的已關閉符合的語義。 在 EF Core 2.0 中，新`ClientSetNull`為選擇性的關聯性的預設值已經導入行為。 這種行為有`SetNull`追蹤實體的語意和`Restrict`建立使用 EF Core 資料庫的行為。 在我們的經驗中, 這些是追蹤實體和資料庫最預期/實用的行為。 `DeleteBehavior.Restrict`針對選擇性關聯性設定時, 現在會接受追蹤的實體。
 
 ## <a name="provider-design-time-packages-removed"></a>已移除提供者設計階段套件
 

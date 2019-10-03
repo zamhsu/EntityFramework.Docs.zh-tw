@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: 4bf9598f9b7e74c2835d3926215de9a7ef4e6f96
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: 4e4ba21cd099daab4db8a8f358800fde26980c14
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921797"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813583"
 ---
 # <a name="loading-related-data"></a>載入相關資料
 
@@ -30,7 +30,6 @@ Entity Framework Core 可讓您在模型中使用導覽屬性來載入相關實�
 > [!TIP]  
 > Entity Framework Core 會將導覽屬性自動修正為先前已載入至內容執行個體的任何其他實體。 因此，即使未明確包含導覽屬性的資料，如果先前已載入部分或所有相關的實體，則仍然可能會填入該屬性。
 
-
 您可以將來自多個關聯性的相關資料包含至單一查詢。
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleIncludes)]
@@ -40,9 +39,6 @@ Entity Framework Core 可讓您在模型中使用導覽屬性來載入相關實�
 您可以使用 `ThenInclude` 方法，透過關聯性向下切入以包含多個層級的相關資料。 下列範例會載入所有部落格、其相關文章，以及每篇文章的作者。
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#SingleThenInclude)]
-
-> [!NOTE]  
-> Visual Studio 的目前版本會提供不正確的程式碼自動完成選項，並可能會在於集合導覽屬性之後使用 `ThenInclude` 方法時，將正確的運算式標示為具有語法錯誤。 這是於 https://github.com/dotnet/roslyn/issues/8237 \(英文\) 所追蹤 IntelliSense 錯誤 (bug) 的症狀。 只要程式碼正確且可成功編譯，就能放心略過這些假性的語法錯誤。 
 
 您可以將多個呼叫鏈結到 `ThenInclude`，以繼續包含更深層級的相關資料。
 
@@ -55,6 +51,9 @@ Entity Framework Core 可讓您在模型中使用導覽屬性來載入相關實�
 您可能會想要針對所包括的其中一個實體包含多個相關實體。 例如，查詢 `Blogs` 時，您包括了 `Posts`，接著想要同時包含 `Posts` 的 `Author` 和 `Tags`。 若要執行此動作，您必須指定每個從根開始的包含路徑。 例如，`Blog -> Posts -> Author` 和 `Blog -> Posts -> Tags`。 這不表示您將會收到多餘的聯結，在大部分情況下，EF 會在產生 SQL 時合併聯結。
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
+
+> [!CAUTION]
+> 由於版本3.0.0，每個 `Include` 會導致其他聯結加入至關聯式提供者所產生的 SQL 查詢，而舊版會產生額外的 SQL 查詢。 這可能會大幅變更查詢的效能，以提高或更糟。 特別的是，具有大量 @no__t 0 運算子的 LINQ 查詢可能需要細分為多個個別的 LINQ 查詢，以避免笛卡隔的問題。
 
 ### <a name="include-on-derived-types"></a>衍生類型中的 Include
 
@@ -111,22 +110,7 @@ public class School
   context.People.Include("School").ToList()
   ```
 
-### <a name="ignored-includes"></a>略過的 Include
-
-如果您變更查詢，使其不再傳回作為查詢開始的實體類型執行個體，則會略過 Include 運算子。
-
-在下列範例中，Include 運算子會以 `Blog` 為基礎，但接著會使用 `Select` 運算子來變更查詢以傳回匿名類型。 在此情況下，Include 運算子不會有任何作用。
-
-[!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#IgnoredInclude)]
-
-根據預設，EF Core 將在略過 Include 運算子時記錄警告。 如需檢視記錄輸出的詳細資訊，請參閱[記錄](../miscellaneous/logging.md)。 您可以將略過 Include 運算子時的行為變更為擲回或不執行任何動作。 這通常會在 `DbContext.OnConfiguring` 中為您的內容設定選項時完成，或者，如果您使用 ASP.NET Core，則是在 `Startup.cs` 中完成。
-
-[!code-csharp[Main](../../../samples/core/Querying/RelatedData/ThrowOnIgnoredInclude/BloggingContext.cs#OnConfiguring)]
-
 ## <a name="explicit-loading"></a>明確式載入
-
-> [!NOTE]  
-> 在 EF Core 1.1 已引入此功能。
 
 您可以透過 `DbContext.Entry(...)` API 來明確地載入導覽屬性。
 
@@ -148,10 +132,8 @@ public class School
 
 ## <a name="lazy-loading"></a>消極式載入
 
-> [!NOTE]  
-> 此功能是在 EF Core 2.1 中引入。
+使用消極式載入的最簡單方式是安裝 [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) \(英文\) 套件，並呼叫 `UseLazyLoadingProxies` 來啟用它。 例如:
 
-使用消極式載入的最簡單方式是安裝 [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) \(英文\) 套件，並呼叫 `UseLazyLoadingProxies` 來啟用它。 例如：
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder
@@ -159,12 +141,15 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         .UseSqlServer(myConnectionString);
 ```
 或在使用 AddDbContext 時：
+
 ```csharp
 .AddDbContext<BloggingContext>(
     b => b.UseLazyLoadingProxies()
           .UseSqlServer(myConnectionString));
 ```
+
 EF Core 接著將針對可覆寫的所有導覽屬性 (也就是說，它必須是 `virtual` 並位於可繼承的類別上) 啟用消極式載入。 例如，在下列實體中，系統將會對 `Post.Blog` 和 `Blog.Posts` 導覽屬性進行消極式載入。
+
 ```csharp
 public class Blog
 {
@@ -183,9 +168,11 @@ public class Post
     public virtual Blog Blog { get; set; }
 }
 ```
+
 ### <a name="lazy-loading-without-proxies"></a>沒有 Proxy 的消極式載入
 
-消極式載入 Proxy 的運作方式是將 `ILazyLoader` 服務插入至實體，如[實體類型建構函式](../modeling/constructors.md)中所述。 例如：
+消極式載入 Proxy 的運作方式是將 `ILazyLoader` 服務插入至實體，如[實體類型建構函式](../modeling/constructors.md)中所述。 例如:
+
 ```csharp
 public class Blog
 {
@@ -238,7 +225,9 @@ public class Post
     }
 }
 ```
-這並不需要實體類型為可繼承的，或是導覽屬性為虛擬的，並且可讓使用 `new` 建立的實體執行個體可以在附加到內容之後進行消極式載入。 不過，它需要對 `ILazyLoader` 服務的參考，這在 [Microsoft.EntityFrameworkCore.Abstractions](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Abstractions/) 套件中定義。 此套件包含最基本的型別集，因此相依於它的影響很小。 不過，若要完全避免對實體型別中任何 EF Core 套件的相依性，您可以將 `ILazyLoader.Load` 方法插入為委派。 例如：
+
+這並不需要實體類型為可繼承的，或是導覽屬性為虛擬的，並且可讓使用 `new` 建立的實體執行個體可以在附加到內容之後進行消極式載入。 不過，它需要對 `ILazyLoader` 服務的參考，這在 [Microsoft.EntityFrameworkCore.Abstractions](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Abstractions/) 套件中定義。 此套件包含最基本的型別集，因此相依於它的影響很小。 不過，若要完全避免對實體型別中任何 EF Core 套件的相依性，您可以將 `ILazyLoader.Load` 方法插入為委派。 例如:
+
 ```csharp
 public class Blog
 {
@@ -291,7 +280,9 @@ public class Post
     }
 }
 ```
+
 上述程式碼會使用 `Load` 擴充方法，來更簡潔地使用委派：
+
 ```csharp
 public static class PocoLoadingExtensions
 {
@@ -308,6 +299,7 @@ public static class PocoLoadingExtensions
     }
 }
 ```
+
 > [!NOTE]  
 > 消極式載入委派的建構函式參數必須稱為 "lazyLoader"。 預計將於未來版本中推出使用與此不同之名稱的設定。
 
