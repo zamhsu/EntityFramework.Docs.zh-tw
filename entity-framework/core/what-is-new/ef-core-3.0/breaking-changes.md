@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 0dd4c5c4aa1a5d241fb48abf1372a678d0f7a7a3
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.openlocfilehash: f7f04efa8fb8ebc1eb06f256b8ccbd3110af47ab
+ms.sourcegitcommit: 705e898b4684e639a57c787fb45c932a27650c2d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813624"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71934875"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>EF Core 3.0 中包含的重大變更
 下列 API 和行為變更可能會在將現有的應用程式升級至3.0.0 時中斷。
@@ -27,6 +27,7 @@ ms.locfileid: "71813624"
 | [查詢類型已與實體類型合併](#qt) | 高      |
 | [Entity Framework Core 不再屬於 ASP.NET Core 共用架構](#no-longer) | Medium      |
 | [根據預設，串聯刪除現在會立即發生](#cascade) | Medium      |
+| [相關實體的積極式載入現在會出現在單一查詢中](#eager-loading-single-query) | Medium      |
 | [DeleteBehavior.Restrict 具有更簡潔的語意](#deletebehavior) | Medium      |
 | [自有類型關聯性的設定 API 已變更](#config) | Medium      |
 | [各個屬性會使用獨立的記憶體內部整數索引鍵產生](#each) | Medium      |
@@ -34,6 +35,7 @@ ms.locfileid: "71813624"
 | [中繼資料 API 變更](#metadata-api-changes) | Medium      |
 | [提供者獨有的中繼資料 API 變更](#provider) | Medium      |
 | [已移除 UseRowNumberForPaging](#urn) | Medium      |
+| [無法撰寫與預存程式搭配使用時的 FromSql 方法](#fromsqlsproc) | Medium      |
 | [FromSql 方法只能在查詢根目錄上指定](#fromsql) | 低      |
 | [~~查詢執行會在偵錯層級記錄~~已還原](#qe) | 低      |
 | [實體執行個體上不會再設定暫存索引鍵值](#tkv) | 低      |
@@ -210,6 +212,35 @@ context.Products.FromSqlInterpolated(
 
 切換至使用新的方法名稱。
 
+<a name="fromsqlsproc"></a>
+### <a name="fromsql-method-when-used-with-stored-procedure-cannot-be-composed"></a>無法撰寫與預存程式搭配使用時的 FromSql 方法
+
+[追蹤問題 #15392](https://github.com/aspnet/EntityFrameworkCore/issues/15392)
+
+**舊行為**
+
+在 EF Core 3.0 之前，FromSql 方法會嘗試偵測是否可以根據傳遞的 SQL 來進行撰寫。 當 SQL 不是可組合的，如同預存程式，它會進行用戶端評估。 下列查詢的運作方式是在伺服器上執行預存程式，並在用戶端上進行 FirstOrDefault。
+
+```C#
+context.Products.FromSqlRaw("[dbo].[Ten Most Expensive Products]").FirstOrDefault();
+```
+
+**新行為**
+
+從 EF Core 3.0 開始，EF Core 不會嘗試剖析 SQL。 因此，如果您在 FromSqlRaw/FromSqlInterpolated 之後撰寫，則 EF Core 會藉由導致子查詢來撰寫 SQL。 因此，如果您使用具有組合的預存程式，則會收到無效 SQL 語法的例外狀況。
+
+**原因**
+
+EF Core 3.0 不支援自動用戶端評估，因為它容易發生錯誤，如[這裡](#linq-queries-are-no-longer-evaluated-on-the-client)所述。
+
+**緩解**
+
+如果您使用 FromSqlRaw/FromSqlInterpolated 中的預存程式，您就知道它無法由撰寫，因此您可以在 FromSql 方法呼叫之後加入__enumerable.asenumerable/AsAsyncEnumerable__ ，以避免伺服器端上的任何組合。
+
+```C#
+context.Products.FromSqlRaw("[dbo].[Ten Most Expensive Products]").AsEnumerable().FirstOrDefault();
+```
+
 <a name="fromsql"></a>
 
 ### <a name="fromsql-methods-can-only-be-specified-on-query-roots"></a>FromSql 方法只能在查詢根目錄上指定
@@ -366,6 +397,29 @@ public string Id { get; set; }
 context.ChangeTracker.CascadeDeleteTiming = CascadeTiming.OnSaveChanges;
 context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 ```
+<a name="eager-loading-single-query"></a>
+### <a name="eager-loading-of-related-entities-now-happens-in-a-single-query"></a>相關實體的積極式載入現在會出現在單一查詢中
+
+[追蹤問題 #18022](https://github.com/aspnet/EntityFrameworkCore/issues/18022)
+
+**舊行為**
+
+在3.0 之前，立即透過 @no__t 0 運算子載入集合導覽，會導致關係資料庫產生多個查詢，每個相關實體類型各一個。
+
+**新行為**
+
+從3.0 開始，EF Core 會在關係資料庫上產生具有聯結的單一查詢。
+
+**原因**
+
+發出多個查詢來執行單一 LINQ 查詢，會造成許多問題，包括負面效能，因為需要多個資料庫往返，而當每個查詢可能觀察到資料庫的不同狀態時，就會發生資料一致性問題。
+
+**風險降低**
+
+雖然技術上來說這不是一項重大變更，但當單一查詢在集合導覽上包含大量的 @no__t 0 運算子時，可能會對應用程式效能造成相當大的影響。 如需詳細資訊和以更有效率的方式重寫查詢，[請參閱此批註](https://github.com/aspnet/EntityFrameworkCore/issues/18022#issuecomment-537219137)。
+
+**
+
 <a name="deletebehavior"></a>
 ### <a name="deletebehaviorrestrict-has-cleaner-semantics"></a>DeleteBehavior.Restrict 具有更簡潔的語意
 
