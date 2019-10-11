@@ -155,7 +155,7 @@
               href: core/managing-schemas/index.md
             - name: 移轉
               items:
-                - name: 概觀
+                - name: 總覽
                   href: core/managing-schemas/migrations/index.md
                 - name: 小組環境
                   href: core/managing-schemas/migrations/teams.md
@@ -175,8 +175,6 @@
           items:
             - name: 總覽
               href: core/querying/index.md
-            - name: 基本查詢
-              href: core/querying/basic.md
             - name: 載入相關資料
               href: core/querying/related-data.md
             - name: 用戶端與伺服器評估
@@ -188,7 +186,7 @@
             - name: 非同步查詢
               href: core/querying/async.md
             - name: 查詢的運作方式
-              href: core/querying/overview.md
+              href: core/querying/how-query-works.md
             - name: 全域查詢篩選條件
               href: core/querying/filters.md
             - name: 查詢標籤

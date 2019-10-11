@@ -1,20 +1,20 @@
 ---
-title: 使用 EF Core 測試元件
+title: 使用 EF Core 測試元件 - EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 1603be0c-69bc-4dd9-9a08-3d0129cdc6c1
 uid: core/miscellaneous/testing/index
-ms.openlocfilehash: a946387718546f14e1485b4093e6c8046188f62d
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 8de7df80ce91c4d94133a96d759dd552d0ba1884
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197501"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181315"
 ---
-# <a name="testing-components-using-ef-core"></a><span data-ttu-id="865ef-102">使用 EF Core 測試元件</span><span class="sxs-lookup"><span data-stu-id="865ef-102">Testing components using EF Core</span></span>
+# <a name="testing-components-using-ef-core"></a><span data-ttu-id="dcba9-102">使用 EF Core 測試元件</span><span class="sxs-lookup"><span data-stu-id="dcba9-102">Testing components using EF Core</span></span>
 
-<span data-ttu-id="865ef-103">您可能會想要使用近似連線至實際資料庫，而不實際進行資料庫 I/O 作業的方式來測試元件。</span><span class="sxs-lookup"><span data-stu-id="865ef-103">You may want to test components using something that approximates connecting to the real database, without the overhead of actual database I/O operations.</span></span>
+<span data-ttu-id="dcba9-103">您可能會想要使用近似連線至實際資料庫，而不實際進行資料庫 I/O 作業的方式來測試元件。</span><span class="sxs-lookup"><span data-stu-id="dcba9-103">You may want to test components using something that approximates connecting to the real database, without the overhead of actual database I/O operations.</span></span>
 
-<span data-ttu-id="865ef-104">有兩種主要的方式可以這麼做：</span><span class="sxs-lookup"><span data-stu-id="865ef-104">There are two main options for doing this:</span></span>
- * <span data-ttu-id="865ef-105">[SQLite 記憶體內部模式](sqlite.md) 可讓您對行為類似關聯式資料庫的提供者寫入有效率的測試。</span><span class="sxs-lookup"><span data-stu-id="865ef-105">[SQLite in-memory mode](sqlite.md) allows you to write efficient tests against a provider that behaves like a relational database.</span></span>
- * <span data-ttu-id="865ef-106">[InMemory 提供者](in-memory.md) 是相依性最低的輕量型提供者，但行為不一定永遠都如同關聯式資料庫。</span><span class="sxs-lookup"><span data-stu-id="865ef-106">[The InMemory provider](in-memory.md) is a lightweight provider that has minimal dependencies, but does not always behave like a relational database.</span></span>
+<span data-ttu-id="dcba9-104">有兩種主要的方式可以這麼做：</span><span class="sxs-lookup"><span data-stu-id="dcba9-104">There are two main options for doing this:</span></span>
+ * <span data-ttu-id="dcba9-105">[SQLite 記憶體內部模式](sqlite.md) 可讓您對行為類似關聯式資料庫的提供者寫入有效率的測試。</span><span class="sxs-lookup"><span data-stu-id="dcba9-105">[SQLite in-memory mode](sqlite.md) allows you to write efficient tests against a provider that behaves like a relational database.</span></span>
+ * <span data-ttu-id="dcba9-106">[InMemory 提供者](in-memory.md) 是相依性最低的輕量型提供者，但行為不一定永遠都如同關聯式資料庫。</span><span class="sxs-lookup"><span data-stu-id="dcba9-106">[The InMemory provider](in-memory.md) is a lightweight provider that has minimal dependencies, but does not always behave like a relational database.</span></span>

@@ -3,19 +3,19 @@ title: 本機資料-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 2eda668b-1e5d-487d-9a8c-0e3beef03fcb
-ms.openlocfilehash: 400b9e1337edac1b9fa4f0ec9e1384ca58aa2fbc
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: efd646348d8a18bbeed2d0a0e708d4d36eb26eac
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490450"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182422"
 ---
-# <a name="local-data"></a><span data-ttu-id="925e1-102">本機資料</span><span class="sxs-lookup"><span data-stu-id="925e1-102">Local Data</span></span>
-<span data-ttu-id="925e1-103">直接對 DbSet 執行 LINQ 查詢仍會一律會傳送至資料庫的查詢，但您可以存取目前記憶體中使用 DbSet.Local 屬性的資料。</span><span class="sxs-lookup"><span data-stu-id="925e1-103">Running a LINQ query directly against a DbSet will always send a query to the database, but you can access the data that is currently in-memory using the DbSet.Local property.</span></span> <span data-ttu-id="925e1-104">您也可以存取您使用 DbContext.Entry 和 DbContext.ChangeTracker.Entries 方法的實體有關的 EF 正在追蹤的額外資訊。</span><span class="sxs-lookup"><span data-stu-id="925e1-104">You can also access the extra information EF is tracking about your entities using the DbContext.Entry and DbContext.ChangeTracker.Entries methods.</span></span> <span data-ttu-id="925e1-105">本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。</span><span class="sxs-lookup"><span data-stu-id="925e1-105">The techniques shown in this topic apply equally to models created with Code First and the EF Designer.</span></span>  
+# <a name="local-data"></a><span data-ttu-id="e4613-102">本機資料</span><span class="sxs-lookup"><span data-stu-id="e4613-102">Local Data</span></span>
+<span data-ttu-id="e4613-103">直接針對 DbSet 執行 LINQ 查詢時，一律會將查詢傳送至資料庫，但您可以使用 DbSet 來存取目前記憶體中的資料。</span><span class="sxs-lookup"><span data-stu-id="e4613-103">Running a LINQ query directly against a DbSet will always send a query to the database, but you can access the data that is currently in-memory using the DbSet.Local property.</span></span> <span data-ttu-id="e4613-104">您也可以使用 DbCoNtext 和 DbCoNtext. ChangeTracker 專案方法，存取 EF 追蹤實體的額外資訊。</span><span class="sxs-lookup"><span data-stu-id="e4613-104">You can also access the extra information EF is tracking about your entities using the DbContext.Entry and DbContext.ChangeTracker.Entries methods.</span></span> <span data-ttu-id="e4613-105">本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。</span><span class="sxs-lookup"><span data-stu-id="e4613-105">The techniques shown in this topic apply equally to models created with Code First and the EF Designer.</span></span>  
 
-## <a name="using-local-to-look-at-local-data"></a><span data-ttu-id="925e1-106">使用本機查看本機資料</span><span class="sxs-lookup"><span data-stu-id="925e1-106">Using Local to look at local data</span></span>  
+## <a name="using-local-to-look-at-local-data"></a><span data-ttu-id="e4613-106">使用本機來查看本機資料</span><span class="sxs-lookup"><span data-stu-id="e4613-106">Using Local to look at local data</span></span>  
 
-<span data-ttu-id="925e1-107">[本機] 屬性的 DbSet 提供簡單的存取權的實體集目前正在追蹤的內容，且尚未標示為已刪除。</span><span class="sxs-lookup"><span data-stu-id="925e1-107">The Local property of DbSet provides simple access to the entities of the set that are currently being tracked by the context and have not been marked as Deleted.</span></span> <span data-ttu-id="925e1-108">存取 [本機] 屬性時，永遠不會使查詢傳送至資料庫。</span><span class="sxs-lookup"><span data-stu-id="925e1-108">Accessing the Local property never causes a query to be sent to the database.</span></span> <span data-ttu-id="925e1-109">這表示，它通常用於查詢已執行之後。</span><span class="sxs-lookup"><span data-stu-id="925e1-109">This means that it is usually used after a query has already been performed.</span></span> <span data-ttu-id="925e1-110">Load 擴充方法可以用來執行查詢，以便將內容追蹤結果中。</span><span class="sxs-lookup"><span data-stu-id="925e1-110">The Load extension method can be used to execute a query so that the context tracks the results.</span></span> <span data-ttu-id="925e1-111">例如: </span><span class="sxs-lookup"><span data-stu-id="925e1-111">For example:</span></span>  
+<span data-ttu-id="e4613-107">DbSet 的 Local 屬性可讓您簡單存取目前正由內容追蹤而且尚未標示為已刪除的集合實體。</span><span class="sxs-lookup"><span data-stu-id="e4613-107">The Local property of DbSet provides simple access to the entities of the set that are currently being tracked by the context and have not been marked as Deleted.</span></span> <span data-ttu-id="e4613-108">存取本機屬性永遠不會使查詢傳送至資料庫。</span><span class="sxs-lookup"><span data-stu-id="e4613-108">Accessing the Local property never causes a query to be sent to the database.</span></span> <span data-ttu-id="e4613-109">這表示通常在已經執行查詢之後，才會使用它。</span><span class="sxs-lookup"><span data-stu-id="e4613-109">This means that it is usually used after a query has already been performed.</span></span> <span data-ttu-id="e4613-110">Load 擴充方法可以用來執行查詢，以便內容追蹤結果。</span><span class="sxs-lookup"><span data-stu-id="e4613-110">The Load extension method can be used to execute a query so that the context tracks the results.</span></span> <span data-ttu-id="e4613-111">例如:</span><span class="sxs-lookup"><span data-stu-id="e4613-111">For example:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -53,9 +53,9 @@ using (var context = new BloggingContext())
 }
 ```  
 
-<span data-ttu-id="925e1-112">如果我們有兩個部落格-'ADO.NET 部落格' 使用的 1 BlogId-和 'Visual Studio 部落格' 與 BlogId 2 的資料庫中，我們可以預期下列輸出：</span><span class="sxs-lookup"><span data-stu-id="925e1-112">If we had two blogs in the database - 'ADO.NET Blog' with a BlogId of 1 and 'The Visual Studio Blog' with a BlogId of 2 - we could expect the following output:</span></span>  
+<span data-ttu-id="e4613-112">如果在資料庫中有兩個日誌：「ADO.NET Blog」，BlogId 為1，而「Visual Studio Blog」的 BlogId 為 2-我們可能會預期下列輸出：</span><span class="sxs-lookup"><span data-stu-id="e4613-112">If we had two blogs in the database - 'ADO.NET Blog' with a BlogId of 1 and 'The Visual Studio Blog' with a BlogId of 2 - we could expect the following output:</span></span>  
 
-```  
+```console
 In Local:
 Found 0: My New Blog with state Added
 Found 2: The Visual Studio Blog with state Unchanged
@@ -65,21 +65,21 @@ Found 1: ADO.NET Blog with state Deleted
 Found 2: The Visual Studio Blog with state Unchanged
 ```  
 
-<span data-ttu-id="925e1-113">這說明三個點：</span><span class="sxs-lookup"><span data-stu-id="925e1-113">This illustrates three points:</span></span>  
+<span data-ttu-id="e4613-113">這說明了三個重點：</span><span class="sxs-lookup"><span data-stu-id="e4613-113">This illustrates three points:</span></span>  
 
-- <span data-ttu-id="925e1-114">新的部落格 'My 新部落格' 包含在本機集合中，即使它有尚未儲存到資料庫。</span><span class="sxs-lookup"><span data-stu-id="925e1-114">The new blog 'My New Blog' is included in the Local collection even though it has not yet been saved to the database.</span></span> <span data-ttu-id="925e1-115">這篇部落格有零的主索引鍵，因為資料庫尚未產生實體的實際金鑰。</span><span class="sxs-lookup"><span data-stu-id="925e1-115">This blog has a primary key of zero because the database has not yet generated a real key for the entity.</span></span>  
-- <span data-ttu-id="925e1-116">ADO.NET 部落格內容不會包含在本機收集，即使仍由內容所追蹤。</span><span class="sxs-lookup"><span data-stu-id="925e1-116">The 'ADO.NET Blog' is not included in the local collection even though it is still being tracked by the context.</span></span> <span data-ttu-id="925e1-117">這是因為我們從藉此標示為已刪除的 DbSet 中移除它。</span><span class="sxs-lookup"><span data-stu-id="925e1-117">This is because we removed it from the DbSet thereby marking it as deleted.</span></span>  
-- <span data-ttu-id="925e1-118">DbSet 來執行查詢時標示為刪除 （ADO.NET 部落格） 部落格包含在結果中，新的部落格 （我新部落格） 尚未儲存到資料庫不包含在結果中。</span><span class="sxs-lookup"><span data-stu-id="925e1-118">When DbSet is used to perform a query the blog marked for deletion (ADO.NET Blog) is included in the results and the new blog (My New Blog) that has not yet been saved to the database is not included in the results.</span></span> <span data-ttu-id="925e1-119">這是因為 DbSet 正在執行資料庫的查詢，而且一律傳回的結果會反映功能的資料庫。</span><span class="sxs-lookup"><span data-stu-id="925e1-119">This is because DbSet is performing a query against the database and the results returned always reflect what is in the database.</span></span>  
+- <span data-ttu-id="e4613-114">新的 blog 「我的新 Blog」已包含在本機集合中，即使尚未儲存到資料庫也一樣。</span><span class="sxs-lookup"><span data-stu-id="e4613-114">The new blog 'My New Blog' is included in the Local collection even though it has not yet been saved to the database.</span></span> <span data-ttu-id="e4613-115">此 blog 的主鍵為零，因為資料庫尚未產生實體的實際索引鍵。</span><span class="sxs-lookup"><span data-stu-id="e4613-115">This blog has a primary key of zero because the database has not yet generated a real key for the entity.</span></span>  
+- <span data-ttu-id="e4613-116">「ADO.NET Blog」並未包含在本機集合中，即使它仍受到內容追蹤。</span><span class="sxs-lookup"><span data-stu-id="e4613-116">The 'ADO.NET Blog' is not included in the local collection even though it is still being tracked by the context.</span></span> <span data-ttu-id="e4613-117">這是因為我們將它從 DbSet 中移除，藉此將其標示為已刪除。</span><span class="sxs-lookup"><span data-stu-id="e4613-117">This is because we removed it from the DbSet thereby marking it as deleted.</span></span>  
+- <span data-ttu-id="e4613-118">當 DbSet 用來執行查詢時，標示為刪除的 blog （ADO.NET Blog）會包含在結果中，而尚未儲存到資料庫的新 blog （我的新 Blog）不會包含在結果中。</span><span class="sxs-lookup"><span data-stu-id="e4613-118">When DbSet is used to perform a query the blog marked for deletion (ADO.NET Blog) is included in the results and the new blog (My New Blog) that has not yet been saved to the database is not included in the results.</span></span> <span data-ttu-id="e4613-119">這是因為 DbSet 正在對資料庫執行查詢，而傳回的結果一律會反映資料庫中的內容。</span><span class="sxs-lookup"><span data-stu-id="e4613-119">This is because DbSet is performing a query against the database and the results returned always reflect what is in the database.</span></span>  
 
-## <a name="using-local-to-add-and-remove-entities-from-the-context"></a><span data-ttu-id="925e1-120">若要新增和移除內容的實體使用本機</span><span class="sxs-lookup"><span data-stu-id="925e1-120">Using Local to add and remove entities from the context</span></span>  
+## <a name="using-local-to-add-and-remove-entities-from-the-context"></a><span data-ttu-id="e4613-120">使用本機來新增和移除內容中的實體</span><span class="sxs-lookup"><span data-stu-id="e4613-120">Using Local to add and remove entities from the context</span></span>  
 
-<span data-ttu-id="925e1-121">DbSet 上的 [本機] 屬性會傳回[ObservableCollection](https://msdn.microsoft.com/library/ms668604.aspx)與連結，它會保持與內容的內容保持同步的事件。</span><span class="sxs-lookup"><span data-stu-id="925e1-121">The Local property on DbSet returns an [ObservableCollection](https://msdn.microsoft.com/library/ms668604.aspx) with events hooked up such that it stays in sync with the contents of the context.</span></span> <span data-ttu-id="925e1-122">這表示可以加入或移除從本機集合或 DbSet 實體。</span><span class="sxs-lookup"><span data-stu-id="925e1-122">This means that entities can be added or removed from either the Local collection or the DbSet.</span></span> <span data-ttu-id="925e1-123">這也表示帶入內容中的新實體的查詢會導致本機更新這些實體的集合。</span><span class="sxs-lookup"><span data-stu-id="925e1-123">It also means that queries that bring new entities into the context will result in the Local collection being updated with those entities.</span></span> <span data-ttu-id="925e1-124">例如: </span><span class="sxs-lookup"><span data-stu-id="925e1-124">For example:</span></span>  
+<span data-ttu-id="e4613-121">DbSet 上的區域屬性會傳回已連結事件的[ObservableCollection](https://msdn.microsoft.com/library/ms668604.aspx) ，使其與內容的內容保持同步。</span><span class="sxs-lookup"><span data-stu-id="e4613-121">The Local property on DbSet returns an [ObservableCollection](https://msdn.microsoft.com/library/ms668604.aspx) with events hooked up such that it stays in sync with the contents of the context.</span></span> <span data-ttu-id="e4613-122">這表示可以從本機集合或 DbSet 中加入或移除實體。</span><span class="sxs-lookup"><span data-stu-id="e4613-122">This means that entities can be added or removed from either the Local collection or the DbSet.</span></span> <span data-ttu-id="e4613-123">這也表示，將新實體帶入內容的查詢將會導致本機集合以這些實體進行更新。</span><span class="sxs-lookup"><span data-stu-id="e4613-123">It also means that queries that bring new entities into the context will result in the Local collection being updated with those entities.</span></span> <span data-ttu-id="e4613-124">例如:</span><span class="sxs-lookup"><span data-stu-id="e4613-124">For example:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
 {
     // Load some posts from the database into the context
-    context.Posts.Where(p => p.Tags.Contains("entity-framework").Load();  
+    context.Posts.Where(p => p.Tags.Contains("entity-framework")).Load();  
 
     // Get the local collection and make some changes to it
     var localPosts = context.Posts.Local;
@@ -119,9 +119,9 @@ using (var context = new BloggingContext())
 }
 ```  
 
-<span data-ttu-id="925e1-125">假設我們有幾個使用 ' entity framework' 和 'asp.net' 輸出已標記的文章，可能看起來像這樣：</span><span class="sxs-lookup"><span data-stu-id="925e1-125">Assuming we had a few posts tagged with 'entity-framework' and 'asp.net' the output may look something like this:</span></span>  
+<span data-ttu-id="e4613-125">假設我們有幾篇文章標記了「entity framework」和「asp.net」，輸出看起來可能像這樣：</span><span class="sxs-lookup"><span data-stu-id="e4613-125">Assuming we had a few posts tagged with 'entity-framework' and 'asp.net' the output may look something like this:</span></span>  
 
-```  
+```console
 In Local after entity-framework query:
 Found 3: EF Designer Basics with state Unchanged
 Found 5: EF Code First Basics with state Unchanged
@@ -135,27 +135,27 @@ Found 0: What's New in EF with state Added
 Found 4: ASP.NET Beginners Guide with state Unchanged
 ```  
 
-<span data-ttu-id="925e1-126">這說明三個點：</span><span class="sxs-lookup"><span data-stu-id="925e1-126">This illustrates three points:</span></span>  
+<span data-ttu-id="e4613-126">這說明了三個重點：</span><span class="sxs-lookup"><span data-stu-id="e4613-126">This illustrates three points:</span></span>  
 
-- <span data-ttu-id="925e1-127">新文章 'What's New in EF' 已加入至本機集合會成為 Added 狀態中的內容所追蹤。</span><span class="sxs-lookup"><span data-stu-id="925e1-127">The new post 'What's New in EF' that was added to the Local collection becomes tracked by the context in the Added state.</span></span> <span data-ttu-id="925e1-128">它將會因此插入資料庫讓呼叫 SaveChanges 時。</span><span class="sxs-lookup"><span data-stu-id="925e1-128">It will therefore be inserted into the database when SaveChanges is called.</span></span>  
-- <span data-ttu-id="925e1-129">已移除本機集合 （EF 初級開發人員指南） 中的文章時，現在會標記為刪除的內容中。</span><span class="sxs-lookup"><span data-stu-id="925e1-129">The post that was removed from the Local collection (EF Beginners Guide) is now marked as deleted in the context.</span></span> <span data-ttu-id="925e1-130">當呼叫 SaveChanges 時，它因此會從資料庫刪除。</span><span class="sxs-lookup"><span data-stu-id="925e1-130">It will therefore be deleted from the database when SaveChanges is called.</span></span>  
-- <span data-ttu-id="925e1-131">將具有第二個查詢的內容載入的其他文章 （ASP.NET 初級開發人員指南） 會自動加入至本機集合。</span><span class="sxs-lookup"><span data-stu-id="925e1-131">The additional post (ASP.NET Beginners Guide) loaded into the context with the second query is automatically added to the Local collection.</span></span>  
+- <span data-ttu-id="e4613-127">新增至本機集合的新 post 「EF 中的新功能」會由已加入狀態的內容進行追蹤。</span><span class="sxs-lookup"><span data-stu-id="e4613-127">The new post 'What's New in EF' that was added to the Local collection becomes tracked by the context in the Added state.</span></span> <span data-ttu-id="e4613-128">因此，在呼叫 SaveChanges 時，它會插入至資料庫。</span><span class="sxs-lookup"><span data-stu-id="e4613-128">It will therefore be inserted into the database when SaveChanges is called.</span></span>  
+- <span data-ttu-id="e4613-129">已從本機集合中移除的文章（EF 初學者 Guide）現在已在內容中標示為已刪除。</span><span class="sxs-lookup"><span data-stu-id="e4613-129">The post that was removed from the Local collection (EF Beginners Guide) is now marked as deleted in the context.</span></span> <span data-ttu-id="e4613-130">因此，在呼叫 SaveChanges 時，將會從資料庫中刪除它。</span><span class="sxs-lookup"><span data-stu-id="e4613-130">It will therefore be deleted from the database when SaveChanges is called.</span></span>  
+- <span data-ttu-id="e4613-131">使用第二個查詢載入內容中的其他文章（ASP.NET 初學者 Guide）會自動加入至本機集合。</span><span class="sxs-lookup"><span data-stu-id="e4613-131">The additional post (ASP.NET Beginners Guide) loaded into the context with the second query is automatically added to the Local collection.</span></span>  
 
-<span data-ttu-id="925e1-132">關於本機，請注意一個最後一件事是，因為它是 ObservableCollection 效能不是適合大量的實體。</span><span class="sxs-lookup"><span data-stu-id="925e1-132">One final thing to note about Local is that because it is an ObservableCollection performance is not great for large numbers of entities.</span></span> <span data-ttu-id="925e1-133">因此如果您正在處理上千個實體，在您的內容中它可能不會建議您將使用的本機。</span><span class="sxs-lookup"><span data-stu-id="925e1-133">Therefore if you are dealing with thousands of entities in your context it may not be advisable to use Local.</span></span>  
+<span data-ttu-id="e4613-132">關於本機，最後要注意的一點是，因為這是 ObservableCollection 的效能，對大量實體而言並不大。</span><span class="sxs-lookup"><span data-stu-id="e4613-132">One final thing to note about Local is that because it is an ObservableCollection performance is not great for large numbers of entities.</span></span> <span data-ttu-id="e4613-133">因此，如果您在內容中處理數以千計的實體，可能不建議使用本機。</span><span class="sxs-lookup"><span data-stu-id="e4613-133">Therefore if you are dealing with thousands of entities in your context it may not be advisable to use Local.</span></span>  
 
-## <a name="using-local-for-wpf-data-binding"></a><span data-ttu-id="925e1-134">使用 WPF 資料繫結的本機</span><span class="sxs-lookup"><span data-stu-id="925e1-134">Using Local for WPF data binding</span></span>  
+## <a name="using-local-for-wpf-data-binding"></a><span data-ttu-id="e4613-134">使用本機進行 WPF 資料系結</span><span class="sxs-lookup"><span data-stu-id="e4613-134">Using Local for WPF data binding</span></span>  
 
-<span data-ttu-id="925e1-135">可以直接針對 WPF 應用程式中的資料繫結使用 DbSet 上的 [本機] 屬性，因為它是 ObservableCollection 的執行個體。</span><span class="sxs-lookup"><span data-stu-id="925e1-135">The Local property on DbSet can be used directly for data binding in a WPF application because it is an instance of ObservableCollection.</span></span> <span data-ttu-id="925e1-136">這表示它會自動前面幾節中所述與內容的內容保持同步，且內容的內容都會自動與其同步。</span><span class="sxs-lookup"><span data-stu-id="925e1-136">As described in the previous sections this means that it will automatically stay in sync with the contents of the context and the contents of the context will automatically stay in sync with it.</span></span> <span data-ttu-id="925e1-137">請注意，您需要以預先填入本機集合才會將繫結至既然本地永遠不會造成資料庫查詢的任何項目資料。</span><span class="sxs-lookup"><span data-stu-id="925e1-137">Note that you do need to pre-populate the Local collection with data for there to be anything to bind to since Local never causes a database query.</span></span>  
+<span data-ttu-id="e4613-135">DbSet 上的區域屬性可以直接用於 WPF 應用程式中的資料系結，因為它是 ObservableCollection 的實例。</span><span class="sxs-lookup"><span data-stu-id="e4613-135">The Local property on DbSet can be used directly for data binding in a WPF application because it is an instance of ObservableCollection.</span></span> <span data-ttu-id="e4613-136">如上一節所述，這表示它會自動與內容保持同步，內容的內容也會自動保持同步。</span><span class="sxs-lookup"><span data-stu-id="e4613-136">As described in the previous sections this means that it will automatically stay in sync with the contents of the context and the contents of the context will automatically stay in sync with it.</span></span> <span data-ttu-id="e4613-137">請注意，您必須預先填入本機集合，其中包含要系結的資料，因為本機永遠不會造成資料庫查詢。</span><span class="sxs-lookup"><span data-stu-id="e4613-137">Note that you do need to pre-populate the Local collection with data for there to be anything to bind to since Local never causes a database query.</span></span>  
 
-<span data-ttu-id="925e1-138">這不是適當的位置，如需完整的 WPF 資料繫結範例，但索引鍵的項目：</span><span class="sxs-lookup"><span data-stu-id="925e1-138">This is not an appropriate place for a full WPF data binding sample but the key elements are:</span></span>  
+<span data-ttu-id="e4613-138">這不是完整 WPF 資料系結範例的適當位置，但主要元素如下：</span><span class="sxs-lookup"><span data-stu-id="e4613-138">This is not an appropriate place for a full WPF data binding sample but the key elements are:</span></span>  
 
-- <span data-ttu-id="925e1-139">設定繫結來源</span><span class="sxs-lookup"><span data-stu-id="925e1-139">Setup a binding source</span></span>  
-- <span data-ttu-id="925e1-140">將它繫結至區域屬性集的</span><span class="sxs-lookup"><span data-stu-id="925e1-140">Bind it to the Local property of your set</span></span>  
-- <span data-ttu-id="925e1-141">填入本機資料庫查詢。</span><span class="sxs-lookup"><span data-stu-id="925e1-141">Populate Local using a query to the database.</span></span>  
+- <span data-ttu-id="e4613-139">設定系結來源</span><span class="sxs-lookup"><span data-stu-id="e4613-139">Setup a binding source</span></span>  
+- <span data-ttu-id="e4613-140">將它系結至您集合的區域屬性</span><span class="sxs-lookup"><span data-stu-id="e4613-140">Bind it to the Local property of your set</span></span>  
+- <span data-ttu-id="e4613-141">使用資料庫的查詢來填入本機。</span><span class="sxs-lookup"><span data-stu-id="e4613-141">Populate Local using a query to the database.</span></span>  
 
-## <a name="wpf-binding-to-navigation-properties"></a><span data-ttu-id="925e1-142">導覽屬性的 WPF 繫結</span><span class="sxs-lookup"><span data-stu-id="925e1-142">WPF binding to navigation properties</span></span>  
+## <a name="wpf-binding-to-navigation-properties"></a><span data-ttu-id="e4613-142">WPF 系結至導覽屬性</span><span class="sxs-lookup"><span data-stu-id="e4613-142">WPF binding to navigation properties</span></span>  
 
-<span data-ttu-id="925e1-143">如果您要進行主版/詳細資料繫結，您可能想要繫結至其中一個實體的導覽屬性的詳細資料檢視。</span><span class="sxs-lookup"><span data-stu-id="925e1-143">If you are doing master/detail data binding you may want to bind the detail view to a navigation property of one of your entities.</span></span> <span data-ttu-id="925e1-144">這麼做的簡單方法是使用 ObservableCollection，瀏覽屬性。</span><span class="sxs-lookup"><span data-stu-id="925e1-144">An easy way to make this work is to use an ObservableCollection for the navigation property.</span></span> <span data-ttu-id="925e1-145">例如: </span><span class="sxs-lookup"><span data-stu-id="925e1-145">For example:</span></span>  
+<span data-ttu-id="e4613-143">如果您要執行主要/詳細資料系結，您可能會想要將詳細資料檢視系結至其中一個實體的導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="e4613-143">If you are doing master/detail data binding you may want to bind the detail view to a navigation property of one of your entities.</span></span> <span data-ttu-id="e4613-144">簡單的方法是使用導覽屬性的 ObservableCollection。</span><span class="sxs-lookup"><span data-stu-id="e4613-144">An easy way to make this work is to use an ObservableCollection for the navigation property.</span></span> <span data-ttu-id="e4613-145">例如:</span><span class="sxs-lookup"><span data-stu-id="e4613-145">For example:</span></span>  
 
 ``` csharp
 public class Blog
@@ -173,9 +173,9 @@ public class Blog
 }
 ```  
 
-## <a name="using-local-to-clean-up-entities-in-savechanges"></a><span data-ttu-id="925e1-146">使用本機 SaveChanges 中的實體進行清除</span><span class="sxs-lookup"><span data-stu-id="925e1-146">Using Local to clean up entities in SaveChanges</span></span>  
+## <a name="using-local-to-clean-up-entities-in-savechanges"></a><span data-ttu-id="e4613-146">使用本機來清除 SaveChanges 中的實體</span><span class="sxs-lookup"><span data-stu-id="e4613-146">Using Local to clean up entities in SaveChanges</span></span>  
 
-<span data-ttu-id="925e1-147">在大部分情況下移除導覽屬性的實體不會被自動標示為已刪除的內容中。</span><span class="sxs-lookup"><span data-stu-id="925e1-147">In most cases entities removed from a navigation property will not be automatically marked as deleted in the context.</span></span> <span data-ttu-id="925e1-148">比方說，如果文章物件從集合中移除 Blog.Posts 的文章，然後將不會自動刪除讓呼叫 SaveChanges 時。</span><span class="sxs-lookup"><span data-stu-id="925e1-148">For example, if you remove a Post object from the Blog.Posts collection then that post will not be automatically deleted when SaveChanges is called.</span></span> <span data-ttu-id="925e1-149">若要刪除，可能需要尋找這些懸空的實體，並標示為刪除，然後再呼叫 SaveChanges，或覆寫的 SaveChanges 的一部分。</span><span class="sxs-lookup"><span data-stu-id="925e1-149">If you need it to be deleted then you may need to find these dangling entities and mark them as deleted before calling SaveChanges or as part of an overridden SaveChanges.</span></span> <span data-ttu-id="925e1-150">例如: </span><span class="sxs-lookup"><span data-stu-id="925e1-150">For example:</span></span>  
+<span data-ttu-id="e4613-147">在大部分情況下，從導覽屬性中移除的實體不會在內容中自動標示為已刪除。</span><span class="sxs-lookup"><span data-stu-id="e4613-147">In most cases entities removed from a navigation property will not be automatically marked as deleted in the context.</span></span> <span data-ttu-id="e4613-148">例如，如果您從 [Blog] 集合中移除 Post 物件，則在呼叫 SaveChanges 時，將不會自動刪除該 post。</span><span class="sxs-lookup"><span data-stu-id="e4613-148">For example, if you remove a Post object from the Blog.Posts collection then that post will not be automatically deleted when SaveChanges is called.</span></span> <span data-ttu-id="e4613-149">如果您需要將它刪除，您可能需要尋找這些無關聯實體，並在呼叫 SaveChanges 或做為覆寫 SaveChanges 的一部分之前，將它們標示為已刪除。</span><span class="sxs-lookup"><span data-stu-id="e4613-149">If you need it to be deleted then you may need to find these dangling entities and mark them as deleted before calling SaveChanges or as part of an overridden SaveChanges.</span></span> <span data-ttu-id="e4613-150">例如:</span><span class="sxs-lookup"><span data-stu-id="e4613-150">For example:</span></span>  
 
 ``` csharp
 public override int SaveChanges()
@@ -192,23 +192,23 @@ public override int SaveChanges()
 }
 ```  
 
-<span data-ttu-id="925e1-151">上述程式碼會使用本機收集，以尋找所有貼文及任何沒有的部落格參考為已刪除的標記。</span><span class="sxs-lookup"><span data-stu-id="925e1-151">The code above uses the Local collection to find all posts and marks any that do not have a blog reference as deleted.</span></span> <span data-ttu-id="925e1-152">ToList 呼叫是必要的因為移除否則修改集合正在列舉時呼叫。</span><span class="sxs-lookup"><span data-stu-id="925e1-152">The ToList call is required because otherwise the collection will be modified by the Remove call while it is being enumerated.</span></span> <span data-ttu-id="925e1-153">在其他大部分的情況下您可以直接針對 [本機] 屬性而不先使用 「 ToList 」 查詢。</span><span class="sxs-lookup"><span data-stu-id="925e1-153">In most other situations you can query directly against the Local property without using ToList first.</span></span>  
+<span data-ttu-id="e4613-151">上述程式碼會使用本機集合來尋找所有貼文，並將沒有 blog 參考的任何文章標示為已刪除。</span><span class="sxs-lookup"><span data-stu-id="e4613-151">The code above uses the Local collection to find all posts and marks any that do not have a blog reference as deleted.</span></span> <span data-ttu-id="e4613-152">ToList 呼叫是必要的，否則，當列舉集合時，將會透過移除呼叫來修改集合。</span><span class="sxs-lookup"><span data-stu-id="e4613-152">The ToList call is required because otherwise the collection will be modified by the Remove call while it is being enumerated.</span></span> <span data-ttu-id="e4613-153">在大部分的其他情況下，您可以直接針對本機屬性進行查詢，而不需要先使用 ToList。</span><span class="sxs-lookup"><span data-stu-id="e4613-153">In most other situations you can query directly against the Local property without using ToList first.</span></span>  
 
-## <a name="using-local-and-tobindinglist-for-windows-forms-data-binding"></a><span data-ttu-id="925e1-154">使用本機和 ToBindingList 適用於 Windows Form 資料繫結</span><span class="sxs-lookup"><span data-stu-id="925e1-154">Using Local and ToBindingList for Windows Forms data binding</span></span>  
+## <a name="using-local-and-tobindinglist-for-windows-forms-data-binding"></a><span data-ttu-id="e4613-154">使用本機和 ToBindingList Windows Forms 資料系結</span><span class="sxs-lookup"><span data-stu-id="e4613-154">Using Local and ToBindingList for Windows Forms data binding</span></span>  
 
-<span data-ttu-id="925e1-155">Windows Form 不支援直接使用 ObservableCollection 完整無缺資料繫結。</span><span class="sxs-lookup"><span data-stu-id="925e1-155">Windows Forms does not support full fidelity data binding using ObservableCollection directly.</span></span> <span data-ttu-id="925e1-156">不過，您仍然可以使用資料繫結的 DbSet 本機屬性來取得前幾節所述的所有權益。</span><span class="sxs-lookup"><span data-stu-id="925e1-156">However, you can still use the DbSet Local property for data binding to get all the benefits described in the previous sections.</span></span> <span data-ttu-id="925e1-157">這透過建立 ToBindingList 擴充方法來達成[IBindingList](https://msdn.microsoft.com/library/system.componentmodel.ibindinglist.aspx)本機 ObservableCollection 所支援的實作。</span><span class="sxs-lookup"><span data-stu-id="925e1-157">This is achieved through the ToBindingList extension method which creates an [IBindingList](https://msdn.microsoft.com/library/system.componentmodel.ibindinglist.aspx) implementation backed by the Local ObservableCollection.</span></span>  
+<span data-ttu-id="e4613-155">Windows Forms 不支援直接使用 ObservableCollection 進行完全精確的資料系結。</span><span class="sxs-lookup"><span data-stu-id="e4613-155">Windows Forms does not support full fidelity data binding using ObservableCollection directly.</span></span> <span data-ttu-id="e4613-156">不過，您仍然可以使用 DbSet 區域屬性來進行資料系結，以取得前幾節中所述的所有好處。</span><span class="sxs-lookup"><span data-stu-id="e4613-156">However, you can still use the DbSet Local property for data binding to get all the benefits described in the previous sections.</span></span> <span data-ttu-id="e4613-157">這是透過 ToBindingList 擴充方法來達成，此方法會建立由本機 ObservableCollection 支援的[IBindingList](https://msdn.microsoft.com/library/system.componentmodel.ibindinglist.aspx)執行。</span><span class="sxs-lookup"><span data-stu-id="e4613-157">This is achieved through the ToBindingList extension method which creates an [IBindingList](https://msdn.microsoft.com/library/system.componentmodel.ibindinglist.aspx) implementation backed by the Local ObservableCollection.</span></span>  
 
-<span data-ttu-id="925e1-158">這不是適當的位置，如需完整的 Windows Form 資料繫結範例，但索引鍵的項目：</span><span class="sxs-lookup"><span data-stu-id="925e1-158">This is not an appropriate place for a full Windows Forms data binding sample but the key elements are:</span></span>  
+<span data-ttu-id="e4613-158">這不是完整 Windows Forms 資料系結範例的適當位置，但主要元素如下：</span><span class="sxs-lookup"><span data-stu-id="e4613-158">This is not an appropriate place for a full Windows Forms data binding sample but the key elements are:</span></span>  
 
-- <span data-ttu-id="925e1-159">設定物件繫結來源</span><span class="sxs-lookup"><span data-stu-id="925e1-159">Setup an object binding source</span></span>  
-- <span data-ttu-id="925e1-160">將它繫結至使用 Local.ToBindingList() 集的區域屬性</span><span class="sxs-lookup"><span data-stu-id="925e1-160">Bind it to the Local property of your set using Local.ToBindingList()</span></span>  
-- <span data-ttu-id="925e1-161">填入本機資料庫查詢</span><span class="sxs-lookup"><span data-stu-id="925e1-161">Populate Local using a query to the database</span></span>  
+- <span data-ttu-id="e4613-159">設定物件系結來源</span><span class="sxs-lookup"><span data-stu-id="e4613-159">Setup an object binding source</span></span>  
+- <span data-ttu-id="e4613-160">使用 ToBindingList （）將它系結至您的集合的區域屬性</span><span class="sxs-lookup"><span data-stu-id="e4613-160">Bind it to the Local property of your set using Local.ToBindingList()</span></span>  
+- <span data-ttu-id="e4613-161">使用資料庫的查詢填入本機</span><span class="sxs-lookup"><span data-stu-id="e4613-161">Populate Local using a query to the database</span></span>  
 
-## <a name="getting-detailed-information-about-tracked-entities"></a><span data-ttu-id="925e1-162">取得追蹤的實體有關的詳細的資訊</span><span class="sxs-lookup"><span data-stu-id="925e1-162">Getting detailed information about tracked entities</span></span>  
+## <a name="getting-detailed-information-about-tracked-entities"></a><span data-ttu-id="e4613-162">取得有關追蹤實體的詳細資訊</span><span class="sxs-lookup"><span data-stu-id="e4613-162">Getting detailed information about tracked entities</span></span>  
 
-<span data-ttu-id="925e1-163">許多在這一系列的範例使用項目方法來傳回實體的 DbEntityEntry 執行個體。</span><span class="sxs-lookup"><span data-stu-id="925e1-163">Many of the examples in this series use the Entry method to return a DbEntityEntry instance for an entity.</span></span> <span data-ttu-id="925e1-164">此項目物件然後當作起點來收集資訊的實體，例如其目前的狀態，以及例如明確載入相關的實體的實體上執行作業。</span><span class="sxs-lookup"><span data-stu-id="925e1-164">This entry object then acts as the starting point for gathering information about the entity such as its current state, as well as for performing operations on the entity such as explicitly loading a related entity.</span></span>  
+<span data-ttu-id="e4613-163">此系列中的許多範例都使用 Entry 方法來傳回實體的 DbEntityEntry 實例。</span><span class="sxs-lookup"><span data-stu-id="e4613-163">Many of the examples in this series use the Entry method to return a DbEntityEntry instance for an entity.</span></span> <span data-ttu-id="e4613-164">這個專案物件接著會做為收集實體相關資訊的起點，例如其目前狀態，以及在實體上執行作業（例如明確載入相關實體）。</span><span class="sxs-lookup"><span data-stu-id="e4613-164">This entry object then acts as the starting point for gathering information about the entity such as its current state, as well as for performing operations on the entity such as explicitly loading a related entity.</span></span>  
 
-<span data-ttu-id="925e1-165">項目方法會傳回多個或所有實體內容正在追蹤的 DbEntityEntry 物件。</span><span class="sxs-lookup"><span data-stu-id="925e1-165">The Entries methods return DbEntityEntry objects for many or all entities being tracked by the context.</span></span> <span data-ttu-id="925e1-166">這可讓您收集資訊或執行許多實體，而不是只是單一項目上的作業。</span><span class="sxs-lookup"><span data-stu-id="925e1-166">This allows you to gather information or perform operations on many entities rather than just a single entry.</span></span> <span data-ttu-id="925e1-167">例如: </span><span class="sxs-lookup"><span data-stu-id="925e1-167">For example:</span></span>  
+<span data-ttu-id="e4613-165">專案方法會針對內容所追蹤的許多或所有實體傳回 DbEntityEntry 物件。</span><span class="sxs-lookup"><span data-stu-id="e4613-165">The Entries methods return DbEntityEntry objects for many or all entities being tracked by the context.</span></span> <span data-ttu-id="e4613-166">這可讓您收集許多實體的資訊或執行作業，而不只是單一專案。</span><span class="sxs-lookup"><span data-stu-id="e4613-166">This allows you to gather information or perform operations on many entities rather than just a single entry.</span></span> <span data-ttu-id="e4613-167">例如:</span><span class="sxs-lookup"><span data-stu-id="e4613-167">For example:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -265,7 +265,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-<span data-ttu-id="925e1-168">您會注意到，我們引進了作者和讀取器的類別到範例-兩個類別實作 IPerson 介面。</span><span class="sxs-lookup"><span data-stu-id="925e1-168">You'll notice we are introducing a Author and Reader class into the example - both of these classes implement the IPerson interface.</span></span>  
+<span data-ttu-id="e4613-168">您會發現我們在範例中引進了作者和 Reader 類別，這兩個類別都是實 IPerson 介面。</span><span class="sxs-lookup"><span data-stu-id="e4613-168">You'll notice we are introducing a Author and Reader class into the example - both of these classes implement the IPerson interface.</span></span>  
 
 ``` csharp
 public class Author : IPerson
@@ -288,17 +288,17 @@ public interface IPerson
 }
 ```  
 
-<span data-ttu-id="925e1-169">例如，假設我們有在資料庫中的下列資料：</span><span class="sxs-lookup"><span data-stu-id="925e1-169">Let's assume we have the following data in the database:</span></span>
+<span data-ttu-id="e4613-169">假設我們在資料庫中有下列資料：</span><span class="sxs-lookup"><span data-stu-id="e4613-169">Let's assume we have the following data in the database:</span></span>
 
-<span data-ttu-id="925e1-170">部落格與 BlogId = 1 且名稱 = ' ADO.NET 部落格</span><span class="sxs-lookup"><span data-stu-id="925e1-170">Blog with BlogId = 1 and Name = 'ADO.NET Blog'</span></span>  
-<span data-ttu-id="925e1-171">部落格與 BlogId = 2 和名稱 = 'Visual Studio 部落格</span><span class="sxs-lookup"><span data-stu-id="925e1-171">Blog with BlogId = 2 and Name = 'The Visual Studio Blog'</span></span>  
-<span data-ttu-id="925e1-172">部落格與 BlogId = 3 和名稱 = '.NET Framework 部落格</span><span class="sxs-lookup"><span data-stu-id="925e1-172">Blog with BlogId = 3 and Name = '.NET Framework Blog'</span></span>  
-<span data-ttu-id="925e1-173">作者與 AuthorId = 1 且名稱 = ' Joe Bloggs'</span><span class="sxs-lookup"><span data-stu-id="925e1-173">Author with AuthorId = 1 and Name = 'Joe Bloggs'</span></span>  
-<span data-ttu-id="925e1-174">讀取器與 ReaderId = 1 且名稱 = ' John Doe'</span><span class="sxs-lookup"><span data-stu-id="925e1-174">Reader with ReaderId = 1 and Name = 'John Doe'</span></span>  
+<span data-ttu-id="e4613-170">BlogId = 1 且 Name = ' ADO.NET Blog ' 的 blog</span><span class="sxs-lookup"><span data-stu-id="e4613-170">Blog with BlogId = 1 and Name = 'ADO.NET Blog'</span></span>  
+<span data-ttu-id="e4613-171">BlogId = 2 且 Name = ' Visual Studio Blog ' 的 blog</span><span class="sxs-lookup"><span data-stu-id="e4613-171">Blog with BlogId = 2 and Name = 'The Visual Studio Blog'</span></span>  
+<span data-ttu-id="e4613-172">BlogId = 3 且 Name = ' .NET Framework Blog ' 的 blog</span><span class="sxs-lookup"><span data-stu-id="e4613-172">Blog with BlogId = 3 and Name = '.NET Framework Blog'</span></span>  
+<span data-ttu-id="e4613-173">作者 = 1，名稱 = ' Joe Bloggs '</span><span class="sxs-lookup"><span data-stu-id="e4613-173">Author with AuthorId = 1 and Name = 'Joe Bloggs'</span></span>  
+<span data-ttu-id="e4613-174">ReaderId = 1 且 Name = ' John Doe ' 的讀取器</span><span class="sxs-lookup"><span data-stu-id="e4613-174">Reader with ReaderId = 1 and Name = 'John Doe'</span></span>  
 
-<span data-ttu-id="925e1-175">執行程式碼的輸出會是：</span><span class="sxs-lookup"><span data-stu-id="925e1-175">The output from running the code would be:</span></span>  
+<span data-ttu-id="e4613-175">執行程式碼的輸出會是：</span><span class="sxs-lookup"><span data-stu-id="e4613-175">The output from running the code would be:</span></span>  
 
-```  
+```console
 All tracked entities:
 Found entity of type Blog with state Modified
 Found entity of type Blog with state Deleted
@@ -322,10 +322,10 @@ Found Person Joe Bloggs
 Found Person Jane Doe
 ```  
 
-<span data-ttu-id="925e1-176">這些範例說明數個點：</span><span class="sxs-lookup"><span data-stu-id="925e1-176">These examples illustrate several points:</span></span>  
+<span data-ttu-id="e4613-176">這些範例會說明幾個重點：</span><span class="sxs-lookup"><span data-stu-id="e4613-176">These examples illustrate several points:</span></span>  
 
-- <span data-ttu-id="925e1-177">項目方法會傳回實體的項目中所有的狀態，包括已刪除。</span><span class="sxs-lookup"><span data-stu-id="925e1-177">The Entries methods return entries for entities in all states, including Deleted.</span></span> <span data-ttu-id="925e1-178">比較這會排除本機刪除的實體。</span><span class="sxs-lookup"><span data-stu-id="925e1-178">Compare this to Local which excludes Deleted entities.</span></span>  
-- <span data-ttu-id="925e1-179">使用非泛型項目方法時，會傳回所有實體類型的項目。</span><span class="sxs-lookup"><span data-stu-id="925e1-179">Entries for all entity types are returned when the non-generic Entries method is used.</span></span> <span data-ttu-id="925e1-180">使用泛型的項目方法時之實體的泛型類型的執行個體將只會傳回項目。</span><span class="sxs-lookup"><span data-stu-id="925e1-180">When the generic entries method is used entries are only returned for entities that are instances of the generic type.</span></span> <span data-ttu-id="925e1-181">這是上述用來取得所有部落格上的項目。</span><span class="sxs-lookup"><span data-stu-id="925e1-181">This was used above to get entries for all blogs.</span></span> <span data-ttu-id="925e1-182">它也用來取得實作 IPerson 的所有實體的項目。</span><span class="sxs-lookup"><span data-stu-id="925e1-182">It was also used to get entries for all entities that implement IPerson.</span></span> <span data-ttu-id="925e1-183">這示範了泛型型別不必是實際的實體類型。</span><span class="sxs-lookup"><span data-stu-id="925e1-183">This demonstrates that the generic type does not have to be an actual entity type.</span></span>  
-- <span data-ttu-id="925e1-184">LINQ 物件可用來篩選傳回的結果。</span><span class="sxs-lookup"><span data-stu-id="925e1-184">LINQ to Objects can be used to filter the results returned.</span></span> <span data-ttu-id="925e1-185">這是上述用來尋找任何類型的實體，只要修改它們。</span><span class="sxs-lookup"><span data-stu-id="925e1-185">This was used above to find entities of any type as long as they are modified.</span></span>  
+- <span data-ttu-id="e4613-177">專案方法會傳回所有狀態中實體的專案，包括已刪除。</span><span class="sxs-lookup"><span data-stu-id="e4613-177">The Entries methods return entries for entities in all states, including Deleted.</span></span> <span data-ttu-id="e4613-178">將此專案與本機（排除已刪除的實體）進行比較。</span><span class="sxs-lookup"><span data-stu-id="e4613-178">Compare this to Local which excludes Deleted entities.</span></span>  
+- <span data-ttu-id="e4613-179">當使用非泛型專案方法時，會傳回所有實體類型的專案。</span><span class="sxs-lookup"><span data-stu-id="e4613-179">Entries for all entity types are returned when the non-generic Entries method is used.</span></span> <span data-ttu-id="e4613-180">使用泛型專案方法時，只會針對屬於泛型型別實例的實體傳回專案。</span><span class="sxs-lookup"><span data-stu-id="e4613-180">When the generic entries method is used entries are only returned for entities that are instances of the generic type.</span></span> <span data-ttu-id="e4613-181">上面用來取得所有 blog 的專案。</span><span class="sxs-lookup"><span data-stu-id="e4613-181">This was used above to get entries for all blogs.</span></span> <span data-ttu-id="e4613-182">它也可用來取得所有實 IPerson 實體的專案。</span><span class="sxs-lookup"><span data-stu-id="e4613-182">It was also used to get entries for all entities that implement IPerson.</span></span> <span data-ttu-id="e4613-183">這會示範泛型型別不一定要是實際的實體型別。</span><span class="sxs-lookup"><span data-stu-id="e4613-183">This demonstrates that the generic type does not have to be an actual entity type.</span></span>  
+- <span data-ttu-id="e4613-184">LINQ to Objects 可以用來篩選傳回的結果。</span><span class="sxs-lookup"><span data-stu-id="e4613-184">LINQ to Objects can be used to filter the results returned.</span></span> <span data-ttu-id="e4613-185">這是在上方用來尋找任何類型的實體，只要它們已修改即可。</span><span class="sxs-lookup"><span data-stu-id="e4613-185">This was used above to find entities of any type as long as they are modified.</span></span>  
 
-<span data-ttu-id="925e1-186">請注意，DbEntityEntry 執行個體一律會包含非 null 的實體。</span><span class="sxs-lookup"><span data-stu-id="925e1-186">Note that DbEntityEntry instances always contain a non-null Entity.</span></span> <span data-ttu-id="925e1-187">關聯性項目和虛設常式項目不會表示為 DbEntityEntry 執行個體這樣就不需要這些篩選。</span><span class="sxs-lookup"><span data-stu-id="925e1-187">Relationship entries and stub entries are not represented as DbEntityEntry instances so there is no need to filter for these.</span></span>
+<span data-ttu-id="e4613-186">請注意，DbEntityEntry 實例一律包含非 null 的實體。</span><span class="sxs-lookup"><span data-stu-id="e4613-186">Note that DbEntityEntry instances always contain a non-null Entity.</span></span> <span data-ttu-id="e4613-187">關聯性專案和存根專案不會呈現為 DbEntityEntry 實例，因此不需要進行篩選。</span><span class="sxs-lookup"><span data-stu-id="e4613-187">Relationship entries and stub entries are not represented as DbEntityEntry instances so there is no need to filter for these.</span></span>

@@ -1,75 +1,68 @@
 ---
 title: 用戶端與伺服器評估 - EF Core
-author: rowanmiller
-ms.date: 10/27/2016
+author: smitpatel
+ms.date: 10/03/2019
 ms.assetid: 8b6697cc-7067-4dc2-8007-85d80503d123
 uid: core/querying/client-eval
-ms.openlocfilehash: cb207d9e1b1004a4084dd6fc66712183b5bdd5dc
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: 3d70324f0b57a0ea9b165b5140a2154001c326f4
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921706"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181908"
 ---
-# <a name="client-vs-server-evaluation"></a><span data-ttu-id="72f32-102">用戶端與伺服器評估</span><span class="sxs-lookup"><span data-stu-id="72f32-102">Client vs. Server Evaluation</span></span>
+# <a name="client-vs-server-evaluation"></a><span data-ttu-id="7e1ce-102">用戶端與伺服器評估</span><span class="sxs-lookup"><span data-stu-id="7e1ce-102">Client vs. Server Evaluation</span></span>
 
-<span data-ttu-id="72f32-103">Entity Framework Core 支援要在用戶端評估的查詢組件，以及要發送到資料庫的查詢組件。</span><span class="sxs-lookup"><span data-stu-id="72f32-103">Entity Framework Core supports parts of the query being evaluated on the client and parts of it being pushed to the database.</span></span> <span data-ttu-id="72f32-104">由資料庫提供者決定將在資料庫中評估查詢的哪些組件。</span><span class="sxs-lookup"><span data-stu-id="72f32-104">It is up to the database provider to determine which parts of the query will be evaluated in the database.</span></span>
+<span data-ttu-id="7e1ce-103">一般的規則是，Entity Framework Core 嘗試在伺服器上盡可能評估查詢。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-103">As a general rule, Entity Framework Core attempts to evaluate a query on the server as much as possible.</span></span> <span data-ttu-id="7e1ce-104">EF Core 會將查詢的某些部分轉換成參數，它可以在用戶端進行評估。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-104">EF Core converts parts of the query into parameters, which it can evaluate on the client side.</span></span> <span data-ttu-id="7e1ce-105">查詢的其餘部分（連同產生的參數）會提供給資料庫提供者，以決定要在伺服器上評估的對等資料庫查詢。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-105">The rest of the query (along with the generated parameters) is given to the database provider to determine the equivalent database query to evaluate on the server.</span></span> <span data-ttu-id="7e1ce-106">EF Core 支援最上層投影中的部分用戶端評估（基本上，`Select()` 的最後一次呼叫）。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-106">EF Core supports partial client evaluation in the top-level projection (essentially, the last call to `Select()`).</span></span> <span data-ttu-id="7e1ce-107">如果查詢中的最上層投影無法轉譯成伺服器，EF Core 將會從伺服器提取所有必要的資料，並評估用戶端上的查詢其餘部分。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-107">If the top-level projection in the query can't be translated to the server, EF Core will fetch any required data from the server and evaluate remaining parts of the query on the client.</span></span> <span data-ttu-id="7e1ce-108">如果 EF Core 在最上層投射以外的任何地方偵測到運算式，但無法將其轉譯為伺服器，則會擲回執行時間例外狀況。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-108">If EF Core detects an expression, in any place other than the top-level projection, which can't be translated to the server, then it throws a runtime exception.</span></span> <span data-ttu-id="7e1ce-109">查看[查詢如何運作](xref:core/querying/how-query-works)，以瞭解 EF Core 如何判斷無法轉譯成伺服器的內容。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-109">See [how query works](xref:core/querying/how-query-works) to understand how EF Core determines what can't be translated to server.</span></span>
 
-> [!TIP]  
-> <span data-ttu-id="72f32-105">您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="72f32-105">You can view this article's [sample](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) on GitHub.</span></span>
+> [!NOTE]
+> <span data-ttu-id="7e1ce-110">在3.0 版之前，請在查詢的任何位置 Entity Framework Core 支援的用戶端評估。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-110">Prior to version 3.0, Entity Framework Core supported client evaluation anywhere in the query.</span></span> <span data-ttu-id="7e1ce-111">如需詳細資訊，請參閱[先前的版本一節](#previous-versions)。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-111">For more information, see the [previous versions section](#previous-versions).</span></span>
 
-## <a name="client-evaluation"></a><span data-ttu-id="72f32-106">用戶端評估</span><span class="sxs-lookup"><span data-stu-id="72f32-106">Client evaluation</span></span>
+## <a name="client-evaluation-in-the-top-level-projection"></a><span data-ttu-id="7e1ce-112">最上層投影中的用戶端評估</span><span class="sxs-lookup"><span data-stu-id="7e1ce-112">Client evaluation in the top-level projection</span></span>
 
-<span data-ttu-id="72f32-107">在下列範例中，會使用 Helper 方法來將從 SQL Server 資料庫所傳回部落格的 URL 標準化。</span><span class="sxs-lookup"><span data-stu-id="72f32-107">In the following example a helper method is used to standardize URLs for blogs that are returned from a SQL Server database.</span></span> <span data-ttu-id="72f32-108">由於 SQL Server 提供者未深入了解此方法的實作方式，因此，無法將它轉譯為 SQL。</span><span class="sxs-lookup"><span data-stu-id="72f32-108">Because the SQL Server provider has no insight into how this method is implemented, it is not possible to translate it into SQL.</span></span> <span data-ttu-id="72f32-109">查詢的所有其他層面均會在資料庫中進行評估，但透過此方法傳遞所傳回的 `URL` 則會在用戶端執行。</span><span class="sxs-lookup"><span data-stu-id="72f32-109">All other aspects of the query are evaluated in the database, but passing the returned `URL` through this method is performed on the client.</span></span>
+> [!TIP]
+> <span data-ttu-id="7e1ce-113">您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-113">You can view this article's [sample](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) on GitHub.</span></span>
 
-<!-- [!code-csharp[Main](samples/core/Querying/ClientEval/Sample.cs?highlight=6)] -->
-``` csharp
-var blogs = context.Blogs
-    .OrderByDescending(blog => blog.Rating)
-    .Select(blog => new
-    {
-        Id = blog.BlogId,
-        Url = StandardizeUrl(blog.Url)
-    })
-    .ToList();
-```
+<span data-ttu-id="7e1ce-114">在下列範例中，helper 方法是用來將 blog 的 Url 標準化，而這些是從 SQL Server 資料庫傳回的。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-114">In the following example, a helper method is used to standardize URLs for blogs, which are returned from a SQL Server database.</span></span> <span data-ttu-id="7e1ce-115">由於 SQL Server 提供者無法深入瞭解如何執行此方法，因此無法將它轉譯為 SQL。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-115">Since the SQL Server provider has no insight into how this method is implemented, it isn't possible to translate it into SQL.</span></span> <span data-ttu-id="7e1ce-116">查詢的所有其他層面都會在資料庫中進行評估，但透過這個方法傳遞傳回的 `URL` 會在用戶端上完成。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-116">All other aspects of the query are evaluated in the database, but passing the returned `URL` through this method is done on the client.</span></span>
 
-<!-- [!code-csharp[Main](samples/core/Querying/ClientEval/Sample.cs)] -->
-``` csharp
-public static string StandardizeUrl(string url)
-{
-    url = url.ToLower();
+[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientProjection)]
 
-    if (!url.StartsWith("http://"))
-    {
-        url = string.Concat("http://", url);
-    }
+[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientMethod)]
 
-    return url;
-}
-```
+## <a name="unsupported-client-evaluation"></a><span data-ttu-id="7e1ce-117">不支援的用戶端評估</span><span class="sxs-lookup"><span data-stu-id="7e1ce-117">Unsupported client evaluation</span></span>
 
-## <a name="client-evaluation-performance-issues"></a><span data-ttu-id="72f32-110">用戶端評估效能問題</span><span class="sxs-lookup"><span data-stu-id="72f32-110">Client evaluation performance issues</span></span>
+<span data-ttu-id="7e1ce-118">雖然用戶端評估很有用，但有時可能會導致效能不佳。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-118">While client evaluation is useful, it can result in poor performance sometimes.</span></span> <span data-ttu-id="7e1ce-119">請考慮下列查詢，其中的 helper 方法現在用於 where 篩選準則中。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-119">Consider the following query, in which the helper method is now used in a where filter.</span></span> <span data-ttu-id="7e1ce-120">因為無法在資料庫中套用篩選，所以必須將所有資料提取到記憶體中，以在用戶端上套用篩選。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-120">Because the filter can't be applied in the database, all the data needs to be pulled into memory to apply the filter on the client.</span></span> <span data-ttu-id="7e1ce-121">根據篩選器和伺服器上的資料量而定，用戶端評估可能會導致效能不佳。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-121">Based on the filter and the amount of data on the server, client evaluation could result in poor performance.</span></span> <span data-ttu-id="7e1ce-122">因此 Entity Framework Core 會封鎖這類用戶端評估，並擲回執行時間例外狀況。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-122">So Entity Framework Core blocks such client evaluation and throws a runtime exception.</span></span>
 
-<span data-ttu-id="72f32-111">雖然用戶端評估非常實用，但在某些情況下，可能會導致效能不佳。</span><span class="sxs-lookup"><span data-stu-id="72f32-111">While client evaluation can be very useful, in some instances it can result in poor performance.</span></span> <span data-ttu-id="72f32-112">請考慮下列查詢，此查詢目前會在篩選條件中使用 Helper 方法。</span><span class="sxs-lookup"><span data-stu-id="72f32-112">Consider the following query, where the helper method is now used in a filter.</span></span> <span data-ttu-id="72f32-113">因為這不能在資料庫中執行，所以會將所有資料提取到記憶體，然後在用戶端套用篩選條件。</span><span class="sxs-lookup"><span data-stu-id="72f32-113">Because this can't be performed in the database, all the data is pulled into memory and then the filter is applied on the client.</span></span> <span data-ttu-id="72f32-114">根據資料量以及要篩選出多少資料而定，這可能會導致效能不佳。</span><span class="sxs-lookup"><span data-stu-id="72f32-114">Depending on the amount of data, and how much of that data is filtered out, this could result in poor performance.</span></span>
+[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientWhere)]
 
-<!-- [!code-csharp[Main](samples/core/Querying/ClientEval/Sample.cs)] -->
-``` csharp
-var blogs = context.Blogs
-    .Where(blog => StandardizeUrl(blog.Url).Contains("dotnet"))
-    .ToList();
-```
+## <a name="explicit-client-evaluation"></a><span data-ttu-id="7e1ce-123">明確的用戶端評估</span><span class="sxs-lookup"><span data-stu-id="7e1ce-123">Explicit client evaluation</span></span>
 
-## <a name="client-evaluation-logging"></a><span data-ttu-id="72f32-115">用戶端評估記錄</span><span class="sxs-lookup"><span data-stu-id="72f32-115">Client evaluation logging</span></span>
+<span data-ttu-id="7e1ce-124">在某些情況下，您可能需要明確地強制執行用戶端評估，如下所示</span><span class="sxs-lookup"><span data-stu-id="7e1ce-124">You may need to force into client evaluation explicitly in certain cases like following</span></span>
 
-<span data-ttu-id="72f32-116">根據預設，執行用戶端評估時，EF Core 將會記錄警告。</span><span class="sxs-lookup"><span data-stu-id="72f32-116">By default, EF Core will log a warning when client evaluation is performed.</span></span> <span data-ttu-id="72f32-117">如需檢視記錄輸出的詳細資訊，請參閱[記錄](../miscellaneous/logging.md)。</span><span class="sxs-lookup"><span data-stu-id="72f32-117">See [Logging](../miscellaneous/logging.md) for more information on viewing logging output.</span></span> 
+- <span data-ttu-id="7e1ce-125">資料量很小，因此在用戶端上進行評估並不會產生明顯的效能影響。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-125">The amount of data is small so that evaluating on the client doesn't incur a huge performance penalty.</span></span>
+- <span data-ttu-id="7e1ce-126">使用的 LINQ 運算子沒有伺服器端轉譯。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-126">The LINQ operator being used has no server-side translation.</span></span>
 
-## <a name="optional-behavior-throw-an-exception-for-client-evaluation"></a><span data-ttu-id="72f32-118">選擇性行為：針對用戶端評估擲回例外狀況</span><span class="sxs-lookup"><span data-stu-id="72f32-118">Optional behavior: throw an exception for client evaluation</span></span>
+<span data-ttu-id="7e1ce-127">在這種情況下，您可以藉由呼叫 `AsEnumerable` 或 `ToList` （`AsAsyncEnumerable` 或 `ToListAsync` 以進行非同步）的方法，明確加入宣告用戶端評估。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-127">In such cases, you can explicitly opt into client evaluation by calling methods like `AsEnumerable` or `ToList` (`AsAsyncEnumerable` or `ToListAsync` for async).</span></span> <span data-ttu-id="7e1ce-128">藉由使用 `AsEnumerable`，您就可以串流處理結果，但使用 `ToList` 會藉由建立清單來產生緩衝，這也會佔用額外的記憶體。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-128">By using `AsEnumerable` you would be streaming the results, but using `ToList` would cause buffering by creating a list, which also takes additional memory.</span></span> <span data-ttu-id="7e1ce-129">不過，如果您要列舉多次，則將結果儲存在清單中會有説明，因為只有一個資料庫查詢。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-129">Though if you're enumerating multiple times, then storing results in a list helps more since there's only one query to the database.</span></span> <span data-ttu-id="7e1ce-130">根據特定的使用方式，您應該評估哪一種方法在案例中更有用。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-130">Depending on the particular usage, you should evaluate which method is more useful for the case.</span></span>
 
-<span data-ttu-id="72f32-119">您可以變更在用戶端評估發生而擲回或不執行任何動作時的行為。</span><span class="sxs-lookup"><span data-stu-id="72f32-119">You can change the behavior when client evaluation occurs to either throw or do nothing.</span></span> <span data-ttu-id="72f32-120">這通常會在 `DbContext.OnConfiguring` 中為您的內容設定選項時完成，或者，如果您使用 ASP.NET Core，則是在 `Startup.cs` 中完成。</span><span class="sxs-lookup"><span data-stu-id="72f32-120">This is done when setting up the options for your context - typically in `DbContext.OnConfiguring`, or in `Startup.cs` if you are using ASP.NET Core.</span></span>
+[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ExplicitClientEval)]
 
-<!-- [!code-csharp[Main](samples/core/Querying/ClientEval/ThrowOnClientEval/BloggingContext.cs?highlight=5)] -->
-``` csharp
+## <a name="potential-memory-leak-in-client-evaluation"></a><span data-ttu-id="7e1ce-131">用戶端評估中可能發生記憶體流失</span><span class="sxs-lookup"><span data-stu-id="7e1ce-131">Potential memory leak in client evaluation</span></span>
+
+<span data-ttu-id="7e1ce-132">由於查詢轉譯和編譯的成本很高，EF Core 快取已編譯的查詢計劃。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-132">Since query translation and compilation are expensive, EF Core caches the compiled query plan.</span></span> <span data-ttu-id="7e1ce-133">快取的委派可能會在執行最上層投影的用戶端評估時使用用戶端程式代碼。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-133">The cached delegate may use client code while doing client evaluation of top-level projection.</span></span> <span data-ttu-id="7e1ce-134">EF Core 會為樹狀結構的用戶端評估部分產生參數，並藉由取代參數值來重複使用查詢計劃。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-134">EF Core generates parameters for the client-evaluated parts of the tree and reuses the query plan by replacing the parameter values.</span></span> <span data-ttu-id="7e1ce-135">但是運算式樹狀架構中的某些常數無法轉換成參數。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-135">But certain constants in the expression tree can't be converted into parameters.</span></span> <span data-ttu-id="7e1ce-136">如果快取的委派包含這類常數，則這些物件無法進行垃圾收集，因為它們仍然被參考。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-136">If the cached delegate contains such constants, then those objects can't be garbage collected since they're still being referenced.</span></span> <span data-ttu-id="7e1ce-137">如果這類物件在其中包含 DbCoNtext 或其他服務，則可能會導致應用程式的記憶體使用量隨著時間成長。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-137">If such an object contains a DbContext or other services in it, then it could cause the memory usage of the app to grow over time.</span></span> <span data-ttu-id="7e1ce-138">這種行為通常是記憶體流失的正負號。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-138">This behavior is generally a sign of a memory leak.</span></span> <span data-ttu-id="7e1ce-139">EF Core 擲回例外狀況時，會在無法使用目前資料庫提供者對應的類型常數時擲回。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-139">EF Core throws an exception whenever it comes across constants of a type that can't be mapped using current database provider.</span></span> <span data-ttu-id="7e1ce-140">常見的原因和其解決方案如下所示：</span><span class="sxs-lookup"><span data-stu-id="7e1ce-140">Common causes and their solutions are as follows:</span></span>
+
+- <span data-ttu-id="7e1ce-141">**使用實例方法**：在用戶端投射中使用實例方法時，運算式樹狀架構會包含實例的常數。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-141">**Using an instance method**: When using instance methods in a client projection, the expression tree contains a constant of the instance.</span></span> <span data-ttu-id="7e1ce-142">如果您的方法不使用實例中的任何資料，請考慮將方法設為靜態。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-142">If your method doesn't use any data from the instance, consider making the method static.</span></span> <span data-ttu-id="7e1ce-143">如果您需要方法主體中的實例資料，請將特定資料當做引數傳遞至方法。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-143">If you need instance data in the method body, then pass the specific data as an argument to the method.</span></span>
+- <span data-ttu-id="7e1ce-144">**將常數引數傳遞至方法**：這種情況通常是藉由在用戶端方法的引數中使用 `this` 來引發。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-144">**Passing constant arguments to method**: This case arises generally by using `this` in an argument to client method.</span></span> <span data-ttu-id="7e1ce-145">請考慮將中的引數分割為多個純量引數（可由資料庫提供者對應）。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-145">Consider splitting the argument in to multiple scalar arguments, which can be mapped by the database provider.</span></span>
+- <span data-ttu-id="7e1ce-146">**其他常數**：如果常數在任何其他情況下都存在，則您可以評估處理時是否需要常數。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-146">**Other constants**: If a constant is come across in any other case, then you can evaluate whether the constant is needed in processing.</span></span> <span data-ttu-id="7e1ce-147">如果必須有常數，或如果您無法使用上述案例中的解決方案，請建立本機變數來儲存值，並在查詢中使用區域變數。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-147">If it's necessary to have the constant, or if you can't use a solution from the above cases, then create a local variable to store the value and use local variable in the query.</span></span> <span data-ttu-id="7e1ce-148">EF Core 會將本機變數轉換成參數。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-148">EF Core will convert the local variable into a parameter.</span></span>
+
+## <a name="previous-versions"></a><span data-ttu-id="7e1ce-149">舊版本</span><span class="sxs-lookup"><span data-stu-id="7e1ce-149">Previous versions</span></span>
+
+<span data-ttu-id="7e1ce-150">下一節適用于3.0 之前的 EF Core 版本。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-150">The following section applies to EF Core versions before 3.0.</span></span>
+
+<span data-ttu-id="7e1ce-151">舊版的 EF Core 支援在查詢的任何部分中進行用戶端評估，而不只是最上層的預測。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-151">Older EF Core versions supported client evaluation in any part of the query--not just the top-level projection.</span></span> <span data-ttu-id="7e1ce-152">這就是為什麼在 [[不支援的用戶端評估](#unsupported-client-evaluation)] 區段下張貼的查詢會正常運作。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-152">That's why queries similar to one posted under the [Unsupported client evaluation](#unsupported-client-evaluation) section worked correctly.</span></span> <span data-ttu-id="7e1ce-153">由於此行為可能會造成未察覺的效能問題，EF Core 記錄用戶端評估警告。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-153">Since this behavior could cause unnoticed performance issues, EF Core logged a client evaluation warning.</span></span> <span data-ttu-id="7e1ce-154">如需有關查看記錄輸出的詳細資訊，請參閱[記錄](xref:core/miscellaneous/logging)。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-154">For more information on viewing logging output, see [Logging](xref:core/miscellaneous/logging).</span></span>
+
+<span data-ttu-id="7e1ce-155">（選擇性） EF Core 允許您變更預設行為，使其在執行用戶端評估時擲回例外狀況或不執行任何動作（在投影中則除外）。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-155">Optionally EF Core allowed you to change the default behavior to either throw an exception or do nothing when doing client evaluation (except for in the projection).</span></span> <span data-ttu-id="7e1ce-156">例外狀況擲回行為會使其類似于3.0 中的行為。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-156">The exception throwing behavior would make it similar to the behavior in 3.0.</span></span> <span data-ttu-id="7e1ce-157">若要變更此行為，您必須在設定內容的選項時（通常是在 `DbContext.OnConfiguring`）中設定警告，或如果您使用 ASP.NET Core，則為 `Startup.cs`。</span><span class="sxs-lookup"><span data-stu-id="7e1ce-157">To change the behavior, you need to configure warnings while setting up the options for your context - typically in `DbContext.OnConfiguring`, or in `Startup.cs` if you're using ASP.NET Core.</span></span>
+
+```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 {
     optionsBuilder

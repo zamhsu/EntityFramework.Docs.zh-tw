@@ -3,28 +3,28 @@ title: 使用屬性值-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e3278b4b-9378-4fdb-923d-f64d80aaae70
-ms.openlocfilehash: afde503bb4ed15fcf83a57053541cd5da8c89835
-ms.sourcegitcommit: 50521b4a2f71139e6a7210a69ac73da582ef46cf
+ms.openlocfilehash: d8a18182754980d79b71df3f227b30c4ce40366f
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/27/2019
-ms.locfileid: "67416676"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182135"
 ---
-# <a name="working-with-property-values"></a><span data-ttu-id="1ea0c-102">使用屬性值</span><span class="sxs-lookup"><span data-stu-id="1ea0c-102">Working with property values</span></span>
-<span data-ttu-id="1ea0c-103">大部分的情況下 Entity Framework 會負責追蹤狀態、 原始值，以及您的實體執行個體的屬性目前值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-103">For the most part Entity Framework will take care of tracking the state, original values, and current values of the properties of your entity instances.</span></span> <span data-ttu-id="1ea0c-104">不過，可能有某些情況下-例如中斷連線的案例-您想要用來檢視或處理 EF 具有屬性的相關資訊。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-104">However, there may be some cases - such as disconnected scenarios - where you want to view or manipulate the information EF has about the properties.</span></span> <span data-ttu-id="1ea0c-105">本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-105">The techniques shown in this topic apply equally to models created with Code First and the EF Designer.</span></span>  
+# <a name="working-with-property-values"></a><span data-ttu-id="47b3c-102">使用屬性值</span><span class="sxs-lookup"><span data-stu-id="47b3c-102">Working with property values</span></span>
+<span data-ttu-id="47b3c-103">在大部分的情況下，Entity Framework 會負責追蹤實體實例屬性的狀態、原始值和目前的值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-103">For the most part Entity Framework will take care of tracking the state, original values, and current values of the properties of your entity instances.</span></span> <span data-ttu-id="47b3c-104">不過，在某些情況下（例如，中斷連線的案例），您想要在其中查看或操作 EF 相關資訊的屬性。</span><span class="sxs-lookup"><span data-stu-id="47b3c-104">However, there may be some cases - such as disconnected scenarios - where you want to view or manipulate the information EF has about the properties.</span></span> <span data-ttu-id="47b3c-105">本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。</span><span class="sxs-lookup"><span data-stu-id="47b3c-105">The techniques shown in this topic apply equally to models created with Code First and the EF Designer.</span></span>  
 
-<span data-ttu-id="1ea0c-106">Entity Framework 會追蹤的追蹤實體的每個屬性的兩個值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-106">Entity Framework keeps track of two values for each property of a tracked entity.</span></span> <span data-ttu-id="1ea0c-107">目前的值是，正如其名，在實體中屬性的目前值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-107">The current value is, as the name indicates, the current value of the property in the entity.</span></span> <span data-ttu-id="1ea0c-108">原始的值是屬性有從資料庫查詢或附加至內容實體時的值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-108">The original value is the value that the property had when the entity was queried from the database or attached to the context.</span></span>  
+<span data-ttu-id="47b3c-106">Entity Framework 會針對追蹤實體的每個屬性追蹤兩個值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-106">Entity Framework keeps track of two values for each property of a tracked entity.</span></span> <span data-ttu-id="47b3c-107">目前的值是，如名稱所示，是實體中屬性的目前值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-107">The current value is, as the name indicates, the current value of the property in the entity.</span></span> <span data-ttu-id="47b3c-108">原始值是從資料庫查詢實體或附加至內容時，屬性所擁有的值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-108">The original value is the value that the property had when the entity was queried from the database or attached to the context.</span></span>  
 
-<span data-ttu-id="1ea0c-109">有兩種一般的機制，來使用屬性值：</span><span class="sxs-lookup"><span data-stu-id="1ea0c-109">There are two general mechanisms for working with property values:</span></span>  
+<span data-ttu-id="47b3c-109">使用屬性值的一般機制有兩種：</span><span class="sxs-lookup"><span data-stu-id="47b3c-109">There are two general mechanisms for working with property values:</span></span>  
 
-- <span data-ttu-id="1ea0c-110">強類型的方式，使用屬性的方法可以取得單一屬性的值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-110">The value of a single property can be obtained in a strongly typed way using the Property method.</span></span>  
-- <span data-ttu-id="1ea0c-111">實體的所有屬性的值可以讀入 DbPropertyValues 物件。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-111">Values for all properties of an entity can be read into a DbPropertyValues object.</span></span> <span data-ttu-id="1ea0c-112">DbPropertyValues 再做為字典式物件，以允許讀取和設定的屬性值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-112">DbPropertyValues then acts as a dictionary-like object to allow property values to be read and set.</span></span> <span data-ttu-id="1ea0c-113">從另一個 DbPropertyValues 物件中的值或一些其他物件，例如另一份簡單的資料傳輸物件 (DTO) 或實體中的值，則可以設定 DbPropertyValues 物件中的值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-113">The values in a DbPropertyValues object can be set from values in another DbPropertyValues object or from values in some other object, such as another copy of the entity or a simple data transfer object (DTO).</span></span>  
+- <span data-ttu-id="47b3c-110">您可以使用屬性方法，以強型別方式取得單一屬性的值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-110">The value of a single property can be obtained in a strongly typed way using the Property method.</span></span>  
+- <span data-ttu-id="47b3c-111">實體的所有屬性值都可以讀入 DbPropertyValues 物件中。</span><span class="sxs-lookup"><span data-stu-id="47b3c-111">Values for all properties of an entity can be read into a DbPropertyValues object.</span></span> <span data-ttu-id="47b3c-112">然後，DbPropertyValues 會作為類似字典的物件，以允許讀取和設定屬性值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-112">DbPropertyValues then acts as a dictionary-like object to allow property values to be read and set.</span></span> <span data-ttu-id="47b3c-113">DbPropertyValues 物件中的值可以從另一個 DbPropertyValues 物件中的值，或從其他物件的值（例如，實體的另一個複本或簡單的資料傳輸物件（DTO））進行設定。</span><span class="sxs-lookup"><span data-stu-id="47b3c-113">The values in a DbPropertyValues object can be set from values in another DbPropertyValues object or from values in some other object, such as another copy of the entity or a simple data transfer object (DTO).</span></span>  
 
-<span data-ttu-id="1ea0c-114">下列各節示範這兩個以上的機制使用的範例。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-114">The sections below show examples of using both of the above mechanisms.</span></span>  
+<span data-ttu-id="47b3c-114">下列各節顯示使用上述這兩種機制的範例。</span><span class="sxs-lookup"><span data-stu-id="47b3c-114">The sections below show examples of using both of the above mechanisms.</span></span>  
 
-## <a name="getting-and-setting-the-current-or-original-value-of-an-individual-property"></a><span data-ttu-id="1ea0c-115">取得和設定的個別屬性的目前或原始值</span><span class="sxs-lookup"><span data-stu-id="1ea0c-115">Getting and setting the current or original value of an individual property</span></span>  
+## <a name="getting-and-setting-the-current-or-original-value-of-an-individual-property"></a><span data-ttu-id="47b3c-115">取得和設定個別屬性的目前或原始值</span><span class="sxs-lookup"><span data-stu-id="47b3c-115">Getting and setting the current or original value of an individual property</span></span>  
 
-<span data-ttu-id="1ea0c-116">下列範例示範可以如何讀取，然後設定新的值屬性的目前值：</span><span class="sxs-lookup"><span data-stu-id="1ea0c-116">The example below shows how the current value of a property can be read and then set to a new value:</span></span>  
+<span data-ttu-id="47b3c-116">下列範例顯示如何讀取屬性的目前值，然後將它設定為新的值：</span><span class="sxs-lookup"><span data-stu-id="47b3c-116">The example below shows how the current value of a property can be read and then set to a new value:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -45,17 +45,17 @@ using (var context = new BloggingContext())
 }
 ```  
 
-<span data-ttu-id="1ea0c-117">使用而非 CurrentValue; 屬性的 OriginalValue 屬性，來讀取或設定原始值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-117">Use the OriginalValue property instead of the CurrentValue property to read or set the original value.</span></span>  
+<span data-ttu-id="47b3c-117">使用 OriginalValue 屬性，而不是 CurrentValue 屬性來讀取或設定原始值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-117">Use the OriginalValue property instead of the CurrentValue property to read or set the original value.</span></span>  
 
-<span data-ttu-id="1ea0c-118">請注意，傳回的值型別為"object"字串來指定屬性名稱時。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-118">Note that the returned value is typed as “object” when a string is used to specify the property name.</span></span> <span data-ttu-id="1ea0c-119">相反地，傳回的值是強型別如果會使用 lambda 運算式。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-119">On the other hand, the returned value is strongly typed if a lambda expression is used.</span></span>  
+<span data-ttu-id="47b3c-118">請注意，當使用字串來指定屬性名稱時，傳回的值會輸入為「物件」。</span><span class="sxs-lookup"><span data-stu-id="47b3c-118">Note that the returned value is typed as “object” when a string is used to specify the property name.</span></span> <span data-ttu-id="47b3c-119">另一方面，如果使用 lambda 運算式，傳回的值就是強型別。</span><span class="sxs-lookup"><span data-stu-id="47b3c-119">On the other hand, the returned value is strongly typed if a lambda expression is used.</span></span>  
 
-<span data-ttu-id="1ea0c-120">將屬性值，這類設定在為新的值不同於舊的值是否已修改，只會將屬性。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-120">Setting the property value like this will only mark the property as modified if the new value is different from the old value.</span></span>  
+<span data-ttu-id="47b3c-120">如果新值與舊值不同，設定屬性值（例如這樣）只會將屬性標示為已修改。</span><span class="sxs-lookup"><span data-stu-id="47b3c-120">Setting the property value like this will only mark the property as modified if the new value is different from the old value.</span></span>  
 
-<span data-ttu-id="1ea0c-121">當以這種方式設定屬性值變更會自動偵測即使 AutoDetectChanges 已關閉。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-121">When a property value is set in this way the change is automatically detected even if AutoDetectChanges is turned off.</span></span>  
+<span data-ttu-id="47b3c-121">以這種方式設定屬性值時，即使已關閉 AutoDetectChanges，也會自動偵測變更。</span><span class="sxs-lookup"><span data-stu-id="47b3c-121">When a property value is set in this way the change is automatically detected even if AutoDetectChanges is turned off.</span></span>  
 
-## <a name="getting-and-setting-the-current-value-of-an-unmapped-property"></a><span data-ttu-id="1ea0c-122">取得和設定目前未對應的屬性的值</span><span class="sxs-lookup"><span data-stu-id="1ea0c-122">Getting and setting the current value of an unmapped property</span></span>  
+## <a name="getting-and-setting-the-current-value-of-an-unmapped-property"></a><span data-ttu-id="47b3c-122">取得和設定未對應屬性的目前值</span><span class="sxs-lookup"><span data-stu-id="47b3c-122">Getting and setting the current value of an unmapped property</span></span>  
 
-<span data-ttu-id="1ea0c-123">也可以讀取此屬性，不會對應到資料庫的目前值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-123">The current value of a property that is not mapped to the database can also be read.</span></span> <span data-ttu-id="1ea0c-124">未對應的範例可能是屬性的部落格上的 RssLink 屬性。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-124">An example of an unmapped property could be an RssLink property on Blog.</span></span> <span data-ttu-id="1ea0c-125">這個值可能會根據 BlogId，計算，因此不需要儲存在資料庫中。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-125">This value may be calculated based on the BlogId, and therefore doesn't need to be stored in the database.</span></span> <span data-ttu-id="1ea0c-126">例如:</span><span class="sxs-lookup"><span data-stu-id="1ea0c-126">For example:</span></span>  
+<span data-ttu-id="47b3c-123">尚未對應至資料庫之屬性的目前值也可以讀取。</span><span class="sxs-lookup"><span data-stu-id="47b3c-123">The current value of a property that is not mapped to the database can also be read.</span></span> <span data-ttu-id="47b3c-124">未對應屬性的範例可能是在 Blog 上的 .Rsslink 屬性。</span><span class="sxs-lookup"><span data-stu-id="47b3c-124">An example of an unmapped property could be an RssLink property on Blog.</span></span> <span data-ttu-id="47b3c-125">此值可能會根據 BlogId 計算，因此不需要儲存在資料庫中。</span><span class="sxs-lookup"><span data-stu-id="47b3c-125">This value may be calculated based on the BlogId, and therefore doesn't need to be stored in the database.</span></span> <span data-ttu-id="47b3c-126">例如:</span><span class="sxs-lookup"><span data-stu-id="47b3c-126">For example:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -69,9 +69,9 @@ using (var context = new BloggingContext())
 }
 ```  
 
-<span data-ttu-id="1ea0c-127">如果屬性會公開 setter，也可以設定目前的值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-127">The current value can also be set if the property exposes a setter.</span></span>  
+<span data-ttu-id="47b3c-127">如果屬性公開 setter，則也可以設定目前的值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-127">The current value can also be set if the property exposes a setter.</span></span>  
 
-<span data-ttu-id="1ea0c-128">執行 Entity Framework 驗證未對應的屬性時，讀取未對應之屬性的值很有用。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-128">Reading the values of unmapped properties is useful when performing Entity Framework validation of unmapped properties.</span></span> <span data-ttu-id="1ea0c-129">基於相同原因可以讀取和設定都沒有目前追蹤內容的實體屬性的目前值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-129">For the same reason current values can be read and set for properties of entities that are not currently being tracked by the context.</span></span> <span data-ttu-id="1ea0c-130">例如:</span><span class="sxs-lookup"><span data-stu-id="1ea0c-130">For example:</span></span>  
+<span data-ttu-id="47b3c-128">執行未對應屬性的 Entity Framework 驗證時，讀取未對應屬性的值會很有用。</span><span class="sxs-lookup"><span data-stu-id="47b3c-128">Reading the values of unmapped properties is useful when performing Entity Framework validation of unmapped properties.</span></span> <span data-ttu-id="47b3c-129">基於相同原因，可以針對目前未由內容追蹤之實體的屬性，讀取和設定目前的值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-129">For the same reason current values can be read and set for properties of entities that are not currently being tracked by the context.</span></span> <span data-ttu-id="47b3c-130">例如:</span><span class="sxs-lookup"><span data-stu-id="47b3c-130">For example:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -87,11 +87,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-<span data-ttu-id="1ea0c-131">請注意，不會有原始值未對應的屬性或沒有內容所追蹤的實體的屬性。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-131">Note that original values are not available for unmapped properties or for properties of entities that are not being tracked by the context.</span></span>  
+<span data-ttu-id="47b3c-131">請注意，原始值不適用於未對應的屬性，或未由內容追蹤之實體的屬性。</span><span class="sxs-lookup"><span data-stu-id="47b3c-131">Note that original values are not available for unmapped properties or for properties of entities that are not being tracked by the context.</span></span>  
 
-## <a name="checking-whether-a-property-is-marked-as-modified"></a><span data-ttu-id="1ea0c-132">檢查屬性是否標示為已修改</span><span class="sxs-lookup"><span data-stu-id="1ea0c-132">Checking whether a property is marked as modified</span></span>  
+## <a name="checking-whether-a-property-is-marked-as-modified"></a><span data-ttu-id="47b3c-132">檢查屬性是否標示為已修改</span><span class="sxs-lookup"><span data-stu-id="47b3c-132">Checking whether a property is marked as modified</span></span>  
 
-<span data-ttu-id="1ea0c-133">下列範例示範如何檢查標示為已修改的個別屬性：</span><span class="sxs-lookup"><span data-stu-id="1ea0c-133">The example below shows how to check whether or not an individual property is marked as modified:</span></span>  
+<span data-ttu-id="47b3c-133">下列範例顯示如何檢查個別屬性是否標示為已修改：</span><span class="sxs-lookup"><span data-stu-id="47b3c-133">The example below shows how to check whether or not an individual property is marked as modified:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -105,11 +105,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-<span data-ttu-id="1ea0c-134">已修改屬性的值會以傳送更新到資料庫讓呼叫 SaveChanges 時。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-134">The values of modified properties are sent as updates to the database when SaveChanges is called.</span></span>  
+<span data-ttu-id="47b3c-134">呼叫 SaveChanges 時，已修改的屬性值會當做更新傳送至資料庫。</span><span class="sxs-lookup"><span data-stu-id="47b3c-134">The values of modified properties are sent as updates to the database when SaveChanges is called.</span></span>  
 
-##  <a name="marking-a-property-as-modified"></a><span data-ttu-id="1ea0c-135">標示為已修改的屬性</span><span class="sxs-lookup"><span data-stu-id="1ea0c-135">Marking a property as modified</span></span>  
+##  <a name="marking-a-property-as-modified"></a><span data-ttu-id="47b3c-135">將屬性標示為已修改</span><span class="sxs-lookup"><span data-stu-id="47b3c-135">Marking a property as modified</span></span>  
 
-<span data-ttu-id="1ea0c-136">下列範例示範如何強制要被標示為已修改的個別屬性：</span><span class="sxs-lookup"><span data-stu-id="1ea0c-136">The example below shows how to force an individual property to be marked as modified:</span></span>  
+<span data-ttu-id="47b3c-136">下列範例顯示如何強制將個別屬性標示為已修改：</span><span class="sxs-lookup"><span data-stu-id="47b3c-136">The example below shows how to force an individual property to be marked as modified:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -123,13 +123,13 @@ using (var context = new BloggingContext())
 }
 ```  
 
-<span data-ttu-id="1ea0c-137">將屬性標示為要更新將傳送至資料庫中的屬性，即使目前屬性的值做為其原始值相同讓呼叫 SaveChanges 時的已修改強制中。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-137">Marking a property as modified forces an update to be send to the database for the property when SaveChanges is called even if the current value of the property is the same as its original value.</span></span>  
+<span data-ttu-id="47b3c-137">將屬性標示為已修改，會在呼叫 SaveChanges 時，強制將更新傳送至資料庫，即使屬性的目前值與原始值相同也一樣。</span><span class="sxs-lookup"><span data-stu-id="47b3c-137">Marking a property as modified forces an update to be send to the database for the property when SaveChanges is called even if the current value of the property is the same as its original value.</span></span>  
 
-<span data-ttu-id="1ea0c-138">它不是目前無法重設該網站已標示為已修改後未修改的個別屬性。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-138">It is not currently possible to reset an individual property to be not modified after it has been marked as modified.</span></span> <span data-ttu-id="1ea0c-139">這是我們計劃在未來版本中支援的項目。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-139">This is something we plan to support in a future release.</span></span>  
+<span data-ttu-id="47b3c-138">目前無法在將個別屬性標示為已修改之後，將它重設為未修改。</span><span class="sxs-lookup"><span data-stu-id="47b3c-138">It is not currently possible to reset an individual property to be not modified after it has been marked as modified.</span></span> <span data-ttu-id="47b3c-139">這是我們計畫在未來版本中支援的專案。</span><span class="sxs-lookup"><span data-stu-id="47b3c-139">This is something we plan to support in a future release.</span></span>  
 
-## <a name="reading-current-original-and-database-values-for-all-properties-of-an-entity"></a><span data-ttu-id="1ea0c-140">讀取目前、 原始值和實體的所有屬性的資料庫值</span><span class="sxs-lookup"><span data-stu-id="1ea0c-140">Reading current, original, and database values for all properties of an entity</span></span>  
+## <a name="reading-current-original-and-database-values-for-all-properties-of-an-entity"></a><span data-ttu-id="47b3c-140">讀取實體所有屬性的目前、原始和資料庫值</span><span class="sxs-lookup"><span data-stu-id="47b3c-140">Reading current, original, and database values for all properties of an entity</span></span>  
 
-<span data-ttu-id="1ea0c-141">下列範例示範如何讀取目前的值、 原始的值，以及實際實體的所有對應屬性的資料庫中的值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-141">The example below shows how to read the current values, the original values, and the values actually in the database for all mapped properties of an entity.</span></span>  
+<span data-ttu-id="47b3c-141">下列範例顯示如何讀取實體的所有對應屬性的目前值、原始值，以及實際在資料庫中的值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-141">The example below shows how to read the current values, the original values, and the values actually in the database for all mapped properties of an entity.</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -163,11 +163,11 @@ public static void PrintValues(DbPropertyValues values)
 }
 ```  
 
-<span data-ttu-id="1ea0c-142">目前的值是實體的目前包含屬性的值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-142">The current values are the values that the properties of the entity currently contain.</span></span> <span data-ttu-id="1ea0c-143">原始的值會是實體的查詢時，從資料庫所讀取的值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-143">The original values are the values that were read from the database when the entity was queried.</span></span> <span data-ttu-id="1ea0c-144">目前儲存在資料庫中，資料庫值會是值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-144">The database values are the values as they are currently stored in the database.</span></span> <span data-ttu-id="1ea0c-145">在資料庫中的值可能已變更，因為實體的查詢，例如當並行編輯已經由另一位使用者對資料庫時，取得資料庫值非常有用的。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-145">Getting the database values is useful when the values in the database may have changed since the entity was queried such as when a concurrent edit to the database has been made by another user.</span></span>  
+<span data-ttu-id="47b3c-142">目前的值是實體的屬性所包含的值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-142">The current values are the values that the properties of the entity currently contain.</span></span> <span data-ttu-id="47b3c-143">原始值是查詢實體時，從資料庫讀取的值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-143">The original values are the values that were read from the database when the entity was queried.</span></span> <span data-ttu-id="47b3c-144">資料庫值是目前儲存在資料庫中的值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-144">The database values are the values as they are currently stored in the database.</span></span> <span data-ttu-id="47b3c-145">當資料庫中的值在查詢實體之後可能已變更，例如當另一位使用者對資料庫進行並行編輯時，取得資料庫值會很有用。</span><span class="sxs-lookup"><span data-stu-id="47b3c-145">Getting the database values is useful when the values in the database may have changed since the entity was queried such as when a concurrent edit to the database has been made by another user.</span></span>  
 
-## <a name="setting-current-or-original-values-from-another-object"></a><span data-ttu-id="1ea0c-146">設定目前或原始值，從另一個物件</span><span class="sxs-lookup"><span data-stu-id="1ea0c-146">Setting current or original values from another object</span></span>  
+## <a name="setting-current-or-original-values-from-another-object"></a><span data-ttu-id="47b3c-146">設定另一個物件的目前或原始值</span><span class="sxs-lookup"><span data-stu-id="47b3c-146">Setting current or original values from another object</span></span>  
 
-<span data-ttu-id="1ea0c-147">另一個物件的值複製，可以更新追蹤的實體的目前或原始值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-147">The current or original values of a tracked entity can be updated by copying values from another object.</span></span> <span data-ttu-id="1ea0c-148">例如:</span><span class="sxs-lookup"><span data-stu-id="1ea0c-148">For example:</span></span>  
+<span data-ttu-id="47b3c-147">您可以藉由複製另一個物件的值，來更新已追蹤實體的目前或原始值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-147">The current or original values of a tracked entity can be updated by copying values from another object.</span></span> <span data-ttu-id="47b3c-148">例如:</span><span class="sxs-lookup"><span data-stu-id="47b3c-148">For example:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -196,9 +196,9 @@ public class BlogDto
 }
 ```  
 
-<span data-ttu-id="1ea0c-149">執行上述程式碼會印出：</span><span class="sxs-lookup"><span data-stu-id="1ea0c-149">Running the code above will print out:</span></span>  
+<span data-ttu-id="47b3c-149">執行上述程式碼將會列印出來：</span><span class="sxs-lookup"><span data-stu-id="47b3c-149">Running the code above will print out:</span></span>  
 
-```  
+```console
 Current values:
 Property Id has value 1
 Property Name has value My Cool Blog
@@ -208,13 +208,13 @@ Property Id has value 1
 Property Name has value My Boring Blog
 ```  
 
-<span data-ttu-id="1ea0c-150">使用從服務呼叫或多層式架構應用程式中的用戶端取得的值更新實體時，有時會用這項技術。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-150">This technique is sometimes used when updating an entity with values obtained from a service call or a client in an n-tier application.</span></span> <span data-ttu-id="1ea0c-151">請注意，所使用的物件不必是實體類型相同，只要它的名稱符合實體的屬性。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-151">Note that the object used does not have to be of the same type as the entity so long as it has properties whose names match those of the entity.</span></span> <span data-ttu-id="1ea0c-152">在上述範例中，BlogDTO 的執行個體用來更新原始值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-152">In the example above, an instance of BlogDTO is used to update the original values.</span></span>  
+<span data-ttu-id="47b3c-150">當您使用從服務呼叫或多層式應用程式中的用戶端取得的值來更新實體時，有時會使用這項技術。</span><span class="sxs-lookup"><span data-stu-id="47b3c-150">This technique is sometimes used when updating an entity with values obtained from a service call or a client in an n-tier application.</span></span> <span data-ttu-id="47b3c-151">請注意，使用的物件不一定要與實體具有相同的類型，只要它有名稱符合實體的屬性即可。</span><span class="sxs-lookup"><span data-stu-id="47b3c-151">Note that the object used does not have to be of the same type as the entity so long as it has properties whose names match those of the entity.</span></span> <span data-ttu-id="47b3c-152">在上述範例中，會使用 BlogDTO 的實例來更新原始值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-152">In the example above, an instance of BlogDTO is used to update the original values.</span></span>  
 
-<span data-ttu-id="1ea0c-153">請注意，只有設定為不同的值，當從另一個物件複製的屬性會標示為已修改。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-153">Note that only properties that are set to different values when copied from the other object will be marked as modified.</span></span>  
+<span data-ttu-id="47b3c-153">請注意，從其他物件複製時，只有設定為不同值的屬性會標示為已修改。</span><span class="sxs-lookup"><span data-stu-id="47b3c-153">Note that only properties that are set to different values when copied from the other object will be marked as modified.</span></span>  
 
-## <a name="setting-current-or-original-values-from-a-dictionary"></a><span data-ttu-id="1ea0c-154">字典中的設定目前或原始值</span><span class="sxs-lookup"><span data-stu-id="1ea0c-154">Setting current or original values from a dictionary</span></span>  
+## <a name="setting-current-or-original-values-from-a-dictionary"></a><span data-ttu-id="47b3c-154">從字典設定目前或原始值</span><span class="sxs-lookup"><span data-stu-id="47b3c-154">Setting current or original values from a dictionary</span></span>  
 
-<span data-ttu-id="1ea0c-155">字典或一些其他資料結構的值複製，可以更新追蹤的實體的目前或原始值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-155">The current or original values of a tracked entity can be updated by copying values from a dictionary or some other data structure.</span></span> <span data-ttu-id="1ea0c-156">例如:</span><span class="sxs-lookup"><span data-stu-id="1ea0c-156">For example:</span></span>  
+<span data-ttu-id="47b3c-155">已追蹤實體的目前或原始值可以藉由從字典或其他資料結構複製值來進行更新。</span><span class="sxs-lookup"><span data-stu-id="47b3c-155">The current or original values of a tracked entity can be updated by copying values from a dictionary or some other data structure.</span></span> <span data-ttu-id="47b3c-156">例如:</span><span class="sxs-lookup"><span data-stu-id="47b3c-156">For example:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -238,11 +238,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-<span data-ttu-id="1ea0c-157">可用於 OriginalValues 屬性而非 CurrentValues; 屬性設定原始值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-157">Use the OriginalValues property instead of the CurrentValues property to set original values.</span></span>  
+<span data-ttu-id="47b3c-157">使用 OriginalValues 屬性，而不是 CurrentValues 屬性來設定原始值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-157">Use the OriginalValues property instead of the CurrentValues property to set original values.</span></span>  
 
-## <a name="setting-current-or-original-values-from-a-dictionary-using-property"></a><span data-ttu-id="1ea0c-158">字典中使用屬性的設定目前或原始值</span><span class="sxs-lookup"><span data-stu-id="1ea0c-158">Setting current or original values from a dictionary using Property</span></span>  
+## <a name="setting-current-or-original-values-from-a-dictionary-using-property"></a><span data-ttu-id="47b3c-158">使用屬性設定字典中的目前或原始值</span><span class="sxs-lookup"><span data-stu-id="47b3c-158">Setting current or original values from a dictionary using Property</span></span>  
 
-<span data-ttu-id="1ea0c-159">使用 CurrentValues 或 OriginalValues 如上所示的替代方法是使用屬性方法來設定每個屬性的值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-159">An alternative to using CurrentValues or OriginalValues as shown above is to use the Property method to set the value of each property.</span></span> <span data-ttu-id="1ea0c-160">當您需要設定複雜屬性的值，這很適合。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-160">This can be preferable when you need to set the values of complex properties.</span></span> <span data-ttu-id="1ea0c-161">例如:</span><span class="sxs-lookup"><span data-stu-id="1ea0c-161">For example:</span></span>  
+<span data-ttu-id="47b3c-159">如上面所示使用 CurrentValues 或 OriginalValues 的替代方式，是使用 Property 方法來設定每個屬性的值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-159">An alternative to using CurrentValues or OriginalValues as shown above is to use the Property method to set the value of each property.</span></span> <span data-ttu-id="47b3c-160">當您需要設定複雜屬性的值時，這會是較理想的作法。</span><span class="sxs-lookup"><span data-stu-id="47b3c-160">This can be preferable when you need to set the values of complex properties.</span></span> <span data-ttu-id="47b3c-161">例如:</span><span class="sxs-lookup"><span data-stu-id="47b3c-161">For example:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -266,11 +266,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-<span data-ttu-id="1ea0c-162">在上例中的複雜屬性會使用存取點線的名稱。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-162">In the example above complex properties are accessed using dotted names.</span></span> <span data-ttu-id="1ea0c-163">如需其他方式存取複雜屬性，請參閱需複雜屬性專門針對本主題稍後的兩個區段。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-163">For other ways to access complex properties see the two sections later in this topic specifically about complex properties.</span></span>  
+<span data-ttu-id="47b3c-162">在上述範例中，會使用點名稱來存取複雜屬性。</span><span class="sxs-lookup"><span data-stu-id="47b3c-162">In the example above complex properties are accessed using dotted names.</span></span> <span data-ttu-id="47b3c-163">如需存取複雜屬性的其他方式，請參閱本主題稍後關於複雜屬性的兩個章節。</span><span class="sxs-lookup"><span data-stu-id="47b3c-163">For other ways to access complex properties see the two sections later in this topic specifically about complex properties.</span></span>  
 
-## <a name="creating-a-cloned-object-containing-current-original-or-database-values"></a><span data-ttu-id="1ea0c-164">建立複製的物件，包含目前、 原始或資料庫值</span><span class="sxs-lookup"><span data-stu-id="1ea0c-164">Creating a cloned object containing current, original, or database values</span></span>  
+## <a name="creating-a-cloned-object-containing-current-original-or-database-values"></a><span data-ttu-id="47b3c-164">建立包含目前、原始或資料庫值的複製物件</span><span class="sxs-lookup"><span data-stu-id="47b3c-164">Creating a cloned object containing current, original, or database values</span></span>  
 
-<span data-ttu-id="1ea0c-165">DbPropertyValues 物件傳回 CurrentValues，OriginalValues，或 GetDatabaseValues 可用來建立實體的複製品。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-165">The DbPropertyValues object returned from CurrentValues, OriginalValues, or GetDatabaseValues can be used to create a clone of the entity.</span></span> <span data-ttu-id="1ea0c-166">此複本將會包含用來建立它的 DbPropertyValues 物件的屬性值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-166">This clone will contain the property values from the DbPropertyValues object used to create it.</span></span> <span data-ttu-id="1ea0c-167">例如:</span><span class="sxs-lookup"><span data-stu-id="1ea0c-167">For example:</span></span>  
+<span data-ttu-id="47b3c-165">從 CurrentValues、OriginalValues 或 GetDatabaseValues 傳回的 DbPropertyValues 物件可以用來建立實體的複本。</span><span class="sxs-lookup"><span data-stu-id="47b3c-165">The DbPropertyValues object returned from CurrentValues, OriginalValues, or GetDatabaseValues can be used to create a clone of the entity.</span></span> <span data-ttu-id="47b3c-166">這個複製將包含用來建立它的 DbPropertyValues 物件的屬性值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-166">This clone will contain the property values from the DbPropertyValues object used to create it.</span></span> <span data-ttu-id="47b3c-167">例如:</span><span class="sxs-lookup"><span data-stu-id="47b3c-167">For example:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -281,13 +281,13 @@ using (var context = new BloggingContext())
 }
 ```  
 
-<span data-ttu-id="1ea0c-168">請注意，傳回的物件不是實體，而且沒有由內容所追蹤。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-168">Note that the object returned is not the entity and is not being tracked by the context.</span></span> <span data-ttu-id="1ea0c-169">傳回的物件也沒有設定為其他物件的任何關聯性。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-169">The returned object also does not have any relationships set to other objects.</span></span>  
+<span data-ttu-id="47b3c-168">請注意，傳回的物件不是實體，而且不是由內容進行追蹤。</span><span class="sxs-lookup"><span data-stu-id="47b3c-168">Note that the object returned is not the entity and is not being tracked by the context.</span></span> <span data-ttu-id="47b3c-169">傳回的物件也沒有任何設定為其他物件的關聯性。</span><span class="sxs-lookup"><span data-stu-id="47b3c-169">The returned object also does not have any relationships set to other objects.</span></span>  
 
-<span data-ttu-id="1ea0c-170">複製的物件可用於解決並行更新的資料庫，尤其是牽涉到資料繫結至物件的特定類型的 UI 的使用位置的相關問題。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-170">The cloned object can be useful for resolving issues related to concurrent updates to the database, especially where a UI that involves data binding to objects of a certain type is being used.</span></span>  
+<span data-ttu-id="47b3c-170">複製的物件有助於解決與資料庫並行更新相關的問題，尤其是在使用牽涉到特定類型物件之資料系結的 UI 時。</span><span class="sxs-lookup"><span data-stu-id="47b3c-170">The cloned object can be useful for resolving issues related to concurrent updates to the database, especially where a UI that involves data binding to objects of a certain type is being used.</span></span>  
 
-## <a name="getting-and-setting-the-current-or-original-values-of-complex-properties"></a><span data-ttu-id="1ea0c-171">取得和設定複雜屬性的目前或原始值</span><span class="sxs-lookup"><span data-stu-id="1ea0c-171">Getting and setting the current or original values of complex properties</span></span>  
+## <a name="getting-and-setting-the-current-or-original-values-of-complex-properties"></a><span data-ttu-id="47b3c-171">取得和設定複雜屬性的目前或原始值</span><span class="sxs-lookup"><span data-stu-id="47b3c-171">Getting and setting the current or original values of complex properties</span></span>  
 
-<span data-ttu-id="1ea0c-172">讀取和使用屬性的方法，就像它可以是基本的屬性集，可以是整個複雜物件的值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-172">The value of an entire complex object can be read and set using the Property method just as it can be for a primitive property.</span></span> <span data-ttu-id="1ea0c-173">此外您可以鑽研到複雜的物件，該物件，或甚至是巢狀的物件的讀取或設定屬性。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-173">In addition you can drill down into the complex object and read or set properties of that object, or even a nested object.</span></span> <span data-ttu-id="1ea0c-174">以下是一些範例：</span><span class="sxs-lookup"><span data-stu-id="1ea0c-174">Here are some examples:</span></span>  
+<span data-ttu-id="47b3c-172">您可以使用 Property 方法來讀取和設定整個複雜物件的值，就像是針對基本屬性一樣。</span><span class="sxs-lookup"><span data-stu-id="47b3c-172">The value of an entire complex object can be read and set using the Property method just as it can be for a primitive property.</span></span> <span data-ttu-id="47b3c-173">此外，您可以向下切入至複雜物件，並讀取或設定該物件的屬性，甚至是嵌套的物件。</span><span class="sxs-lookup"><span data-stu-id="47b3c-173">In addition you can drill down into the complex object and read or set properties of that object, or even a nested object.</span></span> <span data-ttu-id="47b3c-174">以下是一些範例：</span><span class="sxs-lookup"><span data-stu-id="47b3c-174">Here are some examples:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -334,13 +334,13 @@ using (var context = new BloggingContext())
 }
 ```  
 
-<span data-ttu-id="1ea0c-175">使用而非 CurrentValue; 屬性的 OriginalValue 屬性，取得或設定的原始值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-175">Use the OriginalValue property instead of the CurrentValue property to get or set an original value.</span></span>  
+<span data-ttu-id="47b3c-175">請使用 OriginalValue 屬性來取代 CurrentValue 屬性，以取得或設定原始值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-175">Use the OriginalValue property instead of the CurrentValue property to get or set an original value.</span></span>  
 
-<span data-ttu-id="1ea0c-176">請注意，屬性或 ComplexProperty 方法可用來存取複雜屬性。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-176">Note that either the Property or the ComplexProperty method can be used to access a complex property.</span></span> <span data-ttu-id="1ea0c-177">不過，如果您想要向下切入至複雜的物件與其他屬性，或呼叫的 ComplexProperty，必須使用的 ComplexProperty 方法。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-177">However, the ComplexProperty method must be used if you wish to drill down into the complex object with additional Property or ComplexProperty calls.</span></span>  
+<span data-ttu-id="47b3c-176">請注意，屬性或 ComplexProperty 方法都可以用來存取複雜屬性。</span><span class="sxs-lookup"><span data-stu-id="47b3c-176">Note that either the Property or the ComplexProperty method can be used to access a complex property.</span></span> <span data-ttu-id="47b3c-177">不過，如果您想要向下切入至具有其他屬性或 ComplexProperty 呼叫的複雜物件，則必須使用 ComplexProperty 方法。</span><span class="sxs-lookup"><span data-stu-id="47b3c-177">However, the ComplexProperty method must be used if you wish to drill down into the complex object with additional Property or ComplexProperty calls.</span></span>  
 
-## <a name="using-dbpropertyvalues-to-access-complex-properties"></a><span data-ttu-id="1ea0c-178">若要存取複雜屬性使用 DbPropertyValues</span><span class="sxs-lookup"><span data-stu-id="1ea0c-178">Using DbPropertyValues to access complex properties</span></span>  
+## <a name="using-dbpropertyvalues-to-access-complex-properties"></a><span data-ttu-id="47b3c-178">使用 DbPropertyValues 存取複雜屬性</span><span class="sxs-lookup"><span data-stu-id="47b3c-178">Using DbPropertyValues to access complex properties</span></span>  
 
-<span data-ttu-id="1ea0c-179">您可以使用 CurrentValues、 OriginalValues 或 GetDatabaseValues 取得所有目前的原始碼，或任何複雜屬性的值會傳回資料庫實體的值，做為巢狀 DbPropertyValues 物件。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-179">When you use CurrentValues, OriginalValues, or GetDatabaseValues to get all the current, original, or database values for an entity, the values of any complex properties are returned as nested DbPropertyValues objects.</span></span> <span data-ttu-id="1ea0c-180">這些物件可以巢狀結構，然後用來取得的複雜物件的值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-180">These nested objects can then be used to get values of the complex object.</span></span> <span data-ttu-id="1ea0c-181">例如，下列方法會印出所有的屬性，包括任何複雜的屬性和巢狀複雜屬性的值的值。</span><span class="sxs-lookup"><span data-stu-id="1ea0c-181">For example, the following method will print out the values of all properties, including values of any complex properties and nested complex properties.</span></span>  
+<span data-ttu-id="47b3c-179">當您使用 CurrentValues、OriginalValues 或 GetDatabaseValues 取得實體的所有目前、原始或資料庫值時，任何複雜屬性的值都會以 nested DbPropertyValues 物件的形式傳回。</span><span class="sxs-lookup"><span data-stu-id="47b3c-179">When you use CurrentValues, OriginalValues, or GetDatabaseValues to get all the current, original, or database values for an entity, the values of any complex properties are returned as nested DbPropertyValues objects.</span></span> <span data-ttu-id="47b3c-180">然後，這些嵌套物件就可以用來取得複雜物件的值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-180">These nested objects can then be used to get values of the complex object.</span></span> <span data-ttu-id="47b3c-181">例如，下列方法會列印出所有屬性的值，包括任何複雜屬性和嵌套複雜屬性的值。</span><span class="sxs-lookup"><span data-stu-id="47b3c-181">For example, the following method will print out the values of all properties, including values of any complex properties and nested complex properties.</span></span>  
 
 ``` csharp
 public static void WritePropertyValues(string parentPropertyName, DbPropertyValues propertyValues)
@@ -362,7 +362,7 @@ public static void WritePropertyValues(string parentPropertyName, DbPropertyValu
 }
 ```  
 
-<span data-ttu-id="1ea0c-182">若要印出所有目前的屬性值的方法會呼叫，像這樣：</span><span class="sxs-lookup"><span data-stu-id="1ea0c-182">To print out all current property values the method would be called like this:</span></span>  
+<span data-ttu-id="47b3c-182">若要列印出所有目前的屬性值，方法會被呼叫，如下所示：</span><span class="sxs-lookup"><span data-stu-id="47b3c-182">To print out all current property values the method would be called like this:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
