@@ -6,19 +6,20 @@
       "build_source_folder": "entity-framework",
       "build_output_subfolder": "ef",
       "locale": "zh-tw",
-      "version": 0,
       "open_to_public_contributors": true,
       "type_mapping": {
         "Conceptual": "Content",
         "ManagedReference": "Content",
         "RestApi": "Content"
       },
-      "template_folder": "_themes"
+      "template_folder": "_themes",
+      "version": 0
     }
   ],
   "notification_subscribers": [
-    "divega@microsoft.com"
+    "avickers@microsoft.com"
   ],
+  "sync_notification_subscribers": [],
   "branches_to_filter": [
     "live",
     "master"
@@ -52,20 +53,16 @@
         "live": "live",
         "master": "master"
       }
-    },
-    {
-      "path_to_root": "efcore-repo",
-      "url": "https://github.com/aspnet/EntityFrameworkCore.git",
-      "branch": "master"
     }
   ],
-  "need_generate_pdf_url_template": true,
+
   "branch_target_mapping": { 
     "live-sxs": [ 
       "Publish", 
       "Pdf" 
     ] 
   },
+  "need_generate_pdf_url_template": true,
   "Targets": {
     "Pdf": {
       "template_folder": "_themes.pdf"
