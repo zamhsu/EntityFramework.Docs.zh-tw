@@ -1,45 +1,45 @@
 ---
-title: VB.NET-EF6 使用 Fluent API
+title: 流暢的 API 與 VB.NET-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 763dc6a2-764a-4600-896c-f6f13abf56ec
-ms.openlocfilehash: 6aa74fa72296f66f0b069b9b5ee7e2e016570525
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: df3e61fa5e2d24873336511e90231a7d78d32535
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283741"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182664"
 ---
-# <a name="fluent-api-with-vbnet"></a>VB.NET 使用 Fluent API
-程式碼第一次可讓您定義您的模型使用 C\#或 VB.NET 類別。 其他設定 （選擇性） 可以使用屬性，在您的類別和屬性，或使用 fluent API 來執行。 本逐步解說示範如何執行使用 VB.NET 的 fluent API 組態。
+# <a name="fluent-api-with-vbnet"></a>使用 VB.NET 的流暢 API
+Code First 可讓您使用 C @ no__t-0 或 VB.NET 類別來定義您的模型。 您可以選擇性地使用類別和屬性上的屬性，或使用 Fluent API 來執行其他設定。 本逐步解說示範如何使用 VB.NET 來執行 Fluent API 設定。
 
-此頁面會假設您有基本的了解的程式碼第一次。 請參閱下列逐步解說，如需詳細資訊，在第一個程式碼：
+本頁面假設您對 Code First 有基本瞭解。 如需 Code First 的詳細資訊，請參閱下列逐步解說：
 
 -   [Code First 至新的資料庫](~/ef6/modeling/code-first/workflows/new-database.md)
--   [Code First 至現有的資料庫](~/ef6/modeling/code-first/workflows/existing-database.md)
+-   [Code First 到現有的資料庫](~/ef6/modeling/code-first/workflows/existing-database.md)
 
-## <a name="pre-requisites"></a>必要條件
+## <a name="pre-requisites"></a>先決條件
 
-您必須至少是 Visual studio 2010 或 Visual Studio 2012 安裝完成本逐步解說。
+您至少必須安裝 Visual Studio 2010 或 Visual Studio 2012，才能完成此逐步解說。
 
-如果您使用 Visual Studio 2010，您也必須有[NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)安裝
+如果您使用 Visual Studio 2010，您也必須安裝[NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
 
 ## <a name="create-the-application"></a>建立應用程式
 
-為了簡單起見，我們要建置基本的主控台應用程式，會使用 Code First 來執行資料存取。
+為了簡單起見，我們將建立一個使用 Code First 來執行資料存取的基本主控台應用程式。
 
 -   開啟 Visual Studio
--   **檔案-&gt;新增-&gt;專案...**
--   選取  **Windows**從左側的功能表和**主控台應用程式**
--   請輸入**CodeFirstVBSample**做為名稱
+-   **檔案 &gt; 個新 &gt; 個專案 。**
+-   從左側功能表和**主控台應用程式**中選取 [ **Windows** ]
+-   輸入**CodeFirstVBSample**作為名稱
 -   選取 [確定]
 
 ## <a name="define-the-model"></a>定義模型
 
-在此步驟中，您將定義 POCO VB.NET 代表概念模型實體類型。 類別不需要衍生自任何基底類別或實作任何介面。
+在此步驟中，您將定義代表概念模型的 VB.NET POCO 實體類型。 類別不需要衍生自任何基類或實作用任何介面。
 
--   將新類別加入專案中，輸入**SchoolModel**的類別名稱
--   取代為下列程式碼中的新類別的內容
+-   將新類別新增至專案，並在 [類別名稱] 中輸入**SchoolModel**
+-   將新類別的內容取代為下列程式碼
 
 ``` vb
    Public Class Department
@@ -133,21 +133,21 @@ ms.locfileid: "46283741"
     End Class
 ```
 
-## <a name="define-a-derived-context"></a>定義衍生的內容
+## <a name="define-a-derived-context"></a>定義衍生內容
 
-我們即將開始使用從 Entity Framework 的類型，因此我們需要加入 EntityFramework NuGet 套件。
+我們即將開始使用 Entity Framework 的類型，因此我們需要新增 EntityFramework NuGet 套件。
 
--   * * 專案 –&gt; **管理 NuGet 封裝...**
+-   \* * 專案– &gt;**管理 NuGet 套件 ...**
 > [!NOTE]
-> 如果您沒有**管理 NuGet 套件...** 您應該安裝的選項[最新版的 NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
--   選取 [ **Online** ] 索引標籤
--   選取  **EntityFramework**封裝
--   按一下 **安裝**
+> 如果您沒有 [**管理 NuGet 套件 ...** ] 選項您應該安裝[最新版的 NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
+-   選取 [**線上**] 索引標籤
+-   選取**EntityFramework**套件
+-   按一下 [安裝]。
 
-現在就可以開始定義 衍生的內容，表示與資料庫，讓我們可以查詢和儲存資料的工作階段。 我們會定義的內容衍生自 System.Data.Entity.DbContext 並公開 （expose） 的具類型的 DbSet&lt;TEntity&gt;我們的模型中每個類別。
+現在可以定義衍生的內容，代表與資料庫的會話，讓我們能夠查詢和儲存資料。 我們會定義衍生自 DbCoNtext 的內容，並針對模型中的每個類別公開具類型的 DbSet @ no__t-0TEntity @ no__t-1。
 
--   將新類別加入專案中，輸入**SchoolContext**的類別名稱
--   取代為下列程式碼中的新類別的內容
+-   將新類別新增至專案，並在 [類別名稱] 中輸入**SchoolCoNtext**
+-   將新類別的內容取代為下列程式碼
 
 ``` vb
     Imports System.Data.Entity
@@ -169,11 +169,11 @@ ms.locfileid: "46283741"
     End Class
 ```
 
-## <a name="configuring-with-the-fluent-api"></a>使用 Fluent API 設定
+## <a name="configuring-with-the-fluent-api"></a>使用流暢的 API 進行設定
 
-本節示範如何使用 fluent Api，將屬性對應到資料行對應，以及資料表之間的關聯性的資料表類型設定\\模型中的型別。 透過 fluent API 公開**DbModelBuilder**輸入，並且藉由覆寫最常存取**OnModelCreating**方法**DbContext**。
+本節示範如何使用流暢的 Api 來設定資料表的類型、對應的屬性、資料行對應，以及模型中的資料表 @ no__t-0type 之間的關聯性。 Fluent API 是透過**DbModelBuilder**類型公開，而且最常藉由覆寫**DbCoNtext**上的**OnModelCreating**方法來存取。
 
--   複製下列程式碼，並將它加入**OnModelCreating**方法上定義**SchoolContext**類別的註解會說明每個對應的功能
+-   複製下列程式碼，並將它新增至**SchoolCoNtext**類別上定義的**OnModelCreating**方法中，批註會說明每個對應的用途
 
 ``` vb
 ' Configure Code First to ignore PluralizingTableName convention
@@ -365,9 +365,9 @@ modelBuilder.Entity(Of Course)().
 
 ## <a name="using-the-model"></a>使用模型
 
-讓我們執行一些資料存取使用**SchoolContext**若要查看作用中的模型。
+讓我們使用**SchoolCoNtext**來執行一些資料存取，以查看實際運作中的模型。
 
--   開啟 Module1.vb 檔案，其中定義 Main 函式
+-   開啟定義 Main 函數的 Module1 檔案
 -   複製並貼上下列 Module1 定義
 
 ``` vb
@@ -408,9 +408,9 @@ Module Module1
 End Module
 ```
 
-您現在可以執行應用程式，並加以測試。
+您現在可以執行應用程式並加以測試。
 
-```
+```console
 Enter a name for a new Department: Computing
 All Departments in the database:
 Computing

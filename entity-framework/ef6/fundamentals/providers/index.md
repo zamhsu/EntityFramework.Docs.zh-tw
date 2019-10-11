@@ -3,12 +3,12 @@ title: Entity Framework 提供者 - EF6
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 7BFB7763-CD6C-4520-93A2-7B265F5FA586
-ms.openlocfilehash: f6e34d1273bd1004ce9d1610ce3613068088eb5e
-ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
+ms.openlocfilehash: bf07296503e4bb5d1e13f5f6f29e7118cbbde61d
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/03/2019
-ms.locfileid: "55668735"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181680"
 ---
 # <a name="entity-framework-6-providers"></a>Entity Framework 6 提供者
 > [!NOTE]
@@ -21,15 +21,15 @@ Entity Framework 目前正在開放原始碼授權下進行開發，EF6 和更�
 我們知道已針對 EF6 重建的提供者包括：
 
 *   **Microsoft SQL Server 提供者**
-    *   從 [Entity Framework 開放原始碼程式碼基底](http://github.com/aspnet/EntityFramework6)建置
-    *   隨附於 [EntityFramework NuGet 套件](http://nuget.org/packages/EntityFramework)
+    *   從 [Entity Framework 開放原始碼程式碼基底](https://github.com/aspnet/EntityFramework6)建置
+    *   隨附於 [EntityFramework NuGet 套件](https://nuget.org/packages/EntityFramework)
 *   **Microsoft SQL Server Compact Edition 提供者**
-    *   從 [Entity Framework 開放原始碼程式碼基底](http://github.com/aspnet/EntityFramework6)建置
-    *   隨附於 [EntityFramework.SqlServerCompact NuGet 套件](http://nuget.org/packages/EntityFramework.SqlServerCompact)
-*   [**Devart dotConnect 資料提供者**](http://www.devart.com/dotconnect/)
-    *   有來自 [Devart](http://www.devart.com/) 且適用於各種資料庫的協力廠商提供者，包括 Oracle、MySQL、PostgreSQL、SQLite、Salesforce、DB2 和 SQL Server
-*   [**CData Software 提供者**](http://www.cdata.com/ado/)
-    *   有來自 [CData Software](http://www.cdata.com/ado/) 且適用於各種資料存放區的協力廠商提供者，包括 Salesforce、 Azure 表格儲存體、MySql 等等
+    *   從 [Entity Framework 開放原始碼程式碼基底](https://github.com/aspnet/EntityFramework6)建置
+    *   隨附於 [EntityFramework.SqlServerCompact NuGet 套件](https://nuget.org/packages/EntityFramework.SqlServerCompact)
+*   [**Devart dotConnect 資料提供者**](https://www.devart.com/dotconnect/)
+    *   有來自 [Devart](https://www.devart.com/) 且適用於各種資料庫的協力廠商提供者，包括 Oracle、MySQL、PostgreSQL、SQLite、Salesforce、DB2 和 SQL Server
+*   [**CData Software 提供者**](https://www.cdata.com/ado/)
+    *   有來自 [CData Software](https://www.cdata.com/ado/) 且適用於各種資料存放區的協力廠商提供者，包括 Salesforce、 Azure 表格儲存體、MySql 等等
 *   **Firebird 提供者**
     *   以 [NuGet 套件](https://www.nuget.org/packages/EntityFramework.Firebird/)的形式提供給您
 *   **Visual Fox Pro 提供者**
@@ -68,7 +68,7 @@ app.config 或 web.config 中的 EF 提供者註冊具有下列格式：
 
 ### <a name="code-based-registration"></a>程式碼架構註冊
 
-從 Entity Framework 6 開始，可以在程式碼中指定 EF 的整個應用程式組態。 如需完整的詳細料，請參閱 _[Entity Framework 程式碼架構組態](https://msdn.microsoft.com/data/jj680699)_。 使用程式碼架構組態註冊 EF 提供者的一般方式是建立衍生自 System.Data.Entity.DbConfiguration 的新類別，並將它放在與您的 DbContext 類別相同的組件中。 DbConfiguratio 類別接著應該在其建構函式中註冊提供者。 例如，若要註冊 SQL Compact 提供者，DbConfiguration 類別看起來像這樣：
+從 Entity Framework 6 開始，可以在程式碼中指定 EF 的整個應用程式組態。 如需完整的詳細料，請參閱 _[Entity Framework 程式碼架構組態](https://msdn.microsoft.com/data/jj680699)_ 。 使用程式碼架構組態註冊 EF 提供者的一般方式是建立衍生自 System.Data.Entity.DbConfiguration 的新類別，並將它放在與您的 DbContext 類別相同的組件中。 DbConfiguratio 類別接著應該在其建構函式中註冊提供者。 例如，若要註冊 SQL Compact 提供者，DbConfiguration 類別看起來像這樣：
 
 ``` csharp
     public class MyConfiguration : DbConfiguration

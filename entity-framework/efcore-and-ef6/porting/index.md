@@ -1,15 +1,15 @@
 ---
-title: 從 EF6 移植至 EF Core
+title: 從 EF6 移植至 EF Core - EF
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 826b58bd-77b0-4bbc-bfcd-24d1ed3a8f38
 uid: efcore-and-ef6/porting/index
-ms.openlocfilehash: 42e40ce769a67a987883027e1807ec7eaeb4ad7a
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 77096b9bffba6b8c2a3d7bfb0c2e41e2d170a7db
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71198022"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182084"
 ---
 # <a name="porting-from-ef6-to-ef-core"></a>從 EF6 移植至 EF Core
 

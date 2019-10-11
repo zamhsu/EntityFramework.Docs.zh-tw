@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 01/07/2019
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 43b98c1f09a89f7e5451e28cbf2f78a2cb1040e5
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: 0c9671eb77181d85cd493341cd1abf842d13fb0e
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921770"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181264"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -54,7 +54,7 @@ CatFactory 是 .NET Core 的 Scaffolding 引擎，可以自動從 SQL Server 資
 
 Entity Framework Core 產生器 (efg) 是 .NET Core CLI 工具，可以從現有資料庫產生 EF Core 模型，與 `dotnet ef dbcontext scaffold` 十分相似，但它也透過區域取代或剖析對應檔案，支援安全的程式碼[重新產生](https://efg.loresoft.com/en/latest/regeneration/)。 這項工具也支援產生檢視模型、驗證及物件對應程式程式碼。 
 
-[教學課程](http://www.loresoft.com/Generate-ASP-NET-Web-API)
+[教學課程](https://www.loresoft.com/Generate-ASP-NET-Web-API)
 [文件](https://efg.loresoft.com/en/latest/)
 
 ## <a name="extensions"></a>延伸模組

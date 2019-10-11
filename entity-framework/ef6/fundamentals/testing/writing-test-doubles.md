@@ -1,51 +1,51 @@
 ---
-title: 使用您自己的測試替身-EF6 測試
+title: 使用您自己的測試進行測試雙精度浮點數-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 16a8b7c0-2d23-47f4-9cc0-e2eb2e738ca3
-ms.openlocfilehash: 9db56e28cd89084fece36c3e5a2c1b4495991d01
-ms.sourcegitcommit: 645785187ae23ddf7d7b0642c7a4da5ffb0c7f30
+ms.openlocfilehash: 4631206ae26d364e92c932857fa1970804a7a335
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/25/2019
-ms.locfileid: "58419727"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181408"
 ---
-# <a name="testing-with-your-own-test-doubles"></a>使用您自己的測試替身進行測試
+# <a name="testing-with-your-own-test-doubles"></a>使用您自己的測試進行測試雙精度浮點數
 > [!NOTE]
 > **僅限 EF6 及更新版本** - Entity Framework 6 已引進此頁面中所討論的功能及 API 等等。 如果您使用的是較早版本，則不適用部分或全部的資訊。  
 
-撰寫您的應用程式的測試時，通常最好避免達到資料庫。  Entity Framework 可讓您達成此目的所建立的內容 – 定義您的測試-的行為，以便使用的記憶體中的資料。  
+撰寫應用程式的測試時，通常會想要避免資料庫的叫用。  Entity Framework 可讓您藉由建立內容來達成此目的，其中包含測試所定義的行為–這會使用記憶體中的資料。  
 
-## <a name="options-for-creating-test-doubles"></a>建立測試替身的選項  
+## <a name="options-for-creating-test-doubles"></a>建立測試雙精度浮點數的選項  
 
-有兩種不同的方法，可用來建立您的內容是記憶體中的舊版。  
+有兩種不同的方法可以用來建立內容的記憶體中版本。  
 
-- **建立您自己的測試替身**– 這種方法涉及撰寫您自己的記憶體中實作您的內容和 DbSets。 這可讓您控制類別如何運作，但是可以寫入和擁有合理的程式碼牽涉到很多。  
-- **使用模擬的架構來建立測試替身**– 使用模擬的架構 （例如 Moq) 您可以有您的記憶體中實作內容並在執行階段以動態方式建立您的設定。  
+- **建立您自己的測試雙精度**浮點數–此方法牽涉到撰寫您自己在記憶體中的內容和 DbSets 的執行。 這讓您有很大的控制權可以控制類別的行為，但可能牽涉到撰寫和擁有合理的程式碼數量。  
+- **使用模擬架構來建立測試加倍**–使用模擬架構（例如 Moq），您可以擁有內容的記憶體內部內部部署，並在執行時間動態建立的集合。  
 
-這篇文章將會處理建立您自己的測試 double。 如需使用模擬架構的詳細資訊，請參閱[測試模擬 (Mock) 架構](mocking.md)。  
+本文將說明如何建立您自己的測試 double。 如需使用模擬架構的詳細資訊，請參閱[使用模擬架構進行測試](mocking.md)。  
 
-## <a name="testing-with-pre-ef6-versions"></a>測試前 EF6 版本  
+## <a name="testing-with-pre-ef6-versions"></a>使用預先 EF6 的版本進行測試  
 
-這篇文章中所顯示的程式碼適用於 EF6。 使用 EF5 和更舊版本進行測試，請參閱[測試與假的內容](http://romiller.com/2012/02/14/testing-with-a-fake-dbcontext/)。  
+本文中顯示的程式碼與 EF6 相容。 若要使用 EF5 和較舊版本進行測試，請參閱[使用假的內容進行測試](https://romiller.com/2012/02/14/testing-with-a-fake-dbcontext/)。  
 
-## <a name="limitations-of-ef-in-memory-test-doubles"></a>EF 記憶體測試替身的限制  
+## <a name="limitations-of-ef-in-memory-test-doubles"></a>EF 記憶體內部測試的限制雙精度浮點數  
 
-記憶體中的測試替身可提供單元測試的應用程式使用 EF 的位元層級的涵蓋範圍的好方法。 不過，這麼做時您會使用 LINQ to Objects 來針對記憶體中的資料執行查詢。 這可能會導致不同的行為，比使用 EF 的 LINQ 提供者 (LINQ to Entities)，將查詢轉譯為針對您的資料庫執行的 SQL。  
+記憶體內部測試雙精度浮點數，是提供使用 EF 之應用程式位的單元測試層級涵蓋範圍的好方法。 不過，在這麼做時，您會使用 LINQ to Objects 對記憶體中的資料執行查詢。 這可能會導致不同的行為，而不是使用 EF 的 LINQ 提供者（LINQ to Entities）將查詢轉譯為針對您的資料庫執行的 SQL。  
 
-這類差異的其中一個範例會載入相關的資料。 如果您建立一系列部落格的每個有相關的文章，然後使用記憶體中的資料時的相關的文章一律要載入的每個部落格。 不過，對資料庫執行時載入的資料將僅如果您使用 Include 方法。  
+載入相關資料的其中一個範例是這類差異。 如果您建立一系列的 Blog，其中每個都有相關的文章，則在使用記憶體內部資料時，一律會針對每個 Blog 載入相關的文章。 不過，針對資料庫執行時，只有在您使用 Include 方法時，才會載入資料。  
 
-基於這個理由，建議一律包含某種程度的端對端測試 若要確保您的應用程式運作正確地針對資料庫的 電子郵件 （除了您的單元測試）。  
+基於這個理由，建議一律包含某種層級的端對端測試（除了您的單元測試以外），以確保您的應用程式能針對資料庫正確運作。  
 
-## <a name="following-along-with-this-article"></a>觀摩這份文件  
+## <a name="following-along-with-this-article"></a>遵循本文  
 
-這篇文章可讓您可以將它複製到要跟著做如果您想要的 Visual Studio 的完整程式碼清單。 它是最簡單的方式建立**單元測試專案**，您必須到目標 **.NET Framework 4.5**完成使用非同步的區段。  
+本文提供完整的程式代碼清單，您可以將其複製到 Visual Studio，以依照您的需要進行。 最簡單的方式是建立**單元測試專案**，而您將需要以 **.NET Framework 4.5**為目標，才能完成使用 async 的區段。  
 
 ## <a name="creating-a-context-interface"></a>建立內容介面  
 
-我們要查看測試服務會使用 EF 模型。 若要能在我們的 EF 內容取代為測試版記憶體中，我們會定義我們 EF 內容 （和其記憶體雙精度浮點數） 會實作的介面。
+我們將探討如何測試利用 EF 模型的服務。 為了能夠以記憶體內部版本來取代 EF 內容以進行測試，我們將定義 EF 內容（和它在記憶體中的雙精度浮點數）將會執行的介面。
 
-我們要測試此服務將查詢和修改使用我們的內容的 DbSet 屬性的資料，並同時也呼叫 SaveChanges 將變更推送至資料庫。 因此我們加入這些成員在介面上。  
+我們要測試的服務將使用內容的 DbSet 屬性來查詢和修改資料，同時也會呼叫 SaveChanges 來將變更推送至資料庫。 因此，我們會在介面上包含這些成員。  
 
 ``` csharp
 using System.Data.Entity;
@@ -63,7 +63,7 @@ namespace TestingDemo
 
 ## <a name="the-ef-model"></a>EF 模型  
 
-我們要測試此服務可讓您可使用的 EF 模型為 [bloggingcontext] 和部落格和文章類別組成。 此程式碼可能會有 EF 設計工具所產生或 Code First 模型。  
+我們即將測試的服務會使用由 BloggingCoNtext 和 Blog 和 Post 類別所組成的 EF 模型。 這個程式碼可能是由 EF 設計工具產生，或是 Code First 模型。  
 
 ``` csharp
 using System.Collections.Generic;
@@ -98,19 +98,19 @@ namespace TestingDemo
 }
 ```  
 
-### <a name="implementing-the-context-interface-with-the-ef-designer"></a>實作內容介面與 EF 設計工具  
+### <a name="implementing-the-context-interface-with-the-ef-designer"></a>使用 EF 設計工具執行內容介面  
 
-請注意我們的內容實作 IBloggingContext 介面。  
+請注意，我們的內容會實行 IBloggingCoNtext 介面。  
 
-如果您使用 Code First，您可以編輯您的內容，直接以實作的介面。 如果您使用 EF 設計工具將需要編輯 T4 範本產生您的內容。 開啟\<model_name\>。Context.tt 檔案底下您 edmx 檔案，尋找下列程式碼片段，並加入介面中所示。  
+如果您使用 Code First 則可以直接編輯您的內容，以執行介面。 如果您使用 EF 設計工具，則必須編輯產生內容的 T4 範本。 開啟 [\<model_name @ no__t-1]。在您的 edmx 檔案底下的 CoNtext.tt 檔案，尋找下列程式碼片段，並在介面中新增，如下所示。  
 
 ``` csharp  
 <#=Accessibility.ForType(container)#> partial class <#=code.Escape(container)#> : DbContext, IBloggingContext
 ```  
 
-## <a name="service-to-be-tested"></a>要測試服務  
+## <a name="service-to-be-tested"></a>要測試的服務  
 
-為了示範使用記憶體中測試替身，我們將會撰寫 BlogService 幾個測試的測試。 服務是能夠建立新的部落格 (AddBlog)，並傳回所有部落格會依名稱 (GetAllBlogs)。 除了 GetAllBlogs，我們也提供的方法，將會以非同步方式取得依名稱 (GetAllBlogsAsync) 的所有部落格。  
+為了示範使用記憶體內部測試進行測試，我們將針對 BlogService 撰寫幾項測試。 服務能夠建立新的 blog （AddBlog），並傳回依名稱排序的所有 Blog （GetAllBlogs）。 除了 GetAllBlogs 之外，我們也提供了一種方法，可讓您以非同步方式取得依名稱排序的所有 blog （GetAllBlogsAsync）。  
 
 ``` csharp
 using System.Collections.Generic;
@@ -159,13 +159,13 @@ namespace TestingDemo
 }
 ```  
 
-<a name="creating-the-in-memory-test-doubles"/> # # 來建立記憶體中測試加倍  
+<a name="creating-the-in-memory-test-doubles"/> # # 建立記憶體中測試雙精度浮點數  
 
-既然我們有實際的 EF 模型和服務可以使用它，它是建立於記憶體中的測試 double 我們可以用來測試的時間。 我們建立了 TestContext 測試 double 針對我們的內容。 在測試替身，我們可以選擇我們想要以支援測試的行為，我們即將執行。 在此範例中我們只所擷取的次數，好讓呼叫 SaveChanges，但您可以包含任何邏輯才能確認您要測試的案例。  
+既然我們已經有真正的 EF 模型和可使用它的服務，就可以建立可用於測試的記憶體內部測試 double。 我們已為內容建立了 TestCoNtext 測試雙精度浮點數。 在測試中，我們可以選擇我們想要的行為，以支援即將執行的測試。 在此範例中，我們只會捕捉呼叫 SaveChanges 的次數，但是您可以包含所需的任何邏輯，以驗證您要測試的案例。  
 
-我們也建立了提供記憶體中實作的 DbSet TestDbSet。 我們提供的所有方法的完整實作所上 DbSet （除了尋找），但您只需要實作您的測試案例會使用的成員。  
+我們也建立了 TestDbSet，提供 DbSet 的記憶體內部執行。 我們已提供 DbSet 上所有方法的完整實作此實作（[尋找] 除外），但您只需要執行您的測試案例將使用的成員。  
 
-TestDbSet 利用我們包含了以確保非同步查詢都可以處理的一些其他基礎結構類別。  
+TestDbSet 會使用我們已包含的一些其他基礎結構類別，以確保可以處理非同步查詢。  
 
 ``` csharp
 using System;
@@ -372,9 +372,9 @@ namespace TestingDemo
 }
 ```  
 
-### <a name="implementing-find"></a>實作尋找  
+### <a name="implementing-find"></a>執行尋找  
 
-Find 方法很難實作一般的方式。 如果您要測試程式碼，讓使用 Find 方法，它是最簡單的方式建立的每個需要支援實體類型的 DbSet 尋找的測試。 然後，您可以撰寫邏輯，以尋找該特定類型的實體，如下所示。  
+Find 方法很難以以一般方式執行。 如果您需要測試使用 Find 方法的程式碼，最簡單的方式是為每個需要支援尋找的實體類型建立測試 DbSet。 接著，您可以撰寫邏輯來尋找該特定類型的實體，如下所示。  
 
 ``` csharp
 using System.Linq;
@@ -392,11 +392,11 @@ namespace TestingDemo
 }
 ```  
 
-## <a name="writing-some-tests"></a>編寫一些測試  
+## <a name="writing-some-tests"></a>撰寫一些測試  
 
-這是我們只需要啟動測試。 下列測試建立 TestContext，然後根據此環境的服務。 服務接著會用來建立新的部落格 – 使用 AddBlog 方法中。 最後，測試會驗證服務加入新的部落格內容的部落格屬性，並且在內容上呼叫 SaveChanges。  
+這就是開始測試的所有必要步驟。 下列測試會根據此內容來建立 TestCoNtext 和服務。 服務接著會用來建立新的 blog –使用 AddBlog 方法。 最後，測試會確認服務已將新的 Blog 新增至內容的 Blog 屬性，並在內容上呼叫 SaveChanges。  
 
-這是只是您可以使用記憶體中測試替身進行測試的項目類型的範例，您可以調整的測試替身，以符合您需求的驗證邏輯。  
+這只是您可以使用記憶體中測試 double 測試的專案類型範例，而且您可以調整測試的邏輯，以及符合您需求的驗證。  
 
 ``` csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -424,7 +424,7 @@ namespace TestingDemo
 }
 ```  
 
-以下是另一個測試-這次會執行查詢的其中一個範例。 測試一開始會建立含有一些資料在其部落格屬性-請注意，資料不是依字母順序中的測試內容。 接著，我們可以建立 BlogService，根據我們的測試內容，並確保我們從 GetAllBlogs 回取得的資料依名稱排序。  
+以下是另一個測試範例-這次是執行查詢的一個。 測試一開始會建立一個測試內容，其中包含其 [Blog] 屬性中的一些資料-請注意，資料不是依字母順序排列。 然後，我們可以根據我們的測試內容來建立 BlogService，並確保從 GetAllBlogs 取回的資料會依名稱排序。  
 
 ``` csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -454,7 +454,7 @@ namespace TestingDemo
 }
 ```  
 
-最後，我們將撰寫一個使用我們的非同步方法，以確保我們納入的非同步處理基礎結構的多個測試[TestDbSet](#creating-the-in-memory-test-doubles)運作。  
+最後，我們會撰寫一個使用非同步方法的測試，以確保我們在[TestDbSet](#creating-the-in-memory-test-doubles)中所包含的非同步基礎結構運作正常。  
 
 ``` csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -3,12 +3,12 @@ title: Entity Framework 的過去版本-EF6
 author: divega
 ms.date: 09/12/2019
 ms.assetid: 1060bb99-765f-4f32-aaeb-d6635d3dbd3e
-ms.openlocfilehash: 3ee433ac0932f89841b5cc42fb864eefb9419ef2
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: 478dec6b2401efd554e84a231fe78e71dcbf5771
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149277"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182112"
 ---
 # <a name="past-releases-of-entity-framework"></a>過去的 Entity Framework 版本
 
@@ -88,7 +88,7 @@ EF 6.1.0 執行時間已于2014年3月發行至 NuGet。
 
 - **工具匯總**提供一致的方式來建立新的 EF 模型。 這項功能會[擴充 ADO.NET 實體資料模型 wizard，以支援建立 Code First 模型](~/ef6/modeling/code-first/workflows/existing-database.md)，包括從現有的資料庫進行反向工程。 這些功能先前已在 EF Power tool 的 Beta 版品質中提供。
 - **[處理交易認可失敗](~/ef6/fundamentals/connection-resiliency/commit-failures.md)** 會提供 CommitFailureHandler，利用新引進的功能來攔截交易作業。 CommitFailureHandler 可讓您在認可交易時，從連線失敗中自動復原。
-- **[IndexAttribute](~/ef6/modeling/code-first/data-annotations.md)** 可讓您將`[Index]`屬性放在 Code First 模型的屬性（或屬性）上，藉以指定索引。 Code First 接著會在資料庫中建立對應的索引。
+- **[IndexAttribute](~/ef6/modeling/code-first/data-annotations.md)** 允許藉由將 `[Index]` 屬性放在 Code First 模型中的屬性（或屬性），來指定索引。 Code First 接著會在資料庫中建立對應的索引。
 - **公用對應 API**可讓您存取 EF 對於屬性和類型如何對應至資料庫中的資料行和資料表的資訊。 在過去的版本中，此 API 是內部的。
 - 透過 **[App/web.config 檔案設定攔截器的功能](~/ef6/fundamentals/configuring/config-file.md)** ，可讓您在不需重新編譯應用程式的情況下新增攔截器。
 - **DatabaseLogger**是新的攔截器，可讓您輕鬆地將所有資料庫作業記錄到檔案中。 結合先前的功能，可讓您輕鬆地切換已[部署應用程式的資料庫作業記錄](~/ef6/fundamentals/configuring/config-file.md)，而不需要重新編譯。
@@ -125,7 +125,7 @@ EF 6.0.0 執行時間已于2013年10月發行至 NuGet。
 - **.Net 4.0 的列舉、空間和更好的效能**-藉由將過去 .NET Framework 的核心元件移至 EF NuGet 套件，我們現在可以提供 enum 支援、空間資料類型，以及 .net 4.0 上 EF5 的效能改進。
 - 已改善可列舉**的效能。包含在 LINQ 查詢中**。
 - **改善的準備時間（視圖產生）** ，特別是針對大型模型。
-- 即**插&amp;即用複數表示單數服務**。
+- **隨插即用複數表示 &amp; 單數服務**。
 - 現在支援實體類別上**Equals 或 GetHashCode 的自訂**執行。
 - **DbSet. AddRange/RemoveRange**提供了從集合中新增或移除多個實體的最佳方式。
 - **DbChangeTracker。 HasChanges**提供一個簡單又有效率的方式，來查看是否有任何暫止的變更要儲存到資料庫中。
@@ -138,9 +138,9 @@ EF 6.0.0 執行時間已于2013年10月發行至 NuGet。
 - **[等冪遷移腳本](~/ef6/modeling/code-first/migrations/index.md)** 可讓您產生 SQL 腳本，以便將任何版本的資料庫升級至最新版本。
 - **[可設定的遷移記錄資料表](~/ef6/modeling/code-first/migrations/history-customization.md)** 可讓您自訂遷移記錄資料表的定義。 這特別適用于需要適當資料類型等的資料庫提供者，才能指定要讓遷移記錄資料表正常運作。
 - 使用遷移時或 Code First 自動為您建立資料庫時，每個資料庫的**多個**內容都會移除每個資料庫之一個 Code First 模型的先前限制。
-- **[DbModelBuilder. HasDefaultSchema](~/ef6/modeling/code-first/fluent/types-and-properties.md)** 是新的 Code First API，可讓 Code First 模型的預設資料庫架構在一處進行設定。 先前 Code First 的預設架構已硬式編碼為&quot;dbo&quot; ，而設定資料表所屬之架構的唯一方式是透過 ToTable API。
+- **[DbModelBuilder. HasDefaultSchema](~/ef6/modeling/code-first/fluent/types-and-properties.md)** 是新的 Code First API，可讓 Code First 模型的預設資料庫架構在一處進行設定。 先前 Code First 預設架構已硬式編碼為 @no__t 0dbo @ no__t-1，而設定資料表所屬架構的唯一方式是透過 ToTable API。
 - 當您使用具有 Code First 流暢 API 的設定類別時， **AddFromAssembly 方法**可讓您輕鬆地新增元件中定義的所有 configuration 類別。
-- **[自訂的遷移作業](http://romiller.com/2013/02/27/ef6-writing-your-own-code-first-migration-operations/)** 可讓您新增其他作業，以用於以程式碼為基礎的遷移。
+- **[自訂的遷移作業](https://romiller.com/2013/02/27/ef6-writing-your-own-code-first-migration-operations/)** 可讓您新增其他作業，以用於以程式碼為基礎的遷移。
 - 針對使用 Code First 所建立的資料庫，**預設交易隔離等級會變更為 READ_COMMITTED_SNAPSHOT** ，以提供更多的擴充性和較少的鎖死。
 - **實體和複雜類型現在可以是 nestedinside 類別**。 |
 

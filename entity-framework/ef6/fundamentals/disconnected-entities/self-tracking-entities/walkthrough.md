@@ -1,63 +1,63 @@
 ---
-title: 自我追蹤實體的逐步解說-EF6
+title: 自我追蹤實體逐步解說-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: b21207c9-1d95-4aa3-ae05-bc5fe300dab0
-ms.openlocfilehash: d89c452410d34bea71e8220aae141c3bfca3e1ce
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 9bd644461f50a7eff1006cb8866ca9a3b08b6b8d
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490268"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181706"
 ---
-# <a name="self-tracking-entities-walkthrough"></a>自我追蹤實體的逐步解說
+# <a name="self-tracking-entities-walkthrough"></a>自我追蹤實體逐步解說
 > [!IMPORTANT]
-> 我們不再建議使用自我追蹤實體範本。 繼續提供該範本只是為了支援現有應用程式。 如果您的應用程式需要使用已中斷連線的實體圖形，請考慮使用 [Trackable Entities](http://trackableentities.github.io/) (可追蹤的實體) 之類的其他替代項目，這是一項類似於自我追蹤實體的技術，可由社群更積極地進行開發或使用低層級變更追蹤 API 來撰寫自訂程式碼。
+> 我們不再建議使用自我追蹤實體範本。 繼續提供該範本只是為了支援現有應用程式。 如果您的應用程式需要使用已中斷連線的實體圖形，請考慮使用 [Trackable Entities](https://trackableentities.github.io/) (可追蹤的實體) 之類的其他替代項目，這是一項類似於自我追蹤實體的技術，可由社群更積極地進行開發或使用低層級變更追蹤 API 來撰寫自訂程式碼。
 
-本逐步解說將示範 Windows Communication Foundation (WCF) 服務會公開傳回實體圖形作業的案例。 接著，用戶端應用程式會操作該圖形並提交修改至服務作業的驗證，並將更新儲存至資料庫，使用 Entity Framework。
+本逐步解說示範 Windows Communication Foundation （WCF）服務公開傳回實體圖形之作業的案例。 接下來，用戶端應用程式會操作該圖形，並將修改提交至服務作業，以使用 Entity Framework 來驗證和儲存更新至資料庫。
 
-完成本逐步解說之前請確定您閱讀[自我追蹤實體](index.md)頁面。
+完成本逐步解說之前，請確定您已閱讀[自我追蹤實體](index.md)頁面。
 
 這個逐步解說會完成下列動作：
 
--   建立可存取的資料庫。
+-   建立要存取的資料庫。
 -   建立包含模型的類別庫。
--   交換 Self-Tracking Entity Generator 範本。
--   將實體類別移至個別的專案中。
--   建立 WCF 服務公開查詢和儲存實體的作業。
--   建立用戶端應用程式 （主控台和 WPF） 取用服務。
+-   交換至自我追蹤實體產生器範本。
+-   將實體類別移至不同的專案。
+-   建立 WCF 服務，以公開作業來查詢和儲存實體。
+-   建立使用服務的用戶端應用程式（主控台和 WPF）。
 
-我們將使用第一個資料庫在此逐步解說中，但相同的技巧同樣適用於第一個模型。
+我們將在本逐步解說中使用 Database First，但相同的技術同樣適用于 Model First。
 
-## <a name="pre-requisites"></a>必要條件
+## <a name="pre-requisites"></a>先決條件
 
-若要完成此逐步解說，您必須 Visual Studio 的最新版本。
+若要完成此逐步解說，您將需要最新版本的 Visual Studio。
 
 ## <a name="create-a-database"></a>建立資料庫
 
-Visual Studio 隨附安裝的資料庫伺服器是您已安裝的 Visual Studio 版本而有所不同：
+隨 Visual Studio 安裝的資料庫伺服器會根據您安裝的 Visual Studio 版本而有所不同：
 
--   如果您使用 Visual Studio 2012，則您將會建立新的 LocalDB 資料庫。
--   如果您使用 Visual Studio 2010 將會建立 SQL Express 資料庫。
+-   如果您使用 Visual Studio 2012，則您將會建立 LocalDB 資料庫。
+-   如果您使用 Visual Studio 2010，您將會建立 SQL Express 資料庫。
 
-接下來產生的資料庫。
+讓我們繼續產生資料庫。
 
 -   開啟 Visual Studio
--   **檢視-&gt;伺服器總管**
--   以滑鼠右鍵按一下**資料連線-&gt;新增連接...**
--   如果您尚未連線至資料庫從伺服器總管之前您必須選取**Microsoft SQL Server**做為資料來源
--   連接到 LocalDB 或 SQL Express，何者而定，您已安裝
--   請輸入**STESample**做為資料庫名稱
--   選取  **確定**而且會要求您想要建立新資料庫，請選取**是**
--   在 伺服器總管現在會顯示新的資料庫
+-   **View-&gt; 伺服器總管**
+-   以滑鼠右鍵按一下 [**資料連線-&gt; 新增連接 ...** ]
+-   如果您還沒有從伺服器總管連接到資料庫，則必須選取 [ **Microsoft SQL Server** ] 做為資料來源
+-   連接到 LocalDB 或 SQL Express （視您安裝的版本而定）
+-   輸入**STESample**做為資料庫名稱
+-   選取 **[確定]** ，系統會詢問您是否要建立新的資料庫，然後選取 **[是]**
+-   新的資料庫現在會顯示在伺服器總管
 -   如果您使用 Visual Studio 2012
-    -   以滑鼠右鍵按一下伺服器總管 中的資料庫，然後選取**新查詢**
-    -   將下列 SQL 複製到新的查詢，然後以滑鼠右鍵按一下查詢並選取**Execute**
+    -   以滑鼠右鍵按一下伺服器總管中的資料庫，然後選取 [追加**查詢**]
+    -   將下列 SQL 複製到新的查詢中，然後以滑鼠右鍵按一下查詢並選取 [**執行**]。
 -   如果您使用 Visual Studio 2010
-    -   選取 **資料集&gt;Transact SQL 編輯器-&gt;新增查詢連接...**
-    -   請輸入 **。\\SQLEXPRESS**作為伺服器名稱，然後按一下 **[確定]**
-    -   選取  **STESample**資料庫從下拉式清單頂端的查詢編輯器
-    -   將下列 SQL 複製到新的查詢，然後以滑鼠右鍵按一下查詢並選取**執行 SQL**
+    -   選取 **[資料-&gt; Transact-sql 編輯器-@no__t 2 新查詢連接**...]
+    -   輸入 **。 \\SQLEXPRESS**做為伺服器名稱，然後按一下 **[確定]**
+    -   從 [查詢編輯器] 頂端的下拉式選中選取 [ **STESample** ] 資料庫
+    -   將下列 SQL 複製到新的查詢中，然後以滑鼠右鍵按一下查詢並選取 [**執行 SQL** ]。
 
 ``` SQL
     CREATE TABLE [dbo].[Blogs] (
@@ -85,103 +85,103 @@ Visual Studio 隨附安裝的資料庫伺服器是您已安裝的 Visual Studio 
 
 ## <a name="create-the-model"></a>建立模型
 
-首先，我們必須要將此模型的專案。
+首先，我們需要一個專案來放置模型。
 
--   **檔案-&gt;新增-&gt;專案...**
--   選取  **Visual C\#** 從左窗格中，然後**類別庫**
--   請輸入**STESample**作為名稱，然後按一下 **[確定]**
+-   **檔案 &gt; 個新 &gt; 個專案 .。。**
+-   從左窗格中選取 [ **Visual C @ no__t-1** ]，然後按一下 [**類別庫**]
+-   輸入**STESample**作為名稱，然後按一下 **[確定]**
 
-現在我們將建立簡單的模型來存取資料庫的 EF 設計工具中：
+現在，我們將在 EF 設計工具中建立簡單的模型來存取我們的資料庫：
 
--   **專案-&gt;加入新項目...**
--   選取 **資料**從左窗格中，然後**ADO.NET 實體資料模型**
--   請輸入**BloggingModel**作為名稱，然後按一下 **[確定]**
--   選取 **從資料庫產生**，按一下 **下一步**
--   輸入您在上一節中建立資料庫的連接資訊
--   請輸入**為 [bloggingcontext]** 做為連接字串，然後按一下 [名稱**下一步]**
--   核取方塊旁**資料表**，按一下 **完成**
+-   **專案-&gt; 加入新專案 .。。**
+-   從左窗格中選取 [**資料**]，然後**ADO.NET 實體資料模型**
+-   輸入**BloggingModel**作為名稱，然後按一下 **[確定]**
+-   選取 [**從資料庫產生**]，然後按 **[下一步]**
+-   輸入您在上一節中建立之資料庫的連接資訊
+-   輸入**BloggingCoNtext**做為連接字串的名稱，然後按 **[下一步]**
+-   勾選 [**資料表**] 旁的方塊，然後按一下 **[完成]**
 
-## <a name="swap-to-ste-code-generation"></a>切換至 STE 程式碼產生
+## <a name="swap-to-ste-code-generation"></a>交換至 STE 程式碼產生
 
-現在，我們需要停用的預設程式碼產生和自我追蹤實體的交換。
+現在，我們需要停用預設的程式碼產生，並交換至自我追蹤實體。
 
 ### <a name="if-you-are-using-visual-studio-2012"></a>如果您使用 Visual Studio 2012
 
--   依序展開**BloggingModel.edmx**中**方案總管**並刪除**BloggingModel.tt**並**BloggingModel.Context.tt** 
-    *這會停用的預設程式碼產生*
--   以滑鼠右鍵按一下介面，然後選取 EF 設計工具上的空白區域**加入的程式碼產生項目...**
--   選取 **線上**左的窗格中搜尋**STE 產生器**
--   選取  **STE 適用於 C 的產生器\#** 範本，輸入**STETemplate**做為名稱，然後按一下**新增**
--   **STETemplate.tt**並**STETemplate.Context.tt**檔案會新增 BloggingModel.edmx 檔案巢狀
+-   在**方案總管**中展開**BloggingModel** ，然後刪除**BloggingModel.tt**和**BloggingModel.CoNtext.tt**
+    *這會停用預設的程式碼產生*
+-   以滑鼠右鍵按一下 EF 設計工具介面上的空白區域，然後選取 [**新增程式碼產生專案**]。
+-   從左窗格中選取 [**線上**]，然後搜尋 [ **STE**產生器]
+-   選取**C @ no__t-1**範本的 STE 產生器，輸入**STETemplate**做為名稱，然後按一下 [**新增**]
+-   **STETemplate.tt**和**STETemplate.CoNtext.tt**檔案會新增至 BloggingModel 的 .edmx 檔案底下
 
 ### <a name="if-you-are-using-visual-studio-2010"></a>如果您使用 Visual Studio 2010
 
--   以滑鼠右鍵按一下介面，然後選取 EF 設計工具上的空白區域**加入的程式碼產生項目...**
--   選取 **程式碼**從左窗格中，然後**ADO.NET Self-Tracking Entity Generator**
--   請輸入**STETemplate**作為名稱，然後按一下**新增**
--   **STETemplate.tt**並**STETemplate.Context.tt**檔案會直接新增至您的專案
+-   以滑鼠右鍵按一下 EF 設計工具介面上的空白區域，然後選取 [**新增程式碼產生專案**]。
+-   從左窗格中選取 [程式**代碼**]，然後**ADO.NET 自我追蹤實體**產生器
+-   輸入**STETemplate**作為名稱，然後按一下 [**新增**]
+-   **STETemplate.tt**和**STETemplate.CoNtext.tt**檔案會直接新增至您的專案
 
 ## <a name="move-entity-types-into-separate-project"></a>將實體類型移至不同的專案
 
-若要使用自我追蹤實體用戶端應用程式需要從我們的模型產生實體類別的存取權。 因為我們不想要公開 （expose） 用戶端應用程式的整個模型，所以我們要進入個別的專案中的實體類別。
+若要使用自我追蹤實體，我們的用戶端應用程式需要存取從我們的模型產生的實體類別。 因為我們不想要將整個模型公開給用戶端應用程式，所以我們會將實體類別移至不同的專案。
 
-第一步是停止現有的專案中產生實體類別：
+第一個步驟是停止在現有的專案中產生實體類別：
 
--   以滑鼠右鍵按一下**STETemplate.tt**中**方案總管**，然後選取**屬性**
--   在 **屬性**視窗中清除**TextTemplatingFileGenerator**從**CustomTool**屬性
--   依序展開**STETemplate.tt**中**方案總管 中**刪除其下的巢狀的所有檔案
+-   以滑鼠右鍵按一下**方案總管**中的 [ **STETemplate.tt** ]，然後選取 [**屬性**]
+-   在 [**屬性**] 視窗中，從**CustomTool**屬性清除**TextTemplatingFileGenerator**
+-   展開**方案總管**中的**STETemplate.tt** ，並刪除其底下的所有檔案
 
-接下來，我們即將加入新的專案，並在其中產生實體類別
+接下來，我們要加入新的專案，並在其中產生實體類別
 
--   **檔案-&gt;新增-&gt;專案...**
--   選取  **Visual C\#** 從左窗格中，然後**類別庫**
--   請輸入**STESample.Entities**作為名稱，然後按一下 **[確定]**
--   **專案-&gt;加入現有項目...**
--   瀏覽至**STESample**專案資料夾
--   若要檢視選取**的所有檔案 (\*。\*)**
--   選取  **STETemplate.tt**檔案
--   按一下下拉式箭號旁**新增**按鈕，然後選取**加入做為連結**
+-   **檔案-@no__t 1 加入 @no__t 2 專案 .。。**
+-   從左窗格中選取 [ **Visual C @ no__t-1** ]，然後按一下 [**類別庫**]
+-   輸入**STESample**作為名稱，然後按一下 **[確定]**
+-   **專案 &gt; 加入現有專案 .。。**
+-   流覽至**STESample**專案資料夾
+-   選取以查看**所有檔案（\*. \*）**
+-   選取**STETemplate.tt**檔案
+-   按一下 [**新增**] 按鈕旁邊的下拉式箭號，然後選取 [**新增為連結**]。
 
-    ![新增連結的範本](~/ef6/media/addlinkedtemplate.png)
+    ![加入連結的範本](~/ef6/media/addlinkedtemplate.png)
 
-我們也要確定內容相同的命名空間中產生實體類別。 這只會減少 using 陳述式，我們需要新增在我們的應用程式的數目。
+我們也要確保實體類別產生于與內容相同的命名空間中。 這只會減少我們需要在整個應用程式中加入的 using 語句數目。
 
--   以滑鼠右鍵按一下連結**STETemplate.tt**中**方案總管**，然後選取**屬性**
--   在 [**屬性**] 視窗中設定**自訂工具命名空間**到**STESample**
+-   以滑鼠右鍵按一下**方案總管**中的連結的**STETemplate.tt** ，然後選取 [**屬性**]
+-   在 [**屬性**] 視窗中，將**自訂工具命名空間**設為**STESample**
 
-STE 範本所產生的程式碼將會需要的參考**System.Runtime.Serialization**以編譯。 此程式庫所需的 WCF **DataContract**並**DataMember**可序列化的實體類型所使用的屬性。
+STE 範本所產生的程式碼**需要對 system.string**的參考，才能進行編譯。 在可序列化的實體類型上使用的 WCF **DataContract**和**DataMember**屬性需要此程式庫。
 
--   以滑鼠右鍵按一下**STESample.Entities**專案中**方案總管**，然後選取**加入參考...**
-    -   在 Visual Studio 2012-核取方塊旁**System.Runtime.Serialization** ，按一下  **確定**
-    -   在 Visual Studio 2010-選取**System.Runtime.Serialization** ，按一下  **確定**
+-   以滑鼠右鍵按一下**方案總管**中的 [ **STESample** ] 專案，然後選取 [**新增參考 ...** ]。
+    -   在 Visual Studio 2012-核取 [System.object] 旁的方塊，然後按一下 **[確定]** **。**
+    -   在 Visual Studio 2010-選取 [ **System.web** ]，然後按一下 **[確定]**
 
-最後，我們的內容中的專案將會需要的實體類型的參考。
+最後，含有其內容的專案將需要實體類型的參考。
 
--   以滑鼠右鍵按一下**STESample**專案中**方案總管**，然後選取**加入參考...**
-    -   在 Visual Studio 2012-選取**解決方案**從左窗格中，核取方塊旁**STESample.Entities**按一下 **[確定]**
-    -   在 Visual Studio 2010-選取**專案**索引標籤上，選取**STESample.Entities**按一下 **[確定]**
+-   以滑鼠右鍵按一下**方案總管**中的**STESample**專案，然後選取 [**新增參考 ...** ]。
+    -   在 Visual Studio 2012-從左窗格中選取 [**方案**]，勾選 [STESample] 旁的方塊，然後按一下 **[確定]** **。**
+    -   在 Visual Studio 2010-選取 [**專案**] 索引標籤，選取 [STESample]，然後按一下 **[確定]** **。**
 
 >[!NOTE]
-> 將實體類型移到個別的專案的另一個選項是將範本檔案，而不是將其連結從其預設位置。 如果您這麼做，您必須更新**inputFile**變數的範本，以提供 edmx 檔案的相對路徑 (在此範例中會 **...\\BloggingModel.edmx**)。
+> 將實體類型移至個別專案的另一個選項是移動範本檔案，而不是從其預設位置連結。 如果您這樣做，您將需要更新範本中的**inputFile**變數，以提供 .edmx 檔案的相對路徑（在此範例中為 **.。\\BloggingModel .edmx**）。
 
 ## <a name="create-a-wcf-service"></a>建立 WCF 服務
 
-現在就可以開始新增 WCF 服務，以公開我們的資料，我們先建立專案。
+現在可以加入 WCF 服務來公開我們的資料，我們將從建立專案開始。
 
--   **檔案-&gt;新增-&gt;專案...**
--   選取  **Visual C\#** 從左窗格中，然後**WCF 服務應用程式**
--   請輸入**STESample.Service**作為名稱，然後按一下 **[確定]**
--   將參考加入**System.Data.Entity**組件
--   將參考加入**STESample**並**STESample.Entities**專案
+-   **檔案-@no__t 1 加入 @no__t 2 專案 .。。**
+-   從左窗格中選取 [ **Visual C @ no__t-1** ]，然後按一下 [ **WCF 服務應用程式**]
+-   輸入**STESample**做為名稱，然後按一下 **[確定]**
+-   加入**system.object**元件的參考
+-   加入**STESample**和**STESample 實體**專案的參考
 
-我們需要將 EF 連接字串複製到此專案，以便在執行階段找到。
+我們需要將 EF 連接字串複製到這個專案，以便在執行時間中找到它。
 
--   開啟**App.Config**適用於檔案 * * STESample * * 專案和複製**connectionStrings**項目
--   貼上**connectionStrings**元素的子元素當做**configuration**項目**Web.Config**中的檔案**STESample.Service**專案
+-   開啟 **STESample **專案的**app.config**檔案，並複製**connectionStrings**元素
+-   在**STESample**專案中，貼上**connectionStrings**元素做為**web.config**檔案之**configuration**元素的子項目。
 
-現在就可以開始實作實際的服務。
+現在可以開始執行實際的服務。
 
--   開啟**IService1.cs**並取代為下列程式碼的內容
+-   開啟**IService1.cs** ，並以下列程式碼取代內容
 
 ``` csharp
     using System.Collections.Generic;
@@ -201,7 +201,7 @@ STE 範本所產生的程式碼將會需要的參考**System.Runtime.Serializati
     }
 ```
 
--   開啟**Service1.svc**並取代為下列程式碼的內容
+-   開啟**Service1** ，並以下列程式碼取代內容
 
 ``` csharp
     using System;
@@ -254,24 +254,24 @@ STE 範本所產生的程式碼將會需要的參考**System.Runtime.Serializati
     }
 ```
 
-## <a name="consume-the-service-from-a-console-application"></a>取用的主控台應用程式的服務
+## <a name="consume-the-service-from-a-console-application"></a>從主控台應用程式取用服務
 
-讓我們建立使用我們的服務的主控台應用程式。
+讓我們建立一個使用我們服務的主控台應用程式。
 
--   **檔案-&gt;新增-&gt;專案...**
--   選取  **Visual C\#** 從左窗格中，然後**主控台應用程式**
--   請輸入**STESample.ConsoleTest**作為名稱，然後按一下 **[確定]**
--   將參考加入**STESample.Entities**專案
+-   **檔案 &gt; 個新 &gt; 個專案 .。。**
+-   從左窗格中選取 [ **Visual C @ no__t-1** ]，然後選取 [**主控台應用程式**]
+-   輸入**STESample. ConsoleTest**作為名稱，然後按一下 **[確定]** 。
+-   加入**STESample**專案的參考
 
-我們需要我們的 WCF 服務的服務參考
+我們需要 WCF 服務的服務參考
 
--   以滑鼠右鍵按一下**STESample.ConsoleTest**專案中**方案總管**，然後選取**加入服務參考...**
--   按一下 **探索**
--   請輸入**BloggingService**作為命名空間，然後按一下 **[確定]**
+-   以滑鼠右鍵按一下**方案總管**中的 [ **ConsoleTest** ] 專案，然後選取 [**加入服務參考**]。
+-   按一下 [**探索**]
+-   輸入**BloggingService**作為命名空間，然後按一下 **[確定]**
 
 現在我們可以撰寫一些程式碼來取用服務。
 
--   開啟**Program.cs**並取代為下列程式碼的內容。
+-   開啟**Program.cs** ，並將內容取代為下列程式碼。
 
 ``` csharp
     using STESample.ConsoleTest.BloggingService;
@@ -400,11 +400,11 @@ STE 範本所產生的程式碼將會需要的參考**System.Runtime.Serializati
 
 您現在可以執行應用程式來查看運作狀況。
 
--   以滑鼠右鍵按一下**STESample.ConsoleTest**專案中**方案總管**，然後選取**偵錯-&gt;開始新執行個體**
+-   以滑鼠右鍵按一下**方案總管**中的 [ **ConsoleTest** ] 專案，然後選取 [ **Debug-&gt; 開始新實例**]
 
 當應用程式執行時，您會看到下列輸出。
 
-```
+```console
 Initial Data:
 ADO.NET Blog
 - Intro to EF
@@ -434,24 +434,24 @@ ADO.NET Blog
 Press any key to exit...
 ```
 
-## <a name="consume-the-service-from-a-wpf-application"></a>使用 WPF 應用程式服務
+## <a name="consume-the-service-from-a-wpf-application"></a>從 WPF 應用程式取用服務
 
-讓我們建立使用我們的服務的 WPF 應用程式。
+讓我們建立使用我們服務的 WPF 應用程式。
 
--   **檔案-&gt;新增-&gt;專案...**
--   選取  **Visual C\#** 從左窗格中，然後**WPF 應用程式**
--   請輸入**STESample.WPFTest**作為名稱，然後按一下 **[確定]**
--   將參考加入**STESample.Entities**專案
+-   **檔案 &gt; 個新 &gt; 個專案 .。。**
+-   從左窗格中選取 [ **Visual C @ no__t-1** ]，然後按一下 [ **WPF 應用程式**]
+-   輸入**STESample. WPFTest**作為名稱，然後按一下 **[確定]** 。
+-   加入**STESample**專案的參考
 
-我們需要我們的 WCF 服務的服務參考
+我們需要 WCF 服務的服務參考
 
--   以滑鼠右鍵按一下**STESample.WPFTest**專案中**方案總管**，然後選取**加入服務參考...**
--   按一下 **探索**
--   請輸入**BloggingService**作為命名空間，然後按一下 **[確定]**
+-   以滑鼠右鍵按一下**方案總管**中的 [ **WPFTest** ] 專案，然後選取 [**加入服務參考**]。
+-   按一下 [**探索**]
+-   輸入**BloggingService**作為命名空間，然後按一下 **[確定]**
 
 現在我們可以撰寫一些程式碼來取用服務。
 
--   開啟**MainWindow.xaml**並取代為下列程式碼的內容。
+-   開啟**mainwindow.xaml** ，並將內容取代為下列程式碼。
 
 ``` xaml
     <Window
@@ -495,7 +495,7 @@ Press any key to exit...
     </Window>
 ```
 
--   開啟 MainWindow 的程式碼後置 (**MainWindow.xaml.cs**)，並取代為下列程式碼的內容
+-   開啟 Mainwindow.xaml （**MainWindow.xaml.cs**）的程式碼後置，並以下列程式碼取代內容
 
 ``` csharp
     using STESample.WPFTest.BloggingService;
@@ -549,7 +549,7 @@ Press any key to exit...
 
 您現在可以執行應用程式來查看運作狀況。
 
--   以滑鼠右鍵按一下**STESample.WPFTest**專案中**方案總管**，然後選取**偵錯-&gt;開始新執行個體**
--   您可以管理使用螢幕的資料，並將它儲存服務會使用透過**儲存**按鈕
+-   以滑鼠右鍵按一下**方案總管**中的 [ **WPFTest** ] 專案，然後選取 [ **Debug-&gt; 開始新實例**]
+-   您可以使用畫面來運算元據，並使用 [**儲存**] 按鈕透過服務加以儲存
 
 ![WPF 主視窗](~/ef6/media/wpf.png)

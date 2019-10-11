@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: 026df735473e31f1c1463c1fbc6f46c4fd6dfd4f
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: cced53edadb890e4e86753ec2628218ffc4d1d5b
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921728"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181384"
 ---
 # <a name="spatial-data"></a>空間資料
 
@@ -32,7 +32,7 @@ Npgsql.EntityFrameworkCore.PostgreSQL   | [Npgsql. Microsoft.entityframeworkcore
 
 ## <a name="reverse-engineering"></a>反向工程
 
-空間 NuGet 套件也會啟用具有空間屬性的[反向工程](../managing-schemas/scaffolding.md)模型，但您必須`Scaffold-DbContext`先安裝封裝，***才能***執行或。 `dotnet ef dbcontext scaffold` 如果沒有，您會收到關於找不到資料行之類型對應的警告，而且將會略過資料行。
+空間 NuGet 套件也會啟用具有空間屬性的[反向工程](../managing-schemas/scaffolding.md)模型，但您必須先安裝封裝，***才能***執行 `Scaffold-DbContext` 或 `dotnet ef dbcontext scaffold`。 如果沒有，您會收到關於找不到資料行之類型對應的警告，而且將會略過資料行。
 
 ## <a name="nettopologysuite-nts"></a>NetTopologySuite （NTS）
 
@@ -46,7 +46,7 @@ optionsBuilder.UseSqlServer(
     x => x.UseNetTopologySuite());
 ```
 
-有數個空間資料類型。 您所使用的類型取決於您想要允許的圖形類型。 以下是您可以在模型中用於屬性的 NTS 類型階層。 它們位於`NetTopologySuite.Geometries`命名空間內。
+有數個空間資料類型。 您所使用的類型取決於您想要允許的圖形類型。 以下是您可以在模型中用於屬性的 NTS 類型階層。 它們位於 `NetTopologySuite.Geometries` 命名空間內。
 
 * 幾何
   * 點
@@ -62,7 +62,7 @@ optionsBuilder.UseSqlServer(
 
 使用基底 Geometry 類型，可讓屬性指定任何類型的圖形。
 
-下列實體類別可用來對應至[Wide World 匯入工具範例資料庫](http://go.microsoft.com/fwlink/?LinkID=800630)中的資料表。
+下列實體類別可用來對應至[Wide World 匯入工具範例資料庫](https://go.microsoft.com/fwlink/?LinkID=800630)中的資料表。
 
 ``` csharp
 [Table("Cities", Schema = "Application"))]
@@ -101,7 +101,7 @@ var currentLocation = geometryFactory.CreatePoint(-122.121512, 47.6739882);
 
 ### <a name="longitude-and-latitude"></a>經度和緯度
 
-NTS 中的座標是以 X 和 Y 值為依據。 若要代表經度和緯度，請將 X 用於經度，並針對緯度使用 Y。 請注意，這是您通常`latitude, longitude`會看到這些值的格式的反向。
+NTS 中的座標是以 X 和 Y 值為依據。 若要代表經度和緯度，請將 X 用於經度，並針對緯度使用 Y。 請注意，這是您通常會看到這些值的 `latitude, longitude` 格式的**反向**。
 
 ### <a name="srid-ignored-during-client-operations"></a>在用戶端操作期間忽略 SRID
 
@@ -207,21 +207,21 @@ var currentCountry = db.Countries
     .FirstOrDefault(c => c.Border.Contains(currentLocation));
 ```
 
-## <a name="sql-server"></a>SQL Server
+## <a name="sql-server"></a>[SQL Server]
 
 如果您使用 SQL Server，還有一些您應該注意的其他事項。
 
 ### <a name="geography-or-geometry"></a>Geography 或 geometry
 
-根據預設，空間屬性會對應至`geography` SQL Server 中的資料行。 若要`geometry`使用，請在您的模型中[設定資料行類型](xref:core/modeling/relational/data-types)。
+根據預設，空間屬性會對應至 SQL Server 中的 @no__t 0 資料行。 若要使用 `geometry`，請在您的模型中[設定資料行類型](xref:core/modeling/relational/data-types)。
 
 ### <a name="geography-polygon-rings"></a>地理多邊形環形
 
-使用`geography`資料行類型時，SQL Server 會對外部環形（或 shell）和內部環形（或孔）施加額外的需求。 外部環形必須以逆時針方向和內部環形。 NTS 會在將值傳送至資料庫之前進行驗證。
+使用 [`geography`] 資料行類型時，SQL Server 會對外部環形（或 shell）和內部環形（或孔）施加額外的需求。 外部環形必須以逆時針方向和內部環形。 NTS 會在將值傳送至資料庫之前進行驗證。
 
 ### <a name="fullglobe"></a>FullGlobe
 
-使用`geography`資料行類型時，SQL Server 具有非標準的 geometry 類型來代表完整的地球。 它也可以根據全地球（不含外部環形）來呈現多邊形。 NTS 不支援這兩種方法。
+使用 `geography` 資料行類型時，SQL Server 具有非標準 geometry 類型來代表完整的地球。 它也可以根據全地球（不含外部環形）來呈現多邊形。 NTS 不支援這兩種方法。
 
 > [!WARNING]
 > NTS 不支援以其為基礎的 FullGlobe 和多邊形。
@@ -244,7 +244,7 @@ brew install libspatialite
 
 ### <a name="configuring-srid"></a>設定 SRID
 
-在 SpatiaLite 中，資料行必須指定每個資料行的 SRID。 預設 SRID 為`0`。 使用 ForSqliteHasSrid 方法指定不同的 SRID。
+在 SpatiaLite 中，資料行必須指定每個資料行的 SRID。 預設 SRID 為 `0`。 使用 ForSqliteHasSrid 方法指定不同的 SRID。
 
 ``` csharp
 modelBuilder.Entity<City>().Property(c => c.Location)
@@ -331,5 +331,5 @@ Point. Y | ✔ | ✔ | ✔ | ✔
 
 * [SQL Server 中的空間資料](https://docs.microsoft.com/sql/relational-databases/spatial/spatial-data-sql-server)
 * [SpatiaLite 首頁](https://www.gaia-gis.it/fossil/libspatialite)
-* [Npgsql 空間檔](http://www.npgsql.org/efcore/mapping/nts.html)
-* [PostGIS 檔](http://postgis.net/documentation/)
+* [Npgsql 空間檔](https://www.npgsql.org/efcore/mapping/nts.html)
+* [PostGIS 檔](https://postgis.net/documentation/)

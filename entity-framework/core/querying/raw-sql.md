@@ -1,42 +1,32 @@
 ---
 title: 原始 SQL 查詢 - EF Core
-author: rowanmiller
-ms.date: 10/27/2016
+author: smitpatel
+ms.date: 10/08/2019
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: d8f52edfdf4bd7776ab8d81185c867cbfd7bcf44
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.openlocfilehash: 33601d570fa0b7a1fcada1705843da3798c00094
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813602"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181977"
 ---
 # <a name="raw-sql-queries"></a>原始 SQL 查詢
 
-Entity Framework Core 可讓您在處理關聯式資料庫時，下拉至原始 SQL 查詢。 如果您想要執行的查詢無法使用 LINQ 來表示，或如果使用 LINQ 查詢導致 SQL 查詢效率不佳，這項功能就很有用。 原始 SQL 查詢可以傳回屬於模型一部分的一般實體類型或[無索引鍵實體類型](xref:core/modeling/keyless-entity-types)。
+Entity Framework Core 可讓您在處理關聯式資料庫時，下拉至原始 SQL 查詢。 如果您想要的查詢無法使用 LINQ 來表示，原始 SQL 查詢會很有用。 如果使用 LINQ 查詢會導致 SQL 查詢效率不佳，也會使用原始 SQL 查詢。 原始 SQL 查詢可以傳回屬於模型一部分的一般實體類型或[無索引鍵實體類型](xref:core/modeling/keyless-entity-types)。
 
 > [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying/Querying/RawSQL/Sample.cs) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying/RawSQL/Sample.cs) \(英文\)。
 
 ## <a name="basic-raw-sql-queries"></a>基本的原始 SQL 查詢
 
-您可以使用`FromSqlRaw`擴充方法，根據原始 SQL 查詢來開始 LINQ 查詢。
+您可以使用 `FromSqlRaw` 擴充方法，根據原始 SQL 查詢來開始 LINQ 查詢。 `FromSqlRaw` 只能用在直接在 `DbSet<>` 上的查詢根目錄。
 
-<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
-``` csharp
-var blogs = context.Blogs
-    .FromSqlRaw("SELECT * FROM dbo.Blogs")
-    .ToList();
-```
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlRaw)]
 
 原始 SQL 查詢可以用來執行預存程序。
 
-<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
-``` csharp
-var blogs = context.Blogs
-    .FromSqlRaw("EXECUTE dbo.GetMostPopularBlogs")
-    .ToList();
-```
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlRawStoredProcedure)]
 
 ## <a name="passing-parameters"></a>傳遞參數
 
@@ -45,132 +35,74 @@ var blogs = context.Blogs
 >
 > 將任何使用者提供的值引進原始 SQL 查詢時，必須小心避免 SQL 插入式攻擊。 除了驗證此類值不包含不正確字元，請一律使用參數化，將值與 SQL 文字分開傳送。
 >
-> 特別的是，絕對不要將串連或插入字串`$""`（）與未驗證使用者提供的值`FromSqlRaw`傳遞`ExecuteSqlRaw`至或。 `FromSqlInterpolated` 和`ExecuteSqlInterpolated`方法允許以防止 SQL 插入式攻擊的方式來使用字串插補語法。
+> 特別的是，絕對不要將未驗證之使用者提供值的串連或插入字串（`$""`）傳遞至 `FromSqlRaw` 或 `ExecuteSqlRaw`。 @No__t-0 和 @no__t 1 方法允許以防止 SQL 插入式攻擊的方式使用字串內插補點語法。
 
-下列範例會將參數預留位置包含在 SQL 查詢字串中，並提供其他引數，藉以將單一參數傳遞至預存程式。 雖然這看起來可能`String.Format`像語法，但是提供的值會包裝`DbParameter`在中，並在指定`{0}`預留位置的位置插入所產生的參數名稱。
+下列範例會將參數預留位置包含在 SQL 查詢字串中，並提供其他引數，藉以將單一參數傳遞至預存程式。 雖然此語法看起來可能像 `String.Format` 語法，但提供的值會包裝在 `DbParameter` 中，而產生的參數名稱會插入指定的 `{0}` 預留位置。
 
-<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
-``` csharp
-var user = "johndoe";
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlRawStoredProcedureParameter)]
 
-var blogs = context.Blogs
-    .FromSqlRaw("EXECUTE dbo.GetMostPopularBlogsForUser {0}", user)
-    .ToList();
-```
-
-除了，您還`FromSqlRaw`可以使用`FromSqlInterpolated`它來允許安全地使用字串插補。 如同先前的範例，此值會轉換成`DbParameter` ，因此不容易遭受 SQL 插入式攻擊：
+`FromSqlInterpolated` 類似于 `FromSqlRaw`，但可讓您使用字串內插補點語法。 就像 `FromSqlRaw`，`FromSqlInterpolated` 只能用於查詢根目錄。 如同先前的範例，此值會轉換為 `DbParameter`，而且不容易受到 SQL 插入。
 
 > [!NOTE]
-> 在3.0 版之前， `FromSqlRaw`和`FromSqlInterpolated`是兩個名`FromSql`為的多載。 如需詳細資訊，請參閱[先前的版本一節](#previous-versions)。
+> 在3.0 版之前，`FromSqlRaw` 和 `FromSqlInterpolated` 是名為 `FromSql` 的兩個多載。 如需詳細資訊，請參閱[先前的版本一節](#previous-versions)。
 
-<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
-``` csharp
-var user = "johndoe";
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlInterpolatedStoredProcedureParameter)]
 
-var blogs = context.Blogs
-    .FromSqlInterpolated($"EXECUTE dbo.GetMostPopularBlogsForUser {user}")
-    .ToList();
-```
+您也可以建構 DbParameter，並將它提供為參數值。 因為使用了一般 SQL 參數預留位置，而不是字串預留位置，所以可以安全地使用 `FromSqlRaw`：
 
-您也可以建構 DbParameter，並將它提供為參數值。 因為使用了一般 SQL 參數預留位置，而不是字串預留位置， `FromSqlRaw`所以可以安全地使用：
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlRawStoredProcedureSqlParameter)]
 
-<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
-``` csharp
-var user = new SqlParameter("user", "johndoe");
+`FromSqlRaw` 可讓您在 SQL 查詢字串中使用具名引數，當預存程式具有選擇性參數時，這會很有用：
 
-var blogs = context.Blogs
-    .FromSqlRaw("EXECUTE dbo.GetMostPopularBlogsForUser @user", user)
-    .ToList();
-```
-
-這可讓您在 SQL 查詢字串中使用具名的參數，這在當預存程序具有選擇性參數時會很有幫助：
-
-<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
-``` csharp
-var user = new SqlParameter("user", "johndoe");
-
-var blogs = context.Blogs
-    .FromSqlRaw("EXECUTE dbo.GetMostPopularBlogs @filterByUser=@user", user)
-    .ToList();
-```
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlRawStoredProcedureNamedSqlParameter)]
 
 ## <a name="composing-with-linq"></a>使用 LINQ 撰寫
 
-如果可以在資料庫中撰寫 SQL 查詢，則您可以使用 LINQ 運算子在初始原始 SQL 查詢上撰寫。 以 `SELECT` 關鍵字為開頭的 SQL 查詢才可撰寫。
+您可以使用 LINQ 運算子在初始原始 SQL 查詢之上進行撰寫。 EF Core 會將它視為子查詢，並在資料庫中撰寫它。 下列範例會使用從資料表值函式（TVF）選取的原始 SQL 查詢。 然後使用 LINQ 來進行篩選和排序，以在其上撰寫。
 
-下列範例使用的原始 SQL 查詢會從資料表值函式 (TVF) 中進行選取，然後使用 LINQ 在其上進行撰寫以執行篩選和排序。
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlInterpolatedComposed)]
 
-<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
-``` csharp
-var searchTerm = ".NET";
+上述查詢會產生下列 SQL：
 
-var blogs = context.Blogs
-    .FromSqlInterpolated($"SELECT * FROM dbo.SearchBlogs({searchTerm})")
-    .Where(b => b.Rating > 3)
-    .OrderByDescending(b => b.Rating)
-    .ToList();
+```sql
+SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url]
+FROM (
+    SELECT * FROM dbo.SearchBlogs(@p0)
+) AS [b]
+WHERE [b].[Rating] > 3
+ORDER BY [b].[Rating] DESC
 ```
 
-這會產生下列 SQL 查詢：
-
-``` sql
-SELECT [b].[Id], [b].[Name], [b].[Rating]
-        FROM (
-            SELECT * FROM dbo.SearchBlogs(@p0)
-        ) AS b
-        WHERE b."Rating" > 3
-        ORDER BY b."Rating" DESC
-```
-
-## <a name="change-tracking"></a>變更追蹤
-
-使用`FromSql`方法的查詢會遵循與 EF Core 中的任何其他 LINQ 查詢完全相同的變更追蹤規則。 例如，若查詢投影實體類型，就會依預設追蹤結果。
-
-下列範例會使用從資料表值函式（TVF）選取的原始 SQL 查詢，然後透過呼叫來`AsNoTracking`停用變更追蹤：
-
-<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
-``` csharp
-var searchTerm = ".NET";
-
-var blogs = context.Query<SearchBlogsDto>()
-    .FromSqlInterpolated($"SELECT * FROM dbo.SearchBlogs({searchTerm})")
-    .AsNoTracking()
-    .ToList();
-```
-
-## <a name="including-related-data"></a>包含相關資料
+### <a name="including-related-data"></a>包含相關資料
 
 `Include` 方法可用來包含相關的資料，就如同所有其他的 LINQ 查詢一般：
 
-<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
-``` csharp
-var searchTerm = ".NET";
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlInterpolatedInclude)]
 
-var blogs = context.Blogs
-    .FromSqlInterpolated($"SELECT * FROM dbo.SearchBlogs({searchTerm})")
-    .Include(b => b.Posts)
-    .ToList();
-```
+使用 LINQ 撰寫時，您的原始 SQL 查詢必須是可組合的，因為 EF Core 會將提供的 SQL 視為子查詢。 以 `SELECT` 關鍵字為開頭的 SQL 查詢才可撰寫。 此外，SQL 傳遞不應包含在子查詢上不正確任何字元或選項，例如：
 
-請注意，這需要您的原始 SQL 查詢可組合;這不會與預存程序呼叫搭配使用。 請參閱[限制](#limitations)底下的複合性注意事項）。
+- 尾端分號
+- 在 SQL Server 上，結尾的查詢層級提示 (例如，`OPTION (HASH JOIN)`)
+- 在 SQL Server 上，未在 `SELECT` 子句中搭配 `OFFSET 0` 或 `TOP 100 PERCENT` 使用的 @no__t 0 子句
+
+SQL Server 不允許撰寫預存程序呼叫，因此嘗試將其他查詢運算子套用至這類呼叫將會導致不正確 SQL。 在 `FromSqlRaw` 或 @no__t 3 方法之後，使用 `AsEnumerable` 或 `AsAsyncEnumerable` 方法，確保 EF Core 不會嘗試撰寫預存程式。
+
+## <a name="change-tracking"></a>變更追蹤
+
+使用 `FromSqlRaw` 或 @no__t 1 方法的查詢，會遵循與 EF Core 中的任何其他 LINQ 查詢完全相同的變更追蹤規則。 例如，若查詢投影實體類型，就會依預設追蹤結果。
+
+下列範例會使用從資料表值函式（TVF）選取的原始 SQL 查詢，然後使用 `AsNoTracking` 的呼叫來停用變更追蹤：
+
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlInterpolatedAsNoTracking)]
 
 ## <a name="limitations"></a>限制
 
 使用原始 SQL 查詢時有一些要注意的限制：
 
-* SQL 查詢必須傳回實體類型之所有屬性的資料。
-
-* 結果集中的資料行名稱必須符合屬性所對應的資料行名稱。 請注意，此特性與 EF6 不同，因為在 EF6 中針對原始 SQL 查詢的屬性/資料行對應會被略過，而且結果集資料行名稱必須符合屬性名稱。
-
-* SQL 查詢不能包含相關資料。 不過，在許多情況下，您可以使用 `Include` 運算子來傳回相關資料以在查詢上方進行撰寫 (請參閱[包含相關資料](#including-related-data))。
-
-* 傳遞到此方法的 `SELECT` 陳述式通常應該是可組合的：如果 EF Core 需要評估伺服器上的其他查詢運算子（例如，轉譯在方法之後`FromSql`套用的 LINQ 運算子），則會將所提供的 SQL 視為子查詢。 這表示所傳遞的 SQL 不應包含在子查詢上無效的任何字元或選項，例如：
-  * 尾端分號
-  * 在 SQL Server 上，結尾的查詢層級提示 (例如，`OPTION (HASH JOIN)`)
-  * 在 SQL Server 上，`SELECT` 子句中未隨附 `OFFSET 0` 或 `TOP 100 PERCENT` 的 `ORDER BY` 子句
-
-* 請注意，SQL Server 不允許撰寫預存程序呼叫，因此嘗試將其他查詢運算子套用至這類呼叫將會導致不正確 SQL。 在用戶端評估之後`AsEnumerable()` ，可能會引進查詢運算子。
+- SQL 查詢必須傳回實體類型之所有屬性的資料。
+- 結果集中的資料行名稱必須符合屬性所對應的資料行名稱。 請注意，此行為與 EF6 不同。 原始 SQL 查詢的資料行對應和結果集資料行名稱的 EF6 忽略屬性必須符合屬性名稱。
+- SQL 查詢不能包含相關資料。 不過，在許多情況下，您可以使用 `Include` 運算子來傳回相關資料以在查詢上方進行撰寫 (請參閱[包含相關資料](#including-related-data))。
 
 ## <a name="previous-versions"></a>舊版本
 
-EF Core 2.2 版和更早版本有兩`FromSql`個名為的多載，其行為`FromSqlRaw`方式`FromSqlInterpolated`與較新的和相同。 如此一來，當意圖呼叫插入字串方法時，就很容易不小心呼叫未經處理的字串方法，另一種方法則是這樣。 這可能會導致查詢在應該參數化時不進行參數化。
+EF Core 2.2 版和更早版本有兩個名為 `FromSql` 的方法多載，其行為方式與較新的 `FromSqlRaw` 和 `FromSqlInterpolated` 相同。 當意圖是呼叫插入字串方法時，很容易不小心呼叫原始字串方法，另一種方式則是。 意外呼叫錯誤的多載，可能會導致查詢不會在應該發生時進行參數化。

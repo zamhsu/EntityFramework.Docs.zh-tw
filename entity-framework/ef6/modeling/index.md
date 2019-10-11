@@ -3,12 +3,12 @@ title: 建立模型 - EF6
 author: divega
 ms.date: 07/05/2018
 ms.assetid: 4890228E-CEA1-4595-B8AD-CA81253F8767
-ms.openlocfilehash: c02cdf0550116b703fb6436f8b0c6b064b5d1408
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: bd9843a93121f53518a307c9d2d43b68ae03369c
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283572"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182469"
 ---
 # <a name="creating-a-model"></a>建立模型
 
@@ -16,7 +16,7 @@ EF 模型會儲存有關應用程式類別和屬性如何對應至資料庫資�
 
 - **使用 Code First**：開發人員撰寫程式碼以指定模型。 EF 會根據實體類別和開發人員提供的其他模型組態，在執行階段產生模型和對應。
 
-- **使用 EF 設計工具**：開發人員使用 EF 設計工具繪製方塊和線來指定模型。 產生的模型會以 XML 的形式儲存在副檔名為 EDMX 的檔案中。 應用程式的領域物件通常是從概念模型自動產生。
+- **使用 EF Designer**：開發人員使用 EF Designer 繪製方塊和線來指定模型。 產生的模型會以 XML 的形式儲存在副檔名為 EDMX 的檔案中。 應用程式的領域物件通常是從概念模型自動產生。
 
 ## <a name="ef-workflows"></a>EF 工作流程
 
@@ -28,11 +28,11 @@ EF 模型會儲存有關應用程式類別和屬性如何對應至資料庫資�
 | **我要建立新的資料庫**          | [使用 **Code First** 在程式碼中定義您的模型，然後產生資料庫。](~/ef6/modeling/code-first/workflows/new-database.md)           | [使用 **Model First** 利用方塊和線定義您的模型，然後產生資料庫。](~/ef6/modeling/designer/workflows/model-first.md)   |
 | **我需要存取現有資料庫** | [使用 **Code First** 建立對應至現有資料庫的程式碼架構模型。](~/ef6/modeling/code-first/workflows/existing-database.md) | [使用 **Database First** 建立對應至現有資料庫的方塊和線條模型。](~/ef6/modeling/designer/workflows/database-first.md) |
 
-### <a name="watch-the-video-what-ef-workflow-should-i-use"></a>觀看影片：應該使用哪個 EF 工作流程？
+### <a name="watch-the-video-what-ef-workflow-should-i-use"></a>觀賞影片：我應該使用哪個 EF 工作流程？
 
 這個短片說明這些差異，以及如何找出最適合您的工作流程。
 
-**主講人**[Rowan Miller](http://romiller.com/)
+**簡報者**：[Rowan Miller](https://romiller.com/)
 
 ![哪個工作流程縮圖](../media/whichworkflow-thumb.png) [WMV](https://download.microsoft.com/download/8/F/8/8F81F4CD-3678-4229-8D79-0C63FFA3C595/HDI_ITPro_Technet_winvideo_ChoseYourWorkflow.wmv) | [MP4](https://download.microsoft.com/download/8/F/8/8F81F4CD-3678-4229-8D79-0C63FFA3C595/HDI_ITPro_Technet_mp4video_ChoseYourWorkflow.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/8/F/8/8F81F4CD-3678-4229-8D79-0C63FFA3C595/HDI_ITPro_Technet_winvideo_ChoseYourWorkflow.zip)
 

@@ -1,16 +1,16 @@
 ---
 layout: HubPage
-title: Entity Framework
+title: Entity Framework - EF
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 6bb12583-c39a-454c-8d83-d2a2793ca9ef
 uid: index
-ms.openlocfilehash: 0a2d71b435d9886990ccb17e99a4a9363ff994f3
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: 435a99e34fc5be7935dc7c363ece0629fd497299
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149249"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182035"
 ---
 <div id="main" class="v2">
     <div class="container">

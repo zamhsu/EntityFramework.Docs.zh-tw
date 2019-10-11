@@ -1,15 +1,15 @@
 ---
-title: Entity Framework Core 3.0 中的新功能
+title: Entity Framework Core 3.0 中的新功能 - EF Core
 author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/index
-ms.openlocfilehash: ce53d0fa21acfd52dc5e8b37911202cab02f00c8
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.openlocfilehash: ccfb8259c70cf8706a06eb3b22b9541224c3b9bb
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813467"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182077"
 ---
 # <a name="new-features-in-entity-framework-core-30"></a>Entity Framework Core 3.0 中的新功能
 

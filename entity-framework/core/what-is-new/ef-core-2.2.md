@@ -4,12 +4,12 @@ author: divega
 ms.date: 11/14/2018
 ms.assetid: 998C04F3-676A-4FCF-8450-CFB0457B4198
 uid: core/what-is-new/ef-core-2.2
-ms.openlocfilehash: 79b4efc3aee23e19a9ea1deb6373b9984b77f886
-ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
-ms.translationtype: HT
+ms.openlocfilehash: 5fcf7c6dfb4d8cb7928ef974af6deb52df7c63eb
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51688748"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181380"
 ---
 # <a name="new-features-in-ef-core-22"></a>EF Core 2.2 中的新功能
 
@@ -21,10 +21,10 @@ EF Core 2.2 現已支援使用來自多個資料庫 (使用來自 [NetTopologySu
 
 空間資料支援會以提供者專屬延伸模組套件系列的方式實作。
 這些套件中的每個套件，都會提供 NTS 類型與方法的對應，以及資料庫中對應的空間類型與函式。
-這類的提供者延伸模組現已供 [SQL Server](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite/)、[SQLite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite/) 及 [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite/) (來自 [Npgsql 專案](http://www.npgsql.org/)) 使用。
+這類的提供者延伸模組現已供 [SQL Server](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite/)、[SQLite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite/) 及 [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite/) (來自 [Npgsql 專案](https://www.npgsql.org/)) 使用。
 空間類型可搭配 [EF Core 記憶體內部提供者](https://docs.microsoft.com/en-us/ef/core/providers/in-memory/)直接使用，且不需要額外的延伸模組。
 
-安裝提供者延伸模組之後，您可將支援類型的屬性，新增至您的實體。 例如: 
+安裝提供者延伸模組之後，您可將支援類型的屬性，新增至您的實體。 例如:
 
 ``` csharp
 using NetTopologySuite.Geometries;

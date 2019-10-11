@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 uid: core/saving/cascade-delete
-ms.openlocfilehash: ec04de4eab2a28e3aa81ff27accef4fc11c83995
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: af86383bad52c87d2874fa4f8eb247a656601312
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197800"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182017"
 ---
 # <a name="cascade-delete"></a>串聯刪除
 
@@ -78,7 +78,7 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorcascade-with-required-or-optional-relationship"></a>與必要或選擇性關聯性搭配的 DeleteBehavior.Cascade
 
-```
+```console
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -107,7 +107,7 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>與必要關聯性搭配的 DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull
 
-```
+```console
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -130,7 +130,7 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>與選擇性關聯性搭配的 DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull
 
-```
+```console
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -160,7 +160,7 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>與必要或選擇性關聯性搭配的 DeleteBehavior.Restrict
 
-```
+```console
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -189,7 +189,7 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorcascade-with-required-or-optional-relationship"></a>與必要或選擇性關聯性搭配的 DeleteBehavior.Cascade
 
-```
+```console
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -217,7 +217,7 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>與必要關聯性搭配的 DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull
 
-```
+```console
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -240,7 +240,7 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>與選擇性關聯性搭配的 DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull
 
-```
+```console
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -268,7 +268,7 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>與必要或選擇性關聯性搭配的 DeleteBehavior.Restrict
 
-```
+```console
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
