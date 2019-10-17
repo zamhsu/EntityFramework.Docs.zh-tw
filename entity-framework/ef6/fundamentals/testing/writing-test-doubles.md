@@ -3,12 +3,12 @@ title: 使用您自己的測試進行測試雙精度浮點數-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 16a8b7c0-2d23-47f4-9cc0-e2eb2e738ca3
-ms.openlocfilehash: 4631206ae26d364e92c932857fa1970804a7a335
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 3d8933fb5e17f8c01f3971495a1fcdb5b8cfab57
+ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181408"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72446034"
 ---
 # <a name="testing-with-your-own-test-doubles"></a>使用您自己的測試進行測試雙精度浮點數
 > [!NOTE]
@@ -157,9 +157,9 @@ namespace TestingDemo
         }
     }
 }
-```  
+```
 
-<a name="creating-the-in-memory-test-doubles"/> # # 建立記憶體中測試雙精度浮點數  
+## <a name="creating-the-in-memory-test-doubles"></a>建立記憶體中測試雙精度浮點數  
 
 既然我們已經有真正的 EF 模型和可使用它的服務，就可以建立可用於測試的記憶體內部測試 double。 我們已為內容建立了 TestCoNtext 測試雙精度浮點數。 在測試中，我們可以選擇我們想要的行為，以支援即將執行的測試。 在此範例中，我們只會捕捉呼叫 SaveChanges 的次數，但是您可以包含所需的任何邏輯，以驗證您要測試的案例。  
 

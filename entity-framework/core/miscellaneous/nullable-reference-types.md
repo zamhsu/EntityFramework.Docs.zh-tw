@@ -4,18 +4,18 @@ author: roji
 ms.date: 09/09/2019
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: ab35e63a6eeb2f02ed07a715fd65855b4d30eaf5
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.openlocfilehash: 055f492214596506ce2c28485ade359d175c4ac2
+ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813450"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72445894"
 ---
 # <a name="working-with-nullable-reference-types"></a>使用可為 Null 的參考型別
 
 C#8引進了一個稱為[nullable 參考型別](/dotnet/csharp/tutorials/nullable-reference-types)的新功能，允許標注參考型別，指出其是否有效，以包含 null。 如果您是這項功能的新手，建議您閱讀C#檔，讓自己熟悉它。
 
-本頁面介紹可為 null 的參考型別 EF Core 的支援，並說明使用它們的最佳作法。
+本頁面介紹可為 null 參考型別的 EF Core 支援，並說明使用它們的最佳作法。
 
 ## <a name="required-and-optional-properties"></a>必要和選擇性屬性
 
@@ -26,7 +26,7 @@ C#8引進了一個稱為[nullable 參考型別](/dotnet/csharp/tutorials/nullabl
 
 ## <a name="dbcontext-and-dbset"></a>DbCoNtext 和 DbSet
 
-當可為 null 的參考型別啟用C#時，編譯器會針對任何未初始化的不可為 null 屬性發出警告，因為這會包含 null。 因此，在內容上定義不可為 null `DbSet`的常見做法現在會產生警告。 不過，EF Core 一律會初始化`DbSet` DbCoNtext 衍生類型上的所有屬性，因此即使編譯器不知道這一點，它們仍會保證永遠不會是 null。 因此，建議您將您`DbSet`的屬性保持為不可為 null-可讓您在沒有 null 檢查的情況下存取它們，並藉由使用 null 容許運算子（！）的協助明確將其設定為 null，以回應編譯器警告：
+當可為 null 的參考型別啟用C#時，編譯器會針對任何未初始化的不可為 null 屬性發出警告，因為這會包含 null。 因此，在內容上定義不可為 null 的 `DbSet` 的常見作法，現在會產生警告。 不過，EF Core 一律會初始化 DbCoNtext 衍生類型上的所有 `DbSet` 屬性，因此即使編譯器不知道這一點，也一定會是 null。 因此，建議您不要將您的 `DbSet` 屬性保持為可為 null-可讓您在沒有 null 檢查的情況下存取它們，並藉由使用 null 容許運算子（！）的協助明確地將其設定為 null，以回應編譯器警告：
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/NullableReferenceTypesContext.cs?name=Context&highlight=3-4)]
 
@@ -65,4 +65,4 @@ C#8引進了一個稱為[nullable 參考型別](/dotnet/csharp/tutorials/nullabl
 
 ## <a name="scaffolding"></a>Scaffolding
 
-反向工程目前不支援[8 可為 Null 的C#參考型別功能](/dotnet/csharp/tutorials/nullable-reference-types)：EF Core 一律會C#產生假設此功能已關閉的程式碼。 例如，可為 null 的文字資料行將會 scaffold 為具有`string`類型的`string?`屬性，而不是用來設定是否需要屬性的流暢 API 或資料批註。 您可以編輯 scaffold 程式碼，並將其C#取代為 null 屬性注釋。 由問題[#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)追蹤可為 null 之參考型別的樣板支援。
+[反向C#工程目前不支援8可為 null 的參考型別功能](/dotnet/csharp/tutorials/nullable-reference-types)： EF Core 一律C#會產生假設功能已關閉的程式碼。 例如，可為 null 的文字資料行將會 scaffold 為具有類型 `string` 的屬性，而不是 `string?`，而是用來設定是否需要屬性的流暢 API 或資料批註。 您可以編輯 scaffold 程式碼，並將其C#取代為 null 屬性注釋。 由問題[#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)追蹤可為 null 之參考型別的樣板支援。
