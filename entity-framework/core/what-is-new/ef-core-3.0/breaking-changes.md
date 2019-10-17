@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: f7f04efa8fb8ebc1eb06f256b8ccbd3110af47ab
-ms.sourcegitcommit: 705e898b4684e639a57c787fb45c932a27650c2d
+ms.openlocfilehash: 690c7828cfe5019f4e7ae904c92430fab4726cb9
+ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/03/2019
-ms.locfileid: "71934875"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72446011"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>EF Core 3.0 中包含的重大變更
 下列 API 和行為變更可能會在將現有的應用程式升級至3.0.0 時中斷。
@@ -19,12 +19,12 @@ ms.locfileid: "71934875"
 
 | **重大變更**                                                                                               | **產生** |
 |:------------------------------------------------------------------------------------------------------------------|------------|
-| [不會再於用戶端評估 LINQ 查詢](#linq-queries-are-no-longer-evaluated-on-the-client)         | 高       |
-| [EF Core 3.0 以 .NET Standard 2.1 為目標，而非以 .NET Standard 2.0 為目標](#netstandard21) | 高      |
-| [EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分](#dotnet-ef) | 高      |
-| [DetectChanges 接受存放區產生的索引鍵值](#dc) | 高      |
-| [FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名](#fromsql) | 高      |
-| [查詢類型已與實體類型合併](#qt) | 高      |
+| [不會再於用戶端評估 LINQ 查詢](#linq-queries-are-no-longer-evaluated-on-the-client)         | High       |
+| [EF Core 3.0 以 .NET Standard 2.1 為目標，而非以 .NET Standard 2.0 為目標](#netstandard21) | High      |
+| [EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分](#dotnet-ef) | High      |
+| [DetectChanges 接受存放區產生的索引鍵值](#dc) | High      |
+| [FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名](#fromsql) | High      |
+| [查詢類型已與實體類型合併](#qt) | High      |
 | [Entity Framework Core 不再屬於 ASP.NET Core 共用架構](#no-longer) | Medium      |
 | [根據預設，串聯刪除現在會立即發生](#cascade) | Medium      |
 | [相關實體的積極式載入現在會出現在單一查詢中](#eager-loading-single-query) | Medium      |
@@ -79,7 +79,7 @@ ms.locfileid: "71934875"
 
 **舊行為**
 
-3\.0 以前，在 EF Core 無法將屬於查詢的運算式轉換成 SQL 或參數時，它會自動在用戶端評估運算式。
+3.0 以前，在 EF Core 無法將屬於查詢的運算式轉換成 SQL 或參數時，它會自動在用戶端評估運算式。
 根據預設，對可能相當耗費資源的運算式進行用戶端評估只會觸發警告。
 
 **新行為**
@@ -416,7 +416,7 @@ context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
 **風險降低**
 
-雖然技術上來說這不是一項重大變更，但當單一查詢在集合導覽上包含大量的 @no__t 0 運算子時，可能會對應用程式效能造成相當大的影響。 如需詳細資訊和以更有效率的方式重寫查詢，[請參閱此批註](https://github.com/aspnet/EntityFrameworkCore/issues/18022#issuecomment-537219137)。
+雖然技術上來說這不是一項重大變更，但當單一查詢在集合導覽上包含大量的 @no__t 0 運算子時，可能會對應用程式效能造成相當大的影響。 如需詳細資訊和以更有效率的方式重寫查詢，[請參閱此批註](https://github.com/aspnet/EntityFrameworkCore/issues/18022#issuecomment-542397085)。
 
 **
 
@@ -1599,7 +1599,7 @@ Microsoft.EntityFrameworkCore.Sqlite 先前相依於 SQLitePCL.raw 的 1.1.12 �
 
 **原因**
 
-2\.0.0 版的 SQLitePCL.raw 以 .NET Standard 2.0 為目標。 它先前以 .NET Standard 1.1 為目標，這需要大量的大量的可轉移套件才能運作。
+2.0.0 版的 SQLitePCL.raw 以 .NET Standard 2.0 為目標。 它先前以 .NET Standard 1.1 為目標，這需要大量的大量的可轉移套件才能運作。
 
 **風險降低**
 
@@ -1679,7 +1679,7 @@ modelBuilder
 
 **舊行為**
 
-以架構為空字串所設定的 DbFunction，在沒有架構的情況下被視為內建函數。 例如，下列程式碼會`DatePart`將 CLR 函數`DATEPART`對應至 SqlServer 上的內建函數。
+以架構為空字串所設定的 DbFunction，在沒有架構的情況下被視為內建函數。 例如，下列程式碼會將 `DatePart` CLR 函數對應至 SqlServer 上的 @no__t 1 內建函數。
 
 ```C#
 [DbFunction("DATEPART", Schema = "")]
@@ -1689,7 +1689,7 @@ public static int? DatePart(string datePartArg, DateTime? date) => throw new Exc
 
 **新行為**
 
-所有的 DbFunction 對應都會被視為對應至使用者定義的函數。 因此，空的字串值會將函數放在模型的預設架構內。 這可能是透過 Fluent API `modelBuilder.HasDefaultSchema()` `dbo`明確設定的架構，否則為。
+所有的 DbFunction 對應都會被視為對應至使用者定義的函數。 因此，空的字串值會將函數放在模型的預設架構內。 這可能是透過 Fluent API `modelBuilder.HasDefaultSchema()` 明確設定的架構，否則為 `dbo`。
 
 **原因**
 
