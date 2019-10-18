@@ -79,7 +79,7 @@ ms.locfileid: "72446011"
 
 **舊行為**
 
-3.0 以前，在 EF Core 無法將屬於查詢的運算式轉換成 SQL 或參數時，它會自動在用戶端評估運算式。
+3\.0 以前，在 EF Core 無法將屬於查詢的運算式轉換成 SQL 或參數時，它會自動在用戶端評估運算式。
 根據預設，對可能相當耗費資源的運算式進行用戶端評估只會觸發警告。
 
 **新行為**
@@ -1599,7 +1599,7 @@ Microsoft.EntityFrameworkCore.Sqlite 先前相依於 SQLitePCL.raw 的 1.1.12 �
 
 **原因**
 
-2.0.0 版的 SQLitePCL.raw 以 .NET Standard 2.0 為目標。 它先前以 .NET Standard 1.1 為目標，這需要大量的大量的可轉移套件才能運作。
+2\.0.0 版的 SQLitePCL.raw 以 .NET Standard 2.0 為目標。 它先前以 .NET Standard 1.1 為目標，這需要大量的大量的可轉移套件才能運作。
 
 **風險降低**
 
