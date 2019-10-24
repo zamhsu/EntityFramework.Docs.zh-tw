@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 2e007c82-c6e4-45bb-8129-851b79ec1a0a
 uid: core/providers/sql-server/index
-ms.openlocfilehash: f0aa290e8c5166c278f8c9782c4304de5e91f26b
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.openlocfilehash: 1e75bc4bf334b1a60d13a2ec9ef314e3afcf0273
+ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813511"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72812097"
 ---
 # <a name="microsoft-sql-server-ef-core-database-provider"></a>Microsoft SQL Server EF Core 資料庫提供者
 
@@ -32,6 +32,9 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 ***
+
+> [!NOTE]
+> 從 3.0.0 開始，提供者會參考 Microsoft.Data.SqlClient (先前的版本取決於 System.Data.SqlClient)。 若您的專案直接相依於 SqlClient，請確定它參考正確的套件。
 
 ## <a name="supported-database-engines"></a>支援的資料庫引擎
 
