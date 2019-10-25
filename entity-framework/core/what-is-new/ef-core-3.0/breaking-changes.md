@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 690c7828cfe5019f4e7ae904c92430fab4726cb9
-ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
+ms.openlocfilehash: b2e3881e3454377dab7851cba999ed6b891def4e
+ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72446011"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72812131"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>EF Core 3.0 中包含的重大變更
 下列 API 和行為變更可能會在將現有的應用程式升級至3.0.0 時中斷。
@@ -69,6 +69,7 @@ ms.locfileid: "72446011"
 | [Microsoft.EntityFrameworkCore.Design 現在是 DevelopmentDependency 套件](#dip) | 低      |
 | [SQLitePCL.raw 已更新為 2.0.0 版](#SQLitePCL) | 低      |
 | [NetTopologySuite 已更新為 2.0.0 版](#NetTopologySuite) | 低      |
+| [SqlClient 是用來取代 SqlClient 的資料。](#SqlClient) | 低      |
 | [必須設定多個不明確的自我參考關聯性](#mersa) | 低      |
 | [DbFunction。架構為 null 或空字串，將其設定為模型的預設架構](#udf-empty-string) | 低      |
 
@@ -404,7 +405,7 @@ context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
 **舊行為**
 
-在3.0 之前，立即透過 @no__t 0 運算子載入集合導覽，會導致關係資料庫產生多個查詢，每個相關實體類型各一個。
+在3.0 之前，立即透過 `Include` 運算子載入集合導覽，會導致在關係資料庫上產生多個查詢，每個相關實體類型各一個。
 
 **新行為**
 
@@ -416,7 +417,7 @@ context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
 **風險降低**
 
-雖然技術上來說這不是一項重大變更，但當單一查詢在集合導覽上包含大量的 @no__t 0 運算子時，可能會對應用程式效能造成相當大的影響。 如需詳細資訊和以更有效率的方式重寫查詢，[請參閱此批註](https://github.com/aspnet/EntityFrameworkCore/issues/18022#issuecomment-542397085)。
+雖然技術上來說這不是重大變更，但當單一查詢在集合導覽上包含大量的 `Include` 運算子時，可能會對應用程式效能造成相當大的影響。 如需詳細資訊和以更有效率的方式重寫查詢，[請參閱此批註](https://github.com/aspnet/EntityFrameworkCore/issues/18022#issuecomment-542397085)。
 
 **
 
@@ -1595,7 +1596,7 @@ Microsoft.EntityFrameworkCore.Sqlite 先前相依於 SQLitePCL.raw 的 1.1.12 �
 
 **新行為**
 
-我們已更新我們的套件以相依於 2.0.0 版。
+我們已更新套件，以相依于版本2.0.0。
 
 **原因**
 
@@ -1626,6 +1627,29 @@ NetTopologySuite 2.0.0 版旨在解決 EF Core 使用者遇到的數個可用性
 **風險降低**
 
 NetTopologySuite 2.0.0 版包括一些中斷性變更。 如需詳細資訊，請參閱[版本資訊](https://www.nuget.org/packages/NetTopologySuite/2.0.0-pre001) \(英文\)。
+
+<a name="SqlClient"></a>
+
+### <a name="microsoftdatasqlclient-is-used-instead-of-systemdatasqlclient"></a>SqlClient 是用來取代 SqlClient 的資料。
+
+[追蹤問題 #15636](https://github.com/aspnet/EntityFrameworkCore/issues/15636)
+
+**舊行為**
+
+Microsoft.entityframeworkcore 先前的相依于 SqlClient。
+
+**新行為**
+
+我們已更新套件，以相依于 SqlClient。
+
+**原因**
+
+SqlClient 是用於 SQL Server 的旗艦版資料存取驅動程式，而 SqlClient 不再是開發的重點。
+某些重要功能（例如 Always Encrypted）僅適用于 SqlClient。
+
+**風險降低**
+
+如果您的程式碼會直接相依于 SqlClient，您必須將它變更為參考 SqlClient。因為這兩個套件會維持非常高程度的 API 相容性，所以這應該只是簡單的封裝和命名空間變更。
 
 <a name="mersa"></a>
 
@@ -1679,7 +1703,7 @@ modelBuilder
 
 **舊行為**
 
-以架構為空字串所設定的 DbFunction，在沒有架構的情況下被視為內建函數。 例如，下列程式碼會將 `DatePart` CLR 函數對應至 SqlServer 上的 @no__t 1 內建函數。
+以架構為空字串所設定的 DbFunction，在沒有架構的情況下被視為內建函數。 例如，下列程式碼會將 `DatePart` CLR 函數對應至 SqlServer 上 `DATEPART` 內建函數。
 
 ```C#
 [DbFunction("DATEPART", Schema = "")]

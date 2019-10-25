@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a628795e-64df-4f24-a5e8-76bc261e7ed8
 uid: core/modeling/backing-field
-ms.openlocfilehash: c3ca8bb97992c192672e8c2f2040b0de029df68d
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 288440a4494117fe59d27187e24424c4d2fd44ab
+ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197476"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72811872"
 ---
 # <a name="backing-fields"></a>支援欄位
 
@@ -51,16 +51,12 @@ ms.locfileid: "71197476"
 
 您也可以在模型中建立概念屬性，其在實體類別中沒有對應的 CLR 屬性，而是使用欄位將資料儲存在實體中。 這與[陰影屬性](shadow-properties.md)不同，其中的資料會儲存在變更追蹤器中。 如果實體類別使用方法來取得/設定值，通常會使用此專案。
 
-您可以為 EF 提供`Property(...)` API 中的功能變數名稱。 如果沒有具有指定名稱的屬性，則 EF 會尋找欄位。
+您可以為 EF 提供 `Property(...)` API 中的功能變數名稱。 如果沒有具有指定名稱的屬性，則 EF 會尋找欄位。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingFieldNoProperty.cs#Sample)]
 
-您也可以選擇為屬性指定名稱，而不是功能變數名稱。 這個名稱接著會在建立模型時使用，最值得注意的是，它將用於在資料庫中對應至的資料行名稱。
-
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingFieldConceptualProperty.cs#Sample)]
-
-當實體類別中沒有屬性時，您可以在 LINQ 查詢中`EF.Property(...)`使用方法來參考概念上為模型一部分的屬性。
+當實體類別中沒有屬性時，您可以在 LINQ 查詢中使用 `EF.Property(...)` 方法，來參考概念上為模型一部分的屬性。
 
 ``` csharp
-var blogs = db.blogs.OrderBy(b => EF.Property<string>(b, "Url"));
+var blogs = db.blogs.OrderBy(b => EF.Property<string>(b, "_validatedUrl"));
 ```

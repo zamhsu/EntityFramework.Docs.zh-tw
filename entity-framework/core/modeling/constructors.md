@@ -1,29 +1,29 @@
 ---
-title: 建構函式 EF Core 與實體類型
+title: 具有函數的實體類型-EF Core
 author: ajcvickers
 ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
-ms.openlocfilehash: 5bf49718f02c1860871b1f4c255ec4d98fce2fc7
-ms.sourcegitcommit: 960e42a01b3a2f76da82e074f64f52252a8afecc
+ms.openlocfilehash: ddfaa8eebde388a9d3309f21b8891de593077956
+ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/08/2019
-ms.locfileid: "65405251"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72811890"
 ---
-# <a name="entity-types-with-constructors"></a>實體類型建構函式
+# <a name="entity-types-with-constructors"></a>具有函數的實體類型
 
 > [!NOTE]  
-> 這項功能是在 EF Core 2.1 中新功能。
+> 此功能是 EF Core 2.1 中的新功能。
 
-從開始 EF Core 2.1，您就可以定義參數的建構函式，並已建立實體的執行個體時呼叫這個建構函式的 EF Core。 建構函式參數可以繫結至對應的屬性，或為各種類型的服務，以促進行為例如消極式載入。
+從 EF Core 2.1 開始，現在可以定義具有參數的處理常式，並在建立實體的實例時，讓 EF Core 呼叫此函式。 此函式參數可以系結至對應的屬性，或系結至各種不同的服務，以促進延遲載入之類的行為。
 
 > [!NOTE]  
-> EF Core 2.1 中，為所有的建構函式繫結的慣例。 設定特定的建構函式，若要使用的已規劃未來的版本。
+> 從 EF Core 2.1，所有的函式系結都是依照慣例。 未來的版本已規劃要使用的特定構造函式設定。
 
-## <a name="binding-to-mapped-properties"></a>繫結至對應的屬性
+## <a name="binding-to-mapped-properties"></a>系結至對應的屬性
 
-請考慮一般的部落格/後置模型：
+請考慮一般的 Blog/Post 模型：
 
 ``` csharp
 public class Blog
@@ -48,7 +48,7 @@ public class Post
 }
 ```
 
-當 EF Core 建立這些類型的執行個體時，例如結果的查詢時，它會先呼叫預設的無參數建構函式，然後設定每一個屬性的值從資料庫。 不過，如果 EF Core 找到的參數化建構函式參數名稱和相符的型別對應屬性，則它會改為呼叫這些屬性值的參數化建構函式，並將未明確設定每個屬性。 例如: 
+當 EF Core 建立這些類型的實例時（例如，針對查詢的結果），它會先呼叫預設的無參數的函式，然後將每個屬性設定為資料庫中的值。 不過，如果 EF Core 使用符合對應屬性之參數名稱和類型來尋找參數化的函式，則會改為使用這些屬性的值來呼叫參數化的函式，而且不會明確設定每個屬性。 例如:
 
 ``` csharp
 public class Blog
@@ -86,19 +86,23 @@ public class Post
     public Blog Blog { get; set; }
 }
 ```
-請注意一些事項︰
-* 並非所有屬性都必須能夠建構函式參數。 比方說，Post.Content 是未設定屬性的任何建構函式參數，因此 EF Core 之後呼叫建構函式以一般方式將設定。
-* 參數型別和名稱必須符合屬性類型和名稱，不同之處在於屬性時可能會使用 pascal 命名法大小寫的參數是依照 camel 命名法大小寫。
-* EF Core 無法設定 （例如部落格或上述文章） 的導覽屬性使用建構函式。
-* 建構函式可以是公用、 私用，或有任何其他的協助工具。 不過，消極式載入 proxy 需要建構函式是從繼承的 proxy 類別來存取。 這通常表示讓公用或受保護。
+
+要注意的事項：
+
+* 並非所有屬性都必須具有函數參數。 例如，不是由任何的「函數參數」設定「內容」屬性，因此 EF Core 會在以一般方式呼叫「函式」之後設定它。
+* 參數類型和名稱必須符合屬性類型和名稱，但屬性可以是 Pascal 大小寫，而參數則是 camel 大小寫。
+* EF Core 無法使用函式來設定導覽屬性（例如上述的 Blog 或 Post）。
+* 此函式可以是公用、私用或具有任何其他存取範圍。 不過，消極式載入 proxy 需要可從繼承 proxy 類別存取的函式。 這通常表示將它設為公用或受保護。
 
 ### <a name="read-only-properties"></a>唯讀屬性
 
-一旦透過建構函式設定屬性可以合理將部分使用者設唯讀狀態。 EF Core 支援，但要留意的一些事項：
-* 依照慣例，不會對應沒有 setter 的屬性。 （這種方式通常不應對應，例如計算屬性的屬性對應。）
-* 使用自動產生索引鍵的值必須是讀寫，因為需要插入新實體時，金鑰產生器所設定的索引鍵值的索引鍵屬性。
+透過函式設定屬性之後，將其部分設為唯讀可能是合理的。 EF Core 支援這種情況，但有一些要注意的事項：
 
-避免這些事情的簡單方法是使用私用 setter。 例如: 
+* 沒有 setter 的屬性不會依照慣例來對應。 （這麼做通常會對應不應對應的屬性，例如計算屬性）。
+* 使用自動產生的索引鍵值需要具有讀寫的索引鍵屬性，因為在插入新的實體時，索引鍵的值必須由金鑰產生器設定。
+
+避免這些問題的簡單方法是使用私用 setter。 例如:
+
 ``` csharp
 public class Blog
 {
@@ -135,9 +139,10 @@ public class Post
     public Blog Blog { get; set; }
 }
 ```
-EF Core 看見為讀寫，也就是說，所有的屬性對應與之前，以及索引鍵可能仍會存放區產生的私用 setter 的屬性。
 
-使用私用 setter 的替代方法是讓真正唯讀自動屬性，並在 OnModelCreating 中加入更明確的對應。 同樣地，某些屬性可以完全移除，並取代為只有欄位。 例如，請考慮這些實體型別：
+EF Core 看到具有私用 setter 的屬性為讀寫，這表示所有屬性都對應于前面，而且金鑰仍然可以存放區產生。
+
+使用私用 setter 的替代方法是讓屬性成為唯讀的，並在 OnModelCreating 中新增更明確的對應。 同樣地，某些屬性可以完全移除，而且只會以欄位取代。 例如，請考慮下列實體類型：
 
 ``` csharp
 public class Blog
@@ -173,7 +178,9 @@ public class Post
     public Blog Blog { get; set; }
 }
 ```
-與此組態在 OnModelCreating 中：
+
+在 OnModelCreating 中的這項設定：
+
 ``` csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
@@ -194,26 +201,29 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         });
 }
 ```
-要注意的事項：
-* 索引鍵"property"現在是欄位。 它不是`readonly`欄位，以便可以使用存放區產生的索引鍵。
-* 其他屬性是唯讀的屬性，只能在建構函式中設定。
-* 如果主索引鍵值是只會設定 EF，或從資料庫讀取，則不需要包含建構函式。 這會 「 屬性 」 的索引鍵離開做為簡單的欄位，且清楚，它應該不會明確設定時建立新的部落格文章或張貼訊息。
+
+注意事項：
+
+* 索引鍵 "property" 現在是欄位。 這不是 `readonly` 欄位，因此可以使用存放區產生的索引鍵。
+* 其他屬性是唯讀屬性，只會在此函式中設定。
+* 如果主要金鑰值只是由 EF 設定或從資料庫讀取，則不需要將它包含在此函式中。 這會將金鑰「屬性」保留為簡單的欄位，並清楚指出不應該在建立新的 blog 或文章時明確設定。
 
 > [!NOTE]  
-> 此程式碼會產生編譯器警告 '169' 指出欄位絕不會使用。 因為事實上 EF Core 使用的欄位 extralinguistic 的方式可以忽略。
+> 這段程式碼會產生編譯器警告 ' 169 '，表示從未使用過此欄位。 這可能會被忽略，因為事實上，EF Core 以 extralinguistic 的方式使用欄位。
 
-## <a name="injecting-services"></a>插入的服務
+## <a name="injecting-services"></a>插入服務
 
-EF Core 也可以將 「 服務 」 插入到之實體類型的建構函式。 例如，下列可插入：
-* `DbContext` -目前的內容執行個體，它也為您的衍生 DbContext 類型型別
-* `ILazyLoader` -消極式載入服務-請參閱[消極式載入文件](../querying/related-data.md)如需詳細資訊
-* `Action<object, string>` -消極式載入委派，請參閱[消極式載入文件](../querying/related-data.md)如需詳細資訊
-* `IEntityType` -此實體類型相關聯的 EF Core 中繼資料
+EF Core 也可以在實體類型的函式中插入「服務」。 例如，您可以插入下列內容：
+
+* `DbContext`-目前的內容實例，也可以輸入為衍生的 DbCoNtext 類型
+* `ILazyLoader`-延遲載入服務--如需詳細資訊，請參閱消極[式載入檔](../querying/related-data.md)
+* `Action<object, string>`-延遲載入委派--如需詳細資料，請參閱消極[式載入檔](../querying/related-data.md)
+* `IEntityType`-與此實體類型相關聯的 EF Core 中繼資料
 
 > [!NOTE]  
-> 為準，EF Core 2.1 中，可插入 EF Core 的已知的服務。 未來的版本被考慮將應用程式服務的支援。
+> 從 EF Core 2.1，只有 EF Core 已知的服務可以插入。 未來版本將會考慮插入應用程式服務的支援。
 
-例如，插入的 DbContext 可用來選擇性地存取資料庫，以取得相關實體的相關資訊，而不會載入它們全部。 在下列範例中，這用來取得的部落格貼文數目，而不會載入的文章：
+例如，插入的 DbCoNtext 可以用來選擇性地存取資料庫，以取得相關實體的資訊，而不需全部載入。 在下列範例中，這是用來取得 blog 中的貼文數目，而不需要載入文章：
 
 ``` csharp
 public class Blog
@@ -251,10 +261,12 @@ public class Post
     public Blog Blog { get; set; }
 }
 ```
-請注意這幾件事：
-* 因為它永遠只會呼叫 EF Core，而且沒有其他公用建構函式一般用途，是私人的建構函式。
-* 使用插入的服務 （也就是內容） 的程式碼是針對它防禦性正在`null`處理其中 EF Core 不會建立執行個體的情況。
-* 因為服務儲存在讀取/寫入屬性，實體附加至新的內容執行個體時，它將會重設。
+
+以下是一些要注意的事項：
+
+* 此函式是私用的，因為它只會由 EF Core 呼叫，而且有另一個一般使用的公用函數。
+* 使用插入的服務（也就是內容）的程式碼，可以防禦它 `null`，以處理 EF Core 不會建立實例的情況。
+* 因為服務是儲存在讀取/寫入屬性中，所以當實體附加至新的內容實例時，將會重設它。
 
 > [!WARNING]  
-> 插入如下 DbContext 是通常會視為反面模式，因為直接到 EF Core 涉入實體類型。 使用這類服務插入之前，仔細考慮所有選項。
+> 插入這類 DbCoNtext 通常會被視為反模式，因為它會直接將您的實體類型結合 EF Core。 在使用這類服務插入之前，請先仔細考慮所有選項。

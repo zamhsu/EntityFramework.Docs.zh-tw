@@ -1,15 +1,15 @@
 ---
-title: 繼承 （關聯式資料庫） 的 EF Core
+title: 繼承（關係資料庫）-EF Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 9a7c5488-aaf4-4b40-b1ff-f435ff30f6ec
 uid: core/modeling/relational/inheritance
-ms.openlocfilehash: a7fb19f9c86d1768967d172c006eb5d894254e0c
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: c660107619470a726fe13ad8eee2850749e6dcd9
+ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71196939"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72812089"
 ---
 # <a name="inheritance-relational-database"></a>繼承 (關聯式資料庫)
 
@@ -19,13 +19,13 @@ ms.locfileid: "71196939"
 EF 模型中的繼承是用來控制實體類別中的繼承在資料庫中的呈現方式。
 
 > [!NOTE]  
-> 目前，只有每個階層的資料表 (TPH) 模式中實作的 EF Core。 其他常見的模式（例如，每個類型的資料表（TPT）和每個具體的資料表類型（TPC））尚無法使用。
+> 目前，只有每個階層的資料表（TPH）模式會在 EF Core 中執行。 其他常見的模式（例如，每個類型的資料表（TPT）和每個具體的資料表類型（TPC））尚無法使用。
 
 ## <a name="conventions"></a>慣例
 
 依照慣例，會使用每個階層的資料表（TPH）模式來對應繼承。 TPH 會使用單一資料表來儲存階層中所有類型的資料。 鑒別子資料行是用來識別每個資料列所代表的類型。
 
-EF Core 只會設定繼承，如果兩個或多個繼承的型別會明確地包含在模型中 (請參閱[繼承](../inheritance.md)如需詳細資訊)。
+只有在模型中明確包含兩個或多個繼承類型時，EF Core 才會設定繼承（如需詳細資訊，請參閱[繼承](../inheritance.md)）。
 
 以下範例顯示簡單的繼承案例，以及使用 TPH 模式儲存在關係資料庫資料表中的資料。 *鑒別*子資料行會識別每個資料列中所儲存的*Blog*類型。
 
@@ -99,7 +99,8 @@ modelBuilder.Entity<Blog>()
     .HasMaxLength(200);
 ```
 
-鑒別子也可以對應至實體中的實際 CLR 屬性。 例如：
+鑒別子也可以對應至實體中的實際 CLR 屬性。 例如:
+
 ```C#
 class MyContext : DbContext
 {
@@ -126,6 +127,7 @@ public class RssBlog : Blog
 ```
 
 將這兩個專案結合在一起，可以將鑒別子對應到 real 屬性並加以設定：
+
 ```C#
 modelBuilder.Entity<Blog>(b =>
 {

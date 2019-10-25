@@ -1,30 +1,29 @@
 ---
-title: 自訂的移轉作業-EF Core
+title: 自訂遷移作業-EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/07/2017
 uid: core/managing-schemas/migrations/operations
-ms.openlocfilehash: 93de6ee1b2eda1875188ace6eda299260fbcc1fe
-ms.sourcegitcommit: 082946dcaa1ee5174e692dbfe53adeed40609c6a
+ms.openlocfilehash: bd2bfdc24977a47eaf7a6756a88b758b563d818a
+ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2018
-ms.locfileid: "51028079"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72812053"
 ---
-<a name="custom-migrations-operations"></a>自訂的移轉作業
-============================
-MigrationBuilder API 可讓您在移轉時，執行許多不同種類的作業，但不能完全詳盡。 不過，此 API 也是可延伸可讓您定義您自己的作業。 有兩種方式可延伸 API： 使用`Sql()`方法，或藉由定義自訂`MigrationOperation`物件。
+# <a name="custom-migrations-operations"></a>自訂的遷移作業
 
-為了說明，讓我們看看實作建立資料庫使用者，使用每一種方法的作業。 在我們的移轉，我們想要啟用寫入下列程式碼：
+MigrationBuilder API 可讓您在遷移期間執行許多不同種類的作業，但不是很徹底。 不過，此 API 也可延伸，讓您定義自己的作業。 有兩種方式可以擴充 API：使用 `Sql()` 方法，或藉由定義自訂 `MigrationOperation` 物件。
+
+為了說明，讓我們看看如何使用每種方法來建立資料庫使用者。 在我們的遷移中，我們想要啟用撰寫下列程式碼：
 
 ``` csharp
 migrationBuilder.CreateUser("SQLUser1", "Password");
 ```
 
-<a name="using-migrationbuildersql"></a>使用 MigrationBuilder.Sql()
-----------------------------
-實作自訂作業的最簡單方式是定義擴充方法呼叫`MigrationBuilder.Sql()`。
-以下是範例會產生適當的 Transact SQL。
+## <a name="using-migrationbuildersql"></a>使用 MigrationBuilder （）
+
+執行自訂作業最簡單的方式，就是定義會呼叫 `MigrationBuilder.Sql()`的擴充方法。 以下範例會產生適當的 Transact-sql。
 
 ``` csharp
 static MigrationBuilder CreateUser(
@@ -34,7 +33,7 @@ static MigrationBuilder CreateUser(
     => migrationBuilder.Sql($"CREATE USER {name} WITH PASSWORD '{password}';");
 ```
 
-如果您的移轉需要支援多個資料庫提供者，您可以使用`MigrationBuilder.ActiveProvider`屬性。 以下是支援 Microsoft SQL Server 和 PostgreSQL 的範例。
+如果您的遷移需要支援多個資料庫提供者，您可以使用 [`MigrationBuilder.ActiveProvider`] 屬性。 以下是同時支援 Microsoft SQL Server 和于 postgresql 的範例。
 
 ``` csharp
 static MigrationBuilder CreateUser(
@@ -57,11 +56,11 @@ static MigrationBuilder CreateUser(
 }
 ```
 
-這個方法僅適用於您知道每個提供者將會套用您的自訂作業。
+只有在您知道將套用自訂作業的每個提供者時，這個方法才有效。
 
-<a name="using-a-migrationoperation"></a>使用 MigrationOperation
----------------------------
-將它們分開自訂的作業，從 SQL，您可以定義您自己`MigrationOperation`來代表它。 作業接著會傳遞至提供者，因此可以判斷適當的 SQL 來產生。
+## <a name="using-a-migrationoperation"></a>使用 MigrationOperation
+
+若要將自訂作業與 SQL 分離，您可以定義自己的 `MigrationOperation` 來代表它。 作業接著會傳遞至提供者，讓它可以判斷要產生的適當 SQL。
 
 ``` csharp
 class CreateUserOperation : MigrationOperation
@@ -71,7 +70,7 @@ class CreateUserOperation : MigrationOperation
 }
 ```
 
-使用此方法時，擴充方法只需要新增至這些作業的其中一個`MigrationBuilder.Operations`。
+使用此方法時，擴充方法只需要將其中一項作業新增至 `MigrationBuilder.Operations`。
 
 ``` csharp
 static MigrationBuilder CreateUser(
@@ -90,7 +89,7 @@ static MigrationBuilder CreateUser(
 }
 ```
 
-此方法需要知道如何產生 SQL，這項作業中的每個提供者其`IMigrationsSqlGenerator`服務。 以下是覆寫可處理新作業的 SQL Server 的產生器的範例。
+這種方法需要每個提供者知道如何在其 `IMigrationsSqlGenerator` 服務中產生這項作業的 SQL。 以下是覆寫 SQL Server 的產生器以處理新作業的範例。
 
 ``` csharp
 class MyMigrationsSqlGenerator : SqlServerMigrationsSqlGenerator
@@ -135,7 +134,7 @@ class MyMigrationsSqlGenerator : SqlServerMigrationsSqlGenerator
 }
 ```
 
-取代更新的一個預設移轉 sql 產生器服務。
+以更新的 sql 產生器服務取代預設的遷移。
 
 ``` csharp
 protected override void OnConfiguring(DbContextOptionsBuilder options)

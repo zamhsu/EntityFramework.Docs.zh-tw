@@ -1,31 +1,32 @@
 ---
-title: 移轉具有多個專案的 EF Core
+title: 使用個別的遷移專案-EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
 uid: core/managing-schemas/migrations/projects
-ms.openlocfilehash: 30a6afad1488e74ce2585be3d780186311379a97
-ms.sourcegitcommit: ad1bdea58ed35d0f19791044efe9f72f94189c18
+ms.openlocfilehash: 0082b0af2905fe9e5c3c6509516f622c9d4f8370
+ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47447140"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72812040"
 ---
-<a name="using-a-separate-project"></a>使用個別的專案
-========================
-您可以將移轉儲存在不同的組件，比一個包含您`DbContext`。 您也可以使用此策略，以維護多組移轉，例如，一個用於開發，另一個版本到版本升級。
+# <a name="using-a-separate-migrations-project"></a>使用個別的遷移專案
+
+您可能想要將您的遷移儲存在與包含您的 `DbContext`不同的元件中。 您也可以使用此策略來維護多組遷移，例如，一個用於開發，另一個用於發行至發行升級。
 
 若要執行相關作業…
 
 1. 建立新的類別庫。
 
-2. 加入您的 DbContext 組件的參考。
+2. 新增 DbCoNtext 元件的參考。
 
-3. 將移轉與模型快照集檔案移至 類別庫中。
+3. 將「遷移」和「模型快照集」檔案移至類別庫。
    > [!TIP]
-   > 如果您不有任何現有的移轉時，產生一個專案中包含 DbContext，則會移動它。 這很重要，因為如果移轉組件不包含現有的移轉，會找不到 DbContext 新增移轉命令。
+   > 如果您沒有任何現有的遷移，請在包含 DbCoNtext 的專案中產生一個，然後將它移動。
+   > 這很重要，因為如果遷移元件不包含現有的遷移，則新增遷移命令將找不到 DbCoNtext。
 
-4. 設定移轉組件：
+4. 設定遷移元件：
 
    ``` csharp
    options.UseSqlServer(
@@ -33,8 +34,8 @@ ms.locfileid: "47447140"
        x => x.MigrationsAssembly("MyApp.Migrations"));
    ```
 
-5. 新增您移轉的組件中的啟動組件的參考。
-   * 如果這導致循環相依性時，更新類別庫的輸出的路徑：
+5. 從啟動元件新增對您的遷移元件的參考。
+   * 如果這會造成迴圈相依性，請更新類別庫的輸出路徑：
 
      ``` xml
      <PropertyGroup>
@@ -42,11 +43,12 @@ ms.locfileid: "47447140"
      </PropertyGroup>
      ```
 
-如果您正確做到，您應該能夠將新的移轉新增至專案。
+如果您已正確執行所有工作，您應該能夠將新的遷移新增至專案。
 
 ``` powershell
 Add-Migration NewMigration -Project MyApp.Migrations
 ```
+
 ``` Console
 dotnet ef migrations add NewMigration --project MyApp.Migrations
 ```
