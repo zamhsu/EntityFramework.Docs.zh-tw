@@ -35,7 +35,7 @@ Entity Framework Core 可讓您在處理關聯式資料庫時，下拉至原始 
 >
 > 將任何使用者提供的值引進原始 SQL 查詢時，必須小心避免 SQL 插入式攻擊。 除了驗證此類值不包含不正確字元，請一律使用參數化，將值與 SQL 文字分開傳送。
 >
-> 特別的是，絕對不要將未驗證之使用者提供值的串連或插入字串（`$""`）傳遞至 `FromSqlRaw` 或 `ExecuteSqlRaw`。 `FromSqlInterpolated` 和 `ExecuteSqlInterpolated` 方法允許以防止 SQL 插入式攻擊的方式使用字串內插補點語法。
+> 特別的是，絕對不要將未驗證之使用者提供值的串連或插入字串（`$""`）傳遞至 `FromSqlRaw` 或 `ExecuteSqlRaw`。 @No__t-0 和 @no__t 1 方法允許以防止 SQL 插入式攻擊的方式使用字串內插補點語法。
 
 下列範例會將參數預留位置包含在 SQL 查詢字串中，並提供其他引數，藉以將單一參數傳遞至預存程式。 雖然此語法看起來可能像 `String.Format` 語法，但提供的值會包裝在 `DbParameter` 中，而產生的參數名稱會插入指定的 `{0}` 預留位置。
 
@@ -83,9 +83,9 @@ ORDER BY [b].[Rating] DESC
 
 - 尾端分號
 - 在 SQL Server 上，結尾的查詢層級提示 (例如，`OPTION (HASH JOIN)`)
-- 在 SQL Server 上，未在 `SELECT` 子句中搭配 `OFFSET 0` 或 `TOP 100 PERCENT` 使用的 `ORDER BY` 子句
+- 在 SQL Server 上，未在 `SELECT` 子句中搭配 `OFFSET 0` 或 `TOP 100 PERCENT` 使用的 @no__t 0 子句
 
-SQL Server 不允許撰寫預存程序呼叫，因此嘗試將其他查詢運算子套用至這類呼叫將會導致不正確 SQL。 在 `FromSqlRaw` 或 `FromSqlInterpolated` 方法之後，使用 `AsEnumerable` 或 `AsAsyncEnumerable` 方法，確保 EF Core 不會嘗試撰寫預存程式。
+SQL Server 不允許撰寫預存程序呼叫，因此嘗試將其他查詢運算子套用至這類呼叫將會導致不正確 SQL。 在 `FromSqlRaw` 或 @no__t 3 方法之後，使用 `AsEnumerable` 或 `AsAsyncEnumerable` 方法，確保 EF Core 不會嘗試撰寫預存程式。
 
 ## <a name="change-tracking"></a>變更追蹤
 
