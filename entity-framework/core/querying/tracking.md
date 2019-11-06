@@ -55,7 +55,7 @@ ms.locfileid: "72445946"
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection3)]
 
- EF Core 支援在最上層投影中進行用戶端評估。 如果 EF Core 具體化實體實例以進行用戶端評估，則會進行追蹤。 在這裡，因為我們會將 `blog` 實體傳遞至用戶端方法 `StandardizeURL`，EF Core 也會追蹤 blog 實例。
+ EF Core 支援在最上層投影中進行用戶端評估。 如果 EF Core 具體化實體實例以進行用戶端評估，則會進行追蹤。 在這裡，因為我們會將 @no__t 0 實體傳遞至用戶端方法 `StandardizeURL`，EF Core 也會追蹤 blog 實例。
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#ClientProjection)]
 
