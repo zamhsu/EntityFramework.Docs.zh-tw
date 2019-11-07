@@ -4,14 +4,15 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: b2e3881e3454377dab7851cba999ed6b891def4e
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.openlocfilehash: f02825f5303959997dca6e14e4efe64020b3cb22
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72812131"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655882"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>EF Core 3.0 中包含的重大變更
+
 下列 API 和行為變更可能會在將現有的應用程式升級至3.0.0 時中斷。
 這些變更預期只會影響[提供者變更](xref:core/providers/provider-log)底下記載的資料庫提供者。
 
@@ -80,7 +81,7 @@ ms.locfileid: "72812131"
 
 **舊行為**
 
-3\.0 以前，在 EF Core 無法將屬於查詢的運算式轉換成 SQL 或參數時，它會自動在用戶端評估運算式。
+3.0 以前，在 EF Core 無法將屬於查詢的運算式轉換成 SQL 或參數時，它會自動在用戶端評估運算式。
 根據預設，對可能相當耗費資源的運算式進行用戶端評估只會觸發警告。
 
 **新行為**
@@ -1600,7 +1601,7 @@ Microsoft.EntityFrameworkCore.Sqlite 先前相依於 SQLitePCL.raw 的 1.1.12 �
 
 **原因**
 
-2\.0.0 版的 SQLitePCL.raw 以 .NET Standard 2.0 為目標。 它先前以 .NET Standard 1.1 為目標，這需要大量的大量的可轉移套件才能運作。
+2.0.0 版的 SQLitePCL.raw 以 .NET Standard 2.0 為目標。 它先前以 .NET Standard 1.1 為目標，這需要大量的大量的可轉移套件才能運作。
 
 **風險降低**
 
