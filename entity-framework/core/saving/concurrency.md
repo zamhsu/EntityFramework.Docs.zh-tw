@@ -3,12 +3,12 @@ title: 處理並行存取衝突 - EF Core
 author: rowanmiller
 ms.date: 03/03/2018
 uid: core/saving/concurrency
-ms.openlocfilehash: 4d6ff24e58caa0b228e9c1e4313beda78d1025fc
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: b72fa472698e76e18f155cf96b738b0e193eee0f
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197827"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73654621"
 ---
 # <a name="handling-concurrency-conflicts"></a>處理並行存取衝突
 
@@ -56,11 +56,9 @@ WHERE [PersonId] = @p0 AND [LastName] = @p2;
 
 **有三組值可供協助解決並行存取衝突：**
 
-* 「目前值」係指應用程式嘗試寫入至資料庫的值。
-
-* 「原始值」係指在進行任何編輯之前，原先從資料庫擷取到的值。
-
-* 「資料庫值」係指目前儲存在資料庫中的值。
+- 「目前值」係指應用程式嘗試寫入至資料庫的值。
+- 「原始值」係指在進行任何編輯之前，原先從資料庫擷取到的值。
+- 「資料庫值」係指目前儲存在資料庫中的值。
 
 處理並行存取衝突的一般方法是：
 

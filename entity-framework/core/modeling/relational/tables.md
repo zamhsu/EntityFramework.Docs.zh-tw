@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: c807aa4c-7845-443d-b8d0-bfc9b42691a3
 uid: core/modeling/relational/tables
-ms.openlocfilehash: 62dce317b901bc862b3c7d20ed1d176805bb24dd
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 474c49aca4c65cd5d58b184b1f3c2d30e7abff84
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71196964"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656095"
 ---
 # <a name="table-mapping"></a>資料表對應
 
@@ -20,7 +20,7 @@ ms.locfileid: "71196964"
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，每個實體都會設定成對應至與 `DbSet<TEntity>` 屬性同名的資料表，該屬性會在衍生內容上公開實體。 `DbSet<TEntity>`如果指定的實體未包含，則會使用類別名稱。
+依照慣例，每個實體都會設定成對應至與 `DbSet<TEntity>` 屬性同名的資料表，該屬性會在衍生內容上公開實體。 如果指定的實體未包含任何 `DbSet<TEntity>`，則會使用類別名稱。
 
 ## <a name="data-annotations"></a>資料註釋
 
@@ -28,8 +28,7 @@ ms.locfileid: "71196964"
 
 ``` csharp
 using System.ComponentModel.DataAnnotations.Schema;
-```
-``` csharp
+
 [Table("blogs")]
 public class Blog
 {
@@ -55,8 +54,7 @@ public class Blog
 
 ``` csharp
 using Microsoft.EntityFrameworkCore;
-```
-``` csharp
+
 class MyContext : DbContext
 {
     public DbSet<Blog> Blogs { get; set; }
@@ -77,8 +75,4 @@ public class Blog
 
 您也可以指定資料表所屬的架構。
 
-<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Relational/TableAndSchema.cs?highlight=2)] -->
-``` csharp
-        modelBuilder.Entity<Blog>()
-            .ToTable("blogs", schema: "blogging");
-```
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Relational/TableAndSchema.cs?name=Table&highlight=2)]

@@ -3,12 +3,13 @@ title: Entity Framework 的過去版本-EF6
 author: divega
 ms.date: 09/12/2019
 ms.assetid: 1060bb99-765f-4f32-aaeb-d6635d3dbd3e
-ms.openlocfilehash: 478dec6b2401efd554e84a231fe78e71dcbf5771
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+uid: ef6/what-is-new/past-releases
+ms.openlocfilehash: fada7740453cd9a55a1d0069236efcecbd9aa314
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182112"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656145"
 ---
 # <a name="past-releases-of-entity-framework"></a>過去的 Entity Framework 版本
 
@@ -50,7 +51,7 @@ EF 6.2 執行階段已於 2017 年 10 月發行至 NuGet。
 - Migrate.exe 現在支援 -script 選項 [#240](https://github.com/aspnet/EntityFramework6/issues/240)
 - EF6 現在可以使用 SQL Server 中的序列所產生的索引鍵值 [#165](https://github.com/aspnet/EntityFramework6/issues/165)
 - SQL Azure 執行策略之暫時性錯誤的更新清單 [#83](https://github.com/aspnet/EntityFramework6/issues/83)
-- Bug：重試查詢或 SQL 命令失敗，並顯示「SqlParameter 已包含在另一個 SqlParameterCollection 中」[#81](https://github.com/aspnet/EntityFramework6/issues/81)
+- Bug：重試查詢或 SQL 命令失敗，並顯示「SqlParameter 已由另一個 SqlParameterCollection 所包含」 [#81](https://github.com/aspnet/EntityFramework6/issues/81)
 - Bug：DbQuery.ToString() 評估經常在偵錯工具中逾時 [#73](https://github.com/aspnet/EntityFramework6/issues/73)
 
 ## <a name="ef-613"></a>EF 之 EF6.1。3
@@ -58,7 +59,7 @@ EF 之 ef6.1.3 執行時間已于2015年10月發行至 NuGet。
 此版本僅包含6.1.2 版本上回報之高優先順序瑕疵和回歸的修正。
 修正包括：
 
-- 查詢:EF 6.1.2 中的回歸：外部適用于1:1 關聯性和 "let" 子句的引進和更複雜的查詢
+- 查詢： EF 6.1.2 中的回歸：外部套用引進和更複雜的1:1 關聯性和 "let" 子句查詢
 - 在繼承的類別中隱藏基類屬性的 TPT 問題
 - 當文字中包含 ' go ' 一字時，DbMigration 就會失敗
 - 建立 UnionAll 和 Intersect 簡維支援的相容性旗標
@@ -79,7 +80,7 @@ EF 6.1.2 執行時間已在2014年12月發行至 NuGet。
 ## <a name="ef-611"></a>EF 6.1。1
 EF 6.1.1 runtime 已于2014年6月發行至 NuGet。
 此版本包含許多人遇到之問題的修正程式。 還有其他：
-- 設計在 EF6 表設計工具中，以十進位有效位數開啟 EF5 edmx 時發生錯誤
+- 設計師：在 EF6 表設計工具中，以十進位有效位數開啟 EF5 的 edmx 時發生錯誤
 - LocalDB 的預設實例偵測邏輯不適用於 SQL Server 2014
 
 ## <a name="ef-610"></a>EF 6.1。0
@@ -125,7 +126,7 @@ EF 6.0.0 執行時間已于2013年10月發行至 NuGet。
 - **.Net 4.0 的列舉、空間和更好的效能**-藉由將過去 .NET Framework 的核心元件移至 EF NuGet 套件，我們現在可以提供 enum 支援、空間資料類型，以及 .net 4.0 上 EF5 的效能改進。
 - 已改善可列舉**的效能。包含在 LINQ 查詢中**。
 - **改善的準備時間（視圖產生）** ，特別是針對大型模型。
-- **隨插即用複數表示 &amp; 單數服務**。
+- **插即用複數表示 &amp; 單數服務**。
 - 現在支援實體類別上**Equals 或 GetHashCode 的自訂**執行。
 - **DbSet. AddRange/RemoveRange**提供了從集合中新增或移除多個實體的最佳方式。
 - **DbChangeTracker。 HasChanges**提供一個簡單又有效率的方式，來查看是否有任何暫止的變更要儲存到資料庫中。
@@ -138,11 +139,11 @@ EF 6.0.0 執行時間已于2013年10月發行至 NuGet。
 - **[等冪遷移腳本](~/ef6/modeling/code-first/migrations/index.md)** 可讓您產生 SQL 腳本，以便將任何版本的資料庫升級至最新版本。
 - **[可設定的遷移記錄資料表](~/ef6/modeling/code-first/migrations/history-customization.md)** 可讓您自訂遷移記錄資料表的定義。 這特別適用于需要適當資料類型等的資料庫提供者，才能指定要讓遷移記錄資料表正常運作。
 - 使用遷移時或 Code First 自動為您建立資料庫時，每個資料庫的**多個**內容都會移除每個資料庫之一個 Code First 模型的先前限制。
-- **[DbModelBuilder. HasDefaultSchema](~/ef6/modeling/code-first/fluent/types-and-properties.md)** 是新的 Code First API，可讓 Code First 模型的預設資料庫架構在一處進行設定。 先前 Code First 預設架構已硬式編碼為 @no__t 0dbo @ no__t-1，而設定資料表所屬架構的唯一方式是透過 ToTable API。
+- **[DbModelBuilder. HasDefaultSchema](~/ef6/modeling/code-first/fluent/types-and-properties.md)** 是新的 Code First API，可讓 Code First 模型的預設資料庫架構在一處進行設定。 先前 Code First 預設架構已硬式編碼為 &quot;dbo&quot;，而設定資料表所屬架構的唯一方式是透過 ToTable API。
 - 當您使用具有 Code First 流暢 API 的設定類別時， **AddFromAssembly 方法**可讓您輕鬆地新增元件中定義的所有 configuration 類別。
 - **[自訂的遷移作業](https://romiller.com/2013/02/27/ef6-writing-your-own-code-first-migration-operations/)** 可讓您新增其他作業，以用於以程式碼為基礎的遷移。
-- 針對使用 Code First 所建立的資料庫，**預設交易隔離等級會變更為 READ_COMMITTED_SNAPSHOT** ，以提供更多的擴充性和較少的鎖死。
-- **實體和複雜類型現在可以是 nestedinside 類別**。 |
+- **預設交易隔離等級會**針對使用 Code First 建立的資料庫變更為 READ_COMMITTED_SNAPSHOT，以提供更多的擴充性和較少的鎖死。
+- **實體和複雜類型現在可以是 nestedinside 類別**。
 
 ## <a name="ef-50"></a>EF 5。0
 EF 5.0.0 執行時間已于2012年8月發行至 NuGet。
@@ -150,7 +151,7 @@ EF 5.0.0 執行時間已于2012年8月發行至 NuGet。
 
 Visual Studio 2012 中的 Entity Framework Designer 也引進了每個模型的多個圖表支援、設計介面上的圖形著色，以及預存程式的批次匯入。
 
-以下是我們特別為 EF 5 版本放在一起的內容清單。
+以下是我們特別為 EF 5 版本放在一起的內容清單：
 
 -   [EF 5 版本文章](https://blogs.msdn.com/b/adonet/archive/2012/08/15/ef5-released.aspx)
 -   EF5 的新功能
@@ -217,7 +218,7 @@ Visual Studio 2012 中的 Entity Framework Designer 也引進了每個模型的�
 Ef 4.3.1 執行時間已在 EF 4.3.0 之後的2012年2月發行至 NuGet。
 此修補程式版本包含 EF 4.3 版本的一些 bug 修正，並為使用 EF 4.3 與 Visual Studio 2012 的客戶引進了更好的 LocalDB 支援。
 
-以下是我們特別為 EF 4.3.1 版本放在一起的內容清單，針對 EF 4.1 提供的大部分內容也適用于 EF 4.3。
+以下是我們特別為 EF 4.3.1 版本放在一起的內容清單，針對 EF 4.1 提供的大部分內容也適用于 EF 4.3：
 
 -   [EF 4.3.1 Release Blog 文章](https://blogs.msdn.com/b/adonet/archive/2012/02/29/ef4-3-1-and-ef5-beta-1-available-on-nuget.aspx)
 
@@ -235,7 +236,7 @@ EF 4.2.0 執行時間已于2011年11月發行至 NuGet。
 此版本包含 EF 4.1.1 版本的錯誤修正。
 因為此版本只包含 bug 修正，所以它可能是 EF 4.1.2 修補程式版本，但我們選擇改為4.2，以讓我們從 4.1. x 版中使用的以日期為基礎的修補程式版本號碼中移出，並採用適用于 s 的[語義 Versionsing](https://semver.org)標準emantic 版本設定。
 
-以下是我們特別為 EF 4.2 版本放在一起的內容清單，針對 EF 4.1 提供的內容也會套用至 EF 4.2。
+以下是我們特別為 EF 4.2 版本放在一起的內容清單，針對 EF 4.1 提供的內容也會套用至 EF 4.2：
 
 -   [EF 4.2 發行文章](https://blogs.msdn.com/b/adonet/archive/2011/11/01/ef-4-2-released.aspx)
 -   [Code First 逐步解說](https://blogs.msdn.com/b/adonet/archive/2011/09/28/ef-4-2-code-first-walkthrough.aspx)

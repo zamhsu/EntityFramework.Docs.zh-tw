@@ -4,44 +4,26 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 912ffef7-86a0-4cdc-a776-55f907459d20
 uid: core/modeling/keys
-ms.openlocfilehash: 8b32bf6417890a954c933a5973a2c90c609beeca
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 66c64c389294e8e109a614a2bea8311932660dea
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197277"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655940"
 ---
 # <a name="keys-primary"></a>索引鍵 (主要)
 
-索引鍵可作為每個實體實例的主要唯一識別碼。 當使用關係資料庫時，這會對應至*主鍵*的概念。 您也可以設定非主要金鑰的唯一識別碼（如需詳細資訊，請參閱[替代金鑰](alternate-keys.md)）。 
+索引鍵可作為每個實體實例的主要唯一識別碼。 當使用關係資料庫時，這會對應至*主鍵*的概念。 您也可以設定非主要金鑰的唯一識別碼（如需詳細資訊，請參閱[替代金鑰](alternate-keys.md)）。
 
 您可以使用下列其中一種方法來設定/建立主要金鑰。
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，名為`Id`或`<type name>Id`的屬性會設定為實體的索引鍵。
+依照慣例，名為 `Id` 或 `<type name>Id` 的屬性會設定為實體的索引鍵。
 
-<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/KeyId.cs?highlight=3)] -->
-``` csharp
-class Car
-{
-    public string Id { get; set; }
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/KeyId.cs?name=KeyId&highlight=3)]
 
-    public string Make { get; set; }
-    public string Model { get; set; }
-}
-```
-
-<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/KeyTypeNameId.cs?highlight=3)] -->
-``` csharp
-class Car
-{
-    public string CarId { get; set; }
-
-    public string Make { get; set; }
-    public string Model { get; set; }
-}
-```
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/KeyTypeNameId.cs?name=KeyIdhighlight=3)]
 
 ## <a name="data-annotations"></a>資料註釋
 

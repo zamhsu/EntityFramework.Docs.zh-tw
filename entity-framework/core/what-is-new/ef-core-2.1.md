@@ -4,28 +4,31 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: 5f97015f0228387574e3a19fb20cae1bdb403410
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: ba3a26bcd76cd0b9615b13f32456e7280afe533a
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149172"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73654835"
 ---
 # <a name="new-features-in-ef-core-21"></a>EF Core 2.1 中的新功能
 
 除了許多 Bug 修正和小型的功能和效能增強之外，EF Core 2.1 還包含一些吸引人的新功能：
 
 ## <a name="lazy-loading"></a>消極式載入
+
 EF Core 現在包含必要的建置組塊，可讓任何人撰寫實體類別，以視需要載入其導覽屬性。 我們也已建立新套件 Microsoft.EntityFrameworkCore.Proxies，該套件利用這些建置組塊來產生以最小修改之實體類別為基礎的消極式載入 Proxy 類別 (例如，具有虛擬導覽屬性的類別)。
 
 如需此主題的詳細資訊，請閱讀[消極式載入](xref:core/querying/related-data#lazy-loading)一節。
 
 ## <a name="parameters-in-entity-constructors"></a>實體建構函式中的參數
+
 因為是消極式載入所需要建置組塊之一，所以我們允許建立實體，由其建構函式來接受參數。 您可以使用這些參數來插入屬性值、消極式載入委派和服務。
 
 如需此主題的詳細資訊，請閱讀[含參數的實體建構函式](xref:core/modeling/constructors)一節。
 
 ## <a name="value-conversions"></a>值轉換
+
 到目前為止，EF Core 只能對應基礎資料庫提供者原生支援類型的屬性。 這些值會在資料行與屬性之間來回複製，無須進行任何轉換。 從 EF Core 2.1 開始，您可以套用值轉換來轉換從資料行取得的值，再將這些值套用至屬性，反之亦然。 我們有一些可以依照慣例視需要套用的轉換，以及允許在資料行與屬性之間註冊自訂轉換的明確組態 API。 這項功能的一些應用包括：
 
 - 將列舉儲存為字串
@@ -35,6 +38,7 @@ EF Core 現在包含必要的建置組塊，可讓任何人撰寫實體類別，
 如需此主題的詳細資訊，請閱讀[值轉換](xref:core/modeling/value-conversions)一節。  
 
 ## <a name="linq-groupby-translation"></a>LINQ GroupBy 轉譯
+
 在 2.1 版之前，EF Core 中的 GroupBy LINQ 運算子一律會在記憶體內部評估。 我們現在支援在最常見的案例中將它轉譯成 SQL GROUP BY 子句。
 
 此範例會顯示使用 GroupBy 來計算各種彙總函式的查詢：
@@ -63,6 +67,7 @@ GROUP BY [o].[CustomerId], [o].[EmployeeId];
 ```
 
 ## <a name="data-seeding"></a>資料植入
+
 在此新版本中，您可以提供初始資料來填入資料庫。 不同於 EF6，植入資料與屬於模型組態一部分的實體類型相關聯。 然後，將資料庫升級至新版模型時，EF Core 移轉可以自動計算需要套用的插入、更新或刪除作業。
 
 例如，您可以使用此選項，為 `OnModelCreating` 中的 Post 設定種子資料：
@@ -74,6 +79,7 @@ modelBuilder.Entity<Post>().HasData(new Post{ Id = 1, Text = "Hello World!" });
 如需此主題的詳細資訊，請閱讀[資料植入](xref:core/modeling/data-seeding)一節。  
 
 ## <a name="query-types"></a>查詢類型
+
 EF Core 模型現在可以包含查詢類型。 不同於實體類型，查詢類型並未定義索引鍵，也無法予以插入、刪除或更新 (亦即這些類型是唯讀的)，但可以直接由查詢傳回。 查詢類型的一些使用方式情節包括：
 
 - 對應至不含主索引鍵的檢視表
@@ -84,6 +90,7 @@ EF Core 模型現在可以包含查詢類型。 不同於實體類型，查詢�
 如需此主題的詳細資訊，請閱讀[查詢類型](xref:core/modeling/keyless-entity-types)一節。
 
 ## <a name="include-for-derived-types"></a>隨附於衍生類型
+
 現在，當您為 `Include` 方法撰寫運算式時，您可以指定只在衍生類型上定義的導覽屬性。 針對 `Include` 的強型別版本，我們支援使用明確轉換或 `as` 運算子。 我們現在也支援參考 `Include` 的字串版本中衍生類型上所定義的導覽屬性名稱：
 
 ``` csharp
@@ -95,14 +102,17 @@ var option3 = context.People.Include("School");
 如需此主題的詳細資訊，請閱讀[隨附於衍生類型](xref:core/querying/related-data#include-on-derived-types)一節。
 
 ## <a name="systemtransactions-support"></a>System.Transactions 支援
+
 我們新增了使用 System.Transactions 功能的能力，例如 TransactionScope。 使用支援的資料庫提供者時，這會適用於 .NET Framework 和 .NET Core。
 
 如需此主題的詳細資訊，請閱讀 [System.Transactions](xref:core/saving/transactions#using-systemtransactions) 一節。
 
 ## <a name="better-column-ordering-in-initial-migration"></a>改進初始移轉中的資料行排序
+
 根據客戶的意見反應，我們已更新移轉，一開始就依類別中宣告屬性的相同順序來產生資料表的資料行。 請注意，若在初始資料表建立之後新增成員，EF Core 就無法變更順序。
 
 ## <a name="optimization-of-correlated-subqueries"></a>相互關聯子查詢的最佳化
+
 我們已改善查詢轉譯，避免在許多常見情節中執行 "N + 1" SQL 查詢，在這些情節中，於投影中使用導覽屬性會導致根查詢中的資料與相互關聯子查詢中的資料相聯結。 最佳化需要緩衝子查詢形成的結果，因此我們會要求您修改查詢以加入新的行為。
 
 例如，下列查詢通常會轉譯成一個用於客戶的查詢，再加上 N (其中 "N" 是傳回的客戶數目) 個用於訂單的個別查詢：
@@ -119,7 +129,7 @@ var query = context.Customers.Select(
     c => c.Orders.Where(o => o.Amount  > 100).Select(o => o.Amount).ToList());
 ```
 
-請注意，此查詢只會轉譯為兩個 SQL 查詢：一個適用於 Customers，而另一個適用於 Orders。
+請注意這項查詢只會轉譯成兩個 SQL 查詢：一個用於客戶，另一個用於訂單。
 
 ## <a name="owned-attribute"></a>[Owned] 屬性
 
@@ -147,6 +157,7 @@ _dotnet-ef_ 命令現為 .NET Core SDK 的一部分，因此不再需要在專�
 如需如何啟用不同版本之 .NET Core SDK 和 EF Core 命令列工具的詳細資訊，請參閱[安裝工具](xref:core/miscellaneous/cli/dotnet#installing-the-tools)一節。
 
 ## <a name="microsoftentityframeworkcoreabstractions-package"></a>Microsoft.EntityFrameworkCore.Abstractions 套件
+
 新的套件包含屬性和介面，您可以在專案中使用這些屬性和介面來啟用 EF Core 功能，而不必仰賴整體 EF Core。 例如，[Owned] 屬性與 ILazyLoader 介面位於此處。
 
 ## <a name="state-change-events"></a>狀態變更事件

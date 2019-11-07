@@ -5,12 +5,12 @@ ms.author: avickers
 ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 070f2ad396ec21858096c29413ac80bdf8547328
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 88c3fa8ea5b8246a932f5cf21e674bc7cc71c0ea
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197805"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656275"
 ---
 # <a name="disconnected-entities"></a>已中斷連線的實體
 
@@ -18,11 +18,13 @@ DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在
 
 不過，有時會在查詢實體時使用一個內容執行個體，然後儲存時又使用不同的執行個體。 這通常發生在「已中斷連線」的案例中，例如 Web 應用程式，其中會在要求中對實體進行查詢、傳送給用戶端、修改、傳回給伺服器，然後再儲存。 在此情況下，第二個內容執行個體必須知道實體是新的 (應該插入) 還是現有的 (應該更新)。
 
-> [!TIP]  
+<!-- markdownlint-disable MD028 -->
+> [!TIP]
 > 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) \(英文\)。
 
 > [!TIP]
 > 對於具有指定主索引鍵值的任何實體，EF Core 只能追蹤其中一個執行個體。 若要避免此情況成為問題，最佳方式就是針對每個工作單位都使用短期內容，讓內容從空白開始、有實體與其連結、儲存這些實體，然後再處置及捨棄內容。
+<!-- markdownlint-enable MD028 -->
 
 ## <a name="identifying-new-entities"></a>識別新實體
 
@@ -50,8 +52,9 @@ DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在
 ### <a name="with-other-keys"></a>搭配其他索引鍵
 
 當索引鍵值不是以自動方式產生時，需要一些其他機制來識別新的實體。 這包括兩種一般做法：
- * 查詢實體
- * 從用戶端傳遞旗標
+
+* 查詢實體
+* 從用戶端傳遞旗標
 
 若要查詢實體，請直接使用 Find 方法：
 
@@ -74,11 +77,12 @@ Update 方法通常會將實體標示為要進行更新，而不是插入。 不
 > [!TIP]  
 > 這是在 EF Core 2.0 中所導入的行為。 在舊版中，一律是必須明確選擇 Add 或 Update。
 
-如果實體未使用自動產生的索引鍵，則應用程式必須決定是否要插入或更新實體：例如：
+如果實體未使用自動產生的金鑰，應用程式就必須判斷是應該插入還是更新實體：例如：
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntityWithFind)]
 
 步驟如下：
+
 * 如果 Find 傳回 Null，即表示資料庫尚未包含具有此識別碼的部落格，因此我們會呼叫 Add 來將它標示為要進行插入。
 * 如果 Find 傳回實體，則表示它存在於資料庫中，而內容現在正在追蹤該現有實體
   * 那麼，我們就會使用 SetValues 將此實體上所有屬性的值設定為那些來自用戶端的值。
@@ -127,7 +131,7 @@ Update 會將圖表中任何未設定索引鍵值的實體 (部落格或文章) 
 
 處理刪除可能相當棘手，因為當實體不存在時，常常意謂著應該將其刪除。 其中一個處理此情況的方式是使用「虛刪除」來將實體標示為已刪除，而不是實際進行刪除。 如此一來，刪除就變成與更新相同。 您可以在使用[查詢篩選](xref:core/querying/filters)時實作虛刪除。
 
-針對真實的刪除，常見的模式是使用查詢模式的延伸來執行基本上是圖表差異的操作。例如：
+針對真實的刪除，常見的模式是使用查詢模式的延伸來執行基本上是圖表差異的操作。 例如:
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 

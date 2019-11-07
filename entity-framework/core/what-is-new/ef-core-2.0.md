@@ -4,16 +4,17 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 781578d9de05895cdbc777aa53c3f6d6f9777869
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: 72393e96c195af1df5a169025ca2ce7a7acb16bb
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149045"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656215"
 ---
 # <a name="new-features-in-ef-core-20"></a>EF Core 2.0 中的新功能
 
 ## <a name="net-standard-20"></a>.NET Standard 2.0
+
 EF Core 現在的目標是 .NET Standard 2.0，表示它可以處理 .NET Core 2.0、.NET Framework 4.6.1 以及其他實作 .NET Standard 2.0 的程式庫。
 如需所支援實作的詳細資料，請參閱[支援的 .NET 實作](../platforms/index.md)。
 
@@ -32,6 +33,7 @@ modelBuilder.Entity<Product>()
 modelBuilder.Entity<Product>().ToTable("Products");
 modelBuilder.Entity<ProductDetails>().ToTable("Products");
 ```
+
 如需此功能的詳細資訊，請詳讀[資料表分割章節](xref:core/modeling/table-splitting)。
 
 ### <a name="owned-types"></a>擁有的類型
@@ -65,6 +67,7 @@ public class StreetAddress
     public string City { get; set; }
 }
 ```
+
 如需這項功能的詳細資訊，請閱讀[擁有的實體類型](xref:core/modeling/owned-entities)一節。
 
 ### <a name="model-level-query-filters"></a>模型層級查詢篩選
@@ -92,6 +95,7 @@ public class BloggingContext : DbContext
     }
 }
 ```
+
 我們會定義模型層級篩選，以實作 `Post` 實體類型執行個體的多租用戶和虛刪除。 請注意如何使用 DbContext 執行個體層級屬性：`TenantId`。 模型層級篩選會使用正確內容執行個體 (即執行查詢的內容執行個體詢) 中的值。
 
 可能會使用 IgnoreQueryFilters() 運算子停用個別 LINQ 查詢的篩選。
@@ -298,9 +302,11 @@ public class MyPluralizer : IPluralizer
 ## <a name="others"></a>其他
 
 ### <a name="move-adonet-sqlite-provider-to-sqlitepclraw"></a>將 ADO.NET SQLite 提供者移至 SQLitePCL.raw
+
 這可在 Microsoft.Data.Sqlite 中提供更穩固的方案，以將原生 SQLite 二進位檔散發到不同的平台。
 
 ### <a name="only-one-provider-per-model"></a>一個模型只會有一個提供者
+
 大幅增加提供者如何與模型互動，以及簡化慣例、註釋和 Fluent API 如何與不同的提供者搭配運作。
 
 EF Core 2.0 現在會為使用的每個不同提供者建置不同的 [IModel](https://github.com/aspnet/EntityFramework/blob/master/src/EFCore/Metadata/IModel.cs)。 應用程式通常可以看到這項作業。 這已加速簡化較低階中繼資料 API；因此，任何對*一般關聯式中繼資料概念*的存取一律是透過 `.Relational` 呼叫來進行，而非 `.SqlServer`、`.Sqlite` 等等。

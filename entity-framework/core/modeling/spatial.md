@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: cced53edadb890e4e86753ec2628218ffc4d1d5b
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 335d4f3a601624f7c994b7dcacefe4ef6798beb3
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181384"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655604"
 ---
 # <a name="spatial-data"></a>空間資料
 
@@ -48,7 +48,7 @@ optionsBuilder.UseSqlServer(
 
 有數個空間資料類型。 您所使用的類型取決於您想要允許的圖形類型。 以下是您可以在模型中用於屬性的 NTS 類型階層。 它們位於 `NetTopologySuite.Geometries` 命名空間內。
 
-* 幾何
+* 性質
   * 點
   * LineString
   * 多邊形
@@ -101,7 +101,7 @@ var currentLocation = geometryFactory.CreatePoint(-122.121512, 47.6739882);
 
 ### <a name="longitude-and-latitude"></a>經度和緯度
 
-NTS 中的座標是以 X 和 Y 值為依據。 若要代表經度和緯度，請將 X 用於經度，並針對緯度使用 Y。 請注意，這是您通常會看到這些值的 `latitude, longitude` 格式的**反向**。
+NTS 中的座標是以 X 和 Y 值為依據。 若要代表經度和緯度，請將 X 用於經度，並針對緯度使用 Y。 請**注意，這是您**通常會看到這些值的 `latitude, longitude` 格式。
 
 ### <a name="srid-ignored-during-client-operations"></a>在用戶端操作期間忽略 SRID
 
@@ -207,17 +207,17 @@ var currentCountry = db.Countries
     .FirstOrDefault(c => c.Border.Contains(currentLocation));
 ```
 
-## <a name="sql-server"></a>[SQL Server]
+## <a name="sql-server"></a>SQL Server
 
 如果您使用 SQL Server，還有一些您應該注意的其他事項。
 
 ### <a name="geography-or-geometry"></a>Geography 或 geometry
 
-根據預設，空間屬性會對應至 SQL Server 中的 @no__t 0 資料行。 若要使用 `geometry`，請在您的模型中[設定資料行類型](xref:core/modeling/relational/data-types)。
+根據預設，空間屬性會對應至 SQL Server 中 `geography` 資料行。 若要使用 `geometry`，請在您的模型中[設定資料行類型](xref:core/modeling/relational/data-types)。
 
 ### <a name="geography-polygon-rings"></a>地理多邊形環形
 
-使用 [`geography`] 資料行類型時，SQL Server 會對外部環形（或 shell）和內部環形（或孔）施加額外的需求。 外部環形必須以逆時針方向和內部環形。 NTS 會在將值傳送至資料庫之前進行驗證。
+使用 `geography` 資料行類型時，SQL Server 會在外部環形（或 shell）和內部環形（或孔）上施加額外的需求。 外部環形必須以逆時針方向和內部環形。 NTS 會在將值傳送至資料庫之前進行驗證。
 
 ### <a name="fullglobe"></a>FullGlobe
 
@@ -271,7 +271,7 @@ Geometry. AsBinary （） | ✔ | ✔ | ✔ | ✔
 Geometry. AsText （） | ✔ | ✔ | ✔ | ✔
 Geometry。界限 | ✔ | | ✔ | ✔
 Geometry： Buffer （雙精度浮點數） | ✔ | ✔ | ✔ | ✔
-Geometry （double，int） | | | ✔
+Geometry （double，int） | | | ✔ | ✔
 Geometry. 距心 | ✔ | | ✔ | ✔
 Geometry。 Contains （Geometry） | ✔ | ✔ | ✔ | ✔
 Geometry. ConvexHull （） | ✔ | ✔ | ✔ | ✔
@@ -287,17 +287,17 @@ EqualsExact （Geometry） | | | | ✔
 EqualsTopologically （Geometry） | ✔ | ✔ | ✔ | ✔
 Geometry. GeometryType | ✔ | ✔ | ✔ | ✔
 GetGeometryN （int） | ✔ | | ✔ | ✔
-Geometry. InteriorPoint | ✔ | | ✔
+Geometry. InteriorPoint | ✔ | | ✔ | ✔
 Geometry. 交集（Geometry） | ✔ | ✔ | ✔ | ✔
 Geometry. 交集（Geometry） | ✔ | ✔ | ✔ | ✔
 Geometry. IsEmpty | ✔ | ✔ | ✔ | ✔
 Geometry. IsSimple | ✔ | | ✔ | ✔
 Geometry | ✔ | ✔ | ✔ | ✔
-IsWithinDistance （Geometry，double） | ✔ | | ✔
+IsWithinDistance （Geometry，double） | ✔ | | ✔ | ✔
 Geometry。長度 | ✔ | ✔ | ✔ | ✔
 Geometry. NumGeometries | ✔ | ✔ | ✔ | ✔
 Geometry. X.numpoints | ✔ | ✔ | ✔ | ✔
-Geometry. OgcGeometryType | ✔ | ✔ | ✔
+Geometry. OgcGeometryType | ✔ | ✔ | ✔ | ✔
 Geometry. 重迭（Geometry） | ✔ | ✔ | ✔ | ✔
 Geometry. PointOnSurface | ✔ | | ✔ | ✔
 Geometry。關聯（Geometry、string） | ✔ | | ✔ | ✔
@@ -307,7 +307,7 @@ SymmetricDifference （Geometry） | ✔ | ✔ | ✔ | ✔
 Geometry. ToBinary （） | ✔ | ✔ | ✔ | ✔
 Geometry. ToText （） | ✔ | ✔ | ✔ | ✔
 幾何。接觸（Geometry） | ✔ | | ✔ | ✔
-Geometry 聯集（） | | | ✔
+Geometry 聯集（） | | | ✔ | ✔
 Geometry （Geometry） | ✔ | ✔ | ✔ | ✔
 Geometry. 內（Geometry） | ✔ | ✔ | ✔ | ✔
 GeometryCollection。計數 | ✔ | ✔ | ✔ | ✔

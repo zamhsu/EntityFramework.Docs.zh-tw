@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d3e6515b-8181-482c-a790-c4a6778748c1
 uid: core/saving/transactions
-ms.openlocfilehash: ff12c4e7ace1f1b9e503cb2353bcdd53efd87cce
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 952cb891d145a47666f1d506ec00f066be9f245d
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197892"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73654745"
 ---
 # <a name="using-transactions"></a>使用交易
 
@@ -99,9 +99,9 @@ public class BloggingContext : DbContext
 
 ### <a name="limitations-of-systemtransactions"></a>System.Transactions 的限制  
 
-1. EF Core 需倚賴資料庫提供者實作對 System.Transactions 的支援。 雖然支援在 .NET Framework 的 ADO.NET 提供者之間很常見，但此 API 是最近才新增至 .NET Core 中，因此支援尚不普遍。 如果提供者未實作對 System.Transactions 的支援，則對這些 API 發出的呼叫將可能完全被忽略。 .NET Core 的 SqlClient 從 2.1 版起便不支援它。 .NET Core 2.0 的 SqlClient 將會在您嘗試使用該功能時擲回例外狀況。 
+1. EF Core 需倚賴資料庫提供者實作對 System.Transactions 的支援。 雖然支援在 .NET Framework 的 ADO.NET 提供者之間很常見，但此 API 是最近才新增至 .NET Core 中，因此支援尚不普遍。 如果提供者未實作對 System.Transactions 的支援，則對這些 API 發出的呼叫將可能完全被忽略。 .NET Core 的 SqlClient 從 2.1 版起便不支援它。 .NET Core 2.0 的 SqlClient 將會在您嘗試使用該功能時擲回例外狀況。
 
    > [!IMPORTANT]  
-   > 建議您先測試該 API 是否可與您的提供者正確搭配運作，再倚賴它來管理交易。 如果無法正確搭配運作，建議您與資料庫提供者的維護人員連絡。 
+   > 建議您先測試該 API 是否可與您的提供者正確搭配運作，再倚賴它來管理交易。 如果無法正確搭配運作，建議您與資料庫提供者的維護人員連絡。
 
-2. 從 2.1 版開始，.NET Core 中的 System.Transactions 實作便不包含對分散式交易的支援，因此您無法使用 `TransactionScope` 或 `CommittableTransaction` 來跨多個資源管理員協調交易。 
+2. 從 2.1 版開始，.NET Core 中的 System.Transactions 實作便不包含對分散式交易的支援，因此您無法使用 `TransactionScope` 或 `CommittableTransaction` 來跨多個資源管理員協調交易。

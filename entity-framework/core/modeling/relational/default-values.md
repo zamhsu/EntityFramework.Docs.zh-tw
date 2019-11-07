@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: e541366a-130f-47dd-9997-1b110a11febe
 uid: core/modeling/relational/default-values
-ms.openlocfilehash: 0d3613606f21a78e22cfe0ee752ea982a6a17f93
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: b6ac283d551e2c6ee119f7de6933363b5d8793a1
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71196993"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655909"
 ---
 # <a name="default-values"></a>預設值
 
@@ -30,48 +30,8 @@ ms.locfileid: "71196993"
 
 您可以使用流暢的 API 來指定屬性的預設值。
 
-<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Relational/DefaultValue.cs?highlight=9)] -->
-``` csharp
-class MyContext : DbContext
-{
-    public DbSet<Blog> Blogs { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Blog>()
-            .Property(b => b.Rating)
-            .HasDefaultValue(3);
-    }
-}
-
-public class Blog
-{
-    public int BlogId { get; set; }
-    public string Url { get; set; }
-    public int Rating { get; set; }
-}
-```
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Relational/DefaultValue.cs?name=DefaultValue&highlight=9)]
 
 您也可以指定用來計算預設值的 SQL 片段。
 
-<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Relational/DefaultValueSql.cs?highlight=9)] -->
-``` csharp
-class MyContext : DbContext
-{
-    public DbSet<Blog> Blogs { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Blog>()
-            .Property(b => b.Created)
-            .HasDefaultValueSql("getdate()");
-    }
-}
-
-public class Blog
-{
-    public int BlogId { get; set; }
-    public string Url { get; set; }
-    public DateTime Created { get; set; }
-}
-```
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Relational/DefaultValueSql.cs?name=DefaultValueSql&highlight=9)]

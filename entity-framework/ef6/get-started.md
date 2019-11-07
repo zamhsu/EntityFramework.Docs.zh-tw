@@ -3,28 +3,29 @@ title: 開始使用 Entity Framework 6 - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 66ce9113-81d2-480f-8c16-d00ec405b2f7
-ms.openlocfilehash: bf54879ea94e597dfeac3e4bd70571dad290dd9e
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+uid: ef6/get-started
+ms.openlocfilehash: 74ae347af3c386639631f28ccb2ddbe9f444953a
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181402"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655836"
 ---
 # <a name="get-started-with-entity-framework-6"></a>開始使用 Entity Framework 6
 
 本指南包含一系列精選文件文章、逐步解說及影片的連結，以協助您快速開始使用。
 
-## <a name="fundamentals"></a>基礎
+## <a name="fundamentals"></a>Fundamentals
 
 * [取得 Entity Framework](~/ef6/fundamentals/install.md)
 
   您在這裡會學到如何將 Entity Framework 新增到應用程式，而您如果想使用 EF Designer，務必在 Visual Studio 中加以安裝。
 
-* @no__t 0Creating 模型：Code First、EF 設計工具和 EF 工作流程 @ no__t-0
+* [建立模型：Code First、EF Designer 及 EF 工作流程](~/ef6/modeling/index.md)
 
   您偏好指定撰寫程式碼還是建構輪廓的 EF 模型？
 您要使用 EF 將物件對應到現有的資料庫，還是希望 EF 建立專為物件打造的資料庫？
-在這裡，您將瞭解使用 EF6 的兩種不同方法：EF 設計工具和 Code First。
+您可以在這裡學到使用 EF6 的兩種方法：EF Designer 和 Code First。
 請務必追蹤討論，並觀看有關差異的影片。
 
 * [使用 DbContext](~/ef6/fundamentals/working-with-dbcontext.md)

@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3f1993c2-cdf5-425b-bac2-a2665a20322b
 uid: core/saving/explicit-values-generated-properties
-ms.openlocfilehash: d6aa9a0a9ce34e09a39026ad7ea9195b6777858c
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: ea469b9b7199cc767b2d0da1a5999026f938d087
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197865"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656253"
 ---
 # <a name="setting-explicit-values-for-generated-properties"></a>為產生的屬性設定明確值
 
@@ -33,6 +33,7 @@ ms.locfileid: "71197865"
 [!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/EmployeeContext.cs#EmploymentStarted)]
 
 下列程式碼會將兩個員工插入到資料庫中。
+
 * 針對第一個員工，由於未指派任何值給 `Employee.EmploymentStarted` 屬性，因此它會維持設定為 `DateTime` 的 CLR 預設值。
 * 針對第二個員工，我們已設定明確值 `1-Jan-2000`。
 
@@ -73,13 +74,14 @@ ms.locfileid: "71197865"
 > 根據預設，如果您嘗試針對已設定為要在更新期間產生的屬性儲存明確值，EF Core 將會擲回例外狀況。 若要避免此問題，您必須降到較低層級的中繼資料 API 並設定 `AfterSaveBehavior` (如以上所示)。
 
 > [!NOTE]  
-> **EF Core 2.0 中的變更：** 在先前的版本中，會透過`IsReadOnlyAfterSave`旗標控制之後的儲存行為。 此旗標已淘汰並被 `AfterSaveBehavior` 取代。
+> **EF Core 2.0 中的變更：** 在舊版中，是透過 `IsReadOnlyAfterSave` 旗標來控制儲存後的行為。 此旗標已淘汰並被 `AfterSaveBehavior` 取代。
 
 資料庫中也有一個可在 `UPDATE` 作業期間為 `LastPayRaise` 資料行產生值的觸發程序。
 
 [!code-sql[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/employee_UPDATE.sql)]
 
 下列程式碼會為資料庫中的兩個員工加薪。
+
 * 針對第一個員工，由於未指派任何值給 `Employee.LastPayRaise` 屬性，因此它會維持設定為 Null。
 * 針對第二個員工，我們已將明確值設定為一週前 (回溯加薪日期)。
 

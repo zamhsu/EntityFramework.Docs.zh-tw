@@ -4,16 +4,17 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: 4e4ba21cd099daab4db8a8f358800fde26980c14
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.openlocfilehash: bfabe8fd5b0a64edd5d97baff3beab9d712f1c20
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813583"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73654638"
 ---
 # <a name="loading-related-data"></a>載入相關資料
 
 Entity Framework Core 可讓您在模型中使用導覽屬性來載入相關實體。 有三種常見的 O/RM 模式可用來載入相關資料。
+
 * **積極式載入**表示會從資料庫以初始查詢一部分的方式載入相關資料。
 * **明確式載入**表示會從資料庫於稍後以明確方式載入相關資料。
 * **消極式載入**表示會於存取導覽屬性時從資料庫以透明的方式載入相關資料。
@@ -53,11 +54,11 @@ Entity Framework Core 可讓您在模型中使用導覽屬性來載入相關實�
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
 
 > [!CAUTION]
-> 由於版本3.0.0，每個 `Include` 會導致其他聯結加入至關聯式提供者所產生的 SQL 查詢，而舊版會產生額外的 SQL 查詢。 這可能會大幅變更查詢的效能，以提高或更糟。 特別的是，具有大量 @no__t 0 運算子的 LINQ 查詢可能需要細分為多個個別的 LINQ 查詢，以避免笛卡隔的問題。
+> 由於版本3.0.0，每個 `Include` 都會導致將額外的聯結加入至關聯式提供者所產生的 SQL 查詢，而舊版會產生額外的 SQL 查詢。 這可能會大幅變更查詢的效能，以提高或更糟。 特別的是，具有大量 `Include` 運算子的 LINQ 查詢可能需要細分為多個個別的 LINQ 查詢，以避免笛卡爆炸的問題。
 
 ### <a name="include-on-derived-types"></a>衍生類型中的 Include
 
-您可以使用 `Include` 和 `ThenInclude`來包含只定義於衍生類型上導覽的相關資料。 
+您可以使用 `Include` 和 `ThenInclude`來包含只定義於衍生類型上導覽的相關資料。
 
 假設有下列模型：
 
@@ -95,17 +96,20 @@ public class School
 
 身分為學生之所有人員的 `School` 導覽內容可以使用多個模式進行積極式載入：
 
-- 使用 cast
+* 使用 cast
+
   ```csharp
   context.People.Include(person => ((Student)person).School).ToList()
   ```
 
-- 使用 `as` 運算子
+* 使用 `as` 運算子
+
   ```csharp
   context.People.Include(person => (person as Student).School).ToList()
   ```
 
-- 使用 `Include` 的多載，其會接受類型 `string` 的參數
+* 使用 `Include` 的多載，其會接受類型 `string` 的參數
+
   ```csharp
   context.People.Include("School").ToList()
   ```
@@ -140,6 +144,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         .UseLazyLoadingProxies()
         .UseSqlServer(myConnectionString);
 ```
+
 或在使用 AddDbContext 時：
 
 ```csharp
@@ -309,7 +314,7 @@ public static class PocoLoadingExtensions
 
 某些序列化架構並不允許這類循環。 例如，Json.NET 將會在遇到循環時擲回下列例外狀況。
 
-> Newtonsoft.Json.JsonSerializationException:Self referencing loop detected for property 'Blog' with type 'MyApplication.Models.Blog'. (針對具有類型 'MyApplication.Models.Blog' 的屬性 'Blog'，偵測到自我參考迴圈)。
+> Newtonsoft.Json.JsonSerializationException: Self referencing loop detected for property 'Blog' with type 'MyApplication.Models.Blog' (針對具有類型 'MyApplication.Models.Blog' 的屬性 'Blog' 偵測到自我參考迴圈)。
 
 如果您使用 ASP.NET Core，則可將 Json.NET 設定為略過它在物件圖形中所找到的循環。 這可在 `Startup.cs` 的 `ConfigureServices(...)` 方法中完成。
 

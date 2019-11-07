@@ -3,30 +3,30 @@ title: 以模型為基礎的慣例-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0fc4eef8-29b8-4192-9c77-08fd33d3db3a
-ms.openlocfilehash: 80b722730b4ca6c9d00a8611b6c9027e8bc9fe61
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: c873e9a216bd9bd1934f2149ae6af602072f3608
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283703"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656160"
 ---
 # <a name="model-based-conventions"></a>以模型為基礎的慣例
 > [!NOTE]
 > **僅限 EF6 及更新版本** - Entity Framework 6 已引進此頁面中所討論的功能及 API 等等。 如果您使用的是較早版本，則不適用部分或全部的資訊。  
 
-基礎模型慣例是慣例為基礎的模型組態的進階的方法。 在大部分情況下[自訂 Code First 慣例 API 上 DbModelBuilder](~/ef6/modeling/code-first/conventions/custom.md)應該使用。 使用基礎模型慣例之前，建議使用 DbModelBuilder API 慣例的了解。  
+以模型為基礎的慣例是以慣例為基礎的模型設定的先進方法。 在大部分情況下，應該使用[DbModelBuilder 上的自訂 Code First 慣例 API](~/ef6/modeling/code-first/conventions/custom.md) 。 使用以模型為基礎的慣例之前，建議您先瞭解適用于慣例的 DbModelBuilder API。  
 
-基礎模型慣例允許建立的屬性和資料表不是可透過標準慣例設定會影響的慣例。 這些範例會每個階層模型的資料表中的鑑別子資料行和獨立關聯中的資料行。  
+以模型為基礎的慣例允許建立會影響無法透過標準慣例設定之屬性和資料表的慣例。 這些範例是資料表中每個階層模型和獨立關聯資料行的鑒別子資料行。  
 
-## <a name="creating-a-convention"></a>建立一種命名慣例   
+## <a name="creating-a-convention"></a>建立慣例   
 
-在管線中的慣例需要套用至模型時，會選擇建立基礎模型慣例的第一個步驟。 有兩種類型的模型慣例，概念 （C-工作區） 和存放區 （S-工作區）。 C 間距慣例會套用至應用程式建置，而 S 空間慣例會套用至代表資料庫模型的版本，以及如何自動產生的資料行等的控制項項目命名的模型。  
+建立以模型為基礎的慣例的第一個步驟，是選擇管線中的慣例必須套用至模型的時機。 模型慣例有兩種類型：概念（C-空格）和存放區（S-Space）。 C-Space 慣例會套用至應用程式所建立的模型，而 S-Space 慣例會套用至代表資料庫的模型版本，並控制如何命名自動產生的資料行等專案。  
 
-模型慣例是從 IConceptualModelConvention 或 IStoreModelConvention 延伸的類別。  這些介面，同時接受可以是泛型型別輸入 MetadataItem 用來篩選慣例適用於資料類型。  
+模型慣例是一種從 IConceptualModelConvention 或 IStoreModelConvention 延伸的類別。  這些介面都接受可以是 MetadataItem 類型的泛型型別，用來篩選套用慣例的資料類型。  
 
-## <a name="adding-a-convention"></a>加入一種命名慣例   
+## <a name="adding-a-convention"></a>新增慣例   
 
-模型慣例會加入做為一般慣例類別相同的方式。 在  **OnModelCreating**方法，將慣例新增至模型的慣例的清單。  
+模型慣例的加入方式與一般慣例類別相同。 在**OnModelCreating**方法中，將慣例加入至模型的慣例清單。  
 
 ``` csharp
 using System.Data.Entity;
@@ -46,7 +46,7 @@ public class BlogContext : DbContext
 }
 ```  
 
-一種命名慣例，也可以加入相對於另一個慣例使用 Conventions.AddBefore\< \>或 Conventions.AddAfter\< \>方法。 如需適用於 Entity Framework 之慣例的詳細資訊請參閱提示 > 一節。  
+您也可以使用 AddBefore\<\> 或 AddAfter\<\> 方法，來新增慣例與另一個慣例的關聯。 如需 Entity Framework 所套用慣例的詳細資訊，請參閱附注一節。  
 
 ``` csharp
 protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -55,11 +55,11 @@ protected override void OnModelCreating(DbModelBuilder modelBuilder)
 }
 ```  
 
-## <a name="example-discriminator-model-convention"></a>範例： 鑑別子模型慣例  
+## <a name="example-discriminator-model-convention"></a>範例：鑒別子模型慣例  
 
-重新命名 EF 所產生的資料行是無法使用 Api 的其他慣例的某項目的範例。  這是一種情況其中使用模型慣例是您唯一的選項。  
+重新命名 EF 所產生的資料行，是您無法使用其他慣例 Api 執行的作業範例。  在此情況下，使用模型慣例是您唯一的選擇。  
 
-若要使用的基礎模型慣例設定產生的資料行的範例自訂命名鑑別子資料行的方式。  以下是會在名為"鑑別子 」 之模型中的每個資料行重新命名 「 entitytype 」 為基礎的簡單模型慣例的範例。  這包括開發人員只是名為"鑑別子 」 的資料行。 由於 「 鑑別子 」 資料行是產生的資料行，這需要在 S 空間中執行。  
+如何使用模型型慣例來設定產生的資料行的範例，就是自訂鑒別子資料行的命名方式。  以下是以模型為基礎的簡單慣例範例，其會將名為「鑒別子」之模型中的每個資料行重新命名為「EntityType」。  這包括開發人員簡單命名為「鑒別子」的資料行。 因為「鑒別子」資料行是產生的資料行，所以這需要在 S 空間中執行。  
 
 ``` csharp
 using System.Data.Entity;
@@ -79,11 +79,11 @@ class DiscriminatorRenamingConvention : IStoreModelConvention<EdmProperty>
 }
 ```  
 
-## <a name="example-general-ia-renaming-convention"></a>範例： 重新命名慣例的一般 IA   
+## <a name="example-general-ia-renaming-convention"></a>範例：一般 IA 重新命名慣例   
 
-基礎模型動作慣例的另一個更複雜的範例是設定為獨立的關聯 (IAs) 的方式。  這是模型慣例會適用，因為 IAs EF 所產生，而不 DbModelBuilder API 可以存取的模型中存在的情況。  
+另一個更複雜的模型型慣例範例是設定獨立關聯（IAs）的命名方式。  這是適用模型慣例的情況，因為 IAs 是由 EF 產生，而且不存在於 DbModelBuilder API 可存取的模型中。  
 
-當 EF 產生 IA 時，它會建立名為 EntityType_KeyName 的資料行。 比方說，名為 Customer 與索引鍵資料行的關聯指定為 CustomerId 就會產生名為 Customer_CustomerId 的資料行。 下列慣例階梯狀 '\_' 字元不會針對 IA.產生的資料行名稱  
+當 EF 產生 IA 時，它會建立一個名為 EntityType_KeyName 的資料行。 例如，如果名為 Customer 的關聯具有名為 CustomerId 的索引鍵資料行，就會產生名為 Customer_CustomerId 的資料行。 下列慣例會從為 IA 產生的資料行名稱中去除 '\_' 字元。  
 
 ``` csharp
 using System.Data.Entity;
@@ -132,7 +132,7 @@ public class ForeignKeyNamingConvention : IStoreModelConvention<AssociationType>
 
     private void NormalizeForeignKeyProperties(ReadOnlyMetadataCollection<EdmProperty> properties)
     {
-        for (int i = 0; i \< properties.Count; ++i)
+        for (int i = 0; i < properties.Count; ++i)
         {
             int underscoreIndex = properties[i].Name.IndexOf('_');
             if (underscoreIndex > 0)
@@ -146,7 +146,7 @@ public class ForeignKeyNamingConvention : IStoreModelConvention<AssociationType>
 
 ## <a name="extending-existing-conventions"></a>擴充現有的慣例   
 
-如果您要撰寫的慣例是類似於其中的慣例，Entity Framework 已套用到您的模型，您一律可以擴充該慣例，以避免從頭重寫程式。  這個範例是要取代現有的識別碼符合與自訂的慣例。   若要覆寫索引鍵的慣例的另一個好處是，覆寫的方法會取得已偵測到或明確設定沒有索引鍵時，才呼叫。 一份慣例，Entity Framework 使用，請參閱這裡： [ http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx ](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx)。  
+如果您需要撰寫的慣例與 Entity Framework 已適用于模型的其中一個慣例類似，您一律可以擴充該慣例，以避免必須從頭重新進行重寫。  其中一個範例是以自訂的方式取代現有的識別碼比對慣例。   覆寫金鑰慣例的額外好處是，只有在沒有偵測到或明確設定索引鍵時，才會呼叫覆寫的方法。 這裡提供 Entity Framework 所使用的慣例清單： [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx)。  
 
 ``` csharp
 using System.Data.Entity;
@@ -191,7 +191,7 @@ public class CustomKeyDiscoveryConvention : KeyDiscoveryConvention
 }
 ```  
 
-然後，我們需要加入我們新的慣例之前的現有索引鍵的慣例。 我們將新增 CustomKeyDiscoveryConvention 之後，我們可以移除 IdKeyDiscoveryConvention。  如果我們不會移除現有的 IdKeyDiscoveryConvention 這個慣例會仍優先於識別碼探索慣例，因為它會執行第一次，但在找到任何 「 金鑰 」 屬性的情況下，將會執行 「 識別碼 」 慣例。  我們會看到此行為，因為每個慣例會更新先前的慣例 （而非獨立操作它及其所有組合在一起），讓先前的慣例如果比方說，更新資料行名稱相符的項目，會看到模型感興趣，您自訂的慣例 （當之前的名稱不是感興趣的），然後它會套用至該資料行。  
+接著，我們需要在現有的金鑰慣例之前加入新的慣例。 新增 CustomKeyDiscoveryConvention 之後，我們就可以移除 IdKeyDiscoveryConvention。  如果我們未移除現有的 IdKeyDiscoveryConvention，此慣例仍然會優先于識別碼探索慣例，因為它會先執行，但在找不到 "key" 屬性的情況下，將會執行 "Id" 慣例。  我們會看到這項行為，因為每個慣例都會看到先前慣例已更新的模型（而不是單獨對其進行操作，並結合在一起），因此，如果先前的慣例已更新資料行名稱以符合下列專案的內容：對您的自訂慣例感關注（如果名稱之前不是相關，則會套用至該資料行）。  
 
 ``` csharp
 public class BlogContext : DbContext
@@ -207,6 +207,6 @@ public class BlogContext : DbContext
 }
 ```  
 
-## <a name="notes"></a>注意  
+## <a name="notes"></a>備註  
 
-MSDN 文件中有一份由 Entity Framework 目前套用的慣例： [ http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx ](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx)。  這份清單會直接提取自我們的原始程式碼。  Entity Framework 6 的原始程式碼位於[GitHub](https://github.com/aspnet/entityframework6/)和許多 Entity Framework 所使用的慣例都是不錯起點的自訂模型基礎的慣例。  
+此處的 MSDN 檔提供 Entity Framework 目前套用的慣例清單： [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx)。  這份清單會直接從我們的原始程式碼提取。  Entity Framework 6 的原始程式碼可在[GitHub](https://github.com/aspnet/entityframework6/)上取得，而 Entity Framework 使用的許多慣例都是自訂模型型慣例的良好起點。  

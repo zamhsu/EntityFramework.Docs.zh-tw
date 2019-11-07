@@ -5,17 +5,17 @@ ms.author: ansvyryd
 ms.date: 04/10/2019
 ms.assetid: 0EC2CCE1-BD55-45D8-9EA9-20634987F094
 uid: core/modeling/table-splitting
-ms.openlocfilehash: 684fcfbb66debfd1b89e23c8aaf0a32909378c6b
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: a3a2e5842a6c6b4b490084d205a0d44bb46c17ee
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149191"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656032"
 ---
 # <a name="table-splitting"></a>資料表分割
 
 >[!NOTE]
-> 這項功能是在 EF Core 2.0 的新功能。
+> 這項功能在 EF Core 2.0 中是新的。
 
 EF Core 允許將兩個或多個實體對應至單一資料列。 這稱為「_資料表分割_」或「_資料表共用_」。
 
@@ -25,13 +25,13 @@ EF Core 允許將兩個或多個實體對應至單一資料列。 這稱為「_�
 
 資料表分割的常見案例是只使用資料表中的資料行子集，以獲得更佳的效能或封裝。
 
-在此範例`Order`中，表示的`DetailedOrder`子集。
+在此範例中 `Order` 代表 `DetailedOrder`的子集。
 
 [!code-csharp[Order](../../../samples/core/Modeling/TableSplitting/Order.cs?name=Order)]
 
 [!code-csharp[DetailedOrder](../../../samples/core/Modeling/TableSplitting/DetailedOrder.cs?name=DetailedOrder)]
 
-除了所需的設定之外，我們`Property(o => o.Status).HasColumnName("Status")`也`Order.Status`會`DetailedOrder.Status`呼叫來對應至與相同的資料行。
+除了所需的設定之外，我們還會呼叫 `Property(o => o.Status).HasColumnName("Status")` 將 `DetailedOrder.Status` 對應到與 `Order.Status`相同的資料行。
 
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting&highlight=3)]
 
@@ -40,7 +40,7 @@ EF Core 允許將兩個或多個實體對應至單一資料列。 這稱為「_�
 
 ## <a name="usage"></a>使用量
 
-使用資料表分割來儲存和查詢實體的方式與其他實體相同。 從 EF Core 3.0 開始，相依實體參考可以是`null`。 如果相依實體所使用的所有資料行都`NULL`是資料庫，則查詢時將不會建立它的實例。 這也會發生在所有屬性都是選擇性的，而且`null`設定為，這可能不是預期的。
+使用資料表分割來儲存和查詢實體的方式與其他實體相同。 從 EF Core 3.0 開始，可以 `null`相依的實體參考。 如果相依實體所使用的所有資料行都 `NULL` 是資料庫，則查詢時將不會建立它的實例。 這也會發生在所有屬性都是選擇性的，而且設定為 `null`，這可能不是預期的。
 
 [!code-csharp[Usage](../../../samples/core/Modeling/TableSplitting/Program.cs?name=Usage)]
 

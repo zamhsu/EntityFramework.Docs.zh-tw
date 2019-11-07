@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: cbe6935e-2679-4b77-8914-a8d772240cf1
 uid: core/modeling/included-types
-ms.openlocfilehash: ca83b1c432bdf4853dba81e12ec4a739bc8218dc
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 1249e71c02e58afe7fe06b3fdcf523dfa0c9b17c
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197383"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655732"
 ---
 # <a name="including--excluding-types"></a>包含與排除類型
 
@@ -17,52 +17,17 @@ ms.locfileid: "71197383"
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，在內容的`DbSet`屬性中公開的類型會包含在您的模型中。 此外，也包含`OnModelCreating`方法中所述的類型。 最後，以遞迴方式探索已探索類型的導覽屬性所找到的任何類型也會包含在模型中。
+依照慣例，在您的模型中，`DbSet` 屬性中公開的類型會包含在您的模型中。 此外，也包含 `OnModelCreating` 方法中所述的類型。 最後，以遞迴方式探索已探索類型的導覽屬性所找到的任何類型也會包含在模型中。
 
 **例如，在下列程式碼中，會探索所有三種類型：**
 
-* `Blog`因為它是在內容的`DbSet`屬性中公開
+* `Blog`，因為它是在內容的 `DbSet` 屬性中公開
 
-* `Post`因為它是透過`Blog.Posts`導覽屬性來探索的
+* `Post`，因為它是透過 `Blog.Posts` 導覽屬性進行探索
 
-* `AuditEntry`因為已在中提及`OnModelCreating`
+* `AuditEntry`，因為 `OnModelCreating` 中提及
 
-<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/IncludedTypes.cs?highlight=3,7,16)] -->
-``` csharp
-class MyContext : DbContext
-{
-    public DbSet<Blog> Blogs { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<AuditEntry>();
-    }
-}
-
-public class Blog
-{
-    public int BlogId { get; set; }
-    public string Url { get; set; }
-
-    public List<Post> Posts { get; set; }
-}
-
-public class Post
-{
-    public int PostId { get; set; }
-    public string Title { get; set; }
-    public string Content { get; set; }
-
-    public Blog Blog { get; set; }
-}
-
-public class AuditEntry
-{
-    public int AuditEntryId { get; set; }
-    public string Username { get; set; }
-    public string Action { get; set; }
-}
-```
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/IncludedTypes.cs?name=IncludedTypes&highlight=3,7,16)]
 
 ## <a name="data-annotations"></a>資料註釋
 

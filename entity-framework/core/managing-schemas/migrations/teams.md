@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
 uid: core/managing-schemas/migrations/teams
-ms.openlocfilehash: e6a1b86761a201cbcae34cced7e64f11df37a420
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.openlocfilehash: 6c17c56277821159962884aef72d46c624442e20
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72811977"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655536"
 ---
 # <a name="migrations-in-team-environments"></a>在小組環境中移轉
 
@@ -19,11 +19,13 @@ ms.locfileid: "72811977"
 
 當您合併小組的遷移時，您可能會在模型快照集檔案中出現衝突。 如果這兩項變更無關，則合併很簡單，而且兩個遷移可以並存。 例如，您可能會在客戶實體類型設定中看到合併衝突，如下所示：
 
-    <<<<<<< Mine
-    b.Property<bool>("Deactivated");
-    =======
-    b.Property<int>("LoyaltyPoints");
-    >>>>>>> Theirs
+``` output
+<<<<<<< Mine
+b.Property<bool>("Deactivated");
+=======
+b.Property<int>("LoyaltyPoints");
+>>>>>>> Theirs
+```
 
 因為這兩個屬性都必須存在於最終模型中，所以請加入這兩個屬性來完成合併。 在許多情況下，您的版本控制系統可能會自動為您合併這類變更。
 
@@ -38,11 +40,13 @@ b.Property<int>("LoyaltyPoints");
 
 有時候，在合併模型快照集模型時，您會遇到真正的衝突。 例如，您和您的組員可能會分別重新命名為相同的屬性。
 
-    <<<<<<< Mine
-    b.Property<string>("Username");
-    =======
-    b.Property<string>("Alias");
-    >>>>>>> Theirs
+``` output
+<<<<<<< Mine
+b.Property<string>("Username");
+=======
+b.Property<string>("Alias");
+>>>>>>> Theirs
+```
 
 如果您遇到這種衝突，請重新建立您的遷移來解決此問題。 請依照下列步驟：
 
