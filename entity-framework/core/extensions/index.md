@@ -4,175 +4,175 @@ author: ErikEJ
 ms.date: 01/07/2019
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 0c9671eb77181d85cd493341cd1abf842d13fb0e
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: e70011b42818e4df1ec5b9b88d7adb9d36bb26f1
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181264"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73654807"
 ---
-# <a name="ef-core-tools--extensions"></a><span data-ttu-id="4bb44-102">EF Core 工具和延伸模組</span><span class="sxs-lookup"><span data-stu-id="4bb44-102">EF Core Tools & Extensions</span></span>
+# <a name="ef-core-tools--extensions"></a><span data-ttu-id="c0bd0-102">EF Core 工具和延伸模組</span><span class="sxs-lookup"><span data-stu-id="c0bd0-102">EF Core Tools & Extensions</span></span>
 
-<span data-ttu-id="4bb44-103">這些工具和延伸模組可為 Entity Framework Core 2.0 及更新版本提供額外的功能。</span><span class="sxs-lookup"><span data-stu-id="4bb44-103">These tools and extensions provide additional functionality for Entity Framework Core 2.0 and later.</span></span>
+<span data-ttu-id="c0bd0-103">這些工具和延伸模組可為 Entity Framework Core 2.0 及更新版本提供額外的功能。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-103">These tools and extensions provide additional functionality for Entity Framework Core 2.0 and later.</span></span>
 
 > [!IMPORTANT]  
-> <span data-ttu-id="4bb44-104">延伸模組以各種來源建置而成，且不屬於 Entity Framework Core 專案維護的一部份。</span><span class="sxs-lookup"><span data-stu-id="4bb44-104">Extensions are built by a variety of sources and aren't maintained as part of the Entity Framework Core project.</span></span> <span data-ttu-id="4bb44-105">考慮使用協力廠商延伸模組時，請務必評估其品質、授權、相容性、支援等，確保其符合您的需求。</span><span class="sxs-lookup"><span data-stu-id="4bb44-105">When considering a third party extension, be sure to evaluate its quality, licensing, compatibility, support, etc. to ensure it meets your requirements.</span></span>
+> <span data-ttu-id="c0bd0-104">延伸模組以各種來源建置而成，且不屬於 Entity Framework Core 專案維護的一部份。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-104">Extensions are built by a variety of sources and aren't maintained as part of the Entity Framework Core project.</span></span> <span data-ttu-id="c0bd0-105">考慮使用協力廠商延伸模組時，請務必評估其品質、授權、相容性、支援等，確保其符合您的需求。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-105">When considering a third party extension, be sure to evaluate its quality, licensing, compatibility, support, etc. to ensure it meets your requirements.</span></span>
 
-## <a name="tools"></a><span data-ttu-id="4bb44-106">工具</span><span class="sxs-lookup"><span data-stu-id="4bb44-106">Tools</span></span>
+## <a name="tools"></a><span data-ttu-id="c0bd0-106">工具</span><span class="sxs-lookup"><span data-stu-id="c0bd0-106">Tools</span></span>
 
-### <a name="llblgen-pro"></a><span data-ttu-id="4bb44-107">LLBLGen Pro</span><span class="sxs-lookup"><span data-stu-id="4bb44-107">LLBLGen Pro</span></span>
+### <a name="llblgen-pro"></a><span data-ttu-id="c0bd0-107">LLBLGen Pro</span><span class="sxs-lookup"><span data-stu-id="c0bd0-107">LLBLGen Pro</span></span>
 
-<span data-ttu-id="4bb44-108">LLBLGen Pro 是實體模型化解決方案，具備 Entity Framework 與 Entity Framework Core 的支援。</span><span class="sxs-lookup"><span data-stu-id="4bb44-108">LLBLGen Pro is an entity modeling solution with support for Entity Framework and Entity Framework Core.</span></span> <span data-ttu-id="4bb44-109">您可加以利用來輕鬆定義實體模型，並將其對應至資料庫，優先使用資料庫或模型後，即可開始直接撰寫查詢。</span><span class="sxs-lookup"><span data-stu-id="4bb44-109">It lets you easily define your entity model and map it to your database, using database first or model first, so you can get started writing queries right away.</span></span>
+<span data-ttu-id="c0bd0-108">LLBLGen Pro 是實體模型化解決方案，具備 Entity Framework 與 Entity Framework Core 的支援。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-108">LLBLGen Pro is an entity modeling solution with support for Entity Framework and Entity Framework Core.</span></span> <span data-ttu-id="c0bd0-109">您可加以利用來輕鬆定義實體模型，並將其對應至資料庫，優先使用資料庫或模型後，即可開始直接撰寫查詢。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-109">It lets you easily define your entity model and map it to your database, using database first or model first, so you can get started writing queries right away.</span></span>
 
-[<span data-ttu-id="4bb44-110">網站</span><span class="sxs-lookup"><span data-stu-id="4bb44-110">Website</span></span>](https://www.llblgen.com/)
+[<span data-ttu-id="c0bd0-110">網站</span><span class="sxs-lookup"><span data-stu-id="c0bd0-110">Website</span></span>](https://www.llblgen.com/)
 
-### <a name="devart-entity-developer"></a><span data-ttu-id="4bb44-111">Devart Entity Developer</span><span class="sxs-lookup"><span data-stu-id="4bb44-111">Devart Entity Developer</span></span>
+### <a name="devart-entity-developer"></a><span data-ttu-id="c0bd0-111">Devart Entity Developer</span><span class="sxs-lookup"><span data-stu-id="c0bd0-111">Devart Entity Developer</span></span>
 
-<span data-ttu-id="4bb44-112">Devart Entity 是功能強大的 ORM 設計工具，適用於 ADO.NET Entity Framework、NHibernate、LinqConnect、Telerik Data Access、LINQ 到 SQL。</span><span class="sxs-lookup"><span data-stu-id="4bb44-112">Entity Developer is a powerful ORM designer for ADO.NET Entity Framework, NHibernate, LinqConnect, Telerik Data Access, and LINQ to SQL.</span></span> <span data-ttu-id="4bb44-113">它支援使用 model first 或 database first 方法，以及 C# 或 Visual Basic 程式碼產生，以視覺化的方式設計 EF Core 模型。</span><span class="sxs-lookup"><span data-stu-id="4bb44-113">It supports designing EF Core models visually, using model first or database first approaches, and C# or Visual Basic code generation.</span></span> 
+<span data-ttu-id="c0bd0-112">Devart Entity 是功能強大的 ORM 設計工具，適用於 ADO.NET Entity Framework、NHibernate、LinqConnect、Telerik Data Access、LINQ 到 SQL。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-112">Entity Developer is a powerful ORM designer for ADO.NET Entity Framework, NHibernate, LinqConnect, Telerik Data Access, and LINQ to SQL.</span></span> <span data-ttu-id="c0bd0-113">它支援使用 model first 或 database first 方法，以及 C# 或 Visual Basic 程式碼產生，以視覺化的方式設計 EF Core 模型。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-113">It supports designing EF Core models visually, using model first or database first approaches, and C# or Visual Basic code generation.</span></span>
 
-[<span data-ttu-id="4bb44-114">網站</span><span class="sxs-lookup"><span data-stu-id="4bb44-114">Website</span></span>](https://www.devart.com/entitydeveloper/)
+[<span data-ttu-id="c0bd0-114">網站</span><span class="sxs-lookup"><span data-stu-id="c0bd0-114">Website</span></span>](https://www.devart.com/entitydeveloper/)
 
-### <a name="ef-core-power-tools"></a><span data-ttu-id="4bb44-115">EF Core Power Tools</span><span class="sxs-lookup"><span data-stu-id="4bb44-115">EF Core Power Tools</span></span>
+### <a name="ef-core-power-tools"></a><span data-ttu-id="c0bd0-115">EF Core Power Tools</span><span class="sxs-lookup"><span data-stu-id="c0bd0-115">EF Core Power Tools</span></span>
 
-<span data-ttu-id="4bb44-116">EF Core Power Tools 是 Visual Studio 2017 延伸模組，在簡單使用者介面中新增各種設計階段工作。</span><span class="sxs-lookup"><span data-stu-id="4bb44-116">EF Core Power Tools is a Visual Studio 2017 extension that exposes various EF Core design-time tasks in a simple user interface.</span></span> <span data-ttu-id="4bb44-117">包括現有資料庫和 [SQL Server DACPAC](https://docs.microsoft.com/sql/relational-databases/data-tier-applications/data-tier-applications) 之 DbContext 及實體類別的反向工程、資料庫移轉的管理，以及模型視覺效果。</span><span class="sxs-lookup"><span data-stu-id="4bb44-117">It includes reverse engineering of DbContext and entity classes from existing databases and [SQL Server DACPACs](https://docs.microsoft.com/sql/relational-databases/data-tier-applications/data-tier-applications), management of database migrations, and model visualizations.</span></span>
+<span data-ttu-id="c0bd0-116">EF Core Power Tools 是 Visual Studio 2017 延伸模組，在簡單使用者介面中新增各種設計階段工作。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-116">EF Core Power Tools is a Visual Studio 2017 extension that exposes various EF Core design-time tasks in a simple user interface.</span></span> <span data-ttu-id="c0bd0-117">包括現有資料庫和 [SQL Server DACPAC](https://docs.microsoft.com/sql/relational-databases/data-tier-applications/data-tier-applications) 之 DbContext 及實體類別的反向工程、資料庫移轉的管理，以及模型視覺效果。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-117">It includes reverse engineering of DbContext and entity classes from existing databases and [SQL Server DACPACs](https://docs.microsoft.com/sql/relational-databases/data-tier-applications/data-tier-applications), management of database migrations, and model visualizations.</span></span>
 
-[<span data-ttu-id="4bb44-118">GitHub Wiki</span><span class="sxs-lookup"><span data-stu-id="4bb44-118">GitHub wiki</span></span>](https://github.com/ErikEJ/EFCorePowerTools/wiki)
+[<span data-ttu-id="c0bd0-118">GitHub Wiki</span><span class="sxs-lookup"><span data-stu-id="c0bd0-118">GitHub wiki</span></span>](https://github.com/ErikEJ/EFCorePowerTools/wiki)
 
-### <a name="entity-framework-visual-editor"></a><span data-ttu-id="4bb44-119">Entity Framework 視覺效果編輯器</span><span class="sxs-lookup"><span data-stu-id="4bb44-119">Entity Framework Visual Editor</span></span>
+### <a name="entity-framework-visual-editor"></a><span data-ttu-id="c0bd0-119">Entity Framework 視覺效果編輯器</span><span class="sxs-lookup"><span data-stu-id="c0bd0-119">Entity Framework Visual Editor</span></span>
 
-<span data-ttu-id="4bb44-120">Entity Framework 視覺效果編輯器是 Visual Studio 延伸模組，為 EF 6 和 EF Core 類別的視覺效果設計新增 ORM 設計工具。</span><span class="sxs-lookup"><span data-stu-id="4bb44-120">Entity Framework Visual Editor is a Visual Studio extension that adds an ORM designer for visual design of EF 6, and EF Core classes.</span></span> <span data-ttu-id="4bb44-121">因為程式碼會透過 T4 範本產生，所以能加以自訂來滿足各種需求。</span><span class="sxs-lookup"><span data-stu-id="4bb44-121">Code is generated using T4 templates so can be customized to suit any needs.</span></span> <span data-ttu-id="4bb44-122">它支援繼承、單向及雙向關聯、列舉，還能夠對類別進行色彩編碼以及新增文字區塊，以說明設計中可能較不易懂的部分。</span><span class="sxs-lookup"><span data-stu-id="4bb44-122">It supports inheritance, unidirectional and bidirectional associations, enumerations, and the ability to color-code your classes and add text blocks to explain potentially arcane parts of your design.</span></span>
+<span data-ttu-id="c0bd0-120">Entity Framework 視覺效果編輯器是 Visual Studio 延伸模組，為 EF 6 和 EF Core 類別的視覺效果設計新增 ORM 設計工具。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-120">Entity Framework Visual Editor is a Visual Studio extension that adds an ORM designer for visual design of EF 6, and EF Core classes.</span></span> <span data-ttu-id="c0bd0-121">因為程式碼會透過 T4 範本產生，所以能加以自訂來滿足各種需求。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-121">Code is generated using T4 templates so can be customized to suit any needs.</span></span> <span data-ttu-id="c0bd0-122">它支援繼承、單向及雙向關聯、列舉，還能夠對類別進行色彩編碼以及新增文字區塊，以說明設計中可能較不易懂的部分。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-122">It supports inheritance, unidirectional and bidirectional associations, enumerations, and the ability to color-code your classes and add text blocks to explain potentially arcane parts of your design.</span></span>
 
-<span data-ttu-id="4bb44-123">[Marketplace](https://marketplace.visualstudio.com/items?itemName=michaelsawczyn.EFDesigner) \(英文\)</span><span class="sxs-lookup"><span data-stu-id="4bb44-123">[Marketplace](https://marketplace.visualstudio.com/items?itemName=michaelsawczyn.EFDesigner)</span></span>
+<span data-ttu-id="c0bd0-123">[Marketplace](https://marketplace.visualstudio.com/items?itemName=michaelsawczyn.EFDesigner) \(英文\)</span><span class="sxs-lookup"><span data-stu-id="c0bd0-123">[Marketplace](https://marketplace.visualstudio.com/items?itemName=michaelsawczyn.EFDesigner)</span></span>
 
-### <a name="catfactory"></a><span data-ttu-id="4bb44-124">CatFactory</span><span class="sxs-lookup"><span data-stu-id="4bb44-124">CatFactory</span></span>
+### <a name="catfactory"></a><span data-ttu-id="c0bd0-124">CatFactory</span><span class="sxs-lookup"><span data-stu-id="c0bd0-124">CatFactory</span></span>
 
-<span data-ttu-id="4bb44-125">CatFactory 是 .NET Core 的 Scaffolding 引擎，可以自動從 SQL Server 資料庫產生 DbContext 類別、實體、對應組態及存放庫類別。</span><span class="sxs-lookup"><span data-stu-id="4bb44-125">CatFactory is a scaffolding engine for .NET Core that can automate the generation of DbContext classes, entities, mapping configurations, and repository classes from a SQL Server database.</span></span>
+<span data-ttu-id="c0bd0-125">CatFactory 是 .NET Core 的 Scaffolding 引擎，可以自動從 SQL Server 資料庫產生 DbContext 類別、實體、對應組態及存放庫類別。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-125">CatFactory is a scaffolding engine for .NET Core that can automate the generation of DbContext classes, entities, mapping configurations, and repository classes from a SQL Server database.</span></span>
 
-[<span data-ttu-id="4bb44-126">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-126">GitHub repository</span></span>](https://github.com/hherzl/CatFactory.EntityFrameworkCore)
+[<span data-ttu-id="c0bd0-126">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-126">GitHub repository</span></span>](https://github.com/hherzl/CatFactory.EntityFrameworkCore)
 
-### <a name="loresofts-entity-framework-core-generator"></a><span data-ttu-id="4bb44-127">LoreSoft 的 Entity Framework Core Generator</span><span class="sxs-lookup"><span data-stu-id="4bb44-127">LoreSoft's Entity Framework Core Generator</span></span>
+### <a name="loresofts-entity-framework-core-generator"></a><span data-ttu-id="c0bd0-127">LoreSoft 的 Entity Framework Core Generator</span><span class="sxs-lookup"><span data-stu-id="c0bd0-127">LoreSoft's Entity Framework Core Generator</span></span>
 
-<span data-ttu-id="4bb44-128">Entity Framework Core 產生器 (efg) 是 .NET Core CLI 工具，可以從現有資料庫產生 EF Core 模型，與 `dotnet ef dbcontext scaffold` 十分相似，但它也透過區域取代或剖析對應檔案，支援安全的程式碼[重新產生](https://efg.loresoft.com/en/latest/regeneration/)。</span><span class="sxs-lookup"><span data-stu-id="4bb44-128">Entity Framework Core Generator (efg) is a .NET Core CLI tool that can generate EF Core models from an existing database, much like `dotnet ef dbcontext scaffold`, but it also supports safe code [regeneration](https://efg.loresoft.com/en/latest/regeneration/) via region replacement or by parsing mapping files.</span></span> <span data-ttu-id="4bb44-129">這項工具也支援產生檢視模型、驗證及物件對應程式程式碼。</span><span class="sxs-lookup"><span data-stu-id="4bb44-129">This tool supports generating view models, validation, and object mapper code.</span></span> 
+<span data-ttu-id="c0bd0-128">Entity Framework Core 產生器 (efg) 是 .NET Core CLI 工具，可以從現有資料庫產生 EF Core 模型，與 `dotnet ef dbcontext scaffold` 十分相似，但它也透過區域取代或剖析對應檔案，支援安全的程式碼[重新產生](https://efg.loresoft.com/en/latest/regeneration/)。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-128">Entity Framework Core Generator (efg) is a .NET Core CLI tool that can generate EF Core models from an existing database, much like `dotnet ef dbcontext scaffold`, but it also supports safe code [regeneration](https://efg.loresoft.com/en/latest/regeneration/) via region replacement or by parsing mapping files.</span></span> <span data-ttu-id="c0bd0-129">這項工具也支援產生檢視模型、驗證及物件對應程式程式碼。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-129">This tool supports generating view models, validation, and object mapper code.</span></span>
 
-<span data-ttu-id="4bb44-130">[教學課程](https://www.loresoft.com/Generate-ASP-NET-Web-API)
-[文件](https://efg.loresoft.com/en/latest/)</span><span class="sxs-lookup"><span data-stu-id="4bb44-130">[Tutorial](https://www.loresoft.com/Generate-ASP-NET-Web-API)
+<span data-ttu-id="c0bd0-130">[教學課程](https://www.loresoft.com/Generate-ASP-NET-Web-API)
+[文件](https://efg.loresoft.com/en/latest/)</span><span class="sxs-lookup"><span data-stu-id="c0bd0-130">[Tutorial](https://www.loresoft.com/Generate-ASP-NET-Web-API)
 [Documentation](https://efg.loresoft.com/en/latest/)</span></span>
 
-## <a name="extensions"></a><span data-ttu-id="4bb44-131">延伸模組</span><span class="sxs-lookup"><span data-stu-id="4bb44-131">Extensions</span></span>
+## <a name="extensions"></a><span data-ttu-id="c0bd0-131">延伸模組</span><span class="sxs-lookup"><span data-stu-id="c0bd0-131">Extensions</span></span>
 
-### <a name="microsoftentityframeworkcoreautohistory"></a><span data-ttu-id="4bb44-132">Microsoft.EntityFrameworkCore.AutoHistory</span><span class="sxs-lookup"><span data-stu-id="4bb44-132">Microsoft.EntityFrameworkCore.AutoHistory</span></span>
+### <a name="microsoftentityframeworkcoreautohistory"></a><span data-ttu-id="c0bd0-132">Microsoft.EntityFrameworkCore.AutoHistory</span><span class="sxs-lookup"><span data-stu-id="c0bd0-132">Microsoft.EntityFrameworkCore.AutoHistory</span></span>
 
-<span data-ttu-id="4bb44-133">外掛程式庫，能夠自動將 EF Core 執行的資料變更記錄到記錄資料表中。</span><span class="sxs-lookup"><span data-stu-id="4bb44-133">A plugin library that enables automatically recording the data changes performed by EF Core into a history table.</span></span>
+<span data-ttu-id="c0bd0-133">外掛程式庫，能夠自動將 EF Core 執行的資料變更記錄到記錄資料表中。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-133">A plugin library that enables automatically recording the data changes performed by EF Core into a history table.</span></span>
 
-[<span data-ttu-id="4bb44-134">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-134">GitHub repository</span></span>](https://github.com/Arch/AutoHistory/)
+[<span data-ttu-id="c0bd0-134">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-134">GitHub repository</span></span>](https://github.com/Arch/AutoHistory/)
 
-### <a name="microsoftentityframeworkcoredynamiclinq"></a><span data-ttu-id="4bb44-135">Microsoft.EntityFrameworkCore.DynamicLinq</span><span class="sxs-lookup"><span data-stu-id="4bb44-135">Microsoft.EntityFrameworkCore.DynamicLinq</span></span>
+### <a name="microsoftentityframeworkcoredynamiclinq"></a><span data-ttu-id="c0bd0-135">Microsoft.EntityFrameworkCore.DynamicLinq</span><span class="sxs-lookup"><span data-stu-id="c0bd0-135">Microsoft.EntityFrameworkCore.DynamicLinq</span></span>
 
-<span data-ttu-id="4bb44-136">System.Linq.Dynamic 的 .NET Core/.NET Standard 連接埠，包括 EF Core 的非同步支援。</span><span class="sxs-lookup"><span data-stu-id="4bb44-136">A .NET Core / .NET Standard port of System.Linq.Dynamic that includes async support with EF Core.</span></span>
-<span data-ttu-id="4bb44-137">System.Linq.Dynamic 原為 Microsoft 範例，說明如何從字串運算式 (而非程式碼) 動態建構 LINQ 查詢。</span><span class="sxs-lookup"><span data-stu-id="4bb44-137">System.Linq.Dynamic originated as a Microsoft sample that shows how to construct LINQ queries dynamically from string expressions rather than code.</span></span>
+<span data-ttu-id="c0bd0-136">System.Linq.Dynamic 的 .NET Core/.NET Standard 連接埠，包括 EF Core 的非同步支援。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-136">A .NET Core / .NET Standard port of System.Linq.Dynamic that includes async support with EF Core.</span></span>
+<span data-ttu-id="c0bd0-137">System.Linq.Dynamic 原為 Microsoft 範例，說明如何從字串運算式 (而非程式碼) 動態建構 LINQ 查詢。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-137">System.Linq.Dynamic originated as a Microsoft sample that shows how to construct LINQ queries dynamically from string expressions rather than code.</span></span>
 
-[<span data-ttu-id="4bb44-138">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-138">GitHub repository</span></span>](https://github.com/StefH/System.Linq.Dynamic.Core/)
+[<span data-ttu-id="c0bd0-138">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-138">GitHub repository</span></span>](https://github.com/StefH/System.Linq.Dynamic.Core/)
 
-### <a name="efsecondlevelcachecore"></a><span data-ttu-id="4bb44-139">EFSecondLevelCache.Core</span><span class="sxs-lookup"><span data-stu-id="4bb44-139">EFSecondLevelCache.Core</span></span>
+### <a name="efsecondlevelcachecore"></a><span data-ttu-id="c0bd0-139">EFSecondLevelCache.Core</span><span class="sxs-lookup"><span data-stu-id="c0bd0-139">EFSecondLevelCache.Core</span></span>
 
-<span data-ttu-id="4bb44-140">將 EF Core 查詢的結果儲存至第二層快取的延伸模組，如此一來可避免後續執行相同查詢時，直接從快取存取資料庫及擷取資料。</span><span class="sxs-lookup"><span data-stu-id="4bb44-140">An extension that enables storing the results of EF Core queries into a second-level cache, so that subsequent executions of the same queries can avoid accessing the database and retrieve the data directly from the cache.</span></span>
+<span data-ttu-id="c0bd0-140">將 EF Core 查詢的結果儲存至第二層快取的延伸模組，如此一來可避免後續執行相同查詢時，直接從快取存取資料庫及擷取資料。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-140">An extension that enables storing the results of EF Core queries into a second-level cache, so that subsequent executions of the same queries can avoid accessing the database and retrieve the data directly from the cache.</span></span>
 
-[<span data-ttu-id="4bb44-141">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-141">GitHub repository</span></span>](https://github.com/VahidN/EFSecondLevelCache.Core/)
+[<span data-ttu-id="c0bd0-141">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-141">GitHub repository</span></span>](https://github.com/VahidN/EFSecondLevelCache.Core/)
 
-### <a name="entityframeworkcoreprimarykey"></a><span data-ttu-id="4bb44-142">EntityFrameworkCore.PrimaryKey</span><span class="sxs-lookup"><span data-stu-id="4bb44-142">EntityFrameworkCore.PrimaryKey</span></span>
+### <a name="entityframeworkcoreprimarykey"></a><span data-ttu-id="c0bd0-142">EntityFrameworkCore.PrimaryKey</span><span class="sxs-lookup"><span data-stu-id="c0bd0-142">EntityFrameworkCore.PrimaryKey</span></span>
 
-<span data-ttu-id="4bb44-143">這個文件庫允許從任何實體將主索引鍵 (包括複合索引鍵) 的值擷取為字典。</span><span class="sxs-lookup"><span data-stu-id="4bb44-143">This library allows retrieving the values of primary key (including composite keys) from any entity as a dictionary.</span></span>
+<span data-ttu-id="c0bd0-143">這個文件庫允許從任何實體將主索引鍵 (包括複合索引鍵) 的值擷取為字典。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-143">This library allows retrieving the values of primary key (including composite keys) from any entity as a dictionary.</span></span>
 
-[<span data-ttu-id="4bb44-144">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-144">GitHub repository</span></span>](https://github.com/NickStrupat/EntityFramework.PrimaryKey/)
+[<span data-ttu-id="c0bd0-144">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-144">GitHub repository</span></span>](https://github.com/NickStrupat/EntityFramework.PrimaryKey/)
 
-### <a name="entityframeworkcoretypedoriginalvalues"></a><span data-ttu-id="4bb44-145">EntityFrameworkCore.TypedOriginalValues</span><span class="sxs-lookup"><span data-stu-id="4bb44-145">EntityFrameworkCore.TypedOriginalValues</span></span>
+### <a name="entityframeworkcoretypedoriginalvalues"></a><span data-ttu-id="c0bd0-145">EntityFrameworkCore.TypedOriginalValues</span><span class="sxs-lookup"><span data-stu-id="c0bd0-145">EntityFrameworkCore.TypedOriginalValues</span></span>
 
-<span data-ttu-id="4bb44-146">這個文件庫提供實體屬性原始值的強型別存取。</span><span class="sxs-lookup"><span data-stu-id="4bb44-146">This library enables strongly typed access to the original values of entity properties.</span></span> 
+<span data-ttu-id="c0bd0-146">這個文件庫提供實體屬性原始值的強型別存取。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-146">This library enables strongly typed access to the original values of entity properties.</span></span>
 
-[<span data-ttu-id="4bb44-147">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-147">GitHub repository</span></span>](https://github.com/NickStrupat/EntityFramework.TypedOriginalValues/)
+[<span data-ttu-id="c0bd0-147">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-147">GitHub repository</span></span>](https://github.com/NickStrupat/EntityFramework.TypedOriginalValues/)
 
-### <a name="geco"></a><span data-ttu-id="4bb44-148">Geco</span><span class="sxs-lookup"><span data-stu-id="4bb44-148">Geco</span></span>
+### <a name="geco"></a><span data-ttu-id="c0bd0-148">Geco</span><span class="sxs-lookup"><span data-stu-id="c0bd0-148">Geco</span></span>
 
-<span data-ttu-id="4bb44-149">Geco (產生器主控台) 是以主控台專案為基礎的簡單程式碼產生器，在 .NET Core 上執行，並使用插入 C# 的字串產生程式碼。</span><span class="sxs-lookup"><span data-stu-id="4bb44-149">Geco (Generator Console) is a simple code generator based on a console project, that runs on .NET Core and uses C# interpolated strings for code generation.</span></span> <span data-ttu-id="4bb44-150">Geco 包括適用於 EF Core 的反向模型產生器，支援複數、單數和可編輯範本。</span><span class="sxs-lookup"><span data-stu-id="4bb44-150">Geco includes a reverse model generator for EF Core with support for pluralization, singularization, and editable templates.</span></span> <span data-ttu-id="4bb44-151">它也提供種子資料指令碼產生器、指令碼執行器和資料庫清除工具。</span><span class="sxs-lookup"><span data-stu-id="4bb44-151">It also provides a seed data script generator, a script runner, and a database cleaner.</span></span>
+<span data-ttu-id="c0bd0-149">Geco (產生器主控台) 是以主控台專案為基礎的簡單程式碼產生器，在 .NET Core 上執行，並使用插入 C# 的字串產生程式碼。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-149">Geco (Generator Console) is a simple code generator based on a console project, that runs on .NET Core and uses C# interpolated strings for code generation.</span></span> <span data-ttu-id="c0bd0-150">Geco 包括適用於 EF Core 的反向模型產生器，支援複數、單數和可編輯範本。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-150">Geco includes a reverse model generator for EF Core with support for pluralization, singularization, and editable templates.</span></span> <span data-ttu-id="c0bd0-151">它也提供種子資料指令碼產生器、指令碼執行器和資料庫清除工具。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-151">It also provides a seed data script generator, a script runner, and a database cleaner.</span></span>
 
-[<span data-ttu-id="4bb44-152">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-152">GitHub repository</span></span>](https://github.com/iQuarc/Geco)
+[<span data-ttu-id="c0bd0-152">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-152">GitHub repository</span></span>](https://github.com/iQuarc/Geco)
 
-### <a name="linqkitmicrosoftentityframeworkcore"></a><span data-ttu-id="4bb44-153">LinqKit.Microsoft.EntityFrameworkCore</span><span class="sxs-lookup"><span data-stu-id="4bb44-153">LinqKit.Microsoft.EntityFrameworkCore</span></span>
+### <a name="linqkitmicrosoftentityframeworkcore"></a><span data-ttu-id="c0bd0-153">LinqKit.Microsoft.EntityFrameworkCore</span><span class="sxs-lookup"><span data-stu-id="c0bd0-153">LinqKit.Microsoft.EntityFrameworkCore</span></span>
 
-<span data-ttu-id="4bb44-154">LinqKit.Microsoft.EntityFrameworkCore 是 LINQKit 文件庫之與 EF Core 相容的版本。</span><span class="sxs-lookup"><span data-stu-id="4bb44-154">LinqKit.Microsoft.EntityFrameworkCore is an EF Core-compatible version of the LINQKit library.</span></span> <span data-ttu-id="4bb44-155">LINQKit 是適用於 LINQ to SQL 和 Entity Framework 進階使用者的免費延伸模組組合。</span><span class="sxs-lookup"><span data-stu-id="4bb44-155">LINQKit is a free set of extensions for LINQ to SQL and Entity Framework power users.</span></span> <span data-ttu-id="4bb44-156">它提供了進階功能，例如述詞運算式的動態建置，以及在子查詢中使用運算式變數。</span><span class="sxs-lookup"><span data-stu-id="4bb44-156">It enables advanced functionality like dynamic building of predicate expressions, and using expression variables in subqueries.</span></span>  
+<span data-ttu-id="c0bd0-154">LinqKit.Microsoft.EntityFrameworkCore 是 LINQKit 文件庫之與 EF Core 相容的版本。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-154">LinqKit.Microsoft.EntityFrameworkCore is an EF Core-compatible version of the LINQKit library.</span></span> <span data-ttu-id="c0bd0-155">LINQKit 是適用於 LINQ to SQL 和 Entity Framework 進階使用者的免費延伸模組組合。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-155">LINQKit is a free set of extensions for LINQ to SQL and Entity Framework power users.</span></span> <span data-ttu-id="c0bd0-156">它提供了進階功能，例如述詞運算式的動態建置，以及在子查詢中使用運算式變數。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-156">It enables advanced functionality like dynamic building of predicate expressions, and using expression variables in subqueries.</span></span>  
 
-[<span data-ttu-id="4bb44-157">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-157">GitHub repository</span></span>](https://github.com/scottksmith95/LINQKit/)
+[<span data-ttu-id="c0bd0-157">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-157">GitHub repository</span></span>](https://github.com/scottksmith95/LINQKit/)
 
-### <a name="neinlinqentityframeworkcore"></a><span data-ttu-id="4bb44-158">NeinLinq.EntityFrameworkCore</span><span class="sxs-lookup"><span data-stu-id="4bb44-158">NeinLinq.EntityFrameworkCore</span></span>
+### <a name="neinlinqentityframeworkcore"></a><span data-ttu-id="c0bd0-158">NeinLinq.EntityFrameworkCore</span><span class="sxs-lookup"><span data-stu-id="c0bd0-158">NeinLinq.EntityFrameworkCore</span></span>
 
-<span data-ttu-id="4bb44-159">NeinLinq 擴充了 LINQ 提供者 (例如 Entity Framework)，並提供以下功能：重複使用函式、重寫查詢，以及使用可翻譯的述詞和選取器建置動態查詢。</span><span class="sxs-lookup"><span data-stu-id="4bb44-159">NeinLinq extends LINQ providers such as Entity Framework to enable reusing functions, rewriting queries, and building dynamic queries using translatable predicates and selectors.</span></span>
+<span data-ttu-id="c0bd0-159">NeinLinq 擴充了 LINQ 提供者 (例如 Entity Framework)，並提供以下功能：重複使用函式、重寫查詢，以及使用可翻譯的述詞和選取器建置動態查詢。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-159">NeinLinq extends LINQ providers such as Entity Framework to enable reusing functions, rewriting queries, and building dynamic queries using translatable predicates and selectors.</span></span>
 
-[<span data-ttu-id="4bb44-160">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-160">GitHub repository</span></span>](https://github.com/axelheer/nein-linq/)
+[<span data-ttu-id="c0bd0-160">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-160">GitHub repository</span></span>](https://github.com/axelheer/nein-linq/)
 
-### <a name="microsoftentityframeworkcoreunitofwork"></a><span data-ttu-id="4bb44-161">Microsoft.EntityFrameworkCore.UnitOfWork</span><span class="sxs-lookup"><span data-stu-id="4bb44-161">Microsoft.EntityFrameworkCore.UnitOfWork</span></span>
+### <a name="microsoftentityframeworkcoreunitofwork"></a><span data-ttu-id="c0bd0-161">Microsoft.EntityFrameworkCore.UnitOfWork</span><span class="sxs-lookup"><span data-stu-id="c0bd0-161">Microsoft.EntityFrameworkCore.UnitOfWork</span></span>
 
-<span data-ttu-id="4bb44-162">Microsoft.EntityFrameworkCore 的外掛程式，可支援存放庫、工作模式的單位，以及支援分散式交易的多個資料庫。</span><span class="sxs-lookup"><span data-stu-id="4bb44-162">A plugin for Microsoft.EntityFrameworkCore to support repository, unit of work patterns, and multiple databases with distributed transaction supported.</span></span>
+<span data-ttu-id="c0bd0-162">Microsoft.EntityFrameworkCore 的外掛程式，可支援存放庫、工作模式的單位，以及支援分散式交易的多個資料庫。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-162">A plugin for Microsoft.EntityFrameworkCore to support repository, unit of work patterns, and multiple databases with distributed transaction supported.</span></span>
 
-[<span data-ttu-id="4bb44-163">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-163">GitHub repository</span></span>](https://github.com/Arch/UnitOfWork/)
+[<span data-ttu-id="c0bd0-163">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-163">GitHub repository</span></span>](https://github.com/Arch/UnitOfWork/)
 
-### <a name="efcorebulkextensions"></a><span data-ttu-id="4bb44-164">EFCore.BulkExtensions</span><span class="sxs-lookup"><span data-stu-id="4bb44-164">EFCore.BulkExtensions</span></span>
+### <a name="efcorebulkextensions"></a><span data-ttu-id="c0bd0-164">EFCore.BulkExtensions</span><span class="sxs-lookup"><span data-stu-id="c0bd0-164">EFCore.BulkExtensions</span></span>
 
-<span data-ttu-id="4bb44-165">適用於大量作業 (插入、更新、刪除) 的 EF Core 延伸模組。</span><span class="sxs-lookup"><span data-stu-id="4bb44-165">EF Core extensions for Bulk operations (Insert, Update, Delete).</span></span>
+<span data-ttu-id="c0bd0-165">適用於大量作業 (插入、更新、刪除) 的 EF Core 延伸模組。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-165">EF Core extensions for Bulk operations (Insert, Update, Delete).</span></span>
 
-[<span data-ttu-id="4bb44-166">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-166">GitHub repository</span></span>](https://github.com/borisdj/EFCore.BulkExtensions)
+[<span data-ttu-id="c0bd0-166">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-166">GitHub repository</span></span>](https://github.com/borisdj/EFCore.BulkExtensions)
 
-### <a name="bricelamentityframeworkcorepluralizer"></a><span data-ttu-id="4bb44-167">Bricelam.EntityFrameworkCore.Pluralizer</span><span class="sxs-lookup"><span data-stu-id="4bb44-167">Bricelam.EntityFrameworkCore.Pluralizer</span></span>
+### <a name="bricelamentityframeworkcorepluralizer"></a><span data-ttu-id="c0bd0-167">Bricelam.EntityFrameworkCore.Pluralizer</span><span class="sxs-lookup"><span data-stu-id="c0bd0-167">Bricelam.EntityFrameworkCore.Pluralizer</span></span>
 
-<span data-ttu-id="4bb44-168">新增設計階段複數表示到 EF Core。</span><span class="sxs-lookup"><span data-stu-id="4bb44-168">Adds design-time pluralization to EF Core.</span></span>
+<span data-ttu-id="c0bd0-168">新增設計階段複數表示到 EF Core。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-168">Adds design-time pluralization to EF Core.</span></span>
 
-[<span data-ttu-id="4bb44-169">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-169">GitHub repository</span></span>](https://github.com/bricelam/EFCore.Pluralizer)
+[<span data-ttu-id="c0bd0-169">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-169">GitHub repository</span></span>](https://github.com/bricelam/EFCore.Pluralizer)
 
-### <a name="pomelofoundationpomeloentityframeworkcoreextensionstosql"></a><span data-ttu-id="4bb44-170">PomeloFoundation/Pomelo.EntityFrameworkCore.Extensions.ToSql</span><span class="sxs-lookup"><span data-stu-id="4bb44-170">PomeloFoundation/Pomelo.EntityFrameworkCore.Extensions.ToSql</span></span>
+### <a name="pomelofoundationpomeloentityframeworkcoreextensionstosql"></a><span data-ttu-id="c0bd0-170">PomeloFoundation/Pomelo.EntityFrameworkCore.Extensions.ToSql</span><span class="sxs-lookup"><span data-stu-id="c0bd0-170">PomeloFoundation/Pomelo.EntityFrameworkCore.Extensions.ToSql</span></span>
 
-<span data-ttu-id="4bb44-171">簡單的擴充方法，可取得 EF Core 在簡單案例中為所指定 LINQ 查詢產生的 SQL 陳述式。</span><span class="sxs-lookup"><span data-stu-id="4bb44-171">A simple extension method that obtains the SQL statement EF Core would generate for a given LINQ query in simple scenarios.</span></span> <span data-ttu-id="4bb44-172">由於 EF Core 可以為單一 LINQ 查詢產生多個 SQL 陳述式，並視參數值產生不同的 SQL 陳述式，因此 ToSql 方法僅限於簡單案例。</span><span class="sxs-lookup"><span data-stu-id="4bb44-172">The ToSql method is limited to simple scenarios because EF Core can generate more than one SQL statement for a single LINQ query, and different SQL statements depending on parameter values.</span></span>
+<span data-ttu-id="c0bd0-171">簡單的擴充方法，可取得 EF Core 在簡單案例中為所指定 LINQ 查詢產生的 SQL 陳述式。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-171">A simple extension method that obtains the SQL statement EF Core would generate for a given LINQ query in simple scenarios.</span></span> <span data-ttu-id="c0bd0-172">由於 EF Core 可以為單一 LINQ 查詢產生多個 SQL 陳述式，並視參數值產生不同的 SQL 陳述式，因此 ToSql 方法僅限於簡單案例。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-172">The ToSql method is limited to simple scenarios because EF Core can generate more than one SQL statement for a single LINQ query, and different SQL statements depending on parameter values.</span></span>
 
-[<span data-ttu-id="4bb44-173">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-173">GitHub repository</span></span>](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.Extensions.ToSql)
+[<span data-ttu-id="c0bd0-173">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-173">GitHub repository</span></span>](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.Extensions.ToSql)
 
-### <a name="toolbeltentityframeworkcoreindexattribute"></a><span data-ttu-id="4bb44-174">Toolbelt.EntityFrameworkCore.IndexAttribute</span><span class="sxs-lookup"><span data-stu-id="4bb44-174">Toolbelt.EntityFrameworkCore.IndexAttribute</span></span>
+### <a name="toolbeltentityframeworkcoreindexattribute"></a><span data-ttu-id="c0bd0-174">Toolbelt.EntityFrameworkCore.IndexAttribute</span><span class="sxs-lookup"><span data-stu-id="c0bd0-174">Toolbelt.EntityFrameworkCore.IndexAttribute</span></span>
 
-<span data-ttu-id="4bb44-175">EF Core [Index] 屬性的復興 (附有模型建置的延伸模組)。</span><span class="sxs-lookup"><span data-stu-id="4bb44-175">Revival of [Index] attribute for EF Core (with extension for model building).</span></span>
+<span data-ttu-id="c0bd0-175">EF Core [Index] 屬性的復興 (附有模型建置的延伸模組)。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-175">Revival of [Index] attribute for EF Core (with extension for model building).</span></span>
 
-[<span data-ttu-id="4bb44-176">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-176">GitHub repository</span></span>](https://github.com/jsakamoto/EntityFrameworkCore.IndexAttribute)
+[<span data-ttu-id="c0bd0-176">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-176">GitHub repository</span></span>](https://github.com/jsakamoto/EntityFrameworkCore.IndexAttribute)
 
-### <a name="efcoreinmemoryhelpers"></a><span data-ttu-id="4bb44-177">EfCore.InMemoryHelpers</span><span class="sxs-lookup"><span data-stu-id="4bb44-177">EfCore.InMemoryHelpers</span></span>
+### <a name="efcoreinmemoryhelpers"></a><span data-ttu-id="c0bd0-177">EfCore.InMemoryHelpers</span><span class="sxs-lookup"><span data-stu-id="c0bd0-177">EfCore.InMemoryHelpers</span></span>
 
-<span data-ttu-id="4bb44-178">提供 EF Core 記憶體內部資料庫提供者的包裝函式。</span><span class="sxs-lookup"><span data-stu-id="4bb44-178">Provides a wrapper around the EF Core In-Memory Database Provider.</span></span> <span data-ttu-id="4bb44-179">使它的運作更接近關聯式提供者。</span><span class="sxs-lookup"><span data-stu-id="4bb44-179">Makes it act more like a relational provider.</span></span>
+<span data-ttu-id="c0bd0-178">提供 EF Core 記憶體內部資料庫提供者的包裝函式。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-178">Provides a wrapper around the EF Core In-Memory Database Provider.</span></span> <span data-ttu-id="c0bd0-179">使它的運作更接近關聯式提供者。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-179">Makes it act more like a relational provider.</span></span>
 
-[<span data-ttu-id="4bb44-180">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-180">GitHub repository</span></span>](https://github.com/SimonCropp/EfCore.InMemoryHelpers)
+[<span data-ttu-id="c0bd0-180">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-180">GitHub repository</span></span>](https://github.com/SimonCropp/EfCore.InMemoryHelpers)
 
-### <a name="efcoretemporalsupport"></a><span data-ttu-id="4bb44-181">EFCore.TemporalSupport</span><span class="sxs-lookup"><span data-stu-id="4bb44-181">EFCore.TemporalSupport</span></span>
+### <a name="efcoretemporalsupport"></a><span data-ttu-id="c0bd0-181">EFCore.TemporalSupport</span><span class="sxs-lookup"><span data-stu-id="c0bd0-181">EFCore.TemporalSupport</span></span>
 
-<span data-ttu-id="4bb44-182">EF Core 時態性支援的實作。</span><span class="sxs-lookup"><span data-stu-id="4bb44-182">An implementation of temporal support for EF Core.</span></span>
+<span data-ttu-id="c0bd0-182">EF Core 時態性支援的實作。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-182">An implementation of temporal support for EF Core.</span></span>
 
-[<span data-ttu-id="4bb44-183">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-183">GitHub repository</span></span>](https://github.com/cpoDesign/EFCore.TemporalSupport)
+[<span data-ttu-id="c0bd0-183">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-183">GitHub repository</span></span>](https://github.com/cpoDesign/EFCore.TemporalSupport)
 
-### <a name="entityframeworkcorecacheable"></a><span data-ttu-id="4bb44-184">EntityFrameworkCore.Cacheable</span><span class="sxs-lookup"><span data-stu-id="4bb44-184">EntityFrameworkCore.Cacheable</span></span>
+### <a name="entityframeworkcorecacheable"></a><span data-ttu-id="c0bd0-184">EntityFrameworkCore.Cacheable</span><span class="sxs-lookup"><span data-stu-id="c0bd0-184">EntityFrameworkCore.Cacheable</span></span>
 
-<span data-ttu-id="4bb44-185">EF Core 的高效能第二層查詢快取。</span><span class="sxs-lookup"><span data-stu-id="4bb44-185">A high-performance second-level query cache for EF Core.</span></span>
+<span data-ttu-id="c0bd0-185">EF Core 的高效能第二層查詢快取。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-185">A high-performance second-level query cache for EF Core.</span></span>
 
-[<span data-ttu-id="4bb44-186">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-186">GitHub repository</span></span>](https://github.com/SteffenMangold/EntityFrameworkCore.Cacheable)
+[<span data-ttu-id="c0bd0-186">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-186">GitHub repository</span></span>](https://github.com/SteffenMangold/EntityFrameworkCore.Cacheable)
 
-### <a name="entity-framework-plus"></a><span data-ttu-id="4bb44-187">Entity Framework Plus</span><span class="sxs-lookup"><span data-stu-id="4bb44-187">Entity Framework Plus</span></span>
+### <a name="entity-framework-plus"></a><span data-ttu-id="c0bd0-187">Entity Framework Plus</span><span class="sxs-lookup"><span data-stu-id="c0bd0-187">Entity Framework Plus</span></span>
 
-<span data-ttu-id="4bb44-188">使用下功能延伸您的 DbContext：包括篩選、稽核、快取、查詢未來、批次刪除、批次更新等。</span><span class="sxs-lookup"><span data-stu-id="4bb44-188">Extends your DbContext with features such as: Include Filter, Auditing, Caching, Query Future, Batch Delete, Batch Update, and more.</span></span>
+<span data-ttu-id="c0bd0-188">使用下功能延伸您的 DbContext：包括篩選、稽核、快取、查詢未來、批次刪除、批次更新等。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-188">Extends your DbContext with features such as: Include Filter, Auditing, Caching, Query Future, Batch Delete, Batch Update, and more.</span></span>
 
-<span data-ttu-id="4bb44-189">[網站](https://entityframework-plus.net/)
-[GitHub 存放庫](https://github.com/zzzprojects/EntityFramework-Plus)</span><span class="sxs-lookup"><span data-stu-id="4bb44-189">[Website](https://entityframework-plus.net/)
+<span data-ttu-id="c0bd0-189">[網站](https://entityframework-plus.net/)
+[GitHub 存放庫](https://github.com/zzzprojects/EntityFramework-Plus)</span><span class="sxs-lookup"><span data-stu-id="c0bd0-189">[Website](https://entityframework-plus.net/)
 [GitHub repository](https://github.com/zzzprojects/EntityFramework-Plus)</span></span>
 
-### <a name="entity-framework-extensions"></a><span data-ttu-id="4bb44-190">Entity Framework 擴充功能</span><span class="sxs-lookup"><span data-stu-id="4bb44-190">Entity Framework Extensions</span></span>
+### <a name="entity-framework-extensions"></a><span data-ttu-id="c0bd0-190">Entity Framework 擴充功能</span><span class="sxs-lookup"><span data-stu-id="c0bd0-190">Entity Framework Extensions</span></span>
 
-<span data-ttu-id="4bb44-191">使用高效能批次作業延伸您的 DbContext：BulkSaveChanges、BulkInsert、BulkUpdate、BulkDelete、BulkMerge 等。</span><span class="sxs-lookup"><span data-stu-id="4bb44-191">Extends your DbContext with high-performance bulk operations: BulkSaveChanges, BulkInsert, BulkUpdate, BulkDelete, BulkMerge, and more.</span></span>
+<span data-ttu-id="c0bd0-191">使用高效能批次作業延伸您的 DbContext：BulkSaveChanges、BulkInsert、BulkUpdate、BulkDelete、BulkMerge 等。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-191">Extends your DbContext with high-performance bulk operations: BulkSaveChanges, BulkInsert, BulkUpdate, BulkDelete, BulkMerge, and more.</span></span>
 
-[<span data-ttu-id="4bb44-192">網站</span><span class="sxs-lookup"><span data-stu-id="4bb44-192">Website</span></span>](https://entityframework-extensions.net/)
+[<span data-ttu-id="c0bd0-192">網站</span><span class="sxs-lookup"><span data-stu-id="c0bd0-192">Website</span></span>](https://entityframework-extensions.net/)
 
-### <a name="reconciler"></a><span data-ttu-id="4bb44-193">協調器</span><span class="sxs-lookup"><span data-stu-id="4bb44-193">Reconciler</span></span>
+### <a name="reconciler"></a><span data-ttu-id="c0bd0-193">協調器</span><span class="sxs-lookup"><span data-stu-id="c0bd0-193">Reconciler</span></span>
 
-<span data-ttu-id="4bb44-194">插入、更新及移除各自的實體，藉此將存放區中的實體圖表更新為指定的圖表。</span><span class="sxs-lookup"><span data-stu-id="4bb44-194">Update an entity graph in store to a given one by inserting, updating and removing the respective entities.</span></span>
+<span data-ttu-id="c0bd0-194">插入、更新及移除各自的實體，藉此將存放區中的實體圖表更新為指定的圖表。</span><span class="sxs-lookup"><span data-stu-id="c0bd0-194">Update an entity graph in store to a given one by inserting, updating and removing the respective entities.</span></span>
 
-[<span data-ttu-id="4bb44-195">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="4bb44-195">GitHub repository</span></span>](https://github.com/jtheisen/reconciler)
+[<span data-ttu-id="c0bd0-195">GitHub 存放庫</span><span class="sxs-lookup"><span data-stu-id="c0bd0-195">GitHub repository</span></span>](https://github.com/jtheisen/reconciler)
