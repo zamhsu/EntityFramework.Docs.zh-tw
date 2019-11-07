@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 01/07/2019
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 0c9671eb77181d85cd493341cd1abf842d13fb0e
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: e70011b42818e4df1ec5b9b88d7adb9d36bb26f1
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181264"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73654807"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -28,7 +28,7 @@ LLBLGen Pro 是實體模型化解決方案，具備 Entity Framework 與 Entity 
 
 ### <a name="devart-entity-developer"></a>Devart Entity Developer
 
-Devart Entity 是功能強大的 ORM 設計工具，適用於 ADO.NET Entity Framework、NHibernate、LinqConnect、Telerik Data Access、LINQ 到 SQL。 它支援使用 model first 或 database first 方法，以及 C# 或 Visual Basic 程式碼產生，以視覺化的方式設計 EF Core 模型。 
+Devart Entity 是功能強大的 ORM 設計工具，適用於 ADO.NET Entity Framework、NHibernate、LinqConnect、Telerik Data Access、LINQ 到 SQL。 它支援使用 model first 或 database first 方法，以及 C# 或 Visual Basic 程式碼產生，以視覺化的方式設計 EF Core 模型。
 
 [網站](https://www.devart.com/entitydeveloper/)
 
@@ -52,7 +52,7 @@ CatFactory 是 .NET Core 的 Scaffolding 引擎，可以自動從 SQL Server 資
 
 ### <a name="loresofts-entity-framework-core-generator"></a>LoreSoft 的 Entity Framework Core Generator
 
-Entity Framework Core 產生器 (efg) 是 .NET Core CLI 工具，可以從現有資料庫產生 EF Core 模型，與 `dotnet ef dbcontext scaffold` 十分相似，但它也透過區域取代或剖析對應檔案，支援安全的程式碼[重新產生](https://efg.loresoft.com/en/latest/regeneration/)。 這項工具也支援產生檢視模型、驗證及物件對應程式程式碼。 
+Entity Framework Core 產生器 (efg) 是 .NET Core CLI 工具，可以從現有資料庫產生 EF Core 模型，與 `dotnet ef dbcontext scaffold` 十分相似，但它也透過區域取代或剖析對應檔案，支援安全的程式碼[重新產生](https://efg.loresoft.com/en/latest/regeneration/)。 這項工具也支援產生檢視模型、驗證及物件對應程式程式碼。
 
 [教學課程](https://www.loresoft.com/Generate-ASP-NET-Web-API)
 [文件](https://efg.loresoft.com/en/latest/)
@@ -86,7 +86,7 @@ System.Linq.Dynamic 原為 Microsoft 範例，說明如何從字串運算式 (�
 
 ### <a name="entityframeworkcoretypedoriginalvalues"></a>EntityFrameworkCore.TypedOriginalValues
 
-這個文件庫提供實體屬性原始值的強型別存取。 
+這個文件庫提供實體屬性原始值的強型別存取。
 
 [GitHub 存放庫](https://github.com/NickStrupat/EntityFramework.TypedOriginalValues/)
 

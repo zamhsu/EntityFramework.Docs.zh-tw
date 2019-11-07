@@ -4,18 +4,18 @@ author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: b4ae13ae1b22bb78c2c0407c0b3da64ee12ff2c1
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: aeb3ed1af8725ed6f92e0c0ba022a89b651bff80
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181207"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655588"
 ---
 # <a name="installing-entity-framework-core"></a>安裝 Entity Framework Core
 
 ## <a name="prerequisites"></a>必要條件
 
-* 因為 EF Core 是 [.NET Standard 2.1](/dotnet/standard/net-standard) 程式庫。 所以 EF Core 需要支援 .NET Standard 2.1 的 .NET 實作才可執行。 其他 .NET Standard 2.1 程式庫也可以參考 EF Core。 
+* 因為 EF Core 是 [.NET Standard 2.1](/dotnet/standard/net-standard) 程式庫。 所以 EF Core 需要支援 .NET Standard 2.1 的 .NET 實作才可執行。 其他 .NET Standard 2.1 程式庫也可以參考 EF Core。
 
 * 例如，您可以使用 EF Core 開發以 .NET Core 為目標的應用程式。 建置 .NET Core 應用程式需要 [.NET Core SDK](https://dotnet.microsoft.com/download)。 此外，您也可以使用 [Visual Studio](https://visualstudio.microsoft.com/vs)、[Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac) 或 [Visual Studio Code](https://code.visualstudio.com) 等開發環境。 如需詳細資訊，請參閱 [.NET Core 使用者入門](/dotnet/core/get-started)。
 
@@ -64,6 +64,7 @@ ms.locfileid: "72181207"
   ``` PowerShell  
   Install-Package Microsoft.EntityFrameworkCore.SqlServer
   ```
+
 * 若要更新提供者，請使用 `Update-Package` 命令。
 
 * 若要指定特定版本，請使用 `-Version` 修飾詞。 例如，若要安裝 EF Core 2.2.0 套件，請將 `-Version 2.2.0` 附加至命令
@@ -76,7 +77,7 @@ ms.locfileid: "72181207"
 
 有兩組工具可用：
 
-* [.NET Core 命令列介面 (CLI) 工具](xref:core/miscellaneous/cli/dotnet)可在 Windows、Linux 或 macOS 上使用。 這些命令會以 `dotnet ef` 開頭。 
+* [.NET Core 命令列介面 (CLI) 工具](xref:core/miscellaneous/cli/dotnet)可在 Windows、Linux 或 macOS 上使用。 這些命令會以 `dotnet ef` 開頭。
 
 * [套件管理員主控台 (PMC) 工具](xref:core/miscellaneous/cli/powershell)可在 Windows 上的 Visual Studio 中執行。 這些命令會以動詞開頭，例如 `Add-Migration` 和 `Update-Database`。
 
@@ -94,28 +95,28 @@ ms.locfileid: "72181207"
 
 目前版本的 .NET Core SDK 雖包含 `dotnet ef` 命令，但您必須安裝 `Microsoft.EntityFrameworkCore.Design` 套件才能啟用特殊專案上的命令：
 
-``` Console 
-dotnet add package Microsoft.EntityFrameworkCore.Design 
-``` 
+``` Console
+dotnet add package Microsoft.EntityFrameworkCore.Design
+```
 
 若為 ASP.NET Core 應用程式，則已自動包含此套件。
 
-> [!IMPORTANT]      
+> [!IMPORTANT]
 > 一律使用符合執行階段套件主要版本的工具套件版本。
 
 ### <a name="get-the-package-manager-console-tools"></a>取得套件管理員主控台套件
 
 若要取得 EF Core 的套件管理員主控台工具，請安裝 `Microsoft.EntityFrameworkCore.Tools` 套件。 例如，從 Visual Studio 安裝：
 
-``` PowerShell  
+``` PowerShell
 Install-Package Microsoft.EntityFrameworkCore.Tools
-``` 
+```
 
 若為 ASP.NET Core 應用程式，則已自動包含此套件。
 
 ## <a name="upgrading-to-the-latest-ef-core"></a>升級為最新的 EF Core
 
-* 每當我們發行新版本的 EF Core，同時也會發行屬於 EF Core 專案一部分的新版本提供者，像是 Microsoft.EntityFrameworkCore.SqlServer、Microsoft.EntityFrameworkCore.Sqlite 和 Microsoft.EntityFrameworkCore.InMemory。 您可以僅升級為新版本的提供者，來取得所有改善。 
+* 每當我們發行新版本的 EF Core，同時也會發行屬於 EF Core 專案一部分的新版本提供者，像是 Microsoft.EntityFrameworkCore.SqlServer、Microsoft.EntityFrameworkCore.Sqlite 和 Microsoft.EntityFrameworkCore.InMemory。 您可以僅升級為新版本的提供者，來取得所有改善。
 
 * EF Core、SQL Server 以及記憶體內部提供者都包含於目前版本的 ASP.NET Core 中。 若要將現有的 ASP.NET Core 應用程式升級為 EF Core 的較新版本，請持續升級 ASP.NET Core 的版本。
 
@@ -128,7 +129,7 @@ Install-Package Microsoft.EntityFrameworkCore.Tools
   * EF Core 2.0 及更新版本中不再需要或支援如 `Microsoft.EntityFrameworkCore.SqlServer.Design` 等資料庫提供者設計階段套件，但在升級其他套件時不會自動將其移除。
 
   * 從 2.1 版起，.NET CLI 工具都包含在 .NET SDK 中，因此您可以從專案檔移除該套件的參考：
-    ```xml
+
+    ``` xml
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     ```
-
