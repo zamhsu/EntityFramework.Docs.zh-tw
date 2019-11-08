@@ -1,16 +1,16 @@
 ---
 title: Azure Cosmos DB 提供者 - EF Core
+description: 資料庫提供者的文件，內容說明如何搭配使用 Entity Framework Core 與 Azure Cosmos DB SQL API
 author: AndriySvyryd
 ms.author: ansvyryd
-ms.date: 09/12/2019
-ms.assetid: 28264681-4486-4891-888c-be5e4ade24f1
+ms.date: 11/05/2019
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 96686256bb93f5828bb21fed167eb57812806390
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.openlocfilehash: 6cac695288d9ba84968b7fab6361f55e9b51be67
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813550"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656083"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB 提供者
 
@@ -19,19 +19,22 @@ ms.locfileid: "71813550"
 
 此資料庫提供者可讓 Entity Framework Core 與 Azure Cosmos DB 搭配使用。 [Entity Framework Core 專案](https://github.com/aspnet/EntityFrameworkCore)的維護包含此提供者。
 
-強烈建議您在閱讀本節之前先熟悉 [Azure Cosmos DB 文件](https://docs.microsoft.com/en-us/azure/cosmos-db/introduction)。
+強烈建議您在閱讀本節之前先熟悉 [Azure Cosmos DB 文件](/azure/cosmos-db/introduction)。
+
+>[!NOTE]
+> 只能搭配 Azure Cosmos DB 的 SQL API 使用此提供者。
 
 ## <a name="install"></a>安裝
 
 安裝 [Microsoft.EntityFrameworkCore.Cosmos NuGet 套件](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Cosmos/)。
 
-# <a name="net-core-clitabdotnet-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
+## <a name="net-core-clitabdotnet-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
 
 ``` console
 dotnet add package Microsoft.EntityFrameworkCore.Cosmos
 ```
 
-# <a name="visual-studiotabvs"></a>[Visual Studio](#tab/vs)
+## <a name="visual-studiotabvs"></a>[Visual Studio](#tab/vs)
 
 ``` powershell
 Install-Package Microsoft.EntityFrameworkCore.Cosmos
@@ -44,12 +47,12 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 > [!TIP]  
 > 您可以檢視本文中的 [GitHut 範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Cosmos)。
 
-與其他提供者一樣，第一步是呼叫 `UseCosmos`：
+與其他提供者一樣，第一步是呼叫 [UseCosmos](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosDbContextOptionsExtensions.UseCosmos)：
 
 [!code-csharp[Configuration](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=Configuration)]
 
 > [!WARNING]
-> 為了簡便，此處將端點和索引鍵進行了硬式編碼，但應在生產應用程式中[以安全的方式儲存它們](https://docs.microsoft.com/aspnet/core/security/app-secrets#secret-manager)
+> 為了簡便，此處將端點和索引鍵進行了硬式編碼，但應在生產應用程式中[以安全的方式儲存它們](/aspnet/core/security/app-secrets#secret-manager)
 
 在此範例中，`Order` 是簡單實體，其參考了[擁有的類型](../../modeling/owned-entities.md) `StreetAddress`。
 
@@ -62,23 +65,40 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 [!code-csharp[HelloCosmos](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=HelloCosmos)]
 
 > [!IMPORTANT]
-> 呼叫 `EnsureCreated` 對於建立所需集合與插入[種子資料](../../modeling/data-seeding.md) (如果存在於模型中) 是必要的。 但是，`EnsureCreated` 僅應在部署期間呼叫，在一般作業期間呼叫可能會導致效能問題。
+> 如果要建立需要的容器或插入[種子資料](../../modeling/data-seeding.md) (如果存在於模型中)，就必須呼叫 [EnsureCreatedAsync](/dotnet/api/Microsoft.EntityFrameworkCore.Storage.IDatabaseCreator.EnsureCreatedAsync)。 但是，`EnsureCreatedAsync` 僅應在部署期間呼叫，在一般作業期間呼叫可能會導致效能問題。
 
-## <a name="cosmos-specific-model-customization"></a>Cosmos 特定的模型自訂
+## <a name="cosmos-specific-model-customization"></a>Cosmos 專用模型自訂
 
-根據預設，所有實體類型都會對應至相同容器，並以衍生的內容命名 (在此案例中為 `"OrderContext"`)。 若要變更預設容器名稱，請使用 `HasDefaultContainer`：
+根據預設，所有實體類型都會對應至相同容器，並以衍生的內容命名 (在此案例中為 `"OrderContext"`)。 若要變更預設容器名稱，請使用 [HasDefaultContainer](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosModelBuilderExtensions.HasDefaultContainer)：
 
 [!code-csharp[DefaultContainer](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=DefaultContainer)]
 
-若要將實體類型對應至不同的容器，請使用 `ToContainer`：
+若要將實體類型對應至不同的容器，請使用 [ToContainer](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosEntityTypeBuilderExtensions.ToContainer)：
 
 [!code-csharp[Container](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=Container)]
 
 為了識別其指定項目代表 EF Core 的實體類型，即使沒有衍生的實體類型，也會新增鑑別子值。 鑑別子的名稱和值[可以變更](../../modeling/inheritance.md)。
 
+如果不會在同一個容器中儲存其他實體類型，就可以呼叫 [HasNoDiscriminator](/dotnet/api/Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder.HasNoDiscriminator) 將鑑別子移除：
+
+[!code-csharp[NoDiscriminator](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=NoDiscriminator)]
+
+### <a name="partition-keys"></a>資料分割索引鍵
+
+根據預設，EF Core 會使用對 `"__partitionKey"` 設定的分割區索引鍵來建立容器，但不會在插入項目時提供任何值。 不過，如果要充分利用 Azure Cosmos 的效能功能，就必須使用[謹慎選取的分割區索引鍵](/azure/cosmos-db/partition-data)。 您可以透過呼叫 [HasPartitionKey](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosEntityTypeBuilderExtensions.HasPartitionKey) 來設定分割區索引鍵：
+
+[!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=PartitionKey)]
+
+>[!NOTE]
+>只要分割區索引鍵屬性會[轉換成字串](xref:core/modeling/value-conversions)，就不限於任何類型。
+
+分割區索引鍵屬性設定完成後，應該都會具有 null 以外的值。 您可在發出查詢時新增條件，讓查詢成為單一分割區。
+
+[!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=PartitionKey)]
+
 ## <a name="embedded-entities"></a>內嵌實體
 
-針對 Cosmos，擁有的實體會以擁有者身分內嵌在相同項目中。 若要變更屬性名稱，請使用 `ToJsonProperty`：
+針對 Cosmos，擁有的實體會以擁有者身分內嵌在相同項目中。 若要變更屬性名稱，請使用 [ToJsonProperty](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosEntityTypeBuilderExtensions.ToJsonProperty)：
 
 [!code-csharp[PropertyNames](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=PropertyNames)]
 
@@ -87,12 +107,11 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 ``` json
 {
     "Id": 1,
-    "Discriminator": "Order",
+    "PartitionKey": "1",
     "TrackingNumber": null,
-    "id": "Order|1",
+    "id": "1",
     "Address": {
         "ShipsToCity": "London",
-        "Discriminator": "StreetAddress",
         "ShipsToStreet": "221 B Baker St"
     },
     "_rid": "6QEKAM+BOOABAAAAAAAAAA==",
@@ -121,12 +140,10 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
     "ShippingCenters": [
         {
             "City": "Phoenix",
-            "Discriminator": "StreetAddress",
             "Street": "500 S 48th Street"
         },
         {
             "City": "Anaheim",
-            "Discriminator": "StreetAddress",
             "Street": "5650 Dolly Ave"
         }
     ],
@@ -158,18 +175,18 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 ``` json
 {
     "Id": 1,
-    "Discriminator": "Order",
-    "TrackingNumber": null,
-    "id": "Order|1",
-    "Address": {
-        "ShipsToCity": "London",
-        "Discriminator": "StreetAddress",
-        "ShipsToStreet": "3 Abbey Road"
-    },
-    "_rid": "6QEKAM+BOOABAAAAAAAAAA==",
-    "_self": "dbs/6QEKAA==/colls/6QEKAM+BOOA=/docs/6QEKAM+BOOABAAAAAAAAAA==/",
-    "_etag": "\"00000000-0000-0000-683c-8f7ac48f01d5\"",
+    "Discriminator": "Distributor",
+    "id": "Distributor|1",
+    "ShippingCenters": [
+        {
+            "City": "Phoenix",
+            "Street": "500 S 48th Street"
+        }
+    ],
+    "_rid": "JBwtAN8oNYEBAAAAAAAAAA==",
+    "_self": "dbs/JBwtAA==/colls/JBwtAN8oNYE=/docs/JBwtAN8oNYEBAAAAAAAAAA==/",
+    "_etag": "\"00000000-0000-0000-9377-d7a1ae7c01d5\"",
     "_attachments": "attachments/",
-    "_ts": 1568163739
+    "_ts": 1572917100
 }
 ```

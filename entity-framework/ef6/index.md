@@ -4,12 +4,12 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 8ae74d63-6bad-4686-b325-bbf9d68f3743
 uid: ef6/index
-ms.openlocfilehash: 9561a7c4b645896cb4e248cb094c6954ed4bcdf1
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 28a13879416a52cbe8035c23013f16390c75c4c9
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181421"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656185"
 ---
 # <a name="entity-framework-6"></a>Entity Framework 6
 Entity Framework 6 (EF6) 是通過試驗及測試的 .NET 物件關聯式對應程式 (O/RM)，歷經多年的功能開發和穩固。
@@ -17,11 +17,11 @@ Entity Framework 6 (EF6) 是通過試驗及測試的 .NET 物件關聯式對應�
 作為 O/RM，EF6 可減少關聯式與物件導向環境之間的阻抗不相符情況，讓開發人員能夠撰寫使用強型別 .NET 物件 (其代表應用程式網域) 與關聯式資料庫中儲存的資料進行互動的應用程式，因此通常不需要撰寫大部分的資料存取「配管」程式碼。
 
 EF6 會實作許多常用的 O/RM 功能：
-- 對應 [POCO](~/ef6/resources/glossary.md#poco) 實體類別，其不相依於任何 EF 類型
+- 對應 [POCO](xref:ef6/resources/glossary#poco) 實體類別，其不相依於任何 EF 類型
 - 自動變更追蹤
 - 識別解析和工作單位
 - 積極式、消極式和明確式載入
-- 使用 LINQ (Language INtegrated Query) 的強型別查詢轉譯
+- 使用 [LINQ (Language INtegrated Query)](https://aka.ms/AA6hsvu) 的強型別查詢轉譯
 - 豐富的對應功能，包括下列項目的支援：
   - 一對一、一對多及多對多關聯性
   - 繼承 (每個階層的資料表、每個類型的資料表，以及每個實體類別的資料表)
@@ -31,7 +31,7 @@ EF6 會實作許多常用的 O/RM 功能：
 - 藉由撰寫程式碼來建立實體模型的「Code First」體驗。
 - 您可以從現有資料庫產生模型，然後手動編輯，也可以從頭開始建立模型，然後用來產生新的資料庫。
 - 與 .NET Framework 應用程式模型 (包括 ASP.NET) 的整合，或透過資料繫結與 WPF 和 WinForms 的整合。
-- 依據 ADO.NET 的資料庫連線和許多提供者可用來連線至 SQL Server、Oracle、MySQL、SQLite、PostgreSQL、DB2 等等。
+- 依據 ADO.NET 和許多[提供者](xref:ef6/fundamentals/providers/index)的資料庫連線，可用來連線至 SQL Server、Oracle、MySQL、SQLite、PostgreSQL、DB2 等等。
 
 ## <a name="should-i-use-ef6-or-ef-core"></a>我應該使用 EF6 還是 EF Core？
 
@@ -40,11 +40,11 @@ EF Core 是完全重新撰寫的版本，包含許多 EF6 並未提供的新功�
 如果功能集符合您的需求，請考慮在新的應用程式中使用 EF Core。
 [比較 EF Core 與 EF6](xref:efcore-and-ef6/index)可更詳細地檢查這項選擇。
 
-## <a name="get-startedef6get-startedmd"></a>[開始使用](~/ef6/get-started.md)
+## <a name="get-startedxrefef6get-started"></a>[開始使用](xref:ef6/get-started)
 
-將 EntityFramework NuGet 套件新增至您的專案，或安裝 Entity Framework Tools for Visual Studio。 接著觀看影片、閱讀教學課程和進階文件，以協助您充分利用 EF6。
+將 EntityFramework NuGet 套件新增至您的專案，或安裝 [Entity Framework Tools for Visual Studio](https://aka.ms/AA6i8c5)。 接著觀看影片、閱讀教學課程和進階文件，以協助您充分利用 EF6。
 
 ## <a name="past-entity-framework-versions"></a>過去的 Entity Framework 版本
 
 這是適用於最新版 Entity Framework 6 的文件，但其中的大部分內容也適用於過去的版本。
-如需 EF 版本和它們所引進功能的完整清單，請參閱[新功能](~/ef6/what-is-new/index.md)和[過去的版本](~/ef6/what-is-new/past-releases.md)。
+如需 EF 版本和它們所引進功能的完整清單，請參閱[新功能](xref:ef6/what-is-new/index)和[過去的版本](xref:ef6/what-is-new/past-releases)。
