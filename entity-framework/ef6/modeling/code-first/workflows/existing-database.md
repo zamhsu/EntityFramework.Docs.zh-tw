@@ -11,7 +11,7 @@ ms.lasthandoff: 10/09/2019
 ms.locfileid: "72182624"
 ---
 # <a name="code-first-to-an-existing-database"></a>Code First 到現有的資料庫
-這段影片和逐步解說提供以現有資料庫為目標之 Code First 開發的簡介。 Code First 可讓您使用 C @ no__t-0 或 VB.Net 類別來定義您的模型。 您可以選擇性地使用類別和屬性上的屬性，或使用 Fluent API 來執行其他設定。
+這段影片和逐步解說提供以現有資料庫為目標之 Code First 開發的簡介。 Code First 可讓您使用 C\# 或 VB.Net 類別來定義模型。 您可以選擇性地使用類別和屬性上的屬性，或使用 Fluent API 來執行其他設定。
 
 ## <a name="watch-the-video"></a>觀看影片
 [Channel 9 現在提供](https://channel9.msdn.com/blogs/ef/code-first-to-existing-database-ef6-1-onwards-)這部影片。
@@ -22,15 +22,15 @@ ms.locfileid: "72182624"
 
 您也將需要安裝**Visual Studio 的 Entity Framework Tools**版本**6.1** （或更新版本）。 如需安裝最新版本 Entity Framework Tools 的詳細資訊，請參閱[取得 Entity Framework](~/ef6/fundamentals/install.md) 。
 
-## <a name="1-create-an-existing-database"></a>1.建立現有的資料庫
+## <a name="1-create-an-existing-database"></a>1. 建立現有的資料庫
 
 通常當您將目標設為現有的資料庫時，就會建立它，但在此逐步解說中，我們需要建立要存取的資料庫。
 
 讓我們繼續產生資料庫。
 
 -   開啟 Visual Studio
--   **View-&gt; 伺服器總管**
--   以滑鼠右鍵按一下 [**資料連線-&gt; 新增連接 ...** ]
+-   **View&gt; 伺服器總管**
+-   以滑鼠右鍵按一下 **資料連線-&gt; 新增連接 ...**
 -   如果您還沒有從**伺服器總管**連接到資料庫，則必須選取 [ **Microsoft SQL Server** ] 做為資料來源
 
     ![選取資料來源](~/ef6/media/selectdatasource.png)
@@ -70,19 +70,19 @@ INSERT INTO [dbo].[Blogs] ([Name],[Url])
 VALUES ('.NET Framework Blog', 'http://blogs.msdn.com/dotnet/')
 ```
 
-## <a name="2-create-the-application"></a>2.建立應用程式
+## <a name="2-create-the-application"></a>2. 建立應用程式
 
 為了簡單起見，我們將建立一個使用 Code First 來執行資料存取的基本主控台應用程式：
 
 -   開啟 Visual Studio
--   **檔案 &gt; 個新 &gt; 個專案 。**
+-   **檔案&gt; 新&gt; 專案 。**
 -   從左側功能表和**主控台應用程式**中選取 [ **Windows** ]
 -   輸入**CodeFirstExistingDatabaseSample**作為名稱
 -   選取 [確定]
 
  
 
-## <a name="3-reverse-engineer-model"></a>3.反向工程模型
+## <a name="3-reverse-engineer-model"></a>3. 反向工程模型
 
 我們將使用 Visual Studio 的 Entity Framework Tools，協助我們產生一些要對應到資料庫的初始程式碼。 這些工具只會產生程式碼，如果您想要的話，也可以手動輸入。
 
@@ -117,12 +117,12 @@ VALUES ('.NET Framework Blog', 'http://blogs.msdn.com/dotnet/')
 </connectionStrings>
 ```
 
-@no__t 0You'll 注意到設定檔案中的其他設定，這些都是預設 EF 設定，會告訴 Code First 建立資料庫的位置。因為我們要對應到現有的資料庫，所以我們的應用程式將會忽略這些設定。 *
+*您也會注意到設定檔案中的其他設定，這些都是預設的 EF 設定，告訴 Code First 在何處建立資料庫。因為我們要對應到現有的資料庫，所以我們的應用程式將會忽略這些設定。*
 
 ### <a name="derived-context"></a>衍生內容
 
 已將**BloggingCoNtext**類別加入至專案。 內容代表資料庫的會話，可讓我們查詢和儲存資料。
-內容會針對模型中的每個類型，公開**DbSet @ no__t-1TEntity @ no__t-2** 。 您也會注意到，預設的函式會使用**name =** 語法來呼叫基底的函數。 這會告訴 Code First 此內容所使用的連接字串應該從設定檔載入。
+內容會公開模型中每個類型的**DbSet&lt;TEntity&gt;** 。 您也會注意到，預設的函式會使用**name =** 語法來呼叫基底的函數。 這會告訴 Code First 此內容所使用的連接字串應該從設定檔載入。
 
 ``` csharp
 public partial class BloggingContext : DbContext
@@ -141,11 +141,11 @@ public partial class BloggingContext : DbContext
     }
 ```
 
-當您使用設定檔中的連接字串時，@no__t 0You 應一律使用**name =** 語法。這可確保如果連接字串不存在，Entity Framework 會擲回，而不是依照慣例建立新的資料庫。 *
+*當您使用設定檔中的連接字串時，請一律使用**name =** 語法。這可確保如果連接字串不存在，Entity Framework 會擲回，而不是依照慣例建立新的資料庫。*
 
 ### <a name="model-classes"></a>模型類別
 
-最後，也已將**Blog**和**Post**類別加入至專案。 這些是組成模型的網域類別。 您會看到套用至類別的資料批註來指定設定，其中 Code First 慣例不會與現有資料庫的結構對齊。 例如，您會在**Blog.Name**和**Blog**上看到**StringLength**注釋，因為它們在資料庫中的最大長度是**200** （Code First 預設值是使用資料庫提供者所支援的上限長度-SQL Server 中的**Nvarchar （max）** ）。
+最後，也已將**Blog**和**Post**類別加入至專案。 這些是組成模型的網域類別。 您會看到套用至類別的資料批註來指定設定，其中 Code First 慣例不會與現有資料庫的結構對齊。 例如，您會在**Blog.Name**和**Blog**上看到**StringLength**注釋，因為在資料庫中，其最大長度為**200** （Code First 預設為使用資料庫提供者所支援的上限長度，SQL Server 中為**Nvarchar （max）** ）。
 
 ``` csharp
 public partial class Blog
@@ -167,7 +167,7 @@ public partial class Blog
 }
 ```
 
-## <a name="4-reading--writing-data"></a>4.讀取 & 寫入資料
+## <a name="4-reading--writing-data"></a>4. 讀取 & 寫入資料
 
 既然我們已經有模型，就可以使用它來存取一些資料。 在**Program.cs**中執行**Main**方法，如下所示。 此程式碼會建立內容的新實例，然後使用它來插入新的**Blog**。 然後，它會使用 LINQ 查詢來抓取資料庫中依**標題**字母順序排序的所有**blog** 。
 
@@ -223,6 +223,6 @@ Press any key to exit...
 
 如果您想要搭配現有的資料庫使用 Code First 移轉，請參閱[Code First 移轉至現有的資料庫](~/ef6/modeling/code-first/migrations/existing-database.md)。
 
-## <a name="summary"></a>總結
+## <a name="summary"></a>摘要
 
 在本逐步解說中，我們探討了使用現有資料庫的 Code First 開發。 我們使用 Visual Studio 的 Entity Framework Tools，對對應至資料庫的一組類別進行反向工程，並可用來儲存和抓取資料。

@@ -16,9 +16,9 @@ ms.locfileid: "72182455"
 ## <a name="watch-the-video"></a>觀看影片
 這段影片提供使用 Entity Framework 進行 Database First 開發的介紹。 Database First 可讓您從現有的資料庫對模型進行反向工程。 此模型會儲存在 EDMX 檔案（.edmx 副檔名）中，而且可以在 Entity Framework Designer 中查看和編輯。 您在應用程式中與互動的類別會從 EDMX 檔案自動產生。
 
-**提供者**：[Rowan 莎莎](https://romiller.com/)
+**主講人**[Rowan Miller](https://romiller.com/)
 
-**影片**：[WMV](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.wmv)@NO__T[-1 個](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-mp4video-databasefirst.m4v) | [WMV （ZIP）](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.zip)
+**影片**： [wmv](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.wmv) | [.wmv](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-mp4video-databasefirst.m4v) | [wmv （ZIP）](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.zip)
 
 ## <a name="pre-requisites"></a>先決條件
 
@@ -28,7 +28,7 @@ ms.locfileid: "72182455"
 
  
 
-## <a name="1-create-an-existing-database"></a>1.建立現有的資料庫
+## <a name="1-create-an-existing-database"></a>1. 建立現有的資料庫
 
 通常當您將目標設為現有的資料庫時，就會建立它，但在此逐步解說中，我們需要建立要存取的資料庫。
 
@@ -42,8 +42,8 @@ ms.locfileid: "72182455"
 讓我們繼續產生資料庫。
 
 -   開啟 Visual Studio
--   **View-&gt; 伺服器總管**
--   以滑鼠右鍵按一下 [**資料連線-&gt; 新增連接 ...** ]
+-   **View&gt; 伺服器總管**
+-   以滑鼠右鍵按一下 **資料連線-&gt; 新增連接 ...**
 -   如果您還沒有從伺服器總管連接到資料庫，則必須選取 [Microsoft SQL Server] 做為資料來源
 
     ![選取資料來源](~/ef6/media/selectdatasource.png)
@@ -79,19 +79,19 @@ CREATE TABLE [dbo].[Posts] (
 );
 ```
 
-## <a name="2-create-the-application"></a>2.建立應用程式
+## <a name="2-create-the-application"></a>2. 建立應用程式
 
 為了簡單起見，我們將建立一個使用 Database First 來執行資料存取的基本主控台應用程式：
 
 -   開啟 Visual Studio
--   **檔案 &gt; 個新 &gt; 個專案 。**
+-   **檔案&gt; 新&gt; 專案 。**
 -   從左側功能表和**主控台應用程式**中選取 [ **Windows** ]
 -   輸入**DatabaseFirstSample**作為名稱
 -   選取 [確定]
 
  
 
-## <a name="3-reverse-engineer-model"></a>3.反向工程模型
+## <a name="3-reverse-engineer-model"></a>3. 反向工程模型
 
 我們將使用 Entity Framework Designer （隨附于 Visual Studio 的一部分）來建立我們的模型。
 
@@ -123,23 +123,23 @@ CREATE TABLE [dbo].[Posts] (
 
 首先，我們需要從 NuGet 取得最新版本的 Entity Framework。
 
--   **專案– &gt; 管理 NuGet 套件 ...** 
-    *如果您沒有 [**管理 NuGet 套件 ...** ] 選項，您應該安裝[最新版本的 nuget](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) *
+-   **專案–&gt; 管理 NuGet 套件 ...** 
+    *如果您沒有 [**管理 nuget 套件 ...** ] 選項，您應該安裝[最新版本的 nuget](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) *
 -   選取 [**線上**] 索引標籤
 -   選取**EntityFramework**套件
--   按一下 [安裝]。
+-   按一下 [**安裝**]
 
 接下來，我們需要交換我們的模型，以產生會使用 DbCoNtext API 的程式碼，這是在 Entity Framework 的較新版本中引進。
 
 -   在 EF 設計工具中，以滑鼠右鍵按一下模型的空白位置，然後選取 [**新增程式碼產生專案**...]。
 -   從左側功能表中選取 [**線上範本**]，然後搜尋**DbCoNtext**
--   選取**C @ no__t-1**的 EF 5.x DbCoNtext 產生器，輸入**BloggingModel**做為名稱，然後按一下 [**新增**]
+-   選取**適用于 C\#** 的 EF 5.x DbCoNtext 產生器，輸入**BloggingModel**做為名稱，然後按一下 [**新增**]
 
     ![DbCoNtext 範本](~/ef6/media/dbcontexttemplate.png)
 
  
 
-## <a name="4-reading--writing-data"></a>4.讀取 & 寫入資料
+## <a name="4-reading--writing-data"></a>4. 讀取 & 寫入資料
 
 既然我們已經有模型，就可以使用它來存取一些資料。 我們即將用來存取資料的類別會根據 EDMX 檔案自動產生。
 
@@ -194,7 +194,7 @@ Press any key to exit...
 ```
  
 
-## <a name="5-dealing-with-database-changes"></a>5.處理資料庫變更
+## <a name="5-dealing-with-database-changes"></a>5. 處理資料庫變更
 
 現在可以對資料庫架構進行一些變更，當我們進行這些變更時，我們也需要更新我們的模型來反映這些變更。
 
@@ -215,7 +215,7 @@ CREATE TABLE [dbo].[Users]
 
 -   在 EF 設計工具中，以滑鼠右鍵按一下模型的空白位置，然後選取 [從資料庫更新模型]，這將會啟動更新嚮導
 -   在 [更新嚮導] 的 [新增] 索引標籤上，核取 [資料表] 旁的方塊，這表示我們想要從架構新增任何新的資料表。
-    @no__t 0The 重新整理 索引標籤會顯示模型中任何現有的資料表，並會在更新期間檢查是否有變更。刪除 索引標籤會顯示已從架構移除的任何資料表，而且也會在更新過程中從模型中移除。系統會自動偵測這兩個索引標籤上的資訊，並提供僅供參考之用，您無法變更任何設定。 *
+    *[重新整理] 索引標籤會顯示模型中任何現有的資料表，並會在更新期間檢查是否有變更。[刪除] 索引標籤會顯示已從架構移除的任何資料表，而且也會在更新過程中從模型中移除。系統會自動偵測這兩個索引標籤上的資訊，並提供僅供參考之用，您無法變更任何設定。*
 
     ![重新整理嚮導](~/ef6/media/refreshwizard.png)
 
@@ -227,6 +227,6 @@ CREATE TABLE [dbo].[Users]
 
 ![已更新模型](~/ef6/media/modelupdated.png)
 
-## <a name="summary"></a>總結
+## <a name="summary"></a>摘要
 
 在本逐步解說中，我們探討了 Database First 開發，這讓我們能夠在以現有資料庫為基礎的 EF 設計工具中建立模型。 然後，我們會使用該模型來讀取及寫入資料庫中的某些資料。 最後，我們更新了模型，以反映我們對資料庫架構所做的變更。

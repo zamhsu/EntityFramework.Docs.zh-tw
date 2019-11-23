@@ -15,7 +15,7 @@ ms.locfileid: "72182416"
 
 ## <a name="ef-team-blogs"></a>EF Team blog
 
-- @no__t 0.NET 的 Blog-標記：Entity Framework @ no__t-0
+- [.NET Blog-標記： Entity Framework](https://blogs.msdn.microsoft.com/dotnet/tag/entity-framework/)
 - [ADO.NET Blog （不再使用）](https://blogs.msdn.microsoft.com/adonet/)
 - [EF 設計 Blog （不再使用）](https://blogs.msdn.microsoft.com/efdesign/)
 
@@ -24,7 +24,7 @@ ms.locfileid: "72182416"
 - [Arthur Vickers](https://blog.oneunicorn.com/tag/entity-framework/)
 - [Brice Lambson](https://www.bricelam.net/)
 - [聖地牙哥 Vega](https://blogs.msdn.microsoft.com/diego/)
-- [Rowan 莎莎](https://romiller.com/category/entity-framework/)
+- [Rowan Miller](https://romiller.com/category/entity-framework/)
 - [Pawel Kadluczka](https://blog.3d-logic.com/category/entity-framework/)
 - [Alex James](https://blogs.msdn.microsoft.com/alexj/tag/entity-framework/)
 - [Zlatko Michailov](https://blogs.msdn.microsoft.com/esql/tag/entity-framework/)

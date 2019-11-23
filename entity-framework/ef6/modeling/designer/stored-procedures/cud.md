@@ -12,9 +12,9 @@ ms.locfileid: "71813554"
 ---
 # <a name="designer-cud-stored-procedures"></a>設計工具 CUD 預存程式
 
-此逐步解說示範如何使用 Entity Framework Designer （EF Designer），將實體類型的 create @ no__t-0insert、update 和 delete （CUD）作業對應至預存程式。  根據預設，Entity Framework 會自動產生 CUD 作業的 SQL 語句，但您也可以將預存程式對應至這些作業。  
+此逐步解說示範如何使用 Entity Framework Designer （EF Designer），將實體類型的 create\\insert、update 和 delete （CUD）作業對應至預存程式。  根據預設，Entity Framework 會自動產生 CUD 作業的 SQL 語句，但您也可以將預存程式對應至這些作業。  
 
-請注意，該 Code First 不支援對應至預存程式或函數。 不過，您可以使用 DbSet. SqlQuery 方法來呼叫預存程式或函數。 例如:
+請注意，該 Code First 不支援對應至預存程式或函數。 不過，您可以使用 DbSet. SqlQuery 方法來呼叫預存程式或函數。 例如：
 
 ``` csharp
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]");
@@ -24,10 +24,10 @@ var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]");
 
 將 CUD 作業對應至預存程式時，適用下列考慮事項：
 
-- 如果您要將其中一個 CUD 作業對應至預存程式，請將其對應。 如果您沒有對應這三個，未對應的作業將會在執行時失敗，而且會擲回 **UpdateException** will。
+- 如果您要將其中一個 CUD 作業對應至預存程式，請將其對應。 如果您未對應這三個，未對應的作業會在執行時失敗，而且會擲回 **UpdateException** 。
 - 您必須將預存程式的每個參數對應至實體屬性。
-- 如果伺服器為插入的資料列產生主要金鑰值，您必須將此值對應回實體的索引鍵屬性。 在接下來的範例中， **InsertPerson** stored 程式會傳回新建立的主鍵，做為預存程式的結果集的一部分。 主要索引鍵會使用 EF 設計工具的 [ **&lt;Add Result Bindings @ no__t-3** feature] 對應至實體索引鍵（**PersonID**）。
-- 預存程序呼叫會對應1:1 和概念模型中的實體。 例如，如果您在概念模型中執行繼承階層，然後對應**父**（基底）和**子**系（衍生）實體的 CUD 預存程式，則儲存**子**變更只會呼叫**子**系 's 預存程式，它不會觸發**父系**的預存程序呼叫。
+- 如果伺服器為插入的資料列產生主要金鑰值，您必須將此值對應回實體的索引鍵屬性。 在接下來的範例中， **InsertPerson** 預存程式會傳回新建立的主鍵做為預存程式之結果集的一部分。 主鍵會使用 EF Designer 的 **&lt;加入結果**系結&gt;  功能對應至實體索引鍵（**PersonID**）。
+- 預存程序呼叫會對應1:1 和概念模型中的實體。 例如，如果您在概念模型中執行繼承階層，然後對應**父**（基底）和**子**系（衍生）實體的 CUD 預存程式，則儲存**子**變更只會呼叫**子**系的預存程式，而不會觸發**父系**的預存程序呼叫。
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -39,21 +39,21 @@ var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]");
 ## <a name="set-up-the-project"></a>設定專案
 
 - 開啟 Visual Studio 2012。
-- 選取 [檔案 **-@no__t 1] [新 &gt;] 專案**
-- 在左窗格中，按一下 [ **Visual C @ no__t-1**]，然後選取 [**主控台**] 範本。
-- 在 [名稱] 中輸入 **CUDSProcsSample** as。
+- 選取檔案 **&gt; 新&gt; 專案**
+- 在左窗格中，按一下 [ **Visual C\#** ]，然後選取 [**主控台**] 範本。
+- 在 [名稱] 中輸入 **CUDSProcsSample** 。
 - 選取 **[確定]** 。
 
 ## <a name="create-a-model"></a>建立模型
 
-- 以滑鼠右鍵按一下方案總管中的專案名稱，然後選取 [**新增-&gt; 個新專案**]。
+- 以滑鼠右鍵按一下方案總管中的專案名稱，然後選取 [**新增-&gt; 新專案**]。
 - 從左側功能表中選取 [**資料**]，然後選取 [範本] 窗格中的 [ **ADO.NET 實體資料模型**]。
 - 在 [檔案名] 中輸入**CUDSProcs** ，然後按一下 [**新增**]。
 - 在 [選擇模型內容] 對話方塊中，選取 [ **從資料庫產生**]，然後按 **[下一步]** 。
-- 按一下 [ **新增連接**]。 在 [連接屬性] 對話方塊中，輸入伺服器名稱（例如， **（localdb）\\mssqllocaldb**），選取驗證方法，輸入 **School**  作為資料庫名稱，然後按一下 **[確定]** 。
+- 按一下 [ **新增連接**]。 在 [連接屬性] 對話方塊中，輸入伺服器名稱（例如， **（localdb）\\mssqllocaldb**），選取驗證方法，輸入 **School** 作為資料庫名稱，然後按一下 **[確定]** 。
     [選擇您的資料連線] 對話方塊會以您的資料庫連接設定進行更新。
-- 在 [選擇您的資料庫物件] 對話方塊的 [ **資料表** node] 底下，選取 [ **Person** ] 資料表。
-- 此外，請在 [**預存程式和函數**] 節點底下選取下列預存程式：**DeletePerson**、 **InsertPerson**和**UpdatePerson**。
+- 在 [選擇您的資料庫物件] 對話方塊的 [ **資料表** ] 節點底下，選取 [ **Person** ] 資料表。
+- 此外，請在 [**預存程式和函數**] 節點底下選取下列預存程式： **DeletePerson**、 **InsertPerson**和**UpdatePerson**。
 - 從 Visual Studio 2012 開始，EF 設計工具支援大量匯入預存程式。 預設會核取 [將**選取的預存程式和函數匯入至實體模型**]。 因為在此範例中，我們有一個插入、更新和刪除實體類型的預存程式，所以我們不想要匯入它們，而且會取消核取此核取方塊。
 
     ![匯入 S 的過程](~/ef6/media/importsprocs.jpg)
@@ -63,30 +63,30 @@ var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]");
 
 ## <a name="map-the-person-entity-to-stored-procedures"></a>將 Person 實體對應至預存程式
 
-- 以滑鼠右鍵按一下 [ **Person**] @no__t 1entity 類型，然後選取 [ **預存程式對應**]。
-- 預存程式對應會出現在 **對應詳細資料** window 中。
-- 按一下 [ **&lt;Select 插入函數 @ no__t-2**]。
+- 以滑鼠右鍵按一下 [ **Person** ] 實體類型，然後選取 [ **預存程式對應**]。
+- 預存程式對應會顯示在  **對應詳細資料**  視窗中。
+- 按一下  **&lt;選取 插入函數&gt;** 。
     此欄位會變成儲存模型中預存程序的下拉式清單，可以對應到概念模型中的實體類型。
-    選取 [ **InsertPerson** from] 下拉式清單。
-- 預存程序參數與實體屬性之間的預設對應隨即出現。 請注意，箭號表示對應方向：屬性值會提供給預存程式參數。
-- 按一下 [ **&lt;Add Result Binding @ no__t-2**]。
-- 輸入 **NewPersonID**，這是 **InsertPerson** stored 程式所傳回的參數名稱。 請確定不輸入前置或尾端空格。
+    從下拉式清單中選取 [ **InsertPerson** ]。
+- 預存程序參數與實體屬性之間的預設對應隨即出現。 請注意，箭頭表示對應方向：為預存程序參數提供屬性值。
+- 按一下 [ **&lt;加入結果**系結]&gt;。
+- 輸入 **NewPersonID**，這是 **InsertPerson** 預存程式所傳回的參數名稱。 請確定不輸入前置或尾端空格。
 - 按 **enter**鍵。
-- 根據預設， **NewPersonID**@no__t-sp1 是對應至實體索引鍵 **PersonID**。 請注意，箭號表示對應的方向：結果資料行的值會提供給屬性。
+- 根據預設， **NewPersonID** 會對應至實體索引鍵 **PersonID**。 請注意，箭頭表示對應方向：為屬性提供結果資料行的值。
 
     ![對應詳細資料](~/ef6/media/mappingdetails.png)
 
-- 按一下  **&lt;Select Update Function @ no__t-2** and 選取  **UpdatePerson** from 產生的下拉式清單。
+- 按一下  **&lt;選取 更新**函式&gt; ，然後從產生的下拉式清單中選取  **UpdatePerson** 。
 - 預存程序參數與實體屬性之間的預設對應隨即出現。
-- 按一下  **&lt;Select Delete Function @ no__t-2** and 選取  **DeletePerson** from 產生的下拉式清單。
+- 按一下  **&lt;選取 刪除**函式&gt; 然後從產生的下拉式清單中選取  **DeletePerson** 。
 - 預存程序參數與實體屬性之間的預設對應隨即出現。
 
- **Person**@no__t 1entity 類型的插入、更新和刪除作業現在會對應至預存程式。
+ **Person** 實體類型的插入、更新和刪除作業現在會對應至預存程式。
 
 如果您想要在使用預存程式來更新或刪除實體時啟用並行檢查，請使用下列其中一個選項：
 
-- 使用**OUTPUT**參數從預存程式傳回受影響的資料列數目，並檢查參數名稱旁邊  checkbox 的資料**列受影響的參數**。 如果呼叫作業時傳回的值為零，則會擲回  [**OptimisticConcurrencyException**](https://msdn.microsoft.com/library/system.data.optimisticconcurrencyexception.aspx) will。
-- 核取您要用於並行檢查的屬性旁的 [**使用原始值**] 核取方塊。 嘗試進行更新時，將資料寫回資料庫時，會使用原本從資料庫讀取的屬性值。 如果值不符合資料庫中的值，則會擲回**OptimisticConcurrencyException** will。
+- 使用**OUTPUT**參數從預存程式傳回受影響的資料列數目，然後檢查參數名稱旁邊的 **受影響**的資料列 參數  核取方塊。 如果在呼叫作業時傳回的值為零，則會擲回  [**OptimisticConcurrencyException**](https://msdn.microsoft.com/library/system.data.optimisticconcurrencyexception.aspx) 。
+- 核取您要用於並行檢查的屬性旁的 [**使用原始值**] 核取方塊。 嘗試進行更新時，將資料寫回資料庫時，會使用原本從資料庫讀取的屬性值。 如果值不符合資料庫中的值，則會擲回**OptimisticConcurrencyException** 。
 
 ## <a name="use-the-model"></a>使用模型
 

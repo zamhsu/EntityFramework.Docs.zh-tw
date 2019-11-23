@@ -11,7 +11,7 @@ ms.lasthandoff: 10/09/2019
 ms.locfileid: "72182664"
 ---
 # <a name="fluent-api-with-vbnet"></a>使用 VB.NET 的流暢 API
-Code First 可讓您使用 C @ no__t-0 或 VB.NET 類別來定義您的模型。 您可以選擇性地使用類別和屬性上的屬性，或使用 Fluent API 來執行其他設定。 本逐步解說示範如何使用 VB.NET 來執行 Fluent API 設定。
+Code First 可讓您使用 C\# 或 VB.NET 類別來定義模型。 您可以選擇性地使用類別和屬性上的屬性，或使用 Fluent API 來執行其他設定。 本逐步解說示範如何使用 VB.NET 來執行 Fluent API 設定。
 
 本頁面假設您對 Code First 有基本瞭解。 如需 Code First 的詳細資訊，請參閱下列逐步解說：
 
@@ -29,7 +29,7 @@ Code First 可讓您使用 C @ no__t-0 或 VB.NET 類別來定義您的模型。
 為了簡單起見，我們將建立一個使用 Code First 來執行資料存取的基本主控台應用程式。
 
 -   開啟 Visual Studio
--   **檔案 &gt; 個新 &gt; 個專案 。**
+-   **檔案&gt; 新&gt; 專案 。**
 -   從左側功能表和**主控台應用程式**中選取 [ **Windows** ]
 -   輸入**CodeFirstVBSample**作為名稱
 -   選取 [確定]
@@ -137,14 +137,14 @@ Code First 可讓您使用 C @ no__t-0 或 VB.NET 類別來定義您的模型。
 
 我們即將開始使用 Entity Framework 的類型，因此我們需要新增 EntityFramework NuGet 套件。
 
--   \* * 專案– &gt;**管理 NuGet 套件 ...**
+-   \* * 專案–&gt;**管理 NuGet 套件 ...**
 > [!NOTE]
 > 如果您沒有 [**管理 NuGet 套件 ...** ] 選項您應該安裝[最新版的 NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
 -   選取 [**線上**] 索引標籤
 -   選取**EntityFramework**套件
--   按一下 [安裝]。
+-   按一下 [**安裝**]
 
-現在可以定義衍生的內容，代表與資料庫的會話，讓我們能夠查詢和儲存資料。 我們會定義衍生自 DbCoNtext 的內容，並針對模型中的每個類別公開具類型的 DbSet @ no__t-0TEntity @ no__t-1。
+現在可以定義衍生的內容，代表與資料庫的會話，讓我們能夠查詢和儲存資料。 我們會定義衍生自 DbCoNtext 的內容，並針對模型中的每個類別公開具類型的 DbSet&lt;TEntity&gt;。
 
 -   將新類別新增至專案，並在 [類別名稱] 中輸入**SchoolCoNtext**
 -   將新類別的內容取代為下列程式碼
@@ -171,7 +171,7 @@ Code First 可讓您使用 C @ no__t-0 或 VB.NET 類別來定義您的模型。
 
 ## <a name="configuring-with-the-fluent-api"></a>使用流暢的 API 進行設定
 
-本節示範如何使用流暢的 Api 來設定資料表的類型、對應的屬性、資料行對應，以及模型中的資料表 @ no__t-0type 之間的關聯性。 Fluent API 是透過**DbModelBuilder**類型公開，而且最常藉由覆寫**DbCoNtext**上的**OnModelCreating**方法來存取。
+本節示範如何使用流暢的 Api 來設定資料表的類型、對應的屬性、資料行的對應，以及模型中的資料表之間的關聯性\\類型。 Fluent API 是透過**DbModelBuilder**類型公開，而且最常藉由覆寫**DbCoNtext**上的**OnModelCreating**方法來存取。
 
 -   複製下列程式碼，並將它新增至**SchoolCoNtext**類別上定義的**OnModelCreating**方法中，批註會說明每個對應的用途
 

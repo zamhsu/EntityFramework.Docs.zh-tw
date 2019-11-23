@@ -27,9 +27,9 @@ ms.locfileid: "72182655"
 ## <a name="watch-the-video"></a>觀看影片
 這段影片示範如何使用 Entity Framework Code First 來對應空間類型。 它也會示範如何使用 LINQ 查詢來尋找兩個位置之間的距離。
 
-**提供者**：Julia Kornich
+**提供者**： Julia Kornich
 
-**影片**：[WMV](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.wmv)@NO__T[-1 個](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-mp4video-spatialwithcodefirst.m4v) | [WMV （ZIP）](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.zip)
+**影片**： [wmv](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.wmv) | [.wmv](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-mp4video-spatialwithcodefirst.m4v) | [wmv （ZIP）](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.zip)
 
 ## <a name="pre-requisites"></a>先決條件
 
@@ -39,7 +39,7 @@ ms.locfileid: "72182655"
 
 1.  開啟 Visual Studio 2012
 2.  **在 [檔案**] 功能表上，指向 [**新增**]，然後按一下 [**專案**]
-3.  在左窗格中，按一下 [ **Visual C @ no__t-1**]，然後選取**主控台**範本
+3.  在左窗格中，按一下 [ **Visual C\#** ]，然後選取**主控台**範本
 4.  輸入**SpatialCodeFirst**做為專案的名稱，然後按一下 **[確定]** 。
 
 ## <a name="define-a-new-model-using-code-first"></a>使用 Code First 定義新的模型
@@ -67,7 +67,7 @@ public class University
 
 ## <a name="define-the-dbcontext-derived-type"></a>定義 DbCoNtext 衍生類型
 
-除了定義實體以外，您還需要定義衍生自 DbCoNtext 的類別，並公開 DbSet @ no__t-0TEntity @ no__t-1 屬性。 DbSet @ no__t-0TEntity @ no__t-1 屬性可讓內容知道您想要包含在模型中的類型。
+除了定義實體以外，您還需要定義衍生自 DbCoNtext 的類別，並公開 DbSet&lt;TEntity&gt; 屬性。 DbSet&lt;TEntity&gt; 屬性可讓內容知道您想要包含在模型中的類型。
 
 DbCoNtext 衍生類型的實例會在運行時間管理實體物件，其中包括以資料庫的資料填入物件、變更追蹤，以及將資料保存至資料庫。
 
@@ -76,7 +76,7 @@ DbCoNtext 和 DbSet 類型定義于 EntityFramework 元件中。 我們會使用
 1.  在方案總管中，以滑鼠右鍵按一下專案名稱。
 2.  選取 [**管理 NuGet 套件 ...** ]
 3.  在 [管理 NuGet 套件] 對話方塊中，選取 [**線上**] 索引標籤，然後選擇 [ **EntityFramework** ] 套件。
-4.  按一下 [安裝]。
+4.  按一下 [**安裝**]
 
 請注意，除了 EntityFramework 元件之外，也會新增 System.workflow.componentmodel.activity. DataAnnotations 元件的參考。
 
@@ -144,12 +144,12 @@ The closest University to you is: School of Fine Art.
 
 若要查看資料庫和資料，請執行下列動作：
 
-1.  在 [Visual Studio 2012] 主功能表中，選取 [ **View** - @ no__t-2 **SQL Server 物件總管**]。
+1.  在 Visual Studio 2012 主功能表中，選取 [ **View** -&gt; **SQL Server 物件總管**]。
 2.  如果 LocalDB 不在伺服器清單中，請按一下**SQL Server**上的滑鼠右鍵，然後選取 [**新增] SQL Server**使用預設的 [ **Windows 驗證**] 來連接到 LocalDB 實例
 3.  展開 LocalDB 節點
 4.  展開 [**資料庫**] 資料夾以查看新的資料庫，並流覽至 [**大學**] 資料表
 5.  若要查看資料，請以滑鼠右鍵按一下資料表，然後選取 [**查看資料**]
 
-## <a name="summary"></a>總結
+## <a name="summary"></a>摘要
 
 在本逐步解說中，我們探討了如何搭配使用空間類型與 Entity Framework Code First。 

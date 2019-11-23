@@ -16,9 +16,9 @@ ms.locfileid: "72182434"
 ## <a name="watch-the-video"></a>觀看影片
 這段影片和逐步解說提供使用 Entity Framework Model First 開發的簡介。 Model First 可讓您使用 Entity Framework Designer 建立新的模型，然後從模型產生資料庫架構。 此模型會儲存在 EDMX 檔案（.edmx 副檔名）中，而且可以在 Entity Framework Designer 中查看和編輯。 您在應用程式中與互動的類別會從 EDMX 檔案自動產生。
 
-**提供者**：[Rowan 莎莎](https://romiller.com/)
+**主講人**[Rowan Miller](https://romiller.com/)
 
-**影片**：[WMV](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv)@NO__T[-1 個](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v) | [WMV （ZIP）](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
+**影片**： [wmv](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv) | [.wmv](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v) | [wmv （ZIP）](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
 
 ## <a name="pre-requisites"></a>先決條件
 
@@ -26,17 +26,17 @@ ms.locfileid: "72182434"
 
 如果您使用 Visual Studio 2010，您也必須安裝[NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) 。
 
-## <a name="1-create-the-application"></a>1.建立應用程式
+## <a name="1-create-the-application"></a>1. 建立應用程式
 
 為了簡單起見，我們將建立一個使用 Model First 來執行資料存取的基本主控台應用程式：
 
 -   開啟 Visual Studio
--   **檔案 &gt; 個新 &gt; 個專案 。**
+-   **檔案&gt; 新&gt; 專案 。**
 -   從左側功能表和**主控台應用程式**中選取 [ **Windows** ]
 -   輸入**ModelFirstSample**作為名稱
 -   選取 [確定]
 
-## <a name="2-create-model"></a>2.建立模型
+## <a name="2-create-model"></a>2. 建立模型
 
 我們將使用 Entity Framework Designer （隨附于 Visual Studio 的一部分）來建立我們的模型。
 
@@ -50,25 +50,25 @@ ms.locfileid: "72182434"
 Entity Framework Designer 會以空白模型開啟。 現在我們可以開始將實體、屬性和關聯新增至模型。
 
 -   以滑鼠右鍵按一下設計介面，然後選取 [**屬性**]
--   在 屬性視窗將**實體容器名稱**變更為**BloggingCoNtext**
-    *這是將為您產生的衍生內容名稱，內容代表資料庫的會話，讓我們能夠進行查詢和儲存資料*
--   以滑鼠右鍵按一下設計介面，然後選取 [**加入新的-&gt;** ] [實體]。
+-   在屬性視窗將**實體容器名稱**變更為**BloggingCoNtext**
+    *這是將為您產生的衍生內容名稱，內容代表資料庫的會話，讓我們能夠查詢和儲存資料*
+-   以滑鼠右鍵按一下設計介面，然後選取 [**新增-&gt; 實體**...]
 -   輸入**Blog**作為機構名稱，並**BlogId**作為索引鍵名稱，然後按一下 **[確定]** 。
 
     ![新增 Blog 實體](~/ef6/media/addblogentity.png)
 
--   以滑鼠右鍵按一下設計介面上的新實體，然後選取 [**新增-&gt;** 純量屬性]，輸入**name**作為屬性的名稱。
+-   以滑鼠右鍵按一下設計介面上的新實體，然後選取 [**加入新的-&gt;** 純量屬性]，輸入**name**作為屬性的名稱。
 -   重複此程式以新增**Url**屬性。
 -   以滑鼠右鍵按一下設計介面上的  **Url**  屬性，然後選取 **屬性**，在 屬性視窗將**可為 null**的設定變更為  **True** 
-     *，這可讓我們將 Blog 儲存到資料庫，而不需為其指派 Url*
+    *這可讓我們將 Blog 儲存到資料庫，而不需為其指派 Url*
 -   使用您剛才學會的技術，新增具有**PostId**索引鍵屬性的**Post**實體
 -   將**標題**和**內容**純量屬性加入至**Post**實體
 
 既然我們有幾個實體，就可以在兩者之間新增關聯（或關係）。
 
 -   以滑鼠右鍵按一下設計介面，然後選取 [**加入新的-&gt; 關聯**]。
--   將關聯性點的一端**設為** **1**的多重性，另一個結束點則以**許多**
-     的多重性**張貼**，*這表示 blog 有許多貼文，而且貼文屬於一個 blog*
+-   將關聯性點的一端設為具有一個多重性的 blog **，另**一個結束點則以**許多**
+    的多重性**張貼**，*這表示 blog 有許多貼文，而且貼文屬於一個 blog*
 -   確定已核取 [**將外鍵屬性加入至 ' Post ' 實體**] 方塊，然後按一下 **[確定]**
 
     ![新增關聯 MF](~/ef6/media/addassociationmf.png)
@@ -83,21 +83,21 @@ Entity Framework Designer 會以空白模型開啟。 現在我們可以開始�
 
 首先，我們需要從 NuGet 取得最新版本的 Entity Framework。
 
--   **專案– &gt; 管理 NuGet 套件 ...** 
-    *如果您沒有 [**管理 NuGet 套件 ...** ] 選項，您應該安裝[最新版本的 nuget](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) *
+-   **專案–&gt; 管理 NuGet 套件 ...** 
+    *如果您沒有 [**管理 nuget 套件 ...** ] 選項，您應該安裝[最新版本的 nuget](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) *
 -   選取 [**線上**] 索引標籤
 -   選取**EntityFramework**套件
--   按一下 [安裝]。
+-   按一下 [**安裝**]
 
 接下來，我們需要交換我們的模型，以產生會使用 DbCoNtext API 的程式碼，這是在 Entity Framework 的較新版本中引進。
 
 -   在 EF 設計工具中，以滑鼠右鍵按一下模型的空白位置，然後選取 [**新增程式碼產生專案**...]。
 -   從左側功能表中選取 [**線上範本**]，然後搜尋**DbCoNtext**
--   選取**C @ no__t-1**的 EF 5.x DbCoNtext 產生器，輸入**BloggingModel**做為名稱，然後按一下 [**新增**]
+-   選取**適用于 C\#** 的 EF 5.x DbCoNtext 產生器，輸入**BloggingModel**做為名稱，然後按一下 [**新增**]
 
     ![DbCoNtext 範本](~/ef6/media/dbcontexttemplate.png)
 
-## <a name="3-generating-the-database"></a>3.產生資料庫
+## <a name="3-generating-the-database"></a>3. 產生資料庫
 
 假設我們的模型，Entity Framework 可以計算資料庫架構，讓我們使用模型來儲存和抓取資料。
 
@@ -120,7 +120,7 @@ Entity Framework Designer 會以空白模型開啟。 現在我們可以開始�
 -   顯示腳本之後，按一下 **[完成]** ，腳本就會新增至您的專案並開啟
 -   以滑鼠右鍵按一下腳本，然後選取 [**執行**]，系統會提示您指定要連接的資料庫、指定 LocalDB 或 SQL Server Express，視您使用的 Visual Studio 版本而定
 
-## <a name="4-reading--writing-data"></a>4.讀取 & 寫入資料
+## <a name="4-reading--writing-data"></a>4. 讀取 & 寫入資料
 
 既然我們已經有模型，就可以使用它來存取一些資料。 我們即將用來存取資料的類別會根據 EDMX 檔案自動產生。
 
@@ -172,7 +172,7 @@ ADO.NET Blog
 Press any key to exit...
 ```
 
-## <a name="5-dealing-with-model-changes"></a>5.處理模型變更
+## <a name="5-dealing-with-model-changes"></a>5. 處理模型變更
 
 現在是時候對我們的模型進行一些變更，當我們進行這些變更時，我們也需要更新資料庫架構。
 
@@ -183,7 +183,7 @@ Press any key to exit...
     ![新增使用者實體](~/ef6/media/adduserentity.png)
 
 -   以滑鼠右鍵按一下設計介面上的 [使用者**名稱**] 屬性，然後選取 [**屬性**]，在屬性視窗將**MaxLength**設定變更為**50**
-    ，這會將*可儲存在使用者名稱的資料限制為50字元*
+    *這會將可儲存在使用者名稱中的資料限制為50個字元*
 -   將**DisplayName**純量屬性加入至**使用者**實體
 
 我們現在已有更新的模型，而且我們已準備好更新資料庫，以容納新的使用者實體類型。
@@ -192,9 +192,9 @@ Press any key to exit...
 -   按一下 **[完成]**
 -   您可能會收到有關覆寫現有 DDL 腳本的警告，以及模型的對應和儲存部分，請在這兩個警告中按一下 **[是]**
 -   系統會為您開啟用來建立資料庫的已更新 SQL 腳本  
-    產生的 @no__t 0The 腳本將會卸載所有現有的資料表，然後從頭開始重新建立架構。這可能適用于本機開發，但無法將變更推送至已部署的資料庫。如果您需要將變更發行至已部署的資料庫，您必須編輯腳本，或使用架構比較工具來計算遷移腳本。 *
+    *產生的腳本會卸載所有現有的資料表，然後從頭開始重新建立架構。這可能適用于本機開發，但無法將變更推送至已部署的資料庫。如果您需要將變更發行至已部署的資料庫，您必須編輯腳本，或使用架構比較工具來計算遷移腳本。*
 -   以滑鼠右鍵按一下腳本，然後選取 [**執行**]，系統會提示您指定要連接的資料庫、指定 LocalDB 或 SQL Server Express，視您使用的 Visual Studio 版本而定
 
-## <a name="summary"></a>總結
+## <a name="summary"></a>摘要
 
 在本逐步解說中，我們探討了 Model First 開發，這讓我們能夠在 EF 設計工具中建立模型，然後從該模型產生資料庫。 然後，我們會使用此模型來讀取和寫入資料庫中的一些資料。 最後，我們已更新模型，然後重新建立資料庫架構以符合模型。

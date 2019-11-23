@@ -84,7 +84,7 @@ namespace TestingDemo
 
 請注意，內容上的 DbSet 屬性會標示為 virtual。 這可讓模擬架構衍生自我們的內容，並使用模擬的實來覆寫這些屬性。  
 
-如果您使用 Code First 則可以直接編輯您的類別。 如果您使用 EF 設計工具，則必須編輯產生內容的 T4 範本。 開啟 [\<model_name @ no__t-1]。在您的 edmx 檔案底下的 CoNtext.tt 檔案，尋找下列程式碼片段，並加入虛擬關鍵字，如下所示。  
+如果您使用 Code First 則可以直接編輯您的類別。 如果您使用 EF 設計工具，則必須編輯產生內容的 T4 範本。 開啟 \<model_name\>。在您的 edmx 檔案底下的 CoNtext.tt 檔案，尋找下列程式碼片段，並加入虛擬關鍵字，如下所示。  
 
 ``` csharp
 public string DbSet(EntitySet entitySet)
@@ -150,7 +150,7 @@ namespace TestingDemo
 
 ## <a name="testing-non-query-scenarios"></a>測試非查詢案例  
 
-這就是開始測試非查詢方法所需執行的動作。 下列測試會使用 Moq 來建立內容。 接著，它會建立 DbSet @ no__t-0Blog @ no__t-1，並將其從內容的 Blog 屬性中傳回。 接下來，內容是用來建立新的 BlogService，然後使用 AddBlog 方法建立新的 blog。 最後，此測試會驗證服務是否已新增新的 Blog，並在內容上呼叫 SaveChanges。  
+這就是開始測試非查詢方法所需執行的動作。 下列測試會使用 Moq 來建立內容。 接著，它會建立一個 DbSet\<Blog\>，並將它從內容的 Blog 屬性中傳回。 接下來，內容是用來建立新的 BlogService，然後使用 AddBlog 方法建立新的 blog。 最後，此測試會驗證服務是否已新增新的 Blog，並在內容上呼叫 SaveChanges。  
 
 ``` csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -182,7 +182,7 @@ namespace TestingDemo
 
 ## <a name="testing-query-scenarios"></a>測試查詢案例  
 
-為了能夠對我們的 DbSet 測試執行查詢，我們需要設定 IQueryable 的執行。 第一個步驟是建立一些記憶體內部資料-我們使用的是 List @ no__t-0Blog @ no__t-1。 接下來，我們會建立一個內容並 DBSet @ no__t-0Blog @ no__t-1，然後連接 DbSet 的 IQueryable 實作為，只是委派給與 List @ no__t-2T @ no__t-3 搭配運作的 LINQ to Objects 提供者。  
+為了能夠對我們的 DbSet 測試執行查詢，我們需要設定 IQueryable 的執行。 第一個步驟是建立一些記憶體中的資料，我們使用的是\<Blog\>的清單。 接下來，我們會建立內容並 DBSet\<的 Blog，\> 然後連線到 DbSet 的 IQueryable 執行，它們只會委派給與清單\<T\>搭配運作的 LINQ to Objects 提供者。  
 
 然後，我們可以根據測試加倍來建立 BlogService，並確保從 GetAllBlogs 取回的資料會依名稱排序。  
 
@@ -235,7 +235,7 @@ Entity Framework 6 引進了一組擴充方法，可用來以非同步方式執�
 
 由於 Entity Framework 查詢會利用 LINQ，因此擴充方法會定義于 IQueryable 和 IEnumerable 上。 不過，因為它們僅設計用於 Entity Framework，如果您嘗試在不是 Entity Framework 查詢的 LINQ 查詢上使用它們，您可能會收到下列錯誤：
 
-> 來源 IQueryable 不會執行 IDbAsyncEnumerable @ no__t-0。 只有執行 IDbAsyncEnumerable 的來源可以用於 Entity Framework 非同步作業。 如需詳細資訊，請參閱[http://go.microsoft.com/fwlink/?LinkId=287068](https://go.microsoft.com/fwlink/?LinkId=287068)。  
+> 來源 IQueryable 不會執行 IDbAsyncEnumerable{0}。 只有執行 IDbAsyncEnumerable 的來源可以用於 Entity Framework 非同步作業。 如需詳細資訊，請參閱[http://go.microsoft.com/fwlink/?LinkId=287068](https://go.microsoft.com/fwlink/?LinkId=287068)。  
 
 雖然非同步方法僅在針對 EF 查詢執行時才受到支援，但在對 DbSet 的記憶體中測試雙精度執行時，您可能會想要在單元測試中使用它們。  
 

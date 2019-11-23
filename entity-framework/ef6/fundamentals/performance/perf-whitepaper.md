@@ -13,13 +13,13 @@ ms.locfileid: "72181679"
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>EF 4、5和6的效能考慮
 依 David Obando、Eric Dettinger 及其他
 
-發佈2012年4月
+發行日期：2012年4月
 
 上次更新日期：5月2014
 
 ------------------------------------------------------------------------
 
-## <a name="1-introduction"></a>1.簡介
+## <a name="1-introduction"></a>1. 簡介
 
 物件關聯式對應架構是一個便利的方式，可在物件導向應用程式中提供資料存取的抽象概念。 針對 .NET 應用程式，Microsoft 建議的 O/RM Entity Framework。 不過，透過任何抽象概念，效能可能會成為一大顧慮。
 
@@ -31,7 +31,7 @@ ms.locfileid: "72181679"
 
 Entity Framework 6 是頻外版本，不依賴 .NET 隨附的 Entity Framework 元件。 Entity Framework 6 適用于 .NET 4.0 和 .NET 4.5，而且可以為尚未從 .NET 4.0 升級，但想要在應用程式中使用最新 Entity Framework 位的使用者提供極大的效能優勢。 當本檔提及 Entity Framework 6 時，它是指在撰寫本文時可用的最新版本：版本6.1.0。
 
-## <a name="2-cold-vs-warm-query-execution"></a>2.冷與暖查詢執行
+## <a name="2-cold-vs-warm-query-execution"></a>2. 冷與暖查詢執行
 
 第一次針對指定的模型進行任何查詢時，Entity Framework 會在幕後執行許多工作，以載入和驗證模型。 我們經常將這個第一個查詢稱為「冷」查詢。  針對已載入的模型進行進一步的查詢稱為「暖」查詢，而且速度更快。
 
@@ -39,22 +39,22 @@ Entity Framework 6 是頻外版本，不依賴 .NET 隨附的 Entity Framework �
 
 **第一個查詢執行–冷查詢**
 
-| 程式碼使用者寫入                                                                                     | Action                    | EF4 效能影響                                                                                                                                                                                                                                                                                                                                                                                                        | EF5 效能影響                                                                                                                                                                                                                                                                                                                                                                                                                                                    | EF6 效能影響                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 程式碼使用者寫入                                                                                     | 動作                    | EF4 效能影響                                                                                                                                                                                                                                                                                                                                                                                                        | EF5 效能影響                                                                                                                                                                                                                                                                                                                                                                                                                                                    | EF6 效能影響                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |:-----------------------------------------------------------------------------------------------------|:--------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `using(var db = new MyContext())` <br/> `{`                                                          | 內容建立          | Medium                                                                                                                                                                                                                                                                                                                                                                                                                        | Medium                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `using(var db = new MyContext())` <br/> `{`                                                          | 內容建立          | 中等                                                                                                                                                                                                                                                                                                                                                                                                                        | 中等                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `  var q1 = ` <br/> `    from c in db.Customers` <br/> `    where c.Id == id1` <br/> `    select c;` | 查詢運算式建立 | 低                                                                                                                                                                                                                                                                                                                                                                                                                           | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `  var c1 = q1.First();`                                                                             | LINQ 查詢執行      | -中繼資料載入：高但快取 <br/> -View 世代：可能非常高，但已快取 <br/> -參數評估：Medium <br/> -查詢轉譯：Medium <br/> -具體化程式產生：中但快取 <br/> -資料庫查詢執行：可能很高 <br/> + 連接。開啟 <br/> + 命令。 ExecuteReader <br/> + DataReader. 讀取 <br/> 物件具體化：Medium <br/> -身分識別查閱：Medium | -中繼資料載入：高但快取 <br/> -View 世代：可能非常高，但已快取 <br/> -參數評估：低 <br/> -查詢轉譯：中但快取 <br/> -具體化程式產生：中但快取 <br/> -資料庫查詢執行：可能很高（在某些情況下為較佳的查詢） <br/> + 連接。開啟 <br/> + 命令。 ExecuteReader <br/> + DataReader. 讀取 <br/> 物件具體化：Medium <br/> -身分識別查閱：Medium | -中繼資料載入：高但快取 <br/> -View 世代：中但快取 <br/> -參數評估：低 <br/> -查詢轉譯：中但快取 <br/> -具體化程式產生：中但快取 <br/> -資料庫查詢執行：可能很高（在某些情況下為較佳的查詢） <br/> + 連接。開啟 <br/> + 命令。 ExecuteReader <br/> + DataReader. 讀取 <br/> 物件具體化：中（速度比 EF5 快） <br/> -身分識別查閱：Medium |
-| `}`                                                                                                  | Connection.Close          | 低                                                                                                                                                                                                                                                                                                                                                                                                                           | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `  var c1 = q1.First();`                                                                             | LINQ 查詢執行      | -中繼資料載入：高但快取 <br/> -View 世代：可能非常高，但已快取 <br/> -參數評估：中 <br/> -查詢轉譯：中 <br/> -具體化程式產生：中但快取 <br/> -資料庫查詢執行：可能很高 <br/> + 連接。開啟 <br/> + 命令。 ExecuteReader <br/> + DataReader. 讀取 <br/> 物件具體化：中 <br/> -身分識別查閱：中 | -中繼資料載入：高但快取 <br/> -View 世代：可能非常高，但已快取 <br/> -參數評估：低 <br/> -查詢轉譯：中但快取 <br/> -具體化程式產生：中但快取 <br/> -資料庫查詢執行：可能很高（在某些情況下為較佳的查詢） <br/> + 連接。開啟 <br/> + 命令。 ExecuteReader <br/> + DataReader. 讀取 <br/> 物件具體化：中 <br/> -身分識別查閱：中 | -中繼資料載入：高但快取 <br/> -視圖產生：中但快取 <br/> -參數評估：低 <br/> -查詢轉譯：中但快取 <br/> -具體化程式產生：中但快取 <br/> -資料庫查詢執行：可能很高（在某些情況下為較佳的查詢） <br/> + 連接。開啟 <br/> + 命令。 ExecuteReader <br/> + DataReader. 讀取 <br/> 物件具體化：中（速度比 EF5 快） <br/> -身分識別查閱：中 |
+| `}`                                                                                                  | 連接。關閉          | 低                                                                                                                                                                                                                                                                                                                                                                                                                           | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 
 **第二個查詢執行–暖查詢**
 
-| 程式碼使用者寫入                                                                                     | Action                    | EF4 效能影響                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | EF5 效能影響                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | EF6 效能影響                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 程式碼使用者寫入                                                                                     | 動作                    | EF4 效能影響                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | EF5 效能影響                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | EF6 效能影響                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 |:-----------------------------------------------------------------------------------------------------|:--------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `using(var db = new MyContext())` <br/> `{`                                                          | 內容建立          | Medium                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Medium                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `using(var db = new MyContext())` <br/> `{`                                                          | 內容建立          | 中等                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | 中等                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `  var q1 = ` <br/> `    from c in db.Customers` <br/> `    where c.Id == id1` <br/> `    select c;` | 查詢運算式建立 | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `  var c1 = q1.First();`                                                                             | LINQ 查詢執行      | -中繼資料~~載入~~查閱：~~高但快~~取量 <br/> -View~~世代~~查閱：~~可能非常高，但已快~~取量 <br/> -參數評估：Medium <br/> -查詢~~轉譯~~查閱：Medium <br/> -具體化程式~~產生~~查閱：~~中但~~快取量 <br/> -資料庫查詢執行：可能很高 <br/> + 連接。開啟 <br/> + 命令。 ExecuteReader <br/> + DataReader. 讀取 <br/> 物件具體化：Medium <br/> -身分識別查閱：Medium | -中繼資料~~載入~~查閱：~~高但快~~取量 <br/> -View~~世代~~查閱：~~可能非常高，但已快~~取量 <br/> -參數評估：低 <br/> -查詢~~轉譯~~查閱：~~中但~~快取量 <br/> -具體化程式~~產生~~查閱：~~中但~~快取量 <br/> -資料庫查詢執行：可能很高（在某些情況下為較佳的查詢） <br/> + 連接。開啟 <br/> + 命令。 ExecuteReader <br/> + DataReader. 讀取 <br/> 物件具體化：Medium <br/> -身分識別查閱：Medium | -中繼資料~~載入~~查閱：~~高但快~~取量 <br/> -View~~世代~~查閱：~~中但~~快取量 <br/> -參數評估：低 <br/> -查詢~~轉譯~~查閱：~~中但~~快取量 <br/> -具體化程式~~產生~~查閱：~~中但~~快取量 <br/> -資料庫查詢執行：可能很高（在某些情況下為較佳的查詢） <br/> + 連接。開啟 <br/> + 命令。 ExecuteReader <br/> + DataReader. 讀取 <br/> 物件具體化：中（速度比 EF5 快） <br/> -身分識別查閱：Medium |
-| `}`                                                                                                  | Connection.Close          | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `  var c1 = q1.First();`                                                                             | LINQ 查詢執行      | -中繼資料~~載入~~查閱：~~高但快~~取低 <br/> -View~~世代~~查閱：~~可能非常高，但快~~取不足 <br/> -參數評估：中 <br/> -查詢~~轉譯~~查閱：中 <br/> -具體化程式~~產生~~查閱：~~中等但~~快取偏低 <br/> -資料庫查詢執行：可能很高 <br/> + 連接。開啟 <br/> + 命令。 ExecuteReader <br/> + DataReader. 讀取 <br/> 物件具體化：中 <br/> -身分識別查閱：中 | -中繼資料~~載入~~查閱：~~高但快~~取低 <br/> -View~~世代~~查閱：~~可能非常高，但快~~取不足 <br/> -參數評估：低 <br/> -查詢~~轉譯~~查閱：~~中但~~快取偏低 <br/> -具體化程式~~產生~~查閱：~~中等但~~快取偏低 <br/> -資料庫查詢執行：可能很高（在某些情況下為較佳的查詢） <br/> + 連接。開啟 <br/> + 命令。 ExecuteReader <br/> + DataReader. 讀取 <br/> 物件具體化：中 <br/> -身分識別查閱：中 | -中繼資料~~載入~~查閱：~~高但快~~取低 <br/> -View~~世代~~查閱：~~中但~~快取偏低 <br/> -參數評估：低 <br/> -查詢~~轉譯~~查閱：~~中但~~快取偏低 <br/> -具體化程式~~產生~~查閱：~~中等但~~快取偏低 <br/> -資料庫查詢執行：可能很高（在某些情況下為較佳的查詢） <br/> + 連接。開啟 <br/> + 命令。 ExecuteReader <br/> + DataReader. 讀取 <br/> 物件具體化：中（速度比 EF5 快） <br/> -身分識別查閱：中 |
+| `}`                                                                                                  | 連接。關閉          | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | 低                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 
 有數種方式可降低冷和暖查詢的效能成本，我們將在下一節中討論這些功能。 具體而言，我們將探討如何使用預先產生的視圖來降低在冷查詢中載入模型的成本，這應該有助於減輕在視圖產生期間所發生的效能難題。 針對暖查詢，我們將討論查詢計劃快取、沒有追蹤查詢和不同的查詢執行選項。
@@ -68,7 +68,7 @@ Entity Framework 6 是頻外版本，不依賴 .NET 隨附的 Entity Framework �
 
 請記住，概念模型可能會以各種不同的方式與資料庫架構不同。 例如，一個單一資料表可能用來儲存兩個不同實體類型的資料。 繼承和非一般對應在對應視圖的複雜性中扮演著角色。
 
-根據對應規格來計算這些觀點的程式，就是所謂的「視圖產生」。 當載入模型時，或在建立時使用「預先產生的視圖」，可以動態地進行視圖產生;後者會以 Entity SQL 語句的形式序列化為 C @ no__t-0 或 VB 檔案。
+根據對應規格來計算這些觀點的程式，就是所謂的「視圖產生」。 當載入模型時，或在建立時使用「預先產生的視圖」，可以動態地進行視圖產生;後者會以 Entity SQL 語句的形式序列化成 C\# 或 VB 檔案。
 
 當視圖產生時，也會進行驗證。 從效能的觀點來看，大部分的視圖產生成本實際上都是驗證視圖，這可確保實體之間的連接有意義，並對所有支援的作業具有正確的基數。
 
@@ -96,7 +96,7 @@ Entity Framework 6 是頻外版本，不依賴 .NET 隨附的 Entity Framework �
 
 #### <a name="232-how-to-use-pre-generated-views-with-a-model-created-by-edmgen"></a>2.3.2 如何搭配 Edmgen.exe 所建立的模型使用預先產生的視圖
 
-Edmgen.exe 是隨附于 .NET 的公用程式，適用于 Entity Framework 4 和5，但不含 Entity Framework 6。 Edmgen.exe 可讓您從命令列產生模型檔案、物件層和 views。 其中一個輸出將是您選擇的語言、VB 或 C @ no__t-0 的 Views 檔案。 這是一個程式碼檔案，其中包含每個實體集的 Entity SQL 程式碼片段。 若要啟用預先產生的視圖，您只需要在專案中包含檔案。
+Edmgen.exe 是隨附于 .NET 的公用程式，適用于 Entity Framework 4 和5，但不含 Entity Framework 6。 Edmgen.exe 可讓您從命令列產生模型檔案、物件層和 views。 其中一個輸出將是您選擇的語言、VB 或 C\#的 Views 檔案。 這是一個程式碼檔案，其中包含每個實體集的 Entity SQL 程式碼片段。 若要啟用預先產生的視圖，您只需要在專案中包含檔案。
 
 如果您手動對模型的架構檔案進行編輯，就必須重新產生 views 檔案。 若要這麼做，您可以使用 **/mode： ViewGeneration**旗標執行 edmgen.exe。
 
@@ -104,12 +104,12 @@ Edmgen.exe 是隨附于 .NET 的公用程式，適用于 Entity Framework 4 和5
 
 您也可以使用 Edmgen.exe 來產生 EDMX 檔案的 views-先前參考的 MSDN 主題說明如何新增預先建立事件來執行此動作，但這很複雜，而且在某些情況下無法使用。 當您的模型位於 edmx 檔案時，使用 T4 範本來產生視圖通常會比較容易。
 
-ADO.NET 小組部落格有某篇文章說明如何使用 T4 範本產生檢視表 ( \<http://blogs.msdn.com/b/adonet/archive/2008/06/20/how-to-use-a-t4-template-for-view-generation.aspx>) 。 這篇文章包含可供下載並新增至您專案的範本。 範本是針對第一個 Entity Framework 版本所撰寫，因此不保證會與最新版本的 Entity Framework 搭配使用。 不過，您可以針對 Entity Framework 4 下載更新的視圖產生樣板集，並 5from Visual Studio 資源庫：
+ADO.NET 小組的 blog 有一篇文章，說明如何使用 T4 範本來產生視圖（\<http://blogs.msdn.com/b/adonet/archive/2008/06/20/how-to-use-a-t4-template-for-view-generation.aspx>)。 這篇文章包含可供下載並新增至您專案的範本。 範本是針對第一個 Entity Framework 版本所撰寫，因此不保證會與最新版本的 Entity Framework 搭配使用。 不過，您可以針對 Entity Framework 4 下載更新的視圖產生樣板集，並 5from Visual Studio 資源庫：
 
--   VB.NET： \< @ NO__T-1
--   C @ NO__T-0： \< @ NO__T-2
+-   VB.NET： \<http://visualstudiogallery.msdn.microsoft.com/118b44f2-1b91-4de2-a584-7a680418941d>
+-   C\#： \<http://visualstudiogallery.msdn.microsoft.com/ae7730ce-ddab-470f-8456-1b313cd2c44d>
 
-如果您使用 Entity Framework 6 您可以檢視產生 T4 範本從取得 Visual Studio 組件庫，在\<http://visualstudiogallery.msdn.microsoft.com/18a7db90-6705-4d19-9dd1-0a6c23d0751f> 。
+如果您使用 Entity Framework 6，您可以從 \<http://visualstudiogallery.msdn.microsoft.com/18a7db90-6705-4d19-9dd1-0a6c23d0751f>的 Visual Studio 資源庫取得視圖產生 T4 範本。
 
 ### <a name="24-reducing-the-cost-of-view-generation"></a>2.4 降低視圖產生成本
 
@@ -133,19 +133,19 @@ ADO.NET 小組部落格有某篇文章說明如何使用 T4 範本產生檢視�
 
 使用 Edmgen.exe 或 Visual Studio 中的 Entity Designer 時，您預設會取得 Fk，而且只會使用單一核取方塊或命令列旗標，在 Fk 與 IAs 之間切換。
 
-如果您有大型的 Code First 模型，使用獨立關聯的效果會與產生視圖相同。 您可以在相依物件的類別上包含外鍵屬性來避免這種影響，不過有些開發人員會將其視為物件模型的污染。 您可以找到更多有關這個主題進行\<http://blog.oneunicorn.com/2011/12/11/whats-the-deal-with-mapping-foreign-keys-using-the-entity-framework/> 。
+如果您有大型的 Code First 模型，使用獨立關聯的效果會與產生視圖相同。 您可以在相依物件的類別上包含外鍵屬性來避免這種影響，不過有些開發人員會將其視為物件模型的污染。 您可以在 \<http://blog.oneunicorn.com/2011/12/11/whats-the-deal-with-mapping-foreign-keys-using-the-entity-framework/>中找到此主題的詳細資訊。
 
-| 使用時      | 請執行                                                                                                                                                                                                                                                                                                                              |
+| 使用時      | 請這樣做                                                                                                                                                                                                                                                                                                                              |
 |:----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Entity Designer | 加入兩個實體之間的關聯之後，請確定您有參考條件約束。 參考條件約束會告訴 Entity Framework 使用外鍵，而不是獨立的關聯。 如需其他詳細資料請造訪\<http://blogs.msdn.com/b/efdesign/archive/2009/03/16/foreign-keys-in-the-entity-framework.aspx> 。 |
-| Edmgen.exe          | 使用 Edmgen.exe 從資料庫產生您的檔案時，將會遵守您的外鍵，並將其加入至模型中。 如需 EDMGen 所公開的不同選項的詳細資訊請造訪[http://msdn.microsoft.com/library/bb387165.aspx](https://msdn.microsoft.com/library/bb387165.aspx)。                           |
+| Entity Designer | 加入兩個實體之間的關聯之後，請確定您有參考條件約束。 參考條件約束會告訴 Entity Framework 使用外鍵，而不是獨立的關聯。 如需其他詳細資料，請造訪 \<http://blogs.msdn.com/b/efdesign/archive/2009/03/16/foreign-keys-in-the-entity-framework.aspx>。 |
+| Edmgen.exe          | 使用 Edmgen.exe 從資料庫產生您的檔案時，將會遵守您的外鍵，並將其加入至模型中。 如需 Edmgen.exe 所公開之不同選項的詳細資訊，請造訪[http://msdn.microsoft.com/library/bb387165.aspx](https://msdn.microsoft.com/library/bb387165.aspx)。                           |
 | Code First      | 如需有關使用 Code First 時如何在相依物件上包含外鍵屬性的資訊，請參閱[Code First 慣例](~/ef6/modeling/code-first/conventions/built-in.md)主題的「關聯性慣例」一節。                                                                                              |
 
 #### <a name="242-moving-your-model-to-a-separate-assembly"></a>2.4.2 將模型移至不同的元件
 
 當您的模型直接包含在應用程式的專案中，而您透過預先建立事件或 T4 範本產生 views 時，只要重建專案，就會發生視圖產生和驗證，即使模型並未變更也是一樣。 如果您將模型移至不同的元件，並從應用程式的專案中參考它，您可以對應用程式進行其他變更，而不需要重建包含模型的專案。
 
-*注意：* @no__t 1when 將模型移至不同的元件時，請記得將模型的連接字串複製到用戶端專案的應用程式佈建檔中。
+*注意：* 將模型移至不同的元件時  ，請記得將模型的連接字串複製到用戶端專案的應用程式佈建檔中。
 
 #### <a name="243-disable-validation-of-an-edmx-based-model"></a>2.4.3 停用以 edmx 為基礎的模型驗證
 
@@ -191,7 +191,7 @@ Entity Framework 具有下列內建的快取形式：
 1.  如果物件不在快取中，則尋找的優點會是否定的，但語法仍然比依索引鍵的查詢更簡單。
 2.  如果已啟用自動偵測變更，尋找方法的成本可能會增加一個程度，或甚至更多，視您的模型複雜度和物件快取中的實體量而定。
 
-此外，請記住，尋找只會傳回您要尋找的實體，如果物件快取中還沒有關聯的實體，它就不會自動載入它們。 如果您需要抓取相關聯的實體，您可以使用依索引鍵進行的查詢與積極式載入。 如需詳細資訊，請參閱 **8.1 消極式載入與積極式載入 @ no__t-0。
+此外，請記住，尋找只會傳回您要尋找的實體，如果物件快取中還沒有關聯的實體，它就不會自動載入它們。 如果您需要抓取相關聯的實體，您可以使用依索引鍵進行的查詢與積極式載入。 如需詳細資訊，請參閱8.1 消極式**載入和積極式載入**。
 
 #### <a name="312-performance-issues-when-the-object-cache-has-many-entities"></a>當物件快取有許多實體時，3.1.2 效能問題
 
@@ -207,9 +207,9 @@ Entity Framework 具有下列內建的快取形式：
 
 #### <a name="321-some-notes-about-query-plan-caching"></a>3.2.1 關於查詢計劃快取的一些注意事項
 
--   查詢計劃快取會針對所有查詢類型共用：Entity SQL、LINQ to Entities 和 CompiledQuery 物件。
+-   查詢計劃快取會針對所有查詢類型共用： Entity SQL、LINQ to Entities 和 CompiledQuery 物件。
 -   根據預設，查詢計劃快取會針對 Entity SQL 查詢而啟用，不論是透過 EntityCommand 或透過 ObjectQuery 來執行。 在 .NET 4.5 上的 Entity Framework 中 LINQ to Entities 查詢，以及 Entity Framework 6，預設也會啟用此功能。
-    -   將 EnablePlanCaching 屬性（在 EntityCommand 或 ObjectQuery 上）設定為 false，即可停用查詢計劃快取。 例如:
+    -   將 EnablePlanCaching 屬性（在 EntityCommand 或 ObjectQuery 上）設定為 false，即可停用查詢計劃快取。 例如：
 ``` csharp
                     var query = from customer in context.Customer
                                 where customer.CustomerId == id
@@ -260,9 +260,9 @@ AggregatingSubtotals 查詢是我們用來測試的最複雜查詢。 如預期�
 
 ### <a name="33-using-compiledquery-to-improve-performance-with-linq-queries"></a>3.3 使用 CompiledQuery 來改善 LINQ 查詢的效能
 
-我們的測試指出使用 CompiledQuery 可享有 7% over autocompiled LINQ 查詢的優點;這表示您會花費 7% 的時間來執行 Entity Framework 堆疊的程式碼;這並不表示您的應用程式速度將會加快 7%。 一般來說，相較于優點，在 EF 5.0 中寫入和維護 CompiledQuery 物件的成本可能不是值得一提的問題。 您的里程可能會有所不同，因此如果您的專案需要額外的推送，請執行此選項。 請注意，CompiledQueries 只與 ObjectCoNtext 衍生模型相容，而且與 DbCoNtext 衍生模型不相容。
+我們的測試指出使用 CompiledQuery 可享有 7% over autocompiled LINQ 查詢的優點;這表示您會花費7% 的時間來執行 Entity Framework 堆疊的程式碼;這並不表示您的應用程式速度將會加快7%。 一般來說，相較于優點，在 EF 5.0 中寫入和維護 CompiledQuery 物件的成本可能不是值得一提的問題。 您的里程可能會有所不同，因此如果您的專案需要額外的推送，請執行此選項。 請注意，CompiledQueries 只與 ObjectCoNtext 衍生模型相容，而且與 DbCoNtext 衍生模型不相容。
 
-如需有關建立和叫用 CompiledQuery 的詳細資訊，請參閱 <<c0> [編譯的查詢 (LINQ to Entities)](https://msdn.microsoft.com/library/bb896297.aspx)。
+如需有關建立和叫用 CompiledQuery 的詳細資訊，請參閱[編譯的查詢（LINQ to Entities）](https://msdn.microsoft.com/library/bb896297.aspx)。
 
 使用 CompiledQuery 時，您必須採取兩個考慮，也就是使用靜態實例的需求，以及它們與複合性的問題。 以下是這兩個考慮的深入說明。
 
@@ -396,7 +396,7 @@ Entity Framework 也支援中繼資料快取。 這基本上是快取型別資�
 4.  ItemCollection 會定期檢查以供使用。 如果判斷出最近尚未存取的工作區，則會在下一次快取清除時將其標示為清理。
 5.  只要建立 EntityConnection，就會建立中繼資料快取（不過，在開啟連接之前，其中的專案集合將不會初始化）。 此工作區會保留在記憶體中，直到快取演算法判斷其不是「使用中」為止。
 
-客戶諮詢小組已撰寫描述保存 ItemCollection 的參考，以使用大型模型時，避免 「 取代 」 的部落格文章： \<http://blogs.msdn.com/b/appfabriccat/archive/2010/10/22/metadataworkspace-reference-in-wcf-services.aspx> 。
+客戶諮詢小組已撰寫一篇 blog 文章，其中描述保留對 ItemCollection 的參考，以避免在使用大型模型時「淘汰」： \<http://blogs.msdn.com/b/appfabriccat/archive/2010/10/22/metadataworkspace-reference-in-wcf-services.aspx>。
 
 #### <a name="342-the-relationship-between-metadata-caching-and-query-plan-caching"></a>3.4.2 中繼資料快取與查詢計劃快取之間的關聯性
 
@@ -411,7 +411,7 @@ Entity Framework 也支援中繼資料快取。 這基本上是快取型別資�
 #### <a name="351-additional-references-for-results-caching-with-the-wrapping-provider"></a>使用包裝提供者3.5.1 結果快取的其他參考
 
 -   Julie Lerman 已在 Entity Framework 和 Windows Azure 中撰寫了「第二層快取」 MSDN 文章，其中包括如何更新範例包裝提供者以使用 Windows Server AppFabric 快取： [https://msdn.microsoft.com/magazine/hh394143.aspx](https://msdn.microsoft.com/magazine/hh394143.aspx)
--   如果您正在使用 Entity Framework 5，在小組部落格有某篇文章說明如何使用 Entity Framework 5 的快取提供者執行的工作： \<http://blogs.msdn.com/b/adonet/archive/2010/09/13/ef-caching-with-jarek-kowalski-s-provider.aspx> 。 它也包含 T4 範本，可協助自動化將第二層快取新增至您的專案。
+-   如果您使用 Entity Framework 5，則小組的 blog 會有一篇文章，說明如何使用快取提供者（Entity Framework 5： \<http://blogs.msdn.com/b/adonet/archive/2010/09/13/ef-caching-with-jarek-kowalski-s-provider.aspx>）來執行專案。 它也包含 T4 範本，可協助自動化將第二層快取新增至您的專案。
 
 ## <a name="4-autocompiled-queries"></a>4 Autocompiled 查詢
 
@@ -426,14 +426,14 @@ Entity Framework 會偵測何時需要重新編譯查詢，並在叫用查詢時
 
 其他條件可能會讓您的查詢無法使用快取。 常見的範例包括：
 
--   Using IEnumerable @ no__t-0T @ no__t-1。包含 @ no__t-2 @ no__t-3 （T 值）。
+-   使用 IEnumerable&lt;T&gt;。包含&lt;&gt;（T 值）。
 -   使用會產生具有常數之查詢的函數。
 -   使用非對應物件的屬性。
 -   將您的查詢連結到需要重新編譯的另一個查詢。
 
-### <a name="41-using-ienumerablelttgtcontainslttgtt-value"></a>4.1 Using IEnumerable @ no__t-0T @ no__t-1。包含 @ no__t-2T @ no__t-3 （T 值）
+### <a name="41-using-ienumerablelttgtcontainslttgtt-value"></a>4.1 使用 IEnumerable&lt;T&gt;。包含&lt;T&gt;（T 值）
 
-Entity Framework 不會快取叫用 IEnumerable @ no__t-0T @ no__t-1 的查詢。會針對記憶體中的集合包含 @ no__t-2T @ no__t-3 （T 值），因為集合的值會被視為 volatile。 下列範例查詢將不會快取，因此它一律會由計畫編譯器進行處理：
+Entity Framework 不會快取叫用 IEnumerable&lt;T&gt;的查詢。針對記憶體中的集合包含&lt;T&gt;（T 值），因為集合的值會被視為 volatile。 下列範例查詢將不會快取，因此它一律會由計畫編譯器進行處理：
 
 ``` csharp
 int[] ids = new int[10000];
@@ -450,11 +450,11 @@ using (var context = new MyContext())
 
 請注意，執行包含的 IEnumerable 大小會決定查詢的速度或速度。 使用大型集合（如上述範例所示）時，效能可能會大幅降低。
 
-Entity Framework 6 包含 IEnumerable @ no__t-0T @ no__t-1 方法的優化。包含 @ no__t-2T @ no__t-3 （T 值）在執行查詢時運作。 產生的 SQL 程式碼速度會更快，且更容易閱讀，而且在大部分情況下，在伺服器中執行的速度也會更快。
+Entity Framework 6 包含 IEnumerable&lt;T&gt;方式的優化。包含&lt;T&gt;（T 值）可在執行查詢時運作。 產生的 SQL 程式碼速度會更快，且更容易閱讀，而且在大部分情況下，在伺服器中執行的速度也會更快。
 
 ### <a name="42-using-functions-that-produce-queries-with-constants"></a>4.2 使用會產生常數查詢的函式
 
-Skip （）、Take （）、Contains （）和 DefautIfEmpty （） LINQ 運算子不會產生具有參數的 SQL 查詢，而是將值傳遞給它們做為常數。 因此，可能是完全相同的查詢最後會污染查詢計劃快取（在 EF 堆疊和資料庫伺服器上），而且除非在後續的查詢執行中使用相同的常數，否則不會取得 reutilized。 例如:
+Skip （）、Take （）、Contains （）和 DefautIfEmpty （） LINQ 運算子不會產生具有參數的 SQL 查詢，而是將值傳遞給它們做為常數。 因此，可能是完全相同的查詢最後會污染查詢計劃快取（在 EF 堆疊和資料庫伺服器上），而且除非在後續的查詢執行中使用相同的常數，否則不會取得 reutilized。 例如：
 
 ``` csharp
 var id = 10;
@@ -494,7 +494,7 @@ for (var i = 0; i < count; ++i)
 }
 ```
 
-第二個程式碼片段的執行速度最多可達 11%，因為每次執行查詢時都會使用相同的查詢計劃，這樣可節省 CPU 時間並避免查詢快取污染。 此外，因為要略過的參數是在結束時，程式碼現在可能也會如下所示：
+第二個程式碼片段的執行速度最多可達11%，因為每次執行查詢時都會使用相同的查詢計劃，這樣可節省 CPU 時間並避免查詢快取污染。 此外，因為要略過的參數是在結束時，程式碼現在可能也會如下所示：
 
 ``` csharp
 var i = 0;
@@ -508,7 +508,7 @@ for (; i < count; ++i)
 
 ### <a name="43-using-the-properties-of-a-non-mapped-object"></a>4.3 使用非對應物件的屬性
 
-當查詢使用非對應物件類型的屬性做為參數時，查詢將不會被快取。 例如:
+當查詢使用非對應物件類型的屬性做為參數時，查詢將不會被快取。 例如：
 
 ``` csharp
 using (var context = new MyContext())
@@ -625,9 +625,9 @@ using (var context = new MyContext())
 
 Entity Framework 5 在執行結束時，會有較小的記憶體使用量，而不是 Entity Framework 6。 Entity Framework 6 所耗用的額外記憶體，是提供新功能和更佳效能的額外記憶體結構和程式碼所造成的結果。
 
-使用 ObjectStateManager 時，記憶體使用量也有清楚的差異。 Entity Framework 5 在追蹤我們從資料庫具體化的所有實體時，會增加 30% 的使用量。 Entity Framework 6 這麼做時，增加了 28% 的使用量。
+使用 ObjectStateManager 時，記憶體使用量也有清楚的差異。 Entity Framework 5 在追蹤我們從資料庫具體化的所有實體時，會增加30% 的使用量。 Entity Framework 6 這麼做時，增加了28% 的使用量。
 
-在這段時間內，Entity Framework 6 在這項測試中的 Entity Framework 5 會以較大的邊界來勝過。 Entity Framework 6 已在 Entity Framework 5 所耗用的大約 16% 的時間內完成測試。 此外，當使用 ObjectStateManager 時，Entity Framework 5 會花費 9% 以上的時間來完成。 相較之下，使用 ObjectStateManager 時，Entity Framework 6 使用了 3% 的時間。
+在這段時間內，Entity Framework 6 在這項測試中的 Entity Framework 5 會以較大的邊界來勝過。 Entity Framework 6 已在 Entity Framework 5 所耗用的大約16% 的時間內完成測試。 此外，當使用 ObjectStateManager 時，Entity Framework 5 會花費9% 以上的時間來完成。 相較之下，使用 ObjectStateManager 時，Entity Framework 6 使用了3% 的時間。
 
 ## <a name="6-query-execution-options"></a>6查詢執行選項
 
@@ -689,7 +689,7 @@ var q = context.Products.AsNoTracking()
     -   使用 DefaultIfEmpty 進行外部聯結查詢的模式會導致比 Entity SQL 中的簡單外部聯結語句更複雜的查詢。
     -   您仍然無法搭配一般模式比對使用 LIKE。
 
-請注意，即使未指定 NoTracking，也不會追蹤專案純量屬性的查詢。 例如:
+請注意，即使未指定 NoTracking，也不會追蹤專案純量屬性的查詢。 例如：
 
 ``` csharp
 var q = context.Products.Where(p => p.Category.CategoryName == "Beverages").Select(p => new { p.ProductName });
@@ -789,7 +789,7 @@ var q = context.InvokeProductsForCategoryCQ("Beverages");
 
 **展開**
 
--   透過一般 LINQ 查詢，提供最高 7% 的效能改進。
+-   透過一般 LINQ 查詢，提供最高7% 的效能改進。
 -   完全具體化的物件。
 -   適用于 CUD 作業。
 
@@ -857,7 +857,7 @@ Microbenchmarks 對程式碼中的小型變更非常敏感。 在此情況下，
 > [!NOTE]
 > 為求完整性，我們包含在 EntityCommand 上執行 Entity SQL 查詢的變化。 不過，因為這類查詢不會具體化結果，所以比較不一定是蘋果對蘋果。 測試包括要具體化的收盤近似值，以嘗試進行比較 fairer。
 
-在此端對端案例中，由於堆疊的幾個部分的效能改進，包括較輕的 DbCoNtext 初始化，以及更快的 MetadataCollection @ no__t-0T @ no__t-1 查閱，因此 Entity Framework 6 勝過 Entity Framework 5。
+在此端對端案例中，由於在堆疊的數個部分進行效能改進，Entity Framework 6 勝過 Entity Framework 5，包括更輕量的 DbCoNtext 初始化，以及更快的 MetadataCollection&lt;T&gt; 查閱。
 
 ## <a name="7-design-time-performance-considerations"></a>7設計階段效能考慮
 
@@ -871,15 +871,15 @@ Microbenchmarks 對程式碼中的小型變更非常敏感。 在此情況下，
 
 如果您的模型使用 TPT 繼承，則產生的查詢會比使用其他繼承策略產生的查詢更為複雜，這可能會導致存放區上的執行時間較長。  通常會花較長的時間來產生 TPT 模型的查詢，並具體化產生的物件。
 
-請參閱的 < 效能考量當 Entity Framework 中使用 （每個類型的資料表） TPT 繼承 > MSDN 部落格文章： \<http://blogs.msdn.com/b/adonet/archive/2010/08/17/performance-considerations-when-using-tpt-table-per-type-inheritance-in-the-entity-framework.aspx> 。
+請參閱 Entity Framework 的 MSDN blog 文章： \<http://blogs.msdn.com/b/adonet/archive/2010/08/17/performance-considerations-when-using-tpt-table-per-type-inheritance-in-the-entity-framework.aspx>中的 使用 TPT （每一類型的資料表）繼承的效能考慮。
 
 #### <a name="711-avoiding-tpt-in-model-first-or-code-first-applications"></a>7.1.1 避免在 Model First 或 Code First 應用程式中進行 TPT
 
 當您透過具有 TPT 架構的現有資料庫建立模型時，您不會有許多選項。 但是，使用 Model First 或 Code First 建立應用程式時，您應該避免 TPT 繼承以進行效能考慮。
 
-當您使用 Entity Designer Wizard 中的 Model First 時，您會取得模型中任何繼承的 TPT。 如果您想要切換成使用 Model First TPH 繼承策略，您可以使用 「 實體設計工具資料庫產生 Power Pack 」 可從 Visual Studio 組件庫 ( \<http://visualstudiogallery.msdn.microsoft.com/df3541c3-d833-4b65-b942-989e7ec74c87/>) 。
+當您使用 Entity Designer Wizard 中的 Model First 時，您會取得模型中任何繼承的 TPT。 如果您想要使用 Model First 切換到 TPH 繼承策略，可以使用 Visual Studio 資源庫（\<http://visualstudiogallery.msdn.microsoft.com/df3541c3-d833-4b65-b942-989e7ec74c87/>)中的「Entity Designer 資料庫產生功能」。
 
-當您使用 Code First 設定具有繼承的模型對應時，EF 預設會使用 TPH，因此，繼承階層架構中的所有實體都會對應至相同的資料表。 請參閱 MSDN Magazine 中的 「 程式碼第一次在實體 Framework4.1"發行項"對應使用 Fluent API 」 一節 ( [http://msdn.microsoft.com/magazine/hh126815.aspx](https://msdn.microsoft.com/magazine/hh126815.aspx)) 如需詳細資訊。
+當您使用 Code First 設定具有繼承的模型對應時，EF 預設會使用 TPH，因此，繼承階層架構中的所有實體都會對應至相同的資料表。 如需詳細資訊，請參閱 MSDN 雜誌（ [http://msdn.microsoft.com/magazine/hh126815.aspx](https://msdn.microsoft.com/magazine/hh126815.aspx)）中 "Code First Entity Framework 4.1" 一節中的「與流暢 API 的對應」一節。
 
 ### <a name="72-upgrading-from-ef4-to-improve-model-generation-time"></a>7.2 從 EF4 升級以改善模型產生時間
 
@@ -899,7 +899,7 @@ Microbenchmarks 對程式碼中的小型變更非常敏感。 在此情況下，
 
 ### <a name="73-splitting-large-models-with-database-first-and-model-first"></a>7.3 使用 Database First 和 Model First 分割大型模型
 
-隨著模型大小的增加，設計介面會變得雜亂，而且很容易使用。 我們通常會考慮具有超過300個實體的模型太大，而無法有效使用設計工具。 下列部落格文章說明用來分割大型模型的數個選項： \<http://blogs.msdn.com/b/adonet/archive/2008/11/25/working-with-large-models-in-entity-framework-part-2.aspx> 。
+隨著模型大小的增加，設計介面會變得雜亂，而且很容易使用。 我們通常會考慮具有超過300個實體的模型太大，而無法有效使用設計工具。 下列的 blog 文章說明分割大型模型的數個選項： \<http://blogs.msdn.com/b/adonet/archive/2008/11/25/working-with-large-models-in-entity-framework-part-2.aspx>。
 
 文章是針對第一個 Entity Framework 版本所撰寫，但仍適用這些步驟。
 
@@ -915,7 +915,7 @@ Microbenchmarks 對程式碼中的小型變更非常敏感。 在此情況下，
 
 Entity Framework 可讓您將自訂資料類別與您的資料模型搭配使用，而不需要對資料類別本身進行任何修改。 這表示您可以使用「單純」(plain-old) CLR 物件 (POCO)，例如現有的網域物件，加上您的資料模型。 這些 POCO 資料類別（也稱為非持續性物件）對應至資料模型中所定義的實體，可支援與實體資料模型工具所產生之實體類型相同的查詢、插入、更新和刪除行為。
 
-Entity Framework 也可以建立衍生自 POCO 類型的 proxy 類別，當您想要在 POCO 實體上啟用消極式載入和自動變更追蹤之類的功能時，就會使用它們。 您的 POCO 類別必須符合特定需求，才能讓 Entity Framework，才可使用 proxy，如下所述： [http://msdn.microsoft.com/library/dd468057.aspx](https://msdn.microsoft.com/library/dd468057.aspx)。
+Entity Framework 也可以建立衍生自 POCO 類型的 proxy 類別，當您想要在 POCO 實體上啟用消極式載入和自動變更追蹤之類的功能時，就會使用它們。 您的 POCO 類別必須符合特定需求，才能允許 Entity Framework 使用 proxy，如下所述： [http://msdn.microsoft.com/library/dd468057.aspx](https://msdn.microsoft.com/library/dd468057.aspx)。
 
 每當實體的任何屬性變更其值時，追蹤 proxy 就會通知物件狀態管理員，Entity Framework 隨時得知實體的實際狀態。 這是藉由將通知事件加入至屬性的 setter 方法主體來完成，並讓物件狀態管理員處理這類事件。 請注意，由於 Entity Framework 所建立的新增事件集，建立 proxy 實體通常會比建立非 proxy POCO 實體更昂貴。
 
@@ -1141,7 +1141,7 @@ using (NorthwindEntities context = new NorthwindEntities())
 
 Entity Framework 目前不支援純量或複雜屬性的消極式載入。 不過，如果您的資料表包含大型物件（例如 BLOB），您可以使用資料表分割，將大型屬性分隔成不同的實體。 例如，假設您有一個包含 Varbinary 相片資料行的產品資料表。 如果您不常需要在查詢中存取此屬性，您可以使用資料表分割，只帶入您通常需要的實體部分。 代表產品相片的實體只有在您明確需要時才會載入。
 
-說明如何啟用資料表分割的絕佳資源是 Gil Fink 「 資料表分割中實體架構 」 部落格文章： \<http://blogs.microsoft.co.il/blogs/gilf/archive/2009/10/13/table-splitting-in-entity-framework.aspx> 。
+如需如何啟用資料表分割的良好資源，請 Gil Fink 的「Entity Framework 中的資料表分割」 blog 文章： \<http://blogs.microsoft.co.il/blogs/gilf/archive/2009/10/13/table-splitting-in-entity-framework.aspx>。
 
 ## <a name="9-other-considerations"></a>9其他考慮
 
@@ -1158,7 +1158,7 @@ Entity Framework 目前不支援純量或複雜屬性的消極式載入。 不�
 </configuration>
 ```
 
-這應該會減少執行緒爭用，並增加您的輸送量，最高可達 30% 的 CPU 飽和案例。 一般來說，您應該一律使用傳統垃圾收集（針對 UI 和用戶端案例較佳的微調）以及伺服器垃圾收集，來測試應用程式的行為。
+這應該會減少執行緒爭用，並增加您的輸送量，最高可達30% 的 CPU 飽和案例。 一般來說，您應該一律使用傳統垃圾收集（針對 UI 和用戶端案例較佳的微調）以及伺服器垃圾收集，來測試應用程式的行為。
 
 ### <a name="92-autodetectchanges"></a>9.2 AutoDetectChanges
 
@@ -1179,7 +1179,7 @@ finally
 }
 ```
 
-在關閉 AutoDetectChanges 之前，最好先瞭解這可能會導致 Entity Framework 失去追蹤實體所發生變更之特定資訊的能力。 如果處理錯誤，這可能會造成應用程式的資料不一致。 如需有關如何關閉 AutoDetectChanges 的詳細資訊，請閱讀\<http://blog.oneunicorn.com/2012/03/12/secrets-of-detectchanges-part-3-switching-off-automatic-detectchanges/> 。
+在關閉 AutoDetectChanges 之前，最好先瞭解這可能會導致 Entity Framework 失去追蹤實體所發生變更之特定資訊的能力。 如果處理錯誤，這可能會造成應用程式的資料不一致。 如需關閉 AutoDetectChanges 的詳細資訊，請參閱 \<http://blog.oneunicorn.com/2012/03/12/secrets-of-detectchanges-part-3-switching-off-automatic-detectchanges/>。
 
 ### <a name="93-context-per-request"></a>9.3 每個要求的內容
 
@@ -1187,7 +1187,7 @@ Entity Framework 的內容應該當做短期實例使用，以提供最佳的效
 
 ### <a name="94-database-null-semantics"></a>9.4 資料庫 null 語義
 
-Entity Framework 預設會產生具有 C @ no__t-0 null 比較語義的 SQL 程式碼。 請考慮下列範例查詢：
+Entity Framework 預設會產生具有 C\# null 比較語義的 SQL 程式碼。 請考量下列範例查詢：
 
 ``` csharp
             int? categoryId = 7;
@@ -1210,9 +1210,9 @@ Entity Framework 預設會產生具有 C @ no__t-0 null 比較語義的 SQL 程�
             var r = q.ToList();
 ```
 
-在此範例中，我們會將數個可為 null 的變數與實體上的可為 null 屬性進行比較，例如，已建立供應專案和單價。 針對此查詢產生的 SQL 會詢問參數值是否與資料行值相同，或者參數和資料行值是否為 null。 這會隱藏資料庫伺服器處理 null 的方式，並在不同的資料庫廠商之間提供一致的 C @ no__t-0 null 體驗。 相反地，產生的程式碼會有點複雜，而且當查詢的 where 語句中的比較量成長至大量時，可能無法順利執行。
+在此範例中，我們會將數個可為 null 的變數與實體上的可為 null 屬性進行比較，例如，已建立供應專案和單價。 針對此查詢產生的 SQL 會詢問參數值是否與資料行值相同，或者參數和資料行值是否為 null。 這會隱藏資料庫伺服器處理 null 的方式，並在不同的資料庫廠商之間提供一致的 C\# null 體驗。 相反地，產生的程式碼會有點複雜，而且當查詢的 where 語句中的比較量成長至大量時，可能無法順利執行。
 
-處理這種情況的其中一種方式是使用資料庫 null 語義。 請注意，這可能會因 C @ no__t-0 null 語義而有不同的行為，因為現在 Entity Framework 會產生更簡單的 SQL，以公開資料庫引擎處理 null 值的方式。 針對內容設定，可以針對每個內容啟用資料庫 null 語義，其中單一設定行：
+處理這種情況的其中一種方式是使用資料庫 null 語義。 請注意，這可能會與 C\# null 語義有不同的行為，因為現在 Entity Framework 會產生更簡單的 SQL，以公開資料庫引擎處理 null 值的方式。 針對內容設定，可以針對每個內容啟用資料庫 null 語義，其中單一設定行：
 
 ``` csharp
                 context.Configuration.UseDatabaseNullSemantics = true;
@@ -1220,13 +1220,14 @@ Entity Framework 預設會產生具有 C @ no__t-0 null 比較語義的 SQL 程�
 
 使用資料庫 null 語義時，小型到中型的查詢不會顯示明顯的效能改進，但是在具有大量潛在 null 比較的查詢上，其差異會變得更明顯。
 
-在上述的範例查詢中，在受控制的環境中執行的 microbenchmark 中，效能差異小於 2%。
+在上述的範例查詢中，在受控制的環境中執行的 microbenchmark 中，效能差異小於2%。
 
 ### <a name="95-async"></a>9.5 非同步
 
 Entity Framework 6 在 .NET 4.5 或更新版本上執行時，引進了非同步作業的支援。 在大部分的情況下，具有 IO 相關爭用的應用程式將從使用非同步查詢和儲存作業中獲益最多。 如果您的應用程式不受 IO 爭用的影響，在最佳情況下，使用 async 會同步執行，並以同步呼叫的相同時間量傳回結果，或在最壞的情況下，只需順延強制非同步工作並新增額外的 time 完成您的案例。
 
-如需如何非同步的程式設計工作可協助您決定是否非同步會改善您的應用程式的效能請瀏覽[http://msdn.microsoft.com/library/hh191443.aspx](https://msdn.microsoft.com/library/hh191443.aspx)。 如需在 Entity Framework 上使用非同步作業的詳細資訊，請參閱 @no__t 0Async Query 並儲存 @ no__t-1。
+如需非同步程式設計工作如何協助您判斷非同步如何改善應用程式效能的詳細資訊，請造訪[http://msdn.microsoft.com/library/hh191443.aspx](https://msdn.microsoft.com/library/hh191443.aspx)。 如需在 Entity Framework 上使用非同步作業的詳細資訊，請參閱[非同步查詢和儲存](~/ef6/fundamentals/async.md
+)。
 
 ### <a name="96-ngen"></a>9.6 NGEN
 
@@ -1246,17 +1247,17 @@ Code First 方法是一種精密的實體資料模型產生器。 Entity Framewo
 
 ### <a name="101-using-the-visual-studio-profiler"></a>10.1 使用 Visual Studio Profiler
 
-如果您的 Entity Framework 發生效能問題，您可以使用類似 Visual Studio 內建的分析工具來查看應用程式花費時間的位置。 這是我們用來產生圓形圖 」 瀏覽 ADO.NET Entity Framework 的效能-第 1 部分 」 部落格文章中的工具 ( \<http://blogs.msdn.com/b/adonet/archive/2008/02/04/exploring-the-performance-of-the-ado-net-entity-framework-part-1.aspx>) 說明 Entity Framework 要花費在它在冷和暖查詢期間的時間。
+如果您的 Entity Framework 發生效能問題，您可以使用類似 Visual Studio 內建的分析工具來查看應用程式花費時間的位置。 這是我們用來在「探索 ADO.NET 的效能 Entity Framework-第1部」的 blog 文章（\<http://blogs.msdn.com/b/adonet/archive/2008/02/04/exploring-the-performance-of-the-ado-net-entity-framework-part-1.aspx>) 中用來產生圓形圖的工具，顯示 Entity Framework 在冷和暖查詢期間花費的時間。
 
-「使用 Visual Studio 2010 Profiler 撰寫的分析 Entity Framework」的資料和模型化客戶諮詢小組會顯示如何使用 Profiler 來調查效能問題的真實世界範例。  \<http://blogs.msdn.com/b/dmcat/archive/2010/04/30/profiling-entity-framework-using-the-visual-studio-2010-profiler.aspx>. 這篇文章是針對 windows 應用程式所撰寫的。 如果您需要分析 web 應用程式，Windows 效能記錄檔（WPR）和 Windows Performance Analyzer （WPA）工具的運作效果可能會比 Visual Studio 工作更好。 WPR 和 WPA 屬於 Windows 效能工具組所附含的 Windows 評定及部署套件 ( [http://www.microsoft.com/download/details.aspx?id=39982](https://www.microsoft.com/download/details.aspx?id=39982))。
+「使用 Visual Studio 2010 Profiler 撰寫的分析 Entity Framework」的資料和模型化客戶諮詢小組會顯示如何使用 Profiler 來調查效能問題的真實世界範例。  \<http://blogs.msdn.com/b/dmcat/archive/2010/04/30/profiling-entity-framework-using-the-visual-studio-2010-profiler.aspx>。 這篇文章是針對 windows 應用程式所撰寫的。 如果您需要分析 web 應用程式，Windows 效能記錄檔（WPR）和 Windows Performance Analyzer （WPA）工具的運作效果可能會比 Visual Studio 工作更好。 WPR 和 WPA 屬於 windows 評定及部署套件（ [http://www.microsoft.com/download/details.aspx?id=39982](https://www.microsoft.com/download/details.aspx?id=39982)）隨附的 Windows 效能工具組。
 
 ### <a name="102-applicationdatabase-profiling"></a>10.2 應用程式/資料庫分析
 
 像是內建在 Visual Studio 的工具，會告訴您應用程式花費時間的位置。  另一種分析工具可供使用，以根據需求在生產或預先生產環境中執行應用程式的動態分析，並尋找常見的錯誤和資料庫存取的反模式。
 
-兩個販售的分析工具是 Entity Framework Profiler ( \<http://efprof.com>) ORMProfiler 和 ( \<http://ormprofiler.com>) 。
+Entity Framework Profiler （\<http://efprof.com>) 和 ORMProfiler （\<http://ormprofiler.com>)）是兩個商用的分析工具。
 
-如果您的應用程式是使用 Code First 的 MVC 應用程式，您可以使用 Stackexchange.redis 的 Miniprofiler 撼動。 Scott Hanselman 說明這項工具在他的部落格： \<http://www.hanselman.com/blog/NuGetPackageOfTheWeek9ASPNETMiniProfilerFromStackExchangeRocksYourWorld.aspx> 。
+如果您的應用程式是使用 Code First 的 MVC 應用程式，您可以使用 Stackexchange.redis 的 Miniprofiler 撼動。 Scott Hanselman 會在他的 blog 中描述這項工具，網址為： \<http://www.hanselman.com/blog/NuGetPackageOfTheWeek9ASPNETMiniProfilerFromStackExchangeRocksYourWorld.aspx>。
 
 如需分析應用程式資料庫活動的詳細資訊，請參閱 Julie Lerman 的 MSDN 雜誌文章，其標題為[Entity Framework 中的分析資料庫活動](https://msdn.microsoft.com/magazine/gg490349.aspx)。
 
@@ -1273,7 +1274,7 @@ Code First 方法是一種精密的實體資料模型產生器。 Entity Framewo
     }
 ```
 
-在此範例中，資料庫活動會記錄到主控台，但是可以設定記錄檔屬性來呼叫 @ no__t-0string @ no__t-1 委派的任何動作。
+在此範例中，資料庫活動會記錄到主控台，但是可以設定記錄檔屬性，以呼叫&lt;字串&gt; 委派的任何動作。
 
 如果您想要啟用資料庫記錄而不重新編譯，而且您使用 Entity Framework 6.1 或更新版本，您可以在應用程式的 web.config 或 app.config 檔案中新增攔截器來執行此動作。
 
@@ -1287,7 +1288,7 @@ Code First 方法是一種精密的實體資料模型產生器。 Entity Framewo
   </interceptors>
 ```
 
-如需有關如何不需要重新編譯移至 新增記錄\<http://blog.oneunicorn.com/2014/02/09/ef-6-1-turning-on-logging-without-recompiling/> 。
+如需如何在不重新編譯的情況下新增記錄的詳細資訊，請移至 \<http://blog.oneunicorn.com/2014/02/09/ef-6-1-turning-on-logging-without-recompiling/>。
 
 ## <a name="11-appendix"></a>11附錄
 
@@ -1300,16 +1301,16 @@ Code First 方法是一種精密的實體資料模型產生器。 Entity Framewo
 ##### <a name="11111-software-environment"></a>11.1.1.1 軟體環境
 
 -   Entity Framework 4 軟體環境
-    -   OS 名稱：Windows Server 2008 R2 Enterprise SP1。
+    -   OS 名稱： Windows Server 2008 R2 Enterprise SP1。
     -   Visual Studio 2010 –旗艦版。
     -   Visual Studio 2010 SP1 （僅適用于某些比較）。
 -   Entity Framework 5 和6軟體環境
-    -   OS 名稱：Windows 8.1 Enterprise
+    -   OS 名稱： Windows 8.1 Enterprise
     -   Visual Studio 2013 –旗艦版。
 
 ##### <a name="11112-hardware-environment"></a>11.1.1.2 硬體環境
 
--   雙處理器：    Intel （R）2.27 （R） CPU L5520 W3530 @ g h z，2261 Mhz8 GHz，4核心，84個邏輯處理器。
+-   雙處理器： Intel （R）2.27 （R） CPU L5520 W3530 @ g h z，2261 Mhz8 GHz，4核心，84個邏輯處理器（秒）。
 -   2412 GB RamRAM。
 -   136 GB SCSI250GB SATA 7200 rpm 3GB/s 磁片磁碟機分割成4個磁碟分割。
 
@@ -1317,12 +1318,12 @@ Code First 方法是一種精密的實體資料模型產生器。 Entity Framewo
 
 ##### <a name="11121-software-environment"></a>11.1.2.1 軟體環境
 
--   OS 名稱：Windows Server 2008 R 28.1 Enterprise SP1。
--   SQL Server 2008 R22012.
+-   OS 名稱： Windows Server 2008 R 28.1 Enterprise SP1。
+-   SQL Server 2008 R22012。
 
 ##### <a name="11122-hardware-environment"></a>11.1.2.2 硬體環境
 
--   單處理器：Intel （R） MhzES （R） CPU L5520 @ 2.27 GHz，2261-1620 0 @ 3.60 GHz，4核心，8個邏輯處理器。
+-   單處理器： Intel （R）第4方（R） CPU L5520 @ 2.27 GHz，2261 MhzES-1620 0 @ 3.60 GHz，4核心，8個邏輯處理器。
 -   824 GB RamRAM。
 -   465 GB ATA500GB SATA 7200 rpm 6GB/s 磁片磁碟機分割成4個磁碟分割。
 
@@ -1507,7 +1508,7 @@ Navision 資料庫是用來示範 Microsoft Dynamics – NAV 的大型資料庫�
 
 不含匯總的簡單查閱查詢
 
--   計數:16232
+-   計數：16232
 -   範例：
 
 ``` xml
@@ -1520,7 +1521,7 @@ Navision 資料庫是用來示範 Microsoft Dynamics – NAV 的大型資料庫�
 
 具有多個匯總但沒有小計（單一查詢）的一般 BI 查詢
 
--   計數:2313
+-   計數：2313
 -   範例：
 
 ``` xml
@@ -1529,7 +1530,7 @@ Navision 資料庫是用來示範 Microsoft Dynamics – NAV 的大型資料庫�
   </Query>
 ```
 
-其中 MDF @ no__t-0SessionLogin @ no__t-1Time @ no__t-2Max （）在模型中定義為：
+其中 MDF\_SessionLogin\_Time\_Max （）在模型中定義為：
 
 ``` xml
   <Function Name="MDF_SessionLogin_Time_Max" ReturnType="Collection(DateTime)">
@@ -1541,7 +1542,7 @@ Navision 資料庫是用來示範 Microsoft Dynamics – NAV 的大型資料庫�
 
 具有匯總和小計的 BI 查詢（透過 union all）
 
--   計數:178
+-   計數：178
 -   範例：
 
 ``` xml

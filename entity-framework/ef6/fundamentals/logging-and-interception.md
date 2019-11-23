@@ -100,7 +100,7 @@ WHERE @@ROWCOUNT > 0 AND [Id] = scope_identity()
 
 當 Log 屬性設定為時，將會記錄下列所有內容：  
 
-- 適用于所有不同類型命令的 SQL。 例如:  
+- 適用于所有不同類型命令的 SQL。 例如：  
     - 查詢，包括一般 LINQ 查詢、eSQL 查詢，以及來自 SqlQuery 等方法的原始查詢  
     - 在 SaveChanges 中產生的插入、更新和刪除  
     - 關聯性載入查詢，例如消極式載入所產生的查詢  
@@ -227,7 +227,7 @@ public class OneLineFormatter : DatabaseLogFormatter
 
 ### <a name="setting-the-databaselogformatter"></a>設定 DatabaseLogFormatter  
 
-一旦建立新的 DatabaseLogFormatter 類別之後，就必須向 EF 註冊它。 這是使用以程式碼為基礎的設定來完成。 簡單來說，這表示要建立一個衍生自 DbConfiguration 的新類別（在與 DbCoNtext 類別相同的元件中），然後在這個新類別的函式中呼叫 SetDatabaseLogFormatter。 例如:  
+一旦建立新的 DatabaseLogFormatter 類別之後，就必須向 EF 註冊它。 這是使用以程式碼為基礎的設定來完成。 簡單來說，這表示要建立一個衍生自 DbConfiguration 的新類別（在與 DbCoNtext 類別相同的元件中），然後在這個新類別的函式中呼叫 SetDatabaseLogFormatter。 例如：  
 
 ``` csharp
 public class MyDbConfiguration : DbConfiguration
@@ -261,11 +261,11 @@ Context 'BlogContext' is executing command 'insert [dbo].[Posts]([Title], [BlogI
 
 ### <a name="the-interception-context"></a>攔截內容  
 
-查看在任何攔截器介面上定義的方法，很明顯地，每個呼叫都有一個類型為 DbInterceptionCoNtext 的物件，或是一個衍生自 this 的類型，例如 DbCommandInterceptionCoNtext @ no__t-0 @ no__t-1。 此物件包含 EF 正在採取之動作的相關內容資訊。 例如，如果是代表 DbCoNtext 來採取動作，則 DbCoNtext 會包含在 DbInterceptionCoNtext 中。 同樣地，針對以非同步方式執行的命令，會在 DbCommandInterceptionCoNtext 上設定 IsAsync 旗標。  
+查看在任何攔截器介面上定義的方法，很明顯地，每個呼叫都有一個類型為 DbInterceptionCoNtext 的物件，或是一個衍生自此的類型，例如 DbCommandInterceptionCoNtext\<\>。 此物件包含 EF 正在採取之動作的相關內容資訊。 例如，如果是代表 DbCoNtext 來採取動作，則 DbCoNtext 會包含在 DbInterceptionCoNtext 中。 同樣地，針對以非同步方式執行的命令，會在 DbCommandInterceptionCoNtext 上設定 IsAsync 旗標。  
 
 ### <a name="result-handling"></a>結果處理  
 
-DbCommandInterceptionCoNtext @ no__t-0 @ no__t-1 類別包含一個稱為 Result、OriginalResult、Exception 和 OriginalException 的屬性。 對於在執行作業之前呼叫的攔截方法呼叫，這些屬性會設定為 null/零，也就是 。執行方法。 如果作業已執行且成功，則 Result 和 OriginalResult 會設定為作業的結果。 然後可以在作業執行後呼叫的攔截方法中觀察這些值，也就是在 。已執行的方法。 同樣地，如果作業擲回，則會設定 Exception 和 OriginalException 屬性。  
+DbCommandInterceptionCoNtext\<\> 類別包含一個稱為 Result、OriginalResult、Exception 和 OriginalException 的屬性。 對於在執行作業之前呼叫的攔截方法呼叫，這些屬性會設定為 null/零，也就是 。執行方法。 如果作業已執行且成功，則 Result 和 OriginalResult 會設定為作業的結果。 然後可以在作業執行後呼叫的攔截方法中觀察這些值，也就是在 。已執行的方法。 同樣地，如果作業擲回，則會設定 Exception 和 OriginalException 屬性。  
 
 #### <a name="suppressing-execution"></a>隱藏執行  
 
@@ -289,7 +289,7 @@ OriginalResult 和 OriginalException 屬性是唯讀的，而且只有在實際�
 
 ### <a name="registering-interceptors"></a>正在註冊攔截器  
 
-一旦建立了一個或多個攔截介面的類別之後，就可以使用 DbInterception 類別向 EF 註冊它。 例如:  
+一旦建立了一個或多個攔截介面的類別之後，就可以使用 DbInterception 類別向 EF 註冊它。 例如：  
 
 ``` csharp
 DbInterception.Add(new NLogCommandInterceptor());

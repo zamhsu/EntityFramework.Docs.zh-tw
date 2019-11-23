@@ -13,7 +13,7 @@ ms.locfileid: "72181793"
 # <a name="databinding-with-winforms"></a>使用 WinForms 進行資料系結
 此逐步解說示範如何將 POCO 類型系結至「主要-詳細資料」表單中的 Window Forms （WinForms）控制項。 應用程式會使用 Entity Framework，以資料庫中的資料填入物件、追蹤變更，並將資料保存至資料庫。
 
-模型會定義兩個參與一對多關聯性的類型：Category （principal @ no__t-0master）和 Product （相依 @ no__t-1detail）。 然後，Visual Studio 工具會用來將模型中定義的類型系結至 WinForms 控制項。 WinForms 資料系結架構可讓您在相關物件之間流覽：選取主視圖中的資料列會使詳細資料檢視以對應的子資料進行更新。
+模型會定義兩個參與一對多關聯性的類型：類別目錄（主體\\主要）和產品（相依\\詳細資料）。 然後，Visual Studio 工具會用來將模型中定義的類型系結至 WinForms 控制項。 WinForms 資料系結架構可讓您在相關物件之間流覽：選取主視圖中的資料列會使詳細資料檢視以對應的子資料進行更新。
 
 本逐步解說中的螢幕擷取畫面和程式代碼清單取自 Visual Studio 2013，但您可以使用 Visual Studio 2012 或 Visual Studio 2010 來完成此逐步解說。
 
@@ -26,7 +26,7 @@ ms.locfileid: "72181793"
 ## <a name="create-the-application"></a>建立應用程式
 
 -   開啟 Visual Studio
--   **檔案 &gt; 個新 &gt; 個專案 ...。**
+-   **檔案&gt; 新&gt; 專案 ...。**
 -   在左窗格中選取 [ **windows** ]，然後在右窗格中選取 [ **windows FormsApplication** ]
 -   輸入**WinFormswithEFSample**作為名稱
 -   選取 [確定]
@@ -36,7 +36,7 @@ ms.locfileid: "72181793"
 -   在方案總管中，以滑鼠右鍵按一下**WinFormswithEFSample**專案
 -   選取 [**管理 NuGet 套件 ...** ]
 -   在 [管理 NuGet 套件] 對話方塊中，選取 [**線上**] 索引標籤，然後選擇 [ **EntityFramework** ] 套件
--   按一下 [安裝]。  
+-   按一下 [**安裝**]  
     > [!NOTE]
     > 除了 EntityFramework 元件之外，也會新增 System.workflow.componentmodel.activity. DataAnnotations 的參考。 如果專案具有 system.string 實體的參考，則會在安裝 EntityFramework 封裝時將它移除。 System.web 元件不再用於 Entity Framework 6 應用程式。
 
@@ -46,11 +46,11 @@ ms.locfileid: "72181793"
 
 -   將**ObservableListSource**類別新增至專案：
     -   以滑鼠右鍵按一下專案名稱
-    -   選取 [**新增-&gt; 個新專案**]
+    -   選取 [**新增-&gt; 新專案**]
     -   選取 [**類別**]，然後輸入**ObservableListSource**做為類別名稱
 -   將預設產生的程式碼取代為下列程式碼：
 
-@no__t 0This 類別可啟用雙向資料系結，以及排序。類別衍生自 ObservableCollection @ no__t-0T @ no__t-1，並新增 IListSource 的明確實作為。IListSource 的 GetList （）方法會實作為傳回 IBindingList，並與 ObservableCollection 保持同步。ToBindingList 所產生的 IBindingList 實作為支援排序。ToBindingList 擴充方法定義于 EntityFramework 元件中。 *
+*這個類別會啟用雙向資料系結，以及排序。類別衍生自 ObservableCollection&lt;T&gt;，並加入 IListSource 的明確實作為。IListSource 的 GetList （）方法會實作為傳回 IBindingList，並與 ObservableCollection 保持同步。ToBindingList 所產生的 IBindingList 實作為支援排序。ToBindingList 擴充方法定義于 EntityFramework 元件中。*
 
 ``` csharp
     using System.Collections;
@@ -81,9 +81,9 @@ ms.locfileid: "72181793"
 
 在此逐步解說中，您可以選擇使用 Code First 或 EF Designer 來執行模型。 完成下列兩節的其中一個。
 
-### <a name="option-1-define-a-model-using-code-first"></a>選項 1：使用 Code First 定義模型
+### <a name="option-1-define-a-model-using-code-first"></a>選項1：使用 Code First 定義模型
 
-本節說明如何使用 Code First 建立模型及其相關聯的資料庫。 跳到下一節（**Option 2：如果您想要使用 Database First 從使用 EF 設計工具的資料庫還原模型，請使用 Database First）**  定義模型
+本節說明如何使用 Code First 建立模型及其相關聯的資料庫。 如果您想要使用 Database First 從使用 EF 設計工具的資料庫還原模型，請跳到下一節（**選項2：使用 Database First 定義模型）**
 
 使用 Code First 開發時，您通常會從撰寫定義概念（網域）模型的 .NET Framework 類別開始著手。
 
@@ -134,7 +134,7 @@ ms.locfileid: "72181793"
     }
 ```
 
-除了定義實體以外，您還需要定義衍生自**DbCoNtext**的類別，並公開**DbSet @ no__t-2TEntity @ no__t-3**屬性。 **DbSet**屬性可讓內容知道您想要包含在模型中的類型。 **DbCoNtext**和**DbSet**類型定義于 EntityFramework 元件中。
+除了定義實體以外，您還需要定義衍生自**DbCoNtext**的類別，並公開**DbSet&lt;TEntity&gt;** 屬性。 **DbSet**屬性可讓內容知道您想要包含在模型中的類型。 **DbCoNtext**和**DbSet**類型定義于 EntityFramework 元件中。
 
 DbCoNtext 衍生類型的實例會在運行時間管理實體物件，其中包括以資料庫的資料填入物件、變更追蹤，以及將資料保存至資料庫。
 
@@ -160,9 +160,9 @@ DbCoNtext 衍生類型的實例會在運行時間管理實體物件，其中包�
 
 編譯專案。
 
-### <a name="option-2-define-a-model-using-database-first"></a>選項 2：使用 Database First 定義模型
+### <a name="option-2-define-a-model-using-database-first"></a>選項2：使用 Database First 定義模型
 
-本節說明如何使用 Database First，從使用 EF 設計工具的資料庫，對模型進行反向工程。 如果您已完成上一節（**Option 1：使用 Code First）**  定義模型，然後略過此區段並直接移至 [**延遲載入**] 區段。
+本節說明如何使用 Database First，從使用 EF 設計工具的資料庫，對模型進行反向工程。 如果您已完成上一節（**選項1：使用 Code First 定義模型）** ，請略過本節，並直接移至 [消極式**載入**] 區段。
 
 #### <a name="create-an-existing-database"></a>建立現有的資料庫
 
@@ -175,8 +175,8 @@ DbCoNtext 衍生類型的實例會在運行時間管理實體物件，其中包�
 
 讓我們繼續產生資料庫。
 
--   **View-&gt; 伺服器總管**
--   以滑鼠右鍵按一下 [**資料連線-&gt; 新增連接 ...** ]
+-   **View&gt; 伺服器總管**
+-   以滑鼠右鍵按一下 **資料連線-&gt; 新增連接 ...**
 -   如果您還沒有從伺服器總管連接到資料庫，則必須選取 [Microsoft SQL Server] 做為資料來源
 
     ![變更資料來源](~/ef6/media/changedatasource.png)
@@ -241,11 +241,11 @@ DbCoNtext 衍生類型的實例會在運行時間管理實體物件，其中包�
 
 -   在 EF 設計工具中，以滑鼠右鍵按一下模型的空白位置，然後選取 [**新增程式碼產生專案**...]。
 -   從左側功能表中選取 [**線上範本**]，然後搜尋**DbCoNtext**
--   選取**C @ no__t-1 的 EF 6.X DbCoNtext**產生器，輸入**ProductsModel**做為名稱，然後按一下 [新增]
+-   選取**適用于 C\#的 EF 6.X DbCoNtext**產生器，輸入**ProductsModel**做為名稱，然後按一下 [新增]
 
 #### <a name="updating-code-generation-for-data-binding"></a>更新資料系結的程式碼產生
 
-EF 會使用 T4 範本從您的模型產生程式碼。 隨附于 Visual Studio 或從 Visual Studio 資源庫下載的範本，主要是供一般用途使用。 這表示從這些範本產生的實體具有簡單的 ICollection @ no__t-0T @ no__t-1 屬性。 不過，在進行資料系結時，您需要有可執行 IListSource 的集合屬性。 這就是為什麼我們會建立上面的 ObservableListSource 類別，而我們現在要修改範本來使用這個類別。
+EF 會使用 T4 範本從您的模型產生程式碼。 隨附于 Visual Studio 或從 Visual Studio 資源庫下載的範本，主要是供一般用途使用。 這表示從這些範本產生的實體具有簡單的 ICollection&lt;T&gt; 屬性。 不過，在進行資料系結時，您需要有可執行 IListSource 的集合屬性。 這就是為什麼我們會建立上面的 ObservableListSource 類別，而我們現在要修改範本來使用這個類別。
 
 -   開啟**方案總管**並尋找**ProductModel .edmx**檔案
 -   尋找**ProductModel.tt**檔案，該檔案將會在 ProductModel .edmx 檔案底下加以嵌套
@@ -257,7 +257,7 @@ EF 會使用 T4 範本從您的模型產生程式碼。 隨附于 Visual Studio 
 -   尋找並將第一個出現的 "**HashSet**" 取代為 "**ObservableListSource**"。 這個事件位於大約第50行。 **請**不要取代稍後在程式碼中找到的第二個出現的 HashSet。
 -   儲存 ProductModel.tt 檔案。 這應該會導致重新產生實體的程式碼。 如果程式碼未自動重新產生，請以滑鼠右鍵按一下 [ProductModel.tt]，然後選擇 [執行自訂工具]。
 
-如果您現在開啟 Category.cs 檔案（此檔案是在 ProductModel.tt 底下），您應該會看到 Products 集合的類型為**ObservableListSource @ no__t-1Product @ no__t-2**。
+如果您現在開啟 Category.cs 檔案（此檔案是以 ProductModel.tt 為基礎），您應該會看到 Products 集合的類型為**ObservableListSource&lt;產品&gt;** 。
 
 編譯專案。
 
@@ -273,15 +273,15 @@ EF 會使用 T4 範本從您的模型產生程式碼。 隨附于 Visual Studio 
 
 將模型中定義的類別新增為此 WinForms 應用程式的資料來源。
 
--   從主功能表中，選取 [**專案-&gt;] [加入新的資料來源**...]
-    （在 Visual Studio 2010 中，您需要選取 [**資料-&gt;] [加入新的資料來源**...]）
+-   從主功能表中，選取 [**專案-&gt; 加入新的資料來源**...]
+    （在 Visual Studio 2010 中，您需要選取 [**資料-&gt; 加入新的資料來源**...]）
 -   在 [選擇資料來源類型] 視窗中，選取 [**物件**]，然後按 **[下一步]**
 -   在 [選取資料物件] 對話方塊中，展開**WinFormswithEFSample**兩次，然後選取 [**類別**]，而不需要選取 [產品] 資料來源，因為我們會透過類別目錄資料源上的產品屬性來取得它。
 
     ![資料來源](~/ef6/media/datasource.png)
 
--   按一下 **[完成]。**
-    如果 [資料來源] 視窗未顯示，請選取 [ **View-&gt; 個其他的 Windows-@no__t 2] 資料來源**
+-   按一下 **[完成]** 。
+    如果 [資料來源] 視窗未顯示，請選取 [ **View-&gt; 其他 Windows&gt; 資料來源**]
 -   按釘選圖示，讓 [資料來源] 視窗不會自動隱藏。 如果視窗已經是可見的，您可能需要按 [重新整理] 按鈕。
 
     ![資料來源2](~/ef6/media/datasource2.png)
@@ -297,14 +297,14 @@ EF 會使用 T4 範本從您的模型產生程式碼。 隨附于 Visual Studio 
     -   以滑鼠右鍵按一下 DataGridView 控制項，然後選取 [**編輯資料行**]。
     -   選取 [ **ProductId** ] 資料行，並將**ReadOnly**設定為**True**。
     -   選取 [**類別**清單] 資料行，然後按 [**移除**] 按鈕。 對 [**類別**] 資料行執行相同的動作。
-    -   按下**確定**。
+    -   按 [確定]。
 
     到目前為止，我們在設計工具中將 DataGridView 控制項與 BindingSource 元件相關聯。 在下一節中，我們將在程式碼後置中新增程式碼，將 categoryBindingSource 設定為 DbCoNtext 目前所追蹤的實體集合。 當我們從類別下拖放產品時，WinForms 會負責將 productsBindingSource 屬性設定為 categoryBindingSource，並將 productsBindingSource 屬性設為 Products。 因為此系結，所以只有屬於目前所選分類的產品才會顯示在 productDataGridView 中。
 -   按一下滑鼠右鍵並選取 [**已啟用**]，以啟用導覽工具列上的 [**儲存**] 按鈕。
 
     ![表單1設計工具](~/ef6/media/form1-designer.png)
 
--   按兩下按鈕，以新增 [儲存] 按鈕的事件處理常式。 這會新增事件處理常式，並帶您前往表單的程式碼後置。 **CategoryBindingNavigatorSaveItem @ no__t-1Click**事件處理常式的程式碼將在下一節中新增。
+-   按兩下按鈕，以新增 [儲存] 按鈕的事件處理常式。 這會新增事件處理常式，並帶您前往表單的程式碼後置。 下一節將新增**categoryBindingNavigatorSaveItem\_Click**事件處理常式的程式碼。
 
 ## <a name="add-the-code-that-handles-data-interaction"></a>加入處理資料互動的程式碼
 

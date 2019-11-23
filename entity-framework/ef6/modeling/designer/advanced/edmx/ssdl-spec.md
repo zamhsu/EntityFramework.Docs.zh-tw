@@ -27,14 +27,14 @@ SSDL 的版本可藉由 XML 命名空間來區別。
 
 ## <a name="association-element-ssdl"></a>Association 項目 (SSDL)
 
-存放結構定義語言（SSDL）中的**Association**元素會指定參與基礎資料庫外鍵條件約束的資料表資料行。 兩個必要的子專案 End 元素會在關聯的兩端指定資料表，並在每個端的多重性處。 選擇性的 ReferentialConstraint 元素會指定關聯的主體和相依端點，以及參與的資料行。 如果沒有**ReferentialConstraint**元素存在，則必須使用 AssociationSetMapping 專案來指定關聯的資料行對應。
+存放結構定義語言（SSDL）中的**Association**元素會指定參與基礎資料庫外鍵條件約束的資料表資料行。 兩個必要的 End 項目的子項目會指定關聯各端上的資料表，及每一端上的多重性。 選擇性的 ReferentialConstraint 項目會指定關聯的主體端和相依端，以及參與的資料行。 如果沒有**ReferentialConstraint**元素存在，則必須使用 AssociationSetMapping 專案來指定關聯的資料行對應。
 
 **Association**元素可以具有下列子專案（依列出的順序）：
 
 -   檔（零或一個）
 -   結束（剛好兩個）
 -   ReferentialConstraint （零或一個）
--   Annotation 元素（零或多個）
+-   註釋項目 (零或多個)
 
 ### <a name="applicable-attributes"></a>適用屬性
 
@@ -49,7 +49,7 @@ SSDL 的版本可藉由 XML 命名空間來區別。
 
 ### <a name="example"></a>範例
 
-下列範例顯示的**Association**元素，會使用**ReferentialConstraint**專案來指定參與**FK @ no__t-3CustomerOrders** foreign key 條件約束的資料行：
+下列範例顯示的**Association**元素，會使用**ReferentialConstraint**元素來指定參與**FK\_CustomerOrders** foreign key 條件約束的資料行：
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -72,15 +72,15 @@ SSDL 的版本可藉由 XML 命名空間來區別。
 
 ## <a name="associationset-element-ssdl"></a>AssociationSet 項目 (SSDL)
 
-存放結構定義語言（SSDL）中的**AssociationSet**元素代表基礎資料庫中兩個數據表之間的外鍵條件約束。 參與外鍵條件約束的資料表資料行是在 Association 元素中指定。 對應至指定**associationset**元素的**association**專案，是在**AssociationSet**元素的**Association**屬性中指定。
+存放結構定義語言（SSDL）中的**AssociationSet**元素代表基礎資料庫中兩個數據表之間的外鍵條件約束。 參與外部索引鍵條件約束的資料表資料行會在 Association 項目中指定。 對應至指定**associationset**元素的**association**專案，是在**AssociationSet**元素的**Association**屬性中指定。
 
-SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 不過，如果指定之 CSDL 關聯集的 CSDL 關聯是使用 ReferentialConstraint 元素所定義，則不需要對應的**AssociationSetMapping**元素。 在此情況下，如果**AssociationSetMapping**元素存在，則**ReferentialConstraint**元素會覆寫它所定義的對應。
+SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 不過，如果指定之 CSDL 關聯集的 CSDL 關聯是使用 ReferentialConstraint 元素所定義，則不需要對應的**AssociationSetMapping**元素。 在此情況下，如果**AssociationSetMapping**元素存在，則**ReferentialConstraint**元素會覆寫它所定義的對應。
 
 **AssociationSet**元素可以具有下列子專案（依列出的順序）：
 
 -   檔（零或一個）
--   結束（零或兩個）
--   Annotation 元素（零或多個）
+-   End (零或兩個)
+-   註釋項目 (零或多個)
 
 ### <a name="applicable-attributes"></a>適用屬性
 
@@ -96,7 +96,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 ### <a name="example"></a>範例
 
-下列範例顯示**AssociationSet**元素，此專案代表基礎資料庫中的 @no__t 1 外鍵條件約束：
+下列範例顯示**AssociationSet**元素，此專案代表基礎資料庫中的 `FK_CustomerOrders` foreign key 條件約束：
 
 ``` xml
  <AssociationSet Name="FK_CustomerOrders"
@@ -190,8 +190,8 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 相依元素可以具有下列子專案（**依**列出的順序）：
 
--   PropertyRef （一或多個）
--   Annotation 元素（零或多個）
+-   PropertyRef (一個或多個)
+-   註釋項目 (零或多個)
 
 ### <a name="applicable-attributes"></a>適用屬性
 
@@ -206,7 +206,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 ### <a name="example"></a>範例
 
-下列範例顯示的 Association 專案，會使用**ReferentialConstraint**專案來指定參與**FK @ no__t-2CustomerOrders** foreign key 條件約束的資料行。 **Dependent**元素會將**Order**資料表的**CustomerId**資料行指定為條件約束的相依端點。
+下列範例顯示的 Association 專案，會使用**ReferentialConstraint**元素來指定參與**FK\_CustomerOrders** foreign key 條件約束的資料行。 **Dependent**元素會將**Order**資料表的**CustomerId**資料行指定為條件約束的相依端點。
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -234,7 +234,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 **檔**元素可以具有下列子專案（依列出的順序）：
 
 -   **摘要**：父元素的簡短描述。 (零或一個項目)
--   **LongDescription**：父元素的詳細描述。 (零或一個項目)
+-   **LongDescription**：上層元素的詳細描述。 (零或一個項目)
 
 ### <a name="applicable-attributes"></a>適用屬性
 
@@ -278,16 +278,16 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 | 屬性名稱   | 必要 | 值                                                                                                                                                                                                                                                                                                                                                                                      |
 |:-----------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **型別**         | 是         | 位於外鍵條件約束結尾之 SSDL 實體集的完整名稱。                                                                                                                                                                                                                                                                                          |
+| **Type**         | 是         | 位於外部索引鍵條件約束端點上之 SSDL 實體集的完整名稱。                                                                                                                                                                                                                                                                                          |
 | **角色**         | 否          | 在對應之 ReferentialConstraint 專案的 Principal 或 Dependent 元素中， **Role**屬性的值（如果有使用的話）。                                                                                                                                                                                                                                             |
-| **數** | 是         | **1**、 **0 ..1**或 **\*** ，視外鍵條件約束結尾的資料列數目而定。 <br/> **1**表示外鍵條件約束結尾只存在一個資料列。 <br/> **0 ..1**表示外鍵條件約束結尾處有零或一個資料列。 <br/> **\*** 表示外鍵條件約束結尾有零個、一個或多個資料列。 |
+| **數** | 是         | **1**、 **0、1**或 **\*** 取決於外鍵條件約束結尾的資料列數目。 <br/> **1**表示外鍵條件約束結尾只存在一個資料列。 <br/> **0 ..1**表示外鍵條件約束結尾處有零或一個資料列。 <br/> **\*** 指出外鍵條件約束結尾處有零個、一個或多個資料列。 |
 
 > [!NOTE]
 > 任何數目的注釋屬性（自訂 XML 屬性）都可以套用至**End**元素。 不過，自訂屬性不可屬於任何 XML 命名空間，這是保留給 CSDL 之用。 任兩個自訂屬性的完整名稱不能相同。
 
 #### <a name="example"></a>範例
 
-下列範例顯示定義**FK @ no__t-2CustomerOrders** foreign key 條件約束的**Association**元素。 在每個**End**專案上指定的**多重性**值表示**Orders**資料表中的許多資料列都可以與**customers**資料表中的資料列相關聯，但是**customers**資料表中只有一個資料列可以與資料列相關聯在**Orders**資料表中。 此外， **OnDelete**元素表示如果**customers**資料表中的資料列遭到刪除，則會刪除**Orders**資料表中，參考**customers**資料表中之特定資料列的所有資料列。
+下列範例顯示定義**FK\_CustomerOrders** foreign key 條件約束的**Association**元素。 在每個**End**專案上指定的**多重性**值表示**orders**資料表中的許多資料列都可以與**customers**資料表中的資料列相關聯，但是**Customers**資料表中只有一個資料列可以與**Orders**資料表中的資料列產生關聯。 此外， **OnDelete**元素表示如果**customers**資料表中的資料列遭到刪除，則會刪除**Orders**資料表中，參考**customers**資料表中之特定資料列的所有資料列。
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -315,7 +315,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 **End**元素可以具有下列子專案（依列出的順序）：
 
 -   檔（零或一個）
--   Annotation 元素（零或多個）
+-   註釋項目 (零或多個)
 
 #### <a name="applicable-attributes"></a>適用屬性
 
@@ -323,7 +323,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 | 屬性名稱 | 必要 | 值                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------|
-| **EntitySet**  | 是         | 位於外鍵條件約束結尾之 SSDL 實體集的名稱。                                      |
+| **EntitySet**  | 是         | 位於外部索引鍵條件約束端點上之 SSDL 實體集的名稱。                                      |
 | **角色**       | 否          | 在對應關聯專案的一個**End**專案上指定的其中一個**角色**屬性的值。 |
 
 > [!NOTE]
@@ -351,7 +351,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 ## <a name="entitycontainer-element-ssdl"></a>EntityContainer 項目 (SSDL)
 
-存放結構定義語言（SSDL）中的**EntityContainer**元素會描述 Entity Framework 應用程式中基礎資料來源的結構：SSDL 實體集（定義于 EntitySet 專案中）表示資料庫中的資料表、SSDL 實體類型（定義于 EntityType 元素中）代表資料表中的資料列，以及關聯集（定義于 AssociationSet 專案中）代表中的外鍵條件約束資料. 儲存體模型實體容器會透過 EntityContainerMapping 元素對應至概念模型實體容器。
+存放結構定義語言（SSDL）中的**EntityContainer**專案描述了 Entity Framework 應用程式中的基礎資料來源結構： ssdl 實體集（定義于 EntitySet 專案中）代表資料庫中的資料表、ssdl 實體類型（定義于 EntityType 元素中）代表資料表中的資料列，以及關聯集（定義于 AssociationSet 專案中）表示資料庫中的外鍵條件約束。 儲存體模型實體容器會透過 EntityContainerMapping 項目對應至概念模型實體容器。
 
 **EntityContainer**元素可以有零個或一個檔元素。 如果**檔**元素存在，則必須在所有其他子專案之前。
 
@@ -394,7 +394,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 ## <a name="entityset-element-ssdl"></a>EntitySet 項目 (SSDL)
 
-存放結構定義語言（SSDL）中的**EntitySet**元素代表基礎資料庫中的資料表或視圖。 SSDL 中的 EntityType 元素代表資料表或視圖中的資料列。 **EntitySet**元素的**EntityType**屬性會指定代表 ssdl 實體集內資料列的特定 SSDL 實體類型。 CSDL 實體集與 SSDL 實體集之間的對應是在 EntitySetMapping 元素中指定。
+存放結構定義語言（SSDL）中的**EntitySet**元素代表基礎資料庫中的資料表或視圖。 SSDL 中的 EntityType 項目表示資料表或檢視中的資料列。 **EntitySet**元素的**EntityType**屬性會指定代表 ssdl 實體集內資料列的特定 SSDL 實體類型。 CSDL 實體集和 SSDL 實體集之間的對應是在 EntitySetMapping 項目中指定。
 
 **EntitySet**元素可以具有下列子專案（依列出的順序）：
 
@@ -407,7 +407,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 下表描述可套用至**EntitySet**元素的屬性。
 
 > [!NOTE]
-> 某些屬性（此處未列出）可能會以**存放區**別名來限定。 更新模型時會使用這些屬性。
+> 某些屬性（此處未列出）可能會以**存放區**別名來限定。 這些屬性是更新模型時，更新模型精靈所使用的。
 
 | 屬性名稱 | 必要 | 值                                                                                    |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------|
@@ -441,12 +441,12 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 ## <a name="entitytype-element-ssdl"></a>EntityType 項目 (SSDL)
 
-存放結構定義語言（SSDL）中的**EntityType**元素代表基礎資料庫之資料表或視圖中的資料列。 SSDL 中的 EntitySet 元素代表資料列發生所在的資料表或視圖。 **EntitySet**元素的**EntityType**屬性會指定代表 ssdl 實體集內資料列的特定 SSDL 實體類型。 SSDL 實體類型和 CSDL 實體類型之間的對應是在 EntityTypeMapping 元素中指定。
+存放結構定義語言（SSDL）中的**EntityType**元素代表基礎資料庫之資料表或視圖中的資料列。 SSDL 中的 EntitySet 項目表示資料列發生所在的資料表或檢視。 **EntitySet**元素的**EntityType**屬性會指定代表 ssdl 實體集內資料列的特定 SSDL 實體類型。 SSDL 實體類型和 CSDL 實體類型間的對應是在 EntityTypeMapping 項目中指定的。
 
 **EntityType**元素可以具有下列子專案（依列出的順序）：
 
 -   檔（零或一個元素）
--   索引鍵（零或一個元素）
+-   Key(零或一個項目)
 -   Annotation 項目
 
 ### <a name="applicable-attributes"></a>適用屬性
@@ -488,7 +488,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 -   參數（零或多個）
 -   CommandText （零或一個）
 -   ReturnType （零或多個）
--   Annotation 元素（零或多個）
+-   註釋項目 (零或多個)
 
 函式的傳回型別必須使用**returntype**元素或**returntype**屬性（請參閱下文）來指定，但不能同時指定。
 
@@ -499,7 +499,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 下表描述可套用至**Function**元素的屬性。
 
 > [!NOTE]
-> 某些屬性（此處未列出）可能會以**存放區**別名來限定。 更新模型時會使用這些屬性。
+> 某些屬性（此處未列出）可能會以**存放區**別名來限定。 這些屬性是更新模型時，更新模型精靈所使用的。
 
 | 屬性名稱             | 必要 | 值                                                                                                                                                                                                              |
 |:---------------------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -545,7 +545,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 **Key**元素可以具有下列子專案（依列出的順序）：
 
--   PropertyRef （一或多個）
+-   PropertyRef (一個或多個)
 -   Annotation 項目
 
 索引**鍵**元素沒有適用的屬性。
@@ -575,7 +575,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 **OnDelete**元素可以有下列子專案（依列出的順序）：
 
 -   檔（零或一個）
--   Annotation 元素（零或多個）
+-   註釋項目 (零或多個)
 
 ### <a name="applicable-attributes"></a>適用屬性
 
@@ -590,7 +590,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 ### <a name="example"></a>範例
 
-下列範例顯示定義**FK @ no__t-2CustomerOrders** foreign key 條件約束的**Association**元素。 **OnDelete**元素表示如果**customers**資料表中的資料列被刪除，則會刪除**Orders**資料表中，參考**customers**資料表中之特定資料列的所有資料列。
+下列範例顯示定義**FK\_CustomerOrders** foreign key 條件約束的**Association**元素。 **OnDelete**元素表示如果**customers**資料表中的資料列被刪除，則會刪除**Orders**資料表中，參考**customers**資料表中之特定資料列的所有資料列。
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -618,7 +618,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 **Parameter**元素可以具有下列子專案（依列出的順序）：
 
 -   檔（零或一個）
--   Annotation 元素（零或多個）
+-   註釋項目 (零或多個)
 
 ### <a name="applicable-attributes"></a>適用屬性
 
@@ -627,12 +627,12 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 | 屬性名稱 | 必要 | 值                                                                                                                                                                                                                           |
 |:---------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **名稱**       | 是         | 參數名稱。                                                                                                                                                                                                      |
-| **型別**       | 是         | 參數型別。                                                                                                                                                                                                             |
+| **Type**       | 是         | 參數型別。                                                                                                                                                                                                             |
 | **下**       | 否          | **In**、 **Out**或**InOut** ，取決於參數是輸入、輸出或輸入/輸出參數。                                                                                                                |
-| **MaxLength**  | 否          | 參數的長度上限。                                                                                                                                                                                            |
+| **長度**  | 否          | 參數的長度上限。                                                                                                                                                                                            |
 | **整數位數**  | 否          | 參數的精確度。                                                                                                                                                                                                 |
 | **縮放**      | 否          | 參數的小數位數。                                                                                                                                                                                                     |
-| **SRID**       | 否          | 空間系統參考識別碼。 僅對空間類型的參數有效。 如需詳細資訊，請參閱 [SRID](https://en.wikipedia.org/wiki/SRID)並[SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx)。 |
+| **SRID**       | 否          | 空間系統參考識別碼。 僅對空間類型的參數有效。 如需詳細資訊，請參閱[SRID](https://en.wikipedia.org/wiki/SRID) and [SRID （SQL Server）](https://msdn.microsoft.com/library/bb964707.aspx)。 |
 
 > [!NOTE]
 > 任何數目的注釋屬性（自訂 XML 屬性）都可以套用至**Parameter**元素。 不過，自訂屬性不可屬於任何 XML 命名空間，這是保留供 SSDL 使用。 任兩個自訂屬性的完整名稱不能相同。
@@ -660,8 +660,8 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 **Principal**元素可以具有下列子專案（依列出的順序）：
 
--   PropertyRef （一或多個）
--   Annotation 元素（零或多個）
+-   PropertyRef (一個或多個)
+-   註釋項目 (零或多個)
 
 ### <a name="applicable-attributes"></a>適用屬性
 
@@ -676,7 +676,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 ### <a name="example"></a>範例
 
-下列範例顯示的 Association 專案，會使用**ReferentialConstraint**專案來指定參與**FK @ no__t-2CustomerOrders** foreign key 條件約束的資料行。 **Principal**元素會將**Customer**資料表的**CustomerId**資料行指定為條件約束的主要端點。
+下列範例顯示的 Association 專案，會使用**ReferentialConstraint**元素來指定參與**FK\_CustomerOrders** foreign key 條件約束的資料行。 **Principal**元素會將**Customer**資料表的**CustomerId**資料行指定為條件約束的主要端點。
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -710,16 +710,16 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 | 屬性名稱            | 必要 | 值                                                                                                                                                                                                                           |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **名稱**                  | 是         | 對應資料行的名稱。                                                                                                                                                                                           |
-| **型別**                  | 是         | 對應資料行的類型。                                                                                                                                                                                           |
+| **Type**                  | 是         | 對應資料行的類型。                                                                                                                                                                                           |
 | **Null**              | 否          | **True** （預設值）或**False** ，取決於對應的資料行是否可以有 null 值。                                                                                                                  |
 | **DefaultValue**          | 否          | 對應資料行的預設值。                                                                                                                                                                                  |
-| **MaxLength**             | 否          | 對應資料行的長度上限。                                                                                                                                                                                 |
+| **長度**             | 否          | 對應資料行的長度上限。                                                                                                                                                                                 |
 | **FixedLength**           | 否          | **True**或**False** ，取決於對應的資料行值是否會儲存為固定長度的字串。                                                                                                              |
 | **整數位數**             | 否          | 對應資料行的精確度。                                                                                                                                                                                      |
 | **縮放**                 | 否          | 對應資料行的小數位數。                                                                                                                                                                                          |
 | **Unicode**               | 否          | **True**或**False** ，取決於對應的資料行值是否會儲存為 Unicode 字串。                                                                                                                   |
 | **定序**             | 否          | 指定資料來源中使用之定序順序的字串。                                                                                                                                                   |
-| **SRID**                  | 否          | 空間系統參考識別碼。 僅對空間類型的屬性有效。 如需詳細資訊，請參閱 [SRID](https://en.wikipedia.org/wiki/SRID)並[SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx)。 |
+| **SRID**                  | 否          | 空間系統參考識別碼。 僅對空間類型的屬性有效。 如需詳細資訊，請參閱[SRID](https://en.wikipedia.org/wiki/SRID) and [SRID （SQL Server）](https://msdn.microsoft.com/library/bb964707.aspx)。 |
 | **StoreGeneratedPattern** | 否          | **無**、**識別**（如果對應的資料行值是在資料庫中產生的身分識別），或**計算**（如果對應的資料行值是在資料庫中計算）。 對 RowType 屬性無效。 |
 
 > [!NOTE]
@@ -747,8 +747,8 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 存放結構定義語言（SSDL）中的**PropertyRef**元素會參考 EntityType 元素上定義的屬性，以指出屬性將會執行下列其中一個角色：
 
--   屬於**EntityType**所代表之資料表的主鍵。 一或多個**PropertyRef**元素可以用來定義主鍵。 如需詳細資訊，請參閱 Key 元素。
--   做為參考條件約束的相依端點和主要端點。 如需詳細資訊，請參閱 ReferentialConstraint 元素。
+-   屬於**EntityType**所代表之資料表的主鍵。 一或多個**PropertyRef**元素可以用來定義主鍵。 如需詳細資訊，請參閱 Key 項目。
+-   做為參考條件約束的相依端點和主要端點。 如需詳細資訊，請參閱 ReferentialConstraint 項目。
 
 **PropertyRef**元素只能有下列子項目：
 
@@ -786,16 +786,16 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 ## <a name="referentialconstraint-element-ssdl"></a>ReferentialConstraint 項目 (SSDL)
 
-存放結構定義語言（SSDL）中的**ReferentialConstraint**元素代表基礎資料庫中的外鍵條件約束（也稱為參考完整性條件約束）。 條件約束的主體和相依端點會分別由主體和相依子項目指定。 參與主體和相依端點的資料行會以 PropertyRef 元素來參考。
+存放結構定義語言（SSDL）中的**ReferentialConstraint**元素代表基礎資料庫中的外鍵條件約束（也稱為參考完整性條件約束）。 條件約束的主體端和相依端是分別透過 Principal 和 Dependent 子項目指定的。 參與主體端和相依端之資料行是以 PropertyRef 項目來參考的。
 
 **ReferentialConstraint**元素是 Association 元素的選擇性子項目。 如果**ReferentialConstraint**元素不是用來對應**Association**元素中所指定的 foreign key 條件約束，就必須使用 AssociationSetMapping 專案來執行此動作。
 
 **ReferentialConstraint**元素可以有下列子項目：
 
 -   檔（零或一個）
--   Principal （只有一個）
+-   Principal (只有一個)
 -   相依（只有一個）
--   Annotation 元素（零或多個）
+-   註釋項目 (零或多個)
 
 ### <a name="applicable-attributes"></a>適用屬性
 
@@ -803,7 +803,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 ### <a name="example"></a>範例
 
-下列範例顯示的**Association**元素，會使用**ReferentialConstraint**專案來指定參與**FK @ no__t-3CustomerOrders** foreign key 條件約束的資料行：
+下列範例顯示的**Association**元素，會使用**ReferentialConstraint**元素來指定參與**FK\_CustomerOrders** foreign key 條件約束的資料行：
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -866,7 +866,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 **RowType**元素可以有下列子項目：
 
-- 屬性（一或多個）  
+- 屬性 (一個或多個)  
 
 ### <a name="example"></a>範例
 
@@ -902,7 +902,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 **Schema**元素會使用**namespace**屬性來定義儲存模型中實體類型和關聯物件的命名空間。 在命名空間中，兩個物件不能有相同的名稱。
 
-儲存模型命名空間與**架構**元素的 XML 命名空間不同。 儲存模型命名空間（如**命名空間**屬性所定義）是實體類型和關聯類型的邏輯容器。 **Schema**元素的 XML 命名空間（由**xmlns**屬性所表示）是**schema**專案之子專案和屬性的預設命名空間。 XML 命名空間的表單 https://schemas.microsoft.com/ado/YYYY/MM/edm/ssdl （其中 YYYY 和 MM 表示年和月分別） 是保留供 SSDL。 自訂項目和屬性不能出現在擁有此格式的命名空間中。
+儲存模型命名空間與**架構**元素的 XML 命名空間不同。 儲存模型命名空間（如**命名空間**屬性所定義）是實體類型和關聯類型的邏輯容器。 **Schema**元素的 XML 命名空間（由**xmlns**屬性所表示）是**schema**專案之子專案和屬性的預設命名空間。 https://schemas.microsoft.com/ado/YYYY/MM/edm/ssdl 格式的 XML 命名空間（其中 YYYY 和 MM 分別表示年和月）是保留供 SSDL 使用。 自訂項目和屬性不能出現在擁有此格式的命名空間中。
 
 ### <a name="applicable-attributes"></a>適用屬性
 
@@ -910,8 +910,8 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 | 屬性名稱            | 必要 | 值                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **命名空間**             | 是         | 儲存模型的命名空間。 **Namespace**屬性的值是用來形成類型的完整名稱。 例如，如果名為*Customer*的**EntityType**是在 examplemodel.store.customer 命名空間中，則**entitytype**的完整限定名稱為 examplemodel.store.customer。 <br/> 下列字串不能當做**Namespace**屬性的值使用：**系統**、**暫時性**或**Edm**。 **Namespace**屬性的值不能與 CSDL Schema 元素中**namespace**屬性的值相同。 |
-| **Alias**                 | 否          | 用來取代命名空間名稱的識別項。 例如，如果名為*Customer*的**EntityType**是在 Examplemodel.store.customer 中，而且**Alias**屬性的值是*StorageModel*，則您可以使用 StorageModel 做為的完整名稱 **。EntityType。**                                                                                                                                                                                                                                                                                    |
+| **Namespace**             | 是         | 儲存模型的命名空間。 **Namespace**屬性的值是用來形成類型的完整名稱。 例如，如果名為*Customer*的**EntityType**是在 examplemodel.store.customer 命名空間中，則**entitytype**的完整限定名稱為 examplemodel.store.customer。 <br/> 下列字串不能當做**Namespace**屬性的值使用： **System**、**暫時性**或**Edm**。 **Namespace**屬性的值不能與 CSDL Schema 元素中**namespace**屬性的值相同。 |
+| **Alias**                 | 否          | 用來取代命名空間名稱的識別項。 例如，如果名為*Customer*的**EntityType**是在 Examplemodel.store.customer 中，而且**Alias**屬性的值是*StorageModel*，則您可以使用 StorageModel 做為 EntityType 的完整名稱 **。**                                                                                                                                                                                                                                                                                    |
 | **提供者**              | 是         | 資料提供者。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **ProviderManifestToken** | 是         | 向提供者表示要傳回哪個提供者資訊清單的語彙基元。 未定義此語彙基元的格式。 語彙基元的值是由提供者定義。 如需有關 SQL Server 提供者資訊清單標記的詳細資訊，請參閱 SqlClient for Entity Framework。                                                                                                                                                                                                                                                                                                                        |
 
@@ -1064,7 +1064,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 
 ## <a name="facets-ssdl"></a>Facet (SSDL)
 
-存放結構定義語言（SSDL）中的 facet 代表在屬性專案中指定之資料行類型的條件約束。 Facet 會實作為**屬性**元素上的 XML 屬性。
+存放結構定義語言 (SSDL) 中的 Facet 表示 Property 項目中指定之資料行類型上的條件約束。 Facet 會實作為**屬性**元素上的 XML 屬性。
 
 下表說明 SSDL 中支援的 Facet：
 
@@ -1072,7 +1072,7 @@ SSDL 關聯集會透過 AssociationSetMapping 元素對應到 CSDL 關聯集。 
 |:----------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **定序**   | 在執行比較和排序屬性值的作業時，指定要使用的定序順序 (或排序順序)。                                                                                                             |
 | **FixedLength** | 指定資料行值的長度是否可以變更。                                                                                                                                                                                                  |
-| **MaxLength**   | 指定資料行值的最大長度。                                                                                                                                                                                                           |
+| **長度**   | 指定資料行值的最大長度。                                                                                                                                                                                                           |
 | **整數位數**   | 針對**Decimal**類型的屬性，指定屬性值可以擁有的位數。 針對**Time**、 **DateTime**和**DateTimeOffset**類型的屬性，指定資料行值的秒數小數部分的位數。 |
 | **縮放**       | 指定資料行值小數點右邊的位數。                                                                                                                                                                      |
 | **Unicode**     | 指定資料行值是否儲存為 Unicode。                                                                                                                                                                                                    |

@@ -13,7 +13,7 @@ ms.locfileid: "72182474"
 # <a name="designer-query-stored-procedures"></a>設計工具查詢預存程式
 這個逐步解說會示範如何使用 Entity Framework Designer （EF 設計工具）將預存程式匯入模型中，然後呼叫匯入的預存程式來抓取結果。 
 
-請注意，該 Code First 不支援對應至預存程式或函數。 不過，您可以使用 DbSet. SqlQuery 方法來呼叫預存程式或函數。 例如:
+請注意，該 Code First 不支援對應至預存程式或函數。 不過，您可以使用 DbSet. SqlQuery 方法來呼叫預存程式或函數。 例如：
 ``` csharp
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 ```
@@ -28,26 +28,26 @@ var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 ## <a name="set-up-the-project"></a>設定專案
 
 -   開啟 Visual Studio 2012。
--   選取 [檔案 **-@no__t 1] [新 &gt;] 專案**
--   在左窗格中，按一下 [ **Visual C @ no__t-1**]，然後選取 [**主控台**] 範本。
--   在 [名稱] 中輸入 **EFwithSProcsSample** as。
+-   選取檔案 **&gt; 新&gt; 專案**
+-   在左窗格中，按一下 [ **Visual C\#** ]，然後選取 [**主控台**] 範本。
+-   在 [名稱] 中輸入 **EFwithSProcsSample** 。
 -   選取 **[確定]** 。
 
 ## <a name="create-a-model"></a>建立模型
 
--   以滑鼠右鍵按一下方案總管中的專案，然後選取 [**新增-&gt; 個新專案**]。
+-   以滑鼠右鍵按一下方案總管中的專案，然後選取 [**新增-&gt; 新專案**]。
 -   從左側功能表中選取 [**資料**]，然後選取 [範本] 窗格中的 [ **ADO.NET 實體資料模型**]。
 -   在 [檔案名] 中輸入**EFwithSProcsModel** ，然後按一下 [**新增**]。
 -   在 [選擇模型內容] 對話方塊中，選取 [ **從資料庫產生**]，然後按 **[下一步]** 。
 -   按一下 [ **新增連接**]。  
-    在 [連接屬性] 對話方塊中，輸入伺服器名稱（例如， **（localdb） \\mssqllocaldb**），選取驗證方法，輸入 **School** for 資料庫名稱，然後按一下 **[確定]** 。  
+    在 [連接屬性] 對話方塊中，輸入伺服器名稱（例如， **（localdb）\\mssqllocaldb**），選取驗證方法，輸入 **School** 作為資料庫名稱，然後按一下 **[確定]** 。  
     [選擇您的資料連線] 對話方塊會以您的資料庫連接設定進行更新。
--   在 [選擇您的資料庫物件] 對話方塊中，檢查**資料表** checkbox，以選取所有資料表。  
-    此外，請在 [**預存程式和函數**] 節點底下選取下列預存程式：**GetStudentGrades**和**GetDepartmentName**。 
+-   在 [選擇您的資料庫物件] 對話方塊中，核取 [**資料表** ] 核取方塊，以選取所有資料表。  
+    此外，請在 [**預存程式和函數**] 節點底下選取下列預存程式： **GetStudentGrades**和**GetDepartmentName**。 
 
     ![匯入](~/ef6/media/import.jpg)
 
-    @no__t 0Starting 與 Visual Studio 2012，EF 設計工具支援大量匯入預存程式。預設會核取 [將**選取的預存程式和函數匯入 theentity 模型**]。 *
+    *從 Visual Studio 2012 開始，EF 設計工具支援大量匯入預存程式。預設會核取 [將**選取的預存程式和函數匯入 theentity 模型**]。*
 -   按一下 **[完成]** 。
 
 根據預設，每個傳回多個資料行之匯入預存程式或函數的結果圖形都會自動成為新的複雜型別。 在此範例中，我們想要將 **GetStudentGrades**函數的結果對應至 **StudentGrade**實體，並將**GetDepartmentName**的結果對應至**none** （**none**是預設值）。
@@ -56,14 +56,14 @@ var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 
 -   以滑鼠右鍵按一下設計介面，然後選取 [ **模型瀏覽器**]。
 -   在 [**模型瀏覽器**] 中，選取 [函式匯 **入**]，然後按兩下 **GetStudentGrades**函數。
--   在 [編輯函式匯入] 對話方塊中，選取 [ **實體**]  and 選擇 [ **StudentGrade**]。  
-    [函式匯入 **] 對話方塊頂端**的 [0The 函數匯**入可組合**] 核取方塊可讓您對應至可組合的函式。 @no__t如果您核取此方塊，[**預存程式/函數名稱**] 下拉式清單中只會顯示可組合的函式（資料表值函數）。如果未核取此方塊，清單中只會顯示不可組合的函式。 *
+-   在 [編輯函式匯入] 對話方塊中，選取 [ **實體**] 然後選擇 [ **StudentGrade**]。  
+    *[函式匯入 **] 對話方塊頂端**的 [函式匯**入是可組合**的] 核取方塊，可讓您對應至可組合的函數。如果您核取此方塊，[**預存程式/函數名稱**] 下拉式清單中只會顯示可組合的函式（資料表值函數）。如果未核取此方塊，清單中只會顯示不可組合的函式。*
 
 ## <a name="use-the-model"></a>使用模型
 
 開啟定義**Main**方法的**Program.cs**檔案。 將下列程式碼新增至 Main 函式中。
 
-程式碼會呼叫兩個預存程式：**GetStudentGrades** （傳回指定*StudentId*的**StudentGrades** ）和**GetDepartmentName** （傳回輸出參數中的部門名稱）。  
+程式碼會呼叫兩個預存程式： **GetStudentGrades** （傳回指定*StudentId*的**StudentGrades** ）和**GetDepartmentName** （傳回輸出參數中的部門名稱）。  
 
 ``` csharp
     using (SchoolEntities context = new SchoolEntities())

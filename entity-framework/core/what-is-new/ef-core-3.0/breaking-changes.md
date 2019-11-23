@@ -16,27 +16,27 @@ ms.locfileid: "73655882"
 下列 API 和行為變更可能會在將現有的應用程式升級至3.0.0 時中斷。
 這些變更預期只會影響[提供者變更](xref:core/providers/provider-log)底下記載的資料庫提供者。
 
-## <a name="summary"></a>總結
+## <a name="summary"></a>摘要
 
 | **重大變更**                                                                                               | **產生** |
 |:------------------------------------------------------------------------------------------------------------------|------------|
-| [不會再於用戶端評估 LINQ 查詢](#linq-queries-are-no-longer-evaluated-on-the-client)         | High       |
-| [EF Core 3.0 以 .NET Standard 2.1 為目標，而非以 .NET Standard 2.0 為目標](#netstandard21) | High      |
-| [EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分](#dotnet-ef) | High      |
-| [DetectChanges 接受存放區產生的索引鍵值](#dc) | High      |
-| [FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名](#fromsql) | High      |
-| [查詢類型已與實體類型合併](#qt) | High      |
-| [Entity Framework Core 不再屬於 ASP.NET Core 共用架構](#no-longer) | Medium      |
-| [根據預設，串聯刪除現在會立即發生](#cascade) | Medium      |
-| [相關實體的積極式載入現在會出現在單一查詢中](#eager-loading-single-query) | Medium      |
-| [DeleteBehavior.Restrict 具有更簡潔的語意](#deletebehavior) | Medium      |
-| [自有類型關聯性的設定 API 已變更](#config) | Medium      |
-| [各個屬性會使用獨立的記憶體內部整數索引鍵產生](#each) | Medium      |
-| [無追蹤查詢已不再執行身分識別解析](#notrackingresolution) | Medium      |
-| [中繼資料 API 變更](#metadata-api-changes) | Medium      |
-| [提供者獨有的中繼資料 API 變更](#provider) | Medium      |
-| [已移除 UseRowNumberForPaging](#urn) | Medium      |
-| [無法撰寫與預存程式搭配使用時的 FromSql 方法](#fromsqlsproc) | Medium      |
+| [不會再於用戶端評估 LINQ 查詢](#linq-queries-are-no-longer-evaluated-on-the-client)         | 高       |
+| [EF Core 3.0 以 .NET Standard 2.1 為目標，而非以 .NET Standard 2.0 為目標](#netstandard21) | 高      |
+| [EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分](#dotnet-ef) | 高      |
+| [DetectChanges 接受存放區產生的索引鍵值](#dc) | 高      |
+| [FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名](#fromsql) | 高      |
+| [查詢類型已與實體類型合併](#qt) | 高      |
+| [Entity Framework Core 不再屬於 ASP.NET Core 共用架構](#no-longer) | 中等      |
+| [根據預設，串聯刪除現在會立即發生](#cascade) | 中等      |
+| [相關實體的積極式載入現在會出現在單一查詢中](#eager-loading-single-query) | 中等      |
+| [DeleteBehavior.Restrict 具有更簡潔的語意](#deletebehavior) | 中等      |
+| [自有類型關聯性的設定 API 已變更](#config) | 中等      |
+| [各個屬性會使用獨立的記憶體內部整數索引鍵產生](#each) | 中等      |
+| [無追蹤查詢已不再執行身分識別解析](#notrackingresolution) | 中等      |
+| [中繼資料 API 變更](#metadata-api-changes) | 中等      |
+| [提供者獨有的中繼資料 API 變更](#provider) | 中等      |
+| [已移除 UseRowNumberForPaging](#urn) | 中等      |
+| [無法撰寫與預存程式搭配使用時的 FromSql 方法](#fromsqlsproc) | 中等      |
 | [FromSql 方法只能在查詢根目錄上指定](#fromsql) | 低      |
 | [~~查詢執行會在偵錯層級記錄~~已還原](#qe) | 低      |
 | [實體執行個體上不會再設定暫存索引鍵值](#tkv) | 低      |
@@ -81,7 +81,7 @@ ms.locfileid: "73655882"
 
 **舊行為**
 
-3.0 以前，在 EF Core 無法將屬於查詢的運算式轉換成 SQL 或參數時，它會自動在用戶端評估運算式。
+3\.0 以前，在 EF Core 無法將屬於查詢的運算式轉換成 SQL 或參數時，它會自動在用戶端評估運算式。
 根據預設，對可能相當耗費資源的運算式進行用戶端評估只會觸發警告。
 
 **新行為**
@@ -187,7 +187,7 @@ ms.locfileid: "73655882"
 **新行為**
 
 從 EF Core 3.0 開始，請使用 `FromSqlRaw`、`ExecuteSqlRaw` 和 `ExecuteSqlRawAsync` 建立參數化查詢，其中參數會分別從查詢字串傳遞。
-例如:
+例如：
 
 ```C#
 context.Products.FromSqlRaw(
@@ -196,7 +196,7 @@ context.Products.FromSqlRaw(
 ```
 
 使用 `FromSqlInterpolated`、`ExecuteSqlInterpolated` 和 `ExecuteSqlInterpolatedAsync` 建立參數化查詢，其中參數會作為插入查詢字串的一部分傳回。
-例如:
+例如：
 
 ```C#
 context.Products.FromSqlInterpolated(
@@ -259,7 +259,7 @@ context.Products.FromSqlRaw("[dbo].[Ten Most Expensive Products]").AsEnumerable(
 
 **原因**
 
-在 `DbSet` 以外的任何地方指定 `FromSql` 沒有新增的意義或附加價值，而且在某些情況下可能會導致模稜兩可。
+在 `FromSql` 以外的任何地方指定 `DbSet` 沒有新增的意義或附加價值，而且在某些情況下可能會導致模稜兩可。
 
 **風險降低**
 
@@ -277,7 +277,7 @@ context.Products.FromSqlRaw("[dbo].[Ten Most Expensive Products]").AsEnumerable(
 ```C#
 var results = context.Products.Include(e => e.Category).AsNoTracking().ToList();
 ```
-會為每個與給定類別相關聯的 `Product`，傳回相同的 `Category` 執行個體。
+會為每個與給定類別相關聯的 `Category`，傳回相同的 `Product` 執行個體。
 
 **新行為**
 
@@ -388,12 +388,12 @@ public string Id { get; set; }
 
 **原因**
 
-這項變更的目的是為了改善資料繫結和稽核情節的體驗，在這些情節中了解呼叫 `SaveChanges`「之前」將刪除哪些實體是很重要的。
+這項變更的目的是為了改善資料繫結和稽核情節的體驗，在這些情節中了解呼叫 _「之前」_ `SaveChanges`將刪除哪些實體是很重要的。
 
 **風險降低**
 
 透過設定 `context.ChangedTracker` 可以還原舊行為。
-例如:
+例如：
 
 ```C#
 context.ChangeTracker.CascadeDeleteTiming = CascadeTiming.OnSaveChanges;
@@ -486,7 +486,7 @@ API 的下列組件現已淘汰：
 **新行為**
 
 從 EF Core 3.0 開始，現在會有 Fluent API 使用 `WithOwner()` 將導覽屬性設定為擁有者。
-例如:
+例如：
 
 ```C#
 modelBuilder.Entity<Order>.OwnsOne(e => e.Details).WithOwner(e => e.Order);
@@ -494,7 +494,7 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details).WithOwner(e => e.Order);
 
 擁有者與自有之間關聯性的相關設定現在應該在 `WithOwner()` 之後鏈結，類似於其他關聯性的設定方式。
 但自有類型本身的設定仍會在 `OwnsOne()/OwnsMany()` 之後鏈結。
-例如:
+例如：
 
 ```C#
 modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
@@ -552,13 +552,13 @@ public class OrderDetails
     public string ShippingAddress { get; set; }
 }
 ```
-在 EF Core 3.0 之前，如果 `OrderDetails` 由 `Order` 擁有，或明確對應至相同的資料表，則在新增新的 `Order` 時一律需要 `OrderDetails` 執行個體。
+在 EF Core 3.0 之前，如果 `OrderDetails` 由 `Order` 擁有，或明確對應至相同的資料表，則在新增新的 `OrderDetails` 時一律需要 `Order` 執行個體。
 
 
 **新行為**
 
 從 3.0 開始，EF 允許新增 `Order` 而不需要 `OrderDetails`，並會對應所有 `OrderDetails` 屬性，除了可為 Null 之資料行的主索引鍵以外。
-查詢時，如果任何必要的屬性不具有值，或如果其具有主索引鍵以外的不必要屬性，且所有屬性都是 `null`，則 EF Core 會將 `OrderDetails` 設為 `null`。
+查詢時，如果任何必要的屬性不具有值，或如果其具有主索引鍵以外的不必要屬性，且所有屬性都是 `OrderDetails`，則 EF Core 會將 `null` 設為 `null`。
 
 **風險降低**
 
@@ -708,7 +708,7 @@ public class Order
 
 從 3.0 開始，如果屬性的名稱與主體屬性相同，依照慣例，EF Core 不會嘗試將屬性用於外部索引鍵。
 但仍會比對與主體屬性名稱串連的主體類型名稱，以及與主體屬性名稱模式串連的導覽名稱。
-例如:
+例如：
 
 ```C#
 public class Customer
@@ -844,7 +844,7 @@ using (new TransactionScope())
 **風險降低**
 
 透過在 `ModelBuilder` 上設定屬性存取模式可以還原 3.0 以前的行為。
-例如:
+例如：
 
 ```C#
 modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction);
@@ -971,7 +971,7 @@ EF Core 3.0 不會要求這些服務必須存在於應用程式的 DI 容器中�
 
 **風險降低**
 
-在呼叫 `Entry` 之前明確呼叫 `ChgangeTracker.DetectChanges()` 可確保 3.0 以前的行為。
+在呼叫 `ChgangeTracker.DetectChanges()` 之前明確呼叫 `Entry` 可確保 3.0 以前的行為。
 
 ### <a name="string-and-byte-array-keys-are-not-client-generated-by-default"></a>字串和位元組陣列索引鍵預設不是由用戶端產生
 
@@ -1080,7 +1080,7 @@ Proxy 會改為假設如有非 Null 值，會載入參考導覽；如果不是�
 
 遇到此錯誤時的最適當動作是了解根本原因，並停止建立這麼多的內部服務提供者。
 不過，透過設定 `DbContextOptionsBuilder` 可以將錯誤轉換回警告。
-例如:
+例如：
 
 ```C#
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -1099,12 +1099,12 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 **舊行為**
 
 在 EF Core 3.0 之前，使用單一字串呼叫 `HasOne` 或 `HasMany` 的程式碼會以令人困惑的方式解譯。
-例如:
+例如：
 ```C#
 modelBuilder.Entity<Samurai>().HasOne("Entrance").WithOne();
 ```
 
-程式碼看起來像是它使用 `Entrance` 瀏覽屬性將 `Samurai` 與一些其他實體類型相關，這可能是私用屬性。
+程式碼看起來像是它使用 `Samurai` 瀏覽屬性將 `Entrance` 與一些其他實體類型相關，這可能是私用屬性。
 
 在現實中，此程式碼會在不使用瀏覽屬性的情況下嘗試建立與一些實體 (稱為 `Entrance`) 的關係。
 
@@ -1121,7 +1121,7 @@ modelBuilder.Entity<Samurai>().HasOne("Entrance").WithOne();
 這只會造成已明確針對類型名稱使用字串設定關係，而未明確指定瀏覽屬性的應用程式中斷。
 這不是常見情況。
 先前的行為可透過明確地傳遞瀏覽屬性名稱的 `null` 來取得。
-例如:
+例如：
 
 ```C#
 modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
@@ -1145,7 +1145,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 **新行為**
 
-上述方法現在會透過相同的 `T` 傳回 `ValueTask<T>`，如同以前一樣。
+上述方法現在會透過相同的 `ValueTask<T>` 傳回 `T`，如同以前一樣。
 
 **原因**
 
@@ -1154,7 +1154,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 **風險降低**
 
 僅等待上述 API 的應用程式只需要重新編譯，而不需要變更來源。
-更複雜的使用方式 (例如將傳回的 `Task` 傳遞給 `Task.WhenAny()`) 通常需要藉由呼叫 `AsTask()` 將傳回的 `ValueTask<T>` 轉換為 `Task<T>`。
+更複雜的使用方式 (例如將傳回的 `Task` 傳遞給 `Task.WhenAny()`) 通常需要藉由呼叫 `ValueTask<T>` 將傳回的 `Task<T>` 轉換為 `AsTask()`。
 請注意，這會抵消這項變更所帶來的配置減少。
 
 <a name="rtt"></a>
@@ -1511,7 +1511,7 @@ SET MigrationId = CONCAT(LEFT(MigrationId, 4)  - 543, SUBSTRING(MigrationId, 4, 
 
 **舊行為**
 
-在 EF Core 3.0 前，外部索引鍵限制式名稱僅為 "name"。 例如:
+在 EF Core 3.0 前，外部索引鍵限制式名稱僅為 "name"。 例如：
 
 ```C#
 var constraintName = myForeignKey.Name;
@@ -1519,7 +1519,7 @@ var constraintName = myForeignKey.Name;
 
 **新行為**
 
-從 EF Core 3.0 開始，外部索引鍵限制式名稱現為 "constraint name"。 例如:
+從 EF Core 3.0 開始，外部索引鍵限制式名稱現為 "constraint name"。 例如：
 
 ```C#
 var constraintName = myForeignKey.ConstraintName;
@@ -1601,7 +1601,7 @@ Microsoft.EntityFrameworkCore.Sqlite 先前相依於 SQLitePCL.raw 的 1.1.12 �
 
 **原因**
 
-2.0.0 版的 SQLitePCL.raw 以 .NET Standard 2.0 為目標。 它先前以 .NET Standard 1.1 為目標，這需要大量的大量的可轉移套件才能運作。
+2\.0.0 版的 SQLitePCL.raw 以 .NET Standard 2.0 為目標。 它先前以 .NET Standard 1.1 為目標，這需要大量的大量的可轉移套件才能運作。
 
 **風險降低**
 
@@ -1660,7 +1660,7 @@ SqlClient 是用於 SQL Server 的旗艦版資料存取驅動程式，而 SqlCli
 
 **舊行為**
 
-具有多個自我參考單向導覽屬性和相符 FK 的實體類型，不當設定為單一關聯性。 例如:
+具有多個自我參考單向導覽屬性和相符 FK 的實體類型，不當設定為單一關聯性。 例如：
 
 ```C#
 public class User 
@@ -1683,7 +1683,7 @@ public class User
 
 **風險降低**
 
-使用關聯性的完整設定。 例如:
+使用關聯性的完整設定。 例如：
 
 ```C#
 modelBuilder

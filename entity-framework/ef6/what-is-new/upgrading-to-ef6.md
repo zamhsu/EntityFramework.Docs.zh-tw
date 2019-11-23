@@ -18,7 +18,7 @@ ms.locfileid: "72182104"
 
 以下是將現有應用程式升級至 EF6 時所需執行之工作的檢查清單。
 
-## <a name="1-install-the-ef6-nuget-package"></a>1.安裝 EF6 NuGet 套件
+## <a name="1-install-the-ef6-nuget-package"></a>1. 安裝 EF6 NuGet 套件
 
 您必須升級至新的 Entity Framework 6 執行時間。
 
@@ -33,18 +33,18 @@ ms.locfileid: "72182104"
 Install-Package EntityFramework
 ```
 
-## <a name="2-ensure-that-assembly-references-to-systemdataentitydll-are-removed"></a>2.確定已移除 system.string 的元件參考
+## <a name="2-ensure-that-assembly-references-to-systemdataentitydll-are-removed"></a>2. 確定已移除 System.object 的元件參考
 
 安裝 EF6 NuGet 套件時，應該會自動從您的專案中移除對 system.string 的任何參考。
 
-## <a name="3-swap-any-ef-designer-edmx-models-to-use-ef-6x-code-generation"></a>3.交換任何 EF Designer （EDMX）模型，以使用 EF 6.x 程式碼產生
+## <a name="3-swap-any-ef-designer-edmx-models-to-use-ef-6x-code-generation"></a>3. 交換任何 EF Designer （EDMX）模型，以使用 EF 6.x 程式碼產生
 
 如果您有使用 EF 設計工具建立的任何模型，則必須更新程式碼產生範本，以產生 EF6 相容的程式碼。
 
 > [!NOTE]
 > 目前只有 EF 6. x DbCoNtext 產生器範本可供 Visual Studio 2012 和2013。
 
-1. 刪除現有的程式碼產生範本。 這些檔案通常會命名為 **\<edmx_file_name\>.tt**和 **\<edmx_file_name @ no__t-5。CoNtext.tt** ，並在方案總管的 .edmx 檔案底下加以嵌套。 您可以在方案總管中選取範本，然後按下**Del**鍵將它們刪除。  
+1. 刪除現有的程式碼產生範本。 這些檔案通常會命名為 **\<edmx_file_name\>tt**和 **\<edmx_file_name\>。CoNtext.tt** ，並在方案總管的 .edmx 檔案底下加以嵌套。 您可以在方案總管中選取範本，然後按下**Del**鍵將它們刪除。  
    > [!NOTE]
    > 在網站專案中，範本不會在您的 edmx 檔案底下加以嵌套，而是在方案總管中一起列出。  
 
@@ -58,19 +58,19 @@ Install-Package EntityFramework
     - 如果您使用 ObjectCoNtext API，則必須選取 [**線上**] 索引標籤，並搜尋**EF 6.x EntityObject**產生器。  
 3. 如果您將任何自訂套用至程式碼產生範本，則必須將其重新套用至更新的範本。
 
-## <a name="4-update-namespaces-for-any-core-ef-types-being-used"></a>4.更新所使用之任何核心 EF 類型的命名空間
+## <a name="4-update-namespaces-for-any-core-ef-types-being-used"></a>4. 更新所使用之任何核心 EF 類型的命名空間
 
 DbCoNtext 和 Code First 類型的命名空間尚未變更。 這表示許多使用 EF 4.1 或更新版本的應用程式都不需要變更任何專案。
 
 先前在 system.string 中的類型（如 ObjectCoNtext）已移至新的命名空間。 這表示您可能需要更新*使用*或匯*入*指示詞，以針對 EF6 建立。
 
-命名空間變更的一般規則是，系統. Data. * 中的任何類型都會移至 system.string. Data. Core. *。 換句話說，只要插入**Entity Core 即可。** 在 System. Data 之後。 例如:
+命名空間變更的一般規則是，系統. Data. * 中的任何類型都會移至 system.string. Data. Core. *。 換句話說，只要插入**Entity Core 即可。** 在 System. Data 之後。 例如：
 
 - EntityException = > System.object。**Entity. Core**。EntityException  
 - System.string = > 的 System.object。**Entity. Core**。物件. ObjectCoNtext  
 - Dataclasses.dll. RelationshipManager = > 的資料。**Entity. Core**。Dataclasses.dll. RelationshipManager  
 
-這些類型是在*核心*命名空間中，因為它們不會直接用於大部分以 DbCoNtext 為基礎的應用程式。 某些屬於 system.string 的類型仍然經常用於 DbCoNtext 架構的應用程式，因此尚未移至*核心*命名空間中的資料。 這些是：
+這些類型是在*核心*命名空間中，因為它們不會直接用於大部分以 DbCoNtext 為基礎的應用程式。 某些屬於 system.string 的類型仍然經常用於 DbCoNtext 架構的應用程式，因此尚未移至*核心*命名空間中的資料。 它們是：
 
 - EntityState = > System.object。**實體**。EntityState  
 - Dataclasses.dll. EdmFunctionAttribute = > 的資料。**DbFunctionAttribute**  

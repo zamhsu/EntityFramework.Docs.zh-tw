@@ -95,7 +95,7 @@ MSL 的版本是以 XML 命名空間來區分。
 |:-------------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **AssociationSet** | 是         | 要對應的關聯名稱。                                                                                                                                 |
 | **From**           | 是         | 導覽屬性的**FromRole**屬性值，對應至要對應的關聯。 如需詳細資訊，請參閱 NavigationProperty 元素（CSDL）。 |
-| **To**             | 是         | 導覽屬性的**ToRole**屬性值，對應至要對應的關聯。 如需詳細資訊，請參閱 NavigationProperty 元素（CSDL）。   |
+| **若要**             | 是         | 導覽屬性的**ToRole**屬性值，對應至要對應的關聯。 如需詳細資訊，請參閱 NavigationProperty 元素（CSDL）。   |
 
 ### <a name="example"></a>範例
 
@@ -146,7 +146,7 @@ MSL 的版本是以 XML 命名空間來區分。
  </AssociationSetMapping>
 ```
 
-下列程式碼顯示用來將**FK @ no__t-3Course @ no__t-4Department**關聯的**DepartmentID**屬性對應至**UpdateCourse**預存程式的**AssociationEnd**元素（其更新功能為已對應的**課程**實體類型）：
+下列程式碼顯示用來將**FK\_課程\_部門**關聯的**DepartmentID**屬性對應至**UpdateCourse**預存程式的**AssociationEnd**元素（**課程**實體類型的更新功能會對應到此專案）：
 
 ``` xml
  <EntitySetMapping Name="Courses">
@@ -182,7 +182,7 @@ MSL 的版本是以 XML 命名空間來區分。
 
 對應規格語言（MSL）中的**AssociationSetMapping**元素會定義概念模型中的關聯與基礎資料庫中資料表資料行之間的對應。
 
-概念模型中的關聯指其屬性代表基礎資料庫中主要與外部索引鍵資料行的類型。 **AssociationSetMapping**元素會使用兩個 EndProperty 元素，來定義資料庫中關聯類型屬性和資料行之間的對應。 您可以使用 Condition 元素來放置這些對應的條件。 使用 ModificationFunctionMapping 專案，將關聯的 insert、update 和 delete 函數對應至資料庫中的預存程式。 使用 QueryView 元素中的 Entity SQL 字串，定義關聯和資料表資料行之間的唯讀對應。
+概念模型中的關聯指其屬性代表基礎資料庫中主要與外部索引鍵資料行的類型。 **AssociationSetMapping**元素會使用兩個 EndProperty 元素，來定義資料庫中關聯類型屬性和資料行之間的對應。 您可以使用 Condition 項目在這些對應上放置條件。 ModificationFunctionMapping 項目可以用來將關聯的插入、更新或刪除函式對應至資料庫中的預存程序。 使用 QueryView 元素中的 Entity SQL 字串，定義關聯和資料表資料行之間的唯讀對應。
 
 > [!NOTE]
 > 如果概念模型中的關聯定義了參考條件約束，則關聯不需要與**AssociationSetMapping**元素對應。 如果具有參考條件約束之關聯的**AssociationSetMapping**元素存在，則會忽略**AssociationSetMapping**元素中定義的對應。 如需詳細資訊，請參閱 ReferentialConstraint 元素（CSDL）。
@@ -190,7 +190,7 @@ MSL 的版本是以 XML 命名空間來區分。
 **AssociationSetMapping**元素可以有下列子項目
 
 -   QueryView （零或一個）
--   EndProperty （零或兩個）
+-   EndProperty (零或兩個)
 -   條件（零或多個）
 -   ModificationFunctionMapping （零或一個）
 
@@ -201,12 +201,12 @@ MSL 的版本是以 XML 命名空間來區分。
 | 屬性名稱     | 必要 | 值                                                                                       |
 |:-------------------|:------------|:--------------------------------------------------------------------------------------------|
 | **名稱**           | 是         | 要對應的概念模型關聯集名稱。                      |
-| **TypeName**       | 否          | 要對應的概念模型關聯類型之命名空間限定名稱。 |
+| **類型**       | 否          | 要對應的概念模型關聯類型之命名空間限定名稱。 |
 | **中** | 否          | 要對應的資料表名稱。                                                 |
 
 ### <a name="example"></a>範例
 
-下列範例顯示**AssociationSetMapping**專案，其中概念模型中的**FK @ no__t-2Course @ no__t-3Department**關聯集會對應到資料庫中的**課程**資料表。 關聯類型屬性和資料表資料行之間的對應是在子**EndProperty**元素中指定。
+下列範例顯示一個**AssociationSetMapping**專案，其中概念模型中的**FK\_課程\_部門**關聯集會對應到資料庫中的**課程**資料表。 關聯類型屬性和資料表資料行之間的對應是在子**EndProperty**元素中指定。
 
 ``` xml
  <AssociationSetMapping Name="FK_Course_Department"
@@ -223,7 +223,7 @@ MSL 的版本是以 XML 命名空間來區分。
 
 ## <a name="complexproperty-element-msl"></a>ComplexProperty 項目 (MSL)
 
-對應規格語言（MSL）中的**ComplexProperty**元素會定義概念模型實體類型上的複雜類型屬性與基礎資料庫中資料表資料行之間的對應。 屬性資料行對應是在子 ScalarProperty 元素中指定。
+對應規格語言（MSL）中的**ComplexProperty**元素會定義概念模型實體類型上的複雜類型屬性與基礎資料庫中資料表資料行之間的對應。 屬性資料行對應會在 ScalarProperty 子項目中指定。
 
 **ComplexType**屬性專案可以具有下列子項目：
 
@@ -239,7 +239,7 @@ MSL 的版本是以 XML 命名空間來區分。
 | 屬性名稱 | 必要 | 值                                                                                            |
 |:---------------|:------------|:-------------------------------------------------------------------------------------------------|
 | **名稱**       | 是         | 概念模型中要對應的實體類型之複雜屬性的名稱。 |
-| **TypeName**   | 否          | 概念模型屬性類型的命名空間限定名稱。                              |
+| **類型**   | 否          | 概念模型屬性類型的命名空間限定名稱。                              |
 
 ### <a name="example"></a>範例
 
@@ -291,7 +291,7 @@ MSL 的版本是以 XML 命名空間來區分。
 
 ## <a name="complextypemapping-element-msl"></a>ComplexTypeMapping 項目 (MSL)
 
-對應規格語言（MSL）中的**ComplexTypeMapping**專案是 ResultMapping 專案的子系，並定義概念模型中的函式匯入與基礎資料庫中的預存程式之間的對應，如下所示為 true：
+對應規格語言（MSL）中的**ComplexTypeMapping**專案是 ResultMapping 專案的子系，而且會定義概念模型中的函式匯入與基礎資料庫中的預存程式之間的對應（當下列條件成立時）：
 
 -   函式匯入會傳回概念複雜類型。
 -   預存程序所傳回之資料行名稱未與複雜類型上的屬性名稱完全相符。
@@ -308,7 +308,7 @@ MSL 的版本是以 XML 命名空間來區分。
 
 | 屬性名稱 | 必要 | 值                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------|
-| **TypeName**   | 是         | 要對應的複雜類型的命名空間限定名稱。 |
+| **類型**   | 是         | 要對應的複雜類型的命名空間限定名稱。 |
 
 ### <a name="example"></a>範例
 
@@ -431,7 +431,7 @@ MSL 的版本是以 XML 命名空間來區分。
 當**DeleteFunction**元素套用至**EntityTypeMapping**元素時，可以有下列子專案：
 
 -   AssociationEnd （零或多個）
--   ComplexProperty （零或多個）
+-   ComplexProperty (零或多個)
 -   ScarlarProperty （零或多個）
 
 #### <a name="applicable-attributes"></a>適用屬性
@@ -544,7 +544,7 @@ MSL 的版本是以 XML 命名空間來區分。
 
 ## <a name="endproperty-element-msl"></a>EndProperty 項目 (MSL)
 
-對應規格語言（MSL）中的**EndProperty**專案會定義概念模型關聯的 end 或修改函式與基礎資料庫之間的對應。 屬性資料行對應是在子 ScalarProperty 元素中指定。
+對應規格語言（MSL）中的**EndProperty**專案會定義概念模型關聯的 end 或修改函式與基礎資料庫之間的對應。 屬性資料行對應會指定在 ScalarProperty 子項目中。
 
 當**EndProperty**元素用來定義概念模型關聯結尾的對應時，它是 AssociationSetMapping 專案的子系。 當**EndProperty**專案用來定義概念模型關聯之修改函式的對應時，它是 InsertFunction 元素或 DeleteFunction 元素的子系。
 
@@ -558,11 +558,11 @@ MSL 的版本是以 XML 命名空間來區分。
 
 | 屬性名稱 | 必要 | 值                                                 |
 |:---------------|:------------|:------------------------------------------------------|
-| Name           | 是         | 要對應的關聯端名稱。 |
+| 名稱           | 是         | 要對應的關聯端名稱。 |
 
 ### <a name="example"></a>範例
 
-下列範例顯示**AssociationSetMapping**元素，其中概念模型中的**FK @ no__t-2Course @ no__t-3Department**關聯會對應至資料庫中的**課程**資料表。 關聯類型屬性和資料表資料行之間的對應是在子**EndProperty**元素中指定。
+下列範例會顯示**AssociationSetMapping**專案，在此元素中，概念模型中的**FK\_課程\_部門**關聯會對應至資料庫中的**課程**資料表。 關聯類型屬性和資料表資料行之間的對應是在子**EndProperty**元素中指定。
 
 ``` xml
  <AssociationSetMapping Name="FK_Course_Department"
@@ -618,7 +618,7 @@ MSL 的版本是以 XML 命名空間來區分。
 
 **EntityContainerMapping**元素可以有下列子專案（依列出的順序）：
 
--   EntitySetMapping （零或多個）
+-   EntitySetMapping (零或多個)
 -   AssociationSetMapping （零或多個）
 -   FunctionImportMapping （零或多個）
 
@@ -634,7 +634,7 @@ MSL 的版本是以 XML 命名空間來區分。
 
 ### <a name="example"></a>範例
 
-下列範例顯示將**SchoolModelEntities**容器（概念模型實體容器）對應至**SchoolModelStoreContainer**容器（儲存體模型實體）的**EntityContainerMapping**元素。容器）：
+下列範例顯示將**SchoolModelEntities**容器（概念模型實體容器）對應至**SchoolModelStoreContainer**容器（儲存體模型實體容器）的**EntityContainerMapping**元素：
 
 ``` xml
  <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer"
@@ -665,11 +665,11 @@ MSL 的版本是以 XML 命名空間來區分。
 
 ## <a name="entitysetmapping-element-msl"></a>EntitySetMapping 項目 (MSL)
 
-對應規格語言（MSL）中的**EntitySetMapping**專案會將概念模型實體集內的所有類型對應到儲存模型中的實體集。 概念模型中的實體集是相同類型（和衍生類型）之實體實例的邏輯容器。 儲存模型中的實體集代表基礎資料庫中的資料表或資料檢視。 概念模型實體集是由**EntitySetMapping**元素的**Name**屬性值所指定。 對應的 to 資料表或 view 是由每個子 MappingFragment 元素中的**中**屬性或**EntitySetMapping**專案本身所指定。
+對應規格語言（MSL）中的**EntitySetMapping**專案會將概念模型實體集內的所有類型對應到儲存模型中的實體集。 概念模型中的實體集就是相同型別 (及衍生型別) 之實體的執行個體邏輯容器。 儲存模型中的實體集代表基礎資料庫中的資料表或檢視。 概念模型實體集是由**EntitySetMapping**元素的**Name**屬性值所指定。 對應的 to 資料表或 view 是由每個子 MappingFragment 元素中的**中**屬性或**EntitySetMapping**專案本身所指定。
 
 **EntitySetMapping**元素可以有下列子項目：
 
--   EntityTypeMapping （零或多個）
+-   EntityTypeMapping (零或多個)
 -   QueryView （零或一個）
 -   MappingFragment （零或多個）
 
@@ -721,9 +721,9 @@ MSL 的版本是以 XML 命名空間來區分。
 
 ## <a name="entitytypemapping-element-msl"></a>EntityTypeMapping 項目 (MSL)
 
-對應規格語言（MSL）中的**EntityTypeMapping**專案會定義概念模型中的實體類型和基礎資料庫中的資料表或 views 之間的對應。 如需概念模型實體類型和基礎資料庫資料表或 views 的詳細資訊，請參閱 EntityType 專案（CSDL）和 EntitySet 元素（SSDL）。 要對應的概念模型實體類型是由**EntityTypeMapping**元素的**TypeName**屬性所指定。 要對應的資料表或視圖是由子 MappingFragment 元素的**中**屬性所指定。
+對應規格語言（MSL）中的**EntityTypeMapping**專案會定義概念模型中的實體類型和基礎資料庫中的資料表或 views 之間的對應。 如需概念模型實體類型和基礎資料庫資料表或檢視的詳細資訊，請參閱 EntityType 項目 (CSDL) 和 EntitySet 項目 (SSDL)。 要對應的概念模型實體類型是由**EntityTypeMapping**元素的**TypeName**屬性所指定。 要對應的資料表或視圖是由子 MappingFragment 元素的**中**屬性所指定。
 
-ModificationFunctionMapping 子專案可以用來將實體類型的插入、更新或刪除函數對應至資料庫中的預存程式。
+ModificationFunctionMapping 子項目可以用來將實體類型的插入、更新或刪除函式對應至資料庫中的預存程序。
 
 **EntityTypeMapping**元素可以有下列子項目：
 
@@ -745,7 +745,7 @@ ModificationFunctionMapping 子專案可以用來將實體類型的插入、更�
 
 | 屬性名稱 | 必要 | 值                                                                                                                                                                                                |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **TypeName**   | 是         | 要對應的概念模型實體類型之命名空間限定名稱。 <br/> 如果型別是抽象型別或衍生型別，值必須是 `IsOfType(Namespace-qualified_type_name)`。 |
+| **類型**   | 是         | 要對應的概念模型實體類型之命名空間限定名稱。 <br/> 如果型別是抽象型別或衍生型別，值必須是 `IsOfType(Namespace-qualified_type_name)`。 |
 
 ### <a name="example"></a>範例
 
@@ -783,7 +783,7 @@ ModificationFunctionMapping 子專案可以用來將實體類型的插入、更�
 
 ### <a name="example"></a>範例
 
-下一個範例會顯示型別階層的對應，在該階層內根型別是抽象型別。 請注意，使用**TypeName**屬性的 `IsOfType` 語法。
+下一個範例會顯示型別階層的對應，在該階層內根型別是抽象型別。 請注意**TypeName**屬性的 `IsOfType` 語法用法。
 
 ``` xml
  <EntitySetMapping Name="People">
@@ -879,7 +879,7 @@ ModificationFunctionMapping 子專案可以用來將實體類型的插入、更�
 當**InsertFunction**元素套用至**EntityTypeMapping**元素時，可以有下列子專案：
 
 -   AssociationEnd （零或多個）
--   ComplexProperty （零或多個）
+-   ComplexProperty (零或多個)
 -   ResultBinding （零或一個）
 -   ScarlarProperty （零或多個）
 
@@ -982,14 +982,14 @@ ModificationFunctionMapping 子專案可以用來將實體類型的插入、更�
 
 對應規格語言（MSL）中的**mapping**元素包含將概念模型中定義之物件對應至資料庫的資訊（如儲存模型中所述）。 如需詳細資訊，請參閱 CSDL 規格和 SSDL 規格。
 
-**Mapping**元素是對應規格的根項目。 對應規格的 XML 命名空間是 https://schemas.microsoft.com/ado/2009/11/mapping/cs 。
+**Mapping**元素是對應規格的根項目。 對應規格的 XML 命名空間是 https://schemas.microsoft.com/ado/2009/11/mapping/cs。
 
 對應項目可以擁有下列子項目 (依列出的順序)：
 
 -   Alias （零或多個）
 -   EntityContainerMapping （只有一個）
 
-MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的命名空間名稱來限定。 如需概念模型命名空間名稱的詳細資訊，請參閱 Schema 元素（CSDL）。 如需儲存體模型命名空間名稱的詳細資訊，請參閱 Schema Element （SSDL）。 MSL 中所使用之命名空間的別名可以使用 Alias 元素來定義。
+MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的命名空間名稱來限定。 如需概念模型命名空間名稱的詳細資訊，請參閱 Schema 元素（CSDL）。 如需儲存體模型命名空間名稱的詳細資訊，請參閱 Schema Element （SSDL）。 MSL 中所使用之命名空間的別名可以使用 Alias 項目加以定義。
 
 ### <a name="applicable-attributes"></a>適用屬性
 
@@ -1036,7 +1036,7 @@ MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的�
 
 ## <a name="mappingfragment-element-msl"></a>MappingFragment 項目 (MSL)
 
-對應規格語言（MSL）中的**MappingFragment**專案會定義概念模型實體類型的屬性與資料庫中的資料表或視圖之間的對應。 如需概念模型實體類型和基礎資料庫資料表或 views 的詳細資訊，請參閱 EntityType 專案（CSDL）和 EntitySet 元素（SSDL）。 **MappingFragment**可以是 EntityTypeMapping 元素或 EntitySetMapping 元素的子項目。
+對應規格語言（MSL）中的**MappingFragment**專案會定義概念模型實體類型的屬性與資料庫中的資料表或視圖之間的對應。 如需概念模型實體類型和基礎資料庫資料表或檢視的詳細資訊，請參閱 EntityType 項目 (CSDL) 和 EntitySet 項目 (SSDL)。 **MappingFragment**可以是 EntityTypeMapping 元素或 EntitySetMapping 元素的子項目。
 
 **MappingFragment**元素可以有下列子項目：
 
@@ -1193,7 +1193,7 @@ MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的�
 
 ## <a name="queryview-element-msl"></a>QueryView 項目 (MSL)
 
-對應規格語言（MSL）中的**QueryView**元素會定義概念模型中的實體類型或關聯與基礎資料庫中的資料表之間的唯讀對應。 對應是使用針對儲存體模型評估的 Entity SQL 查詢來定義，而且您會根據概念模型中的實體或關聯來表示結果集。 因為查詢檢視是唯讀的，無法使用標準更新命令來更新查詢檢視所定義的類型。 您可以使用修改函式來更新這些類型。 如需詳細資訊，請參閱＜如何：將修改函數對應至預存程式。
+對應規格語言（MSL）中的**QueryView**元素會定義概念模型中的實體類型或關聯與基礎資料庫中的資料表之間的唯讀對應。 對應是使用針對儲存體模型評估的 Entity SQL 查詢來定義，而且您會根據概念模型中的實體或關聯來表示結果集。 因為查詢檢視是唯讀的，無法使用標準更新命令來更新查詢檢視所定義的類型。 您可以使用修改函式來更新這些類型。 如需詳細資訊，請參閱如何：將修改函數對應至預存程式。
 
 > [!NOTE]
 > 在**QueryView**元素中，不支援包含**GroupBy**、群組匯總或導覽屬性的 Entity SQL 運算式。
@@ -1213,7 +1213,7 @@ MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的�
 
 | 屬性名稱 | 必要 | 值                                                                         |
 |:---------------|:------------|:------------------------------------------------------------------------------|
-| **TypeName**   | 否          | 要由查詢檢視對應的概念模型類型名稱。 |
+| **類型**   | 否          | 要由查詢檢視對應的概念模型類型名稱。 |
 
 ### <a name="example"></a>範例
 
@@ -1253,7 +1253,7 @@ MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的�
 
 ### <a name="example"></a>範例
 
-下一個範例顯示**QueryView**元素做為**AssociationSetMapping**專案的子系，並定義 School 模型中 @no__t 2 關聯的唯讀對應。
+下一個範例顯示**QueryView**元素做為**AssociationSetMapping**專案的子系，並定義 School 模型中 `FK_Course_Department` 關聯的唯讀對應。
 
 ``` xml
  <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer"
@@ -1315,7 +1315,7 @@ MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的�
 
 ## <a name="resultbinding-element-msl"></a>ResultBinding 項目 (MSL)
 
-對應規格語言（MSL）中的**ResultBinding**元素，會將預存程式傳回的資料行值，對應至概念模型中的實體屬性（當實體類型修改函式對應至中的預存程式時）。基礎資料庫。 例如，當 insert 預存程式傳回識別欄位的值時， **ResultBinding**元素會將傳回的值對應至概念模型中的實體類型屬性。
+當實體類型修改函式對應至基礎資料庫中的預存程式時，對應規格語言（MSL）中的**ResultBinding**專案會將預存程式所傳回的資料行值對應到概念模型中的實體屬性。 例如，當 insert 預存程式傳回識別欄位的值時， **ResultBinding**元素會將傳回的值對應至概念模型中的實體類型屬性。
 
 **ResultBinding**元素可以是 InsertFunction 元素或 UpdateFunction 元素的子系。
 
@@ -1398,7 +1398,7 @@ MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的�
 
 **ResultMapping**元素可以有下列子項目：
 
--   EntityTypeMapping （零或多個）
+-   EntityTypeMapping (零或多個)
 -   ComplexTypeMapping
 
 **ResultMapping**元素沒有適用的屬性。
@@ -1587,7 +1587,7 @@ MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的�
 **UpdateFunction**元素可以有下列子項目：
 
 -   AssociationEnd （零或多個）
--   ComplexProperty （零或多個）
+-   ComplexProperty (零或多個)
 -   ResultBinding （零或一個）
 -   ScarlarProperty （零或多個）
 

@@ -102,7 +102,7 @@ namespace TestingDemo
 
 請注意，我們的內容會實行 IBloggingCoNtext 介面。  
 
-如果您使用 Code First 則可以直接編輯您的內容，以執行介面。 如果您使用 EF 設計工具，則必須編輯產生內容的 T4 範本。 開啟 [\<model_name @ no__t-1]。在您的 edmx 檔案底下的 CoNtext.tt 檔案，尋找下列程式碼片段，並在介面中新增，如下所示。  
+如果您使用 Code First 則可以直接編輯您的內容，以執行介面。 如果您使用 EF 設計工具，則必須編輯產生內容的 T4 範本。 開啟 \<model_name\>。在您的 edmx 檔案底下的 CoNtext.tt 檔案，尋找下列程式碼片段，並在介面中新增，如下所示。  
 
 ``` csharp  
 <#=Accessibility.ForType(container)#> partial class <#=code.Escape(container)#> : DbContext, IBloggingContext
