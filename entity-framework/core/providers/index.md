@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 02/23/2018
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/providers/index
-ms.openlocfilehash: 0995c2cb403cf4f0db1462f1e3446a13563a1064
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 7acc00c5e78ac5bc82f6d55d8b74682ff5f5a799
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73654820"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74823982"
 ---
 # <a name="database-providers"></a>資料庫提供者
 
@@ -52,7 +52,7 @@ EF Core 的大多數資料庫提供者會以 NuGet 套件形式發佈，可以�
 
 ## <a name="net-core-clitabdotnet-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
 
-``` console
+```dotnetcli
 dotnet add package provider_package_name
 ```
 
