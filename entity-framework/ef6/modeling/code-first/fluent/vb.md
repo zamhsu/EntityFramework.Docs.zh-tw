@@ -3,177 +3,177 @@ title: 流暢的 API 與 VB.NET-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 763dc6a2-764a-4600-896c-f6f13abf56ec
-ms.openlocfilehash: df3e61fa5e2d24873336511e90231a7d78d32535
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 1c889877b827408919c6170cf997e8805cc607cf
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182664"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824824"
 ---
-# <a name="fluent-api-with-vbnet"></a><span data-ttu-id="74121-102">使用 VB.NET 的流暢 API</span><span class="sxs-lookup"><span data-stu-id="74121-102">Fluent API with VB.NET</span></span>
-<span data-ttu-id="74121-103">Code First 可讓您使用 C\# 或 VB.NET 類別來定義模型。</span><span class="sxs-lookup"><span data-stu-id="74121-103">Code First allows you to define your model using C\# or VB.NET classes.</span></span> <span data-ttu-id="74121-104">您可以選擇性地使用類別和屬性上的屬性，或使用 Fluent API 來執行其他設定。</span><span class="sxs-lookup"><span data-stu-id="74121-104">Additional configuration can optionally be performed using attributes on your classes and properties or by using a fluent API.</span></span> <span data-ttu-id="74121-105">本逐步解說示範如何使用 VB.NET 來執行 Fluent API 設定。</span><span class="sxs-lookup"><span data-stu-id="74121-105">This walkthrough shows how to perform fluent API configuration using VB.NET.</span></span>
+# <a name="fluent-api-with-vbnet"></a><span data-ttu-id="0a333-102">使用 VB.NET 的流暢 API</span><span class="sxs-lookup"><span data-stu-id="0a333-102">Fluent API with VB.NET</span></span>
+<span data-ttu-id="0a333-103">Code First 可讓您使用 C\# 或 VB.NET 類別來定義模型。</span><span class="sxs-lookup"><span data-stu-id="0a333-103">Code First allows you to define your model using C\# or VB.NET classes.</span></span> <span data-ttu-id="0a333-104">您可以選擇性地使用類別和屬性上的屬性，或使用 Fluent API 來執行其他設定。</span><span class="sxs-lookup"><span data-stu-id="0a333-104">Additional configuration can optionally be performed using attributes on your classes and properties or by using a fluent API.</span></span> <span data-ttu-id="0a333-105">本逐步解說示範如何使用 VB.NET 來執行 Fluent API 設定。</span><span class="sxs-lookup"><span data-stu-id="0a333-105">This walkthrough shows how to perform fluent API configuration using VB.NET.</span></span>
 
-<span data-ttu-id="74121-106">本頁面假設您對 Code First 有基本瞭解。</span><span class="sxs-lookup"><span data-stu-id="74121-106">This page assumes you have a basic understanding of Code First.</span></span> <span data-ttu-id="74121-107">如需 Code First 的詳細資訊，請參閱下列逐步解說：</span><span class="sxs-lookup"><span data-stu-id="74121-107">Check out the following walkthroughs for more information on Code First:</span></span>
+<span data-ttu-id="0a333-106">本頁面假設您對 Code First 有基本瞭解。</span><span class="sxs-lookup"><span data-stu-id="0a333-106">This page assumes you have a basic understanding of Code First.</span></span> <span data-ttu-id="0a333-107">如需 Code First 的詳細資訊，請參閱下列逐步解說：</span><span class="sxs-lookup"><span data-stu-id="0a333-107">Check out the following walkthroughs for more information on Code First:</span></span>
 
--   [<span data-ttu-id="74121-108">Code First 至新的資料庫</span><span class="sxs-lookup"><span data-stu-id="74121-108">Code First to a New Database</span></span>](~/ef6/modeling/code-first/workflows/new-database.md)
--   [<span data-ttu-id="74121-109">Code First 到現有的資料庫</span><span class="sxs-lookup"><span data-stu-id="74121-109">Code First to an Existing Database</span></span>](~/ef6/modeling/code-first/workflows/existing-database.md)
+-   [<span data-ttu-id="0a333-108">新資料庫的 Code First</span><span class="sxs-lookup"><span data-stu-id="0a333-108">Code First to a New Database</span></span>](~/ef6/modeling/code-first/workflows/new-database.md)
+-   [<span data-ttu-id="0a333-109">Code First 到現有的資料庫</span><span class="sxs-lookup"><span data-stu-id="0a333-109">Code First to an Existing Database</span></span>](~/ef6/modeling/code-first/workflows/existing-database.md)
 
-## <a name="pre-requisites"></a><span data-ttu-id="74121-110">先決條件</span><span class="sxs-lookup"><span data-stu-id="74121-110">Pre-Requisites</span></span>
+## <a name="pre-requisites"></a><span data-ttu-id="0a333-110">必要條件</span><span class="sxs-lookup"><span data-stu-id="0a333-110">Pre-Requisites</span></span>
 
-<span data-ttu-id="74121-111">您至少必須安裝 Visual Studio 2010 或 Visual Studio 2012，才能完成此逐步解說。</span><span class="sxs-lookup"><span data-stu-id="74121-111">You will need to have at least Visual Studio 2010 or Visual Studio 2012 installed to complete this walkthrough.</span></span>
+<span data-ttu-id="0a333-111">您至少必須安裝 Visual Studio 2010 或 Visual Studio 2012，才能完成此逐步解說。</span><span class="sxs-lookup"><span data-stu-id="0a333-111">You will need to have at least Visual Studio 2010 or Visual Studio 2012 installed to complete this walkthrough.</span></span>
 
-<span data-ttu-id="74121-112">如果您使用 Visual Studio 2010，您也必須安裝[NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)</span><span class="sxs-lookup"><span data-stu-id="74121-112">If you are using Visual Studio 2010, you will also need to have [NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) installed</span></span>
+<span data-ttu-id="0a333-112">如果您使用 Visual Studio 2010，您也必須安裝[NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)</span><span class="sxs-lookup"><span data-stu-id="0a333-112">If you are using Visual Studio 2010, you will also need to have [NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) installed</span></span>
 
-## <a name="create-the-application"></a><span data-ttu-id="74121-113">建立應用程式</span><span class="sxs-lookup"><span data-stu-id="74121-113">Create the Application</span></span>
+## <a name="create-the-application"></a><span data-ttu-id="0a333-113">建立應用程式</span><span class="sxs-lookup"><span data-stu-id="0a333-113">Create the Application</span></span>
 
-<span data-ttu-id="74121-114">為了簡單起見，我們將建立一個使用 Code First 來執行資料存取的基本主控台應用程式。</span><span class="sxs-lookup"><span data-stu-id="74121-114">To keep things simple we’re going to build a basic console application that uses Code First to perform data access.</span></span>
+<span data-ttu-id="0a333-114">為了簡單起見，我們將建立一個使用 Code First 來執行資料存取的基本主控台應用程式。</span><span class="sxs-lookup"><span data-stu-id="0a333-114">To keep things simple we’re going to build a basic console application that uses Code First to perform data access.</span></span>
 
--   <span data-ttu-id="74121-115">開啟 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="74121-115">Open Visual Studio</span></span>
--   <span data-ttu-id="74121-116">**檔案&gt; 新&gt; 專案 。**</span><span class="sxs-lookup"><span data-stu-id="74121-116">**File -&gt; New -&gt; Project…**</span></span>
--   <span data-ttu-id="74121-117">從左側功能表和**主控台應用程式**中選取 [ **Windows** ]</span><span class="sxs-lookup"><span data-stu-id="74121-117">Select **Windows** from the left menu and **Console Application**</span></span>
--   <span data-ttu-id="74121-118">輸入**CodeFirstVBSample**作為名稱</span><span class="sxs-lookup"><span data-stu-id="74121-118">Enter **CodeFirstVBSample** as the name</span></span>
--   <span data-ttu-id="74121-119">選取 [確定]</span><span class="sxs-lookup"><span data-stu-id="74121-119">Select **OK**</span></span>
+-   <span data-ttu-id="0a333-115">開啟 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0a333-115">Open Visual Studio</span></span>
+-   <span data-ttu-id="0a333-116">**檔案&gt; 新&gt; 專案 。**</span><span class="sxs-lookup"><span data-stu-id="0a333-116">**File -&gt; New -&gt; Project…**</span></span>
+-   <span data-ttu-id="0a333-117">從左側功能表和**主控台應用程式**中選取 [ **Windows** ]</span><span class="sxs-lookup"><span data-stu-id="0a333-117">Select **Windows** from the left menu and **Console Application**</span></span>
+-   <span data-ttu-id="0a333-118">輸入**CodeFirstVBSample**作為名稱</span><span class="sxs-lookup"><span data-stu-id="0a333-118">Enter **CodeFirstVBSample** as the name</span></span>
+-   <span data-ttu-id="0a333-119">選取 [確定]</span><span class="sxs-lookup"><span data-stu-id="0a333-119">Select **OK**</span></span>
 
-## <a name="define-the-model"></a><span data-ttu-id="74121-120">定義模型</span><span class="sxs-lookup"><span data-stu-id="74121-120">Define the Model</span></span>
+## <a name="define-the-model"></a><span data-ttu-id="0a333-120">定義模型</span><span class="sxs-lookup"><span data-stu-id="0a333-120">Define the Model</span></span>
 
-<span data-ttu-id="74121-121">在此步驟中，您將定義代表概念模型的 VB.NET POCO 實體類型。</span><span class="sxs-lookup"><span data-stu-id="74121-121">In this step you will define VB.NET POCO entity types that represent the conceptual model.</span></span> <span data-ttu-id="74121-122">類別不需要衍生自任何基類或實作用任何介面。</span><span class="sxs-lookup"><span data-stu-id="74121-122">The classes do not need to derive from any base classes or implement any interfaces.</span></span>
+<span data-ttu-id="0a333-121">在此步驟中，您將定義代表概念模型的 VB.NET POCO 實體類型。</span><span class="sxs-lookup"><span data-stu-id="0a333-121">In this step you will define VB.NET POCO entity types that represent the conceptual model.</span></span> <span data-ttu-id="0a333-122">類別不需要衍生自任何基類或實作用任何介面。</span><span class="sxs-lookup"><span data-stu-id="0a333-122">The classes do not need to derive from any base classes or implement any interfaces.</span></span>
 
--   <span data-ttu-id="74121-123">將新類別新增至專案，並在 [類別名稱] 中輸入**SchoolModel**</span><span class="sxs-lookup"><span data-stu-id="74121-123">Add a new class to the project, enter **SchoolModel** for the class name</span></span>
--   <span data-ttu-id="74121-124">將新類別的內容取代為下列程式碼</span><span class="sxs-lookup"><span data-stu-id="74121-124">Replace the contents of the new class with the following code</span></span>
+-   <span data-ttu-id="0a333-123">將新類別新增至專案，並在 [類別名稱] 中輸入**SchoolModel**</span><span class="sxs-lookup"><span data-stu-id="0a333-123">Add a new class to the project, enter **SchoolModel** for the class name</span></span>
+-   <span data-ttu-id="0a333-124">將新類別的內容取代為下列程式碼</span><span class="sxs-lookup"><span data-stu-id="0a333-124">Replace the contents of the new class with the following code</span></span>
 
 ``` vb
-   Public Class Department
-        Public Sub New()
-            Me.Courses = New List(Of Course)()
-        End Sub
+Public Class Department
+    Public Sub New()
+        Me.Courses = New List(Of Course)()
+    End Sub
 
-        ' Primary key
-        Public Property DepartmentID() As Integer
-        Public Property Name() As String
-        Public Property Budget() As Decimal
-        Public Property StartDate() As Date
-        Public Property Administrator() As Integer?
-        Public Overridable Property Courses() As ICollection(Of Course)
-    End Class
+    ' Primary key
+    Public Property DepartmentID() As Integer
+    Public Property Name() As String
+    Public Property Budget() As Decimal
+    Public Property StartDate() As Date
+    Public Property Administrator() As Integer?
+    Public Overridable Property Courses() As ICollection(Of Course)
+End Class
 
-    Public Class Course
-        Public Sub New()
-            Me.Instructors = New HashSet(Of Instructor)()
-        End Sub
+Public Class Course
+    Public Sub New()
+        Me.Instructors = New HashSet(Of Instructor)()
+    End Sub
 
-        ' Primary key
-        Public Property CourseID() As Integer
-        Public Property Title() As String
-        Public Property Credits() As Integer
+    ' Primary key
+    Public Property CourseID() As Integer
+    Public Property Title() As String
+    Public Property Credits() As Integer
 
-        ' Foreign  key that does not follow the Code First convention.
-        ' The fluent API will be used to configure DepartmentID_FK  to be the foreign key for this entity.
-        Public Property DepartmentID_FK() As Integer
+    ' Foreign  key that does not follow the Code First convention.
+    ' The fluent API will be used to configure DepartmentID_FK  to be the foreign key for this entity.
+    Public Property DepartmentID_FK() As Integer
 
-        ' Navigation properties
-         Public Overridable Property Department() As Department
-         Public Overridable Property Instructors() As ICollection(Of Instructor)
-    End Class
+    ' Navigation properties
+    Public Overridable Property Department() As Department
+    Public Overridable Property Instructors() As ICollection(Of Instructor)
+End Class
 
-    Public Class OnlineCourse
-        Inherits Course
+Public Class OnlineCourse
+    Inherits Course
 
-        Public Property URL() As String
-    End Class
+    Public Property URL() As String
+End Class
 
-    Partial Public Class OnsiteCourse
-        Inherits Course
+Partial Public Class OnsiteCourse
+    Inherits Course
 
-        Public Sub New()
-            Details = New OnsiteCourseDetails()
-        End Sub
+    Public Sub New()
+        Details = New OnsiteCourseDetails()
+    End Sub
 
-        Public Property Details() As OnsiteCourseDetails
-     End Class
+    Public Property Details() As OnsiteCourseDetails
+ End Class
 
-    ' Complex type
-    Public Class OnsiteCourseDetails
-        Public Property Time() As Date
-        Public Property Location() As String
-        Public Property Days() As String
-    End Class
+' Complex type
+Public Class OnsiteCourseDetails
+    Public Property Time() As Date
+    Public Property Location() As String
+    Public Property Days() As String
+End Class
 
-    Public Class Person
-        ' Primary key
-        Public Property PersonID() As Integer
-        Public Property LastName() As String
-        Public Property FirstName() As String
-    End Class
+Public Class Person
+    ' Primary key
+    Public Property PersonID() As Integer
+    Public Property LastName() As String
+    Public Property FirstName() As String
+End Class
 
-    Public Class Instructor
-        Inherits Person
+Public Class Instructor
+    Inherits Person
 
-        Public Sub New()
-            Me.Courses = New List(Of Course)()
-        End Sub
+    Public Sub New()
+        Me.Courses = New List(Of Course)()
+    End Sub
 
-        Public Property HireDate() As Date
+    Public Property HireDate() As Date
 
-        ' Navigation properties
-        Private privateCourses As ICollection(Of Course)
-        Public Overridable Property Courses() As ICollection(Of Course)
-        Public Overridable Property OfficeAssignment() As OfficeAssignment
-    End Class
+    ' Navigation properties
+    Private privateCourses As ICollection(Of Course)
+    Public Overridable Property Courses() As ICollection(Of Course)
+    Public Overridable Property OfficeAssignment() As OfficeAssignment
+End Class
 
-    Public Class OfficeAssignment
-        ' Primary key that does not follow the Code First convention.
-        ' The HasKey method is used later to configure the primary key for the entity.
-        Public Property InstructorID() As Integer
+Public Class OfficeAssignment
+    ' Primary key that does not follow the Code First convention.
+    ' The HasKey method is used later to configure the primary key for the entity.
+    Public Property InstructorID() As Integer
 
-        Public Property Location() As String
-        Public Property Timestamp() As Byte()
+    Public Property Location() As String
+    Public Property Timestamp() As Byte()
 
-        ' Navigation property
-        Public Overridable Property Instructor() As Instructor
-    End Class
+    ' Navigation property
+    Public Overridable Property Instructor() As Instructor
+End Class
 ```
 
-## <a name="define-a-derived-context"></a><span data-ttu-id="74121-125">定義衍生內容</span><span class="sxs-lookup"><span data-stu-id="74121-125">Define a Derived Context</span></span>
+## <a name="define-a-derived-context"></a><span data-ttu-id="0a333-125">定義衍生內容</span><span class="sxs-lookup"><span data-stu-id="0a333-125">Define a Derived Context</span></span>
 
-<span data-ttu-id="74121-126">我們即將開始使用 Entity Framework 的類型，因此我們需要新增 EntityFramework NuGet 套件。</span><span class="sxs-lookup"><span data-stu-id="74121-126">We’re about to start to using types from the Entity Framework so we need to add the EntityFramework NuGet package.</span></span>
+<span data-ttu-id="0a333-126">我們即將開始使用 Entity Framework 的類型，因此我們需要新增 EntityFramework NuGet 套件。</span><span class="sxs-lookup"><span data-stu-id="0a333-126">We’re about to start to using types from the Entity Framework so we need to add the EntityFramework NuGet package.</span></span>
 
--   <span data-ttu-id="74121-127">\* \* 專案–&gt;**管理 NuGet 套件 ...**</span><span class="sxs-lookup"><span data-stu-id="74121-127">\*\*Project –&gt; **Manage NuGet Packages…**</span></span>
+-   <span data-ttu-id="0a333-127">\* \* 專案–&gt;**管理 NuGet 套件 ...**</span><span class="sxs-lookup"><span data-stu-id="0a333-127">\*\*Project –&gt; **Manage NuGet Packages…**</span></span>
 > [!NOTE]
-> <span data-ttu-id="74121-128">如果您沒有 [**管理 NuGet 套件 ...** ]</span><span class="sxs-lookup"><span data-stu-id="74121-128">If you don’t have the **Manage NuGet Packages…**</span></span> <span data-ttu-id="74121-129">選項您應該安裝[最新版的 NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)</span><span class="sxs-lookup"><span data-stu-id="74121-129">option you should install the [latest version of NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)</span></span>
--   <span data-ttu-id="74121-130">選取 [**線上**] 索引標籤</span><span class="sxs-lookup"><span data-stu-id="74121-130">Select the **Online** tab</span></span>
--   <span data-ttu-id="74121-131">選取**EntityFramework**套件</span><span class="sxs-lookup"><span data-stu-id="74121-131">Select the **EntityFramework** package</span></span>
--   <span data-ttu-id="74121-132">按一下 [**安裝**]</span><span class="sxs-lookup"><span data-stu-id="74121-132">Click **Install**</span></span>
+> <span data-ttu-id="0a333-128">如果您沒有 [**管理 NuGet 套件 ...** ]</span><span class="sxs-lookup"><span data-stu-id="0a333-128">If you don’t have the **Manage NuGet Packages…**</span></span> <span data-ttu-id="0a333-129">選項您應該安裝[最新版的 NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)</span><span class="sxs-lookup"><span data-stu-id="0a333-129">option you should install the [latest version of NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)</span></span>
+-   <span data-ttu-id="0a333-130">選取 [**線上**] 索引標籤</span><span class="sxs-lookup"><span data-stu-id="0a333-130">Select the **Online** tab</span></span>
+-   <span data-ttu-id="0a333-131">選取**EntityFramework**套件</span><span class="sxs-lookup"><span data-stu-id="0a333-131">Select the **EntityFramework** package</span></span>
+-   <span data-ttu-id="0a333-132">按一下 [安裝]</span><span class="sxs-lookup"><span data-stu-id="0a333-132">Click **Install**</span></span>
 
-<span data-ttu-id="74121-133">現在可以定義衍生的內容，代表與資料庫的會話，讓我們能夠查詢和儲存資料。</span><span class="sxs-lookup"><span data-stu-id="74121-133">Now it’s time to define a derived context, which represents a session with the database, allowing us to query and save data.</span></span> <span data-ttu-id="74121-134">我們會定義衍生自 DbCoNtext 的內容，並針對模型中的每個類別公開具類型的 DbSet&lt;TEntity&gt;。</span><span class="sxs-lookup"><span data-stu-id="74121-134">We define a context that derives from System.Data.Entity.DbContext and exposes a typed DbSet&lt;TEntity&gt; for each class in our model.</span></span>
+<span data-ttu-id="0a333-133">現在可以定義衍生的內容，代表與資料庫的會話，讓我們能夠查詢和儲存資料。</span><span class="sxs-lookup"><span data-stu-id="0a333-133">Now it’s time to define a derived context, which represents a session with the database, allowing us to query and save data.</span></span> <span data-ttu-id="0a333-134">我們會定義衍生自 DbCoNtext 的內容，並針對模型中的每個類別公開具類型的 DbSet&lt;TEntity&gt;。</span><span class="sxs-lookup"><span data-stu-id="0a333-134">We define a context that derives from System.Data.Entity.DbContext and exposes a typed DbSet&lt;TEntity&gt; for each class in our model.</span></span>
 
--   <span data-ttu-id="74121-135">將新類別新增至專案，並在 [類別名稱] 中輸入**SchoolCoNtext**</span><span class="sxs-lookup"><span data-stu-id="74121-135">Add a new class to the project, enter **SchoolContext** for the class name</span></span>
--   <span data-ttu-id="74121-136">將新類別的內容取代為下列程式碼</span><span class="sxs-lookup"><span data-stu-id="74121-136">Replace the contents of the new class with the following code</span></span>
+-   <span data-ttu-id="0a333-135">將新類別新增至專案，並在 [類別名稱] 中輸入**SchoolCoNtext**</span><span class="sxs-lookup"><span data-stu-id="0a333-135">Add a new class to the project, enter **SchoolContext** for the class name</span></span>
+-   <span data-ttu-id="0a333-136">將新類別的內容取代為下列程式碼</span><span class="sxs-lookup"><span data-stu-id="0a333-136">Replace the contents of the new class with the following code</span></span>
 
-``` vb
-    Imports System.Data.Entity
-    Imports System.Data.Entity.Infrastructure
-    Imports System.Data.Entity.ModelConfiguration.Conventions
-    Imports System.ComponentModel.DataAnnotations
-    Imports System.ComponentModel.DataAnnotations.Schema
+```vb
+Imports System.ComponentModel.DataAnnotations
+Imports System.ComponentModel.DataAnnotations.Schema
+Imports System.Data.Entity
+Imports System.Data.Entity.Infrastructure
+Imports System.Data.Entity.ModelConfiguration.Conventions
 
-    Public Class SchoolContext
-        Inherits DbContext
+Public Class SchoolContext
+    Inherits DbContext
 
-        Public Property OfficeAssignments() As DbSet(Of OfficeAssignment)
-        Public Property Instructors() As DbSet(Of Instructor)
-        Public Property Courses() As DbSet(Of Course)
-        Public Property Departments() As DbSet(Of Department)
+    Public Property OfficeAssignments() As DbSet(Of OfficeAssignment)
+    Public Property Instructors() As DbSet(Of Instructor)
+    Public Property Courses() As DbSet(Of Course)
+    Public Property Departments() As DbSet(Of Department)
 
-        Protected Overrides Sub OnModelCreating(ByVal modelBuilder As DbModelBuilder)
-        End Sub
-    End Class
+    Protected Overrides Sub OnModelCreating(ByVal modelBuilder As DbModelBuilder)
+    End Sub
+End Class
 ```
 
-## <a name="configuring-with-the-fluent-api"></a><span data-ttu-id="74121-137">使用流暢的 API 進行設定</span><span class="sxs-lookup"><span data-stu-id="74121-137">Configuring with the Fluent API</span></span>
+## <a name="configuring-with-the-fluent-api"></a><span data-ttu-id="0a333-137">使用流暢的 API 進行設定</span><span class="sxs-lookup"><span data-stu-id="0a333-137">Configuring with the Fluent API</span></span>
 
-<span data-ttu-id="74121-138">本節示範如何使用流暢的 Api 來設定資料表的類型、對應的屬性、資料行的對應，以及模型中的資料表之間的關聯性\\類型。</span><span class="sxs-lookup"><span data-stu-id="74121-138">This section demonstrates how to use the fluent APIs to configure types to tables mapping, properties to columns mapping, and relationships between tables\\type in your model.</span></span> <span data-ttu-id="74121-139">Fluent API 是透過**DbModelBuilder**類型公開，而且最常藉由覆寫**DbCoNtext**上的**OnModelCreating**方法來存取。</span><span class="sxs-lookup"><span data-stu-id="74121-139">The fluent API is exposed through the **DbModelBuilder** type and is most commonly accessed by overriding the **OnModelCreating** method on **DbContext**.</span></span>
+<span data-ttu-id="0a333-138">本節示範如何使用流暢的 Api 來設定資料表的類型、對應的屬性、資料行的對應，以及模型中的資料表之間的關聯性\\類型。</span><span class="sxs-lookup"><span data-stu-id="0a333-138">This section demonstrates how to use the fluent APIs to configure types to tables mapping, properties to columns mapping, and relationships between tables\\type in your model.</span></span> <span data-ttu-id="0a333-139">Fluent API 是透過**DbModelBuilder**類型公開，而且最常藉由覆寫**DbCoNtext**上的**OnModelCreating**方法來存取。</span><span class="sxs-lookup"><span data-stu-id="0a333-139">The fluent API is exposed through the **DbModelBuilder** type and is most commonly accessed by overriding the **OnModelCreating** method on **DbContext**.</span></span>
 
--   <span data-ttu-id="74121-140">複製下列程式碼，並將它新增至**SchoolCoNtext**類別上定義的**OnModelCreating**方法中，批註會說明每個對應的用途</span><span class="sxs-lookup"><span data-stu-id="74121-140">Copy the following code and add it to the **OnModelCreating** method defined on the **SchoolContext** class The comments explain what each mapping does</span></span>
+-   <span data-ttu-id="0a333-140">複製下列程式碼，並將它新增至**SchoolCoNtext**類別上定義的**OnModelCreating**方法中，批註會說明每個對應的用途</span><span class="sxs-lookup"><span data-stu-id="0a333-140">Copy the following code and add it to the **OnModelCreating** method defined on the **SchoolContext** class The comments explain what each mapping does</span></span>
 
 ``` vb
 ' Configure Code First to ignore PluralizingTableName convention
@@ -363,12 +363,12 @@ modelBuilder.Entity(Of Course)().
     WillCascadeOnDelete(False)
 ```
 
-## <a name="using-the-model"></a><span data-ttu-id="74121-141">使用模型</span><span class="sxs-lookup"><span data-stu-id="74121-141">Using the Model</span></span>
+## <a name="using-the-model"></a><span data-ttu-id="0a333-141">使用模型</span><span class="sxs-lookup"><span data-stu-id="0a333-141">Using the Model</span></span>
 
-<span data-ttu-id="74121-142">讓我們使用**SchoolCoNtext**來執行一些資料存取，以查看實際運作中的模型。</span><span class="sxs-lookup"><span data-stu-id="74121-142">Let's perform some data access using the **SchoolContext** to see out model in action.</span></span>
+<span data-ttu-id="0a333-142">讓我們使用**SchoolCoNtext**來執行一些資料存取，以查看實際運作中的模型。</span><span class="sxs-lookup"><span data-stu-id="0a333-142">Let's perform some data access using the **SchoolContext** to see out model in action.</span></span>
 
--   <span data-ttu-id="74121-143">開啟定義 Main 函數的 Module1 檔案</span><span class="sxs-lookup"><span data-stu-id="74121-143">Open the Module1.vb file where the Main function is defined</span></span>
--   <span data-ttu-id="74121-144">複製並貼上下列 Module1 定義</span><span class="sxs-lookup"><span data-stu-id="74121-144">Copy and paste the following Module1 definition</span></span>
+-   <span data-ttu-id="0a333-143">開啟定義 Main 函數的 Module1 檔案</span><span class="sxs-lookup"><span data-stu-id="0a333-143">Open the Module1.vb file where the Main function is defined</span></span>
+-   <span data-ttu-id="0a333-144">複製並貼上下列 Module1 定義</span><span class="sxs-lookup"><span data-stu-id="0a333-144">Copy and paste the following Module1 definition</span></span>
 
 ``` vb
 Imports System.Data.Entity
@@ -377,7 +377,7 @@ Module Module1
 
     Sub Main()
 
-    Using context As New SchoolContext()
+        Using context As New SchoolContext()
 
             ' Create and save a new Department.
             Console.Write("Enter a name for a new Department: ")
@@ -408,7 +408,7 @@ Module Module1
 End Module
 ```
 
-<span data-ttu-id="74121-145">您現在可以執行應用程式並加以測試。</span><span class="sxs-lookup"><span data-stu-id="74121-145">You can now run the application and test it out.</span></span>
+<span data-ttu-id="0a333-145">您現在可以執行應用程式並加以測試。</span><span class="sxs-lookup"><span data-stu-id="0a333-145">You can now run the application and test it out.</span></span>
 
 ```console
 Enter a name for a new Department: Computing

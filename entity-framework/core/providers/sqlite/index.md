@@ -4,28 +4,28 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3e2f7698-fec2-4cec-9e2d-2e3e0074120c
 uid: core/providers/sqlite/index
-ms.openlocfilehash: 4637044b1712280d3cdca6bcca1ca61564ff78ea
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 433dedbe1e0e11bf2fd83e259e321ece32b2c188
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656077"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824802"
 ---
-# <a name="sqlite-ef-core-database-provider"></a><span data-ttu-id="40dc1-102">SQLite EF Core 資料庫提供者</span><span class="sxs-lookup"><span data-stu-id="40dc1-102">SQLite EF Core Database Provider</span></span>
+# <a name="sqlite-ef-core-database-provider"></a><span data-ttu-id="3185f-102">SQLite EF Core 資料庫提供者</span><span class="sxs-lookup"><span data-stu-id="3185f-102">SQLite EF Core Database Provider</span></span>
 
-<span data-ttu-id="40dc1-103">此資料庫提供者可讓 Entity Framework Core 與 SQLite 搭配使用。</span><span class="sxs-lookup"><span data-stu-id="40dc1-103">This database provider allows Entity Framework Core to be used with SQLite.</span></span> <span data-ttu-id="40dc1-104">[Entity Framework Core 專案](https://github.com/aspnet/EntityFrameworkCore)的維護包含此提供者。</span><span class="sxs-lookup"><span data-stu-id="40dc1-104">The provider is maintained as part of the [Entity Framework Core project](https://github.com/aspnet/EntityFrameworkCore).</span></span>
+<span data-ttu-id="3185f-103">此資料庫提供者可讓 Entity Framework Core 與 SQLite 搭配使用。</span><span class="sxs-lookup"><span data-stu-id="3185f-103">This database provider allows Entity Framework Core to be used with SQLite.</span></span> <span data-ttu-id="3185f-104">[Entity Framework Core 專案](https://github.com/aspnet/EntityFrameworkCore)的維護包含此提供者。</span><span class="sxs-lookup"><span data-stu-id="3185f-104">The provider is maintained as part of the [Entity Framework Core project](https://github.com/aspnet/EntityFrameworkCore).</span></span>
 
-## <a name="install"></a><span data-ttu-id="40dc1-105">安裝</span><span class="sxs-lookup"><span data-stu-id="40dc1-105">Install</span></span>
+## <a name="install"></a><span data-ttu-id="3185f-105">安裝</span><span class="sxs-lookup"><span data-stu-id="3185f-105">Install</span></span>
 
-<span data-ttu-id="40dc1-106">安裝 [Microsoft.EntityFrameworkCore.Sqlite NuGet 套件](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/)。</span><span class="sxs-lookup"><span data-stu-id="40dc1-106">Install the [Microsoft.EntityFrameworkCore.Sqlite NuGet package](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/).</span></span>
+<span data-ttu-id="3185f-106">安裝 [Microsoft.EntityFrameworkCore.Sqlite NuGet 套件](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/)。</span><span class="sxs-lookup"><span data-stu-id="3185f-106">Install the [Microsoft.EntityFrameworkCore.Sqlite NuGet package](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/).</span></span>
 
-## <a name="net-core-clitabdotnet-core-cli"></a>[<span data-ttu-id="40dc1-107">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="40dc1-107">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
+## <a name="net-core-clitabdotnet-core-cli"></a>[<span data-ttu-id="3185f-107">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="3185f-107">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
 
-``` console
+```dotnetcli
 dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 ```
 
-## <a name="visual-studiotabvs"></a>[<span data-ttu-id="40dc1-108">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="40dc1-108">Visual Studio</span></span>](#tab/vs)
+## <a name="visual-studiotabvs"></a>[<span data-ttu-id="3185f-108">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="3185f-108">Visual Studio</span></span>](#tab/vs)
 
 ``` powershell
 Install-Package Microsoft.EntityFrameworkCore.Sqlite
@@ -33,10 +33,10 @@ Install-Package Microsoft.EntityFrameworkCore.Sqlite
 
 ***
 
-## <a name="supported-database-engines"></a><span data-ttu-id="40dc1-109">支援的資料庫引擎</span><span class="sxs-lookup"><span data-stu-id="40dc1-109">Supported Database Engines</span></span>
+## <a name="supported-database-engines"></a><span data-ttu-id="3185f-109">支援的資料庫引擎</span><span class="sxs-lookup"><span data-stu-id="3185f-109">Supported Database Engines</span></span>
 
-* <span data-ttu-id="40dc1-110">SQLite (3.7 及更新版本)</span><span class="sxs-lookup"><span data-stu-id="40dc1-110">SQLite (3.7 onwards)</span></span>
+* <span data-ttu-id="3185f-110">SQLite (3.7 及更新版本)</span><span class="sxs-lookup"><span data-stu-id="3185f-110">SQLite (3.7 onwards)</span></span>
 
-## <a name="limitations"></a><span data-ttu-id="40dc1-111">限制</span><span class="sxs-lookup"><span data-stu-id="40dc1-111">Limitations</span></span>
+## <a name="limitations"></a><span data-ttu-id="3185f-111">限制</span><span class="sxs-lookup"><span data-stu-id="3185f-111">Limitations</span></span>
 
-<span data-ttu-id="40dc1-112">如需 SQLite 提供者的部分重要限制，請參閱 [SQLite 限制](limitations.md)。</span><span class="sxs-lookup"><span data-stu-id="40dc1-112">See [SQLite Limitations](limitations.md) for some important limitations of the SQLite provider.</span></span>
+<span data-ttu-id="3185f-112">如需 SQLite 提供者的部分重要限制，請參閱 [SQLite 限制](limitations.md)。</span><span class="sxs-lookup"><span data-stu-id="3185f-112">See [SQLite Limitations](limitations.md) for some important limitations of the SQLite provider.</span></span>
