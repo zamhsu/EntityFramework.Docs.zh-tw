@@ -1,31 +1,30 @@
 ---
 title: EF Core 3.0 的中斷性變更 - EF Core
-author: divega
-ms.date: 02/19/2019
-ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
+author: ajcvickers
+ms.date: 12/03/2019
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: f02825f5303959997dca6e14e4efe64020b3cb22
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: d614103169837238810fabd0a8889043c851ef14
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655882"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824860"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>EF Core 3.0 中包含的重大變更
 
 下列 API 和行為變更可能會在將現有的應用程式升級至3.0.0 時中斷。
 這些變更預期只會影響[提供者變更](xref:core/providers/provider-log)底下記載的資料庫提供者。
 
-## <a name="summary"></a>摘要
+## <a name="summary"></a>總結
 
-| **重大變更**                                                                                               | **產生** |
+| **重大變更**                                                                                               | **影響** |
 |:------------------------------------------------------------------------------------------------------------------|------------|
-| [不會再於用戶端評估 LINQ 查詢](#linq-queries-are-no-longer-evaluated-on-the-client)         | 高       |
-| [EF Core 3.0 以 .NET Standard 2.1 為目標，而非以 .NET Standard 2.0 為目標](#netstandard21) | 高      |
-| [EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分](#dotnet-ef) | 高      |
-| [DetectChanges 接受存放區產生的索引鍵值](#dc) | 高      |
-| [FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名](#fromsql) | 高      |
-| [查詢類型已與實體類型合併](#qt) | 高      |
+| [不會再於用戶端評估 LINQ 查詢](#linq-queries-are-no-longer-evaluated-on-the-client)         | High       |
+| [EF Core 3.0 以 .NET Standard 2.1 為目標，而非以 .NET Standard 2.0 為目標](#netstandard21) | High      |
+| [EF Core 命令列工具 dotnet ef 不再是 .NET Core SDK 的一部分](#dotnet-ef) | High      |
+| [DetectChanges 接受存放區產生的索引鍵值](#dc) | High      |
+| [FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名](#fromsql) | High      |
+| [查詢類型已與實體類型合併](#qt) | High      |
 | [Entity Framework Core 不再屬於 ASP.NET Core 共用架構](#no-longer) | 中等      |
 | [根據預設，串聯刪除現在會立即發生](#cascade) | 中等      |
 | [相關實體的積極式載入現在會出現在單一查詢中](#eager-loading-single-query) | 中等      |
@@ -42,6 +41,7 @@ ms.locfileid: "73655882"
 | [實體執行個體上不會再設定暫存索引鍵值](#tkv) | 低      |
 | [現在可以選用與主體共用資料表的相依實體](#de) | 低      |
 | [所有與並行語彙基元資料行共用資料表的實體，都必須將其對應到屬性](#aes) | 低      |
+| [在沒有擁有者的情況下，無法使用追蹤查詢來查詢擁有的實體](#owned-query) | 低      |
 | [未對應類型的繼承屬性，現在會對應到所有衍生類型的單一資料行](#ip) | 低      |
 | [外部索引鍵屬性慣例不會再比對與主體屬性相同的名稱](#fkp) | 低      |
 | [如果在 TransactionScope 完成之前未再使用，資料庫連線現在會關閉](#dbc) | 低      |
@@ -49,6 +49,7 @@ ms.locfileid: "73655882"
 | [找到多個相容的支援欄位時擲回](#throw-if-multiple-compatible-backing-fields-are-found) | 低      |
 | [僅欄位的屬性名稱應與欄位名稱相符](#field-only-property-names-should-match-the-field-name) | 低      |
 | [AddDbContext/AddDbContextPool 再也不會呼叫 AddLogging 與 AddMemoryCache](#adddbc) | 低      |
+| [AddEntityFramework * 新增具有大小限制的 IMemoryCache](#addentityframework-adds-imemorycache-with-a-size-limit) | 低      |
 | [DbContext.Entry 現在會執行本機 DetectChanges](#dbe) | 低      |
 | [根據預設，字串和位元組陣列索引鍵不會由用戶端產生](#string-and-byte-array-keys-are-not-client-generated-by-default) | 低      |
 | [ILoggerFactory 現在是限定範圍的服務](#ilf) | 低      |
@@ -189,7 +190,7 @@ ms.locfileid: "73655882"
 從 EF Core 3.0 開始，請使用 `FromSqlRaw`、`ExecuteSqlRaw` 和 `ExecuteSqlRawAsync` 建立參數化查詢，其中參數會分別從查詢字串傳遞。
 例如：
 
-```C#
+```csharp
 context.Products.FromSqlRaw(
     "SELECT * FROM Products WHERE Name = {0}",
     product.Name);
@@ -198,7 +199,7 @@ context.Products.FromSqlRaw(
 使用 `FromSqlInterpolated`、`ExecuteSqlInterpolated` 和 `ExecuteSqlInterpolatedAsync` 建立參數化查詢，其中參數會作為插入查詢字串的一部分傳回。
 例如：
 
-```C#
+```csharp
 context.Products.FromSqlInterpolated(
     $"SELECT * FROM Products WHERE Name = {product.Name}");
 ```
@@ -223,7 +224,7 @@ context.Products.FromSqlInterpolated(
 
 在 EF Core 3.0 之前，FromSql 方法會嘗試偵測是否可以根據傳遞的 SQL 來進行撰寫。 當 SQL 不是可組合的，如同預存程式，它會進行用戶端評估。 下列查詢的運作方式是在伺服器上執行預存程式，並在用戶端上進行 FirstOrDefault。
 
-```C#
+```csharp
 context.Products.FromSqlRaw("[dbo].[Ten Most Expensive Products]").FirstOrDefault();
 ```
 
@@ -235,11 +236,11 @@ context.Products.FromSqlRaw("[dbo].[Ten Most Expensive Products]").FirstOrDefaul
 
 EF Core 3.0 不支援自動用戶端評估，因為它容易發生錯誤，如[這裡](#linq-queries-are-no-longer-evaluated-on-the-client)所述。
 
-**緩解**
+**風險降低**
 
 如果您使用 FromSqlRaw/FromSqlInterpolated 中的預存程式，您就知道它無法由撰寫，因此您可以在 FromSql 方法呼叫之後加入__enumerable.asenumerable/AsAsyncEnumerable__ ，以避免伺服器端上的任何組合。
 
-```C#
+```csharp
 context.Products.FromSqlRaw("[dbo].[Ten Most Expensive Products]").AsEnumerable().FirstOrDefault();
 ```
 
@@ -259,7 +260,7 @@ context.Products.FromSqlRaw("[dbo].[Ten Most Expensive Products]").AsEnumerable(
 
 **原因**
 
-在 `FromSql` 以外的任何地方指定 `DbSet` 沒有新增的意義或附加價值，而且在某些情況下可能會導致模稜兩可。
+在 `DbSet` 以外的任何地方指定 `FromSql` 沒有新增的意義或附加價值，而且在某些情況下可能會導致模稜兩可。
 
 **風險降低**
 
@@ -272,12 +273,12 @@ context.Products.FromSqlRaw("[dbo].[Ten Most Expensive Products]").AsEnumerable(
 
 **舊行為**
 
-在 EF Core 3.0 之前，每次出現具有給定類型與識別碼的實體時，皆會使用相同的實體執行個體。 如此符合追蹤查詢的行為。 例如，下列查詢：
+在 EF Core 3.0 之前，每次出現具有給定類型與識別碼的實體時，皆會使用相同的實體執行個體。 如此符合追蹤查詢的行為。 例如，下列查詢︰
 
-```C#
+```csharp
 var results = context.Products.Include(e => e.Category).AsNoTracking().ToList();
 ```
-會為每個與給定類別相關聯的 `Category`，傳回相同的 `Product` 執行個體。
+會為每個與給定類別相關聯的 `Product`，傳回相同的 `Category` 執行個體。
 
 **新行為**
 
@@ -298,7 +299,7 @@ var results = context.Products.Include(e => e.Category).AsNoTracking().ToList();
 [追蹤問題 #14523](https://github.com/aspnet/EntityFrameworkCore/issues/14523)
 
 我們還原此變更的原因是 EF Core 3.0 中的新設定允許應用程式指定任何事件的記錄層級。 例如，若要將 SQL 的記錄切換到 `Debug`，請明確地在 `OnConfiguring` 或 `AddDbContext` 中設定層級：
-```C#
+```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder
         .UseSqlServer(connectionString)
@@ -359,7 +360,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 修正方法是明確設定索引鍵屬性不使用產生的值。
 例如，使用 Fluent API：
 
-```C#
+```csharp
 modelBuilder
     .Entity<Blog>()
     .Property(e => e.Id)
@@ -368,7 +369,7 @@ modelBuilder
 
 或者，使用資料註解：
 
-```C#
+```csharp
 [DatabaseGenerated(DatabaseGeneratedOption.None)]
 public string Id { get; set; }
 ```
@@ -388,14 +389,14 @@ public string Id { get; set; }
 
 **原因**
 
-這項變更的目的是為了改善資料繫結和稽核情節的體驗，在這些情節中了解呼叫 _「之前」_ `SaveChanges`將刪除哪些實體是很重要的。
+這項變更的目的是為了改善資料繫結和稽核情節的體驗，在這些情節中了解呼叫 `SaveChanges`「之前」將刪除哪些實體是很重要的。
 
 **風險降低**
 
 透過設定 `context.ChangedTracker` 可以還原舊行為。
 例如：
 
-```C#
+```csharp
 context.ChangeTracker.CascadeDeleteTiming = CascadeTiming.OnSaveChanges;
 context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 ```
@@ -488,7 +489,7 @@ API 的下列組件現已淘汰：
 從 EF Core 3.0 開始，現在會有 Fluent API 使用 `WithOwner()` 將導覽屬性設定為擁有者。
 例如：
 
-```C#
+```csharp
 modelBuilder.Entity<Order>.OwnsOne(e => e.Details).WithOwner(e => e.Order);
 ```
 
@@ -496,7 +497,7 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details).WithOwner(e => e.Order);
 但自有類型本身的設定仍會在 `OwnsOne()/OwnsMany()` 之後鏈結。
 例如：
 
-```C#
+```csharp
 modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
     {
         eb.WithOwner()
@@ -538,7 +539,7 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
 **舊行為**
 
 請考慮下列模型：
-```C#
+```csharp
 public class Order
 {
     public int Id { get; set; }
@@ -552,13 +553,13 @@ public class OrderDetails
     public string ShippingAddress { get; set; }
 }
 ```
-在 EF Core 3.0 之前，如果 `OrderDetails` 由 `Order` 擁有，或明確對應至相同的資料表，則在新增新的 `OrderDetails` 時一律需要 `Order` 執行個體。
+在 EF Core 3.0 之前，如果 `OrderDetails` 由 `Order` 擁有，或明確對應至相同的資料表，則在新增新的 `Order` 時一律需要 `OrderDetails` 執行個體。
 
 
 **新行為**
 
 從 3.0 開始，EF 允許新增 `Order` 而不需要 `OrderDetails`，並會對應所有 `OrderDetails` 屬性，除了可為 Null 之資料行的主索引鍵以外。
-查詢時，如果任何必要的屬性不具有值，或如果其具有主索引鍵以外的不必要屬性，且所有屬性都是 `OrderDetails`，則 EF Core 會將 `null` 設為 `null`。
+查詢時，如果任何必要的屬性不具有值，或如果其具有主索引鍵以外的不必要屬性，且所有屬性都是 `null`，則 EF Core 會將 `OrderDetails` 設為 `null`。
 
 **風險降低**
 
@@ -573,7 +574,7 @@ public class OrderDetails
 **舊行為**
 
 請考慮下列模型：
-```C#
+```csharp
 public class Order
 {
     public int Id { get; set; }
@@ -608,12 +609,44 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 **風險降低**
 
 共用資料表的所有實體，都必須包含對應至並行語彙基元資料行的屬性。 在陰影狀態中建立一個是可能的：
-```C#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<OrderDetails>()
         .Property<byte[]>("Version").IsRowVersion().HasColumnName("Version");
 }
+```
+
+<a name="owned-query"></a>
+
+### <a name="owned-entities-cannot-be-queried-without-the-owner-using-a-tracking-query"></a>在沒有擁有者的情況下，無法使用追蹤查詢來查詢擁有的實體
+
+[追蹤問題 #18876](https://github.com/aspnet/EntityFrameworkCore/issues/18876)
+
+**舊行為**
+
+在 EF Core 3.0 之前，您可以將擁有的實體當做任何其他導覽來查詢。
+
+```csharp
+context.People.Select(p => p.Address);
+```
+
+**新行為**
+
+從3.0 開始，如果追蹤查詢在沒有擁有者的情況下投射擁有的實體，EF Core 將會擲回。
+
+**原因**
+
+擁有的實體無法在沒有擁有者的情況下操作，因此在大部分的情況下，以這種方式查詢它們是一項錯誤。
+
+**風險降低**
+
+如果必須追蹤所擁有的實體，以便在稍後進行修改，則擁有者應該包含在查詢中。
+
+否則，請新增 `AsNoTracking()` 呼叫：
+
+```csharp
+context.People.Select(p => p.Address).AsNoTracking();
 ```
 
 <a name="ip"></a>
@@ -625,7 +658,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 **舊行為**
 
 請考慮下列模型：
-```C#
+```csharp
 public abstract class EntityBase
 {
     public int Id { get; set; }
@@ -667,7 +700,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 屬性仍可以在衍生類型上明確對應至個別資料行：
 
-```C#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Ignore<OrderBase>();
@@ -688,7 +721,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 **舊行為**
 
 請考慮下列模型：
-```C#
+```csharp
 public class Customer
 {
     public int CustomerId { get; set; }
@@ -710,7 +743,7 @@ public class Order
 但仍會比對與主體屬性名稱串連的主體類型名稱，以及與主體屬性名稱模式串連的導覽名稱。
 例如：
 
-```C#
+```csharp
 public class Customer
 {
     public int Id { get; set; }
@@ -724,7 +757,7 @@ public class Order
 }
 ```
 
-```C#
+```csharp
 public class Customer
 {
     public int Id { get; set; }
@@ -757,7 +790,7 @@ public class Order
 
 在 EF Core 3.0 之前，如果內容在 `TransactionScope` 內開啟連線，則當目前 `TransactionScope` 處於作用中時，連線將保持開啟。
 
-```C#
+```csharp
 using (new TransactionScope())
 {
     using (AdventureWorks context = new AdventureWorks())
@@ -766,7 +799,7 @@ using (new TransactionScope())
         context.SaveChanges();
 
         // Old behavior: Connection is still open at this point
-        
+
         var categories = context.ProductCategories().ToList();
     }
 }
@@ -784,7 +817,7 @@ using (new TransactionScope())
 
 如果連線需要保持開啟，則明確呼叫 `OpenConnection()` 可確保 EF Core 不會過早將其關閉：
 
-```C#
+```csharp
 using (new TransactionScope())
 {
     using (AdventureWorks context = new AdventureWorks())
@@ -792,7 +825,7 @@ using (new TransactionScope())
         context.Database.OpenConnection();
         context.ProductCategories.Add(new ProductCategory());
         context.SaveChanges();
-        
+
         var categories = context.ProductCategories().ToList();
         context.Database.CloseConnection();
     }
@@ -846,7 +879,7 @@ using (new TransactionScope())
 透過在 `ModelBuilder` 上設定屬性存取模式可以還原 3.0 以前的行為。
 例如：
 
-```C#
+```csharp
 modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction);
 ```
 
@@ -872,7 +905,7 @@ modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruct
 若屬性的支援欄位模稜兩可，則必須明確指定要使用的欄位。
 例如，使用 Fluent API：
 
-```C#
+```csharp
 modelBuilder
     .Entity<Blog>()
     .Property(e => e.Id)
@@ -884,14 +917,16 @@ modelBuilder
 **舊行為**
 
 在 EF Core 3.0 之前，屬性可以由字串值指定，而且如果在 .NET 類型上找不到具有該名稱的屬性，則 EF Core 會嘗試使用慣例規則將它與欄位進行比對。
-```C#
+
+```csharp
 private class Blog
 {
     private int _id;
     public string Name { get; set; }
 }
 ```
-```C#
+
+```csharp
 modelBuilder
     .Entity<Blog>()
     .Property("Id");
@@ -901,7 +936,7 @@ modelBuilder
 
 從 EF Core 3.0 開始，僅限欄位的屬性必須與欄位名稱完全相符。
 
-```C#
+```csharp
 modelBuilder
     .Entity<Blog>()
     .Property("_id");
@@ -916,7 +951,7 @@ modelBuilder
 僅限欄位屬性必須命名為與其所對應欄位相同的名稱。
 在3.0 以後的 EF Core 版本中，我們計畫重新啟用明確設定與屬性名稱不同的功能變數名稱（請參閱問題[#15307](https://github.com/aspnet/EntityFrameworkCore/issues/15307)）：
 
-```C#
+```csharp
 modelBuilder
     .Entity<Blog>()
     .Property("Id")
@@ -931,7 +966,7 @@ modelBuilder
 
 **舊行為**
 
-在 EF Core 3.0 之前，呼叫 `AddDbContext` 或 `AddDbContextPool` 也會透過呼叫 [AddLogging](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.loggingservicecollectionextensions.addlogging) 與 [AddMemoryCache](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.memorycacheservicecollectionextensions.addmemorycache) 來向 DI 註冊記錄與記憶體快取服務。
+在 EF Core 3.0 之前，呼叫 `AddDbContext` 或 `AddDbContextPool` 也會透過對[AddLogging](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.loggingservicecollectionextensions.addlogging)和[AddMemoryCache](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.memorycacheservicecollectionextensions.addmemorycache)的呼叫，向 DI 註冊記錄和記憶體快取服務。
 
 **新行為**
 
@@ -944,6 +979,28 @@ EF Core 3.0 不會要求這些服務必須存在於應用程式的 DI 容器中�
 **風險降低**
 
 若您的應用程式需要這些服務，請使用  [AddLogging](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.loggingservicecollectionextensions.addlogging) 或 [AddMemoryCache](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.memorycacheservicecollectionextensions.addmemorycache) 明確地向 DI 容器註冊它們。
+
+### <a name="addentityframework-adds-imemorycache-with-a-size-limit"></a>AddEntityFramework * 新增具有大小限制的 IMemoryCache
+
+[追蹤問題 #12905](https://github.com/aspnet/EntityFrameworkCore/issues/12905)
+
+**舊行為**
+
+在 EF Core 3.0 之前，呼叫 `AddEntityFramework*` 方法也會在沒有大小限制的情況下，向 DI 註冊記憶體快取服務。
+
+**新行為**
+
+從 EF Core 3.0 開始，`AddEntityFramework*` 會註冊具有大小限制的 IMemoryCache 服務。 如果之後新增的任何其他服務相依于 IMemoryCache，他們可以快速達到預設限制，導致例外狀況或效能降低。
+
+**原因**
+
+如果查詢快取邏輯中有錯誤，或動態產生查詢，則使用沒有限制的 IMemoryCache 可能會導致無法控制記憶體使用量。 具有預設限制可減少潛在的 DoS 攻擊。
+
+**風險降低**
+
+在大多數情況下，如果同時呼叫 `AddDbContext` 或 `AddDbContextPool`，則不需要呼叫 `AddEntityFramework*`。 因此，最好的緩和措施是移除 `AddEntityFramework*` 呼叫。
+
+如果您的應用程式需要這些服務，請事先使用[AddMemoryCache](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.memorycacheservicecollectionextensions.addmemorycache)，以直接向 DI 容器註冊 IMemoryCache 的執行。
 
 <a name="dbe"></a>
 
@@ -971,7 +1028,7 @@ EF Core 3.0 不會要求這些服務必須存在於應用程式的 DI 容器中�
 
 **風險降低**
 
-在呼叫 `ChgangeTracker.DetectChanges()` 之前明確呼叫 `Entry` 可確保 3.0 以前的行為。
+在呼叫 `Entry` 之前明確呼叫 `ChgangeTracker.DetectChanges()` 可確保 3.0 以前的行為。
 
 ### <a name="string-and-byte-array-keys-are-not-client-generated-by-default"></a>字串和位元組陣列索引鍵預設不是由用戶端產生
 
@@ -995,7 +1052,7 @@ EF Core 3.0 不會要求這些服務必須存在於應用程式的 DI 容器中�
 藉由明確指定索引鍵屬性應該在未設定其他非 Null 值時使用產生的值，即可取得 3.0 以前的行為。
 例如，使用 Fluent API：
 
-```C#
+```csharp
 modelBuilder
     .Entity<Blog>()
     .Property(e => e.Id)
@@ -1004,7 +1061,7 @@ modelBuilder
 
 或者，使用資料註解：
 
-```C#
+```csharp
 [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 public string Id { get; set; }
 ```
@@ -1082,7 +1139,7 @@ Proxy 會改為假設如有非 Null 值，會載入參考導覽；如果不是�
 不過，透過設定 `DbContextOptionsBuilder` 可以將錯誤轉換回警告。
 例如：
 
-```C#
+```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 {
     optionsBuilder
@@ -1100,11 +1157,11 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 在 EF Core 3.0 之前，使用單一字串呼叫 `HasOne` 或 `HasMany` 的程式碼會以令人困惑的方式解譯。
 例如：
-```C#
+```csharp
 modelBuilder.Entity<Samurai>().HasOne("Entrance").WithOne();
 ```
 
-程式碼看起來像是它使用 `Samurai` 瀏覽屬性將 `Entrance` 與一些其他實體類型相關，這可能是私用屬性。
+程式碼看起來像是它使用 `Entrance` 瀏覽屬性將 `Samurai` 與一些其他實體類型相關，這可能是私用屬性。
 
 在現實中，此程式碼會在不使用瀏覽屬性的情況下嘗試建立與一些實體 (稱為 `Entrance`) 的關係。
 
@@ -1123,7 +1180,7 @@ modelBuilder.Entity<Samurai>().HasOne("Entrance").WithOne();
 先前的行為可透過明確地傳遞瀏覽屬性名稱的 `null` 來取得。
 例如：
 
-```C#
+```csharp
 modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 ```
 
@@ -1145,7 +1202,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 
 **新行為**
 
-上述方法現在會透過相同的 `ValueTask<T>` 傳回 `T`，如同以前一樣。
+上述方法現在會透過相同的 `T` 傳回 `ValueTask<T>`，如同以前一樣。
 
 **原因**
 
@@ -1154,7 +1211,7 @@ modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
 **風險降低**
 
 僅等待上述 API 的應用程式只需要重新編譯，而不需要變更來源。
-更複雜的使用方式 (例如將傳回的 `Task` 傳遞給 `Task.WhenAny()`) 通常需要藉由呼叫 `ValueTask<T>` 將傳回的 `Task<T>` 轉換為 `AsTask()`。
+更複雜的使用方式 (例如將傳回的 `Task` 傳遞給 `Task.WhenAny()`) 通常需要藉由呼叫 `AsTask()` 將傳回的 `ValueTask<T>` 轉換為 `Task<T>`。
 請注意，這會抵消這項變更所帶來的配置減少。
 
 <a name="rtt"></a>
@@ -1513,7 +1570,7 @@ SET MigrationId = CONCAT(LEFT(MigrationId, 4)  - 543, SUBSTRING(MigrationId, 4, 
 
 在 EF Core 3.0 前，外部索引鍵限制式名稱僅為 "name"。 例如：
 
-```C#
+```csharp
 var constraintName = myForeignKey.Name;
 ```
 
@@ -1521,7 +1578,7 @@ var constraintName = myForeignKey.Name;
 
 從 EF Core 3.0 開始，外部索引鍵限制式名稱現為 "constraint name"。 例如：
 
-```C#
+```csharp
 var constraintName = myForeignKey.ConstraintName;
 ```
 
@@ -1662,7 +1719,7 @@ SqlClient 是用於 SQL Server 的旗艦版資料存取驅動程式，而 SqlCli
 
 具有多個自我參考單向導覽屬性和相符 FK 的實體類型，不當設定為單一關聯性。 例如：
 
-```C#
+```csharp
 public class User 
 {
         public Guid Id { get; set; }
@@ -1685,7 +1742,7 @@ public class User
 
 使用關聯性的完整設定。 例如：
 
-```C#
+```csharp
 modelBuilder
      .Entity<User>()
      .HasOne(e => e.CreatedBy)
@@ -1706,7 +1763,7 @@ modelBuilder
 
 以架構為空字串所設定的 DbFunction，在沒有架構的情況下被視為內建函數。 例如，下列程式碼會將 `DatePart` CLR 函數對應至 SqlServer 上 `DATEPART` 內建函數。
 
-```C#
+```csharp
 [DbFunction("DATEPART", Schema = "")]
 public static int? DatePart(string datePartArg, DateTime? date) => throw new Exception();
 
@@ -1724,7 +1781,7 @@ public static int? DatePart(string datePartArg, DateTime? date) => throw new Exc
 
 手動設定 DbFunction 的轉譯，以將其對應至內建函數。
 
-```C#
+```csharp
 modelBuilder
     .HasDbFunction(typeof(MyContext).GetMethod(nameof(MyContext.DatePart)))
     .HasTranslation(args => SqlFunctionExpression.Create("DatePart", args, typeof(int?), null));

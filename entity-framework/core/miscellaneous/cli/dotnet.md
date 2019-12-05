@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 07/11/2019
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: 29434c26a503fabb16b43ee8f0c36136a0b5b745
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.openlocfilehash: 5686d28e6847797130476cd858bd3fb611620140
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72811968"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824477"
 ---
 # <a name="entity-framework-core-tools-reference---net-cli"></a>Entity Framework Core 工具參考-.NET CLI
 
@@ -33,17 +33,17 @@ ms.locfileid: "72811968"
 
 * `dotnet ef` 必須安裝為全域或本機工具。 大部分的開發人員都會使用下列命令，將 `dotnet ef` 安裝為通用工具：
 
-  ``` console
+  ```dotnetcli
   dotnet tool install --global dotnet-ef
   ```
 
   您也可以使用 `dotnet ef` 做為本機工具。 若要使用它做為本機工具，請使用[工具資訊清單](https://github.com/dotnet/cli/issues/10288)檔，將宣告為工具相依性的專案的相依性還原。
 
-* 安裝[.NET Core SDK 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0)）。 即使您有最新版本的 Visual Studio，也必須安裝 SDK。
+* 安裝[.NET Core SDK 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0)。 即使您有最新版本的 Visual Studio，也必須安裝 SDK。
 
 * 安裝最新的 `Microsoft.EntityFrameworkCore.Design` 套件。
 
-  ``` Console
+  ```dotnetcli
   dotnet add package Microsoft.EntityFrameworkCore.Design
   ```
 
@@ -61,7 +61,7 @@ ms.locfileid: "72811968"
 
 * 安裝最新的穩定 `Microsoft.EntityFrameworkCore.Design` 套件。
 
-  ``` Console
+  ```dotnetcli
   dotnet add package Microsoft.EntityFrameworkCore.Design
   ```
 
@@ -75,7 +75,7 @@ ms.locfileid: "72811968"
 
 * 安裝最新的1.x 版 `Microsoft.EntityFrameworkCore.Design` 封裝，例如：
 
-  ```console
+  ```dotnetcli
   dotnet add package Microsoft.EntityFrameworkCore.Design -v 1.1.6
   ```
 
@@ -105,7 +105,7 @@ ms.locfileid: "72811968"
 
 執行下列命令，確認已正確安裝 EF Core CLI 工具：
 
-  ``` Console
+  ```dotnetcli
   dotnet restore
   dotnet ef
   ```
@@ -173,7 +173,7 @@ CLI 工具適用于 .NET Core 專案和 .NET Framework 專案。 在 .NET Standa
 
 ## <a name="dotnet-ef-database-drop"></a>dotnet ef 資料庫捨棄
 
-卸載資料庫。
+卸除資料庫。
 
 選項:
 
@@ -186,7 +186,7 @@ CLI 工具適用于 .NET Core 專案和 .NET Framework 專案。 在 .NET Standa
 
 將資料庫更新為上次遷移或指定的遷移。
 
-引數：
+引數:
 
 | 引數      | 描述                                                                                                                                                                                                                                                     |
 |:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -194,7 +194,7 @@ CLI 工具適用于 .NET Core 專案和 .NET Framework 專案。 在 .NET Standa
 
 下列範例會將資料庫更新為指定的遷移。 第一個使用「遷移名稱」，第二個使用「遷移識別碼」：
 
-```console
+```dotnetcli
 dotnet ef database update InitialCreate
 dotnet ef database update 20180904195021_InitialCreate
 ```
@@ -211,7 +211,7 @@ dotnet ef database update 20180904195021_InitialCreate
 
 為資料庫的 `DbContext` 和實體類型產生程式碼。 為了讓這個命令產生實體類型，資料庫資料表必須有主鍵。
 
-引數：
+引數:
 
 | 引數       | 描述                                                                                                                                                                                                             |
 |:---------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -222,7 +222,7 @@ dotnet ef database update 20180904195021_InitialCreate
 
 |                 | 選項                                   | 描述                                                                                                                                                                    |
 |:----------------|:-----------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-d.ddd...e</nobr> | `--data-annotations`                     | 使用屬性來設定模型（可能的話）。 如果省略此選項，則只會使用 Fluent API。                                                                |
+| <nobr>-d</nobr> | `--data-annotations`                     | 使用屬性來設定模型（可能的話）。 如果省略此選項，則只會使用 Fluent API。                                                                |
 | `-c`            | `--context <NAME>`                       | 要產生之 `DbContext` 類別的名稱。                                                                                                                                 |
 |                 | `--context-dir <PATH>`                   | 要放入 `DbContext` 類別檔案的目錄。 路徑相對於專案目錄。 命名空間是從資料夾名稱衍生而來。                                 |
 | `-f`            | `--force`                                | 覆寫現有檔案。                                                                                                                                                      |
@@ -233,13 +233,13 @@ dotnet ef database update 20180904195021_InitialCreate
 
 下列範例會 scaffold 所有架構和資料表，並將新檔案放在 [*模型*] 資料夾中。
 
-```console
+```dotnetcli
 dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models
 ```
 
 下列範例只會 scaffold 選取的資料表，並在具有指定名稱的另一個資料夾中建立內容：
 
-```console
+```dotnetcli
 dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models -t Blog -t Post --context-dir Context -c BlogContext
 ```
 
@@ -247,7 +247,7 @@ dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Tr
 
 加入新的遷移。
 
-引數：
+引數:
 
 | 引數 | 描述                |
 |:---------|:---------------------------|
@@ -277,11 +277,11 @@ dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Tr
 
 從遷移產生 SQL 腳本。
 
-引數：
+引數:
 
 | 引數 | 描述                                                                                                                                                   |
 |:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<FROM>` | 開始的遷移。 可以依名稱或識別碼來識別遷移。 數位0是特殊案例，表示*第一次遷移之前*。 預設為0。 |
+| `<FROM>` | 開始的遷移。 可以依名稱或識別碼來識別遷移。 數位0是特殊案例，表示*第一次遷移之前*。 預設為 0。 |
 | `<TO>`   | 結束遷移。 預設為上次遷移。                                                                                                         |
 
 選項:
@@ -293,13 +293,13 @@ dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Tr
 
 下列範例會建立 InitialCreate 遷移的腳本：
 
-```console
+```dotnetcli
 dotnet ef migrations script 0 InitialCreate
 ```
 
 下列範例會針對 InitialCreate 遷移之後的所有遷移建立腳本。
 
-```console
+```dotnetcli
 dotnet ef migrations script 20180904195021_InitialCreate
 ```
 

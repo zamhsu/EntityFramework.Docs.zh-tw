@@ -1,15 +1,16 @@
 ---
 title: 繼承-EF Core
-author: rowanmiller
+description: 如何使用 Entity Framework Core 設定實體類型繼承
+author: AndriySvyryd
+ms.author: ansvyryd
 ms.date: 10/27/2016
-ms.assetid: 754be334-dd21-450e-9d22-2591e80012a2
 uid: core/modeling/inheritance
-ms.openlocfilehash: abc1caa4d3839b7cdb52b316bcfc8f648b609b70
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 4d43a432174c92ab7f3f9d78a234aefb0a4a17e8
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655679"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824671"
 ---
 # <a name="inheritance"></a>繼承
 
@@ -17,7 +18,7 @@ EF 模型中的繼承是用來控制實體類別中的繼承在資料庫中的�
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，由資料庫提供者決定如何在資料庫中表示繼承。 請參閱[繼承（關係資料庫）](relational/inheritance.md) ，以瞭解如何使用關係資料庫提供者來處理這種情況。
+根據預設，它是由資料庫提供者決定如何在資料庫中表示繼承。 請參閱[繼承（關係資料庫）](relational/inheritance.md) ，以瞭解如何使用關係資料庫提供者來處理這種情況。
 
 只有在模型中明確包含兩個或多個繼承類型時，EF 才會設定繼承。 EF 不會掃描模型中未包含的基底或衍生類型。 您可以藉由在繼承階層架構中的每個型別公開一個*DbSet\<TEntity >* ，來包含模型中的型別。
 

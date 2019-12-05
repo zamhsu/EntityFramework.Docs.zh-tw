@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
 uid: core/managing-schemas/migrations/projects
-ms.openlocfilehash: 0c08855db77470d28e23f9ef1d147497dfcdff83
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 89b7f50fe750c2953aa75efcdffcb1a5199ce90c
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655560"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824419"
 ---
 # <a name="using-a-separate-migrations-project"></a>使用個別的遷移專案
 
@@ -47,7 +47,7 @@ ms.locfileid: "73655560"
 
 ## <a name="net-core-clitabdotnet-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
 
-``` Console
+```dotnetcli
 dotnet ef migrations add NewMigration --project MyApp.Migrations
 ```
 

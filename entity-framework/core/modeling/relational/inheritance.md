@@ -1,15 +1,16 @@
 ---
 title: 繼承（關係資料庫）-EF Core
-author: rowanmiller
-ms.date: 10/27/2016
-ms.assetid: 9a7c5488-aaf4-4b40-b1ff-f435ff30f6ec
+description: 如何使用 Entity Framework Core 在關係資料庫中設定實體類型繼承
+author: AndriySvyryd
+ms.author: ansvyryd
+ms.date: 11/06/2019
 uid: core/modeling/relational/inheritance
-ms.openlocfilehash: 381d1878007bb78b359eb49649f4356f1e5eb04a
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 30e25aa2968ceab03404baddb46e0ae59fc3ea6b
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655635"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824751"
 ---
 # <a name="inheritance-relational-database"></a>繼承 (關聯式資料庫)
 
@@ -23,7 +24,7 @@ EF 模型中的繼承是用來控制實體類別中的繼承在資料庫中的�
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，會使用每個階層的資料表（TPH）模式來對應繼承。 TPH 會使用單一資料表來儲存階層中所有類型的資料。 鑒別子資料行是用來識別每個資料列所代表的類型。
+根據預設，系統會使用每個階層的資料表（TPH）模式來對應繼承。 TPH 會使用單一資料表來儲存階層中所有類型的資料。 鑒別子資料行是用來識別每個資料列所代表的類型。
 
 只有在模型中明確包含兩個或多個繼承類型時，EF Core 才會設定繼承（如需詳細資訊，請參閱[繼承](../inheritance.md)）。
 
@@ -50,48 +51,14 @@ EF 模型中的繼承是用來控制實體類別中的繼承在資料庫中的�
 
 在上述範例中，會在階層的基底實體上建立鑒別子做為[陰影屬性](xref:core/modeling/shadow-properties)。 由於它是模型中的屬性，因此可以像其他屬性一樣進行設定。 例如，若要設定預設值時使用的最大長度（依慣例鑒別子）：
 
-```C#
-modelBuilder.Entity<Blog>()
-    .Property("Discriminator")
-    .HasMaxLength(200);
-```
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/DefaultDiscriminator.cs#DiscriminatorConfiguration)]
 
-鑒別子也可以對應至實體中的實際 CLR 屬性。 例如:
+鑒別子也可以對應至實體中的 .NET 屬性，並加以設定。 例如：
 
-```C#
-class MyContext : DbContext
-{
-    public DbSet<Blog> Blogs { get; set; }
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/NonShadowDiscriminator.cs#NonShadowDiscriminator)]
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Blog>()
-            .HasDiscriminator<string>("BlogType");
-    }
-}
+## <a name="shared-columns"></a>共用資料行
 
-public class Blog
-{
-    public int BlogId { get; set; }
-    public string Url { get; set; }
-    public string BlogType { get; set; }
-}
+當兩個同級實體類型具有相同名稱的屬性時，預設會將它們對應至兩個不同的資料行。 但是，如果它們相容，則可以對應到相同的資料行：
 
-public class RssBlog : Blog
-{
-    public string RssUrl { get; set; }
-}
-```
-
-將這兩個專案結合在一起，可以將鑒別子對應到 real 屬性並加以設定：
-
-```C#
-modelBuilder.Entity<Blog>(b =>
-{
-    b.HasDiscriminator<string>("BlogType");
-
-    b.Property(e => e.BlogType)
-        .HasMaxLength(200)
-        .HasColumnName("blog_type");
-});
-```
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/SharedTPHColumns.cs#SharedTPHColumns)]

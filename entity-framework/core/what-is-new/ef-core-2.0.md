@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 72393e96c195af1df5a169025ca2ce7a7acb16bb
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 83f6b819409d502dba17a678d44a0746a4a77f4b
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656215"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824883"
 ---
 # <a name="new-features-in-ef-core-20"></a>EF Core 2.0 中的新功能
 
@@ -91,12 +91,12 @@ public class BloggingContext : DbContext
     {
         modelBuilder.Entity<Post>().HasQueryFilter(
             p => !p.IsDeleted
-            && p.TenantId == this.TenantId );
+            && p.TenantId == this.TenantId);
     }
 }
 ```
 
-我們會定義模型層級篩選，以實作 `Post` 實體類型執行個體的多租用戶和虛刪除。 請注意如何使用 DbContext 執行個體層級屬性：`TenantId`。 模型層級篩選會使用正確內容執行個體 (即執行查詢的內容執行個體詢) 中的值。
+我們會定義模型層級篩選，以實作 `Post` 實體類型執行個體的多租用戶和虛刪除。 請注意，使用 `DbContext` 實例層級屬性： `TenantId`。 模型層級篩選會使用正確內容執行個體 (即執行查詢的內容執行個體詢) 中的值。
 
 可能會使用 IgnoreQueryFilters() 運算子停用個別 LINQ 查詢的篩選。
 
@@ -119,7 +119,7 @@ public class BloggingContext : DbContext
     [DbFunction]
     public static int PostReadCount(int blogId)
     {
-        throw new Exception();
+        throw new NotImplementedException();
     }
 }
 ```
@@ -135,9 +135,9 @@ var query =
 
 請注意幾件事：
 
-- 依照慣例，產生 SQL 時，方法的名稱會用作函式的名稱 (在此情況下，為使用者定義函式)，但您可以在方法註冊期間覆寫名稱和結構描述
-- 目前只支援純量函式
-- 您必須在資料庫中建立對應函式。 EF Core 移轉不負責建立它
+- 依照慣例，在產生 SQL 時，會使用方法的名稱做為函式的名稱（在此案例中為使用者定義函數），但是您可以在方法註冊期間覆寫名稱和架構。
+- 目前僅支援純量函數。
+- 您必須在資料庫中建立對應函式。 EF Core 遷移並不會負責建立它。
 
 ### <a name="self-contained-type-configuration-for-code-first"></a>Code First 的獨立類型組態
 
@@ -146,11 +146,11 @@ var query =
 ``` csharp
 class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
-  public void Configure(EntityTypeBuilder<Customer> builder)
-  {
-     builder.HasKey(c => c.AlternateKey);
-     builder.Property(c => c.Name).HasMaxLength(200);
-   }
+    public void Configure(EntityTypeBuilder<Customer> builder)
+    {
+        builder.HasKey(c => c.AlternateKey);
+        builder.Property(c => c.Name).HasMaxLength(200);
+    }
 }
 
 ...
@@ -213,7 +213,7 @@ EF Core 支援透過不同的機制來自動產生索引鍵值。 使用此功�
 
 ## <a name="query"></a>查詢
 
-### <a name="improved-linq-translation"></a>改善的 LINQ 轉譯
+### <a name="improved-linq-translation"></a>改良的 LINQ 轉譯
 
 讓更多查詢順利執行，並在資料庫中評估更多邏輯 (而不是在記憶體中) 以及從資料庫擷取較少的資料。
 
@@ -223,7 +223,7 @@ EF Core 支援透過不同的機制來自動產生索引鍵值。 使用此功�
 
 ### <a name="string-interpolation-in-fromsql-and-executesqlcommand"></a>FromSql 和 ExecuteSqlCommand 中的字串插值
 
-C# 6 已引進「字串插值」，此功能允許 C# 運算式直接內嵌在字串常值中，並提供不錯的方式在執行階段建置字串。 在 EF Core 2.0 中，我們已在接受原始 SQL 字串的兩個主要 API 中新增內插字串的特殊支援：`FromSql` and `ExecuteSqlCommand`. 這個新的支援允許以「安全」方式使用 C# 字串插值。 也就是說，可防止在執行階段動態建構 SQL 時可能發生的常見 SQL 插入錯誤。
+C# 6 已引進「字串插值」，此功能允許 C# 運算式直接內嵌在字串常值中，並提供不錯的方式在執行階段建置字串。 在 EF Core 2.0 中，我們已在接受原始 SQL 字串的兩個主要 API 中新增內插字串的特殊支援：`FromSql` and `ExecuteSqlCommand`. 這項新的C#支援可讓您以「安全」的方式使用字串內插補點。 也就是說，可防止在執行階段動態建構 SQL 時可能發生的常見 SQL 插入錯誤。
 
 請看以下範例：
 
@@ -270,7 +270,7 @@ var aCustomers =
 
 ## <a name="database-management"></a>資料庫管理
 
-### <a name="pluralization-hook-for-dbcontext-scaffolding"></a>DbContext Scaffolding 的複數攔截
+### <a name="pluralization-hook-for-dbcontext-scaffolding"></a>DbCoNtext 樣板的複數表示勾點
 
 EF Core 2.0 引進新的 *IPluralizer* 服務，以用來將實體類型名稱單數化，並將 DbSet 名稱複數化。 預設實作是不操作，因此這只是人員可以輕鬆插入其專屬 pluralizer 的攔截。
 
@@ -311,7 +311,7 @@ public class MyPluralizer : IPluralizer
 
 EF Core 2.0 現在會為使用的每個不同提供者建置不同的 [IModel](https://github.com/aspnet/EntityFramework/blob/master/src/EFCore/Metadata/IModel.cs)。 應用程式通常可以看到這項作業。 這已加速簡化較低階中繼資料 API；因此，任何對*一般關聯式中繼資料概念*的存取一律是透過 `.Relational` 呼叫來進行，而非 `.SqlServer`、`.Sqlite` 等等。
 
-### <a name="consolidated-logging-and-diagnostics"></a>合併的記錄和診斷
+### <a name="consolidated-logging-and-diagnostics"></a>匯總記錄和診斷
 
 記錄 (根據 ILogger) 和診斷 (根據 DiagnosticSource) 機制現在共用更多程式碼。
 

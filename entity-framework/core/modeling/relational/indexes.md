@@ -1,15 +1,15 @@
 ---
 title: 索引（關係資料庫）-EF Core
-author: rowanmiller
-ms.date: 10/27/2016
-ms.assetid: 4581e7ba-5e7f-452c-9937-0aaf790ba10a
+author: AndriySvyryd
+ms.author: ansvyryd
+ms.date: 11/05/2019
 uid: core/modeling/relational/indexes
-ms.openlocfilehash: 7bb74d0bfa6090b597eb988a46f00494e25f233e
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.openlocfilehash: e14615275f85ee9b6b32d080905465d33963feca
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813638"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824571"
 ---
 # <a name="indexes-relational-database"></a>索引（關係資料庫）
 
@@ -20,7 +20,7 @@ ms.locfileid: "71813638"
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，索引會命名`IX_<type name>_<property name>`為。 對於複合索引`<property name>` ，會變成以底線分隔的屬性名稱清單。
+依照慣例，索引會命名為 `IX_<type name>_<property name>`。 若為複合索引，`<property name>` 會變成以底線分隔的屬性名稱清單。
 
 ## <a name="data-annotations"></a>資料註釋
 
@@ -36,7 +36,7 @@ ms.locfileid: "71813638"
 
 [!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Relational/IndexFilter.cs?name=Model&highlight=9)]
 
-使用 SQL Server 提供者 EF 時，針對屬於唯一索引一部分的所有可為 null 的資料行，加入 ' IS NOT Null ' 篩選準則。 若要覆寫此慣例，您`null`可以提供值。
+使用 SQL Server 提供者 EF 時，會為屬於唯一索引一部分的所有可為 null 的資料行加入 `'IS NOT NULL'` 篩選準則。 若要覆寫此慣例，您可以提供 `null` 值。
 
 [!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Relational/IndexNoFilter.cs?name=Model&highlight=10)]
 
@@ -44,4 +44,4 @@ ms.locfileid: "71813638"
 
 當查詢中的所有資料行都包含在索引中當做索引鍵或非索引鍵資料行時，您可以設定[內含資料行的索引](https://docs.microsoft.com/sql/relational-databases/indexes/create-indexes-with-included-columns)，以大幅提升查詢效能。
 
-[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Relational/ForSqlServerHasIndex.cs?name=Model)]
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Relational/IndexInclude.cs?name=Model)]

@@ -1,16 +1,16 @@
 ---
 title: 擁有的實體類型-EF Core
+description: 如何在使用 Entity Framework Core 時設定擁有的實體類型或匯總
 author: AndriySvyryd
 ms.author: ansvyryd
-ms.date: 02/26/2018
-ms.assetid: 2B0BADCE-E23E-4B28-B8EE-537883E16DF3
+ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: a0665bfa27134b8dc3eba854ff3f7b1af4b69217
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 7b6d1b3bccbfceb85f03a580ba03a45984d29c74
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655928"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824602"
 ---
 # <a name="owned-entity-types"></a>擁有的實體類型
 
@@ -19,7 +19,7 @@ ms.locfileid: "73655928"
 
 EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類型模型化。 這些稱為「_自有實體類型_」。 包含自有實體類型的實體是_其擁有者。_
 
-擁有的實體基本上是擁有者的一部分，如果沒有，就不能存在，它們在概念上類似于[匯總](https://martinfowler.com/bliki/DDD_Aggregate.html)。
+擁有的實體基本上是擁有者的一部分，如果沒有，就不能存在，它們在概念上類似于[匯總](https://martinfowler.com/bliki/DDD_Aggregate.html)。 這表示擁有的型別是與擁有者關聯性之相依端的定義。
 
 ## <a name="explicit-configuration"></a>明確設定
 
@@ -74,7 +74,7 @@ EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類
 [!code-csharp[OwnsMany](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsMany)]
 
 > [!NOTE]
-> 在 EF Core 3.0 之前 `WithOwner()` 方法不存在，因此應該移除此呼叫。
+> 在 EF Core 3.0 之前 `WithOwner()` 方法不存在，因此應該移除此呼叫。 此外，也不會自動探索主鍵，因此一定會指定它。
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>對應具有資料表分割的擁有類型
 
@@ -85,6 +85,9 @@ EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類
 您可以使用 `HasColumnName` 方法來重新命名這些資料行：
 
 [!code-csharp[ColumnNames](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=ColumnNames)]
+
+> [!NOTE]
+> 大部分的一般實體類型設定方法（例如「[忽略](/dotnet/api/microsoft.entityframeworkcore.metadata.builders.ownednavigationbuilder.ignore)」）都可以用相同的方式呼叫。
 
 ## <a name="sharing-the-same-net-type-among-multiple-owned-types"></a>在多個擁有的類型之間共用相同的 .NET 類型
 
@@ -106,6 +109,8 @@ EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類
 
 [!code-csharp[OrderStatus](../../../samples/core/Modeling/OwnedEntities/OrderStatus.cs?name=OrderStatus)]
 
+對自有類型的每個導覽會定義具有完全獨立設定的個別實體類型。
+
 除了嵌套的擁有類型之外，擁有的類型也可以參考一般實體，只要擁有的實體位於相依端，就可以是擁有者或不同的實體。 這項功能會在 EF6 中設定除了複雜類型之外的自有實體類型。
 
 [!code-csharp[OrderDetails](../../../samples/core/Modeling/OwnedEntities/OrderDetails.cs?name=OrderDetails)]
@@ -114,15 +119,17 @@ EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類
 
 [!code-csharp[OwnsOneNested](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsOneNested)]
 
-請注意，用來設定在擁有者上指向之導覽屬性的 `WithOwner` 呼叫。
+請注意，用來設定在擁有者上指向之導覽屬性的 `WithOwner` 呼叫。 若要設定不屬於擁有權關聯性之擁有者實體類型的導覽，`WithOwner()` 應該在沒有任何引數的情況下呼叫。
 
-您可以使用 `OrderDetails` 和 `StreetAdress`上的 `OwnedAttribute` 來達到結果。
+您可以使用 `OrderDetails` 和 `StreetAddress`上的 `OwnedAttribute` 來達到結果。
 
 ## <a name="storing-owned-types-in-separate-tables"></a>將擁有的類型儲存在不同的資料表中
 
 也不同于 EF6 複雜類型，擁有的類型可以儲存在擁有者的個別資料表中。 若要覆寫將擁有的類型對應到與擁有者相同之資料表的慣例，您只要呼叫 `ToTable` 並提供不同的資料表名稱即可。 下列範例會將 `OrderDetails` 和它的兩個位址對應到 `DetailedOrder`的個別資料表：
 
 [!code-csharp[OwnsOneTable](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsOneTable)]
+
+您也可以使用 `TableAttribute` 來完成這項操作，但請注意，如果有多個導覽屬於自有類型，這會失敗，因為在這種情況下，多個實體類型會對應至相同的資料表。
 
 ## <a name="querying-owned-types"></a>查詢擁有的類型
 
@@ -141,7 +148,7 @@ EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類
 
 ### <a name="current-shortcomings"></a>目前的缺點
 
-- 不支援包含所擁有之實體類型的繼承階層
+- 擁有的實體類型不能有繼承階層
 - 擁有的實體類型的參考導覽不可以是 null，除非它們已明確對應至擁有者的個別資料表
 - 擁有的實體類型實例無法由多個擁有者共用（這是已知的值物件的情況，無法使用自有的實體類型來執行）
 

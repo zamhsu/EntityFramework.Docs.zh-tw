@@ -1,16 +1,16 @@
 ---
 title: 無索引鍵實體類型-EF Core
+description: 如何使用 Entity Framework Core 設定無索引鍵實體類型
 author: AndriySvyryd
 ms.author: ansvyryd
-ms.date: 02/26/2018
-ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
+ms.date: 9/13/2019
 uid: core/modeling/keyless-entity-types
-ms.openlocfilehash: 3dbc2700fc9bb277eb90885dfc2506c250ae21f1
-ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
+ms.openlocfilehash: 129e24b154ba32583435aeb742dbf478350344e8
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72445941"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824669"
 ---
 # <a name="keyless-entity-types"></a>無索引鍵實體類型
 
@@ -47,10 +47,10 @@ ms.locfileid: "72445941"
 
 ## <a name="mapping-to-database-objects"></a>對應至資料庫物件
 
-將無索引鍵實體類型對應至資料庫物件是使用 `ToTable` 或 `ToView` Fluent API 來達成。 從 EF Core 的觀點來看，這個方法中指定的資料庫物件是一個_視圖_，這表示它會被視為唯讀查詢來源，而且不能是 update、insert 或 delete 作業的目標。 不過，這並不表示資料庫物件實際上必須是資料庫的視圖。 它也可以是將視為唯讀的資料庫資料表。 相反地，針對一般實體類型，EF Core 會假設在 `ToTable` 方法中指定的資料庫物件可以視為_資料表_，這表示它可以做為查詢來源，但也可做為更新、刪除和插入作業的目標。 事實上，您可以在 `ToTable` 中指定資料庫檢視的名稱，只要將此視圖設定為可在資料庫上更新，一切都應該能正常執行。
+將無索引鍵實體類型對應至資料庫物件是使用 `ToTable` 或 `ToView` Fluent API 來達成。 從 EF Core 的觀點來看，這個方法中指定的資料庫物件是一個_視圖_，這表示它會被視為唯讀查詢來源，而且不能是 update、insert 或 delete 作業的目標。 不過，這並不表示資料庫物件實際上必須是資料庫的視圖。 它也可以是將視為唯讀的資料庫資料表。 相反地，針對一般實體類型，EF Core 會假設 `ToTable` 方法中指定的資料庫物件可以視為_資料表_，這表示它可以做為查詢來源，但也可做為更新、刪除和插入作業的目標。 事實上，您可以在 `ToTable` 中指定資料庫的名稱，而且只要此視圖設定為可在資料庫上更新，一切都應該能正常執行。
 
 > [!NOTE]
-> `ToView` 會假設物件已經存在於資料庫中，而且不會由遷移所建立。
+> `ToView` 假設物件已經存在於資料庫中，而不是由遷移所建立。
 
 ## <a name="example"></a>範例
 
@@ -71,12 +71,12 @@ ms.locfileid: "72445941"
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#KeylessEntityType)]
 
-接下來，我們會使用 `HasNoKey` API 來設定_OnModelCreating_中的無索引鍵實體類型。
+接下來，我們會使用 `HasNoKey` API，在_OnModelCreating_中設定無索引鍵實體類型。
 我們會使用流暢的設定 API 來設定無索引鍵實體類型的對應：
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#Configuration)]
 
-接下來，我們會將 `DbContext` 設定為包含 `DbSet<T>`：
+接下來，我們會設定 `DbContext` 以包含 `DbSet<T>`：
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#DbSet)]
 

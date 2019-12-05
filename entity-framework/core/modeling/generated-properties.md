@@ -1,15 +1,16 @@
 ---
 title: 產生的值-EF Core
-author: rowanmiller
-ms.date: 10/27/2016
-ms.assetid: eb082011-11a1-41b4-a108-15daafa03e80
+description: 如何在使用 Entity Framework Core 時設定屬性的值產生
+author: AndriySvyryd
+ms.author: ansvyryd
+ms.date: 11/06/2019
 uid: core/modeling/generated-properties
-ms.openlocfilehash: 6643d3c5c9b3363e450e820793f449a41e2eba80
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 7fa3eae5e2edb7b4c40ed4f99ce4a29f367e622a
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655752"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824709"
 ---
 # <a name="generated-values"></a>產生的值
 
@@ -53,7 +54,7 @@ ms.locfileid: "73655752"
 
 ## <a name="conventions"></a>慣例
 
-依照慣例，將會設定 short、int、long 或 Guid 類型的非複合主鍵，使其具有在 add 上產生的值。 所有其他屬性都將設定為不產生值。
+根據預設，將會設定 short、int、long 或 Guid 類型的非複合主鍵，使其具有在 add 上產生的值。 所有其他屬性都將設定為不產生值。
 
 ## <a name="data-annotations"></a>資料註釋
 
