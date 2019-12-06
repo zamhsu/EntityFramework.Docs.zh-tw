@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/index
-ms.openlocfilehash: 24368b4c87e785e779b3f2b2f10de19766451c9b
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: ebc676930ffc396aa70bb8afb91cf5a0cd43e04d
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656226"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824848"
 ---
 # <a name="new-features-in-entity-framework-core-30"></a>Entity Framework Core 3.0 中的新功能
 
@@ -145,7 +145,7 @@ services.AddDbContext(b => b
 
 例如，您可以使用 [dotnet ef 命令列工具](xref:core/miscellaneous/cli/dotnet)來輸入：
 
-``` console
+```dotnetcli
 dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
 ```
 
