@@ -225,6 +225,8 @@
                   href: core/providers/sql-server/index.md
                 - name: 經記憶體最佳化的資料表
                   href: core/providers/sql-server/memory-optimized-tables.md
+                - name: 指定 Azure SQL Database 選項
+                  href: core/providers/sql-server/azure-sql-database.md
             - name: SQLite
               items:
                 - name: 總覽
