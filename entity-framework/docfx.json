@@ -67,7 +67,6 @@
       "searchScope": [
         "Entity Framework"
       ],
-      "bilingual_type": "hover over",
       "ms.topic": "conceptual",
       "audience": "developer",
       "ms.prod": "entity-framework",
@@ -77,7 +76,7 @@
       "disable_contribution_on_translation_quality": ["MT"],
       "feedback_system": "GitHub",
       "feedback_github_repo": "aspnet/EntityFramework.Docs.zh-tw",
-      "feedback_product_url": "https://github.com/aspnet/EntityFrameworkCore/issues/new",
+      "feedback_product_url": "https://github.com/aspnet/EntityFrameworkCore/issues/new/choose",
       "uhfHeaderId": "MSDocsHeader-DotNet"
     },
     "fileMetadata": {
