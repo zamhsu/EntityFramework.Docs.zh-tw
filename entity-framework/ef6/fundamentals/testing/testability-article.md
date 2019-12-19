@@ -13,7 +13,7 @@ ms.locfileid: "72181581"
 # <a name="testability-and-entity-framework-40"></a>可測試性和 Entity Framework 4。0
 Scott Allen
 
-發佈2010 年 5 月
+發佈日期：2010 年 5 月
 
 ## <a name="introduction"></a>簡介
 
@@ -120,7 +120,7 @@ Fowler 會指出存放庫在網域和資料對應層之間，使用類似集合�
 
 因為程式碼使用的是介面（Employee 的 IRepository），所以我們可以為程式碼提供不同的介面執行。 其中一個執行方式是將物件 EF4 並保存到 Microsoft SQL Server 資料庫中，藉以進行支援。 不同的執行（在測試期間所使用的）可能會受到員工物件的記憶體中清單所支援。 介面將有助於在程式碼中達成隔離。
 
-請注意，IRepository @ no__t-0T @ no__t-1 介面不會公開儲存作業。 如何更新現有的物件？ 您可能會遇到包含儲存作業的 IRepository 定義，而且這些存放庫的執行必須立即將物件保存到資料庫中。 不過，在許多應用程式中，我們不想要個別保存物件。 相反地，我們想要將物件從不同的存放庫帶入現實，將這些物件修改為商務活動的一部分，然後將所有物件保存為單一不可部分完成作業的一部分。 幸運的是，有一個模式可以允許這種行為。
+請注意，IRepository&lt;T&gt; 介面不會公開儲存作業。 如何更新現有的物件？ 您可能會遇到包含儲存作業的 IRepository 定義，而且這些存放庫的執行必須立即將物件保存到資料庫中。 不過，在許多應用程式中，我們不想要個別保存物件。 相反地，我們想要將物件從不同的存放庫帶入現實，將這些物件修改為商務活動的一部分，然後將所有物件保存為單一不可部分完成作業的一部分。 幸運的是，有一個模式可以允許這種行為。
 
 ### <a name="the-unit-of-work-pattern"></a>工作單位模式
 
@@ -198,7 +198,7 @@ Poco 就緒之後，我們就可以在 Visual Studio 中建立實體資料模型
 
 **圖1**
 
-注意：如果您想要先開發 EDM 模型，可以從 EDM 產生乾淨的 POCO 程式碼。 您可以使用資料可程式性小組所提供的 Visual Studio 2010 延伸模組來執行這項操作。 若要下載擴充功能，請從 Visual Studio 中的 [工具] 功能表啟動 [擴充管理員]，並搜尋「POCO」範本的線上元件庫（請參閱 [圖 2]）。 有數個適用于 EF 的 POCO 範本。 如需使用範本的詳細資訊，請參閱 < @no__t 0Walkthrough：Entity Framework @ no__t-0 "的 POCO 範本。
+注意：如果您想要先開發 EDM 模型，可以從 EDM 產生乾淨的 POCO 程式碼。 您可以使用資料可程式性小組所提供的 Visual Studio 2010 延伸模組來執行這項操作。 若要下載擴充功能，請從 Visual Studio 中的 [工具] 功能表啟動 [擴充管理員]，並搜尋「POCO」範本的線上元件庫（請參閱 [圖 2]）。 有數個適用于 EF 的 POCO 範本。 如需使用範本的詳細資訊，請參閱 [「逐步解說：適用于 Entity Framework 的 POCO 範本」。](https://blogs.msdn.com/adonet/pages/walkthrough-poco-template-for-the-entity-framework.aspx)
 
 ![ef test_02](~/ef6/media/eftest-02.png)
 
@@ -220,7 +220,7 @@ Poco 就緒之後，我們就可以在 Visual Studio 中建立實體資料模型
 
 程式碼是否可測試？ 至少有兩個測試需要驗證動作的行為。 首先，我們想要確認動作會傳回正確的觀點–這是一個簡單的測試。 我們也想要撰寫測試來確認動作會抓取正確的員工，而我們想要這麼做，而不執行程式碼來查詢資料庫。 請記住，我們想要隔離受測程式碼。 隔離會確保測試不會因為資料存取程式碼或資料庫設定中的錯誤而失敗。 如果測試失敗，我們會知道控制器邏輯中有錯誤，而不是在較低層級的系統元件中。
 
-為了達到隔離，我們需要一些抽象概念，像是我們稍早針對存放庫和工作單位所提供的介面。 請記住，存放庫模式是設計來在網域物件和資料對應層之間進行協調。 在此案例中，EF4*是*資料對應層，而且已經提供名為 IObjectSet @ No__t-1T @ no__t-2 的類似存放庫抽象概念（來自 system.web 命名空間）。 介面定義看起來如下所示。
+為了達到隔離，我們需要一些抽象概念，像是我們稍早針對存放庫和工作單位所提供的介面。 請記住，存放庫模式是設計來在網域物件和資料對應層之間進行協調。 在此案例中，EF4*是*資料對應層，而且已經提供名為 IObjectSet&lt;t&gt; 的類似存放庫抽象概念（從 system.web 命名空間）。 介面定義看起來如下所示。
 
 ``` csharp
     public interface IObjectSet<TEntity> :
@@ -237,7 +237,7 @@ Poco 就緒之後，我們就可以在 Visual Studio 中建立實體資料模型
     }
 ```
 
-IObjectSet @ no__t-0T @ no__t-1 符合存放庫的需求，因為它類似物件的集合（透過 IEnumerable @ no__t-2T @ no__t-3），並提供從模擬的集合新增和移除物件的方法。 Attach 和 Detach 方法會公開 EF4 API 的其他功能。 若要使用 IObjectSet @ no__t-0T @ no__t-1 做為存放庫的介面，我們需要一個工作單位抽象來將存放庫系結在一起。
+IObjectSet&lt;T&gt; 符合存放庫的需求，因為它類似物件的集合（透過 IEnumerable&lt;T&gt;），並提供從模擬的集合中新增和移除物件的方法。 Attach 和 Detach 方法會公開 EF4 API 的其他功能。 若要使用 IObjectSet&lt;T&gt; 作為存放庫的介面，我們需要一個工作單位抽象來將存放庫系結在一起。
 
 ``` csharp
     public interface IUnitOfWork {
@@ -276,7 +276,7 @@ IObjectSet @ no__t-0T @ no__t-1 符合存放庫的需求，因為它類似物件
     }
 ```
 
-將 IObjectSet @ no__t-0T @ no__t-1 帶入生活，就像叫用 ObjectCoNtext 物件的 Createobjectset<tentity> 方法一樣簡單。 在幕後，架構將會使用我們在 EDM 中提供的中繼資料來產生具體的 ObjectSet @ no__t-0T @ no__t-1。 我們會繼續傳回 IObjectSet @ no__t-0T @ no__t-1 介面，因為它有助於保留用戶端程式代碼中的可測試性。
+將 IObjectSet&lt;T&gt; 的生活，就像叫用 ObjectCoNtext 物件的 Createobjectset<tentity> 方法一樣簡單。 在幕後，架構將會使用我們在 EDM 中提供的中繼資料來產生具體的 ObjectSet&lt;T&gt;。 我們會繼續傳回 IObjectSet&lt;T&gt; 介面，因為它有助於保留用戶端程式代碼中的可測試性。
 
 這個具體的執行功能在生產環境中很有用，但我們需要專注于如何使用我們的 IUnitOfWork 抽象概念來加速測試。
 
@@ -321,7 +321,7 @@ IObjectSet @ no__t-0T @ no__t-1 符合存放庫的需求，因為它類似物件
 
 請注意，假的工作單位會公開一個已認可的屬性。 將功能新增至可加速測試的假類別，有時會很有用。 在此情況下，您可以藉由檢查已認可的屬性，輕鬆觀察程式碼是否認可工作單位。
 
-我們也需要假的 IObjectSet @ no__t-0T @ no__t-1，將員工和工時卡物件保存在記憶體中。 我們可以使用泛型來提供單一的執行。
+我們也需要假的 IObjectSet&lt;T&gt;，將員工和工時卡物件保存在記憶體中。 我們可以使用泛型來提供單一的執行。
 
 ``` csharp
     public class InMemoryObjectSet<T> : IObjectSet<T> where T : class
@@ -368,7 +368,7 @@ IObjectSet @ no__t-0T @ no__t-1 符合存放庫的需求，因為它類似物件
     }
 ```
 
-這項測試會將大部分的工作都委派給基礎 HashSet @ no__t-0T @ no__t-1 物件。 請注意，IObjectSet @ no__t-0T @ no__t-1 需要泛型條件約束強制執行 T 做為類別（參考型別），同時也會強制我們執行 IQueryable @ no__t-2T @ no__t-3。 使用標準 LINQ 運算子 AsQueryable，可以輕鬆地將記憶體中的集合顯示為 IQueryable @ no__t-0T @ no__t-1。
+這項測試會將大部分的工作都委派給基礎 HashSet&lt;T&gt; 物件。 請注意，IObjectSet&lt;T&gt; 需要強制使用 T 做為類別（參考型別）的泛型條件約束，同時也會強制我們執行 IQueryable&lt;T&gt;。 使用標準 LINQ 運算子 AsQueryable，可以輕鬆地將記憶體中的集合顯示為 IQueryable&lt;T&gt;。
 
 ### <a name="the-tests"></a>測試
 
@@ -541,7 +541,7 @@ IObjectSet @ no__t-0T @ no__t-1 符合存放庫的需求，因為它類似物件
     }
 ```
 
-第二個值得注意的功能是程式碼如何讓 EF4 產生單一、有效率的查詢，將員工和時間卡資訊組合在一起。 我們已將員工資訊和時間卡資訊載入至相同的物件，而不需使用任何特殊 Api。 程式碼只會使用適用于記憶體內部資料來源和遠端資料源的標準 LINQ 運算子，來表示其所需的資訊。 EF4 能夠將 LINQ 查詢所產生的運算式樹狀架構和 C @ no__t-0 編譯器轉譯成單一且有效率的 T-SQL 查詢。
+第二個值得注意的功能是程式碼如何讓 EF4 產生單一、有效率的查詢，將員工和時間卡資訊組合在一起。 我們已將員工資訊和時間卡資訊載入至相同的物件，而不需使用任何特殊 Api。 程式碼只會使用適用于記憶體內部資料來源和遠端資料源的標準 LINQ 運算子，來表示其所需的資訊。 EF4 能夠將 LINQ 查詢和 C\# 編譯器所產生的運算式樹狀架構，轉譯成單一且有效率的 T-SQL 查詢。
 
 ``` SQL
     SELECT
@@ -569,14 +569,14 @@ IObjectSet @ no__t-0T @ no__t-1 符合存放庫的需求，因為它類似物件
 
 ### <a name="explicit-eager-loading"></a>明確的積極式載入
 
-當我們想要立即載入相關的實體資訊時，我們需要一些商務邏輯（或在此案例中為控制器動作邏輯）的機制，以表達其對存放庫的期望。 EF4 ObjectQuery @ no__t-0T @ no__t-1 類別會定義 Include 方法，以指定要在查詢期間取得的相關物件。 請記住，EF4 ObjectCoNtext 會透過衍生自 No__t @ ObjectQuery-No__t @ 2T-3 的具體 ObjectSet @ no__t-0T @ no__t-1 類別來公開實體。  如果我們在控制器動作中使用 ObjectSet @ no__t-0T @ no__t-1 參考，我們可以撰寫下列程式碼來指定每個員工的即時卡片資訊載入。
+當我們想要立即載入相關的實體資訊時，我們需要一些商務邏輯（或在此案例中為控制器動作邏輯）的機制，以表達其對存放庫的期望。 EF4 ObjectQuery&lt;T&gt; 類別會定義 Include 方法，以指定要在查詢期間取得的相關物件。 請記住，EF4 ObjectCoNtext 會透過衍生自 ObjectQuery&lt;T&gt;的具體 ObjectSet&lt;T&gt; 類別來公開實體。  如果我們使用 ObjectSet&lt;T&gt; 控制器動作中的參考，我們可以撰寫下列程式碼來指定每個員工的即時卡片資訊載入。
 
 ``` csharp
     _employees.Include("TimeCards")
               .Where(e => e.HireDate.Year > 2009);
 ```
 
-不過，因為我們想要讓程式碼保持可測試性，所以我們不會從真實的工作單位類別外公開 ObjectSet @ no__t-0T @ no__t-1。 相反地，我們會依賴 IObjectSet @ no__t-0T @ no__t-1 介面，這較容易假，但是 IObjectSet @ no__t-2T @ no__t-3 不會定義 Include 方法。 LINQ 的優點是我們可以建立自己的 Include 運算子。
+不過，因為我們想要讓程式碼保持可測試性，所以我們不會公開 ObjectSet&lt;T&gt; 從真實的工作單位類別之外。 相反地，我們依賴 IObjectSet&lt;T&gt; 介面較容易假，但是 IObjectSet&lt;T&gt; 不會定義 Include 方法。 LINQ 的優點是我們可以建立自己的 Include 運算子。
 
 ``` csharp
     public static class QueryableExtensions {
@@ -592,7 +592,7 @@ IObjectSet @ no__t-0T @ no__t-1 符合存放庫的需求，因為它類似物件
     }
 ```
 
-請注意，此 Include 運算子定義為 IQueryable @ no__t-0T @ no__t-1 的擴充方法，而不是 IObjectSet @ no__t-2T @ no__t-3。 這讓我們能夠使用具有更廣泛可能類型的方法，包括 IQueryable @ no__t-0T @ no__t-1、IObjectSet @ no__t-2T @ no__t-3、ObjectQuery @ no__t-4T @ no__t-5 和 ObjectSet @ no__t-6T @ no__t-7。 在事件中，基礎序列不是正版 EF4 ObjectQuery @ no__t-0T @ no__t-1，因此不會有任何傷害，而且 Include 運算子不會有任何作用。 如果基礎序列*是*ObjectQuery @ No__t-1T @ no__t-2 （或衍生自 ObjectQuery @ No__t-3T @ no__t-4），則 EF4 會看到我們對其他資料的需求，並制訂適當的 SQL 查詢。
+請注意，此 Include 運算子定義為 IQueryable&lt;T&gt; 的擴充方法，而不是 IObjectSet&lt;T&gt;。 這讓我們能夠使用具有更廣泛可能類型的方法，包括 IQueryable&lt;T&gt;、IObjectSet&lt;T&gt;、ObjectQuery&lt;T&gt;和 ObjectSet&lt;T&gt;。 在事件中，基礎序列不是正版 EF4 ObjectQuery&lt;T&gt;，因此不會有任何傷害，而且 Include 運算子不會有任何作用。 如果基礎序列*是*ObjectQuery&lt;t&gt; （或衍生自 ObjectQuery&lt;t&gt;），則 EF4 會看到我們對其他資料的需求，並制訂適當的 SQL 查詢。
 
 有了這個新的操作員，我們就可以從存放庫明確要求立即載入的時間卡資訊。
 
@@ -660,7 +660,7 @@ IObjectSet @ no__t-0T @ no__t-1 符合存放庫的需求，因為它類似物件
     }
 ```
 
-我們仍然可以說，Employee 實體大部分的持續性都是未知的。 唯一的需求是使用虛擬成員，而這不會影響程式碼的可測試性。 我們不需要衍生自任何特殊基類，或甚至使用消極式載入專用的特殊集合。 如程式碼所示，任何執行 ICollection @ no__t-0T @ no__t-1 的類別都可以用來保存相關的實體。
+我們仍然可以說，Employee 實體大部分的持續性都是未知的。 唯一的需求是使用虛擬成員，而這不會影響程式碼的可測試性。 我們不需要衍生自任何特殊基類，或甚至使用消極式載入專用的特殊集合。 如程式碼所示，任何執行 ICollection&lt;T&gt; 的類別都可以用來保存相關的實體。
 
 此外，我們還需要在工作單元中進行一項次要變更。 當直接使用 ObjectCoNtext 物件時，消極式載入會預設為*關閉*。 我們可以在 CoNtextoptions.negotiate 屬性上設定一個屬性來啟用延後載入，而且我們可以在實際工作單元內設定此屬性（如果我們想要在所有位置啟用消極式載入）。
 
@@ -687,7 +687,7 @@ IObjectSet @ no__t-0T @ no__t-1 符合存放庫的需求，因為它類似物件
 
 消極式載入可讓應用程式的程式碼更容易撰寫，而且使用 proxy 的神奇，程式碼就能保持完整的可測試性。 工作單位的記憶體內部 fakes 可以在測試期間視需要預先載入具有相關聯資料的假實體。
 
-此時，我們會使用 IObjectSet @ no__t-0T @ no__t-1 來將注意力轉成建立存放庫，並查看抽象概念以隱藏所有持續性架構的符號。
+此時，我們會從使用 IObjectSet&lt;T&gt; 建立存放庫，並查看抽象來隱藏持續性架構的所有符號。
 
 ## <a name="custom-repositories"></a>自訂存放庫
 
@@ -701,9 +701,9 @@ IObjectSet @ no__t-0T @ no__t-1 符合存放庫的需求，因為它類似物件
     }
 ```
 
-此工作單位和我們在上一節中建立的工作單位之間的主要差異在於，此工作單位不會使用 EF4 架構中的任何抽象概念（沒有 IObjectSet @ no__t-0T @ no__t-1）。 IObjectSet @ no__t-0T @ no__t-1 可以做為存放庫介面，但它公開的 API 可能無法完全符合我們的應用程式需求。 在即將推出的方法中，我們將使用自訂的 IRepository @ no__t-0T @ no__t-1 抽象概念來呈現存放庫。
+此工作單位和我們在上一節中建立的工作單位之間的主要差異在於，此工作單位不會使用 EF4 架構中的任何抽象概念（沒有 IObjectSet&lt;T&gt;）。 IObjectSet&lt;T&gt; 以存放庫介面的形式運作良好，但它公開的 API 可能無法完全符合我們的應用程式需求。 在即將推出的方法中，我們將使用自訂 IRepository&lt;T&gt; 抽象來代表存放庫。
 
-許多開發人員遵循測試導向設計、行為導向設計，以及網域導向的方法設計，都偏好使用 IRepository @ no__t-0T @ no__t-1 方法的原因有好幾種。 首先，IRepository @ no__t-0T @ no__t-1 介面代表「反毀」層。 如 Eric Evans 在他的網域導向設計書籍中所述，反毀層會讓您的網域程式碼遠離基礎結構 Api，例如持續性 API。 其次，開發人員可以將方法建立到存放庫中，以符合應用程式的確切需求（在撰寫測試時發現）。 例如，我們可能經常需要使用識別碼值來尋找單一實體，因此我們可以將 FindById 方法新增至存放庫介面。  我們的 IRepository @ no__t-0T @ no__t-1 定義看起來會像下面這樣。
+許多開發人員遵循測試導向設計、行為導向設計，以及網域導向的方法設計，偏好 IRepository&lt;T&gt; 方法的原因有好幾個。 首先，IRepository&lt;T&gt; 介面代表「反毀」層。 如 Eric Evans 在他的網域導向設計書籍中所述，反毀層會讓您的網域程式碼遠離基礎結構 Api，例如持續性 API。 其次，開發人員可以將方法建立到存放庫中，以符合應用程式的確切需求（在撰寫測試時發現）。 例如，我們可能經常需要使用識別碼值來尋找單一實體，因此我們可以將 FindById 方法新增至存放庫介面。  我們的 IRepository&lt;T&gt; 定義看起來會像下面這樣。
 
 ``` csharp
     public interface IRepository<T>
@@ -716,9 +716,9 @@ IObjectSet @ no__t-0T @ no__t-1 符合存放庫的需求，因為它類似物件
     }
 ```
 
-請注意，我們會回到使用 IQueryable @ no__t-0T @ no__t-1 介面來公開實體集合。 IQueryable @ no__t-0T @ no__t-1 可讓 LINQ 運算式樹狀架構流入 EF4 提供者，並為提供者提供查詢的整體觀點。 第二個選項是傳回 IEnumerable @ no__t-0T @ no__t-1，這表示 EF4 LINQ 提供者只會看到存放庫內建的運算式。 在儲存機制外部完成的任何分組、排序和投射，都不會在傳送至資料庫的 SQL 命令中構成，因而可能會造成效能降低。 另一方面，只傳回 IEnumerable @ no__t-0T @ no__t-1 結果的存放庫，並不會對您造成新的 SQL 命令感到驚訝。 這兩種方法都能運作，而且這兩種方法都保持可測試狀態。
+請注意，我們會回頭使用 IQueryable&lt;T&gt; 介面來公開實體集合。 IQueryable&lt;T&gt; 可讓 LINQ 運算式樹狀結構流入 EF4 提供者，並為提供者提供查詢的整體觀點。 第二個選項是傳回 IEnumerable&lt;T&gt;，這表示 EF4 LINQ 提供者只會看到存放庫內建的運算式。 在儲存機制外部完成的任何分組、排序和投射，都不會在傳送至資料庫的 SQL 命令中構成，因而可能會造成效能降低。 另一方面，只傳回 IEnumerable&lt;T&gt; 結果的存放庫，並不會對您造成新的 SQL 命令感到驚訝。 這兩種方法都能運作，而且這兩種方法都保持可測試狀態。
 
-使用泛型和 EF4 ObjectCoNtext API 來提供 IRepository @ no__t-0T @ no__t-1 介面的單一實作為簡單的方式。
+使用泛型和 EF4 ObjectCoNtext API，提供 IRepository&lt;T&gt; 介面的單一實作為簡單明瞭。
 
 ``` csharp
     public class SqlRepository<T> : IRepository<T>
@@ -746,7 +746,7 @@ IObjectSet @ no__t-0T @ no__t-1 符合存放庫的需求，因為它類似物件
     }
 ```
 
-IRepository @ no__t-0T @ no__t-1 方法可讓我們進一步控制查詢，因為用戶端必須叫用方法來取得實體。 在方法內，我們可以提供額外的檢查和 LINQ 運算子，以強制執行應用程式條件約束。 請注意，介面有兩個泛型型別參數的條件約束。 第一個條件約束是 ObjectSet @ no__t-0T @ no__t-1 所需的類別缺點污點，而第二個條件約束會強制我們的實體執行 IEntity –為應用程式建立的抽象概念。 IEntity 介面會強制實體具有可讀取的 Id 屬性，然後我們可以在 FindById 方法中使用這個屬性。 IEntity 是以下列程式碼定義。
+因為用戶端必須叫用方法來取得實體，所以 IRepository&lt;T&gt; 方法可讓我們進一步控制查詢。 在方法內，我們可以提供額外的檢查和 LINQ 運算子，以強制執行應用程式條件約束。 請注意，介面有兩個泛型型別參數的條件約束。 第一個條件約束是 ObjectSet&lt;T&gt;所需的類別缺點污點，而第二個條件約束會強制我們的實體執行 IEntity –為應用程式建立的抽象概念。 IEntity 介面會強制實體具有可讀取的 Id 屬性，然後我們可以在 FindById 方法中使用這個屬性。 IEntity 是以下列程式碼定義。
 
 ``` csharp
     public interface IEntity {
@@ -756,7 +756,7 @@ IRepository @ no__t-0T @ no__t-1 方法可讓我們進一步控制查詢，因�
 
 IEntity 可視為持續性無知的小違規，因為我們的實體需要實作為此介面。 記住持續性無知是關於取捨，而許多 FindById 功能將會超過介面加諸的條件約束。 介面不會影響可測試性。
 
-具現化即時 IRepository @ no__t-0T @ no__t-1 需要 EF4 ObjectCoNtext，因此，具體的工作單位實作為應該管理具現化。
+將即時 IRepository 具現化&lt;T&gt; 需要 EF4 ObjectCoNtext，因此，具體工作單位的執行方式應該管理具現化。
 
 ``` csharp
     public class SqlUnitOfWork : IUnitOfWork {
@@ -801,7 +801,7 @@ IEntity 可視為持續性無知的小違規，因為我們的實體需要實作
 
 ### <a name="using-the-custom-repository"></a>使用自訂存放庫
 
-使用我們的自訂存放庫並不會與使用以 IObjectSet @ no__t-0T @ no__t-1 為基礎的儲存機制截然不同。 我們必須先叫用一個存放庫的方法來抓取 IQueryable @ no__t-0T @ no__t-1 參考，而不是直接將 LINQ 運算子套用至屬性。
+使用我們的自訂存放庫與使用以 IObjectSet&lt;T&gt;為基礎的儲存機制並沒有顯著差異。 我們不會直接將 LINQ 運算子套用至屬性，而是必須先叫用其中一個存放庫的方法，以抓取 IQueryable&lt;T&gt; 參考。
 
 ``` csharp
     public ViewResult Index() {
@@ -821,7 +821,7 @@ IEntity 可視為持續性無知的小違規，因為我們的實體需要實作
     }
 ```
 
-我們已檢查過的兩種方法的可測試性並沒有顯著的差異。 我們可以藉由建立 HashSet @ no__t-2Employee @ no__t-3 支援的具象類別，就像我們在上一節中所做的一樣，提供 IRepository @ no__t-0T @ no__t-1 的虛設實。 不過，有些開發人員偏好使用 mock 物件和模擬物件架構，而不是建立 fakes。 在下一節中，我們將探討如何使用模擬來測試我們的執行，並討論模擬與 fakes 之間的差異。
+我們已檢查過的兩種方法的可測試性並沒有顯著的差異。 我們可以藉由建立 HashSet&lt;Employee&gt; 支援的具象類別，來提供 IRepository&lt;T&gt; 的假實現，就像我們在最後一節中所做的一樣。 不過，有些開發人員偏好使用 mock 物件和模擬物件架構，而不是建立 fakes。 在下一節中，我們將探討如何使用模擬來測試我們的執行，並討論模擬與 fakes 之間的差異。
 
 ### <a name="testing-with-mocks"></a>使用模擬進行測試
 
@@ -841,7 +841,7 @@ IEntity 可視為持續性無知的小違規，因為我們的實體需要實作
     var employee = repository.FindById(1);
 ```
 
-我們會要求 Moq 進行 IRepository @ no__t-0Employee @ no__t-1 的執行，並以動態方式建立一個。 我們可以藉由存取 Mock @ no__t-2T @ no__t-3 物件的 Object 屬性，來取得執行 IRepository @ no__t-0Employee @ no__t-1 的物件。 這是我們可以傳入控制器的內建物件，而且不知道這是測試雙重或真正的存放庫。 我們可以叫用物件上的方法，就像我們會在實際執行的物件上叫用方法一樣。
+我們會向 Moq 尋求 IRepository&lt;員工&gt; 實行，並以動態方式建立一個。 藉由存取 Mock&lt;T&gt; 物件的 Object 屬性，我們可以&lt;員工&gt; 取得執行 IRepository 的物件。 這是我們可以傳入控制器的內建物件，而且不知道這是測試雙重或真正的存放庫。 我們可以叫用物件上的方法，就像我們會在實際執行的物件上叫用方法一樣。
 
 當我們叫用 Add 方法時，您必須想知道模擬儲存機制會執行的動作。 因為 mock 物件後面沒有任何執行，所以 Add 不會執行任何操作。 在幕後不會有具體的集合，像是我們所撰寫的 fakes，所以會捨棄員工。 FindById 的傳回值呢？ 在此情況下，mock 物件會執行唯一可以做的事，這會傳回預設值。 因為我們傳回的是參考型別（Employee），所以傳回值為 null 值。
 
@@ -862,7 +862,7 @@ IEntity 可視為持續性無知的小違規，因為我們的實體需要實作
     }
 ```
 
-在此範例中，我們會要求 Moq 以動態方式建立存放庫，然後在預期的情況下為存放庫進行程式設計。 當有人叫用傳遞值為5的 FindById 方法時，預期會告訴 mock 物件傳回識別碼值為5的新員工物件。 這種測試會成功，而且我們不需要為假的 IRepository @ no__t-0T @ no__t-1 建立完整的執行。
+在此範例中，我們會要求 Moq 以動態方式建立存放庫，然後在預期的情況下為存放庫進行程式設計。 當有人叫用傳遞值為5的 FindById 方法時，預期會告訴 mock 物件傳回識別碼值為5的新員工物件。 這種測試會通過，而且我們不需要為假的 IRepository&lt;T&gt;建立完整的執行。
 
 讓我們重新流覽稍早撰寫的測試，並將其修改為使用模擬，而不是 fakes。 就像之前一樣，我們將使用基類來設定所有控制器測試所需的基礎結構的通用部分。
 
@@ -917,7 +917,7 @@ IEntity 可視為持續性無知的小違規，因為我們的實體需要實作
 -   確認模型在索引執行後保存所有員工的清單。
 -   確認在刪除執行後，存放庫未包含指定的員工。
 
-另一個您會看到模擬物件的方法，就是驗證*互動*。 雖然以狀態為基礎的測試會對物件的狀態進行判斷提示，但互動式測試會對物件的互動方式做出判斷提示。 例如:
+另一個您會看到模擬物件的方法，就是驗證*互動*。 雖然以狀態為基礎的測試會對物件的狀態進行判斷提示，但互動式測試會對物件的互動方式做出判斷提示。 例如：
 
 -   確認在建立執行時，控制器會叫用存放庫的 Add 方法。
 -   確認控制器會在執行索引時，叫用存放庫的 FindAll 方法。
@@ -957,14 +957,14 @@ IEntity 可視為持續性無知的小違規，因為我們的實體需要實作
 
 ## <a name="conclusions"></a>結論
 
-在本文中，我們示範了數種方法來建立可測試的程式碼，同時使用 ADO.NET Entity Framework 來進行資料持續性。 我們可以利用內建的抽象概念（例如 IObjectSet @ no__t-0T @ no__t-1），或建立自己的抽象概念，例如 IRepository @ no__t-2T @ no__t-3。  在這兩種情況下，ADO.NET Entity Framework 4.0 中的 POCO 支援可讓這些抽象類別的取用者維持持續性未知且高度可測試性。 隱含消極式載入之類的其他 EF4 功能可讓商務和應用程式服務程式碼工作，而不需擔心關聯式資料存放區的詳細資訊。 最後，我們所建立的抽象概念在單元測試中很容易模擬或假，而我們可以使用這些測試來達到快速執行、高度隔離和可靠的測試。
+在本文中，我們示範了數種方法來建立可測試的程式碼，同時使用 ADO.NET Entity Framework 來進行資料持續性。 我們可以利用內建的抽象概念（例如 IObjectSet&lt;T&gt;），或建立自己的抽象概念，例如 IRepository&lt;T&gt;。  在這兩種情況下，ADO.NET Entity Framework 4.0 中的 POCO 支援可讓這些抽象類別的取用者維持持續性未知且高度可測試性。 隱含消極式載入之類的其他 EF4 功能可讓商務和應用程式服務程式碼工作，而不需擔心關聯式資料存放區的詳細資訊。 最後，我們所建立的抽象概念在單元測試中很容易模擬或假，而我們可以使用這些測試來達到快速執行、高度隔離和可靠的測試。
 
 ### <a name="additional-resources"></a>其他資源
 
 -   Robert c. 「[單一責任原則](https://www.objectmentor.com/resources/articles/srp.pdf)」
 -   聖馬丁 Fowler，*企業應用程式架構模式*的[模式目錄](https://www.martinfowler.com/eaaCatalog/index.html)
 -   Griffin Caprio，「相依性[插入](https://msdn.microsoft.com/magazine/cc163739.aspx)」
--   資料可程式性 Blog，"@no__t 0Walkthrough：以 Entity Framework 4.0 @ no__t-0 "測試導向的開發。
+-   資料可程式性 Blog，「[逐步解說：使用 Entity Framework 4.0 的測試導向開發](https://blogs.msdn.com/adonet/pages/walkthrough-test-driven-development-with-the-entity-framework-4-0.aspx)」。
 -   資料可程式性的 Blog，「[使用存放庫和 Entity Framework 4.0 的工作單位模式](https://blogs.msdn.com/adonet/archive/2009/06/16/using-repository-and-unit-of-work-patterns-with-entity-framework-4-0.aspx)」
 -   Aaron Jensen 「[簡介機器規格](http://codebetter.com/blogs/aaron.jensen/archive/2008/05/08/introducing-machine-specifications-or-mspec-for-short.aspx)」
 -   Eric 先生，" [BDD With MSTest](https://blogs.msdn.com/elee/archive/2009/01/20/bdd-with-mstest.aspx)"
@@ -975,4 +975,4 @@ IEntity 可視為持續性無知的小違規，因為我們的實體需要實作
 
 ### <a name="biography"></a>自傳
 
-Scott Allen 是 Pluralsight 和創辦人 OdeToCode.com 的技術人員的成員。 在15年的商務軟體開發中，Scott 已針對從8位 embedded 裝置到可高度擴充性 ASP.NET web 應用程式的所有專案，處理解決方案。 您可以在他的 OdeToCode，或在 Twitter 上的[https://twitter.com/OdeToCode](https://twitter.com/OdeToCode)，觸及 Scott 的 blog。
+Scott Allen 是 Pluralsight 和創辦人 OdeToCode.com 的技術人員的成員。 在15年的商務軟體開發中，Scott 已針對從8位 embedded 裝置到可高度擴充性 ASP.NET web 應用程式的所有專案，處理解決方案。 您可以在 OdeToCode 或 Twitter 上的[https://twitter.com/OdeToCode](https://twitter.com/OdeToCode)，觸達 Scott 的 blog。
