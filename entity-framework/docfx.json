@@ -73,7 +73,12 @@
       "ms.tgt_pltfrm": "dotnet",
       "ms.devlang": "dotnet",
       "ms.author": "avickers",
-      "disable_contribution_on_translation_quality": ["MT"],
+      "disable_contribution_on_translation_quality": [
+        "MT",
+        "MTE75",
+        "MTE95",
+        "Blank"
+      ],
       "feedback_system": "GitHub",
       "feedback_github_repo": "aspnet/EntityFramework.Docs.zh-tw",
       "feedback_product_url": "https://github.com/aspnet/EntityFrameworkCore/issues/new/choose",
@@ -89,7 +94,7 @@
         "efcore-and-ef6/**/**.md": "entity-framework-core"
       },
       "open_to_public_contributors": {
-	      "core/managing-schemas/**.md": false,
+        "core/managing-schemas/**.md": false,
         "core/miscellaneous/**.md": false,
         "core/modeling/**.md": false,
         "core/providers/**.md": false,
