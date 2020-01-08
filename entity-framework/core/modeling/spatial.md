@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: 335d4f3a601624f7c994b7dcacefe4ef6798beb3
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 8dae1ab949c77ffa08904b12a5716b729e6913a1
+ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655604"
+ms.lasthandoff: 12/27/2019
+ms.locfileid: "75502236"
 ---
 # <a name="spatial-data"></a>空間資料
 
@@ -48,7 +48,7 @@ optionsBuilder.UseSqlServer(
 
 有數個空間資料類型。 您所使用的類型取決於您想要允許的圖形類型。 以下是您可以在模型中用於屬性的 NTS 類型階層。 它們位於 `NetTopologySuite.Geometries` 命名空間內。
 
-* 性質
+* 幾何
   * 點
   * LineString
   * 多邊形
@@ -207,13 +207,13 @@ var currentCountry = db.Countries
     .FirstOrDefault(c => c.Border.Contains(currentLocation));
 ```
 
-## <a name="sql-server"></a>SQL Server
+## <a name="sql-server"></a>[SQL Server]
 
 如果您使用 SQL Server，還有一些您應該注意的其他事項。
 
 ### <a name="geography-or-geometry"></a>Geography 或 geometry
 
-根據預設，空間屬性會對應至 SQL Server 中 `geography` 資料行。 若要使用 `geometry`，請在您的模型中[設定資料行類型](xref:core/modeling/relational/data-types)。
+根據預設，空間屬性會對應至 SQL Server 中 `geography` 資料行。 若要使用 `geometry`，請在您的模型中[設定資料行類型](xref:core/modeling/entity-properties#column-data-types)。
 
 ### <a name="geography-polygon-rings"></a>地理多邊形環形
 

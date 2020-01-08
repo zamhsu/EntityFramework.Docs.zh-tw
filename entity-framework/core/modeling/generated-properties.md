@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/generated-properties
-ms.openlocfilehash: 7fa3eae5e2edb7b4c40ed4f99ce4a29f367e622a
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.openlocfilehash: 9c616e157ff1bdb9700f436a7ae2788330fe5d45
+ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824709"
+ms.lasthandoff: 12/27/2019
+ms.locfileid: "75502028"
 ---
 # <a name="generated-values"></a>產生的值
 
@@ -34,7 +34,7 @@ ms.locfileid: "74824709"
 
 如果您將實體加入至具有指派給屬性之值的內容，則 EF 會嘗試插入該值，而不是產生新的值。 如果未指派 CLR 預設值（`string`的`null`、`int`的 `0`、`Guid.Empty` 等等），則會將屬性視為具有指派的值。 如需詳細資訊，請參閱[產生的屬性的明確值](../saving/explicit-values-generated-properties.md)。
 
-> [!WARNING]  
+> [!WARNING]
 > 為新增的實體產生值的方式，將取決於所使用的資料庫提供者。 資料庫提供者可以自動設定某些屬性類型的值產生，但其他則可能需要您手動設定產生值的方式。
 >
 > 例如，使用 SQL Server 時，將會自動產生 `GUID` 屬性（使用 SQL Server 連續 GUID 演算法）的值。 不過，如果您指定在 add 上產生 `DateTime` 屬性，則必須設定要產生值的方式。 執行此動作的其中一種方式是設定 `GETDATE()`的預設值，請參閱[預設值](relational/default-values.md)。
@@ -52,48 +52,73 @@ ms.locfileid: "74824709"
 >
 > [!code-sql[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdate.sql)]
 
-## <a name="conventions"></a>慣例
+## <a name="value-generated-on-add"></a>Add 上產生的值
 
-根據預設，將會設定 short、int、long 或 Guid 類型的非複合主鍵，使其具有在 add 上產生的值。 所有其他屬性都將設定為不產生值。
+依照慣例，如果應用程式未提供值，則 short、int、long 或 Guid 類型的非複合主鍵會設定為已為插入的實體產生值。 您的資料庫提供者通常會負責所需的設定;例如，SQL Server 中的數值主鍵會自動設定為識別資料行。
 
-## <a name="data-annotations"></a>資料註釋
+您可以設定任何屬性，為插入的實體產生其值，如下所示：
 
-### <a name="no-value-generation-data-annotations"></a>沒有值產生（資料批註）
+### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedNever.cs#Sample)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAdd.cs?name=ValueGeneratedOnAdd&highlight=5)]
 
-### <a name="value-generated-on-add-data-annotations"></a>Add （資料批註）上產生的值
+### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAdd.cs#Sample)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAdd.cs?name=ValueGeneratedOnAdd&highlight=5)]
 
-> [!WARNING]  
+***
+
+> [!WARNING]
 > 這只是讓 EF 知道為新增的實體產生值，並不保證 EF 會設定實際的機制來產生值。 如需詳細資訊，請參閱 add 一節所[產生的值](#value-generated-on-add)。
 
-### <a name="value-generated-on-add-or-update-data-annotations"></a>在新增或更新時產生的值（資料批註）
+### <a name="default-values"></a>預設值
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAddOrUpdate.cs#Sample)]
+在關係資料庫上，可以使用預設值來設定資料行。如果插入的資料列沒有該資料行的值，則會使用預設值。
 
-> [!WARNING]  
+您可以在屬性上設定預設值：
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/DefaultValue.cs?name=DefaultValue&highlight=5)]
+
+您也可以指定用來計算預設值的 SQL 片段：
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/DefaultValueSql.cs?name=DefaultValueSql&highlight=5)]
+
+指定預設值會將屬性隱含地設定為在 add 上產生的值。
+
+## <a name="value-generated-on-add-or-update"></a>新增或更新時產生的值
+
+### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=5)]
+
+### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=5)]
+
+***
+
+> [!WARNING]
 > 這只是讓 EF 知道為新增或更新的實體產生值，並不保證 EF 會設定實際的機制來產生值。 如需詳細資訊，請參閱[add 或 update 一節中產生的值](#value-generated-on-add-or-update)。
 
-## <a name="fluent-api"></a>Fluent API
+### <a name="computed-columns"></a>計算資料行
 
-您可以使用流暢的 API 來變更指定屬性的值產生模式。
+在某些關係資料庫上，可以將資料行設定為在資料庫中計算其值，通常會有一個運算式參考其他資料行：
 
-### <a name="no-value-generation-fluent-api"></a>無值產生（流暢 API）
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ComputedColumn.cs?name=ComputedColumn&highlight=5)]
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedNever.cs#Sample)]
+> [!NOTE]
+> 在某些情況下，資料行的值會在每次提取時計算（有時稱為「*虛擬*資料行」），而其他則會在資料列的每個更新上進行計算並儲存（有時稱為*儲存*或*保存*的資料行）。 這會因資料庫提供者而異。
 
-### <a name="value-generated-on-add-fluent-api"></a>Add （流暢 API）上產生的值
+## <a name="no-value-generation"></a>未產生值
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAdd.cs#Sample)]
+如果慣例將屬性（property）設定為產生值，通常就需要停用屬性的值產生。 例如，如果您有 int 類型的主鍵，則會隱含地將它設定為在 add 上產生的值;您可以透過下列方式來停用此功能：
 
-> [!WARNING]  
-> `ValueGeneratedOnAdd()` 只是讓 EF 知道為新增的實體產生值，並不保證 EF 會設定實際的機制來產生值。  如需詳細資訊，請參閱 add 一節所[產生的值](#value-generated-on-add)。
+### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
 
-### <a name="value-generated-on-add-or-update-fluent-api"></a>新增或更新時產生的值（流暢的 API）
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedNever.cs?name=ValueGeneratedNever&highlight=3)]
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdate.cs#Sample)]
+### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
 
-> [!WARNING]  
-> 這只是讓 EF 知道為新增或更新的實體產生值，並不保證 EF 會設定實際的機制來產生值。 如需詳細資訊，請參閱[add 或 update 一節中產生的值](#value-generated-on-add-or-update)。
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedNever.cs?name=ValueGeneratedNever&highlight=5)]
+
+***

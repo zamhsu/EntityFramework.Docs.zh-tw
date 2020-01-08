@@ -4,12 +4,12 @@ description: 如何在使用 Entity Framework Core 時，設定實體類型之�
 author: AndriySvyryd
 ms.date: 11/21/2019
 uid: core/modeling/relationships
-ms.openlocfilehash: 452169c902d56fda0a65a5c2846a9b42c80640fd
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.openlocfilehash: 6b3e0636bfa266b78baafe1b6e318c9707294560
+ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824756"
+ms.lasthandoff: 12/27/2019
+ms.locfileid: "75502184"
 ---
 # <a name="relationships"></a>關聯性
 
@@ -42,7 +42,7 @@ ms.locfileid: "74824756"
 
 下列程式碼顯示 `Blog` 與之間的一對多關聯性 `Post`
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs#Entities)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs#Full)]
 
 * `Post` 是相依實體
 
@@ -71,13 +71,13 @@ ms.locfileid: "74824756"
 
 * 如果在兩個類型之間找到一對導覽屬性，則會將它們設定為相同關聯性的反向導覽屬性。
 
-* 如果相依實體包含名稱為 mathing 的屬性之一，則會將它設定為外鍵：
+* 如果相依實體包含名稱符合這些模式之一的屬性，則會將它設定為外鍵：
   * `<navigation property name><principal key property name>`
   * `<navigation property name>Id`
   * `<principal entity name><principal key property name>`
   * `<principal entity name>Id`
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs?name=Entities&highlight=6,15,16)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs?name=Full&highlight=6,15-16)]
 
 在此範例中，反白顯示的屬性將用來設定關聯性。
 
@@ -91,7 +91,7 @@ ms.locfileid: "74824756"
 
 雖然建議在相依實體類別中定義外鍵屬性，但它並不是必要的。 如果找不到外鍵屬性，則會以名稱 `<navigation property name><principal key property name>` 或 `<principal entity name><principal key property name>` 導入[陰影外鍵屬性](shadow-properties.md)（如果相依類型上沒有導覽的話）。
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/NoForeignKey.cs?name=Entities&highlight=6,15)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/NoForeignKey.cs?name=NoForeignKey&highlight=6,15)]
 
 在此範例中，陰影外鍵是 `BlogId` 的，因為預先填入導覽名稱會是多餘的。
 
@@ -102,13 +102,13 @@ ms.locfileid: "74824756"
 
 只包含一個導覽屬性（沒有反向導覽，而且沒有外鍵屬性）就足以擁有依照慣例定義的關聯性。 您也可以有一個導覽屬性和一個外鍵屬性。
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/OneNavigation.cs?name=Entities&highlight=6)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/OneNavigation.cs?name=OneNavigation&highlight=6)]
 
 ### <a name="limitations"></a>限制
 
 當兩個類型之間有多個導覽屬性定義時（亦即，不只是一個指向彼此的一對流覽），導覽屬性所表示的關聯性不明確。 您將需要手動設定它們來解決不明確的問題。
 
-### <a name="cascade-delete"></a>串聯刪除
+### <a name="cascade-delete"></a>Cascade 刪除
 
 依照慣例，串聯刪除會針對必要關聯性設定為*cascade* ，並針對選擇性關聯性*deletebehavior.clientsetnull* 。 *Cascade*表示也會刪除相依的實體。 *Deletebehavior.clientsetnull*表示未載入記憶體的相依實體會維持不變，必須手動刪除或更新，以指向有效的主體實體。 若為載入記憶體中的實體，EF Core 會嘗試將外鍵屬性設定為 null。
 
@@ -118,17 +118,17 @@ ms.locfileid: "74824756"
 
 ## <a name="manual-configuration"></a>手動設定
 
-#### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
 
 若要在流暢的 API 中設定關聯性，您一開始會先識別構成關聯性的導覽屬性。 `HasOne` 或 `HasMany` 會識別您開始設定之實體類型的導覽屬性。 接著，您會將呼叫連結至 `WithOne` 或 `WithMany`，以識別反向導覽。 `HasOne`/`WithOne` 用於參考導覽屬性，而 `HasMany`/`WithMany` 用於集合導覽屬性。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoForeignKey.cs?highlight=14-16)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoForeignKey.cs?name=NoForeignKey&highlight=8-10)]
 
-#### <a name="data-annotationstabdata-annotations"></a>[資料批註](#tab/data-annotations)
+### <a name="data-annotationstabdata-annotations"></a>[資料批註](#tab/data-annotations)
 
 您可以使用資料批註來設定相依和主體實體上的導覽屬性如何配對。 當兩個實體類型之間有一對以上的導覽屬性時，通常就會執行這項作業。
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/InverseProperty.cs?highlight=33,36)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/InverseProperty.cs?name=InverseProperty&highlight=20,23)]
 
 > [!NOTE]
 > 您只能在相依實體的屬性上使用 [Required]，以影響關聯性的必要性。 [必要] 通常會忽略主體實體的導覽，但可能會導致實體成為相依專案。
@@ -142,21 +142,27 @@ ms.locfileid: "74824756"
 
 如果您只有一個導覽屬性，則會有 `WithOne` 和 `WithMany`的無參數多載。 這表示概念上的另一端有參考或集合，但實體類別中沒有包含任何導覽屬性。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/OneNavigation.cs?highlight=14-16)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/OneNavigation.cs?name=OneNavigation&highlight=8-10)]
 
 ### <a name="foreign-key"></a>外部索引鍵
 
-#### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+#### <a name="fluent-api-simple-keytabfluent-api-simple-key"></a>[流暢的 API （簡單金鑰）](#tab/fluent-api-simple-key)
 
-您可以使用流暢的 API 來設定應該使用哪一個屬性做為指定之關聯性的外鍵屬性。
+您可以使用流暢的 API 來設定應該使用哪一個屬性做為指定關聯性的外鍵屬性：
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ForeignKey.cs?highlight=17)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ForeignKey.cs?name=ForeignKey&highlight=11)]
 
-#### <a name="data-annotationstabdata-annotations"></a>[資料批註](#tab/data-annotations)
+#### <a name="fluent-api-composite-keytabfluent-api-composite-key"></a>[流暢 API （複合索引鍵）](#tab/fluent-api-composite-key)
 
-您可以使用資料批註來設定應該使用哪一個屬性做為指定關聯性的外鍵屬性。 這通常是在不依照慣例探索外鍵屬性時進行。
+您可以使用流暢的 API 來設定應該使用哪些屬性做為指定關聯性的複合外鍵屬性：
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/ForeignKey.cs?highlight=30)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositeForeignKey.cs?name=CompositeForeignKey&highlight=13)]
+
+#### <a name="data-annotations-simple-keytabdata-annotations-simple-key"></a>[資料批註（簡單索引鍵）](#tab/data-annotations-simple-key)
+
+您可以使用資料批註來設定應該使用哪一個屬性做為指定關聯性的外鍵屬性。 這通常是在不依照慣例探索外鍵屬性時完成：
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/ForeignKey.cs?name=ForeignKey&highlight=17)]
 
 > [!TIP]  
 > `[ForeignKey]` 注釋可以放在關聯性中的任一導覽屬性上。 不需要移至相依實體類別中的導覽屬性。
@@ -166,49 +172,59 @@ ms.locfileid: "74824756"
 
 ---
 
-下列程式碼顯示如何設定複合外鍵。
-
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositeForeignKey.cs?highlight=20)]
+#### <a name="shadow-foreign-key"></a>陰影外鍵
 
 您可以使用 `HasForeignKey(...)` 的字串多載，將陰影屬性設定為外鍵（如需詳細資訊，請參閱[陰影屬性](shadow-properties.md)）。 我們建議您先將 shadow 屬性明確加入至模型，再將其當做外鍵使用（如下所示）。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ShadowForeignKey.cs#Sample)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ShadowForeignKey.cs?name=ShadowForeignKey&highlight=10,16)]
+
+#### <a name="foreign-key-constraint-name"></a>外鍵條件約束名稱
+
+依照慣例，將目標設為關係資料庫時，外鍵條件約束會命名為 FK_<dependent type name> _<principal type name>_ <foreign key property name>。 對於複合外鍵 <foreign key property name> 會變成以底線分隔的外鍵屬性名稱清單。
+
+您也可以設定條件約束名稱，如下所示：
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ConstraintName.cs?name=ConstraintName&highlight=6-7)]
 
 ### <a name="without-navigation-property"></a>沒有導覽屬性
 
 您不一定需要提供導覽屬性。 您可以直接在關聯性的一端提供外鍵。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoNavigation.cs?highlight=14-17)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoNavigation.cs?name=NoNavigation&highlight=8-11)]
 
 ### <a name="principal-key"></a>主要金鑰
 
 如果您想要外鍵參考主鍵以外的屬性，您可以使用流暢的 API 來設定關聯性的主體索引鍵屬性。 您設定為主體金鑰的屬性會自動設定為[替代金鑰](alternate-keys.md)。
 
+#### <a name="simple-keytabsimple-key"></a>[簡單金鑰](#tab/simple-key)
+
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/PrincipalKey.cs?name=PrincipalKey&highlight=11)]
 
-下列程式碼會示範如何設定複合主體索引鍵。
+#### <a name="composite-keytabcomposite-key"></a>[複合索引鍵](#tab/composite-key)
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositePrincipalKey.cs?name=Composite&highlight=11)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositePrincipalKey.cs?name=CompositePrincipalKey&highlight=11)]
 
 > [!WARNING]  
 > 指定主體索引鍵屬性的順序必須符合為外鍵指定的順序。
+
+---
 
 ### <a name="required-and-optional-relationships"></a>必要和選擇性的關聯性
 
 您可以使用流暢的 API 來設定關聯性是否為必要或選擇性。 最後，這會控制外鍵屬性是否為必要或選擇性。 當您使用陰影狀態外鍵時，這是最有用的。 如果您的實體類別中有外鍵屬性，則關聯性的必要性取決於外鍵屬性是否為必要或選擇性（如需詳細資訊，請參閱[必要和選擇性屬性](required-optional.md)）。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/Required.cs?name=Required&highlight=11)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/Required.cs?name=Required&highlight=6)]
 
 > [!NOTE]
 > 呼叫 `IsRequired(false)` 也會使外鍵屬性變成選擇性，除非另有設定。
 
-### <a name="cascade-delete"></a>串聯刪除
+### <a name="cascade-delete"></a>Cascade 刪除
 
 您可以使用流暢的 API，為指定的關聯性明確設定串聯刪除行為。
 
 如需每個選項的詳細討論，請參閱串聯[刪除](../saving/cascade-delete.md)。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CascadeDelete.cs?name=CascadeDelete&highlight=11)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CascadeDelete.cs?name=CascadeDelete&highlight=6)]
 
 ## <a name="other-relationship-patterns"></a>其他關聯性模式
 
@@ -216,7 +232,7 @@ ms.locfileid: "74824756"
 
 一對一關聯性在兩端都有參考導覽屬性。 它們遵循與一對多關聯性相同的慣例，但是在外鍵屬性上引進了唯一的索引，以確保只有一個相依性與每個主體相關。
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/OneToOne.cs?name=Property&highlight=6,15,16)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/OneToOne.cs?name=OneToOne&highlight=6,15-16)]
 
 > [!NOTE]  
 > EF 會根據其偵測外鍵屬性的能力，選擇要相依的其中一個實體。 如果選擇錯誤的實體做為相依專案，您可以使用流暢的 API 來修正此問題。
@@ -231,4 +247,4 @@ ms.locfileid: "74824756"
 
 尚未支援多對多關聯性，但沒有實體類別來表示聯結資料表。 不過，您可以藉由包含聯結資料表的實體類別並對應兩個不同的一對多關聯性，來代表多對多關聯性。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=11,12,13,14,16,17,18,19,39,40,41,42,43,44,45,46)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=11-14,16-19,39-46)]

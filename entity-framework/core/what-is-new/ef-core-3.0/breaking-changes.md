@@ -3,12 +3,12 @@ title: EF Core 3.0 的中斷性變更 - EF Core
 author: ajcvickers
 ms.date: 12/03/2019
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: d614103169837238810fabd0a8889043c851ef14
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.openlocfilehash: cac166e9e194e512de7d730d27c061e6deaf5191
+ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824860"
+ms.lasthandoff: 12/27/2019
+ms.locfileid: "75502223"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>EF Core 3.0 中包含的重大變更
 
@@ -389,11 +389,11 @@ public string Id { get; set; }
 
 **原因**
 
-這項變更的目的是為了改善資料繫結和稽核情節的體驗，在這些情節中了解呼叫 `SaveChanges`「之前」將刪除哪些實體是很重要的。
+這項變更是為了改善資料系結和審核案例的體驗，在此您必須瞭解在呼叫 `SaveChanges`_之前_將刪除哪些實體。
 
 **風險降低**
 
-透過設定 `context.ChangedTracker` 可以還原舊行為。
+透過設定 `context.ChangeTracker` 可以還原舊行為。
 例如：
 
 ```csharp
@@ -1624,7 +1624,7 @@ var constraintName = myForeignKey.ConstraintName;
 
 **新行為**
 
-從 EF Core 3.0 開始，它是 DevelopmentDependency 套件。 這表示相依性將不會以可轉移方式流動到其他專案，而且您預設再也無法參考其組件。
+從 EF Core 3.0 開始，它是 DevelopmentDependency 套件。 這表示相依性不會傳遞至其他專案，而且根據預設，您無法再參考其元件。
 
 **原因**
 
@@ -1632,7 +1632,7 @@ var constraintName = myForeignKey.ConstraintName;
 
 **風險降低**
 
-若您必須參考此套件以覆寫 EF Core 的設計階段行為，您可以更新您專案中的 PackageReference 項目中繼資料。 若以可轉移方式透過 Microsoft.EntityFrameworkCore.Tools 參考該套件，您將必須新增明確的 PackageReference 到該套件以變更其中繼資料。
+如果您需要參考此封裝來覆寫 EF Core 的設計階段行為，則可以更新專案中的 PackageReference 專案中繼資料。
 
 ``` xml
 <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0">
@@ -1641,6 +1641,8 @@ var constraintName = myForeignKey.ConstraintName;
   <!--<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
 </PackageReference>
 ```
+
+若以可轉移方式透過 Microsoft.EntityFrameworkCore.Tools 參考該套件，您將必須新增明確的 PackageReference 到該套件以變更其中繼資料。 這類明確參考必須加入至需要封裝之類型的任何專案中。
 
 <a name="SQLitePCL"></a>
 
