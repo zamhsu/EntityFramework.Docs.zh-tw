@@ -79,18 +79,14 @@
           items:
             - name: 總覽
               href: core/modeling/index.md
-            - name: 包含與排除類型
-              href: core/modeling/included-types.md
-            - name: 包含與排除屬性
-              href: core/modeling/included-properties.md
-            - name: 索引鍵 (主要)
+            - name: 實體類型
+              href: core/modeling/entity-types.md
+            - name: 實體屬性
+              href: core/modeling/entity-properties.md
+            - name: 按鍵
               href: core/modeling/keys.md
             - name: 產生的值
               href: core/modeling/generated-properties.md
-            - name: 必要和選用屬性
-              href: core/modeling/required-optional.md
-            - name: 長度上限
-              href: core/modeling/max-length.md
             - name: 並行語彙基元
               href: core/modeling/concurrency.md
             - name: 陰影屬性
@@ -99,10 +95,10 @@
               href: core/modeling/relationships.md
             - name: 索引
               href: core/modeling/indexes.md
-            - name: 替代索引鍵
-              href: core/modeling/alternate-keys.md
             - name: 繼承
               href: core/modeling/inheritance.md
+            - name: 序列
+              href: core/modeling/sequences.md
             - name: 支援欄位
               href: core/modeling/backing-field.md
             - name: 值轉換
@@ -119,36 +115,13 @@
               href: core/modeling/keyless-entity-types.md
             - name: 以相同 DbContext 替代模型
               href: core/modeling/dynamic-model.md
-            - name: 空間資料 (GIS)
+            - name: 空間資料
+              displayName: GIS
               href: core/modeling/spatial.md
             - name: 關聯式資料庫模型化
               items:
                 - name: 總覽
                   href: core/modeling/relational/index.md
-                - name: 資料表對應
-                  href: core/modeling/relational/tables.md
-                - name: 資料行對應
-                  href: core/modeling/relational/columns.md
-                - name: 資料類型
-                  href: core/modeling/relational/data-types.md
-                - name: 主索引鍵
-                  href: core/modeling/relational/primary-keys.md
-                - name: 預設結構描述
-                  href: core/modeling/relational/default-schema.md
-                - name: 計算資料行
-                  href: core/modeling/relational/computed-columns.md
-                - name: 序列
-                  href: core/modeling/relational/sequences.md
-                - name: 預設值
-                  href: core/modeling/relational/default-values.md
-                - name: 索引
-                  href: core/modeling/relational/indexes.md
-                - name: 外部索引鍵條件約束
-                  href: core/modeling/relational/fk-constraints.md
-                - name: 替代索引鍵 (唯一條件約束)
-                  href: core/modeling/relational/unique-constraints.md
-                - name: 繼承 (關聯式資料庫)
-                  href: core/modeling/relational/inheritance.md
         - name: 管理資料庫結構描述
           items:
             - name: 總覽
@@ -505,7 +478,7 @@
           items:
             - name: 部落格
               href: ef6/resources/blogs.md
-            - name: 個案研究
+            - name: 案例研究
               href: ef6/resources/case-studies.md
             - name: 參與
               href: ef6/resources/contribute.md
