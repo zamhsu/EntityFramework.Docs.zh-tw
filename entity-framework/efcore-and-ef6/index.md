@@ -5,12 +5,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a6b9cd22-6803-4c6c-a4d4-21147c0a81cb
 uid: efcore-and-ef6/index
-ms.openlocfilehash: 9fe4905de5bd81fce083d620724b7fad4c6dd11b
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 62f7da64bbb6289edd38b877af71fc126e03d0f6
+ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182037"
+ms.lasthandoff: 12/27/2019
+ms.locfileid: "75502285"
 ---
 # <a name="compare-ef-core--ef6"></a>比較 EF Core 與 EF6
 
@@ -30,7 +30,7 @@ EF Core 旨在提供類似於 EF6 的開發人員體驗。 大部分的頂層 AP
 
 ## <a name="feature-comparison"></a>功能比較
 
-EF Core 提供的新功能將無法在 EF6 中實作 (例如[替代金鑰](xref:core/modeling/alternate-keys)、[批次更新](xref:core/what-is-new/ef-core-1.0#relational-batching-of-statements)及 [LINQ 查詢中的混合用戶端/資料庫評估](xref:core/querying/client-eval)。 但由於它是新的程式碼基底，所以也缺少 EF6 具有的一些功能。
+EF Core 提供的新功能將無法在 EF6 中實作 (例如[替代金鑰](xref:core/modeling/keys#alternate-keys)、[批次更新](xref:core/what-is-new/ef-core-1.0#relational-batching-of-statements)及 [LINQ 查詢中的混合用戶端/資料庫評估](xref:core/querying/client-eval)。 但由於它是新的程式碼基底，所以也缺少 EF6 具有的一些功能。
 
 下表比較 EF Core 和 EF6 中提供的功能。 這是一個上位階的比較，並不會列出每個功能，也不會解釋不同 EF 版本中同一項功能間的差異。
 
@@ -81,7 +81,7 @@ EF Core 行表示功能首次出現所在的產品版本。
 | GroupBy 轉譯                                   | 是      | 2.1                                   |
 | 載入相關資料：積極式                           | 是      | 1.0                                   |
 | 載入相關資料：衍生類型的積極式載入 |          | 2.1                                   |
-| 載入相關資料：緩慢                            | 是      | 2.1                                   |
+| 載入相關資料：消極式                            | 是      | 2.1                                   |
 | 載入相關資料：明確                        | 是      | 1.1                                   |
 | 原始 SQL 查詢：實體類型                         | 是      | 1.0                                   |
 | 原始 SQL 查詢：無索引鍵實體類型                 | 是      | 2.1                                   |
