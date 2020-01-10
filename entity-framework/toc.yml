@@ -53,7 +53,7 @@
               href: core/get-started/index.md
             - name: 安裝 EF Core
               href: core/get-started/install/index.md
-            - name: ⤤ ASP.NET Core 教學課程
+            - name: ASP.NET Core 教學課程 >>
               href: /aspnet/core/data/ef-rp/intro
         - name: 基礎
           items:
@@ -118,10 +118,6 @@
             - name: 空間資料
               displayName: GIS
               href: core/modeling/spatial.md
-            - name: 關聯式資料庫模型化
-              items:
-                - name: 總覽
-                  href: core/modeling/relational/index.md
         - name: 管理資料庫結構描述
           items:
             - name: 總覽
@@ -234,8 +230,8 @@
               href: core/miscellaneous/cli/dbcontext-creation.md
             - name: 設計階段服務
               href: core/miscellaneous/cli/services.md
-        - name: ⤤ EF Core API 參考
-          href: 'https://docs.microsoft.com/dotnet/api/?view=efcore-2.1'
+        - name: EF Core API 參考 >>
+          href: /dotnet/api/?view=efcore-3.1
     - name: Entity Framework 6
       items:
         - name: 總覽
@@ -542,5 +538,5 @@
                       href: ef6/resources/licenses/ef6/kor.md
                     - name: 俄文
                       href: ef6/resources/licenses/ef6/rus.md
-        - name: ⤤ EF6 API 參考
+        - name: EF6 API 參考 >>
           href: 'https://docs.microsoft.com/dotnet/api/?view=entity-framework-6.2.0'
