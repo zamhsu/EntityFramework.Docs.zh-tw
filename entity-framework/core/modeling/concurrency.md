@@ -1,57 +1,47 @@
 ---
-title: 並行語彙基元-EF Core
-author: rowanmiller
-ms.date: 03/03/2018
+title: 並行標記-EF Core
+author: AndriySvyryd
+ms.date: 01/03/2020
 ms.assetid: bc8b1cb0-befe-4b67-8004-26e6c5f69385
 uid: core/modeling/concurrency
-ms.openlocfilehash: db768c1de99000be91d33764ccd3c3924237f8bb
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 8a5f3aa09c2a83d5be0998a11ef2ee8100437514
+ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197461"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75781140"
 ---
 # <a name="concurrency-tokens"></a>並行語彙基元
 
 > [!NOTE]
-> 此頁面記載如何設定並行標記。 請參閱[處理並行存取衝突](../saving/concurrency.md)的並行存取控制的 EF Core 及如何處理您的應用程式中的並行存取衝突的範例的運作方式的詳細說明。
+> 此頁面記載如何設定並行標記。 如需並行存取控制如何在 EF Core 上運作的詳細說明，以及如何在您的應用程式中處理並行衝突的範例，請參閱[處理平行存取衝突](../saving/concurrency.md)。
 
 設定為並行標記的屬性會用來執行開放式並行存取控制。
 
-## <a name="conventions"></a>慣例
+## <a name="configuration"></a>組態
 
-依照慣例，屬性永遠不會設定為並行標記。
+### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
 
-## <a name="data-annotations"></a>資料註釋
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Concurrency.cs?name=Concurrency&highlight=5)]
 
-您可以使用資料批註，將屬性設定為並行標記。
+### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Concurrency.cs#ConfigureConcurrencyAnnotations)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Concurrency.cs?name=Concurrency&highlight=5)]
 
-## <a name="fluent-api"></a>Fluent API
+***
 
-您可以使用流暢的 API 將屬性設定為並行標記。
+## <a name="timestamprowversion"></a>時間戳記/rowversion
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Concurrency.cs#ConfigureConcurrencyFluent)]
+Timestamp/rowversion 是一個屬性，每次插入或更新資料列時，資料庫就會自動產生新的值。 屬性也會被視為並行標記，以確保當您要更新的資料列在查詢後已變更時，您會收到例外狀況。 精確的詳細資料取決於所使用的資料庫提供者。針對 SQL Server，通常會使用*byte []* 屬性，其會設定為資料庫中的*ROWVERSION*資料行。
 
-## <a name="timestamprow-version"></a>時間戳記/資料列版本
+您可以將屬性設定為時間戳記/rowversion，如下所示：
 
-時間戳記是一個屬性，在每次插入或更新資料列時，資料庫就會產生新的值。 屬性也會被視為並行標記。 這可確保當其他人在您查詢資料之後，修改了您嘗試更新的資料列時，您會收到例外狀況。
+### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
 
-如何達成此目的是要使用的資料庫提供者。 針對 SQL Server，時間戳記通常用於*byte []* 屬性，它會設定為資料庫中的*ROWVERSION*資料行。
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Timestamp.cs?name=Timestamp&highlight=7)]
 
-### <a name="conventions"></a>慣例
+### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
 
-依照慣例，屬性永遠不會設定為時間戳記。
+[！ code-csharp [Main] （.。/../../samples/core/Modeling/FluentAPI/Timestamp.cs？ name = Timestamp & 醒目提示 = 9，17]
 
-### <a name="data-annotations"></a>資料註釋
-
-您可以使用資料批註，將屬性設定為時間戳記。
-
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Timestamp.cs#ConfigureTimestampAnnotations)]
-
-### <a name="fluent-api"></a>Fluent API
-
-您可以使用流暢的 API，將屬性設定為時間戳記。
-
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Timestamp.cs#ConfigureTimestampFluent)]
+***

@@ -3,19 +3,16 @@ title: 資料表分割-EF Core
 description: 如何使用 Entity Framework Core 設定資料表分割
 author: AndriySvyryd
 ms.author: ansvyryd
-ms.date: 04/10/2019
+ms.date: 01/03/2020
 uid: core/modeling/table-splitting
-ms.openlocfilehash: 0e48c516de43cdc2b54c56f1a96f5e01f9fbbbc4
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.openlocfilehash: c38d3ee0efa82f84a1051017ae40c9f3fdd57f1f
+ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824564"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75781166"
 ---
 # <a name="table-splitting"></a>資料表分割
-
->[!NOTE]
-> 這項功能在 EF Core 2.0 中是新的。
 
 EF Core 允許將兩個或多個實體對應至單一資料列。 這稱為「_資料表分割_」或「_資料表共用_」。
 
@@ -33,21 +30,28 @@ EF Core 允許將兩個或多個實體對應至單一資料列。 這稱為「_�
 
 除了所需的設定之外，我們還會呼叫 `Property(o => o.Status).HasColumnName("Status")` 將 `DetailedOrder.Status` 對應到與 `Order.Status`相同的資料行。
 
-[!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting&highlight=3)]
+[!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting)]
 
 > [!TIP]
 > 如需詳細內容，請參閱[完整的範例專案](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting)。
 
 ## <a name="usage"></a>使用
 
-使用資料表分割來儲存和查詢實體的方式與其他實體相同。 從 EF Core 3.0 開始，可以 `null`相依的實體參考。 如果相依實體所使用的所有資料行都 `NULL` 是資料庫，則查詢時將不會建立它的實例。 這也會發生在所有屬性都是選擇性的，而且設定為 `null`，這可能不是預期的。
+使用資料表分割來儲存和查詢實體的方式與其他實體相同：
 
 [!code-csharp[Usage](../../../samples/core/Modeling/TableSplitting/Program.cs?name=Usage)]
 
+## <a name="optional-dependent-entity"></a>選擇性的相依實體
+
+> [!NOTE]
+> 這項功能是在 EF Core 3.0 中引進。
+
+如果相依實體所使用的所有資料行都 `NULL` 在資料庫中，則查詢時不會建立它的實例。 這可讓您建立選擇性相依實體的模型，其中主體上的關聯性屬性會是 null。 請注意，這也會發生在所有相依的屬性都是選擇性的，而且設定為 `null`，這可能不是預期的。
+
 ## <a name="concurrency-tokens"></a>並行標記
 
-如果共用資料表的任何實體類型具有並行 token，則必須將它包含在所有其他實體類型中，以避免只有對應到相同資料表的其中一個實體更新時，才會有過時的並行標記值。
+如果共用資料表的任何實體類型有並行 token，則也必須將它包含在所有其他實體類型中。 這是必要的，以便在只更新對應至相同資料表的其中一個實體時，避免過時的並行標記值。
 
-為了避免將它公開給取用的程式碼，您可以在陰影狀態中建立一個。
+若要避免將並行權杖公開給取用程式碼，您可以建立一個做為[陰影屬性](xref:core/modeling/shadow-properties)：
 
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=ConcurrencyToken&highlight=2)]

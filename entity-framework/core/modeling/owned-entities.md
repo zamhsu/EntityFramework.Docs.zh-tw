@@ -5,17 +5,14 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 7b6d1b3bccbfceb85f03a580ba03a45984d29c74
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.openlocfilehash: 30b91b6e66b6c0f516d1ba12485304b52770cbef
+ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824602"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75781231"
 ---
 # <a name="owned-entity-types"></a>擁有的實體類型
-
-> [!NOTE]
-> 這項功能在 EF Core 2.0 中是新的。
 
 EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類型模型化。 這些稱為「_自有實體類型_」。 包含自有實體類型的實體是_其擁有者。_
 
@@ -56,7 +53,7 @@ EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類
 
 若要設定擁有類型的集合，請使用 `OnModelCreating`中的 `OwnsMany`。
 
-擁有的類型需要主要金鑰。 如果 .NET 類型上沒有良好的候選項目屬性，EF Core 可以嘗試建立一個。 不過，當擁有的型別是透過集合來定義時，只是建立一個陰影屬性，同時做為擁有者的外鍵和所擁有之實例的主鍵，如同 `OwnsOne`：每個都可以有多個擁有的型別實例。擁有者，因此擁有者的金鑰不足，無法為每個擁有的實例提供唯一的身分識別。
+擁有的類型需要主要金鑰。 如果 .NET 類型上沒有良好的候選項目屬性，EF Core 可以嘗試建立一個。 不過，當擁有的型別是透過集合所定義時，就無法只建立陰影屬性來當做外鍵同時做為擁有者實例和擁有者的主要索引鍵，如同 `OwnsOne`：每個擁有者都可以有多個擁有的型別實例，因此擁有者的索引鍵也不足以提供每個擁有之實例的唯一身分識別。
 
 這兩個最直接的解決辦法是：
 
