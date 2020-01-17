@@ -4,12 +4,12 @@ author: roji
 ms.date: 09/09/2019
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 0d05902566b6b166f1267915d9f698ed29dff588
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.openlocfilehash: c16a475c363320cd18804a4efe78ccae1ae22f0d
+ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502063"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76124349"
 ---
 # <a name="working-with-nullable-reference-types"></a>使用可為 Null 的參考型別
 
@@ -38,9 +38,9 @@ C#8引進了一個稱為[nullable 參考型別](/dotnet/csharp/tutorials/nullabl
 
 處理這些案例的其中一種方式，是將不可為 null 的屬性與可為 null 的[支援欄位](xref:core/modeling/backing-field)搭配使用：
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Order.cs?range=12-17)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Order.cs?range=10-17)]
 
-由於導覽屬性不可為 null，因此會設定必要的導覽;而且只要正確載入導覽，就可以透過屬性存取相依性。 不過，如果在沒有第一次正確載入相關實體的情況下存取屬性，則會擲回 InvalidOperationException，因為 API 合約的使用不正確。
+由於導覽屬性不可為 null，因此會設定必要的導覽;而且只要正確載入導覽，就可以透過屬性存取相依性。 不過，如果在沒有第一次正確載入相關實體的情況下存取屬性，則會擲回 InvalidOperationException，因為 API 合約的使用不正確。 請注意，EF 必須設定為一律存取支援欄位，而不是屬性，因為它依賴能夠讀取值，即使未設定也是如此。請參閱[支援欄位](xref:core/modeling/backing-field)上的檔，以瞭解如何執行此操作，並考慮指定 `PropertyAccessMode.Field` 以確保設定正確。
 
 做為 terser 的替代方案，您可以使用 null 容許運算子（！）的協助，將屬性初始化為 null：
 
@@ -63,6 +63,7 @@ C#8引進了一個稱為[nullable 參考型別](/dotnet/csharp/tutorials/nullabl
 
 如果您發現自己這麼做很多，而且有問題的實體類型主要（或專門）用於 EF Core 查詢，請考慮將導覽屬性設為不可為 null，並透過流暢的 API 或資料批註，將其設定為選擇性。 這會移除所有編譯器警告，同時保持關聯性的選擇性;不過，如果您的實體在 EF Core 之外進行遍歷，您可能會觀察到 null 值，雖然屬性會標注為不可為 null。
 
-## <a name="scaffolding"></a>Scaffolding
+## <a name="limitations"></a>限制
 
-[反向C#工程目前不支援8可為 null 的參考型別功能](/dotnet/csharp/tutorials/nullable-reference-types)： EF Core 一律C#會產生假設功能已關閉的程式碼。 例如，可為 null 的文字資料行將會 scaffold 為具有類型 `string` 的屬性，而不是 `string?`，其中包含用來設定是否需要屬性的流暢 API 或資料批註。 您可以編輯 scaffold 程式碼，並將其C#取代為 null 屬性注釋。 由問題[#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)追蹤可為 null 之參考型別的樣板支援。
+* 反向工程目前不支援[ C# 8 個可為 null 的參考型別（NRTs）](/dotnet/csharp/tutorials/nullable-reference-types)： C# EF Core 一律會產生假設此功能已關閉的程式碼。 例如，可為 null 的文字資料行將會 scaffold 為具有類型 `string` 的屬性，而不是 `string?`，其中包含用來設定是否需要屬性的流暢 API 或資料批註。 您可以編輯 scaffold 程式碼，並將其C#取代為 null 屬性注釋。 由問題[#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)追蹤可為 null 之參考型別的樣板支援。
+* EF Core 的公用 API 介面尚未標注 null 屬性（公用 API 是 "null-遺忘式"），因此在開啟 NRT 功能時，有時會很難使用。 這值得注意的是，EF Core 所公開的非同步 LINQ 運算子，例如[FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_)。 我們計畫在5.0 版本中解決此情況。

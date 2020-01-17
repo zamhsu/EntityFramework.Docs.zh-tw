@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: 8dae1ab949c77ffa08904b12a5716b729e6913a1
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.openlocfilehash: 5b45f83ca7f02665f52ccfe16b5af506a6046a62
+ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502236"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76124427"
 ---
 # <a name="spatial-data"></a>空間資料
 
@@ -240,6 +240,22 @@ apt-get install libsqlite3-mod-spatialite
 
 # macOS
 brew install libspatialite
+```
+
+可惜的是，較新版本的 PROJ （SpatiaLite 的相依性）與 EF 的預設[SQLitePCLRaw](/dotnet/standard/data/sqlite/custom-versions#bundles)組合不相容。 若要解決此情況，您可以建立使用系統 SQLite 程式庫的自訂[SQLitePCLRaw 提供者](/dotnet/standard/data/sqlite/custom-versions#sqlitepclraw-providers)，或者您可以安裝 SpatiaLite 停用 PROJ 支援的自訂群組建。
+
+``` sh
+curl https://www.gaia-gis.it/gaia-sins/libspatialite-4.3.0a.tar.gz | tar -xz
+cd libspatialite-4.3.0a
+
+if [[ `uname -s` == Darwin* ]]; then
+    # Mac OS requires some minor patching
+    sed -i "" "s/shrext_cmds='\`test \\.\$module = .yes && echo .so \\|\\| echo \\.dylib\`'/shrext_cmds='.dylib'/g" configure
+fi
+
+./configure --disable-proj
+make
+make install
 ```
 
 ### <a name="configuring-srid"></a>設定 SRID
