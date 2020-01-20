@@ -19,10 +19,16 @@
       items:
         - name: 總覽
           href: core/index.md
-        - name: 新功能
+        - name: 版本和計劃
           items:
             - name: 總覽
               href: core/what-is-new/index.md
+            - name: 發行計劃程序
+              href: core/what-is-new/release-planning.md
+            - name: EF Core 5.0
+              items:
+                - name: 概略計劃
+                  href: core/what-is-new/ef-core-5.0/plan.md
             - name: EF Core 3.0
               items:
                 - name: 新功能
