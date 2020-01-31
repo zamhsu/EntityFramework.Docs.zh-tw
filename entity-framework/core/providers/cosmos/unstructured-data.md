@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/unstructured-data
-ms.openlocfilehash: 0bfccbfd3af6e209967004752b5a3947d644544b
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 69f979d46174ff56310b334f28438ac271f45155
+ms.sourcegitcommit: b3cf5d2e3cb170b9916795d1d8c88678269639b1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655522"
+ms.lasthandoff: 01/30/2020
+ms.locfileid: "76888092"
 ---
 # <a name="working-with-unstructured-data-in-ef-core-azure-cosmos-db-provider"></a>使用 EF Core Azure Cosmos DB 提供者中的非結構化資料
 
@@ -55,11 +55,11 @@ EF Core 的設計可讓您輕鬆地使用遵循模型中所定義之架構的資
 
 ## <a name="missing-property-values"></a>遺漏屬性值
 
-在上述範例中，我們從訂單中移除 `"TrackingNumber"` 屬性。 因為索引在 Cosmos DB 中的運作方式，所以參考遺漏屬性的查詢不在投影中，而是會傳回非預期的結果。 例如:
+在上述範例中，我們從訂單中移除 `"TrackingNumber"` 屬性。 因為索引在 Cosmos DB 中的運作方式，所以參考遺漏屬性的查詢不在投影中，而是會傳回非預期的結果。 例如：
 
 [!code-csharp[MissingProperties](../../../../samples/core/Cosmos/UnstructuredData/Sample.cs?name=MissingProperties)]
 
 已排序的查詢實際上不會傳回任何結果。 這表示當直接使用存放區時，一定要特別注意一個 EF Core 所對應的屬性。
 
 > [!NOTE]
-> 在未來的 Cosmos 版本中，此行為可能會變更。 例如，目前索引編制原則是否定義複合索引 {Id/？ ASC、TrackingNumber/？ ASC）}，然後查詢具有 ' ORDER BY c.Id ASC，c. 鑒別子 ASC '__會__傳回遺漏 `"TrackingNumber"` 屬性的專案。
+> 在未來的 Cosmos 版本中，此行為可能會變更。 例如，目前索引編制原則是否定義複合索引 {Id/？ ASC、TrackingNumber/？ ASC）}，則具有 ' ORDER BY c.Id ASC，c. 鑒別子 ASC ' 的查詢__會__傳回遺漏 `"TrackingNumber"` 屬性的專案。

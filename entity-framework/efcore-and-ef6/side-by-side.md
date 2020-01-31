@@ -1,15 +1,15 @@
 ---
 title: EF6 和 EF Core - 在相同的應用程式中使用它們
-author: rowanmiller
-ms.date: 10/27/2016
+author: ajcvickers
+ms.date: 01/23/2019
 ms.assetid: a06e3c35-110c-4294-a1e2-32d2c31c90a7
 uid: efcore-and-ef6/side-by-side
-ms.openlocfilehash: 8bf9f51c0e5c4b1b3adf4a6a9a894689dc13d2d9
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: bcf0a26535c4ec880a9ac25478c987fb683f6d26
+ms.sourcegitcommit: b3cf5d2e3cb170b9916795d1d8c88678269639b1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149290"
+ms.lasthandoff: 01/30/2020
+ms.locfileid: "76888131"
 ---
 # <a name="using-ef-core-and-ef6-in-the-same-application"></a>在相同的應用程式中使用 EF Core 和 EF6
 

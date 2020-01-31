@@ -3,12 +3,12 @@ title: EF Core 3.0 的中斷性變更 - EF Core
 author: ajcvickers
 ms.date: 12/03/2019
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 0626ffe98843fbf5ee0e2de4b269da6c395c07f6
-ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
+ms.openlocfilehash: 6e0c17a22b56b206f18e47f678e3e237d5c42375
+ms.sourcegitcommit: b3cf5d2e3cb170b9916795d1d8c88678269639b1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75781218"
+ms.lasthandoff: 01/30/2020
+ms.locfileid: "76888105"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>EF Core 3.0 中包含的重大變更
 
@@ -109,6 +109,9 @@ ms.locfileid: "75781218"
 
 [追蹤問題 #15498](https://github.com/aspnet/EntityFrameworkCore/issues/15498)
 
+> [!IMPORTANT] 
+> EF Core 3.1 的目標 .NET Standard 2.0。 這會傳回 .NET Framework 的支援。
+
 **舊行為**
 
 在 3.0 之前，EF Core 以 .NET Standard 2.0 為目標，且執行於支援該標準的所有平台上，包括 .NET Framework。
@@ -123,7 +126,7 @@ ms.locfileid: "75781218"
 
 **風險降低**
 
-請考慮移至現代化的 .NET 平台。 如果無法如此做，請繼續使用 EF Core 2.1 或 EF Core 2.2，這兩者皆支援 .NET Framework。
+使用 EF Core 3.1。
 
 <a name="no-longer"></a>
 ### <a name="entity-framework-core-is-no-longer-part-of-the-aspnet-core-shared-framework"></a>Entity Framework Core 不再屬於 ASP.NET Core 共用架構
@@ -236,7 +239,7 @@ context.Products.FromSqlRaw("[dbo].[Ten Most Expensive Products]").FirstOrDefaul
 
 EF Core 3.0 不支援自動用戶端評估，因為它容易發生錯誤，如[這裡](#linq-queries-are-no-longer-evaluated-on-the-client)所述。
 
-**風險降低**
+**緩解**
 
 如果您使用 FromSqlRaw/FromSqlInterpolated 中的預存程式，您就知道它無法由撰寫，因此您可以在 FromSql 方法呼叫之後加入__enumerable.asenumerable/AsAsyncEnumerable__ ，以避免伺服器端上的任何組合。
 
@@ -273,7 +276,7 @@ context.Products.FromSqlRaw("[dbo].[Ten Most Expensive Products]").AsEnumerable(
 
 **舊行為**
 
-在 EF Core 3.0 之前，每次出現具有給定類型與識別碼的實體時，皆會使用相同的實體執行個體。 如此符合追蹤查詢的行為。 例如，下列查詢︰
+在 EF Core 3.0 之前，每次出現具有給定類型與識別碼的實體時，皆會使用相同的實體執行個體。 如此符合追蹤查詢的行為。 例如，下列查詢：
 
 ```csharp
 var results = context.Products.Include(e => e.Category).AsNoTracking().ToList();
