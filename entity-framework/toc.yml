@@ -21,7 +21,7 @@
           href: core/index.md
         - name: 版本和計劃
           items:
-            - name: 總覽
+            - name: 目前和已規劃的版本 (藍圖)
               href: core/what-is-new/index.md
             - name: 發行計劃程序
               href: core/what-is-new/release-planning.md
