@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 6903aab4911f7478afe3d8987a791ae1c5ccebce
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.openlocfilehash: 7451ce6e8d5d7078b3f56a6865aa7698e6fc63ca
+ms.sourcegitcommit: b3cf5d2e3cb170b9916795d1d8c88678269639b1
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502210"
+ms.lasthandoff: 01/30/2020
+ms.locfileid: "76888118"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB 提供者
 
@@ -52,7 +52,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 [!code-csharp[Configuration](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=Configuration)]
 
 > [!WARNING]
-> 為了簡便，此處將端點和索引鍵進行了硬式編碼，但應在生產應用程式中[以安全的方式儲存它們](/aspnet/core/security/app-secrets#secret-manager)
+> 為簡便起見，此處將端點和索引鍵進行了硬式編碼，但這些內容在生產應用程式中應予以[安全儲存](/aspnet/core/security/app-secrets#secret-manager)。
 
 在此範例中，`Order` 是簡單實體，其參考[自有類型](../../modeling/owned-entities.md) `StreetAddress`。
 

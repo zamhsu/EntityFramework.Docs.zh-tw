@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 12/17/2019
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: bab725afffe1fbf9f8c0abeef58579ac9dc842d2
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.openlocfilehash: 99f59153a452a2f4aad5811110ebc5b5da7717ef
+ms.sourcegitcommit: b3cf5d2e3cb170b9916795d1d8c88678269639b1
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502078"
+ms.lasthandoff: 01/30/2020
+ms.locfileid: "76888050"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -31,6 +31,12 @@ LLBLGen Pro 是實體模型化解決方案，具備 Entity Framework 與 Entity 
 Devart Entity 是功能強大的 ORM 設計工具，適用於 ADO.NET Entity Framework、NHibernate、LinqConnect、Telerik Data Access、LINQ 到 SQL。 它支援使用 model first 或 database first 方法，以及 C# 或 Visual Basic 程式碼產生，以視覺化的方式設計 EF Core 模型。 適用於 EF Core：2.
 
 [網站](https://www.devart.com/entitydeveloper/)
+
+### <a name="nhydrate-orm-for-entity-framework"></a>Entity Framework 的 nHydrate ORM
+
+為 Entity Framework 建立可延伸類別的強型別 ORM。 產生的程式碼為 Entity Framework Core。 因此兩者沒有任何不同。 這不能取代 EF 或自訂 ORM。 這是一種視覺化的模型化層，可讓小組管理複雜的資料庫結構描述。 適用於 Git 這類的 SCM 軟體，允許多使用者存取模型，但具有最少的衝突。 安裝程式會追蹤模型變更並建立升級指令碼。 適用於 EF Core：3.
+
+[Github 網站](https://github.com/nHydrate/nHydrate)
 
 ### <a name="ef-core-power-tools"></a>EF Core Power Tools
 
@@ -163,3 +169,9 @@ Entity Framework Core 的延伸模組程式庫，可讓使用 SQL Server 的開�
 使用高效能批次作業延伸您的 DbContext：BulkSaveChanges、BulkInsert、BulkUpdate、BulkDelete、BulkMerge 等。 適用於 EF Core：2、3。
 
 [網站](https://entityframework-extensions.net/)
+
+### <a name="expressionify"></a>Expressionify
+
+新增在 linq Lambda 中呼叫擴充方法的支援。 適用於 EF Core：3.1
+
+[GitHub 存放庫](https://github.com/ClaveConsulting/Expressionify)
