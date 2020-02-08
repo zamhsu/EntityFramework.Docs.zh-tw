@@ -4,12 +4,12 @@ description: 如何在使用 Entity Framework Core 時，設定實體類型之�
 author: AndriySvyryd
 ms.date: 11/21/2019
 uid: core/modeling/relationships
-ms.openlocfilehash: 6b3e0636bfa266b78baafe1b6e318c9707294560
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.openlocfilehash: 6d68e813cec6c989e8e4cb848f8740489645c65c
+ms.sourcegitcommit: 89567d08c9d8bf9c33bb55a62f17067094a4065a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502184"
+ms.lasthandoff: 02/06/2020
+ms.locfileid: "77051403"
 ---
 # <a name="relationships"></a>關聯性
 
@@ -26,9 +26,9 @@ ms.locfileid: "75502184"
 
 * **主體實體：** 這是包含主要/替代索引鍵屬性的實體。 有時稱為關聯性的「父系」。
 
-* **外鍵：** 相依實體中用來儲存相關實體之主體索引鍵值的屬性。
-
 * **主要金鑰：** 可唯一識別主體實體的屬性。 這可能是主要金鑰或替代索引鍵。
+
+* **外鍵：** 相依實體中用來儲存相關實體之主體索引鍵值的屬性。
 
 * **導覽屬性：** 定義于主體和/或相依實體（參考相關實體）上的屬性。
 
@@ -48,9 +48,9 @@ ms.locfileid: "75502184"
 
 * `Blog` 是主體實體
 
-* `Post.BlogId` 是外鍵
-
 * `Blog.BlogId` 是主要金鑰（在此案例中，它是主鍵，而不是替代金鑰）
+
+* `Post.BlogId` 是外鍵
 
 * `Post.Blog` 是參考導覽屬性
 
