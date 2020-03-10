@@ -5,11 +5,11 @@ ms.date: 12/17/2019
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
 ms.openlocfilehash: 99f59153a452a2f4aad5811110ebc5b5da7717ef
-ms.sourcegitcommit: b3cf5d2e3cb170b9916795d1d8c88678269639b1
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/30/2020
-ms.locfileid: "76888050"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78412993"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 

@@ -6,11 +6,11 @@ ms.date: 01/23/2019
 ms.assetid: a6b9cd22-6803-4c6c-a4d4-21147c0a81cb
 uid: efcore-and-ef6/index
 ms.openlocfilehash: e28c7d0299e5089f56fb0795d00917cfc30f5cf1
-ms.sourcegitcommit: b3cf5d2e3cb170b9916795d1d8c88678269639b1
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/30/2020
-ms.locfileid: "76888144"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413393"
 ---
 # <a name="compare-ef-core--ef6"></a>比較 EF Core 與 EF6
 

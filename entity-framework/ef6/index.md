@@ -5,11 +5,11 @@ ms.date: 10/23/2016
 ms.assetid: 8ae74d63-6bad-4686-b325-bbf9d68f3743
 uid: ef6/index
 ms.openlocfilehash: 28a13879416a52cbe8035c23013f16390c75c4c9
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656185"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78412753"
 ---
 # <a name="entity-framework-6"></a>Entity Framework 6
 Entity Framework 6 (EF6) 是通過試驗及測試的 .NET 物件關聯式對應程式 (O/RM)，歷經多年的功能開發和穩固。
@@ -40,7 +40,7 @@ EF Core 是完全重新撰寫的版本，包含許多 EF6 並未提供的新功�
 如果功能集符合您的需求，請考慮在新的應用程式中使用 EF Core。
 [比較 EF Core 與 EF6](xref:efcore-and-ef6/index)可更詳細地檢查這項選擇。
 
-## <a name="get-startedxrefef6get-started"></a>[開始使用](xref:ef6/get-started)
+## <a name="get-started"></a>[開始使用](xref:ef6/get-started)
 
 將 EntityFramework NuGet 套件新增至您的專案，或安裝 [Entity Framework Tools for Visual Studio](https://aka.ms/AA6i8c5)。 接著觀看影片、閱讀教學課程和進階文件，以協助您充分利用 EF6。
 

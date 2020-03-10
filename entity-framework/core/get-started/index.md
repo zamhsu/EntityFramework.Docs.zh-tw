@@ -4,12 +4,12 @@ author: rick-anderson
 ms.date: 09/17/2019
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: 8aea40b9caaf454bc06d4991fd403e1ad0ff9b93
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.openlocfilehash: 0e7a1ee159cdf5b72448fe6d73c972975b1ab95b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502015"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78412863"
 ---
 # <a name="getting-started-with-ef-core"></a>開始使用 EF Core
 
@@ -17,17 +17,17 @@ ms.locfileid: "75502015"
 
 若要遵循本教學課程，您可以在 Windows 上使用 Visual Studio 或在 Windows、macOS 或 Linux 上使用 .NET Core CLI。
 
-[在 GitHub 上檢視此文章的範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted)。
+[在 GitHub 上檢視此文章的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/GetStarted)。
 
 ## <a name="prerequisites"></a>必要條件
 
 安裝下列軟體：
 
-### <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+### <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-* [.NET Core 3.0 SDK](https://www.microsoft.com/net/download/core)。
+* [.NET Core SDK](https://www.microsoft.com/net/download/core)。
 
-### <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [Visual Studio 2019 16.3 版或更新版本](https://www.visualstudio.com/downloads/)與此工作負載：
   * **.NET Core 跨平台開發** (位在 [其他工具組]  下)
@@ -36,14 +36,14 @@ ms.locfileid: "75502015"
 
 ## <a name="create-a-new-project"></a>建立新專案
 
-### <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+### <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet new console -o EFGetStarted
 cd EFGetStarted
 ```
 
-### <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 開啟 Visual Studio
 * 按一下 [建立新專案] 
@@ -56,13 +56,13 @@ cd EFGetStarted
 
 若要安裝 EF Core，請為希望作為目標的 EF Core 資料庫提供者，安裝此套件。 本教學課程會使用 SQLite，因為它可以在 .NET Core 支援的所有平台上執行。 如需可用的提供者清單，請參閱[資料庫提供者](../providers/index.md)。
 
-### <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+### <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 ```
 
-### <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [工具] > [NuGet 套件管理員] > [套件管理員主控台] 
 * 執行下列命令：
@@ -79,11 +79,11 @@ dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 
 定義組成模型的內容類別與實體類別。
 
-### <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+### <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 * 在專案目錄中，使用下列程式碼建立 **Model.cs**
 
-### <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 以滑鼠右鍵按一下專案，然後選取 [新增] > [類別] 
 * 輸入 **Model.cs** 作為名稱，然後按一下 [新增] 
@@ -101,7 +101,7 @@ EF Core 也可以對現有資料庫中的模型進行[反向工程](../managing-
 
 下列步驟會使用[移轉](xref:core/managing-schemas/migrations/index)來建立資料庫。
 
-### <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+### <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 * 執行下列命令：
 
@@ -114,7 +114,7 @@ EF Core 也可以對現有資料庫中的模型進行[反向工程](../managing-
 
   這會安裝 [dotnet ef](../miscellaneous/cli/dotnet.md) 以及在專案上執行命令所需的設計套件。 `migrations` 命令會建立移轉的 Scaffolding，以針對模型建立一組初始資料表。 `database update` 命令會建立資料庫，並對資料庫套用新的移轉。
 
-### <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 在**套件管理器主控台**中執行下列命令
 
@@ -136,13 +136,13 @@ EF Core 也可以對現有資料庫中的模型進行[反向工程](../managing-
 
 ## <a name="run-the-app"></a>執行應用程式
 
-### <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+### <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet run
 ```
 
-### <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 執行 .NET Core 主控台應用程式時，Visual Studio 會使用不一致的工作目錄。 (請參閱 [dotnet/project-system#3619](https://github.com/dotnet/project-system/issues/3619)) 這會導致擲回例外狀況：「沒有這個表格：  部落格」。 更新工作目錄：
 

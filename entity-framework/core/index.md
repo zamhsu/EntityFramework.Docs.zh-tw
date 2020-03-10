@@ -5,11 +5,11 @@ ms.date: 10/27/2016
 ms.assetid: bc2a2676-bc46-493f-bf49-e3cc97994d57
 uid: core/index
 ms.openlocfilehash: e6127f775d6bbbdf81debf5519388fe252fe079d
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655614"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78412833"
 ---
 # <a name="entity-framework-core"></a>Entity Framework Core
 

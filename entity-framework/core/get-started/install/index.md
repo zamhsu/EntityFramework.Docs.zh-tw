@@ -4,12 +4,12 @@ author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: 1121b2bde1ada74ee189287501bc770aeb65e358
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.openlocfilehash: 987b6f38954c291f88b5167fa9b061853b15a6cb
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824434"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78412853"
 ---
 # <a name="installing-entity-framework-core"></a>安裝 Entity Framework Core
 
@@ -98,8 +98,6 @@ ms.locfileid: "74824434"
 ```dotnetcli
 dotnet add package Microsoft.EntityFrameworkCore.Design
 ```
-
-若為 ASP.NET Core 應用程式，則已自動包含此套件。
 
 > [!IMPORTANT]
 > 一律使用符合執行階段套件主要版本的工具套件版本。
