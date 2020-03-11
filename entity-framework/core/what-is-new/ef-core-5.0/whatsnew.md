@@ -3,12 +3,12 @@ title: 5\.0 EF Core 的新功能
 author: ajcvickers
 ms.date: 01/29/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew.md
-ms.openlocfilehash: e858379cc46abbef999fd32a3685e1d522524889
-ms.sourcegitcommit: 89567d08c9d8bf9c33bb55a62f17067094a4065a
+ms.openlocfilehash: 65d7bd43e8a00c77fd6091a74c677635710d03e3
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/06/2020
-ms.locfileid: "77052029"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417963"
 ---
 # <a name="whats-new-in-ef-core-50"></a>5\.0 EF Core 的新功能
 
@@ -30,7 +30,7 @@ EF Core 5.0 目前正在開發中。
 
 [2019 年12月5日的 EF 每週狀態](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863)會包含初稿檔。
 
-其他檔則是由問題[#2085](https://github.com/aspnet/EntityFramework.Docs/issues/2085)追蹤。
+其他檔則是由問題[#2085](https://github.com/dotnet/EntityFramework.Docs/issues/2085)追蹤。
 
 ### <a name="simple-way-to-get-generated-sql"></a>取得產生之 SQL 的簡單方式
 
@@ -38,7 +38,7 @@ EF Core 5.0 引進 `ToQueryString` 擴充方法，其會傳回執行 LINQ 查詢
 
 初稿檔包含在[2020 年1月9日的 EF 每週狀態](https://github.com/dotnet/efcore/issues/19549#issuecomment-572823246)。
 
-其他檔則是由問題[#1331](https://github.com/aspnet/EntityFramework.Docs/issues/1331)追蹤。
+其他檔則是由問題[#1331](https://github.com/dotnet/EntityFramework.Docs/issues/1331)追蹤。
 
 ### <a name="enhanced-debug-views"></a>增強的調試視圖
 
@@ -48,7 +48,7 @@ EF Core 5.0 引進 `ToQueryString` 擴充方法，其會傳回執行 LINQ 查詢
 
 [2019 年12月12日的 EF 每週狀態](https://github.com/dotnet/efcore/issues/15403#issuecomment-565196206)會包含初稿檔。
 
-其他檔則是由問題[#2086](https://github.com/aspnet/EntityFramework.Docs/issues/2086)追蹤。
+其他檔則是由問題[#2086](https://github.com/dotnet/EntityFramework.Docs/issues/2086)追蹤。
 
 ### <a name="connection-or-connection-string-can-be-changed-on-initialized-dbcontext"></a>連接或連接字串可以在初始化的 DbCoNtext 上變更
 
@@ -56,7 +56,7 @@ EF Core 5.0 引進 `ToQueryString` 擴充方法，其會傳回執行 LINQ 查詢
 此外，連接或連接字串現在可以在內容實例上進行變化。
 這可讓相同的內容實例動態連接到不同的資料庫。
 
-檔是由問題[#2075](https://github.com/aspnet/EntityFramework.Docs/issues/2075)追蹤。
+檔是由問題[#2075](https://github.com/dotnet/EntityFramework.Docs/issues/2075)追蹤。
 
 ### <a name="change-tracking-proxies"></a>變更追蹤 proxy
 
@@ -64,7 +64,7 @@ EF Core 現在可以產生自動執行[INotifyPropertyChanging](https://docs.mic
 這些之後，實體屬性上的這些值會直接變更為 EF Core，避免需要掃描變更。
 不過，proxy 會有自己的一組限制，因此不適合所有人。
 
-檔是由問題[#2076](https://github.com/aspnet/EntityFramework.Docs/issues/2076)追蹤。
+檔是由問題[#2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076)追蹤。
 
 ### <a name="improved-handling-of-database-null-semantics"></a>改善資料庫 null 語義的處理
 
@@ -73,14 +73,14 @@ C#相反地，會將 null 視為已定義的值，其比較是否等於任何其
 EF Core 預設會轉譯查詢，使其使用C# null 的語義。
 EF Core 5.0 大幅提升了這些翻譯的效率。
 
-檔是由問題[#1612](https://github.com/aspnet/EntityFramework.Docs/issues/1612)追蹤。
+檔是由問題[#1612](https://github.com/dotnet/EntityFramework.Docs/issues/1612)追蹤。
 
 ### <a name="indexer-properties"></a>索引子屬性
 
 EF Core 5.0 支援索引子C#屬性的對應。
 這可讓實體作為屬性包，其中的資料行會對應到包中的命名屬性。
 
-檔是由問題[#2018](https://github.com/aspnet/EntityFramework.Docs/issues/2018)追蹤。
+檔是由問題[#2018](https://github.com/dotnet/EntityFramework.Docs/issues/2018)追蹤。
 
 ### <a name="generation-of-check-constraints-for-enum-mappings"></a>列舉對應的檢查條件約束產生
 
@@ -91,14 +91,14 @@ EF Core 5.0 遷移現在可以產生 enum 屬性對應的檢查條件約束。
 MyEnumColumn VARCHAR(10) NOT NULL CHECK (MyEnumColumn IN('Useful', 'Useless', 'Unknown'))
 ```
 
-檔是由問題[#2082](https://github.com/aspnet/EntityFramework.Docs/issues/2082)追蹤。
+檔是由問題[#2082](https://github.com/dotnet/EntityFramework.Docs/issues/2082)追蹤。
 
 ### <a name="query-translations-for-more-datetime-constructs"></a>更多日期時間結構的查詢翻譯
 
 包含新 DataTime 結構的查詢現在已轉譯。
 此外，SQL Server 函數 DateDiffWeek 現在已經對應。
 
-檔是由問題[#2079](https://github.com/aspnet/EntityFramework.Docs/issues/2079)追蹤。
+檔是由問題[#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)追蹤。
 
 ### <a name="query-translations-for-more-byte-array-constructs"></a>更多位元組陣列結構的查詢翻譯
 
@@ -106,7 +106,7 @@ MyEnumColumn VARCHAR(10) NOT NULL CHECK (MyEnumColumn IN('Useful', 'Useless', 'U
 
 [2019 年12月5日的 EF 每週狀態](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863)會包含初稿檔。
 
-其他檔則是由問題[#2079](https://github.com/aspnet/EntityFramework.Docs/issues/2079)追蹤。
+其他檔則是由問題[#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)追蹤。
 
 ### <a name="query-translation-for-reverse"></a>反向的查詢轉譯
 
@@ -117,7 +117,7 @@ MyEnumColumn VARCHAR(10) NOT NULL CHECK (MyEnumColumn IN('Useful', 'Useless', 'U
 context.Employees.OrderBy(e => e.EmployeeID).Reverse()
 ```
 
-檔是由問題[#2079](https://github.com/aspnet/EntityFramework.Docs/issues/2079)追蹤。
+檔是由問題[#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)追蹤。
 
 ### <a name="query-translation-for-bitwise-operators"></a>位運算子的查詢轉譯
 
@@ -127,10 +127,10 @@ context.Employees.OrderBy(e => e.EmployeeID).Reverse()
 context.Orders.Where(o => ~o.OrderID == negatedId)
 ```
 
-檔是由問題[#2079](https://github.com/aspnet/EntityFramework.Docs/issues/2079)追蹤。
+檔是由問題[#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)追蹤。
 
 ### <a name="query-translation-for-strings-on-cosmos"></a>Cosmos 上字串的查詢轉譯
 
 使用 Azure Cosmos DB 提供者時，現在會轉譯使用字串方法 Contains、StartsWith 和 EndsWith 的查詢。
 
-檔是由問題[#2079](https://github.com/aspnet/EntityFramework.Docs/issues/2079)追蹤。
+檔是由問題[#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)追蹤。

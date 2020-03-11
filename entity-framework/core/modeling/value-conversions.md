@@ -5,11 +5,11 @@ ms.date: 02/19/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/value-conversions
 ms.openlocfilehash: 93774bc1bc3887f982faeac151825a6643c1107c
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73654787"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417199"
 ---
 # <a name="value-conversions"></a>值轉換
 
@@ -18,7 +18,7 @@ ms.locfileid: "73654787"
 
 值轉換器可在讀取或寫入資料庫時，允許轉換屬性值。 這項轉換可以是從某個值到另一個類型（例如，將字串加密），或從某個型別的值轉換成另一個類型的值（例如，將列舉值轉換成資料庫中的字串，以及將其從資料庫中的一個或多個）。
 
-## <a name="fundamentals"></a>Fundamentals
+## <a name="fundamentals"></a>基礎
 
 值轉換器是以 `ModelClrType` 和 `ProviderClrType`的角度來指定。 模型類型是實體類型中屬性的 .NET 類型。 提供者類型是資料庫提供者所瞭解的 .NET 類型。 例如，若要將列舉當做字串儲存在資料庫中，模型類型就是 enum 的類型，而提供者類型是 `String`。 這兩種類型可以相同。
 
@@ -63,7 +63,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ## <a name="the-valueconverter-class"></a>ValueConverter 類別
 
-如上面所示呼叫 `HasConversion` 將會建立 `ValueConverter` 實例，並在屬性上設定它。 您可以改為明確建立 `ValueConverter`。 例如:
+如上面所示呼叫 `HasConversion` 將會建立 `ValueConverter` 實例，並在屬性上設定它。 您可以改為明確建立 `ValueConverter`。 例如：
 
 ``` csharp
 var converter = new ValueConverter<EquineBeast, string>(
@@ -83,7 +83,7 @@ modelBuilder
 
 ## <a name="built-in-converters"></a>內建轉換器
 
-EF Core 隨附一組預先定義的 `ValueConverter` 類別，在 `Microsoft.EntityFrameworkCore.Storage.ValueConversion` 命名空間中找到。 這些是：
+EF Core 隨附一組預先定義的 `ValueConverter` 類別，在 `Microsoft.EntityFrameworkCore.Storage.ValueConversion` 命名空間中找到。 它們是：
 
 * `BoolToZeroOneConverter`-Bool 到零和一個
 * `BoolToStringConverter`-Bool 到字串（例如 "Y" 和 "N"）

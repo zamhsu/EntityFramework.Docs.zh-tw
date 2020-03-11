@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: f019c97b-87b0-4e93-98f4-2c539f77b2dc
 ms.openlocfilehash: 35684196dcd7b708a8feeb1eca3096e8d4e555ec
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182528"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418694"
 ---
 # <a name="table-valued-functions-tvfs"></a>資料表值函式（Tvf）
 > [!NOTE]
@@ -22,13 +22,13 @@ Entity Framework 第5版引進 TVF 支援。 請注意，若要使用資料表�
 
 Tvf 與預存程式非常類似，但有一個主要差異： TVF 的結果是可組合的。 這表示，TVF 的結果可以在 LINQ 查詢中使用，而預存程式的結果則不能。
 
-## <a name="watch-the-video"></a>觀看影片
+## <a name="watch-the-video"></a>觀賞影片
 
 **提供者**： Julia Kornich
 
 [Wmv](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-winvideo-tvf.wmv) | [.wmv](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-mp4video-tvf.m4v) | [wmv （ZIP）](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-winvideo-tvf.zip)
 
-## <a name="pre-requisites"></a>先決條件
+## <a name="pre-requisites"></a>必要條件
 
 若要完成此逐步解說，您需要：
 

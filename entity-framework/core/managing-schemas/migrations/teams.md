@@ -5,11 +5,11 @@ ms.author: bricelam
 ms.date: 10/30/2017
 uid: core/managing-schemas/migrations/teams
 ms.openlocfilehash: 6c17c56277821159962884aef72d46c624442e20
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655536"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416767"
 ---
 # <a name="migrations-in-team-environments"></a>在小組環境中移轉
 
@@ -48,7 +48,7 @@ b.Property<string>("Alias");
 >>>>>>> Theirs
 ```
 
-如果您遇到這種衝突，請重新建立您的遷移來解決此問題。 請依照下列步驟：
+如果您遇到這種衝突，請重新建立您的遷移來解決此問題。 請遵循下列步驟：
 
 1. 在合併之前中止合併並復原至您的工作目錄
 2. 移除您的遷移（但保留您的模型變更）

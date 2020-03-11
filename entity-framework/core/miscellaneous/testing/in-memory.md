@@ -4,19 +4,19 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 0d0590f1-1ea3-4d5c-8f44-db17395cd3f3
 uid: core/miscellaneous/testing/in-memory
-ms.openlocfilehash: fcd2f99ad06fd30ef9e36fd1e5a6a09fe0a45d07
-ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
+ms.openlocfilehash: 18641677098c20d9172136b07868dcb647d189c6
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75781114"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416506"
 ---
 # <a name="testing-with-inmemory"></a>使用 InMemory 進行測試
 
 當您想要使用近似連接到實際資料庫的專案來測試元件，而不會產生實際資料庫作業的額外負荷時，InMemory 提供者會很有用。
 
 > [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing) \(英文\)。
 
 ## <a name="inmemory-is-not-a-relational-database"></a>InMemory 不是關係資料庫
 

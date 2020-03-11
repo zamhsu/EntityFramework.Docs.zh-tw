@@ -3,19 +3,20 @@ title: 關聯性、導覽屬性和外鍵-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: cc7160f2d0ab7ac0c6009f820441c88590cacfaf
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 892e872e3cb11ea95084cf6d9ab43c8d500bc0de
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655870"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419350"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>關聯性、導覽屬性和外鍵
-本主題概述 Entity Framework 如何管理實體之間的關聯性。 同時也提供一些關於如何對應和操作關聯性的指引。
+
+本文概述 Entity Framework 如何管理實體之間的關聯性。 同時也提供一些關於如何對應和操作關聯性的指引。
 
 ## <a name="relationships-in-ef"></a>EF 中的關聯性
 
-在關係資料庫中，資料表之間的關聯性（也稱為關聯）是透過外鍵定義。 外鍵（FK）是一或多個資料行的組合，用來建立和強制執行兩個數據表中的資料之間的連結。 通常有三種類型的關聯性：一對一、一對多和多對多之間。 在一對多關聯性中，外鍵是在代表關聯性的多個端的資料表上定義的。 多對多關聯性牽涉到定義第三個數據表（稱為「連接點」或「聯結資料表」），其主鍵是由兩個相關資料表中的外鍵所組成。 在一對一關聯性中，主鍵會當做外鍵來額外運作，而且不會有任何一個資料表的個別外鍵資料行。
+在關係資料庫中，資料表之間的關聯性（也稱為關聯）是透過外鍵定義。 外部索引鍵 (FK) 是可用來建立與強制兩資料表的資料之間連結的一個資料行或資料行組合。 通常有三種類型的關聯性：一對一、一對多和多對多之間。 在一對多關聯性中，外鍵是在代表關聯性的多個端的資料表上定義的。 多對多關聯性牽涉到定義第三個數據表（稱為「連接點」或「聯結資料表」），其主鍵是由兩個相關資料表中的外鍵所組成。 在一對一關聯性中，主鍵會當做外鍵來額外運作，而且不會有任何一個資料表的個別外鍵資料行。
 
 下圖顯示兩個參與一對多關聯性的資料表。 **課程**資料表是相依資料表，因為它包含將它連結至**部門**資料表的**DepartmentID**資料行。
 
@@ -93,7 +94,7 @@ public class Department
   course.Department = department;
   ```
 
-- 若要刪除關聯性，請將導覽屬性設定為 [`null`]。 如果您要使用以 .NET 4.0 為基礎的 Entity Framework，則必須先載入相關端，才能將其設定為 null。 例如:   
+- 若要刪除關聯性，請將導覽屬性設定為 [`null`]。 如果您要使用以 .NET 4.0 為基礎的 Entity Framework，則必須先載入相關端，才能將其設定為 null。 例如：   
   ``` csharp
   context.Entry(course).Reference(c => c.Department).Load();
   course.Department = null;
@@ -166,7 +167,7 @@ public class Department
 
 在獨立關聯中，會根據目前在資料庫中的外部索引鍵值來查詢相依物件的相關端。 不過，如果已修改關聯性，而相依物件上的 reference 屬性指向載入物件內容中的不同主體物件，Entity Framework 將會嘗試建立關聯性，因為它是在用戶端上定義。
 
-## <a name="managing-concurrency"></a>管理並行
+## <a name="managing-concurrency"></a>管理並行存取
 
 在外鍵和獨立關聯中，平行存取檢查是以模型中所定義的實體索引鍵和其他實體屬性為基礎。 使用 EF 設計工具建立模型時，請將 `ConcurrencyMode` 屬性設定為 [**固定**]，以指定應檢查是否有平行存取的屬性。 使用 Code First 定義模型時，請在您想要檢查並行的屬性上使用 `ConcurrencyCheck` 注釋。 使用 Code First 時，您也可以使用 `TimeStamp` 注釋，指定應該檢查屬性是否有平行存取。 在指定的類別中，您只能有一個時間戳記屬性。 Code First 會將此屬性對應至資料庫中不可為 null 的欄位。
 

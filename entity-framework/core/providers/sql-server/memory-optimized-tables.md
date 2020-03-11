@@ -6,11 +6,11 @@ ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/sql-server/memory-optimized-tables
 ms.openlocfilehash: a504fb3487aea6dd36abf204a7427095e3d29118
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824644"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417788"
 ---
 # <a name="memory-optimized-tables-support-in-sql-server-ef-core-database-provider"></a>SQL Server EF Core 資料庫提供者中的記憶體優化資料表支援
 

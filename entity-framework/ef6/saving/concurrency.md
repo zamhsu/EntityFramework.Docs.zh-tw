@@ -4,26 +4,26 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
 ms.openlocfilehash: 81ae186201fdfac331b1d4e7836b222545fe78b5
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489150"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419689"
 ---
 # <a name="handling-concurrency-conflicts"></a>處理並行存取衝突
-開放式並行存取包括樂觀地嘗試將您的實體儲存到該處的資料實體之後並未變更，希望在資料庫已載入。 事實上，如果資料已變更，則會擲回例外狀況，您必須解決衝突，然後再嘗試再次儲存。 本主題涵蓋如何處理 Entity Framework 中的這類例外狀況。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
+開放式平行存取牽涉到樂觀地嘗試將實體儲存至資料庫，希望資料在載入實體之後尚未變更。 如果資料已變更，就會擲回例外狀況，而且您必須先解決衝突，然後再嘗試重新儲存。 本主題涵蓋如何在 Entity Framework 中處理這類例外狀況。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
 
-這篇文章不是適合的開放式並行存取的完整討論。 下列各節假設並行處理解決方式的一些知識，並顯示為一般工作的模式。  
+這篇文章並不是完整討論開放式平行存取的適當位置。 下列各節假設有一些並行解析知識，並顯示一般工作的模式。  
 
-有多項這些模式的使用中所討論的主題[使用屬性值](~/ef6/saving/change-tracking/property-values.md)。  
+這些模式中有許多都是利用使用[屬性值](~/ef6/saving/change-tracking/property-values.md)中所討論的主題。  
 
-解決並行存取問題，當您使用獨立關聯 （其中外部索引鍵未對應到您的實體中的屬性） 會比當您使用外部索引鍵關聯更為困難。 因此如果您要在您的應用程式中的並行解析它會建議您一律將外部索引鍵對應至您的實體。 以下所有範例中都假設您使用的外部索引鍵關聯。  
+解決使用獨立關聯（其中外鍵未對應至實體中的屬性）時的並行問題，比使用外鍵關聯更為棘手。 因此，如果您要在應用程式中進行並行解析，建議您一律將外鍵對應至您的實體。 下列所有範例都假設您使用的是外鍵關聯。  
 
-嘗試儲存會使用外部索引鍵關聯的實體時偵測到的開放式並行存取例外狀況時，由 SaveChanges 會擲回 DbUpdateConcurrencyException。  
+當嘗試儲存使用外鍵關聯的實體時，在偵測到開放式平行存取例外狀況時，SaveChanges 會擲回 DbUpdateConcurrencyException。  
 
-## <a name="resolving-optimistic-concurrency-exceptions-with-reload-database-wins"></a>解決開放式並行存取例外狀況，以重新載入 (資料庫 wins)  
+## <a name="resolving-optimistic-concurrency-exceptions-with-reload-database-wins"></a>使用重載來解析開放式平行存取例外狀況（資料庫勝出）  
 
-Reload 方法可用來覆寫實體的目前值，現在在資料庫中的值。 實體然後通常還給某種形式的使用者，他們必須試著再次進行其變更並重新儲存。 例如:   
+Reload 方法可以用來以目前在資料庫中的值來覆寫實體目前的值。 接著，實體會以某種形式傳回給使用者，而且必須嘗試再次進行變更並重新儲存。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -52,18 +52,18 @@ using (var context = new BloggingContext())
 }
 ```  
 
-模擬並行例外狀況的好方法是以 SaveChanges 呼叫上設定中斷點，然後修改 實體儲存在資料庫中使用 SQL Management Studio 等其他工具。 您也可以插入之前要直接使用 SqlCommand 更新資料庫的 SaveChanges 行。 例如:   
+模擬並行例外狀況的好方法是在 SaveChanges 呼叫上設定中斷點，然後使用 SQL Management Studio 之類的其他工具來修改儲存在資料庫中的實體。 您也可以在 SaveChanges 之前插入一行，以使用 SqlCommand 直接更新資料庫。 例如：  
 
 ``` csharp
 context.Database.SqlCommand(
     "UPDATE dbo.Blogs SET Name = 'Another Name' WHERE BlogId = 1");
 ```  
 
-DbUpdateConcurrencyException 的項目方法會傳回無法更新實體的 DbEntityEntry 執行個體。 （這個屬性目前一律會傳回單一值的並行處理問題。 它可能會傳回多個值的一般更新例外狀況。）某些情況下的替代方式是以取得可能需要重新載入從資料庫的所有實體的項目並呼叫重新載入的每一種。  
+DbUpdateConcurrencyException 上的專案方法會傳回無法更新之實體的 DbEntityEntry 實例。 （此屬性目前一律會針對並行問題傳回單一值。 它可能會傳回多個一般更新例外狀況的值）。在某些情況下，有一個替代方法，就是取得可能需要從資料庫重載的所有實體專案，並針對每個實體呼叫重載。  
 
-## <a name="resolving-optimistic-concurrency-exceptions-as-client-wins"></a>為用戶端獲勝解決開放式並行存取例外狀況  
+## <a name="resolving-optimistic-concurrency-exceptions-as-client-wins"></a>解決用戶端獲勝的開放式平行存取例外狀況  
 
-上述範例會重新載入有時也稱為資料庫 wins，或存放區獲勝，因為在實體中的值會覆寫資料庫中的值。 有時候您可能想要反過來，並以目前在實體中的值覆寫在資料庫中的值。 這有時稱為用戶端獲勝，而且可藉由取得目前資料庫的值，並將它們設定為實體的原始值。 (請參閱[屬性值使用](~/ef6/saving/change-tracking/property-values.md)如需目前和原始值。)例如:   
+上述使用重載的範例有時稱為資料庫 wins 或存放區 wins，因為實體中的值會由資料庫中的值覆寫。 有時候，您可能會想要執行相反的動作，並將資料庫中的值覆寫為目前在實體中的值。 這有時稱為用戶端 wins，可以藉由取得目前的資料庫值並將其設定為實體的原始值來完成。 （如需目前和原始值的相關資訊，請參閱[使用屬性值](~/ef6/saving/change-tracking/property-values.md)）。例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -92,9 +92,9 @@ using (var context = new BloggingContext())
 }
 ```  
 
-## <a name="custom-resolution-of-optimistic-concurrency-exceptions"></a>自訂解析開放式並行存取例外狀況  
+## <a name="custom-resolution-of-optimistic-concurrency-exceptions"></a>開放式平行存取例外狀況的自訂解析  
 
-有時候您可能要結合目前在實體中的值中的目前資料庫中的值。 這通常需要一些自訂邏輯或使用者互動。 例如，您可能會包含目前的值，在資料庫中，值對使用者顯示表單和一組預設解析的值。 使用者可以再編輯解析的值，必要時，也會解析取得儲存到資料庫中的值。 這可以使用 DbPropertyValues 物件 CurrentValues 和 GetDatabaseValues 上傳回實體的項目。 例如:   
+有時候，您可能會想要將目前在資料庫中的值與實體中目前的值結合。 這通常需要一些自訂邏輯或使用者互動。 例如，您可能會向使用者呈現一個表單，其中包含目前的值、資料庫中的值，以及一組預設的已解析值。 然後，使用者會視需要編輯已解析的值，而這會是儲存到資料庫中的這些已解析的值。 您可以使用從 CurrentValues 傳回的 DbPropertyValues 物件，並 GetDatabaseValues 實體的專案來完成這項作業。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -143,9 +143,9 @@ public void HaveUserResolveConcurrency(DbPropertyValues currentValues,
 }
 ```  
 
-## <a name="custom-resolution-of-optimistic-concurrency-exceptions-using-objects"></a>使用物件的開放式並行存取例外狀況的自訂解析  
+## <a name="custom-resolution-of-optimistic-concurrency-exceptions-using-objects"></a>使用物件的開放式平行存取例外狀況自訂解析  
 
-上述程式碼會使用 DbPropertyValues 執行個體的目前傳遞、 資料庫和解析的值。 有時可能會用於這個實體型別的執行個體的工作變得更容易。 這可以利用 DbPropertyValues ToObject 和 SetValues 的方法。 例如:   
+上述程式碼會使用 DbPropertyValues 實例來傳遞目前、資料庫和已解析的值。 有時候，您可以更輕鬆地使用實體類型的實例來進行此作業。 這可以使用 DbPropertyValues 的 ToObject 和 SetValues 方法來完成。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())

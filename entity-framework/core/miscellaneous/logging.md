@@ -4,17 +4,17 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f6e35c6d-45b7-4258-be1d-87c1bb67438d
 uid: core/miscellaneous/logging
-ms.openlocfilehash: 1a3863ee5f508c1fd393d4ec2c25c46ab8634f00
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.openlocfilehash: e8adc39ec01ff75112b03446a488df6199cc7041
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502093"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416579"
 ---
 # <a name="logging"></a>記錄
 
 > [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging) \(英文\)。
 
 ## <a name="aspnet-core-applications"></a>ASP.NET Core 應用程式
 
@@ -33,11 +33,11 @@ EF Core 記錄需要 ILoggerFactory，其本身是以一或多個記錄提供者
 
 安裝適當的封裝之後，應用程式應該建立 Server.loggerfactory 的單一或全域實例。 例如，使用主控台記錄器：
 
-### <a name="version-30tabv3"></a>[版本3。0](#tab/v3)
+### <a name="version-3x"></a>[3.x 版](#tab/v3)
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#DefineLoggerFactory)]
 
-### <a name="version-2xtabv2"></a>[2.x 版](#tab/v2)
+### <a name="version-2x"></a>[2.x 版](#tab/v2)
 
 > [!NOTE]
 > 下列程式碼範例會使用在2.2 版中已過時且已在3.0 中取代的 `ConsoleLoggerProvider` 函式。 使用2.2 時，忽略和隱藏警告是安全的。
@@ -60,11 +60,11 @@ public static readonly LoggerFactory MyLoggerFactory
 
 應用程式可以藉由在 ILoggerProvider 上設定篩選準則，來控制所記錄的內容。 例如：
 
-### <a name="version-30tabv3"></a>[版本3。0](#tab/v3)
+### <a name="version-3x"></a>[3.x 版](#tab/v3)
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContextWithFiltering.cs#DefineLoggerFactory)]
 
-### <a name="version-2xtabv2"></a>[2.x 版](#tab/v2)
+### <a name="version-2x"></a>[2.x 版](#tab/v2)
 
 > [!NOTE]
 > 下列程式碼範例會使用在2.2 版中已過時且已在3.0 中取代的 `ConsoleLoggerProvider` 函式。 使用2.2 時，忽略和隱藏警告是安全的。

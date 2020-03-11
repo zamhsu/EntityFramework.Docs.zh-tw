@@ -5,11 +5,11 @@ ms.date: 08/13/2017
 ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
 uid: core/miscellaneous/1x-2x-upgrade
 ms.openlocfilehash: b27c09fdb6210dd7c6aa0c8bc912a8bd183c16b9
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824424"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416753"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>將繼承應用程式升級至 EF Core 2。0
 
@@ -74,7 +74,7 @@ namespace AspNetCoreDotNetCore2._0App
 
 基於上述 ASP.NET Core 2.0 變更，我們發現新的 `IDesignTimeDbContextFactory<TContext>` 介面上不再需要 `DbContextFactoryOptions`。 以下是您應該改為使用的替代方案。
 
-| DbCoNtextFactoryOptions | 選項                                                  |
+| DbCoNtextFactoryOptions | 替代函式                                                  |
 |:------------------------|:-------------------------------------------------------------|
 | ApplicationBasePath     | AppCoNtext. BaseDirectory                                     |
 | ContentRootPath         | 目錄. GetCurrentDirectory （）                              |

@@ -5,11 +5,11 @@ ms.author: bricelam
 ms.date: 11/07/2018
 uid: core/managing-schemas/ensure-created
 ms.openlocfilehash: 32ac6cd043df73cd041780ec4c8805675adc5ab1
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72811782"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416867"
 ---
 # <a name="create-and-drop-apis"></a>建立及卸除 API
 
@@ -43,7 +43,7 @@ dbContext.Database.EnsureCreated();
 > [!TIP]
 > 這些方法的非同步版本也可供使用。
 
-## <a name="sql-script"></a>SQL 腳本
+## <a name="sql-script"></a>SQL 指令碼
 
 若要取得 EnsureCreated 所使用的 SQL，您可以使用 GenerateCreateScript 方法。
 

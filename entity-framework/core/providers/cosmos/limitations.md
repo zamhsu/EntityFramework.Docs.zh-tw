@@ -6,11 +6,11 @@ ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/limitations
 ms.openlocfilehash: 2631526b152d6ddcacf25173c8d51e4e3cb24500
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655978"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417206"
 ---
 # <a name="ef-core-azure-cosmos-db-provider-limitations"></a>EF Core Azure Cosmos DB 提供者限制
 

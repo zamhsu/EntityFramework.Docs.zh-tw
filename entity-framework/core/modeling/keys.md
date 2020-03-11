@@ -6,13 +6,13 @@ ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/keys
 ms.openlocfilehash: abd65a5ea079a49fd7a3bbc84a9337f6ee19fab1
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502002"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416464"
 ---
-# <a name="keys"></a>按鍵
+# <a name="keys"></a>索引鍵
 
 索引鍵可作為每個實體實例的唯一識別碼。 EF 中的大部分實體都有單一索引鍵，其對應至關係資料庫中的*主鍵*概念（針對沒有索引鍵的實體，請參閱[無索引鍵實體](xref:core/modeling/keyless-entity-types)）。 實體可以有超出主要金鑰的其他索引鍵（如需詳細資訊，請參閱[替代金鑰](#alternate-keys)）。
 
@@ -25,11 +25,11 @@ ms.locfileid: "75502002"
 
 您可以將單一屬性設定為實體的主要金鑰，如下所示：
 
-## <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
+## <a name="data-annotations"></a>[資料註解](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/KeySingle.cs?name=KeySingle&highlight=3)]
 
-## <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+## <a name="fluent-api"></a>[流暢的 API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeySingle.cs?name=KeySingle&highlight=4)]
 

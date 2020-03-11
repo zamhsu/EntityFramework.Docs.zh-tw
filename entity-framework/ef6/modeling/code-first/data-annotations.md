@@ -1,31 +1,31 @@
 ---
-title: First 資料註解-EF6 的程式碼
+title: Code First 資料批註-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: fcd01aef7303573001460b352f8099b2cc6e224a
-ms.sourcegitcommit: e90d6cfa3e96f10b8b5275430759a66a0c714ed1
+ms.openlocfilehash: 9fac2a90c46d78ff5fd632800cc0050276467773
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/17/2019
-ms.locfileid: "68286471"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419182"
 ---
-# <a name="code-first-data-annotations"></a>Code First 資料註解
+# <a name="code-first-data-annotations"></a>Code First 資料批註
 > [!NOTE]
-> **EF4.1 及更新版本僅**-功能、 Api、 Entity Framework 4.1 中導入等本頁所述。 如果您使用較早版本，部分或所有的這項資訊不適用於。
+> **僅限 ef 4.1 [僅限**]-此頁面中所討論的功能、api 等已在 Entity Framework 4.1 中引進。 如果您使用的是較舊的版本，則不會套用本資訊的部分或全部。
 
-此頁面上的內容是來自原始寫入，作者： Julie Lerman 的發行項 (\<http://thedatafarm.com>) 。
+此頁面上的內容可從原本由 Julie Lerman （\<http://thedatafarm.com>)所撰寫的文章進行調整。
 
-Entity Framework Code First 可讓您使用您自己的網域類別，代表模型執行查詢時，EF 相依於變更追蹤，以及更新函式。 程式碼首先會利用程式設計的模式稱為 'convention over configuration'。 程式碼第一次會假設您的類別遵循的慣例，Entity framework，並且在此情況下，便會自動生效時如何執行的作業。 不過，如果您的類別並不遵守這些慣例，您能夠將設定新增至您的類別，為 EF 提供的必要資訊。
+Entity Framework Code First 可讓您使用自己的網域類別來代表 EF 依賴來執行查詢、變更追蹤和更新函數的模型。 Code First 利用稱為「設定的慣例」的程式設計模式。 Code First 會假設您的類別遵循 Entity Framework 的慣例，而在此情況下，將會自動處理如何執行其作業。 不過，如果您的類別未遵循這些慣例，您就能夠將設定新增至您的類別，以提供 EF 必要的資訊。
 
-程式碼首先提供兩種方式可將這些設定新增至您的類別。 其中一個使用簡單的屬性，稱為 DataAnnotations，且第二個使用 Code First 的 Fluent API，可讓您在程式碼中，以命令方式描述設定。
+Code First 提供您兩種方式，將這些設定新增至您的類別。 其中一個是使用稱為 DataAnnotations 的簡單屬性，第二個則是使用 Code First 的流暢 API，這可讓您在程式碼中以命令方式描述設定。
 
-這篇文章將著重在使用 DataAnnotations （在 System.ComponentModel.DataAnnotations 命名空間中），若要設定您的類別 – 反白顯示最常需要的組態。 DataAnnotations 也會辨識由數項.NET 應用程式，例如 ASP.NET MVC 可讓這些應用程式運用相同的註釋的用戶端驗證。
+本文將著重于使用 DataAnnotations （在 System.workflow.componentmodel.activity. DataAnnotations 命名空間中）來設定您的類別，並反白顯示最常需要的設定。 許多 .NET 應用程式（例如 ASP.NET MVC）也都能理解 DataAnnotations，這可讓這些應用程式利用相同的注釋來進行用戶端驗證。
 
 
 ## <a name="the-model"></a>模型
 
-我將示範如何使用一對簡單類別的程式碼第一次 DataAnnotations:部落格和文章。
+我將使用一組簡單的類別來示範 Code First DataAnnotations： Blog 和 Post。
 
 ``` csharp
     public class Blog
@@ -47,15 +47,15 @@ Entity Framework Code First 可讓您使用您自己的網域類別，代表模�
     }
 ```
 
-如有需要，部落格和後置類別方便遵循程式碼的第一個慣例，且需要未調整，若要啟用 EF 的相容性。 不過，您也可以使用註解提供給 EF 的詳細資訊，相關的類別和它們所對應的資料庫。
+就像是一樣，Blog 和 Post 類別可以方便遵循 code first 慣例，而且不需要調整就能啟用 EF 相容性。 不過，您也可以使用批註，將有關類別及其對應之資料庫的詳細資訊提供給 EF。
 
  
 
 ## <a name="key"></a>Key
 
-Entity Framework 依賴具有索引鍵的值會用於追蹤的實體，每個實體。 Code First 一個慣例是隱含的索引鍵屬性;第一次程式碼會尋找名為 「 識別碼 」 或類別名稱和 「 識別碼 」，例如"BlogId 」 的組合的屬性。 這個屬性會對應至資料庫中的主索引鍵資料行。
+Entity Framework 依賴每個實體具有用於實體追蹤的索引鍵值。 Code First 的其中一個慣例是隱含的索引鍵屬性;Code First 會尋找名為 "Id" 的屬性，或類別名稱和 "Id" 的組合，例如 "BlogId"。 這個屬性會對應至資料庫中的主鍵資料行。
 
-部落格和後置類別都遵循這個慣例。 如果它們沒有嗎？ 如果部落格已使用名稱*PrimaryTrackingKey*相反的或甚至*foo*嗎？ 如果程式碼第一次找不到符合此慣例的屬性則會因為 Entity Framework 的需求，您必須有索引鍵屬性來擲回例外狀況。 您可以使用索引鍵的註解來指定要用作 EntityKey 的哪一個屬性。
+[Blog] 和 [Post] 類別都遵循此慣例。 如果沒有的話，該怎麼辦？ 如果 Blog 使用名稱*PrimaryTrackingKey* ，或甚至是*foo*，該怎麼辦？ 如果 code first 找不到符合此慣例的屬性，就會擲回例外狀況，因為 Entity Framework 的需求必須要有索引鍵屬性。 您可以使用索引鍵注釋來指定要使用哪一個屬性做為 EntityKey。
 
 ``` csharp
     public class Blog
@@ -68,13 +68,13 @@ Entity Framework 依賴具有索引鍵的值會用於追蹤的實體，每個實
     }
 ```
 
-如果您是第一次使用程式碼是資料庫產生功能、 部落格資料表擁有名為 PrimaryTrackingKey，預設也定義為 Identity 的主索引鍵資料行。
+如果您使用 code first 的資料庫產生功能，則 Blog 資料表會有一個名為 PrimaryTrackingKey 的主鍵資料行，其預設也會定義為身分識別。
 
-![部落格資料表具有主索引鍵](~/ef6/media/jj591583-figure01.png)
+![具有主要金鑰的 Blog 資料表](~/ef6/media/jj591583-figure01.png)
 
 ### <a name="composite-keys"></a>複合索引鍵
 
-Entity Framework 支援複合索引鍵-多個屬性所組成的主索引鍵。 例如，您可能有其主索引鍵是 PassportNumber 和組合 IssuingCountry Passport 類別。
+Entity Framework 支援複合索引鍵-由一個以上的屬性所組成的主要索引鍵。 例如，您可以擁有一個 Passport 類別，其主要金鑰是 PassportNumber 和 IssuingCountry 的組合。
 
 ``` csharp
     public class Passport
@@ -88,14 +88,14 @@ Entity Framework 支援複合索引鍵-多個屬性所組成的主索引鍵。 �
     }
 ```
 
-嘗試在您的 EF 模型中使用上述的類別會導致`InvalidOperationException`:
+嘗試在 EF 模型中使用上述類別會產生 `InvalidOperationException`：
 
-*無法判斷複合主索引鍵排序類型 'Passport'。使用 ColumnAttribute 或 HasKey 方法來指定複合主索引鍵的順序。*
+*無法判斷類型 ' Passport ' 的複合主要索引鍵排序。使用 ColumnAttribute 或 HasKey 方法來指定複合主鍵的順序。*
 
-若要使用複合索引鍵，Entity Framework 會要求您定義的順序索引鍵的屬性。 您可以使用資料行註解，以指定的順序來執行這項操作。
+為了使用複合索引鍵，Entity Framework 需要您定義索引鍵屬性的順序。 若要這麼做，您可以使用資料行批註來指定訂單。
 
 >[!NOTE]
-> 將順序值是相對的 （而非以索引為基礎） 讓您可以使用任何值。 例如，100 和 200 可接受來取代 1 和 2。
+> 順序值是相對的（而不是以索引為基礎），因此可以使用任何值。 例如，100和200可以接受，以取代1和2。
 
 ``` csharp
     public class Passport
@@ -111,9 +111,9 @@ Entity Framework 支援複合索引鍵-多個屬性所組成的主索引鍵。 �
     }
 ```
 
-如果您有複合外部索引鍵的實體，您必須指定相同的資料行排序，用於對應的主索引鍵屬性。
+如果您有具有複合外鍵的實體，則您必須指定用於對應主鍵屬性的相同資料行順序。
 
-只有的相對順序內外部索引鍵屬性必須是相同的實際的值指派給**順序**不需要比對。 例如，在下列類別中，3 和 4 可能可用來取代 1 和 2。
+只有外鍵屬性中的相對順序必須相同，指派給**Order**的確切值不需要相符。 例如，在下列類別中，可以使用3和4來取代1和2。
 
 ``` csharp
     public class PassportStamp
@@ -137,61 +137,61 @@ Entity Framework 支援複合索引鍵-多個屬性所組成的主索引鍵。 �
 
 ## <a name="required"></a>必要
 
-必要的註釋會告知 EF 所需之特定的屬性。
+必要的注釋會告訴 EF 需要特定屬性。
 
-加入所需的 Title 屬性會強制 EF （和 MVC） 以確保屬性中沒有資料。
+將 Required 加入 Title 屬性將會強制 EF （和 MVC），以確保屬性中有資料。
 
 ``` csharp
     [Required]
     public string Title { get; set; }
 ```
 
-沒有額外的程式碼或應用程式中的標記變更，在 MVC 應用程式會執行用戶端驗證，甚至以動態方式建置訊息使用的屬性和註釋名稱。
+在應用程式中不會有任何額外的程式碼或標記變更，MVC 應用程式會執行用戶端驗證，甚至使用屬性和批註名稱動態建立訊息。
 
-![建立頁面，其標題是必要的錯誤](~/ef6/media/jj591583-figure02.png)
+![需要標題為 [建立] 頁面的錯誤](~/ef6/media/jj591583-figure02.png)
 
-必要的屬性也會影響所產生的資料庫，藉由對應的內容不可為 null。 請注意，[標題] 欄位已變更為"not null"。
+必要的屬性也會影響所產生的資料庫，方法是讓對應的屬性成為不可為 null。 請注意，[標題] 欄位已變更為 [非 null]。
 
 >[!NOTE]
-> 在某些情況下它可能無法在資料庫中是不可為 null，即使需要此屬性，資料行。 比方說，當使用 TPH 繼承策略資料的多個類型會儲存在單一資料表。 如果衍生型別包含必要的屬性資料行無法進行不可為 null 因為並非所有的型別階層架構中會有這個屬性。
+> 在某些情況下，即使屬性是必要的，資料庫中的資料行還是無法是不可為 null 的。 例如，使用多個類型的 TPH 繼承策略資料時，會儲存在單一資料表中。 如果衍生類型包含必要的屬性，則資料行不能設為不可為 null，因為不是階層中的所有類型都有這個屬性。
 
  
 
-![部落格資料表](~/ef6/media/jj591583-figure03.png)
+![Blog 資料表](~/ef6/media/jj591583-figure03.png)
 
  
 
-## <a name="maxlength-and-minlength"></a>MaxLength 與 MinLength
+## <a name="maxlength-and-minlength"></a>MaxLength 和 MinLength
 
-MaxLength 與 MinLength 屬性可讓您指定額外的屬性驗證，就像您一樣需要。
+MaxLength 和 MinLength 屬性可讓您指定其他屬性驗證，就如同您在必要時所做的一樣。
 
-以下是 BloggerName 長度需求。 此範例也示範如何結合屬性。
+以下是長度需求的 BloggerName。 此範例也會示範如何結合屬性。
 
 ``` csharp
     [MaxLength(10),MinLength(5)]
     public string BloggerName { get; set; }
 ```
 
-MaxLength 註解會影響資料庫，藉由設定屬性的長度為 10。
+MaxLength 注釋會藉由將屬性的長度設定為10來影響資料庫。
 
-![顯示最大長度 BloggerName 資料行上的部落格資料表](~/ef6/media/jj591583-figure04.png)
+![顯示 BloggerName 資料行最大長度的 blog 資料表](~/ef6/media/jj591583-figure04.png)
 
-MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證，再以動態方式建立一則錯誤訊息：「 BloggerName 欄位必須是字串或陣列類型最大長度為 '10'。 」該訊息是有點長。 許多註釋可讓您與 ErrorMessage 屬性中指定的錯誤訊息。
+MVC 用戶端注釋和 EF 4.1 伺服器端批註都會接受這項驗證，再次動態建立錯誤訊息：「欄位 BloggerName 必須是字串或陣列類型，最大長度為 ' 10 '。」該訊息有點長。 許多批註可讓您指定具有 ErrorMessage 屬性的錯誤訊息。
 
 ``` csharp
     [MaxLength(10, ErrorMessage="BloggerName must be 10 characters or less"),MinLength(5)]
     public string BloggerName { get; set; }
 ```
 
-您也可以指定錯誤訊息所需的註解中。
+您也可以在必要的注釋中指定 ErrorMessage。
 
-![建立具有自訂錯誤訊息的網頁](~/ef6/media/jj591583-figure05.png)
+![建立包含自訂錯誤訊息的頁面](~/ef6/media/jj591583-figure05.png)
 
  
 
 ## <a name="notmapped"></a>NotMapped
 
-程式碼的第一個慣例會要求每個支援的資料類型的屬性會以資料庫中。 但這不一定在您的應用程式。 例如，您可能會建立標題和 BloggerName 欄位為基礎的程式碼的部落格類別中有屬性。 該屬性會自動建立，而且不需要儲存。 您可以將不會對應至 NotMapped 註釋，例如此 BlogCode 屬性具有任何屬性的標記。
+Code first 慣例會指示每個支援資料類型的屬性都會在資料庫中表示。 但在您的應用程式中，這種情況不一定如此。 例如，您在 Blog 類別中的屬性可能會根據標題和 BloggerName 欄位建立程式碼。 該屬性可以動態建立，不需要儲存。 您可以使用 NotMapped 注釋（例如此 BlogCode 屬性），將未對應至資料庫的任何屬性標示為。
 
 ``` csharp
     [NotMapped]
@@ -208,7 +208,7 @@ MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證�
 
 ## <a name="complextype"></a>ComplexType
 
-不常見描述您的領域實體透過一組類別，然後層這些類別來描述完整的實體。 比方說，您可能會新增至您的模型稱為 BlogDetails 的類別。
+在一組類別中描述您的領域實體並不常見，然後將這些類別分層以描述完整的實體。 例如，您可以將名為 BlogDetails 的類別新增至您的模型。
 
 ``` csharp
     public class BlogDetails
@@ -220,9 +220,9 @@ MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證�
     }
 ```
 
-請注意 BlogDetails 沒有任何類型的索引鍵屬性。 在 網域導向設計，BlogDetails 被指值的物件。 Entity Framework 會將稱為複雜類型的值物件。  複雜型別無法自行追蹤。
+請注意，BlogDetails 沒有任何類型的索引鍵屬性。 在網域導向設計中，BlogDetails 稱為「值物件」。 Entity Framework 將值物件參考為複雜類型。  複雜類型無法自行追蹤。
 
-不過部落格類別，它將會追蹤部落格物件的一部分的 BlogDetails 中的屬性。 為了讓第一次將此辨識的程式碼，您必須將 BlogDetails 類別標示為 ComplexType。
+不過，做為 Blog 類別中的屬性，BlogDetails 會被追蹤為 Blog 物件的一部分。 為了讓 code first 能夠辨識這一點，您必須將 BlogDetails 類別標記為 ComplexType。
 
 ``` csharp
     [ComplexType]
@@ -235,105 +235,105 @@ MVC 用戶端註釋和 EF 4.1 伺服器端註解將會同時採用這項驗證�
     }
 ```
 
-現在您可以新增屬性來表示該部落格 BlogDetails 部落格類別中。
+現在您可以在 Blog 類別中新增屬性，以代表該 blog 的 BlogDetails。
 
 ``` csharp
         public BlogDetails BlogDetail { get; set; }
 ```
 
-在資料庫中，部落格資料表將包含的所有部落格，包括其 BlogDetail; 屬性所包含的屬性的屬性。 根據預設，每一個前面加上複雜類型，也就是 BlogDetail 的名稱。
+在資料庫中，Blog 資料表會包含 blog 的所有屬性，包括其 BlogDetail 屬性中包含的屬性。 根據預設，每個名稱的前面都會加上複雜型別 BlogDetail。
 
-![具有複雜類型的部落格資料表](~/ef6/media/jj591583-figure06.png)
+![具有複雜類型的 Blog 資料表](~/ef6/media/jj591583-figure06.png)
 
 
 ## <a name="concurrencycheck"></a>ConcurrencyCheck
 
-ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用者編輯或刪除實體的一或多個屬性的旗標。 如果您使用的 EF 設計工具，這會與屬性的 ConcurrencyMode 設定為 已修正。
+ConcurrencyCheck 注釋可讓您在使用者編輯或刪除實體時，將一個或多個要用於資料庫並行檢查的屬性加上旗標。 如果您曾經使用過 EF Designer，這會與將屬性的 ConcurrencyMode 設定為 Fixed 一致。
 
-我們來看看 ConcurrencyCheck 藉由將 BloggerName 屬性的運作方式。
+讓我們來瞭解 ConcurrencyCheck 如何藉由將它新增至 BloggerName 屬性來運作。
 
 ``` csharp
     [ConcurrencyCheck, MaxLength(10, ErrorMessage="BloggerName must be 10 characters or less"),MinLength(5)]
     public string BloggerName { get; set; }
 ```
 
-當呼叫 SaveChanges 時，由於 ConcurrencyCheck 上的註解 BloggerName 欄位中，該屬性的原始值將用於更新。 此命令會嘗試找出正確的資料列篩選的索引鍵的值不僅在 BloggerName 的原始值。  以下是 傳送到資料庫的更新命令的重要部分，其中您可以看到此命令會更新資料列具有 PrimaryTrackingKey 是 1 到"Julie"，也就是原始的值，該部落格已從資料庫擷取時的 BloggerName。
+呼叫 SaveChanges 時，因為 BloggerName 欄位上的 ConcurrencyCheck 注釋，所以該屬性的原始值將會用於更新中。 此命令將不只會篩選索引鍵值，同時也會針對 BloggerName 的原始值，嘗試找出正確的資料列。  以下是傳送到資料庫之 UPDATE 命令的重要部分，您可以在其中看到此命令會更新具有 PrimaryTrackingKey 的資料列，以及 BloggerName 的 "Julie"，這是從資料庫抓取該 blog 時的原始值。
 
 ``` SQL
     where (([PrimaryTrackingKey] = @4) and ([BloggerName] = @5))
     @4=1,@5=N'Julie'
 ```
 
-如果有人變更過該部落格部落客名稱在此同時，這項更新將會失敗，您會收到要處理 DbUpdateConcurrencyException。
+如果有人在此同時變更了該 blog 的博客名稱，這項更新將會失敗，而您將會收到您需要處理的 DbUpdateConcurrencyException。
 
  
 
 ## <a name="timestamp"></a>TimeStamp
 
-就較常使用的並行存取檢查的 rowversion 或時間戳記欄位。 但是，而不是使用 ConcurrencyCheck 註釋，您可以使用更特定的時間戳記註解，只要將屬性的型別是位元組陣列。 程式碼第一次將時間戳記屬性視為相同 ConcurrencyCheck 屬性，但它也會確保程式碼第一次會產生的資料庫欄位是不可為 null。 您只能有一個時間戳記屬性中指定的類別。
+使用 rowversion 或 timestamp 欄位進行並行檢查比較常見。 但是，您可以使用更特定的時間戳記注釋，而不是使用 ConcurrencyCheck 注釋，只要屬性的類型為位元組陣列即可。 Code first 會將 Timestamp 屬性視為與 ConcurrencyCheck 屬性相同，但它也會確保程式碼第一次產生的資料庫欄位不可為 null。 在指定的類別中，您只能有一個時間戳記屬性。
 
-部落格類別中加入下列屬性：
+將下列屬性新增至 Blog 類別：
 
 ``` csharp
     [Timestamp]
     public Byte[] TimeStamp { get; set; }
 ```
 
-在第一次建立資料庫資料表中的 不可為 null 的時間戳記資料行的程式碼中的結果。
+在程式碼中，第一次在資料庫資料表中建立不可為 null 的 timestamp 資料行。
 
-![部落格與時間戳記資料行的資料表](~/ef6/media/jj591583-figure07.png)
+![包含時間戳記資料行的 blog 資料表](~/ef6/media/jj591583-figure07.png)
 
  
 
 ## <a name="table-and-column"></a>資料表和資料行
 
-如果您讓 Code First 建立的資料庫，您可能想要變更的資料表和其建立的資料行的名稱。 您也可以使用 Code First 與現有的資料庫。 但它不是一定的類別和您的網域中的屬性名稱比對的資料表和資料庫中的資料行的名稱。
+如果您要讓 Code First 建立資料庫，您可能會想要變更所建立之資料表和資料行的名稱。 您也可以使用 Code First 搭配現有的資料庫。 但是，您的網域中的類別和屬性名稱不一定會符合資料庫中的資料表和資料行名稱。
 
-我的類別名為部落格，並依照慣例，程式碼先假設這會對應到名為部落格的資料表。 如果不是您可以指定資料表的名稱與資料表屬性。 此處，例如註解會指定資料表名稱 InternalBlogs。
+我的類別稱為 Blog，而 code first 會假設這會對應到名為 Blog 的資料表。 如果不是這種情況，您可以使用 Table 屬性來指定資料表的名稱。 例如，批註會指定資料表名稱是 InternalBlogs。
 
 ``` csharp
     [Table("InternalBlogs")]
     public class Blog
 ```
 
-資料行註解是更多的精英中指定的對應資料行的屬性。 您可以規定名稱、 資料型別或甚至是將資料行出現在資料表中的順序。 以下是資料行屬性的範例。
+在指定對應資料行的屬性時，資料行注釋更為熟練。 您可以規定 [名稱]、[資料類型]，或甚至是資料表中顯示的資料行順序。 以下是資料行屬性的範例。
 
 ``` csharp
     [Column("BlogDescription", TypeName="ntext")]
     public String Description {get;set;}
 ```
 
-請勿混淆資料行的資料型別 DataAnnotation TypeName 屬性。 資料型別是用於 UI 的註釋，而且會忽略的 Code First。
+請勿將資料行的 TypeName 屬性與 DataType DataAnnotation 混淆。 DataType 是用於 UI 的注釋，Code First 會予以忽略。
 
-已重新產生之後，以下是資料表。 資料表名稱已變更為 InternalBlogs，描述複雜型別資料行現在已 BlogDescription。 因為註解中指定的名稱，程式碼第一次不會使用資料行名稱開頭為複雜型別名稱的慣例。
+以下是重新產生的資料表。 資料表名稱已變更為 InternalBlogs，而複雜類型的 Description 資料行現在是 BlogDescription。 因為注釋中已指定名稱，所以 code first 不會使用以複雜型別名稱來啟動資料行名稱的慣例。
 
-![部落格資料表和資料行重新命名](~/ef6/media/jj591583-figure08.png)
+![已重新命名的 blog 資料表和資料行](~/ef6/media/jj591583-figure08.png)
 
  
 
 ## <a name="databasegenerated"></a>DatabaseGenerated
 
-重要的資料庫功能是能夠有計算屬性。 如果您對應 Code First 類別，藉此資料表包含計算資料行，您不想要嘗試更新這些資料行的 Entity Framework。 但您想 EF 來插入或更新的資料之後，從資料庫傳回這些值。 您可以使用 DatabaseGenerated 註解來標示那些屬性，在您的類別，以及計算列舉。 其他列舉都是無和身分識別。
+重要的資料庫功能是具有計算屬性的能力。 如果您要將 Code First 類別對應至包含計算資料行的資料表，您不會想要 Entity Framework 嘗試更新這些資料行。 但是，您可以在插入或更新資料之後，讓 EF 從資料庫傳回這些值。 您可以使用 DatabaseGenerated 注釋，將類別中的屬性和計算的列舉一併加上旗標。 其他列舉為 None 和 Identity。
 
 ``` csharp
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime DateCreated { get; set; }
 ```
 
-您可以使用程式碼第一次產生資料庫時，產生位元組或時間戳記資料行上的資料庫，否則您應該只使用這個選項指向現有的資料庫，因為程式碼第一次將無法判斷計算資料行的公式。
+當程式碼第一次產生資料庫時，您可以使用在 byte 或 timestamp 資料行上產生的資料庫，否則，您應該只在指向現有的資料庫時才使用它，因為程式碼 first 無法判斷計算資料行的公式。
 
-您閱讀上述，根據預設，是一個整數的索引鍵屬性，將會成為在資料庫中的識別索引鍵。 這會是 DatabaseGenerated 設 DatabaseGeneratedOption.Identity 相同。 如果您不想要識別索引鍵，值可以設 DatabaseGeneratedOption.None。
+您會在上面閱讀，根據預設，做為整數的索引鍵屬性會成為資料庫中的識別索引鍵。 也就是將 DatabaseGenerated 設定為 DatabaseGeneratedOption。 如果您不想讓它成為身分識別索引鍵，您可以將值設定為 DatabaseGeneratedOption。
 
  
 
 ## <a name="index"></a>索引
 
 > [!NOTE]
-> **EF6.1 及更新版本僅**-Entity Framework 6.1 中導入的索引屬性。 如果您使用較早版本不適用這一節的資訊。
+> **Ef 6.1 僅適用**于 Entity Framework 6.1 中引進的索引屬性。 如果您使用較舊的版本，本節中的資訊將不適用。
 
-您可以使用的一或多個資料行上建立索引**IndexAttribute**。 將屬性加入至一個或多個屬性將會導致 EF 在資料庫中建立對應的索引，建立資料庫時，或建立對應的結構**CreateIndex**呼叫如果您使用 Code First 移轉。
+您可以使用**IndexAttribute**，在一或多個資料行上建立索引。 將屬性加入至一個或多個屬性，會使 EF 在建立資料庫時于資料庫中建立對應的索引，或 scaffold 對應的**CreateIndex**呼叫（如果您使用 Code First 移轉）。
 
-例如，下列程式碼會導致上所建立的索引**分級**資料行**文章**資料庫資料表中的。
+例如，下列程式碼會在資料庫的 [**貼**文] 資料表的 [**評**等] 資料行上建立索引。
 
 ``` csharp
     public class Post
@@ -347,14 +347,14 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
     }
 ```
 
-根據預設，將會命名為索引**IX\_&lt;屬性名稱&gt;** (IX\_評等在上述範例中)。 您也可以透過指定索引的名稱。 下列範例會指定應該命名為索引**PostRatingIndex**。
+根據預設，索引會命名為**IX\_&lt;屬性名稱&gt;** （在上述範例中為 IX\_分級）。 不過，您也可以指定索引的名稱。 下列範例會指定索引應該命名為**PostRatingIndex**。
 
 ``` csharp
     [Index("PostRatingIndex")]
     public int Rating { get; set; }
 ```
 
-根據預設，索引為非唯一的但您可以使用**IsUnique**具名參數來指定應該是唯一的索引。 下列範例會介紹一個唯一的索引上**使用者**的登入名稱。
+根據預設，索引不是唯一的，但您可以使用**IsUnique**具名引數來指定索引應該是唯一的。 下列範例會在**使用者**的登入名稱上引進唯一索引。
 
 ``` csharp
     public class User
@@ -369,9 +369,9 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
     }
 ```
 
-### <a name="multiple-column-indexes"></a>多個資料行索引
+### <a name="multiple-column-indexes"></a>多重資料行索引
 
-跨越多個資料行的索引已指定在多個索引註解中使用相同的名稱，指定的資料表。 當您建立多重資料行索引時，您必須指定在索引中的資料行的順序。 比方說，下列程式碼會建立多重資料行索引上**分級**並**BlogId**呼叫**IX\_BlogIdAndRating**。 **BlogId**是在索引中的第一個資料行和**分級**是第二個。
+跨越多個資料行的索引是使用相同的名稱，在指定資料表的多個索引注釋中指定。 當您建立多重資料行索引時，您必須指定索引中資料行的順序。 例如，下列程式碼會在**分級**和**BlogId**上建立多個資料行的索引，稱為**IX\_BlogIdAndRating**。 **BlogId**是索引中的第一個資料行，而**評**等是第二個數據行。
 
 ``` csharp
     public class Post
@@ -388,16 +388,16 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
 
  
 
-## <a name="relationship-attributes-inverseproperty-and-foreignkey"></a>關聯性的屬性：InverseProperty 和 ForeignKey
+## <a name="relationship-attributes-inverseproperty-and-foreignkey"></a>關聯性屬性： InverseProperty 和 ForeignKey
 
 > [!NOTE]
-> 此頁面提供有關設定 Code First 模型使用資料註解中的關聯性資訊。 如需 EF 以及如何存取和操作資料使用關聯性的關聯性的一般資訊，請參閱[關聯性和導覽屬性](~/ef6/fundamentals/relationships.md)。 *
+> 此頁面提供使用資料批註在 Code First 模型中設定關聯性的相關資訊。 如需 EF 中的關聯性以及如何使用關聯性存取和運算元據的一般資訊，請參閱[& 導覽屬性的關聯](~/ef6/fundamentals/relationships.md)性。 *
 
-程式碼的第一個慣例會負責在您的模型中，最常見的關聯性，但有某些情況下，它需要說明的位置。
+Code first 慣例會負責您模型中最常見的關聯性，但在某些情況下，它需要協助。
 
-變更建立問題貼文及其關聯性的部落格類別中的索引鍵屬性名稱。 
+變更 Blog 類別中的索引鍵屬性名稱，會建立與 Post 關聯的問題。 
 
-產生時的資料庫，程式碼第一次看到 BlogId 類別中的屬性後，並會將它，它符合類別名稱加上 「 識別碼 」，為部落格類別的外部索引鍵的慣例所辨識。 但是，部落格類別中沒有 BlogId 屬性。 這個解決方法是建立貼文中的導覽屬性，並使用外部索引 DataAnnotation 協助先了解如何建置這兩個類別之間的關聯性的程式碼 — 使用 Post.BlogId 屬性，以及如何指定條件約束中的資料庫。
+產生資料庫時，code first 會看到 Post 類別中的 BlogId 屬性，並依照其符合類別名稱加上 "Id" 的慣例來辨識它，作為 Blog 類別的外鍵。 但在 blog 類別中沒有 BlogId 屬性。 其解決方法是在 Post 中建立導覽屬性，並使用外部 DataAnnotation 協助程式碼先瞭解如何使用 BlogId 屬性來建立兩個類別之間的關聯性，以及如何在中指定條件約束。資料.
 
 ``` csharp
     public class Post
@@ -413,20 +413,20 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
     }
 ```
 
-在資料庫中的條件約束會顯示 InternalBlogs.PrimaryTrackingKey Posts.BlogId 之間的關聯性。 
+資料庫中的條件約束會顯示 InternalBlogs PrimaryTrackingKey 與 BlogId 之間的關聯性。 
 
-![InternalBlogs.PrimaryTrackingKey 和 Posts.BlogId 之間的關聯性](~/ef6/media/jj591583-figure09.png)
+![InternalBlogs 之間的關聯性 PrimaryTrackingKey 和貼文。 BlogId](~/ef6/media/jj591583-figure09.png)
 
-當您有多個類別之間的關聯性時，會使用 InverseProperty。
+當您的類別之間有多個關聯性時，就會使用 InverseProperty。
 
-在 Post 類別中，您可能想要追蹤是誰撰寫的部落格文章的以及誰可以編輯它。 以下是 Post 類別的兩個新導覽屬性。
+在 Post 類別中，您可能想要追蹤誰寫了 blog 文章以及編輯者。 以下是 Post 類別的兩個新導覽屬性。
 
 ``` csharp
     public Person CreatedBy { get; set; }
     public Person UpdatedBy { get; set; }
 ```
 
-您也必須新增這些屬性所參考的 Person 類別中。 Person 類別有回到文章中，一個用於所有人員，另一個用於所有由該位人員更新的文章所撰寫的文章的導覽屬性。
+您也必須在這些屬性所參考的 Person 類別中加入。 Person 類別具有回到文章的導覽屬性，一個用於個人所撰寫的所有貼文，另一個則用於該人員所更新的所有文章。
 
 ``` csharp
     public class Person
@@ -438,11 +438,11 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
     }
 ```
 
-程式碼第一次不能符合其本身上的兩個類別中的屬性。 貼文的資料庫資料表應該有一個外部索引鍵，用於 CreatedBy person，一個用於 UpdatedBy 人員，但程式碼首先會建立四個外部索引鍵屬性：個人\_識別碼，Person\_Id1、 CreatedBy\_識別碼和 UpdatedBy\_識別碼。
+Code first 無法單獨比對這兩個類別中的屬性。 貼文的資料庫資料表應該有一個 CreatedBy 人員的外鍵，另一個用於 UpdatedBy 人員，但 code first 會建立四個外鍵屬性： Person\_Id、Person\_Id1、CreatedBy\_Id 和 UpdatedBy\_Id。
 
-![張貼額外的外部索引鍵的資料表](~/ef6/media/jj591583-figure10.png)
+![附有額外外鍵的貼文資料表](~/ef6/media/jj591583-figure10.png)
 
-若要修正這些問題，您可以使用 InverseProperty 註解來指定屬性的對齊方式。
+若要修正這些問題，您可以使用 InverseProperty 批註來指定屬性的對齊方式。
 
 ``` csharp
     [InverseProperty("CreatedBy")]
@@ -452,14 +452,14 @@ ConcurrencyCheck 註釋可讓您用於並行存取檢查資料庫中，當使用
     public List<Post> PostsUpdated { get; set; }
 ```
 
-親自轉交 PostsWritten 屬性會知道這是指 Post 型別，因為它會建置 Post.CreatedBy 的關聯性。 同樣地，PostsUpdated 將會連接到 Post.UpdatedBy。 程式碼第一次不會產生額外的外部索引鍵。
+因為 Person 中的 PostsWritten 屬性知道這會參考 Post 類型，所以它會建立 CreatedBy 的關聯性。 同樣地，PostsUpdated 會連接到 UpdatedBy。 而 code first 不會建立額外的外鍵。
 
-![貼文資料表，而不需要額外的外部索引鍵](~/ef6/media/jj591583-figure11.png)
+![沒有額外外鍵的貼文資料表](~/ef6/media/jj591583-figure11.png)
 
  
 
-## <a name="summary"></a>總結
+## <a name="summary"></a>摘要
 
-DataAnnotations 不僅可讓您描述在您的程式碼的第一個類別，用戶端和伺服器端驗證，但它們也可讓您增強和甚至修正第一次程式碼可讓您根據其慣例的類別的相關假設。 使用 DataAnnotations 您可以不只有磁碟機產生資料庫結構描述，但您也可以將您的程式碼的第一個類別對應到預先存在的資料庫。
+DataAnnotations 不僅可讓您在程式碼的第一個類別中描述用戶端和伺服器端驗證，還可讓您增強，甚至更正程式碼第一次將根據其慣例來對類別進行的假設。 有了 DataAnnotations，您不僅可以驅動資料庫架構的產生，還可以將程式碼的第一個類別對應到既有的資料庫。
 
-雖然它們是非常大的彈性，請記住，DataAnnotations 提供中最常需要組態變更，您可以對您的程式碼的第一個類別。 若要設定您的類別，針對某些邊緣案例，您應該查看的其他設定機制，Code First 的 Fluent API。
+雖然它們非常有彈性，但請記住，DataAnnotations 只會提供您在程式碼第一個類別上可以進行的最常需要的設定變更。 若要針對某些邊緣案例設定您的類別，您應該查看其他設定機制，Code First 的流暢 API。

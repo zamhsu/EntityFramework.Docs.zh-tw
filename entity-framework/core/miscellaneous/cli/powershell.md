@@ -5,11 +5,11 @@ ms.author: bricelam
 ms.date: 09/18/2018
 uid: core/miscellaneous/cli/powershell
 ms.openlocfilehash: a9ce6d5b5f36a72e3715a9de787f1f00e989a58c
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72811910"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416715"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Entity Framework Core 工具參考-Visual Studio 中的套件管理員主控台
 
@@ -66,7 +66,7 @@ Install-Package Microsoft.EntityFrameworkCore.Tools
 Update-Package Microsoft.EntityFrameworkCore.Tools
 ```
 
-### <a name="verify-the-installation"></a>確認安裝
+### <a name="verify-the-installation"></a>驗證安裝
 
 執行下列命令來確認是否已安裝工具：
 
@@ -125,7 +125,7 @@ SHORT DESCRIPTION
 
 ### <a name="aspnet-core-environment"></a>ASP.NET Core 環境
 
-若要指定 ASP.NET Core 專案的環境，請在執行命令之前，設定**env： ASPNETCORE_ENVIRONMENT** 。
+若要指定 ASP.NET Core 專案的環境，請在執行命令之前，先設定**env： ASPNETCORE_ENVIRONMENT** 。
 
 ## <a name="common-parameters"></a>一般參數
 
@@ -156,7 +156,7 @@ SHORT DESCRIPTION
 
 ## <a name="drop-database"></a>放置資料庫
 
-卸載資料庫。
+卸除資料庫。
 
 參數：
 
@@ -217,7 +217,7 @@ Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Conn
 
 | 參數                | 描述                                                                                                                                                                                                                |
 |:-------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *-從*\<字串 >        | 開始的遷移。 可以依名稱或識別碼來識別遷移。 數位0是特殊案例，表示*第一次遷移之前*。 預設為0。                                                              |
+| *-從*\<字串 >        | 開始的遷移。 可以依名稱或識別碼來識別遷移。 數位0是特殊案例，表示*第一次遷移之前*。 預設為 0。                                                              |
 | *-* \<字串 >          | 結束遷移。 預設為上次遷移。                                                                                                                                                                      |
 | <nobr>-等冪</nobr> | 產生可在任何遷移的資料庫上使用的腳本。                                                                                                                                                         |
 | -輸出 \<字串 >        | 要寫入結果的檔案。 如果省略此參數，則會在建立應用程式的執行時間檔案所在的相同資料夾中建立具有所產生名稱的檔案，例如： */obj/Debug/netcoreapp2.1/ghbkztfz.sql/* 。 |

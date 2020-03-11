@@ -5,11 +5,11 @@ ms.date: 10/27/2016
 ms.assetid: a628795e-64df-4f24-a5e8-76bc261e7ed8
 uid: core/modeling/backing-field
 ms.openlocfilehash: 20cf9dc9b0d556f29680bce588bcbdc4ea48fa74
-ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76124375"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417306"
 ---
 # <a name="backing-fields"></a>支援欄位
 

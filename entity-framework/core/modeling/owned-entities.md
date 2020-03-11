@@ -5,18 +5,18 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 30b91b6e66b6c0f516d1ba12485304b52770cbef
-ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
+ms.openlocfilehash: da4a459fbc40010fc14190204c8ed66fe0495b84
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75781231"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416457"
 ---
 # <a name="owned-entity-types"></a>擁有的實體類型
 
 EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類型模型化。 這些稱為「_自有實體類型_」。 包含自有實體類型的實體是_其擁有者。_
 
-擁有的實體基本上是擁有者的一部分，如果沒有，就不能存在，它們在概念上類似于[匯總](https://martinfowler.com/bliki/DDD_Aggregate.html)。 這表示擁有的型別是與擁有者關聯性之相依端的定義。
+擁有的實體基本上是擁有者的一部分，如果沒有，就不能存在，它們在概念上類似于[匯總](https://martinfowler.com/bliki/DDD_Aggregate.html)。 這表示擁有的實體是由與擁有者之關聯性的相依端定義。
 
 ## <a name="explicit-configuration"></a>明確設定
 
@@ -38,7 +38,7 @@ EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類
 
 [!code-csharp[OwnsOneString](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsOneString)]
 
-如需詳細內容，請參閱[完整的範例專案](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/OwnedEntities)。
+如需詳細內容，請參閱[完整的範例專案](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/OwnedEntities)。
 
 ## <a name="implicit-keys"></a>隱含索引鍵
 
@@ -100,7 +100,7 @@ EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類
 
 ## <a name="nested-owned-types"></a>嵌套擁有的類型
 
-在此範例中 `OrderDetails` 擁有 `BillingAddress` 和 `ShippingAddress`，這兩者都是 `StreetAddress` 類型。 然後 `DetailedOrder` 類型擁有 `OrderDetails`。
+在此範例中 `OrderDetails` 擁有 `BillingAddress` 和 `ShippingAddress`，這兩者都是 `StreetAddress` 類型。 然後 `OrderDetails` 類型擁有 `DetailedOrder`。
 
 [!code-csharp[DetailedOrder](../../../samples/core/Modeling/OwnedEntities/DetailedOrder.cs?name=DetailedOrder)]
 

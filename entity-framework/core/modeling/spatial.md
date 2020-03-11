@@ -6,11 +6,11 @@ ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
 ms.openlocfilehash: 5b45f83ca7f02665f52ccfe16b5af506a6046a62
-ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76124427"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417402"
 ---
 # <a name="spatial-data"></a>空間資料
 
@@ -49,9 +49,9 @@ optionsBuilder.UseSqlServer(
 有數個空間資料類型。 您所使用的類型取決於您想要允許的圖形類型。 以下是您可以在模型中用於屬性的 NTS 類型階層。 它們位於 `NetTopologySuite.Geometries` 命名空間內。
 
 * 幾何
-  * 點
+  * Point
   * LineString
-  * 多邊形
+  * Polygon
   * GeometryCollection
     * MultiPoint
     * MultiLineString
@@ -207,7 +207,7 @@ var currentCountry = db.Countries
     .FirstOrDefault(c => c.Border.Contains(currentLocation));
 ```
 
-## <a name="sql-server"></a>[SQL Server]
+## <a name="sql-server"></a>SQL Server
 
 如果您使用 SQL Server，還有一些您應該注意的其他事項。
 

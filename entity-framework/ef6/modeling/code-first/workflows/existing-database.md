@@ -3,20 +3,20 @@ title: Code First 到現有的資料庫-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: a7e60b74-973d-4480-868f-500a3899932e
-ms.openlocfilehash: 61980bbd1f236f496a9d4fd92aa52264f1454615
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 0a51f826422d7e2bff33b968605eace1e754c425
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182624"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418872"
 ---
 # <a name="code-first-to-an-existing-database"></a>Code First 到現有的資料庫
 這段影片和逐步解說提供以現有資料庫為目標之 Code First 開發的簡介。 Code First 可讓您使用 C\# 或 VB.Net 類別來定義模型。 您可以選擇性地使用類別和屬性上的屬性，或使用 Fluent API 來執行其他設定。
 
-## <a name="watch-the-video"></a>觀看影片
+## <a name="watch-the-video"></a>觀賞影片
 [Channel 9 現在提供](https://channel9.msdn.com/blogs/ef/code-first-to-existing-database-ef6-1-onwards-)這部影片。
 
-## <a name="pre-requisites"></a>先決條件
+## <a name="pre-requisites"></a>必要條件
 
 您必須安裝**Visual Studio 2012**或**Visual Studio 2013** ，才能完成此逐步解說。
 
@@ -72,7 +72,7 @@ VALUES ('.NET Framework Blog', 'http://blogs.msdn.com/dotnet/')
 
 ## <a name="2-create-the-application"></a>2. 建立應用程式
 
-為了簡單起見，我們將建立一個使用 Code First 來執行資料存取的基本主控台應用程式：
+為了簡單起見，我們將建立一個使用 Code First 來進行資料存取的基本主控台應用程式：
 
 -   開啟 Visual Studio
 -   **檔案&gt; 新&gt; 專案 。**
@@ -84,7 +84,7 @@ VALUES ('.NET Framework Blog', 'http://blogs.msdn.com/dotnet/')
 
 ## <a name="3-reverse-engineer-model"></a>3. 反向工程模型
 
-我們將使用 Visual Studio 的 Entity Framework Tools，協助我們產生一些要對應到資料庫的初始程式碼。 這些工具只會產生程式碼，如果您想要的話，也可以手動輸入。
+我們會使用 Visual Studio 的 Entity Framework Tools，協助我們產生一些要對應至資料庫的初始程式碼。 這些工具只會產生程式碼，如果您想要的話，也可以手動輸入。
 
 -   **專案-&gt; 加入新專案 。**
 -   從左側功能表中選取 [**資料**]，然後**ADO.NET 實體資料模型**

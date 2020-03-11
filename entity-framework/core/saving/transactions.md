@@ -4,19 +4,19 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d3e6515b-8181-482c-a790-c4a6778748c1
 uid: core/saving/transactions
-ms.openlocfilehash: 952cb891d145a47666f1d506ec00f066be9f245d
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 390d89398ebfdf015804749e71ff0b61d3f278d3
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73654745"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417552"
 ---
 # <a name="using-transactions"></a>使用交易
 
 交易可讓系統以不可部分完成的方式處理數個資料庫作業。 如果認可交易，就會對資料庫成功套用所有作業。 如果復原交易，則不會對資料庫套用任何作業。
 
 > [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Transactions/) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Transactions/) \(英文\)。
 
 ## <a name="default-transaction-behavior"></a>預設交易行為
 

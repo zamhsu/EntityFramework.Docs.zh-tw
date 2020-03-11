@@ -5,11 +5,11 @@ ms.date: 09/26/2018
 ms.assetid: de2e34cd-659b-4cab-b5ed-7a979c6bf120
 uid: core/querying/how-query-works
 ms.openlocfilehash: ba0d68469530e6272ffbb51946d7856122a261c7
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656246"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417698"
 ---
 # <a name="how-queries-work"></a>查詢的運作方式
 

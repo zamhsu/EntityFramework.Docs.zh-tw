@@ -4,18 +4,18 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 869ee4dc-06f1-471d-8e0e-0a1a2bc59c30
 ms.openlocfilehash: 8f7d2e8b41ece28efe8d1df3b0679e6e4510d64a
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489813"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419336"
 ---
 # <a name="working-with-proxies"></a>使用 proxy
-在建立 POCO 實體類型執行個體時，Entity Framework 通常會建立動態產生的衍生型別，做為實體的 proxy 的執行個體。 此 proxy 會覆寫要插入存取屬性時，就會自動執行動作的攔截程序之實體的某些虛擬屬性。 比方說，這項機制用來支援關聯性的消極式載入。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
+建立 POCO 實體類型的實例時，Entity Framework 通常會建立動態產生之衍生類型的實例，作為實體的 proxy。 此 proxy 會覆寫實體的某些虛擬屬性，以插入在存取屬性時自動執行動作的勾點。 例如，這項機制是用來支援延遲載入關聯性。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
 
 ## <a name="disabling-proxy-creation"></a>停用 proxy 建立  
 
-有時候它適合防止 Entity Framework 建立 proxy 執行個體。 比方說，序列化非 proxy 執行個體可達事半功倍比序列化 proxy 執行個體。 Proxy 建立可以藉由清除 ProxyCreationEnabled 旗標關閉。 可以這麼做的一個位置是在您內容的建構函式。 例如:   
+有時候，防止 Entity Framework 建立 proxy 實例會很有用。 例如，序列化非 proxy 實例會比序列化 proxy 實例簡單得多。 藉由清除 ProxyCreationEnabled 旗標，可以關閉 Proxy 建立。 您可以執行這項操作的其中一個地方是在您的內容的函式中。 例如：  
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -30,11 +30,11 @@ public class BloggingContext : DbContext
 }
 ```  
 
-請注意，EF 會建立型別的 proxy 其中沒有任何要執行的 proxy。 這表示您也可以避免 proxy 擁有密封格式，和/或沒有任何虛擬屬性的型別。  
+請注意，如果沒有 proxy 要執行的類型，則 EF 不會建立 proxy。 這表示您也可以藉由擁有密封的類型和/或沒有虛擬屬性來避免 proxy。  
 
-## <a name="explicitly-creating-an-instance-of-a-proxy"></a>明確建立 proxy 的執行個體  
+## <a name="explicitly-creating-an-instance-of-a-proxy"></a>明確建立 proxy 的實例  
 
-如果您建立使用新的運算子實體的執行個體，將不會建立 proxy 執行個體。 這可能不是問題，但如果您要建立的 proxy 執行個體 （例如，讓消極式載入或 proxy 變更追蹤會運作） 然後您可以這樣使用 DbSet 的 Create 方法。 例如:   
+如果您使用 new 運算子建立實體的實例，則不會建立 proxy 實例。 這可能不是問題，但如果您需要建立 proxy 實例（例如，讓消極式載入或 proxy 變更追蹤能夠正常執行），您可以使用 DbSet 的 Create 方法來這麼做。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -43,7 +43,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-如果您想要建立衍生的實體型別的執行個體，則可以使用建立的泛型版本。 例如:   
+如果您想要建立衍生實體類型的實例，則可以使用 Create 的泛型版本。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -52,17 +52,17 @@ using (var context = new BloggingContext())
 }
 ```  
 
-請注意，Create 方法不會加入或建立的實體附加至內容。  
+請注意，Create 方法不會將建立的實體加入或附加至內容。  
 
-建立方法會只是建立實體型別本身的執行個體如果建立 proxy 型別之實體的附註會有任何值，因為它不會執行任何動作。 例如，如果實體類型密封格式，及/或有任何虛擬屬性，則只會建立建立實體類型的執行個體。  
+請注意，如果建立實體的 proxy 類型不會有任何值，Create 方法只會建立實體類型本身的實例，因為它不會執行任何動作。 例如，如果實體類型是密封的，而且（或沒有虛擬屬性），則 Create 只會建立實體類型的實例。  
 
-## <a name="getting-the-actual-entity-type-from-a-proxy-type"></a>從 proxy 類型中取得實際的實體類型  
+## <a name="getting-the-actual-entity-type-from-a-proxy-type"></a>從 proxy 類型取得實際實體類型  
 
-Proxy 型別有看起來像這樣的名稱：  
+Proxy 類型的名稱如下所示：  
 
-System.Data.Entity.DynamicProxies.Blog_5E43C6C196972BF0754973E48C9C941092D86818CD94005E9A759B70BF6E48E6  
+DynamicProxies. Entity. Blog_5E43C6C196972BF0754973E48C9C941092D86818CD94005E9A759B70BF6E48E6  
 
-您可以在此 proxy 使用針對類型從 ObjectContext GetObjectType 方法找到的實體類型。 例如:   
+您可以使用 ObjectCoNtext 的 GetObjectType 方法，來尋找此 proxy 類型的實體類型。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -72,4 +72,4 @@ using (var context = new BloggingContext())
 }
 ```  
 
-請注意，如果型別傳遞至 GetObjectType 仍然會傳回不是 proxy 類型的實體類型的實體類型的執行個體。 這表示您永遠可以使用這個方法，而不需要任何其他檢查類型是否 proxy 型別取得實際的實體類型。  
+請注意，如果傳遞至 GetObjectType 的類型是不是 proxy 類型之實體類型的實例，則仍會傳回實體的類型。 這表示您一律可以使用這個方法來取得實際實體類型，而不需要任何其他檢查，以查看該類型是否為 proxy 類型。  

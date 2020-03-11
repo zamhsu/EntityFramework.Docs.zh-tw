@@ -4,23 +4,23 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: cc6ffdb3-388d-4e79-a201-01ec2577c949
 ms.openlocfilehash: d40cff4ddccf43a394ef4f244653372a5a89b05a
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182455"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418354"
 ---
 # <a name="database-first"></a>Database First
 這段影片和逐步解說提供使用 Entity Framework Database First 開發的簡介。 Database First 可讓您從現有的資料庫對模型進行反向工程。 此模型會儲存在 EDMX 檔案（.edmx 副檔名）中，而且可以在 Entity Framework Designer 中查看和編輯。 您在應用程式中與互動的類別會從 EDMX 檔案自動產生。
 
-## <a name="watch-the-video"></a>觀看影片
+## <a name="watch-the-video"></a>觀賞影片
 這段影片提供使用 Entity Framework 進行 Database First 開發的介紹。 Database First 可讓您從現有的資料庫對模型進行反向工程。 此模型會儲存在 EDMX 檔案（.edmx 副檔名）中，而且可以在 Entity Framework Designer 中查看和編輯。 您在應用程式中與互動的類別會從 EDMX 檔案自動產生。
 
 **主講人**[Rowan Miller](https://romiller.com/)
 
 **影片**： [wmv](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.wmv) | [.wmv](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-mp4video-databasefirst.m4v) | [wmv （ZIP）](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.zip)
 
-## <a name="pre-requisites"></a>先決條件
+## <a name="pre-requisites"></a>必要條件
 
 您至少必須安裝 Visual Studio 2010 或 Visual Studio 2012，才能完成此逐步解說。
 
@@ -127,7 +127,7 @@ CREATE TABLE [dbo].[Posts] (
     *如果您沒有 [**管理 nuget 套件 ...** ] 選項，您應該安裝[最新版本的 nuget](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) *
 -   選取 [**線上**] 索引標籤
 -   選取**EntityFramework**套件
--   按一下 [**安裝**]
+-   按一下 [安裝]
 
 接下來，我們需要交換我們的模型，以產生會使用 DbCoNtext API 的程式碼，這是在 Entity Framework 的較新版本中引進。
 

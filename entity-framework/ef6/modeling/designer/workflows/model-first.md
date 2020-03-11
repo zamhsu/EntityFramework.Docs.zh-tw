@@ -4,23 +4,23 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
 ms.openlocfilehash: 1b37805beb3d33f0b6dad2577a8abb3ea8f7b1e4
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182434"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418102"
 ---
 # <a name="model-first"></a>Model First
 這段影片和逐步解說提供使用 Entity Framework Model First 開發的簡介。 Model First 可讓您使用 Entity Framework Designer 建立新的模型，然後從模型產生資料庫架構。 此模型會儲存在 EDMX 檔案（.edmx 副檔名）中，而且可以在 Entity Framework Designer 中查看和編輯。 您在應用程式中與互動的類別會從 EDMX 檔案自動產生。
 
-## <a name="watch-the-video"></a>觀看影片
+## <a name="watch-the-video"></a>觀賞影片
 這段影片和逐步解說提供使用 Entity Framework Model First 開發的簡介。 Model First 可讓您使用 Entity Framework Designer 建立新的模型，然後從模型產生資料庫架構。 此模型會儲存在 EDMX 檔案（.edmx 副檔名）中，而且可以在 Entity Framework Designer 中查看和編輯。 您在應用程式中與互動的類別會從 EDMX 檔案自動產生。
 
 **主講人**[Rowan Miller](https://romiller.com/)
 
 **影片**： [wmv](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv) | [.wmv](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v) | [wmv （ZIP）](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
 
-## <a name="pre-requisites"></a>先決條件
+## <a name="pre-requisites"></a>必要條件
 
 您將需要安裝 Visual Studio 2010 或 Visual Studio 2012，才能完成此逐步解說。
 
@@ -87,7 +87,7 @@ Entity Framework Designer 會以空白模型開啟。 現在我們可以開始�
     *如果您沒有 [**管理 nuget 套件 ...** ] 選項，您應該安裝[最新版本的 nuget](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) *
 -   選取 [**線上**] 索引標籤
 -   選取**EntityFramework**套件
--   按一下 [**安裝**]
+-   按一下 [安裝]
 
 接下來，我們需要交換我們的模型，以產生會使用 DbCoNtext API 的程式碼，這是在 Entity Framework 的較新版本中引進。
 
@@ -189,7 +189,7 @@ Press any key to exit...
 我們現在已有更新的模型，而且我們已準備好更新資料庫，以容納新的使用者實體類型。
 
 -   以滑鼠右鍵按一下設計介面，然後選取 [**從模型產生資料庫**...]，Entity Framework 將會計算腳本，以根據更新的模型重新建立架構。
--   按一下 **[完成]**
+-   按一下 [完成]
 -   您可能會收到有關覆寫現有 DDL 腳本的警告，以及模型的對應和儲存部分，請在這兩個警告中按一下 **[是]**
 -   系統會為您開啟用來建立資料庫的已更新 SQL 腳本  
     *產生的腳本會卸載所有現有的資料表，然後從頭開始重新建立架構。這可能適用于本機開發，但無法將變更推送至已部署的資料庫。如果您需要將變更發行至已部署的資料庫，您必須編輯腳本，或使用架構比較工具來計算遷移腳本。*

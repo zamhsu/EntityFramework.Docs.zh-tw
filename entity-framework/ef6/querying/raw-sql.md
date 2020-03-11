@@ -4,18 +4,18 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 9e1ee76e-2499-408c-81e8-9b6c5d1945a0
 ms.openlocfilehash: 168aee67186535bf2a50705e86bfc5a88147e369
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283780"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417092"
 ---
 # <a name="raw-sql-queries"></a>原始 SQL 查詢
-Entity Framework 可讓您與您的實體類別中使用 LINQ 進行查詢。 不過，可能有您想要使用原始的 SQL 直接對資料庫執行查詢的時間。 這包括呼叫預存程序，可以幫助您目前不支援對應至預存程序的 Code First 模型。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
+Entity Framework 可讓您使用 LINQ 搭配實體類別來進行查詢。 不過，有時候您可能會想要直接針對資料庫使用原始 SQL 來執行查詢。 這包括呼叫預存程式，對於目前不支援對應至預存程式的 Code First 模型而言，這很有説明。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
 
-## <a name="writing-sql-queries-for-entities"></a>撰寫 SQL 查詢實體  
+## <a name="writing-sql-queries-for-entities"></a>撰寫實體的 SQL 查詢  
 
-DbSet SqlQuery 方法可讓原始的 SQL 查詢，以寫入，會傳回實體執行個體。 內容會追蹤傳回的物件，就如同它們由 LINQ 查詢，其方式是。 例如:   
+DbSet 上的 SqlQuery 方法可讓您撰寫會傳回實體實例的原始 SQL 查詢。 傳回的物件會由內容追蹤，就如同 LINQ 查詢所傳回的一樣。 例如：  
 
 ``` csharp  
 using (var context = new BloggingContext())
@@ -24,15 +24,15 @@ using (var context = new BloggingContext())
 }
 ```  
 
-請注意，如同 LINQ 查詢，查詢才可以執行結果會列舉，在上述範例中是使用 ToList 的呼叫。  
+請注意，就像 LINQ 查詢一樣，查詢不會執行，直到列舉結果為止-在上述範例中，這是透過呼叫 ToList 來完成。  
 
-只要原始 SQL 查詢會寫入兩個原因，應該特別注意。 首先，應該撰寫查詢，以確保只會傳回實體的要求的型別實際上是。 例如，使用功能，例如繼承時很容易撰寫的查詢，將會建立屬於錯誤的 CLR 類型的實體。  
+每次寫入原始 SQL 查詢時都應該小心，原因有兩個。 首先，應撰寫查詢，以確保它只會傳回實際為所要求類型的實體。 例如，使用繼承之類的功能時，很容易就能撰寫查詢來建立屬於錯誤 CLR 類型的實體。  
 
-第二，某些類型的原始 SQL 查詢會公開潛在的安全性風險，尤其是 SQL 資料隱碼攻擊。 請確定在查詢中使用參數，以防範這類攻擊的正確方式。  
+其次，某些類型的原始 SQL 查詢會公開潛在的安全性風險，特別是在 SQL 插入式攻擊方面。 請確定您以正確的方式在查詢中使用參數，以防範這類攻擊。  
 
-### <a name="loading-entities-from-stored-procedures"></a>從預存程序中載入的實體  
+### <a name="loading-entities-from-stored-procedures"></a>從預存程式載入實體  
 
-您可以使用 DbSet.SqlQuery 載入實體，從預存程序的結果。 例如，下列程式碼會呼叫 dbo。在資料庫中的 GetBlogs 程序：  
+您可以使用 DbSet，從預存程式的結果載入實體。 例如，下列程式碼會呼叫 dbo。資料庫中的 GetBlogs 程式：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -41,7 +41,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-您也可以將參數傳遞至預存程序，使用下列語法：  
+您也可以使用下列語法，將參數傳遞至預存程式：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -52,9 +52,9 @@ using (var context = new BloggingContext())
 }
 ```  
 
-## <a name="writing-sql-queries-for-non-entity-types"></a>非實體類型的撰寫 SQL 查詢  
+## <a name="writing-sql-queries-for-non-entity-types"></a>撰寫非實體類型的 SQL 查詢  
 
-資料庫類別使用 SqlQuery 方法可以建立 SQL 查詢傳回的任何類型，包括基本類型的執行個體。 例如:   
+您可以使用資料庫類別上的 SqlQuery 方法，來建立傳回任何類型實例的 SQL 查詢，包括基本類型。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -64,11 +64,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-即使物件是實體類型的執行個體，在資料庫上的 SqlQuery 從傳回的結果永遠不會追蹤內容。  
+即使物件是實體類型的實例，內容也永遠不會追蹤從資料庫上的 SqlQuery 傳回的結果。  
 
-## <a name="sending-raw-commands-to-the-database"></a>將未經處理的命令傳送至資料庫  
+## <a name="sending-raw-commands-to-the-database"></a>將原始命令傳送至資料庫  
 
-非查詢命令可以傳送到使用 ExecuteSqlCommand 方法，在資料庫上的資料庫。 例如:   
+您可以使用資料庫上的 ExecuteSqlCommand 方法，將非查詢命令傳送到資料庫。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -78,8 +78,8 @@ using (var context = new BloggingContext())
 }
 ```  
 
-請注意，使用 ExecuteSqlCommand 中資料庫的資料所做的變更是不透明的內容，直到載入或從資料庫重新載入實體。  
+請注意，使用 ExecuteSqlCommand 對資料庫中的資料所做的任何變更，都是不透明的內容，直到從資料庫載入或重載實體為止。  
 
 ### <a name="output-parameters"></a>輸出參數  
 
-如果 output 參數使用，直到已完全讀取結果，將無法使用它們的值。 這是因為基礎行為的 DbDataReader，請參閱 <<c0> [ 擷取的資料使用 DataReader](https://go.microsoft.com/fwlink/?LinkID=398589)如需詳細資訊。  
+如果使用輸出參數，則在完全讀取結果之前，其值將無法使用。 這是因為 DbDataReader 的基礎行為，請參閱[使用 DataReader 抓取資料](https://go.microsoft.com/fwlink/?LinkID=398589)以取得詳細資訊。  

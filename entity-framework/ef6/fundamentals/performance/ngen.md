@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: dc6110a0-80a0-4370-8190-cea942841cee
 ms.openlocfilehash: 841aec645abdb2a56076d0b70bfb2614b0acafb4
-ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72446004"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419458"
 ---
 # <a name="improving-startup-performance-with-ngen"></a>使用 NGen 改善啟動效能
 > [!NOTE]
@@ -56,7 +56,7 @@ Ngen.exe 也支援其他功能，例如卸載和顯示已安裝的原生映射�
 
 - **主要 ef 執行時間元件（EntityFramework）** ：一般 ef 型應用程式會在啟動時或其第一次存取資料庫時，從這個元件執行大量的程式碼。 因此，建立此元件的原生映射將會產生最大的啟動效能提升。  
 - **您的應用程式所使用的任何 EF 提供者元件**：啟動時間也會稍微受益于產生這些的原生映射。 例如，如果應用程式使用 SQL Server 的 EF 提供者，您會想要為 EntityFramework 產生原生映射。  
-- **您應用程式的元件和其他**相依性： [ngen.exe 檔](https://msdn.microsoft.com/library/6t9t5wcf.aspx)涵蓋選擇要產生原生映射之元件的一般準則，以及原生映射對安全性的影響，例如「hard系結」，例如在偵錯工具和分析案例中使用原生影像等案例。  
+- **您應用程式的元件和其他**相依性： [ngen.exe 檔](https://msdn.microsoft.com/library/6t9t5wcf.aspx)涵蓋了一般準則，可供您選擇要產生原生映射的元件，以及原生映射對安全性的影響、像是「硬系結」之類的原生映射、在偵錯工具和分析案例中使用原生影像等案例。  
 
 > [!TIP]
 > 請確定您仔細測量在應用程式的啟動效能和整體效能上使用原生映射的影響，並將它們與實際需求做比較。 雖然原生映射通常有助於改善啟動效能，而且在某些情況下會減少記憶體使用量，並非所有案例都能同樣受益。 比方說，在穩定狀態執行時（亦即，一旦應用程式使用的所有方法都叫用至少一次），JIT 編譯程式所產生的程式碼實際上可能會比原生映射產生稍微好一點的效能。  

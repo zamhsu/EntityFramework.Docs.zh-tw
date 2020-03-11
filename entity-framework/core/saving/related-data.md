@@ -4,19 +4,19 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 07b6680f-ffcf-412c-9857-f997486b386c
 uid: core/saving/related-data
-ms.openlocfilehash: 45c7b8e4bfa4ce7967ad76ef4a7d4818b0d3aebf
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 86d32b6172ee21c12a15e9ed4bb0142afc99c8bd
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197886"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417542"
 ---
 # <a name="saving-related-data"></a>儲存相關資料
 
 儲存隔離的實體之外，您也可以利用模型中所定義的關聯性。
 
 > [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/) \(英文\)。
 
 ## <a name="adding-a-graph-of-new-entities"></a>新增新實體的圖表
 
@@ -27,13 +27,13 @@ ms.locfileid: "71197886"
 [!code-csharp[Main](../../../samples/core/Saving/RelatedData/Sample.cs#AddingGraphOfEntities)]
 
 > [!TIP]  
-> 請使用 EntityEntry.State 屬性來僅設定單一實體的狀態。 例如，`context.Entry(blog).State = EntityState.Modified`。
+> 請使用 EntityEntry.State 屬性來僅設定單一實體的狀態。 例如： `context.Entry(blog).State = EntityState.Modified` 。
 
 ## <a name="adding-a-related-entity"></a>新增相關實體
 
 如果您從內容所追蹤實體的導覽屬性參考新的實體，系統將會探索到該實體並插入到資料庫中。
 
-在下列範例中，會插入 `post` 實體，因為該實體已新增至擷取自資料庫 `blog` 實體的 `Posts` 屬性。
+在下列範例中，會插入 `post` 實體，因為該實體已新增至擷取自資料庫 `Posts` 實體的 `blog` 屬性。
 
 [!code-csharp[Main](../../../samples/core/Saving/RelatedData/Sample.cs#AddingRelatedEntity)]
 

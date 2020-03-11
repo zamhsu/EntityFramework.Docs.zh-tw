@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 16a8b7c0-2d23-47f4-9cc0-e2eb2e738ca3
 ms.openlocfilehash: 3d8933fb5e17f8c01f3971495a1fcdb5b8cfab57
-ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72446034"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416326"
 ---
 # <a name="testing-with-your-own-test-doubles"></a>使用您自己的測試進行測試雙精度浮點數
 > [!NOTE]

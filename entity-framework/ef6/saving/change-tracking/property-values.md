@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: e3278b4b-9378-4fdb-923d-f64d80aaae70
 ms.openlocfilehash: d8a18182754980d79b71df3f227b30c4ce40366f
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182135"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416964"
 ---
 # <a name="working-with-property-values"></a>使用屬性值
 在大部分的情況下，Entity Framework 會負責追蹤實體實例屬性的狀態、原始值和目前的值。 不過，在某些情況下（例如，中斷連線的案例），您想要在其中查看或操作 EF 相關資訊的屬性。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
@@ -55,7 +55,7 @@ using (var context = new BloggingContext())
 
 ## <a name="getting-and-setting-the-current-value-of-an-unmapped-property"></a>取得和設定未對應屬性的目前值  
 
-尚未對應至資料庫之屬性的目前值也可以讀取。 未對應屬性的範例可能是在 Blog 上的 .Rsslink 屬性。 此值可能會根據 BlogId 計算，因此不需要儲存在資料庫中。 例如:  
+尚未對應至資料庫之屬性的目前值也可以讀取。 未對應屬性的範例可能是在 Blog 上的 .Rsslink 屬性。 此值可能會根據 BlogId 計算，因此不需要儲存在資料庫中。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -71,7 +71,7 @@ using (var context = new BloggingContext())
 
 如果屬性公開 setter，則也可以設定目前的值。  
 
-執行未對應屬性的 Entity Framework 驗證時，讀取未對應屬性的值會很有用。 基於相同原因，可以針對目前未由內容追蹤之實體的屬性，讀取和設定目前的值。 例如:  
+執行未對應屬性的 Entity Framework 驗證時，讀取未對應屬性的值會很有用。 基於相同原因，可以針對目前未由內容追蹤之實體的屬性，讀取和設定目前的值。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -167,7 +167,7 @@ public static void PrintValues(DbPropertyValues values)
 
 ## <a name="setting-current-or-original-values-from-another-object"></a>設定另一個物件的目前或原始值  
 
-您可以藉由複製另一個物件的值，來更新已追蹤實體的目前或原始值。 例如:  
+您可以藉由複製另一個物件的值，來更新已追蹤實體的目前或原始值。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -214,7 +214,7 @@ Property Name has value My Boring Blog
 
 ## <a name="setting-current-or-original-values-from-a-dictionary"></a>從字典設定目前或原始值  
 
-已追蹤實體的目前或原始值可以藉由從字典或其他資料結構複製值來進行更新。 例如:  
+已追蹤實體的目前或原始值可以藉由從字典或其他資料結構複製值來進行更新。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -242,7 +242,7 @@ using (var context = new BloggingContext())
 
 ## <a name="setting-current-or-original-values-from-a-dictionary-using-property"></a>使用屬性設定字典中的目前或原始值  
 
-如上面所示使用 CurrentValues 或 OriginalValues 的替代方式，是使用 Property 方法來設定每個屬性的值。 當您需要設定複雜屬性的值時，這會是較理想的作法。 例如:  
+如上面所示使用 CurrentValues 或 OriginalValues 的替代方式，是使用 Property 方法來設定每個屬性的值。 當您需要設定複雜屬性的值時，這會是較理想的作法。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -270,7 +270,7 @@ using (var context = new BloggingContext())
 
 ## <a name="creating-a-cloned-object-containing-current-original-or-database-values"></a>建立包含目前、原始或資料庫值的複製物件  
 
-從 CurrentValues、OriginalValues 或 GetDatabaseValues 傳回的 DbPropertyValues 物件可以用來建立實體的複本。 這個複製將包含用來建立它的 DbPropertyValues 物件的屬性值。 例如:  
+從 CurrentValues、OriginalValues 或 GetDatabaseValues 傳回的 DbPropertyValues 物件可以用來建立實體的複本。 這個複製將包含用來建立它的 DbPropertyValues 物件的屬性值。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())

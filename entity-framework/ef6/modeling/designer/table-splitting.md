@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 452f17c3-9f26-4de4-9894-8bc036e23b0f
 ms.openlocfilehash: f5e7532e6c0b473d8ce77cbd11e3e673b0af6cbe
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921787"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418165"
 ---
 # <a name="designer-table-splitting"></a>設計工具資料表分割
 本逐步解說示範如何使用 Entity Framework Designer （EF Designer）修改模型，將多個實體類型對應至單一資料表。
@@ -19,7 +19,7 @@ ms.locfileid: "70921787"
 
 ![EF Designer](~/ef6/media/efdesigner.png)
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 若要完成這個逐步解說，您將需要：
 
@@ -31,7 +31,7 @@ ms.locfileid: "70921787"
 本逐步解說使用 Visual Studio 2012。
 
 -   開啟 Visual Studio 2012。
--   在 [檔案] **Deploying Office Solutions** 功能表中，指向 [新增]，然後按一下 [專案]。
+-   在 **[檔案]** 功能表上，指向 **[開新檔案]** ，然後按一下 **[專案]** 。
 -   在左窗格中，按一下 [Visual C\#]，然後選取 [主控台應用程式] 範本。
 -   輸入**TableSplittingSample**做為專案的名稱，然後按一下 **[確定]** 。
 

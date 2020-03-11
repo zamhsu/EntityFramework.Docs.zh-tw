@@ -3,12 +3,12 @@ title: 規劃 Entity Framework Core 5。0
 author: ajcvickers
 ms.date: 01/14/2020
 uid: core/what-is-new/ef-core-5.0/plan.md
-ms.openlocfilehash: 0472841fdcd105ec8ea38db062c6768510b8735d
-ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
+ms.openlocfilehash: c5b7300c61c2f668b6f9393ae51bf9ebddf330a7
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76125379"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417873"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>規劃 Entity Framework Core 5。0
 
@@ -47,11 +47,13 @@ T 恤尺寸： L
 
 狀態：進行中
 
-「多對多」是 GitHub 待處理專案上最常要求的功能（~ 407 投票）。 對多對多關聯性的支援可分為三個主要區域：
+「多對多」是 GitHub 待處理專案上[最常要求的功能](https://github.com/aspnet/EntityFrameworkCore/issues/1368)（~ 407 投票）。
 
-* 略過導覽屬性。 這些可讓模型用於查詢等，而不需要參考基礎聯結資料表實體。
-* 屬性包實體類型。 這些專案允許將標準 CLR 型別（例如 `Dictionary`）用於實體實例，因此每個實體型別都不需要明確的 CLR 型別。
-* 方便設定多對多關聯性的便利。
+整體支援多對多關聯性會以[#10508](https://github.com/aspnet/EntityFrameworkCore/issues/10508)的方式進行追蹤。 這可分為三個主要區域：
+
+* 略過導覽屬性。 這些可讓模型用於查詢等，而不需要參考基礎聯結資料表實體。 （[#19003](https://github.com/aspnet/EntityFrameworkCore/issues/19003)）
+* 屬性包實體類型。 這些專案允許將標準 CLR 型別（例如 `Dictionary`）用於實體實例，因此每個實體型別都不需要明確的 CLR 型別。 （5.0 的 Stretch： [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)）。
+* 方便設定多對多關聯性的便利。 （5.0 的延展）。
 
 我們相信，想要多對多支援的最重要封鎖程式，在商務邏輯（例如查詢）中無法使用「自然」關聯性，而不需要參考聯結資料表。 聯結資料表實體類型可能仍然存在，但不應該取得商務邏輯的方式。 這就是我們選擇解決 [略過 5.0] 的流覽屬性的原因。
 
@@ -122,7 +124,7 @@ T 恤尺寸： L
 * 多個執行緒/進程/伺服器可能會嘗試同時遷移資料庫
 * 應用程式可能會在發生這種情況時，嘗試存取不一致的狀態
 * 通常不應授與修改架構的資料庫許可權以執行應用程式
-* 如果發生問題，它很難還原為乾淨狀態
+* 如果發生錯誤，很難還原為「清除」狀態
 
 我們想要在此提供更好的體驗，讓您可以輕鬆地在部署時遷移資料庫。 這應該：
 
@@ -144,7 +146,7 @@ T 恤尺寸： L
 
 狀態：未啟動
 
-我們有在傳統的 MVC web 應用程式中使用 EF Core 的絕佳指引。 其他平臺和應用程式模型的指引可能遺失或過期。 針對 EF Core 5.0，我們打算調查、改善及記載搭配使用 EF Core 的經驗：
+我們有在傳統的 MVC web 應用程式中使用 EF Core 的絕佳指引。 其他平臺和應用程式模型的指引可能遺失或過期。 針對 EF Core 5.0，我們計畫調查、改善及記載搭配 EF Core 使用的體驗：
 
 * Blazor
 * Xamarin，包括使用 AOT/連結器案例
@@ -170,7 +172,7 @@ T 恤尺寸： L
 
 狀態：進行中
 
-針對 EF Core 我們計畫改善我們的效能基準測試套件，並對執行時間進行有引導的效能改進。 此外，我們計畫在3.0 發行週期內完成新的 ADO.NET 批次處理 API，這是原型。 此外，在 ADO.NET 層，我們也為 Npgsql 提供者規劃了額外的效能改進。
+針對 EF Core，我們計畫改善我們的效能基準測試套件，並對執行時間進行有引導的效能改進。 此外，我們計畫在3.0 發行週期內完成新的 ADO.NET 批次處理 API，這是原型。 此外，在 ADO.NET 層，我們也為 Npgsql 提供者規劃了額外的效能改進。
 
 在這項工作中，我們也計畫在適當的情況下新增 ADO.NET/EF 核心效能計數器和其他診斷。
 
@@ -178,7 +180,7 @@ T 恤尺寸： L
 
 潛在客戶文檔： @ajcvickers
 
-由[#1920](https://github.com/aspnet/EntityFramework.Docs/issues/1920)追蹤
+由[#1920](https://github.com/dotnet/EntityFramework.Docs/issues/1920)追蹤
 
 T 恤尺寸： L
 
@@ -194,7 +196,7 @@ T 恤尺寸： L
 
 潛在客戶文檔： @bricelam
 
-由[#1675](https://github.com/aspnet/EntityFramework.Docs/issues/1675)追蹤
+由[#1675](https://github.com/dotnet/EntityFramework.Docs/issues/1675)追蹤
 
 T 恤尺寸： M
 
@@ -206,7 +208,7 @@ EF 小組也擁有 ADO.NET 提供者。 我們計畫將此提供者完整記錄�
 
 潛在客戶文檔： @ajcvickers
 
-[5.0 里程碑的](https://github.com/aspnet/EntityFramework.Docs/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+)檔存放庫中的問題追蹤
+[5.0 里程碑的](https://github.com/dotnet/EntityFramework.Docs/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+)檔存放庫中的問題追蹤
 
 T 恤尺寸： L
 
@@ -252,6 +254,6 @@ T 恤尺寸： L
 
 此外，我們在規劃時，一律會考慮[最投票的問題](https://github.com/dotnet/efcore/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc)。 從版本中去除這些問題總是很麻煩，但我們對我們所擁有的資源需要有實際的計畫。
 
-## <a name="feedback"></a>意見
+## <a name="feedback"></a>意見反應
 
-您對規劃的意見反應很重要。 若要指出問題的重要性，最佳方式是在 GitHub 上針對該問題投票（大拇指）。 此資料接著會饋送至下一版的[規劃](../release-planning.md)程式。
+您對計劃的意見反應很重要。 若要指出問題的重要性，最佳方式是在 GitHub 上針對該問題投票 (大拇指)。 此資料接著會饋送至下一版的[規劃](../release-planning.md)程式。

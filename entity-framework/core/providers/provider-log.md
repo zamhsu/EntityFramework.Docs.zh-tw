@@ -7,11 +7,11 @@ ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
 ms.openlocfilehash: b911a2da493e20c4e4ce6f1e25024bd0efd38b44
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656121"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417819"
 ---
 # <a name="provider-impacting-changes"></a>會影響提供者的變更
 

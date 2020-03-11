@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: c6ae6d8f-1ace-47db-ad47-b1718f1ba082
 ms.openlocfilehash: 92a763b84a04d3ce7ec0853ef2a4852356cf7997
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182512"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418564"
 ---
 # <a name="enum-support---ef-designer"></a>列舉支援-EF 設計工具
 > [!NOTE]
@@ -29,7 +29,7 @@ ms.locfileid: "72182512"
 
 **影片**： [wmv](https://download.microsoft.com/download/0/7/A/07ADECC9-7893-415D-9F20-8B97D46A37EC/HDI-ITPro-MSDN-winvideo-enumwithdesiger.wmv) | [.wmv](https://download.microsoft.com/download/0/7/A/07ADECC9-7893-415D-9F20-8B97D46A37EC/HDI-ITPro-MSDN-mp4video-enumwithdesiger.m4v) | [wmv （ZIP）](https://download.microsoft.com/download/0/7/A/07ADECC9-7893-415D-9F20-8B97D46A37EC/HDI-ITPro-MSDN-winvideo-enumwithdesiger.zip)
 
-## <a name="pre-requisites"></a>先決條件
+## <a name="pre-requisites"></a>必要條件
 
 您必須安裝 Visual Studio 2012、旗艦版、Premium、Professional 或 Web Express edition，才能完成此逐步解說。
 
@@ -46,7 +46,7 @@ ms.locfileid: "72182512"
 2.  從左側功能表中選取 **資料**，然後選取 範本 窗格中的  **ADO.NET 實體資料模型**
 3.  在 [檔案名] 中輸入**EnumTestModel** ，然後按一下 [**新增**]
 4.  在 [實體資料模型 Wizard] 頁面上，選取 [選擇模型內容] 對話方塊中的 [**空的模型**]
-5.  按一下 **[完成]**
+5.  按一下 [完成]
 
 會顯示 Entity Designer （提供編輯模型的設計介面）。
 
@@ -60,7 +60,7 @@ ms.locfileid: "72182512"
 
 1.  以滑鼠右鍵按一下設計介面的空白區域，然後選取 [**加入-&gt; 實體**]，[新增實體] 對話方塊隨即出現
 2.  針對 [類型名稱] 指定 [**部門**]，並指定索引鍵屬性名稱的**DepartmentID** ，並將類型保留為 [ **Int32** ]
-3.  按一下 [確定]。
+3.  按一下 [檔案] &gt; [新增] &gt; [專案]
 4.  以滑鼠右鍵按一下實體，然後選取 [**加入新的-&gt;** 純量屬性]
 5.  將新屬性重新命名為**名稱**
 6.  將新屬性的類型變更為**Int32** （根據預設，新的屬性為 String 類型），以變更類型、開啟屬性視窗，並將 type 屬性變更為**Int32**

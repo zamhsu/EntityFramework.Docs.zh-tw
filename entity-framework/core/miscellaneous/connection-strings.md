@@ -5,11 +5,11 @@ ms.date: 10/27/2016
 ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
 ms.openlocfilehash: ed89d6d09b15b0dea7fd8bc3ff3e3f631495ecb7
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149122"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416586"
 ---
 # <a name="connection-strings"></a>連接字串
 
@@ -31,9 +31,9 @@ WinForms、WPF 和 ASP.NET 4 應用程式已嘗試並測試連接字串模式。
 ```
 
 > [!TIP]  
-> 在`providerName` app.config 中儲存的 EF Core 連接字串上不需要此設定，因為資料庫提供者是透過程式碼來設定。
+> 在 App.config 中儲存的 EF Core 連接字串上不需要 `providerName` 設定，因為資料庫提供者是透過程式碼來設定。
 
-接著，您可以在內容的`ConfigurationManager` `OnConfiguring`方法中使用 API 來讀取連接字串。 您可能需要加入`System.Configuration`架構元件的參考，才能夠使用此 API。
+然後，您可以在內容的 `OnConfiguring` 方法中，使用 `ConfigurationManager` API 來讀取連接字串。 您可能需要加入 `System.Configuration` framework 元件的參考，才能夠使用此 API。
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -67,7 +67,7 @@ public class BloggingContext : DbContext
 
 ## <a name="aspnet-core"></a>ASP.NET Core
 
-在 ASP.NET Core 設定系統非常有彈性，且連接字串可以儲存在、環境變數`appsettings.json`、使用者秘密存放區或其他設定來源中。 如需詳細資訊，請參閱[ASP.NET Core 檔的設定一節](https://docs.asp.net/en/latest/fundamentals/configuration.html)。 下列範例會顯示中`appsettings.json`儲存的連接字串。
+在 ASP.NET Core 設定系統非常有彈性，且連接字串可以儲存在 `appsettings.json`、環境變數、使用者密碼存放區或其他設定來源中。 如需詳細資訊，請參閱[ASP.NET Core 檔的設定一節](https://docs.asp.net/en/latest/fundamentals/configuration.html)。 下列範例會顯示儲存在 `appsettings.json`中的連接字串。
 
 ``` json
 {
@@ -77,7 +77,7 @@ public class BloggingContext : DbContext
 }
 ```
 
-內容通常會在中設定`Startup.cs` ，且連接字串會從設定中讀取。 請注意`GetConnectionString()` ，方法會尋找其金鑰為`ConnectionStrings:<connection string name>`的設定值。 您需要匯入設定[命名空間](https://docs.microsoft.com/dotnet/api/microsoft.extensions.configuration)，才能使用此擴充方法。
+內容通常會在 `Startup.cs` 中設定，且連接字串會從 configuration 中讀取。 請注意，`GetConnectionString()` 方法會尋找其金鑰為 `ConnectionStrings:<connection string name>`的設定值。 您需要匯入設定[命名空間](https://docs.microsoft.com/dotnet/api/microsoft.extensions.configuration)，才能使用此擴充方法。
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)

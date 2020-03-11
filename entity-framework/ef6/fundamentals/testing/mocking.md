@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
 ms.openlocfilehash: 790e077c5b30c4a68a96b3c1a99b40893b2bbe55
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181564"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419343"
 ---
 # <a name="testing-with-a-mocking-framework"></a>使用模擬架構進行測試
 > [!NOTE]

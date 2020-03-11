@@ -1,39 +1,39 @@
 ---
-title: School 範例資料庫 EF6
+title: School 範例資料庫-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e83a6a06-e63b-4530-8656-614bf609b12b
 ms.openlocfilehash: 1e9dc98edb8590021bbf3393e9edda1929d505e0
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490710"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416995"
 ---
 # <a name="school-sample-database"></a>School 範例資料庫
-本主題包含的結構描述和 School 資料庫的資料。 範例 School 資料庫可在各種不同的位置，在 Entity Framework 文件。  
+本主題包含 School 資料庫的架構和資料。 範例 School 資料庫用於 Entity Framework 檔中的不同位置。  
 
 > [!NOTE]
-> Visual Studio 隨附安裝的資料庫伺服器是您所使用的 Visual Studio 版本而有所不同。 請參閱[Visual Studio 版本](~/ef6/what-is-new/visual-studio.md)如需有關要使用的項目。  
+> 隨 Visual Studio 安裝的資料庫伺服器會根據您使用的 Visual Studio 版本而有所不同。 如需所要使用之內容的詳細資訊，請參閱[Visual Studio 版本](~/ef6/what-is-new/visual-studio.md)。  
 
 以下是建立資料庫的步驟：
 
 - 開啟 Visual Studio  
-- **檢視** -> **伺服器總管**  
-- 以滑鼠右鍵按一下**資料連接** -> **新增連接...**  
-- 如果您尚未連線至資料庫從伺服器總管之前您必須選取**Microsoft SQL Server**做為資料來源  
-- 連接到 LocalDB 或 SQL Express，何者而定，您已安裝  
-- 請輸入**學校**做為資料庫名稱  
-- 選取  **確定**而且會要求您想要建立新資料庫，請選取**是**  
-- 在 伺服器總管現在會顯示新的資料庫  
+- **View** -> **伺服器總管**  
+- 以滑鼠右鍵按一下 [**資料連線**] -> [**新增連接 ...** ]  
+- 如果您還沒有從伺服器總管連接到資料庫，則必須選取 [ **Microsoft SQL Server** ] 做為資料來源  
+- 連接到 LocalDB 或 SQL Express （視您安裝的版本而定）  
+- 輸入**School**作為資料庫名稱  
+- 選取 **[確定]** ，系統會詢問您是否要建立新的資料庫，然後選取 **[是]**  
+- 新的資料庫現在會顯示在伺服器總管  
 - 如果您使用 Visual Studio 2012 或更新版本
-    - 以滑鼠右鍵按一下伺服器總管 中的資料庫，然後選取**新查詢**  
-    - 將下列 SQL 複製到新的查詢，然後以滑鼠右鍵按一下查詢並選取**Execute**  
+    - 以滑鼠右鍵按一下伺服器總管中的資料庫，然後選取 [追加**查詢**]  
+    - 將下列 SQL 複製到新的查詢中，然後以滑鼠右鍵按一下查詢並選取 [**執行**]。  
 - 如果您使用 Visual Studio 2010  
-    - 選取 **資料** -> **Transact SQL 編輯器** -> **新增查詢連接...**  
-    - 請輸入 **。 \SQLEXPRESS**作為伺服器名稱，然後按一下 **[確定]**  
-    - 選取  **STESample**資料庫從下拉式清單頂端的查詢編輯器  
-    - 將下列 SQL 複製到新的查詢，然後以滑鼠右鍵按一下查詢並選取**執行 SQL**  
+    - 選取**資料** -> **Transact-sql 編輯器** -> **新的查詢連接**。  
+    - 輸入 **.\SQLEXPRESS**做為伺服器名稱，然後按一下 **[確定]**  
+    - 從 [查詢編輯器] 頂端的下拉式選中選取 [ **STESample** ] 資料庫  
+    - 將下列 SQL 複製到新的查詢中，然後以滑鼠右鍵按一下查詢並選取 [**執行 SQL** ]。  
 
 ``` SQL  
 SET ANSI_NULLS ON

@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: a4af4b1a-40f4-48cc-b2e0-fa8f5d9d5419
 ms.openlocfilehash: b20d1f99f1da9c53a8a164fccc461e07d19c879d
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182538"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418722"
 ---
 # <a name="ssdl-specification"></a>SSDL 規格
 存放結構定義語言 (SSDL) 是一種 XML 架構語言，會描述 Entity Framework 應用程式的儲存體模型。
@@ -36,7 +36,7 @@ SSDL 的版本可藉由 XML 命名空間來區別。
 -   ReferentialConstraint （零或一個）
 -   註釋項目 (零或多個)
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**Association**元素的屬性。
 
@@ -82,7 +82,7 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 -   End (零或兩個)
 -   註釋項目 (零或多個)
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**AssociationSet**元素的屬性。
 
@@ -193,7 +193,7 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 -   PropertyRef (一個或多個)
 -   註釋項目 (零或多個)
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**相依**元素的屬性。
 
@@ -236,7 +236,7 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 -   **摘要**：父元素的簡短描述。 (零或一個項目)
 -   **LongDescription**：上層元素的詳細描述。 (零或一個項目)
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 可以將任何數目的注釋屬性（自訂 XML 屬性）套用至**檔**元素。 不過，自訂屬性不可屬於任何 XML 命名空間，這是保留給 CSDL 之用。 任兩個自訂屬性的完整名稱不能相同。
 
@@ -272,15 +272,15 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 -   OnDelete （零或一個元素）
 -   Annotation 元素（零或多個元素）
 
-#### <a name="applicable-attributes"></a>適用屬性
+#### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述當屬性為**Association**元素的子系時，可以套用至**結尾**專案的屬性。
 
 | 屬性名稱   | 必要 | 值                                                                                                                                                                                                                                                                                                                                                                                      |
 |:-----------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Type**         | 是         | 位於外部索引鍵條件約束端點上之 SSDL 實體集的完整名稱。                                                                                                                                                                                                                                                                                          |
+| **型別**         | 是         | 位於外部索引鍵條件約束端點上之 SSDL 實體集的完整名稱。                                                                                                                                                                                                                                                                                          |
 | **角色**         | 否          | 在對應之 ReferentialConstraint 專案的 Principal 或 Dependent 元素中， **Role**屬性的值（如果有使用的話）。                                                                                                                                                                                                                                             |
-| **數** | 是         | **1**、 **0、1**或 **\*** 取決於外鍵條件約束結尾的資料列數目。 <br/> **1**表示外鍵條件約束結尾只存在一個資料列。 <br/> **0 ..1**表示外鍵條件約束結尾處有零或一個資料列。 <br/> **\*** 指出外鍵條件約束結尾處有零個、一個或多個資料列。 |
+| **多重性** | 是         | **1**、 **0、1**或 **\*** 取決於外鍵條件約束結尾的資料列數目。 <br/> **1**表示外鍵條件約束結尾只存在一個資料列。 <br/> **0 ..1**表示外鍵條件約束結尾處有零或一個資料列。 <br/> **\*** 指出外鍵條件約束結尾處有零個、一個或多個資料列。 |
 
 > [!NOTE]
 > 任何數目的注釋屬性（自訂 XML 屬性）都可以套用至**End**元素。 不過，自訂屬性不可屬於任何 XML 命名空間，這是保留給 CSDL 之用。 任兩個自訂屬性的完整名稱不能相同。
@@ -317,7 +317,7 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 -   檔（零或一個）
 -   註釋項目 (零或多個)
 
-#### <a name="applicable-attributes"></a>適用屬性
+#### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述當元素是**AssociationSet**專案的子系時，可以套用至**結尾**專案的屬性。
 
@@ -359,9 +359,9 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 
 -   EntitySet
 -   AssociationSet
--   Annotation 項目
+-   Annotation 元素
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**EntityContainer**元素的屬性。
 
@@ -400,9 +400,9 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 
 -   檔（零或一個元素）
 -   DefiningQuery （零或一個元素）
--   Annotation 項目
+-   Annotation 元素
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**EntitySet**元素的屬性。
 
@@ -414,7 +414,7 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 | **名稱**       | 是         | 實體集的名稱。                                                              |
 | **EntityType** | 是         | 實體類型 (實體集包含其執行個體) 的完整名稱。 |
 | **結構描述**     | 否          | 資料庫結構描述。                                                                     |
-| **資料表**      | 否          | 資料庫資料表。                                                                      |
+| **Table**      | 否          | 資料庫資料表。                                                                      |
 
 > [!NOTE]
 > 任何數目的注釋屬性（自訂 XML 屬性）都可以套用至**EntitySet**元素。 不過，自訂屬性不可屬於任何 XML 命名空間，這是保留供 SSDL 使用。 任兩個自訂屬性的完整名稱不能相同。
@@ -447,9 +447,9 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 
 -   檔（零或一個元素）
 -   Key(零或一個項目)
--   Annotation 項目
+-   Annotation 元素
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**EntityType**元素的屬性。
 
@@ -494,7 +494,7 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 
 儲存體模型中所指定的預存程序可以匯入應用程式的概念模型中。 如需詳細資訊，請參閱[使用預存程式進行查詢](~/ef6/modeling/designer/stored-procedures/query.md)。 **Function**元素也可以用來定義儲存體模型中的自訂函數。  
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**Function**元素的屬性。
 
@@ -503,11 +503,11 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 
 | 屬性名稱             | 必要 | 值                                                                                                                                                                                                              |
 |:---------------------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **名稱**                   | 是         | 預存程序 (Stored Procedure) 的名稱。                                                                                                                                                                                  |
+| **名稱**                   | 是         | 預存程序的名稱。                                                                                                                                                                                  |
 | **ReturnType**             | 否          | 預存程序的傳回型別。                                                                                                                                                                           |
-| **Aggregate**              | 否          | 如果預存程式傳回匯總值，則**為 True** ;否則**為 False**。                                                                                                                                  |
+| **彙總**              | 否          | 如果預存程式傳回匯總值，則**為 True** ;否則**為 False**。                                                                                                                                  |
 | **BuiltIn**                | 否          | 如果函式是內建的<sup>1</sup>函數，則為**True** ;否則**為 False**。                                                                                                                                  |
-| **StoreFunctionName**      | 否          | 預存程序 (Stored Procedure) 的名稱。                                                                                                                                                                                  |
+| **StoreFunctionName**      | 否          | 預存程序的名稱。                                                                                                                                                                                  |
 | **且具有 niladicfunction**        | 否          | 如果函數是 niladic<sup>2</sup>函式，則為**True** ;否則**為 False** 。                                                                                                                                   |
 | **IsComposable**           | 否          | 如果函式是可組合的<sup>3</sup>個函數，則為**True** ;否則**為 False** 。                                                                                                                                |
 | **ParameterTypeSemantics** | 否          | 列舉型別，可定義用來解決函式多載的型別語意。 列舉型別會定義在每個函式定義的提供者資訊清單。 預設值為**AllowImplicitConversion**。 |
@@ -546,7 +546,7 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 **Key**元素可以具有下列子專案（依列出的順序）：
 
 -   PropertyRef (一個或多個)
--   Annotation 項目
+-   Annotation 元素
 
 索引**鍵**元素沒有適用的屬性。
 
@@ -577,7 +577,7 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 -   檔（零或一個）
 -   註釋項目 (零或多個)
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**OnDelete**元素的屬性。
 
@@ -620,18 +620,18 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 -   檔（零或一個）
 -   註釋項目 (零或多個)
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**參數**元素的屬性。
 
 | 屬性名稱 | 必要 | 值                                                                                                                                                                                                                           |
 |:---------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **名稱**       | 是         | 參數名稱。                                                                                                                                                                                                      |
-| **Type**       | 是         | 參數型別。                                                                                                                                                                                                             |
-| **下**       | 否          | **In**、 **Out**或**InOut** ，取決於參數是輸入、輸出或輸入/輸出參數。                                                                                                                |
-| **長度**  | 否          | 參數的長度上限。                                                                                                                                                                                            |
-| **整數位數**  | 否          | 參數的精確度。                                                                                                                                                                                                 |
-| **縮放**      | 否          | 參數的小數位數。                                                                                                                                                                                                     |
+| **型別**       | 是         | 參數類型。                                                                                                                                                                                                             |
+| **模式**       | 否          | **In**、 **Out**或**InOut** ，取決於參數是輸入、輸出或輸入/輸出參數。                                                                                                                |
+| **MaxLength**  | 否          | 參數的長度上限。                                                                                                                                                                                            |
+| **有效位數**  | 否          | 參數的精確度。                                                                                                                                                                                                 |
+| **調整**      | 否          | 參數的小數位數。                                                                                                                                                                                                     |
 | **SRID**       | 否          | 空間系統參考識別碼。 僅對空間類型的參數有效。 如需詳細資訊，請參閱[SRID](https://en.wikipedia.org/wiki/SRID) and [SRID （SQL Server）](https://msdn.microsoft.com/library/bb964707.aspx)。 |
 
 > [!NOTE]
@@ -663,7 +663,7 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 -   PropertyRef (一個或多個)
 -   註釋項目 (零或多個)
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**主體**元素的屬性。
 
@@ -703,22 +703,22 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 
 **Property**元素不能有任何子專案。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**Property**元素的屬性。
 
 | 屬性名稱            | 必要 | 值                                                                                                                                                                                                                           |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **名稱**                  | 是         | 對應資料行的名稱。                                                                                                                                                                                           |
-| **Type**                  | 是         | 對應資料行的類型。                                                                                                                                                                                           |
-| **Null**              | 否          | **True** （預設值）或**False** ，取決於對應的資料行是否可以有 null 值。                                                                                                                  |
+| **型別**                  | 是         | 對應資料行的類型。                                                                                                                                                                                           |
+| **可為 Null**              | 否          | **True** （預設值）或**False** ，取決於對應的資料行是否可以有 null 值。                                                                                                                  |
 | **DefaultValue**          | 否          | 對應資料行的預設值。                                                                                                                                                                                  |
-| **長度**             | 否          | 對應資料行的長度上限。                                                                                                                                                                                 |
+| **MaxLength**             | 否          | 對應資料行的長度上限。                                                                                                                                                                                 |
 | **FixedLength**           | 否          | **True**或**False** ，取決於對應的資料行值是否會儲存為固定長度的字串。                                                                                                              |
-| **整數位數**             | 否          | 對應資料行的精確度。                                                                                                                                                                                      |
-| **縮放**                 | 否          | 對應資料行的小數位數。                                                                                                                                                                                          |
+| **有效位數**             | 否          | 對應資料行的精確度。                                                                                                                                                                                      |
+| **調整**                 | 否          | 對應資料行的小數位數。                                                                                                                                                                                          |
 | **Unicode**               | 否          | **True**或**False** ，取決於對應的資料行值是否會儲存為 Unicode 字串。                                                                                                                   |
-| **定序**             | 否          | 指定資料來源中使用之定序順序的字串。                                                                                                                                                   |
+| **定序**             | 否          | 指定要在資料來源使用之定序的字串。                                                                                                                                                   |
 | **SRID**                  | 否          | 空間系統參考識別碼。 僅對空間類型的屬性有效。 如需詳細資訊，請參閱[SRID](https://en.wikipedia.org/wiki/SRID) and [SRID （SQL Server）](https://msdn.microsoft.com/library/bb964707.aspx)。 |
 | **StoreGeneratedPattern** | 否          | **無**、**識別**（如果對應的資料行值是在資料庫中產生的身分識別），或**計算**（如果對應的資料行值是在資料庫中計算）。 對 RowType 屬性無效。 |
 
@@ -753,9 +753,9 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 **PropertyRef**元素只能有下列子項目：
 
 -   檔（零或一個）
--   Annotation 項目
+-   Annotation 元素
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**PropertyRef**元素的屬性。
 
@@ -797,7 +797,7 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 -   相依（只有一個）
 -   註釋項目 (零或多個)
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 任何數目的注釋屬性（自訂 XML 屬性）都可以套用至**ReferentialConstraint**元素。 不過，自訂屬性不可屬於任何 XML 命名空間，這是保留供 SSDL 使用。 任兩個自訂屬性的完整名稱不能相同。
 
@@ -898,20 +898,20 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 -   關聯
 -   EntityType
 -   EntityContainer
--   函數
+-   函式
 
 **Schema**元素會使用**namespace**屬性來定義儲存模型中實體類型和關聯物件的命名空間。 在命名空間中，兩個物件不能有相同的名稱。
 
 儲存模型命名空間與**架構**元素的 XML 命名空間不同。 儲存模型命名空間（如**命名空間**屬性所定義）是實體類型和關聯類型的邏輯容器。 **Schema**元素的 XML 命名空間（由**xmlns**屬性所表示）是**schema**專案之子專案和屬性的預設命名空間。 https://schemas.microsoft.com/ado/YYYY/MM/edm/ssdl 格式的 XML 命名空間（其中 YYYY 和 MM 分別表示年和月）是保留供 SSDL 使用。 自訂項目和屬性不能出現在擁有此格式的命名空間中。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**架構**元素的屬性。
 
 | 屬性名稱            | 必要 | 值                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Namespace**             | 是         | 儲存模型的命名空間。 **Namespace**屬性的值是用來形成類型的完整名稱。 例如，如果名為*Customer*的**EntityType**是在 examplemodel.store.customer 命名空間中，則**entitytype**的完整限定名稱為 examplemodel.store.customer。 <br/> 下列字串不能當做**Namespace**屬性的值使用： **System**、**暫時性**或**Edm**。 **Namespace**屬性的值不能與 CSDL Schema 元素中**namespace**屬性的值相同。 |
-| **Alias**                 | 否          | 用來取代命名空間名稱的識別項。 例如，如果名為*Customer*的**EntityType**是在 Examplemodel.store.customer 中，而且**Alias**屬性的值是*StorageModel*，則您可以使用 StorageModel 做為 EntityType 的完整名稱 **。**                                                                                                                                                                                                                                                                                    |
+| **別名**                 | 否          | 用來取代命名空間名稱的識別項。 例如，如果名為*Customer*的**EntityType**是在 Examplemodel.store.customer 中，而且**Alias**屬性的值是*StorageModel*，則您可以使用 StorageModel 做為 EntityType 的完整名稱 **。**                                                                                                                                                                                                                                                                                    |
 | **提供者**              | 是         | 資料提供者。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **ProviderManifestToken** | 是         | 向提供者表示要傳回哪個提供者資訊清單的語彙基元。 未定義此語彙基元的格式。 語彙基元的值是由提供者定義。 如需有關 SQL Server 提供者資訊清單標記的詳細資訊，請參閱 SqlClient for Entity Framework。                                                                                                                                                                                                                                                                                                                        |
 
@@ -1072,7 +1072,7 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 |:----------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **定序**   | 在執行比較和排序屬性值的作業時，指定要使用的定序順序 (或排序順序)。                                                                                                             |
 | **FixedLength** | 指定資料行值的長度是否可以變更。                                                                                                                                                                                                  |
-| **長度**   | 指定資料行值的最大長度。                                                                                                                                                                                                           |
-| **整數位數**   | 針對**Decimal**類型的屬性，指定屬性值可以擁有的位數。 針對**Time**、 **DateTime**和**DateTimeOffset**類型的屬性，指定資料行值的秒數小數部分的位數。 |
-| **縮放**       | 指定資料行值小數點右邊的位數。                                                                                                                                                                      |
+| **MaxLength**   | 指定資料行值的最大長度。                                                                                                                                                                                                           |
+| **有效位數**   | 針對**Decimal**類型的屬性，指定屬性值可以擁有的位數。 針對**Time**、 **DateTime**和**DateTimeOffset**類型的屬性，指定資料行值的秒數小數部分的位數。 |
+| **調整**       | 指定資料行值小數點右邊的位數。                                                                                                                                                                      |
 | **Unicode**     | 指定資料行值是否儲存為 Unicode。                                                                                                                                                                                                    |

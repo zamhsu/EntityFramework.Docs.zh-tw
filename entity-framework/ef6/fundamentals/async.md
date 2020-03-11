@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
 ms.openlocfilehash: 0642dc13e7aa3906fa1495031c62701fc16f0192
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181838"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417977"
 ---
 # <a name="async-query-and-save"></a>非同步查詢和儲存
 > [!NOTE]
@@ -41,7 +41,7 @@ EF6 引進了非同步查詢的支援，並使用 .NET 4.5 中引進的[async �
     -   在方案總管中，以滑鼠右鍵按一下**AsyncDemo**專案
     -   選取 [**管理 NuGet 套件 ...** ]
     -   在 [管理 NuGet 套件] 對話方塊中，選取 [**線上**] 索引標籤，然後選擇 [ **EntityFramework** ] 套件
-    -   按一下 [**安裝**]
+    -   按一下 [安裝]
 -   使用下列執行方式新增**Model.cs**類別
 
 ``` csharp

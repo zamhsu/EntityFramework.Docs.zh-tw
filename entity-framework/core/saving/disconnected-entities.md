@@ -5,12 +5,12 @@ ms.author: avickers
 ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 88c3fa8ea5b8246a932f5cf21e674bc7cc71c0ea
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 421531e68ac98c0553938f1c24892701f22fef3c
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656275"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417594"
 ---
 # <a name="disconnected-entities"></a>已中斷連線的實體
 
@@ -20,7 +20,7 @@ DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在
 
 <!-- markdownlint-disable MD028 -->
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) \(英文\)。
 
 > [!TIP]
 > 對於具有指定主索引鍵值的任何實體，EF Core 只能追蹤其中一個執行個體。 若要避免此情況成為問題，最佳方式就是針對每個工作單位都使用短期內容，讓內容從空白開始、有實體與其連結、儲存這些實體，然後再處置及捨棄內容。
@@ -131,7 +131,7 @@ Update 會將圖表中任何未設定索引鍵值的實體 (部落格或文章) 
 
 處理刪除可能相當棘手，因為當實體不存在時，常常意謂著應該將其刪除。 其中一個處理此情況的方式是使用「虛刪除」來將實體標示為已刪除，而不是實際進行刪除。 如此一來，刪除就變成與更新相同。 您可以在使用[查詢篩選](xref:core/querying/filters)時實作虛刪除。
 
-針對真實的刪除，常見的模式是使用查詢模式的延伸來執行基本上是圖表差異的操作。 例如:
+針對真實的刪除，常見的模式是使用查詢模式的延伸來執行基本上是圖表差異的操作。 例如：
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 

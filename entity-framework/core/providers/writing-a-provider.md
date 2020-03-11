@@ -4,19 +4,19 @@ author: anmiller
 ms.date: 10/27/2016
 ms.assetid: 1165e2ec-e421-43fc-92ab-d92f9ab3c494
 uid: core/providers/writing-a-provider
-ms.openlocfilehash: 9d52a8581772cc5405e94966fa7ebdff4128c252
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 2d9e4a6cdfda80d7dfcfb6e7bf0480eb49f8e057
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73654769"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417880"
 ---
 # <a name="writing-a-database-provider"></a>撰寫資料庫提供者
 
 如需有關撰寫 Entity Framework Core 資料庫提供者的詳細資訊，請參閱，以[Arthur Vickers](https://github.com/ajcvickers)[撰寫 EF Core 提供者](https://blog.oneunicorn.com/2016/11/11/so-you-want-to-write-an-ef-core-provider/)。
 
 > [!NOTE]
-> 這些文章在 EF Core 1.1 之後尚未更新，而且已經大幅變更，因為該時間[問題 681](https://github.com/aspnet/EntityFramework.Docs/issues/681)正在追蹤此檔的更新。
+> 這些文章在 EF Core 1.1 之後尚未更新，而且已經大幅變更，因為該時間[問題 681](https://github.com/dotnet/EntityFramework.Docs/issues/681)正在追蹤此檔的更新。
 
 EF Core 程式碼基底是開放原始碼，包含數個可做為參考的資料庫提供者。 您可以在 <https://github.com/aspnet/EntityFrameworkCore>找到原始程式碼。 查看常用協力廠商提供者的程式碼，例如[Npgsql](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL)、 [Pomelo MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)和[SQL Server Compact](https://github.com/ErikEJ/EntityFramework.SqlServerCompact)，可能也會很有説明。 特別是，這些專案會進行設定，以擴充並執行我們在 NuGet 上發行的功能測試。 強烈建議使用這種設定。
 
@@ -32,7 +32,7 @@ EF Core 程式碼基底是開放原始碼，包含數個可做為參考的資料
 
 `<Optional project/company name>.EntityFrameworkCore.<Database engine name>`
 
-例如:
+例如：
 
 * `Microsoft.EntityFrameworkCore.SqlServer`
 * `Npgsql.EntityFrameworkCore.PostgreSQL`

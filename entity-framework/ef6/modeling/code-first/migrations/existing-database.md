@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: f0cc4f93-67dd-4664-9753-0a9f913814db
 ms.openlocfilehash: eb7948eafb1322cabcf69b47bd5411f762fe8498
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182588"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418990"
 ---
 # <a name="code-first-migrations-with-an-existing-database"></a>現有資料庫的 Code First 移轉
 > [!NOTE]
@@ -67,7 +67,7 @@ Code First 移轉會使用儲存在最新的遷移中的模型快照集來偵測
 3.  在 [套件管理員主控台] 中執行 [**更新-資料庫**] 命令。 這會將 InitialCreate 遷移套用至資料庫。 因為實際的遷移不會包含任何變更（因為我們暫時將其批註化），所以只會將資料列新增至 \_\_MigrationsHistory 資料表，表示已套用此遷移。
 4.  將 Up 方法中的程式碼取消批註。 這表示當此遷移套用至未來的資料庫時，會透過遷移來建立已存在於本機資料庫中的架構。
 
-## <a name="things-to-be-aware-of"></a>要注意的事項
+## <a name="things-to-be-aware-of"></a>注意事項
 
 針對現有的資料庫使用遷移時，您必須注意幾件事。
 

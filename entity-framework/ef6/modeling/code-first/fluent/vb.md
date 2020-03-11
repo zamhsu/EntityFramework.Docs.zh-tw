@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 763dc6a2-764a-4600-896c-f6f13abf56ec
 ms.openlocfilehash: 1c889877b827408919c6170cf997e8805cc607cf
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824824"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419056"
 ---
 # <a name="fluent-api-with-vbnet"></a>使用 VB.NET 的流暢 API
 Code First 可讓您使用 C\# 或 VB.NET 類別來定義模型。 您可以選擇性地使用類別和屬性上的屬性，或使用 Fluent API 來執行其他設定。 本逐步解說示範如何使用 VB.NET 來執行 Fluent API 設定。

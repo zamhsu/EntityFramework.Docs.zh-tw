@@ -1,84 +1,84 @@
 ---
-title: Fluent API-設定和對應屬性及型別-EF6
+title: 流暢的 API-設定和對應屬性和類型-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 648ed274-c501-4630-88e0-d728ab5c4057
 ms.openlocfilehash: 7371cc99142ccf8fc6bea237d7d58d1e67fcecec
-ms.sourcegitcommit: 75f8a179ac9a70ad390fc7ab2a6c5e714e701b8b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/27/2018
-ms.locfileid: "52339799"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419063"
 ---
-# <a name="fluent-api---configuring-and-mapping-properties-and-types"></a>Fluent API-設定和對應的屬性和類型
-使用 Entity Framework Code First 時的預設行為是將您的 POCO 類別對應到資料表使用一組內建到 EF 的慣例。 有時候，不過，您無法或不想遵循這些慣例，而且必須將實體對應至規範的要求以外的項目。  
+# <a name="fluent-api---configuring-and-mapping-properties-and-types"></a>流暢的 API-設定和對應屬性和類型
+使用 Entity Framework 時 Code First 預設行為是使用內建至 EF 的一組慣例，將 POCO 類別對應至資料表。 不過，有時候您不能或不想要遵循這些慣例，也不需要將實體對應至慣例所規定的其他專案。  
 
-有兩種主要方式，您可以設定使用以外的慣例，也就是 EF[註解](~/ef6/modeling/code-first/data-annotations.md)或 EFs fluent API。 註解只涵蓋 fluent API 功能的子集，因此會有無法使用註解來達成的對應案例。 這篇文章是設計用來示範如何使用 fluent API 來設定屬性。  
+有兩種主要方式可將 EF 設定為使用慣例以外的專案，即[附注](~/ef6/modeling/code-first/data-annotations.md)或 EFs Fluent API。 批註只涵蓋 Fluent API 功能的子集，因此有一些無法使用注釋達成的對應案例。 本文的設計目的是要示範如何使用 Fluent API 來設定屬性。  
 
-Code first fluent API 最常存取藉由覆寫[OnModelCreating](https://msdn.microsoft.com/library/system.data.entity.dbcontext.onmodelcreating.aspx)方法，在您的衍生[DbContext](https://msdn.microsoft.com/library/system.data.entity.dbcontext.aspx)。 下列範例設計用來示範如何執行各種工作，使用 fluent api，並可讓您複製程式碼，並自訂以配合您的模型，如果您想要查看它們可用來與當做模型-則提供這篇文章的結尾。  
+Code first Fluent API 最常透過覆寫衍生[DbCoNtext](https://msdn.microsoft.com/library/system.data.entity.dbcontext.aspx)上的[OnModelCreating](https://msdn.microsoft.com/library/system.data.entity.dbcontext.onmodelcreating.aspx)方法來存取。 下列範例的設計目的是要示範如何使用流暢的 api 來執行各種工作，並可讓您將程式碼複製並加以自訂，以符合您的模型，如果您想要查看可以用原樣使用的模型，則會在本文結尾處提供。  
 
-## <a name="model-wide-settings"></a>模型範圍內的設定  
+## <a name="model-wide-settings"></a>全模型設定  
 
-### <a name="default-schema-ef6-onwards"></a>預設結構描述 (EF6 之後版本)  
+### <a name="default-schema-ef6-onwards"></a>預設架構（EF6 開始）  
 
-從 EF6 與您可以使用 HasDefaultSchema 方法上 DbModelBuilder 來指定要用於所有資料表、 預存程序等資料庫結構描述。您明確設定不同的結構描述的任何物件，將會覆寫此預設設定。  
+從 EF6 開始，您可以在 DbModelBuilder 上使用 HasDefaultSchema 方法，以指定要用於所有資料表、預存程式等的資料庫架構。針對您明確設定不同架構的任何物件，將會覆寫此預設設定。  
 
 ``` csharp
 modelBuilder.HasDefaultSchema("sales");
 ```  
 
-### <a name="custom-conventions-ef6-onwards"></a>自訂慣例 (EF6 之後版本)  
+### <a name="custom-conventions-ef6-onwards"></a>自訂慣例（EF6 和更新版本）  
 
-從的 EF6，您可以建立自己的慣例，來補充 Code First 中包含的項目。 如需詳細資訊，請參閱 <<c0> [ 自訂程式碼的第一個慣例](~/ef6/modeling/code-first/conventions/custom.md)。  
+從 EF6 開始，您可以建立自己的慣例來補充 Code First 中包含的慣例。 如需詳細資訊，請參閱[自訂 Code First 慣例](~/ef6/modeling/code-first/conventions/custom.md)。  
 
 ## <a name="property-mapping"></a>屬性對應  
 
-[屬性](https://msdn.microsoft.com/library/system.data.entity.infrastructure.dbentityentry.property.aspx)方法用來設定每個屬性屬於實體或複雜類型的屬性。 屬性的方法用來取得指定屬性的組態物件。 組態物件上的選項專屬於設定; 的型別IsUnicode 是例如只有字串屬性才有提供。  
+[屬性](https://msdn.microsoft.com/library/system.data.entity.infrastructure.dbentityentry.property.aspx)方法是用來設定屬於實體或複雜類型之每個屬性的屬性。 屬性方法是用來取得指定屬性的設定物件。 Configuration 物件上的選項是所設定類型特有的。例如，IsUnicode 僅適用于字串屬性。  
 
-### <a name="configuring-a-primary-key"></a>設定主索引鍵  
+### <a name="configuring-a-primary-key"></a>設定主要金鑰  
 
-主索引鍵的 Entity Framework 慣例是：  
+主要金鑰的 Entity Framework 慣例是：  
 
-1. 您的類別定義的屬性，其名稱為 「 識別碼 」 或 「 識別碼 」  
-2. 或類別名稱後面加上 「 識別碼 」 或 「 識別碼 」  
+1. 您的類別定義的屬性名稱為 "ID" 或 "Id"  
+2. 或類別名稱，後面接著 "ID" 或 "Id"  
 
-若要明確設定主索引鍵屬性，您可以使用 HasKey 方法。 在下列範例中，HasKey 方法用來設定 OfficeAssignment 型別上的 InstructorID 主索引鍵。  
+若要將屬性明確設定為主要索引鍵，您可以使用 HasKey 方法。 在下列範例中，HasKey 方法是用來在 OfficeAssignment 型別上設定 InstructorID 的主要金鑰。  
 
 ``` csharp
 modelBuilder.Entity<OfficeAssignment>().HasKey(t => t.InstructorID);
 ```  
 
-### <a name="configuring-a-composite-primary-key"></a>設定複合主索引鍵  
+### <a name="configuring-a-composite-primary-key"></a>設定複合主要金鑰  
 
-下列範例會設定 DepartmentID 及名稱屬性是部門類型的複合主索引鍵。  
+下列範例會將 DepartmentID 和 Name 屬性設定為部門類型的複合主要索引鍵。  
 
 ``` csharp
 modelBuilder.Entity<Department>().HasKey(t => new { t.DepartmentID, t.Name });
 ```  
 
-### <a name="switching-off-identity-for-numeric-primary-keys"></a>關閉 數字的主索引鍵的 身分識別  
+### <a name="switching-off-identity-for-numeric-primary-keys"></a>關閉數值主要金鑰的識別  
 
-下列範例會將 [DepartmentID] 屬性設 System.ComponentModel.DataAnnotations.DatabaseGeneratedOption.None 表示不會由資料庫所產生的值。  
+下列範例會將 DepartmentID 屬性設定為 System.workflow.componentmodel.activity，以指出此值將不會由資料庫產生。  
 
 ``` csharp
 modelBuilder.Entity<Department>().Property(t => t.DepartmentID)
     .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 ```  
 
-### <a name="specifying-the-maximum-length-on-a-property"></a>在屬性上指定的最大長度  
+### <a name="specifying-the-maximum-length-on-a-property"></a>指定屬性的最大長度  
 
-在下列範例中，[名稱] 屬性應該不超過 50 個字元。 如果您超過 50 個字元的值，您會收到[DbEntityValidationException](https://msdn.microsoft.com/library/system.data.entity.validation.dbentityvalidationexception.aspx)例外狀況。 如果 Code First 會建立一個資料庫在這個模型中它會同時設定 [名稱] 欄的最大長度，為 50 個字元。  
+在下列範例中，Name 屬性的長度不能超過50個字元。 如果您將此值的長度超過50個字元，就會收到[DbEntityValidationException](https://msdn.microsoft.com/library/system.data.entity.validation.dbentityvalidationexception.aspx)例外狀況。 如果 Code First 從這個模型建立資料庫，它也會將 [名稱] 資料行的最大長度設定為50個字元。  
 
 ``` csharp
 modelBuilder.Entity<Department>().Property(t => t.Name).HasMaxLength(50);
 ```  
 
-### <a name="configuring-the-property-to-be-required"></a>設定為 Required 屬性  
+### <a name="configuring-the-property-to-be-required"></a>將屬性設定為必要  
 
-在下列範例中，[名稱] 屬性是必要的。 如果您未指定名稱，您會收到 DbEntityValidationException 例外狀況。 如果第一個程式碼從這個模型建立資料庫再用來儲存這個屬性的資料行通常是不可為 null。  
+在下列範例中，必須要有 Name 屬性。 如果您未指定名稱，則會收到 DbEntityValidationException 例外狀況。 如果 Code First 從這個模型建立資料庫，則用來儲存此屬性的資料行通常會是不可為 null 的。  
 
 > [!NOTE]
-> 在某些情況下它可能無法在資料庫中是不可為 null，即使需要此屬性，資料行。 比方說，當使用 TPH 繼承策略資料的多個類型會儲存在單一資料表。 如果衍生型別包含必要的屬性資料行無法進行不可為 null 因為並非所有的型別階層架構中會有這個屬性。  
+> 在某些情況下，即使屬性是必要的，資料庫中的資料行還是無法是不可為 null 的。 例如，使用多個類型的 TPH 繼承策略資料時，會儲存在單一資料表中。 如果衍生類型包含必要的屬性，則資料行不能設為不可為 null，因為不是階層中的所有類型都有這個屬性。  
 
 ``` csharp
 modelBuilder.Entity<Department>().Property(t => t.Name).IsRequired();
@@ -87,11 +87,11 @@ modelBuilder.Entity<Department>().Property(t => t.Name).IsRequired();
 ### <a name="configuring-an-index-on-one-or-more-properties"></a>設定一或多個屬性的索引  
 
 > [!NOTE]
-> **EF6.1 及更新版本僅**-Entity Framework 6.1 中導入的索引屬性。 如果您使用較早版本不適用這一節的資訊。  
+> **Ef 6.1 僅適用**于 Entity Framework 6.1 中引進的索引屬性。 如果您使用較舊的版本，本節中的資訊將不適用。  
 
-建立索引不原生支援的 Fluent API，但是您可以使用的支援**IndexAttribute**透過 Fluent API。 索引屬性，會處理包括模型上的註釋的模型，然後變成稍後在管線中的資料庫中的索引。 您可以手動新增這些相同使用 Fluent API 的註解。  
+流暢的 API 原本不支援建立索引，但您可以透過流暢的 API 使用**IndexAttribute**的支援。 索引屬性的處理方式是在模型上包含模型注釋，然後在管線中稍後再轉換成資料庫中的索引。 您可以使用流暢的 API 手動新增這些相同的注釋。  
 
-若要這樣做最簡單的方式是建立的執行個體**IndexAttribute**包含新索引的所有設定。 然後，您就可以建立的執行個體**IndexAnnotation**即會將轉換的 EF 特定型別**IndexAttribute**設定成可以儲存在 EF 模型的模型註釋。 這些接著傳遞給**HasColumnAnnotation** Fluent api，並指定名稱的方法**Index**的註解。  
+若要這麼做，最簡單的方法是建立**IndexAttribute**的實例，其中包含新索引的所有設定。 接著，您可以建立**IndexAnnotation**的實例，這是 EF 特定型別，會將**IndexAttribute**設定轉換成可儲存在 EF 模型上的模型注釋。 然後，這些可以在流暢的 API 上傳遞至**HasColumnAnnotation**方法，並指定批註的名稱**索引**。  
 
 ``` csharp
 modelBuilder
@@ -100,9 +100,9 @@ modelBuilder
     .HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute()));
 ```  
 
-如需完整的清單中可用的設定**IndexAttribute**，請參閱*Index*一節[Code First 資料註解](~/ef6/modeling/code-first/data-annotations.md)。 這包括自訂的索引名稱、 建立唯一索引，以及建立多重資料行索引。  
+如需**IndexAttribute**中可用設定的完整清單，請參閱[Code First 資料批註](~/ef6/modeling/code-first/data-annotations.md)的*索引*一節。 這包括自訂索引名稱、建立唯一索引，以及建立多重資料行索引。  
 
-您也可以傳遞陣列的單一屬性上指定多個索引的註釋**IndexAttribute**的建構函式**IndexAnnotation**。  
+您可以在單一屬性上指定多個索引注釋，方法是將**IndexAttribute**的陣列傳遞給**IndexAnnotation**的函式。  
 
 ``` csharp
 modelBuilder
@@ -117,17 +117,17 @@ modelBuilder
             })));
 ```  
 
-### <a name="specifying-not-to-map-a-clr-property-to-a-column-in-the-database"></a>指定不在資料庫中的資料行中對應的 CLR 屬性  
+### <a name="specifying-not-to-map-a-clr-property-to-a-column-in-the-database"></a>指定不要將 CLR 屬性對應至資料庫中的資料行  
 
-下列範例示範如何指定 CLR 類型上的屬性不對應至資料庫中的資料行。  
+下列範例顯示如何指定 CLR 類型上的屬性未對應至資料庫中的資料行。  
 
 ``` csharp
 modelBuilder.Entity<Department>().Ignore(t => t.Budget);
 ```  
 
-### <a name="mapping-a-clr-property-to-a-specific-column-in-the-database"></a>在資料庫中的特定資料行中對應的 CLR 屬性  
+### <a name="mapping-a-clr-property-to-a-specific-column-in-the-database"></a>將 CLR 屬性對應至資料庫中的特定資料行  
 
-下列範例會對應至 DepartmentName 資料庫資料行的名稱 CLR 屬性。  
+下列範例會將 Name CLR 屬性對應至 DepartmentName 資料庫資料行。  
 
 ``` csharp
 modelBuilder.Entity<Department>()
@@ -135,9 +135,9 @@ modelBuilder.Entity<Department>()
     .HasColumnName("DepartmentName");
 ```  
 
-### <a name="renaming-a-foreign-key-that-is-not-defined-in-the-model"></a>重新命名模型中未定義的外部索引鍵  
+### <a name="renaming-a-foreign-key-that-is-not-defined-in-the-model"></a>重新命名模型中未定義的外鍵  
 
-如果您選擇不在 CLR 型別上定義的外部索引鍵，但想要在資料庫中指定它應該有何種名稱，執行下列作業：  
+如果您選擇不要在 CLR 類型上定義外鍵，但想要指定它在資料庫中應有的名稱，請執行下列動作：  
 
 ``` csharp
 modelBuilder.Entity<Course>()
@@ -146,9 +146,9 @@ modelBuilder.Entity<Course>()
     .Map(m => m.MapKey("ChangedDepartmentID"));
 ```  
 
-### <a name="configuring-whether-a-string-property-supports-unicode-content"></a>設定是否為字串屬性支援 Unicode 內容  
+### <a name="configuring-whether-a-string-property-supports-unicode-content"></a>設定字串屬性是否支援 Unicode 內容  
 
-預設字串為 Unicode (SQL Server 中的 nvarchar)。 您可以使用 IsUnicode 方法，以指定的 varchar 類型應為字串。  
+根據預設，字串為 Unicode （在 SQL Server 中為 Nvarchar）。 您可以使用 IsUnicode 方法來指定字串應為 Varchar 類型。  
 
 ``` csharp
 modelBuilder.Entity<Department>()
@@ -158,7 +158,7 @@ modelBuilder.Entity<Department>()
 
 ### <a name="configuring-the-data-type-of-a-database-column"></a>設定資料庫資料行的資料類型  
 
-[HasColumnType](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.configuration.stringcolumnconfiguration.hascolumntype.aspx)方法可讓相同的基本類型的不同表示法的對應。 使用此方法無法讓您執行任何轉換的資料在執行階段。 請注意，IsUnicode 設定資料行的慣用的方法為 varchar，因為它與資料庫無關。  
+[HasColumnType](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.configuration.stringcolumnconfiguration.hascolumntype.aspx)方法可讓您對應至相同基本類型的不同標記法。 使用這個方法並不會讓您在執行時間執行資料的任何轉換。 請注意，IsUnicode 是將資料行設定為 Varchar 的慣用方式，因為它與資料庫無關。  
 
 ``` csharp
 modelBuilder.Entity<Department>()   
@@ -166,11 +166,11 @@ modelBuilder.Entity<Department>()
     .HasColumnType("varchar");
 ```  
 
-### <a name="configuring-properties-on-a-complex-type"></a>複雜類型上設定屬性  
+### <a name="configuring-properties-on-a-complex-type"></a>設定複雜類型的屬性  
 
-有兩種方式可設定純量屬性上的複雜型別。  
+有兩種方式可以在複雜型別上設定純量屬性。  
 
-您可以呼叫 ComplexTypeConfiguration 屬性。  
+您可以在 ComplexTypeConfiguration 上呼叫屬性。  
 
 ``` csharp
 modelBuilder.ComplexType<Details>()
@@ -178,7 +178,7 @@ modelBuilder.ComplexType<Details>()
     .HasMaxLength(20);
 ```  
 
-您也可以使用點標記法來存取複雜型別的屬性。  
+您也可以使用點標記法來存取複雜類型的屬性。  
 
 ``` csharp
 modelBuilder.Entity<OnsiteCourse>()
@@ -186,9 +186,9 @@ modelBuilder.Entity<OnsiteCourse>()
     .HasMaxLength(20);
 ```  
 
-### <a name="configuring-a-property-to-be-used-as-an-optimistic-concurrency-token"></a>設定要當做開放式並行存取 Token 的屬性  
+### <a name="configuring-a-property-to-be-used-as-an-optimistic-concurrency-token"></a>設定要當做開放式並行存取權杖使用的屬性  
 
-若要指定實體中的屬性代表並行語彙基元，您可以使用 ConcurrencyCheck 屬性或 IsConcurrencyToken; 方法。  
+若要指定實體中的屬性代表並行標記，您可以使用 ConcurrencyCheck 屬性或 IsConcurrencyToken 方法。  
 
 ``` csharp
 modelBuilder.Entity<OfficeAssignment>()
@@ -196,7 +196,7 @@ modelBuilder.Entity<OfficeAssignment>()
     .IsConcurrencyToken();
 ```  
 
-您也可以使用 IsRowVersion 方法來設定要在資料庫中的資料列版本的屬性。 設定此屬性的資料列版本會自動設定它的開放式並行存取 token。  
+您也可以使用 IsRowVersion 方法，將屬性設定為資料庫中的資料列版本。 將屬性設為數據列版本會自動將它設定為開放式並行存取權杖。  
 
 ``` csharp
 modelBuilder.Entity<OfficeAssignment>()
@@ -206,17 +206,17 @@ modelBuilder.Entity<OfficeAssignment>()
 
 ## <a name="type-mapping"></a>類型對應  
 
-### <a name="specifying-that-a-class-is-a-complex-type"></a>指定類別複雜型別  
+### <a name="specifying-that-a-class-is-a-complex-type"></a>指定類別為複雜類型  
 
-依照慣例，指定沒有主索引鍵的型別會被視為複雜型別。 有一些案例，其中第一個程式碼不會偵測到複雜型別 （例如，如果您沒有名為 ID 的屬性，但您並不表示讓它成為主索引鍵）。 在這種情況下，您會使用 fluent API，明確指定的類型是複雜類型。  
+依照慣例，未指定主鍵的型別會被視為複雜型別。 在某些情況下，Code First 不會偵測到複雜型別（例如，如果您有一個名為 ID 的屬性，但不表示它是主要索引鍵）。 在這種情況下，您可以使用 Fluent API 明確指定型別為複雜型別。  
 
 ``` csharp
 modelBuilder.ComplexType<Details>();
 ```  
 
-### <a name="specifying-not-to-map-a-clr-entity-type-to-a-table-in-the-database"></a>指定不將 CLR 實體型別對應至資料庫中的資料表  
+### <a name="specifying-not-to-map-a-clr-entity-type-to-a-table-in-the-database"></a>指定不要將 CLR 實體類型對應至資料庫中的資料表  
 
-下列範例示範如何對應到資料庫中的資料表時，排除 CLR 型別。  
+下列範例示範如何排除 CLR 類型，使其無法對應至資料庫中的資料表。  
 
 ``` csharp
 modelBuilder.Ignore<OnlineCourse>();
@@ -224,23 +224,23 @@ modelBuilder.Ignore<OnlineCourse>();
 
 ### <a name="mapping-an-entity-type-to-a-specific-table-in-the-database"></a>將實體類型對應至資料庫中的特定資料表  
 
-部門的所有屬性會都對應到名為 t_ 部門的資料表中的資料行。  
+部門的所有屬性都會對應到名為 t_ 部門的資料表中的資料行。  
 
 ``` csharp
 modelBuilder.Entity<Department>()  
     .ToTable("t_Department");
 ```  
 
-您也可以指定結構描述名稱，像這樣：  
+您也可以指定架構名稱，如下所示：  
 
 ``` csharp
 modelBuilder.Entity<Department>()  
     .ToTable("t_Department", "school");
 ```  
 
-### <a name="mapping-the-table-per-hierarchy-tph-inheritance"></a>對應表-table-per Hierarchy (TPH) 繼承  
+### <a name="mapping-the-table-per-hierarchy-tph-inheritance"></a>對應每個階層的資料表（TPH）繼承  
 
-TPH 對應案例中，在繼承階層架構中的所有型別會對應至單一資料表。 鑑別子資料行用來識別每個資料列型別。 當使用 Code First 建立模型，TPH 是參與繼承階層架構中的類型的預設策略。 根據預設，鑑別子資料行加入至具有名稱"鑑別子 」 的資料表，並在階層中每個類型的 CLR 型別名稱將用於鑑別子值。 您可以使用 fluent API，以修改預設行為。  
+在 TPH 對應案例中，繼承階層架構中的所有類型都會對應到單一資料表。 鑒別子資料行是用來識別每個資料列的類型。 使用 Code First 建立模型時，TPH 是參與繼承階層架構之類型的預設策略。 根據預設，會將鑒別子資料行加入至名稱為 "鑒別子" 的資料表，而階層中每個類型的 CLR 類型名稱會用於鑒別子值。 您可以使用 Fluent API 來修改預設行為。  
 
 ``` csharp
 modelBuilder.Entity<Course>()  
@@ -248,23 +248,23 @@ modelBuilder.Entity<Course>()
     .Map<OnsiteCourse>(m => m.Requires("Type").HasValue("OnsiteCourse"));
 ```  
 
-### <a name="mapping-the-table-per-type-tpt-inheritance"></a>對應每一類一表 (TPT) 繼承  
+### <a name="mapping-the-table-per-type-tpt-inheritance"></a>對應每一類型的資料表（TPT）繼承  
 
-在 TPT 對應案例中，所有的類型會對應至個別資料表。 單獨屬於基底型別 (Base Type) 或衍生型別 (Derived Type) 的屬性會儲存在對應至該型別的資料表中。 對應至衍生類型的資料表也會儲存在衍生的資料表，與基底資料表的外部索引鍵。  
+在 TPT 對應案例中，所有類型都會對應至個別資料表。 單獨屬於基底型別 (Base Type) 或衍生型別 (Derived Type) 的屬性會儲存在對應至該型別的資料表中。 對應至衍生類型的資料表也會儲存聯結衍生資料表與基表的外鍵。  
 
 ``` csharp
 modelBuilder.Entity<Course>().ToTable("Course");  
 modelBuilder.Entity<OnsiteCourse>().ToTable("OnsiteCourse");
 ```  
 
-### <a name="mapping-the-table-per-concrete-class-tpc-inheritance"></a>對應資料表每個實體 (Tpc) 繼承  
+### <a name="mapping-the-table-per-concrete-class-tpc-inheritance"></a>對應每個具體的資料表類別（TPC）繼承  
 
-TPC 對應案例中，在階層中的所有非抽象型別會對應至個別資料表。 對應至衍生類別的資料表會有沒有對應到基底類別，在資料庫中資料表的關聯性。 所有類別的屬性，包括繼承的屬性會對應到相對應資料表的資料行。  
+在 TPC 對應案例中，階層中的所有非抽象類別型都會對應到個別資料表。 對應至衍生類別的資料表與對應至資料庫中基類的資料表沒有關聯性。 類別的所有屬性（包括繼承的屬性）都會對應至對應資料表的資料行。  
 
-呼叫 MapInheritedProperties 方法來設定每個衍生的類型。 MapInheritedProperties 重新對應至新的資料行，資料表中的衍生類別繼承自基底類別的所有屬性。  
+呼叫 MapInheritedProperties 方法，以設定每個衍生類型。 MapInheritedProperties 會將繼承自基類的所有屬性重新對應到衍生類別之資料表中的新資料行。  
 
 > [!NOTE]
-> 請注意，因為不會共用參與 TPC 繼承階層架構中的資料表有主索引鍵會重複的實體索引鍵會對應到子類別中，如果您有使用相同的識別值種子的資料庫產生值的資料表中插入時。 若要解決此問題，您可以指定不同的初始種子值，每個資料表，或關閉主索引鍵屬性上的身分識別。 使用 Code First 時，身分識別會是整數索引鍵屬性的預設值。  
+> 請注意，由於參與 TPC 繼承階層架構的資料表不會共用主鍵，因此如果您的資料庫產生的值具有相同的身分識別種子，則在對應至子類別的資料表中插入時，將會有重複的實體索引鍵。 若要解決這個問題，您可以為每個資料表指定不同的初始種子值，或在 primary key 屬性上關閉識別。 識別是使用 Code First 時，整數索引鍵屬性的預設值。  
 
 ``` csharp
 modelBuilder.Entity<Course>()
@@ -284,9 +284,9 @@ modelBuilder.Entity<OnlineCourse>().Map(m =>
 });
 ```  
 
-### <a name="mapping-properties-of-an-entity-type-to-multiple-tables-in-the-database-entity-splitting"></a>將實體類型的屬性對應至多個資料表中的資料庫 （實體分割）  
+### <a name="mapping-properties-of-an-entity-type-to-multiple-tables-in-the-database-entity-splitting"></a>將實體類型的屬性對應至資料庫中的多個資料表（實體分割）  
 
-實體分割可讓分散到多個資料表的實體類型的屬性。 在下列範例中，部門實體會分割成兩個資料表： 部門和 DepartmentDetails。 實體分割，可用於對應方法的多個呼叫對應至特定資料表的屬性子集。  
+實體分割可讓實體類型的屬性散佈到多個資料表。 在下列範例中，部門實體會分割成兩個數據表：部門和 DepartmentDetails。 實體分割會使用多個對應方法呼叫，將屬性的子集對應至特定的資料表。  
 
 ``` csharp
 modelBuilder.Entity<Department>()
@@ -302,9 +302,9 @@ modelBuilder.Entity<Department>()
     });
 ```  
 
-### <a name="mapping-multiple-entity-types-to-one-table-in-the-database-table-splitting"></a>將多個實體類型對應至資料庫 （分割的資料表） 中的一個資料表  
+### <a name="mapping-multiple-entity-types-to-one-table-in-the-database-table-splitting"></a>將多個實體類型對應至資料庫中的一個資料表（資料表分割）  
 
-下列範例會共用一個資料表的主索引鍵的兩個實體類型。  
+下列範例會將共用主要索引鍵的兩個實體類型對應到一個資料表。  
 
 ``` csharp
 modelBuilder.Entity<OfficeAssignment>()
@@ -319,13 +319,13 @@ modelBuilder.Entity<Instructor>().ToTable("Instructor");
 modelBuilder.Entity<OfficeAssignment>().ToTable("Instructor");
 ```  
 
-### <a name="mapping-an-entity-type-to-insertupdatedelete-stored-procedures-ef6-onwards"></a>將實體類型對應到 Insert/Update/Delete 預存程序 (EF6 之後版本)  
+### <a name="mapping-an-entity-type-to-insertupdatedelete-stored-procedures-ef6-onwards"></a>將實體類型對應到插入/更新/刪除預存程式（EF6）  
 
-開始使用 EF6 可以對應預存程序用於插入更新和刪除實體。 如需詳細資訊，請參閱[程式碼第一個 Insert/Update/Delete 預存程序](~/ef6/modeling/code-first/fluent/cud-stored-procedures.md)。  
+從 EF6 開始，您可以對應實體來使用插入更新和刪除的預存程式。 如需詳細資訊，請參閱[Code First 插入/更新/刪除預存程式](~/ef6/modeling/code-first/fluent/cud-stored-procedures.md)。  
 
-## <a name="model-used-in-samples"></a>範例中所使用的模型  
+## <a name="model-used-in-samples"></a>範例中使用的模型  
 
-下列的 Code First 模型用於此頁面上的範例。  
+下列 Code First 模型用於此頁面上的範例。  
 
 ``` csharp
 using System.Data.Entity;

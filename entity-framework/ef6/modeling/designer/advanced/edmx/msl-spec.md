@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 13ae7bc1-74b4-4ee4-8d73-c337be841467
 ms.openlocfilehash: 8990d1373ea2121ce11337a43dbcdf3b9e1532bd
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182560"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418729"
 ---
 # <a name="msl-specification"></a>MSL 規格
 對應規格語言（MSL）是以 XML 為基礎的語言，描述 Entity Framework 應用程式的概念模型和儲存模型之間的對應。
@@ -33,14 +33,14 @@ MSL 的版本是以 XML 命名空間來區分。
 
 **Alias**元素不能有子項目。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**Alias**元素的屬性。
 
 | 屬性名稱 | 必要 | 值                                                                     |
 |:---------------|:------------|:--------------------------------------------------------------------------|
-| **Key**        | 是         | [**值**] 屬性所指定之命名空間的別名。 |
-| **值**      | 是         | **Key**元素的值為別名的命名空間。     |
+| **索引鍵**        | 是         | [**值**] 屬性所指定之命名空間的別名。 |
+| **ReplTest1**      | 是         | **Key**元素的值為別名的命名空間。     |
 
 ### <a name="example"></a>範例
 
@@ -87,7 +87,7 @@ MSL 的版本是以 XML 命名空間來區分。
 
 -   ScalarProperty
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述適用于**AssociationEnd**元素的屬性。
 
@@ -194,7 +194,7 @@ MSL 的版本是以 XML 命名空間來區分。
 -   條件（零或多個）
 -   ModificationFunctionMapping （零或一個）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**AssociationSetMapping**元素的屬性。
 
@@ -232,7 +232,7 @@ MSL 的版本是以 XML 命名空間來區分。
 -   ComplextTypeMapping （零或多個）
 -   條件（零或多個）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述適用于**ComplexProperty**元素的屬性：
 
@@ -302,7 +302,7 @@ MSL 的版本是以 XML 命名空間來區分。
 
 -   ScalarProperty （零或多個）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述適用于**ComplexTypeMapping**元素的屬性。
 
@@ -373,15 +373,15 @@ MSL 的版本是以 XML 命名空間來區分。
 
 **Condition**元素不可以有任何子項目。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述適用于**Condition**元素的屬性：
 
 | 屬性名稱 | 必要 | 值                                                                                                                                                                                                                                                                                         |
 |:---------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **ColumnName** | 否          | 其值用來評估條件之資料表資料行的名稱。                                                                                                                                                                                                                   |
-| **IsNull**     | 否          | **True**或**False**。 如果值為**True** ，且資料行值為**null**，或者如果值為**False**且資料行值不是**null**，則條件為 true。 否則，條件不成立。 <br/> 不能同時使用**IsNull**和**Value**屬性。 |
-| **值**      | 否          | 要與資料行值比較的值。 如果值相同，則條件成立。 否則，條件不成立。 <br/> 不能同時使用**IsNull**和**Value**屬性。                                                                       |
+| **IsNull**     | 否          | **True** 或 **False**。 如果值為**True** ，且資料行值為**null**，或者如果值為**False**且資料行值不是**null**，則條件為 true。 否則，條件不成立。 <br/> 不能同時使用**IsNull**和**Value**屬性。 |
+| **ReplTest1**      | 否          | 要與資料行值比較的值。 如果值相同，則條件成立。 否則，條件不成立。 <br/> 不能同時使用**IsNull**和**Value**屬性。                                                                       |
 | **名稱**       | 否          | 其值用來評估條件之概念模型實體屬性的名稱。 <br/> 如果在 FunctionImportMapping 專案中使用**Condition**元素，則此屬性不適用。                                                                           |
 
 ### <a name="example"></a>範例
@@ -434,7 +434,7 @@ MSL 的版本是以 XML 命名空間來區分。
 -   ComplexProperty (零或多個)
 -   ScarlarProperty （零或多個）
 
-#### <a name="applicable-attributes"></a>適用屬性
+#### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述當屬性套用至**EntityTypeMapping**元素時，可以套用至**DeleteFunction**元素的屬性。
 
@@ -498,7 +498,7 @@ MSL 的版本是以 XML 命名空間來區分。
 
 -   EndProperty
 
-#### <a name="applicable-attributes"></a>適用屬性
+#### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述當屬性套用至**AssociationSetMapping**元素時，可以套用至**DeleteFunction**元素的屬性。
 
@@ -552,7 +552,7 @@ MSL 的版本是以 XML 命名空間來區分。
 
 -   ScalarProperty （零或多個）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述適用于**EndProperty**元素的屬性：
 
@@ -622,7 +622,7 @@ MSL 的版本是以 XML 命名空間來區分。
 -   AssociationSetMapping （零或多個）
 -   FunctionImportMapping （零或多個）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**EntityContainerMapping**元素的屬性。
 
@@ -630,7 +630,7 @@ MSL 的版本是以 XML 命名空間來區分。
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **StorageModelContainer** | 是         | 要對應至的儲存模型實體容器名稱。                                                                                                                                                                                     |
 | **CdmEntityContainer**    | 是         | 要對應的概念模型實體容器名稱。                                                                                                                                                                                  |
-| **GenerateUpdateViews**   | 否          | **True**或**False**。 如果**為 False**，則不會產生任何更新視圖。 當您擁有不正確唯讀對應時，此屬性應該設定為**False** ，因為資料可能無法成功地往返。 <br/> 預設值是 **True**。 |
+| **GenerateUpdateViews**   | 否          | **True** 或 **False**。 如果**為 False**，則不會產生任何更新視圖。 當您擁有不正確唯讀對應時，此屬性應該設定為**False** ，因為資料可能無法成功地往返。 <br/> 預設值為 **True**。 |
 
 ### <a name="example"></a>範例
 
@@ -673,7 +673,7 @@ MSL 的版本是以 XML 命名空間來區分。
 -   QueryView （零或一個）
 -   MappingFragment （零或多個）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**EntitySetMapping**元素的屬性。
 
@@ -739,7 +739,7 @@ ModificationFunctionMapping 子項目可以用來將實體類型的插入、更�
 > [!NOTE]
 > **ScalarProperty**和**Condition**元素在 FunctionImportMapping 專案中使用時，只能是**EntityTypeMapping**元素的子項目。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**EntityTypeMapping**元素的屬性。
 
@@ -825,7 +825,7 @@ ModificationFunctionMapping 子項目可以用來將實體類型的插入、更�
 
 -   ResultMapping （零或多個）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述適用于**FunctionImportMapping**元素的屬性：
 
@@ -883,7 +883,7 @@ ModificationFunctionMapping 子項目可以用來將實體類型的插入、更�
 -   ResultBinding （零或一個）
 -   ScarlarProperty （零或多個）
 
-#### <a name="applicable-attributes"></a>適用屬性
+#### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述套用至**EntityTypeMapping**元素時，可以套用至**InsertFunction**元素的屬性。
 
@@ -934,7 +934,7 @@ ModificationFunctionMapping 子項目可以用來將實體類型的插入、更�
 
 -   EndProperty
 
-#### <a name="applicable-attributes"></a>適用屬性
+#### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述當屬性套用至**AssociationSetMapping**元素時，可以套用至**InsertFunction**元素的屬性。
 
@@ -991,7 +991,7 @@ ModificationFunctionMapping 子項目可以用來將實體類型的插入、更�
 
 MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的命名空間名稱來限定。 如需概念模型命名空間名稱的詳細資訊，請參閱 Schema 元素（CSDL）。 如需儲存體模型命名空間名稱的詳細資訊，請參閱 Schema Element （SSDL）。 MSL 中所使用之命名空間的別名可以使用 Alias 項目加以定義。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**Mapping**元素的屬性。
 
@@ -1044,7 +1044,7 @@ MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的�
 -   ScalarProperty （零或多個）
 -   條件（零或多個）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**MappingFragment**元素的屬性。
 
@@ -1207,7 +1207,7 @@ MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的�
 
 **QueryView**元素不能有任何子項目。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**QueryView**元素的屬性。
 
@@ -1321,7 +1321,7 @@ MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的�
 
 **ResultBinding**元素不能有任何子項目。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述適用于**ResultBinding**元素的屬性：
 
@@ -1471,7 +1471,7 @@ MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的�
 
 **ScalarProperty**元素不能有任何子項目。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 套用至**ScalarProperty**元素的屬性會根據專案的角色而有所不同。
 
@@ -1591,7 +1591,7 @@ MSL 中所參考之概念及儲存模型類型的名稱必須以它們各自的�
 -   ResultBinding （零或一個）
 -   ScarlarProperty （零或多個）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**UpdateFunction**元素的屬性。
 

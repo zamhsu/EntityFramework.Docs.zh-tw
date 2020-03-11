@@ -4,18 +4,18 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 03c5a069-b7b4-455f-a16f-ee3b96cc4e28
 ms.openlocfilehash: bcea8ab2477f44281cd5de824457a72a84ccc766
-ms.sourcegitcommit: 4a795285004612ac03ab26532ac09ca333cb4c8f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50123813"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417120"
 ---
 # <a name="the-load-method"></a>Load 方法
-有幾個案例，您可能要從資料庫載入實體到內容而不立即進行與這些實體的任何項目。 一個很好的範例中所述，正在載入資料繫結的實體[本機資料](~/ef6/querying/local-data.md)。 若要這樣做的一個常見方式是撰寫 LINQ 查詢，然後再呼叫它，才可立即捨棄 建立的清單的 ToList。 Load 擴充方法的運作方式類似 ToList 不同之處在於它完全可避免建立清單。  
+在幾種情況下，您可能會想要將實體從資料庫載入至內容，而不需要立即對那些實體執行任何動作。 如[本機資料](~/ef6/querying/local-data.md)所述，載入資料系結的實體就是一個很好的例子。 其中一個常見的方法是撰寫 LINQ 查詢，然後在它上呼叫 ToList，只是為了立即捨棄已建立的清單。 Load 擴充方法的運作方式就像 ToList，不同之處在于它可避免完全建立清單。  
 
 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
 
-以下是使用載入兩個範例。 第一個取自 Windows Form 資料繫結應用程式可載入查詢繫結至本機集合中之前, 的實體中所述[本機資料](~/ef6/querying/local-data.md):  
+以下是使用 Load 的兩個範例。 第一個是從 Windows Forms 資料系結應用程式取得，其中會使用負載來查詢實體，然後再系結至本機集合，如[本機資料](~/ef6/querying/local-data.md)中所述：  
 
 ``` csharp
 protected override void OnLoad(EventArgs e)
@@ -29,7 +29,7 @@ protected override void OnLoad(EventArgs e)
 }
 ```  
 
-第二個範例示範如何使用負載載入相關實體的已篩選的集合中所述[載入相關實體](~/ef6/querying/related-data.md):  
+第二個範例顯示如何使用負載來載入已篩選的相關實體集合，如[載入相關實體](~/ef6/querying/related-data.md)中所述：  
 
 ``` csharp
 using (var context = new BloggingContext())

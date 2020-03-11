@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: d617aed1-15f2-48a9-b187-186991c666e3
 ms.openlocfilehash: 018f480c1f0f1e74fc9f7a8950a6880e96f1facc
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182655"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419098"
 ---
 # <a name="spatial---code-first"></a>空間-Code First
 > [!NOTE]
@@ -24,14 +24,14 @@ ms.locfileid: "72182655"
 
 主要的空間資料類型有兩種： geography 和 geometry。 Geography 資料類型會儲存橢圓體資料（例如，GPS 緯度和經度座標）。 Geometry 資料類型代表 Euclidean （平面）座標系統。
 
-## <a name="watch-the-video"></a>觀看影片
+## <a name="watch-the-video"></a>觀賞影片
 這段影片示範如何使用 Entity Framework Code First 來對應空間類型。 它也會示範如何使用 LINQ 查詢來尋找兩個位置之間的距離。
 
 **提供者**： Julia Kornich
 
 **影片**： [wmv](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.wmv) | [.wmv](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-mp4video-spatialwithcodefirst.m4v) | [wmv （ZIP）](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.zip)
 
-## <a name="pre-requisites"></a>先決條件
+## <a name="pre-requisites"></a>必要條件
 
 您必須安裝 Visual Studio 2012、旗艦版、Premium、Professional 或 Web Express edition，才能完成此逐步解說。
 
@@ -76,7 +76,7 @@ DbCoNtext 和 DbSet 類型定義于 EntityFramework 元件中。 我們會使用
 1.  在方案總管中，以滑鼠右鍵按一下專案名稱。
 2.  選取 [**管理 NuGet 套件 ...** ]
 3.  在 [管理 NuGet 套件] 對話方塊中，選取 [**線上**] 索引標籤，然後選擇 [ **EntityFramework** ] 套件。
-4.  按一下 [**安裝**]
+4.  按一下 [安裝]
 
 請注意，除了 EntityFramework 元件之外，也會新增 System.workflow.componentmodel.activity. DataAnnotations 元件的參考。
 

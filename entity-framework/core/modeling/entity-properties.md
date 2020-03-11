@@ -6,13 +6,13 @@ ms.date: 12/10/2019
 ms.assetid: e9dff604-3469-4a05-8f9e-18ac281d82a9
 uid: core/modeling/entity-properties
 ms.openlocfilehash: b67603fbffd1f1c8506bc21f8972c851eb8eef29
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502464"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417213"
 ---
-# <a name="entity-properties"></a>實體內容
+# <a name="entity-properties"></a>實體屬性
 
 模型中的每個實體類型都有一組屬性，EF Core 會從資料庫讀取和寫入。 如果您要使用關係資料庫，實體屬性會對應到資料表資料行。
 
@@ -22,11 +22,11 @@ ms.locfileid: "75502464"
 
 可以排除特定的屬性，如下所示：
 
-### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
+### <a name="data-annotations"></a>[資料註解](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IgnoreProperty.cs?name=IgnoreProperty&highlight=6)]
 
-### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+### <a name="fluent-api"></a>[流暢的 API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IgnoreProperty.cs?name=IgnoreProperty&highlight=3,4)]
 
@@ -38,11 +38,11 @@ ms.locfileid: "75502464"
 
 如果您想要使用不同的名稱來設定資料行，您可以如下所示：
 
-### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
+### <a name="data-annotations"></a>[資料註解](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnName.cs?Name=ColumnName&highlight=3)]
 
-### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+### <a name="fluent-api"></a>[流暢的 API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnName.cs?Name=ColumnName&highlight=3-5)]
 
@@ -56,17 +56,17 @@ ms.locfileid: "75502464"
 
 您也可以設定您的資料行，以指定資料行的精確資料類型。 例如，下列程式碼會將 `Url` 設定為非 unicode 字串，其最大長度為 `200`，而 `Rating` 為十進位，且有效位數為 `2`的 `5` 和小數位數：
 
-### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
+### <a name="data-annotations"></a>[資料註解](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnDataType.cs?name=ColumnDataType&highlight=4,6)]
 
-### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+### <a name="fluent-api"></a>[流暢的 API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=5-6)]
 
 ***
 
-### <a name="maximum-length"></a>長度上限
+### <a name="maximum-length"></a>最大長度
 
 設定最大長度會向資料庫提供者提供有關要為指定屬性選擇之適當資料行資料類型的提示。 最大長度僅適用于陣列資料類型，例如 `string` 和 `byte[]`。
 
@@ -75,11 +75,11 @@ ms.locfileid: "75502464"
 
 在下列範例中，將最大長度設定為500將會在 SQL Server 上建立 `nvarchar(500)` 類型的資料行：
 
-#### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
+#### <a name="data-annotations"></a>[資料註解](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/MaxLength.cs?name=MaxLength&highlight=4)]
 
-#### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+#### <a name="fluent-api"></a>[流暢的 API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/MaxLength.cs?name=MaxLength&highlight=3-5)]
 
@@ -100,11 +100,11 @@ C#8引進了一個稱為[nullable 參考型別](/dotnet/csharp/tutorials/nullabl
 
 下列範例顯示具有必要和選擇性屬性的實體類型，且可為 null 參考功能已停用（預設值）並已啟用：
 
-#### <a name="without-nullable-reference-types-defaulttabwithout-nrt"></a>[沒有可為 null 的參考型別（預設值）](#tab/without-nrt)
+#### <a name="without-nullable-reference-types-default"></a>[沒有可為 null 的參考型別（預設值）](#tab/without-nrt)
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithoutNullableReferenceTypes.cs?name=Customer&highlight=4-8)]
 
-#### <a name="with-nullable-reference-typestabwith-nrt"></a>[具有可為 null 的參考型別](#tab/with-nrt)
+#### <a name="with-nullable-reference-types"></a>[具有可為 null 的參考型別](#tab/with-nrt)
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Customer.cs?name=Customer&highlight=4-6)]
 
@@ -121,11 +121,11 @@ C#8引進了一個稱為[nullable 參考型別](/dotnet/csharp/tutorials/nullabl
 
 依照慣例，您可以將屬性設定為必要，如下所示：
 
-#### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
+#### <a name="data-annotations"></a>[資料註解](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Required.cs?name=Required&highlight=4)]
 
-#### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+#### <a name="fluent-api"></a>[流暢的 API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Required.cs?name=Required&highlight=3-5)]
 

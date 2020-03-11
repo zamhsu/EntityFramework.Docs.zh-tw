@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 51c8b6f4517a3f87821ed1e4e2d60549e06ed39d
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 6e92b869d691d0224abf1997d9eb7ea035489c5d
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656062"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417611"
 ---
 # <a name="cascade-delete"></a>串聯刪除
 
@@ -58,7 +58,7 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 在上表中，「無」會造成條件約束違規。 例如，如果將主體/子系實體刪除，但未採取任何動作來變更相依項/子系的外部索引鍵，資料庫將可能因外部條件約速違規而在 SaveChanges 時擲回例外狀況。
 
-概要說明：
+概括而言：
 
 * 如果您有父系不存在便無法存在的實體，而想要讓 EF 負責自動刪除子系，則請使用 *Cascade*。
   * 父系不存在便無法存在的實體通常會使用必要關聯性，就此關聯性而言，預設值為 *Cascade*。
@@ -75,7 +75,7 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ## <a name="entity-deletion-examples"></a>實體刪除範例
 
-對於可供下載並執行的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/CascadeDelete/)，以下程式碼是其中的一部分。 此範例示範刪除父系實體時，選擇性和必要關聯性的每個刪除行為會發生什麼情況。
+對於可供下載並執行的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/CascadeDelete/)，以下程式碼是其中的一部分。 此範例示範刪除父系實體時，選擇性和必要關聯性的每個刪除行為會發生什麼情況。
 
 [!code-csharp[Main](../../../samples/core/Saving/CascadeDelete/Sample.cs#DeleteBehaviorVariations)]
 
@@ -186,7 +186,7 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ## <a name="delete-orphans-examples"></a>刪除失去關聯的項目範例
 
-對於可供下載並執行的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/CascadeDelete/)，以下程式碼是其中的一部分。 此範例示範切斷父系/主體與其子系/相依項之間的關聯性時，選擇性和必要關聯性的每個刪除行為會發生什麼情況。 在此範例中，會藉由從主體/父系 (部落格) 上的集合導覽屬性移除相依項/子系 (文章) 來切斷關聯性。 不過，如果改為將相依項/子系對主體/父系的參考設定為 Null，行為也會相同。
+對於可供下載並執行的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/CascadeDelete/)，以下程式碼是其中的一部分。 此範例示範切斷父系/主體與其子系/相依項之間的關聯性時，選擇性和必要關聯性的每個刪除行為會發生什麼情況。 在此範例中，會藉由從主體/父系 (部落格) 上的集合導覽屬性移除相依項/子系 (文章) 來切斷關聯性。 不過，如果改為將相依項/子系對主體/父系的參考設定為 Null，行為也會相同。
 
 [!code-csharp[Main](../../../samples/core/Saving/CascadeDelete/Sample.cs#DeleteOrphansVariations)]
 

@@ -5,11 +5,11 @@ ms.date: 10/27/2016
 ms.assetid: c3c1940b-136d-45d8-aa4f-cb5040f8980a
 uid: core/miscellaneous/rc2-rtm-upgrade
 ms.openlocfilehash: 779caad7883d13684b389dab7515be44bc42e1ef
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655811"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416520"
 ---
 # <a name="upgrading-from-ef-core-10-rc2-to-rtm"></a>從 EF Core 1.0 RC2 升級至 RTM
 
@@ -36,13 +36,13 @@ ms.locfileid: "73655811"
 這種變更會影響使用 ASP.NET Identity 的專案，而且是從 RTM 之前的專案範本建立的。 專案範本包含用來建立資料庫的遷移。 您必須編輯此遷移，以指定下列資料行的最大 `256` 長度。
 
 * **AspNetRoles**
-  * [屬性]
+  * 名稱
   * NormalizedName
 * **AspNetUsers**
-  * Email
+  * 電子郵件
   * NormalizedEmail
   * NormalizedUserName
-  * 使用者名稱
+  * UserName
 
 若無法進行這項變更，將會在初始遷移套用至資料庫時產生下列例外狀況。
 

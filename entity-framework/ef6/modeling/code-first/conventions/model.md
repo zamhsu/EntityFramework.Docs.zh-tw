@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 0fc4eef8-29b8-4192-9c77-08fd33d3db3a
 ms.openlocfilehash: c873e9a216bd9bd1934f2149ae6af602072f3608
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656160"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419168"
 ---
 # <a name="model-based-conventions"></a>以模型為基礎的慣例
 > [!NOTE]
@@ -207,6 +207,6 @@ public class BlogContext : DbContext
 }
 ```  
 
-## <a name="notes"></a>備註  
+## <a name="notes"></a>注意  
 
 此處的 MSDN 檔提供 Entity Framework 目前套用的慣例清單： [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx)。  這份清單會直接從我們的原始程式碼提取。  Entity Framework 6 的原始程式碼可在[GitHub](https://github.com/aspnet/entityframework6/)上取得，而 Entity Framework 使用的許多慣例都是自訂模型型慣例的良好起點。  

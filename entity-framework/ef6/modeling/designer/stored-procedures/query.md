@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 9554ed25-c5c1-43be-acad-5da37739697f
 ms.openlocfilehash: 2e0092b526278597e8477d47eeb642598647bb91
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182474"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418389"
 ---
 # <a name="designer-query-stored-procedures"></a>設計工具查詢預存程式
 這個逐步解說會示範如何使用 Entity Framework Designer （EF 設計工具）將預存程式匯入模型中，然後呼叫匯入的預存程式來抓取結果。 
@@ -18,7 +18,7 @@ ms.locfileid: "72182474"
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 ```
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 若要完成這個逐步解說，您將需要：
 
@@ -31,7 +31,7 @@ var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 -   選取檔案 **&gt; 新&gt; 專案**
 -   在左窗格中，按一下 [ **Visual C\#** ]，然後選取 [**主控台**] 範本。
 -   在 [名稱] 中輸入 **EFwithSProcsSample** 。
--   選取 **[確定]** 。
+-   選取 [確定] **** 。
 
 ## <a name="create-a-model"></a>建立模型
 

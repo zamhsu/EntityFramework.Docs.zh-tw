@@ -3,12 +3,12 @@ title: 處理並行存取衝突 - EF Core
 author: rowanmiller
 ms.date: 03/03/2018
 uid: core/saving/concurrency
-ms.openlocfilehash: b72fa472698e76e18f155cf96b738b0e193eee0f
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: a1d1a5a11d482f9104691aa3c072dbd1c548e9f1
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73654621"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417587"
 ---
 # <a name="handling-concurrency-conflicts"></a>處理並行存取衝突
 
@@ -16,7 +16,7 @@ ms.locfileid: "73654621"
 > 本頁記載並行存取在 EF Core 中的運作方式，以及如何處理您應用程式中的並行存取衝突。 如需有關如何在模型中設定並行存取語彙基元的詳細資料，請參閱[並行存取語彙基元](xref:core/modeling/concurrency)。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Concurrency/) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Concurrency/) \(英文\)。
 
 「資料庫並行存取」係指多個處理程序或使用者同時存取或變更資料庫中的相同資料。 「並行存取控制」係指在發生並行變更時用來確保資料一致性的特定機制。
 
@@ -33,11 +33,11 @@ EF Core 實作「開放式並行存取控制」，意謂著它會讓多個處理
 
 資料庫提供者需負責實作並行存取語彙基元值的比較。
 
-在關聯式資料庫上，EF Core 會檢查所有 `UPDATE` 或 `DELETE` 陳述式的 `WHERE` 子句中是否有並行存取語彙基元的值。 在執行這些陳述式之後，EF Core 會讀取受影響的資料列數目。
+在關聯式資料庫上，EF Core 會檢查所有 `WHERE` 或 `UPDATE` 陳述式的 `DELETE` 子句中是否有並行存取語彙基元的值。 在執行這些陳述式之後，EF Core 會讀取受影響的資料列數目。
 
 如果沒有任何資料列受影響，即表示偵測到並行存取衝突，而 EF Core 就會擲回 `DbUpdateConcurrencyException`。
 
-例如，我們可以將 `Person` 上的 `LastName` 設定為並行存取語彙基元。 然後，在 Person 上進行的任何更新作業就會包含 `WHERE` 子句中的並行存取檢查：
+例如，我們可以將 `LastName` 上的 `Person` 設定為並行存取語彙基元。 然後，在 Person 上進行的任何更新作業就會包含 `WHERE` 子句中的並行存取檢查：
 
 ``` sql
 UPDATE [Person] SET [FirstName] = @p1
@@ -62,11 +62,11 @@ WHERE [PersonId] = @p0 AND [LastName] = @p2;
 
 處理並行存取衝突的一般方法是：
 
-1. 在 `SaveChanges` 期間攔截 `DbUpdateConcurrencyException`。
+1. 在 `DbUpdateConcurrencyException` 期間攔截 `SaveChanges`。
 2. 使用 `DbUpdateConcurrencyException.Entries` 為受影響的實體準備一組新的變更。
 3. 重新整理並行存取語彙基元的原始值以反映資料庫中的目前值。
 4. 重試處理程序，直到沒有發生任何衝突為止。
 
-在下列範例中，`Person.FirstName` 和 `Person.LastName` 被設定為並行存取語彙基元。 在您包含應用程式特定邏輯以選擇所要儲存值的位置中，有一個 `// TODO:` 註解。
+在下列範例中，`Person.FirstName` 和 `Person.LastName` 設定為並行標記。 在您包含應用程式特定邏輯以選擇所要儲存值的位置中，有一個 `// TODO:` 註解。
 
 [!code-csharp[Main](../../../samples/core/Saving/Concurrency/Sample.cs?name=ConcurrencyHandlingCode&highlight=34-35)]

@@ -5,11 +5,11 @@ ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
 ms.openlocfilehash: 83f6b819409d502dba17a678d44a0746a4a77f4b
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824883"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417493"
 ---
 # <a name="new-features-in-ef-core-20"></a>EF Core 2.0 中的新功能
 
@@ -133,7 +133,7 @@ var query =
     select p;
 ```
 
-請注意幾件事：
+幾個注意事項：
 
 - 依照慣例，在產生 SQL 時，會使用方法的名稱做為函式的名稱（在此案例中為使用者定義函數），但是您可以在方法註冊期間覆寫名稱和架構。
 - 目前僅支援純量函數。
@@ -225,7 +225,7 @@ EF Core 支援透過不同的機制來自動產生索引鍵值。 使用此功�
 
 C# 6 已引進「字串插值」，此功能允許 C# 運算式直接內嵌在字串常值中，並提供不錯的方式在執行階段建置字串。 在 EF Core 2.0 中，我們已在接受原始 SQL 字串的兩個主要 API 中新增內插字串的特殊支援：`FromSql` and `ExecuteSqlCommand`. 這項新的C#支援可讓您以「安全」的方式使用字串內插補點。 也就是說，可防止在執行階段動態建構 SQL 時可能發生的常見 SQL 插入錯誤。
 
-請看以下範例：
+範例如下：
 
 ``` csharp
 var city = "London";

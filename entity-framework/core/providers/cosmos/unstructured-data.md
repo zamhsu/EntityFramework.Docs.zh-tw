@@ -6,11 +6,11 @@ ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/unstructured-data
 ms.openlocfilehash: 69f979d46174ff56310b334f28438ac271f45155
-ms.sourcegitcommit: b3cf5d2e3cb170b9916795d1d8c88678269639b1
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/30/2020
-ms.locfileid: "76888092"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417189"
 ---
 # <a name="working-with-unstructured-data-in-ef-core-azure-cosmos-db-provider"></a>使用 EF Core Azure Cosmos DB 提供者中的非結構化資料
 

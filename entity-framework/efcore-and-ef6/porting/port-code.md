@@ -5,11 +5,11 @@ ms.date: 10/27/2016
 ms.assetid: 2dce1a50-7d84-4856-abf6-2763dd9be99d
 uid: efcore-and-ef6/porting/port-code
 ms.openlocfilehash: 0a99eac2091c07d8bcf7d4e5e4bdc2afcaeee810
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181220"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419634"
 ---
 # <a name="porting-an-ef6-code-based-model-to-ef-core"></a>將以 EF6 程式碼為基礎的模型移植至 EF Core
 

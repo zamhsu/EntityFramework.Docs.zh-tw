@@ -6,11 +6,11 @@ ms.date: 12/03/2019
 ms.assetid: cbe6935e-2679-4b77-8914-a8d772240cf1
 uid: core/modeling/entity-types
 ms.openlocfilehash: b3d9ad753637d021d9aa52965da38091ae690f77
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502450"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417230"
 ---
 # <a name="entity-types"></a>實體型別
 
@@ -32,11 +32,11 @@ ms.locfileid: "75502450"
 
 如果您不想要將類型包含在模型中，您可以將它排除：
 
-### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
+### <a name="data-annotations"></a>[資料註解](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IgnoreType.cs?name=IgnoreType&highlight=1)]
 
-### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+### <a name="fluent-api"></a>[流暢的 API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IgnoreType.cs?name=IgnoreType&highlight=3)]
 
@@ -48,11 +48,11 @@ ms.locfileid: "75502450"
 
 您可以手動設定資料表名稱：
 
-### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
+### <a name="data-annotations"></a>[資料註解](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/TableName.cs?Name=TableName&highlight=1)]
 
-### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+### <a name="fluent-api"></a>[流暢的 API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableName.cs?Name=TableName&highlight=3-4)]
 
@@ -64,11 +64,11 @@ ms.locfileid: "75502450"
 
 您可以設定要在特定架構中建立的資料表，如下所示：
 
-### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
+### <a name="data-annotations"></a>[資料註解](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=1)]
 
-### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+### <a name="fluent-api"></a>[流暢的 API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=3-4)]
 

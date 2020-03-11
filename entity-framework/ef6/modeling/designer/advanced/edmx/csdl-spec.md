@@ -4,14 +4,14 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: c54255f4-253f-49eb-bec8-ad7927ac2fa3
 ms.openlocfilehash: 642e5977ecbbf0c474cac1ceae19d33a135aa875
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182591"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418774"
 ---
 # <a name="csdl-specification"></a>CSDL 規格
-概念結構定義語言 (CSDL) 是 XML架構語言，可描述組成資料驅動應用程式之概念模型的實體、關聯性和函式。 此概念模型可由 Entity Framework 或 WCF Data Services 使用。 Entity Framework 使用 CSDL 所描述的中繼資料，將概念模型中定義的實體和關聯性對應至資料來源。 如需詳細資訊，請參閱 [SSDL 規格](~/ef6/modeling/designer/advanced/edmx/ssdl-spec.md)並[MSL 規格](~/ef6/modeling/designer/advanced/edmx/msl-spec.md)。
+概念結構定義語言 (CSDL) 是 XML架構語言，可描述組成資料驅動應用程式之概念模型的實體、關聯性和函式。 此概念模型可由 Entity Framework 或 WCF Data Services 使用。 Entity Framework 使用 CSDL 所描述的中繼資料，將概念模型中定義的實體和關聯性對應至資料來源。 如需詳細資訊，請參閱[SSDL 規格](~/ef6/modeling/designer/advanced/edmx/ssdl-spec.md)和[MSL 規格](~/ef6/modeling/designer/advanced/edmx/msl-spec.md)。
 
 CSDL 是實體資料模型的 Entity Framework 執行。
 
@@ -30,7 +30,7 @@ CSDL 的版本可藉由 XML 命名空間來區別。
  
 ## <a name="association-element-csdl"></a>Association 項目 (CSDL)
 
-Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (Association) 必須指定關聯性 (relationship) 中的相關實體類型，以及關聯性每一端可能的實體類型數量 (也就是「多重性」)。 關聯端點的多重性可以有一（1）、零或一（0 ..1），或多個（\*）的值。 這項資訊是在兩個子系 End 元素中指定。
+Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (Association) 必須指定關聯性 (relationship) 中的相關實體類型，以及關聯性每一端可能的實體類型數量 (也就是「多重性」)。 關聯端點的多重性可以有一（1）、零或一（0 ..1），或多個（\*）的值。 這項資訊會在兩個 End 子項目中指定。
 
 關聯其中一端的實體類型執行個體可透過導覽屬性或外部索引鍵來存取 (若在實體類型上公開)。
 
@@ -43,7 +43,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 -   ReferentialConstraint （零或一個元素）
 -   Annotation 元素（零或多個元素）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**Association**元素的屬性。
 
@@ -72,7 +72,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 ```
  
 
-下列範例顯示在**Customer**和**Order**實體類型上公開外鍵時，定義**CustomerOrders**關聯的**association**元素。 公開外鍵後，實體之間的關聯性會使用**ReferentialConstraint**元素來管理。 對應的 AssociationSetMapping 元素不是將這個關聯對應至資料來源的必要專案。
+下列範例顯示在**Customer**和**Order**實體類型上公開外鍵時，定義**CustomerOrders**關聯的**association**元素。 公開外鍵後，實體之間的關聯性會使用**ReferentialConstraint**元素來管理。 對應此關聯與資料來源時，不需要對應的 AssociationSetMapping 項目。
 
 ``` xml
  <Association Name="CustomerOrders">
@@ -106,7 +106,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 **Association**屬性會指定關聯集包含的關聯類型。 組成關聯集端點的實體集是使用剛好兩**個子項目**來指定。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**AssociationSet**元素的屬性。
 
@@ -159,23 +159,23 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
  
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**CollectionType**元素的屬性。 請注意， **DefaultValue**、 **MaxLength**、 **FixedLength**、 **Precision**、 **Scale**、 **Unicode**和定**序**屬性僅適用于**EDMSimpleTypes**的集合。
 
 | 屬性名稱                                                          | 必要 | 值                                                                                                                                                                                                                            |
 |:------------------------------------------------------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **型別**                                                                | 否          | 集合的型別。                                                                                                                                                                                                      |
-| **Null**                                                            | 否          | **True** （預設值）或**False** ，取決於屬性是否可以有 null 值。 <br/> [!NOTE]                                                                                                                 |
+| **可為 Null**                                                            | 否          | **True** (預設值) 或 **False**，取決於屬性是否可以具有 null 值。 <br/> [!NOTE]                                                                                                                 |
 | > 在 CSDL v1 中，複雜型別屬性必須具有 `Nullable="False"`。 |             |                                                                                                                                                                                                                                  |
 | **DefaultValue**                                                        | 否          | 屬性的預設值。                                                                                                                                                                                               |
-| **MaxLength**                                                           | 否          | 屬性值的最大長度。                                                                                                                                                                                        |
+| **MaxLength**                                                           | 否          | 屬性值的長度上限                                                                                                                                                                                        |
 | **FixedLength**                                                         | 否          | **True**或**False** ，取決於屬性值是否會儲存為固定長度的字串。                                                                                                                           |
-| **整數位數**                                                           | 否          | 屬性值的有效位數。                                                                                                                                                                                             |
-| **縮放**                                                               | 否          | 屬性值的小數位數。                                                                                                                                                                                                 |
-| **SRID**                                                                | 否          | 空間系統參考識別碼。 僅對空間類型的屬性有效。   如需詳細資訊，請參閱 [SRID](https://en.wikipedia.org/wiki/SRID)和[SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx) |
+| **有效位數**                                                           | 否          | 屬性值的有效位數。                                                                                                                                                                                             |
+| **調整**                                                               | 否          | 屬性值的小數位數。                                                                                                                                                                                                 |
+| **SRID**                                                                | 否          | 空間系統參考識別碼。 僅對空間類型的屬性有效。   如需詳細資訊，請參閱[SRID](https://en.wikipedia.org/wiki/SRID) and [SRID （SQL Server）](https://msdn.microsoft.com/library/bb964707.aspx) |
 | **Unicode**                                                             | 否          | **True**或**False** ，取決於屬性值是否會儲存為 Unicode 字串。                                                                                                                                |
-| **定序**                                                           | 否          | 指定資料來源中使用之定序順序的字串。                                                                                                                                                    |
+| **定序**                                                           | 否          | 指定要在資料來源使用之定序的字串。                                                                                                                                                    |
 
  
 
@@ -246,26 +246,26 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 ## <a name="complextype-element-csdl"></a>ComplexType 項目 (CSDL)
 
-**ComplexType**元素會定義由**EdmSimpleType**屬性或其他複雜類型所組成的資料結構。  複雜類型可以是實體類型的屬性或另一個複雜類型的屬性。 複雜類型與實體類型相似之處在於複雜類型會定義資料。 不過，複雜型別和實體類型之間還是有些重大的差異：
+**ComplexType**元素會定義由**EdmSimpleType**屬性或其他複雜類型所組成的資料結構。  複雜類型可以是實體類型或其他複雜類型的屬性。 複雜類型與實體類型相似之處在於複雜類型會定義資料。 不過，複雜型別和實體類型之間還是有些重大的差異：
 
 -   複雜型別不具有識別 (或索引鍵)，因此無法獨立存在。 複雜型別只能以實體類型或其他複雜型別的屬性形式存在。
--   複雜類型不能參與關聯。 關聯的兩端都不可以是複雜型別，因此不能為複雜類型定義導覽屬性。
+-   複雜類型不可參與關聯。 關聯的兩個端點皆不可為複雜型別，因此不可為複雜型別定義導覽屬性。
 -   雖然複雜型別的純量屬性可能每個都設為 null，但複雜型別屬性不可以有 null 值。
 
 **ComplexType**元素可以具有下列子專案（依列出的順序）：
 
 -   檔（零或一個元素）
--   屬性（零或多個元素）
+-   Property (零或多個項目)
 -   Annotation 元素（零或多個元素）
 
 下表描述可套用至**ComplexType**元素的屬性。
 
 | 屬性名稱                                                                                                 | 必要 | 值                                                                                                                                                                               |
 |:---------------------------------------------------------------------------------------------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Name                                                                                                           | 是         | 複雜類型的名稱。 複雜類型的名稱不可與其他複雜類型、實體類型或模型範圍內之關聯的名稱相同。 |
+| 名稱                                                                                                           | 是         | 複雜類型的名稱。 複雜類型的名稱不可與其他複雜類型、實體類型或模型範圍內之關聯的名稱相同。 |
 | BaseType                                                                                                       | 否          | 其他複雜類型的名稱是即將定義之複雜類型的基底型別。 <br/> [!NOTE]                                                                     |
 | > 這個屬性在 CSDL v1 中不適用。 該版本不支援複雜類型的繼承。 |             |                                                                                                                                                                                     |
-| 概要                                                                                                       | 否          | **True**或**False** （預設值），視複雜型別是否為抽象型別而定。 <br/> [!NOTE]                                                                  |
+| 摘要                                                                                                       | 否          | **True**或**False** （預設值），視複雜型別是否為抽象型別而定。 <br/> [!NOTE]                                                                  |
 | > 這個屬性在 CSDL v1 中不適用。 該版本的複雜類型不可以是抽象型別。         |             |                                                                                                                                                                                     |
 
  
@@ -317,7 +317,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
  
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 任何數目的注釋屬性（自訂 XML 屬性）都可以套用至**DefiningExpression**元素。 不過，自訂屬性不可屬於任何 XML 命名空間，這是保留給 CSDL 之用。 任兩個自訂屬性的完整名稱不能相同。
 
@@ -339,14 +339,14 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 ## <a name="dependent-element-csdl"></a>Dependent 項目 (CSDL)
 
-概念結構定義語言（CSDL）中的**相依**專案是 ReferentialConstraint 專案的子專案，並定義參考條件約束的相依端點。 **ReferentialConstraint**元素會定義與關係資料庫中的參考完整性條件約束類似的功能。 同樣地，資料庫資料表的資料行 (或多個資料行) 可以參考其他資料表的主索引鍵，實體類型的屬性 (或多個屬性) 可以參考其他實體類型的實體索引鍵。 參考的實體類型稱為條件約束的*主要端點*。 參考主要端點的實體類型稱為條件約束的*相依端點*。 **PropertyRef**元素是用來指定哪些索引鍵會參考主要端。
+概念結構定義語言（CSDL）中的**相依**專案是 ReferentialConstraint 專案的子專案，並定義參考條件約束的相依端點。 **ReferentialConstraint**元素會定義與關係資料庫中的參考完整性條件約束類似的功能。 資料庫資料表中的資料行可以參考另一個資料表的主要索引鍵，同樣地，實體類型的屬性也可以參考另一個實體類型的實體索引鍵。 參考的實體類型稱為條件約束的*主要端點*。 參考主要端點的實體類型稱為條件約束的*相依端點*。 **PropertyRef**元素是用來指定哪些索引鍵會參考主要端。
 
 相依元素可以具有下列子專案（**依**列出的順序）：
 
 -   PropertyRef （一或多個元素）
 -   Annotation 元素（零或多個元素）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**相依**元素的屬性。
 
@@ -386,21 +386,21 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 ## <a name="documentation-element-csdl"></a>Documentation 項目 (CSDL)
 
-概念結構定義語言（CSDL）中的**檔**專案可以用來提供父元素中所定義之物件的相關資訊。 在 .edmx 檔案中，當檔元素是專案的子系，**而該專案**在 EF 設計工具的設計介面上顯示為物件（例如實體、關聯或屬性）時，**檔**元素的內容會出現在物件的 Visual Studio **屬性** 視窗。
+概念結構定義語言（CSDL）中的**檔**專案可以用來提供父元素中所定義之物件的相關資訊。 在 .edmx 檔案中，**當檔專案**是專案的子系，而該專案在 EF 設計工具的設計介面上顯示為物件（例如實體、關聯或屬性）時，**檔**元素的內容會出現在物件的 [Visual Studio **屬性**] 視窗中。
 
 **檔**元素可以具有下列子專案（依列出的順序）：
 
 -   **摘要**：父元素的簡短描述。 (零或一個項目)
--   **LongDescription**：父元素的詳細描述。 (零或一個項目)
--   Annotation 元素。 (零或多個項目)
+-   **LongDescription**：上層元素的詳細描述。 (零或一個項目)
+-   Annotation 項目. (零或多個項目)
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 可以將任何數目的注釋屬性（自訂 XML 屬性）套用至**檔**元素。 不過，自訂屬性不可屬於任何 XML 命名空間，這是保留給 CSDL 之用。 任兩個自訂屬性的完整名稱不能相同。
 
 ### <a name="example"></a>範例
 
-下列範例顯示**檔**元素做為 EntityType 元素的子專案。 如果下列程式碼片段位於 .edmx 檔案的 CSDL 內容中，當您按一下 [`Customer`] 實體類型時， **Summary**和**LongDescription**元素的內容就會出現在 [Visual Studio **屬性**] 視窗中。
+下列範例顯示**檔**元素做為 EntityType 元素的子專案。 如果下列程式碼片段位於 .edmx 檔案的 CSDL 內容中，當您按一下 [`Customer`] 實體類型時，[**摘要**] 和 [ **LongDescription** ] 專案的內容就會出現在 [Visual Studio **屬性**] 視窗中。
 
 ``` xml
  <EntityType Name="Customer">
@@ -425,7 +425,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 ### <a name="end-element-as-a-child-of-the-association-element"></a>End 項目為 Association 項目的子項目
 
-**End**專案（做為**association**元素的子系）會識別關聯一端的實體類型，以及該關聯結尾的實體類型實例數目。 關聯 End 會定義為關聯的部分。關聯必須具有兩個關聯 End。 關聯其中一端的實體型別執行個體可透過巡覽屬性或外部索引鍵來存取 (若在實體型別上公開)。  
+**End**專案（做為**association**元素的子系）會識別關聯一端的實體類型，以及該關聯結尾的實體類型實例數目。 關聯 End 會定義為關聯的部分。關聯必須具有兩個關聯 End。 關聯其中一端的實體型別執行個體可透過導覽屬性或外部索引鍵來存取 (若在實體型別上公開)。  
 
 **End**元素可以具有下列子專案（依列出的順序）：
 
@@ -433,7 +433,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 -   OnDelete （零或一個元素）
 -   Annotation 元素（零或多個元素）
 
-#### <a name="applicable-attributes"></a>適用屬性
+#### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述當屬性為**Association**元素的子系時，可以套用至**結尾**專案的屬性。
 
@@ -441,7 +441,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 |:-----------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **型別**         | 是         | 其中一個關聯 End 的實體類型名稱。                                                                                                                                                                                                                                                                                                                                                         |
 | **角色**         | 否          | 關聯 End 的名稱。 如果未提供任何名稱，則會使用關聯 End 上之實體類型的名稱。                                                                                                                                                                                                                                                                                           |
-| **數** | 是         | **1**、 **0、1**或 **\*** ，視關聯的結尾可以是實體類型實例的數目而定。 <br/> **1**表示關聯端只有一個實體類型實例存在。 <br/> **0 ..1**表示關聯 end 有零或一個實體類型實例。 <br/> **\*** 表示關聯端有零個、一個或多個實體類型實例存在。 |
+| **多重性** | 是         | **1**、 **0、1**或 **\*** 取決於可以在關聯結尾的實體類型實例數目而定。 <br/> **1**表示關聯端只有一個實體類型實例存在。 <br/> **0 ..1**表示關聯 end 有零或一個實體類型實例。 <br/> **\*** 表示關聯 end 有零個、一個或多個實體類型實例存在。 |
 
  
 
@@ -478,7 +478,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
  
 
-#### <a name="applicable-attributes"></a>適用屬性
+#### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述當元素是**AssociationSet**專案的子系時，可以套用至**結尾**專案的屬性。
 
@@ -519,7 +519,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 ## <a name="entitycontainer-element-csdl"></a>EntityContainer 項目 (CSDL)
 
-概念結構定義語言（CSDL）中的**EntityContainer**元素是實體集、關聯集和函式匯入的邏輯容器。 概念模型實體容器會透過 EntityContainerMapping 元素對應至儲存體模型實體容器。 儲存體模型實體容器描述資料的結構：實體集描述資料表、關聯集描述外部索引建條件約束，而函式匯入則描述資料庫中的預存程序。
+概念結構定義語言（CSDL）中的**EntityContainer**元素是實體集、關聯集和函式匯入的邏輯容器。 概念模型實體容器透過 EntityContainerMapping 項目對應於儲存體模型實體容器。 儲存體模型實體容器描述資料的結構：實體集描述資料表、關聯集描述外部索引建條件約束，而函式匯入則描述資料庫中的預存程序。
 
 **EntityContainer**元素可以有零個或一個檔元素。 如果**檔**元素存在，則必須在所有**EntitySet**、 **AssociationSet**和**FunctionImport**元素的前面。
 
@@ -528,11 +528,11 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 -   EntitySet
 -   AssociationSet
 -   FunctionImport
--   Annotation 項目
+-   Annotation 元素
 
 您可以擴充**EntityContainer**元素，以包含相同命名空間內另一個**entitycontainer**的內容。 若要包含另一個**EntityContainer**的內容，請在參考的**entitycontainer**專案中，將 [**擴充**屬性] 的值設定為您要包含之**EntityContainer**元素的名稱。 包含之**entitycontainer**元素的所有子專案都會被視為參考**entitycontainer**元素的子項目。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**Using**元素的屬性。
 
@@ -587,7 +587,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 -   檔元素（允許零或一個元素）
 -   Annotation 元素（允許零或多個元素）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**EntitySet**元素的屬性。
 
@@ -662,19 +662,19 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 **EntityType**元素可以具有下列子專案（依列出的順序）：
 
 -   檔（零或一個元素）
--   索引鍵（零或一個元素）
--   屬性（零或多個元素）
--   NavigationProperty （零或多個元素）
+-   Key(零或一個項目)
+-   Property (零或多個項目)
+-   NavigationProperty (零或多個項目)
 -   Annotation 元素（零或多個元素）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**EntityType**元素的屬性。
 
 | 屬性名稱                                                                                                                                  | 必要 | 值                                                                                            |
 |:------------------------------------------------------------------------------------------------------------------------------------------------|:------------|:-------------------------------------------------------------------------------------------------|
 | **名稱**                                                                                                                                        | 是         | 實體類型的名稱。                                                                     |
-| **BaseType**                                                                                                                                    | 否          | 其他實體類型的名稱是即將定義之實體類型的基底類型。  |
+| **BaseType**                                                                                                                                    | 否          | 另一個實體類型的名稱，而此實體類型是要定義之實體類型的基底類型。  |
 | **概要**                                                                                                                                    | 否          | **True**或**False**，視實體類型是否為抽象類別型而定。                 |
 | **OpenType**                                                                                                                                    | 否          | **True**或**False** ，視實體類型是否為開放式實體類型而定。 <br/> [!NOTE] |
 | > **OpenType**屬性僅適用于概念模型中定義的實體類型（與 ADO.NET 資料服務搭配使用）。 |             |                                                                                                  |
@@ -718,15 +718,15 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 -   成員（零或多個元素）
 -   Annotation 元素（零或多個元素）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**EnumType**元素的屬性。
 
 | 屬性名稱     | 必要 | 值                                                                                                                                                                                         |
 |:-------------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **名稱**           | 是         | 實體類型的名稱。                                                                                                                                                                  |
-| **IsFlags**        | 否          | **True**或**False**，取決於列舉型別是否可以當做一組旗標使用。 預設值是 **，則為 False。**                                                                     |
-| **UnderlyingType** | 否          | **Edm： Byte**、 **edm**、 **edm**、 **edm**或**edm。 SByte**定義類型的值範圍。   預設基礎列舉項目類型是**Edm.Int32.** 。 |
+| **IsFlags**        | 否          | **True**或**False**，取決於列舉型別是否可以當做一組旗標使用。 預設值為**False。**                                                                     |
+| **UnderlyingType** | 否          | **Edm： Byte**、 **edm**、 **edm**、 **edm**或**edm。 SByte**定義類型的值範圍。   列舉元素的預設基礎類型是**Edm. Int32.** 。 |
 
  
 
@@ -752,25 +752,25 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 ## <a name="function-element-csdl"></a>Function 屬性 (CSDL)
 
-概念結構定義語言（CSDL）中的**Function**元素是用來定義或宣告概念模型中的函式。 函式是使用 DefiningExpression 元素所定義。  
+概念結構定義語言（CSDL）中的**Function**元素是用來定義或宣告概念模型中的函式。 函式是使用 DefiningExpression 項目 來定義的。  
 
 **Function**元素可以具有下列子專案（依列出的順序）：
 
 -   檔（零或一個元素）
--   Parameter （零或多個元素）
--   DefiningExpression （零或一個元素）
+-   Parameter (零或多個項目)
+-   DefiningExpression (零或一個項目)
 -   ReturnType （函數）（零或一個元素）
 -   Annotation 元素（零或多個元素）
 
 函式的傳回型別必須使用**returntype** （function）元素或**returntype**屬性（請參閱下文）來指定，但不能兩者同時指定。 可能的傳回型別包括任何 EdmSimpleType、實體類型、複雜類型、資料列型別或 ref 型別 (或這些類型其中之一的集合)。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**Function**元素的屬性。
 
 | 屬性名稱 | 必要 | 值                              |
 |:---------------|:------------|:-----------------------------------|
-| **名稱**       | 是         | 函式的名稱。          |
+| **名稱**       | 是         | 函數的名稱。          |
 | **ReturnType** | 否          | 此函式傳回的型別。 |
 
  
@@ -798,12 +798,12 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 ## <a name="functionimport-element-csdl"></a>FunctionImport 項目 (CSDL)
 
-概念結構定義語言（CSDL）中的**FunctionImport**元素代表在資料來源中定義，但可透過概念模型提供給物件的函數。 例如，儲存體模型中的 Function 元素可用來代表資料庫中的預存程式。 概念模型中的**FunctionImport**元素代表 Entity Framework 應用程式中的對應函式，而且會使用 FunctionImportMapping 元素來對應至儲存模型函式。 在應用程式中呼叫函式時，對應的預存程序會在資料庫中執行。
+概念結構定義語言（CSDL）中的**FunctionImport**元素代表在資料來源中定義，但可透過概念模型提供給物件的函數。 例如，儲存體模型中的 Function 項目 可以用來代表資料庫中的預存程序。 概念模型中的**FunctionImport**元素代表 Entity Framework 應用程式中的對應函式，而且會使用 FunctionImportMapping 元素來對應至儲存模型函式。 在應用程式中呼叫函式時，對應的預存程序會在資料庫中執行。
 
 **FunctionImport**元素可以具有下列子專案（依列出的順序）：
 
 -   檔（允許零或一個元素）
--   參數（允許零或多個元素）
+-   Parameter (可允許零或多個項目)
 -   Annotation 元素（允許零或多個元素）
 -   ReturnType （FunctionImport）（允許零或多個元素）
 
@@ -811,16 +811,16 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 函式的傳回型別必須使用**returntype** （FunctionImport）專案或**returntype**屬性（請參閱下文）來指定，但不能同時指定。 傳回型別值必須是 EdmSimpleType、EntityType 或 ComplexType 的集合。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**FunctionImport**元素的屬性。
 
 | 屬性名稱   | 必要 | 值                                                                                                                                                                                                 |
 |:-----------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **名稱**         | 是         | 匯入函式的名稱。                                                                                                                                                                    |
-| **ReturnType**   | 否          | 函式傳回的型別。 如果函式不會傳回值，請不要使用這個屬性。 否則，此值必須是 ComplexType、EntityType 或 EDMSimpleType 的集合。        |
-| **EntitySet**    | 否          | 如果函數傳回實體類型的集合，則**EntitySet**的值必須是集合所屬的實體集。 否則，不得使用**EntitySet**屬性。 |
-| **IsComposable** | 否          | 如果值設定為 true，則函式可組合（資料表值函式），而且可以在 LINQ 查詢中使用。  預設值為 **false**。                                                           |
+| **ReturnType**   | 否          | 函式傳回的型別。 如果函數沒有傳回值，請勿使用這個屬性。 否則，此值必須是 ComplexType、EntityType 或 EDMSimpleType 的集合。        |
+| **EntitySet**    | 否          | 如果函數傳回實體類型的集合，則**EntitySet**的值必須是集合所屬的實體集。 否則，不得使用 **EntitySet** 屬性。 |
+| **IsComposable** | 否          | 如果值設定為 true，則函式可組合（資料表值函式），而且可以在 LINQ 查詢中使用。  預設值為**false**。                                                           |
 
  
 
@@ -853,7 +853,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 -   PropertyRef （一或多個元素）
 -   Annotation 元素（零或多個元素）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 任何數目的注釋屬性（自訂 XML 屬性）都可以套用至索引**鍵**元素。 不過，自訂屬性不可屬於任何 XML 命名空間，這是保留給 CSDL 之用。 任兩個自訂屬性的完整名稱不能相同。
 
@@ -903,14 +903,14 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 **Member**元素是 EnumType 專案的子專案，並定義列舉類型的成員。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**FunctionImport**元素的屬性。
 
 | 屬性名稱 | 必要 | 值                                                                                                                                                                                    |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **名稱**       | 是         | 成員的名稱。                                                                                                                                                                  |
-| **值**      | 否          | 成員的值。 根據預設，第一個成員的值為0，而每個後續列舉值的值會遞增1。 有多個具有相同值的成員可能存在。 |
+| **ReplTest1**      | 否          | 成員的值。 根據預設，第一個成員的值為0，而每個後續列舉值的值會遞增1。 有多個具有相同值的成員可能存在。 |
 
  
 
@@ -934,9 +934,9 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
  
 
-## <a name="navigationproperty-element-csdl"></a>NavigationProperty 項目 (CSDL)
+## <a name="navigationproperty-element-csdl"></a>NavigationProperty 元素 (CSDL)
 
-**NavigationProperty**元素會定義導覽屬性，以提供關聯另一端的參考。 不同于以 Property 專案定義的屬性，導覽屬性不會定義資料的形狀和特性。 他們提供巡覽兩個實體類型間之關聯的方式。
+**NavigationProperty**元素會定義導覽屬性，以提供關聯另一端的參考。 與使用 Property 項目 定義的屬性不同，導覽屬性不會定義資料的圖案和特性。 他們提供巡覽兩個實體類型間之關聯的方式。
 
 請注意，在關聯各端點的實體類型上，導覽屬性是選擇性的。 如果您在關聯其中一個端點的實體類型上定義導覽屬性，就不必在關聯另一個端點的實體類型上定義導覽屬性。
 
@@ -947,7 +947,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 -   檔（零或一個元素）
 -   Annotation 元素（零或多個元素）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**NavigationProperty**元素的屬性。
 
@@ -1001,7 +1001,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 -   檔（零或一個元素）
 -   Annotation 元素（零或多個元素）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**OnDelete**元素的屬性。
 
@@ -1045,19 +1045,19 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 -   檔（允許零或一個元素）
 -   Annotation 元素（允許零或多個元素）
 
-#### <a name="applicable-attributes"></a>適用屬性
+#### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**參數**元素的屬性。
 
 | 屬性名稱 | 必要 | 值                                                                                                                                                                                                                           |
 |:---------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **名稱**       | 是         | 參數名稱。                                                                                                                                                                                                      |
-| **型別**       | 是         | 參數型別。 此值必須是**EDMSimpleType**或模型範圍內的複雜類型。                                                                                                             |
-| **下**       | 否          | **In**、 **Out**或**InOut** ，取決於參數是輸入、輸出或輸入/輸出參數。                                                                                                                |
-| **MaxLength**  | 否          | 可允許的最大參數長度。                                                                                                                                                                                    |
-| **整數位數**  | 否          | 參數的精確度。                                                                                                                                                                                                 |
-| **縮放**      | 否          | 參數的小數位數。                                                                                                                                                                                                     |
-| **SRID**       | 否          | 空間系統參考識別碼。 僅對空間類型的參數有效。 如需詳細資訊，請參閱 [SRID](https://en.wikipedia.org/wiki/SRID)並[SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx)。 |
+| **型別**       | 是         | 參數類型。 此值必須是 **EDMSimpleType** 或是模型範圍內的複雜類型。                                                                                                             |
+| **模式**       | 否          | **In**、 **Out**或**InOut** ，取決於參數是輸入、輸出或輸入/輸出參數。                                                                                                                |
+| **MaxLength**  | 否          | 允許的參數長度上限。                                                                                                                                                                                    |
+| **有效位數**  | 否          | 參數的精確度。                                                                                                                                                                                                 |
+| **調整**      | 否          | 參數的小數位數。                                                                                                                                                                                                     |
+| **SRID**       | 否          | 空間系統參考識別碼。 僅對空間類型的參數有效。 如需詳細資訊，請參閱[SRID](https://en.wikipedia.org/wiki/SRID) and [SRID （SQL Server）](https://msdn.microsoft.com/library/bb964707.aspx)。 |
 
  
 
@@ -1102,23 +1102,23 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
  
 
-#### <a name="applicable-attributes"></a>適用屬性
+#### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**參數**元素的屬性。
 
 | 屬性名稱   | 必要 | 值                                                                                                                                                                                                                           |
 |:-----------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **名稱**         | 是         | 參數名稱。                                                                                                                                                                                                      |
-| **型別**         | 否          | 參數型別。 參數可以是下列任何一種型別 (或這些型別的集合)： <br/> **EdmSimpleType** <br/> Entity Type - 實體類型 <br/> 複雜類型 <br/> 資料列型別 <br/> 參考類型                             |
-| **Null**     | 否          | **True** （預設值）或**False** ，取決於屬性是否可以有**null**值。                                                                                                                          |
+| **型別**         | 否          | 參數類型。 參數可以是下列任何一種型別 (或這些型別的集合)： <br/> **EdmSimpleType** <br/> Entity Type - 實體類型 <br/> 複雜類型 <br/> 資料列型別 <br/> 參考類型                             |
+| **可為 Null**     | 否          | **True** （預設值）或**False** ，取決於屬性是否可以有**null**值。                                                                                                                          |
 | **DefaultValue** | 否          | 屬性的預設值。                                                                                                                                                                                              |
-| **MaxLength**    | 否          | 屬性值的最大長度。                                                                                                                                                                                       |
+| **MaxLength**    | 否          | 屬性值的長度上限                                                                                                                                                                                       |
 | **FixedLength**  | 否          | **True**或**False** ，取決於屬性值是否會儲存為固定長度的字串。                                                                                                                          |
-| **整數位數**    | 否          | 屬性值的有效位數。                                                                                                                                                                                            |
-| **縮放**        | 否          | 屬性值的小數位數。                                                                                                                                                                                                |
-| **SRID**         | 否          | 空間系統參考識別碼。 僅對空間類型的屬性有效。 如需詳細資訊，請參閱 [SRID](https://en.wikipedia.org/wiki/SRID)並[SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx)。 |
+| **有效位數**    | 否          | 屬性值的有效位數。                                                                                                                                                                                            |
+| **調整**        | 否          | 屬性值的小數位數。                                                                                                                                                                                                |
+| **SRID**         | 否          | 空間系統參考識別碼。 僅對空間類型的屬性有效。 如需詳細資訊，請參閱[SRID](https://en.wikipedia.org/wiki/SRID) and [SRID （SQL Server）](https://msdn.microsoft.com/library/bb964707.aspx)。 |
 | **Unicode**      | 否          | **True**或**False** ，取決於屬性值是否會儲存為 Unicode 字串。                                                                                                                               |
-| **定序**    | 否          | 指定資料來源中使用之定序順序的字串。                                                                                                                                                   |
+| **定序**    | 否          | 指定要在資料來源使用之定序的字串。                                                                                                                                                   |
 
  
 
@@ -1144,14 +1144,14 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 ## <a name="principal-element-csdl"></a>Principal 項目 (CSDL)
 
-概念結構定義語言（CSDL）中的**Principal**元素是 ReferentialConstraint 元素的子專案，可定義參考條件約束的主要端點。 **ReferentialConstraint**元素會定義與關係資料庫中的參考完整性條件約束類似的功能。 同樣地，資料庫資料表的資料行 (或多個資料行) 可以參考其他資料表的主索引鍵，實體類型的屬性 (或多個屬性) 可以參考其他實體類型的實體索引鍵。 參考的實體類型稱為條件約束的*主要端點*。 參考主要端點的實體類型稱為條件約束的*相依端點*。 **PropertyRef**元素是用來指定相依端所參考的索引鍵。
+概念結構定義語言（CSDL）中的**Principal**元素是 ReferentialConstraint 元素的子專案，可定義參考條件約束的主要端點。 **ReferentialConstraint**元素會定義與關係資料庫中的參考完整性條件約束類似的功能。 資料庫資料表中的資料行可以參考另一個資料表的主要索引鍵，同樣地，實體類型的屬性也可以參考另一個實體類型的實體索引鍵。 參考的實體類型稱為條件約束的*主要端點*。 參考主要端點的實體類型稱為條件約束的*相依端點*。 **PropertyRef**元素是用來指定相依端所參考的索引鍵。
 
 **Principal**元素可以具有下列子專案（依列出的順序）：
 
 -   PropertyRef （一或多個元素）
 -   Annotation 元素（零或多個元素）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**主體**元素的屬性。
 
@@ -1202,32 +1202,32 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 -   檔元素（允許零或一個元素）
 -   Annotation 元素（允許零或多個元素）
 
-下列 facet 可以套用至**屬性**元素：**Nullable**、 **DefaultValue**、 **MaxLength**、 **FixedLength**、 **Precision**、 **Scale**、 **Unicode**、定**序**、 **ConcurrencyMode**。 Facet 是 XML 屬性 (attribute)，提供關於屬性 (property) 值如何儲存在資料存放區資訊。
+下列 facet 可以套用至**Property**元素： **Nullable**、 **DefaultValue**、 **MaxLength**、 **FixedLength**、 **Precision**、 **Scale**、 **Unicode**、定**序**、 **ConcurrencyMode**。 Facet 是 XML 屬性 (attribute)，提供關於屬性 (property) 值如何儲存在資料存放區資訊。
 
 > [!NOTE]
 > Facet 只能套用至**EDMSimpleType**類型的屬性。
 
  
 
-#### <a name="applicable-attributes"></a>適用屬性
+#### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**Property**元素的屬性。
 
 | 屬性名稱                                                         | 必要 | 值                                                                                                                                                                                                                           |
 |:-----------------------------------------------------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **名稱**                                                               | 是         | 屬性的名稱。                                                                                                                                                                                                       |
-| **型別**                                                               | 是         | 屬性值的型別。 屬性值類型必須是模型範圍內的**EDMSimpleType**或複雜類型（以完整名稱表示）。                                                 |
-| **Null**                                                           | 否          | **True** （預設值）或<strong>False</strong> ，取決於屬性是否可以有 null 值。 <br/> [!NOTE]                                                                                                   |
+| **型別**                                                               | 是         | 屬性值的類型。 屬性值類型必須是 **EDMSimpleType** ，或是模型範圍內的複雜類型 (以完整名稱表示)。                                                 |
+| **可為 Null**                                                           | 否          | **True** (預設值) 或 <strong>False</strong>，取決於屬性是否可以具有 null 值。 <br/> [!NOTE]                                                                                                   |
 | CSDL v1 中的 > 複雜型別屬性必須具有 `Nullable="False"`。 |             |                                                                                                                                                                                                                                 |
 | **DefaultValue**                                                       | 否          | 屬性的預設值。                                                                                                                                                                                              |
-| **MaxLength**                                                          | 否          | 屬性值的最大長度。                                                                                                                                                                                       |
+| **MaxLength**                                                          | 否          | 屬性值的長度上限                                                                                                                                                                                       |
 | **FixedLength**                                                        | 否          | **True**或**False** ，取決於屬性值是否會儲存為固定長度的字串。                                                                                                                          |
-| **整數位數**                                                          | 否          | 屬性值的有效位數。                                                                                                                                                                                            |
-| **縮放**                                                              | 否          | 屬性值的小數位數。                                                                                                                                                                                                |
-| **SRID**                                                               | 否          | 空間系統參考識別碼。 僅對空間類型的屬性有效。 如需詳細資訊，請參閱 [SRID](https://en.wikipedia.org/wiki/SRID)並[SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx)。 |
+| **有效位數**                                                          | 否          | 屬性值的有效位數。                                                                                                                                                                                            |
+| **調整**                                                              | 否          | 屬性值的小數位數。                                                                                                                                                                                                |
+| **SRID**                                                               | 否          | 空間系統參考識別碼。 僅對空間類型的屬性有效。 如需詳細資訊，請參閱[SRID](https://en.wikipedia.org/wiki/SRID) and [SRID （SQL Server）](https://msdn.microsoft.com/library/bb964707.aspx)。 |
 | **Unicode**                                                            | 否          | **True**或**False** ，取決於屬性值是否會儲存為 Unicode 字串。                                                                                                                               |
-| **定序**                                                          | 否          | 指定資料來源中使用之定序順序的字串。                                                                                                                                                   |
-| **ConcurrencyMode**                                                    | 否          | **None** （預設值）或**Fixed**。 如果值設定為**Fixed**，則屬性值將用於開放式平行存取檢查中。                                                                                  |
+| **定序**                                                          | 否          | 指定要在資料來源使用之定序的字串。                                                                                                                                                   |
+| **ConcurrencyMode**                                                    | 否          | **None** (預設值) 或 **Fixed**。 如果值設為 **Fixed**，則屬性值將用於開放式並行存取檢查中。                                                                                  |
 
  
 
@@ -1286,24 +1286,24 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
  
 
-#### <a name="applicable-attributes"></a>適用屬性
+#### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**Property**元素的屬性。
 
 | 屬性名稱                                                     | 必要 | 值                                                                                                                                                                                                                           |
 |:-------------------------------------------------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **名稱**                                                           | 是         | 屬性的名稱。                                                                                                                                                                                                       |
-| **型別**                                                           | 是         | 屬性值的型別。                                                                                                                                                                                                 |
-| **Null**                                                       | 否          | **True** （預設值）或**False** ，取決於屬性是否可以有 null 值。 <br/> [!NOTE]                                                                                                                |
+| **型別**                                                           | 是         | 屬性值的類型。                                                                                                                                                                                                 |
+| **可為 Null**                                                       | 否          | **True** (預設值) 或 **False**，取決於屬性是否可以具有 null 值。 <br/> [!NOTE]                                                                                                                |
 | CSDL v1 中的 > 複雜型別屬性必須具有 `Nullable="False"`。 |             |                                                                                                                                                                                                                                 |
 | **DefaultValue**                                                   | 否          | 屬性的預設值。                                                                                                                                                                                              |
-| **MaxLength**                                                      | 否          | 屬性值的最大長度。                                                                                                                                                                                       |
+| **MaxLength**                                                      | 否          | 屬性值的長度上限                                                                                                                                                                                       |
 | **FixedLength**                                                    | 否          | **True**或**False** ，取決於屬性值是否會儲存為固定長度的字串。                                                                                                                          |
-| **整數位數**                                                      | 否          | 屬性值的有效位數。                                                                                                                                                                                            |
-| **縮放**                                                          | 否          | 屬性值的小數位數。                                                                                                                                                                                                |
-| **SRID**                                                           | 否          | 空間系統參考識別碼。 僅對空間類型的屬性有效。 如需詳細資訊，請參閱 [SRID](https://en.wikipedia.org/wiki/SRID)並[SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx)。 |
+| **有效位數**                                                      | 否          | 屬性值的有效位數。                                                                                                                                                                                            |
+| **調整**                                                          | 否          | 屬性值的小數位數。                                                                                                                                                                                                |
+| **SRID**                                                           | 否          | 空間系統參考識別碼。 僅對空間類型的屬性有效。 如需詳細資訊，請參閱[SRID](https://en.wikipedia.org/wiki/SRID) and [SRID （SQL Server）](https://msdn.microsoft.com/library/bb964707.aspx)。 |
 | **Unicode**                                                        | 否          | **True**或**False** ，取決於屬性值是否會儲存為 Unicode 字串。                                                                                                                               |
-| **定序**                                                      | 否          | 指定資料來源中使用之定序順序的字串。                                                                                                                                                   |
+| **定序**                                                      | 否          | 指定要在資料來源使用之定序的字串。                                                                                                                                                   |
 
  
 
@@ -1352,7 +1352,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
  
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**PropertyRef**元素的屬性。
 
@@ -1423,7 +1423,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 -   檔（零或一個元素）
 -   Annotation 元素（零或多個元素）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**ReferenceType**元素的屬性。
 
@@ -1473,7 +1473,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 ## <a name="referentialconstraint-element-csdl"></a>ReferentialConstraint 項目 (CSDL)
 
-概念結構定義語言（CSDL）中的**ReferentialConstraint**專案會定義與關係資料庫中的參考完整性條件約束類似的功能。 同樣地，資料庫資料表的資料行 (或多個資料行) 可以參考其他資料表的主索引鍵，實體類型的屬性 (或多個屬性) 可以參考其他實體類型的實體索引鍵。 參考的實體類型稱為條件約束的*主要端點*。 參考主要端點的實體類型稱為條件約束的*相依端點*。
+概念結構定義語言（CSDL）中的**ReferentialConstraint**專案會定義與關係資料庫中的參考完整性條件約束類似的功能。 資料庫資料表中的資料行可以參考另一個資料表的主要索引鍵，同樣地，實體類型的屬性也可以參考另一個實體類型的實體索引鍵。 參考的實體類型稱為條件約束的*主要端點*。 參考主要端點的實體類型稱為條件約束的*相依端點*。
 
 如果在某個實體類型上公開的外鍵參考另一個實體類型上的屬性，則**ReferentialConstraint**元素會定義兩個實體類型之間的關聯。 由於**ReferentialConstraint**元素會提供與兩個實體類型相關的資訊，因此對應規格語言（MSL）中不需要有對應的 AssociationSetMapping 元素。 沒有公開外鍵的兩個實體類型之間的關聯，必須具有對應的**AssociationSetMapping**元素，才能將關聯資訊對應至資料來源。
 
@@ -1483,10 +1483,10 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 -   檔（零或一個元素）
 -   Principal （只有一個元素）
--   相依（正好一個元素）
+-   Dependent (只有一個項目)
 -   Annotation 元素（零或多個元素）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 **ReferentialConstraint**元素可以有任意數目的注釋屬性（自訂 XML 屬性）。 不過，自訂屬性不可屬於任何 XML 命名空間，這是保留給 CSDL 之用。 任兩個自訂屬性的完整名稱不能相同。
 
@@ -1530,7 +1530,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
  
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**ReturnType** （Function）元素的屬性。
 
@@ -1570,14 +1570,14 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 函式的傳回型別是以**ReturnType** （FunctionImport）元素的**type**屬性來指定。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**ReturnType** （FunctionImport）元素的屬性。
 
 | 屬性名稱 | 必要 | 值                                                                                                                                                                                                 |
 |:---------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **型別**       | 否          | 函式傳回的型別。 此值必須是 ComplexType、EntityType 或 EDMSimpleType 的集合。                                                                                      |
-| **EntitySet**  | 否          | 如果函數傳回實體類型的集合，則**EntitySet**的值必須是集合所屬的實體集。 否則，不得使用**EntitySet**屬性。 |
+| **EntitySet**  | 否          | 如果函數傳回實體類型的集合，則**EntitySet**的值必須是集合所屬的實體集。 否則，不得使用 **EntitySet** 屬性。 |
 
  
 
@@ -1612,10 +1612,10 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 **RowType**元素可以有下列子專案（依列出的順序）：
 
--   屬性（一或多個）
--   Annotation 元素（零或多個）
+-   屬性 (一個或多個)
+-   註釋項目 (零或多個)
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 任何數目的注釋屬性（自訂 XML 屬性）都可以套用至**RowType**元素。 不過，自訂屬性不可屬於任何 XML 命名空間，這是保留給 CSDL 之用。 任兩個自訂屬性的完整名稱不能相同。
 
@@ -1648,13 +1648,13 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 **Schema**元素可以包含零個或多個下列子項目：
 
--   Using
+-   使用
 -   EntityContainer
 -   EntityType
 -   EnumType
 -   關聯
 -   ComplexType
--   函數
+-   函式
 
 **Schema**元素可以包含零個或一個 Annotation 元素。
 
@@ -1665,16 +1665,16 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 **Schema**元素會使用**namespace**屬性來定義概念模型中的實體類型、複雜類型和關聯物件的命名空間。 在命名空間中，兩個物件不能有相同的名稱。 命名空間可以跨越多個**架構**元素和多個 csdl 檔案。
 
-概念模型命名空間與**架構**元素的 XML 命名空間不同。 概念模型命名空間（如**命名空間**屬性所定義）是實體類型、複雜類型和關聯類型的邏輯容器。 **Schema**元素的 XML 命名空間（由**xmlns**屬性所表示）是**schema**專案之子專案和屬性的預設命名空間。 XML 命名空間的表單 https://schemas.microsoft.com/ado/YYYY/MM/edm （其中 YYYY 和 MM 表示年和月分別） 是保留供 CSDL。 自訂項目和屬性不能出現在擁有此格式的命名空間中。
+概念模型命名空間與**架構**元素的 XML 命名空間不同。 概念模型命名空間（如**命名空間**屬性所定義）是實體類型、複雜類型和關聯類型的邏輯容器。 **Schema**元素的 XML 命名空間（由**xmlns**屬性所表示）是**schema**專案之子專案和屬性的預設命名空間。 https://schemas.microsoft.com/ado/YYYY/MM/edm 格式的 XML 命名空間（其中 YYYY 和 MM 分別表示年和月）是保留給 CSDL 之用。 自訂項目和屬性不能出現在擁有此格式的命名空間中。
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**架構**元素的屬性。
 
 | 屬性名稱 | 必要 | 值                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |:---------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **命名空間**  | 是         | 概念模型的命名空間。 **Namespace**屬性的值是用來形成類型的完整名稱。 例如，如果名為*Customer*的**EntityType**在 Simple. Model 命名空間中，則**entitytype**的完整限定名稱為 simpleexamplemodel.customer。 <br/> 下列字串不能當做**Namespace**屬性的值使用：**系統**、**暫時性**或**Edm**。 **Namespace**屬性的值不能與 SSDL Schema 元素中**namespace**屬性的值相同。 |
-| **Alias**      | 否          | 用來取代命名空間名稱的識別項。 例如，如果名為*Customer*的**EntityType**在 Simple. model 命名空間中，而**Alias**屬性的值是*model*，則您可以使用 model. Customer 當做 EntityType 的完整名稱 **。**                                                                                                                                                                                                                                                                                                     |
+| **Namespace**  | 是         | 概念模型的命名空間。 **Namespace**屬性的值是用來形成類型的完整名稱。 例如，如果名為*Customer*的**EntityType**在 Simple. Model 命名空間中，則**entitytype**的完整限定名稱為 simpleexamplemodel.customer。 <br/> 下列字串不能當做**Namespace**屬性的值使用： **System**、**暫時性**或**Edm**。 **Namespace**屬性的值不能與 SSDL Schema 元素中**namespace**屬性的值相同。 |
+| **別名**      | 否          | 用來取代命名空間名稱的識別項。 例如，如果名為*Customer*的**EntityType**在 Simple. model 命名空間中，而**Alias**屬性的值是*model*，則您可以使用 model. Customer 當做 EntityType 的完整名稱 **。**                                                                                                                                                                                                                                                                                                     |
 
  
 
@@ -1756,23 +1756,23 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 -   檔（零或一個元素）
 -   Annotation 元素（零或多個元素）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**TypeRef**元素的屬性。 請注意， **DefaultValue**、 **MaxLength**、 **FixedLength**、 **Precision**、 **Scale**、 **Unicode**和定**序**屬性僅適用于**EDMSimpleTypes**。
 
 | 屬性名稱                                                     | 必要 | 值                                                                                                                                                                                                                           |
 |:-------------------------------------------------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **型別**                                                           | 否          | 所參考的型別名稱。                                                                                                                                                                                          |
-| **Null**                                                       | 否          | **True** （預設值）或**False** ，取決於屬性是否可以有 null 值。 <br/> [!NOTE]                                                                                                                |
+| **可為 Null**                                                       | 否          | **True** (預設值) 或 **False**，取決於屬性是否可以具有 null 值。 <br/> [!NOTE]                                                                                                                |
 | CSDL v1 中的 > 複雜型別屬性必須具有 `Nullable="False"`。 |             |                                                                                                                                                                                                                                 |
 | **DefaultValue**                                                   | 否          | 屬性的預設值。                                                                                                                                                                                              |
-| **MaxLength**                                                      | 否          | 屬性值的最大長度。                                                                                                                                                                                       |
+| **MaxLength**                                                      | 否          | 屬性值的長度上限                                                                                                                                                                                       |
 | **FixedLength**                                                    | 否          | **True**或**False** ，取決於屬性值是否會儲存為固定長度的字串。                                                                                                                          |
-| **整數位數**                                                      | 否          | 屬性值的有效位數。                                                                                                                                                                                            |
-| **縮放**                                                          | 否          | 屬性值的小數位數。                                                                                                                                                                                                |
-| **SRID**                                                           | 否          | 空間系統參考識別碼。 僅對空間類型的屬性有效。 如需詳細資訊，請參閱 [SRID](https://en.wikipedia.org/wiki/SRID)並[SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx)。 |
+| **有效位數**                                                      | 否          | 屬性值的有效位數。                                                                                                                                                                                            |
+| **調整**                                                          | 否          | 屬性值的小數位數。                                                                                                                                                                                                |
+| **SRID**                                                           | 否          | 空間系統參考識別碼。 僅對空間類型的屬性有效。 如需詳細資訊，請參閱[SRID](https://en.wikipedia.org/wiki/SRID) and [SRID （SQL Server）](https://msdn.microsoft.com/library/bb964707.aspx)。 |
 | **Unicode**                                                        | 否          | **True**或**False** ，取決於屬性值是否會儲存為 Unicode 字串。                                                                                                                               |
-| **定序**                                                      | 否          | 指定資料來源中使用之定序順序的字串。                                                                                                                                                   |
+| **定序**                                                      | 否          | 指定要在資料來源使用之定序的字串。                                                                                                                                                   |
 
  
 
@@ -1816,14 +1816,14 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 -   檔（允許零或一個元素）
 -   Annotation 元素（允許零或多個元素）
 
-### <a name="applicable-attributes"></a>適用屬性
+### <a name="applicable-attributes"></a>適用的屬性
 
 下表描述可套用至**Using**元素的屬性。
 
 | 屬性名稱 | 必要 | 值                                                                                                                                                                              |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **命名空間**  | 是         | 匯入的命名空間名稱。                                                                                                                                                |
-| **Alias**      | 是         | 用來取代命名空間名稱的識別項。 雖然這個屬性是必要的，但是不必使用此屬性取代命名空間名稱，來限定物件名稱。 |
+| **Namespace**  | 是         | 匯入的命名空間名稱。                                                                                                                                                |
+| **別名**      | 是         | 用來取代命名空間名稱的識別項。 雖然這個屬性是必要的，但是不必使用此屬性取代命名空間名稱，來限定物件名稱。 |
 
  
 
@@ -1834,7 +1834,7 @@ Association 元素會定義兩個實體類型之間的**關聯**性。 關聯 (A
 
 ### <a name="example"></a>範例
 
-下列範例示範用來匯入在其他地方定義之命名空間的**Using**元素。 請注意，顯示的**架構**元素的命名空間是 `BooksModel`。 @No__t-1**EntityType**上的 `Address` 屬性是在 `ExtendedBooksModel` 命名空間（使用**Using**元素匯入）中定義的複雜類型。
+下列範例示範用來匯入在其他地方定義之命名空間的**Using**元素。 請注意，顯示的**架構**元素的命名空間是 `BooksModel`。 `Publisher`**EntityType**上的 `Address` 屬性是在 `ExtendedBooksModel` 命名空間（**使用 Using**元素匯入）中定義的複雜類型。
 
 ``` xml
  <Schema xmlns="https://schemas.microsoft.com/ado/2009/11/edm"
@@ -2011,22 +2011,22 @@ Annotation 項目可用來提供與概念模型中之項目有關的額外中繼
 | EDMSimpleType                    | 描述                                                | 適用的 Facet                                                        |
 |:---------------------------------|:-----------------------------------------------------------|:-------------------------------------------------------------------------|
 | **Edm. Binary**                   | 包含二進位資料。                                      | MaxLength、FixedLength、Nullable、Default                                |
-| **Edm。布林值**                  | 包含**true**或**false**值。                  | Nullable、Default                                                        |
+| **Edm.Boolean**                  | 包含**true**或**false**值。                  | Nullable、Default                                                        |
 | **Edm. Byte**                     | 包含不帶正負號的 8 位元整數值。                  | Precision、Nullable、Default                                             |
 | **Edm. DateTime**                 | 表示日期和時間。                                | Precision、Nullable、Default                                             |
-| **Edm。 DateTimeOffset**           | 包含與 GMT 的日期和時間時差 (以分鐘為單位)。 | Precision、Nullable、Default                                             |
+| **Edm.DateTimeOffset**           | 包含日期和時間以表示與 GMT 的時差 (以分鐘為單位)。 | Precision、Nullable、Default                                             |
 | **Edm Decimal**                  | 包含固定有效位數和小數位數的數值。   | Precision、Nullable、Default                                             |
-| **Edm. Double**                   | 包含具有15位數精確度的浮點數   | Precision、Nullable、Default                                             |
+| **Edm.Double**                   | 包含具有15位數精確度的浮點數   | Precision、Nullable、Default                                             |
 | **Edm. Float**                    | 包含具有 7 位數精確度的浮點數。   | Precision、Nullable、Default                                             |
 | **Edm. Guid**                     | 包含 16 位元組的唯一識別碼。                      | Precision、Nullable、Default                                             |
 | **Edm. Int16**                    | 包含帶正負號的 16 位元整數值。                    | Precision、Nullable、Default                                             |
-| **Edm Int32**                    | 包含帶正負號的 32 位元整數值。                    | Precision、Nullable、Default                                             |
-| **Edm。 Int64**                    | 包含帶正負號的 64 位元整數值。                    | Precision、Nullable、Default                                             |
+| **Edm.Int32**                    | 包含帶正負號的 32 位元整數值。                    | Precision、Nullable、Default                                             |
+| **Edm.Int64**                    | 包含帶正負號的 64 位元整數值。                    | Precision、Nullable、Default                                             |
 | **Edm. SByte**                    | 包含帶正負號的 8 位元整數值。                     | Precision、Nullable、Default                                             |
-| **Edm 字串**                   | 包含字元資料。                                   | Unicode、FixedLength、MaxLength、Collation、Precision、Nullable、Default |
+| **Edm.String**                   | 包含字元資料。                                   | Unicode、FixedLength、MaxLength、Collation、Precision、Nullable、Default |
 | **Edm。時間**                     | 包含一天的時間。                                    | Precision、Nullable、Default                                             |
 | **Edm. Geography**                |                                                            | Nullable、Default、SRID                                                  |
-| **Edm. GeographyPoint**           |                                                            | Nullable、Default、SRID                                                  |
+| **Edm.GeographyPoint**           |                                                            | Nullable、Default、SRID                                                  |
 | **Edm. GeographyLineString**      |                                                            | Nullable、Default、SRID                                                  |
 | **Edm. 之 geographypolygon**         |                                                            | Nullable、Default、SRID                                                  |
 | **Edm. 之 geographymultipoint**      |                                                            | Nullable、Default、SRID                                                  |
@@ -2057,19 +2057,19 @@ Annotation 項目可用來提供與概念模型中之項目有關的額外中繼
 
 | Facet               | 描述                                                                                                                                                                                                                                                   | 適用於                                                                                                                                                                                                                                                                                                                                                                           | 用於產生資料庫 | 由執行階段所使用 |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|:--------------------|
-| **定序**       | 在執行比較和排序屬性值的作業時，指定要使用的定序順序 (或排序順序)。                                                                                                               | **Edm 字串**                                                                                                                                                                                                                                                                                                                                                                       | 是                              | 否                  |
+| **定序**       | 在執行比較和排序屬性值的作業時，指定要使用的定序順序 (或排序順序)。                                                                                                               | **Edm.String**                                                                                                                                                                                                                                                                                                                                                                       | 是                              | 否                  |
 | **ConcurrencyMode** | 表示屬性值應用於開放式並行存取檢查。                                                                                                                                                                    | 所有**EDMSimpleType**屬性                                                                                                                                                                                                                                                                                                                                                     | 否                               | 是                 |
-| **Default**         | 執行個體化時如果沒有提供值，請指定屬性的預設值。                                                                                                                                                                       | 所有**EDMSimpleType**屬性                                                                                                                                                                                                                                                                                                                                                     | 是                              | 是                 |
+| **預設值**         | 執行個體化時如果沒有提供值，請指定屬性的預設值。                                                                                                                                                                       | 所有**EDMSimpleType**屬性                                                                                                                                                                                                                                                                                                                                                     | 是                              | 是                 |
 | **FixedLength**     | 指定屬性值的長度是否可以變更。                                                                                                                                                                                                  | **Edm. Binary**、 **Edm 字串**                                                                                                                                                                                                                                                                                                                                                       | 是                              | 否                  |
 | **MaxLength**       | 指定屬性值的最大長度。                                                                                                                                                                                                           | **Edm. Binary**、 **Edm 字串**                                                                                                                                                                                                                                                                                                                                                       | 是                              | 否                  |
-| **Null**        | 指定屬性是否可以有**null**值。                                                                                                                                                                                                     | 所有**EDMSimpleType**屬性                                                                                                                                                                                                                                                                                                                                                     | 是                              | 是                 |
-| **整數位數**       | 針對**Decimal**類型的屬性，指定屬性值可以擁有的位數。 針對**Time**、 **DateTime**和**DateTimeOffset**類型的屬性，指定屬性值秒數小數部分的位數。 | **Edm. DateTime**， **edm**，edm. **Decimal**， **edm。 Time**                                                                                                                                                                                                                                                                                                              | 是                              | 否                  |
-| **縮放**           | 指定屬性值小數點右邊的位數。                                                                                                                                                                      | **Edm Decimal**                                                                                                                                                                                                                                                                                                                                                                      | 是                              | 否                  |
-| **SRID**            | 指定空間系統參考系統識別碼。 如需詳細資訊，請參閱 [SRID](https://en.wikipedia.org/wiki/SRID)並[SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx)。                                                              | **GeographyPoint，Edm，GeographyLineString，Edm. 之 geographypolygon，Edm. 之 geographymultipoint，Edm. 之 geographymultilinestring，Edm. 之 geographymultipolygon，edm. GeographyCollection，Edm，Edm. 之 geometrypoint，之 geometrylinestring，Edm 之 geometrypolygon，Edm. 之 geometrymultipoint，Edm. 之 geometrymultilinestring，Edm. 之 geometrymultipolygon，Edm. GeometryCollection** | 否                               | 是                 |
-| **Unicode**         | 指出屬性值是否儲存為 Unicode。                                                                                                                                                                                                    | **Edm 字串**                                                                                                                                                                                                                                                                                                                                                                       | 是                              | 是                 |
+| **可為 Null**        | 指定屬性是否可以有**null**值。                                                                                                                                                                                                     | 所有**EDMSimpleType**屬性                                                                                                                                                                                                                                                                                                                                                     | 是                              | 是                 |
+| **有效位數**       | 針對**Decimal**類型的屬性，指定屬性值可以擁有的位數。 針對**Time**、 **DateTime**和**DateTimeOffset**類型的屬性，指定屬性值秒數小數部分的位數。 | **Edm. DateTime**， **edm**，edm. **Decimal**， **edm。 Time**                                                                                                                                                                                                                                                                                                              | 是                              | 否                  |
+| **調整**           | 指定屬性值小數點右邊的位數。                                                                                                                                                                      | **Edm Decimal**                                                                                                                                                                                                                                                                                                                                                                      | 是                              | 否                  |
+| **SRID**            | 指定空間系統參考系統識別碼。 如需詳細資訊，請參閱[SRID](https://en.wikipedia.org/wiki/SRID) and [SRID （SQL Server）](https://msdn.microsoft.com/library/bb964707.aspx)。                                                              | **GeographyPoint，Edm，GeographyLineString，Edm. 之 geographypolygon，Edm. 之 geographymultipoint，Edm. 之 geographymultilinestring，Edm. 之 geographymultipolygon，edm. GeographyCollection，Edm，Edm. 之 geometrypoint，之 geometrylinestring，Edm 之 geometrypolygon，Edm. 之 geometrymultipoint，Edm. 之 geometrymultilinestring，Edm. 之 geometrymultipolygon，Edm. GeometryCollection** | 否                               | 是                 |
+| **Unicode**         | 指出屬性值是否儲存為 Unicode。                                                                                                                                                                                                    | **Edm.String**                                                                                                                                                                                                                                                                                                                                                                       | 是                              | 是                 |
 
 >[!NOTE]
-> 從概念模型產生資料庫時，如果**屬性**專案位於下列命名空間中，則「產生資料庫」 Wizard 會辨識其**StoreGeneratedPattern**屬性的值： https://schemas.microsoft.com/ado/2009/02/edm/annotation 。 屬性的支援值為**Identity**和**計算**。 **Identity**的值將會產生資料庫資料行，其中具有在資料庫中產生的識別值。 **計算**的值將會產生資料行，其中包含在資料庫中計算的值。
+> 從概念模型產生資料庫時，如果**屬性**專案位於下列命名空間中，則「產生資料庫」 Wizard 會辨識其**StoreGeneratedPattern**屬性的值： https://schemas.microsoft.com/ado/2009/02/edm/annotation。 屬性的支援值為**Identity**和**計算**。 **Identity**的值將會產生資料庫資料行，其中具有在資料庫中產生的識別值。 **計算**的值將會產生資料行，其中包含在資料庫中計算的值。
 
 ### <a name="example"></a>範例
 

@@ -4,41 +4,41 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: acb27f46-3f3a-4179-874a-d6bea5d7120c
 ms.openlocfilehash: ef0e8d5a5a9d66adab7046088c49d8cd472edc8a
-ms.sourcegitcommit: e5f9ca4aa41e64141fa63a1e5fcf4d4775d67d24
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52899648"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419696"
 ---
 # <a name="working-with-entity-states"></a>使用實體狀態
-本主題會討論如何加入及附加實體內容和 Entity Framework 如何處理這些 SaveChanges 期間。
-Entity Framework 會負責的追蹤實體時連線到內容中，但在中斷連線 」 或 「 多層式架構的情況下，您可以讓 EF 知道何種狀態，您的實體的狀態應該是在。
+本主題將說明如何將實體加入和附加至內容，以及 Entity Framework 如何在 SaveChanges 期間處理這些專案。
+Entity Framework 會負責追蹤實體連接到內容時的狀態，但是在中斷連線或多層式案例中，您可以讓 EF 知道您的實體應該位於哪一個狀態。
 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
 
 ## <a name="entity-states-and-savechanges"></a>實體狀態和 SaveChanges
 
-EntityState 列舉所定義時，實體可以在五種狀態之一。 這些狀態包括：  
+實體可以是 EntityState 列舉所定義的五種狀態之一。 這些狀態包括：  
 
-- 新增： 實體內容正在追蹤，但尚未存在資料庫中  
-- Unchanged： 實體內容正在追蹤，且存在於資料庫中，並從資料庫中的值未變更其屬性值  
-- 修改過： 實體內容正在追蹤存在於資料庫中，並修改部份或全部的屬性值  
-- 已刪除： 實體內容正在追蹤和存在於資料庫中，但已標記為要在下一次，好讓呼叫 SaveChanges 從資料庫刪除  
-- 中斷連結： 實體沒有追蹤內容  
+- 已加入：實體正在由內容追蹤，但尚未存在於資料庫中  
+- 未變更：實體正在由內容追蹤，而且存在於資料庫中，而且其屬性值尚未從資料庫中的值變更  
+- 已修改：實體正在由內容追蹤，而且存在於資料庫中，而且部分或全部的屬性值已修改  
+- 已刪除：實體正在由內容追蹤，而且存在於資料庫中，但在下一次呼叫 SaveChanges 時，已標記為要從資料庫中刪除  
+- 已卸離：實體未由內容追蹤  
 
-SaveChanges 會執行不同的項目，實體在不同的狀態：  
+SaveChanges 會針對不同狀態的實體執行不同的動作：  
 
-- 未變更的實體不會觸及的 SaveChanges。 更新不會傳送到在 Unchanged 狀態的實體資料庫。  
-- 加入實體插入至資料庫，然後變得不變時 SaveChanges 傳回。  
-- 已修改之實體資料庫中會更新，並接著會保持不變時 SaveChanges 傳回。  
-- 已刪除的實體會從資料庫刪除，然後從內容中斷連結。  
+- SaveChanges 不觸及未變更的實體。 對於處於未變更狀態的實體，不會將更新傳送至資料庫。  
+- 新增的實體會插入至資料庫，然後在 SaveChanges 傳回時變得不變。  
+- 修改過的實體會在資料庫中更新，然後在 SaveChanges 傳回時變得不變。  
+- 已刪除的實體會從資料庫中刪除，然後從內容卸離。  
 
-下列範例顯示實體或實體圖形的狀態可變更所在的方式。  
+下列範例會顯示實體或實體圖形的狀態可以變更的方式。  
 
 ## <a name="adding-a-new-entity-to-the-context"></a>將新實體新增至內容  
 
-可以 DbSet 上呼叫 Add 方法，將新實體新增至內容。
-這會讓實體進入 Added 狀態中，這表示，它會插入至資料庫下一次，好讓呼叫 SaveChanges。
-例如:   
+可以藉由在 DbSet 上呼叫 Add 方法，將新的實體加入至內容中。
+這會讓實體進入已加入的狀態，這表示它會在下次呼叫 SaveChanges 時插入至資料庫。
+例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -49,7 +49,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-將新實體新增至內容的另一個方法是將其狀態變更為 Added。 例如:   
+另一個將新實體新增至內容的方法，是將其狀態變更為 [已新增]。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -60,8 +60,8 @@ using (var context = new BloggingContext())
 }
 ```  
 
-最後，您也可以以它連結到另一個已追蹤的實體，以新增新的實體內容。
-這可能是藉由將新的實體加入至另一個實體的集合導覽屬性或設定以指向新的實體的另一個實體的參考導覽屬性。 例如:   
+最後，您可以將新實體連結至內容，方法是將它連結到已追蹤的另一個實體。
+這可能是藉由將新實體新增至另一個實體的集合導覽屬性，或設定另一個實體的參考導覽屬性來指向新的實體。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -77,11 +77,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-請注意，所有的這些範例中所加入的實體參考不是其他實體有尚未追蹤然後這些新的實體也會加入至內容，並將插入至資料庫下一次，好讓呼叫 SaveChanges。  
+請注意，在這些範例中，如果要加入的實體具有尚未追蹤之其他實體的參考，則這些新的實體也會加入至內容中，並在下次呼叫 SaveChanges 時插入資料庫。  
 
-## <a name="attaching-an-existing-entity-to-the-context"></a>將現有實體附加至內容  
+## <a name="attaching-an-existing-entity-to-the-context"></a>將現有的實體附加至內容  
 
-如果您有一個實體，您已經知道存在於資料庫，但其中沒有目前追蹤內容您可以指示要追蹤的實體上 DbSet 使用附加方法的內容。 實體會處於 Unchanged 狀態的內容中。 例如:   
+如果您的實體已經存在於資料庫中，但目前未由內容追蹤，您可以使用 DbSet 上的 Attach 方法，告訴內容追蹤該實體。 實體在內容中的狀態會是 [未變更]。 例如：  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -96,9 +96,9 @@ using (var context = new BloggingContext())
 }
 ```  
 
-請注意資料庫會進行的任何變更，是否呼叫 SaveChanges 時沒有進行任何其他操作的附加的實體。 這是因為實體處於 Unchanged 狀態。  
+請注意，如果呼叫 SaveChanges，而不進行任何其他的附加實體操作，則不會對資料庫進行任何變更。 這是因為實體處於未變更狀態。  
 
-若要將現有實體附加至內容的另一個方法是將其狀態變更為未變更。 例如:   
+另一個將現有實體附加至內容的方法，是將其狀態變更為 [未變更]。 例如：  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -113,12 +113,12 @@ using (var context = new BloggingContext())
 }
 ```  
 
-請注意，針對這兩個範例所附加的實體是否還不能追蹤其他實體的參考然後這些新的實體也附加到在 Unchanged 狀態的內容。  
+請注意，在這兩個範例中，如果附加的實體具有尚未追蹤之其他實體的參考，則這些新的實體也會附加至未變更狀態的內容。  
 
-## <a name="attaching-an-existing-but-modified-entity-to-the-context"></a>附加現有但內容已修改的實體  
+## <a name="attaching-an-existing-but-modified-entity-to-the-context"></a>將現有但已修改的實體附加至內容  
 
-如果您有一個實體，您已經知道存在於資料庫中，但變更可能已進行，您可以指示要附加的實體，並將其狀態設定為已修改的內容。
-例如:   
+如果您的實體已經存在於資料庫中，但可能已進行變更，則可以告訴內容附加實體，並將其狀態設定為 [已修改]。
+例如：  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -133,14 +133,14 @@ using (var context = new BloggingContext())
 }
 ```  
 
-當您將狀態變更為已修改之實體的所有屬性都將都標示為已修改，所有屬性值將會都傳送至資料庫，讓呼叫 SaveChanges 時。  
+當您變更狀態以修改時，實體的所有屬性都會標示為已修改，而且在呼叫 SaveChanges 時，所有屬性值都會傳送至資料庫。  
 
-請注意，是否所附加的實體會不追蹤其他實體的參考，這些新的實體會附加到在 Unchanged 狀態的內容，它們就不會自動進行修改。
-如果您有多個要標示為已修改的實體您應該針對每一個實體的個別設定的狀態。  
+請注意，如果所附加的實體具有其他尚未追蹤之實體的參考，則這些新的實體會附加至未變更狀態的內容，而不會自動進行修改。
+如果您有多個需要標示為已修改的實體，您應該個別設定這些實體的狀態。  
 
-## <a name="changing-the-state-of-a-tracked-entity"></a>變更追蹤的實體狀態  
+## <a name="changing-the-state-of-a-tracked-entity"></a>變更已追蹤實體的狀態  
 
-您可以變更其項目上設定 [狀態] 屬性已在追蹤實體的狀態。 例如:   
+您可以藉由在其專案上設定 State 屬性，來變更已追蹤之實體的狀態。 例如：  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -156,13 +156,13 @@ using (var context = new BloggingContext())
 }
 ```  
 
-請注意，呼叫 新增或附加已追蹤的實體也可用來將實體狀態變更。 比方說，如果呼叫附加目前處於 Added 狀態的實體，將可以變更其狀態為 Unchanged。  
+請注意，針對已追蹤的實體呼叫 [加入] 或 [附加] 也可以用來變更實體狀態。 例如，針對目前處於已加入狀態的實體呼叫 Attach，會將其狀態變更為不變。  
 
 ## <a name="insert-or-update-pattern"></a>插入或更新模式  
 
-有些應用程式的常見模式是將實體新增為新 （導致資料庫的插入），或附加為現有的實體，並標示為已修改 （導致資料庫更新） 的主索引鍵的值而定。
-比方說，使用資料庫產生的整數主索引鍵時很常見，若要將新的零索引鍵的實體和具有與現有的非零索引鍵的實體。
-此模式可藉由設定主索引鍵值的核取為基礎的實體狀態。 例如:   
+某些應用程式的常見模式是將實體新增為新的（產生資料庫插入），或將實體附加為現有的，並將它標示為已修改（產生資料庫更新），視主鍵的值而定。
+例如，當使用資料庫產生的整數主鍵時，通常會將具有零索引鍵的實體視為新，並將具有非零索引鍵的實體當做現有的。
+您可以根據主鍵值的檢查設定實體狀態來達成此模式。 例如：  
 
 ``` csharp
 public void InsertOrUpdate(Blog blog)
@@ -178,4 +178,4 @@ public void InsertOrUpdate(Blog blog)
 }
 ```  
 
-請注意，當您將狀態變更為已修改之實體的所有屬性都將都標示為已修改的所有屬性值將會都傳送至資料庫，讓呼叫 SaveChanges 時。  
+請注意，當您變更狀態以修改時，實體的所有屬性都會標示為已修改，而且在呼叫 SaveChanges 時，所有屬性值都會傳送至資料庫。  

@@ -1,29 +1,29 @@
 ---
-title: 連接字串 」 和 「 模型-EF6
+title: 連接字串和模型-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 294bb138-978f-4fe2-8491-fdf3cd3c60c4
 ms.openlocfilehash: 2c9f084107e4de7f5439bf0082b46a3b538496e0
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490738"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419294"
 ---
 # <a name="connection-strings-and-models"></a>連接字串和模型
-本主題涵蓋了 Entity Framework 會使用，哪一個資料庫連接的探索，並可以變更它的方式。 同時涵蓋在本主題中使用 Code First 和 EF 設計工具所建立的模型。  
+本主題涵蓋 Entity Framework 如何探索要使用的資料庫連接，以及您可以如何變更它。 使用 Code First 和 EF 設計工具建立的模型都涵蓋在本主題中。  
 
-通常 Entity Framework 應用程式會使用一個衍生自 DbContext 類別。 這個衍生的類別會呼叫建構函式的其中一個基底 DbContext 類別來控制：  
+Entity Framework 的應用程式通常會使用衍生自 DbCoNtext 的類別。 此衍生類別會呼叫基底 DbCoNtext 類別上的其中一個函式來控制：  
 
-- 內容連接到資料庫的方式 — 也就是如何連接字串是找到/已使用  
-- 是否將使用的內容計算使用 Code First 模型，或將使用 EF 設計工具建立模型  
-- 其他進階的選項  
+- 內容將如何連接至資料庫，也就是如何找到/使用連接字串  
+- 內容是否會使用 Code First 來計算模型，或載入使用 EF 設計工具建立的模型  
+- 其他 advanced 選項  
 
-下列片段會示範幾種 DbContext 建構函式使用。  
+下列片段顯示一些可使用 DbCoNtext 的函式的方式。  
 
-## <a name="use-code-first-with-connection-by-convention"></a>使用 Code First 與連線依慣例  
+## <a name="use-code-first-with-connection-by-convention"></a>依慣例使用 Code First 搭配連接  
 
-如果您從未在您的應用程式中的任何其他設定，然後在 DbContext 上呼叫的無參數建構函式會造成 DbContext 執行 Code First 模式中依照慣例建立的資料庫連線。 例如:   
+如果您尚未在應用程式中進行任何其他設定，則在 DbCoNtext 上呼叫無參數的函式會導致 DbCoNtext 在 Code First 模式中執行，並以慣例建立資料庫連接。 例如：  
 
 ``` csharp  
 namespace Demo.EF
@@ -38,13 +38,13 @@ namespace Demo.EF
 }
 ```  
 
-在此範例中 DbContext 會使用您的衍生的內容 class—Demo.EF.BloggingContext—as 資料庫名稱的命名空間限定的名稱，並建立使用 SQL Express 或 LocalDB 此資料庫的連接字串。 如果兩者均安裝，將會使用 SQL Express。  
+在此範例中，DbCoNtext 會使用衍生內容類別的命名空間限定名稱（BloggingCoNtext）作為資料庫名稱，並使用 SQL Express 或 LocalDB 建立此資料庫的連接字串。 如果兩者都已安裝，則會使用 SQL Express。  
 
-Visual Studio 2010 包含 SQL Express 預設和 Visual Studio 2012 和更新版本不包含 LocalDB。 在安裝期間，EntityFramework NuGet 套件會檢查之資料庫伺服器可用。 NuGet 套件會更新組態檔設定第一個程式碼會使用慣例來建立連接時的預設資料庫伺服器。 如果 SQL Express 執行時，它會使用它。 如果未提供 SQL Express 然後 LocalDB 會註冊為預設值改為。 不會變更至組態檔若它已包含設定預設連接 factory。  
+Visual Studio 2010 預設包含 SQL Express，而 Visual Studio 2012 和更新版本則包含 LocalDB。 在安裝期間，EntityFramework NuGet 套件會檢查是否有可用的資料庫伺服器。 然後，NuGet 封裝會藉由設定預設的資料庫伺服器（依慣例建立連接時 Code First 使用）來更新設定檔。 如果 SQL Express 正在執行，將會使用它。 如果 SQL Express 無法使用，則 LocalDB 會改為註冊為預設值。 如果設定檔案已包含預設連線處理站的設定，則不會進行任何變更。  
 
-## <a name="use-code-first-with-connection-by-convention-and-specified-database-name"></a>使用 Code First 慣例和指定的資料庫名稱的連線  
+## <a name="use-code-first-with-connection-by-convention-and-specified-database-name"></a>使用 Code First 搭配依照慣例和指定的資料庫名稱來連接  
 
-如果您從未在您的應用程式中的任何其他設定，然後在 DbContext 上呼叫字串建構函式，以您想要使用的資料庫名稱將會導致 DbContext 執行 Code First 模式中使用的資料庫的慣例所建立的資料庫連接該名稱。 例如:   
+如果您尚未在應用程式中進行任何其他設定，則使用您想要使用的資料庫名稱在 DbCoNtext 上呼叫字串的函式，將會導致 DbCoNtext 在 Code First 模式中執行，並以慣例建立資料庫連接到該名稱。 例如：  
 
 ``` csharp  
 public class BloggingContext : DbContext
@@ -56,11 +56,11 @@ public class BloggingContext : DbContext
 }
 ```  
 
-在此範例中 DbContext"BloggingDatabase 」 做為資料庫名稱，並建立使用 SQL Express （與 Visual Studio 2010 一起安裝）] 或 [LocalDB （與 Visual Studio 2012 一起安裝） 此資料庫的連接字串。 如果兩者均安裝，將會使用 SQL Express。  
+在此範例中，DbCoNtext 會使用 "BloggingDatabase" 作為資料庫名稱，並使用 SQL Express （隨 Visual Studio 2010）或 LocalDB （隨 Visual Studio 2012 安裝）來建立此資料庫的連接字串。 如果兩者都已安裝，則會使用 SQL Express。  
 
-## <a name="use-code-first-with-connection-string-in-appconfigwebconfig-file"></a>使用 Code First 與 app.config/web.config 檔案中的連接字串  
+## <a name="use-code-first-with-connection-string-in-appconfigwebconfig-file"></a>搭配 app.config/web.config 檔案中的連接字串使用 Code First  
 
-您可以選擇將連接字串放在您的 app.config 或 web.config 檔案。 例如:   
+您可以選擇將連接字串放在 app.config 或 web.config 檔案中。 例如：  
 
 ``` xml  
 <configuration>
@@ -72,9 +72,9 @@ public class BloggingContext : DbContext
 </configuration>
 ```  
 
-這是簡單的方式，向使用 SQL Express 或 LocalDB 以外的資料庫伺服器的 DbContext，上述範例中指定的 SQL Server Compact Edition 資料庫。  
+這是一個簡單的方法，告訴 DbCoNtext 使用 SQL Express 或 LocalDB 以外的資料庫伺服器，上述範例會指定 SQL Server Compact 版本資料庫。  
 
-如果連接字串的名稱符合您的內容 （不論有命名空間限定性條件) 的名稱然後它會找到 DbContext 的無參數建構函式使用時。 如果連接字串名稱不同於您內容的名稱，您可以告訴 DbContext Code First 模式中使用這個連線，將連接字串名稱傳遞至 DbContext 建構函式。 例如:   
+如果連接字串的名稱符合您的內容名稱（不論有無命名空間限定性），則在使用無參數的函式時，DbCoNtext 就會找到它。 如果連接字串名稱與您的內容名稱不同，則您可以將連接字串名稱傳遞至 DbCoNtext 的函式，告訴 DbCoNtext 在 Code First 模式中使用此連接。 例如：  
 
 ``` csharp  
 public class BloggingContext : DbContext
@@ -86,7 +86,7 @@ public class BloggingContext : DbContext
 }
 ```  
 
-或者，您可以使用格式 「 名稱 =\<連接字串名稱\>"傳遞至 DbContext 建構函式的字串。 例如:   
+或者，您可以針對傳遞給 DbCoNtext 函式的字串使用 "name =\<連接字串名稱\>" 格式。 例如：  
 
 ``` csharp  
 public class BloggingContext : DbContext
@@ -98,13 +98,13 @@ public class BloggingContext : DbContext
 }
 ```  
 
-此表單可讓您明確您預期要在組態檔中找到的連接字串。 如果找不到具有指定名稱的連接字串，將會擲回例外狀況。  
+此表單會明確指出您預期在設定檔中找到連接字串。 如果找不到具有指定名稱的連接字串，則會擲回例外狀況。  
 
-## <a name="databasemodel-first-with-connection-string-in-appconfigwebconfig-file"></a>資料庫/Model First app.config/web.config 檔案中的連接字串  
+## <a name="databasemodel-first-with-connection-string-in-appconfigwebconfig-file"></a>在 app.config/web.config 檔案中使用連接字串的資料庫/Model First  
 
-在於您的模型已經存在，而且不從產生的程式碼應用程式執行時，使用 EF 設計工具建立的模型是不同的程式碼第一次。 此模型通常會有為 EDMX 檔案在您的專案。  
+使用 EF 設計工具建立的模型與 Code First 不同之處在于，您的模型已經存在，而且不會在應用程式執行時從程式碼產生。 模型通常會以 .EDMX 檔案的形式存在於您的專案中。  
 
-設計工具會將您的 app.config 或 web.config 檔案的 EF 連接字串。 其中包含如何在 EDMX 檔案中尋找資訊的相關資訊，此連接字串是特殊的。 例如:   
+設計工具會將 EF 連接字串新增至您的 app.config 或 web.config 檔案。 此連接字串的特殊之處在于，其中包含如何在您的 EDMX 檔案中尋找資訊的相關資訊。 例如：  
 
 ``` xml  
 <configuration>  
@@ -124,7 +124,7 @@ public class BloggingContext : DbContext
 </configuration>
 ```  
 
-EF 設計工具也會產生程式碼，告訴她能夠使用此連接將連接字串名稱傳遞至 DbContext 建構函式的 DbContext。 例如:   
+EF 設計工具也會產生程式碼，告訴 DbCoNtext 使用這個連接的方法，是將連接字串名稱傳遞至 DbCoNtext 的函式。 例如：  
 
 ``` csharp  
 public class NorthwindContext : DbContext
@@ -136,13 +136,13 @@ public class NorthwindContext : DbContext
 }
 ```  
 
-DbContext 知道要載入現有的模型 （而非計算從程式碼使用 Code First） 因為連接字串是包含要使用之模型的詳細資料的 EF 連接字串。  
+DbCoNtext 知道要載入現有的模型（而不是使用 Code First 從程式碼計算），因為連接字串是 EF 連接字串，其中包含要使用之模型的詳細資料。  
 
-## <a name="other-dbcontext-constructor-options"></a>DbContext 建構函式的其他選項  
+## <a name="other-dbcontext-constructor-options"></a>其他 DbCoNtext 的函數選項  
 
-DbContext 類別包含其他建構函式和使用模式可讓某些更進階的案例。 這些因素包括：  
+DbCoNtext 類別包含其他的函式和使用模式，可啟用一些更先進的案例。 其中的一些改進和變更如下：  
 
-- 您可以使用 DbModelBuilder 類別建置，Code First 模型而不具現化 DbContext 執行個體。 這樣的結果是 DbModel 物件。 然後您可以為其中一個的 DbContext 建構函式傳遞此 DbModel 物件，當您準備好建立您的 DbContext 執行個體。  
-- 您可以傳遞至 DbContext 的完整連接字串，而非只是資料庫或連接字串名稱。 根據預設使用 System.Data.SqlClient 的提供者，使用此連接字串可以變更此設定 IConnectionFactory 至內容的不同實作。Database.DefaultConnectionFactory。  
-- 您可以使用現有的 DbConnection 物件傳遞至 DbContext 建構函式。 如果連接物件是 EntityConnection，執行個體，則在連接中指定的模型會使用，而不是計算模型，使用程式碼第一次。 如果該物件是某個其他型別的執行個體 — 比方說，SqlConnection — 內容 Code First 模式會使用它。  
-- 您可以將現有 ObjectContext 傳遞至 DbContext 建構函式建立 DbContext 包裝現有的內容。 這可以用於現有的應用程式，使用 ObjectContext，但其想要利用應用程式的某些部分中的 DbContext。  
+- 您可以使用 DbModelBuilder 類別來建立 Code First 模型，而不具現化 DbCoNtext 實例。 這個的結果是 DbModel 物件。 當您準備好建立 DbCoNtext 實例時，可以將這個 DbModel 物件傳遞至其中一個 DbCoNtext 的函式。  
+- 您可以將完整連接字串傳遞至 DbCoNtext，而不只是資料庫或連接字串名稱。 根據預設，此連接字串會搭配 SqlClient 提供者使用。這可以藉由在內容上設定不同的 IConnectionFactory 執行來加以變更。DefaultConnectionFactory。  
+- 您可以藉由將現有的 DbConnection 物件傳遞至 DbCoNtext 的函式來使用它。 如果連線物件是 EntityConnection 的實例，則會使用連接中指定的模型，而不是使用 Code First 來計算模型。 如果物件是其他類型的實例（例如 SqlConnection），則內容會將它用於 Code First 模式。  
+- 您可以將現有的 ObjectCoNtext 傳遞至 DbCoNtext 的函式，以建立包裝現有內容的 DbCoNtext。 這可用於使用 ObjectCoNtext 的現有應用程式，但想要在應用程式的某些部分中利用 DbCoNtext。  

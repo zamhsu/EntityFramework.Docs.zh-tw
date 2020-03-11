@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 1e773972-2da5-45e0-85a2-3cf3fbcfa5cf
 ms.openlocfilehash: bdb0df969c33d5ad3f103bfa9af6002c9c2bb9b3
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813554"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418319"
 ---
 # <a name="designer-cud-stored-procedures"></a>設計工具 CUD 預存程式
 
@@ -29,7 +29,7 @@ var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]");
 - 如果伺服器為插入的資料列產生主要金鑰值，您必須將此值對應回實體的索引鍵屬性。 在接下來的範例中， **InsertPerson** 預存程式會傳回新建立的主鍵做為預存程式之結果集的一部分。 主鍵會使用 EF Designer 的 **&lt;加入結果**系結&gt;  功能對應至實體索引鍵（**PersonID**）。
 - 預存程序呼叫會對應1:1 和概念模型中的實體。 例如，如果您在概念模型中執行繼承階層，然後對應**父**（基底）和**子**系（衍生）實體的 CUD 預存程式，則儲存**子**變更只會呼叫**子**系的預存程式，而不會觸發**父系**的預存程序呼叫。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 若要完成這個逐步解說，您將需要：
 
@@ -42,7 +42,7 @@ var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]");
 - 選取檔案 **&gt; 新&gt; 專案**
 - 在左窗格中，按一下 [ **Visual C\#** ]，然後選取 [**主控台**] 範本。
 - 在 [名稱] 中輸入 **CUDSProcsSample** 。
-- 選取 **[確定]** 。
+- 選取 [確定] **** 。
 
 ## <a name="create-a-model"></a>建立模型
 

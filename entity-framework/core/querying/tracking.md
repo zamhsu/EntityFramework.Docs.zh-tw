@@ -4,12 +4,12 @@ author: smitpatel
 ms.date: 10/10/2019
 ms.assetid: e17e060c-929f-4180-8883-40c438fbcc01
 uid: core/querying/tracking
-ms.openlocfilehash: 66988f936ab75e17620398c8f21e4a32bbc950bd
-ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
+ms.openlocfilehash: a6c71c12f429f1324abe91d1b2cef96312bec051
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72445946"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417646"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>追蹤與不追蹤查詢的比較
 
@@ -19,11 +19,11 @@ ms.locfileid: "72445946"
 > 永遠不會追蹤[無索引鍵的實體類型](xref:core/modeling/keyless-entity-types)。 本文提及實體類型的任何地方，都是指已定義索引鍵的實體類型。
 
 > [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
 
 ## <a name="tracking-queries"></a>追蹤查詢
 
-預設會追蹤傳回實體類型的查詢。 這表示您可以對這些實體實例進行變更，並 `SaveChanges()` 保存這些變更。 在下列範例中，將會偵測到對部落格評等的變更，並在 `SaveChanges()` 期間將其保存於資料庫。
+預設會追蹤傳回實體類型的查詢。 這表示您可以對這些實體實例進行變更，並由 `SaveChanges()`保存這些變更。 在下列範例中，將會偵測到對部落格評等的變更，並在 `SaveChanges()` 期間將其保存於資料庫。
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#Tracking)]
 
@@ -55,7 +55,7 @@ ms.locfileid: "72445946"
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection3)]
 
- EF Core 支援在最上層投影中進行用戶端評估。 如果 EF Core 具體化實體實例以進行用戶端評估，則會進行追蹤。 在這裡，因為我們會將 `blog` 實體傳遞至用戶端方法 `StandardizeURL`，EF Core 也會追蹤 blog 實例。
+ EF Core 支援在最上層投影中進行用戶端評估。 如果 EF Core 具體化實體實例以進行用戶端評估，則會進行追蹤。 在這裡，由於我們會將 `blog` 實體傳遞至用戶端方法 `StandardizeURL`，因此 EF Core 也會追蹤 blog 實例。
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#ClientProjection)]
 
@@ -65,7 +65,7 @@ EF Core 不會追蹤結果中包含的無索引鍵實體實例。 但是 EF Core
 
 在 EF Core 3.0 之前，部分規則的運作方式不同。 如需詳細資訊，請參閱[先前的版本](#previous-versions)。
 
-## <a name="previous-versions"></a>舊版本
+## <a name="previous-versions"></a>舊版
 
 在3.0 版之前，EF Core 在追蹤完成的方式上有一些差異。 值得注意的差異如下：
 

@@ -3,12 +3,12 @@ title: 全域查詢篩選條件 - EF Core
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: f4ee9b77411290249e763f9cb8492eea61803e91
-ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
+ms.openlocfilehash: 9262ff7970b0502945480c673315071cbc3f44b9
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76124388"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417726"
 ---
 # <a name="global-query-filters"></a>全域查詢篩選條件
 
@@ -25,7 +25,7 @@ ms.locfileid: "76124388"
 下列範例示範如何使用全域查詢篩選條件，在簡單的部落格模型中實作虛刪除和多租用戶查詢行為。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/QueryFilters) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/QueryFilters) \(英文\)。
 
 首先，定義實體：
 
@@ -33,7 +33,7 @@ ms.locfileid: "76124388"
 
 請注意 _Blog_ 實體上 _tenantId_ 欄位的宣告。 這會用來將每個 Blog 執行個體與特定租用戶產生關聯。 此外，還定義了 _Post_ 實體類型上的 _IsDeleted_ 屬性。 這會用來追蹤是否已將 _Post_ 執行個體「虛刪除」。 亦即，將執行個體標示為已刪除，而不實際移除底層資料。
 
-接下來，使用 `HasQueryFilter` API，在 _OnModelCreating_ 中設定查詢篩選條件。
+接下來，使用 _API，在_OnModelCreating`HasQueryFilter` 中設定查詢篩選條件。
 
 [!code-csharp[Main](../../../samples/core/QueryFilters/Program.cs#Configuration)]
 

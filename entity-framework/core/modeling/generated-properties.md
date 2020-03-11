@@ -6,11 +6,11 @@ ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/generated-properties
 ms.openlocfilehash: 9c616e157ff1bdb9700f436a7ae2788330fe5d45
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502028"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416343"
 ---
 # <a name="generated-values"></a>產生的值
 
@@ -32,7 +32,7 @@ ms.locfileid: "75502028"
 
 視所使用的資料庫提供者而定，值可能是由 EF 或資料庫中的用戶端產生。 如果值是由資料庫產生，則當您將實體加入內容時，EF 可能會指派暫存值。 此暫存值接著會在 `SaveChanges()`期間由資料庫產生的值取代。
 
-如果您將實體加入至具有指派給屬性之值的內容，則 EF 會嘗試插入該值，而不是產生新的值。 如果未指派 CLR 預設值（`string`的`null`、`int`的 `0`、`Guid.Empty` 等等），則會將屬性視為具有指派的值。 如需詳細資訊，請參閱[產生的屬性的明確值](../saving/explicit-values-generated-properties.md)。
+如果您將實體加入至具有指派給屬性之值的內容，則 EF 會嘗試插入該值，而不是產生新的值。 如果未指派 CLR 預設值（`string`的`null`、`int`的 `0`、`Guid.Empty` 等等），則會將屬性視為具有指派的值。`Guid` 如需詳細資訊，請參閱[產生的屬性的明確值](../saving/explicit-values-generated-properties.md)。
 
 > [!WARNING]
 > 為新增的實體產生值的方式，將取決於所使用的資料庫提供者。 資料庫提供者可以自動設定某些屬性類型的值產生，但其他則可能需要您手動設定產生值的方式。
@@ -58,11 +58,11 @@ ms.locfileid: "75502028"
 
 您可以設定任何屬性，為插入的實體產生其值，如下所示：
 
-### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
+### <a name="data-annotations"></a>[資料註解](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAdd.cs?name=ValueGeneratedOnAdd&highlight=5)]
 
-### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+### <a name="fluent-api"></a>[流暢的 API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAdd.cs?name=ValueGeneratedOnAdd&highlight=5)]
 
@@ -87,11 +87,11 @@ ms.locfileid: "75502028"
 
 ## <a name="value-generated-on-add-or-update"></a>新增或更新時產生的值
 
-### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
+### <a name="data-annotations"></a>[資料註解](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=5)]
 
-### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+### <a name="fluent-api"></a>[流暢的 API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=5)]
 
@@ -113,11 +113,11 @@ ms.locfileid: "75502028"
 
 如果慣例將屬性（property）設定為產生值，通常就需要停用屬性的值產生。 例如，如果您有 int 類型的主鍵，則會隱含地將它設定為在 add 上產生的值;您可以透過下列方式來停用此功能：
 
-### <a name="data-annotationstabdata-annotations"></a>[資料註解](#tab/data-annotations)
+### <a name="data-annotations"></a>[資料註解](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedNever.cs?name=ValueGeneratedNever&highlight=3)]
 
-### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+### <a name="fluent-api"></a>[流暢的 API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedNever.cs?name=ValueGeneratedNever&highlight=5)]
 

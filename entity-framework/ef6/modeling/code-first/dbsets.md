@@ -4,18 +4,18 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 4528a509-ace7-4dfb-8065-1b833f5e03a0
 ms.openlocfilehash: 045b22d2b9d26804948689dd7c9dd694baadda7e
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45488994"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419091"
 ---
 # <a name="defining-dbsets"></a>定義 DbSets
-使用 Code First 的工作流程開發時您會定義衍生的 DbContext，其代表您的工作階段與資料庫，並會公開您的模型中每個類型的 DbSet。 本主題涵蓋您可以定義 DbSet 屬性的各種方式。  
+使用 Code First 工作流程進行開發時，您會定義衍生的 DbCoNtext，以代表您的資料庫會話，並針對模型中的每個型別公開一個 DbSet。 本主題涵蓋您可以定義 DbSet 屬性的各種方式。  
 
-## <a name="dbcontext-with-dbset-properties"></a>DbContext DbSet 屬性  
+## <a name="dbcontext-with-dbset-properties"></a>具有 DbSet 屬性的 DbCoNtext  
 
-第一個程式碼範例所示的常見案例是模型的將 DbContext 具有公用自動針對您實體類型的 DbSet 屬性。 例如:   
+Code First 範例中所顯示的常見案例，就是讓模型的實體類型具有公用自動 DbSet 屬性的 DbCoNtext。 例如：  
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -25,11 +25,11 @@ public class BloggingContext : DbContext
 }
 ```  
 
-使用 Code First 模式中，這會設定為實體類型，以及設定可從這些其他類型的部落格和文章。 此外 DbContext 會自動為每個這些屬性，以執行個體設定為適當的 DbSet 呼叫 setter。  
+在 Code First 模式中使用時，這會將 Blog 和 Post 設定為實體類型，以及設定可從這些專案存取的其他類型。 此外，DbCoNtext 會自動為每個屬性呼叫 setter，以設定適當 DbSet 的實例。  
 
-## <a name="dbcontext-with-idbset-properties"></a>DbContext IDbSet 屬性  
+## <a name="dbcontext-with-idbset-properties"></a>具有 Idbset 會屬性的 DbCoNtext  
 
-有些情況，例如當建立模擬或 fakes，很多有用來宣告您的設定屬性使用的介面。 在此情況下 IDbSet 介面可用以取代 DbSet。 例如:   
+在某些情況下，例如建立模擬或 fakes 時，使用介面宣告您的集合屬性會更有用。 在這種情況下，Idbset 會介面可以用來取代 DbSet。 例如：  
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -39,11 +39,11 @@ public class BloggingContext : DbContext
 }
 ```  
 
-此內容適用於使用 DbSet 類別，針對其設定屬性的內容完全相同的方式。  
+此內容的運作方式與使用其 set 屬性之 DbSet 類別的內容完全相同。  
 
-## <a name="dbcontext-with-read-only-set-properties"></a>使用唯讀的 DbContext 設定屬性  
+## <a name="dbcontext-with-read-only-set-properties"></a>具有唯讀集屬性的 DbCoNtext  
 
-如果您不想公開公用 setter DbSet 或 IDbSet 屬性可以改為建立唯讀屬性，並自行建立集執行個體。 例如:   
+如果您不想要公開 DbSet 或 Idbset 會屬性的公用 setter，您可以改為建立唯讀屬性，並自行建立集合實例。 例如：  
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -60,6 +60,6 @@ public class BloggingContext : DbContext
 }
 ```  
 
-請注意，DbContext 會快取的 DbSet 傳回從 Set 方法，以便每次呼叫時，每個屬性會傳回相同的執行個體的執行個體。  
+請注意，DbCoNtext 會快取從 Set 方法傳回的 DbSet 實例，如此一來，每個屬性都會在每次呼叫時傳回相同的實例。  
 
-探索相同的方式中的第一個程式碼運作的實體類型一樣對具有公用 getter 和 setter 的屬性。  
+Code First 的實體類型探索在這裡的運作方式與使用公用 getter 和 setter 的屬性相同。  

@@ -5,13 +5,13 @@ ms.date: 04/09/2017
 ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
 ms.openlocfilehash: 2f80dc195265787318ac4925dd937da45ffad011
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72179776"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417771"
 ---
-# <a name="sqlite-ef-core-database-provider-limitations"></a>SQLite EF Core 資料庫提供者的限制
+# <a name="sqlite-ef-core-database-provider-limitations"></a>SQLite EF Core 資料庫提供者限制
 
 SQLite 提供者有許多遷移限制。 這些限制大多是基礎 SQLite 資料庫引擎限制的結果，而不是 EF 特有的。
 
@@ -34,7 +34,7 @@ SQLite 原本就不支援下列資料類型。 EF Core 可以讀取和寫入這�
 
 我們建議使用 DateTime 值，而不是 `DateTimeOffset`。 處理多個時區時，建議您先將值轉換成 UTC，再儲存，然後再轉換回適當的時區。
 
-@No__t-0 類型提供高的精確度。 不過，如果您不需要該有效位數層級，我們建議您改為使用 double。 您可以使用[值轉換器](../../modeling/value-conversions.md)，在您的類別中繼續使用 decimal。
+`Decimal` 類型提供高的有效位數層級。 不過，如果您不需要該有效位數層級，我們建議您改為使用 double。 您可以使用[值轉換器](../../modeling/value-conversions.md)，在您的類別中繼續使用 decimal。
 
 ``` csharp
 modelBuilder.Entity<MyEntity>()
@@ -46,7 +46,7 @@ modelBuilder.Entity<MyEntity>()
 
 SQLite 資料庫引擎不支援大多數其他關係資料庫所支援的許多架構作業。 如果您嘗試將其中一個不支援的作業套用至 SQLite 資料庫，將會擲回 `NotSupportedException`。
 
-| 運算            | 支援? | 需要版本 |
+| 作業            | 支援？ | 需要版本 |
 |:---------------------|:-----------|:-----------------|
 | AddColumn            | ✔          | 1.0              |
 | AddForeignKey        | ✗          |                  |
@@ -64,11 +64,11 @@ SQLite 資料庫引擎不支援大多數其他關係資料庫所支援的許多�
 | RenameColumn         | ✔          | 2.2.2            |
 | RenameIndex          | ✔          | 2.1              |
 | RenameTable          | ✔          | 1.0              |
-| EnsureSchema         | ✔ (no-op)  | 2.0              |
-| DropSchema           | ✔ (no-op)  | 2.0              |
-| Insert               | ✔          | 2.0              |
-| Update               | ✔          | 2.0              |
-| DELETE               | ✔          | 2.0              |
+| EnsureSchema         | ✔（無 op）  | 2.0              |
+| DropSchema           | ✔（無 op）  | 2.0              |
+| 插入               | ✔          | 2.0              |
+| 更新               | ✔          | 2.0              |
+| 刪除               | ✔          | 2.0              |
 
 ## <a name="migrations-limitations-workaround"></a>遷移限制解決方法
 

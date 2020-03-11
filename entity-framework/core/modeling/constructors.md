@@ -5,11 +5,11 @@ ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
 ms.openlocfilehash: ddfaa8eebde388a9d3309f21b8891de593077956
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72811890"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417326"
 ---
 # <a name="entity-types-with-constructors"></a>具有函數的實體類型
 
@@ -48,7 +48,7 @@ public class Post
 }
 ```
 
-當 EF Core 建立這些類型的實例時（例如，針對查詢的結果），它會先呼叫預設的無參數的函式，然後將每個屬性設定為資料庫中的值。 不過，如果 EF Core 使用符合對應屬性之參數名稱和類型來尋找參數化的函式，則會改為使用這些屬性的值來呼叫參數化的函式，而且不會明確設定每個屬性。 例如:
+當 EF Core 建立這些類型的實例時（例如，針對查詢的結果），它會先呼叫預設的無參數的函式，然後將每個屬性設定為資料庫中的值。 不過，如果 EF Core 使用符合對應屬性之參數名稱和類型來尋找參數化的函式，則會改為使用這些屬性的值來呼叫參數化的函式，而且不會明確設定每個屬性。 例如：
 
 ``` csharp
 public class Blog
@@ -87,7 +87,7 @@ public class Post
 }
 ```
 
-要注意的事項：
+注意事項如下：
 
 * 並非所有屬性都必須具有函數參數。 例如，不是由任何的「函數參數」設定「內容」屬性，因此 EF Core 會在以一般方式呼叫「函式」之後設定它。
 * 參數類型和名稱必須符合屬性類型和名稱，但屬性可以是 Pascal 大小寫，而參數則是 camel 大小寫。
@@ -101,7 +101,7 @@ public class Post
 * 沒有 setter 的屬性不會依照慣例來對應。 （這麼做通常會對應不應對應的屬性，例如計算屬性）。
 * 使用自動產生的索引鍵值需要具有讀寫的索引鍵屬性，因為在插入新的實體時，索引鍵的值必須由金鑰產生器設定。
 
-避免這些問題的簡單方法是使用私用 setter。 例如:
+避免這些問題的簡單方法是使用私用 setter。 例如：
 
 ``` csharp
 public class Blog

@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 122c38a2-f9e8-4ecc-9c72-a83bc9af7814
 ms.openlocfilehash: 2bdec6a9be228fbe934d0f46aa1bfafdfb2c971c
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181744"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419465"
 ---
 # <a name="get-entity-framework"></a>取得 Entity Framework
 Entity Framework 是由適用于 Visual Studio 和 EF 執行時間的 EF 工具所組成。
@@ -27,7 +27,7 @@ Visual Studio 的 Entity Framework Tools 包含 EF 設計工具和 EF 模型 Wiz
 
 您可以在專案的 [**參考**] 資料夾上按一下滑鼠右鍵，然後選取 [**管理 NuGet 套件 ...** ]，以安裝 EntityFramework 套件。
 
-![管理 NuGet 套件](~/ef6/media/managenugetpackages.png)
+![Manage NuGet Packages](~/ef6/media/managenugetpackages.png)
 
 ### <a name="installing-from-package-manager-console"></a>從套件管理員主控台安裝
 

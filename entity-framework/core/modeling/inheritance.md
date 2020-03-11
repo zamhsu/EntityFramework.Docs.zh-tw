@@ -6,11 +6,11 @@ ms.author: ansvyryd
 ms.date: 10/27/2016
 uid: core/modeling/inheritance
 ms.openlocfilehash: 507854e3acc0347adee612e516b3e2e0b10f55cf
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502160"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417292"
 ---
 # <a name="inheritance"></a>繼承
 
@@ -31,7 +31,7 @@ EF 可以將 .NET 類型階層架構對應到資料庫。 這可讓您以平常�
 
 此模型會對應至下列資料庫架構（請注意隱含建立的*鑒別*子資料行，其可識別每個資料列中儲存的是哪一種類型的*Blog* ）：
 
-![影像](_static/inheritance-tph-data.png)
+![image](_static/inheritance-tph-data.png)
 
 >[!NOTE]
 > 使用 TPH 對應時，視需要自動將資料庫資料行設為可為 null。 例如， *RssUrl*資料行可為 null，因為一般的*Blog*實例沒有該屬性。

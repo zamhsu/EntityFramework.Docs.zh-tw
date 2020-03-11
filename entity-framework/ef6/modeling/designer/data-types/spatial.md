@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 06baa6e1-d680-4a95-845b-81305c87a962
 ms.openlocfilehash: a9c54fbc14dd02ce5d4d91449a0d5f9e72f7f0f7
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182508"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418536"
 ---
 # <a name="spatial---ef-designer"></a>空間-EF 設計工具
 > [!NOTE]
@@ -24,14 +24,14 @@ ms.locfileid: "72182508"
 
 主要的空間資料類型有兩種： geography 和 geometry。 Geography 資料類型會儲存橢圓體資料（例如，GPS 緯度和經度座標）。 Geometry 資料類型代表 Euclidean （平面）座標系統。
 
-## <a name="watch-the-video"></a>觀看影片
+## <a name="watch-the-video"></a>觀賞影片
 這段影片示範如何使用 Entity Framework Designer 來對應空間類型。 它也會示範如何使用 LINQ 查詢來尋找兩個位置之間的距離。
 
 **提供者**： Julia Kornich
 
 **影片**： [wmv](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-winvideo-spatialwithdesigner.wmv) | [.wmv](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-mp4video-spatialwithdesigner.m4v) | [wmv （ZIP）](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-winvideo-spatialwithdesigner.zip)
 
-## <a name="pre-requisites"></a>先決條件
+## <a name="pre-requisites"></a>必要條件
 
 您必須安裝 Visual Studio 2012、旗艦版、Premium、Professional 或 Web Express edition，才能完成此逐步解說。
 
@@ -48,7 +48,7 @@ ms.locfileid: "72182508"
 2.  從左側功能表中選取 **資料**，然後選取 範本 窗格中的  **ADO.NET 實體資料模型**
 3.  在 [檔案名] 中輸入**UniversityModel** ，然後按一下 [**新增**]
 4.  在 [實體資料模型 Wizard] 頁面上，選取 [選擇模型內容] 對話方塊中的 [**空的模型**]
-5.  按一下 **[完成]**
+5.  按一下 [完成]
 
 會顯示 Entity Designer （提供編輯模型的設計介面）。
 
@@ -62,7 +62,7 @@ ms.locfileid: "72182508"
 
 1.  以滑鼠右鍵按一下設計介面的空白區域，然後選取 [**加入-&gt; 實體**]，[新增實體] 對話方塊隨即出現
 2.  針對 [類型名稱] 指定 [**大學**]，並指定索引鍵屬性名稱的 [ **UniversityID** ]，將類型保留為 [ **Int32** ]
-3.  按一下 [確定]。
+3.  按一下 [檔案] &gt; [新增] &gt; [專案]
 4.  以滑鼠右鍵按一下實體，然後選取 [**加入新的-&gt;** 純量屬性]
 5.  將新屬性重新命名為**名稱**
 6.  新增另一個純量屬性並將它重新命名為**Location**開啟屬性視窗，並將新屬性的類型變更為**Geography**

@@ -4,23 +4,23 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 2df6cb0a-7d8b-4e28-9d05-e2b9a90125af
 ms.openlocfilehash: d540fc6e84049f345ae22998f94c309e0be73fc3
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182576"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78418809"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First 至新的資料庫
 這段影片和逐步解說提供以新資料庫為目標之 Code First 開發的簡介。 此案例包含的目標資料庫不存在且 Code First 將會建立，或是 Code First 會加入新資料表的空資料庫。 Code First 可讓您使用 C\# 或 VB.Net 類別來定義模型。 您可以選擇性地使用類別和屬性上的屬性，或使用 Fluent API 來執行其他設定。
 
-## <a name="watch-the-video"></a>觀看影片
+## <a name="watch-the-video"></a>觀賞影片
 這段影片提供以新資料庫為目標之 Code First 開發的簡介。 此案例包含的目標資料庫不存在且 Code First 將會建立，或是 Code First 會加入新資料表的空資料庫。 Code First 可讓您使用C#或 VB.Net 類別來定義您的模型。 您可以選擇性地使用類別和屬性上的屬性，或使用 Fluent API 來執行其他設定。
 
 **主講人**[Rowan Miller](https://romiller.com/)
 
 **影片**： [wmv](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.wmv) | [.wmv](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-mp4Video-CodeFirstNewDatabase.m4v) | [wmv （ZIP）](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.zip)
 
-## <a name="pre-requisites"></a>先決條件
+## <a name="pre-requisites"></a>必要條件
 
 您至少必須安裝 Visual Studio 2010 或 Visual Studio 2012，才能完成此逐步解說。
 
@@ -74,7 +74,7 @@ public class Post
     注意：如果您沒有 [**管理 NuGet 套件 ...** ] 選項您應該安裝[最新版的 NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
 -   選取 [**線上**] 索引標籤
 -   選取**EntityFramework**套件
--   按一下 [**安裝**]
+-   按一下 [安裝]
 
 在 Program.cs 頂端，為 system.string 新增 using 語句。
 

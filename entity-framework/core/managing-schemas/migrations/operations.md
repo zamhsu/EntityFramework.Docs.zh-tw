@@ -5,11 +5,11 @@ ms.author: bricelam
 ms.date: 11/07/2017
 uid: core/managing-schemas/migrations/operations
 ms.openlocfilehash: bd2bfdc24977a47eaf7a6756a88b758b563d818a
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72812053"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416874"
 ---
 # <a name="custom-migrations-operations"></a>自訂的遷移作業
 

@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: c8417e18-a2ee-499c-9ce9-2a48cc5b468a
 ms.openlocfilehash: c359d8d32a88049213fd5e98e99fe49d7e3121a3
-ms.sourcegitcommit: d01fc19aa42ca34c3bebccbc96ee26d06fcecaa2
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/16/2019
-ms.locfileid: "71005481"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417085"
 ---
 # <a name="loading-related-entities"></a>載入相關實體
 

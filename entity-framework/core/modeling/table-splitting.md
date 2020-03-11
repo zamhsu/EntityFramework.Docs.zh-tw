@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 01/03/2020
 uid: core/modeling/table-splitting
-ms.openlocfilehash: c38d3ee0efa82f84a1051017ae40c9f3fdd57f1f
-ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
+ms.openlocfilehash: de24f8903af79ebd7f68e6b74288257883c1fa8d
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75781166"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417395"
 ---
 # <a name="table-splitting"></a>資料表分割
 
@@ -33,9 +33,9 @@ EF Core 允許將兩個或多個實體對應至單一資料列。 這稱為「_�
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting)]
 
 > [!TIP]
-> 如需詳細內容，請參閱[完整的範例專案](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting)。
+> 如需詳細內容，請參閱[完整的範例專案](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting)。
 
-## <a name="usage"></a>使用
+## <a name="usage"></a>使用量
 
 使用資料表分割來儲存和查詢實體的方式與其他實體相同：
 

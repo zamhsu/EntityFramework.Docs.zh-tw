@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 9/13/2019
 uid: core/modeling/keyless-entity-types
-ms.openlocfilehash: 129e24b154ba32583435aeb742dbf478350344e8
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.openlocfilehash: 520c9ed93240c05deee36fa527a3757490fd7082
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824669"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417313"
 ---
 # <a name="keyless-entity-types"></a>無索引鍵實體類型
 
@@ -36,7 +36,7 @@ ms.locfileid: "74824669"
 - 需要使用 `.HasNoKey()` 方法呼叫來設定。
 - 可能會對應到_定義查詢_。 定義查詢是在模型中宣告的查詢，做為無索引鍵實體類型的資料來源。
 
-## <a name="usage-scenarios"></a>使用案例
+## <a name="usage-scenarios"></a>使用方式情節
 
 無索引鍵實體類型的一些主要使用案例如下：
 
@@ -57,7 +57,7 @@ ms.locfileid: "74824669"
 下列範例顯示如何使用無索引鍵實體類型來查詢資料庫檢視。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/KeylessEntityTypes) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/KeylessEntityTypes) \(英文\)。
 
 首先，我們會定義簡單的 Blog 和 Post 模型：
 

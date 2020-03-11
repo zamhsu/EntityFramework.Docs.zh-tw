@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 77d6a095-c0d0-471e-80b9-8f9aea6108b2
 ms.openlocfilehash: 2c5e6f1b3f60862124bafcac42e8859a7591f8e6
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72812145"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416957"
 ---
 # <a name="data-validation"></a>資料驗證
 > [!NOTE]
@@ -54,7 +54,7 @@ public string Title { get; set; }
 
 在應用程式中不會有任何額外的程式碼或標記變更，現有 MVC 應用程式會執行用戶端驗證，甚至使用屬性和批註名稱動態建立訊息。
 
-![圖1](~/ef6/media/figure01.png)
+![圖 1](~/ef6/media/figure01.png)
 
 在此 Create view 的回傳方法中，Entity Framework 是用來將新的 blog 儲存到資料庫中，但是在應用程式達到該程式碼之前，會觸發 MVC 的用戶端驗證。
 
@@ -235,7 +235,7 @@ foreach (var validationResult in db.GetValidationErrors())
   - 複雜型別屬性的屬性層級驗證
   - 複雜型別上的型別層級驗證，包括複雜型別上的 `IValidatableObject` 驗證
 
-## <a name="summary"></a>總結
+## <a name="summary"></a>摘要
 
 Entity Framework 中的驗證 API 在 MVC 中的用戶端驗證非常好用，但是您不需要依賴用戶端驗證。 Entity Framework 會針對您使用 code first 流暢 API 套用的 DataAnnotations 或設定，負責處理伺服器端的驗證。
 

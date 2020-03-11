@@ -5,11 +5,11 @@ ms.date: 09/09/2019
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/nullable-reference-types
 ms.openlocfilehash: c16a475c363320cd18804a4efe78ccae1ae22f0d
-ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76124349"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416652"
 ---
 # <a name="working-with-nullable-reference-types"></a>使用可為 Null 的參考型別
 

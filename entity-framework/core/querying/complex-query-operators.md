@@ -4,19 +4,19 @@ author: smitpatel
 ms.date: 10/03/2019
 ms.assetid: 2e187a2a-4072-4198-9040-aaad68e424fd
 uid: core/querying/complex-query-operators
-ms.openlocfilehash: 350a7fa6a3ee1de16bad4b63e10842f9356a1b60
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 44c2695ea003da043925740a52596fd27da638f8
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72186257"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417740"
 ---
 # <a name="complex-query-operators"></a>複雜查詢運算子
 
 語言整合式查詢（LINQ）包含許多複雜運算子，可結合多個資料來源或執行複雜的處理。 並非所有的 LINQ 運算子在伺服器端都有適當的翻譯。 有時候，一個表單中的查詢會轉譯成伺服器，但如果是以不同的格式撰寫，即使結果相同也是一樣。 此頁面描述一些複雜運算子和其支援的變化。 在未來的版本中，我們可以辨識更多模式並新增其對應的翻譯。 也請務必記住，翻譯支援會因提供者而異。 在 SqlServer 中轉譯的特定查詢，對 SQLite 資料庫可能無法使用。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
 
 ## <a name="join"></a>Join
 
@@ -112,11 +112,11 @@ ORDER BY [p].[AuthorId]
 
 EF Core 支援的匯總運算子如下所示
 
-- 平均
-- [計數]
+- Average
+- Count
 - LongCount
-- Max
-- Min
+- 最大值
+- 最小值
 - Sum
 
 ## <a name="left-join"></a>左方聯結

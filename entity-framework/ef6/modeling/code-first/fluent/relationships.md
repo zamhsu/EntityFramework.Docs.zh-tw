@@ -1,30 +1,30 @@
 ---
-title: Fluent API-關聯性-EF6
+title: 流暢的 API-關聯性-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: fd73b4f8-16d5-40f1-9640-885ceafe67a1
 ms.openlocfilehash: 05f282c02699f8bf3c71197ac5e01000f1855917
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490463"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419070"
 ---
-# <a name="fluent-api---relationships"></a>Fluent API-關聯性
+# <a name="fluent-api---relationships"></a>流暢的 API-關聯性
 > [!NOTE]
-> 此頁面提供有關設定 Code First 模型使用 fluent API 中的關聯性資訊。 如需 EF 以及如何存取和操作資料使用關聯性的關聯性的一般資訊，請參閱[關聯性和導覽屬性](~/ef6/fundamentals/relationships.md)。  
+> 此頁面提供使用 Fluent API 在 Code First 模型中設定關聯性的相關資訊。 如需 EF 中關聯性和如何使用關聯性存取和運算元據的一般資訊，請參閱[& 導覽屬性的關聯](~/ef6/fundamentals/relationships.md)性。  
 
-當使用 Code First，您會定義您的模型，藉由定義您的網域 CLR 類別。 根據預設，Entity Framework 會使用 Code First 慣例，來將您的類別對應至資料庫結構描述。 如果您使用的第一個程式碼的命名慣例，在大部分情況下您可以依賴 Code First 來設定您的外部索引鍵和您在類別上定義導覽屬性為基礎的資料表之間的關聯性。 如果您沒有遵循慣例，定義您的類別時，或慣例如果您想要變更的方式運作，您可以使用資料註解的 fluent API 來設定您的類別，讓程式碼第一次可以對應您的資料表之間的關聯性。  
+使用 Code First 時，您可以藉由定義網域 CLR 類別來定義您的模型。 根據預設，Entity Framework 會使用 Code First 慣例，將您的類別對應至資料庫架構。 如果您使用 Code First 命名慣例，在大部分的情況下，您可以依賴 Code First 根據您在類別上定義的外鍵和導覽屬性來設定資料表之間的關聯性。 如果您在定義類別時未遵循慣例，或想要變更慣例的使用方式，您可以使用 Fluent API 或資料批註來設定類別，讓 Code First 可以對應資料表之間的關聯性。  
 
 ## <a name="introduction"></a>簡介  
 
-設定時的關聯性使用 fluent API，開始與 EntityTypeConfiguration 執行個體，然後使用 HasRequired、 HasOptional 或 HasMany 方法來指定此實體所參與的關聯性的類型。 HasRequired 和 HasOptional 方法會採用表示參考導覽屬性的 lambda 運算式。 HasMany 方法會採用 lambda 運算式，表示集合導覽屬性。 您接著可以設定反向的導覽屬性使用 WithRequired、 WithOptional 和 WithMany 方法。 這些方法具有多載，不接受引數，而且可用來指定基數與單向導覽。  
+當設定與 Fluent API 的關聯性時，您會從 EntityTypeConfiguration 實例開始，然後使用 HasRequired、HasOptional 或 HasMany 方法來指定這個實體所參與之關聯性的類型。 HasRequired 和 HasOptional 方法會接受代表參考導覽屬性的 lambda 運算式。 HasMany 方法會接受代表集合導覽屬性的 lambda 運算式。 接著，您可以使用 WithRequired、WithOptional 和 WithMany 方法來設定反向導覽屬性。 這些方法具有不接受引數的多載，而且可以用來指定具有單向導覽的基數。  
 
-您接著可以使用 HasForeignKey 方法來設定外部索引鍵屬性。 這個方法會採用 lambda 運算式，表示要做為外部索引鍵的屬性。  
+接著，您可以使用 HasForeignKey 方法來設定外鍵屬性。 這個方法會採用 lambda 運算式，表示要當做外鍵使用的屬性。  
 
-## <a name="configuring-a-required-to-optional-relationship-one-tozero-or-one"></a>設定所需-至-選用的關聯性 （--0-或-一對一）  
+## <a name="configuring-a-required-to-optional-relationship-one-tozero-or-one"></a>設定必要的選擇性關聯性（一對一到零或一）  
 
-下列範例會設定--0-或-一對一關聯性。 OfficeAssignment 具有屬於主索引鍵和外部索引鍵，InstructorID 屬性，因為屬性的名稱並未遵循 HasKey 方法用來設定主索引鍵的慣例。  
+下列範例會設定一對零或一關聯性。 OfficeAssignment 具有屬於主鍵和外鍵的 InstructorID 屬性，因為屬性的名稱不會遵循 HasKey 方法用來設定主鍵的慣例。  
 
 ``` csharp
 // Configure the primary key for the OfficeAssignment
@@ -37,9 +37,9 @@ modelBuilder.Entity<OfficeAssignment>()
     .WithOptional(t => t.OfficeAssignment);
 ```  
 
-## <a name="configuring-a-relationship-where-both-ends-are-required-one-to-one"></a>設定關聯性兩端所需 （一對一）  
+## <a name="configuring-a-relationship-where-both-ends-are-required-one-to-one"></a>設定兩個端點都是必要的關聯性（一對一）  
 
-在大部分情況下 Entity Framework 可以推斷的型別是依存和也就是關聯性中的主體。 不過，當兩個關聯性所需或兩邊都是選擇性的 Entity Framework 無法識別相依和主體。 當關聯性的兩端都是必要項目時，使用 WithRequiredPrincipal 或 WithRequiredDependent HasRequired 方法之後。 當關聯性的兩端都是選擇性項目時，使用 WithOptionalPrincipal 或 WithOptionalDependent HasOptional 方法之後。  
+在大部分的情況下，Entity Framework 可以推斷哪個類型是相依的，而這是關聯性中的主體。 不過，當關聯性的兩端都是必要的，或兩端都是選擇性時 Entity Framework 無法識別相依和主體。 當關聯性的兩端都是必要的時，請在 HasRequired 方法後面使用 WithRequiredPrincipal 或 WithRequiredDependent。 當關聯性的兩端都是選擇性時，請在 HasOptional 方法後面使用 WithOptionalPrincipal 或 WithOptionalDependent。  
 
 ``` csharp
 // Configure the primary key for the OfficeAssignment
@@ -53,7 +53,7 @@ modelBuilder.Entity<Instructor>()
 
 ## <a name="configuring-a-many-to-many-relationship"></a>設定多對多關聯性  
 
-下列程式碼會設定 Course 與 Instructor 型別之間的多對多關聯性。 在下列範例中，預設 Code First 慣例來建立聯結的資料表。 如此一來 CourseInstructor 資料表會透過 Course_CourseID 和 Instructor_InstructorID 資料行。  
+下列程式碼會設定課程和講師類型之間的多對多關聯性。 在下列範例中，預設 Code First 慣例是用來建立聯結資料表。 因此，CourseInstructor 資料表是使用 Course_CourseID 和 Instructor_InstructorID 資料行建立的。  
 
 ``` csharp
 modelBuilder.Entity<Course>()
@@ -61,7 +61,7 @@ modelBuilder.Entity<Course>()
     .WithMany(t => t.Courses)
 ```  
 
-如果您想要在資料表中指定的聯結資料表名稱和資料行的名稱必須使用 Map 方法執行其他設定。 下列程式碼會產生的 CourseInstructor 資料表 CourseID 和 InstructorID 的資料行。  
+如果您想要指定聯結資料表名稱和資料表中的資料行名稱，您必須使用 Map 方法來執行其他設定。 下列程式碼會產生具有 CourseID 和 InstructorID 資料行的 CourseInstructor 資料表。  
 
 ``` csharp
 modelBuilder.Entity<Course>()
@@ -75,9 +75,9 @@ modelBuilder.Entity<Course>()
     });
 ```  
 
-## <a name="configuring-a-relationship-with-one-navigation-property"></a>設定具有一個導覽屬性的關聯性  
+## <a name="configuring-a-relationship-with-one-navigation-property"></a>使用一個導覽屬性設定關聯性  
 
-單向 （也稱為單向） 關聯性是只有其中一個關聯性端，而不是在同時定義導覽屬性時。 依照慣例，Code First 一律會解譯為一對多單向關聯性。 例如，如果您想要的一對一關聯性介於 Instructor 與 OfficeAssignment，其中只有 Instructor 型別有一個導覽屬性，您需要使用 fluent API 來設定此關聯性。  
+單向（也稱為單向）關聯性是只在其中一個關聯性端（而不是兩者）上定義導覽屬性時。 依照慣例，Code First 一律會將單向關聯性解讀為「一對多」。 例如，如果您想要講師和 OfficeAssignment 之間的一對一關聯性，其中只有講師類型的導覽屬性，您必須使用 Fluent API 來設定此關聯性。  
 
 ``` csharp
 // Configure the primary Key for the OfficeAssignment
@@ -91,14 +91,14 @@ modelBuilder.Entity<Instructor>()
 
 ## <a name="enabling-cascade-delete"></a>啟用串聯刪除  
 
-您可以使用 WillCascadeOnDelete 方法，將關聯性設定串聯刪除。 如果相依的實體上的外部索引鍵不是可為 null，然後第一個程式碼設定串聯刪除關聯性。 如果相依的實體上的外部索引鍵可為 null，第一個程式碼不會設定串聯刪除關聯性，而且當主體已刪除的外部索引鍵將會設定為 null。  
+您可以使用 WillCascadeOnDelete 方法，針對關聯性設定串聯刪除。 如果相依實體的外鍵不可為 null，則 Code First 在關聯性上設定 cascade delete。 如果相依實體上的外鍵可為 null，Code First 不會在關聯性上設定串聯刪除，而且當主體被刪除時，外鍵將會設定為 null。  
 
-您可以使用，以移除這些 cascade delete 慣例：  
+您可以使用下列方法移除這些串聯刪除慣例：  
 
-modelBuilder.Conventions.Remove\<OneToManyCascadeDeleteConvention\>（)  
-modelBuilder.Conventions.Remove\<ManyToManyCascadeDeleteConvention\>（)  
+modelBuilder\>（）移除\<  
+modelBuilder\>（）移除\<  
 
-下列程式碼會設定為 required 關聯性，並再停用串聯刪除。  
+下列程式碼會將關聯性設定為必要，然後停用串聯刪除。  
 
 ``` csharp
 modelBuilder.Entity<Course>()
@@ -108,9 +108,9 @@ modelBuilder.Entity<Course>()
     .WillCascadeOnDelete(false);
 ```  
 
-## <a name="configuring-a-composite-foreign-key"></a>設定複合外部索引鍵  
+## <a name="configuring-a-composite-foreign-key"></a>設定複合外鍵  
 
-如果部門型別上的主索引鍵是由 DepartmentID 和 Name 屬性所組成，您會設定主索引鍵部門 」 和 「 外部索引鍵的課程類型，如下所示：  
+如果部門類型上的主鍵是由 DepartmentID 和 Name 屬性所組成，您可以設定部門的主要金鑰和課程類型上的外鍵，如下所示：  
 
 ``` csharp
 // Composite primary key
@@ -124,9 +124,9 @@ modelBuilder.Entity<Course>()
     .HasForeignKey(d => new { d.DepartmentID, d.DepartmentName });
 ```  
 
-## <a name="renaming-a-foreign-key-that-is-not-defined-in-the-model"></a>重新命名模型中未定義的外部索引鍵  
+## <a name="renaming-a-foreign-key-that-is-not-defined-in-the-model"></a>重新命名模型中未定義的外鍵  
 
-如果您選擇不在 CLR 型別上定義的外部索引鍵，但想要在資料庫中指定它應該有何種名稱，執行下列作業：  
+如果您選擇不要在 CLR 類型上定義外鍵，但想要指定它在資料庫中應有的名稱，請執行下列動作：  
 
 ``` csharp
 modelBuilder.Entity<Course>()
@@ -135,9 +135,9 @@ modelBuilder.Entity<Course>()
     .Map(m => m.MapKey("ChangedDepartmentID"));
 ```  
 
-## <a name="configuring-a-foreign-key-name-that-does-not-follow-the-code-first-convention"></a>設定外部索引鍵名稱未遵循的程式碼的第一個慣例  
+## <a name="configuring-a-foreign-key-name-that-does-not-follow-the-code-first-convention"></a>正在設定未遵循 Code First 慣例的外鍵名稱  
 
-如果在課程類別上的外部索引鍵屬性呼叫而不是 DepartmentID SomeDepartmentID，您需要執行下列工作來指定您想要將外部索引鍵的 SomeDepartmentID:  
+如果課程類別上的外鍵屬性呼叫 SomeDepartmentID 而不是 DepartmentID，您就必須執行下列動作，指定要讓 SomeDepartmentID 成為外鍵：  
 
 ``` csharp
 modelBuilder.Entity<Course>()
@@ -146,9 +146,9 @@ modelBuilder.Entity<Course>()
          .HasForeignKey(c => c.SomeDepartmentID);
 ```  
 
-## <a name="model-used-in-samples"></a>範例中所使用的模型  
+## <a name="model-used-in-samples"></a>範例中使用的模型  
 
-下列的 Code First 模型用於此頁面上的範例。  
+下列 Code First 模型用於此頁面上的範例。  
 
 ``` csharp
 using System.Data.Entity;

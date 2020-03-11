@@ -5,11 +5,11 @@ ms.date: 01/03/2020
 ms.assetid: 75369266-d2b9-4416-b118-ed238f81f599
 uid: core/modeling/shadow-properties
 ms.openlocfilehash: 229cfd83f75b01dff9ac9ad30ee55c7cc727c19e
-ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75781179"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417409"
 ---
 # <a name="shadow-properties"></a>陰影屬性
 

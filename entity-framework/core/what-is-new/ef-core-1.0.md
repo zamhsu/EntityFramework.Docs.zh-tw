@@ -5,11 +5,11 @@ ms.date: 10/27/2016
 ms.assetid: 20A25111-AEBE-4BC2-83A5-3F651952DF72
 uid: core/what-is-new/ef-core-1.0
 ms.openlocfilehash: 2cd2a54d75ed3f0caa8b674dfb56babcfcc13592
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655848"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417521"
 ---
 # <a name="features-included-in-ef-core-10"></a>EF Core 1.0 中包含的功能
 
@@ -61,7 +61,7 @@ ms.locfileid: "73655848"
 
 可讓您在模型中定義序列物件。
 
-### <a name="unique-constraints"></a>唯一的條件約束
+### <a name="unique-constraints"></a>UNIQUE 條件約束
 
 可讓您定義替代索引鍵，並讓您定義以該索引鍵為目標的關聯性。
 
@@ -81,7 +81,7 @@ ms.locfileid: "73655848"
 
 偵測模型中的無效模式並提供實用的錯誤訊息。
 
-## <a name="change-tracking"></a>Change tracking
+## <a name="change-tracking"></a>變更追蹤
 
 ### <a name="snapshot-change-tracking"></a>快照集變更追蹤
 
@@ -171,7 +171,7 @@ ms.locfileid: "73655848"
 
 連線到 SQLite 3 資料庫。
 
-### <a name="in-memory"></a>記憶體內部
+### <a name="in-memory"></a>記憶體內
 
 設計為在不需要連線到實際資料庫的情況下輕鬆進行測試。
 

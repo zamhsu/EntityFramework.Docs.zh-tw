@@ -5,17 +5,17 @@ ms.date: 10/23/2016
 ms.assetid: 66ce9113-81d2-480f-8c16-d00ec405b2f7
 uid: ef6/get-started
 ms.openlocfilehash: 74ae347af3c386639631f28ccb2ddbe9f444953a
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655836"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416312"
 ---
 # <a name="get-started-with-entity-framework-6"></a>開始使用 Entity Framework 6
 
 本指南包含一系列精選文件文章、逐步解說及影片的連結，以協助您快速開始使用。
 
-## <a name="fundamentals"></a>Fundamentals
+## <a name="fundamentals"></a>基礎
 
 * [取得 Entity Framework](~/ef6/fundamentals/install.md)
 

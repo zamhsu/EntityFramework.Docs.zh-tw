@@ -5,17 +5,17 @@ ms.author: bricelam
 ms.date: 10/30/2017
 uid: core/managing-schemas/migrations/projects
 ms.openlocfilehash: 89b7f50fe750c2953aa75efcdffcb1a5199ce90c
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824419"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416812"
 ---
 # <a name="using-a-separate-migrations-project"></a>使用個別的遷移專案
 
 您可能想要將您的遷移儲存在與包含您的 `DbContext`不同的元件中。 您也可以使用此策略來維護多組遷移，例如，一個用於開發，另一個用於發行至發行升級。
 
-若要執行相關作業…
+作法...
 
 1. 建立新的類別庫。
 
@@ -45,13 +45,13 @@ ms.locfileid: "74824419"
 
 如果您已正確執行所有工作，您應該能夠將新的遷移新增至專案。
 
-## <a name="net-core-clitabdotnet-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
+## <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
 
 ```dotnetcli
 dotnet ef migrations add NewMigration --project MyApp.Migrations
 ```
 
-## <a name="visual-studiotabvs"></a>[Visual Studio](#tab/vs)
+## <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ``` powershell
 Add-Migration NewMigration -Project MyApp.Migrations

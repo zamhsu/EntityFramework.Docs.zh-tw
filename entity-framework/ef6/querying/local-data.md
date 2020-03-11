@@ -4,18 +4,18 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 2eda668b-1e5d-487d-9a8c-0e3beef03fcb
 ms.openlocfilehash: efd646348d8a18bbeed2d0a0e708d4d36eb26eac
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182422"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78417106"
 ---
 # <a name="local-data"></a>本機資料
 直接針對 DbSet 執行 LINQ 查詢時，一律會將查詢傳送至資料庫，但您可以使用 DbSet 來存取目前記憶體中的資料。 您也可以使用 DbCoNtext 和 DbCoNtext. ChangeTracker 專案方法，存取 EF 追蹤實體的額外資訊。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
 
 ## <a name="using-local-to-look-at-local-data"></a>使用本機來查看本機資料  
 
-DbSet 的 Local 屬性可讓您簡單存取目前正由內容追蹤而且尚未標示為已刪除的集合實體。 存取本機屬性永遠不會使查詢傳送至資料庫。 這表示通常在已經執行查詢之後，才會使用它。 Load 擴充方法可以用來執行查詢，以便內容追蹤結果。 例如:  
+DbSet 的 Local 屬性可讓您簡單存取目前正由內容追蹤而且尚未標示為已刪除的集合實體。 存取本機屬性永遠不會使查詢傳送至資料庫。 這表示通常在已經執行查詢之後，才會使用它。 Load 擴充方法可以用來執行查詢，以便內容追蹤結果。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -73,7 +73,7 @@ Found 2: The Visual Studio Blog with state Unchanged
 
 ## <a name="using-local-to-add-and-remove-entities-from-the-context"></a>使用本機來新增和移除內容中的實體  
 
-DbSet 上的區域屬性會傳回已連結事件的[ObservableCollection](https://msdn.microsoft.com/library/ms668604.aspx) ，使其與內容的內容保持同步。 這表示可以從本機集合或 DbSet 中加入或移除實體。 這也表示，將新實體帶入內容的查詢將會導致本機集合以這些實體進行更新。 例如:  
+DbSet 上的區域屬性會傳回已連結事件的[ObservableCollection](https://msdn.microsoft.com/library/ms668604.aspx) ，使其與內容的內容保持同步。 這表示可以從本機集合或 DbSet 中加入或移除實體。 這也表示，將新實體帶入內容的查詢將會導致本機集合以這些實體進行更新。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -155,7 +155,7 @@ DbSet 上的區域屬性可以直接用於 WPF 應用程式中的資料系結，
 
 ## <a name="wpf-binding-to-navigation-properties"></a>WPF 系結至導覽屬性  
 
-如果您要執行主要/詳細資料系結，您可能會想要將詳細資料檢視系結至其中一個實體的導覽屬性。 簡單的方法是使用導覽屬性的 ObservableCollection。 例如:  
+如果您要執行主要/詳細資料系結，您可能會想要將詳細資料檢視系結至其中一個實體的導覽屬性。 簡單的方法是使用導覽屬性的 ObservableCollection。 例如：  
 
 ``` csharp
 public class Blog
@@ -175,7 +175,7 @@ public class Blog
 
 ## <a name="using-local-to-clean-up-entities-in-savechanges"></a>使用本機來清除 SaveChanges 中的實體  
 
-在大部分情況下，從導覽屬性中移除的實體不會在內容中自動標示為已刪除。 例如，如果您從 [Blog] 集合中移除 Post 物件，則在呼叫 SaveChanges 時，將不會自動刪除該 post。 如果您需要將它刪除，您可能需要尋找這些無關聯實體，並在呼叫 SaveChanges 或做為覆寫 SaveChanges 的一部分之前，將它們標示為已刪除。 例如:  
+在大部分情況下，從導覽屬性中移除的實體不會在內容中自動標示為已刪除。 例如，如果您從 [Blog] 集合中移除 Post 物件，則在呼叫 SaveChanges 時，將不會自動刪除該 post。 如果您需要將它刪除，您可能需要尋找這些無關聯實體，並在呼叫 SaveChanges 或做為覆寫 SaveChanges 的一部分之前，將它們標示為已刪除。 例如：  
 
 ``` csharp
 public override int SaveChanges()
@@ -208,7 +208,7 @@ Windows Forms 不支援直接使用 ObservableCollection 進行完全精確的�
 
 此系列中的許多範例都使用 Entry 方法來傳回實體的 DbEntityEntry 實例。 這個專案物件接著會做為收集實體相關資訊的起點，例如其目前狀態，以及在實體上執行作業（例如明確載入相關實體）。  
 
-專案方法會針對內容所追蹤的許多或所有實體傳回 DbEntityEntry 物件。 這可讓您收集許多實體的資訊或執行作業，而不只是單一專案。 例如:  
+專案方法會針對內容所追蹤的許多或所有實體傳回 DbEntityEntry 物件。 這可讓您收集許多實體的資訊或執行作業，而不只是單一專案。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
