@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 36591d8f-36e1-4835-8a51-90f34f633d1e
 ms.openlocfilehash: e5a91af73bab9d45b0f1f4242ce503c6b6f407f6
-ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/03/2019
-ms.locfileid: "55668696"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413303"
 ---
 # <a name="code-first-migrations"></a>Code First 移轉
 如果您使用 Code First 工作流程，則建議使用 Code First 移轉來改善應用程式的資料庫結構描述。 移轉會提供一組工具，該工具允許下列項目：
@@ -25,7 +25,7 @@ ms.locfileid: "55668696"
 
 -   建立新 **MigrationsDemo** 主控台應用程式
 -   將最新版本 **EntityFramework** NuGet 套件新增至專案
-    -   [工具] –&gt; [程式庫套件管理員] –&gt; [套件管理員主控台]
+    -   [工具] –&gt; [程式庫套件管理員] –&gt; [套件管理員主控台] 
     -   執行 **Install-package EntityFramework** 命令
 -   使用如下所示的程式碼新增 **Model.cs** 檔案。 此程式碼會定義構成我們網域模型的單一 **Blog** 類別，以及作為 EF Code First 內容的 **BlogContext** 類別
 
@@ -96,7 +96,7 @@ ms.locfileid: "55668696"
     public string Url { get; set; }
 ```
 
-如果您再次執行該應用程式，您將會收到 InvalidOperationException，指出*自資料庫建立以來，支援 'BlogContext' 內容的模型已變更。請考慮使用 Code First 移轉來更新資料庫」(* [*http://go.microsoft.com/fwlink/?LinkId=238269*](https://go.microsoft.com/fwlink/?LinkId=238269)*)。*
+如果您再次執行該應用程式，您將會收到 InvalidOperationException，指出*自資料庫建立以來，支援 'BlogContext' 內容的模型已變更。請考慮使用 Code First 移轉更新資料庫 (* [ *http://go.microsoft.com/fwlink/?LinkId=238269* ](https://go.microsoft.com/fwlink/?LinkId=238269) *)。*
 
 如例外狀況所示，現在可以開始使用 Code First 移轉。 第一個步驟是為內容啟用移轉。
 
@@ -105,9 +105,9 @@ ms.locfileid: "55668696"
     此命令會將 **Migrations** 資料夾新增至專案。 這個新資料夾包含兩個檔案：
 
 -   **組態類別**。 這個類別可讓您設定移轉對內容的運作方式。 在此逐步解說中，我們將只使用預設組態。
-    「由於專案中只有一個單一 Code First 內容，因此 Enable-Migrations 已自動填入此組態適用的內容類型。」
+    「由於專案中只有一個單一 Code First 內容，因此 Enable-Migrations 已自動填入此組態適用的內容類型。」 
 -   **InitialCreate 移轉**。 產生此移轉是因為在我們啟用移轉之前，Code First 已為我們建立了資料庫。 這個包含 scaffold 移轉中的程式碼，表示已在資料庫中建立的物件。 在本案例中，即是包含 **BlogId** 和 **Name** 資料行的 **Blog** 資料表。 檔案名稱包含時間戳記，以協助排序。
-    「如果尚未建立資料庫，則不會將此 InitialCreate 移轉新增至專案中。反之，在我們第一次呼叫 Add-Migration 時，建立這些資料表的程式碼將會建立至新的移轉中。」
+    「如果尚未建立資料庫，則不會將此 InitialCreate 移轉新增至專案中。反之，在我們第一次呼叫 Add-Migration 時，建立這些資料表的程式碼將會建立至新的移轉中。」 
 
 ### <a name="multiple-models-targeting-the-same-database"></a>針對相同資料庫的多個模型
 
@@ -237,7 +237,7 @@ Code First 移轉在建立這些變更方面做得非常好，但我們可能仍
 
 已編輯的移轉已準備好，現在請使用 **Update-Database** 將資料庫保持最新狀態。 這次讓我們指定 **–Verbose** 旗標，讓您可以看到 Code First 移轉正在執行的 SQL。
 
--   在套件管理員主控台中執行 **Update-Database –Verbose** 命令。
+-   在套件管理員主控台中執行 **-Verbose** 命令。
 
 ## <a name="data-motion--custom-sql"></a>資料動作/自訂 SQL
 
@@ -280,7 +280,7 @@ Code First 移轉在建立這些變更方面做得非常好，但我們可能仍
 
 已編輯的移轉看起來一切良好，現在請使用 **Update-Database** 將資料庫保持最新狀態。 我們將會指定 **–Verbose** 旗標，讓我們能夠查看為資料庫執行的 SQL。
 
--   在套件管理員主控台中執行 **Update-Database –Verbose** 命令。
+-   在套件管理員主控台中執行 **-Verbose** 命令。
 
 ## <a name="migrate-to-a-specific-version-including-downgrade"></a>移轉至特定版本 (包括降級)
 
@@ -298,8 +298,8 @@ Code First 移轉在建立這些變更方面做得非常好，但我們可能仍
 
 如果其他開發人員希望在其電腦上進行這些變更，他們可以在我們檢查對原始檔控制的變更後同步。 一旦他們擁有了我們的新移轉，他們就可以執行 Update-Database 命令以在本機套用變更。 但是，如果我們想將這些變更推送至測試伺服器並生產，我們可能需要能夠遞交給 DBA 的 SQL 指令碼。
 
--   請執行 **Update-database** 命令，但這次請指定 **–Script** 旗標，以便將變更寫入至指令碼，而非套用。 我們也會指定來源和目標移轉以產生指令碼。 我們希望指令碼從空的資料庫 (**$InitialDatabase**) 移轉至最新版本 (移轉 **AddPostAbstract**)。
-    「如果您未指定目標移轉，則移轉會使用最新的移轉作為目標。如果您未指定來源移轉，則移轉會使用資料庫的目前狀態。」
+-   請執行 **Update-database** 命令，但這次請指定 **–Script** 旗標，以便將變更寫入至指令碼，而非套用。 我們也會指定來源和目標移轉以產生指令碼。 我們希望指令碼從空的資料庫 ( **$InitialDatabase**) 移轉至最新版本 (移轉 **AddPostAbstract**)。
+    「如果您未指定目標移轉，則移轉會使用最新的移轉作為目標。如果您未指定來源移轉，則移轉會使用資料庫的目前狀態。」 
 -   在套件管理員主控台中執行 **Update-Database -Script -SourceMigration: $InitialDatabase -TargetMigration:AddPostAbstract** 命令
 
 Code First 移轉將執行移轉管線，但不會實際套用變更，而是將其寫入 .sql 檔案中。 一旦產生指令碼，即會在 Visual Studio 中開啟，供您檢視或儲存。
@@ -314,7 +314,7 @@ Code First 移轉將執行移轉管線，但不會實際套用變更，而是將
 
 我們可以更新 **Program.cs** 檔案 (如下所示) 在我們使用內容 (第 14 行) 之前為 BlogContext 設定 **MigrateDatabaseToLatestVersion** 初始設定式。 請注意，您也需要為 **System.Data.Entity** 命名空間 (第 5 行) 新增使用陳述式。
 
-當我們建立此初始設定式的執行個體時，我們需要指定內容類型 ( **BlogContext**) 和移轉組態 (**Configuration**) - 移轉組態是在我們啟用移轉時新增至 **Migrations** 資料夾的類別。
+當我們建立此初始設定式的執行個體時，我們需要指定內容類型 ( **BlogContext**) 和移轉組態 (**Configuration**) - 移轉組態是在我們啟用移轉時新增至 **Migrations** 資料夾的類別。 
 
 ``` csharp
     using System;

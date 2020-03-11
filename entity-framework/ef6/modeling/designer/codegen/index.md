@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 56e00fa2-f9f0-48b3-8006-f8266ca7e74b
 ms.openlocfilehash: e4e99a86e7c273682c85eba06042af9a2a837d12
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283858"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413283"
 ---
 # <a name="designer-code-generation-templates"></a>設計工具程式碼產生範本
 當您使用 Entity Framework Designer 建立模型時，會自動為您產生類別和衍生的內容。 除了預設程式碼產生之外，我們也提供許多範本，可用於自訂產生的程式碼。 這些範本會以 T4 文字範本的形式提供，讓您可根據需要來自訂範本。
@@ -30,11 +30,11 @@ Entity Framework 小組提供下列範本：
 
 此範本將產生簡單的 POCO 實體類別，以及使用 EF6 從 DbContext 衍生的內容。
 這是建議的範本，除非您有理由使用下面列出的其他範本之一。
-如果您使用的是 Visual Studio 最新版本 (Visual Studio 2013 以上版本)，則此範本也是您預設會取得的程式碼產生範本：建立新模型時，預設會使用此範本，並且 T4 檔案 (.tt) 會巢狀於您的 .edmx 檔案下。
+若是使用最近幾版的 Visual Studio (自 Visual Studio 2013 起)，這也是您預設會取得的程式碼產生範本：根據預設，當您建立新模型時，將會使用此範本，並會將 T4 檔案 (.tt) 巢狀顯示在您的 .edmx 檔案下。
 
 #### <a name="older-versions-of-visual-studio"></a>Visual Studio 舊版
-- **Visual Studio 2012：** 若要取得 **EF 6.x DbContextGenerator** 範本，您必須安裝最新的 **Entity Framework Tools for Visual Studio** - 請參閱[取得Entity Framework](~/ef6/fundamentals/install.md) 頁面以取得詳細資訊。
-- **Visual Studio 2010：****EF 6.x DbContextGenerator** 範本不適用於 Visual Studio 2010。
+- **Visual Studio 2012：** 若要取得 **EF 6.x DbContextGenerator** 範本，必須安裝最新的 **Entity Framework Tools for Visual Studio** - 請參閱[取得Entity Framework](~/ef6/fundamentals/install.md) 頁面，以取得詳細資訊。
+- **Visual Studio 2010：** **EF 6.x DbContextGenerator** 範本不適用於 Visual Studio 2010。
 
 #### <a name="dbcontext-generator-for-ef-5x"></a>適用於 EF 5.x 的 DbContext 產生器
 
@@ -42,7 +42,7 @@ Entity Framework 小組提供下列範本：
 
 如果您使用 Visual Studio 2013 或 2012，則此範本已安裝。
 
-如果您使用 Visual Studio 2010，則在新增範本時需要選取 [線上] 索引標籤以從 Visual Studio 組件庫下載。 或者，您可以直接從 Visual Studio 組件庫中預先安裝此範本。 由於更新版本的 Visual Studio 中已包含範本，因此組件庫中的版本只能安裝於 Visual Studio 2010。
+如果您使用 Visual Studio 2010，則在新增範本時需要選取 [線上]  索引標籤以從 Visual Studio 組件庫下載。 或者，您可以直接從 Visual Studio 組件庫中預先安裝此範本。 由於更新版本的 Visual Studio 中已包含範本，因此組件庫中的版本只能安裝於 Visual Studio 2010。
 
 - [EF 5.x DbContext Generator for C#](https://visualstudiogallery.msdn.microsoft.com/da740968-02f9-42a9-9ee4-1a9a06d896a2) (適用於 C# 的 EF 5.x DbContext 產生器)
 - [EF 5.x DbContext Generator for C# Web Sites](https://visualstudiogallery.msdn.microsoft.com/5d01a981-91b8-492c-b42c-c771c3f31e03) (適用於 C# 網站的 EF 5.x DbContext 產生器)
@@ -51,7 +51,7 @@ Entity Framework 小組提供下列範本：
 
 #### <a name="dbcontext-generator-for-ef-4x"></a>適用於 EF 4.x 的 DbContext 產生器
 
-如果您使用較舊版本的 EntityFramework NuGet 套件 (主要版本為 4)，則必須使用 **EF 4.x DbContext 產生器**範本。 新增範本時，您可在 [線上] 索引標籤中找到此範本，或者您也可以直接從 Visual Studio 組件庫中預先安裝此範本。
+如果您使用較舊版本的 EntityFramework NuGet 套件 (主要版本為 4)，則必須使用 **EF 4.x DbContext 產生器**範本。 新增範本時，您可在 [線上]  索引標籤中找到此範本，或者您也可以直接從 Visual Studio 組件庫中預先安裝此範本。
 
 - [EF 4.x DbContext Generator for C#](https://visualstudiogallery.msdn.microsoft.com/7812b04c-db36-4817-8a84-e73c452410a2) (適用於 C# 的 EF 4.x DbContext 產生器)
 - [EF 4.x DbContext Generator for C# Web Sites](https://visualstudiogallery.msdn.microsoft.com/de0e9bc6-e86a-4448-8a2e-a1260a53203e) (適用於 C# 網站的 EF 4.x DbContext 產生器)
@@ -69,7 +69,7 @@ DbContext 產生器現在是新應用程式的建議範本。 DbContext 產生�
 
 **Visual Studio 2010, 2012 &amp; 2013**
 
-在您新增範本時需要選取 [線上] 索引標籤以從 Visual Studio 組件庫下載。 或者，您可以直接從 Visual Studio 組件庫中預先安裝此範本。
+在您新增範本時需要選取 [線上]  索引標籤以從 Visual Studio 組件庫下載。 或者，您可以直接從 Visual Studio 組件庫中預先安裝此範本。
 
 - [EF 6.x EntityObject Generator for C#](https://visualstudiogallery.msdn.microsoft.com/66612113-549c-4a9e-a14a-f629ceb3f89a) (適用於 C# 的 EF 6.x EntityObject 產生器)
 - [EF 6.x EntityObject Generator for C# Web Sites](https://visualstudiogallery.msdn.microsoft.com/076140f3-6dbe-451f-a0e0-16b6d2bd8996) (適用於 C# 網站的 EF 6.x EntityObject 產生器)
@@ -79,7 +79,7 @@ DbContext 產生器現在是新應用程式的建議範本。 DbContext 產生�
 **EntityObject Generator for EF 5.x** (適用於 EF 5.x 的 EntityObject 產生器)
 
 
-如果您使用 Visual Studio 2012 或 2013，則在新增範本時需要選取 [線上] 索引標籤以從 Visual Studio 組件庫下載。 或者，您可以直接從 Visual Studio 組件庫中預先安裝此範本。 由於 Visual Studio 2010 中已包含範本，因此組件庫中的版本只能安裝於 Visual Studio 2012 &amp; 2013。
+如果您使用 Visual Studio 2012 或 2013，則在新增範本時需要選取 [線上]  索引標籤以從 Visual Studio 組件庫下載。 或者，您可以直接從 Visual Studio 組件庫中預先安裝此範本。 由於 Visual Studio 2010 中已包含範本，因此組件庫中的版本只能安裝於 Visual Studio 2012 &amp; 2013。
 
 - [EF 5.x EntityObject Generator for C#](https://visualstudiogallery.msdn.microsoft.com/1da40393-b5ec-404a-a000-6a7e6e911339) (適用於 C# 的 EF 5.x EntityObject 產生器)
 - [EF 5.x EntityObject Generator for C# Web Sites](https://visualstudiogallery.msdn.microsoft.com/94b48556-fcf0-4b9b-8615-20f9066ae9ac)
@@ -108,7 +108,7 @@ DbContext 產生器現在是新應用程式的建議範本。 DbContext 產生�
 
 ### <a name="visual-studio-2012"></a>Visual Studio 2012
 
-如果您使用 Visual Studio 2012，則在新增範本時需要選取 [線上] 索引標籤以從 Visual Studio 組件庫下載。 或者，您可以直接從 Visual Studio 組件庫中預先安裝此範本。 由於 Visual Studio 2010 中已包含範本，因此組件庫中的版本只能安裝於 Visual Studio 2012。
+如果您使用 Visual Studio 2012，則在新增範本時需要選取 [線上]  索引標籤以從 Visual Studio 組件庫下載。 或者，您可以直接從 Visual Studio 組件庫中預先安裝此範本。 由於 Visual Studio 2010 中已包含範本，因此組件庫中的版本只能安裝於 Visual Studio 2012。
 
 - [EF 5.x STE Generator for C#](https://visualstudiogallery.msdn.microsoft.com/a3ac10a5-9365-4096-bb58-d9a1ba71db8f) (適用於 C# 的 EF 5.x STE 產生器)
 - [EF 5.x STE Generator for C# Web Sites](https://visualstudiogallery.msdn.microsoft.com/1b55ab82-eeb4-47ba-8d35-3c7c8b5f5a8c) (適用於 C# 網站的 EF 5.x STE 產生器)
@@ -136,7 +136,7 @@ DbContext 產生器現在是用於在新應用程式中產生 POCO 類別的建�
 
 #### <a name="visual-studio-2012-amp-visual-studio-2010"></a>Visual Studio 2012 &amp; Visual Studio 2010
 
-在您新增範本時需要選取 [線上] 索引標籤以從 Visual Studio 組件庫下載。 或者，您可以直接從 Visual Studio 組件庫中預先安裝此範本。
+在您新增範本時需要選取 [線上]  索引標籤以從 Visual Studio 組件庫下載。 或者，您可以直接從 Visual Studio 組件庫中預先安裝此範本。
 
 - [EF 4.x POCO Generator for C#](https://visualstudiogallery.msdn.microsoft.com/23df0450-5677-4926-96cc-173d02752313) (適用於 C# 的 EF 4.x POCO 產生器)
 - [EF 4.x POCO Generator for C# Web Sites](https://visualstudiogallery.msdn.microsoft.com/fe568da5-aa1a-4178-a2a5-48813c707a7f) (適用於 C# 網站的 EF 4.x POCO 產生器)
@@ -145,29 +145,29 @@ DbContext 產生器現在是用於在新應用程式中產生 POCO 類別的建�
 
 ### <a name="what-are-the-web-sites-templates"></a>什麼是「網站」範本
 
-「網站」範本 (例如**適用於 C\# 網站的 EF 5.x DbContext 產生器**) 用於透過 [檔案] -&gt; [新增] -&gt; [網站...] 建立的網站專案中。這些與透過 [檔案] -&gt; [新增] -&gt; [專案...] 建立的 Web 應用程式不同，後者使用標準範本。 我們提供不同的範本，因為 Visual Studio 中的項目範本系統需要。
+「網站」範本 (例如**適用於 C\# 網站的 EF 5.x DbContext 產生器**) 用於透過 [檔案] -&gt; [新增] -&gt; [網站...]  建立的網站專案中。這些與透過 [檔案] -&gt; [新增] -&gt; [專案...]  建立的 Web 應用程式不同，後者使用標準範本。 我們提供不同的範本，因為 Visual Studio 中的項目範本系統需要。
 
 ## <a name="using-a-template"></a>使用範本
 
-若要開始使用程式碼產生範本，請以滑鼠右鍵按一下 EF Designer 中設計介面上的空白點，然後選取 [新增程式碼產生項目...]。
+若要開始使用程式碼產生範本，請以滑鼠右鍵按一下 EF Designer 中設計介面上的空白點，然後選取 [新增程式碼產生項目...]  。
 
 ![新增程式碼產生項目](~/ef6/media/add-code-gen-item.png)
 
-如果您已經安裝要使用的範本 (或者已包含在 Visual Studio 中)，則範本將在左側功能表的 [程式碼] 或 [資料] 區段下可用。
+如果您已經安裝要使用的範本 (或者已包含在 Visual Studio 中)，則範本將在左側功能表的 [程式碼]  或 [資料]  區段下可用。
 
 ![已安裝](~/ef6/media/installed.png)
 
-如果您尚未安裝範本，請從左側功能表中選取 [線上]，然後搜尋所需的範本。
+如果您尚未安裝範本，請從左側功能表中選取 [線上]  ，然後搜尋所需的範本。
 
-![搜尋](~/ef6/media/search.png) 
+![搜尋](~/ef6/media/search.png) 
 
 如果您使用 Visual Studio 2012，則新的 .tt 檔案將巢狀於 .edmx 檔案下。*
 
 > [!NOTE]
-> 對於在 Visual Studio 2012 中建立的模型，您將需要刪除用於預設程式碼產生的範本，否則您將產生重複的類別和內容。 預設檔案為 **&lt;模型名稱&gt;.tt** 和 **&lt;模型名稱&gt;.context.tt**。 
+> 對於在 Visual Studio 2012 中建立的模型，您將需要刪除用於預設程式碼產生的範本，否則您將產生重複的類別和內容。 預設檔案為 **&lt;模型名稱&gt;.tt** 和 **&lt;模型名稱&gt;.context.tt**。 
 
 ![VS2012 範本](~/ef6/media/vs2012-templates.png)
 
-如果您使用 Visual Studio 2010，tt 檔案會直接新增至您的專案。  
+如果您使用 Visual Studio 2010，tt 檔案會直接新增至您的專案。  
 
 ![VS2010 範本](~/ef6/media/vs2010-templates.png)
