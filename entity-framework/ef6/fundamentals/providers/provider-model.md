@@ -4,11 +4,11 @@ author: divega
 ms.date: 06/27/2018
 ms.assetid: 066832F0-D51B-4655-8BE7-C983C557E0E4
 ms.openlocfilehash: 8bda3f51e8934f2add862c30e60f1185f068c515
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181602"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78419357"
 ---
 # <a name="the-entity-framework-6-provider-model"></a>Entity Framework 6 提供者模型
 
@@ -36,7 +36,7 @@ EF 相依于擁有衍生自 Dbproviderservices.createdatabase 的型別，以便
 
 如需 Dbproviderservices.createdatabase 執行的基本功能的詳細資訊，請參閱[MSDN](https://msdn.microsoft.com/library/ee789835.aspx)。 不過，請注意，在撰寫本文時，不會針對 EF6 更新這項資訊，雖然大部分的概念仍然有效。 Dbproviderservices.createdatabase 的 SQL Server 和 SQL Server Compact 實作用也會簽入到[開放原始碼程式碼基](https://github.com/aspnet/EntityFramework6/)底，而且可以做為其他執行的實用參考。
 
-在較舊版本的 EF 中，會直接從 ADO.NET 提供者取得要使用的 Dbproviderservices.createdatabase 執行。 這是藉由將 DbProviderFactory 轉換成 IServiceProvider 並呼叫 GetService 方法來完成。 這會將 EF 提供者緊密結合到 DbProviderFactory。 這項結合會使 EF 無法從 .NET Framework 移出，因此 EF6 此緊密結合已移除，而 Dbproviderservices.createdatabase 的執行現在會直接在應用程式的設定檔中註冊，或是以程式碼為基礎的設定進行，如下面的 >註冊 dbproviderservices.createdatabase一節中所述。
+在較舊版本的 EF 中，會直接從 ADO.NET 提供者取得要使用的 Dbproviderservices.createdatabase 執行。 這是藉由將 DbProviderFactory 轉換成 IServiceProvider 並呼叫 GetService 方法來完成。 這會將 EF 提供者緊密結合到 DbProviderFactory。 這項結合會使 EF 無法從 .NET Framework 移出，因此 EF6 此緊密結合已移除，而 Dbproviderservices.createdatabase 的執行現在會直接在應用程式的設定檔中註冊，或是以程式碼為基礎的設定進行，如下面的 _註冊 dbproviderservices.createdatabase一節中所述。_
 
 ## <a name="additional-services"></a>其他服務
 
