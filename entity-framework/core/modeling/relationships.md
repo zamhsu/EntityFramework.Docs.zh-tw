@@ -5,11 +5,11 @@ author: AndriySvyryd
 ms.date: 11/21/2019
 uid: core/modeling/relationships
 ms.openlocfilehash: 6d68e813cec6c989e8e4cb848f8740489645c65c
-ms.sourcegitcommit: 89567d08c9d8bf9c33bb55a62f17067094a4065a
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/06/2020
-ms.locfileid: "77051403"
+ms.lasthandoff: 03/15/2020
+ms.locfileid: "79402163"
 ---
 # <a name="relationships"></a>關聯性
 
@@ -118,13 +118,13 @@ ms.locfileid: "77051403"
 
 ## <a name="manual-configuration"></a>手動設定
 
-### <a name="fluent-apitabfluent-api"></a>[流暢的 API](#tab/fluent-api)
+### <a name="fluent-api"></a>[流暢的 API](#tab/fluent-api)
 
 若要在流暢的 API 中設定關聯性，您一開始會先識別構成關聯性的導覽屬性。 `HasOne` 或 `HasMany` 會識別您開始設定之實體類型的導覽屬性。 接著，您會將呼叫連結至 `WithOne` 或 `WithMany`，以識別反向導覽。 `HasOne`/`WithOne` 用於參考導覽屬性，而 `HasMany`/`WithMany` 用於集合導覽屬性。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoForeignKey.cs?name=NoForeignKey&highlight=8-10)]
 
-### <a name="data-annotationstabdata-annotations"></a>[資料批註](#tab/data-annotations)
+### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
 
 您可以使用資料批註來設定相依和主體實體上的導覽屬性如何配對。 當兩個實體類型之間有一對以上的導覽屬性時，通常就會執行這項作業。
 
@@ -146,19 +146,19 @@ ms.locfileid: "77051403"
 
 ### <a name="foreign-key"></a>外部索引鍵
 
-#### <a name="fluent-api-simple-keytabfluent-api-simple-key"></a>[流暢的 API （簡單金鑰）](#tab/fluent-api-simple-key)
+#### <a name="fluent-api-simple-key"></a>[流暢的 API （簡單金鑰）](#tab/fluent-api-simple-key)
 
 您可以使用流暢的 API 來設定應該使用哪一個屬性做為指定關聯性的外鍵屬性：
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ForeignKey.cs?name=ForeignKey&highlight=11)]
 
-#### <a name="fluent-api-composite-keytabfluent-api-composite-key"></a>[流暢 API （複合索引鍵）](#tab/fluent-api-composite-key)
+#### <a name="fluent-api-composite-key"></a>[流暢 API （複合索引鍵）](#tab/fluent-api-composite-key)
 
 您可以使用流暢的 API 來設定應該使用哪些屬性做為指定關聯性的複合外鍵屬性：
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositeForeignKey.cs?name=CompositeForeignKey&highlight=13)]
 
-#### <a name="data-annotations-simple-keytabdata-annotations-simple-key"></a>[資料批註（簡單索引鍵）](#tab/data-annotations-simple-key)
+#### <a name="data-annotations-simple-key"></a>[資料批註（簡單索引鍵）](#tab/data-annotations-simple-key)
 
 您可以使用資料批註來設定應該使用哪一個屬性做為指定關聯性的外鍵屬性。 這通常是在不依照慣例探索外鍵屬性時完成：
 
@@ -196,11 +196,11 @@ ms.locfileid: "77051403"
 
 如果您想要外鍵參考主鍵以外的屬性，您可以使用流暢的 API 來設定關聯性的主體索引鍵屬性。 您設定為主體金鑰的屬性會自動設定為[替代金鑰](alternate-keys.md)。
 
-#### <a name="simple-keytabsimple-key"></a>[簡單金鑰](#tab/simple-key)
+#### <a name="simple-key"></a>[簡單金鑰](#tab/simple-key)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/PrincipalKey.cs?name=PrincipalKey&highlight=11)]
 
-#### <a name="composite-keytabcomposite-key"></a>[複合索引鍵](#tab/composite-key)
+#### <a name="composite-key"></a>[複合索引鍵](#tab/composite-key)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositePrincipalKey.cs?name=CompositePrincipalKey&highlight=11)]
 

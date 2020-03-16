@@ -4,12 +4,12 @@ author: divega
 ms.date: 09/12/2019
 ms.assetid: 1060bb99-765f-4f32-aaeb-d6635d3dbd3e
 uid: ef6/what-is-new/past-releases
-ms.openlocfilehash: fada7740453cd9a55a1d0069236efcecbd9aa314
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: b7181334cd125c5cbf296d5b3674c0b5f087f438
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656145"
+ms.lasthandoff: 03/15/2020
+ms.locfileid: "79402170"
 ---
 # <a name="past-releases-of-entity-framework"></a>過去的 Entity Framework 版本
 
@@ -19,7 +19,7 @@ ms.locfileid: "73656145"
 
 在版本4.1 和5.0 之間，EntityFramework NuGet 套件會擴充 .NET Framework 隨附的 EF 程式庫。
 
-從第6版開始，EF 變成開放原始碼專案，並已完全以頻外形式移出 .NET Framework。
+從第6版開始，EF 變成了開放原始碼專案，而且已從 .NET Framework 中完全移出頻外。
 這表示當您將 EntityFramework 第6版 NuGet 封裝新增至應用程式時，您會取得 EF 程式庫的完整複本，而不會相依于 .NET Framework 中隨附的 EF 位。
 這有助於稍微加速開發和傳遞新功能的速度。
 
@@ -94,7 +94,7 @@ EF 6.1.0 執行時間已于2014年3月發行至 NuGet。
 - 透過 **[App/web.config 檔案設定攔截器的功能](~/ef6/fundamentals/configuring/config-file.md)** ，可讓您在不需重新編譯應用程式的情況下新增攔截器。
 - **DatabaseLogger**是新的攔截器，可讓您輕鬆地將所有資料庫作業記錄到檔案中。 結合先前的功能，可讓您輕鬆地切換已[部署應用程式的資料庫作業記錄](~/ef6/fundamentals/configuring/config-file.md)，而不需要重新編譯。
 - 已改善**遷移模型變更偵測**，讓 scaffold 的遷移更為精確;變更偵測程式的效能也已經增強。
-- **效能改進**，包括在初始化期間減少資料庫作業、在 LINQ 查詢中優化 null 相等比較、在更多案例中產生更快速的視圖（模型建立），以及更有效率的具體化具有多個關聯的追蹤實體。
+- **效能改進**，包括在初始化期間減少資料庫作業、在 LINQ 查詢中優化 null 相等比較、在更多案例中產生更快速的視圖（模型建立），以及更有效率地具體化具有多個關聯的追蹤實體。
 
 ## <a name="ef-602"></a>EF 6.0。2
 EF 6.0.2 執行時間已在2013年12月發行至 NuGet。
@@ -121,7 +121,7 @@ EF 6.0.0 執行時間已于2013年10月發行至 NuGet。
 - 相依性 **[解析](~/ef6/fundamentals/configuring/dependency-resolution.md)** 引進服務定位器模式的支援，而且我們已分解一些可由自訂的執行取代的功能。
 - **[攔截/SQL 記錄](~/ef6/fundamentals/logging-and-interception.md)** 會提供低層級的建立區塊，以攔截 EF 作業，並建立最上層的簡單 SQL 記錄。
 - 當您[使用模擬架構](~/ef6/fundamentals/testing/mocking.md)或[撰寫您自己的測試加倍](~/ef6/fundamentals/testing/writing-test-doubles.md)時，可**測試**性的改良讓您更輕鬆地為 DbCoNtext 和 DbSet 建立測試雙精度浮點數。
-- **[現在可以使用已開啟的 DbConnection 來建立 DbCoNtext，](~/ef6/fundamentals/connection-management.md)** 這可讓您在建立內容時開啟連線時（例如，在您無法保證的元件之間共用連接），這樣會很有説明。連接的狀態）。
+- **[現在可以使用已開啟的 DbConnection 來建立 DbCoNtext，](~/ef6/fundamentals/connection-management.md)** 這可讓您在建立內容時（例如，共用元件間的連線，但不能保證線上狀態）開啟連接時，它會很有説明。
 - **[改良的交易支援](~/ef6/saving/transactions.md)** 提供架構外部交易的支援，以及在架構內建立交易的改良方式。
 - **.Net 4.0 的列舉、空間和更好的效能**-藉由將過去 .NET Framework 的核心元件移至 EF NuGet 套件，我們現在可以提供 enum 支援、空間資料類型，以及 .net 4.0 上 EF5 的效能改進。
 - 已改善可列舉**的效能。包含在 LINQ 查詢中**。
@@ -168,7 +168,7 @@ Visual Studio 2012 中的 Entity Framework Designer 也引進了每個模型的�
     -   [效能考量](~/ef6/fundamentals/performance/perf-whitepaper.md)
     -   [使用 Microsoft SQL Azure](~/ef6/fundamentals/connection-resiliency/retry-logic.md)
     -   [設定檔設定](~/ef6/fundamentals/configuring/config-file.md)
-    -   [字彙](~/ef6/resources/glossary.md)
+    -   [詞彙](~/ef6/resources/glossary.md)
     -   Code First
         -   [Code First 至新的資料庫（逐步解說和影片）](~/ef6/modeling/code-first/workflows/new-database.md)
         -   [Code First 到現有的資料庫（逐步解說和影片）](~/ef6/modeling/code-first/workflows/existing-database.md)
@@ -234,7 +234,7 @@ EF 4.3.0 執行時間已于2012年2月發行至 NuGet。
 ## <a name="ef-42"></a>EF 4。2
 EF 4.2.0 執行時間已于2011年11月發行至 NuGet。
 此版本包含 EF 4.1.1 版本的錯誤修正。
-因為此版本只包含 bug 修正，所以它可能是 EF 4.1.2 修補程式版本，但我們選擇改為4.2，以讓我們從 4.1. x 版中使用的以日期為基礎的修補程式版本號碼中移出，並採用適用于 s 的[語義 Versionsing](https://semver.org)標準emantic 版本設定。
+因為此版本只包含 bug 修正，所以它可能是 EF 4.1.2 修補程式版本，但我們選擇移至4.2，讓我們可以從4.1 版中使用的以日期為基礎的修補程式版本號碼中移出，並採用語義[Versionsing](https://semver.org)標準進行語義版本設定。
 
 以下是我們特別為 EF 4.2 版本放在一起的內容清單，針對 EF 4.1 提供的內容也會套用至 EF 4.2：
 

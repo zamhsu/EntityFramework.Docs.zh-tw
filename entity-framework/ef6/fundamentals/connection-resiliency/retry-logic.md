@@ -4,11 +4,11 @@ author: AndriySvyryd
 ms.date: 11/20/2019
 ms.assetid: 47d68ac1-927e-4842-ab8c-ed8c8698dff2
 ms.openlocfilehash: 50e65bed32d0cfcf42746da0d632f9e990424b97
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824846"
+ms.lasthandoff: 03/15/2020
+ms.locfileid: "79402156"
 ---
 # <a name="connection-resiliency-and-retry-logic"></a>連接復原和重試邏輯
 > [!NOTE]
