@@ -5,17 +5,17 @@ ms.date: 10/23/2016
 ms.assetid: 3f05ffdd-49bc-499c-9732-4a368bf5d2d7
 uid: ef6/resources/glossary
 ms.openlocfilehash: df0da4a68b3d2c882d9673417ee5fe335eccae2b
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656150"
+ms.lasthandoff: 03/15/2020
+ms.locfileid: "79402198"
 ---
 # <a name="entity-framework-glossary"></a>Entity Framework 詞彙
 ## <a name="code-first"></a>Code First
 使用程式碼建立 Entity Framework 模型。 模型可以目標為現有的資料庫或新的資料庫。
 
-## <a name="context"></a>內容
+## <a name="context"></a>Context
 代表與資料庫之會話的類別，可讓您查詢和儲存資料。 內容衍生自 DbCoNtext 或 ObjectCoNtext 類別。
 
 ## <a name="convention-code-first"></a>慣例（Code First）
@@ -30,7 +30,7 @@ ms.locfileid: "73656150"
 ## <a name="ef-designer"></a>EF Designer
 Visual Studio 中的視覺化設計工具，可讓您使用方塊和線條建立 Entity Framework 模型。
 
-## <a name="entity"></a>實體
+## <a name="entity"></a>單位
 代表像是客戶、產品和訂單這類應用程式資料的類別或物件。
 
 ## <a name="entity-data-model"></a>實體資料模型
@@ -46,7 +46,7 @@ Visual Studio 中的視覺化設計工具，可讓您使用方塊和線條建立
 實體之間的關聯，其中代表外鍵的屬性會包含在相依實體的類別中。 例如，Product 包含 [類別] 屬性。
 
 ## <a name="identifying-relationship"></a>識別關聯性
-一種關聯性，其中主要實體的主索引鍵也是相依實體之主索引鍵的一部分。 在這種關聯性中，如果沒有主要實體，相依實體就無法存在。
+主要實體的主索引鍵為相依實體之主索引鍵一部分的關聯性。 在這種關聯性中，相依實體一定要與主要實體一起存在。
 
 ## <a name="independent-association"></a>獨立關聯
 實體之間的關聯，其中沒有屬性代表相依實體之類別中的外鍵。 例如，Product 類別包含與 Category 的關聯性，但沒有任何類別目錄屬性。 Entity Framework 會在兩個關聯端的實體狀態以外，追蹤關聯的狀態。
