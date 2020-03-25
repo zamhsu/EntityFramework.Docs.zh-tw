@@ -3,12 +3,12 @@ title: 規劃 Entity Framework Core 5。0
 author: ajcvickers
 ms.date: 01/14/2020
 uid: core/what-is-new/ef-core-5.0/plan.md
-ms.openlocfilehash: c5b7300c61c2f668b6f9393ae51bf9ebddf330a7
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 8b4ca32524869019c04d5a4d4d55967f68181cd7
+ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417873"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80136226"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>規劃 Entity Framework Core 5。0
 
@@ -67,7 +67,7 @@ T 恤尺寸： L
 
 T 恤尺寸： XL
 
-狀態：未啟動
+狀態：進行中
 
 我們正在進行 TPT，因為這兩者都是高度要求的功能（~ 254 的投票; 第三個），因為它需要一些低層級的變更，我們覺得這適用于整體 .NET 5 計畫的基本本質。 我們預期這會導致資料庫提供者的中斷性變更，但這應該比3.0 所需的變更少很多。
 
@@ -79,7 +79,7 @@ T 恤尺寸： XL
 
 T 恤尺寸： M
 
-狀態：未啟動
+狀態：進行中
 
 篩選的「包含」是一種高度要求的功能（大約317的投票; 第二個整體），這不是大量的工作，因此我們認為會解除封鎖或更輕鬆地進行目前需要模型層級篩選或更複雜查詢的許多案例。
 
@@ -91,7 +91,7 @@ T 恤尺寸： M
 
 T 恤尺寸： L
 
-狀態：未啟動
+狀態：進行中
 
 我們已在舊版中進行了支援原始 SQL、無索引鍵類型和相關區域的進度。 不過，所有專案的整體運作方式都有差距和不一致的情況。 5\.0 的目標是要修正這些問題，並建立定義、遷移和使用不同類型實體及其相關聯查詢和資料庫成品的絕佳體驗。 這也可能牽涉到已編譯查詢 API 的更新。
 
@@ -184,7 +184,7 @@ T 恤尺寸： L
 
 T 恤尺寸： L
 
-狀態：未啟動
+狀態：進行中
 
 這裡的概念是要讓您更輕鬆地瞭解 EF Core 內部的狀況。 這對任何使用 EF Core 的人來說都很有用，但主要動機是讓外部人員更容易：
 

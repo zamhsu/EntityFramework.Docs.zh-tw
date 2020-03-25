@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: 3ab90d46b7a4476044e5ea38eaf04f995708e7bf
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 53b38f288cd45e66d68ebcc3b6066646d59b0262
+ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416666"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80136182"
 ---
 # <a name="configuring-a-dbcontext"></a>設定 DbContext
 
@@ -186,11 +186,11 @@ Entity Framework Core 不支援在相同的 `DbContext` 實例上執行多個平
 
 [`AddDbContext`](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext)擴充方法預設會註冊具有[限定範圍存留期](https://docs.microsoft.com/aspnet/core/fundamentals/dependency-injection#service-lifetimes)的 `DbContext` 類型。
 
-這是 ASP.NET Core 應用程式中的平行存取問題的安全，因為在指定的時間內只有一個執行緒執行每個用戶端要求，而且每個要求都會取得個別的相依性插入範圍（因此是個別的 `DbContext` 實例）。
+這不是大多數 ASP.NET Core 應用程式中平行存取問題的安全，因為在指定的時間內只有一個執行緒執行每個用戶端要求，而且每個要求都會取得個別的相依性插入範圍（因此是個別的 `DbContext` 實例）。 針對 Blazor 伺服器裝載模型，會使用一個邏輯要求來維護 Blazor 的使用者線路，因此，如果使用預設的插入範圍，每個使用者線路只有一個範圍 DbCoNtext 實例可供使用。
 
-不過，任何明確地以平行方式執行多個執行緒的程式碼，都應該確保不會同時存取 `DbContext` 實例。
+任何明確地平行執行多個執行緒的程式碼，都應該確保不會同時存取 `DbContext` 實例。
 
-使用相依性插入，您可以將內容註冊為已設定範圍，並建立每個執行緒的範圍（使用 `IServiceScopeFactory`），或將 `DbContext` 註冊為暫時性（使用接受 `ServiceLifetime` 參數的 `AddDbContext` 多載），藉此達成此目的。
+使用相依性插入，可以藉由將內容註冊為已設定範圍，並建立每個執行緒的範圍（使用 `IServiceScopeFactory`），或將 `DbContext` 註冊為暫時性（使用接受 `ServiceLifetime` 參數的 `AddDbContext` 多載）來達成此目的。
 
 ## <a name="more-reading"></a>閱讀更多
 

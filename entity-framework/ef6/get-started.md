@@ -4,12 +4,12 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 66ce9113-81d2-480f-8c16-d00ec405b2f7
 uid: ef6/get-started
-ms.openlocfilehash: 74ae347af3c386639631f28ccb2ddbe9f444953a
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 729dea2c474c35f638ccaf6673550f76e88e2667
+ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416312"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80136272"
 ---
 # <a name="get-started-with-entity-framework-6"></a>開始使用 Entity Framework 6
 
@@ -25,7 +25,7 @@ ms.locfileid: "78416312"
 
   您偏好指定撰寫程式碼還是建構輪廓的 EF 模型？
 您要使用 EF 將物件對應到現有的資料庫，還是希望 EF 建立專為物件打造的資料庫？
-您可以在這裡學到使用 EF6 的兩種方法：EF Designer 和 Code First。
+在這裡，您將瞭解使用 EF6 的兩種不同方法： EF Designer 和 Code First。
 請務必追蹤討論，並觀看有關差異的影片。
 
 * [使用 DbContext](~/ef6/fundamentals/working-with-dbcontext.md)
