@@ -4,12 +4,12 @@ author: ajcvickers
 ms.date: 03/03/2020
 ms.assetid: C21F89EE-FB08-4ED9-A2A0-76CB7656E6E4
 uid: core/what-is-new/index
-ms.openlocfilehash: 2c41f65d1fead8430a39c6230a0f22506686504e
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 7b58b4de0eb8d9575f77e0b147da017eabad1867
+ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78413203"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80136215"
 ---
 # <a name="ef-core-releases-and-planning"></a>EF Core 版本和計劃
 
@@ -57,10 +57,12 @@ EF Core 發行與 [.NET Core 推出排程](https://github.com/dotnet/core/blob/m
 
 ### <a name="get-it-now"></a>立即取得！
 
-EF Core 5.0 套件**現已**作為[每日組建](https://github.com/aspnet/AspNetCore/blob/master/docs/DailyBuilds.md) \(英文\) 提供。 
+EF Core 5.0 套件**現以**作為
 
-使用每日組建是找出問題並儘早提供意見反應的絕佳方式。
+* [每日組建](https://github.com/dotnet/aspnetcore/blob/master/docs/DailyBuilds.md) (英文) 的形式提供
+  * 所有最新的功能與 Bug 修正。 整體而言十分穩定，每個組建都經過 57000 次以上的測試。
+* [NuGet 上的預覽](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore) (英文)
+  * 每日組建有延遲的情況，但全都經過測試，可搭配對應的 ASP.NET Core 與 .NET Core 預覽版一起使用。
+
+使用預覽版或每日組建，是發現問題的最佳方法，並能因此而儘早提供意見反應。
 我們越快取得這類意見反應，就越可能在下一版正式發行之前處理它。
-我們為每個組建在每個平台上執行超過 56,000 次測試，努力讓每日組建保持良好狀態。
-
-預覽套件會在今年稍後送出到 NuGet。

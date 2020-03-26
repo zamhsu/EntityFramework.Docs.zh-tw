@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/05/2018
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: dc0c1ae1a03c98c6f230557dc0bdd4d29ec191dd
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 190057daed61c58c1f89ee8d775913458e413a50
+ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78412843"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80136203"
 ---
 # <a name="migrations"></a>移轉
 
@@ -215,15 +215,43 @@ Update-Database LastGoodMigration
 
 ### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
 
+#### <a name="basic-usage"></a>基本使用方式
 ```dotnetcli
 dotnet ef migrations script
 ```
 
+#### <a name="with-from-to-implied"></a>使用 From (隱含)
+這會產生 SQL 指令碼，從此移轉到最新的移轉。
+```dotnetcli
+dotnet ef migrations script 20190725054716_Add_new_tables
+```
+
+#### <a name="with-from-and-to"></a>使用 From 與 To
+這會產生 SQL 指令碼，從此 `from` 移轉到指定的 `to` 移轉。
+```dotnetcli
+dotnet ef migrations script 20190725054716_Add_new_tables 20190829031257_Add_audit_table
+```
+您可以使用比 `to` 新的 `from` 來產生復原指令碼。 *請注意，可能會發生資料遺失的狀況。*
+
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
+#### <a name="basic-usage"></a>基本使用方式
 ``` powershell
 Script-Migration
 ```
+
+#### <a name="with-from-to-implied"></a>使用 From (隱含)
+這會產生 SQL 指令碼，從此移轉到最新的移轉。
+```powershell
+Script-Migration 20190725054716_Add_new_tables
+```
+
+#### <a name="with-from-and-to"></a>使用 From 與 To
+這會產生 SQL 指令碼，從此 `from` 移轉到指定的 `to` 移轉。
+```powershell
+Script-Migration 20190725054716_Add_new_tables 20190829031257_Add_audit_table
+```
+您可以使用比 `to` 新的 `from` 來產生復原指令碼。 *請注意，可能會發生資料遺失的狀況。*
 
 ***
 
