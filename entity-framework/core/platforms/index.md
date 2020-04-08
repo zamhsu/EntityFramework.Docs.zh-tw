@@ -4,10 +4,10 @@ author: bricelam
 ms.date: 03/03/2020
 uid: core/platforms/index
 ms.openlocfilehash: 693d4cae85eddf86d01e17084415147c52a008c7
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78413063"
 ---
 # <a name="net-implementations-supported-by-ef-core"></a>EF Core 支援的 .NET 實作
