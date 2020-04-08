@@ -5,15 +5,15 @@ ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
 ms.openlocfilehash: 6575b1ac028f8b67b49ca7f4e49d6f19500be98f
-ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "80136176"
 ---
 # <a name="installing-entity-framework-core"></a>安裝 Entity Framework Core
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * 因為 EF Core 是 [.NET Standard 2.0](/dotnet/standard/net-standard) 程式庫。 所以 EF Core 需要支援 .NET Standard 2.0 的 .NET 實作才可執行。 其他 .NET Standard 2.0 程式庫也可以參考 EF Core。
 
