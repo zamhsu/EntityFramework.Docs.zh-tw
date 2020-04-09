@@ -5,10 +5,10 @@ ms.date: 10/27/2016
 ms.assetid: 07b6680f-ffcf-412c-9857-f997486b386c
 uid: core/saving/related-data
 ms.openlocfilehash: 86d32b6172ee21c12a15e9ed4bb0142afc99c8bd
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78417542"
 ---
 # <a name="saving-related-data"></a>儲存相關資料
@@ -16,7 +16,7 @@ ms.locfileid: "78417542"
 儲存隔離的實體之外，您也可以利用模型中所定義的關聯性。
 
 > [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/) \(英文\)。
+> 您可以在 GitHub 上查看本文[的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/)。
 
 ## <a name="adding-a-graph-of-new-entities"></a>新增新實體的圖表
 
@@ -33,7 +33,7 @@ ms.locfileid: "78417542"
 
 如果您從內容所追蹤實體的導覽屬性參考新的實體，系統將會探索到該實體並插入到資料庫中。
 
-在下列範例中，會插入 `post` 實體，因為該實體已新增至擷取自資料庫 `Posts` 實體的 `blog` 屬性。
+在下列範例中，會插入 `post` 實體，因為該實體已新增至擷取自資料庫 `blog` 實體的 `Posts` 屬性。
 
 [!code-csharp[Main](../../../samples/core/Saving/RelatedData/Sample.cs#AddingRelatedEntity)]
 

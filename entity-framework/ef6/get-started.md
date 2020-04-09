@@ -5,10 +5,10 @@ ms.date: 10/23/2016
 ms.assetid: 66ce9113-81d2-480f-8c16-d00ec405b2f7
 uid: ef6/get-started
 ms.openlocfilehash: 729dea2c474c35f638ccaf6673550f76e88e2667
-ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "80136272"
 ---
 # <a name="get-started-with-entity-framework-6"></a>開始使用 Entity Framework 6
@@ -25,18 +25,18 @@ ms.locfileid: "80136272"
 
   您偏好指定撰寫程式碼還是建構輪廓的 EF 模型？
 您要使用 EF 將物件對應到現有的資料庫，還是希望 EF 建立專為物件打造的資料庫？
-在這裡，您將瞭解使用 EF6 的兩種不同方法： EF Designer 和 Code First。
+在這裡,您將瞭解使用 EF6 的兩種不同方法:EF 設計器和代碼優先。
 請務必追蹤討論，並觀看有關差異的影片。
 
 * [使用 DbContext](~/ef6/fundamentals/working-with-dbcontext.md)
 
   DbContext 是第一個也最重要的 EF 類型，值得您學習如何使用。 其用途是資料庫查詢的啟動控制區，並會持續追蹤您對物件進行的變更，以便存回資料庫。
 
-* [提出問題](~/ef6/resources/get-help.md)
+* [提問](~/ef6/resources/get-help.md)
 
   了解如何取得專家的協助，以及對社群貢獻您自己的答案。
 
-* [參與](https://github.com/aspnet/EntityFramework6/)
+* [貢獻](https://github.com/aspnet/EntityFramework6/)
 
   Entity Framework 6 使用開放的開發模型。 歡迎瀏覽我們的 GitHub 存放庫，看看您可以如何讓 EF 更臻完美。
 

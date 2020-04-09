@@ -6,10 +6,10 @@ ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
 ms.openlocfilehash: 421531e68ac98c0553938f1c24892701f22fef3c
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78417594"
 ---
 # <a name="disconnected-entities"></a>已中斷連線的實體
@@ -20,7 +20,7 @@ DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在
 
 <!-- markdownlint-disable MD028 -->
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) \(英文\)。
+> 您可以在 GitHub 上查看本文[的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/)。
 
 > [!TIP]
 > 對於具有指定主索引鍵值的任何實體，EF Core 只能追蹤其中一個執行個體。 若要避免此情況成為問題，最佳方式就是針對每個工作單位都使用短期內容，讓內容從空白開始、有實體與其連結、儲存這些實體，然後再處置及捨棄內容。
@@ -47,7 +47,7 @@ DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#IsItNewGeneral)]
 
 > [!TIP]  
-> 只要內容一追蹤實體，就會立即設定索引鍵，即使該實體處於 Added 狀態時也一樣。 周遊實體圖表並判斷要針對每個實體執行什麼動作時 (例如使用 TrackGraph API 時)，這會很有幫助。 使用索引鍵值時，應該只以這裡所示的方式在發出任何呼叫來追蹤實體「之前」使用。
+> 只要內容一追蹤實體，就會立即設定索引鍵，即使該實體處於 Added 狀態時也一樣。 周遊實體圖表並判斷要針對每個實體執行什麼動作時 (例如使用 TrackGraph API 時)，這會很有幫助。 使用索引鍵值時，應該只以這裡所示的方式在發出任何呼叫來追蹤實體「之前」__ 使用。
 
 ### <a name="with-other-keys"></a>搭配其他索引鍵
 

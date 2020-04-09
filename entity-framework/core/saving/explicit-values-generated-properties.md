@@ -5,10 +5,10 @@ ms.date: 10/27/2016
 ms.assetid: 3f1993c2-cdf5-425b-bac2-a2665a20322b
 uid: core/saving/explicit-values-generated-properties
 ms.openlocfilehash: 43c4ab3c2a60645cdeff2a6cc40ce979f832f2fd
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78417566"
 ---
 # <a name="setting-explicit-values-for-generated-properties"></a>為產生的屬性設定明確值
@@ -18,7 +18,7 @@ ms.locfileid: "78417566"
 在一些情況下，您可能會想要為產生的屬性設定明確值，而不是使用產生的值。
 
 > [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/ExplicitValuesGenerateProperties/) \(英文\)。
+> 您可以在 GitHub 上查看本文[的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/ExplicitValuesGenerateProperties/)。
 
 ## <a name="the-model"></a>模型
 
@@ -50,7 +50,7 @@ ms.locfileid: "78417566"
 
 依照慣例，`Employee.EmployeeId` 屬性是一個存放區產生的 `IDENTITY` 資料行。
 
-就大多數情況而言，上面所示的方法對索引鍵屬性都適用。 不過，若要將明確值插入到 SQL Server `IDENTITY` 資料行中，您將必須在呼叫 `IDENTITY_INSERT` 之前，先手動啟用 `SaveChanges()`。
+就大多數情況而言，上面所示的方法對索引鍵屬性都適用。 不過，若要將明確值插入到 SQL Server `IDENTITY` 資料行中，您將必須在呼叫 `SaveChanges()` 之前，先手動啟用 `IDENTITY_INSERT`。
 
 > [!NOTE]  
 > 在我們的待辦項目上有一個在 SQL Server 提供者內自動進行此操作的[功能要求](https://github.com/aspnet/EntityFramework/issues/703)。
@@ -76,7 +76,7 @@ ms.locfileid: "78417566"
 > [!NOTE]  
 > **EF Core 2.0 中的變更：** 在舊版中，是透過 `IsReadOnlyAfterSave` 旗標來控制儲存後的行為。 此旗標已淘汰並被 `AfterSaveBehavior` 取代。
 
-資料庫中也有一個可在 `LastPayRaise` 作業期間為 `UPDATE` 資料行產生值的觸發程序。
+資料庫中也有一個可在 `UPDATE` 作業期間為 `LastPayRaise` 資料行產生值的觸發程序。
 
 [!code-sql[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/employee_UPDATE.sql)]
 

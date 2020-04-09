@@ -5,10 +5,10 @@ ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
 ms.openlocfilehash: 915aaa41beb495a046f2d6260e9c3b174d5f3031
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78417674"
 ---
 # <a name="loading-related-data"></a>載入相關資料
@@ -20,7 +20,7 @@ Entity Framework Core 可讓您在模型中使用導覽屬性來載入相關實�
 * **消極式載入**表示會於存取導覽屬性時從資料庫以透明的方式載入相關資料。
 
 > [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
+> 您可以在 GitHub 上查看本文[的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying)。
 
 ## <a name="eager-loading"></a>積極式載入
 
@@ -49,12 +49,12 @@ Entity Framework Core 可讓您在模型中使用導覽屬性來載入相關實�
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#IncludeTree)]
 
-您可能會想要針對所包括的其中一個實體包含多個相關實體。 例如，查詢 `Blogs` 時，您包括了 `Posts`，接著想要同時包含 `Author` 的 `Tags` 和 `Posts`。 若要執行此動作，您必須指定每個從根開始的包含路徑。 例如 `Blog -> Posts -> Author` 和 `Blog -> Posts -> Tags`。 這不表示您將會收到多餘的聯結，在大部分情況下，EF 會在產生 SQL 時合併聯結。
+您可能會想要針對所包括的其中一個實體包含多個相關實體。 例如，查詢 `Blogs` 時，您包括了 `Posts`，接著想要同時包含 `Posts` 的 `Author` 和 `Tags`。 若要執行此動作，您必須指定每個從根開始的包含路徑。 例如 `Blog -> Posts -> Author` 和 `Blog -> Posts -> Tags`。 這不表示您將會收到多餘的聯結，在大部分情況下，EF 會在產生 SQL 時合併聯結。
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
 
 > [!CAUTION]
-> 由於版本3.0.0，每個 `Include` 都會導致將額外的聯結加入至關聯式提供者所產生的 SQL 查詢，而舊版會產生額外的 SQL 查詢。 這可能會大幅變更查詢的效能，以提高或更糟。 特別的是，具有大量 `Include` 運算子的 LINQ 查詢可能需要細分為多個個別的 LINQ 查詢，以避免笛卡爆炸的問題。
+> 自版本 3.0.0`Include`起,每個版本將導致將附加 JOIN 添加到關係提供程式生成的 SQL 查詢中,而早期版本生成了其他 SQL 查詢。 這可以顯著更改查詢的性能,無論好壞。 特別是,具有極高數量的運算符的`Include`LINQ 查詢可能需要分解為多個單獨的 LINQ 查詢,以避免卡點分解問題。
 
 ### <a name="include-on-derived-types"></a>衍生類型中的 Include
 
@@ -316,7 +316,7 @@ public static class PocoLoadingExtensions
 
 > Newtonsoft.Json.JsonSerializationException: Self referencing loop detected for property 'Blog' with type 'MyApplication.Models.Blog' (針對具有類型 'MyApplication.Models.Blog' 的屬性 'Blog' 偵測到自我參考迴圈)。
 
-如果您使用 ASP.NET Core，則可將 Json.NET 設定為略過它在物件圖形中所找到的循環。 這可在 `ConfigureServices(...)` 的 `Startup.cs` 方法中完成。
+如果您使用 ASP.NET Core，則可將 Json.NET 設定為略過它在物件圖形中所找到的循環。 這可在 `Startup.cs` 的 `ConfigureServices(...)` 方法中完成。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

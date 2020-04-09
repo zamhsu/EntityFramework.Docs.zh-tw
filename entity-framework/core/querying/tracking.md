@@ -1,35 +1,35 @@
 ---
-title: 追蹤與不追蹤查詢-EF Core
+title: 追蹤與無追蹤查詢 - EF 核心
 author: smitpatel
 ms.date: 10/10/2019
 ms.assetid: e17e060c-929f-4180-8883-40c438fbcc01
 uid: core/querying/tracking
 ms.openlocfilehash: a6c71c12f429f1324abe91d1b2cef96312bec051
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78417646"
 ---
-# <a name="tracking-vs-no-tracking-queries"></a>追蹤與不追蹤查詢的比較
+# <a name="tracking-vs-no-tracking-queries"></a>追蹤與無追蹤查詢
 
-追蹤行為會控制 Entity Framework Core 是否會在其變更追蹤程式中保存實體實例的相關資訊。 如果追蹤實體，即會在 `SaveChanges()` 期間，將實體中偵測到的任何變更保存於資料庫。 EF Core 也會修正追蹤查詢結果中的實體與變更追蹤器中的實體之間的導覽屬性。
+跟蹤行為控制實體框架核心是否在其更改跟蹤器中保留有關實體實例的資訊。 如果追蹤實體，即會在 `SaveChanges()` 期間，將實體中偵測到的任何變更保存於資料庫。 EF Core 還將修復追蹤查詢結果中的實體和更改跟蹤器中的實體之間的導航屬性。
 
 > [!NOTE]
-> 永遠不會追蹤[無索引鍵的實體類型](xref:core/modeling/keyless-entity-types)。 本文提及實體類型的任何地方，都是指已定義索引鍵的實體類型。
+> 從不追蹤[無鍵實體型態](xref:core/modeling/keyless-entity-types)。 無論本文提到實體類型,它是指定義了密鑰的實體類型。
 
 > [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
+> 您可以在 GitHub 上查看本文[的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying)。
 
 ## <a name="tracking-queries"></a>追蹤查詢
 
-預設會追蹤傳回實體類型的查詢。 這表示您可以對這些實體實例進行變更，並由 `SaveChanges()`保存這些變更。 在下列範例中，將會偵測到對部落格評等的變更，並在 `SaveChanges()` 期間將其保存於資料庫。
+預設會追蹤傳回實體類型的查詢。 這意味著您可以對這些實體實例進行更改,並保留這些變更`SaveChanges()`。 在下列範例中，將會偵測到對部落格評等的變更，並在 `SaveChanges()` 期間將其保存於資料庫。
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#Tracking)]
 
 ## <a name="no-tracking-queries"></a>無追蹤查詢
 
-如果要在唯讀案例中使用結果，則不追蹤的查詢很實用。 因為不需要設定變更追蹤資訊，所以執行速度會更快。 如果您不需要更新從資料庫中取出的實體，則應該使用無追蹤查詢。 您可以將個別查詢交換為不追蹤。
+如果要在唯讀案例中使用結果，則不追蹤的查詢很實用。 它們執行得更快,因為無需設置更改跟蹤資訊。 如果不需要更新從資料庫中檢索的實體,則應使用無跟蹤查詢。 您可以將單個查詢交換為無跟蹤。
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#NoTracking)]
 
@@ -39,42 +39,42 @@ ms.locfileid: "78417646"
 
 ## <a name="identity-resolution"></a>身分識別解析
 
-由於追蹤查詢會使用變更追蹤器，因此 EF Core 會在追蹤查詢中執行識別解析。 當具體化實體時，如果已追蹤，EF Core 將會從變更追蹤程式傳回相同的實體實例。 如果結果多次包含相同的實體，您就會在每次發生時取得相同的實例。 無追蹤查詢不會使用變更追蹤器，也不會執行識別解析。 如此一來，即使相同的實體多次包含在結果中，您也會得到新的實體實例。 在 EF Core 3.0 之前的版本中，此行為不同，請參閱[先前的版本](#previous-versions)。
+由於追蹤查詢使用更改跟蹤器,EF Core 將在追蹤查詢中執行標識解析。 實體具體化時,如果已跟蹤該實體,EF Core 將從更改跟蹤器返回同一實體實例。 如果結果多次包含同一實體,則每個匹配項都會返回同一實例。 無追蹤查詢不使用更改跟蹤器,也不會執行標識解析。 因此,即使同一實體多次包含在結果中,您也會返回實體的新實例。 此行為在 EF Core 3.0 之前的版本不同,請參閱[以前的版本](#previous-versions)。
 
-## <a name="tracking-and-custom-projections"></a>追蹤和自訂投影
+## <a name="tracking-and-custom-projections"></a>追蹤並自訂投影
 
-即使查詢的結果型別不是實體型別，EF Core 仍會預設追蹤包含在結果中的實體類型。 下列查詢會傳回匿名類型，並且將在結果集中追蹤 `Blog` 的執行個體。
+即使查詢的結果類型不是實體類型,EF Core 仍將在預設情況下跟蹤結果中包含的實體類型。 下列查詢會傳回匿名類型，並且將在結果集中追蹤 `Blog` 的執行個體。
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection1)]
 
-如果結果集包含來自 LINQ 撰寫的實體類型，EF Core 將會加以追蹤。
+如果結果集包含來自 LINQ 組合的實體類型,EF Core 將追蹤它們。
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection2)]
 
-如果結果集未包含任何實體類型，則不會進行任何追蹤。 在下列查詢中，我們會傳回匿名型別與實體的某些值（但不含實際實體類型的實例）。 查詢中沒有任何已追蹤的實體。
+如果結果集不包含任何實體類型,則不執行任何跟蹤。 在下面的查詢中,我們返回一個匿名類型,其中包含來自實體的某些值(但沒有實際實體類型的實例)。 查詢中沒有跟蹤的實體。
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection3)]
 
- EF Core 支援在最上層投影中進行用戶端評估。 如果 EF Core 具體化實體實例以進行用戶端評估，則會進行追蹤。 在這裡，由於我們會將 `blog` 實體傳遞至用戶端方法 `StandardizeURL`，因此 EF Core 也會追蹤 blog 實例。
+ EF Core 支援在頂級投影中執行客戶端評估。 如果 EF Core 實現了用於客戶端評估的實體實例,則將跟蹤該實例。 在這裏,由於我們將實體傳遞`blog`給`StandardizeURL`用戶端方法 ,EF Core 也將跟蹤博客實例。
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#ClientProjection)]
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#ClientMethod)]
 
-EF Core 不會追蹤結果中包含的無索引鍵實體實例。 但是 EF Core 會根據上述規則，追蹤實體類型的所有其他實例與索引鍵。
+EF Core 不跟蹤結果中包含的無鑰匙實體實例。 但是,EF Core 根據上述規則使用密鑰跟蹤實體類型的所有其他實例。
 
-在 EF Core 3.0 之前，部分規則的運作方式不同。 如需詳細資訊，請參閱[先前的版本](#previous-versions)。
+在 EF Core 3.0 之前,上述某些規則的工作方式不同。 有關詳細資訊,請參閱[以前的版本](#previous-versions)。
 
-## <a name="previous-versions"></a>舊版
+## <a name="previous-versions"></a>舊版本
 
-在3.0 版之前，EF Core 在追蹤完成的方式上有一些差異。 值得注意的差異如下：
+在版本 3.0 之前,EF Core 在追蹤方式上存在一些差異。 顯著差異如下:
 
-- 如[用戶端與伺服器評估](xref:core/querying/client-eval)頁面中所述，在3.0 版之前，請在查詢的任何部分中 EF Core 支援的用戶端評估。 用戶端評估導致實體具體化，這不是結果的一部分。 因此 EF Core 分析結果來偵測要追蹤的內容。這種設計有一些差異，如下所示：
-  - 預測中的用戶端評估，這會導致具體化，但未傳回具體化實體實例。 下列範例未追蹤 `blog` 的實體。
+- 如[在用戶端與伺服器評估](xref:core/querying/client-eval)頁中所述,EF Core 支援在版本 3.0 之前查詢的任何部分中的客戶端評估。 用戶端評估導致實體的物化,而實體不是結果的一部分。 因此,EF Core 分析了結果,以檢測要跟蹤的內容。此設計存在以下某些差異:
+  - 投影中的客戶端評估導致具體化,但沒有返回具體化實體實例。 以下示例未跟蹤`blog`實體。
     [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#ClientProjection)]
 
-  - 在某些情況下，EF Core 不會追蹤由 LINQ 撰寫所傳入的物件。 下列範例未追蹤 `Post`。
+  - 在某些情況下,EF Core 未跟蹤 LINQ 組合物中的物件。 下面的範例未追蹤`Post`。
     [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection2)]
 
-- 每當查詢結果包含無索引鍵的實體類型時，整個查詢就會進行非追蹤。 這表示不會追蹤具有索引鍵的實體類型，也就是結果中的。
-- EF Core 沒有追蹤查詢中的身分識別解析。 它使用弱式參考來追蹤已經傳回的實體。 因此，如果結果集包含相同的實體倍數，您就會針對每個發生次數取得相同的實例。 不過，如果先前具有相同身分識別的結果超出範圍，且已進行垃圾收集，EF Core 會傳回新的實例。
+- 每當查詢結果包含無鍵實體類型時,整個查詢都會被非跟蹤。 這意味著實體類型與鍵,結果也沒有被跟蹤。
+- EF Core 在無跟蹤查詢中做了標識解析。 它使用弱引用來跟蹤已返回的實體。 因此,如果結果集多次包含相同的實體,則每個匹配項都會獲得相同的實例。 儘管如果以前具有相同標識的結果已出範圍並回收了垃圾,但 EF Core 返回了一個新實例。
