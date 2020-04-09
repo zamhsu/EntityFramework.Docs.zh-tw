@@ -5,51 +5,51 @@ ms.date: 10/27/2016
 ms.assetid: d3e6515b-8181-482c-a790-c4a6778748c1
 uid: core/saving/transactions
 ms.openlocfilehash: 390d89398ebfdf015804749e71ff0b61d3f278d3
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78417552"
 ---
-# <a name="using-transactions"></a><span data-ttu-id="188bd-102">使用交易</span><span class="sxs-lookup"><span data-stu-id="188bd-102">Using Transactions</span></span>
+# <a name="using-transactions"></a><span data-ttu-id="ac2bc-102">使用交易</span><span class="sxs-lookup"><span data-stu-id="ac2bc-102">Using Transactions</span></span>
 
-<span data-ttu-id="188bd-103">交易可讓系統以不可部分完成的方式處理數個資料庫作業。</span><span class="sxs-lookup"><span data-stu-id="188bd-103">Transactions allow several database operations to be processed in an atomic manner.</span></span> <span data-ttu-id="188bd-104">如果認可交易，就會對資料庫成功套用所有作業。</span><span class="sxs-lookup"><span data-stu-id="188bd-104">If the transaction is committed, all of the operations are successfully applied to the database.</span></span> <span data-ttu-id="188bd-105">如果復原交易，則不會對資料庫套用任何作業。</span><span class="sxs-lookup"><span data-stu-id="188bd-105">If the transaction is rolled back, none of the operations are applied to the database.</span></span>
+<span data-ttu-id="ac2bc-103">交易可讓系統以不可部分完成的方式處理數個資料庫作業。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-103">Transactions allow several database operations to be processed in an atomic manner.</span></span> <span data-ttu-id="ac2bc-104">如果認可交易，就會對資料庫成功套用所有作業。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-104">If the transaction is committed, all of the operations are successfully applied to the database.</span></span> <span data-ttu-id="ac2bc-105">如果復原交易，則不會對資料庫套用任何作業。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-105">If the transaction is rolled back, none of the operations are applied to the database.</span></span>
 
 > [!TIP]  
-> <span data-ttu-id="188bd-106">您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Transactions/) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="188bd-106">You can view this article's [sample](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Transactions/) on GitHub.</span></span>
+> <span data-ttu-id="ac2bc-106">您可以在 GitHub 上查看本文[的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Transactions/)。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-106">You can view this article's [sample](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Transactions/) on GitHub.</span></span>
 
-## <a name="default-transaction-behavior"></a><span data-ttu-id="188bd-107">預設交易行為</span><span class="sxs-lookup"><span data-stu-id="188bd-107">Default transaction behavior</span></span>
+## <a name="default-transaction-behavior"></a><span data-ttu-id="ac2bc-107">預設交易行為</span><span class="sxs-lookup"><span data-stu-id="ac2bc-107">Default transaction behavior</span></span>
 
-<span data-ttu-id="188bd-108">根據預設，如果資料庫提供者支援交易，就會在交易中套用對 `SaveChanges()` 單一呼叫中的所有變更。</span><span class="sxs-lookup"><span data-stu-id="188bd-108">By default, if the database provider supports transactions, all changes in a single call to `SaveChanges()` are applied in a transaction.</span></span> <span data-ttu-id="188bd-109">如果其中任何一項變更失敗，系統就會復原交易，而不會對資料庫套用任何變更。</span><span class="sxs-lookup"><span data-stu-id="188bd-109">If any of the changes fail, then the transaction is rolled back and none of the changes are applied to the database.</span></span> <span data-ttu-id="188bd-110">這意謂著會保證 `SaveChanges()` 要不就是完全成功，要不就是發生錯誤時讓資料庫維持原封不動。</span><span class="sxs-lookup"><span data-stu-id="188bd-110">This means that `SaveChanges()` is guaranteed to either completely succeed, or leave the database unmodified if an error occurs.</span></span>
+<span data-ttu-id="ac2bc-108">根據預設，如果資料庫提供者支援交易，就會在交易中套用對 `SaveChanges()` 單一呼叫中的所有變更。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-108">By default, if the database provider supports transactions, all changes in a single call to `SaveChanges()` are applied in a transaction.</span></span> <span data-ttu-id="ac2bc-109">如果其中任何一項變更失敗，系統就會復原交易，而不會對資料庫套用任何變更。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-109">If any of the changes fail, then the transaction is rolled back and none of the changes are applied to the database.</span></span> <span data-ttu-id="ac2bc-110">這意謂著會保證 `SaveChanges()` 要不就是完全成功，要不就是發生錯誤時讓資料庫維持原封不動。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-110">This means that `SaveChanges()` is guaranteed to either completely succeed, or leave the database unmodified if an error occurs.</span></span>
 
-<span data-ttu-id="188bd-111">對大多數應用程式來說，此預設行為已足以應付需求。</span><span class="sxs-lookup"><span data-stu-id="188bd-111">For most applications, this default behavior is sufficient.</span></span> <span data-ttu-id="188bd-112">您應該只有在應用程式需求認為有必要時，才手動控制交易。</span><span class="sxs-lookup"><span data-stu-id="188bd-112">You should only manually control transactions if your application requirements deem it necessary.</span></span>
+<span data-ttu-id="ac2bc-111">對大多數應用程式來說，此預設行為已足以應付需求。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-111">For most applications, this default behavior is sufficient.</span></span> <span data-ttu-id="ac2bc-112">您應該只有在應用程式需求認為有必要時，才手動控制交易。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-112">You should only manually control transactions if your application requirements deem it necessary.</span></span>
 
-## <a name="controlling-transactions"></a><span data-ttu-id="188bd-113">控制交易</span><span class="sxs-lookup"><span data-stu-id="188bd-113">Controlling transactions</span></span>
+## <a name="controlling-transactions"></a><span data-ttu-id="ac2bc-113">控制交易</span><span class="sxs-lookup"><span data-stu-id="ac2bc-113">Controlling transactions</span></span>
 
-<span data-ttu-id="188bd-114">您可以使用 `DbContext.Database` API 來開始、認可及復原交易。</span><span class="sxs-lookup"><span data-stu-id="188bd-114">You can use the `DbContext.Database` API to begin, commit, and rollback transactions.</span></span> <span data-ttu-id="188bd-115">下列範例示範在單一交易中執行兩個 `SaveChanges()` 作業和一個 LINQ 查詢。</span><span class="sxs-lookup"><span data-stu-id="188bd-115">The following example shows two `SaveChanges()` operations and a LINQ query being executed in a single transaction.</span></span>
+<span data-ttu-id="ac2bc-114">您可以使用 `DbContext.Database` API 來開始、認可及復原交易。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-114">You can use the `DbContext.Database` API to begin, commit, and rollback transactions.</span></span> <span data-ttu-id="ac2bc-115">下列範例示範在單一交易中執行兩個 `SaveChanges()` 作業和一個 LINQ 查詢。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-115">The following example shows two `SaveChanges()` operations and a LINQ query being executed in a single transaction.</span></span>
 
-<span data-ttu-id="188bd-116">並非所有資料庫提供者都支援交易。</span><span class="sxs-lookup"><span data-stu-id="188bd-116">Not all database providers support transactions.</span></span> <span data-ttu-id="188bd-117">呼叫交易 API 時，有些提供者可能會擲回例外狀況或不執行任何作業。</span><span class="sxs-lookup"><span data-stu-id="188bd-117">Some providers may throw or no-op when transaction APIs are called.</span></span>
+<span data-ttu-id="ac2bc-116">並非所有資料庫提供者都支援交易。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-116">Not all database providers support transactions.</span></span> <span data-ttu-id="ac2bc-117">呼叫交易 API 時，有些提供者可能會擲回例外狀況或不執行任何作業。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-117">Some providers may throw or no-op when transaction APIs are called.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Saving/Transactions/ControllingTransaction/Sample.cs?name=Transaction&highlight=3,17,18,19)]
 
-## <a name="cross-context-transaction-relational-databases-only"></a><span data-ttu-id="188bd-118">跨內容交易 (僅適用於關聯式資料庫)</span><span class="sxs-lookup"><span data-stu-id="188bd-118">Cross-context transaction (relational databases only)</span></span>
+## <a name="cross-context-transaction-relational-databases-only"></a><span data-ttu-id="ac2bc-118">跨內容交易 (僅適用於關聯式資料庫)</span><span class="sxs-lookup"><span data-stu-id="ac2bc-118">Cross-context transaction (relational databases only)</span></span>
 
-<span data-ttu-id="188bd-119">您也可以跨多個內容執行個體共用交易。</span><span class="sxs-lookup"><span data-stu-id="188bd-119">You can also share a transaction across multiple context instances.</span></span> <span data-ttu-id="188bd-120">只有使用關聯式資料庫提供者時才有提供此功能，因為它會要求使用關聯式資料庫資料庫特定的 `DbTransaction` 和 `DbConnection`。</span><span class="sxs-lookup"><span data-stu-id="188bd-120">This functionality is only available when using a relational database provider because it requires the use of `DbTransaction` and `DbConnection`, which are specific to relational databases.</span></span>
+<span data-ttu-id="ac2bc-119">您也可以跨多個內容執行個體共用交易。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-119">You can also share a transaction across multiple context instances.</span></span> <span data-ttu-id="ac2bc-120">只有使用關聯式資料庫提供者時才有提供此功能，因為它會要求使用關聯式資料庫資料庫特定的 `DbTransaction` 和 `DbConnection`。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-120">This functionality is only available when using a relational database provider because it requires the use of `DbTransaction` and `DbConnection`, which are specific to relational databases.</span></span>
 
-<span data-ttu-id="188bd-121">若要共用交易，內容必須同時共用 `DbConnection` 和 `DbTransaction`。</span><span class="sxs-lookup"><span data-stu-id="188bd-121">To share a transaction, the contexts must share both a `DbConnection` and a `DbTransaction`.</span></span>
+<span data-ttu-id="ac2bc-121">若要共用交易，內容必須同時共用 `DbConnection` 和 `DbTransaction`。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-121">To share a transaction, the contexts must share both a `DbConnection` and a `DbTransaction`.</span></span>
 
-### <a name="allow-connection-to-be-externally-provided"></a><span data-ttu-id="188bd-122">允許從外部提供連線</span><span class="sxs-lookup"><span data-stu-id="188bd-122">Allow connection to be externally provided</span></span>
+### <a name="allow-connection-to-be-externally-provided"></a><span data-ttu-id="ac2bc-122">允許從外部提供連線</span><span class="sxs-lookup"><span data-stu-id="ac2bc-122">Allow connection to be externally provided</span></span>
 
-<span data-ttu-id="188bd-123">必須能夠在建構內容時將連線傳遞給內容，才能共用 `DbConnection`。</span><span class="sxs-lookup"><span data-stu-id="188bd-123">Sharing a `DbConnection` requires the ability to pass a connection into a context when constructing it.</span></span>
+<span data-ttu-id="ac2bc-123">必須能夠在建構內容時將連線傳遞給內容，才能共用 `DbConnection`。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-123">Sharing a `DbConnection` requires the ability to pass a connection into a context when constructing it.</span></span>
 
-<span data-ttu-id="188bd-124">若要允許從外部提供 `DbConnection`，最簡單的方式就是停止使用 `DbContext.OnConfiguring` 方法來設定內容，然後從外部建立 `DbContextOptions` 並將其傳遞給內容建構函式。</span><span class="sxs-lookup"><span data-stu-id="188bd-124">The easiest way to allow `DbConnection` to be externally provided, is to stop using the `DbContext.OnConfiguring` method to configure the context and externally create `DbContextOptions` and pass them to the context constructor.</span></span>
+<span data-ttu-id="ac2bc-124">若要允許從外部提供 `DbConnection`，最簡單的方式就是停止使用 `DbContext.OnConfiguring` 方法來設定內容，然後從外部建立 `DbContextOptions` 並將其傳遞給內容建構函式。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-124">The easiest way to allow `DbConnection` to be externally provided, is to stop using the `DbContext.OnConfiguring` method to configure the context and externally create `DbContextOptions` and pass them to the context constructor.</span></span>
 
 > [!TIP]  
-> <span data-ttu-id="188bd-125">`DbContextOptionsBuilder` 是您在 `DbContext.OnConfiguring` 中用來設定內容的 API，現在您將從外部使用它來建立 `DbContextOptions`。</span><span class="sxs-lookup"><span data-stu-id="188bd-125">`DbContextOptionsBuilder` is the API you used in `DbContext.OnConfiguring` to configure the context, you are now going to use it externally to create `DbContextOptions`.</span></span>
+> <span data-ttu-id="ac2bc-125">`DbContextOptionsBuilder` 是您在 `DbContext.OnConfiguring` 中用來設定內容的 API，現在您將從外部使用它來建立 `DbContextOptions`。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-125">`DbContextOptionsBuilder` is the API you used in `DbContext.OnConfiguring` to configure the context, you are now going to use it externally to create `DbContextOptions`.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Saving/Transactions/SharingTransaction/Sample.cs?name=Context&highlight=3,4,5)]
 
-<span data-ttu-id="188bd-126">替代方法是繼續使用 `DbContext.OnConfiguring`，但接受 `DbConnection`，這會在儲存後於 `DbContext.OnConfiguring` 中使用。</span><span class="sxs-lookup"><span data-stu-id="188bd-126">An alternative is to keep using `DbContext.OnConfiguring`, but accept a `DbConnection` that is saved and then used in `DbContext.OnConfiguring`.</span></span>
+<span data-ttu-id="ac2bc-126">替代方法是繼續使用 `DbContext.OnConfiguring`，但接受 `DbConnection`，這會在儲存後於 `DbContext.OnConfiguring` 中使用。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-126">An alternative is to keep using `DbContext.OnConfiguring`, but accept a `DbConnection` that is saved and then used in `DbContext.OnConfiguring`.</span></span>
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -70,38 +70,38 @@ public class BloggingContext : DbContext
 }
 ```
 
-### <a name="share-connection-and-transaction"></a><span data-ttu-id="188bd-127">共用連線和交易</span><span class="sxs-lookup"><span data-stu-id="188bd-127">Share connection and transaction</span></span>
+### <a name="share-connection-and-transaction"></a><span data-ttu-id="ac2bc-127">共用連線和交易</span><span class="sxs-lookup"><span data-stu-id="ac2bc-127">Share connection and transaction</span></span>
 
-<span data-ttu-id="188bd-128">您現在可以建立多個共用相同連線的內容執行個體。</span><span class="sxs-lookup"><span data-stu-id="188bd-128">You can now create multiple context instances that share the same connection.</span></span> <span data-ttu-id="188bd-129">然後使用 `DbContext.Database.UseTransaction(DbTransaction)` API 將兩個內容都登錄在同一個交易中。</span><span class="sxs-lookup"><span data-stu-id="188bd-129">Then use the `DbContext.Database.UseTransaction(DbTransaction)` API to enlist both contexts in the same transaction.</span></span>
+<span data-ttu-id="ac2bc-128">您現在可以建立多個共用相同連線的內容執行個體。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-128">You can now create multiple context instances that share the same connection.</span></span> <span data-ttu-id="ac2bc-129">然後使用 `DbContext.Database.UseTransaction(DbTransaction)` API 將兩個內容都登錄在同一個交易中。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-129">Then use the `DbContext.Database.UseTransaction(DbTransaction)` API to enlist both contexts in the same transaction.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Saving/Transactions/SharingTransaction/Sample.cs?name=Transaction&highlight=1,2,3,7,16,23,24,25)]
 
-## <a name="using-external-dbtransactions-relational-databases-only"></a><span data-ttu-id="188bd-130">使用外部 DbTransactions (僅適用於關聯式資料庫)</span><span class="sxs-lookup"><span data-stu-id="188bd-130">Using external DbTransactions (relational databases only)</span></span>
+## <a name="using-external-dbtransactions-relational-databases-only"></a><span data-ttu-id="ac2bc-130">使用外部 DbTransactions (僅適用於關聯式資料庫)</span><span class="sxs-lookup"><span data-stu-id="ac2bc-130">Using external DbTransactions (relational databases only)</span></span>
 
-<span data-ttu-id="188bd-131">如果您使用多個資料存取技術來存取關聯式資料庫，則可能會想要在這些不同技術所執行的作業之間共用交易。</span><span class="sxs-lookup"><span data-stu-id="188bd-131">If you are using multiple data access technologies to access a relational database, you may want to share a transaction between operations performed by these different technologies.</span></span>
+<span data-ttu-id="ac2bc-131">如果您使用多個資料存取技術來存取關聯式資料庫，則可能會想要在這些不同技術所執行的作業之間共用交易。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-131">If you are using multiple data access technologies to access a relational database, you may want to share a transaction between operations performed by these different technologies.</span></span>
 
-<span data-ttu-id="188bd-132">下列範例示範如何在同一個交易中執行 ADO.NET SqlClient 作業和 Entity Framework Core 作業。</span><span class="sxs-lookup"><span data-stu-id="188bd-132">The following example, shows how to perform an ADO.NET SqlClient operation and an Entity Framework Core operation in the same transaction.</span></span>
+<span data-ttu-id="ac2bc-132">下列範例示範如何在同一個交易中執行 ADO.NET SqlClient 作業和 Entity Framework Core 作業。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-132">The following example, shows how to perform an ADO.NET SqlClient operation and an Entity Framework Core operation in the same transaction.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Saving/Transactions/ExternalDbTransaction/Sample.cs?name=Transaction&highlight=4,10,21,26,27,28)]
 
-## <a name="using-systemtransactions"></a><span data-ttu-id="188bd-133">使用 System.Transactions</span><span class="sxs-lookup"><span data-stu-id="188bd-133">Using System.Transactions</span></span>
+## <a name="using-systemtransactions"></a><span data-ttu-id="ac2bc-133">使用 System.Transactions</span><span class="sxs-lookup"><span data-stu-id="ac2bc-133">Using System.Transactions</span></span>
 
 > [!NOTE]  
-> <span data-ttu-id="188bd-134">此功能是 EF Core 2.1 中的新功能。</span><span class="sxs-lookup"><span data-stu-id="188bd-134">This feature is new in EF Core 2.1.</span></span>
+> <span data-ttu-id="ac2bc-134">此功能是 EF Core 2.1 中的新功能。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-134">This feature is new in EF Core 2.1.</span></span>
 
-<span data-ttu-id="188bd-135">如果您需要跨較大的範圍進行協調，可以使用環境交易。</span><span class="sxs-lookup"><span data-stu-id="188bd-135">It is possible to use ambient transactions if you need to coordinate across a larger scope.</span></span>
+<span data-ttu-id="ac2bc-135">如果您需要跨較大的範圍進行協調，可以使用環境交易。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-135">It is possible to use ambient transactions if you need to coordinate across a larger scope.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Saving/Transactions/AmbientTransaction/Sample.cs?name=Transaction&highlight=1,2,3,26,27,28)]
 
-<span data-ttu-id="188bd-136">此外，也可以登錄在明確交易中。</span><span class="sxs-lookup"><span data-stu-id="188bd-136">It is also possible to enlist in an explicit transaction.</span></span>
+<span data-ttu-id="ac2bc-136">此外，也可以登錄在明確交易中。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-136">It is also possible to enlist in an explicit transaction.</span></span>
 
 [!code-csharp[Main](../../../samples/core/Saving/Transactions/CommitableTransaction/Sample.cs?name=Transaction&highlight=1,15,28,29,30)]
 
-### <a name="limitations-of-systemtransactions"></a><span data-ttu-id="188bd-137">System.Transactions 的限制</span><span class="sxs-lookup"><span data-stu-id="188bd-137">Limitations of System.Transactions</span></span>  
+### <a name="limitations-of-systemtransactions"></a><span data-ttu-id="ac2bc-137">System.Transactions 的限制</span><span class="sxs-lookup"><span data-stu-id="ac2bc-137">Limitations of System.Transactions</span></span>  
 
-1. <span data-ttu-id="188bd-138">EF Core 需倚賴資料庫提供者實作對 System.Transactions 的支援。</span><span class="sxs-lookup"><span data-stu-id="188bd-138">EF Core relies on database providers to implement support for System.Transactions.</span></span> <span data-ttu-id="188bd-139">雖然支援在 .NET Framework 的 ADO.NET 提供者之間很常見，但此 API 是最近才新增至 .NET Core 中，因此支援尚不普遍。</span><span class="sxs-lookup"><span data-stu-id="188bd-139">Although support is quite common among ADO.NET providers for .NET Framework, the API has only been recently added to .NET Core and hence support is not as widespread.</span></span> <span data-ttu-id="188bd-140">如果提供者未實作對 System.Transactions 的支援，則對這些 API 發出的呼叫將可能完全被忽略。</span><span class="sxs-lookup"><span data-stu-id="188bd-140">If a provider does not implement support for System.Transactions, it is possible that calls to these APIs will be completely ignored.</span></span> <span data-ttu-id="188bd-141">.NET Core 的 SqlClient 從 2.1 版起便不支援它。</span><span class="sxs-lookup"><span data-stu-id="188bd-141">SqlClient for .NET Core does support it from 2.1 onwards.</span></span> <span data-ttu-id="188bd-142">.NET Core 2.0 的 SqlClient 將會在您嘗試使用該功能時擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="188bd-142">SqlClient for .NET Core 2.0 will throw an exception if you attempt to use the feature.</span></span>
+1. <span data-ttu-id="ac2bc-138">EF Core 需倚賴資料庫提供者實作對 System.Transactions 的支援。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-138">EF Core relies on database providers to implement support for System.Transactions.</span></span> <span data-ttu-id="ac2bc-139">雖然支援在 .NET Framework 的 ADO.NET 提供者之間很常見，但此 API 是最近才新增至 .NET Core 中，因此支援尚不普遍。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-139">Although support is quite common among ADO.NET providers for .NET Framework, the API has only been recently added to .NET Core and hence support is not as widespread.</span></span> <span data-ttu-id="ac2bc-140">如果提供者未實作對 System.Transactions 的支援，則對這些 API 發出的呼叫將可能完全被忽略。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-140">If a provider does not implement support for System.Transactions, it is possible that calls to these APIs will be completely ignored.</span></span> <span data-ttu-id="ac2bc-141">.NET Core 的 SqlClient 從 2.1 版起便不支援它。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-141">SqlClient for .NET Core does support it from 2.1 onwards.</span></span> <span data-ttu-id="ac2bc-142">.NET Core 2.0 的 SqlClient 將會在您嘗試使用該功能時擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-142">SqlClient for .NET Core 2.0 will throw an exception if you attempt to use the feature.</span></span>
 
    > [!IMPORTANT]  
-   > <span data-ttu-id="188bd-143">建議您先測試該 API 是否可與您的提供者正確搭配運作，再倚賴它來管理交易。</span><span class="sxs-lookup"><span data-stu-id="188bd-143">It is recommended that you test that the API behaves correctly with your provider before you rely on it for managing transactions.</span></span> <span data-ttu-id="188bd-144">如果無法正確搭配運作，建議您與資料庫提供者的維護人員連絡。</span><span class="sxs-lookup"><span data-stu-id="188bd-144">You are encouraged to contact the maintainer of the database provider if it does not.</span></span>
+   > <span data-ttu-id="ac2bc-143">建議您先測試該 API 是否可與您的提供者正確搭配運作，再倚賴它來管理交易。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-143">It is recommended that you test that the API behaves correctly with your provider before you rely on it for managing transactions.</span></span> <span data-ttu-id="ac2bc-144">如果無法正確搭配運作，建議您與資料庫提供者的維護人員連絡。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-144">You are encouraged to contact the maintainer of the database provider if it does not.</span></span>
 
-2. <span data-ttu-id="188bd-145">從 2.1 版開始，.NET Core 中的 System.Transactions 實作便不包含對分散式交易的支援，因此您無法使用 `TransactionScope` 或 `CommittableTransaction` 來跨多個資源管理員協調交易。</span><span class="sxs-lookup"><span data-stu-id="188bd-145">As of version 2.1, the System.Transactions implementation in .NET Core does not include support for distributed transactions, therefore you cannot use `TransactionScope` or `CommittableTransaction` to coordinate transactions across multiple resource managers.</span></span>
+2. <span data-ttu-id="ac2bc-145">從 2.1 版開始，.NET Core 中的 System.Transactions 實作便不包含對分散式交易的支援，因此您無法使用 `TransactionScope` 或 `CommittableTransaction` 來跨多個資源管理員協調交易。</span><span class="sxs-lookup"><span data-stu-id="ac2bc-145">As of version 2.1, the System.Transactions implementation in .NET Core does not include support for distributed transactions, therefore you cannot use `TransactionScope` or `CommittableTransaction` to coordinate transactions across multiple resource managers.</span></span>
