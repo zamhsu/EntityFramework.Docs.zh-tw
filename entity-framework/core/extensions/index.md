@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 12/17/2019
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 99f59153a452a2f4aad5811110ebc5b5da7717ef
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: e3806f7161fecfe66450d3e08f97caf3d2c84cf3
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78412993"
+ms.lasthandoff: 04/07/2020
+ms.locfileid: "80634232"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -175,3 +175,14 @@ Entity Framework Core 的延伸模組程式庫，可讓使用 SQL Server 的開�
 新增在 linq Lambda 中呼叫擴充方法的支援。 適用於 EF Core：3.1
 
 [GitHub 存放庫](https://github.com/ClaveConsulting/Expressionify)
+
+### <a name="xlinq"></a>XLinq
+
+關聯式資料的 Language-integrated Query (LINQ) 技術。 可供使用 C# 來撰寫強型別查詢。 適用於 EF Core：3.1
+
+- 查詢建立的完整 C# 支援：Lambda 內部的多個陳述式、變數、函式等。
+- 與 SQL 沒有語意隔閡。 XLinq 會將 SQL 陳述式 (例如 `SELECT`、`FROM`、`WHERE`) 宣告為第一級 C# 方法，以結合熟悉的語法與 IntelliSense、型別安全和重構。
+
+因此，SQL 會變成在本機公開其 API 的「另一個」類別庫，實際上就是「整合語言的 SQL」  。
+
+[網站](http://xlinq.live/)
