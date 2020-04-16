@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: 915aaa41beb495a046f2d6260e9c3b174d5f3031
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: bfd6e161ed7f7bf96e61946f94c8eeadd24a72f5
+ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417674"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81434184"
 ---
 # <a name="loading-related-data"></a>載入相關資料
 
@@ -55,6 +55,27 @@ Entity Framework Core 可讓您在模型中使用導覽屬性來載入相關實�
 
 > [!CAUTION]
 > 自版本 3.0.0`Include`起,每個版本將導致將附加 JOIN 添加到關係提供程式生成的 SQL 查詢中,而早期版本生成了其他 SQL 查詢。 這可以顯著更改查詢的性能,無論好壞。 特別是,具有極高數量的運算符的`Include`LINQ 查詢可能需要分解為多個單獨的 LINQ 查詢,以避免卡點分解問題。
+
+### <a name="filtered-include"></a>篩選包括
+
+> [!NOTE]
+> 此功能在 EF Core 5.0 中介紹。
+
+當應用"包括"載入相關數據時,可以在包含的集合導航上應用某些枚舉操作,從而允許篩選和排序結果。
+
+支援的操作包括: `Where` `OrderBy` `OrderByDescending``Take``ThenBy``ThenByDescending``Skip`、、、、、、 與 。
+
+此類操作應應用於傳遞給 Include 方法的 lambda 中的集合導航上,如下所示:
+
+[!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#FilteredInclude)]
+
+每個包含的導航只允許一組唯一的篩選器操作。 如果對給定集合導航應用多個 Include`blog.Posts`操作( 在下面的範例中),只能在其中一個操作上指定篩選器操作: 
+
+[!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered1)]
+
+或者,可以對包含多次的每個導航應用相同的操作:
+
+[!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered2)]
 
 ### <a name="include-on-derived-types"></a>衍生類型中的 Include
 
