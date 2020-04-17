@@ -1,15 +1,15 @@
 ---
 title: 工具和延伸模組 - EF Core
 author: ErikEJ
-ms.date: 12/17/2019
+ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: e3806f7161fecfe66450d3e08f97caf3d2c84cf3
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 7727229fc50a4bfd39e05481399e392037402396
+ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80634232"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81434106"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -71,11 +71,11 @@ Entity Framework Core 產生器 (efg) 是 .NET Core CLI 工具，可以從現有
 
 [GitHub 存放庫](https://github.com/Arch/AutoHistory/)
 
-### <a name="efsecondlevelcachecore"></a>EFSecondLevelCache.Core
+### <a name="efcoresecondlevelcacheinterceptor"></a>EFCoreSecondLevelCacheInterceptor
 
-將 EF Core 查詢的結果儲存至第二層快取的延伸模組，如此一來可避免後續執行相同查詢時，直接從快取存取資料庫及擷取資料。 適用於 EF Core：2.
+第二個層級快取是查詢快取。 EF 命令的結果會存放在快取中，使相同的 EF 命令會從快取擷取其資料，而不必再次向資料庫再次執行命令。 適用於 EF Core：3.
 
-[GitHub 存放庫](https://github.com/VahidN/EFSecondLevelCache.Core/)
+[GitHub 存放庫](https://github.com/VahidN/EFCoreSecondLevelCacheInterceptor)
 
 ### <a name="geco"></a>Geco
 
@@ -172,13 +172,13 @@ Entity Framework Core 的延伸模組程式庫，可讓使用 SQL Server 的開�
 
 ### <a name="expressionify"></a>Expressionify
 
-新增在 linq Lambda 中呼叫擴充方法的支援。 適用於 EF Core：3.1
+新增在 LINQ Lambda 中呼叫擴充方法的支援。 適用於 EF Core：3.
 
 [GitHub 存放庫](https://github.com/ClaveConsulting/Expressionify)
 
 ### <a name="xlinq"></a>XLinq
 
-關聯式資料的 Language-integrated Query (LINQ) 技術。 可供使用 C# 來撰寫強型別查詢。 適用於 EF Core：3.1
+關聯式資料的 Language-integrated Query (LINQ) 技術。 可供使用 C# 來撰寫強型別查詢。 適用於 EF Core：3.
 
 - 查詢建立的完整 C# 支援：Lambda 內部的多個陳述式、變數、函式等。
 - 與 SQL 沒有語意隔閡。 XLinq 會將 SQL 陳述式 (例如 `SELECT`、`FROM`、`WHERE`) 宣告為第一級 C# 方法，以結合熟悉的語法與 IntelliSense、型別安全和重構。
@@ -186,3 +186,27 @@ Entity Framework Core 的延伸模組程式庫，可讓使用 SQL Server 的開�
 因此，SQL 會變成在本機公開其 API 的「另一個」類別庫，實際上就是「整合語言的 SQL」  。
 
 [網站](http://xlinq.live/)
+
+### <a name="ramses"></a>Ramses
+
+生命週期勾點 (呼叫 SaveChanges)。 適用於 EF Core：2、3。
+
+[GitHub 存放庫](https://github.com/JValck/Ramses)
+
+### <a name="efcorenamingconventions"></a>EFCore.NamingConventions
+
+這會自動使所有資料表與資料行名稱採用全為大寫或小寫字母，並以底線作為空格的格式。 適用於 EF Core：3.
+
+[GitHub 存放庫](https://github.com/efcore/EFCore.NamingConventions)
+
+### <a name="simplersoftwareentityframeworkcoresqlservernodatime"></a>SimplerSoftware.EntityFrameworkCore.SqlServer.NodaTime
+
+針對 NodaTime 類型，將原生支援新增至 SQL Server 的 EntityFrameworkCore。 適用於 EF Core：3.
+
+[GitHub 存放庫](https://github.com/StevenRasmussen/EFCore.SqlServer.NodaTime)
+
+### <a name="dabbleentityframeworkcoretemporalquery"></a>Dabble.EntityFrameworkCore.Temporal.Query
+
+Entity Framework Core 3.1 的 LINQ 延伸模組，以支援 Microsoft SQL Server 時態表查詢。 適用於 EF Core：3.
+
+[GitHub 存放庫](https://github.com/Adam-Langley/efcore-temporal-query)
