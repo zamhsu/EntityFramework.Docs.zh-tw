@@ -1,5 +1,5 @@
 - name: Entity Framework
-  href: index.md
+  href: index.yml
   items:
     - name: EF Core 與 EF6
       items:
@@ -266,7 +266,7 @@
               href: ef6/fundamentals/relationships.md
             - name: 非同步查詢及儲存
               href: ef6/fundamentals/async.md
-            - name: Configuration
+            - name: 設定
               items:
                 - name: 以程式碼為基礎
                   href: ef6/fundamentals/configuring/code-based.md
