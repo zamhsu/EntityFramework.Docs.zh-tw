@@ -1,0 +1,169 @@
+### YamlMime:Hub
+title: Entity Framework 文件
+summary: Entity Framework Core 是適用於 .NET 的新式物件資料庫對應程式。 其支援 LINQ 查詢、變更追蹤、更新以及結構描述移轉。 EF Core 適用於 SQL Server、Azure SQL Database、SQLite、Azure Cosmos。
+brand: dotnet
+metadata:
+  title: Entity Framework 文件
+  description: 了解如何使用 Entity Framework Core，這是適用於 .NET 的新式物件資料庫對應程式，可支援 LINQ 查詢、變更追蹤、更新與結構描述移轉。 瀏覽教學課程、範例程式碼、基本概念、API 參考等等。
+  ms.product: entity-framework
+  ms.topic: hub-page
+  author: WadePickett
+  ms.author: wpickett
+  ms.date: 04/14/2020
+  ms.openlocfilehash: b5f82a93e767da1230795895c24fabd17448157a
+  ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
+  ms.translationtype: HT
+  ms.contentlocale: zh-TW
+  ms.lasthandoff: 04/16/2020
+  ms.locfileid: "81434348"
+highlightedContent:
+  items:
+  - title: Entity Framework Core
+    itemType: get-started
+    url: core/get-started/index.md
+  - title: 使用 Entity Framework Core 保存並擷取關聯式資料
+    itemType: learn
+    url: /learn/modules/persist-data-ef-core/
+  - title: 版本與平台
+    itemType: whats-new
+    url: core/what-is-new/index.md
+  - title: 支援的資料庫
+    itemType: overview
+    url: core/providers/index.md
+  - title: 選擇適合您的版本
+    itemType: overview
+    url: efcore-and-ef6/index.md
+  - title: API 參考瀏覽器
+    itemType: reference
+    url: https://docs.microsoft.com/dotnet/api/?view=efcore-3.1
+additionalContent:
+  sections:
+  - title: 使用 Entity Framework Core 來開發
+    items:
+    - title: 開發您的第一個應用程式
+      links:
+      - url: core/get-started/index.md
+        text: 使用 EF Core 存取 SQLite 的 .NET Core 主控台應用程式
+      - url: /aspnet/core/data/ef-rp/
+        text: 使用 EF Core 存取 SQL Server LocalDB 或 SQLite 的 ASP.NET Core Razor Pages Web 應用程式
+      - url: /aspnet/core/data/ef-mvc/
+        text: 使用 EF Core 存取 SQL Server 的 ASP.NET Core MVC Web 應用程式
+    - title: 基礎
+      links:
+      - url: core/miscellaneous/connection-strings.md
+        text: 連接字串
+      - url: core/miscellaneous/logging.md
+        text: 記錄
+      - url: core/miscellaneous/connection-resiliency.md
+        text: 連線恢復功能
+      - url: core/miscellaneous/testing/index.md
+        text: 測試
+      - url: core/miscellaneous/configuring-dbcontext.md
+        text: 設定 DbCoNtext
+      - url: core/miscellaneous/nullable-reference-types.md
+        text: 可為 Null 的參考型別
+    - title: 建立模型
+      links:
+      - url: core/modeling/index.md
+        text: 總覽
+      - url: core/modeling/entity-types.md
+        text: 實體類型
+      - url: core/modeling/entity-properties.md
+        text: 實體屬性
+      - url: core/modeling/keys.md
+        text: 按鍵
+      - url: core/modeling/generated-properties.md
+        text: 產生的值
+      - url: core/modeling/relationships.md
+        text: 關聯性
+      - url: core/modeling/data-seeding.md
+        text: 資料植入
+      - url: core/modeling/owned-entities.md
+        text: 擁有的實體類型
+      - url: core/modeling/keyless-entity-types.md
+        text: 無索引鍵實體類型
+    - title: 查詢
+      links:
+      - url: core/querying/index.md
+        text: 總覽
+      - url: core/querying/client-eval.md
+        text: 用戶端與伺服器的評估比較
+      - url: core/querying/tracking.md
+        text: 追蹤與不追蹤的比較
+      - url: core/querying/complex-query-operators.md
+        text: 複雜查詢運算子
+      - url: core/querying/related-data.md
+        text: 讀取相關資料
+      - url: core/querying/async.md
+        text: 非同步查詢
+      - url: core/querying/raw-sql.md
+        text: 原始 SQL 查詢
+      - url: core/querying/filters.md
+        text: 全域查詢篩選條件
+    - title: 管理資料庫架構
+      links:
+      - url: core/managing-schemas/index.md
+        text: 總覽
+      - url: core/managing-schemas/migrations/index.md
+        text: 移轉概觀
+      - url: core/managing-schemas/migrations/teams.md
+        text: 小組環境的移轉
+      - url: core/managing-schemas/migrations/operations.md
+        text: 移轉 - 自訂作業
+      - url: core/managing-schemas/migrations/projects.md
+        text: 移轉 - 使用個別的專案
+      - url: core/managing-schemas/migrations/providers.md
+        text: 移轉 - 多個提供者
+      - url: core/managing-schemas/migrations/history-table.md
+        text: 移轉 - 自訂記錄資料表
+      - url: core/managing-schemas/ensure-created.md
+        text: 建立及卸除 API
+      - url: core/managing-schemas/scaffolding.md
+        text: 還原工程 (Scaffolding)
+    - title: 儲存資料
+      links:
+      - url: core/saving/index.md
+        text: 總覽
+      - url: core/saving/basic.md
+        text: 基本儲存
+      - url: core/saving/related-data.md
+        text: 相關資料
+      - url: core/saving/cascade-delete.md
+        text: 串聯刪除
+      - url: core/saving/concurrency.md
+        text: 並行衝突
+      - url: core/saving/transactions.md
+        text: 異動
+      - url: core/saving/async.md
+        text: 非同步儲存
+      - url: core/saving/disconnected-entities.md
+        text: 已中斷連線的實體
+    - title: 支援的資料庫
+      links:
+      - url: core/providers/sql-server/index.md
+        text: SQL Server
+      - url: core/providers/sqlite/index.md
+        text: SQL Lite
+      - url: core/providers/cosmos/index.md
+        text: Cosmos
+      - url: core/providers/in-memory/index.md
+        text: 適用於測試的記憶體內部資料庫
+      - url: core/providers/index.md
+        text: 所有目前的資料庫提供者
+    - title: 命令列參考
+      links:
+      - url: core/miscellaneous/cli/index.md
+        text: 總覽
+      - url: core/miscellaneous/cli/powershell.md
+        text: 套件管理員主控台 (Visual Studio)
+      - url: core/miscellaneous/cli/dotnet.md
+        text: .NET Core CLI
+      - url: core/miscellaneous/cli/dbcontext-creation.md
+        text: 設計階段建立 DbContext
+      - url: core/miscellaneous/cli/services.md
+        text: 設計階段服務
+    - title: 舊版本
+      links:
+      - url: ef6/get-started.md
+        text: Entity Framework 6
+  footer: 參與 Entity Framework 文件。請參閱 [參與者指南](https://github.com/dotnet/EntityFramework.Docs/blob/master/CONTRIBUTING.md)(英文)。
