@@ -1,29 +1,29 @@
 ---
-title: 無鑰匙實體型態 - EF 核心
-description: 如何使用實體框架核心設定無鑰匙實體類型
+title: 無索引鍵實體類型-EF Core
+description: 如何使用 Entity Framework Core 設定無索引鍵實體類型
 author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 9/13/2019
 uid: core/modeling/keyless-entity-types
-ms.openlocfilehash: 496e1e8983ba2d5e15dbee02607ea3f2c861503e
-ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
+ms.openlocfilehash: 00e8f17c88fd51e39df3c1e45c648c203bbbe324
+ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81434210"
+ms.lasthandoff: 04/23/2020
+ms.locfileid: "82103122"
 ---
 # <a name="keyless-entity-types"></a>無索引鍵實體類型
 
 > [!NOTE]
-> 此功能在 EF Core 2.1 中以查詢類型的名義添加。 在 EF Core 3.0 中,概念重新命名為無鑰匙實體類型。
+> 這項功能已在 EF Core 2.1 中的查詢類型名稱下新增。 在 EF Core 3.0 中，概念已重新命名為無索引鍵的實體類型。 `[Keyless]`資料批註在 EFCore 5.0 中變成可供使用。
 
-除了常規實體類型外,EF Core 模型還可以包含_無鍵實體類型_,可用於對不包含鍵值的數據執行資料庫查詢。
+除了一般實體類型之外，EF Core 模型也可以包含_無索引鍵的實體類型_，可用來對不包含索引鍵值的資料執行資料庫查詢。
 
-## <a name="defining-keyless-entity-types"></a>定義無鍵實體類型
+## <a name="defining-keyless-entity-types"></a>定義無索引鍵實體類型
 
-可以使用資料註解或 Fluent API 定義無鍵實體類型:
+無索引鍵實體類型可以使用資料批註或流暢的 API 來定義：
 
-### <a name="data-annotations"></a>[資料註解](#tab/data-annotations)
+### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Keyless.cs?Name=Keyless&highlight=1)]
 
@@ -33,70 +33,70 @@ ms.locfileid: "81434210"
 
 ***
 
-## <a name="keyless-entity-types-characteristics"></a>沒有鍵實體類型特徵
+## <a name="keyless-entity-types-characteristics"></a>無索引鍵實體類型特性
 
-無鍵實體類型支援許多與常規實體類型相同的映射功能,如繼承映射和導航屬性。 在關係存儲上,他們可以通過流暢的 API 方法或數據註釋配置目標資料庫物件和列。
+無索引鍵實體類型支援許多與一般實體類型相同的對應功能，例如繼承對應和導覽屬性。 在關聯式存放區上，他們可以透過 Fluent API 方法或資料批註來設定目標資料庫物件和資料行。
 
-但是,它們不同於常規實體類型,因為它們:
+不過，它們與一般實體類型不同之處如下：
 
-- 無法定義金鑰。
-- 永遠不會追蹤_DbContext_中的更改,因此永遠不會在資料庫中插入、更新或刪除。
-- 從來都沒有被慣例發現。
-- 僅支持導航映射功能的子集,特別是:
-  - 他們可能永遠不會作為關係的主要目的。
-  - 它們可能沒有指向擁有的實體的導航
-  - 它們只能包含指向常規實體的引用導航屬性。
-  - 實體不能包含無鍵實體類型的導航屬性。
-- 需要使用`[Keyless]`數據註釋或方法調用`.HasNoKey()`進行 配置。
-- 可以映射到_定義查詢_。 定義查詢是在模型中聲明的查詢,它充當無鍵實體類型的數據源。
+- 不能定義索引鍵。
+- 永遠不會針對_DbCoNtext_中的變更進行追蹤，因此永遠不會在資料庫上插入、更新或刪除。
+- 一律不會依照慣例來探索。
+- 僅支援導覽對應功能的子集，特別是：
+  - 它們可能永遠不會做為關聯性的主要端點。
+  - 他們可能不會有所擁有實體的導覽
+  - 它們只能包含指向一般實體的參考導覽屬性。
+  - 實體不能包含無索引鍵實體類型的導覽屬性。
+- 需要使用`[Keyless]`資料批註或`.HasNoKey()`方法呼叫來設定。
+- 可能會對應到_定義查詢_。 定義查詢是在模型中宣告的查詢，做為無索引鍵實體類型的資料來源。
 
 ## <a name="usage-scenarios"></a>使用方式情節
 
-沒有鍵實體類型的一些主要使用機制是:
+無索引鍵實體類型的一些主要使用案例如下：
 
-- 用作[原始 SQL 查詢的](xref:core/querying/raw-sql)傳回類型。
-- 映射到不包含主鍵的資料庫檢視。
-- 映射到未定義主鍵的表。
-- 映射到模型中定義的查詢。
+- 做為[原始 SQL 查詢](xref:core/querying/raw-sql)的傳回型別。
+- 對應至不含主鍵的資料庫 views。
+- 對應至未定義主鍵的資料表。
+- 對應至模型中定義的查詢。
 
-## <a name="mapping-to-database-objects"></a>映射到資料庫物件
+## <a name="mapping-to-database-objects"></a>對應至資料庫物件
 
-使用`ToTable`或`ToView`fluent API 將無鍵實體類型映射到資料庫物件。 從 EF Core 的角度來看,此方法中指定的資料庫物件是一個_檢視_,這意味著它被視為唯讀查詢來源,不能成為更新、插入或刪除操作的目標。 但是,這並不意味著資料庫對象實際上需要是資料庫視圖。 它也可以是資料庫表,將被視為唯讀。 相反,對於常規實體類型,EF Core`ToTable`假定 方法中指定的資料庫物件可以視為_表_,這意味著它可以用作查詢源,但也可以通過更新、刪除和插入操作作為目標。 事實上,您可以指定中的`ToTable`資料庫檢視的名稱,只要檢視配置為在資料庫上可升算,所有內容都應該正常工作。
+使用`ToTable`或`ToView` Fluent API，將無索引鍵實體類型對應至資料庫物件。 從 EF Core 的觀點來看，這個方法中指定的資料庫物件是一個_視圖_，這表示它會被視為唯讀查詢來源，而且不能是 update、insert 或 delete 作業的目標。 不過，這並不表示資料庫物件實際上必須是資料庫的視圖。 它也可以是將視為唯讀的資料庫資料表。 相反地，針對一般實體類型，EF Core 會假設`ToTable`方法中指定的資料庫物件可以視為_資料表_，這表示它可以當做查詢來源使用，但也會以更新、刪除和插入作業為目標。 事實上，您可以在中`ToTable`指定資料庫檢視的名稱，只要將此視圖設定為可在資料庫上更新，一切都應該可以正常使用。
 
 > [!NOTE]
-> `ToView`假定該物件已存在於資料庫中,並且不會由遷移創建。
+> `ToView`假設物件已經存在於資料庫中，而且不會由遷移所建立。
 
 ## <a name="example"></a>範例
 
-下面的範例展示如何使用無鍵實體類型來查詢資料庫檢視。
+下列範例顯示如何使用無索引鍵實體類型來查詢資料庫檢視。
 
 > [!TIP]
-> 您可以在 GitHub 上查看本文[的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/KeylessEntityTypes)。
+> 您可以在 GitHub 上查看這篇文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/KeylessEntityTypes)。
 
-首先,我們定義了一個簡單的博客和帖子模型:
+首先，我們會定義簡單的 Blog 和 Post 模型：
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#Entities)]
 
-接下來,我們定義一個簡單的資料庫視圖,該視圖將使我們能夠查詢與每個博客關聯的帖子數:
+接下來，我們會定義一個簡單的資料庫檢視，讓我們查詢與每個 blog 相關聯的貼文數目：
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#View)]
 
-接下來,我們定義一個類來保存資料庫視圖的結果:
+接下來，我們會定義一個類別，以保存資料庫檢視的結果：
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#KeylessEntityType)]
 
-接下來,我們使用`HasNoKey`API 在_OnModel 創建_中配置無鑰匙實體類型。
-我們使用流暢的設定 API 設定無鑰匙實體類型的對應:
+接下來，我們會使用`HasNoKey` API，在_OnModelCreating_中設定無索引鍵實體類型。
+我們會使用流暢的設定 API 來設定無索引鍵實體類型的對應：
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#Configuration)]
 
-接下來,我們將 設定`DbContext`為`DbSet<T>`包括 :
+接下來，我們會`DbContext`設定，以`DbSet<T>`包含：
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#DbSet)]
 
-最後,我們可以以標準方式查詢資料庫檢視:
+最後，我們可以透過標準方式來查詢資料庫檢視：
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#Query)]
 
 > [!TIP]
-> 請注意,我們還定義了上下文級別查詢屬性 (DbSet), 以充噹針對此類型的查詢的根。
+> 請注意，我們也定義了內容層級查詢屬性（DbSet），以做為此類型之查詢的根。
