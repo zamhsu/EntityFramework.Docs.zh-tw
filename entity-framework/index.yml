@@ -1,6 +1,6 @@
 ### YamlMime:Hub
 title: Entity Framework 文件
-summary: Entity Framework Core 是適用於 .NET 的新式物件資料庫對應程式。 其支援 LINQ 查詢、變更追蹤、更新以及結構描述移轉。 EF Core 適用於 SQL Server、Azure SQL Database、SQLite、Azure Cosmos。
+summary: Entity Framework Core 是適用於 .NET 的新式物件資料庫對應程式。 其支援 LINQ 查詢、變更追蹤、更新以及結構描述移轉。 EF Core 可用於多種資料庫，包括 SQL Database (內部部署與 Azure)、SQLite、MySQL、PostgreSQL 及 Azure Cosmos DB。
 brand: dotnet
 metadata:
   title: Entity Framework 文件
@@ -9,13 +9,13 @@ metadata:
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 04/14/2020
-  ms.openlocfilehash: b5f82a93e767da1230795895c24fabd17448157a
-  ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
+  ms.date: 04/15/2020
+  ms.openlocfilehash: bfb96b06a2832b489e194fede0c04efebcc7496d
+  ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
   ms.translationtype: HT
   ms.contentlocale: zh-TW
-  ms.lasthandoff: 04/16/2020
-  ms.locfileid: "81434348"
+  ms.lasthandoff: 04/23/2020
+  ms.locfileid: "82103096"
 highlightedContent:
   items:
   - title: Entity Framework Core
@@ -143,11 +143,15 @@ additionalContent:
       - url: core/providers/sql-server/index.md
         text: SQL Server
       - url: core/providers/sqlite/index.md
-        text: SQL Lite
+        text: SQLite
+      - url: http://www.npgsql.org/efcore/index.html
+        text: PostgreSQL
+      - url: https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql
+        text: MySQL 和 MariaDB
       - url: core/providers/cosmos/index.md
-        text: Cosmos
+        text: Cosmos DB SQL API
       - url: core/providers/in-memory/index.md
-        text: 適用於測試的記憶體內部資料庫
+        text: 記憶體內部 (測試)
       - url: core/providers/index.md
         text: 所有目前的資料庫提供者
     - title: 命令列參考

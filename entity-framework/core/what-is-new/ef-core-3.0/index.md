@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/index
-ms.openlocfilehash: ebc676930ffc396aa70bb8afb91cf5a0cd43e04d
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 39684cdcc17e3baa4b77cf29d54b626294771332
+ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413193"
+ms.lasthandoff: 04/23/2020
+ms.locfileid: "82103135"
 ---
 # <a name="new-features-in-entity-framework-core-30"></a>Entity Framework Core 3.0 中的新功能
 
@@ -113,15 +113,15 @@ EF Core 3.0 中的新攔截 API 允許提供發生低層級資料庫作業 (在 
 
 與 EF 6 中已存在的攔截功能類似，攔截器可讓您在作業發生之前或之後進行攔截。 如果在它們發生之前對其進行攔截，則可以跳過執行，並提供來自攔截邏輯的替代結果。
 
-例如，若要操作命令文字，您可以建立 `IDbCommandInterceptor`：
+例如，若要操作命令文字，您可以建立 `DbCommandInterceptor`：
 
 ``` csharp
 public class HintCommandInterceptor : DbCommandInterceptor
 {
-    public override InterceptionResult ReaderExecuting(
+    public override InterceptionResult<DbDataReader> ReaderExecuting(
         DbCommand command,
         CommandEventData eventData,
-        InterceptionResult result)
+        InterceptionResult<DbDataReader> result)
     {
         // Manipulate the command text, etc. here...
         command.CommandText += " OPTION (OPTIMIZE FOR UNKNOWN)";
@@ -171,7 +171,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 從 EF Core 3.0 開始，如果 `OrderDetails` 由 `Order` 所擁有，或明確地對應到相同的資料表，即可新增 `Order` 而無需 `OrderDetails` 及所有 `OrderDetails` 屬性，但主索引鍵將會對應至可為 Null 的資料行。
 
-進行查詢時，如果任何其必要的屬性不具有值，或如果其具有主索引鍵以外的非必要屬性，且所有屬性皆為 `OrderDetails`，則 EF Core 會將 `null` 設定為 `null`。
+進行查詢時，如果任何其必要的屬性不具有值，或如果其具有主索引鍵以外的非必要屬性，且所有屬性皆為 `null`，則 EF Core 會將 `OrderDetails` 設定為 `null`。
 
 ``` csharp
 public class Order
