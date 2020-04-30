@@ -1,54 +1,46 @@
 ---
 title: 使用 SQLite EF Core 進行測試
-author: rowanmiller
-ms.date: 10/27/2016
-ms.assetid: 7a2b75e2-1875-4487-9877-feff0651b5a6
+description: 使用 SQLite 測試 EF Core 應用程式
+author: ajcvickers
+ms.date: 04/24/2020
 uid: core/miscellaneous/testing/sqlite
-ms.openlocfilehash: f7f847d8c766c0d4d7577ea6760ee72a17f84933
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 327fdc230df2a3b4094accf93fffa81f92e0a931
+ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417299"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82538279"
 ---
-# <a name="testing-with-sqlite"></a>使用 SQLite 進行測試
+# <a name="using-sqlite-to-test-an-ef-core-application"></a>使用 SQLite 測試 EF Core 應用程式
 
-SQLite 具有記憶體中模式，可讓您使用 SQLite 針對關係資料庫撰寫測試，而不會產生實際資料庫作業的額外負荷。
+> [!WARNING]
+> 使用 SQLite 可以是測試 EF Core 應用程式的有效方式。
+> 不過，SQLite 的行為與其他資料庫系統不同，可能會發生問題。 如需問題和取捨的討論，請參閱[測試使用 EF Core 的程式碼](xref:core/miscellaneous/testing/index)。  
 
-> [!TIP]  
-> 您可以在 GitHub 上查看這篇文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing)
+本檔會針對[示範如何測試使用 EF Core 之應用程式的範例](xref:core/miscellaneous/testing/testing-sample)中所介紹的概念來使用。
+此處顯示的程式碼範例來自此範例。
 
-## <a name="example-testing-scenario"></a>範例測試案例
+## <a name="using-sqlite-in-memory-databases"></a>使用 SQLite 記憶體內部資料庫
 
-請考慮下列可讓應用程式程式碼執行與 blog 相關之作業的服務。 在內部，它會使用連接到 SQL Server 資料庫的 `DbContext`。 交換此內容以連接到記憶體中的 SQLite 資料庫，讓我們可以為此服務撰寫有效率的測試，而不需要修改程式碼，或執行許多工作來建立內容的測試 double，這會很有説明。
+一般來說，SQLite 會將資料庫建立為簡單檔案，並使用您的應用程式在同進程中存取檔案。
+這非常快速，特別是在使用快速[SSD](https://en.wikipedia.org/wiki/Solid-state_drive)時。 
 
-[!code-csharp[Main](../../../../samples/core/Miscellaneous/Testing/BusinessLogic/BlogService.cs)]
+SQLite 也可以使用純粹在記憶體中建立的資料庫。
+只要您瞭解記憶體內部資料庫存留期，這就很容易與 EF Core 搭配使用：
+* 當資料庫的連接開啟時，就會建立該資料庫。
+* 當資料庫的連接已關閉時，就會刪除該資料庫
 
-## <a name="get-your-context-ready"></a>讓您的內容就緒
+EF Core 在指定時，將會使用已開啟的連接，而且永遠不會嘗試關閉它。
+因此，使用 EF Core 搭配記憶體內部 SQLite 資料庫的關鍵，是在將連接傳遞給 EF 之前，先開啟連線。  
 
-### <a name="avoid-configuring-two-database-providers"></a>避免設定兩個資料庫提供者
+此[範例](xref:core/miscellaneous/testing/testing-sample)會使用下列程式碼來達到此動作：
 
-在您的測試中，您將會在外部設定內容以使用 InMemory 提供者。 如果您要藉由覆寫內容中的 `OnConfiguring` 來設定資料庫提供者，則必須新增一些條件式程式碼，以確保只有在資料庫提供者尚未設定時，才會進行設定。
+[!code-csharp[SqliteInMemory](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/SqliteInMemoryItemsControllerTest.cs?name=SqliteInMemory)]
 
-> [!TIP]  
-> 如果您使用 ASP.NET Core，則不應該需要此程式碼，因為您的資料庫提供者是在內容外部設定（在 Startup.cs 中）。
+注意：
+* `CreateInMemoryDatabase`方法會建立 SQLite 記憶體內部資料庫，並開啟其連接。
+* 建立`DbConnection`的會從解壓縮`ContextOptions`並儲存。
+* 處置測試時，會處置此連接，而不會流失資源。 
 
-[!code-csharp[Main](../../../../samples/core/Miscellaneous/Testing/BusinessLogic/BloggingContext.cs#OnConfiguring)]
-
-### <a name="add-a-constructor-for-testing"></a>新增用於測試的函數
-
-針對不同的資料庫啟用測試的最簡單方式是修改您的內容，以公開接受 `DbContextOptions<TContext>`的函式。
-
-[!code-csharp[Main](../../../../samples/core/Miscellaneous/Testing/BusinessLogic/BloggingContext.cs#Constructors)]
-
-> [!TIP]  
-> `DbContextOptions<TContext>` 會告訴內容其所有設定，例如要連接的資料庫。 這是在您的內容中執行 OnConfiguring 方法所建立的相同物件。
-
-## <a name="writing-tests"></a>撰寫測試
-
-使用此提供者進行測試的關鍵在於能夠告訴內容使用 SQLite，並控制記憶體內部資料庫的範圍。 資料庫的範圍是藉由開啟和關閉連接來控制。 資料庫的範圍是連接開啟的持續時間。 您通常會想要針對每個測試方法使用乾淨的資料庫。
-
->[!TIP]
-> 若要使用 `SqliteConnection()` 和 `.UseSqlite()` 擴充方法，請參考[microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/)的 NuGet 套件。
-
-[!code-csharp[Main](../../../../samples/core/Miscellaneous/Testing/TestProject/SQLite/BlogServiceTests.cs)]
+> [!NOTE]
+> [問題 #16103](https://github.com/dotnet/efcore/issues/16103)是追蹤讓此連接管理變得更容易的方式。 
