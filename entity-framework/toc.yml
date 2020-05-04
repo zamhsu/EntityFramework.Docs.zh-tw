@@ -73,8 +73,12 @@
               href: core/miscellaneous/connection-resiliency.md
             - name: 測試
               items:
-                - name: 總覽
+                - name: 測試使用 EF Core 的程式碼
                   href: core/miscellaneous/testing/index.md
+                - name: EF Core 測試範例
+                  href: core/miscellaneous/testing/testing-sample.md
+                - name: 在測試之間共用資料庫
+                  href: core/miscellaneous/testing/sharing-databases.md
                 - name: 使用 SQLite 測試
                   href: core/miscellaneous/testing/sqlite.md
                 - name: 使用 InMemory 測試
@@ -111,6 +115,8 @@
               href: core/modeling/backing-field.md
             - name: 值轉換
               href: core/modeling/value-conversions.md
+            - name: 值比較子
+              href: core/modeling/value-comparers.md
             - name: 資料植入
               href: core/modeling/data-seeding.md
             - name: 實體類型建構函式
