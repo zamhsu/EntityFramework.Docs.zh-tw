@@ -1,15 +1,15 @@
 ---
-title: 使用 EF Core 測試元件 - EF Core
+title: 測試使用 EF Core 的程式碼 - EF Core
 description: 測試使用 EF Core 的應用程式不同方法
 author: ajcvickers
-ms.date: 03/23/2020
+ms.date: 04/22/2020
 uid: core/miscellaneous/testing/index
-ms.openlocfilehash: b1ab37ebb0a3aae09d5d5b225f746cf83dfba170
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 308128b0d51b9e0d1fc1ebb0ed00e803100efb52
+ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80634257"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82538356"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>測試使用 EF Core 的程式碼
 
@@ -20,6 +20,9 @@ ms.locfileid: "80634257"
 
 本文件概述上述每種選擇所牽涉到的取捨，並示範 EF Core 如何搭配每種方法使用。  
 
+> [!TIP]
+> 請參閱 [EF Core 測試範例](xref:core/miscellaneous/testing/testing-sample)來取得示範這裡所介紹之概念的程式碼。 
+
 ## <a name="all-database-providers-are-not-equal"></a>所有資料庫提供者都不相同
 
 請務必了解，EF Core 的設計不是將基礎資料庫系統的每個層面抽象化。
@@ -27,10 +30,10 @@ ms.locfileid: "80634257"
 EF Core 資料庫提供者接著會在此通用架構上分層資料庫特定的行為和功能。
 這讓每個資料庫系統得以發揮所長，同時仍可在適當的情況下，與其他資料庫系統保持共通性。 
 
-基本上，這表示交換資料庫提供者將會變更 EF Core 行為，且應用程式會無法如預期般正常運作，除非明確說明所有行為差異。
+基本上，這表示交換資料庫提供者將會變更 EF Core 行為，且應用程式可能無法正常運作，除非其明確地將任何行為上的差異納入考量。
 話雖如此，在許多情況下，由於關聯式資料庫之間有高度的共通性，因此這樣做沒有問題。
 這有好處也有壞處。
-好處是在資料庫之間移動可能相當容易。
+好處是在資料庫系統之間移動可能相當容易。
 壞處是如果應用程式未針對新的資料庫系統進行完整測試，可能會對安全性有所誤判。  
 
 ## <a name="approach-1-production-database-system"></a>方法 1：生產資料庫系統
@@ -45,20 +48,22 @@ EF Core 資料庫提供者接著會在此通用架構上分層資料庫特定的
 SQL Azure 和 SQL Server 非常類似，因此對 SQL Server 進行測試通常是合理的取捨。
 話雖如此，最好還是在進入生產環境之前，先對 SQL Azure 本身執行測試。
  
-### <a name="localdb"></a>LocalDb 
+### <a name="localdb"></a>LocalDB 
 
 所有主要資料庫系統都有某種形式的「開發人員版本」，可用於本機測試。
-SQL Server 也有稱為 [LocalDb](/sql/database-engine/configure-windows/sql-server-express-localdb?view=sql-server-ver15) 的功能。
-LocalDb 的主要優點在於會視需要啟動資料庫執行個體。
+SQL Server 也有稱為 [LocalDB](/sql/database-engine/configure-windows/sql-server-express-localdb?view=sql-server-ver15) 的功能。
+LocalDB 的主要優點在於會視需要啟動資料庫執行個體。
 這可避免在電腦上執行資料庫服務，即使未正在執行測試也一樣。
 
-但 LocalDb 也有自身的問題：
+但 LocalDB 也有自身的問題：
 * 它無法提供 [SQL Server Developer Edition](/sql/sql-server/editions-and-components-of-sql-server-2016?view=sql-server-ver15) 的所有支援。
 * 不適用於 Linux。
 * 啟動服務時，可能會造成第一個測試回合延遲。
 
 我個人從不認為在開發電腦上執行資料庫服務有何問題，因此通常會建議改用 Developer Edition。
-不過，這可能適合某些人，特別是功能較低的開發電腦上。  
+不過，LocalDB 可能適合某些人，特別是在功能不強大的開發電腦上。
+
+在 Docker 容器 (或類似容器) 中執行 SQL Server (或任何其他資料庫系統)，是另一種能夠避免直接在開發電腦上執行資料庫系統的方式。  
 
 ## <a name="approach-2-sqlite"></a>方法 2：SQLite
 
@@ -105,8 +110,8 @@ EF Core 隨附記憶體內部資料庫，可用於 EF Core 本身的內部測試
 這麼做很困難、繁瑣且容易出錯。
 **請不要這麼做。**
 
-相反地，對使用 DbCoNtext 的項目進行單元測試時，我們會使用記憶體內部資料庫。
-在此情況下，由於測試不會受到資料庫行為影響，因此適合使用記憶體內部資料庫。
+相反地，對使用 DbCoNtext 的項目進行單元測試時，我們會使用 EF 記憶體內部資料庫。
+在此情況下，由於測試不會受到資料庫行為影響，因此適合使用 EF 記憶體內部資料庫。
 只要別用來測試實際資料庫查詢或更新即可。   
 
-如需使用記憶體內部資料庫進行單元測試的 EF Core 特定指導方針，請參閱[使用記憶體內部提供者進行測試](xref:core/miscellaneous/testing/in-memory)。
+[EF Core 測試範例](xref:core/miscellaneous/testing/testing-sample)會示範使用 EF 記憶體內部資料庫，以及 SQL Server 和 SQLite 的測試。 

@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/05/2018
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 190057daed61c58c1f89ee8d775913458e413a50
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 99bb420d95cb86443b63ba05ce9e6b4ab838eff9
+ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80136203"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82538447"
 ---
 # <a name="migrations"></a>移轉
 
@@ -62,7 +62,20 @@ Add-Migration InitialCreate
 檔案名稱中的時間戳記有助於使其依時間先後順序排列，以便您查看變更的進展。
 
 > [!TIP]
-> 您可以自由移動移轉檔案和變更其命名空間。 新的移轉會作為最後一個移轉的同層級建立。
+> 您可以自由地手動移動移轉檔案及變更其命名空間。 新的移轉會作為最後一個移轉的同層級建立。
+> 
+> 或者，您可以使用 `-Namespace` (套件管理員主控台) 或 `--namespace` (.NET Core CLI) 在產生時指定命名空間。
+> ### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
+> 
+> ```dotnetcli
+> dotnet ef migrations add InitialCreate --namespace Your.Namespace
+> ```
+> 
+> ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+> 
+> ``` powershell
+> Add-Migration InitialCreate -Namespace Your.Namespace
+> ```
 
 ## <a name="update-the-database"></a>更新資料庫
 
