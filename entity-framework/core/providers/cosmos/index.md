@@ -65,7 +65,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 [!code-csharp[HelloCosmos](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=HelloCosmos)]
 
 > [!IMPORTANT]
-> 如果要建立需要的容器或插入[種子資料](/dotnet/api/Microsoft.EntityFrameworkCore.Storage.IDatabaseCreator.EnsureCreatedAsync) (如果存在於模型中)，就必須呼叫 [EnsureCreatedAsync](../../modeling/data-seeding.md)。 但是，`EnsureCreatedAsync` 僅應在部署期間呼叫，在一般作業期間呼叫可能會導致效能問題。
+> 如果要建立需要的容器或插入[種子資料](../../modeling/data-seeding.md) (如果存在於模型中)，就必須呼叫 [EnsureCreatedAsync](/dotnet/api/Microsoft.EntityFrameworkCore.Storage.IDatabaseCreator.EnsureCreatedAsync)。 但是，`EnsureCreatedAsync` 僅應在部署期間呼叫，在一般作業期間呼叫可能會導致效能問題。
 
 ## <a name="cosmos-specific-model-customization"></a>Cosmos 專用模型自訂
 
