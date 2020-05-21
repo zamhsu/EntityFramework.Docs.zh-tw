@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 04/09/2017
 ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: 2f80dc195265787318ac4925dd937da45ffad011
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 17e97da9dfffefeb507fde744b710e6936bff69b
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417771"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672783"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>SQLite EF Core 資料庫提供者限制
 
@@ -21,20 +21,19 @@ SQLite 提供者有許多遷移限制。 這些限制大多是基礎 SQLite 資�
 
 * 結構描述
 * 序列
-* 計算資料行
 
 ## <a name="query-limitations"></a>查詢限制
 
-SQLite 原本就不支援下列資料類型。 EF Core 可以讀取和寫入這些類型的值，也支援查詢是否相等（`where e.Property == value`）。 不過，其他作業（例如比較和順序）將需要用戶端上的評估。
+SQLite 原本就不支援下列資料類型。 EF Core 可以讀取和寫入這些類型的值，也支援查詢是否相等（ `where e.Property == value` ）。 不過，其他作業（例如比較和順序）將需要用戶端上的評估。
 
 * DateTimeOffset
 * Decimal
 * TimeSpan
 * UInt64
 
-我們建議使用 DateTime 值，而不是 `DateTimeOffset`。 處理多個時區時，建議您先將值轉換成 UTC，再儲存，然後再轉換回適當的時區。
+`DateTimeOffset`我們建議使用 DateTime 值，而不是。 處理多個時區時，建議您先將值轉換成 UTC，再儲存，然後再轉換回適當的時區。
 
-`Decimal` 類型提供高的有效位數層級。 不過，如果您不需要該有效位數層級，我們建議您改為使用 double。 您可以使用[值轉換器](../../modeling/value-conversions.md)，在您的類別中繼續使用 decimal。
+`Decimal`型別提供高程度的精確度。 不過，如果您不需要該有效位數層級，我們建議您改為使用 double。 您可以使用[值轉換器](../../modeling/value-conversions.md)，在您的類別中繼續使用 decimal。
 
 ``` csharp
 modelBuilder.Entity<MyEntity>()
@@ -44,9 +43,9 @@ modelBuilder.Entity<MyEntity>()
 
 ## <a name="migrations-limitations"></a>遷移限制
 
-SQLite 資料庫引擎不支援大多數其他關係資料庫所支援的許多架構作業。 如果您嘗試將其中一個不支援的作業套用至 SQLite 資料庫，將會擲回 `NotSupportedException`。
+SQLite 資料庫引擎不支援大多數其他關係資料庫所支援的許多架構作業。 如果您嘗試將其中一個不支援的作業套用至 SQLite 資料庫， `NotSupportedException` 將會擲回。
 
-| 作業            | 支援？ | 需要版本 |
+| 作業            | 是否支援？ | 需要版本 |
 |:---------------------|:-----------|:-----------------|
 | AddColumn            | ✔          | 1.0              |
 | AddForeignKey        | ✗          |                  |

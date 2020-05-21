@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 83f6b819409d502dba17a678d44a0746a4a77f4b
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: a3e066056fc67031060920f5f7763007bdc1d2d3
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417493"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672878"
 ---
 # <a name="new-features-in-ef-core-20"></a>EF Core 2.0 中的新功能
 
@@ -38,7 +38,7 @@ modelBuilder.Entity<ProductDetails>().ToTable("Products");
 
 ### <a name="owned-types"></a>擁有的類型
 
-擁有的實體類型可以與另一個擁有的實體類型共用相同的 .NET 類型,但由於它不能僅由 .NET 類型標識,因此必須從另一個實體類型向它導航。 包含定義導覽的實體是擁有者。 查詢擁有者時，預設會包含擁有的類型。
+擁有的實體類型可以與另一個擁有的實體類型共用相同的 .NET 類型，但因為它不能只由 .NET 類型識別，所以必須從另一個實體類型進行導覽。 包含定義導覽的實體是擁有者。 查詢擁有者時，預設會包含擁有的類型。
 
 依照慣例，將為擁有的類型建立陰影主索引鍵，而且會使用資料表分割將它對應至與擁有者相同的資料表。 這允許使用擁有的類型，其類似在 EF6 中如何使用複雜類型：
 
@@ -96,7 +96,7 @@ public class BloggingContext : DbContext
 }
 ```
 
-我們會定義模型層級篩選，以實作 `Post` 實體類型執行個體的多租用戶和虛刪除。 請注意`DbContext`實體屬性的使用: `TenantId`。 模型層級篩選會使用正確內容執行個體 (即執行查詢的內容執行個體詢) 中的值。
+我們會定義模型層級篩選，以實作 `Post` 實體類型執行個體的多租用戶和虛刪除。 請注意 `DbContext` 實例層級屬性的使用： `TenantId` 。 模型層級篩選會使用正確內容執行個體 (即執行查詢的內容執行個體詢) 中的值。
 
 可能會使用 IgnoreQueryFilters() 運算子停用個別 LINQ 查詢的篩選。
 
@@ -135,9 +135,9 @@ var query =
 
 幾個注意事項：
 
-- 根據約定,該方法的名稱在生成 SQL 時用作函數的名稱(在本例中為使用者定義的函數),但您可以在方法註冊期間重寫名稱和架構。
-- 目前僅支援標量函數。
-- 您必須在資料庫中建立對應函式。 EF 核心遷移不會考慮創建它。
+- 依照慣例，在產生 SQL 時，會使用方法的名稱做為函式的名稱（在此案例中為使用者定義函數），但是您可以在方法註冊期間覆寫名稱和架構。
+- 目前僅支援純量函數。
+- 您必須在資料庫中建立對應函式。 EF Core 遷移並不會負責建立它。
 
 ### <a name="self-contained-type-configuration-for-code-first"></a>Code First 的獨立類型組態
 
@@ -162,7 +162,7 @@ builder.ApplyConfiguration(new CustomerConfiguration());
 
 ### <a name="dbcontext-pooling"></a>DbContext 共用
 
-在 ASP.NET Core 應用程式中使用 EF Core 的基本模式，通常包含將自訂 DbContext 類型註冊到相依性插入系統，以及稍後透過控制器中的建構函式參數來取得該類型的執行個體。 這表示會為每個要求建立新的 DbContext 執行個體。
+在 ASP.NET Core 應用程式中使用 EF Core 的基本模式，通常包含將自訂 DbContext 類型註冊到相依性插入系統，以及稍後透過控制器中的建構函式參數來取得該類型的執行個體。 這表示會針對每個要求建立新的 DbCoNtext 實例。
 
 在 2.0 版中，我們引進在相依性插入中註冊自訂 DbContext 類型的新方式，而相依性插入會以透明方式引進可重複使用 DbContext 執行個體的集區中。 若要使用 DbContext 共用，請在服務註冊期間使用 `AddDbContextPool`，而非 `AddDbContext`：
 
@@ -180,7 +180,7 @@ services.AddDbContextPool<BloggingContext>(
 新的方法引進 DbContext 的 `OnConfiguring()` 方法中可進行作業的一些限制。
 
 > [!WARNING]  
-> 如果您在不應該於要求間共用的衍生 DbContext 類別中維護自己的狀態 (例如私用欄位)，請避免使用 DbContext 共用。 EF Core 只會重設在將 DbContext 執行個體新增至集區之前所知道的狀態。
+> 如果您在不應該於要求間共用的衍生 DbContext 類別中維護自己的狀態 (例如私用欄位)，請避免使用 DbContext 共用。 EF Core 在將 DbCoNtext 實例新增至集區之前，只會重設其感知的狀態。
 
 ### <a name="explicitly-compiled-queries"></a>明確地編譯查詢
 
@@ -213,7 +213,7 @@ EF Core 支援透過不同的機制來自動產生索引鍵值。 使用此功�
 
 ## <a name="query"></a>查詢
 
-### <a name="improved-linq-translation"></a>改進的 LINQ 翻譯
+### <a name="improved-linq-translation"></a>改良的 LINQ 轉譯
 
 讓更多查詢順利執行，並在資料庫中評估更多邏輯 (而不是在記憶體中) 以及從資料庫擷取較少的資料。
 
@@ -223,7 +223,7 @@ EF Core 支援透過不同的機制來自動產生索引鍵值。 使用此功�
 
 ### <a name="string-interpolation-in-fromsql-and-executesqlcommand"></a>FromSql 和 ExecuteSqlCommand 中的字串插值
 
-C# 6 已引進「字串插值」，此功能允許 C# 運算式直接內嵌在字串常值中，並提供不錯的方式在執行階段建置字串。 在 EF Core 2.0 中，我們已在接受原始 SQL 字串的兩個主要 API 中新增內插字串的特殊支援：`FromSql` and `ExecuteSqlCommand`. 這種新的支援允許以"安全"的方式使用 C# 字串插值。 也就是說，可防止在執行階段動態建構 SQL 時可能發生的常見 SQL 插入錯誤。
+C# 6 已引進「字串插值」，此功能允許 C# 運算式直接內嵌在字串常值中，並提供不錯的方式在執行階段建置字串。 在 EF Core 2.0 中，我們已在接受原始 SQL 字串的兩個主要 API 中新增內插字串的特殊支援：`FromSql` and `ExecuteSqlCommand`. 這項新的支援可讓您以「安全」的方式使用 c # 字串插補。 也就是說，可防止在執行階段動態建構 SQL 時可能發生的常見 SQL 插入錯誤。
 
 範例如下：
 
@@ -270,7 +270,7 @@ var aCustomers =
 
 ## <a name="database-management"></a>資料庫管理
 
-### <a name="pluralization-hook-for-dbcontext-scaffolding"></a>DbContext 基架的複數掛鉤
+### <a name="pluralization-hook-for-dbcontext-scaffolding"></a>DbCoNtext 樣板的複數表示勾點
 
 EF Core 2.0 引進新的 *IPluralizer* 服務，以用來將實體類型名稱單數化，並將 DbSet 名稱複數化。 預設實作是不操作，因此這只是人員可以輕鬆插入其專屬 pluralizer 的攔截。
 
@@ -309,9 +309,9 @@ public class MyPluralizer : IPluralizer
 
 大幅增加提供者如何與模型互動，以及簡化慣例、註釋和 Fluent API 如何與不同的提供者搭配運作。
 
-EF Core 2.0 現在會為使用的每個不同提供者建置不同的 [IModel](https://github.com/aspnet/EntityFramework/blob/master/src/EFCore/Metadata/IModel.cs)。 應用程式通常可以看到這項作業。 這促進了較低級別元數據 API 的簡化,因此對*公共關係元數據概念*的任何訪問總是通過`.Relational`調`.SqlServer`用`.Sqlite`而不是等 進行。
+EF Core 2.0 現在會為使用的每個不同提供者建置不同的 [IModel](https://github.com/aspnet/EntityFramework/blob/master/src/EFCore/Metadata/IModel.cs)。 應用程式通常可以看到這項作業。 這簡化了較低層級的中繼資料 Api，讓*一般關聯式中繼資料概念*的任何存取一律透過呼叫來進行 `.Relational` ，而不是 `.SqlServer` 、等等 `.Sqlite` 。
 
-### <a name="consolidated-logging-and-diagnostics"></a>整合紀錄記錄與診斷
+### <a name="consolidated-logging-and-diagnostics"></a>匯總記錄和診斷
 
 記錄 (根據 ILogger) 和診斷 (根據 DiagnosticSource) 機制現在共用更多程式碼。
 

@@ -2,14 +2,14 @@
 title: 5.0 EF Core 的新功能
 description: EF Core 5.0 中的新功能總覽
 author: ajcvickers
-ms.date: 03/30/2020
+ms.date: 05/11/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew.md
-ms.openlocfilehash: c902988920e3b1a6039808fe0658fc19dee2728a
-ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
+ms.openlocfilehash: fcb2eb8df99a06eaf3459835347a4027a363b86b
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82103070"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672859"
 ---
 # <a name="whats-new-in-ef-core-50"></a>5.0 EF Core 的新功能
 
@@ -20,6 +20,38 @@ EF Core 5.0 目前正在開發中。
 此計畫描述 EF Core 5.0 的整體主題，包括我們打算在交付最終版本之前包含的所有專案。
 
 我們會將這裡的連結新增至正式檔，因為它已發佈。
+
+## <a name="preview-4"></a>Preview 4
+
+### <a name="configure-database-precisionscale-in-model"></a>在模型中設定資料庫精確度/規模
+
+屬性的有效位數和小數位數現在可以使用模型產生器來指定。
+例如：
+
+```CSharp
+modelBuilder
+    .Entity<Blog>()
+    .Property(b => b.Numeric)
+    .HasPrecision(16, 4);
+```
+
+精確度和小數位數仍然可以透過完整資料庫類型來設定，例如 "decimal （16，4）"。 
+
+檔是由問題[#527](https://github.com/dotnet/EntityFramework.Docs/issues/527)追蹤。
+
+### <a name="specify-sql-server-index-fill-factor"></a>指定 SQL Server 索引填滿因數
+
+在 SQL Server 上建立索引時，現在可以指定填滿因數。
+例如：
+
+```CSharp
+modelBuilder
+    .Entity<Customer>()
+    .HasIndex(e => e.Name)
+    .HasFillFactor(90);
+```
+
+檔是由問題[#2378](https://github.com/dotnet/EntityFramework.Docs/issues/2378)追蹤。
 
 ## <a name="preview-3"></a>Preview 3
 
@@ -51,7 +83,7 @@ var blogs = context.Blogs
 ### <a name="new-modelbuilder-api-for-navigation-properties"></a>導覽屬性的新 ModelBuilder API
 
 導覽屬性主要是在[定義關聯](xref:core/modeling/relationships)性時設定。
-不過，在導覽`Navigation`屬性需要其他設定的情況下，可以使用新的方法。
+不過，在 `Navigation` 導覽屬性需要其他設定的情況下，可以使用新的方法。
 例如，當依照慣例找不到欄位時，設定導覽的支援欄位：
 
 ```CSharp
@@ -61,7 +93,7 @@ modelBuilder.Entity<Blog>().Navigation(e => e.Posts).HasField("_myposts");
 請注意， `Navigation` API 不會取代關聯性設定。
 相反地，它允許在已經探索或定義的關聯性中，額外設定導覽屬性。
 
-檔是由問題[#2302](https://github.com/dotnet/EntityFramework.Docs/issues/2302)追蹤。
+請參閱設定[導覽屬性檔](xref:core/modeling/relationships#configuring-navigation-properties)。
 
 ### <a name="new-command-line-parameters-for-namespaces-and-connection-strings"></a>命名空間和連接字串的新命令列參數 
 
@@ -72,22 +104,25 @@ modelBuilder.Entity<Blog>().Navigation(e => e.Posts).HasField("_myposts");
 dotnet ef dbcontext scaffold "connection string" Microsoft.EntityFrameworkCore.SqlServer --context-namespace "My.Context" --namespace "My.Model"
 ```
 
-此外，連接字串現在可以傳遞至`database-update`命令：
+如需完整詳細資料，請參閱[遷移](xref:core/managing-schemas/migrations/index#namespaces)和[還原工程](xref:core/managing-schemas/scaffolding#directories-and-namespaces)檔。
+
+---
+此外，連接字串現在可以傳遞至 `database-update` 命令：
 
 ```
 dotnet ef database update --connection "connection string"
 ```
 
-對等的參數也已新增至 VS 套件管理員主控台中使用的 PowerShell 命令。
+如需完整詳細資料，請參閱[工具檔](xref:core/miscellaneous/cli/dotnet#dotnet-ef-database-update)。
 
-檔是由問題[#2303](https://github.com/dotnet/EntityFramework.Docs/issues/2303)追蹤。
+對等的參數也已新增至 VS 套件管理員主控台中使用的 PowerShell 命令。
 
 ### <a name="enabledetailederrors-has-returned"></a>EnableDetailedErrors 已傳回
 
 基於效能考慮，從資料庫讀取值時，EF 不會執行額外的 null 檢查。
 當遇到未預期的 null 時，這可能會導致難以造成根本原因的例外狀況。
 
-使用`EnableDetailedErrors`會在查詢中加入額外的 null 檢查，如此一來，在小型的效能額外負荷下，這些錯誤就會更容易追蹤到根本原因。  
+使用 `EnableDetailedErrors` 會在查詢中加入額外的 null 檢查，如此一來，在小型的效能額外負荷下，這些錯誤就會更容易追蹤到根本原因。  
 
 例如：
 ```CSharp
@@ -115,7 +150,7 @@ await context.Set<Customer>()
 
 ### <a name="support-for-the-sql-server-datalength-function"></a>支援 SQL Server DATALENGTH 函數
 
-這可使用新`EF.Functions.DataLength`的方法來存取。
+這可使用新的方法來存取 `EF.Functions.DataLength` 。
 例如：
 ```CSharp
 var count = context.Orders.Count(c => 100 < EF.Functions.DataLength(c.OrderDate));
@@ -183,7 +218,7 @@ FROM [Animal] AS [a]
 
 ### <a name="simple-logging"></a>簡單記錄
 
-這項功能會`Database.Log`在 EF6 中新增類似的功能。
+這項功能會 `Database.Log` 在 EF6 中新增類似的功能。
 也就是說，它提供簡單的方法，讓您不需要設定任何類型的外部記錄架構，即可從 EF Core 取得記錄。
 
 [2019 年12月5日的 EF 每週狀態](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863)會包含初稿檔。
@@ -192,7 +227,7 @@ FROM [Animal] AS [a]
 
 ### <a name="simple-way-to-get-generated-sql"></a>取得產生之 SQL 的簡單方式
 
-EF Core 5.0 引進了`ToQueryString`擴充方法，這會傳回在執行 LINQ 查詢時，EF Core 將產生的 SQL。
+EF Core 5.0 引進了 `ToQueryString` 擴充方法，這會傳回在執行 LINQ 查詢時，EF Core 將產生的 SQL。
 
 初稿檔包含在[2020 年1月9日的 EF 每週狀態](https://github.com/dotnet/efcore/issues/19549#issuecomment-572823246)。
 
@@ -200,7 +235,7 @@ EF Core 5.0 引進了`ToQueryString`擴充方法，這會傳回在執行 LINQ �
 
 ### <a name="use-a-c-attribute-to-indicate-that-an-entity-has-no-key"></a>使用 c # 屬性來表示實體沒有索引鍵
 
-現在可以使用新`KeylessAttribute`的，將實體類型設定為沒有任何索引鍵。
+現在可以使用新的，將實體類型設定為沒有任何索引鍵 `KeylessAttribute` 。
 例如：
 
 ```CSharp
@@ -270,7 +305,7 @@ MyEnumColumn VARCHAR(10) NOT NULL CHECK (MyEnumColumn IN ('Useful', 'Useless', '
 
 ### <a name="isrelational"></a>IsRelational
 
-除了現有`IsRelational` `IsSqlServer`的、和`IsSqlite` `IsInMemory`之外，還加入了新的方法。
+`IsRelational`除了現有的、和之外，還加入了新的方法 `IsSqlServer` `IsSqlite` `IsInMemory` 。
 這個方法可以用來測試 DbCoNtext 是否使用任何關係資料庫提供者。
 例如：
 
@@ -295,7 +330,7 @@ Azure Cosmos DB 資料庫提供者現在支援使用 Etag 的開放式平行存�
 builder.Entity<Customer>().Property(c => c.ETag).IsEtagConcurrency();
 ```
 
-接著，SaveChanges 會擲`DbUpdateConcurrencyException`回並行衝突，以[處理](https://docs.microsoft.com/ef/core/saving/concurrency)以執行重試等。
+接著，SaveChanges 會擲回 `DbUpdateConcurrencyException` 並行衝突，以[處理](https://docs.microsoft.com/ef/core/saving/concurrency)以執行重試等。
 
 檔是由問題[#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099)追蹤。
 
@@ -327,7 +362,7 @@ var count = context.Orders.Count(c => date > EF.Functions.DateFromParts(DateTime
 
 ### <a name="query-translation-for-reverse"></a>反向的查詢轉譯
 
-使用`Reverse`的查詢現在已轉譯。
+使用 `Reverse` 的查詢現在已轉譯。
 例如：
 
 ```CSharp

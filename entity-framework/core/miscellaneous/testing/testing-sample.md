@@ -1,22 +1,20 @@
 ---
-title: EF Core 測試範例-EF Core
-description: 範例顯示如何測試使用 EF Core 的應用程式
-author: ajcvickers
-ms.date: 04/22/2020
-uid: core/miscellaneous/testing/testing-sample
+title: ''
+description: ''
+author: ''
+ms.date: ''
+uid: ''
 no-loc:
 - Item
 - Tag
 - Items
 - Tags
-- items
-- tags
-ms.openlocfilehash: dda7191df7646aa06aab51d8d7891bd0ba155674
-ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
+ms.openlocfilehash: ae073fc0b3a99fb9de07a3e0a42c638fe0838a5a
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82564284"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672822"
 ---
 # <a name="ef-core-testing-sample"></a>EF Core 測試範例
 
@@ -34,13 +32,13 @@ ms.locfileid: "82564284"
 
 ### <a name="the-model-and-business-rules"></a>模型和商務規則
 
-支援此 API 的模型有兩個實體類型Items ： Tags和。
+支援此 API 的模型有兩個實體類型： Items 和 Tags 。
 
-* Items具有區分大小寫的名稱和的集合Tags。
-* 每Tag個都有一個標籤和一個計數，代表已套用至的Item次數。
-* 每Item個都只能有Tag一個具有指定標籤的。
+* Items具有區分大小寫的名稱和的集合 Tags 。
+* 每個 Tag 都有一個標籤和一個計數，代表已套用至的次數 Item 。
+* 每個都 Item 只能有一個 Tag 具有指定標籤的。
   * 如果專案被標記為相同標籤一次以上，則具有該標籤之現有標記的計數會遞增，而不是建立新的標記。 
-* 刪除應該Item會刪除所有相關Tags聯的。
+* 刪除 Item 應該會刪除所有相關聯的 Tags 。
 
 #### <a name="the-item-entity-type"></a>Item實體類型
 
@@ -48,22 +46,22 @@ ms.locfileid: "82564284"
 
 [!code-csharp[ItemEntityType](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Item.cs?name=ItemEntityType)]
 
-及其在中`DbContext.OnModelCreating`的設定：
+及其在中的設定 `DbContext.OnModelCreating` ：
 
 [!code-csharp[ConfigureItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/ItemsContext.cs?name=ConfigureItem)]
 
 請注意，實體類型會限制它可以用來反映領域模型和商務規則的方式。 尤其是：
-- 主要金鑰會直接對應到`_id`欄位，而不會公開公開
+- 主要金鑰會直接對應到 `_id` 欄位，而不會公開公開
   - EF 會偵測並使用私用的函式，以接受主要金鑰值和名稱。
 - `Name`屬性是唯讀的，而且只會在此函式中設定。 
-- Tags會公開為`IReadOnlyList<Tag>` ，以防止任意修改。
-  - EF 藉由`Tags`比對屬性`_tags`與支援欄位，藉由比對其名稱來建立關聯。 
+- Tags會公開為 `IReadOnlyList<Tag>` ，以防止任意修改。
+  - EF 藉由比對 `Tags` 屬性與支援欄位，藉由比對 `_tags` 其名稱來建立關聯。 
   - `AddTag`方法會採用標記標籤，並執行前述的商務規則。
     也就是說，只有新標籤才會加入標記。
     否則，現有標籤上的計數會遞增。
 - `Tags`導覽屬性是針對多對一關聯性所設定
-  - 不需要從Tag到Item的導覽屬性，因此不會包含。
-  - 此外， Tag不會定義外鍵屬性。
+  - 不需要從到的導覽屬性 Tag Item ，因此不會包含。
+  - 此外，不 Tag 會定義外鍵屬性。
     取而代之的是，EF 會建立和管理陰影狀態的屬性。
 
 #### <a name="the-tag-entity-type"></a>Tag實體類型
@@ -72,32 +70,32 @@ ms.locfileid: "82564284"
 
 [!code-csharp[TagEntityType](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Tag.cs?name=TagEntityType)]
 
-及其在中`DbContext.OnModelCreating`的設定：
+及其在中的設定 `DbContext.OnModelCreating` ：
 
 [!code-csharp[ConfigureTag](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/ItemsContext.cs?name=ConfigureTag)]
 
-類似于Item， Tag會隱藏其主要金鑰，並`Label`讓屬性成為唯讀。
+類似于 Item ， Tag 會隱藏其主要金鑰，並讓 `Label` 屬性成為唯讀。
 
 ### <a name="the-itemscontroller"></a>ItemsController
 
 Web API 控制器非常基本。
-它會透過`DbContext`函式插入，從相依性插入容器取得：
+它會透過函式 `DbContext` 插入，從相依性插入容器取得：
 
 [!code-csharp[Constructor](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=Constructor)]
 
-它有方法可以取得Items Item具有指定名稱的所有或：
+它有方法可以取得 Items Item 具有指定名稱的所有或：
 
 [!code-csharp[Get](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=Get)]
 
-它有一個方法可以加入新Item的：
+它有一個方法可以加入新的 Item ：
 
 [!code-csharp[PostItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=PostItem)]
 
-使用標籤標記的Item方法：
+Item使用標籤標記的方法：
 
 [!code-csharp[PostTag](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=PostTag)]
 
-以及刪除Item和所有相關聯Tags的方法：
+以及刪除 Item 和所有相關聯的方法 Tags ：
 
 [!code-csharp[DeleteItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=DeleteItem)]
 
@@ -153,7 +151,7 @@ XUnit 就像大部分的測試架構一樣，會為每個測試回合建立新�
 
 即使應用程式使用相依性插入，測試也不會。
 在這裡使用相依性插入是可行的，但它所需的額外程式碼卻沒有太大的價值。
-相反地，會使用`new`建立 DbCoNtext，然後直接將它當做相依性傳遞至控制器。
+相反地，會使用建立 DbCoNtext，然後直接將它當做相依性 `new` 傳遞至控制器。
 
 然後每個測試都會在控制器上執行受測的方法，並判斷提示結果是否符合預期。
 例如：
@@ -164,7 +162,7 @@ XUnit 就像大部分的測試架構一樣，會為每個測試回合建立新�
 它也更符合 web 應用程式和服務中發生的情況。
 
 變動資料庫的測試會在測試中建立第二個 DbCoNtext 實例，原因類似。
-也就是說，建立新的、乾淨的內容，然後從資料庫中讀取，以確保變更真的儲存到資料庫中。 例如：
+也就是說，建立新的、乾淨的內容，然後從資料庫中讀取，以確保變更已儲存至資料庫。 例如：
 
 [!code-csharp[CanAddItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddItem)]
 
@@ -180,9 +178,9 @@ XUnit 就像大部分的測試架構一樣，會為每個測試回合建立新�
 這會在[測試使用 EF Core 之程式碼](xref:core/miscellaneous/testing/index)的概念層級中討論。  
 下列各節涵蓋此範例中的測試所示範的兩個這類問題的範例。
 
-### <a name="test-passes-when-application-is-broken"></a>應用程式中斷時的測試階段
+### <a name="test-passes-when-the-application-is-broken"></a>應用程式中斷時的測試階段
 
-我們的應用程式有一個需求，就是「Items有區分大小寫的名稱和集合Tags。」
+我們應用程式的其中一個需求，就是「 Items 有區分大小寫的名稱和集合 Tags 。」
 這非常容易測試：
 
 [!code-csharp[CanAddItemCaseInsensitive](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddItemCaseInsensitive)]
@@ -209,9 +207,9 @@ System.InvalidOperationException : Sequence contains more than one element
 一旦我們知道這是一個問題，我們就可以修正應用程式，並在測試中進行補償。
 不過，這裡的重點是，如果只使用 EF 記憶體內部資料庫或 SQLite 提供者進行測試，就可能會遺漏此 bug。
 
-### <a name="test-fails-when-application-is-correct"></a>當應用程式正確時，測試會失敗 
+### <a name="test-fails-when-the-application-is-correct"></a>當應用程式正確時，測試會失敗 
 
-我們的應用程式有另一個需求，就是「刪除Item應該刪除所有相關Tags聯的」。
+我們的應用程式的另一個需求是「刪除 Item 應該刪除所有相關聯的」 Tags 。
 同樣地，很容易測試：
 
 [!code-csharp[DeleteItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=DeleteItem)]

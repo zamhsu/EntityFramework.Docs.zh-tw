@@ -3,12 +3,12 @@ title: 處理並行衝突-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
-ms.openlocfilehash: 81ae186201fdfac331b1d4e7836b222545fe78b5
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: a99f824fe256a10b84f539a5339a09624315efa4
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419689"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672717"
 ---
 # <a name="handling-concurrency-conflicts"></a>處理並行存取衝突
 開放式平行存取牽涉到樂觀地嘗試將實體儲存至資料庫，希望資料在載入實體之後尚未變更。 如果資料已變更，就會擲回例外狀況，而且您必須先解決衝突，然後再嘗試重新儲存。 本主題涵蓋如何在 Entity Framework 中處理這類例外狀況。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
@@ -52,7 +52,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-模擬並行例外狀況的好方法是在 SaveChanges 呼叫上設定中斷點，然後使用 SQL Management Studio 之類的其他工具來修改儲存在資料庫中的實體。 您也可以在 SaveChanges 之前插入一行，以使用 SqlCommand 直接更新資料庫。 例如：  
+模擬平行存取例外狀況的好方法是在 SaveChanges 呼叫上設定中斷點，然後使用另一項工具（例如 SQL Server Management Studio）來修改儲存在資料庫中的實體。 您也可以在 SaveChanges 之前插入一行，以使用 SqlCommand 直接更新資料庫。 例如：  
 
 ``` csharp
 context.Database.SqlCommand(

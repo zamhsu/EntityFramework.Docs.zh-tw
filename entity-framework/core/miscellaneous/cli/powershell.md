@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 09/18/2018
 uid: core/miscellaneous/cli/powershell
-ms.openlocfilehash: 0676475d46a8d21dee7bd10e25dd273a11e96ac3
-ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
+ms.openlocfilehash: 698a2cadadb1389f2e659e3ecab2fb21d020322e
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82538395"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672931"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Entity Framework Core 工具參考-Visual Studio 中的套件管理員主控台
 
@@ -23,7 +23,7 @@ ms.locfileid: "82538395"
 
 ### <a name="aspnet-core-version-21-and-later"></a>ASP.NET Core 2.1 版和更新版本
 
-這些工具會自動包含在 ASP.NET Core 2.1 + 專案中，因為`Microsoft.EntityFrameworkCore.Tools`此套件包含在[AspNetCore 應用程式中繼套件](/aspnet/core/fundamentals/metapackage-app)中。
+這些工具會自動包含在 ASP.NET Core 2.1 + 專案中，因為此 `Microsoft.EntityFrameworkCore.Tools` 套件包含在[AspNetCore 應用程式中繼套件](/aspnet/core/fundamentals/metapackage-app)中。
 
 因此，您不需要執行任何動作來安裝工具，但是您必須：
 
@@ -32,13 +32,13 @@ ms.locfileid: "82538395"
 
 若要確定您是取得最新版本的工具，建議您同時執行下列步驟：
 
-* 編輯您的 *.csproj*檔案，並加入一行，指定最新版本的[microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/)套件。 例如， *.csproj*檔案可能包含`ItemGroup`如下所示的：
+* 編輯您的 *.csproj*檔案，並加入一行，指定最新版本的[microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/)套件。 例如， *.csproj*檔案可能包含如下所示的 `ItemGroup` ：
 
   ```xml
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
   </ItemGroup>
   ```
 
@@ -106,9 +106,9 @@ SHORT DESCRIPTION
 
 這些命令會參考*專案*和*啟始專案*。
 
-* *專案*也稱為「*目標專案*」，因為它是命令新增或移除檔案的位置。 根據預設，在 [**套件管理員主控台**] 中選取的**預設專案**是目標專案。 您可以使用<nobr>`--project`</nobr>選項，將不同的專案指定為目標專案。
+* *專案*也稱為「*目標專案*」，因為它是命令新增或移除檔案的位置。 根據預設，在 [**套件管理員主控台**] 中選取的**預設專案**是目標專案。 您可以使用選項，將不同的專案指定為目標專案 <nobr>`--project`</nobr> 。
 
-* *啟始專案*是工具所建立和執行的專案。 這些工具必須在設計階段執行應用程式程式碼，以取得專案的相關資訊，例如資料庫連接字串和模型的設定。 根據預設，**方案總管**中的**啟始專案**是啟始專案。 您可以使用<nobr>`--startup-project`</nobr>選項，將不同的專案指定為啟始專案。
+* *啟始專案*是工具所建立和執行的專案。 這些工具必須在設計階段執行應用程式程式碼，以取得專案的相關資訊，例如資料庫連接字串和模型的設定。 根據預設，**方案總管**中的**啟始專案**是啟始專案。 您可以使用選項，將不同的專案指定為啟始專案 <nobr>`--startup-project`</nobr> 。
 
 啟始專案和目標專案通常是相同的專案。 一般情況下，它們是個別的專案，如下所示：
 
@@ -119,7 +119,7 @@ SHORT DESCRIPTION
 
 ### <a name="other-target-frameworks"></a>其他目標 framework
 
-套件管理員主控台工具適用于 .NET Core 或 .NET Framework 專案。 在 .NET Standard 類別庫中具有 EF Core 模型的應用程式，可能沒有 .NET Core 或 .NET Framework 專案。 例如，這適用于 Xamarin 和通用 Windows 平臺應用程式。 在這種情況下，您可以建立 .NET Core 或 .NET Framework 主控台應用程式專案，其目的只是要作為工具的啟始專案。 專案可以是沒有實際程式碼&mdash;的虛擬專案，只需要提供工具的目標。
+套件管理員主控台工具適用于 .NET Core 或 .NET Framework 專案。 在 .NET Standard 類別庫中具有 EF Core 模型的應用程式，可能沒有 .NET Core 或 .NET Framework 專案。 例如，這適用于 Xamarin 和通用 Windows 平臺應用程式。 在這種情況下，您可以建立 .NET Core 或 .NET Framework 主控台應用程式專案，其目的只是要作為工具的啟始專案。 專案可以是沒有實際程式碼的虛擬專案， &mdash; 只需要提供工具的目標。
 
 為什麼需要虛擬專案？ 如先前所述，工具必須在設計階段執行應用程式程式碼。 若要這麼做，他們必須使用 .NET Core 或 .NET Framework 執行時間。 當 EF Core 模型位於以 .NET Core 或 .NET Framework 為目標的專案中時，EF Core 工具會從專案借用執行時間。 如果 EF Core 模型位於 .NET Standard 類別庫中，他們就無法這麼做。 .NET Standard 不是實際的 .NET 執行;這是一組 .NET 部署必須支援之 Api 的規格。 因此 .NET Standard 並不足以讓 EF Core 工具執行應用程式程式碼。 您建立用來做為啟始專案的虛設專案，會提供可讓工具載入 .NET Standard 類別庫的具體目標平臺。
 
@@ -131,14 +131,14 @@ SHORT DESCRIPTION
 
 下表顯示所有 EF Core 命令通用的參數：
 
-| 參數                 | 描述                                                                                                                                                                                                          |
+| 參數                 | 說明                                                                                                                                                                                                          |
 |:--------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -內容\<字串>        | 要使用的 `DbContext` 類別。 僅限類別名稱，或使用命名空間完整限定。  如果省略此參數，EF Core 會尋找內容類別。 如果有多個內容類別，則需要此參數。 |
-| -專案\<字串>        | 目標專案。 如果省略此參數，則會使用 [**封裝管理員主控台**] 的**預設專案**做為目標專案。                                                                             |
+| -內容 \< 字串>        | 要使用的 `DbContext` 類別。 僅限類別名稱，或使用命名空間完整限定。  如果省略此參數，EF Core 會尋找內容類別。 如果有多個內容類別，則需要此參數。 |
+| -專案 \< 字串>        | 目標專案。 如果省略此參數，則會使用 [**封裝管理員主控台**] 的**預設專案**做為目標專案。                                                                             |
 | <nobr>-啟始專案</nobr> \<字串> | 啟始專案。 如果省略此參數，則會使用 [**方案屬性**] 中的**啟始專案**做為目標專案。                                                                                 |
 | -Verbose                  | 顯示詳細資訊輸出。                                                                                                                                                                                                 |
 
-若要顯示命令的說明資訊，請使用 PowerShell `Get-Help`的命令。
+若要顯示命令的說明資訊，請使用 PowerShell 的 `Get-Help` 命令。
 
 > [!TIP]
 > CoNtext、Project 和啟始專案參數支援 tab 鍵展開。
@@ -149,11 +149,11 @@ SHORT DESCRIPTION
 
 參數：
 
-| 參數                         | 描述                                                                                                             |
+| 參數                         | 說明                                                                                                             |
 |:----------------------------------|:------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-Name \<String><nobr>       | 遷移的名稱。 這是位置參數，而且是必要的。                                              |
-| <nobr>-OutputDir \<字串></nobr> | 目錄用來輸出檔案。 路徑相對於目標專案目錄。 預設為「遷移」。 |
-| <nobr>-Namespace \<字串></nobr> | 要用於產生之類別的命名空間。 預設為從輸出目錄產生。 |
+| <nobr>-Name \< String><nobr>       | 遷移的名稱。 這是位置參數，而且是必要的。                                              |
+| <nobr>-OutputDir \< 字串></nobr> | 目錄用來輸出檔案。 路徑相對於目標專案目錄。 預設為「遷移」。 |
+| <nobr>-Namespace \< 字串></nobr> | 要用於產生之類別的命名空間。 預設為從輸出目錄產生。 |
 
 ## <a name="drop-database"></a>放置資料庫
 
@@ -161,13 +161,13 @@ SHORT DESCRIPTION
 
 參數：
 
-| 參數 | 描述                                              |
+| 參數 | 說明                                              |
 |:----------|:---------------------------------------------------------|
 | -WhatIf   | 顯示要捨棄的資料庫，但不要卸載它。 |
 
 ## <a name="get-dbcontext"></a>DbCoNtext
 
-取得類型的`DbContext`相關資訊。
+取得類型的相關資訊 `DbContext` 。
 
 ## <a name="remove-migration"></a>移除移轉
 
@@ -175,27 +175,27 @@ SHORT DESCRIPTION
 
 參數：
 
-| 參數 | 描述                                                                     |
+| 參數 | 說明                                                                     |
 |:----------|:--------------------------------------------------------------------------------|
 | -Force    | 還原遷移（復原已套用至資料庫的變更）。 |
 
 ## <a name="scaffold-dbcontext"></a>Scaffold-DbCoNtext
 
-為資料庫的`DbContext`和實體類型產生程式碼。 為了讓`Scaffold-DbContext`產生實體類型，資料庫資料表必須有主鍵。
+為 `DbContext` 資料庫的和實體類型產生程式碼。 為了讓 `Scaffold-DbContext` 產生實體類型，資料庫資料表必須有主鍵。
 
 參數：
 
-| 參數                          | 描述                                                                                                                                                                                                                                                             |
+| 參數                          | 說明                                                                                                                                                                                                                                                             |
 |:-----------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-連接\<字串></nobr> | 資料庫的連接字串。 針對 ASP.NET Core 2.x 專案，此值可以是*name =\<連接字串的名稱>*。 在此情況下，此名稱來自針對專案所設定的設定來源。 這是位置參數，而且是必要的。 |
-| <nobr>-提供\<者字串></nobr>   | 要使用的提供者。 這通常是 NuGet 套件的名稱，例如： `Microsoft.EntityFrameworkCore.SqlServer`。 這是位置參數，而且是必要的。                                                                                           |
-| -OutputDir \<字串>               | 要用來放置檔案的目錄。 路徑相對於專案目錄。                                                                                                                                                                                             |
-| -CoNtextDir \<字串>              | 要放置`DbContext`檔案的目錄。 路徑相對於專案目錄。                                                                                                                                                               |
-| -Namespace \<字串>               | 要用於所有產生之類別的命名空間。 預設為從根命名空間和輸出目錄產生。                                                                                                                                                                                             |
-| -CoNtextNamespace \<字串>        | 要用於所產生`DbContext`類別的命名空間。 注意：覆`-Namespace`寫。                                                                                                                                                                              |
-| -內容\<字串>                 | 要產生的`DbContext`類別名稱。                                                                                                                                                                                                                          |
-| -架構\<字串 [] >               | 要為其產生實體類型的資料表架構。 如果省略此參數，則會包含所有架構。                                                                                                                                                             |
-| -Tables \<String [] >                | 要為其產生實體類型的資料表。 如果省略此參數，則會包含所有資料表。                                                                                                                                                                         |
+| <nobr>-連接 \< 字串></nobr> | 資料庫的連接字串。 針對 ASP.NET Core 2.x 專案，此值可以是*name = \< 連接字串的名稱>*。 在此情況下，此名稱來自針對專案所設定的設定來源。 這是位置參數，而且是必要的。 |
+| <nobr>-提供者 \< 字串></nobr>   | 要使用的提供者。 這通常是 NuGet 套件的名稱，例如： `Microsoft.EntityFrameworkCore.SqlServer` 。 這是位置參數，而且是必要的。                                                                                           |
+| -OutputDir \< 字串>               | 要用來放置檔案的目錄。 路徑相對於專案目錄。                                                                                                                                                                                             |
+| -CoNtextDir \< 字串>              | 要放置檔案的目錄 `DbContext` 。 路徑相對於專案目錄。                                                                                                                                                               |
+| -Namespace \< 字串>               | 要用於所有產生之類別的命名空間。 預設為從根命名空間和輸出目錄產生。                                                                                                                                                                                             |
+| -CoNtextNamespace \< 字串>        | 要用於所產生類別的命名空間 `DbContext` 。 注意：覆寫 `-Namespace` 。                                                                                                                                                                              |
+| -內容 \< 字串>                 | `DbContext`要產生的類別名稱。                                                                                                                                                                                                                          |
+| -架構 \< 字串 [] >               | 要為其產生實體類型的資料表架構。 如果省略此參數，則會包含所有架構。                                                                                                                                                             |
+| -Tables \< String [] >                | 要為其產生實體類型的資料表。 如果省略此參數，則會包含所有資料表。                                                                                                                                                                         |
 | -DataAnnotations                   | 使用屬性來設定模型（可能的話）。 如果省略此參數，則只會使用 Fluent API。                                                                                                                                                      |
 | -UseDatabaseNames                  | 使用資料表和資料行名稱，就像在資料庫中所出現的一樣。 如果省略這個參數，資料庫名稱就會變更，以更符合 c # 名稱樣式慣例。                                                                                       |
 | -Force                             | 覆寫現有檔案。                                                                                                                                                                                                                                               |
@@ -218,12 +218,12 @@ Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Conn
 
 參數：
 
-| 參數                | 描述                                                                                                                                                                                                                |
+| 參數                | 說明                                                                                                                                                                                                                |
 |:-------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *-從* \<字串>        | 開始的遷移。 可以依名稱或識別碼來識別遷移。 數位0是特殊案例，表示*第一次遷移之前*。 預設為 0。                                                              |
-| *-到* \<字串>          | 結束遷移。 預設為上次遷移。                                                                                                                                                                      |
+| *-來源* \<字串>        | 開始的遷移。 可以依名稱或識別碼來識別遷移。 數位0是特殊案例，表示*第一次遷移之前*。 預設為 0。                                                              |
+| *-至* \<字串>          | 結束遷移。 預設為上次遷移。                                                                                                                                                                      |
 | <nobr>-等冪</nobr> | 產生可在任何遷移的資料庫上使用的腳本。                                                                                                                                                         |
-| -輸出\<字串>        | 要寫入結果的檔案。 如果省略此參數，則會在建立應用程式的執行時間檔案所在的相同資料夾中建立具有所產生名稱的檔案，例如： */obj/Debug/netcoreapp2.1/ghbkztfz.sql/*。 |
+| -輸出 \< 字串>        | 要寫入結果的檔案。 如果省略此參數，則會在建立應用程式的執行時間檔案所在的相同資料夾中建立具有所產生名稱的檔案，例如： */obj/Debug/netcoreapp2.1/ghbkztfz.sql/*。 |
 
 > [!TIP]
 > To、From 和 Output 參數支援 tab 鍵展開。
@@ -244,10 +244,10 @@ Script-Migration -From 20180904195021_InitialCreate
 
 將資料庫更新為上次遷移或指定的遷移。
 
-| 參數                           | 描述                                                                                                                                                                                                                                                     |
+| 參數                           | 說明                                                                                                                                                                                                                                                     |
 |:------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>*-遷移* \<字串></nobr> | 目標遷移。 可以依名稱或識別碼來識別遷移。 數位0是特殊案例，表示*第一次遷移之前*，並會還原所有遷移。 如果未指定任何遷移，此命令會預設為上次遷移。 |
-| <nobr>-連接\<字串></nobr>  | 資料庫的連接字串。 預設為或`AddDbContext` `OnConfiguring`中指定的值。 |
+| <nobr>-連接 \< 字串></nobr>  | 資料庫的連接字串。 預設為或中指定的 `AddDbContext` 值 `OnConfiguring` 。 |
 
 > [!TIP]
 > [遷移] 參數支援 tab 鍵展開。
