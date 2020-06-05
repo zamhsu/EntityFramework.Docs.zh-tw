@@ -2,14 +2,14 @@
 title: 5.0 EF Core 的新功能
 description: EF Core 5.0 中的新功能總覽
 author: ajcvickers
-ms.date: 05/11/2020
+ms.date: 06/02/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew.md
-ms.openlocfilehash: fcb2eb8df99a06eaf3459835347a4027a363b86b
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 45d851a4b08a26dda0c24e20c79f42964fa4fae4
+ms.sourcegitcommit: 1f0f93c66b2b50e03fcbed90260e94faa0279c46
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672859"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84418934"
 ---
 # <a name="whats-new-in-ef-core-50"></a>5.0 EF Core 的新功能
 
@@ -20,6 +20,117 @@ EF Core 5.0 目前正在開發中。
 此計畫描述 EF Core 5.0 的整體主題，包括我們打算在交付最終版本之前包含的所有專案。
 
 我們會將這裡的連結新增至正式檔，因為它已發佈。
+
+## <a name="preview-5"></a>Preview 5
+
+### <a name="database-collations"></a>資料庫定序
+
+現在，您可以在 EF 模型中指定資料庫的預設定序。
+這會傳送至產生的遷移，以便在建立資料庫時設定定序。
+例如：
+
+```CSharp
+modelBuilder.UseCollation("German_PhoneBook_CI_AS");
+```
+
+接著，遷移會產生下列內容，以在 SQL Server 上建立資料庫：
+
+```sql
+CREATE DATABASE [Test]
+COLLATE German_PhoneBook_CI_AS;
+```
+
+您也可以指定用於特定資料庫資料行的定序。
+例如：
+
+```CSharp
+ modelBuilder
+     .Entity<User>()
+     .Property(e => e.Name)
+     .UseCollation("German_PhoneBook_CI_AS");
+```
+
+對於未使用遷移的人員，定序現在會在 DbCoNtext 架構時，從資料庫進行反向工程。
+
+最後， `EF.Functions.Collate()` 允許使用不同定序的特定查詢。
+例如：
+
+```CSharp
+context.Users.Single(e => EF.Functions.Collate(e.Name, "French_CI_AS") == "Jean-Michel Jarre");
+```
+
+這會產生 SQL Server 的下列查詢：
+
+```sql
+SELECT TOP(2) [u].[Id], [u].[Name]
+FROM [Users] AS [u]
+WHERE [u].[Name] COLLATE French_CI_AS = N'Jean-Michel Jarre'
+```
+
+請注意，特定定序應謹慎使用，因為它們可能會對資料庫效能造成負面影響。
+
+檔是由問題[#2273](https://github.com/dotnet/EntityFramework.Docs/issues/2273)追蹤。
+
+### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a>IDesignTimeDbCoNtextFactory 中的流程引數
+
+引數現在會從命令列流動到 `CreateDbContext` [IDesignTimeDbCoNtextFactory](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1)的方法中。 例如，若要指出這是開發組建， `dev` 可以在命令列上傳遞自訂引數（例如）：
+
+```
+dotnet ef migrations add two --verbose --dev
+``` 
+
+這個引數接著會流入處理站，它可以用來控制內容的建立和初始化方式。
+例如：
+
+```CSharp
+public class MyDbContextFactory : IDesignTimeDbContextFactory<SomeDbContext>
+{
+    public SomeDbContext CreateDbContext(string[] args) 
+        => new SomeDbContext(args.Contains("--dev"));
+}
+```
+
+檔是由問題[#2419](https://github.com/dotnet/EntityFramework.Docs/issues/2419)追蹤。
+
+### <a name="no-tracking-queries-with-identity-resolution"></a>沒有識別解析的追蹤查詢
+
+現在沒有任何追蹤查詢可以設定為執行識別解析。
+例如，下列查詢會針對每個貼文建立新的 Blog 實例，即使每個 Blog 都有相同的主要金鑰。 
+
+```CSharp
+context.Posts.AsNoTracking().Include(e => e.Blog).ToList();
+```
+
+不過，通常會稍微變慢，而且一定會使用更多的記憶體，因此可以變更此查詢，以確保只會建立單一的 Blog 實例：
+
+```CSharp
+context.Posts.AsNoTracking().PerformIdentityResolution().Include(e => e.Blog).ToList();
+```
+
+請注意，這只適用于沒有追蹤的查詢，因為所有追蹤查詢都已經呈現此行為。 此外，在遵循 API 審查之後， `PerformIdentityResolution` 語法將會變更。
+請參閱[#19877](https://github.com/dotnet/efcore/issues/19877#issuecomment-637371073)。
+
+檔是由問題[#1895](https://github.com/dotnet/EntityFramework.Docs/issues/1895)追蹤。
+
+### <a name="stored-persisted-computed-columns"></a>儲存的（保存）計算資料行
+
+大部分的資料庫都允許在計算後儲存計算的資料行值。
+雖然這會佔用磁碟空間，但計算的資料行只會在 update 上計算一次，而不是每次抓取它的值。
+這也可讓某些資料庫的資料行編制索引。
+
+EF Core 5.0 允許將計算資料行設定為已儲存。
+例如：
+ 
+```CSharp
+modelBuilder
+    .Entity<User>()
+    .Property(e => e.SomethingComputed)
+    .HasComputedColumnSql("my sql", stored: true);
+```
+
+### <a name="sqlite-computed-columns"></a>SQLite 計算資料行
+
+EF Core 現在支援 SQLite 資料庫中的計算資料行。
 
 ## <a name="preview-4"></a>Preview 4
 
@@ -50,8 +161,6 @@ modelBuilder
     .HasIndex(e => e.Name)
     .HasFillFactor(90);
 ```
-
-檔是由問題[#2378](https://github.com/dotnet/EntityFramework.Docs/issues/2378)追蹤。
 
 ## <a name="preview-3"></a>Preview 3
 
