@@ -4,12 +4,12 @@ author: rick-anderson
 ms.date: 09/17/2019
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: 7ace80bf326395d3b68f3e745100cd45356d7973
-ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
-ms.translationtype: HT
+ms.openlocfilehash: b45a7e5010dd3ef37ea952aaf483847ae95ea4ef
+ms.sourcegitcommit: 1f0f93c66b2b50e03fcbed90260e94faa0279c46
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81434093"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84418936"
 ---
 # <a name="getting-started-with-ef-core"></a>開始使用 EF Core
 
@@ -95,7 +95,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 
 EF Core 也可以對現有資料庫中的模型進行[反向工程](../managing-schemas/scaffolding.md)。
 
-提示：為了清晰易懂，此應用程式刻意保持簡潔。 [連接字串](../miscellaneous/connection-strings.md)不應儲存在實際執行應用程式的程式碼中。 也建議您將每個 C# 類別分割成個別的檔案。
+提示：為了清晰易懂，此應用程式刻意保持簡潔。 [連接字串](../miscellaneous/connection-strings.md)不應儲存在實際執行應用程式的程式碼中。 您可能也會想要將每個 c # 類別分割成自己的檔案。
 
 ## <a name="create-the-database"></a>建立資料庫
 
