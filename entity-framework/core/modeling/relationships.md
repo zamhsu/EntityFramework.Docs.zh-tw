@@ -4,12 +4,12 @@ description: 如何在使用 Entity Framework Core 時，設定實體類型之�
 author: AndriySvyryd
 ms.date: 11/21/2019
 uid: core/modeling/relationships
-ms.openlocfilehash: 8d3df109f34c2a77305db1e2be2eea1694d7ad6b
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 3ed25b752970cf0f55d38f1ce5b8383f1c90edc3
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672762"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664139"
 ---
 # <a name="relationships"></a>關聯性
 
@@ -152,7 +152,8 @@ ms.locfileid: "83672762"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NavigationConfiguration.cs?name=NavigationConfiguration&highlight=7-9)]
 
-[!NOTE] 這個呼叫不能用來建立導覽屬性。 它只會用來設定導覽屬性，先前已藉由定義關聯性或從慣例來建立。
+> [!NOTE]
+> 這個呼叫不能用來建立導覽屬性。 它只會用來設定導覽屬性，先前已藉由定義關聯性或從慣例來建立。
 
 ### <a name="foreign-key"></a>外部索引鍵
 
@@ -178,7 +179,7 @@ ms.locfileid: "83672762"
 > `[ForeignKey]`批註可以放在關聯性中的任一導覽屬性上。 不需要移至相依實體類別中的導覽屬性。
 
 > [!NOTE]
-> `[ForeignKey]`在導覽屬性上使用指定的屬性不需要存在相依型別。 在此情況下，將會使用指定的名稱來建立陰影外鍵。
+> `[ForeignKey]`在導覽屬性上使用指定的屬性不需要存在於相依型別上。 在此情況下，將會使用指定的名稱來建立陰影外鍵。
 
 ---
 

@@ -4,12 +4,12 @@ description: 使用值比較子來控制 EF Core 如何比較屬性值
 author: ajcvickers
 ms.date: 03/20/2020
 uid: core/modeling/value-comparers
-ms.openlocfilehash: 9dfed7b7ef8163f4f5c94a0c81c510807c53c13d
-ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
+ms.openlocfilehash: 9e33bfb840606b746626daa1da7331904b495ab4
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80148268"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664113"
 ---
 # <a name="value-comparers"></a>值比較子
 
@@ -94,7 +94,7 @@ EF Core 已內建支援，可產生結構屬性的編譯、成員比較。
 
 [!code-csharp[ListProperty](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ListProperty)]
 
-[`List<T>` 類別](/dotnet/api/system.collections.generic.list-1?view=netstandard-2.1)：
+[ `List<T>` 類別](/dotnet/api/system.collections.generic.list-1?view=netstandard-2.1)：
 * 具有參考是否相等;包含相同值的兩個清單會視為不同。
 * 是可變的;清單中的值可以加入和移除。
 
@@ -102,7 +102,7 @@ EF Core 已內建支援，可產生結構屬性的編譯、成員比較。
 
 [!code-csharp[ConfigureListProperty](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ConfigureListProperty)]
 
-然後，需要在屬性上設定 `ValueComparer<T>`，以強制 EF Core 對此轉換使用正確的比較：
+然後，需要 `ValueComparer<T>` 在屬性上設定，以強制 EF Core 搭配此轉換來使用正確的比較：
 
 [!code-csharp[ConfigureListPropertyComparer](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ConfigureListPropertyComparer)]
 
@@ -110,8 +110,8 @@ EF Core 已內建支援，可產生結構屬性的編譯、成員比較。
 > 尚未實作為模型產生器（「流暢」） API 來設定值比較子。
 > 相反地，上述程式碼會呼叫產生器所公開之較低層級 IMutableProperty 上的 SetValueComparer 做為 ' Metadata '。
 
-`ValueComparer<T>` 的函數會接受三個運算式：
-* 檢查品質的運算式
+此函式 `ValueComparer<T>` 接受三個運算式：
+* 檢查是否相等的運算式
 * 產生雜湊碼的運算式
 * 要為值建立快照集的運算式  
 
