@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 246cf687f2a087e9a9a569c875b27712ebe80c5c
-ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
-ms.translationtype: HT
+ms.openlocfilehash: 41bc403b586c9e67033d6db0dc4418510bc7b061
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82538338"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664178"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -216,3 +216,11 @@ Entity Framework Core 3.1 的 LINQ 延伸模組，以支援 Microsoft SQL Server
 為 SQL Server EF Core 提供者新增 hierarchyid 支援。 適用於 EF Core：3.
 
 [GitHub 存放庫](https://github.com/efcore/EFCore.SqlServer.HierarchyId)
+
+### <a name="linq2dbentityframeworkcore"></a>linq2db.Microsoft.entityframeworkcore
+
+將 LINQ 查詢轉換為 SQL 運算式的替代方法。 適用於 EF Core：3.
+
+包含支援先進的 SQL 功能，例如 Cte、大量複製、資料表提示、視窗型函數、臨時表，以及資料庫端的建立/更新/刪除作業。
+
+[GitHub 存放庫](https://github.com/linq2db/linq2db.EntityFrameworkCore)

@@ -10,12 +10,12 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 04/15/2020
-  ms.openlocfilehash: 54cbd0fcda19c4e2f35a3c3d4f350e3fecf3f597
-  ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
-  ms.translationtype: HT
+  ms.openlocfilehash: 1411737453563ac5377dbda2804dd0bd058133a7
+  ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+  ms.translationtype: MT
   ms.contentlocale: zh-TW
-  ms.lasthandoff: 04/29/2020
-  ms.locfileid: "82538370"
+  ms.lasthandoff: 06/10/2020
+  ms.locfileid: "84664165"
 highlightedContent:
   items:
   - title: Entity Framework Core
@@ -94,10 +94,12 @@ additionalContent:
         text: 設定 DbCoNtext
       - url: core/miscellaneous/nullable-reference-types.md
         text: 可為 Null 的參考型別
+      - url: core/miscellaneous/collations-and-case-sensitivity.md
+        text: 定序和區分大小寫
     - title: 建立模型
       links:
       - url: core/modeling/index.md
-        text: 總覽
+        text: 概觀
       - url: core/modeling/entity-types.md
         text: 實體類型
       - url: core/modeling/entity-properties.md
@@ -155,7 +157,7 @@ additionalContent:
     - title: 儲存資料
       links:
       - url: core/saving/index.md
-        text: 總覽
+        text: 概觀
       - url: core/saving/basic.md
         text: 基本儲存
       - url: core/saving/related-data.md
@@ -173,7 +175,7 @@ additionalContent:
     - title: 命令列參考
       links:
       - url: core/miscellaneous/cli/index.md
-        text: 總覽
+        text: 概觀
       - url: core/miscellaneous/cli/powershell.md
         text: 套件管理員主控台 (Visual Studio)
       - url: core/miscellaneous/cli/dotnet.md
