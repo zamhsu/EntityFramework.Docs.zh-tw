@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: cb20120154101a9b92b4bf2bc06d20b1dafe88c1
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 2422e7455dc4ef52f0a9d3bdaebfa02f62e6d50f
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672978"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370589"
 ---
 # <a name="reverse-engineering"></a>反向工程
 
@@ -85,11 +85,11 @@ Scaffold-DbContext ... -Tables Artist, Album
 
 ## <a name="preserving-names"></a>保留名稱
 
-根據預設，資料表和資料行名稱已修正，以便更符合類型和屬性的 .NET 命名慣例。 `-UseDatabaseNames`在 PMC 中指定參數或 `--use-database-names` CLI 中的選項，將會停用此行為，盡可能保留原始的資料庫名稱。 不正確 .NET 識別碼仍然會固定，而合成名稱（例如導覽屬性）仍會符合 .NET 命名慣例。
+根據預設，資料表和資料行名稱已修正，以便更符合類型和屬性的 .NET 命名慣例。 `-UseDatabaseNames`在 PMC 中指定參數或 `--use-database-names` .NET Core CLI 中的選項，將會停用此行為，盡可能保留原始資料庫名稱。 不正確 .NET 識別碼仍然會固定，而合成名稱（例如導覽屬性）仍會符合 .NET 命名慣例。
 
 ## <a name="fluent-api-or-data-annotations"></a>流暢的 API 或資料批註
 
-實體類型預設會使用流暢的 API 來設定。 `-DataAnnotations` `--data-annotations` 如果可能的話，請指定（PMC）或（CLI）來改為使用資料批註。
+實體類型預設會使用流暢的 API 來設定。 `-DataAnnotations`請指定（PMC）或 `--data-annotations` （.NET Core CLI），以在可能時改用資料批註。
 
 例如，使用流暢的 API 將會 scaffold：
 
@@ -109,7 +109,7 @@ public string Title { get; set; }
 
 ## <a name="dbcontext-name"></a>DbCoNtext 名稱
 
-根據預設，scaffold DbCoNtext 類別名稱會是以*內容*尾碼的資料庫名稱。 若要指定不同的帳戶，請 `-Context` 在 PMC 和 `--context` CLI 中使用。
+根據預設，scaffold DbCoNtext 類別名稱會是以*內容*尾碼的資料庫名稱。 若要指定不同的帳戶，請 `-Context` 在 PMC 和 `--context` .NET Core CLI 中使用。
 
 ## <a name="directories-and-namespaces"></a>目錄和命名空間
 

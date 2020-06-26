@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/08/2017
 uid: core/managing-schemas/migrations/providers
-ms.openlocfilehash: efe95893f7dbfc8e5c4775e86d58abb32eee3c83
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 388829992687e626648889a47130cc61df1c0d1f
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416784"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370614"
 ---
 # <a name="migrations-with-multiple-providers"></a>使用多個提供者進行遷移
 
@@ -68,7 +68,7 @@ Id = table.Column<int>(nullable: false)
     .Annotation("Sqlite:Autoincrement", true),
 ```
 
-如果作業只能套用至一個提供者（或在提供者之間不同），請使用 `ActiveProvider` 屬性來分辨哪個提供者為作用中。
+如果作業只能套用至一個提供者，或在提供者之間不同，請使用 `ActiveProvider` 屬性來判斷哪個提供者為作用中：
 
 ``` csharp
 if (migrationBuilder.ActiveProvider == "Microsoft.EntityFrameworkCore.SqlServer")

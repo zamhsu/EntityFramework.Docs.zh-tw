@@ -4,12 +4,12 @@ description: 測試使用 EF Core 的應用程式不同方法
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/miscellaneous/testing/index
-ms.openlocfilehash: a5ff85a60af1f56a0924d6fa0646195146a6827e
-ms.sourcegitcommit: 1f0f93c66b2b50e03fcbed90260e94faa0279c46
+ms.openlocfilehash: 71222f17ac4cc1b71052a2e7e916ebcedd2ae0f4
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84418906"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370535"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>測試使用 EF Core 的程式碼
 
@@ -92,7 +92,7 @@ SQLite 是不錯的選擇，因為：
 ## <a name="approach-3-the-ef-core-in-memory-database"></a>方法 3：EF Core 記憶體內部資料庫
 
 EF Core 隨附記憶體內部資料庫，可用於 EF Core 本身的內部測試。
-此資料庫一般**不適合作為測試使用 EF Core 的應用程式替代方法**。 尤其是：
+這個資料庫一般**不適合用來測試使用 EF Core 的應用程式**。 尤其是：
 
 * 這不是關聯式資料庫。
 * 不支援異動。

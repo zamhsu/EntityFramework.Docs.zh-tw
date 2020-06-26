@@ -1,259 +1,291 @@
 ---
-title: 實體框架核心 5.0 規劃
+title: 規劃 Entity Framework Core 5。0
 author: ajcvickers
-ms.date: 01/14/2020
-uid: core/what-is-new/ef-core-5.0/plan.md
-ms.openlocfilehash: 8b4ca32524869019c04d5a4d4d55967f68181cd7
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.date: 06/11/2020
+uid: core/what-is-new/ef-core-5.0/plan
+ms.openlocfilehash: 249560bc14f72fd524be91bb1670dbaf78ae6b60
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80136226"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370574"
 ---
-# <a name="plan-for-entity-framework-core-50"></a>實體框架核心 5.0 規劃
+# <a name="plan-for-entity-framework-core-50"></a>規劃 Entity Framework Core 5。0
 
-如[規劃過程中](../release-planning.md)所述,我們已經收集了利益相關者對 EF Core 5.0 版本的暫定計劃的投入。
+如[規劃](xref:core/what-is-new/release_planning)程式中所述，我們已將專案關係人的輸入收集到 EF Core 5.0 版本的暫時計畫。
 
 > [!IMPORTANT] 
-> 這個計劃仍在進行中。 這裡沒有什麼是承諾。 這個計劃是一個起點,隨著我們學習到更多,它將不斷演變。 一些目前未計劃為 5.0 的事情可能會被拉進去。 目前計劃為 5.0 的一些事情可能會被罰出場。
+> 此計畫仍然是進行中的工作。 這裡沒有任何承諾。 此計畫是一個起點，會隨著我們深入瞭解而演變。 目前未計畫5.0 的某些專案可能會提取。 目前規劃5.0 的某些專案可能會一度。
 
-### <a name="version-number-and-release-date"></a>版本號和發佈日期。
+### <a name="version-number-and-release-date"></a>版本號碼和發行日期。
 
-EF Core 5.0 目前計劃與[.NET 5.0 同時](https://devblogs.microsoft.com/dotnet/introducing-net-5/)發佈。 選擇版本"5.0"與 .NET 5.0 對齊。
+EF Core 5.0 目前排定與[.net 5.0](https://devblogs.microsoft.com/dotnet/introducing-net-5/)同時發行。 已選擇版本 "5.0" 以配合 .NET 5.0。
 
 ### <a name="supported-platforms"></a>支援的平台
 
-EF Core 5.0 計劃基於[這些平臺與 .NET Core 的融合](https://devblogs.microsoft.com/dotnet/introducing-net-5/),在任何 .NET 5.0 平臺上運行。 就 .NET 標準和實際使用的 TFM 而言,這意味著什麼是 TBD。
+EF Core 5.0 計畫在任何 .NET 5.0 平臺上執行，其以[這些平臺與 .Net Core 的交集為](https://devblogs.microsoft.com/dotnet/introducing-net-5/)基礎。 這代表 .NET Standard 的意義，而實際使用的 TFM 仍然是 TBD。
 
-EF 核心 5.0 將不會在 .NET 框架上運行。
+EF Core 5.0 不會在 .NET Framework 上執行。
 
 ### <a name="breaking-changes"></a>重大變更
 
-EF Core 5.0 將包含一些重大更改,但這些變化將比 EF Core 3.0 的嚴重程度要小得多。 我們的目標是允許絕大多數應用程式在不中斷的情況下進行更新。
+EF Core 5.0 將包含一些[重大變更](xref:core/what-is-new/ef-core-5.0/breaking-changes)，但它們的嚴重程度比 EF Core 3.0 的情況低。 我們的目標是讓大部分的應用程式都能在不中斷的情況下進行更新。
 
-預計資料庫提供程式會有一些重大更改,尤其是在 TPT 支援方面。 但是,我們預計為 5.0 更新提供程式的工作將小於 3.0 更新所需的工作。
+資料庫提供者應該會有一些重大變更，特別是關於 TPT 支援。 不過，我們預期更新5.0 提供者的工作將會小於更新3.0 所需的時間。
 
-## <a name="themes"></a>主題
+## <a name="themes"></a>佈景主題
 
-我們已經提取了幾個主要領域或主題,這些領域或主題將成為 EF Core 5.0 大型投資的基礎。
+我們已解壓縮幾個主要區域或主題，這會構成 EF Core 5.0 中大型投資的基礎。
 
-## <a name="many-to-many-navigation-properties-aka-skip-navigations"></a>多對多導航屬性(即"跳過導航")
+## <a name="fully-transparent-many-to-many-mapping-by-convention"></a>依慣例的完全透明多對多對應
 
-首席開發人員:@smitpatel和@AndriySvyryd
+潛在客戶開發人員： @smitpatel 、 @AndriySvyryd 和@lajones
+
+由[#10508](https://github.com/aspnet/EntityFrameworkCore/issues/10508)追蹤
+
+T 恤尺寸： L
+
+狀態：進行中
+
+「多對多」是 GitHub 待處理專案上[最常要求的功能](https://github.com/aspnet/EntityFrameworkCore/issues/1368)（~ 506 投票）。
+
+對多對多關聯性的支援可分為三個主要區域：
+
+* 略過導覽屬性--下一個主題所涵蓋的內容。
+* 屬性包實體類型。 這些專案允許將標準 CLR 型別（例如 `Dictionary` ）用於實體實例，因此每個實體型別都不需要明確的 clr 型別。 由[#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)追蹤。
+* 方便設定多對多關聯性的便利。
+
+除了略過流覽支援之外，我們現在還將多對多的其他區域提取到 EF Core 5.0，以提供完整的體驗。
+
+## <a name="many-to-many-navigation-properties-aka-skip-navigations"></a>多對多導覽屬性（即「略過流覽」）
+
+潛在客戶開發人員： @smitpatel 和@AndriySvyryd
 
 由[#19003](https://github.com/aspnet/EntityFrameworkCore/issues/19003)追蹤
 
-T恤尺寸:L
+T 恤尺寸： L
 
-狀態:正在進行
+狀態：進行中
 
-多對多是 GitHub 積壓工作[中請求最多的功能](https://github.com/aspnet/EntityFrameworkCore/issues/1368)(+407 票)。
+如第一個主題中所述，多對多支援有多個層面。
+本主題特別說明略過導覽的使用。
+我們相信，想要多對多支援的最重要封鎖程式，在商務邏輯（例如查詢）中無法使用「自然」關聯性，而不需要參考聯結資料表。
+聯結資料表實體類型可能仍然存在，但不應該取得商務邏輯的方式。
 
-對多對多關係的支援被跟蹤為[#10508。](https://github.com/aspnet/EntityFrameworkCore/issues/10508) 這可以分為三個主要領域:
+## <a name="table-per-type-tpt-inheritance-mapping"></a>每一類型的資料表（TPT）繼承對應
 
-* 跳過導航屬性。 這些允許模型用於查詢等,而無需引用基礎聯接表實體。 [(#19003](https://github.com/aspnet/EntityFrameworkCore/issues/19003))
-* 屬性包實體類型。 這些允許將標準 CLR 類型`Dictionary`(例如 )用於實體實例,以便每個實體類型不需要顯式 CLR 類型。 (拉伸 5.0: [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914).)
-* 糖易於配置多對多關係。 (拉伸為 5.0。
-
-我們認為,對於那些需要多對多支援的人來說,最重要的阻止程式是不能在業務邏輯(如查詢)中使用"自然"關係,而不提及聯接表。 聯接表實體類型可能仍然存在,但不應妨礙業務邏輯。 這就是為什麼我們選擇解決 5.0 的跳過導航屬性的原因。
-
-此時,許多對多的其他部分正在被作為 EF Core 5.0 的延伸目標進行追求。 這意味著他們目前不在5.0的計劃中,但如果進展順利,我們希望能吸引他們。
-
-## <a name="table-per-type-tpt-inheritance-mapping"></a>依類型表 (TPT) 繼承映射
-
-首席開發人員:@AndriySvyryd
+首席開發人員：@AndriySvyryd
 
 由[#2266](https://github.com/aspnet/EntityFrameworkCore/issues/2266)追蹤
 
-T恤尺寸:XL
+T 恤尺寸： XL
 
-狀態:正在進行
+狀態：進行中
 
-我們之所以做TPT,是因為它既是一個高度要求的功能(+254票;整體排名第三),而且它需要一些我們認為適合整體.NET 5計劃的基本性質的低級別更改。 我們預計這將導致資料庫提供程式的突發更改,儘管這些更改應比3.0所需的更改嚴重得多。
+我們正在進行 TPT，因為這兩者都是高度要求的功能（~ 289 的投票; 第三個），因為它需要一些低層級的變更，我們覺得這適用于整體 .NET 5 計畫的基本本質。 我們預期這會導致資料庫提供者的中斷性變更，但這應該比3.0 所需的變更少很多。
 
-## <a name="filtered-include"></a>過濾器
+## <a name="filtered-include"></a>篩選的包含
 
-首席開發人員:@maumar
+首席開發人員：@maumar
 
 由[#1833](https://github.com/aspnet/EntityFrameworkCore/issues/1833)追蹤
 
-T恤尺寸:M
+T 恤尺寸： M
 
-狀態:正在進行
+狀態：進行中
 
-過濾包含是一個高度請求的功能(+317票;總體排名第二),它不是大量工作,我們相信這將取消阻止或使當前需要模型級篩選器或更複雜的查詢的許多方案更容易。
+篩選的「包含」是一種高度要求的功能（大約376的投票; 第二個整體），這不是大量的工作，因此我們認為會解除封鎖或更輕鬆地進行目前需要模型層級篩選或更複雜查詢的許多案例。
 
-## <a name="rationalize-totable-toquery-toview-fromsql-etc"></a>合理化到表,查詢,查看,從Sql等。
+## <a name="split-include"></a>分割包含
 
-首席開發人員:@maumar和@smitpatel
+首席開發人員：@smitpatel
+
+由[#20892](https://github.com/dotnet/efcore/issues/20892)追蹤
+
+T 恤尺寸： L
+
+狀態：進行中
+
+EF Core 3.0 已變更預設行為，以建立給定 LINQ 查詢的單一 SQL 查詢。
+這會對使用包含多個集合的查詢造成大量的效能衰退。
+
+在 EF Core 5.0 中，我們會保留新的預設行為。
+不過，EF Core 5.0 現在會允許產生多個集合查詢，包括有單一查詢導致效能不佳的情況。 
+
+## <a name="rationalize-totable-toquery-toview-fromsql-etc"></a>合理化 ToTable、ToQuery、ToView、FromSql 等。
+
+潛在客戶開發人員： @maumar 和@smitpatel
 
 由[#17270](https://github.com/aspnet/EntityFrameworkCore/issues/17270)追蹤
 
-T恤尺寸:L
+T 恤尺寸： L
 
-狀態:正在進行
+狀態：進行中
 
-我們在以前的版本中在支援原始 SQL、無鑰匙類型和相關領域方面取得了進展。 然而,在一切工作方式上,一切事物都存在差距和不一致之處。 5.0 的目標是修復這些,並創建定義、遷移和使用不同類型的實體及其關聯查詢和資料庫專案的良好體驗。 這還可能涉及對已編譯查詢 API 的更新。
+我們已在舊版中進行了支援原始 SQL、無索引鍵類型和相關區域的進度。 不過，所有專案的整體運作方式都有差距和不一致的情況。 5.0 的目標是要修正這些問題，並建立定義、遷移和使用不同類型實體及其相關聯查詢和資料庫成品的絕佳體驗。 這也可能牽涉到已編譯查詢 API 的更新。
 
-請注意,此專案可能會導致一些應用程式級的中斷更改,因為我們目前擁有的某些功能過於寬鬆,因此可以快速導致人們陷入失敗坑。 我們最終可能會阻止某些功能,以及有關如何操作的指導。
+請注意，這個專案可能會導致某些應用層級的中斷性變更，因為我們目前擁有的一些功能過於寬鬆，所以可能很快就會導致使用者 pits 失敗。 我們可能會同時封鎖這部分功能，並提供有關該怎麼做的指引。
 
 ## <a name="general-query-enhancements"></a>一般查詢增強功能
 
-首席開發人員:@smitpatel和@maumar
+潛在客戶開發人員： @smitpatel 和@maumar
 
-按[5.0`area-query`里程碑中標記的問題](https://github.com/dotnet/efcore/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3Aarea-query+milestone%3A5.0.0+)進行追蹤
+[ `area-query` 在5.0 里程碑中由標記為的問題](https://github.com/dotnet/efcore/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3Aarea-query+milestone%3A5.0.0+)所追蹤
 
-T恤尺寸:XL
+T 恤尺寸： XL
 
-狀態:正在進行
+狀態：進行中
 
-為 EF Core 3.0 廣泛重寫了查詢轉換代碼。 因此,查詢代碼通常處於更加健壯的狀態。 對於 5.0,我們不打算在支援 TPT 和跳過導航屬性所需的外部進行重大查詢更改。 然而,要修復3.0大修遺留下來的一些技術債務,仍有許多工作要做。 我們還計劃修復許多 Bug 並實施小型增強功能,以進一步改善總體查詢體驗。
+已針對 EF Core 3.0 廣泛重寫查詢轉譯程式碼。 這種情況下，查詢程式碼通常會有更健全的狀態。 針對5.0，我們不打算在支援 TPT 和略過導覽屬性所需的範圍內進行主要查詢變更。 不過，仍然需要進行一些工作，以修正3.0 檢修中剩餘的技術債務。 我們也計畫修正許多 bug，並執行小型的增強功能，以進一步改善整體的查詢體驗。
 
-## <a name="migrations-and-deployment-experience"></a>遷移及部署經驗
+## <a name="migrations-and-deployment-experience"></a>遷移與部署體驗
 
-首席開發人員:@bricelam
+潛在客戶開發人員：@bricelam
 
 由[#19587](https://github.com/dotnet/efcore/issues/19587)追蹤
 
-T恤尺寸:L
+T 恤尺寸： L
 
-狀態:正在進行
+狀態：進行中
 
-目前,許多開發人員在應用程式啟動時遷移其資料庫。 這很容易,但不建議這樣做,因為:
+目前，許多開發人員會在應用程式啟動時遷移其資料庫。 這很簡單，但不建議這麼做，因為：
 
-* 多個線程/行程/伺服器可能會嘗試同時移移資料庫
-* 應用程式可能會嘗試訪問不一致的狀態,而這種情況正在發生
-* 通常,不應授予資料庫許可權以修改架構以進行應用程式執行
-* 如果出現問題,很難恢復到乾淨狀態
+* 多個執行緒/進程/伺服器可能會嘗試同時遷移資料庫
+* 應用程式可能會在發生這種情況時，嘗試存取不一致的狀態
+* 通常不應授與修改架構的資料庫許可權以執行應用程式
+* 如果發生錯誤，很難還原為「清除」狀態
 
-我們希望在這裡提供更好的體驗,從而在部署時輕鬆遷移資料庫。 這應:
+我們想要在此提供更好的體驗，讓您可以輕鬆地在部署時遷移資料庫。 這應該：
 
-* Linux、Mac 和 Windows 上工作
-* 在命令列上做好體驗
-* 支援容器機制
-* 使用常用的實際部署工具/串流
-* 至少整合到視覺化工作室
+* 在 Linux、Mac 和 Windows 上工作
+* 在命令列上是不錯的體驗
+* 容器的支援案例
+* 使用常用的真實世界部署工具/流程
+* 至少整合到 Visual Studio
 
-其結果可能是 EF Core 的許多小改進(例如,在 SQLite 上更好的遷移),以及與其他團隊的指導和長期協作,以改善超越 EF 的端到端體驗。
+結果可能是 EF Core 中的許多小改良（例如，SQLite 上較佳的遷移），並提供與其他小組的指引和更長期的共同作業，以改善超越 EF 的端對端體驗。
 
-## <a name="ef-core-platforms-experience"></a>EF 核心平台體驗 
+## <a name="ef-core-platforms-experience"></a>EF Core 平臺體驗 
 
-首席開發人員:@roji和@bricelam
+潛在客戶開發人員： @roji 和@bricelam
 
 由[#19588](https://github.com/dotnet/efcore/issues/19588)追蹤
 
-T恤尺寸:L
+T 恤尺寸： L
 
-狀態:未啟動
+狀態：未啟動
 
-我們在傳統的 MVC 類似 Web 應用程式中使用 EF Core 有很好的指導。 其他平臺和應用模型的指導要麼丟失,要麼過期。 對於 EF Core 5.0,我們計劃調查、改進和記錄使用 EF Core 的經驗:
+我們有在傳統的 MVC web 應用程式中使用 EF Core 的絕佳指引。 其他平臺和應用程式模型的指引可能遺失或過期。 針對 EF Core 5.0，我們計畫調查、改善及記載搭配 EF Core 使用的體驗：
 
 * Blazor
-* Xamarin,包括使用 AOT/連結器故事
-* WinForms/WPF/WinUI 可能還有其他 U.I. frameworks
+* Xamarin，包括使用 AOT/連結器案例
+* WinForms/WPF/WinUI，可能還有其他 U.I。 frameworks
 
-這可能是 EF Core 的許多小改進,以及與其他團隊的指導和長期協作,以改善超越 EF 的端到端體驗。
+這可能是 EF Core 中的許多小改進，以及與其他小組的指引和更長期的共同作業，以改善超越 EF 的端對端體驗。
 
-我們計劃研究的具體領域包括:
+我們打算查看的特定領域包括：
 
-* 部署,包括使用 EF 工具(如移轉)的經驗
-* 應用程式模型,包括 Xamarin 和 Blazor,可能還有其他
-* SQLite 體驗,包括空間體驗和桌面重建
+* 部署，包括使用 EF 工具（例如）進行遷移的經驗
+* 應用程式模型，包括 Xamarin 和 Blazor，還有其他可能
+* SQLite 體驗，包括空間體驗和資料表重建
 * AOT 和連結體驗
-* 診斷整合,包括 perf 計數器
+* 診斷整合，包括效能計數器
 
 ## <a name="performance"></a>效能
 
-首席開發人員:@roji
+首席開發人員：@roji
 
-按[5.0`area-perf`里程碑中標記的問題](https://github.com/dotnet/efcore/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3Aarea-perf+milestone%3A5.0.0+)進行追蹤
+[ `area-perf` 在5.0 里程碑中由標記為的問題](https://github.com/dotnet/efcore/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3Aarea-perf+milestone%3A5.0.0+)所追蹤
 
-T恤尺寸:L
+T 恤尺寸： L
 
-狀態:正在進行
+狀態：進行中
 
-對於 EF Core,我們計劃改進我們的性能基準套件,並針對運行時進行定向性能改進。 此外,我們還計劃完成在 3.0 發佈週期中原型設計的新 ADO.NET 批處理 API。 此外,在ADO.NET層,我們計劃對Npgsql提供程式進行其他性能改進。
+針對 EF Core，我們計畫改善我們的效能基準測試套件，並對執行時間進行有引導的效能改進。 此外，我們計畫在3.0 發行週期內完成新的 ADO.NET 批次處理 API，這是原型。 此外，在 ADO.NET 層，我們也為 Npgsql 提供者規劃了額外的效能改進。
 
-作為這項工作的一部分,我們還計劃根據需要添加ADO.NET/EF核心性能計數器和其他診斷。
+在這項工作中，我們也計畫在適當的情況下新增 ADO.NET/EF 核心效能計數器和其他診斷。
 
-## <a name="architecturalcontributor-documentation"></a>架構/貢獻者文件
+## <a name="architecturalcontributor-documentation"></a>架構/參與者檔
 
-鉛文件記錄器:@ajcvickers
+潛在客戶文件管理：@ajcvickers
 
 由[#1920](https://github.com/dotnet/EntityFramework.Docs/issues/1920)追蹤
 
-T恤尺寸:L
+T 恤尺寸： L
 
-狀態:正在進行
+狀態：剪下
 
-這裡的想法是讓您更容易地瞭解 EF Core 的內部情況。 這對使用 EF Core 的任何人都很有用,但主要動機是讓外部人員更容易:
+這裡的概念是要讓您更輕鬆地瞭解 EF Core 內部的狀況。 這對任何使用 EF Core 的人來說都很有用，但主要動機是讓外部人員更容易：
 
-* 為 EF 核心代碼做出貢獻
+* 參與 EF Core 程式碼
 * 建立資料庫提供者
-* 產生其他擴充
+* 建立其他擴充功能
 
-## <a name="microsoftdatasqlite-documentation"></a>微軟.Data.Sqlite 文件
+更新：可惜的是，此計畫太確保建構完善。
+我們還是相信這一點很重要，但可惜的是，它不會 EF Core 5.0。
 
-鉛文件記錄器:@bricelam
+## <a name="microsoftdatasqlite-documentation"></a>Microsoft. Sqlite 檔
+
+潛在客戶文件管理：@bricelam
 
 由[#1675](https://github.com/dotnet/EntityFramework.Docs/issues/1675)追蹤
 
-T恤尺寸:M
+T 恤尺寸： M
 
-狀態:已完成。 新的文檔[是微軟文檔網站上的](https://docs.microsoft.com/dotnet/standard/data/sqlite/?tabs=netcore-cli)即時。
+狀態：已完成。 新的檔已[上線于 Microsoft 檔網站](https://docs.microsoft.com/dotnet/standard/data/sqlite/?tabs=netcore-cli)。
 
-EF 團隊還擁有 Microsoft.Data.Sqlite ADO.NET供應商。 我們計劃作為 5.0 版本的一部分完整記錄此提供程式。
+EF 小組也擁有 ADO.NET 提供者。 我們計畫將此提供者完整記錄為5.0 版本的一部分。
 
-## <a name="general-documentation"></a>一般文件
+## <a name="general-documentation"></a>一般檔
 
-鉛文件記錄器:@ajcvickers
+潛在客戶文件管理：@ajcvickers
 
-按[5.0 里程碑中文件回購中的問題](https://github.com/dotnet/EntityFramework.Docs/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+)進行追蹤
+[5.0 里程碑的](https://github.com/dotnet/EntityFramework.Docs/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+)檔存放庫中的問題追蹤
 
-T恤尺寸:L
+T 恤尺寸： L
 
-狀態:正在進行
+狀態：進行中
 
-我們已經在更新 3.0 和 3.1 版本的文檔。 我們還在致力於:
-  * 對入門文檔進行大修,使其更易近人/更易於遵循
-  * 重整文件,使尋找更容易並新增交叉參考
-  * 新增額外資訊和說明
+我們已在更新3.0 和3.1 版本的檔。 我們也在努力：
+  * 深入瞭解開始使用檔，使其更平易近人/更容易遵循
+  * 重新組織檔，使其更容易尋找及新增交互參考
+  * 新增更多詳細資料和對現有檔的說明
   * 更新範例並新增更多範例
 
-## <a name="fixing-bugs"></a>修復錯誤
+## <a name="fixing-bugs"></a>修正 bug
 
-按[5.0`type-bug`里程碑中標記的問題](https://github.com/dotnet/efcore/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+label%3Atype-bug+)進行追蹤
+[ `type-bug` 在5.0 里程碑中由標記為的問題](https://github.com/dotnet/efcore/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+label%3Atype-bug+)所追蹤
 
-開發人員: @roji @maumar @bricelam @smitpatel、 @AndriySvyryd、 、 、@ajcvickers
+開發人員： @roji 、 @maumar 、 @bricelam 、 @smitpatel 、 @AndriySvyryd 、@ajcvickers
 
-T恤尺寸:L
+T 恤尺寸： L
 
-狀態:正在進行
+狀態：進行中
 
-在編寫本文時,我們有 135 個 bug 在 5.0 版本中被分對修復(已有 62 個 Bug 已修復),但與上面_的一般查詢增強部分_存在顯著重疊。
+在撰寫本文時，我們會在5.0 版本（已修正62）中修正 135 bug，但與上面的_一般查詢增強功能_相比，有相當大的重迭。
 
-在 3.0 版本中,傳入率(最終作為里程碑中工作的問題)每月大約 23 個問題。 並非所有這些都需要固定在 5.0 中。 粗略估計,我們計劃在 5.0 個時間範圍內解決另外 150 個問題。
+傳入的速率（最後在里程碑中運作的問題）是3.0 發行期間每月大約23個問題。 並非所有這些都必須在5.0 中修正。 我們打算在5.0 時間範圍內修正其他150問題，這是粗略的估計。
 
 ## <a name="small-enhancements"></a>小型增強功能
 
-按[5.0`type-enhancement`里程碑中標記的問題](https://github.com/dotnet/efcore/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+label%3Atype-enhancement+)進行追蹤
+[ `type-enhancement` 在5.0 里程碑中由標記為的問題](https://github.com/dotnet/efcore/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+label%3Atype-enhancement+)所追蹤
 
-開發人員: @roji @maumar @bricelam @smitpatel、 @AndriySvyryd、 、 、@ajcvickers
+開發人員： @roji 、 @maumar 、 @bricelam 、 @smitpatel 、 @AndriySvyryd 、@ajcvickers
 
-T恤尺寸:L
+T 恤尺寸： L
 
-狀態:正在進行
+狀態：進行中
 
-除了上面概述的更大功能外,我們還計劃對 5.0 進行許多較小的改進,以修復"剪紙"。 請注意,上述較一般的主題也涵蓋了其中許多增強功能。
+除了上面所述的更大功能之外，我們也針對5.0 排定了許多較小的改進，以修正「紙張切割」。 請注意，上述的許多增強功能也都涵蓋在上面所述的一般主題。
 
-## <a name="below-the-line"></a>線下
+## <a name="below-the-line"></a>底下-行
 
-按[標籤為`consider-for-next-release`](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+label%3Aconsider-for-next-release)
+由[標記 `consider-for-next-release` ](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+label%3Aconsider-for-next-release)為的問題所追蹤
 
-這些是當前**未**為 5.0 版本安排的 Bug 修復和增強功能,但我們會根據上述工作的進度來考慮拉伸目標。
+這些是目前**未**針對5.0 版本排程的錯誤修正和增強功能，但我們會根據上述工作的進度，查看是否為延展目標。
 
-此外,在規劃時,我們總是考慮[投票最多的問題](https://github.com/dotnet/efcore/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc)。 從發佈中削減這些問題總是痛苦的,但我們確實需要一個現實的計劃,以我認為我們擁有的資源。
+此外，我們在規劃時，一律會考慮[最投票的問題](https://github.com/dotnet/efcore/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc)。 從版本中去除這些問題總是很麻煩，但我們對我們所擁有的資源需要有實際的計畫。
 
 ## <a name="feedback"></a>意見反應
 
-您對計劃的意見反應很重要。 若要指出問題的重要性，最佳方式是在 GitHub 上針對該問題投票 (大拇指)。 然後,此資料將饋入下一個版本[的規劃過程](../release-planning.md)。
+您對計劃的意見反應很重要。 若要指出問題的重要性，最佳方式是在 GitHub 上針對該問題投票 (大拇指)。 此資料接著會饋送至下一版的[規劃](xref:core/what-is-new/release_planning)程式。

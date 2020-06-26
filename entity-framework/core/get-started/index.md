@@ -4,12 +4,12 @@ author: rick-anderson
 ms.date: 09/17/2019
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: b45a7e5010dd3ef37ea952aaf483847ae95ea4ef
-ms.sourcegitcommit: 1f0f93c66b2b50e03fcbed90260e94faa0279c46
+ms.openlocfilehash: 7181df6ee73b09f196940178ffed38d96b075258
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84418936"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370314"
 ---
 # <a name="getting-started-with-ef-core"></a>開始使用 EF Core
 
@@ -116,7 +116,7 @@ EF Core 也可以對現有資料庫中的模型進行[反向工程](../managing-
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在**套件管理器主控台**中執行下列命令
+* 在**套件管理員主控台（PMC）** 中執行下列命令
 
   ``` PowerShell
   Install-Package Microsoft.EntityFrameworkCore.Tools

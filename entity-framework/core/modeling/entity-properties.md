@@ -1,16 +1,16 @@
 ---
 title: 實體屬性-EF Core
 description: 如何使用 Entity Framework Core 設定和對應實體屬性
-author: roji
-ms.date: 12/10/2019
+author: lajones
+ms.date: 05/27/2020
 ms.assetid: e9dff604-3469-4a05-8f9e-18ac281d82a9
 uid: core/modeling/entity-properties
-ms.openlocfilehash: e4a1867a90df1fb277e7dd44b93d6c2d47895030
-ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+ms.openlocfilehash: fcf3b0f8480fde2f3ba6b5fd601db115f1d246b8
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664152"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370509"
 ---
 # <a name="entity-properties"></a>實體屬性
 
@@ -85,6 +85,26 @@ ms.locfileid: "84664152"
 
 ***
 
+### <a name="precision-and-scale"></a>精確度和小數位數
+
+從 EFCore 5.0 開始，您可以使用 Fluent API 來設定精確度和小數位數。 它會告訴資料庫提供者，指定的資料行需要多少儲存空間。 它只適用于資料類型，而提供者允許有效位數和小數位數，通常只是 `decimal` 和 `DateTime` 。
+
+對於 `decimal` 屬性，precision 會定義資料行所包含的任何值所需的最大位數，而 scale 則會定義所需的最大小數位數。 對於 `DateTime` 屬性而言，精確度會定義表示秒數所需的最大位數，而不會使用 scale。
+
+> [!NOTE]
+> Entity Framework 在傳遞資料給提供者之前，不會執行任何有效位數或小數位數的驗證。 視需要驗證提供者或資料存放區。 例如，當以 SQL Server 為目標時，資料類型的資料行不 `datetime` 允許設定有效位數，而 `datetime2` 可以有介於0到7（含）之間的有效位數。
+
+在下列範例中， `Score` 將屬性設定為具有有效位數14和小數位數2，將會 `decimal(14,2)` 在 SQL Server 上建立類型的資料行，並將屬性設定為具有有效位數3的資料 `LastUpdated` 行 `datetime2(3)` ：
+
+#### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/PrecisionAndScale.cs?name=PrecisionAndScale&highlight=3-9)]
+
+> [!NOTE]
+> 永遠不會定義小數位數，而不會先定義精確度，因此，用於定義小數位數的流暢 API 是 `HasPrecision(precision, scale)` 。
+
+***
+
 ## <a name="required-and-optional-properties"></a>必要和選擇性屬性
 
 如果屬性可包含，則會將其視為選擇性 `null` 。 如果不是要指派給屬性的有效值，則會將 `null` 它視為必要的屬性。 對應至關係資料庫架構時，會將所需的屬性建立為不可為 null 的資料行，並將選擇性屬性建立為可為 null 的資料行。
@@ -142,4 +162,4 @@ C # 8 引進了一個稱為[nullable 參考型別](/dotnet/csharp/tutorials/null
 
 如果資料庫中的所有資料行都必須使用特定定序，請改為在資料庫層級上定義定序。
 
-如需有關定序的 EF Core 支援的一般資訊，請參閱定[序檔頁面](xref:core/miscellaneous/collations-and-case-sensitivity.md)。
+如需有關定序的 EF Core 支援的一般資訊，請參閱定[序檔頁面](xref:core/miscellaneous/collations-and-case-sensitivity)。

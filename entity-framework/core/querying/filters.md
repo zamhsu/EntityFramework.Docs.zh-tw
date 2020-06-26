@@ -3,12 +3,12 @@ title: 全域查詢篩選條件 - EF Core
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: f6c59bcbab31edcbed22079a1320c060ce08c6f7
-ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+ms.openlocfilehash: 233289b0c50e15f4555b342bc654211ce04c24d3
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664126"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370457"
 ---
 # <a name="global-query-filters"></a>全域查詢篩選條件
 
@@ -52,7 +52,7 @@ ms.locfileid: "84664126"
 > [!NOTE]
 > 目前 EF Core 不會偵測全域查詢篩選定義中的迴圈，因此在定義時，您應該小心。 如果指定錯誤，這可能會在查詢轉譯期間導致無限迴圈。
 
-## <a name="accessing-entity-with-query-filter-using-reqiured-navigation"></a>使用 reqiured 導覽來存取具有查詢篩選準則的實體
+## <a name="accessing-entity-with-query-filter-using-required-navigation"></a>使用必要的導覽來存取具有查詢篩選準則的實體
 
 > [!CAUTION]
 > 使用必要的流覽來存取已定義全域查詢篩選器的實體，可能會導致非預期的結果。 

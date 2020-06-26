@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: bfd6e161ed7f7bf96e61946f94c8eeadd24a72f5
-ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
+ms.openlocfilehash: 86b9d08377ea8295b746e5f0217a408edcfe1517
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81434184"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370469"
 ---
 # <a name="loading-related-data"></a>載入相關資料
 
@@ -20,7 +20,7 @@ Entity Framework Core 可讓您在模型中使用導覽屬性來載入相關實�
 * **消極式載入**表示會於存取導覽屬性時從資料庫以透明的方式載入相關資料。
 
 > [!TIP]  
-> 您可以在 GitHub 上查看本文[的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying)。
+> 您可以在 GitHub 上查看這篇文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying)。
 
 ## <a name="eager-loading"></a>積極式載入
 
@@ -54,28 +54,40 @@ Entity Framework Core 可讓您在模型中使用導覽屬性來載入相關實�
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
 
 > [!CAUTION]
-> 自版本 3.0.0`Include`起,每個版本將導致將附加 JOIN 添加到關係提供程式生成的 SQL 查詢中,而早期版本生成了其他 SQL 查詢。 這可以顯著更改查詢的性能,無論好壞。 特別是,具有極高數量的運算符的`Include`LINQ 查詢可能需要分解為多個單獨的 LINQ 查詢,以避免卡點分解問題。
+> 由於版本3.0.0，每個 `Include` 都會導致其他聯結加入至關聯式提供者所產生的 SQL 查詢，而舊版則產生額外的 SQL 查詢。 這可能會大幅變更查詢的效能，以提高或更糟。 特別的是，具有大量運算子的 LINQ 查詢 `Include` 可能需要細分為多個個別的 LINQ 查詢，以避免笛卡爆炸的問題。
 
-### <a name="filtered-include"></a>篩選包括
+### <a name="filtered-include"></a>篩選的包含
 
 > [!NOTE]
-> 此功能在 EF Core 5.0 中介紹。
+> 這項功能會在 EF Core 5.0 中引進。
 
-當應用"包括"載入相關數據時,可以在包含的集合導航上應用某些枚舉操作,從而允許篩選和排序結果。
+將 [包含] 套用至載入相關資料時，您可以在包含的集合導覽上套用特定的可列舉作業，以便篩選和排序結果。
 
-支援的操作包括: `Where` `OrderBy` `OrderByDescending``Take``ThenBy``ThenByDescending``Skip`、、、、、、 與 。
+支援的作業包括： `Where` 、 `OrderBy` 、 `OrderByDescending` 、、、 `ThenBy` `ThenByDescending` `Skip` 和 `Take` 。
 
-此類操作應應用於傳遞給 Include 方法的 lambda 中的集合導航上,如下所示:
+這類作業應套用在傳遞至 Include 方法之 lambda 的集合導覽上，如下列範例所示：
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#FilteredInclude)]
 
-每個包含的導航只允許一組唯一的篩選器操作。 如果對給定集合導航應用多個 Include`blog.Posts`操作( 在下面的範例中),只能在其中一個操作上指定篩選器操作: 
+每個包含的導覽只允許一組唯一的篩選作業。 在針對指定集合導覽套用多個 Include 作業的情況下（ `blog.Posts` 在下列範例中），只能在其中一個專案上指定篩選作業： 
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered1)]
 
-或者,可以對包含多次的每個導航應用相同的操作:
+或者，也可以針對每個包含多次的導覽套用相同的作業：
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered2)]
+
+> [!CAUTION]
+> 在追蹤查詢的情況下，篩選包含的結果可能因為[導覽修復](tracking.md)而非預期。 先前已 querried 並儲存在變更追蹤器中的所有相關實體，都會出現在篩選的 Include 查詢結果中，即使它們不符合篩選準則的需求也一樣。 `NoTracking`在這些情況下使用已篩選的包含時，請考慮使用查詢或重新建立 DbCoNtext。
+
+範例：
+
+```csharp
+var orders = context.Orders.Where(o => o.Id > 1000).ToList();
+
+// customer entities will have references to all orders where Id > 1000, rathat than > 5000
+var filtered = context.Customers.Include(c => c.Orders.Where(o => o.Id > 5000)).ToList();
+```
 
 ### <a name="include-on-derived-types"></a>衍生類型中的 Include
 
