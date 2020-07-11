@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: 062a7f292d16deb3840fd116f270edb11c6e0687
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: e955e93723fc371170641b0b3209cca014ef1c26
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672915"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238147"
 ---
 # <a name="connection-strings"></a>連接字串
 
@@ -17,7 +17,7 @@ ms.locfileid: "83672915"
 
 ## <a name="winforms--wpf-applications"></a>WPF 應用程式的 WinForms &
 
-WinForms、WPF 和 ASP.NET 4 應用程式已嘗試並測試連接字串模式。 如果您使用 ASP.NET，則應該將連接字串新增至應用程式的 app.config 檔案（web.config）。 如果您的連接字串包含敏感性資訊，例如使用者名稱和密碼，您可以使用[秘密管理員工具](/aspnet/core/security/app-secrets#secret-manager)來保護設定檔的內容。
+WinForms、WPF 和 ASP.NET 4 應用程式已嘗試並測試連接字串模式。 如果您使用 ASP.NET) ，應該將連接字串新增至應用程式的 App.config 檔 ( # A1。 如果您的連接字串包含敏感性資訊，例如使用者名稱和密碼，您可以使用[秘密管理員工具](/aspnet/core/security/app-secrets#secret-manager)來保護設定檔的內容。
 
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -31,7 +31,7 @@ WinForms、WPF 和 ASP.NET 4 應用程式已嘗試並測試連接字串模式。
 ```
 
 > [!TIP]  
-> 在 `providerName` app.config 中儲存的 EF Core 連接字串上不需要此設定，因為資料庫提供者是透過程式碼來設定。
+> `providerName`EF Core 儲存在 App.config 中的連接字串不需要設定，因為資料庫提供者是透過程式碼來設定。
 
 接著，您可以 `ConfigurationManager` 在內容的方法中使用 API 來讀取連接字串 `OnConfiguring` 。 您可能需要加入 `System.Configuration` 架構元件的參考，才能夠使用此 API。
 
@@ -73,7 +73,7 @@ public class BloggingContext : DbContext
 
 ```dotnetcli
 dotnet user-secrets set ConnectionStrings.YourDatabaseAlias "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=YourDatabase"
-dotnet ef dbcontext scaffold Name=YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
+dotnet ef dbcontext scaffold Name=ConnectionStrings.YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 或者，下列範例會顯示中儲存的連接字串 `appsettings.json` 。
@@ -86,7 +86,7 @@ dotnet ef dbcontext scaffold Name=YourDatabaseAlias Microsoft.EntityFrameworkCor
 }
 ```
 
-然後，通常會在中將內容設定為， `Startup.cs` 並從設定讀取連接字串。 請注意， `GetConnectionString()` 方法會尋找其金鑰為的設定值 `ConnectionStrings:<connection string name>` 。 您需要匯入設定[命名空間](/dotnet/api/microsoft.extensions.configuration)，才能使用此擴充方法。
+然後，通常會在中將內容設定為， `Startup.cs` 並從設定讀取連接字串。 請注意， `GetConnectionString()` 方法會尋找其金鑰為的設定值 `ConnectionStrings:<connection string name>` 。 您必須匯入[Microsoft.Extensions.Configuration](/dotnet/api/microsoft.extensions.configuration)命名空間，才能使用此擴充方法。
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)

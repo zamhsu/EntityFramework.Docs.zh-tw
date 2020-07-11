@@ -4,12 +4,12 @@ description: EF Core 5.0 中的新功能總覽
 author: ajcvickers
 ms.date: 06/02/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: 0a2ba5b804cc6636b321edcc48feeb76ad60560b
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 304ed74fe344b43177525113c70b7be7bb0ac5ed
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370366"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238329"
 ---
 # <a name="whats-new-in-ef-core-50"></a>5.0 EF Core 的新功能
 
@@ -170,7 +170,7 @@ var artists = context.Artists.Where(e => e.IsSigned).ToList();
 
 EF Core 將會擲回下列例外狀況，指出轉譯失敗，因為未 `IsSigned` 對應：
 
-> 未處理的例外狀況。 InvalidOperationException： LINQ 運算式的 DbSet <Artist> （）。Where （a => IsSigned） ' 無法轉譯。 其他資訊：實體類型 ' 演出者 ' 上成員 ' IsSigned ' 的轉譯失敗。 可能是指定的成員未對應。 請以可翻譯的形式重寫查詢，或將呼叫插入 Enumerable.asenumerable （）、AsAsyncEnumerable （）、ToList （）或 ToListAsync （），以明確地切換至用戶端評估。 如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2101038 。
+> 未處理的例外狀況。 InvalidOperationException： LINQ 運算式 ' DbSet <Artist> ( # A2。其中 (a => IsSigned) ' 無法轉譯。 其他資訊：實體類型 ' 演出者 ' 上成員 ' IsSigned ' 的轉譯失敗。 可能是指定的成員未對應。 請以可翻譯的形式重寫查詢，或將呼叫插入 Enumerable.asenumerable ( # A1、AsAsyncEnumerable ( # A3、ToList ( # A5 或 ToListAsync ( # A7，以明確地切換至用戶端評估。 如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2101038 。
 
 同樣地，當嘗試使用與文化特性相關的語義來轉譯字串比較時，現在會產生更好的例外狀況訊息。 例如，此查詢會嘗試使用 `StringComparison.CurrentCulture` ：
 
@@ -182,7 +182,7 @@ var artists = context.Artists
 
 EF Core 現在會擲回下列例外狀況：
 
-> 未處理的例外狀況。 InvalidOperationException： LINQ 運算式的 DbSet <Artist> （）。其中（a =>. Name. Equals （值： "the 獨角獸"，comparisonType： CurrentCulture）） ' 無法轉譯。 其他資訊： ' string ' 的轉譯。不支援採用 ' StringComparison ' 引數的 Equals ' 方法。 如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2129535 。 請以可翻譯的形式重寫查詢，或將呼叫插入 Enumerable.asenumerable （）、AsAsyncEnumerable （）、ToList （）或 ToListAsync （），以明確地切換至用戶端評估。 如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2101038 。
+> 未處理的例外狀況。 InvalidOperationException： LINQ 運算式 ' DbSet <Artist> ( # A2。其中 (a =>. Name. Equals ( 值： "獨角獸"，comparisonType： CurrentCulture) # A6 ' 無法轉譯。 其他資訊： ' string ' 的轉譯。不支援採用 ' StringComparison ' 引數的 Equals ' 方法。 如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2129535 。 請以可翻譯的形式重寫查詢，或將呼叫插入 Enumerable.asenumerable ( # A1、AsAsyncEnumerable ( # A3、ToList ( # A5 或 ToListAsync ( # A7，以明確地切換至用戶端評估。 如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2101038 。
 
 ### <a name="specify-transaction-id"></a>指定交易識別碼
 
@@ -361,7 +361,7 @@ WHERE [u].[Name] COLLATE French_CI_AS = N'Jean-Michel Jarre'
 
 ### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a>IDesignTimeDbCoNtextFactory 中的流程引數
 
-引數現在會從命令列流動到 `CreateDbContext` [IDesignTimeDbCoNtextFactory](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1)的方法中。 例如，若要指出這是開發組建， `dev` 可以在命令列上傳遞自訂引數（例如）：
+引數現在會從命令列流動到 `CreateDbContext` [IDesignTimeDbCoNtextFactory](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1)的方法中。 例如，若要指出這是開發組建， `dev` 可以在命令列上傳遞自訂引數 (例如) ：
 
 ```
 dotnet ef migrations add two --verbose --dev
@@ -397,7 +397,7 @@ context.Posts.AsNoTracking().PerformIdentityResolution().Include(e => e.Blog).To
 
 檔是由問題[#1895](https://github.com/dotnet/EntityFramework.Docs/issues/1895)追蹤。
 
-### <a name="stored-persisted-computed-columns"></a>儲存的（保存）計算資料行
+### <a name="stored-persisted-computed-columns"></a>儲存的 (保存) 計算資料行
 
 大部分的資料庫都允許在計算後儲存計算的資料行值。 雖然這會佔用磁碟空間，但計算的資料行只會在 update 上計算一次，而不是每次抓取它的值。 這也可讓某些資料庫的資料行編制索引。
 
@@ -427,7 +427,7 @@ modelBuilder
     .HasPrecision(16, 4);
 ```
 
-精確度和小數位數仍然可以透過完整資料庫類型來設定，例如 "decimal （16，4）"。 
+精確度和小數位數仍然可以透過完整資料庫類型來設定，例如 "decimal (16，4) "。 
 
 檔是由問題[#527](https://github.com/dotnet/EntityFramework.Docs/issues/527)追蹤。
 

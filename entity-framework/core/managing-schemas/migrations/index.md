@@ -1,51 +1,59 @@
 ---
-title: 移轉 - EF Core
+title: 遷移總覽-EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 10/05/2018
+ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: c87864b3430d3cd42729c13ddde33c0cd9de9308
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
-ms.translationtype: HT
+ms.openlocfilehash: 8539a8da6f0051d3737efc583f0adfaf05fb2d3d
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672983"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238225"
 ---
-# <a name="migrations"></a>移轉
+# <a name="migrations-overview"></a>遷移總覽
 
-資料模型在開發期間變更，而且與資料庫不同步。 您可以卸除資料庫，然後讓 EF 建立符合模型的新資料庫，但此程序會導致資料遺失。 EF Core 中的移轉功能讓您能夠以累加方式來更新資料庫結構描述，讓它與應用程式的資料模型保持同步，同時將現有的資料保留在資料庫中。
+在實際的專案中，資料模型會隨著功能的執行而變更：新增和移除新的實體或屬性，而且必須據此變更資料庫架構，使其與應用程式保持同步。 EF Core 中的移轉功能讓您能夠以累加方式來更新資料庫結構描述，讓它與應用程式的資料模型保持同步，同時將現有的資料保留在資料庫中。
 
-移轉包含命令列工具和 API，可協助執行下列工作：
+概括而言，遷移的運作方式如下：
 
-* [建立移轉](#create-a-migration)。 產生程式碼，該程式碼可以更新資料庫，以便與一組模型變更同步。
-* [更新資料庫](#update-the-database)。 套用擱置移轉來更新資料庫結構描述。
-* [自訂移轉程式碼](#customize-migration-code)。 有時候產生的程式碼需要修改或補充。
-* [移除移轉](#remove-a-migration)。 刪除產生的程式碼。
-* [還原移轉](#revert-a-migration)。 復原資料庫變更。
-* [產生 SQL 指令碼](#generate-sql-scripts)。 您需要指令碼以更新生產環境資料庫，或者針對移轉程式碼進行疑難排解。
-* [在執行階段套用移轉](#apply-migrations-at-runtime)。 當設計階段更新以及執行指令碼都不是最佳選項時，請呼叫 `Migrate()` 方法。
+* 引進資料模型變更時，開發人員會使用 EF Core 工具來加入對應的遷移，以描述保持資料庫架構同步所需的更新。EF Core 會比較目前的模型與舊模型的快照集，以判斷差異，並產生遷移來源檔案;您可以在專案的原始檔控制中追蹤檔案，就像任何其他原始程式檔一樣。
+* 一旦產生新的遷移之後，就可以用各種方式將它套用到資料庫。 EF Core 會記錄特殊歷程記錄資料表中所有套用的遷移，讓 it 知道已套用但尚未套用的遷移。
 
-> [!TIP]
-> 如果 `DbContext` 與啟始專案位於不同的組件中，您可以在[套件管理員主控台工具](xref:core/miscellaneous/cli/powershell#target-and-startup-project)或 [.NET Core CLI 工具](xref:core/miscellaneous/cli/dotnet#target-project-and-startup-project)中明確指定目標和啟始專案。
+本頁面的其餘部分是使用遷移的逐步入門指南。 如需更深入的資訊，請參閱本節中的其他頁面。
 
-## <a name="install-the-tools"></a>安裝工具
+## <a name="getting-started"></a>開始使用
 
-安裝[命令列工具](xref:core/miscellaneous/cli/index)：
+假設您剛完成第一個 EF Core 應用程式，其中包含下列簡單的模型：
 
-* 針對 Visual Studio，我們建議使用[套件管理員主控台工具](xref:core/miscellaneous/cli/powershell)。
-* 針對其他開發環境，請選擇 [.NET Core CLI 工具](xref:core/miscellaneous/cli/dotnet)。
+```c#
+public class Blog
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+```
 
-## <a name="create-a-migration"></a>建立移轉
+在開發期間，您可能已使用[建立和卸載 api](xref:core/managing-schemas/ensure-created)來快速反復執行，並視需要變更您的模型;但現在您的應用程式即將進入生產階段，您需要一種方法來安全地演進架構，而不需卸載整個資料庫。
 
-在您[定義起始模型](xref:core/modeling/index)之後，即可開始建立資料庫。 若要新增初始移轉，請執行下列命令。
+### <a name="install-the-tools"></a>安裝工具
 
-### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
+首先，您必須安裝[EF Core 命令列工具](xref:core/miscellaneous/cli/index)：
+
+* 我們通常建議使用可在所有平臺上運作的[.NET Core CLI 工具](xref:core/miscellaneous/cli/dotnet)。
+* 如果您更熟悉 Visual Studio 或擁有 EF6 遷移的經驗，您也可以使用[套件管理員主控台工具](xref:core/miscellaneous/cli/powershell)。
+
+### <a name="create-your-first-migration"></a>建立您的第一次遷移
+
+您現在已準備好加入您的第一次遷移！ 指示 EF Core 建立名為**InitialCreate**的遷移：
+
+#### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
 
 ```dotnetcli
 dotnet ef migrations add InitialCreate
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+#### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ``` powershell
 Add-Migration InitialCreate
@@ -53,45 +61,18 @@ Add-Migration InitialCreate
 
 ***
 
-會新增三個檔案到您**移轉**目錄下的專案：
+EF Core 會在專案中建立名為「**遷移**」的目錄，並產生一些檔案。 最好的做法是檢查產生的 EF Core，而且可能會修改它，但我們現在會跳過該程式。
 
-* **XXXXXXXXXXXXXX_InitialCreate.cs** - 主要移轉檔案。 包含套用移轉 (在 `Up()` 中) 及予以反轉 (在 `Down()` 中) 的必要作業。
-* **XXXXXXXXXXXXXX_InitialCreate.Designer.cs** - 移轉中繼資料檔案。 包含 EF 使用的資訊。
-* **MyContextModelSnapshot.cs** - 您目前模型的快照集。 用來決定新增下一個移轉時所要變更的項目。
+### <a name="create-your-database-and-schema"></a>建立您的資料庫和架構
 
-檔案名稱中的時間戳記有助於使其依時間先後順序排列，以便您查看變更的進展。
+此時，您可以讓 EF 建立您的資料庫，並從遷移建立您的架構。 這可以透過下列方式來完成：
 
-### <a name="namespaces"></a>命名空間
-
-您可以自由地手動移動移轉檔案及變更其命名空間。 新的移轉會作為最後一個移轉的同層級建立。
-
-或者，您可以使用 `-Namespace` (套件管理員主控台) 或 `--namespace` (.NET Core CLI) 在產生時指定命名空間。
-
-### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
-
-```dotnetcli
-dotnet ef migrations add InitialCreate --namespace Your.Namespace
-```
-
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
-
-``` powershell
-Add-Migration InitialCreate -Namespace Your.Namespace
-```
-
-***
-
-## <a name="update-the-database"></a>更新資料庫
-
-接下來，將移轉套用到資料庫以建立結構描述。
-
-### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
+#### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
 
 ```dotnetcli
 dotnet ef database update
 ```
-
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+#### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ``` powershell
 Update-Database
@@ -99,78 +80,49 @@ Update-Database
 
 ***
 
-## <a name="customize-migration-code"></a>自訂移轉程式碼
+就是這麼簡單-您的應用程式已準備好在新的資料庫上執行，而且您不需要撰寫任何一行的 SQL。 請注意，這種套用遷移的方式適用于本機開發，但較不適合用于生產環境-如需詳細資訊，請參閱[應用程式遷移頁面](xref:core/managing-schemas/migrations/applying)。
 
-對您的 EF Core 模型進行變更後，資料庫結構描述會失去同步。若要將其更新為最新狀態，請新增另一個移轉。 您能夠以類似版本控制系統中認可訊息的方式來使用移轉名稱。 例如，如果變更是要檢閱的新實體類別，您可以選擇像是 AddProductReviews 的名稱。
+### <a name="evolving-your-model"></a>發展您的模型
 
-### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
+經過幾天後，系統會要求您將建立時間戳記新增至您的 blog。 您已完成對應用程式所做的必要變更，而您的模型現在看起來像這樣：
 
-```dotnetcli
-dotnet ef migrations add AddProductReviews
+```c#
+public class Blog
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public DateTime CreatedTimestamp { get; set; }
+}
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+您的模型和生產資料庫現在已不同步-我們必須將新的資料行加入至您的資料庫架構。 讓我們為此建立新的遷移：
+
+#### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
+
+```dotnetcli
+dotnet ef migrations add AddBlogCreatedTimestamp
+```
+
+#### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ``` powershell
-Add-Migration AddProductReviews
+Add-Migration AddBlogCreatedTimestamp
 ```
 
 ***
 
-一旦建立移轉 (為其產生程式碼) 後，請檢閱程式碼的正確性，以及視需要新增、移除或修改任何作業，以便正確套用。
+請注意，我們會為遷移提供描述性的名稱，讓您稍後可以更輕鬆地瞭解專案歷程記錄。
 
-例如，移轉可能包含下列作業：
+由於這不是專案的第一次遷移，因此在加入資料行之前，EF Core 現在會比較已更新的模型與舊模型的快照集;模型快照集是當您加入遷移時 EF Core 所產生的其中一個檔案，而且會簽入原始檔控制中。 根據該比較，EF Core 會偵測到已新增資料行，並新增適當的遷移。
 
-``` csharp
-migrationBuilder.DropColumn(
-    name: "FirstName",
-    table: "Customer");
+您現在可以像之前一樣套用您的遷移：
 
-migrationBuilder.DropColumn(
-    name: "LastName",
-    table: "Customer");
-
-migrationBuilder.AddColumn<string>(
-    name: "Name",
-    table: "Customer",
-    nullable: true);
-```
-
-雖然這些作業會使資料庫結構描述符合規範，但不會保存現有的客戶名稱。 若要加以改善，請以下列格式重寫。
-
-``` csharp
-migrationBuilder.AddColumn<string>(
-    name: "Name",
-    table: "Customer",
-    nullable: true);
-
-migrationBuilder.Sql(
-@"
-    UPDATE Customer
-    SET Name = FirstName + ' ' + LastName;
-");
-
-migrationBuilder.DropColumn(
-    name: "FirstName",
-    table: "Customer");
-
-migrationBuilder.DropColumn(
-    name: "LastName",
-    table: "Customer");
-```
-
-> [!TIP]
-> 當作業可能導致資料遺失時 (例如卸除資料行)，移轉建立程序會引發警告。 如果您看到該警告，請務必檢閱移轉程式碼的正確性。
-
-使用適當的命令將移轉套用到資料庫。
-
-### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
+#### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
 
 ```dotnetcli
 dotnet ef database update
 ```
-
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+#### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ``` powershell
 Update-Database
@@ -178,123 +130,8 @@ Update-Database
 
 ***
 
-### <a name="empty-migrations"></a>空白的移轉
+請注意，這次 EF 會偵測到資料庫已經存在。 此外，當我們的第一次遷移已套用時，此事實會記錄在資料庫的特殊遷移歷程記錄資料表中;這可讓 EF 自動套用新的遷移。
 
-新增移轉而不進行任何模型變更有時很實用。 在這種情況下，新增移轉會建立具有空白類別的程式碼檔案。 您可以自訂此移轉來自訂未與 EF Core 模型直接相關的作業。 您可能會想要以這種方式處理的項目如下：
+### <a name="next-steps"></a>後續步驟
 
-* 全文檢索搜尋
-* 函式
-* 預存程序
-* 觸發程序
-* 檢視
-
-## <a name="remove-a-migration"></a>移除移轉
-
-在您新增移轉時，有時候會發現您必須在套用 EF Core 模型之前對其進行其他變更。 若要移除上一個移轉，請使用此命令。
-
-### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
-
-```dotnetcli
-dotnet ef migrations remove
-```
-
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
-
-``` powershell
-Remove-Migration
-```
-
-***
-
-移除移轉後，您可以進行其他模型變更並再次予以新增。
-
-## <a name="revert-a-migration"></a>還原移轉
-
-若您已經套用移轉 (或多個移轉) 到資料庫但需要還原，您可以使用相同命令來套用移轉，但必須指定所要復原到的移轉名稱。
-
-### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
-
-```dotnetcli
-dotnet ef database update LastGoodMigration
-```
-
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
-
-``` powershell
-Update-Database LastGoodMigration
-```
-
-***
-
-## <a name="generate-sql-scripts"></a>產生 SQL 指令碼
-
-對移轉進行偵錯或將其部署到生產資料庫時，產生 SQL 指令碼很實用。 您可以進一步檢閱程式碼的精確度，並對其進行微調以符合生產資料庫的需求。 指令碼也可以搭配部署技術使用。 基本命令如下。
-
-### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
-
-#### <a name="basic-usage"></a>基本使用方式
-```dotnetcli
-dotnet ef migrations script
-```
-
-#### <a name="with-from-to-implied"></a>使用 From (隱含)
-這會產生 SQL 指令碼，從此移轉到最新的移轉。
-```dotnetcli
-dotnet ef migrations script 20190725054716_Add_new_tables
-```
-
-#### <a name="with-from-and-to"></a>使用 From 與 To
-這會產生 SQL 指令碼，從此 `from` 移轉到指定的 `to` 移轉。
-```dotnetcli
-dotnet ef migrations script 20190725054716_Add_new_tables 20190829031257_Add_audit_table
-```
-您可以使用比 `to` 新的 `from` 來產生復原指令碼。 *請注意，可能會發生資料遺失的狀況。*
-
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
-
-#### <a name="basic-usage"></a>基本使用方式
-``` powershell
-Script-Migration
-```
-
-#### <a name="with-from-to-implied"></a>使用 From (隱含)
-這會產生 SQL 指令碼，從此移轉到最新的移轉。
-```powershell
-Script-Migration 20190725054716_Add_new_tables
-```
-
-#### <a name="with-from-and-to"></a>使用 From 與 To
-這會產生 SQL 指令碼，從此 `from` 移轉到指定的 `to` 移轉。
-```powershell
-Script-Migration 20190725054716_Add_new_tables 20190829031257_Add_audit_table
-```
-您可以使用比 `to` 新的 `from` 來產生復原指令碼。 *請注意，可能會發生資料遺失的狀況。*
-
-***
-
-這個命令有多個選項。
-
-執行指令碼之前，**from** 移轉應該是套用到資料庫的最後一個移轉。 若未套用任何移轉，請指定 `0` (此為預設)。
-
-執行指令碼之後，**to** 移轉是套用到資料庫的最後一個移轉。 預設為您專案中的最後一個移轉。
-
-您可以選擇產生**等冪**指令碼。 當移轉尚未套用到資料庫時，此指令碼才適用於移轉。 當您不確定套用到資料庫的上一個移轉是哪項，或是要部署到可能在不同移轉的多個資料庫時，這個方法很實用。
-
-## <a name="apply-migrations-at-runtime"></a>在執行階段套用移轉
-
-某些應用程式在啟動或初次執行期間，可能會想要在執行階段套用移轉。 請使用 `Migrate()` 方法來執行此動作。
-
-此方法的基礎建立在 `IMigrator` 服務之上，其可用於更進階的案例。 您可以使用 `myDbContext.GetInfrastructure().GetService<IMigrator>()` 來加以存取。
-
-``` csharp
-myDbContext.Database.Migrate();
-```
-
-> [!WARNING]
->
-> * 並非所有應用程式都適合此方法。 雖然這相當適合具本機資料庫的應用程式，但大多數應用程式會需要更強固的部署策略，例如產生 SQL 指令碼。
-> * 請勿在 `Migrate()` 之前呼叫 `EnsureCreated()`。 `EnsureCreated()` 會略過移轉而建立結構描述，因此造成 `Migrate()` 失敗。
-
-## <a name="next-steps"></a>後續步驟
-
-如需詳細資訊，請參閱<xref:core/miscellaneous/cli/index>。
+以上只是簡單的遷移簡介。 請參閱其他檔頁面，以深入瞭解如何[管理遷移](xref:core/managing-schemas/migrations/managing)、套用[它們](xref:core/managing-schemas/migrations/applying)和其他層面。 [.NET Core CLI 工具參考](xref:core/miscellaneous/cli/index)也包含不同命令的實用資訊

@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 69bdd5d5a64983d691b5967f3a64dedccbd7c07f
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 6ff98d005c0a868d420509571378756c56edc54a
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672809"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238121"
 ---
 # <a name="owned-entity-types"></a>擁有的實體類型
 
@@ -20,7 +20,7 @@ EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類
 
 ## <a name="explicit-configuration"></a>明確設定
 
-模型中的 EF Core 絕對不會包含擁有的實體類型。 您可以使用 `OwnsOne` 中的方法，或以 `OnModelCreating` `OwnedAttribute` （EF Core 2.1 中的新功能）標注類型，將類型設定為自有類型。
+模型中的 EF Core 絕對不會包含擁有的實體類型。 您可以使用 `OwnsOne` 中的方法，或以 `OnModelCreating` `OwnedAttribute` EF Core 2.1 中的 (新增來標注類型) 將類型設定為擁有的類型。
 
 在此範例中， `StreetAddress` 是不含識別屬性的類型。 它用做訂單類型的屬性，指定特定訂單的送貨地址。
 
@@ -57,8 +57,8 @@ EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類
 
 這兩個最直接的解決辦法是：
 
-- 在與指向擁有者的外鍵無關的新屬性上定義代理主鍵。 包含的值在所有擁有者中都必須是唯一的（例如，如果父系 {1} 具有子系 {1} ，則父系 {2} 不能有子系 {1} ），因此值不會有任何固有的意義。 因為外鍵不是主鍵的一部分，所以可以變更其值，因此您可以將子系從一個父系移到另一個父代，但這通常會針對匯總的語義進行。
-- 使用外鍵和其他屬性做為複合索引鍵。 對於指定的父系，其他屬性值現在只需要是唯一的（因此，如果父系 {1} 具有 child， {1,1} 父系 {2} 仍然可以有子系 {2,1} ）。 藉由讓主鍵的外鍵部分成為主要金鑰的一部分，擁有者與擁有的實體之間的關聯性就會變成不可變，並更清楚反映匯總的語法。 這就是 EF Core 預設執行的工作。
+- 在與指向擁有者的外鍵無關的新屬性上定義代理主鍵。 包含的值在所有擁有者中都必須是唯一的 (例如，如果父系 {1} 具有子系 {1} ，則父系 {2} 不能有子 {1}) ，因此值不會有任何固有的意義。 因為外鍵不是主鍵的一部分，所以可以變更其值，因此您可以將子系從一個父系移到另一個父代，但這通常會針對匯總的語義進行。
+- 使用外鍵和其他屬性做為複合索引鍵。 對於指定的 (父系而言，其他屬性值現在只需要是唯一的，因此如果父系 {1} 具有 child， {1,1} 父系 {2} 仍然可以有子 {2,1}) 。 藉由讓主鍵的外鍵部分成為主要金鑰的一部分，擁有者與擁有的實體之間的關聯性就會變成不可變，並更清楚反映匯總的語法。 這就是 EF Core 預設執行的工作。
 
 在此範例中，我們將使用 `Distributor` 類別：
 
@@ -71,7 +71,7 @@ EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類
 [!code-csharp[OwnsMany](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsMany)]
 
 > [!NOTE]
-> 在 EF Core 3.0 `WithOwner()` 方法不存在之前，請先移除此呼叫。 此外，也不會自動探索主鍵，因此一定會指定它。
+> 在 EF Core 3.0 `WithOwner()` 方法不存在之前，請先移除此呼叫。 此外，也不會自動探索主鍵，因此一定要指定。
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>對應具有資料表分割的擁有類型
 
@@ -151,7 +151,7 @@ EF Core 可讓您將只能出現在其他實體類型之導覽屬性的實體類
 
 - 擁有的實體類型不能有繼承階層
 - 擁有的實體類型的參考導覽不可以是 null，除非它們已明確對應至擁有者的個別資料表
-- 擁有的實體類型實例無法由多個擁有者共用（這是已知的值物件的情況，無法使用自有的實體類型來執行）
+- 擁有的實體類型實例無法由多個擁有者共用 (這是已知的值物件的案例，無法使用擁有的實體類型來執行) 
 
 ### <a name="shortcomings-in-previous-versions"></a>舊版的缺點
 

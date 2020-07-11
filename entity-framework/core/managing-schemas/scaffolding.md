@@ -5,20 +5,20 @@ ms.author: bricelam
 ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 2422e7455dc4ef52f0a9d3bdaebfa02f62e6d50f
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 19945ef2eb99ac423cc50510edc85439964024b8
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370589"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238186"
 ---
 # <a name="reverse-engineering"></a>反向工程
 
-反向工程是基類庫實體類型類別的程式，以及以資料庫架構為基礎的 DbCoNtext 類別。 您可以使用 `Scaffold-DbContext` EF Core 套件管理員主控台（PMC）工具的命令或 `dotnet ef dbcontext scaffold` .net 命令列介面（CLI）工具的命令來執行此作業。
+反向工程是基類庫實體類型類別的程式，以及以資料庫架構為基礎的 DbCoNtext 類別。 您可以使用 `Scaffold-DbContext` EF Core 套件管理員主控台的命令， (PMC) 工具] 或 `dotnet ef dbcontext scaffold` .net 命令列介面的命令 (CLI) 工具來執行。
 
 ## <a name="installing"></a>安裝
 
-在反向工程之前，您必須安裝[PMC 工具](xref:core/miscellaneous/cli/powershell)（僅限 Visual Studio）或[CLI 工具](xref:core/miscellaneous/cli/dotnet)。 如需詳細資訊，請參閱連結。
+在反向工程之前，您必須先安裝[PMC 工具](xref:core/miscellaneous/cli/powershell) (Visual Studio 僅) 或[CLI 工具](xref:core/miscellaneous/cli/dotnet)。 如需詳細資訊，請參閱連結。
 
 您也需要為您想要反向工程的資料庫架構安裝適當的[資料庫提供者](xref:core/providers/index)。
 
@@ -50,7 +50,7 @@ Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' 
 
 ```dotnetcli
 dotnet user-secrets set ConnectionStrings.Chinook "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook"
-dotnet ef dbcontext scaffold Name=Chinook Microsoft.EntityFrameworkCore.SqlServer
+dotnet ef dbcontext scaffold Name=ConnectionStrings.Chinook Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 ## <a name="provider-name"></a>提供者名稱
@@ -89,7 +89,7 @@ Scaffold-DbContext ... -Tables Artist, Album
 
 ## <a name="fluent-api-or-data-annotations"></a>流暢的 API 或資料批註
 
-實體類型預設會使用流暢的 API 來設定。 `-DataAnnotations`請指定（PMC）或 `--data-annotations` （.NET Core CLI），以在可能時改用資料批註。
+實體類型預設會使用流暢的 API 來設定。 `-DataAnnotations`在可能的情況下，指定 (PMC) 或 `--data-annotations` ( .NET Core CLI) ，改為使用資料批註。
 
 例如，使用流暢的 API 將會 scaffold：
 
@@ -157,7 +157,7 @@ Scaffold-DbContext ... -Namespace Your.Namespace -ContextNamespace Your.DbContex
 
 * 並非有關模型的所有專案都可以使用資料庫架構來表示。 例如，有關[**繼承**](../modeling/inheritance.md)階層、[**擁有類型**](../modeling/owned-entities.md)和[**資料表分割**](../modeling/table-splitting.md)的資訊並不會出現在資料庫架構中。 因此，這些結構永遠不會進行反向工程。
 * 此外，EF Core 提供者可能不支援**某些資料行類型**。 這些資料行不會包含在模型中。
-* 您可以在 EF Core 模型中定義[**並行標記**](../modeling/concurrency.md)，以防止兩個使用者同時更新相同的實體。 某些資料庫具有特殊類型來表示這種類型的資料行（例如，SQL Server 中的 rowversion），在此情況下，我們可以對這項資訊進行反向工程。不過，其他並行存取權杖將不會進行反向工程。
+* 您可以在 EF Core 模型中定義[**並行標記**](../modeling/concurrency.md)，以防止兩個使用者同時更新相同的實體。 某些資料庫具有特殊類型來表示這種類型的資料行 (例如，在 SQL Server 中 rowversion) 在此情況下，我們可以對這項資訊進行反向工程。不過，其他並行存取權杖將不會進行反向工程。
 * 反向工程目前不支援[c # 8 可為 Null 的參考型別功能](/dotnet/csharp/tutorials/nullable-reference-types)： EF Core 一律會產生 c # 程式碼，其假設已停用此功能。 例如，可為 null 的文字資料行將會 scaffold 為具有類型的屬性，而不是用 `string` `string?` 來設定是否需要屬性的流暢 API 或資料批註。 您可以編輯 scaffold 程式碼，並將其取代為 c # null 屬性注釋。 由問題[#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)追蹤可為 null 之參考型別的樣板支援。
 
 ## <a name="customizing-the-model"></a>自訂模型
@@ -172,7 +172,7 @@ EF Core 所產生的程式碼就是您的程式碼。 您可以隨意變更它�
 
 對資料庫進行變更之後，您可能需要更新 EF Core 模型以反映這些變更。 如果資料庫變更很簡單，只需要手動對 EF Core 模型進行變更，可能是最簡單的方法。 例如，重新命名資料表或資料行、移除資料行或更新資料行的類型，都是在程式碼中進行的簡單變更。
 
-不過，更重要的變更並不是手動進行。 其中一個常見的工作流程是使用（PMC）或（CLI），再次從資料庫對模型進行反向工程， `-Force` `--force` 以覆寫現有的模型並更新一個。
+不過，更重要的變更並不是手動進行。 其中一個常見的工作流程是使用 `-Force` (PMC) 或 `--force` (CLI) 來覆寫現有的模型，以從資料庫再次對模型進行反向工程。
 
 另一個常見的要求功能是能夠從資料庫更新模型，同時保留自訂，例如重新命名、類型階層等等。使用 [問題[#831](https://github.com/aspnet/EntityFrameworkCore/issues/831) ] 追蹤此功能的進度。
 

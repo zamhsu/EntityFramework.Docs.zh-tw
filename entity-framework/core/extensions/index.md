@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 47a5601e996afab9c0aa0538a2a2b47f204f7753
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 5b7945bd24ac19a82b08f4d5709555cf53485f4c
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370352"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238251"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -157,6 +157,12 @@ Entity Framework Core 的延伸模組程式庫，可讓使用 SQL Server 的開�
 
 [GitHub 存放庫](https://github.com/SteffenMangold/EntityFrameworkCore.Cacheable)
 
+### <a name="entityframeworkcorencache"></a>Microsoft.entityframeworkcore. NCache
+
+NCache Entity Framework Core 提供者是用來快取查詢結果的分散式第二層快取提供者。 NCache 的分散式架構讓它更具擴充性和高可用性。 針對 EF Core 2。
+
+[網站](https://www.alachisoft.com/ncache/ef-core-cache.html)
+
 ### <a name="entity-framework-plus"></a>Entity Framework Plus
 
 使用下功能延伸您的 DbContext：包括篩選、稽核、快取、查詢未來、批次刪除、批次更新等。 適用於 EF Core：2、3。
@@ -224,3 +230,9 @@ Entity Framework Core 3.1 的 LINQ 延伸模組，以支援 Microsoft SQL Server
 包含支援先進的 SQL 功能，例如 Cte、大量複製、資料表提示、視窗型函數、臨時表，以及資料庫端的建立/更新/刪除作業。
 
 [GitHub 存放庫](https://github.com/linq2db/linq2db.EntityFrameworkCore)
+
+### <a name="efcoresoftdelete"></a>EFCore.SoftDelete
+
+虛刪除實體的執行。 適用於 EF Core：3.
+
+[NuGet](https://www.nuget.org/packages/EFCore.SoftDelete)
