@@ -1,51 +1,59 @@
 ---
-title: 移轉 - EF Core
+title: 遷移總覽-EF Core
 author: bricelam
 ms.author: bricelam
-ms.date: 10/05/2018
+ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: c87864b3430d3cd42729c13ddde33c0cd9de9308
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
-ms.translationtype: HT
+ms.openlocfilehash: 8539a8da6f0051d3737efc583f0adfaf05fb2d3d
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672983"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238225"
 ---
-# <a name="migrations"></a><span data-ttu-id="399f6-102">移轉</span><span class="sxs-lookup"><span data-stu-id="399f6-102">Migrations</span></span>
+# <a name="migrations-overview"></a><span data-ttu-id="ba9fb-102">遷移總覽</span><span class="sxs-lookup"><span data-stu-id="ba9fb-102">Migrations Overview</span></span>
 
-<span data-ttu-id="399f6-103">資料模型在開發期間變更，而且與資料庫不同步。</span><span class="sxs-lookup"><span data-stu-id="399f6-103">A data model changes during development and gets out of sync with the database.</span></span> <span data-ttu-id="399f6-104">您可以卸除資料庫，然後讓 EF 建立符合模型的新資料庫，但此程序會導致資料遺失。</span><span class="sxs-lookup"><span data-stu-id="399f6-104">You can drop the database and let EF create a new one that matches the model, but this procedure results in the loss of data.</span></span> <span data-ttu-id="399f6-105">EF Core 中的移轉功能讓您能夠以累加方式來更新資料庫結構描述，讓它與應用程式的資料模型保持同步，同時將現有的資料保留在資料庫中。</span><span class="sxs-lookup"><span data-stu-id="399f6-105">The migrations feature in EF Core provides a way to incrementally update the database schema to keep it in sync with the application's data model while preserving existing data in the database.</span></span>
+<span data-ttu-id="ba9fb-103">在實際的專案中，資料模型會隨著功能的執行而變更：新增和移除新的實體或屬性，而且必須據此變更資料庫架構，使其與應用程式保持同步。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-103">In real world projects, data models change as features get implemented: new entities or properties are added and removed, and database schemas needs to be changed accordingly to be kept in sync with the application.</span></span> <span data-ttu-id="ba9fb-104">EF Core 中的移轉功能讓您能夠以累加方式來更新資料庫結構描述，讓它與應用程式的資料模型保持同步，同時將現有的資料保留在資料庫中。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-104">The migrations feature in EF Core provides a way to incrementally update the database schema to keep it in sync with the application's data model while preserving existing data in the database.</span></span>
 
-<span data-ttu-id="399f6-106">移轉包含命令列工具和 API，可協助執行下列工作：</span><span class="sxs-lookup"><span data-stu-id="399f6-106">Migrations includes command-line tools and APIs that help with the following tasks:</span></span>
+<span data-ttu-id="ba9fb-105">概括而言，遷移的運作方式如下：</span><span class="sxs-lookup"><span data-stu-id="ba9fb-105">At a high level, migrations function in the following way:</span></span>
 
-* <span data-ttu-id="399f6-107">[建立移轉](#create-a-migration)。</span><span class="sxs-lookup"><span data-stu-id="399f6-107">[Create a migration](#create-a-migration).</span></span> <span data-ttu-id="399f6-108">產生程式碼，該程式碼可以更新資料庫，以便與一組模型變更同步。</span><span class="sxs-lookup"><span data-stu-id="399f6-108">Generate code that can update the database to sync it with a set of model changes.</span></span>
-* <span data-ttu-id="399f6-109">[更新資料庫](#update-the-database)。</span><span class="sxs-lookup"><span data-stu-id="399f6-109">[Update the database](#update-the-database).</span></span> <span data-ttu-id="399f6-110">套用擱置移轉來更新資料庫結構描述。</span><span class="sxs-lookup"><span data-stu-id="399f6-110">Apply pending migrations to update the database schema.</span></span>
-* <span data-ttu-id="399f6-111">[自訂移轉程式碼](#customize-migration-code)。</span><span class="sxs-lookup"><span data-stu-id="399f6-111">[Customize migration code](#customize-migration-code).</span></span> <span data-ttu-id="399f6-112">有時候產生的程式碼需要修改或補充。</span><span class="sxs-lookup"><span data-stu-id="399f6-112">Sometimes the generated code needs to be modified or supplemented.</span></span>
-* <span data-ttu-id="399f6-113">[移除移轉](#remove-a-migration)。</span><span class="sxs-lookup"><span data-stu-id="399f6-113">[Remove a migration](#remove-a-migration).</span></span> <span data-ttu-id="399f6-114">刪除產生的程式碼。</span><span class="sxs-lookup"><span data-stu-id="399f6-114">Delete the generated code.</span></span>
-* <span data-ttu-id="399f6-115">[還原移轉](#revert-a-migration)。</span><span class="sxs-lookup"><span data-stu-id="399f6-115">[Revert a migration](#revert-a-migration).</span></span> <span data-ttu-id="399f6-116">復原資料庫變更。</span><span class="sxs-lookup"><span data-stu-id="399f6-116">Undo the database changes.</span></span>
-* <span data-ttu-id="399f6-117">[產生 SQL 指令碼](#generate-sql-scripts)。</span><span class="sxs-lookup"><span data-stu-id="399f6-117">[Generate SQL scripts](#generate-sql-scripts).</span></span> <span data-ttu-id="399f6-118">您需要指令碼以更新生產環境資料庫，或者針對移轉程式碼進行疑難排解。</span><span class="sxs-lookup"><span data-stu-id="399f6-118">You might need a script to update a production database or to troubleshoot migration code.</span></span>
-* <span data-ttu-id="399f6-119">[在執行階段套用移轉](#apply-migrations-at-runtime)。</span><span class="sxs-lookup"><span data-stu-id="399f6-119">[Apply migrations at runtime](#apply-migrations-at-runtime).</span></span> <span data-ttu-id="399f6-120">當設計階段更新以及執行指令碼都不是最佳選項時，請呼叫 `Migrate()` 方法。</span><span class="sxs-lookup"><span data-stu-id="399f6-120">When design-time updates and running scripts aren't the best options, call the `Migrate()` method.</span></span>
+* <span data-ttu-id="ba9fb-106">引進資料模型變更時，開發人員會使用 EF Core 工具來加入對應的遷移，以描述保持資料庫架構同步所需的更新。EF Core 會比較目前的模型與舊模型的快照集，以判斷差異，並產生遷移來源檔案;您可以在專案的原始檔控制中追蹤檔案，就像任何其他原始程式檔一樣。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-106">When a data model change is introduced, the developer uses EF Core tools to add a corresponding migration describing the updates necessary to keep the database schema in sync. EF Core compares the current model against a snapshot of the old model to determine the differences, and generates migration source files; the files can be tracked in your project's source control like any other source file.</span></span>
+* <span data-ttu-id="ba9fb-107">一旦產生新的遷移之後，就可以用各種方式將它套用到資料庫。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-107">Once a new migration has been generated, it can be applied to a database in various ways.</span></span> <span data-ttu-id="ba9fb-108">EF Core 會記錄特殊歷程記錄資料表中所有套用的遷移，讓 it 知道已套用但尚未套用的遷移。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-108">EF Core records all applied migrations in a special history table, allowing it to know which migrations have been applied and which haven't.</span></span>
 
-> [!TIP]
-> <span data-ttu-id="399f6-121">如果 `DbContext` 與啟始專案位於不同的組件中，您可以在[套件管理員主控台工具](xref:core/miscellaneous/cli/powershell#target-and-startup-project)或 [.NET Core CLI 工具](xref:core/miscellaneous/cli/dotnet#target-project-and-startup-project)中明確指定目標和啟始專案。</span><span class="sxs-lookup"><span data-stu-id="399f6-121">If the `DbContext` is in a different assembly than the startup project, you can explicitly specify the target and startup projects in either the [Package Manager Console tools](xref:core/miscellaneous/cli/powershell#target-and-startup-project) or the [.NET Core CLI tools](xref:core/miscellaneous/cli/dotnet#target-project-and-startup-project).</span></span>
+<span data-ttu-id="ba9fb-109">本頁面的其餘部分是使用遷移的逐步入門指南。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-109">The rest of this page is a step-by-step beginner's guide for using migrations.</span></span> <span data-ttu-id="ba9fb-110">如需更深入的資訊，請參閱本節中的其他頁面。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-110">Consult the other pages in this section for more in-depth information.</span></span>
 
-## <a name="install-the-tools"></a><span data-ttu-id="399f6-122">安裝工具</span><span class="sxs-lookup"><span data-stu-id="399f6-122">Install the tools</span></span>
+## <a name="getting-started"></a><span data-ttu-id="ba9fb-111">開始使用</span><span class="sxs-lookup"><span data-stu-id="ba9fb-111">Getting started</span></span>
 
-<span data-ttu-id="399f6-123">安裝[命令列工具](xref:core/miscellaneous/cli/index)：</span><span class="sxs-lookup"><span data-stu-id="399f6-123">Install the [command-line tools](xref:core/miscellaneous/cli/index):</span></span>
+<span data-ttu-id="ba9fb-112">假設您剛完成第一個 EF Core 應用程式，其中包含下列簡單的模型：</span><span class="sxs-lookup"><span data-stu-id="ba9fb-112">Let's assume you've just completed your first EF Core application, which contains the following simple model:</span></span>
 
-* <span data-ttu-id="399f6-124">針對 Visual Studio，我們建議使用[套件管理員主控台工具](xref:core/miscellaneous/cli/powershell)。</span><span class="sxs-lookup"><span data-stu-id="399f6-124">For Visual Studio, we recommend the [Package Manager Console tools](xref:core/miscellaneous/cli/powershell).</span></span>
-* <span data-ttu-id="399f6-125">針對其他開發環境，請選擇 [.NET Core CLI 工具](xref:core/miscellaneous/cli/dotnet)。</span><span class="sxs-lookup"><span data-stu-id="399f6-125">For other development environments, choose the [.NET Core CLI tools](xref:core/miscellaneous/cli/dotnet).</span></span>
+```c#
+public class Blog
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+```
 
-## <a name="create-a-migration"></a><span data-ttu-id="399f6-126">建立移轉</span><span class="sxs-lookup"><span data-stu-id="399f6-126">Create a migration</span></span>
+<span data-ttu-id="ba9fb-113">在開發期間，您可能已使用[建立和卸載 api](xref:core/managing-schemas/ensure-created)來快速反復執行，並視需要變更您的模型;但現在您的應用程式即將進入生產階段，您需要一種方法來安全地演進架構，而不需卸載整個資料庫。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-113">During development, you may have used the [Create and Drop APIs](xref:core/managing-schemas/ensure-created) to iterate quickly, changing your model as needed; but now that your application is going to production, you need a way to safely evolve the schema without dropping the entire database.</span></span>
 
-<span data-ttu-id="399f6-127">在您[定義起始模型](xref:core/modeling/index)之後，即可開始建立資料庫。</span><span class="sxs-lookup"><span data-stu-id="399f6-127">After you've [defined your initial model](xref:core/modeling/index), it's time to create the database.</span></span> <span data-ttu-id="399f6-128">若要新增初始移轉，請執行下列命令。</span><span class="sxs-lookup"><span data-stu-id="399f6-128">To add an initial migration, run the following command.</span></span>
+### <a name="install-the-tools"></a><span data-ttu-id="ba9fb-114">安裝工具</span><span class="sxs-lookup"><span data-stu-id="ba9fb-114">Install the tools</span></span>
 
-### <a name="net-core-cli"></a>[<span data-ttu-id="399f6-129">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="399f6-129">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
+<span data-ttu-id="ba9fb-115">首先，您必須安裝[EF Core 命令列工具](xref:core/miscellaneous/cli/index)：</span><span class="sxs-lookup"><span data-stu-id="ba9fb-115">First, you'll have to install the [EF Core command-line tools](xref:core/miscellaneous/cli/index):</span></span>
+
+* <span data-ttu-id="ba9fb-116">我們通常建議使用可在所有平臺上運作的[.NET Core CLI 工具](xref:core/miscellaneous/cli/dotnet)。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-116">We generally recommend using the [.NET Core CLI tools](xref:core/miscellaneous/cli/dotnet), which work on all platforms.</span></span>
+* <span data-ttu-id="ba9fb-117">如果您更熟悉 Visual Studio 或擁有 EF6 遷移的經驗，您也可以使用[套件管理員主控台工具](xref:core/miscellaneous/cli/powershell)。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-117">If you're more comfortable working inside Visual Studio or have experience with EF6 migrations, you can also use the [Package Manager Console tools](xref:core/miscellaneous/cli/powershell).</span></span>
+
+### <a name="create-your-first-migration"></a><span data-ttu-id="ba9fb-118">建立您的第一次遷移</span><span class="sxs-lookup"><span data-stu-id="ba9fb-118">Create your first migration</span></span>
+
+<span data-ttu-id="ba9fb-119">您現在已準備好加入您的第一次遷移！</span><span class="sxs-lookup"><span data-stu-id="ba9fb-119">You're now ready to add your first migration!</span></span> <span data-ttu-id="ba9fb-120">指示 EF Core 建立名為**InitialCreate**的遷移：</span><span class="sxs-lookup"><span data-stu-id="ba9fb-120">Instruct EF Core to create a migration named **InitialCreate**:</span></span>
+
+#### <a name="net-core-cli"></a>[<span data-ttu-id="ba9fb-121">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="ba9fb-121">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
 
 ```dotnetcli
 dotnet ef migrations add InitialCreate
 ```
 
-### <a name="visual-studio"></a>[<span data-ttu-id="399f6-130">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="399f6-130">Visual Studio</span></span>](#tab/vs)
+#### <a name="visual-studio"></a>[<span data-ttu-id="ba9fb-122">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="ba9fb-122">Visual Studio</span></span>](#tab/vs)
 
 ``` powershell
 Add-Migration InitialCreate
@@ -53,45 +61,18 @@ Add-Migration InitialCreate
 
 ***
 
-<span data-ttu-id="399f6-131">會新增三個檔案到您**移轉**目錄下的專案：</span><span class="sxs-lookup"><span data-stu-id="399f6-131">Three files are added to your project under the **Migrations** directory:</span></span>
+<span data-ttu-id="ba9fb-123">EF Core 會在專案中建立名為「**遷移**」的目錄，並產生一些檔案。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-123">EF Core will create a directory called **Migrations** in your project, and generate some files.</span></span> <span data-ttu-id="ba9fb-124">最好的做法是檢查產生的 EF Core，而且可能會修改它，但我們現在會跳過該程式。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-124">It's a good idea to inspect what exactly EF Core generated - and possibly amend it - but we'll skip over that for now.</span></span>
 
-* <span data-ttu-id="399f6-132">**XXXXXXXXXXXXXX_InitialCreate.cs** - 主要移轉檔案。</span><span class="sxs-lookup"><span data-stu-id="399f6-132">**XXXXXXXXXXXXXX_InitialCreate.cs**--The main migrations file.</span></span> <span data-ttu-id="399f6-133">包含套用移轉 (在 `Up()` 中) 及予以反轉 (在 `Down()` 中) 的必要作業。</span><span class="sxs-lookup"><span data-stu-id="399f6-133">Contains the operations necessary to apply the migration (in `Up()`) and to revert it (in `Down()`).</span></span>
-* <span data-ttu-id="399f6-134">**XXXXXXXXXXXXXX_InitialCreate.Designer.cs** - 移轉中繼資料檔案。</span><span class="sxs-lookup"><span data-stu-id="399f6-134">**XXXXXXXXXXXXXX_InitialCreate.Designer.cs**--The migrations metadata file.</span></span> <span data-ttu-id="399f6-135">包含 EF 使用的資訊。</span><span class="sxs-lookup"><span data-stu-id="399f6-135">Contains information used by EF.</span></span>
-* <span data-ttu-id="399f6-136">**MyContextModelSnapshot.cs** - 您目前模型的快照集。</span><span class="sxs-lookup"><span data-stu-id="399f6-136">**MyContextModelSnapshot.cs**--A snapshot of your current model.</span></span> <span data-ttu-id="399f6-137">用來決定新增下一個移轉時所要變更的項目。</span><span class="sxs-lookup"><span data-stu-id="399f6-137">Used to determine what changed when adding the next migration.</span></span>
+### <a name="create-your-database-and-schema"></a><span data-ttu-id="ba9fb-125">建立您的資料庫和架構</span><span class="sxs-lookup"><span data-stu-id="ba9fb-125">Create your database and schema</span></span>
 
-<span data-ttu-id="399f6-138">檔案名稱中的時間戳記有助於使其依時間先後順序排列，以便您查看變更的進展。</span><span class="sxs-lookup"><span data-stu-id="399f6-138">The timestamp in the filename helps keep them ordered chronologically so you can see the progression of changes.</span></span>
+<span data-ttu-id="ba9fb-126">此時，您可以讓 EF 建立您的資料庫，並從遷移建立您的架構。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-126">At this point you can have EF create your database and create your schema from the migration.</span></span> <span data-ttu-id="ba9fb-127">這可以透過下列方式來完成：</span><span class="sxs-lookup"><span data-stu-id="ba9fb-127">This can be done via the following:</span></span>
 
-### <a name="namespaces"></a><span data-ttu-id="399f6-139">命名空間</span><span class="sxs-lookup"><span data-stu-id="399f6-139">Namespaces</span></span>
-
-<span data-ttu-id="399f6-140">您可以自由地手動移動移轉檔案及變更其命名空間。</span><span class="sxs-lookup"><span data-stu-id="399f6-140">You are free to move Migrations files and change their namespace manually.</span></span> <span data-ttu-id="399f6-141">新的移轉會作為最後一個移轉的同層級建立。</span><span class="sxs-lookup"><span data-stu-id="399f6-141">New migrations are created as siblings of the last migration.</span></span>
-
-<span data-ttu-id="399f6-142">或者，您可以使用 `-Namespace` (套件管理員主控台) 或 `--namespace` (.NET Core CLI) 在產生時指定命名空間。</span><span class="sxs-lookup"><span data-stu-id="399f6-142">Alternatively you can use `-Namespace` (Package Manager Console) or `--namespace` (.NET Core CLI) to specify the namespace at generation time.</span></span>
-
-### <a name="net-core-cli"></a>[<span data-ttu-id="399f6-143">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="399f6-143">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
-
-```dotnetcli
-dotnet ef migrations add InitialCreate --namespace Your.Namespace
-```
-
-### <a name="visual-studio"></a>[<span data-ttu-id="399f6-144">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="399f6-144">Visual Studio</span></span>](#tab/vs)
-
-``` powershell
-Add-Migration InitialCreate -Namespace Your.Namespace
-```
-
-***
-
-## <a name="update-the-database"></a><span data-ttu-id="399f6-145">更新資料庫</span><span class="sxs-lookup"><span data-stu-id="399f6-145">Update the database</span></span>
-
-<span data-ttu-id="399f6-146">接下來，將移轉套用到資料庫以建立結構描述。</span><span class="sxs-lookup"><span data-stu-id="399f6-146">Next, apply the migration to the database to create the schema.</span></span>
-
-### <a name="net-core-cli"></a>[<span data-ttu-id="399f6-147">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="399f6-147">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
+#### <a name="net-core-cli"></a>[<span data-ttu-id="ba9fb-128">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="ba9fb-128">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
 
 ```dotnetcli
 dotnet ef database update
 ```
-
-### <a name="visual-studio"></a>[<span data-ttu-id="399f6-148">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="399f6-148">Visual Studio</span></span>](#tab/vs)
+#### <a name="visual-studio"></a>[<span data-ttu-id="ba9fb-129">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="ba9fb-129">Visual Studio</span></span>](#tab/vs)
 
 ``` powershell
 Update-Database
@@ -99,78 +80,49 @@ Update-Database
 
 ***
 
-## <a name="customize-migration-code"></a><span data-ttu-id="399f6-149">自訂移轉程式碼</span><span class="sxs-lookup"><span data-stu-id="399f6-149">Customize migration code</span></span>
+<span data-ttu-id="ba9fb-130">就是這麼簡單-您的應用程式已準備好在新的資料庫上執行，而且您不需要撰寫任何一行的 SQL。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-130">That's all there is to it - your application is ready to run on your new database, and you didn't need to write a single line of SQL.</span></span> <span data-ttu-id="ba9fb-131">請注意，這種套用遷移的方式適用于本機開發，但較不適合用于生產環境-如需詳細資訊，請參閱[應用程式遷移頁面](xref:core/managing-schemas/migrations/applying)。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-131">Note that this way of applying migrations is ideal for local development, but is less suitable for production environments - see the [Applying Migrations page](xref:core/managing-schemas/migrations/applying) for more info.</span></span>
 
-<span data-ttu-id="399f6-150">對您的 EF Core 模型進行變更後，資料庫結構描述會失去同步。若要將其更新為最新狀態，請新增另一個移轉。</span><span class="sxs-lookup"><span data-stu-id="399f6-150">After making changes to your EF Core model, the database schema might be out of sync. To bring it up to date, add another migration.</span></span> <span data-ttu-id="399f6-151">您能夠以類似版本控制系統中認可訊息的方式來使用移轉名稱。</span><span class="sxs-lookup"><span data-stu-id="399f6-151">The migration name can be used like a commit message in a version control system.</span></span> <span data-ttu-id="399f6-152">例如，如果變更是要檢閱的新實體類別，您可以選擇像是 AddProductReviews 的名稱。</span><span class="sxs-lookup"><span data-stu-id="399f6-152">For example, you might choose a name like *AddProductReviews* if the change is a new entity class for reviews.</span></span>
+### <a name="evolving-your-model"></a><span data-ttu-id="ba9fb-132">發展您的模型</span><span class="sxs-lookup"><span data-stu-id="ba9fb-132">Evolving your model</span></span>
 
-### <a name="net-core-cli"></a>[<span data-ttu-id="399f6-153">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="399f6-153">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
+<span data-ttu-id="ba9fb-133">經過幾天後，系統會要求您將建立時間戳記新增至您的 blog。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-133">A few days have passed, and you're asked to add a creation timestamp to your blogs.</span></span> <span data-ttu-id="ba9fb-134">您已完成對應用程式所做的必要變更，而您的模型現在看起來像這樣：</span><span class="sxs-lookup"><span data-stu-id="ba9fb-134">You've done the necessary changes to your application, and your model now looks like this:</span></span>
 
-```dotnetcli
-dotnet ef migrations add AddProductReviews
+```c#
+public class Blog
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public DateTime CreatedTimestamp { get; set; }
+}
 ```
 
-### <a name="visual-studio"></a>[<span data-ttu-id="399f6-154">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="399f6-154">Visual Studio</span></span>](#tab/vs)
+<span data-ttu-id="ba9fb-135">您的模型和生產資料庫現在已不同步-我們必須將新的資料行加入至您的資料庫架構。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-135">Your model and your production database are now out of sync - we must add a new column to your database schema.</span></span> <span data-ttu-id="ba9fb-136">讓我們為此建立新的遷移：</span><span class="sxs-lookup"><span data-stu-id="ba9fb-136">Let's create a new migration for this:</span></span>
+
+#### <a name="net-core-cli"></a>[<span data-ttu-id="ba9fb-137">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="ba9fb-137">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
+
+```dotnetcli
+dotnet ef migrations add AddBlogCreatedTimestamp
+```
+
+#### <a name="visual-studio"></a>[<span data-ttu-id="ba9fb-138">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="ba9fb-138">Visual Studio</span></span>](#tab/vs)
 
 ``` powershell
-Add-Migration AddProductReviews
+Add-Migration AddBlogCreatedTimestamp
 ```
 
 ***
 
-<span data-ttu-id="399f6-155">一旦建立移轉 (為其產生程式碼) 後，請檢閱程式碼的正確性，以及視需要新增、移除或修改任何作業，以便正確套用。</span><span class="sxs-lookup"><span data-stu-id="399f6-155">Once the migration is scaffolded (code generated for it), review the code for accuracy and add, remove or modify any operations required to apply it correctly.</span></span>
+<span data-ttu-id="ba9fb-139">請注意，我們會為遷移提供描述性的名稱，讓您稍後可以更輕鬆地瞭解專案歷程記錄。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-139">Note that we give migrations a descriptive name, to make it easier to understand the project history later.</span></span>
 
-<span data-ttu-id="399f6-156">例如，移轉可能包含下列作業：</span><span class="sxs-lookup"><span data-stu-id="399f6-156">For example, a migration might contain the following operations:</span></span>
+<span data-ttu-id="ba9fb-140">由於這不是專案的第一次遷移，因此在加入資料行之前，EF Core 現在會比較已更新的模型與舊模型的快照集;模型快照集是當您加入遷移時 EF Core 所產生的其中一個檔案，而且會簽入原始檔控制中。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-140">Since this isn't the project's first migration, EF Core now compares your updated model against a snapshot of the old model, before the column was added; the model snapshot is one of the files generated by EF Core when you add a migration, and is checked into source control.</span></span> <span data-ttu-id="ba9fb-141">根據該比較，EF Core 會偵測到已新增資料行，並新增適當的遷移。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-141">Based on that comparison, EF Core detects that a column has been added, and adds the appropriate migration.</span></span>
 
-``` csharp
-migrationBuilder.DropColumn(
-    name: "FirstName",
-    table: "Customer");
+<span data-ttu-id="ba9fb-142">您現在可以像之前一樣套用您的遷移：</span><span class="sxs-lookup"><span data-stu-id="ba9fb-142">You can now apply your migration as before:</span></span>
 
-migrationBuilder.DropColumn(
-    name: "LastName",
-    table: "Customer");
-
-migrationBuilder.AddColumn<string>(
-    name: "Name",
-    table: "Customer",
-    nullable: true);
-```
-
-<span data-ttu-id="399f6-157">雖然這些作業會使資料庫結構描述符合規範，但不會保存現有的客戶名稱。</span><span class="sxs-lookup"><span data-stu-id="399f6-157">While these operations make the database schema compatible, they don't preserve the existing customer names.</span></span> <span data-ttu-id="399f6-158">若要加以改善，請以下列格式重寫。</span><span class="sxs-lookup"><span data-stu-id="399f6-158">To make it better, rewrite it as follows.</span></span>
-
-``` csharp
-migrationBuilder.AddColumn<string>(
-    name: "Name",
-    table: "Customer",
-    nullable: true);
-
-migrationBuilder.Sql(
-@"
-    UPDATE Customer
-    SET Name = FirstName + ' ' + LastName;
-");
-
-migrationBuilder.DropColumn(
-    name: "FirstName",
-    table: "Customer");
-
-migrationBuilder.DropColumn(
-    name: "LastName",
-    table: "Customer");
-```
-
-> [!TIP]
-> <span data-ttu-id="399f6-159">當作業可能導致資料遺失時 (例如卸除資料行)，移轉建立程序會引發警告。</span><span class="sxs-lookup"><span data-stu-id="399f6-159">The migration scaffolding process warns when an operation might result in data loss (like dropping a column).</span></span> <span data-ttu-id="399f6-160">如果您看到該警告，請務必檢閱移轉程式碼的正確性。</span><span class="sxs-lookup"><span data-stu-id="399f6-160">If you see that warning, be especially sure to review the migrations code for accuracy.</span></span>
-
-<span data-ttu-id="399f6-161">使用適當的命令將移轉套用到資料庫。</span><span class="sxs-lookup"><span data-stu-id="399f6-161">Apply the migration to the database using the appropriate command.</span></span>
-
-### <a name="net-core-cli"></a>[<span data-ttu-id="399f6-162">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="399f6-162">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
+#### <a name="net-core-cli"></a>[<span data-ttu-id="ba9fb-143">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="ba9fb-143">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
 
 ```dotnetcli
 dotnet ef database update
 ```
-
-### <a name="visual-studio"></a>[<span data-ttu-id="399f6-163">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="399f6-163">Visual Studio</span></span>](#tab/vs)
+#### <a name="visual-studio"></a>[<span data-ttu-id="ba9fb-144">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="ba9fb-144">Visual Studio</span></span>](#tab/vs)
 
 ``` powershell
 Update-Database
@@ -178,123 +130,8 @@ Update-Database
 
 ***
 
-### <a name="empty-migrations"></a><span data-ttu-id="399f6-164">空白的移轉</span><span class="sxs-lookup"><span data-stu-id="399f6-164">Empty migrations</span></span>
+<span data-ttu-id="ba9fb-145">請注意，這次 EF 會偵測到資料庫已經存在。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-145">Note that this time, EF detects that the database already exists.</span></span> <span data-ttu-id="ba9fb-146">此外，當我們的第一次遷移已套用時，此事實會記錄在資料庫的特殊遷移歷程記錄資料表中;這可讓 EF 自動套用新的遷移。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-146">In addition, when our first migration was applied above, this fact was recorded in a special migrations history table in your database; this allows EF to automatically apply only the new migration.</span></span>
 
-<span data-ttu-id="399f6-165">新增移轉而不進行任何模型變更有時很實用。</span><span class="sxs-lookup"><span data-stu-id="399f6-165">Sometimes it's useful to add a migration without making any model changes.</span></span> <span data-ttu-id="399f6-166">在這種情況下，新增移轉會建立具有空白類別的程式碼檔案。</span><span class="sxs-lookup"><span data-stu-id="399f6-166">In this case, adding a new migration creates code files with empty classes.</span></span> <span data-ttu-id="399f6-167">您可以自訂此移轉來自訂未與 EF Core 模型直接相關的作業。</span><span class="sxs-lookup"><span data-stu-id="399f6-167">You can customize this migration to perform operations that don't directly relate to the EF Core model.</span></span> <span data-ttu-id="399f6-168">您可能會想要以這種方式處理的項目如下：</span><span class="sxs-lookup"><span data-stu-id="399f6-168">Some things you might want to manage this way are:</span></span>
+### <a name="next-steps"></a><span data-ttu-id="ba9fb-147">後續步驟</span><span class="sxs-lookup"><span data-stu-id="ba9fb-147">Next steps</span></span>
 
-* <span data-ttu-id="399f6-169">全文檢索搜尋</span><span class="sxs-lookup"><span data-stu-id="399f6-169">Full-Text Search</span></span>
-* <span data-ttu-id="399f6-170">函式</span><span class="sxs-lookup"><span data-stu-id="399f6-170">Functions</span></span>
-* <span data-ttu-id="399f6-171">預存程序</span><span class="sxs-lookup"><span data-stu-id="399f6-171">Stored procedures</span></span>
-* <span data-ttu-id="399f6-172">觸發程序</span><span class="sxs-lookup"><span data-stu-id="399f6-172">Triggers</span></span>
-* <span data-ttu-id="399f6-173">檢視</span><span class="sxs-lookup"><span data-stu-id="399f6-173">Views</span></span>
-
-## <a name="remove-a-migration"></a><span data-ttu-id="399f6-174">移除移轉</span><span class="sxs-lookup"><span data-stu-id="399f6-174">Remove a migration</span></span>
-
-<span data-ttu-id="399f6-175">在您新增移轉時，有時候會發現您必須在套用 EF Core 模型之前對其進行其他變更。</span><span class="sxs-lookup"><span data-stu-id="399f6-175">Sometimes you add a migration and realize you need to make additional changes to your EF Core model before applying it.</span></span> <span data-ttu-id="399f6-176">若要移除上一個移轉，請使用此命令。</span><span class="sxs-lookup"><span data-stu-id="399f6-176">To remove the last migration, use this command.</span></span>
-
-### <a name="net-core-cli"></a>[<span data-ttu-id="399f6-177">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="399f6-177">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
-
-```dotnetcli
-dotnet ef migrations remove
-```
-
-### <a name="visual-studio"></a>[<span data-ttu-id="399f6-178">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="399f6-178">Visual Studio</span></span>](#tab/vs)
-
-``` powershell
-Remove-Migration
-```
-
-***
-
-<span data-ttu-id="399f6-179">移除移轉後，您可以進行其他模型變更並再次予以新增。</span><span class="sxs-lookup"><span data-stu-id="399f6-179">After removing the migration, you can make the additional model changes and add it again.</span></span>
-
-## <a name="revert-a-migration"></a><span data-ttu-id="399f6-180">還原移轉</span><span class="sxs-lookup"><span data-stu-id="399f6-180">Revert a migration</span></span>
-
-<span data-ttu-id="399f6-181">若您已經套用移轉 (或多個移轉) 到資料庫但需要還原，您可以使用相同命令來套用移轉，但必須指定所要復原到的移轉名稱。</span><span class="sxs-lookup"><span data-stu-id="399f6-181">If you already applied a migration (or several migrations) to the database but need to revert it, you can use the same command to apply migrations, but specify the name of the migration you want to roll back to.</span></span>
-
-### <a name="net-core-cli"></a>[<span data-ttu-id="399f6-182">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="399f6-182">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
-
-```dotnetcli
-dotnet ef database update LastGoodMigration
-```
-
-### <a name="visual-studio"></a>[<span data-ttu-id="399f6-183">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="399f6-183">Visual Studio</span></span>](#tab/vs)
-
-``` powershell
-Update-Database LastGoodMigration
-```
-
-***
-
-## <a name="generate-sql-scripts"></a><span data-ttu-id="399f6-184">產生 SQL 指令碼</span><span class="sxs-lookup"><span data-stu-id="399f6-184">Generate SQL scripts</span></span>
-
-<span data-ttu-id="399f6-185">對移轉進行偵錯或將其部署到生產資料庫時，產生 SQL 指令碼很實用。</span><span class="sxs-lookup"><span data-stu-id="399f6-185">When debugging your migrations or deploying them to a production database, it's useful to generate a SQL script.</span></span> <span data-ttu-id="399f6-186">您可以進一步檢閱程式碼的精確度，並對其進行微調以符合生產資料庫的需求。</span><span class="sxs-lookup"><span data-stu-id="399f6-186">The script can then be further reviewed for accuracy and tuned to fit the needs of a production database.</span></span> <span data-ttu-id="399f6-187">指令碼也可以搭配部署技術使用。</span><span class="sxs-lookup"><span data-stu-id="399f6-187">The script can also be used in conjunction with a deployment technology.</span></span> <span data-ttu-id="399f6-188">基本命令如下。</span><span class="sxs-lookup"><span data-stu-id="399f6-188">The basic command is as follows.</span></span>
-
-### <a name="net-core-cli"></a>[<span data-ttu-id="399f6-189">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="399f6-189">.NET Core CLI</span></span>](#tab/dotnet-core-cli)
-
-#### <a name="basic-usage"></a><span data-ttu-id="399f6-190">基本使用方式</span><span class="sxs-lookup"><span data-stu-id="399f6-190">Basic Usage</span></span>
-```dotnetcli
-dotnet ef migrations script
-```
-
-#### <a name="with-from-to-implied"></a><span data-ttu-id="399f6-191">使用 From (隱含)</span><span class="sxs-lookup"><span data-stu-id="399f6-191">With From (to implied)</span></span>
-<span data-ttu-id="399f6-192">這會產生 SQL 指令碼，從此移轉到最新的移轉。</span><span class="sxs-lookup"><span data-stu-id="399f6-192">This will generate a SQL script from this migration to the latest migration.</span></span>
-```dotnetcli
-dotnet ef migrations script 20190725054716_Add_new_tables
-```
-
-#### <a name="with-from-and-to"></a><span data-ttu-id="399f6-193">使用 From 與 To</span><span class="sxs-lookup"><span data-stu-id="399f6-193">With From and To</span></span>
-<span data-ttu-id="399f6-194">這會產生 SQL 指令碼，從此 `from` 移轉到指定的 `to` 移轉。</span><span class="sxs-lookup"><span data-stu-id="399f6-194">This will generate a SQL script from the `from` migration to the specified `to` migration.</span></span>
-```dotnetcli
-dotnet ef migrations script 20190725054716_Add_new_tables 20190829031257_Add_audit_table
-```
-<span data-ttu-id="399f6-195">您可以使用比 `to` 新的 `from` 來產生復原指令碼。</span><span class="sxs-lookup"><span data-stu-id="399f6-195">You can use a `from` that is newer than the `to` in order to generate a rollback script.</span></span> <span data-ttu-id="399f6-196">*請注意，可能會發生資料遺失的狀況。*</span><span class="sxs-lookup"><span data-stu-id="399f6-196">*Please take note of potential data loss scenarios.*</span></span>
-
-### <a name="visual-studio"></a>[<span data-ttu-id="399f6-197">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="399f6-197">Visual Studio</span></span>](#tab/vs)
-
-#### <a name="basic-usage"></a><span data-ttu-id="399f6-198">基本使用方式</span><span class="sxs-lookup"><span data-stu-id="399f6-198">Basic Usage</span></span>
-``` powershell
-Script-Migration
-```
-
-#### <a name="with-from-to-implied"></a><span data-ttu-id="399f6-199">使用 From (隱含)</span><span class="sxs-lookup"><span data-stu-id="399f6-199">With From (to implied)</span></span>
-<span data-ttu-id="399f6-200">這會產生 SQL 指令碼，從此移轉到最新的移轉。</span><span class="sxs-lookup"><span data-stu-id="399f6-200">This will generate a SQL script from this migration to the latest migration.</span></span>
-```powershell
-Script-Migration 20190725054716_Add_new_tables
-```
-
-#### <a name="with-from-and-to"></a><span data-ttu-id="399f6-201">使用 From 與 To</span><span class="sxs-lookup"><span data-stu-id="399f6-201">With From and To</span></span>
-<span data-ttu-id="399f6-202">這會產生 SQL 指令碼，從此 `from` 移轉到指定的 `to` 移轉。</span><span class="sxs-lookup"><span data-stu-id="399f6-202">This will generate a SQL script from the `from` migration to the specified `to` migration.</span></span>
-```powershell
-Script-Migration 20190725054716_Add_new_tables 20190829031257_Add_audit_table
-```
-<span data-ttu-id="399f6-203">您可以使用比 `to` 新的 `from` 來產生復原指令碼。</span><span class="sxs-lookup"><span data-stu-id="399f6-203">You can use a `from` that is newer than the `to` in order to generate a rollback script.</span></span> <span data-ttu-id="399f6-204">*請注意，可能會發生資料遺失的狀況。*</span><span class="sxs-lookup"><span data-stu-id="399f6-204">*Please take note of potential data loss scenarios.*</span></span>
-
-***
-
-<span data-ttu-id="399f6-205">這個命令有多個選項。</span><span class="sxs-lookup"><span data-stu-id="399f6-205">There are several options to this command.</span></span>
-
-<span data-ttu-id="399f6-206">執行指令碼之前，**from** 移轉應該是套用到資料庫的最後一個移轉。</span><span class="sxs-lookup"><span data-stu-id="399f6-206">The **from** migration should be the last migration applied to the database before running the script.</span></span> <span data-ttu-id="399f6-207">若未套用任何移轉，請指定 `0` (此為預設)。</span><span class="sxs-lookup"><span data-stu-id="399f6-207">If no migrations have been applied, specify `0` (this is the default).</span></span>
-
-<span data-ttu-id="399f6-208">執行指令碼之後，**to** 移轉是套用到資料庫的最後一個移轉。</span><span class="sxs-lookup"><span data-stu-id="399f6-208">The **to** migration is the last migration that will be applied to the database after running the script.</span></span> <span data-ttu-id="399f6-209">預設為您專案中的最後一個移轉。</span><span class="sxs-lookup"><span data-stu-id="399f6-209">This defaults to the last migration in your project.</span></span>
-
-<span data-ttu-id="399f6-210">您可以選擇產生**等冪**指令碼。</span><span class="sxs-lookup"><span data-stu-id="399f6-210">An **idempotent** script can optionally be generated.</span></span> <span data-ttu-id="399f6-211">當移轉尚未套用到資料庫時，此指令碼才適用於移轉。</span><span class="sxs-lookup"><span data-stu-id="399f6-211">This script only applies migrations if they haven't already been applied to the database.</span></span> <span data-ttu-id="399f6-212">當您不確定套用到資料庫的上一個移轉是哪項，或是要部署到可能在不同移轉的多個資料庫時，這個方法很實用。</span><span class="sxs-lookup"><span data-stu-id="399f6-212">This is useful if you don't exactly know what the last migration applied to the database was or if you are deploying to multiple databases that may each be at a different migration.</span></span>
-
-## <a name="apply-migrations-at-runtime"></a><span data-ttu-id="399f6-213">在執行階段套用移轉</span><span class="sxs-lookup"><span data-stu-id="399f6-213">Apply migrations at runtime</span></span>
-
-<span data-ttu-id="399f6-214">某些應用程式在啟動或初次執行期間，可能會想要在執行階段套用移轉。</span><span class="sxs-lookup"><span data-stu-id="399f6-214">Some apps may want to apply migrations at runtime during startup or first run.</span></span> <span data-ttu-id="399f6-215">請使用 `Migrate()` 方法來執行此動作。</span><span class="sxs-lookup"><span data-stu-id="399f6-215">Do this using the `Migrate()` method.</span></span>
-
-<span data-ttu-id="399f6-216">此方法的基礎建立在 `IMigrator` 服務之上，其可用於更進階的案例。</span><span class="sxs-lookup"><span data-stu-id="399f6-216">This method builds on top of the `IMigrator` service, which can be used for more advanced scenarios.</span></span> <span data-ttu-id="399f6-217">您可以使用 `myDbContext.GetInfrastructure().GetService<IMigrator>()` 來加以存取。</span><span class="sxs-lookup"><span data-stu-id="399f6-217">Use `myDbContext.GetInfrastructure().GetService<IMigrator>()` to access it.</span></span>
-
-``` csharp
-myDbContext.Database.Migrate();
-```
-
-> [!WARNING]
->
-> * <span data-ttu-id="399f6-218">並非所有應用程式都適合此方法。</span><span class="sxs-lookup"><span data-stu-id="399f6-218">This approach isn't for everyone.</span></span> <span data-ttu-id="399f6-219">雖然這相當適合具本機資料庫的應用程式，但大多數應用程式會需要更強固的部署策略，例如產生 SQL 指令碼。</span><span class="sxs-lookup"><span data-stu-id="399f6-219">While it's great for apps with a local database, most applications will require more robust deployment strategy like generating SQL scripts.</span></span>
-> * <span data-ttu-id="399f6-220">請勿在 `Migrate()` 之前呼叫 `EnsureCreated()`。</span><span class="sxs-lookup"><span data-stu-id="399f6-220">Don't call `EnsureCreated()` before `Migrate()`.</span></span> <span data-ttu-id="399f6-221">`EnsureCreated()` 會略過移轉而建立結構描述，因此造成 `Migrate()` 失敗。</span><span class="sxs-lookup"><span data-stu-id="399f6-221">`EnsureCreated()` bypasses Migrations to create the schema, which causes `Migrate()` to fail.</span></span>
-
-## <a name="next-steps"></a><span data-ttu-id="399f6-222">後續步驟</span><span class="sxs-lookup"><span data-stu-id="399f6-222">Next steps</span></span>
-
-<span data-ttu-id="399f6-223">如需詳細資訊，請參閱<xref:core/miscellaneous/cli/index>。</span><span class="sxs-lookup"><span data-stu-id="399f6-223">For more information, see <xref:core/miscellaneous/cli/index>.</span></span>
+<span data-ttu-id="ba9fb-148">以上只是簡單的遷移簡介。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-148">The above was only a brief introduction to migrations.</span></span> <span data-ttu-id="ba9fb-149">請參閱其他檔頁面，以深入瞭解如何[管理遷移](xref:core/managing-schemas/migrations/managing)、套用[它們](xref:core/managing-schemas/migrations/applying)和其他層面。</span><span class="sxs-lookup"><span data-stu-id="ba9fb-149">Please consult the other documentation pages to learn more about [managing migrations](xref:core/managing-schemas/migrations/managing), [applying them](xref:core/managing-schemas/migrations/applying), and other aspects.</span></span> <span data-ttu-id="ba9fb-150">[.NET Core CLI 工具參考](xref:core/miscellaneous/cli/index)也包含不同命令的實用資訊</span><span class="sxs-lookup"><span data-stu-id="ba9fb-150">The [.NET Core CLI tool reference](xref:core/miscellaneous/cli/index) also contains useful information on the different commands</span></span>
