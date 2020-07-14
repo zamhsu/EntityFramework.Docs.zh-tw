@@ -144,6 +144,10 @@
               items:
                 - name: 總覽
                   href: core/managing-schemas/migrations/index.md
+                - name: 管理移轉
+                  href: core/managing-schemas/migrations/managing.md
+                - name: 套用移轉
+                  href: core/managing-schemas/migrations/applying.md
                 - name: Team 環境
                   href: core/managing-schemas/migrations/teams.md
                 - name: 自訂作業
