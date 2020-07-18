@@ -1,15 +1,15 @@
 ---
 title: SQLite 資料庫提供者-限制-EF Core
-author: rowanmiller
-ms.date: 04/09/2017
+author: bricelam
+ms.date: 07/16/2020
 ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: 17e97da9dfffefeb507fde744b710e6936bff69b
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 393f5e80ce2e11dcb11c2048e06effa27e48dc13
+ms.sourcegitcommit: d85263b5d5d665dbaf94de8832e2917bce048b34
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672783"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86451225"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>SQLite EF Core 資料庫提供者限制
 
@@ -45,34 +45,36 @@ modelBuilder.Entity<MyEntity>()
 
 SQLite 資料庫引擎不支援大多數其他關係資料庫所支援的許多架構作業。 如果您嘗試將其中一個不支援的作業套用至 SQLite 資料庫， `NotSupportedException` 將會擲回。
 
-| 作業            | 是否支援？ | 需要版本 |
-|:---------------------|:-----------|:-----------------|
-| AddColumn            | ✔          | 1.0              |
-| AddForeignKey        | ✗          |                  |
-| AddPrimaryKey        | ✗          |                  |
-| AddUniqueConstraint  | ✗          |                  |
-| AlterColumn          | ✗          |                  |
-| CreateIndex          | ✔          | 1.0              |
-| CreateTable          | ✔          | 1.0              |
-| DropColumn           | ✗          |                  |
-| DropForeignKey       | ✗          |                  |
-| DropIndex            | ✔          | 1.0              |
-| DropPrimaryKey       | ✗          |                  |
-| DropTable            | ✔          | 1.0              |
-| DropUniqueConstraint | ✗          |                  |
-| RenameColumn         | ✔          | 2.2.2            |
-| RenameIndex          | ✔          | 2.1              |
-| RenameTable          | ✔          | 1.0              |
-| EnsureSchema         | ✔（無 op）  | 2.0              |
-| DropSchema           | ✔（無 op）  | 2.0              |
-| 插入               | ✔          | 2.0              |
-| 更新               | ✔          | 2.0              |
-| 刪除               | ✔          | 2.0              |
+系統會嘗試重建，以便執行特定作業。 只有屬於 EF Core 模型之一部分的資料庫成品才可以重建。 如果資料庫成品不是模型的一部分（例如，它是在遷移內手動建立的），則仍會擲回 `NotSupportedException` 。
+
+| 作業            | 是否支援？  | 需要版本 |
+|:---------------------|:------------|:-----------------|
+| AddCheckConstraint   | ✔（重建） | 5.0              |
+| AddColumn            | ✔           | 1.0              |
+| AddForeignKey        | ✔（重建） | 5.0              |
+| AddPrimaryKey        | ✔（重建） | 5.0              |
+| AddUniqueConstraint  | ✔（重建） | 5.0              |
+| AlterColumn          | ✔（重建） | 5.0              |
+| CreateIndex          | ✔           | 1.0              |
+| CreateTable          | ✔           | 1.0              |
+| DropCheckConstraint  | ✔（重建） | 5.0              |
+| DropColumn           | ✔（重建） | 5.0              |
+| DropForeignKey       | ✔（重建） | 5.0              |
+| DropIndex            | ✔           | 1.0              |
+| DropPrimaryKey       | ✔（重建） | 5.0              |
+| DropTable            | ✔           | 1.0              |
+| DropUniqueConstraint | ✔（重建） | 5.0              |
+| RenameColumn         | ✔           | 2.2.2            |
+| RenameIndex          | ✔（重建） | 2.1              |
+| RenameTable          | ✔           | 1.0              |
+| EnsureSchema         | ✔（無 op）   | 2.0              |
+| DropSchema           | ✔（無 op）   | 2.0              |
+| 插入               | ✔           | 2.0              |
+| 更新               | ✔           | 2.0              |
+| 刪除               | ✔           | 2.0              |
 
 ## <a name="migrations-limitations-workaround"></a>遷移限制解決方法
 
-您可以藉由在您的遷移中手動撰寫程式碼來執行資料表重建，以解決其中一些限制。 重建資料表需要重新命名現有的資料表、建立新的資料表、將資料複製到新的資料表，以及卸除舊的資料表。 您將需要使用 `Sql(string)` 方法來執行其中一些步驟。
+您可以藉由在您的遷移中手動撰寫程式碼來執行重建，以解決其中一些限制。 資料表重建牽涉到建立新的資料表、將資料複製到新的資料表、卸載舊的資料表、重新命名新的資料表。 您將需要使用 `Sql(string)` 方法來執行其中一些步驟。
 
 如需詳細資訊，請參閱 SQLite 檔中的[建立其他類型的資料表架構變更](https://sqlite.org/lang_altertable.html#otheralter)。
-
-在未來，EF 可能會使用部分的資料表重建方法來支援其中某些作業。 您可以[在我們的 GitHub 專案上追蹤這項功能](https://github.com/aspnet/EntityFrameworkCore/issues/329)。
