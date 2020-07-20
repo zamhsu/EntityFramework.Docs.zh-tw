@@ -65,6 +65,8 @@
               href: core/get-started/install/index.md
             - name: ASP.NET Core 教學課程 >>
               href: /aspnet/core/data/ef-rp/intro
+            - name: Xamarin 教學課程
+              href: core/get-started/xamarin.md
         - name: 基礎
           items:
             - name: 連接字串
