@@ -4,16 +4,16 @@ author: roji
 ms.date: 09/09/2019
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: c16a475c363320cd18804a4efe78ccae1ae22f0d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 3acd446d64a94ffecb12c181e3910528d2293448
+ms.sourcegitcommit: 51148929e3889c48227d96c95c4e310d53a3d2c9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416652"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86873353"
 ---
 # <a name="working-with-nullable-reference-types"></a>使用可為 Null 的參考型別
 
-C#8引進了一個稱為[nullable 參考型別](/dotnet/csharp/tutorials/nullable-reference-types)的新功能，允許標注參考型別，指出其是否有效，以包含 null。 如果您是這項功能的新手，建議您閱讀C#檔，讓自己熟悉它。
+C # 8 引進了一個稱為[nullable 參考型別](/dotnet/csharp/tutorials/nullable-reference-types)的新功能，可讓參考型別具有批註，指出其是否有效包含 null。 如果您是這項功能的新手，建議您閱讀 c # 檔，讓自己熟悉它。
 
 本頁面介紹可為 null 參考型別的 EF Core 支援，並說明使用它們的最佳作法。
 
@@ -26,7 +26,7 @@ C#8引進了一個稱為[nullable 參考型別](/dotnet/csharp/tutorials/nullabl
 
 ## <a name="dbcontext-and-dbset"></a>DbCoNtext 和 DbSet
 
-當可為 null 的參考型別啟用C#時，編譯器會針對任何未初始化的不可為 null 屬性發出警告，因為這會包含 null。 因此，在內容上定義不可為 null `DbSet` 的常見作法，現在會產生警告。 不過，EF Core 一律會初始化 DbCoNtext 衍生類型上的所有 `DbSet` 屬性，因此即使編譯器不知道這一點，也一定會是 null。 因此，建議您將 `DbSet` 屬性保持為不可為 null-可讓您在沒有 null 檢查的情況下存取它們，並藉由使用 null 容許運算子（！）的協助明確將其設定為 null，以回應編譯器警告：
+當可為 null 的參考型別啟用時，c # 編譯器會針對任何未初始化的不可為 null 屬性發出警告，因為這會包含 null。 因此，在內容類型上具有未初始化 DbSet 屬性的常見作法，現在會產生警告。 若要修正此問題，請將您的 DbSet 屬性設為唯讀，並將其初始化，如下所示：
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/NullableReferenceTypesContext.cs?name=Context&highlight=3-4)]
 
@@ -40,7 +40,7 @@ C#8引進了一個稱為[nullable 參考型別](/dotnet/csharp/tutorials/nullabl
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Order.cs?range=10-17)]
 
-由於導覽屬性不可為 null，因此會設定必要的導覽;而且只要正確載入導覽，就可以透過屬性存取相依性。 不過，如果在沒有第一次正確載入相關實體的情況下存取屬性，則會擲回 InvalidOperationException，因為 API 合約的使用不正確。 請注意，EF 必須設定為一律存取支援欄位，而不是屬性，因為它依賴能夠讀取值，即使未設定也是如此。請參閱[支援欄位](xref:core/modeling/backing-field)上的檔，以瞭解如何執行此操作，並考慮指定 `PropertyAccessMode.Field` 以確保設定正確。
+由於導覽屬性不可為 null，因此會設定必要的導覽;而且只要正確載入導覽，就可以透過屬性存取相依性。 不過，如果在沒有第一次正確載入相關實體的情況下存取屬性，則會擲回 InvalidOperationException，因為 API 合約的使用不正確。 請注意，EF 必須設定為一律存取支援欄位，而不是屬性，因為它依賴能夠讀取值，即使未設定也是如此。請參閱有關如何執行此操作的[支援欄位](xref:core/modeling/backing-field)檔，並考慮指定 `PropertyAccessMode.Field` 以確保設定正確。
 
 做為 terser 的替代方案，您可以使用 null 容許運算子（！）的協助，將屬性初始化為 null：
 
@@ -65,5 +65,5 @@ C#8引進了一個稱為[nullable 參考型別](/dotnet/csharp/tutorials/nullabl
 
 ## <a name="limitations"></a>限制
 
-* 反向工程目前不支援[ C# 8 個可為 null 的參考型別（NRTs）](/dotnet/csharp/tutorials/nullable-reference-types)： C# EF Core 一律會產生假設此功能已關閉的程式碼。 例如，可為 null 的文字資料行將會 scaffold 為具有類型 `string` 的屬性，而不是 `string?`，其中包含用來設定是否需要屬性的流暢 API 或資料批註。 您可以編輯 scaffold 程式碼，並將其C#取代為 null 屬性注釋。 由問題[#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)追蹤可為 null 之參考型別的樣板支援。
+* 反向工程目前不支援[c # 8 可為 null 的參考型別（NRTs）](/dotnet/csharp/tutorials/nullable-reference-types)： EF Core 一律會產生 c # 程式碼，其假設此功能已關閉。 例如，可為 null 的文字資料行將會 scaffold 為具有類型的屬性，而不是用 `string` `string?` 來設定是否需要屬性的流暢 API 或資料批註。 您可以編輯 scaffold 程式碼，並將其取代為 c # null 屬性注釋。 由問題[#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)追蹤可為 null 之參考型別的樣板支援。
 * EF Core 的公用 API 介面尚未標注 null 屬性（公用 API 是 "null-遺忘式"），因此在開啟 NRT 功能時，有時會很難使用。 這值得注意的是，EF Core 所公開的非同步 LINQ 運算子，例如[FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_)。 我們計畫在5.0 版本中解決此情況。

@@ -2,14 +2,14 @@
 title: 5.0 EF Core 的新功能
 description: EF Core 5.0 中的新功能總覽
 author: ajcvickers
-ms.date: 06/02/2020
+ms.date: 07/20/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: 304ed74fe344b43177525113c70b7be7bb0ac5ed
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: d42b2811d07516e9febedbc51fcb206000d38371
+ms.sourcegitcommit: 51148929e3889c48227d96c95c4e310d53a3d2c9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238329"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86873379"
 ---
 # <a name="whats-new-in-ef-core-50"></a>5.0 EF Core 的新功能
 
@@ -18,6 +18,148 @@ EF Core 5.0 目前正在開發中。 此頁面將包含每個預覽中所引進�
 此頁面不會複製[EF Core 5.0 的計畫](xref:core/what-is-new/ef-core-5.0/plan)。 此計畫描述 EF Core 5.0 的整體主題，包括我們打算在交付最終版本之前包含的所有專案。
 
 我們會將這裡的連結新增至正式檔，因為它已發佈。
+
+## <a name="preview-7"></a>Preview 7
+
+### <a name="dbcontextfactory"></a>DbCoNtextFactory
+
+EF Core 5.0 引進 `AddDbContextFactory` 並 `AddPooledDbContextFactory` 註冊 factory，以便在應用程式的相依性插入（D.I.）容器中建立 DbCoNtext 實例。 例如：
+
+```csharp
+services.AddDbContextFactory<SomeDbContext>(b =>
+    b.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Test"));
+```
+
+然後，ASP.NET Core 控制器之類的應用程式服務就可以依賴 `IDbContextFactory<TContext>` 服務的函式。 例如：
+
+```csharp
+public class MyController
+{
+    private readonly IDbContextFactory<SomeDbContext> _contextFactory;
+
+    public MyController(IDbContextFactory<SomeDbContext> contextFactory)
+    {
+        _contextFactory = contextFactory;
+    }
+}
+```
+
+然後可以視需要建立和使用 DbCoNtext 實例。 例如：
+
+```csharp
+public void DoSomehing()
+{
+    using (var context = _contextFactory.CreateDbContext())
+    {
+        // ...            
+    }
+}
+```
+
+請注意，以這種方式建立的 DbCoNtext 實例_不_會由應用程式的服務提供者管理，因此必須由應用程式處置。 這種分離功能對於 Blazor 應用程式非常有用，其中 `IDbContextFactory` 建議使用，但在其他情況下也很有用。
+
+DbCoNtext 實例可以藉由呼叫來集區 `AddPooledDbContextFactory` 。 這個共用的運作方式與相同 `AddDbContextPool` ，而且也具有相同的限制。
+
+檔是由問題[#2523](https://github.com/dotnet/EntityFramework.Docs/issues/2523)追蹤。
+
+### <a name="reset-dbcontext-state"></a>重設 DbCoNtext 狀態
+
+EF Core 5.0 引進了 `ChangeTracker.Clear()` ，其會清除所有追蹤實體的 DbCoNtext。 當您使用最佳作法來建立每個工作單位的新短期內容實例時，通常不需要這樣做。 不過，如果需要重設 DbCoNtext 實例的狀態，則使用新的 `Clear()` 方法比大量卸離所有實體更具效能且穩定。  
+
+檔是由問題[#2524](https://github.com/dotnet/EntityFramework.Docs/issues/2524)追蹤。
+
+### <a name="new-pattern-for-store-generated-defaults"></a>存放區產生之預設值的新模式
+
+EF Core 允許針對可能也有預設值條件約束的資料行設定明確的值。 EF Core 使用 type 屬性類型的 CLR 預設值做為此的 sentinel;如果該值不是 CLR 預設值，則會插入它，否則會使用資料庫預設。
+
+這會為 CLR 預設不是良好 sentinel 的類型（最值得注意的屬性）產生問題 `bool` 。 EF Core 5.0 現在允許在這類情況下，支援欄位可為 null。 例如：
+
+```csharp
+public class Blog
+{
+    private bool? _isValid;
+
+    public bool IsValid
+    {
+        get => _isValid ?? false;
+        set => _isValid = value;
+    }
+}
+```
+
+請注意，支援欄位可為 null，但公開的屬性不是。 這可讓 sentinel 值不會 `null` 影響實體類型的公用介面。 在此情況下，如果 `IsValid` 從未設定，則會使用資料庫預設值，因為支援欄位仍然是 null。 如果 `true` `false` 設定了或，則此值會明確儲存到資料庫中。
+
+檔是由問題[#2525](https://github.com/dotnet/EntityFramework.Docs/issues/2525)追蹤。
+
+### <a name="cosmos-partition-keys"></a>Cosmos 分割區索引鍵
+
+EF Core 允許在 EF 模型中包含 Cosmos 分割區索引鍵。 例如：
+
+```csharp
+modelBuilder.Entity<Customer>().HasPartitionKey(b => b.AlternateKey)
+```
+
+從 preview 7 開始，資料分割索引鍵會包含在實體類型的 PK 中，並在某些查詢中用來改善效能。
+
+檔是由問題[#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471)追蹤。
+
+### <a name="cosmos-configuration"></a>Cosmos 設定
+
+EF Core 5.0 會改善 Cosmos 和 Cosmos 連接的設定。
+
+在過去，EF Core 需要在連接到 Cosmos 資料庫時明確指定端點和金鑰。 EF Core 5.0 允許改用連接字串。 此外，EF Core 5.0 允許明確設定 WebProxy 實例。 例如：
+
+```csharp
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .UseCosmos("my-cosmos-connection-string", "MyDb",
+            cosmosOptionsBuilder =>
+            {
+                cosmosOptionsBuilder.WebProxy(myProxyInstance);
+            });
+```
+
+現在也可以設定許多其他的超時值、限制等等。 例如：
+
+```csharp
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .UseCosmos("my-cosmos-connection-string", "MyDb",
+            cosmosOptionsBuilder =>
+            {
+                cosmosOptionsBuilder.LimitToEndpoint();
+                cosmosOptionsBuilder.RequestTimeout(requestTimeout);
+                cosmosOptionsBuilder.OpenTcpConnectionTimeout(timeout);
+                cosmosOptionsBuilder.IdleTcpConnectionTimeout(timeout);
+                cosmosOptionsBuilder.GatewayModeMaxConnectionLimit(connectionLimit);
+                cosmosOptionsBuilder.MaxTcpConnectionsPerEndpoint(connectionLimit);
+                cosmosOptionsBuilder.MaxRequestsPerTcpConnection(requestLimit);
+            });
+```
+
+最後，預設的連接模式現在是 `ConnectionMode.Gateway` 較相容的。
+
+檔是由問題[#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471)追蹤。
+
+### <a name="scaffold-dbcontext-now-singularizes"></a>Scaffold-DbCoNtext now singularizes
+
+先前，當樣板從現有的資料庫 DbCoNtext 時，EF Core 將會建立符合資料庫中資料表名稱的實體類型名稱。 例如，資料表 `People` 和會 `Addresses` 產生名為和的實體類型 `People` `Addresses` 。
+
+在先前的版本中，此行為可透過註冊複數表示服務來設定。 現在在 EF Core 5.0 中，會使用[Humanizer](https://www.nuget.org/packages/Humanizer.Core/)套件做為預設複數表示服務。 這表示資料表 `People` 和 `Addresses` 現在會針對名為和的實體類型進行反向工程 `Person` `Address` 。
+
+### <a name="savepoints"></a>保存
+
+EF Core 現在支援儲存[點](/SQL/t-sql/language-elements/save-transaction-transact-sql?view=sql-server-ver15#remarks)，以進一步控制執行多項作業的交易。
+
+儲存點可以手動建立、釋放和復原。 例如：
+
+```csharp
+context.Database.CreateSavepoint("MySavePoint"); 
+```
+
+此外，在執行失敗時，EF Core 現在會回復為最後一個儲存點 `SaveChanges` 。 這可讓 SaveChanges 重新嘗試，而不需要重新嘗試整個交易。
+
+檔是由問題[#2429](https://github.com/dotnet/EntityFramework.Docs/issues/2429)追蹤。
 
 ## <a name="preview-6"></a>Preview 6
 
@@ -170,7 +312,7 @@ var artists = context.Artists.Where(e => e.IsSigned).ToList();
 
 EF Core 將會擲回下列例外狀況，指出轉譯失敗，因為未 `IsSigned` 對應：
 
-> 未處理的例外狀況。 InvalidOperationException： LINQ 運算式 ' DbSet <Artist> ( # A2。其中 (a => IsSigned) ' 無法轉譯。 其他資訊：實體類型 ' 演出者 ' 上成員 ' IsSigned ' 的轉譯失敗。 可能是指定的成員未對應。 請以可翻譯的形式重寫查詢，或將呼叫插入 Enumerable.asenumerable ( # A1、AsAsyncEnumerable ( # A3、ToList ( # A5 或 ToListAsync ( # A7，以明確地切換至用戶端評估。 如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2101038 。
+> 未處理的例外狀況。 InvalidOperationException： LINQ 運算式的 DbSet <Artist> （）。Where （a => IsSigned） ' 無法轉譯。 其他資訊：實體類型 ' 演出者 ' 上成員 ' IsSigned ' 的轉譯失敗。 可能是指定的成員未對應。 請以可翻譯的形式重寫查詢，或將呼叫插入 Enumerable.asenumerable （）、AsAsyncEnumerable （）、ToList （）或 ToListAsync （），以明確地切換至用戶端評估。 如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2101038 。
 
 同樣地，當嘗試使用與文化特性相關的語義來轉譯字串比較時，現在會產生更好的例外狀況訊息。 例如，此查詢會嘗試使用 `StringComparison.CurrentCulture` ：
 
@@ -182,7 +324,7 @@ var artists = context.Artists
 
 EF Core 現在會擲回下列例外狀況：
 
-> 未處理的例外狀況。 InvalidOperationException： LINQ 運算式 ' DbSet <Artist> ( # A2。其中 (a =>. Name. Equals ( 值： "獨角獸"，comparisonType： CurrentCulture) # A6 ' 無法轉譯。 其他資訊： ' string ' 的轉譯。不支援採用 ' StringComparison ' 引數的 Equals ' 方法。 如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2129535 。 請以可翻譯的形式重寫查詢，或將呼叫插入 Enumerable.asenumerable ( # A1、AsAsyncEnumerable ( # A3、ToList ( # A5 或 ToListAsync ( # A7，以明確地切換至用戶端評估。 如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2101038 。
+> 未處理的例外狀況。 InvalidOperationException： LINQ 運算式的 DbSet <Artist> （）。其中（a =>. Name. Equals （值： "the 獨角獸"，comparisonType： CurrentCulture）） ' 無法轉譯。 其他資訊： ' string ' 的轉譯。不支援採用 ' StringComparison ' 引數的 Equals ' 方法。 如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2129535 。 請以可翻譯的形式重寫查詢，或將呼叫插入 Enumerable.asenumerable （）、AsAsyncEnumerable （）、ToList （）或 ToListAsync （），以明確地切換至用戶端評估。 如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2101038 。
 
 ### <a name="specify-transaction-id"></a>指定交易識別碼
 
@@ -361,7 +503,7 @@ WHERE [u].[Name] COLLATE French_CI_AS = N'Jean-Michel Jarre'
 
 ### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a>IDesignTimeDbCoNtextFactory 中的流程引數
 
-引數現在會從命令列流動到 `CreateDbContext` [IDesignTimeDbCoNtextFactory](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1)的方法中。 例如，若要指出這是開發組建， `dev` 可以在命令列上傳遞自訂引數 (例如) ：
+引數現在會從命令列流動到 `CreateDbContext` [IDesignTimeDbCoNtextFactory](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1)的方法中。 例如，若要指出這是開發組建， `dev` 可以在命令列上傳遞自訂引數（例如）：
 
 ```
 dotnet ef migrations add two --verbose --dev
@@ -397,7 +539,7 @@ context.Posts.AsNoTracking().PerformIdentityResolution().Include(e => e.Blog).To
 
 檔是由問題[#1895](https://github.com/dotnet/EntityFramework.Docs/issues/1895)追蹤。
 
-### <a name="stored-persisted-computed-columns"></a>儲存的 (保存) 計算資料行
+### <a name="stored-persisted-computed-columns"></a>儲存的（保存）計算資料行
 
 大部分的資料庫都允許在計算後儲存計算的資料行值。 雖然這會佔用磁碟空間，但計算的資料行只會在 update 上計算一次，而不是每次抓取它的值。 這也可讓某些資料庫的資料行編制索引。
 
@@ -427,7 +569,7 @@ modelBuilder
     .HasPrecision(16, 4);
 ```
 
-精確度和小數位數仍然可以透過完整資料庫類型來設定，例如 "decimal (16，4) "。 
+精確度和小數位數仍然可以透過完整資料庫類型來設定，例如 "decimal （16，4）"。 
 
 檔是由問題[#527](https://github.com/dotnet/EntityFramework.Docs/issues/527)追蹤。
 
