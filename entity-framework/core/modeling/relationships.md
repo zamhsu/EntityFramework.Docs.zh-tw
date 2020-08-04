@@ -4,12 +4,12 @@ description: 如何在使用 Entity Framework Core 時，設定實體類型之�
 author: AndriySvyryd
 ms.date: 11/21/2019
 uid: core/modeling/relationships
-ms.openlocfilehash: 3ed25b752970cf0f55d38f1ce5b8383f1c90edc3
-ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+ms.openlocfilehash: 927457c2a5b5ef4a5061fe2e5d28f864eb95c55f
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664139"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526728"
 ---
 # <a name="relationships"></a>關聯性
 

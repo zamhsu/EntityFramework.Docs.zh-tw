@@ -3,19 +3,19 @@ title: 使用 WPF 進行資料系結-EF6
 author: divega
 ms.date: 05/19/2020
 ms.assetid: e90d48e6-bea7785-47ef-b756-7b89cce4daf0
-ms.openlocfilehash: c8e9e9a0810d8192e5184abbc7df2e74e4ee7edb
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: baeb75b1ee386ca58013048bcc31ea4074604673
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672901"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526845"
 ---
 # <a name="databinding-with-wpf"></a>使用 WPF 的資料繫結
 
 > [!IMPORTANT]
 > **本檔僅適用于 .NET Framework 上的 WPF**
 >
-> 本檔說明 .NET Framework 上 WPF 的資料系結。 針對新的 .NET Core 專案，建議使用[EF Core](/ef/core) ，而不是 Entity Framework 6。 EF Core 中的資料系結檔會在[問題 #778](https://github.com/dotnet/EntityFramework.Docs/issues/778)中進行追蹤。
+> 本檔說明 .NET Framework 上 WPF 的資料系結。 針對新的 .NET Core 專案，建議使用[EF Core](/ef/core) ，而不是 Entity Framework 6。 EF Core 中的資料系結檔位於這裡：[使用 WPF 消費者入門](/ef/core/get-started/wpf)。
 
 此逐步解說會示範如何將 POCO 類型系結至「主要-詳細資料」表單中的 WPF 控制項。 應用程式會使用 Entity Framework Api，以資料庫中的資料來填入物件、追蹤變更，並將資料保存至資料庫。
 
@@ -52,7 +52,7 @@ Visual Studio 2012 和 Visual Studio 2013 的 EF 設計工具會產生一個與�
 -   在方案總管中，以滑鼠右鍵按一下**WinFormswithEFSample**專案
 -   選取 [**管理 NuGet 套件 ...** ]
 -   在 [管理 NuGet 套件] 對話方塊中，選取 [**線上**] 索引標籤，然後選擇 [ **EntityFramework** ] 套件
--   按一下 [安裝]   
+-   按一下 [安裝]  
     >[!NOTE]
     > 除了 EntityFramework 元件之外，也會新增 System.workflow.componentmodel.activity. DataAnnotations 的參考。 如果專案具有 system.string 實體的參考，則會在安裝 EntityFramework 封裝時將它移除。 System.web 元件不再用於 Entity Framework 6 應用程式。
 
@@ -296,7 +296,7 @@ EF 會使用 T4 範本從您的模型產生程式碼。 隨附于 Visual Studio 
 
 表單看起來應該像這樣：
 
-![設計師](~/ef6/media/designer.png) 
+![Designer](~/ef6/media/designer.png) 
 
 ## <a name="add-code-that-handles-data-interaction"></a>加入處理資料互動的程式碼
 

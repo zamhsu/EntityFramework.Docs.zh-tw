@@ -4,12 +4,12 @@ author: roji
 ms.date: 12/16/2019
 ms.assetid: 85b92003-b692-417d-ac1d-76d40dce664b
 uid: core/modeling/indexes
-ms.openlocfilehash: 810fccc0c6b035f515107601b245811f7b4118a6
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 9565b499ababace3595153e7159e017d2df1cc5a
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416392"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526741"
 ---
 # <a name="indexes"></a>索引
 
@@ -38,7 +38,7 @@ ms.locfileid: "78416392"
 
 ## <a name="index-name"></a>索引名稱
 
-依照慣例，在關係資料庫中建立的索引會命名為 `IX_<type name>_<property name>`。 若為複合索引，`<property name>` 會變成以底線分隔的屬性名稱清單。
+依照慣例，在關係資料庫中建立的索引會命名為 `IX_<type name>_<property name>` 。 對於複合索引， `<property name>` 會變成以底線分隔的屬性名稱清單。
 
 您可以使用流暢的 API 來設定在資料庫中建立的索引名稱：
 
@@ -46,20 +46,20 @@ ms.locfileid: "78416392"
 
 ## <a name="index-filter"></a>索引篩選
 
-某些關係資料庫可讓您指定篩選或部分索引。 這可讓您只為數據行值的子集編制索引，減少索引的大小，並同時改善效能和磁碟空間的使用。 如需 SQL Server 篩選索引的詳細資訊，[請參閱檔](https://docs.microsoft.com/sql/relational-databases/indexes/create-filtered-indexes)集。
+某些關係資料庫可讓您指定篩選或部分索引。 這可讓您只為數據行值的子集編制索引，減少索引的大小，並同時改善效能和磁碟空間的使用。 如需 SQL Server 篩選索引的詳細資訊，[請參閱檔](/sql/relational-databases/indexes/create-filtered-indexes)集。
 
 您可以使用流暢的 API 來指定索引的篩選準則（以 SQL 運算式形式提供）：
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexFilter.cs?name=IndexFilter&highlight=5)]
 
-使用 SQL Server 提供者 EF 時，會為屬於唯一索引一部分的所有可為 null 的資料行加入 `'IS NOT NULL'` 篩選準則。 若要覆寫此慣例，您可以提供 `null` 值。
+使用 SQL Server 提供者 EF 時 `'IS NOT NULL'` ，會為屬於唯一索引一部分的所有可為 null 的資料行加入篩選。 若要覆寫此慣例，您可以提供 `null` 值。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexNoFilter.cs?name=IndexNoFilter&highlight=6)]
 
 ## <a name="included-columns"></a>包含的資料行
 
-某些關係資料庫可讓您設定一組資料行，這些資料行會包含在索引中，但不屬於其「金鑰」的一部分。 當查詢中的所有資料行都包含在索引中當做索引鍵或非索引鍵資料行時，這可以大幅改善查詢效能，因為資料表本身不需要存取。 如需 SQL Server 內含資料行的詳細資訊，[請參閱檔](https://docs.microsoft.com/sql/relational-databases/indexes/create-indexes-with-included-columns)集。
+某些關係資料庫可讓您設定一組資料行，這些資料行會包含在索引中，但不屬於其「金鑰」的一部分。 當查詢中的所有資料行都包含在索引中當做索引鍵或非索引鍵資料行時，這可以大幅改善查詢效能，因為資料表本身不需要存取。 如需 SQL Server 內含資料行的詳細資訊，[請參閱檔](/sql/relational-databases/indexes/create-indexes-with-included-columns)集。
 
-在下列範例中，`Url` 資料行是索引鍵的一部分，因此對該資料行進行的任何查詢篩選都可以使用該索引。 此外，只存取 `Title` 和 `PublishedOn` 資料行的查詢不需要存取資料表，而且會更有效率地執行：
+在下列範例中，資料 `Url` 行是索引鍵的一部分，因此對該資料行進行的任何查詢篩選都可以使用此索引。 此外，只存取和資料行的 `Title` 查詢 `PublishedOn` 不需要存取資料表，而且會更有效率地執行：
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexInclude.cs?name=IndexInclude&highlight=5-9)]

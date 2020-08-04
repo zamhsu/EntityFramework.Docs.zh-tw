@@ -3,12 +3,12 @@ title: 規劃 Entity Framework Core 5。0
 author: ajcvickers
 ms.date: 06/11/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: a107f901b215e7abaa5905852f81c2d9ab094b98
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: 4abb6f500dce320dd0c32f8f3bf5c529b59fb28b
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238316"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526884"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>規劃 Entity Framework Core 5。0
 
@@ -49,17 +49,17 @@ T 恤尺寸： L
 
 狀態：進行中
 
-「多對多」是 GitHub 待處理專案 (~ 506 投票) [最常要求的功能](https://github.com/aspnet/EntityFrameworkCore/issues/1368)。
+「多對多」是 GitHub 待處理專案上[最常要求的功能](https://github.com/aspnet/EntityFrameworkCore/issues/1368)（~ 506 投票）。
 
 對多對多關聯性的支援可分為三個主要區域：
 
 * 略過導覽屬性--下一個主題所涵蓋的內容。
-* 屬性包實體類型。 這些允許標準 CLR 型別 (例如 `Dictionary`) 用於實體實例，因此每個實體型別都不需要明確的 clr 型別。 由[#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)追蹤。
+* 屬性包實體類型。 這些專案允許將標準 CLR 型別（例如 `Dictionary` ）用於實體實例，因此每個實體型別都不需要明確的 clr 型別。 由[#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)追蹤。
 * 方便設定多對多關聯性的便利。
 
 除了略過流覽支援之外，我們現在還將多對多的其他區域提取到 EF Core 5.0，以提供完整的體驗。
 
-## <a name="many-to-many-navigation-properties-aka-skip-navigations"></a>多對多導覽屬性 (. k. 「略過流覽」 ) 
+## <a name="many-to-many-navigation-properties-aka-skip-navigations"></a>多對多導覽屬性（即「略過流覽」）
 
 潛在客戶開發人員： @smitpatel 和@AndriySvyryd
 
@@ -74,7 +74,7 @@ T 恤尺寸： L
 我們相信，想要多對多支援的最重要封鎖程式，在商務邏輯（例如查詢）中無法使用「自然」關聯性，而不需要參考聯結資料表。
 聯結資料表實體類型可能仍然存在，但不應該取得商務邏輯的方式。
 
-## <a name="table-per-type-tpt-inheritance-mapping"></a>每一類型的資料表 (TPT) 繼承對應
+## <a name="table-per-type-tpt-inheritance-mapping"></a>每一類型的資料表（TPT）繼承對應
 
 首席開發人員：@AndriySvyryd
 
@@ -84,7 +84,7 @@ T 恤尺寸： XL
 
 狀態：進行中
 
-我們正在進行 TPT，因為它是高度要求的功能， (~ 289 的投票;第三個整體) 和，因為它需要一些低層級的變更，我們覺得這適用于整體 .NET 5 計畫的基本本質。 我們預期這會導致資料庫提供者的中斷性變更，但這應該比3.0 所需的變更少很多。
+我們正在進行 TPT，因為這兩者都是高度要求的功能（~ 289 的投票; 第三個），因為它需要一些低層級的變更，我們覺得這適用于整體 .NET 5 計畫的基本本質。 我們預期這會導致資料庫提供者的中斷性變更，但這應該比3.0 所需的變更少很多。
 
 ## <a name="filtered-include"></a>篩選的包含
 
@@ -96,7 +96,7 @@ T 恤尺寸： M
 
 狀態：進行中
 
-已篩選的「包含」是高度要求的功能， (~ 376 的投票;第二個整體) 不是大量的工作，因此我們認為會解除封鎖或更輕鬆地進行許多目前需要模型層級篩選或更複雜查詢的案例。
+篩選的「包含」是一種高度要求的功能（大約376的投票; 第二個整體），這不是大量的工作，因此我們認為會解除封鎖或更輕鬆地進行目前需要模型層級篩選或更複雜查詢的許多案例。
 
 ## <a name="split-include"></a>分割包含
 
@@ -165,7 +165,7 @@ T 恤尺寸： L
 * 使用常用的真實世界部署工具/流程
 * 至少整合到 Visual Studio
 
-結果可能是 EF Core (中的許多小改進，例如，SQLite) 上的更佳遷移，以及與其他小組的指引和更長期的共同作業，以改善超越 EF 的端對端體驗。
+結果可能是 EF Core 中的許多小改良（例如，SQLite 上較佳的遷移），並提供與其他小組的指引和更長期的共同作業，以改善超越 EF 的端對端體驗。
 
 ## <a name="ef-core-platforms-experience"></a>EF Core 平臺體驗
 
@@ -234,7 +234,7 @@ T 恤尺寸： L
 
 T 恤尺寸： M
 
-狀態：已完成。 新的檔已[上線于 Microsoft 檔網站](https://docs.microsoft.com/dotnet/standard/data/sqlite/?tabs=netcore-cli)。
+狀態：已完成。 新的檔已[上線于 Microsoft 檔網站](/dotnet/standard/data/sqlite/?tabs=netcore-cli)。
 
 EF 小組也擁有 ADO.NET 提供者。 我們計畫將此提供者完整記錄為5.0 版本的一部分。
 
@@ -265,9 +265,9 @@ T 恤尺寸： L
 
 狀態：進行中
 
-在撰寫本文時，我們已將135錯誤分級為在 5.0 release (修正，62已修正) ，但與上面的_一般查詢增強功能_相比，有相當大的重迭。
+在撰寫本文時，我們會在5.0 版本（已修正62）中修正 135 bug，但與上面的_一般查詢增強功能_相比，有相當大的重迭。
 
-傳入的速率 (在里程碑中的工作) 在3.0 版本期間大約每個月23個問題。 並非所有這些都必須在5.0 中修正。 我們打算在5.0 時間範圍內修正其他150問題，這是粗略的估計。
+傳入的速率（最後在里程碑中運作的問題）是3.0 發行期間每月大約23個問題。 並非所有這些都必須在5.0 中修正。 我們打算在5.0 時間範圍內修正其他150問題，這是粗略的估計。
 
 ## <a name="small-enhancements"></a>小型增強功能
 

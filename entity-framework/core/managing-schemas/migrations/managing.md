@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: e52d3680360a1e83e05f04650c735c5a67680094
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: 2097d3cc9232d448191dbebbe3d14d86e80b91fe
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238748"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526429"
 ---
 # <a name="managing-migrations"></a>管理遷移
 
@@ -83,7 +83,7 @@ migrationBuilder.AddColumn<string>(
     nullable: true);
 ```
 
-EF Core 通常無法知道何時要卸載資料行，並建立一個新的， (兩個不同的變更) ，以及何時應該重新命名資料行。 如果上述的遷移是依情況套用，則您的所有客戶名稱都會遺失。 若要重新命名資料行，請將上述產生的遷移取代為下列內容：
+EF Core 通常無法知道何時要卸載資料行，並建立新的資料行（兩個不同的變更），以及何時應重新命名資料行。 如果上述的遷移是依情況套用，則您的所有客戶名稱都會遺失。 若要重新命名資料行，請將上述產生的遷移取代為下列內容：
 
 ```c#
 migrationBuilder.RenameColumn(
@@ -97,7 +97,7 @@ migrationBuilder.RenameColumn(
 
 ### <a name="adding-raw-sql"></a>新增原始 SQL
 
-當您重新命名資料行時，可以透過內建 API 來完成，但在許多情況下，這是不可能的。 例如，我們可能會想要 `FirstName` 使用單一的新屬性來取代現有的和 `LastColumn` 屬性 `FullName` 。 EF Core 所產生的遷移將會如下所示：
+當您重新命名資料行時，可以透過內建 API 來完成，但在許多情況下，這是不可能的。 例如，我們可能會想要 `FirstName` 使用單一的新屬性來取代現有的和 `LastName` 屬性 `FullName` 。 EF Core 所產生的遷移將會如下所示：
 
 ``` csharp
 migrationBuilder.DropColumn(
@@ -109,7 +109,7 @@ migrationBuilder.DropColumn(
     table: "Customer");
 
 migrationBuilder.AddColumn<string>(
-    name: "Name",
+    name: "FullName",
     table: "Customer",
     nullable: true);
 ```
@@ -118,14 +118,14 @@ migrationBuilder.AddColumn<string>(
 
 ``` csharp
 migrationBuilder.AddColumn<string>(
-    name: "Name",
+    name: "FullName",
     table: "Customer",
     nullable: true);
 
 migrationBuilder.Sql(
 @"
     UPDATE Customer
-    SET Name = FirstName + ' ' + LastName;
+    SET FullName = FirstName + ' ' + LastName;
 ");
 
 migrationBuilder.DropColumn(

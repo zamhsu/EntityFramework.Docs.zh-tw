@@ -4,12 +4,12 @@ description: EF Core 5.0 中的新功能總覽
 author: ajcvickers
 ms.date: 07/20/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: d42b2811d07516e9febedbc51fcb206000d38371
-ms.sourcegitcommit: 51148929e3889c48227d96c95c4e310d53a3d2c9
+ms.openlocfilehash: d7f5863e657e243ce733eda5dc8b40c1b92818ce
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86873379"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526871"
 ---
 # <a name="whats-new-in-ef-core-50"></a>5.0 EF Core 的新功能
 
@@ -47,7 +47,7 @@ public class MyController
 然後可以視需要建立和使用 DbCoNtext 實例。 例如：
 
 ```csharp
-public void DoSomehing()
+public void DoSomeThing()
 {
     using (var context = _contextFactory.CreateDbContext())
     {
@@ -503,7 +503,7 @@ WHERE [u].[Name] COLLATE French_CI_AS = N'Jean-Michel Jarre'
 
 ### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a>IDesignTimeDbCoNtextFactory 中的流程引數
 
-引數現在會從命令列流動到 `CreateDbContext` [IDesignTimeDbCoNtextFactory](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1)的方法中。 例如，若要指出這是開發組建， `dev` 可以在命令列上傳遞自訂引數（例如）：
+引數現在會從命令列流動到 `CreateDbContext` [IDesignTimeDbCoNtextFactory](/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1)的方法中。 例如，若要指出這是開發組建， `dev` 可以在命令列上傳遞自訂引數（例如）：
 
 ```
 dotnet ef migrations add two --verbose --dev
@@ -774,7 +774,7 @@ public class Address
 
 ### <a name="change-tracking-proxies"></a>變更追蹤 proxy
 
-EF Core 現在可以產生自動執行[INotifyPropertyChanging](https://docs.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanging?view=netcore-3.1)和[INotifyPropertyChanged](https://docs.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged?view=netcore-3.1)的執行時間 proxy。 這些之後，實體屬性上的這些值會直接變更為 EF Core，避免需要掃描變更。 不過，proxy 會有自己的一組限制，因此不適合所有人。
+EF Core 現在可以產生自動執行[INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging?view=netcore-3.1)和[INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged?view=netcore-3.1)的執行時間 proxy。 這些之後，實體屬性上的這些值會直接變更為 EF Core，避免需要掃描變更。 不過，proxy 會有自己的一組限制，因此不適合所有人。
 
 檔是由問題[#2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076)追蹤。
 
@@ -832,7 +832,7 @@ Azure Cosmos DB 資料庫提供者現在支援使用 Etag 的開放式平行存�
 builder.Entity<Customer>().Property(c => c.ETag).IsEtagConcurrency();
 ```
 
-接著，SaveChanges 會擲回 `DbUpdateConcurrencyException` 並行衝突，以[處理](https://docs.microsoft.com/ef/core/saving/concurrency)以執行重試等。
+接著，SaveChanges 會擲回 `DbUpdateConcurrencyException` 並行衝突，以[處理](/ef/core/saving/concurrency)以執行重試等。
 
 檔是由問題[#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099)追蹤。
 

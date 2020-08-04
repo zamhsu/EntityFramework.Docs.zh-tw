@@ -5,12 +5,12 @@ author: roji
 ms.date: 04/27/2020
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: b3874847922cb39aa57d50813e6e50ff7db72eb9
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 46a13d341c1b721bb243ee2b205bdc2f4d7e7aee
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370561"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526442"
 ---
 # <a name="collations-and-case-sensitivity"></a>定序和區分大小寫
 
@@ -68,11 +68,11 @@ WHERE [c].[Name] COLLATE SQL_Latin1_General_CP1_CS_AS = N'John'
 
 在 .NET 中，根據預設，字串相等會區分大小寫： `s1 == s2` 執行需要字串相同的序數比較。 由於資料庫的預設定序會有所不同，而且因為很適合使用索引，所以 EF Core 不會嘗試將簡單的相等性轉譯為資料庫區分大小寫的作業： c # 相等會直接轉譯為 SQL 相等，這可能會因為使用中的特定資料庫及其定序設定而不區分大小寫。
 
-此外，.NET 也提供接受列舉的多載 [`string.Equals`](https://docs.microsoft.com/dotnet/api/system.string.equals#System_String_Equals_System_String_System_StringComparison_) ，可讓您 [`StringComparison`](https://docs.microsoft.com/dotnet/api/system.stringcomparison) 指定比較的區分大小寫和文化特性。 根據設計，EF Core refrains 從將這些多載轉譯為 SQL，並嘗試使用它們將導致例外狀況。 一件事，EF Core 不知道應該使用哪一個區分大小寫或不區分大小寫定序。 更重要的是，在大多數情況下，套用定序可能會導致索引的使用，大幅影響非常基本且常用之 .NET 結構的效能。 若要強制查詢使用區分大小寫或不區分大小寫的比較，請依照 `EF.Functions.Collate` [上述詳細](#explicit-collations-and-indexes)說明，明確地指定定序。
+此外，.NET 也提供接受列舉的多載 [`string.Equals`](/dotnet/api/system.string.equals#System_String_Equals_System_String_System_StringComparison_) ，可讓您 [`StringComparison`](/dotnet/api/system.stringcomparison) 指定比較的區分大小寫和文化特性。 根據設計，EF Core refrains 從將這些多載轉譯為 SQL，並嘗試使用它們將導致例外狀況。 一件事，EF Core 不知道應該使用哪一個區分大小寫或不區分大小寫定序。 更重要的是，在大多數情況下，套用定序可能會導致索引的使用，大幅影響非常基本且常用之 .NET 結構的效能。 若要強制查詢使用區分大小寫或不區分大小寫的比較，請依照 `EF.Functions.Collate` [上述詳細](#explicit-collations-and-indexes)說明，明確地指定定序。
 
 ## <a name="database-specific-information"></a>資料庫特定資訊
 
-* [SQL Server 定序的相關檔](https://docs.microsoft.com/sql/relational-databases/collations/collation-and-unicode-support)。
-* [有關定序的 Sqlite 檔](https://docs.microsoft.com/dotnet/standard/data/sqlite/collation)。
+* [SQL Server 定序的相關檔](/sql/relational-databases/collations/collation-and-unicode-support)。
+* [有關定序的 Sqlite 檔](/dotnet/standard/data/sqlite/collation)。
 * [于 postgresql 定序的相關檔](https://www.postgresql.org/docs/current/collation.html)。
 * 定序[的 MySQL 檔](https://dev.mysql.com/doc/refman/en/charset-general.html)。

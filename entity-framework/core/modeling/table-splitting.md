@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 01/03/2020
 uid: core/modeling/table-splitting
-ms.openlocfilehash: de24f8903af79ebd7f68e6b74288257883c1fa8d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: e7428bc516a69310b6a6f521acc49aee0ba9f802
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417395"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526495"
 ---
 # <a name="table-splitting"></a>資料表分割
 
@@ -22,13 +22,13 @@ EF Core 允許將兩個或多個實體對應至單一資料列。 這稱為「_�
 
 資料表分割的常見案例是只使用資料表中的資料行子集，以獲得更佳的效能或封裝。
 
-在此範例中 `Order` 代表 `DetailedOrder`的子集。
+在此範例中， `Order` 表示的子集 `DetailedOrder` 。
 
 [!code-csharp[Order](../../../samples/core/Modeling/TableSplitting/Order.cs?name=Order)]
 
 [!code-csharp[DetailedOrder](../../../samples/core/Modeling/TableSplitting/DetailedOrder.cs?name=DetailedOrder)]
 
-除了所需的設定之外，我們還會呼叫 `Property(o => o.Status).HasColumnName("Status")` 將 `DetailedOrder.Status` 對應到與 `Order.Status`相同的資料行。
+除了所需的設定之外，我們 `Property(o => o.Status).HasColumnName("Status")` 也會呼叫來對應 `DetailedOrder.Status` 至與相同的資料行 `Order.Status` 。
 
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting)]
 
@@ -46,9 +46,9 @@ EF Core 允許將兩個或多個實體對應至單一資料列。 這稱為「_�
 > [!NOTE]
 > 這項功能是在 EF Core 3.0 中引進。
 
-如果相依實體所使用的所有資料行都 `NULL` 在資料庫中，則查詢時不會建立它的實例。 這可讓您建立選擇性相依實體的模型，其中主體上的關聯性屬性會是 null。 請注意，這也會發生在所有相依的屬性都是選擇性的，而且設定為 `null`，這可能不是預期的。
+如果相依實體所使用的所有資料行都 `NULL` 在資料庫中，則查詢時不會建立它的實例。 這可讓您建立選擇性相依實體的模型，其中主體上的關聯性屬性會是 null。 請注意，如果所有相依的屬性都是選擇性的，而且設定為 `null` （可能不是預期的），也會發生這種情況。
 
-## <a name="concurrency-tokens"></a>並行標記
+## <a name="concurrency-tokens"></a>並行權杖
 
 如果共用資料表的任何實體類型有並行 token，則也必須將它包含在所有其他實體類型中。 這是必要的，以便在只更新對應至相同資料表的其中一個實體時，避免過時的並行標記值。
 

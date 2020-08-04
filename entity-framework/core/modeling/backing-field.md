@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a628795e-64df-4f24-a5e8-76bc261e7ed8
 uid: core/modeling/backing-field
-ms.openlocfilehash: 5c1b2e8036a8556d69cac2ec22722fc72d6da4aa
-ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
+ms.openlocfilehash: e015c4f3fca767d25bee179c027813bd9fcf4c07
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82103148"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526754"
 ---
 # <a name="backing-fields"></a>支援欄位
 
@@ -24,7 +24,7 @@ ms.locfileid: "82103148"
 * `m_<camel-cased property name>`
 * `m_<property name>`
 
-在下列範例中， `Url`屬性已設定為`_url` ，其支援欄位如下：
+在下列範例中， `Url` 屬性已設定為， `_url` 其支援欄位如下：
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/BackingField.cs#Sample)]
 
@@ -46,22 +46,22 @@ ms.locfileid: "82103148"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingFieldAccessMode.cs?name=BackingFieldAccessMode&highlight=6)]
 
-如需一組完整的支援選項，請參閱[PropertyAccessMode 列舉](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.propertyaccessmode)。
+如需一組完整的支援選項，請參閱[PropertyAccessMode 列舉](/dotnet/api/microsoft.entityframeworkcore.propertyaccessmode)。
 
 > [!NOTE]
-> 使用 EF Core 3.0，預設屬性存取模式從`PreferFieldDuringConstruction`變更為。 `PreferField`
+> 使用 EF Core 3.0，預設屬性存取模式從變更 `PreferFieldDuringConstruction` 為 `PreferField` 。
 
 ## <a name="field-only-properties"></a>僅限欄位屬性
 
 您也可以在模型中建立概念屬性，其在實體類別中沒有對應的 CLR 屬性，而是使用欄位將資料儲存在實體中。 這與[陰影屬性](shadow-properties.md)不同，其中的資料會儲存在變更追蹤程式中，而不是實體的 CLR 型別中。 僅限欄位屬性通常會在實體類別使用方法（而非屬性）來取得/設定值，或在網域模型中不應該公開欄位（例如主鍵）的情況下使用。
 
-您可以在`Property(...)` API 中提供名稱，以設定僅限欄位的屬性：
+您可以在 API 中提供名稱，以設定僅限欄位的屬性 `Property(...)` ：
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingFieldNoProperty.cs#Sample)]
 
 EF 會嘗試尋找具有指定名稱的 CLR 屬性，如果找不到屬性，則為欄位。 如果找不到屬性和欄位，則會改為設定陰影屬性。
 
-您可能需要從 LINQ 查詢參考僅限欄位的屬性，但這類欄位通常是私用的。 您可以在 LINQ `EF.Property(...)`查詢中使用方法來參考欄位：
+您可能需要從 LINQ 查詢參考僅限欄位的屬性，但這類欄位通常是私用的。 您可以 `EF.Property(...)` 在 LINQ 查詢中使用方法來參考欄位：
 
 ``` csharp
 var blogs = db.blogs.OrderBy(b => EF.Property<string>(b, "_validatedUrl"));

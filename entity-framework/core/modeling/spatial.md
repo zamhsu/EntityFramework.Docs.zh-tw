@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: 2222df84be7bfde3f252766bef1cfab39b476efa
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 85124b7e252797ccd952d0d332e7309eff97ba56
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370444"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526663"
 ---
 # <a name="spatial-data"></a>空間資料
 
@@ -19,7 +19,7 @@ ms.locfileid: "85370444"
 
 空間資料代表實體位置和物件的形狀。 許多資料庫都提供這種資料類型的支援，因此可以與其他資料一起編制索引及查詢。 常見的案例包括從位置查詢給定距離內的物件，或選取其框線包含指定位置的物件。 EF Core 支援使用[NetTopologySuite](https://github.com/NetTopologySuite/NetTopologySuite)空間程式庫來對應到空間資料類型。
 
-## <a name="installing"></a>安裝
+## <a name="installing"></a>安裝中
 
 若要將空間資料與 EF Core 搭配使用，您需要安裝適當的支援 NuGet 套件。 您需要安裝的套件取決於您所使用的提供者。
 
@@ -48,7 +48,7 @@ optionsBuilder.UseSqlServer(
 
 有數個空間資料類型。 您所使用的類型取決於您想要允許的圖形類型。 以下是您可以在模型中用於屬性的 NTS 類型階層。 它們位於 `NetTopologySuite.Geometries` 命名空間內。
 
-* 幾何
+* 幾何形狀
   * Point
   * LineString
   * 多邊形
@@ -345,7 +345,7 @@ Point. Y | ✔ | ✔ | ✔ | ✔
 
 ## <a name="additional-resources"></a>其他資源
 
-* [SQL Server 中的空間資料](https://docs.microsoft.com/sql/relational-databases/spatial/spatial-data-sql-server)
+* [SQL Server 中的空間資料](/sql/relational-databases/spatial/spatial-data-sql-server)
 * [SpatiaLite 首頁](https://www.gaia-gis.it/fossil/libspatialite)
 * [Npgsql 空間檔](https://www.npgsql.org/efcore/mapping/nts.html)
 * [PostGIS 檔](https://postgis.net/documentation/)

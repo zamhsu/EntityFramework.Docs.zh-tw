@@ -4,21 +4,21 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f6e35c6d-45b7-4258-be1d-87c1bb67438d
 uid: core/miscellaneous/logging
-ms.openlocfilehash: e8adc39ec01ff75112b03446a488df6199cc7041
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 4f39e0ad1f061970aae7f7eb7abdc72e4bb0d691
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416579"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526455"
 ---
 # <a name="logging"></a>記錄
 
 > [!TIP]  
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging) \(英文\)。
+> 您可以在 GitHub 上查看這篇文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging)。
 
 ## <a name="aspnet-core-applications"></a>ASP.NET Core 應用程式
 
-EF Core 在使用 `AddDbContext` 或 `AddDbContextPool` 時，會自動與 ASP.NET Core 的記錄機制整合。 因此，使用 ASP.NET Core 時，應該依照[ASP.NET Core 檔](https://docs.microsoft.com/aspnet/core/fundamentals/logging?tabs=aspnetcore2x)中所述設定記錄。
+EF Core 在 `AddDbContext` 使用或時，會自動與 ASP.NET Core 的記錄機制整合 `AddDbContextPool` 。 因此，使用 ASP.NET Core 時，應該依照[ASP.NET Core 檔](/aspnet/core/fundamentals/logging?tabs=aspnetcore2x)中所述設定記錄。
 
 ## <a name="other-applications"></a>其他應用程式
 
@@ -29,7 +29,7 @@ EF Core 記錄需要 ILoggerFactory，其本身是以一或多個記錄提供者
 * [[記錄](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug/)檔]：使用 system.servicemodel （）記錄到偵錯工具監視器。
 * [記錄檔]。 [EventLog](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventLog/)：記錄到 Windows 事件記錄檔。
 * 。 [Eventsource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventSource/)：支援 Eventsource/EventListener。
-* [TraceSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.TraceSource/)：使用 `System.Diagnostics.TraceSource.TraceEvent()`記錄至追蹤接聽程式。
+* [TraceSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.TraceSource/)：使用記錄至追蹤接聽程式 `System.Diagnostics.TraceSource.TraceEvent()` 。
 
 安裝適當的封裝之後，應用程式應該建立 Server.loggerfactory 的單一或全域實例。 例如，使用主控台記錄器：
 
@@ -40,7 +40,7 @@ EF Core 記錄需要 ILoggerFactory，其本身是以一或多個記錄提供者
 ### <a name="version-2x"></a>[2.x 版](#tab/v2)
 
 > [!NOTE]
-> 下列程式碼範例會使用在2.2 版中已過時且已在3.0 中取代的 `ConsoleLoggerProvider` 函式。 使用2.2 時，忽略和隱藏警告是安全的。
+> 下列程式碼範例會使用 `ConsoleLoggerProvider` 在2.2 版中已過時且已在3.0 中取代的函式。 使用2.2 時，忽略和隱藏警告是安全的。
 
 ``` csharp
 public static readonly LoggerFactory MyLoggerFactory
@@ -49,7 +49,7 @@ public static readonly LoggerFactory MyLoggerFactory
 
 ***
 
-接著，這個 singleton/global 實例就應該向 `DbContextOptionsBuilder`上的 EF Core 註冊。 例如：
+接著，這個單一/全域實例應該會向 EF Core 註冊 `DbContextOptionsBuilder` 。 例如：
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#RegisterLoggerFactory)]
 
@@ -67,7 +67,7 @@ public static readonly LoggerFactory MyLoggerFactory
 ### <a name="version-2x"></a>[2.x 版](#tab/v2)
 
 > [!NOTE]
-> 下列程式碼範例會使用在2.2 版中已過時且已在3.0 中取代的 `ConsoleLoggerProvider` 函式。 使用2.2 時，忽略和隱藏警告是安全的。
+> 下列程式碼範例會使用 `ConsoleLoggerProvider` 在2.2 版中已過時且已在3.0 中取代的函式。 使用2.2 時，忽略和隱藏警告是安全的。
 
 ``` csharp
 public static readonly LoggerFactory MyLoggerFactory
@@ -86,6 +86,6 @@ public static readonly LoggerFactory MyLoggerFactory
 * 在 [Microsoft.entityframeworkcore] 類別中
 * 在「資訊」層級
 
-針對 EF Core，記錄器分類會在 `DbLoggerCategory` 類別中定義，讓您輕鬆地尋找類別目錄，但這些會解析成簡單的字串。
+針對 EF Core，記錄器分類會在類別中定義， `DbLoggerCategory` 讓您輕鬆地尋找類別目錄，但這些會解析成簡單的字串。
 
-如需基礎記錄基礎結構的詳細資訊，請參閱[ASP.NET Core 記錄檔](https://docs.microsoft.com/aspnet/core/fundamentals/logging?tabs=aspnetcore2x)。
+如需基礎記錄基礎結構的詳細資訊，請參閱[ASP.NET Core 記錄檔](/aspnet/core/fundamentals/logging?tabs=aspnetcore2x)。

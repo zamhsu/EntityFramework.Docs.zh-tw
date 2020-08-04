@@ -3,12 +3,12 @@ title: 全域查詢篩選條件 - EF Core
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 233289b0c50e15f4555b342bc654211ce04c24d3
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 57d81919dedb853d2a41066f76ec20685ae41d6b
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370457"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526897"
 ---
 # <a name="global-query-filters"></a>全域查詢篩選條件
 
@@ -43,7 +43,7 @@ ms.locfileid: "85370457"
 > 請注意 DbContext 執行個體層級欄位的使用方式：`_tenantId` 用來設定目前的租用戶。 模型層級篩選將會使用正確內容執行個體 (亦即，執行查詢的執行個體) 中的值。
 
 > [!NOTE]
-> 目前不能在相同的實體上定義多個查詢篩選準則-只會套用最後一個。 不過，您可以使用邏輯_AND_運算子（[ `&&` c # 中](https://docs.microsoft.com/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-)的）定義具有多個條件的單一篩選。
+> 目前不能在相同的實體上定義多個查詢篩選準則-只會套用最後一個。 不過，您可以使用邏輯_AND_運算子（[ `&&` c # 中](/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-)的）定義具有多個條件的單一篩選。
 
 ## <a name="use-of-navigations"></a>導覽的使用
 
