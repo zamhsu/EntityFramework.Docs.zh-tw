@@ -4,12 +4,12 @@ description: 測試使用 EF Core 的應用程式不同方法
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/miscellaneous/testing/index
-ms.openlocfilehash: 71222f17ac4cc1b71052a2e7e916ebcedd2ae0f4
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
-ms.translationtype: MT
+ms.openlocfilehash: 7929c284c2794b2fcc95235ae413d56895ebb6e2
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370535"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526806"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>測試使用 EF Core 的程式碼
 
@@ -63,7 +63,7 @@ LocalDB 的主要優點在於會視需要啟動資料庫執行個體。
 我個人從不認為在開發電腦上執行資料庫服務有何問題，因此通常會建議改用 Developer Edition。
 不過，LocalDB 可能適合某些人，特別是在功能不強大的開發電腦上。
 
-在 Docker 容器 (或類似容器) 中執行 SQL Server (或任何其他資料庫系統)，是另一種能夠避免直接在開發電腦上執行資料庫系統的方式。  
+在 Docker 容器 (或類似容器) 中[執行 SQL Server](/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15) (或任何其他資料庫系統)，是另一種能夠避免直接在開發電腦上執行資料庫系統的方式。  
 
 ## <a name="approach-2-sqlite"></a>方法 2：SQLite
 
@@ -92,11 +92,11 @@ SQLite 是不錯的選擇，因為：
 ## <a name="approach-3-the-ef-core-in-memory-database"></a>方法 3：EF Core 記憶體內部資料庫
 
 EF Core 隨附記憶體內部資料庫，可用於 EF Core 本身的內部測試。
-這個資料庫一般**不適合用來測試使用 EF Core 的應用程式**。 尤其是：
+此資料庫一般**不適合用於測試使用 EF Core 的應用程式**。 尤其是：
 
 * 這不是關聯式資料庫。
 * 不支援異動。
-* 它無法執行原始 SQL 查詢。
+* 其無法執行原始 SQL 查詢。
 * 未針對效能最佳化。
 
 當測試 EF Core 內部時，上述幾點並不重要，因為我們會將其特別用於資料庫與測試無關的情況下。

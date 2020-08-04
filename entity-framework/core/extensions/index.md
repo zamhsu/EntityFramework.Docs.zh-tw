@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 5b7945bd24ac19a82b08f4d5709555cf53485f4c
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
-ms.translationtype: MT
+ms.openlocfilehash: f450742b761ef3daf35e32cf87c63a8ee8a7b8c3
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238251"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526403"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -28,7 +28,7 @@ LLBLGen Pro 是實體模型化解決方案，具備 Entity Framework 與 Entity 
 
 ### <a name="devart-entity-developer"></a>Devart Entity Developer
 
-Devart Entity 是功能強大的 ORM 設計工具，適用於 ADO.NET Entity Framework、NHibernate、LinqConnect、Telerik Data Access、LINQ 到 SQL。 它支援使用 model first 或 database first 方法，以及 C# 或 Visual Basic 程式碼產生，以視覺化的方式設計 EF Core 模型。 若為 EF Core：1、2、3、5。
+Devart Entity 是功能強大的 ORM 設計工具，適用於 ADO.NET Entity Framework、NHibernate、LinqConnect、Telerik Data Access、LINQ 到 SQL。 它支援使用 model first 或 database first 方法，以及 C# 或 Visual Basic 程式碼產生，以視覺化的方式設計 EF Core 模型。 適用於 EF Core：1、2、3、5。
 
 [網站](https://www.devart.com/entitydeveloper/)
 
@@ -40,7 +40,7 @@ Devart Entity 是功能強大的 ORM 設計工具，適用於 ADO.NET Entity Fra
 
 ### <a name="ef-core-power-tools"></a>EF Core Power Tools
 
-EF Core Power Tools 是 Visual Studio 延伸模組，在簡單使用者介面中公開各種設計階段工作。 包括現有資料庫和 [SQL Server DACPAC](https://docs.microsoft.com/sql/relational-databases/data-tier-applications/data-tier-applications) 之 DbContext 及實體類別的反向工程、資料庫移轉的管理，以及模型視覺效果。 適用於 EF Core：2、3。
+EF Core Power Tools 是 Visual Studio 延伸模組，在簡單使用者介面中公開各種設計階段工作。 包括現有資料庫和 [SQL Server DACPAC](/sql/relational-databases/data-tier-applications/data-tier-applications) 之 DbContext 及實體類別的反向工程、資料庫移轉的管理，以及模型視覺效果。 適用於 EF Core：2、3。
 
 [GitHub Wiki](https://github.com/ErikEJ/EFCorePowerTools/wiki)
 
@@ -157,9 +157,9 @@ Entity Framework Core 的延伸模組程式庫，可讓使用 SQL Server 的開�
 
 [GitHub 存放庫](https://github.com/SteffenMangold/EntityFrameworkCore.Cacheable)
 
-### <a name="entityframeworkcorencache"></a>Microsoft.entityframeworkcore. NCache
+### <a name="entityframeworkcorencache"></a>EntityFrameworkCore.NCache
 
-NCache Entity Framework Core 提供者是用來快取查詢結果的分散式第二層快取提供者。 NCache 的分散式架構讓它更具擴充性和高可用性。 針對 EF Core 2。
+NCache Entity Framework Core Provider 是快取查詢結果的分散式第二層級快取提供者。 NCache 的分散式架構使其更具可擴縮性與高可用性。 適用於 EF Core 2。
 
 [網站](https://www.alachisoft.com/ncache/ef-core-cache.html)
 
@@ -223,16 +223,16 @@ Entity Framework Core 3.1 的 LINQ 延伸模組，以支援 Microsoft SQL Server
 
 [GitHub 存放庫](https://github.com/efcore/EFCore.SqlServer.HierarchyId)
 
-### <a name="linq2dbentityframeworkcore"></a>linq2db.Microsoft.entityframeworkcore
+### <a name="linq2dbentityframeworkcore"></a>linq2db.EntityFrameworkCore
 
-將 LINQ 查詢轉換為 SQL 運算式的替代方法。 適用於 EF Core：3.
+將 LINQ 查詢轉換為 SQL 運算式的替代轉譯程式。 適用於 EF Core：3.
 
-包含支援先進的 SQL 功能，例如 Cte、大量複製、資料表提示、視窗型函數、臨時表，以及資料庫端的建立/更新/刪除作業。
+包括對進階 SQL 功能的支援，例如 CTE、大量複製、資料表提示、視窗型函式、暫存資料表，以及資料庫端的建立/更新/刪除作業。
 
 [GitHub 存放庫](https://github.com/linq2db/linq2db.EntityFrameworkCore)
 
 ### <a name="efcoresoftdelete"></a>EFCore.SoftDelete
 
-虛刪除實體的執行。 適用於 EF Core：3.
+虛刪除實體的實作。 適用於 EF Core：3.
 
 [NuGet](https://www.nuget.org/packages/EFCore.SoftDelete)
