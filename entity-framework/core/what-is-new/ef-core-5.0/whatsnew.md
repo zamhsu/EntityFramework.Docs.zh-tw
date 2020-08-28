@@ -4,12 +4,12 @@ description: EF Core 5.0 的新功能總覽
 author: ajcvickers
 ms.date: 07/20/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: 3a1f5c7d44ad0e4d648492c4edcf14678c73538e
-ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
+ms.openlocfilehash: f822e3ae776778749a654377cbd9d9814ca40972
+ms.sourcegitcommit: 12d257db4786487a0c28e9ddd79f176f7cf6edb1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88847588"
+ms.lasthandoff: 08/28/2020
+ms.locfileid: "89043593"
 ---
 # <a name="whats-new-in-ef-core-50"></a>EF Core 5.0 的新功能
 
@@ -21,7 +21,7 @@ EF Core 5.0 目前正在開發中。 此頁面將包含每個預覽中所引進�
 
 ## <a name="preview-8"></a>Preview 8
 
-## <a name="table-per-type-tpt-mapping"></a>每一類型的 (TPT) 對應的資料表
+### <a name="table-per-type-tpt-mapping"></a>每一類型的 (TPT) 對應的資料表
 
 根據預設，EF Core 會將 .NET 類型的繼承階層對應到單一資料庫資料表。 這稱為每一階層的資料表 (TPH) 對應。 EF Core 5.0 也可將繼承階層架構中的每個 .NET 類型對應至不同的資料庫資料表;稱為每一類型的資料表 (TPT) 對應。
 
