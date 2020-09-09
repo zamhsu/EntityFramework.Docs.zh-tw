@@ -1,36 +1,37 @@
 ---
 title: 設定 DbCoNtext-EF Core
+description: 使用 Entity Framework Core 設定 DbcoNtext 的策略
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: 9614449f6ead393b514f42b718b4cae5f97dfc98
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 3e45199e6fc0c8c105ccb0bb03175b4b08716b3f
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526416"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617791"
 ---
-# <a name="configuring-a-dbcontext"></a><span data-ttu-id="1b0dc-102">設定 DbContext</span><span class="sxs-lookup"><span data-stu-id="1b0dc-102">Configuring a DbContext</span></span>
+# <a name="configuring-a-dbcontext"></a><span data-ttu-id="d5dc3-103">設定 DbContext</span><span class="sxs-lookup"><span data-stu-id="d5dc3-103">Configuring a DbContext</span></span>
 
-<span data-ttu-id="1b0dc-103">本文說明 `DbContext` `DbContextOptions` 使用特定的 EF Core 提供者和選擇性行為，透過來設定的基本模式，以連接到資料庫。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-103">This article shows basic patterns for configuring a `DbContext` via a `DbContextOptions` to connect to a database using a specific EF Core provider and optional behaviors.</span></span>
+<span data-ttu-id="d5dc3-104">本文說明 `DbContext` `DbContextOptions` 使用特定 EF Core 提供者和選擇性行為來設定 via 的基本模式，以連接到資料庫。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-104">This article shows basic patterns for configuring a `DbContext` via a `DbContextOptions` to connect to a database using a specific EF Core provider and optional behaviors.</span></span>
 
-## <a name="design-time-dbcontext-configuration"></a><span data-ttu-id="1b0dc-104">設計階段 DbCoNtext 設定</span><span class="sxs-lookup"><span data-stu-id="1b0dc-104">Design-time DbContext configuration</span></span>
+## <a name="design-time-dbcontext-configuration"></a><span data-ttu-id="d5dc3-105">設計階段 DbCoNtext 設定</span><span class="sxs-lookup"><span data-stu-id="d5dc3-105">Design-time DbContext configuration</span></span>
 
-<span data-ttu-id="1b0dc-105">EF Core 設計階段工具（例如[遷移](xref:core/managing-schemas/migrations/index)）必須能夠探索並建立類型的工作實例， `DbContext` 才能收集應用程式實體類型的詳細資料，以及它們如何對應到資料庫架構。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-105">EF Core design-time tools such as [migrations](xref:core/managing-schemas/migrations/index) need to be able to discover and create a working instance of a `DbContext` type in order to gather details about the application's entity types and how they map to a database schema.</span></span> <span data-ttu-id="1b0dc-106">此程式可以是自動的，只要工具可以輕鬆地建立，如此 `DbContext` 一來，它就會以類似在執行時間設定的方式來進行設定。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-106">This process can be automatic as long as the tool can easily create the `DbContext` in such a way that it will be configured similarly to how it would be configured at run-time.</span></span>
+<span data-ttu-id="d5dc3-106">EF Core 的設計階段工具（例如 [遷移](xref:core/managing-schemas/migrations/index) ）必須能夠探索和建立型別的工作實例，才能 `DbContext` 收集有關應用程式實體類型的詳細資料，以及它們如何對應到資料庫架構。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-106">EF Core design-time tools such as [migrations](xref:core/managing-schemas/migrations/index) need to be able to discover and create a working instance of a `DbContext` type in order to gather details about the application's entity types and how they map to a database schema.</span></span> <span data-ttu-id="d5dc3-107">這項程式可以是自動的，只要工具可以輕鬆地建立，就會以 `DbContext` 類似于執行時間設定的方式來設定。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-107">This process can be automatic as long as the tool can easily create the `DbContext` in such a way that it will be configured similarly to how it would be configured at run-time.</span></span>
 
-<span data-ttu-id="1b0dc-107">雖然提供必要設定資訊的任何模式 `DbContext` 在執行時間都可以運作，但是在設計階段需要使用的工具只能使用 `DbContext` 有限數目的模式。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-107">While any pattern that provides the necessary configuration information to the `DbContext` can work at run-time, tools that require using a `DbContext` at design-time can only work with a limited number of patterns.</span></span> <span data-ttu-id="1b0dc-108">在[設計階段內容建立](xref:core/miscellaneous/cli/dbcontext-creation)一節中，將會更詳細地說明這些功能。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-108">These are covered in more detail in the [Design-Time Context Creation](xref:core/miscellaneous/cli/dbcontext-creation) section.</span></span>
+<span data-ttu-id="d5dc3-108">雖然提供必要設定資訊的任何模式 `DbContext` 都可以在執行時間運作，但是在設計階段需要使用的工具只能使用 `DbContext` 有限數目的模式。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-108">While any pattern that provides the necessary configuration information to the `DbContext` can work at run-time, tools that require using a `DbContext` at design-time can only work with a limited number of patterns.</span></span> <span data-ttu-id="d5dc3-109">這些在 [設計階段內容建立](xref:core/miscellaneous/cli/dbcontext-creation) 一節中會更詳細地討論。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-109">These are covered in more detail in the [Design-Time Context Creation](xref:core/miscellaneous/cli/dbcontext-creation) section.</span></span>
 
-## <a name="configuring-dbcontextoptions"></a><span data-ttu-id="1b0dc-109">設定 DbCoNtextOptions</span><span class="sxs-lookup"><span data-stu-id="1b0dc-109">Configuring DbContextOptions</span></span>
+## <a name="configuring-dbcontextoptions"></a><span data-ttu-id="d5dc3-110">設定 DbCoNtextOptions</span><span class="sxs-lookup"><span data-stu-id="d5dc3-110">Configuring DbContextOptions</span></span>
 
-<span data-ttu-id="1b0dc-110">`DbContext`必須具有的實例 `DbContextOptions` ，才能執行任何工作。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-110">`DbContext` must have an instance of `DbContextOptions` in order to perform any work.</span></span> <span data-ttu-id="1b0dc-111">實例會攜帶如下的設定 `DbContextOptions` 資訊：</span><span class="sxs-lookup"><span data-stu-id="1b0dc-111">The `DbContextOptions` instance carries configuration information such as:</span></span>
+<span data-ttu-id="d5dc3-111">`DbContext` 必須具有的實例 `DbContextOptions` ，才能執行任何工作。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-111">`DbContext` must have an instance of `DbContextOptions` in order to perform any work.</span></span> <span data-ttu-id="d5dc3-112">此 `DbContextOptions` 實例會攜帶設定資訊，例如：</span><span class="sxs-lookup"><span data-stu-id="d5dc3-112">The `DbContextOptions` instance carries configuration information such as:</span></span>
 
-- <span data-ttu-id="1b0dc-112">要使用的資料庫提供者，通常是藉由叫用方法（例如或）來選取 `UseSqlServer` `UseSqlite` 。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-112">The database provider to use, typically selected by invoking a method such as `UseSqlServer` or `UseSqlite`.</span></span> <span data-ttu-id="1b0dc-113">這些擴充方法需要對應的提供者封裝，例如 `Microsoft.EntityFrameworkCore.SqlServer` 或 `Microsoft.EntityFrameworkCore.Sqlite` 。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-113">These extension methods require the corresponding provider package, such as `Microsoft.EntityFrameworkCore.SqlServer` or `Microsoft.EntityFrameworkCore.Sqlite`.</span></span> <span data-ttu-id="1b0dc-114">方法定義于 `Microsoft.EntityFrameworkCore` 命名空間中。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-114">The methods are defined in the `Microsoft.EntityFrameworkCore` namespace.</span></span>
-- <span data-ttu-id="1b0dc-115">資料庫實例的任何必要連接字串或識別碼，通常會當做引數傳遞給上述提供者選取方法</span><span class="sxs-lookup"><span data-stu-id="1b0dc-115">Any necessary connection string or identifier of the database instance, typically passed as an argument to the provider selection method mentioned above</span></span>
-- <span data-ttu-id="1b0dc-116">任何提供者層級的選擇性行為選取器，通常也會在對提供者選取方法的呼叫內進行連結</span><span class="sxs-lookup"><span data-stu-id="1b0dc-116">Any provider-level optional behavior selectors, typically also chained inside the call to the provider selection method</span></span>
-- <span data-ttu-id="1b0dc-117">任何一般 EF Core 行為選取器，通常會在提供者選取器方法之後或之前連結</span><span class="sxs-lookup"><span data-stu-id="1b0dc-117">Any general EF Core behavior selectors, typically chained after or before the provider selector method</span></span>
+- <span data-ttu-id="d5dc3-113">要使用的資料庫提供者，通常是透過叫用方法（例如或）來選取 `UseSqlServer` `UseSqlite` 。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-113">The database provider to use, typically selected by invoking a method such as `UseSqlServer` or `UseSqlite`.</span></span> <span data-ttu-id="d5dc3-114">這些擴充方法需要對應的提供者封裝，例如 `Microsoft.EntityFrameworkCore.SqlServer` 或 `Microsoft.EntityFrameworkCore.Sqlite` 。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-114">These extension methods require the corresponding provider package, such as `Microsoft.EntityFrameworkCore.SqlServer` or `Microsoft.EntityFrameworkCore.Sqlite`.</span></span> <span data-ttu-id="d5dc3-115">這些方法會在 `Microsoft.EntityFrameworkCore` 命名空間中定義。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-115">The methods are defined in the `Microsoft.EntityFrameworkCore` namespace.</span></span>
+- <span data-ttu-id="d5dc3-116">資料庫實例的任何必要連接字串或識別碼，通常會做為引數傳遞至上面所述的提供者選取方法</span><span class="sxs-lookup"><span data-stu-id="d5dc3-116">Any necessary connection string or identifier of the database instance, typically passed as an argument to the provider selection method mentioned above</span></span>
+- <span data-ttu-id="d5dc3-117">任何提供者層級的選用行為選取器，通常也會在對提供者選取方法的呼叫內連結</span><span class="sxs-lookup"><span data-stu-id="d5dc3-117">Any provider-level optional behavior selectors, typically also chained inside the call to the provider selection method</span></span>
+- <span data-ttu-id="d5dc3-118">任何一般 EF Core 行為選取器，通常是在提供者選取器方法之後或之前連結</span><span class="sxs-lookup"><span data-stu-id="d5dc3-118">Any general EF Core behavior selectors, typically chained after or before the provider selector method</span></span>
 
-<span data-ttu-id="1b0dc-118">下列範例會將設定 `DbContextOptions` 為使用 SQL Server 提供者、包含在變數中的連接 `connectionString` 、提供者層級的命令逾時，以及讓所有查詢都在 `DbContext` [no-tracking](xref:core/querying/tracking#no-tracking-queries)預設情況下執行的 EF Core 行為選取器：</span><span class="sxs-lookup"><span data-stu-id="1b0dc-118">The following example configures the `DbContextOptions` to use the SQL Server provider, a connection contained in the `connectionString` variable, a provider-level command timeout, and an EF Core behavior selector that makes all queries executed in the `DbContext` [no-tracking](xref:core/querying/tracking#no-tracking-queries) by default:</span></span>
+<span data-ttu-id="d5dc3-119">下列範例會將設定 `DbContextOptions` 為使用 SQL Server 提供者、變數中包含的連接 `connectionString` 、提供者層級的命令逾時，以及讓所有查詢在 `DbContext` [no-tracking](xref:core/querying/tracking#no-tracking-queries)預設情況下執行的 EF Core 行為選取器：</span><span class="sxs-lookup"><span data-stu-id="d5dc3-119">The following example configures the `DbContextOptions` to use the SQL Server provider, a connection contained in the `connectionString` variable, a provider-level command timeout, and an EF Core behavior selector that makes all queries executed in the `DbContext` [no-tracking](xref:core/querying/tracking#no-tracking-queries) by default:</span></span>
 
 ``` csharp
 optionsBuilder
@@ -39,15 +40,15 @@ optionsBuilder
 ```
 
 > [!NOTE]  
-> <span data-ttu-id="1b0dc-119">上述提供者選取器方法和其他行為選取器方法，是 `DbContextOptions` 或提供者特定選項類別上的擴充方法。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-119">Provider selector methods and other behavior selector methods mentioned above are extension methods on `DbContextOptions` or provider-specific option classes.</span></span> <span data-ttu-id="1b0dc-120">為了能夠存取這些擴充方法，您可能需要在範圍內有命名空間（通常是 `Microsoft.EntityFrameworkCore` ），並在專案中包含其他封裝相依性。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-120">In order to have access to these extension methods you may need to have a namespace (typically `Microsoft.EntityFrameworkCore`) in scope and include additional package dependencies in the project.</span></span>
+> <span data-ttu-id="d5dc3-120">上述提供者選取器方法和其他行為選取器方法，是 `DbContextOptions` 或提供者特定選項類別上的擴充方法。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-120">Provider selector methods and other behavior selector methods mentioned above are extension methods on `DbContextOptions` or provider-specific option classes.</span></span> <span data-ttu-id="d5dc3-121">若要能夠存取這些擴充方法，您可能需要命名空間 (通常 `Microsoft.EntityFrameworkCore`) 在範圍內，並在專案中包含額外的套件相依性。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-121">In order to have access to these extension methods you may need to have a namespace (typically `Microsoft.EntityFrameworkCore`) in scope and include additional package dependencies in the project.</span></span>
 
-<span data-ttu-id="1b0dc-121">`DbContextOptions`可以藉由覆 `DbContext` 寫方法或透過函式 `OnConfiguring` 引數在外部提供給。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-121">The `DbContextOptions` can be supplied to the `DbContext` by overriding the `OnConfiguring` method or externally via a constructor argument.</span></span>
+<span data-ttu-id="d5dc3-122">您 `DbContextOptions` 可以藉 `DbContext` 由覆寫 `OnConfiguring` 方法或從外部透過函式引數來提供。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-122">The `DbContextOptions` can be supplied to the `DbContext` by overriding the `OnConfiguring` method or externally via a constructor argument.</span></span>
 
-<span data-ttu-id="1b0dc-122">如果使用這兩種 `OnConfiguring` 方法，則會最後套用，而且可以覆寫提供給此函式引數的選項。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-122">If both are used, `OnConfiguring` is applied last and can overwrite options supplied to the constructor argument.</span></span>
+<span data-ttu-id="d5dc3-123">如果使用這兩種 `OnConfiguring` 方法，則會最後套用，而且可以覆寫提供給函式引數的選項。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-123">If both are used, `OnConfiguring` is applied last and can overwrite options supplied to the constructor argument.</span></span>
 
-### <a name="constructor-argument"></a><span data-ttu-id="1b0dc-123">函數引數</span><span class="sxs-lookup"><span data-stu-id="1b0dc-123">Constructor argument</span></span>
+### <a name="constructor-argument"></a><span data-ttu-id="d5dc3-124">函數引數</span><span class="sxs-lookup"><span data-stu-id="d5dc3-124">Constructor argument</span></span>
 
-<span data-ttu-id="1b0dc-124">您的函式可以直接接受， `DbContextOptions` 如下所示：</span><span class="sxs-lookup"><span data-stu-id="1b0dc-124">Your constructor can simply accept a `DbContextOptions` as follows:</span></span>
+<span data-ttu-id="d5dc3-125">您的函式可以直接接受，如下 `DbContextOptions` 所示：</span><span class="sxs-lookup"><span data-stu-id="d5dc3-125">Your constructor can simply accept a `DbContextOptions` as follows:</span></span>
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -61,9 +62,9 @@ public class BloggingContext : DbContext
 ```
 
 > [!TIP]  
-> <span data-ttu-id="1b0dc-125">DbCoNtext 的基底函式也會接受的非泛型版本 `DbContextOptions` ，但不建議針對具有多個內容類型的應用程式使用非泛型版本。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-125">The base constructor of DbContext also accepts the non-generic version of `DbContextOptions`, but using the non-generic version is not recommended for applications with multiple context types.</span></span>
+> <span data-ttu-id="d5dc3-126">DbCoNtext 的基底函式也會接受的非泛型版本 `DbContextOptions` ，但不建議針對具有多個內容類型的應用程式使用非泛型版本。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-126">The base constructor of DbContext also accepts the non-generic version of `DbContextOptions`, but using the non-generic version is not recommended for applications with multiple context types.</span></span>
 
-<span data-ttu-id="1b0dc-126">您的應用程式現在可以 `DbContextOptions` 在具現化內容時傳遞，如下所示：</span><span class="sxs-lookup"><span data-stu-id="1b0dc-126">Your application can now pass the `DbContextOptions` when instantiating a context, as follows:</span></span>
+<span data-ttu-id="d5dc3-127">您的應用程式現在可以在具現 `DbContextOptions` 化內容時傳遞，如下所示：</span><span class="sxs-lookup"><span data-stu-id="d5dc3-127">Your application can now pass the `DbContextOptions` when instantiating a context, as follows:</span></span>
 
 ``` csharp
 var optionsBuilder = new DbContextOptionsBuilder<BloggingContext>();
@@ -75,11 +76,11 @@ using (var context = new BloggingContext(optionsBuilder.Options))
 }
 ```
 
-### <a name="onconfiguring"></a><span data-ttu-id="1b0dc-127">OnConfiguring</span><span class="sxs-lookup"><span data-stu-id="1b0dc-127">OnConfiguring</span></span>
+### <a name="onconfiguring"></a><span data-ttu-id="d5dc3-128">OnConfiguring</span><span class="sxs-lookup"><span data-stu-id="d5dc3-128">OnConfiguring</span></span>
 
-<span data-ttu-id="1b0dc-128">您也可以在 `DbContextOptions` 內容本身中初始化。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-128">You can also initialize the `DbContextOptions` within the context itself.</span></span> <span data-ttu-id="1b0dc-129">雖然您可以使用這項技術來進行基本設定，但您通常還是需要從外部取得特定的設定詳細資料，例如資料庫連接字串。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-129">While you can use this technique for basic configuration, you will typically still need to get certain configuration details from the outside, e.g. a database connection string.</span></span> <span data-ttu-id="1b0dc-130">這可以透過設定 API 或任何其他方式來完成。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-130">This can be done with a configuration API or any other means.</span></span>
+<span data-ttu-id="d5dc3-129">您也可以在 `DbContextOptions` 內容本身內初始化。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-129">You can also initialize the `DbContextOptions` within the context itself.</span></span> <span data-ttu-id="d5dc3-130">雖然您可以使用這項技術進行基本設定，但通常還是需要從外部取得某些設定詳細資料，例如資料庫連接字串。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-130">While you can use this technique for basic configuration, you will typically still need to get certain configuration details from the outside, e.g. a database connection string.</span></span> <span data-ttu-id="d5dc3-131">這可以透過設定 API 或任何其他方式來完成。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-131">This can be done with a configuration API or any other means.</span></span>
 
-<span data-ttu-id="1b0dc-131">若要在 `DbContextOptions` 內容中初始化，請覆寫 `OnConfiguring` 方法，並在提供的上呼叫方法 `DbContextOptionsBuilder` ：</span><span class="sxs-lookup"><span data-stu-id="1b0dc-131">To initialize `DbContextOptions` within the context, override the `OnConfiguring` method and call the methods on the provided `DbContextOptionsBuilder`:</span></span>
+<span data-ttu-id="d5dc3-132">若要在 `DbContextOptions` 內容中初始化，請覆寫 `OnConfiguring` 方法，並在提供的上呼叫方法 `DbContextOptionsBuilder` ：</span><span class="sxs-lookup"><span data-stu-id="d5dc3-132">To initialize `DbContextOptions` within the context, override the `OnConfiguring` method and call the methods on the provided `DbContextOptionsBuilder`:</span></span>
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -93,7 +94,7 @@ public class BloggingContext : DbContext
 }
 ```
 
-<span data-ttu-id="1b0dc-132">應用程式可以直接具現化這類內容，而不需要將任何專案傳遞至其「其」</span><span class="sxs-lookup"><span data-stu-id="1b0dc-132">An application can simply instantiate such a context without passing anything to its constructor:</span></span>
+<span data-ttu-id="d5dc3-133">應用程式可以直接將這類內容具現化，而不將任何內容傳遞至其函式：</span><span class="sxs-lookup"><span data-stu-id="d5dc3-133">An application can simply instantiate such a context without passing anything to its constructor:</span></span>
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -103,17 +104,17 @@ using (var context = new BloggingContext())
 ```
 
 > [!TIP]
-> <span data-ttu-id="1b0dc-133">除非測試是以完整資料庫為目標，否則此方法不會使其本身進行測試。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-133">This approach does not lend itself to testing, unless the tests target the full database.</span></span>
+> <span data-ttu-id="d5dc3-134">除非測試以完整資料庫為目標，否則此方法不會自行測試。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-134">This approach does not lend itself to testing, unless the tests target the full database.</span></span>
 
-### <a name="using-dbcontext-with-dependency-injection"></a><span data-ttu-id="1b0dc-134">搭配使用 DbCoNtext 與相依性插入</span><span class="sxs-lookup"><span data-stu-id="1b0dc-134">Using DbContext with dependency injection</span></span>
+### <a name="using-dbcontext-with-dependency-injection"></a><span data-ttu-id="d5dc3-135">使用 DbCoNtext 搭配相依性插入</span><span class="sxs-lookup"><span data-stu-id="d5dc3-135">Using DbContext with dependency injection</span></span>
 
-<span data-ttu-id="1b0dc-135">EF Core 支援使用搭配相依性 `DbContext` 插入容器。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-135">EF Core supports using `DbContext` with a dependency injection container.</span></span> <span data-ttu-id="1b0dc-136">您可以使用方法，將您的 DbCoNtext 類型新增至服務容器 `AddDbContext<TContext>` 。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-136">Your DbContext type can be added to the service container by using the `AddDbContext<TContext>` method.</span></span>
+<span data-ttu-id="d5dc3-136">EF Core 支援搭配相依性 `DbContext` 插入容器使用。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-136">EF Core supports using `DbContext` with a dependency injection container.</span></span> <span data-ttu-id="d5dc3-137">您可以使用方法，將您的 DbCoNtext 類型加入至服務容器 `AddDbContext<TContext>` 。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-137">Your DbContext type can be added to the service container by using the `AddDbContext<TContext>` method.</span></span>
 
-<span data-ttu-id="1b0dc-137">`AddDbContext<TContext>`會同時從服務容器中，將您的 DbCoNtext 類型、 `TContext` 和對應的 `DbContextOptions<TContext>` 提供給插入。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-137">`AddDbContext<TContext>` will make both your DbContext type, `TContext`, and the corresponding `DbContextOptions<TContext>` available for injection from the service container.</span></span>
+<span data-ttu-id="d5dc3-138">`AddDbContext<TContext>` 會讓您的 DbCoNtext 類型、 `TContext` 和對應的 `DbContextOptions<TContext>` 可從服務容器中插入。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-138">`AddDbContext<TContext>` will make both your DbContext type, `TContext`, and the corresponding `DbContextOptions<TContext>` available for injection from the service container.</span></span>
 
-<span data-ttu-id="1b0dc-138">如需有關相依性插入的詳細資訊，請參閱下方的進一步[閱讀](#more-reading)。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-138">See [more reading](#more-reading) below for additional information on dependency injection.</span></span>
+<span data-ttu-id="d5dc3-139">如需有關相依性插入的詳細資訊，請參閱下面的 [詳細](#more-reading) 資訊。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-139">See [more reading](#more-reading) below for additional information on dependency injection.</span></span>
 
-<span data-ttu-id="1b0dc-139">將加入 `DbContext` 至相依性插入：</span><span class="sxs-lookup"><span data-stu-id="1b0dc-139">Adding the `DbContext` to dependency injection:</span></span>
+<span data-ttu-id="d5dc3-140">將加入 `DbContext` 至相依性插入：</span><span class="sxs-lookup"><span data-stu-id="d5dc3-140">Adding the `DbContext` to dependency injection:</span></span>
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)
@@ -122,9 +123,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-<span data-ttu-id="1b0dc-140">這需要將函式[引數](#constructor-argument)加入至接受的 DbCoNtext 類型 `DbContextOptions<TContext>` 。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-140">This requires adding a [constructor argument](#constructor-argument) to your DbContext type that accepts `DbContextOptions<TContext>`.</span></span>
+<span data-ttu-id="d5dc3-141">這需要在接受的 DbCoNtext 型別中加入一個函式 [引數](#constructor-argument) `DbContextOptions<TContext>` 。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-141">This requires adding a [constructor argument](#constructor-argument) to your DbContext type that accepts `DbContextOptions<TContext>`.</span></span>
 
-<span data-ttu-id="1b0dc-141">內容代碼：</span><span class="sxs-lookup"><span data-stu-id="1b0dc-141">Context code:</span></span>
+<span data-ttu-id="d5dc3-142">內容程式碼：</span><span class="sxs-lookup"><span data-stu-id="d5dc3-142">Context code:</span></span>
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -137,7 +138,7 @@ public class BloggingContext : DbContext
 }
 ```
 
-<span data-ttu-id="1b0dc-142">應用程式代碼（在 ASP.NET Core 中）：</span><span class="sxs-lookup"><span data-stu-id="1b0dc-142">Application code (in ASP.NET Core):</span></span>
+<span data-ttu-id="d5dc3-143">ASP.NET Core) 中的應用程式程式碼 (：</span><span class="sxs-lookup"><span data-stu-id="d5dc3-143">Application code (in ASP.NET Core):</span></span>
 
 ``` csharp
 public class MyController
@@ -153,7 +154,7 @@ public class MyController
 }
 ```
 
-<span data-ttu-id="1b0dc-143">應用程式代碼（直接使用 ServiceProvider，較不常見）：</span><span class="sxs-lookup"><span data-stu-id="1b0dc-143">Application code (using ServiceProvider directly, less common):</span></span>
+<span data-ttu-id="d5dc3-144">應用程式程式碼 (直接使用 ServiceProvider，較不常見) ：</span><span class="sxs-lookup"><span data-stu-id="d5dc3-144">Application code (using ServiceProvider directly, less common):</span></span>
 
 ``` csharp
 using (var context = serviceProvider.GetService<BloggingContext>())
@@ -164,35 +165,35 @@ using (var context = serviceProvider.GetService<BloggingContext>())
 var options = serviceProvider.GetService<DbContextOptions<BloggingContext>>();
 ```
 
-## <a name="avoiding-dbcontext-threading-issues"></a><span data-ttu-id="1b0dc-144">避免 DbCoNtext 執行緒問題</span><span class="sxs-lookup"><span data-stu-id="1b0dc-144">Avoiding DbContext threading issues</span></span>
+## <a name="avoiding-dbcontext-threading-issues"></a><span data-ttu-id="d5dc3-145">避免 DbCoNtext 執行緒問題</span><span class="sxs-lookup"><span data-stu-id="d5dc3-145">Avoiding DbContext threading issues</span></span>
 
-<span data-ttu-id="1b0dc-145">Entity Framework Core 不支援在相同的實例上執行多個平行作業 `DbContext` 。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-145">Entity Framework Core does not support multiple parallel operations being run on the same `DbContext` instance.</span></span> <span data-ttu-id="1b0dc-146">這包括平行執行非同步查詢，以及從多個執行緒進行任何明確的並行使用。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-146">This includes both parallel execution of async queries and any explicit concurrent use from multiple threads.</span></span> <span data-ttu-id="1b0dc-147">因此，一律會 `await` 立即非同步呼叫，或 `DbContext` 針對平行執行的作業使用個別的實例。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-147">Therefore, always `await` async calls immediately, or use separate `DbContext` instances for operations that execute in parallel.</span></span>
+<span data-ttu-id="d5dc3-146">Entity Framework Core 不支援在相同實例上執行多個平行作業 `DbContext` 。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-146">Entity Framework Core does not support multiple parallel operations being run on the same `DbContext` instance.</span></span> <span data-ttu-id="d5dc3-147">這包括平行執行非同步查詢，以及從多個執行緒進行任何明確的並行使用。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-147">This includes both parallel execution of async queries and any explicit concurrent use from multiple threads.</span></span> <span data-ttu-id="d5dc3-148">因此，一律會 `await` 立即非同步呼叫，或 `DbContext` 針對平行執行的作業使用個別的實例。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-148">Therefore, always `await` async calls immediately, or use separate `DbContext` instances for operations that execute in parallel.</span></span>
 
-<span data-ttu-id="1b0dc-148">當 EF Core 偵測到同時嘗試使用 `DbContext` 實例時，您會看到 `InvalidOperationException` 具有如下訊息的：</span><span class="sxs-lookup"><span data-stu-id="1b0dc-148">When EF Core detects an attempt to use a `DbContext` instance concurrently, you'll see an `InvalidOperationException` with a message like this:</span></span>
+<span data-ttu-id="d5dc3-149">當 EF Core 偵測到同時嘗試使用 `DbContext` 實例時，您會看到 `InvalidOperationException` 含有如下的訊息：</span><span class="sxs-lookup"><span data-stu-id="d5dc3-149">When EF Core detects an attempt to use a `DbContext` instance concurrently, you'll see an `InvalidOperationException` with a message like this:</span></span>
 
-> <span data-ttu-id="1b0dc-149">在先前的作業完成之前，已在此內容上啟動第二個作業。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-149">A second operation started on this context before a previous operation completed.</span></span> <span data-ttu-id="1b0dc-150">這通常是因為不同的執行緒使用相同的 DbCoNtext 實例而造成，但是實例成員不一定是安全線程。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-150">This is usually caused by different threads using the same instance of DbContext, however instance members are not guaranteed to be thread safe.</span></span>
+> <span data-ttu-id="d5dc3-150">在先前的作業完成之前，在此內容上啟動的第二個作業。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-150">A second operation started on this context before a previous operation completed.</span></span> <span data-ttu-id="d5dc3-151">這通常是由使用相同 DbCoNtext 實例的不同執行緒所造成，但是實例成員並不保證是安全線程。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-151">This is usually caused by different threads using the same instance of DbContext, however instance members are not guaranteed to be thread safe.</span></span>
 
-<span data-ttu-id="1b0dc-151">未偵測到平行存取時，可能會導致未定義的行為、應用程式當機和資料損毀。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-151">When concurrent access goes undetected, it can result in undefined behavior, application crashes and data corruption.</span></span>
+<span data-ttu-id="d5dc3-152">未偵測到平行存取時，可能會導致未定義的行為、應用程式當機和資料損毀。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-152">When concurrent access goes undetected, it can result in undefined behavior, application crashes and data corruption.</span></span>
 
-<span data-ttu-id="1b0dc-152">在相同的實例上，可能會不小心造成平行存取的常見錯誤 `DbContext` ：</span><span class="sxs-lookup"><span data-stu-id="1b0dc-152">There are common mistakes that can inadvertently cause concurrent access on the same `DbContext` instance:</span></span>
+<span data-ttu-id="d5dc3-153">有一些常見的錯誤，可能會不慎導致相同實例上的平行存取 `DbContext` ：</span><span class="sxs-lookup"><span data-stu-id="d5dc3-153">There are common mistakes that can inadvertently cause concurrent access on the same `DbContext` instance:</span></span>
 
-### <a name="forgetting-to-await-the-completion-of-an-asynchronous-operation-before-starting-any-other-operation-on-the-same-dbcontext"></a><span data-ttu-id="1b0dc-153">忘了等待非同步作業完成，再于相同的 DbCoNtext 上啟動任何其他作業</span><span class="sxs-lookup"><span data-stu-id="1b0dc-153">Forgetting to await the completion of an asynchronous operation before starting any other operation on the same DbContext</span></span>
+### <a name="forgetting-to-await-the-completion-of-an-asynchronous-operation-before-starting-any-other-operation-on-the-same-dbcontext"></a><span data-ttu-id="d5dc3-154">忘記等候非同步作業完成後，再于相同 DbCoNtext 上啟動任何其他作業</span><span class="sxs-lookup"><span data-stu-id="d5dc3-154">Forgetting to await the completion of an asynchronous operation before starting any other operation on the same DbContext</span></span>
 
-<span data-ttu-id="1b0dc-154">非同步方法可讓 EF Core 起始以非封鎖方式存取資料庫的作業。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-154">Asynchronous methods enable EF Core to initiate operations that access the database in a non-blocking way.</span></span> <span data-ttu-id="1b0dc-155">但是，如果呼叫端不等待其中一種方法完成，並繼續在上執行其他作業，則的 `DbContext` 狀態 `DbContext` 可以是（而且很可能會）損毀。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-155">But if a caller does not await the completion of one of these methods, and proceeds to perform other operations on the `DbContext`, the state of the `DbContext` can be, (and very likely will be) corrupted.</span></span>
+<span data-ttu-id="d5dc3-155">非同步方法可讓 EF Core 起始以非封鎖方式存取資料庫的作業。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-155">Asynchronous methods enable EF Core to initiate operations that access the database in a non-blocking way.</span></span> <span data-ttu-id="d5dc3-156">但是，如果呼叫端未等候完成其中一種方法，並繼續在上執行其他作業 `DbContext` ，的狀態 `DbContext` 可能是， (且很可能會) 損毀。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-156">But if a caller does not await the completion of one of these methods, and proceeds to perform other operations on the `DbContext`, the state of the `DbContext` can be, (and very likely will be) corrupted.</span></span>
 
-<span data-ttu-id="1b0dc-156">一律等待立即 EF Core 非同步方法。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-156">Always await EF Core asynchronous methods immediately.</span></span>  
+<span data-ttu-id="d5dc3-157">請一律立即等候 EF Core 非同步方法。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-157">Always await EF Core asynchronous methods immediately.</span></span>  
 
-### <a name="implicitly-sharing-dbcontext-instances-across-multiple-threads-via-dependency-injection"></a><span data-ttu-id="1b0dc-157">透過相依性插入，在多個執行緒之間隱含共用 DbCoNtext 實例</span><span class="sxs-lookup"><span data-stu-id="1b0dc-157">Implicitly sharing DbContext instances across multiple threads via dependency injection</span></span>
+### <a name="implicitly-sharing-dbcontext-instances-across-multiple-threads-via-dependency-injection"></a><span data-ttu-id="d5dc3-158">透過相依性插入，隱含地跨多個執行緒共用 DbCoNtext 實例</span><span class="sxs-lookup"><span data-stu-id="d5dc3-158">Implicitly sharing DbContext instances across multiple threads via dependency injection</span></span>
 
-<span data-ttu-id="1b0dc-158">[`AddDbContext`](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext)根據預設，擴充方法會註冊 `DbContext` 具有[限定範圍存留期](/aspnet/core/fundamentals/dependency-injection#service-lifetimes)的類型。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-158">The [`AddDbContext`](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) extension method registers `DbContext` types with a [scoped lifetime](/aspnet/core/fundamentals/dependency-injection#service-lifetimes) by default.</span></span>
+<span data-ttu-id="d5dc3-159">[`AddDbContext`](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext)擴充方法預設會 `DbContext` 註冊具有[範圍存留期](/aspnet/core/fundamentals/dependency-injection#service-lifetimes)的類型。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-159">The [`AddDbContext`](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) extension method registers `DbContext` types with a [scoped lifetime](/aspnet/core/fundamentals/dependency-injection#service-lifetimes) by default.</span></span>
 
-<span data-ttu-id="1b0dc-159">這不是大多數 ASP.NET Core 應用程式中平行存取問題的安全，因為在指定的時間內只有一個執行緒執行每個用戶端要求，而且每個要求都會取得個別的相依性插入範圍（因此是個別的 `DbContext` 實例）。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-159">This is safe from concurrent access issues in most ASP.NET Core applications because there is only one thread executing each client request at a given time, and because each request gets a separate dependency injection scope (and therefore a separate `DbContext` instance).</span></span> <span data-ttu-id="1b0dc-160">針對 Blazor 伺服器裝載模型，會使用一個邏輯要求來維護 Blazor 的使用者線路，因此，如果使用預設的插入範圍，每個使用者線路只有一個範圍 DbCoNtext 實例可供使用。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-160">For Blazor Server hosting model, one logical request is used for maintaining the Blazor user circuit, and thus only one scoped DbContext instance is available per user circuit if the default injection scope is used.</span></span>
+<span data-ttu-id="d5dc3-160">這可安全地避免大多數 ASP.NET Core 應用程式中的平行存取問題，因為在指定的時間內只有一個執行緒執行每個用戶端要求，而且每個要求都會取得個別的相依性插入範圍 (，因此) 個別的 `DbContext` 實例。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-160">This is safe from concurrent access issues in most ASP.NET Core applications because there is only one thread executing each client request at a given time, and because each request gets a separate dependency injection scope (and therefore a separate `DbContext` instance).</span></span> <span data-ttu-id="d5dc3-161">針對 Blazor 伺服器裝載模型，會使用一個邏輯要求來維護 Blazor 使用者電路，因此，如果使用預設的插入範圍，每個使用者電路只能使用一個範圍的 DbCoNtext 實例。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-161">For Blazor Server hosting model, one logical request is used for maintaining the Blazor user circuit, and thus only one scoped DbContext instance is available per user circuit if the default injection scope is used.</span></span>
 
-<span data-ttu-id="1b0dc-161">任何明確地以平行方式執行多個執行緒的程式碼，都應該確保 `DbContext` 不會同時存取實例。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-161">Any code that explicitly executes multiple threads in parallel should ensure that `DbContext` instances aren't ever accessed concurrently.</span></span>
+<span data-ttu-id="d5dc3-162">任何明確地以平行方式執行多個執行緒的程式碼，都應該確保 `DbContext` 不會同時存取實例。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-162">Any code that explicitly executes multiple threads in parallel should ensure that `DbContext` instances aren't ever accessed concurrently.</span></span>
 
-<span data-ttu-id="1b0dc-162">使用相依性插入，您可以將內容註冊為已設定範圍，並建立每個執行緒的範圍（使用 `IServiceScopeFactory` ），或將註冊 `DbContext` 為暫時性（使用採用參數的多載 `AddDbContext` ）來達成此目的 `ServiceLifetime` 。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-162">Using dependency injection, this can be achieved by either registering the context as scoped, and creating scopes (using `IServiceScopeFactory`) for each thread, or by registering the `DbContext` as transient (using the overload of `AddDbContext` which takes a `ServiceLifetime` parameter).</span></span>
+<span data-ttu-id="d5dc3-163">使用相依性插入時，您可以將內容註冊為已設定範圍，並為 `IServiceScopeFactory` 每個執行緒建立範圍)  (，或使用 `DbContext` `AddDbContext` 接受參數) 的多載來註冊作為暫時性 (來達成 `ServiceLifetime` 。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-163">Using dependency injection, this can be achieved by either registering the context as scoped, and creating scopes (using `IServiceScopeFactory`) for each thread, or by registering the `DbContext` as transient (using the overload of `AddDbContext` which takes a `ServiceLifetime` parameter).</span></span>
 
-## <a name="more-reading"></a><span data-ttu-id="1b0dc-163">閱讀更多</span><span class="sxs-lookup"><span data-stu-id="1b0dc-163">More reading</span></span>
+## <a name="more-reading"></a><span data-ttu-id="d5dc3-164">更多閱讀</span><span class="sxs-lookup"><span data-stu-id="d5dc3-164">More reading</span></span>
 
-- <span data-ttu-id="1b0dc-164">若要深入瞭解如何使用 DI，請參閱相依性[插入](/aspnet/core/fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-164">Read [Dependency Injection](/aspnet/core/fundamentals/dependency-injection) to learn more about using DI.</span></span>
-- <span data-ttu-id="1b0dc-165">如需詳細資訊，請參閱[測試](testing/index.md)。</span><span class="sxs-lookup"><span data-stu-id="1b0dc-165">Read [Testing](testing/index.md) for more information.</span></span>
+- <span data-ttu-id="d5dc3-165">若要深入瞭解如何使用 DI，請參閱相依性 [插入](/aspnet/core/fundamentals/dependency-injection) 。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-165">Read [Dependency Injection](/aspnet/core/fundamentals/dependency-injection) to learn more about using DI.</span></span>
+- <span data-ttu-id="d5dc3-166">閱讀 [測試](xref:core/miscellaneous/testing/index) 以取得詳細資訊。</span><span class="sxs-lookup"><span data-stu-id="d5dc3-166">Read [Testing](xref:core/miscellaneous/testing/index) for more information.</span></span>
