@@ -1,59 +1,61 @@
 ---
-title: 空間類型的提供者支援-EF6
+title: 支援空間類型的提供者-EF6
+description: Entity Framework 6 中的空間類型提供者支援
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 1097cb00-15f5-453d-90ed-bff9403d23e3
-ms.openlocfilehash: 863f1b4551bd62160915eba90fee7ba6c49c169c
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/providers/spatial-support
+ms.openlocfilehash: 060d662aa8f03ea3510bd6b1fb7bdf904585efab
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416336"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89615790"
 ---
 # <a name="provider-support-for-spatial-types"></a>空間類型的提供者支援
-Entity Framework 支援透過 DbGeography 或 DbGeometry 類別來使用空間資料。 這些類別會依賴 Entity Framework 提供者所提供的資料庫特定功能。 並非所有提供者都支援空間資料，而且可能會有額外的必要條件（例如安裝空間類型元件）。 以下提供有關空間類型提供者支援的詳細資訊。  
+Entity Framework 支援透過 DbGeography 或 DbGeometry 類別處理空間資料。 這些類別依賴 Entity Framework 提供者所提供的資料庫特定功能。 並非所有提供者都支援空間資料，而且可能有其他必要條件，例如安裝空間類型元件。 以下提供有關空間類型提供者支援的詳細資訊。  
 
 有關如何在應用程式中使用空間類型的其他資訊，可以在兩個逐步解說中找到，一個用於 Code First，另一個用於 Database First 或 Model First：  
 
-- [Code First 中的空間資料類型](~/ef6/modeling/code-first/data-types/spatial.md)  
-- [EF 設計工具中的空間資料類型](~/ef6/modeling/designer/data-types/spatial.md)  
+- [Code First 中的空間資料類型](xref:ef6/modeling/code-first/data-types/spatial)  
+- [EF 設計工具中的空間資料類型](xref:ef6/modeling/designer/data-types/spatial)  
 
 ## <a name="ef-releases-that-support-spatial-types"></a>支援空間類型的 EF 版本  
 
-空間類型的支援已在 EF5 中引進。 不過，在 EF5 空間類型中，只有在應用程式以 .NET 4.5 為目標並執行時才支援。  
+EF5 中引進了對空間類型的支援。 不過，只有當應用程式是以 .NET 4.5 為目標並執行時，才支援 EF5 空間類型。  
 
-針對以 .NET 4 和 .NET 4.5 為目標的應用程式，支援從 EF6 空間類型開始。  
+以 .NET 4 和 .NET 4.5 為目標的應用程式支援以 EF6 空間類型開始。  
 
 ## <a name="ef-providers-that-support-spatial-types"></a>支援空間類型的 EF 提供者  
 
 ### <a name="ef5"></a>EF5  
 
-我們知道支援空間類型之 EF5 的 Entity Framework 提供者為：  
+我們注意到支援空間類型的 EF5 Entity Framework 提供者為：  
 
 - Microsoft SQL Server 提供者  
-    - 此提供者隨附于 EF5 中。  
-    - 此提供者取決於可能需要安裝的其他低層級程式庫，請參閱下面的詳細資料。  
+    - 此提供者隨附于 EF5 的一部分。  
+    - 此提供者相依于可能需要安裝的一些較低層級程式庫，如需詳細資料，請參閱下文。  
 - [適用于 Oracle 的 Devart dotConnect](https://www.devart.com/dotconnect/oracle/)  
-    - 這是 Devart 的協力廠商提供者。  
+    - 這是來自 Devart 的協力廠商提供者。  
 
-如果您知道支援空間類型的 EF5 提供者，請取得連絡人，我們很樂意將其新增至此清單。  
+如果您知道支援空間類型的 EF5 提供者，請聯繫，我們很樂意將其新增至此清單。  
 
 ### <a name="ef6"></a>EF6  
 
-我們知道支援空間類型之 EF6 的 Entity Framework 提供者為：  
+我們注意到支援空間類型的 EF6 Entity Framework 提供者為：  
 
 - Microsoft SQL Server 提供者  
-    - 此提供者隨附于 EF6 中。  
-    - 此提供者取決於可能需要安裝的其他低層級程式庫，請參閱下面的詳細資料。  
+    - 此提供者隨附于 EF6 的一部分。  
+    - 此提供者相依于可能需要安裝的一些較低層級程式庫，如需詳細資料，請參閱下文。  
 - [適用于 Oracle 的 Devart dotConnect](https://www.devart.com/dotconnect/oracle/)  
-    - 這是 Devart 的協力廠商提供者。  
+    - 這是來自 Devart 的協力廠商提供者。  
 
-如果您知道支援空間類型的 EF6 提供者，請取得連絡人，我們很樂意將其新增至此清單。  
+如果您知道支援空間類型的 EF6 提供者，請聯繫，我們很樂意將其新增至此清單。  
 
-## <a name="prerequisites-for-spatial-types-with-microsoft-sql-server"></a>具有 Microsoft SQL Server 之空間類型的必要條件  
+## <a name="prerequisites-for-spatial-types-with-microsoft-sql-server"></a>具有 Microsoft SQL Server 的空間類型必要條件  
 
-SQL Server 空間支援取決於低層級、SQL Server 特定的類型 SqlGeography 和 SqlGeometry。 這些類型存在於 Microsoft. SqlServer 元件中，而且此元件不會隨附在 EF 中，或做為 .NET Framework 的一部分。  
+SQL Server 空間支援取決於低層級的 SQL Server 特定類型 SqlGeography 和 SqlGeometry。 這些類型會存留在 Microsoft.SqlServer.Types.dll 元件中，而此元件不會隨附于 EF 或 .NET Framework 的一部分。  
 
-安裝 Visual Studio 時，通常也會安裝 SQL Server 的版本，而這會包含安裝的 Microsoft. SqlServer. d. d. d. d。  
+安裝 Visual Studio 時，通常也會安裝 SQL Server 的版本，這將包含安裝 Microsoft.SqlServer.Types.dll。  
 
-如果 SQL Server 未安裝在您想要使用空間類型的電腦上，或如果已從 SQL Server 安裝中排除空間類型，您就必須手動安裝它們。 您可以使用 `SQLSysClrTypes.msi`（屬於 Microsoft SQL Server Feature Pack 的一部分）來安裝類型。 空間類型是 SQL Server 版本特定的，因此建議您在 Microsoft 下載中心[搜尋 "SQL Server Feature Pack"](https://www.microsoft.com/search/result.aspx?q=sql+server+feature+pack) ，然後選取並下載與您將使用的 SQL Server 版本對應的選項。
+如果 SQL Server 未安裝在您要使用空間類型的電腦上，或空間類型已從 SQL Server 安裝中排除，則您必須手動安裝它們。 您可以使用來安裝類型 `SQLSysClrTypes.msi` ，這是 Microsoft SQL Server Feature Pack 的一部分。 空間類型 SQL Server 版本專屬，因此我們建議您在 Microsoft 下載中心 [搜尋「SQL Server Feature Pack](https://www.microsoft.com/search/result.aspx?q=sql+server+feature+pack) 」，然後選取並下載與您將使用之 SQL Server 版本對應的選項。

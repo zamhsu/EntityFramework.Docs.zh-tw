@@ -1,19 +1,21 @@
 ---
 title: 連接管理-EF6
+description: Entity Framework 6 中的連接管理
 author: divega
 ms.date: 10/23/2016
 ms.assetid: ecaa5a27-b19e-4bf9-8142-a3fb00642270
-ms.openlocfilehash: a6352bbbc38c38bd5f30536736ec969056df2c7d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/connection-management
+ms.openlocfilehash: c352e761a9891b5c275f32752f10de13222bf48e
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417984"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617230"
 ---
 # <a name="connection-management"></a>連線管理
-此頁面描述將連接傳遞至內容和**Database. Open （）** API 的功能時，Entity Framework 的行為。  
+此頁面描述將連接傳遞至內容的行為，以及連接到資料庫的功能時的 Entity Framework 行為 **。開啟 ( # B1 ** API。  
 
-## <a name="passing-connections-to-the-context"></a>傳遞連接至內容  
+## <a name="passing-connections-to-the-context"></a>傳遞內容的連接  
 
 ### <a name="behavior-for-ef5-and-earlier-versions"></a>EF5 和較早版本的行為  
 
@@ -24,12 +26,12 @@ public DbContext(DbConnection existingConnection, bool contextOwnsConnection)
 public DbContext(DbConnection existingConnection, DbCompiledModel model, bool contextOwnsConnection)
 ```  
 
-您可以使用這些方法，但您必須解決幾個限制：  
+您可以使用這些功能，但您必須解決一些限制：  
 
-1. 如果您將開啟的連接傳遞給其中一個，則當架構第一次嘗試使用它時，就會擲回 InvalidOperationException，指出它無法重新開啟已開啟的連接。  
-2. CoNtextOwnsConnection 旗標會解讀為表示在處置內容時是否應處置基礎存放區連接。 但是，不論該設定為何，當處置內容時，存放區連接一律會關閉。 因此，如果您有一個以上的 DbCoNtext 具有相同的連線，則會先將其處置，否則會關閉連接（同樣地，如果您已使用 DbCoNtext 混合現有的 ADO.NET 連線，DbCoNtext 將一律會在處置時關閉連接）.  
+1. 如果您將開啟的連接傳遞到其中一種，則當 framework 第一次嘗試使用它時，會擲回 InvalidOperationException，指出它無法重新開啟已開啟的連接。  
+2. 當處置內容時，會將 coNtextOwnsConnection 旗標解釋為表示是否應該處置基礎存放區連接。 但是，不論該設定為何，當處置內容時，存放區連接一律會關閉。 因此，如果您有多個 DbCoNtext 具有相同的連接，則 (會先處置其中的任何內容。如果您已將現有的 ADO.NET 連接與 DbCoNtext 混合，則 DbCoNtext 將會在) 處置時一律關閉連接。  
 
-藉由傳遞已關閉的連接，而且只執行會在建立所有內容之後開啟它的程式碼，就可以解決上述第一項限制：  
+您可以藉由傳遞關閉的連線，並只執行在建立所有內容之後開啟它的程式碼，來解決上述第一項限制：  
 
 ``` csharp
 using System.Collections.Generic;
@@ -71,11 +73,11 @@ namespace ConnectionManagementExamples
 }
 ```  
 
-第二個限制只是表示您需要避免處置任何 DbCoNtext 物件，直到您準備好讓連接關閉為止。  
+第二個限制只是表示您必須先避免處置任何 DbCoNtext 物件，直到您準備好要關閉連接為止。  
 
 ### <a name="behavior-in-ef6-and-future-versions"></a>EF6 和未來版本中的行為  
 
-在 EF6 和未來版本中，DbCoNtext 具有相同的兩個函式，但不再要求傳遞至該函式的連接在收到時關閉。 這現在是可行的：  
+在 EF6 和未來版本中，DbCoNtext 具有相同的兩個函式，但不再要求傳遞至函式的連接在收到時關閉。 這現在是可行的：  
 
 ``` csharp
 using System.Collections.Generic;
@@ -123,24 +125,24 @@ namespace ConnectionManagementExamples
 }
 ```  
 
-此外，coNtextOwnsConnection 旗標現在會控制是否要在處置 DbCoNtext 時關閉和處置連接。 因此，在上述範例中，當內容被處置（行32）時，不會關閉連接，因為它在舊版 EF 中已經存在，而是在處理連接本身時（行40）。  
+此外，coNtextOwnsConnection 旗標現在也會控制在處置 DbCoNtext 時是否關閉和處置連接。 因此，在上述範例中，當 (行 32) 處置內容時，不會關閉連線，就像在舊版 EF 中處置一樣，當連接本身 (行 40) 時，也不會關閉連接。  
 
-當然，DbCoNtext 還是可以控制連接（只要將 coNtextOwnsConnection 設為 true，或使用其中一個其他的函式）。  
+當然，DbCoNtext 還是有可能掌控連接 (只要將 coNtextOwnsConnection 設為 true，或使用其中一個其他的函式) 如果您想要的話。  
 
 > [!NOTE]
-> 在此新模型中使用交易時，還有一些額外的考慮。 如需詳細資訊，請參閱[使用交易](~/ef6/saving/transactions.md)。  
+> 使用此新模型時，有一些其他考慮。 如需詳細資訊，請參閱 [使用交易](xref:ef6/saving/transactions)。  
 
-## <a name="databaseconnectionopen"></a>連接。開啟（）  
+## <a name="databaseconnectionopen"></a>連接。開啟 ( # A1  
 
 ### <a name="behavior-for-ef5-and-earlier-versions"></a>EF5 和較早版本的行為  
 
-在 EF5 和較舊版本中，有一個 bug，讓**ObjectCoNtext**不會更新，以反映基礎存放區連接的真正狀態。 例如，如果您執行下列程式碼，您可以傳回狀態 [**已關閉**]，即使基礎存放區連接已**開啟**也是一樣。  
+在 EF5 和較早的版本中，有一個錯誤（bug），因此不會更新 **ObjectCoNtext** 以反映基礎存放區連接的真正狀態。 例如，如果您執行了下列程式碼，即使基礎存放區連接已**開啟**，也可以將狀態視為**已關閉**。  
 
 ``` csharp
 ((IObjectContextAdapter)context).ObjectContext.Connection.State
 ```  
 
-另外，如果您藉由呼叫 [資料庫] 開啟資料庫連接，請開啟（），直到下一次執行查詢或呼叫需要資料庫連接的任何專案時（例如 SaveChanges （）），但在基礎存放區之後，才會開啟連接將會關閉。 然後，每當需要另一個資料庫作業時，內容就會重新開啟並重新關閉連接：  
+另外，如果您藉由呼叫連接來開啟資料庫連接，請開啟 ( # A1，直到您下一次執行查詢或呼叫需要資料庫 (連接的任何作業時，才會開啟它（例如 SaveChanges ( # A4 # A5，但之後將會關閉基礎存放區連接）。 當需要另一個資料庫作業時，內容就會重新開啟並重新關閉連接：  
 
 ``` csharp
 using System;
@@ -186,12 +188,12 @@ namespace ConnectionManagementExamples
 
 ### <a name="behavior-in-ef6-and-future-versions"></a>EF6 和未來版本中的行為  
 
-在 EF6 和未來版本中，如果呼叫程式碼選擇藉由呼叫內容來開啟連接，我們就採取了方法。連接. Open （），這樣做有一個很好的理由，而且架構會假設它想要控制連接的開啟和關閉，而且不會再自動關閉連接。  
+針對 EF6 和未來的版本，我們採用的方法是，如果呼叫程式碼選擇透過呼叫內容來開啟連接。連接。開啟 ( # A1 之後，它會有很好的理由，而且架構會假設它想要控制連接的開啟和關閉，且不會再自動關閉連接。  
 
 > [!NOTE]
-> 這可能會導致長時間開啟的連線，因此請小心使用。  
+> 這可能會導致長時間開啟的連接，因此請小心使用。  
 
-我們也更新了程式碼，讓 ObjectCoNtext 的狀態能夠正確追蹤基礎連接的狀態。  
+我們也已更新程式碼，讓 ObjectCoNtext 連接。狀態現在會正確地追蹤基礎連接的狀態。  
 
 ``` csharp
 using System;

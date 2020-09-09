@@ -1,26 +1,27 @@
 ---
 title: 已中斷連線的實體 - EF Core
+description: 在 Entity Framework Core 中使用已中斷連線、未追蹤的實體（跨多個內容實例）
 author: ajcvickers
 ms.author: avickers
 ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 421531e68ac98c0553938f1c24892701f22fef3c
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 52ba838c4d54771c51737c3940e5a88659f94144
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417594"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617274"
 ---
 # <a name="disconnected-entities"></a>已中斷連線的實體
 
-DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在呼叫 SaveChanges 時，就會偵測已對這些實體進行的變更，然後將會視需要更新資料庫。 如需詳細資料，請參閱[基本儲存](basic.md)和[相關資料](related-data.md)。
+DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在呼叫 SaveChanges 時，就會偵測已對這些實體進行的變更，然後將會視需要更新資料庫。 如需詳細資料，請參閱[基本儲存](xref:core/saving/basic)和[相關資料](xref:core/saving/related-data)。
 
 不過，有時會在查詢實體時使用一個內容執行個體，然後儲存時又使用不同的執行個體。 這通常發生在「已中斷連線」的案例中，例如 Web 應用程式，其中會在要求中對實體進行查詢、傳送給用戶端、修改、傳回給伺服器，然後再儲存。 在此情況下，第二個內容執行個體必須知道實體是新的 (應該插入) 還是現有的 (應該更新)。
 
 <!-- markdownlint-disable MD028 -->
 > [!TIP]
-> 您可以在 GitHub 上查看本文[的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/)。
+> 您可以在 GitHub 上查看這篇文章的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) 。
 
 > [!TIP]
 > 對於具有指定主索引鍵值的任何實體，EF Core 只能追蹤其中一個執行個體。 若要避免此情況成為問題，最佳方式就是針對每個工作單位都使用短期內容，讓內容從空白開始、有實體與其連結、儲存這些實體，然後再處置及捨棄內容。

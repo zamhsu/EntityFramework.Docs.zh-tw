@@ -1,21 +1,22 @@
 ---
 title: 串聯刪除 - EF Core
+description: 在刪除主體實體時設定相關實體的刪除行為
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 6e92b869d691d0224abf1997d9eb7ea035489c5d
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: cf17e6586b89376b2d7fcc0f9cbfc8e1c4f6ba58
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417611"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617400"
 ---
 # <a name="cascade-delete"></a>串聯刪除
 
 串聯刪除在資料庫術語中常用來描述一種允許在刪除一個資料列時自動觸發刪除相關資料列的特性。 EF Core 刪除行為也涵蓋一個密切相關的概念，就是在子實體與父系的關聯性已被切斷時便自動刪除子實體，這也通稱為「刪除失去關聯的項目」。
 
-EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪除行為。 EF Core 也實作一些慣例，可根據[關聯性的必要性](../modeling/relationships.md#required-and-optional-relationships)，為每個關聯性自動設定實用的預設刪除行為。
+EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪除行為。 EF Core 也實作一些慣例，可根據[關聯性的必要性](xref:core/modeling/relationships#required-and-optional-relationships)，為每個關聯性自動設定實用的預設刪除行為。
 
 ## <a name="delete-behaviors"></a>刪除行為
 
@@ -30,7 +31,7 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 > [!NOTE]  
 > 只有在使用 EF Core 來刪除主體實體且已將相依實體載入記憶體中 (亦即針對所追蹤的相依項) 的情況下，才會套用 EF Core 模型中所設定的刪除行為。 必須在資料庫中設定對應的串聯行為，才能確保沒有受到內容追蹤的資料會套用必要的動作。 如果您使用 EF Core 來建立資料庫，將會為您設定此串聯行為。
 
-就上述第二個動作而言，如果外部索引鍵值不可為 Null，將其設定為 Null 就會無效。 (非空外鍵等效於所需的關係。在這些情況下,EF Core 跟蹤外鍵屬性已被標記為 null,直到調用 SaveChange,此時將引發異常,因為更改無法儲存到資料庫。 這與從資料庫收到條件約束違規類似。
+就上述第二個動作而言，如果外部索引鍵值不可為 Null，將其設定為 Null 就會無效。  (不可為 null 的外鍵相當於必要的關聯性。 ) 在這些情況下，EF Core 會追蹤外鍵屬性是否已標示為 null，直到呼叫 SaveChanges 為止，此時會擲回例外狀況，因為變更無法保存到資料庫。 這與從資料庫收到條件約束違規類似。
 
 如下表中所列，有四種刪除行為。
 
@@ -41,9 +42,9 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 | 行為名稱               | 對記憶體中相依項/子系的影響    | 對資料庫中相依項/子系的影響  |
 |:----------------------------|:---------------------------------------|:---------------------------------------|
 | **級 聯**                 | 將實體刪除                   | 將實體刪除                   |
-| **ClientSetNull** (預設值) | 將外部索引鍵屬性設定為 Null | None                                   |
+| **ClientSetNull** (預設值) | 將外部索引鍵屬性設定為 Null | 無                                   |
 | **SetNull**                 | 將外部索引鍵屬性設定為 Null | 將外部索引鍵屬性設定為 Null |
-| **限制**                | None                                   | None                                   |
+| **限制**                | 無                                   | 無                                   |
 
 ### <a name="required-relationships"></a>必要關係
 
@@ -52,9 +53,9 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 | 行為名稱         | 對記憶體中相依項/子系的影響 | 對資料庫中相依項/子系的影響 |
 |:----------------------|:------------------------------------|:--------------------------------------|
 | **Cascade** (預設值) | 將實體刪除                | 將實體刪除                  |
-| **ClientSetNull**     | SaveChanges 擲回例外狀況                  | None                                  |
+| **ClientSetNull**     | SaveChanges 擲回例外狀況                  | 無                                  |
 | **SetNull**           | SaveChanges 擲回例外狀況                  | SaveChanges 擲回例外狀況                    |
-| **限制**          | None                                | None                                  |
+| **限制**          | 無                                | 無                                  |
 
 在上表中，「無」** 會造成條件約束違規。 例如，如果將主體/子系實體刪除，但未採取任何動作來變更相依項/子系的外部索引鍵，資料庫將可能因外部條件約速違規而在 SaveChanges 時擲回例外狀況。
 

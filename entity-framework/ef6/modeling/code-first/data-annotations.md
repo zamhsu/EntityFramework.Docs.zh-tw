@@ -1,14 +1,16 @@
 ---
 title: Code First 資料批註-EF6
+description: Entity Framework 6 中的 Code First 資料批註
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 17370b83aee9974161b1771e8a1dc99c2de27f0f
-ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
+uid: ef6/modeling/code-first/data-annotations
+ms.openlocfilehash: 37b2872b5fb40cf0dc346554b2cbb9e3fffd6bdc
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88847614"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617354"
 ---
 # <a name="code-first-data-annotations"></a>Code First 資料註解
 > [!NOTE]
@@ -391,7 +393,7 @@ Code first 慣例規定在資料庫中表示支援的資料類型的每個屬性
 ## <a name="relationship-attributes-inverseproperty-and-foreignkey"></a>關聯性屬性： InverseProperty 和 ForeignKey
 
 > [!NOTE]
-> 此頁面提供使用資料批註在 Code First 模型中設定關聯性的相關資訊。 如需 EF 中關聯性的一般資訊，以及如何使用關聯性存取和運算元據，請參閱 [關聯性 & 導覽屬性](~/ef6/fundamentals/relationships.md)。 *
+> 此頁面提供使用資料批註在 Code First 模型中設定關聯性的相關資訊。 如需 EF 中關聯性的一般資訊，以及如何使用關聯性存取和運算元據，請參閱 [關聯性 & 導覽屬性](xref:ef6/fundamentals/relationships)。 *
 
 Code first 慣例將負責您模型中最常見的關聯性，但在某些情況下需要協助。
 

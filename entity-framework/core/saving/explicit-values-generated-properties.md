@@ -1,24 +1,25 @@
 ---
 title: 為產生的屬性設定明確值 - EF Core
+description: 針對設定為隨 Entity Framework Core 產生的屬性，明確設定值的相關資訊
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3f1993c2-cdf5-425b-bac2-a2665a20322b
 uid: core/saving/explicit-values-generated-properties
-ms.openlocfilehash: 43c4ab3c2a60645cdeff2a6cc40ce979f832f2fd
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 6a10e8d8c056ab66226f229dcb8b032ff83f06fe
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417566"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617252"
 ---
 # <a name="setting-explicit-values-for-generated-properties"></a>為產生的屬性設定明確值
 
-產生的屬性係指其值會在新增和/或更新實體時產生 (由 EF 或資料庫產生) 的屬性。 如需詳細資訊，請參閱[產生的屬性](../modeling/generated-properties.md)。
+產生的屬性係指其值會在新增和/或更新實體時產生 (由 EF 或資料庫產生) 的屬性。 如需詳細資訊，請參閱[產生的屬性](xref:core/modeling/generated-properties)。
 
 在一些情況下，您可能會想要為產生的屬性設定明確值，而不是使用產生的值。
 
 > [!TIP]  
-> 您可以在 GitHub 上查看本文[的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/ExplicitValuesGenerateProperties/)。
+> 您可以在 GitHub 上查看這篇文章的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/ExplicitValuesGenerateProperties/) 。
 
 ## <a name="the-model"></a>模型
 

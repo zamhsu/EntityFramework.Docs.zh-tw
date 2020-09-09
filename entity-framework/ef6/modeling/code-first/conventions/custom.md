@@ -1,33 +1,35 @@
 ---
 title: 自訂 Code First 慣例-EF6
+description: Entity Framework 6 中的自訂 Code First 慣例
 author: divega
 ms.date: 10/23/2016
 ms.assetid: dd2bdbd9-ae9e-470a-aeb8-d0ba160499b7
-ms.openlocfilehash: cfd7f7cad532dca5227793c04d7d91e977ea5e4e
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/conventions/custom
+ms.openlocfilehash: 69e4b0111394e83195f5c0a81624c7b9e45bda52
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419224"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617266"
 ---
 # <a name="custom-code-first-conventions"></a>自訂 Code First 慣例
 > [!NOTE]
 > **僅限 EF6 及更新版本** - Entity Framework 6 已引進此頁面中所討論的功能及 API 等等。 如果您使用的是較早版本，則不適用部分或全部的資訊。
 
-使用 Code First 您的模型是使用一組慣例從類別計算而來。 預設[Code First 慣例](~/ef6/modeling/code-first/conventions/built-in.md)會決定哪些屬性會成為實體的主要金鑰、實體所對應的資料表名稱，以及十進位資料行預設具有的精確度和小數位數。
+使用 Code First 您的模型會使用一組慣例從您的類別計算。 預設的 [Code First 慣例](xref:ef6/modeling/code-first/conventions/built-in) 會決定哪些屬性會成為實體的主鍵、實體所對應的資料表名稱，以及 decimal 資料行預設的精確度和小數位數。
 
-有時候，這些預設慣例並不適合您的模型，而且您必須使用資料批註或流暢的 API 來設定許多個別實體來解決這些問題。 自訂 Code First 慣例可讓您定義自己的慣例，為您的模型提供設定預設值。 在本逐步解說中，我們將探討不同類型的自訂慣例，以及如何建立它們。
+這些預設慣例有時不適合您的模型，而且您必須使用資料批註或流暢的 API 來設定許多個別實體來解決這些預設慣例。 自訂 Code First 慣例可讓您定義自己的慣例，以提供模型的設定預設值。 在這個逐步解說中，我們將探討不同類型的自訂慣例，以及如何建立每個類型。
 
 
 ## <a name="model-based-conventions"></a>以模型為基礎的慣例
 
-本頁面涵蓋適用于自訂慣例的 DbModelBuilder API。 此 API 應該足以撰寫大部分的自訂慣例。 不過，也能夠撰寫以模型為基礎的慣例-在建立後操作最終模型的慣例-以處理 advanced 案例。 如需詳細資訊，請參閱以[模型為基礎的慣例](~/ef6/modeling/code-first/conventions/model.md)。
+本頁面涵蓋自訂慣例的 DbModelBuilder API。 此 API 應該足以撰寫大部分的自訂慣例。 不過，您也可以撰寫以模型為基礎的慣例慣例，在建立模型時操作最終模型，以處理先進的案例。 如需詳細資訊，請參閱以 [模型為基礎的慣例](xref:ef6/modeling/code-first/conventions/model)。
 
  
 
 ## <a name="our-model"></a>我們的模型
 
-讓我們從定義可用於慣例的簡單模型開始。 將下列類別新增至您的專案。
+讓我們從定義可搭配慣例使用的簡單模型開始。 將下列類別新增至您的專案。
 
 ``` csharp
     using System;
@@ -66,9 +68,9 @@ ms.locfileid: "78419224"
 
 ## <a name="introducing-custom-conventions"></a>自訂慣例簡介
 
-讓我們撰寫一個慣例，將任何名為 Key 的屬性設定為其實體類型的主要金鑰。
+讓我們撰寫一項慣例，將名為 Key 的任何屬性設定為其實體類型的主鍵。
 
-在模型產生器上啟用慣例，可以藉由覆寫內容中的 OnModelCreating 來存取。 更新 ProductCoNtext 類別，如下所示：
+模型產生器上已啟用慣例，可透過覆寫內容中的 OnModelCreating 來存取。 更新 ProductCoNtext 類別，如下所示：
 
 ``` csharp
     public class ProductContext : DbContext
@@ -89,9 +91,9 @@ ms.locfileid: "78419224"
     }
 ```
 
-現在，名為 Key 之模型中的任何屬性，都會設定為其元件所屬實體的主要索引鍵。
+現在，模型中名為 Key 的任何屬性，將會設定為其所屬的任何實體的主鍵。
 
-我們也可以篩選我們要設定的屬性類型，讓我們的慣例更為明確：
+我們也可以篩選要設定的屬性類型，讓我們的慣例更明確：
 
 ``` csharp
     modelBuilder.Properties<int>()
@@ -99,9 +101,9 @@ ms.locfileid: "78419224"
                 .Configure(p => p.IsKey());
 ```
 
-這會將名為 Key 的所有屬性設定為其實體的主要金鑰，但僅限於其為整數。
+這會將名為 Key 的所有屬性設定為其實體的主鍵，但只有在它們是整數時。
 
-IsKey 方法有一個有趣的功能，就是它是累加的。 這表示如果您在多個屬性上呼叫 IsKey，它們全都會成為複合索引鍵的一部分。 要注意的是，當您為索引鍵指定多個屬性時，也必須指定這些屬性的順序。 若要這麼做，您可以呼叫 HasColumnOrder 方法，如下所示：
+IsKey 方法有一個有趣的功能，就是它是加法。 這表示，如果您在多個屬性上呼叫 IsKey，它們全都會成為複合索引鍵的一部分。 有一點要注意的是，當您為索引鍵指定多個屬性時，您也必須指定這些屬性的順序。 若要這麼做，您可以呼叫 HasColumnOrder 方法，如下所示：
 
 ``` csharp
     modelBuilder.Properties<int>()
@@ -113,11 +115,11 @@ IsKey 方法有一個有趣的功能，就是它是累加的。 這表示如果�
                 .Configure(x => x.IsKey().HasColumnOrder(2));
 ```
 
-此程式碼會設定模型中的類型，使其具有由 int 索引鍵資料行和字串名稱資料行組成的複合索引鍵。 如果我們在設計工具中看到模型，它看起來會像這樣：
+這段程式碼會將模型中的型別設定為具有由 int 索引鍵資料行和字串名稱資料行所組成的複合索引鍵。 如果我們在設計工具中看到模型，它看起來會像這樣：
 
 ![複合索引鍵](~/ef6/media/compositekey.png)
 
-屬性慣例的另一個範例是設定我的模型中的所有日期時間屬性，以對應至 SQL Server 中的 datetime2 型別，而不是 DateTime。 您可以使用下列各項來達到此目的：
+屬性慣例的另一個範例，是在模型中設定所有 DateTime 屬性，以對應至 SQL Server 中的 datetime2 型別，而非 DateTime。 您可以使用下列內容達成此目的：
 
 ``` csharp
     modelBuilder.Properties<DateTime>()
@@ -128,9 +130,9 @@ IsKey 方法有一個有趣的功能，就是它是累加的。 這表示如果�
 
 ## <a name="convention-classes"></a>慣例類別
 
-定義慣例的另一種方式是使用慣例類別來封裝您的慣例。 當使用慣例類別時，您會建立繼承自 ModelConfiguration 的慣例類別的型別。
+定義慣例的另一種方式是使用慣例類別來封裝您的慣例。 使用慣例類別時，您會建立一個繼承自 ModelConfiguration 命名空間中慣例類別的型別。
 
-我們可以藉由執行下列動作，以先前所示的 datetime2 慣例來建立慣例類別：
+我們可以藉由執行下列步驟，以稍早所示的 datetime2 慣例來建立慣例類別：
 
 ``` csharp
     public class DateTime2Convention : Convention
@@ -143,7 +145,7 @@ IsKey 方法有一個有趣的功能，就是它是累加的。 這表示如果�
     }
 ```
 
-若要告訴 EF 使用此慣例，您可以將它新增至 OnModelCreating 中的慣例集合，如果您已經遵循此逐步解說，就會如下所示：
+若要告訴 EF 使用此慣例，請將它新增至 OnModelCreating 的慣例集合，如果您已遵循本逐步解說的說明，將會如下所示：
 
 ``` csharp
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -156,13 +158,13 @@ IsKey 方法有一個有趣的功能，就是它是累加的。 這表示如果�
     }
 ```
 
-如您所見，我們會將慣例的實例新增至慣例集合。 繼承自慣例可提供便利的方式來分組和共用小組或專案之間的慣例。 例如，您可以有一個類別庫，其中包含一組通用慣例，讓您的所有組織專案都使用。
+如您所見，我們會將慣例的實例新增至慣例集合。 繼承自慣例提供在小組或專案之間分組和共用慣例的便利方式。 例如，您可以有一個類別庫，其中包含您所有組織專案都使用的一組通用慣例。
 
  
 
 ## <a name="custom-attributes"></a>自訂屬性
 
-另一個很棒的慣例使用，就是要在設定模型時，使用新的屬性。 為了說明這一點，讓我們建立一個可以用來將字串屬性標示為非 Unicode 的屬性。
+慣例的另一個絕佳用途，是要在設定模型時啟用新的屬性。 為了說明這一點，讓我們建立一個屬性，讓我們可以用來將字串屬性標示為非 Unicode。
 
 ``` csharp
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
@@ -171,7 +173,7 @@ IsKey 方法有一個有趣的功能，就是它是累加的。 這表示如果�
     }
 ```
 
-現在，讓我們建立一個慣例，將此屬性套用至我們的模型：
+現在，讓我們建立將此屬性套用至模型的慣例：
 
 ``` csharp
     modelBuilder.Properties()
@@ -179,13 +181,13 @@ IsKey 方法有一個有趣的功能，就是它是累加的。 這表示如果�
                 .Configure(c => c.IsUnicode(false));
 ```
 
-在此慣例中，我們可以將 NonUnicode 屬性加入至我們的任何字串屬性，這表示資料庫中的資料行將會儲存為 Varchar 而非 Nvarchar。
+使用這個慣例，我們可以將 NonUnicode 屬性加入至任何字串屬性，這表示資料庫中的資料行會儲存為 Varchar 而非 Nvarchar。
 
-關於此慣例，有一點要注意的是，如果您將 NonUnicode 屬性放在字串屬性以外的任何地方，則會擲回例外狀況。 這是因為您無法在字串以外的任何類型上設定 IsUnicode。 如果發生這種情況，您可以讓慣例更明確，讓它篩選掉不是字串的任何專案。
+有一點要注意的是，如果您將 NonUnicode 屬性放在字串屬性以外的任何字元，則會擲回例外狀況。 這樣做的原因是因為您無法在字串以外的任何類型上設定 IsUnicode。 如果發生這種情況，您可以讓您的慣例更明確，讓它篩選掉不是字串的任何事物。
 
-雖然上述慣例適用于定義自訂屬性，但還有另一個 API 可以更容易使用，特別是當您想要使用屬性類別中的屬性時。
+雖然上述慣例適用于定義自訂屬性，但還有另一個 API 可能更容易使用，特別是當您想要使用屬性類別的屬性時。
 
-在此範例中，我們將更新屬性，並將其變更為 IsUnicode 屬性，讓它看起來像這樣：
+在此範例中，我們要更新屬性，並將其變更為 IsUnicode 屬性，使其看起來像這樣：
 
 ``` csharp
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
@@ -200,7 +202,7 @@ IsKey 方法有一個有趣的功能，就是它是累加的。 這表示如果�
     }
 ```
 
-這麼做之後，我們可以在屬性上設定 bool，以告知慣例屬性是否應為 Unicode。 我們可以藉由存取設定類別的 ClrProperty 來執行這項操作，如下所示：
+一旦有了這種情況之後，我們就可以在屬性上設定 bool，以告知慣例屬性是否應該是 Unicode。 我們可以藉由存取設定類別的 ClrProperty 來達成此目的，如下所示：
 
 ``` csharp
     modelBuilder.Properties()
@@ -208,7 +210,7 @@ IsKey 方法有一個有趣的功能，就是它是累加的。 這表示如果�
                 .Configure(c => c.IsUnicode(c.ClrPropertyInfo.GetCustomAttribute<IsUnicode>().Unicode));
 ```
 
-這很簡單，但使用慣例 API 的 Having 方法，可以更簡潔的方式達到此目的。 Having 方法具有 Func 類型的參數&lt;PropertyInfo，T&gt; 會接受與 Where 方法相同的 PropertyInfo，但預期會傳回物件。 如果傳回的物件是 null，則不會設定屬性，這表示您可以用它來篩選屬性，就像在其中一樣，但它也會捕捉傳回的物件，並將它傳遞給 Configure 方法。 其運作方式如下所示：
+這很簡單，但使用「慣例 API」的 Having 方法可以更簡潔地達成此目的。 Having 方法具有 Func PropertyInfo 型別的參數 &lt; ， &gt; 它接受的 PropertyInfo 與 Where 方法相同，但預期會傳回物件。 如果傳回的物件為 null，則不會設定此屬性，這表示您可以像在 Where 一樣地篩選出屬性，但它也不同，因為它也會捕捉傳回的物件，並將它傳遞至設定方法。 其運作方式如下所示：
 
 ``` csharp
     modelBuilder.Properties()
@@ -216,15 +218,15 @@ IsKey 方法有一個有趣的功能，就是它是累加的。 這表示如果�
                 .Configure((config, att) => config.IsUnicode(att.Unicode));
 ```
 
-自訂屬性不是唯一使用 Having 方法的理由，在設定型別或屬性時，您需要進行篩選的任何地方都很有用。
+自訂屬性不是使用 Having 方法的唯一原因，它很適合您在設定類型或屬性時所要篩選的某個內容的任何位置。
 
  
 
 ## <a name="configuring-types"></a>設定類型
 
-到目前為止，我們所有的慣例都適用于屬性，但在您的模型中設定類型的慣例 API 有另一個區域。 此體驗與我們目前所見的慣例類似，但 [設定] 內的選項會位於實體而非屬性層級。
+到目前為止，我們所有的慣例都是針對屬性，但是慣例 API 還有另一個區域，可在您的模型中設定類型。 此體驗類似于目前為止所見的慣例，但 [設定] 內的選項會在實體上，而不是屬性層級。
 
-類型層級慣例的其中一項功能非常適合用來變更資料表命名慣例，也就是對應到與 EF 預設值不同的現有架構，或者使用不同的命名慣例來建立新的資料庫。 若要這麼做，我們必須先有方法可以接受模型中類型的 TypeInfo，並傳回該類型的資料表名稱應為：
+類型層級慣例的其中一件事，就是變更資料表命名慣例，以對應至與 EF 預設值不同的現有架構，或使用不同的命名慣例來建立新的資料庫。 若要這樣做，我們必須先有方法可以接受模型中類型的 TypeInfo，並傳回該型別的資料表名稱應該是什麼：
 
 ``` csharp
     private string GetTableName(Type type)
@@ -235,20 +237,20 @@ IsKey 方法有一個有趣的功能，就是它是累加的。 這表示如果�
     }
 ```
 
-這個方法會採用類型，並傳回使用小寫加底線的字串，而不是 CamelCase。 在我們的模型中，這表示 ProductCategory 類別會對應至名為 product\_category 的資料表，而不是 ProductCategories。
+這個方法會採用類型，並傳回使用小寫和底線而非 CamelCase 的字串。 在我們的模型中，這表示 ProductCategory 類別會對應到稱為 product category 的資料表， \_ 而不是 ProductCategories。
 
-有了這個方法之後，我們就可以像這樣的慣例來呼叫它：
+有了這個方法之後，就可以用像這樣的慣例來呼叫它：
 
 ``` csharp
     modelBuilder.Types()
                 .Configure(c => c.ToTable(GetTableName(c.ClrType)));
 ```
 
-此慣例會將模型中的每個類型設定為對應至 GetTableName 方法所傳回的資料表名稱。 此慣例等同于使用流暢的 API 針對模型中的每個實體呼叫 ToTable 方法。
+此慣例會將模型中的每個型別設定為對應至 GetTableName 方法所傳回的資料表名稱。 這個慣例相當於使用流暢的 API 針對模型中的每個實體呼叫 ToTable 方法。
 
-有一點要注意的是，當您呼叫 ToTable 時，EF 會採用您提供的字串做為確切的資料表名稱，而不需要在決定資料表名稱時，通常會執行的任何複數表示。 這就是為什麼我們慣例的資料表名稱是產品\_的類別，而不是產品\_的類別。 我們可以自行呼叫複數表示服務，以在我們的慣例中解決此問題。
+有一點要注意的是，當您呼叫 ToTable 時，EF 會將您提供的字串做為精確的資料表名稱，而不是在判斷資料表名稱時，通常會執行的任何複數表示。 這就是為什麼我們慣例中的資料表名稱是產品類別目錄， \_ 而不是產品類別目錄的原因 \_ 。 我們可以藉由對複數表示服務進行呼叫，在我們的慣例中解決此問題。
 
-在下列程式碼中，我們將使用 EF6 中新增的相依性[解析](~/ef6/fundamentals/configuring/dependency-resolution.md)功能來抓取 EF 已使用的複數表示服務，並將複數化我們的資料表名稱。
+在下列程式碼中，我們將使用 EF6 中加入的相依性 [解析](xref:ef6/fundamentals/configuring/dependency-resolution) 功能，來抓取 EF 已使用的複數表示服務，並複數化我們的資料表名稱。
 
 ``` csharp
     private string GetTableName(Type type)
@@ -268,7 +270,7 @@ IsKey 方法有一個有趣的功能，就是它是累加的。 這表示如果�
 
 ### <a name="totable-and-inheritance"></a>ToTable 和繼承
 
-ToTable 的另一個重要層面是，如果您將類型明確對應至指定的資料表，則可以改變 EF 將使用的對應策略。 如果您針對繼承階層架構中的每個類型呼叫 ToTable，傳遞類型名稱做為上述的資料表名稱，則您會將預設的每一階層資料表（TPH）對應策略變更為每一類型的資料表（TPT）。 描述這一點的最佳方式是 whith 具體的範例：
+ToTable 的另一個重要層面是，如果您明確地將型別對應到指定的資料表，則可以改變 EF 將使用的對應策略。 如果您針對繼承階層架構中的每個型別呼叫 ToTable，然後將型別名稱當作資料表的名稱來傳遞，那麼您就可以將每個階層的預設資料表 (TPH) 對應策略變更為每個類型的資料表 (TPT) 。 描述這項工作的最佳方式是 whith 具體的範例：
 
 ``` csharp
     public class Employee
@@ -283,27 +285,27 @@ ToTable 的另一個重要層面是，如果您將類型明確對應至指定的
     }
 ```
 
-根據預設，employee 和 manager 都會對應到資料庫中的相同資料表（員工）。 資料表將同時包含員工和經理與鑒別子資料行，以告訴您每個資料列中儲存了哪種類型的實例。 這是 TPH 對應，因為階層有單一資料表。 不過，如果您在這兩個 classe 上呼叫 ToTable，則每個類型都會對應到它自己的資料表（也稱為 TPT），因為每個類型都有自己的資料表。
+根據預設，employee 和 manager 都會對應到資料庫中 (員工) 的相同資料表。 資料表將會包含具有鑒別子資料行的員工和經理，以告訴您每個資料列中儲存的實例類型。 這是 TPH 對應，因為階層有單一資料表。 但是，如果您在這兩個 classe 上呼叫 ToTable，則每個類型都會改為對應至它自己的資料表（也稱為 TPT），因為每個類型都有自己的資料表。
 
 ``` csharp
     modelBuilder.Types()
                 .Configure(c=>c.ToTable(c.ClrType.Name));
 ```
 
-上述程式碼會對應至如下所示的資料表結構：
+上述程式碼會對應到如下所示的資料表結構：
 
 ![tpt 範例](~/ef6/media/tptexample.jpg)
 
-您可以透過幾種方式來避免這種情況，並維護預設的 TPH 對應：
+您可以透過幾種方式來避免這種情況，並維持預設的 TPH 對應：
 
 1.  針對階層中的每個類型，使用相同的資料表名稱來呼叫 ToTable。
-2.  只在階層的基類（在我們的範例中為 employee）上呼叫 ToTable。
+2.  請只針對階層的基類（在我們的範例中為 employee）呼叫 ToTable。
 
  
 
 ## <a name="execution-order"></a>執行順序
 
-慣例會以最後的 wins 方式運作，與流暢的 API 相同。 這表示如果您撰寫兩個慣例來設定相同屬性的相同選項，則最後一個會執行 wins。 例如，在下列程式碼中，所有字串的最大長度都設為500，但我們接著將模型中所有名為 Name 的屬性設定為最大長度250。
+慣例的運作方式與流暢的 API 相同。 這表示，如果您撰寫兩個慣例來設定相同屬性的相同選項，則最後一個會執行 wins。 例如，在下列程式碼中，所有字串的最大長度都會設定為500，但接著會在模型中設定名為 Name 的所有屬性，使其長度上限為250。
 
 ``` csharp
     modelBuilder.Properties<string>()
@@ -314,23 +316,23 @@ ToTable 的另一個重要層面是，如果您將類型明確對應至指定的
                 .Configure(c => c.HasMaxLength(250));
 ```
 
-因為將最大長度設定為250的慣例是在將所有字串設定為500的情況下，所以模型中所有名為 Name 的屬性都會有一個250的 MaxLength，而任何其他字串（例如描述）都會是500。 以這種方式使用慣例，表示您可以在模型中提供類型或屬性的一般慣例，然後針對不同的子集加以覆寫。
+由於將 [最大長度] 設定為250的慣例是在將所有字串設為500的之後，因此模型中名為 Name 的所有屬性都會有 MaxLength 250，而任何其他字串（例如描述）會是500。 以這種方式使用慣例，表示您可以在模型中提供類型或屬性的一般慣例，然後針對不同的子集覆寫它們。
 
-流暢的 API 和資料批註也可以用來覆寫特定案例中的慣例。 在上述範例中，如果我們使用了流暢的 API 來設定屬性的最大長度，則我們可以將它放在慣例之前或之後，因為更具體的流暢 API 將會優先于較一般的設定慣例。
+流暢的 API 和資料批註也可以用來覆寫特定情況下的慣例。 在上述範例中，如果我們使用了流暢的 API 來設定屬性的最大長度，則在慣例之前或之後，我們可以將它放在慣例之前或之後，因為更明確的流暢 API 將會贏得更一般的設定慣例。
 
  
 
 ## <a name="built-in-conventions"></a>內建慣例
 
-因為自訂慣例可能會受到預設 Code First 慣例的影響，所以新增慣例以在另一個慣例之前或之後執行可能會很有用。 若要這麼做，您可以在衍生的 DbCoNtext 上使用慣例集合的 AddBefore 和 AddAfter 方法。 下列程式碼會新增我們稍早建立的慣例類別，讓它能夠在內建的金鑰探索慣例之前執行。
+因為自訂慣例可能會受到預設 Code First 慣例的影響，所以將慣例新增為在另一個慣例之前或之後執行，可能會很有用。 若要這樣做，您可以在衍生的 DbCoNtext 上使用慣例集合的 AddBefore 和 AddAfter 方法。 下列程式碼會新增我們稍早建立的慣例類別，使其可在內建的金鑰探索慣例之前執行。
 
 ``` csharp
     modelBuilder.Conventions.AddBefore<IdKeyDiscoveryConvention>(new DateTime2Convention());
 ```
 
-在新增必須在內建慣例之前或之後執行的慣例時，這會是最常使用的，您可以在這裡找到內建慣例清單： [ModelConfiguration. 慣例 Namespace](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx)。
+當您新增需要在內建慣例之前或之後執行的慣例時，這會是最常用的功能，您可以在這裡找到內建的慣例清單： [ModelConfiguration 命名空間](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx)。
 
-您也可以移除您不想要套用至模型的慣例。 若要移除慣例，請使用 Remove 方法。 以下是移除 PluralizingTableNameConvention 的範例。
+您也可以移除您不想套用至模型的慣例。 若要移除慣例，請使用 Remove 方法。 以下是移除 PluralizingTableNameConvention 的範例。
 
 ``` csharp
     protected override void OnModelCreating(DbModelBuilder modelBuilder)

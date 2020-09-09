@@ -1,22 +1,23 @@
 ---
 title: 基本儲存 - EF Core
+description: 使用 Entity Framework Core 新增、更新和移除資料的基本資訊
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 850d842e-3fad-4ef2-be17-053768e97b9e
 uid: core/saving/basic
-ms.openlocfilehash: 066d67d6104316832a33f5a3648f1f2fa6cc9c50
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 21a9be10d081591a7d3b33a8e9cc48552c95fb6c
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417632"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617436"
 ---
 # <a name="basic-save"></a>基本儲存
 
 了解如何使用您的內容和實體類別來新增、修改及移除資料。
 
 > [!TIP]  
-> 您可以在 GitHub 上查看本文[的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/)。
+> 您可以在 GitHub 上查看這篇文章的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/) 。
 
 ## <a name="adding-data"></a>加入資料
 
@@ -25,7 +26,7 @@ ms.locfileid: "78417632"
 [!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#Add)]
 
 > [!TIP]  
-> 如[相關資料](related-data.md)一節中所述，Add、Attach 及 Update 方法對於傳遞給它們的整個實體圖表都適用。 或者，您也可以使用 EntityEntry.State 屬性來僅設定單一實體的狀態。 例如： `context.Entry(blog).State = EntityState.Modified` 。
+> 如[相關資料](xref:core/saving/related-data)一節中所述，Add、Attach 及 Update 方法對於傳遞給它們的整個實體圖表都適用。 或者，您也可以使用 EntityEntry.State 屬性來僅設定單一實體的狀態。 例如： `context.Entry(blog).State = EntityState.Modified` 。
 
 ## <a name="updating-data"></a>更新資料
 
