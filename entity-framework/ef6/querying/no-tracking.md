@@ -1,19 +1,21 @@
 ---
 title: 無追蹤查詢-EF6
+description: Entity Framework 6 中的無追蹤查詢
 author: divega
 ms.date: 10/23/2016
 ms.assetid: f80ac260-c2dc-484d-94a3-3424fd862f8b
-ms.openlocfilehash: 44d58e14a2550bd08a8edd68b467237f6f5b5978
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/querying/no-tracking
+ms.openlocfilehash: eb9e29c219e0cdf1e379cf8bb925f4226b1434a9
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417099"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620297"
 ---
-# <a name="no-tracking-queries"></a><span data-ttu-id="32a0b-102">不追蹤的查詢</span><span class="sxs-lookup"><span data-stu-id="32a0b-102">No-Tracking Queries</span></span>
-<span data-ttu-id="32a0b-103">有時候，您可能會想要從查詢中取回實體，但不會由內容追蹤這些實體。</span><span class="sxs-lookup"><span data-stu-id="32a0b-103">Sometimes you may want to get entities back from a query but not have those entities be tracked by the context.</span></span> <span data-ttu-id="32a0b-104">在唯讀案例中查詢大量實體時，這可能會產生較佳的效能。</span><span class="sxs-lookup"><span data-stu-id="32a0b-104">This may result in better performance when querying for large numbers of entities in read-only scenarios.</span></span> <span data-ttu-id="32a0b-105">本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。</span><span class="sxs-lookup"><span data-stu-id="32a0b-105">The techniques shown in this topic apply equally to models created with Code First and the EF Designer.</span></span>  
+# <a name="no-tracking-queries"></a><span data-ttu-id="24bf9-103">不追蹤的查詢</span><span class="sxs-lookup"><span data-stu-id="24bf9-103">No-Tracking Queries</span></span>
+<span data-ttu-id="24bf9-104">有時您可能會想要從查詢中取回實體，但內容不會追蹤這些實體。</span><span class="sxs-lookup"><span data-stu-id="24bf9-104">Sometimes you may want to get entities back from a query but not have those entities be tracked by the context.</span></span> <span data-ttu-id="24bf9-105">在唯讀案例中查詢大量實體時，這可能會導致更好的效能。</span><span class="sxs-lookup"><span data-stu-id="24bf9-105">This may result in better performance when querying for large numbers of entities in read-only scenarios.</span></span> <span data-ttu-id="24bf9-106">本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。</span><span class="sxs-lookup"><span data-stu-id="24bf9-106">The techniques shown in this topic apply equally to models created with Code First and the EF Designer.</span></span>  
 
-<span data-ttu-id="32a0b-106">新的擴充方法 AsNoTracking 允許以這種方式執行任何查詢。</span><span class="sxs-lookup"><span data-stu-id="32a0b-106">A new extension method AsNoTracking allows any query to be run in this way.</span></span> <span data-ttu-id="32a0b-107">例如：</span><span class="sxs-lookup"><span data-stu-id="32a0b-107">For example:</span></span>  
+<span data-ttu-id="24bf9-107">新的擴充方法 AsNoTracking 讓任何查詢都能以這種方式執行。</span><span class="sxs-lookup"><span data-stu-id="24bf9-107">A new extension method AsNoTracking allows any query to be run in this way.</span></span> <span data-ttu-id="24bf9-108">例如：</span><span class="sxs-lookup"><span data-stu-id="24bf9-108">For example:</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())

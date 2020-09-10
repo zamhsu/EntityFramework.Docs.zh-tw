@@ -1,39 +1,41 @@
 ---
 title: School 範例資料庫-EF6
+description: Entity Framework 6 的 School 範例資料庫
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e83a6a06-e63b-4530-8656-614bf609b12b
-ms.openlocfilehash: 1e9dc98edb8590021bbf3393e9edda1929d505e0
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/resources/school-database
+ms.openlocfilehash: c1576bdeaa3247c7c5c8fd5547c8402b4e301402
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416995"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620000"
 ---
-# <a name="school-sample-database"></a><span data-ttu-id="ff608-102">School 範例資料庫</span><span class="sxs-lookup"><span data-stu-id="ff608-102">School Sample Database</span></span>
-<span data-ttu-id="ff608-103">本主題包含 School 資料庫的架構和資料。</span><span class="sxs-lookup"><span data-stu-id="ff608-103">This topic contains the schema and data for the School database.</span></span> <span data-ttu-id="ff608-104">範例 School 資料庫用於 Entity Framework 檔中的不同位置。</span><span class="sxs-lookup"><span data-stu-id="ff608-104">The sample School database is used in various places throughout the Entity Framework documentation.</span></span>  
+# <a name="school-sample-database"></a><span data-ttu-id="d830b-103">School 範例資料庫</span><span class="sxs-lookup"><span data-stu-id="d830b-103">School Sample Database</span></span>
+<span data-ttu-id="d830b-104">本主題包含 School 資料庫的架構和資料。</span><span class="sxs-lookup"><span data-stu-id="d830b-104">This topic contains the schema and data for the School database.</span></span> <span data-ttu-id="d830b-105">範例 School 資料庫用於整個 Entity Framework 檔的各種不同位置。</span><span class="sxs-lookup"><span data-stu-id="d830b-105">The sample School database is used in various places throughout the Entity Framework documentation.</span></span>  
 
 > [!NOTE]
-> <span data-ttu-id="ff608-105">隨 Visual Studio 安裝的資料庫伺服器會根據您使用的 Visual Studio 版本而有所不同。</span><span class="sxs-lookup"><span data-stu-id="ff608-105">The database server that is installed with Visual Studio is different depending on the version of Visual Studio you use.</span></span> <span data-ttu-id="ff608-106">如需所要使用之內容的詳細資訊，請參閱[Visual Studio 版本](~/ef6/what-is-new/visual-studio.md)。</span><span class="sxs-lookup"><span data-stu-id="ff608-106">See [Visual Studio Releases](~/ef6/what-is-new/visual-studio.md) for details on what to use.</span></span>  
+> <span data-ttu-id="d830b-106">隨 Visual Studio 安裝的資料庫伺服器會根據您所使用的 Visual Studio 版本而有所不同。</span><span class="sxs-lookup"><span data-stu-id="d830b-106">The database server that is installed with Visual Studio is different depending on the version of Visual Studio you use.</span></span> <span data-ttu-id="d830b-107">如需使用方式的詳細資訊，請參閱 [Visual Studio 版本](xref:ef6/what-is-new/visual-studio) 。</span><span class="sxs-lookup"><span data-stu-id="d830b-107">See [Visual Studio Releases](xref:ef6/what-is-new/visual-studio) for details on what to use.</span></span>  
 
-<span data-ttu-id="ff608-107">以下是建立資料庫的步驟：</span><span class="sxs-lookup"><span data-stu-id="ff608-107">Here are the steps to create the database:</span></span>
+<span data-ttu-id="d830b-108">以下是建立資料庫的步驟：</span><span class="sxs-lookup"><span data-stu-id="d830b-108">Here are the steps to create the database:</span></span>
 
-- <span data-ttu-id="ff608-108">開啟 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="ff608-108">Open Visual Studio</span></span>  
-- <span data-ttu-id="ff608-109">**View** -> **伺服器總管**</span><span class="sxs-lookup"><span data-stu-id="ff608-109">**View** -> **Server Explorer**</span></span>  
-- <span data-ttu-id="ff608-110">以滑鼠右鍵按一下 [**資料連線**] -> [**新增連接 ...** ]</span><span class="sxs-lookup"><span data-stu-id="ff608-110">Right click on **Data Connections** -> **Add Connection…**</span></span>  
-- <span data-ttu-id="ff608-111">如果您還沒有從伺服器總管連接到資料庫，則必須選取 [ **Microsoft SQL Server** ] 做為資料來源</span><span class="sxs-lookup"><span data-stu-id="ff608-111">If you haven’t connected to a database from Server Explorer before you’ll need to select **Microsoft SQL Server** as the data source</span></span>  
-- <span data-ttu-id="ff608-112">連接到 LocalDB 或 SQL Express （視您安裝的版本而定）</span><span class="sxs-lookup"><span data-stu-id="ff608-112">Connect to either LocalDB or SQL Express, depending on which one you have installed</span></span>  
-- <span data-ttu-id="ff608-113">輸入**School**作為資料庫名稱</span><span class="sxs-lookup"><span data-stu-id="ff608-113">Enter **School** as the database name</span></span>  
-- <span data-ttu-id="ff608-114">選取 **[確定]** ，系統會詢問您是否要建立新的資料庫，然後選取 **[是]**</span><span class="sxs-lookup"><span data-stu-id="ff608-114">Select **OK** and you will be asked if you want to create a new database, select **Yes**</span></span>  
-- <span data-ttu-id="ff608-115">新的資料庫現在會顯示在伺服器總管</span><span class="sxs-lookup"><span data-stu-id="ff608-115">The new database will now appear in Server Explorer</span></span>  
-- <span data-ttu-id="ff608-116">如果您使用 Visual Studio 2012 或更新版本</span><span class="sxs-lookup"><span data-stu-id="ff608-116">If you are using Visual Studio 2012 or newer</span></span>
-    - <span data-ttu-id="ff608-117">以滑鼠右鍵按一下伺服器總管中的資料庫，然後選取 [追加**查詢**]</span><span class="sxs-lookup"><span data-stu-id="ff608-117">Right-click on the database in Server Explorer and select **New Query**</span></span>  
-    - <span data-ttu-id="ff608-118">將下列 SQL 複製到新的查詢中，然後以滑鼠右鍵按一下查詢並選取 [**執行**]。</span><span class="sxs-lookup"><span data-stu-id="ff608-118">Copy the following SQL into the new query, then right-click on the query and select **Execute**</span></span>  
-- <span data-ttu-id="ff608-119">如果您使用 Visual Studio 2010</span><span class="sxs-lookup"><span data-stu-id="ff608-119">If you are using Visual Studio 2010</span></span>  
-    - <span data-ttu-id="ff608-120">選取**資料** -> **Transact-sql 編輯器** -> **新的查詢連接**。</span><span class="sxs-lookup"><span data-stu-id="ff608-120">Select **Data** -> **Transact SQL Editor** -> **New Query Connection...**</span></span>  
-    - <span data-ttu-id="ff608-121">輸入 **.\SQLEXPRESS**做為伺服器名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="ff608-121">Enter **.\SQLEXPRESS** as the server name and click **OK**</span></span>  
-    - <span data-ttu-id="ff608-122">從 [查詢編輯器] 頂端的下拉式選中選取 [ **STESample** ] 資料庫</span><span class="sxs-lookup"><span data-stu-id="ff608-122">Select the **STESample** database from the drop down at the top of the query editor</span></span>  
-    - <span data-ttu-id="ff608-123">將下列 SQL 複製到新的查詢中，然後以滑鼠右鍵按一下查詢並選取 [**執行 SQL** ]。</span><span class="sxs-lookup"><span data-stu-id="ff608-123">Copy the following SQL into the new query, then right-click on the query and select **Execute SQL**</span></span>  
+- <span data-ttu-id="d830b-109">開啟 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="d830b-109">Open Visual Studio</span></span>  
+- <span data-ttu-id="d830b-110">**視圖**  -> **伺服器總管**</span><span class="sxs-lookup"><span data-stu-id="d830b-110">**View** -> **Server Explorer**</span></span>  
+- <span data-ttu-id="d830b-111">以滑鼠右鍵按一下 [**資料連線**  ->  **新增連接 ...** ]</span><span class="sxs-lookup"><span data-stu-id="d830b-111">Right click on **Data Connections** -> **Add Connection…**</span></span>  
+- <span data-ttu-id="d830b-112">如果您還沒有從伺服器總管連接到資料庫，則必須選取 **Microsoft SQL Server** 作為資料來源</span><span class="sxs-lookup"><span data-stu-id="d830b-112">If you haven’t connected to a database from Server Explorer before you’ll need to select **Microsoft SQL Server** as the data source</span></span>  
+- <span data-ttu-id="d830b-113">連接至 LocalDB 或 SQL Express （視您已安裝的版本而定）</span><span class="sxs-lookup"><span data-stu-id="d830b-113">Connect to either LocalDB or SQL Express, depending on which one you have installed</span></span>  
+- <span data-ttu-id="d830b-114">輸入 **School** 作為資料庫名稱</span><span class="sxs-lookup"><span data-stu-id="d830b-114">Enter **School** as the database name</span></span>  
+- <span data-ttu-id="d830b-115">選取 **[確定]** ，系統會詢問您是否要建立新的資料庫，請選取 **[是]** 。</span><span class="sxs-lookup"><span data-stu-id="d830b-115">Select **OK** and you will be asked if you want to create a new database, select **Yes**</span></span>  
+- <span data-ttu-id="d830b-116">新資料庫現在會出現在伺服器總管</span><span class="sxs-lookup"><span data-stu-id="d830b-116">The new database will now appear in Server Explorer</span></span>  
+- <span data-ttu-id="d830b-117">如果您使用 Visual Studio 2012 或更新版本</span><span class="sxs-lookup"><span data-stu-id="d830b-117">If you are using Visual Studio 2012 or newer</span></span>
+    - <span data-ttu-id="d830b-118">以滑鼠右鍵按一下 [伺服器總管] 中的資料庫，並選取 [新增查詢]\*\*\*\*</span><span class="sxs-lookup"><span data-stu-id="d830b-118">Right-click on the database in Server Explorer and select **New Query**</span></span>  
+    - <span data-ttu-id="d830b-119">將下列 SQL 複製到新的查詢，然後以滑鼠右鍵按一下查詢並選取 [**執行**]</span><span class="sxs-lookup"><span data-stu-id="d830b-119">Copy the following SQL into the new query, then right-click on the query and select **Execute**</span></span>  
+- <span data-ttu-id="d830b-120">如果您使用 Visual Studio 2010</span><span class="sxs-lookup"><span data-stu-id="d830b-120">If you are using Visual Studio 2010</span></span>  
+    - <span data-ttu-id="d830b-121">選取**Data**  ->  **[資料 transact-sql 編輯器**  ->  **新增查詢連接 ...** ]</span><span class="sxs-lookup"><span data-stu-id="d830b-121">Select **Data** -> **Transact SQL Editor** -> **New Query Connection...**</span></span>  
+    - <span data-ttu-id="d830b-122">輸入 **.\SQLEXPRESS** 做為伺服器名稱，然後按一下 **[確定]**</span><span class="sxs-lookup"><span data-stu-id="d830b-122">Enter **.\SQLEXPRESS** as the server name and click **OK**</span></span>  
+    - <span data-ttu-id="d830b-123">從查詢編輯器頂端的下拉式清單中選取 **STESample** 資料庫</span><span class="sxs-lookup"><span data-stu-id="d830b-123">Select the **STESample** database from the drop down at the top of the query editor</span></span>  
+    - <span data-ttu-id="d830b-124">將下列 SQL 複製到新的查詢，然後以滑鼠右鍵按一下查詢並選取 [**執行 SQL** ]。</span><span class="sxs-lookup"><span data-stu-id="d830b-124">Copy the following SQL into the new query, then right-click on the query and select **Execute SQL**</span></span>  
 
 ``` SQL  
 SET ANSI_NULLS ON
