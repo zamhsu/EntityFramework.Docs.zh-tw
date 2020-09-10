@@ -1,21 +1,23 @@
 ---
 title: 本機資料-EF6
+description: Entity Framework 6 中的本機資料
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 2eda668b-1e5d-487d-9a8c-0e3beef03fcb
-ms.openlocfilehash: efd646348d8a18bbeed2d0a0e708d4d36eb26eac
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/querying/local-data
+ms.openlocfilehash: f7c4c8904a2985901491e423f655d4aea79f666d
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417106"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620305"
 ---
 # <a name="local-data"></a>本機資料
-直接針對 DbSet 執行 LINQ 查詢時，一律會將查詢傳送至資料庫，但您可以使用 DbSet 來存取目前記憶體中的資料。 您也可以使用 DbCoNtext 和 DbCoNtext. ChangeTracker 專案方法，存取 EF 追蹤實體的額外資訊。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
+直接針對 DbSet 執行 LINQ 查詢，一律會將查詢傳送至資料庫，但您可以使用 DbSet 來存取目前記憶體內部的資料。 您也可以使用 DbCoNtext 和 DbCoNtext ChangeTracker 專案方法，存取 EF 追蹤實體的額外資訊。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
 
 ## <a name="using-local-to-look-at-local-data"></a>使用本機來查看本機資料  
 
-DbSet 的 Local 屬性可讓您簡單存取目前正由內容追蹤而且尚未標示為已刪除的集合實體。 存取本機屬性永遠不會使查詢傳送至資料庫。 這表示通常在已經執行查詢之後，才會使用它。 Load 擴充方法可以用來執行查詢，以便內容追蹤結果。 例如：  
+DbSet 的 Local 屬性提供簡單的存取權，讓您存取目前正由內容追蹤且尚未標示為已刪除的集合實體。 存取本機屬性絕不會導致查詢傳送至資料庫。 這表示它通常是在查詢已經執行之後使用。 載入擴充方法可以用來執行查詢，以便內容追蹤結果。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -53,7 +55,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-如果在資料庫中有兩個日誌：「ADO.NET Blog」，BlogId 為1，而「Visual Studio Blog」的 BlogId 為 2-我們可能會預期下列輸出：  
+如果您在資料庫中有兩個 blog：「ADO.NET Blog」的 BlogId 是1，而「Visual Studio Blog」的 BlogId 是2，我們可以預期下列輸出：  
 
 ```console
 In Local:
@@ -65,15 +67,15 @@ Found 1: ADO.NET Blog with state Deleted
 Found 2: The Visual Studio Blog with state Unchanged
 ```  
 
-這說明了三個重點：  
+這會說明三個重點：  
 
-- 新的 blog 「我的新 Blog」已包含在本機集合中，即使尚未儲存到資料庫也一樣。 此 blog 的主鍵為零，因為資料庫尚未產生實體的實際索引鍵。  
-- 「ADO.NET Blog」並未包含在本機集合中，即使它仍受到內容追蹤。 這是因為我們將它從 DbSet 中移除，藉此將其標示為已刪除。  
-- 當 DbSet 用來執行查詢時，標示為刪除的 blog （ADO.NET Blog）會包含在結果中，而尚未儲存到資料庫的新 blog （我的新 Blog）不會包含在結果中。 這是因為 DbSet 正在對資料庫執行查詢，而傳回的結果一律會反映資料庫中的內容。  
+- 新的 blog 「我的新的 Blog」已包含在本機集合中，即使尚未儲存到資料庫中也一樣。 此 blog 的主鍵為零，因為資料庫尚未為實體產生真正的索引鍵。  
+- 「ADO.NET Blog」不會包含在本機集合中，即使它仍由內容追蹤也一樣。 這是因為我們將它從 DbSet 中移除，因此將其標示為已刪除。  
+- 當使用 DbSet 來執行查詢時，會將已標示為要刪除的 blog (ADO.NET Blog) 包含在結果中，而新的 blog (新的 blog) 尚未儲存至資料庫，則不會包含在結果中。 這是因為 DbSet 正在對資料庫執行查詢，而傳回的結果一律會反映資料庫中的內容。  
 
-## <a name="using-local-to-add-and-remove-entities-from-the-context"></a>使用本機來新增和移除內容中的實體  
+## <a name="using-local-to-add-and-remove-entities-from-the-context"></a>使用 Local 從內容新增和移除實體  
 
-DbSet 上的區域屬性會傳回已連結事件的[ObservableCollection](https://msdn.microsoft.com/library/ms668604.aspx) ，使其與內容的內容保持同步。 這表示可以從本機集合或 DbSet 中加入或移除實體。 這也表示，將新實體帶入內容的查詢將會導致本機集合以這些實體進行更新。 例如：  
+DbSet 上的區域屬性會傳回已連結事件的 [ObservableCollection](https://msdn.microsoft.com/library/ms668604.aspx) ，使其與內容的內容保持同步。 這表示可以從本機集合或 DbSet 中加入或移除實體。 這也表示，將新實體帶入內容中的查詢會導致本機集合以這些實體進行更新。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -119,7 +121,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-假設我們有幾篇文章標記了「entity framework」和「asp.net」，輸出看起來可能像這樣：  
+假設我們有幾個以 ' entity framework ' 和 ' asp.net ' 標記的貼文，輸出可能看起來像這樣：  
 
 ```console
 In Local after entity-framework query:
@@ -135,27 +137,27 @@ Found 0: What's New in EF with state Added
 Found 4: ASP.NET Beginners Guide with state Unchanged
 ```  
 
-這說明了三個重點：  
+這會說明三個重點：  
 
-- 新增至本機集合的新 post 「EF 中的新功能」會由已加入狀態的內容進行追蹤。 因此，在呼叫 SaveChanges 時，它會插入至資料庫。  
-- 已從本機集合中移除的文章（EF 初學者 Guide）現在已在內容中標示為已刪除。 因此，在呼叫 SaveChanges 時，將會從資料庫中刪除它。  
-- 使用第二個查詢載入內容中的其他文章（ASP.NET 初學者 Guide）會自動加入至本機集合。  
+- 新增至本機集合的新文章「EF 中的新功能」會由新增狀態中的內容所追蹤。 因此，它會在呼叫 SaveChanges 時插入資料庫。  
+- 從本機集合移除的 post (EF 初學者指南) 現在會在內容中標示為已刪除。 因此在呼叫 SaveChanges 時，將會從資料庫中刪除。  
+- 使用第二個查詢載入內容中的額外 post (ASP.NET 初學者指南) 會自動加入至本機集合。  
 
-關於本機，最後要注意的一點是，因為這是 ObservableCollection 的效能，對大量實體而言並不大。 因此，如果您在內容中處理數以千計的實體，可能不建議使用本機。  
+關於本機的最後一件事是，因為這是 ObservableCollection 的效能不適合大量的實體。 因此，如果您在內容中處理數千個實體，則可能不建議使用本機。  
 
 ## <a name="using-local-for-wpf-data-binding"></a>使用本機進行 WPF 資料系結  
 
-DbSet 上的區域屬性可以直接用於 WPF 應用程式中的資料系結，因為它是 ObservableCollection 的實例。 如上一節所述，這表示它會自動與內容保持同步，內容的內容也會自動保持同步。 請注意，您必須預先填入本機集合，其中包含要系結的資料，因為本機永遠不會造成資料庫查詢。  
+DbSet 上的本機屬性可直接用於 WPF 應用程式中的資料系結，因為它是 ObservableCollection 的實例。 如上一節所述，這表示它會自動與內容的內容保持同步，內容的內容將會自動保持同步。 請注意，您確實需要預先填入本機集合，其中包含要系結的任何資料，因為本機永遠不會造成資料庫查詢。  
 
 這不是完整 WPF 資料系結範例的適當位置，但主要元素如下：  
 
 - 設定系結來源  
-- 將它系結至您集合的區域屬性  
+- 將它系結至集合的區域屬性  
 - 使用資料庫的查詢來填入本機。  
 
 ## <a name="wpf-binding-to-navigation-properties"></a>WPF 系結至導覽屬性  
 
-如果您要執行主要/詳細資料系結，您可能會想要將詳細資料檢視系結至其中一個實體的導覽屬性。 簡單的方法是使用導覽屬性的 ObservableCollection。 例如：  
+如果您正在執行 master/detail 資料系結，您可能會想要將詳細資料檢視系結至其中一個實體的導覽屬性。 讓這項工作變得簡單的方法，就是使用 ObservableCollection 做為導覽屬性。 例如：  
 
 ``` csharp
 public class Blog
@@ -173,9 +175,9 @@ public class Blog
 }
 ```  
 
-## <a name="using-local-to-clean-up-entities-in-savechanges"></a>使用本機來清除 SaveChanges 中的實體  
+## <a name="using-local-to-clean-up-entities-in-savechanges"></a>使用本機在 SaveChanges 中清除實體  
 
-在大部分情況下，從導覽屬性中移除的實體不會在內容中自動標示為已刪除。 例如，如果您從 [Blog] 集合中移除 Post 物件，則在呼叫 SaveChanges 時，將不會自動刪除該 post。 如果您需要將它刪除，您可能需要尋找這些無關聯實體，並在呼叫 SaveChanges 或做為覆寫 SaveChanges 的一部分之前，將它們標示為已刪除。 例如：  
+在大部分情況下，從導覽屬性中移除的實體將不會自動在內容中標示為已刪除。 例如，如果您從 Blog 集合中移除 Post 物件，則在呼叫 SaveChanges 時，將不會自動刪除該 post。 如果您需要將它刪除，您可能需要在呼叫 SaveChanges 之前，或在覆寫的 SaveChanges 中找出這些實體，並將其標示為已刪除。 例如：  
 
 ``` csharp
 public override int SaveChanges()
@@ -192,23 +194,23 @@ public override int SaveChanges()
 }
 ```  
 
-上述程式碼會使用本機集合來尋找所有貼文，並將沒有 blog 參考的任何文章標示為已刪除。 ToList 呼叫是必要的，否則，當列舉集合時，將會透過移除呼叫來修改集合。 在大部分的其他情況下，您可以直接針對本機屬性進行查詢，而不需要先使用 ToList。  
+上述程式碼會使用本機集合來尋找所有貼文，並將沒有任何 blog 參考的任何貼文標示為已刪除。 ToList 呼叫是必要的，因為在列舉時，會由移除呼叫來修改集合。 在大部分的情況下，您可以直接針對本機屬性進行查詢，而不需要先使用 ToList。  
 
-## <a name="using-local-and-tobindinglist-for-windows-forms-data-binding"></a>使用本機和 ToBindingList Windows Forms 資料系結  
+## <a name="using-local-and-tobindinglist-for-windows-forms-data-binding"></a>使用本機和 ToBindingList 進行 Windows Forms 資料系結  
 
-Windows Forms 不支援直接使用 ObservableCollection 進行完全精確的資料系結。 不過，您仍然可以使用 DbSet 區域屬性來進行資料系結，以取得前幾節中所述的所有好處。 這是透過 ToBindingList 擴充方法來達成，此方法會建立由本機 ObservableCollection 支援的[IBindingList](https://msdn.microsoft.com/library/system.componentmodel.ibindinglist.aspx)執行。  
+Windows Forms 不支援直接使用 ObservableCollection 進行完全精確度的資料系結。 不過，您仍然可以使用 DbSet 區域屬性進行資料系結，以取得上一節中所述的所有優點。 這是透過 ToBindingList 擴充方法來達成，該方法會建立本機 ObservableCollection 所支援的 [IBindingList](https://msdn.microsoft.com/library/system.componentmodel.ibindinglist.aspx) 執行。  
 
 這不是完整 Windows Forms 資料系結範例的適當位置，但主要元素如下：  
 
 - 設定物件系結來源  
-- 使用 ToBindingList （）將它系結至您的集合的區域屬性  
+- 使用 ToBindingList ( # A1 將它系結至您集合的本機屬性  
 - 使用資料庫的查詢填入本機  
 
 ## <a name="getting-detailed-information-about-tracked-entities"></a>取得有關追蹤實體的詳細資訊  
 
-此系列中的許多範例都使用 Entry 方法來傳回實體的 DbEntityEntry 實例。 這個專案物件接著會做為收集實體相關資訊的起點，例如其目前狀態，以及在實體上執行作業（例如明確載入相關實體）。  
+本系列中的許多範例都使用 Entry 方法來傳回實體的 DbEntityEntry 實例。 然後，這個專案物件會作為收集實體相關資訊（例如其目前狀態）的起點，以及用來在實體上執行作業的起點，例如明確載入相關實體。  
 
-專案方法會針對內容所追蹤的許多或所有實體傳回 DbEntityEntry 物件。 這可讓您收集許多實體的資訊或執行作業，而不只是單一專案。 例如：  
+這些專案方法會針對內容所追蹤的許多或所有實體傳回 DbEntityEntry 物件。 這可讓您收集資訊，或在許多實體（而不只是單一專案）上執行作業。 例如：  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -265,7 +267,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-您會發現我們在範例中引進了作者和 Reader 類別，這兩個類別都是實 IPerson 介面。  
+您將會注意到，我們會在範例中引進作者和讀者類別，這兩個類別都是實 IPerson 介面。  
 
 ``` csharp
 public class Author : IPerson
@@ -288,12 +290,12 @@ public interface IPerson
 }
 ```  
 
-假設我們在資料庫中有下列資料：
+讓我們假設資料庫中有下列資料：
 
-BlogId = 1 且 Name = ' ADO.NET Blog ' 的 blog  
+BlogId = 1 和 Name = ' ADO.NET Blog ' 的 blog  
 BlogId = 2 且 Name = ' Visual Studio Blog ' 的 blog  
-BlogId = 3 且 Name = ' .NET Framework Blog ' 的 blog  
-作者 = 1，名稱 = ' Joe Bloggs '  
+BlogId = 3 和 Name = ' .NET Framework Blog 的 blog  
+作者 = 1 且 Name = ' Joe Bloggs ' 的作者  
 ReaderId = 1 且 Name = ' John Doe ' 的讀取器  
 
 執行程式碼的輸出會是：  
@@ -322,10 +324,10 @@ Found Person Joe Bloggs
 Found Person Jane Doe
 ```  
 
-這些範例會說明幾個重點：  
+這些範例說明幾個重點：  
 
-- 專案方法會傳回所有狀態中實體的專案，包括已刪除。 將此專案與本機（排除已刪除的實體）進行比較。  
-- 當使用非泛型專案方法時，會傳回所有實體類型的專案。 使用泛型專案方法時，只會針對屬於泛型型別實例的實體傳回專案。 上面用來取得所有 blog 的專案。 它也可用來取得所有實 IPerson 實體的專案。 這會示範泛型型別不一定要是實際的實體型別。  
-- LINQ to Objects 可以用來篩選傳回的結果。 這是在上方用來尋找任何類型的實體，只要它們已修改即可。  
+- 專案方法會傳回所有狀態中的實體專案，包括已刪除的專案。 將此與排除已刪除實體的本機比較。  
+- 使用非泛型專案方法時，會傳回所有實體類型的專案。 使用泛型專案方法時，只會針對屬於泛型型別實例的實體傳回專案。 這是用來取得所有 blog 的專案。 它也可用來取得所有執行 IPerson 之實體的專案。 這會示範泛型型別不一定是實際的實體型別。  
+- LINQ to Objects 可以用來篩選傳回的結果。 這是用來尋找任何類型的實體（只要修改它們的話）。  
 
-請注意，DbEntityEntry 實例一律包含非 null 的實體。 關聯性專案和存根專案不會呈現為 DbEntityEntry 實例，因此不需要進行篩選。
+請注意，DbEntityEntry 實例一律包含非 null 的實體。 關聯性專案和存根專案不會表示為 DbEntityEntry 實例，因此不需要篩選這些專案。

@@ -1,19 +1,20 @@
 ---
 title: EF6 和 EF Core - 在相同的應用程式中使用它們
+description: 在相同應用程式中同時使用 Entity Framework Core 和 Entity Framework 6 的指引
 author: ajcvickers
 ms.date: 01/23/2019
 ms.assetid: a06e3c35-110c-4294-a1e2-32d2c31c90a7
 uid: efcore-and-ef6/side-by-side
-ms.openlocfilehash: bcf0a26535c4ec880a9ac25478c987fb683f6d26
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 9bd3d837a333eb23be4cb3095b7f387ad303376d
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78419641"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619552"
 ---
 # <a name="using-ef-core-and-ef6-in-the-same-application"></a>在相同的應用程式中使用 EF Core 和 EF6
 
-可以通過同時安裝 NuGet 包在同一應用程式或庫中使用 EF Core 和 EF6。
+您可以同時安裝這兩個 NuGet 套件，以在相同的應用程式或程式庫中使用 EF Core 和 EF6。
 
 某些類型在 EF Core 和 EF6 中有相同的名稱，僅命名空間不同，使得在相同程式碼檔案中同時使用 EF Core 和 EF6 變得有些複雜。 使用命名空間別名指示詞可輕鬆避免模稜兩可的指涉。 例如：
 
