@@ -1,44 +1,46 @@
 ---
-title: 流暢的 API 與 VB.NET-EF6
+title: 使用 VB.NET 的流暢 API-EF6
+description: Entity Framework 6 中的流暢 API 與 VB.NET
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 763dc6a2-764a-4600-896c-f6f13abf56ec
-ms.openlocfilehash: 1c889877b827408919c6170cf997e8805cc607cf
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/fluent/vb
+ms.openlocfilehash: d6430ee254c6f0d5f093961d25902326022226cd
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419056"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616974"
 ---
 # <a name="fluent-api-with-vbnet"></a>使用 VB.NET 的流暢 API
-Code First 可讓您使用 C\# 或 VB.NET 類別來定義模型。 您可以選擇性地使用類別和屬性上的屬性，或使用 Fluent API 來執行其他設定。 本逐步解說示範如何使用 VB.NET 來執行 Fluent API 設定。
+Code First 可讓您使用 C 或 VB.NET 類別來定義您的模型 \# 。 您可以選擇性地使用類別和屬性上的屬性，或使用流暢的 API 來執行其他設定。 本逐步解說將說明如何使用 VB.NET 執行流暢的 API 設定。
 
-本頁面假設您對 Code First 有基本瞭解。 如需 Code First 的詳細資訊，請參閱下列逐步解說：
+本頁面假設您對 Code First 有基本的瞭解。 如需 Code First 的詳細資訊，請參閱下列逐步解說：
 
--   [新資料庫的 Code First](~/ef6/modeling/code-first/workflows/new-database.md)
--   [Code First 到現有的資料庫](~/ef6/modeling/code-first/workflows/existing-database.md)
+-   [新資料庫的 Code First](xref:ef6/modeling/code-first/workflows/new-database)
+-   [Code First 至現有的資料庫](xref:ef6/modeling/code-first/workflows/existing-database)
 
 ## <a name="pre-requisites"></a>必要條件
 
-您至少必須安裝 Visual Studio 2010 或 Visual Studio 2012，才能完成此逐步解說。
+您必須至少安裝 Visual Studio 2010 或 Visual Studio 2012，才能完成此逐步解說。
 
-如果您使用 Visual Studio 2010，您也必須安裝[NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
+如果您使用 Visual Studio 2010，也需要安裝[NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
 
 ## <a name="create-the-application"></a>建立應用程式
 
-為了簡單起見，我們將建立一個使用 Code First 來執行資料存取的基本主控台應用程式。
+為了簡單起見，我們將建立使用 Code First 來執行資料存取的基本主控台應用程式。
 
 -   開啟 Visual Studio
--   **檔案&gt; 新&gt; 專案 。**
--   從左側功能表和**主控台應用程式**中選取 [ **Windows** ]
--   輸入**CodeFirstVBSample**作為名稱
+-   **檔案- &gt; 新增- &gt; 專案 .。。**
+-   從左側功能表和**主控台應用程式**選取 [ **Windows** ]
+-   輸入 **CodeFirstVBSample** 作為名稱
 -   選取 [確定]
 
 ## <a name="define-the-model"></a>定義模型
 
-在此步驟中，您將定義代表概念模型的 VB.NET POCO 實體類型。 類別不需要衍生自任何基類或實作用任何介面。
+在這個步驟中，您將定義代表概念模型的 VB.NET POCO 實體類型。 類別不需要從任何基類衍生，或執行任何介面。
 
--   將新類別新增至專案，並在 [類別名稱] 中輸入**SchoolModel**
+-   將新類別新增至專案中，輸入 **SchoolModel** 做為類別名稱
 -   將新類別的內容取代為下列程式碼
 
 ``` vb
@@ -137,16 +139,16 @@ End Class
 
 我們即將開始使用 Entity Framework 的類型，因此我們需要新增 EntityFramework NuGet 套件。
 
--   \* * 專案–&gt;**管理 NuGet 套件 ...**
+-   * * Project- &gt; **管理 NuGet 套件 ...**
 > [!NOTE]
-> 如果您沒有 [**管理 NuGet 套件 ...** ] 選項您應該安裝[最新版的 NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
--   選取 [**線上**] 索引標籤
--   選取**EntityFramework**套件
+> 如果您沒有 [**管理 NuGet 套件 ...** ] 選項您應該安裝 [最新版本的 NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
+-   選取 [ **線上** ] 索引標籤
+-   選取 **EntityFramework** 套件
 -   按一下 [安裝]
 
-現在可以定義衍生的內容，代表與資料庫的會話，讓我們能夠查詢和儲存資料。 我們會定義衍生自 DbCoNtext 的內容，並針對模型中的每個類別公開具類型的 DbSet&lt;TEntity&gt;。
+現在是時候定義衍生的內容，它代表與資料庫的會話，讓我們可以查詢和儲存資料。 我們會定義衍生自 DbCoNtext 的內容，並 &lt; &gt; 針對模型中的每個類別公開具類型的 DbSet TEntity。
 
--   將新類別新增至專案，並在 [類別名稱] 中輸入**SchoolCoNtext**
+-   將新類別新增至專案中，輸入 **SchoolCoNtext** 做為類別名稱
 -   將新類別的內容取代為下列程式碼
 
 ```vb
@@ -171,9 +173,9 @@ End Class
 
 ## <a name="configuring-with-the-fluent-api"></a>使用流暢的 API 進行設定
 
-本節示範如何使用流暢的 Api 來設定資料表的類型、對應的屬性、資料行的對應，以及模型中的資料表之間的關聯性\\類型。 Fluent API 是透過**DbModelBuilder**類型公開，而且最常藉由覆寫**DbCoNtext**上的**OnModelCreating**方法來存取。
+本節示範如何使用流暢的 Api 來設定資料表對應的類型、資料行對應的屬性，以及模型中資料表類型之間的關聯性 \\ 。 流暢的 API 會透過**DbModelBuilder**型別公開，最常透過覆寫**DbCoNtext**上的**OnModelCreating**方法來存取。
 
--   複製下列程式碼，並將它新增至**SchoolCoNtext**類別上定義的**OnModelCreating**方法中，批註會說明每個對應的用途
+-   複製下列程式碼，並將它新增至**SchoolCoNtext**類別上所定義的**OnModelCreating**方法，批註會說明每個對應的用途
 
 ``` vb
 ' Configure Code First to ignore PluralizingTableName convention
@@ -365,10 +367,10 @@ modelBuilder.Entity(Of Course)().
 
 ## <a name="using-the-model"></a>使用模型
 
-讓我們使用**SchoolCoNtext**來執行一些資料存取，以查看實際運作中的模型。
+讓我們使用 **SchoolCoNtext** 來執行一些資料存取，以查看作用中的模型。
 
 -   開啟定義 Main 函數的 Module1 檔案
--   複製並貼上下列 Module1 定義
+-   複製並貼上下列的 Module1 定義
 
 ``` vb
 Imports System.Data.Entity
@@ -408,7 +410,7 @@ Module Module1
 End Module
 ```
 
-您現在可以執行應用程式並加以測試。
+您現在可以執行應用程式並進行測試。
 
 ```console
 Enter a name for a new Department: Computing

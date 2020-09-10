@@ -1,15 +1,16 @@
 ---
 title: EF Core 1.0 中的新增功能 - EF Core
+description: Entity Framework Core 1.0 的變更和改進
 author: divega
 ms.date: 10/27/2016
 ms.assetid: 20A25111-AEBE-4BC2-83A5-3F651952DF72
 uid: core/what-is-new/ef-core-1.0
-ms.openlocfilehash: 2cd2a54d75ed3f0caa8b674dfb56babcfcc13592
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: adde26095a11016796f6bd616978c3ccc0fe4c18
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417521"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618851"
 ---
 # <a name="features-included-in-ef-core-10"></a>EF Core 1.0 中包含的功能
 
@@ -177,4 +178,4 @@ ms.locfileid: "78417521"
 
 ### <a name="3rd-party-providers"></a>協力廠商提供者
 
-有數個提供者提供其他資料庫引擎。 如需完整清單，請參閱[資料庫提供者](../providers/index.md)。
+有數個提供者提供其他資料庫引擎。 如需完整清單，請參閱[資料庫提供者](xref:core/providers/index)。

@@ -1,35 +1,37 @@
 ---
-title: 空間 Code First-EF6
+title: 空間-Code First-EF6
+description: Entity Framework 6 中的空間 Code First
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d617aed1-15f2-48a9-b187-186991c666e3
-ms.openlocfilehash: 018f480c1f0f1e74fc9f7a8950a6880e96f1facc
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/data-types/spatial
+ms.openlocfilehash: 8c2d47a66979a228fdc4902857df999a21945547
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419098"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618166"
 ---
 # <a name="spatial---code-first"></a>空間-Code First
 > [!NOTE]
-> **EF5 僅限**，此頁面中所討論的功能、api 等內容是在 Entity Framework 5 中引進。 如果您使用的是較早版本，則不適用部分或全部的資訊。
+> **EF5 只** 會提供此 Entity Framework 頁面中所討論的功能、api 等等。 如果您使用的是較早版本，則不適用部分或全部的資訊。
 
-影片和逐步解說會顯示如何使用 Entity Framework Code First 來對應空間類型。 它也會示範如何使用 LINQ 查詢來尋找兩個位置之間的距離。
+影片和逐步解說會示範如何使用 Entity Framework Code First 來對應空間類型。 它也會示範如何使用 LINQ 查詢來尋找兩個位置之間的距離。
 
-這個逐步解說將使用 Code First 建立新的資料庫，但是您也可以使用[現有資料庫的 Code First](~/ef6/modeling/code-first/workflows/existing-database.md)。
+本逐步解說將使用 Code First 建立新的資料庫，但您也可以使用 [Code First 到現有的資料庫](xref:ef6/modeling/code-first/workflows/existing-database)。
 
-空間類型支援已于 Entity Framework 5 中引進。 請注意，若要使用空間類型、列舉和資料表值函式等新功能，您必須以 .NET Framework 4.5 為目標。 Visual Studio 2012 預設會以 .NET 4.5 為目標。
+Entity Framework 5 引進了空間類型支援。 請注意，若要使用空間類型、列舉和資料表值函式之類的新功能，您必須將目標設為 .NET Framework 4.5。 Visual Studio 2012 預設會以 .NET 4.5 為目標。
 
-若要使用空間資料類型，您也必須使用具有空間支援的 Entity Framework 提供者。 如需詳細資訊，請參閱[提供者支援的空間類型](~/ef6/fundamentals/providers/spatial-support.md)。
+若要使用空間資料類型，您也必須使用具有空間支援的 Entity Framework 提供者。 如需詳細資訊，請參閱 [提供者的空間類型支援](xref:ef6/fundamentals/providers/spatial-support) 。
 
-主要的空間資料類型有兩種： geography 和 geometry。 Geography 資料類型會儲存橢圓體資料（例如，GPS 緯度和經度座標）。 Geometry 資料類型代表 Euclidean （平面）座標系統。
+有兩個主要的空間資料類型： geography 和 geometry。 Geography 資料類型會儲存橢圓體資料 (例如，GPS 緯度和經度座標) 。 Geometry 資料類型代表 Euclidean (的平面) 座標系統。
 
 ## <a name="watch-the-video"></a>觀賞影片
 這段影片示範如何使用 Entity Framework Code First 來對應空間類型。 它也會示範如何使用 LINQ 查詢來尋找兩個位置之間的距離。
 
 **提供者**： Julia Kornich
 
-**影片**： [wmv](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.wmv) | [.wmv](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-mp4video-spatialwithcodefirst.m4v) | [wmv （ZIP）](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.zip)
+**影片**： [wmv](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.wmv)的  |  [MP4](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-mp4video-spatialwithcodefirst.m4v)  |  [wmv .wmv (ZIP) ](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.zip)
 
 ## <a name="pre-requisites"></a>必要條件
 
@@ -38,17 +40,17 @@ ms.locfileid: "78419098"
 ## <a name="set-up-the-project"></a>設定專案
 
 1.  開啟 Visual Studio 2012
-2.  **在 [檔案**] 功能表上，指向 [**新增**]，然後按一下 [**專案**]
-3.  在左窗格中，按一下 [ **Visual C\#** ]，然後選取**主控台**範本
-4.  輸入**SpatialCodeFirst**做為專案的名稱，然後按一下 **[確定]** 。
+2.  **在 [檔案**] 功能表上，指向 [**新增**]，然後按一下 [**專案**]。
+3.  在左窗格中，按一下 [ **Visual \# C**]，然後選取**主控台**範本
+4.  輸入 **SpatialCodeFirst** 做為專案的名稱，然後按一下 **[確定]**
 
-## <a name="define-a-new-model-using-code-first"></a>使用 Code First 定義新的模型
+## <a name="define-a-new-model-using-code-first"></a>使用 Code First 定義新模型
 
-使用 Code First 開發時，您通常會從撰寫定義概念（網域）模型的 .NET Framework 類別開始著手。 下列程式碼會定義大學類別。
+使用 Code First 開發時，通常會先撰寫 .NET Framework 類別，以定義您的概念 (網域) 模型。 下列程式碼會定義大學類別。
 
-大學具有 DbGeography 類型的 Location 屬性。 若要使用 DbGeography 類型，您必須加入 system.string 元件的參考，並使用語句來新增 System.web 空間。
+大學具有 DbGeography 類型的 Location 屬性。 若要使用 DbGeography 型別，您必須加入 system.string 元件的參考，並使用語句加入 system.string。
 
-開啟 Program.cs 檔案，並在檔案頂端貼上下列 using 語句：
+開啟 Program.cs 檔案，並將下列 using 語句貼到檔案頂端：
 
 ``` csharp
 using System.Data.Spatial;
@@ -67,18 +69,18 @@ public class University
 
 ## <a name="define-the-dbcontext-derived-type"></a>定義 DbCoNtext 衍生類型
 
-除了定義實體以外，您還需要定義衍生自 DbCoNtext 的類別，並公開 DbSet&lt;TEntity&gt; 屬性。 DbSet&lt;TEntity&gt; 屬性可讓內容知道您想要包含在模型中的類型。
+除了定義實體之外，您還必須定義衍生自 DbCoNtext 的類別，並公開 DbSet &lt; TEntity &gt; 屬性。 DbSet &lt; TEntity &gt; 屬性可讓內容知道您想要包含在模型中的類型。
 
-DbCoNtext 衍生類型的實例會在運行時間管理實體物件，其中包括以資料庫的資料填入物件、變更追蹤，以及將資料保存至資料庫。
+DbCoNtext 衍生類型的實例會在運行時間管理實體物件，包括將資料庫的資料填入物件、變更追蹤，以及將資料保存到資料庫。
 
-DbCoNtext 和 DbSet 類型定義于 EntityFramework 元件中。 我們會使用 EntityFramework NuGet 套件來新增對此 DLL 的參考。
+DbCoNtext 和 DbSet 類型是在 EntityFramework 元件中定義。 我們會使用 EntityFramework NuGet 封裝來新增此 DLL 的參考。
 
 1.  在方案總管中，以滑鼠右鍵按一下專案名稱。
 2.  選取 [**管理 NuGet 套件 ...** ]
-3.  在 [管理 NuGet 套件] 對話方塊中，選取 [**線上**] 索引標籤，然後選擇 [ **EntityFramework** ] 套件。
+3.  在 [管理 NuGet 封裝] 對話方塊中，選取 [ **線上** ] 索引標籤，然後選擇 **EntityFramework** 套件。
 4.  按一下 [安裝]
 
-請注意，除了 EntityFramework 元件之外，也會新增 System.workflow.componentmodel.activity. DataAnnotations 元件的參考。
+請注意，除了 EntityFramework 元件之外，也會加入 ComponentModel. DataAnnotations 元件的參考。
 
 在 Program.cs 檔案的頂端，新增下列 using 語句：
 
@@ -86,7 +88,7 @@ DbCoNtext 和 DbSet 類型定義于 EntityFramework 元件中。 我們會使用
 using System.Data.Entity;
 ```
 
-在 Program.cs 中，新增內容定義。 
+在 Program.cs 中加入內容定義。 
 
 ``` csharp
 public partial class UniversityContext : DbContext
@@ -97,9 +99,9 @@ public partial class UniversityContext : DbContext
 
 ## <a name="persist-and-retrieve-data"></a>保存和取出資料
 
-開啟定義 Main 方法的 Program.cs 檔案。 將下列程式碼新增至 Main 函式中。
+開啟定義 Main 方法的 Program.cs 檔案。 將下列程式碼新增至 Main 函數。
 
-程式碼會在內容中加入兩個新的大學物件。 空間屬性會使用 DbGeography. FromText 方法進行初始化。 以 WellKnownText 表示的 geography 點會傳遞至方法。 然後，程式碼會儲存資料。 然後，會建立並執行 LINQ 查詢，以傳回其位置最接近指定位置的大學物件。
+此程式碼會將兩個新的大學物件新增至內容中。 空間屬性會使用 DbGeography. Value.fromtext 方法來初始化。 以 WellKnownText 表示的地理位置點會傳遞給方法。 然後，程式碼會儲存資料。 然後，會建立並執行 LINQ 查詢，該查詢會傳回其位置最接近指定位置的大學物件。
 
 ``` csharp
 using (var context = new UniversityContext ())
@@ -138,18 +140,18 @@ The closest University to you is: School of Fine Art.
 
 ## <a name="view-the-generated-database"></a>查看產生的資料庫
 
-當您第一次執行應用程式時，Entity Framework 會為您建立資料庫。 因為我們已安裝 Visual Studio 2012，所以會在 LocalDB 實例上建立資料庫。 根據預設，Entity Framework 會在衍生內容的完整名稱後面加上資料庫名稱（在此範例中為**SpatialCodeFirst. UniversityCoNtext**）。 將使用現有資料庫的後續時間。  
+當您第一次執行應用程式時，Entity Framework 會為您建立資料庫。 因為我們安裝了 Visual Studio 2012，所以會在 LocalDB 實例上建立資料庫。 根據預設，Entity Framework 會在衍生內容的完整名稱之後，將資料庫命名 (在此範例中為 **SpatialCodeFirst. UniversityCoNtext**) 。 將會使用現有資料庫的後續時間。  
 
-請注意，如果您在建立資料庫之後對模型進行任何變更，您應該使用 Code First 移轉來更新資料庫架構。 如需使用遷移的範例，請參閱[Code First 至新的資料庫](~/ef6/modeling/code-first/workflows/new-database.md)。
+請注意，如果您在建立資料庫之後對模型進行任何變更，則應該使用 Code First 移轉來更新資料庫架構。 如需使用遷移的範例，請參閱 [Code First 至新的資料庫](xref:ef6/modeling/code-first/workflows/new-database) 。
 
 若要查看資料庫和資料，請執行下列動作：
 
-1.  在 Visual Studio 2012 主功能表中，選取 [ **View** -&gt; **SQL Server 物件總管**]。
-2.  如果 LocalDB 不在伺服器清單中，請按一下**SQL Server**上的滑鼠右鍵，然後選取 [**新增] SQL Server**使用預設的 [ **Windows 驗證**] 來連接到 LocalDB 實例
+1.  在 [Visual Studio 2012] 主功能表中，選取 [ **View**  - &gt; **SQL Server 物件總管**。
+2.  如果 LocalDB 不在伺服器清單中，請在 **SQL Server** 上按一下滑鼠右鍵，然後選取 [ **加入] SQL Server** 使用預設的 **Windows 驗證** 連接到 LocalDB 實例
 3.  展開 LocalDB 節點
-4.  展開 [**資料庫**] 資料夾以查看新的資料庫，並流覽至 [**大學**] 資料表
-5.  若要查看資料，請以滑鼠右鍵按一下資料表，然後選取 [**查看資料**]
+4.  展開 [ **資料庫** ] 資料夾以查看新的資料庫，並流覽至 [ **大學** ] 資料表
+5.  若要查看資料，請以滑鼠右鍵按一下資料表，然後選取 [ **View data** ]
 
 ## <a name="summary"></a>摘要
 
-在本逐步解說中，我們探討了如何搭配使用空間類型與 Entity Framework Code First。 
+在本逐步解說中，我們探討了如何搭配 Entity Framework Code First 來使用空間類型。 

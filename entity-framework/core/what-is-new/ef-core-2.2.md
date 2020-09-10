@@ -1,15 +1,16 @@
 ---
 title: EF Core 2.2 的新功能 - EF Core
+description: Entity Framework Core 2.2 的變更和改進
 author: divega
 ms.date: 11/14/2018
 ms.assetid: 998C04F3-676A-4FCF-8450-CFB0457B4198
 uid: core/what-is-new/ef-core-2.2
-ms.openlocfilehash: fb9de799753bebd7b4092cd8f4af74703dee3e45
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 5d248c4dcf760ee7ae86417f5d7a000848a4f97e
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417444"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618738"
 ---
 # <a name="new-features-in-ef-core-22"></a>EF Core 2.2 中的新功能
 

@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 74284bf78f404e376436a1ef5d5933186c85ae49
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 0d88e0a4876755656626621fd9a4ca01d18b5b64
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413053"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619319"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB 提供者
 
@@ -54,7 +54,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 > [!WARNING]
 > 為簡便起見，此處將端點和索引鍵進行了硬式編碼，但這些內容在生產應用程式中應予以[安全儲存](/aspnet/core/security/app-secrets#secret-manager)。
 
-在此範例中，`Order` 是簡單實體，其參考[自有類型](../../modeling/owned-entities.md) `StreetAddress`。
+在此範例中，`Order` 是簡單實體，其參考[自有類型](xref:core/modeling/owned-entities) `StreetAddress`。
 
 [!code-csharp[Order](../../../../samples/core/Cosmos/ModelBuilding/Order.cs?name=Order)]
 
@@ -65,7 +65,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 [!code-csharp[HelloCosmos](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=HelloCosmos)]
 
 > [!IMPORTANT]
-> 如果要建立需要的容器或插入[種子資料](../../modeling/data-seeding.md) (如果存在於模型中)，就必須呼叫 [EnsureCreatedAsync](/dotnet/api/Microsoft.EntityFrameworkCore.Storage.IDatabaseCreator.EnsureCreatedAsync)。 但是，`EnsureCreatedAsync` 僅應在部署期間呼叫，在一般作業期間呼叫可能會導致效能問題。
+> 如果要建立需要的容器或插入[種子資料](xref:core/modeling/data-seeding) (如果存在於模型中)，就必須呼叫 [EnsureCreatedAsync](/dotnet/api/Microsoft.EntityFrameworkCore.Storage.IDatabaseCreator.EnsureCreatedAsync)。 但是，`EnsureCreatedAsync` 僅應在部署期間呼叫，在一般作業期間呼叫可能會導致效能問題。
 
 ## <a name="cosmos-specific-model-customization"></a>Cosmos 專用模型自訂
 
@@ -77,13 +77,13 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 
 [!code-csharp[Container](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=Container)]
 
-為了識別其指定項目代表 EF Core 的實體類型，即使沒有衍生的實體類型，也會新增鑑別子值。 鑑別子的名稱和值[可以變更](../../modeling/inheritance.md)。
+為了識別其指定項目代表 EF Core 的實體類型，即使沒有衍生的實體類型，也會新增鑑別子值。 鑑別子的名稱和值[可以變更](xref:core/modeling/inheritance)。
 
 如果不會在同一個容器中儲存其他實體類型，就可以呼叫 [HasNoDiscriminator](/dotnet/api/Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder.HasNoDiscriminator) 將鑑別子移除：
 
 [!code-csharp[NoDiscriminator](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=NoDiscriminator)]
 
-### <a name="partition-keys"></a>分割區索引鍵
+### <a name="partition-keys"></a>資料分割索引鍵
 
 根據預設，EF Core 會使用對 `"__partitionKey"` 設定的分割區索引鍵來建立容器，但不會在插入項目時提供任何值。 不過，如果要充分利用 Azure Cosmos 的效能功能，就必須使用[謹慎選取的分割區索引鍵](/azure/cosmos-db/partition-data)。 您可以透過呼叫 [HasPartitionKey](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosEntityTypeBuilderExtensions.HasPartitionKey) 來設定分割區索引鍵：
 
@@ -164,7 +164,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 
 ## <a name="working-with-disconnected-entities"></a>使用已中斷連線的實體
 
-每個項目都必須具有 `id` 值，該值對於特定分割區索引鍵是唯一的。 根據預設，EF Core 會使用 “|” 作為分隔符號，將鑑別子和主索引鍵值相結合以產生值。 僅當實體進入 `Added` 狀態時才會產生索引鍵值。 在[連結實體](../../saving/disconnected-entities.md)時，如果它們在 .NET 類型上不具有 `id` 屬性來儲存值，則可能會發生問題。
+每個項目都必須具有 `id` 值，該值對於特定分割區索引鍵是唯一的。 根據預設，EF Core 會使用 “|” 作為分隔符號，將鑑別子和主索引鍵值相結合以產生值。 僅當實體進入 `Added` 狀態時才會產生索引鍵值。 在[連結實體](xref:core/saving/disconnected-entities)時，如果它們在 .NET 類型上不具有 `id` 屬性來儲存值，則可能會發生問題。
 
 若要解決此限制，您可以手動建立並設定 `id` 值，或先將實體標記為已新增，然後將其變更為所需狀態：
 

@@ -1,22 +1,23 @@
 ---
 title: 儲存相關資料 - EF Core
+description: 在 Entity Framework Core 中儲存相關實體和管理關聯性圖形的相關資訊
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 07b6680f-ffcf-412c-9857-f997486b386c
 uid: core/saving/related-data
-ms.openlocfilehash: 86d32b6172ee21c12a15e9ed4bb0142afc99c8bd
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 118d5933dd543a03bbe16fd8be1f00b7304e39c4
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417542"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618890"
 ---
 # <a name="saving-related-data"></a>儲存相關資料
 
 儲存隔離的實體之外，您也可以利用模型中所定義的關聯性。
 
 > [!TIP]  
-> 您可以在 GitHub 上查看本文[的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/)。
+> 您可以在 GitHub 上查看這篇文章的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/) 。
 
 ## <a name="adding-a-graph-of-new-entities"></a>新增新實體的圖表
 
@@ -53,9 +54,9 @@ ms.locfileid: "78417542"
 
 針對必要關聯性，預設會設定串聯刪除行為，系統將會從資料庫中刪除子系/相依實體。 針對選擇性關聯性，預設並不會設定串聯刪除，但外部索引鍵屬性將會設定為 Null。
 
-若要了解如何設定關聯性的必要性，請參閱[必要和選擇性關聯性](../modeling/relationships.md#required-and-optional-relationships)。
+若要了解如何設定關聯性的必要性，請參閱[必要和選擇性關聯性](xref:core/modeling/relationships#required-and-optional-relationships)。
 
-如需有關串聯刪除行為如何運作、如何明確設定這些行為及如何依慣例選取這些行為的更多詳細資料，請參閱[串聯刪除](cascade-delete.md)。
+如需有關串聯刪除行為如何運作、如何明確設定這些行為及如何依慣例選取這些行為的更多詳細資料，請參閱[串聯刪除](xref:core/saving/cascade-delete)。
 
 在下列範例中，在 `Blog` 與 `Post` 之間的關聯性上已設定串聯刪除，因此會從資料庫中刪除 `post`實體。
 

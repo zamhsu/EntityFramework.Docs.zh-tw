@@ -1,46 +1,48 @@
 ---
-title: Code First 至新的資料庫-EF6
+title: Code First 新增至新資料庫-EF6
+description: Code First 至 Entity Framework 6 中的新資料庫
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 2df6cb0a-7d8b-4e28-9d05-e2b9a90125af
-ms.openlocfilehash: d540fc6e84049f345ae22998f94c309e0be73fc3
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/workflows/new-database
+ms.openlocfilehash: 4e927bab07ae7a9719c46655e10685b59d0b65dc
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418809"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616888"
 ---
-# <a name="code-first-to-a-new-database"></a>Code First 至新的資料庫
-這段影片和逐步解說提供以新資料庫為目標之 Code First 開發的簡介。 此案例包含的目標資料庫不存在且 Code First 將會建立，或是 Code First 會加入新資料表的空資料庫。 Code First 可讓您使用 C\# 或 VB.Net 類別來定義模型。 您可以選擇性地使用類別和屬性上的屬性，或使用 Fluent API 來執行其他設定。
+# <a name="code-first-to-a-new-database"></a>新資料庫的 Code First
+這段影片和逐步解說將提供以新的資料庫為目標的 Code First 開發簡介。 這種情況包括以不存在的資料庫為目標，Code First 將會建立，或是 Code First 將新的資料表加入的空資料庫。 Code First 可讓您使用 C 或 VB.Net 類別來定義您的模型 \# 。 您可以選擇性地使用類別和屬性上的屬性，或使用流暢的 API 來執行其他設定。
 
 ## <a name="watch-the-video"></a>觀賞影片
-這段影片提供以新資料庫為目標之 Code First 開發的簡介。 此案例包含的目標資料庫不存在且 Code First 將會建立，或是 Code First 會加入新資料表的空資料庫。 Code First 可讓您使用C#或 VB.Net 類別來定義您的模型。 您可以選擇性地使用類別和屬性上的屬性，或使用 Fluent API 來執行其他設定。
+這段影片提供以新的資料庫為目標的 Code First 開發簡介。 這種情況包括以不存在的資料庫為目標，Code First 將會建立，或是 Code First 將新的資料表加入的空資料庫。 Code First 可讓您使用 c # 或 VB.Net 類別來定義您的模型。 您可以選擇性地使用類別和屬性上的屬性，或使用流暢的 API 來執行其他設定。
 
 **主講人**[Rowan Miller](https://romiller.com/)
 
-**影片**： [wmv](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.wmv) | [.wmv](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-mp4Video-CodeFirstNewDatabase.m4v) | [wmv （ZIP）](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.zip)
+**影片**： [wmv](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.wmv)的  |  [MP4](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-mp4Video-CodeFirstNewDatabase.m4v)  |  [wmv .wmv (ZIP) ](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.zip)
 
 ## <a name="pre-requisites"></a>必要條件
 
-您至少必須安裝 Visual Studio 2010 或 Visual Studio 2012，才能完成此逐步解說。
+您必須至少安裝 Visual Studio 2010 或 Visual Studio 2012，才能完成此逐步解說。
 
-如果您使用 Visual Studio 2010，您也必須安裝[NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) 。
+如果您使用 Visual Studio 2010，也需要安裝 [NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) 。
 
 ## <a name="1-create-the-application"></a>1. 建立應用程式
 
-為了簡單起見，我們將建立一個使用 Code First 來執行資料存取的基本主控台應用程式。
+為了簡單起見，我們將建立使用 Code First 來執行資料存取的基本主控台應用程式。
 
 -   開啟 Visual Studio
--   **檔案&gt; 新&gt; 專案 。**
--   從左側功能表和**主控台應用程式**中選取 [ **Windows** ]
--   輸入**CodeFirstNewDatabaseSample**作為名稱
+-   **檔案- &gt; 新增- &gt; 專案 .。。**
+-   從左側功能表和**主控台應用程式**選取 [ **Windows** ]
+-   輸入 **CodeFirstNewDatabaseSample** 作為名稱
 -   選取 [確定]
 
 ## <a name="2-create-the-model"></a>2. 建立模型
 
-讓我們使用類別來定義一個非常簡單的模型。 我們只是在 Program.cs 檔案中定義它們，但在真實世界的應用程式中，您會將類別分割成不同的檔案，而且可能是個別的專案。
+讓我們使用類別來定義非常簡單的模型。 我們只是在 Program.cs 檔中定義它們，但在真實世界的應用程式中，您會將類別分成不同的檔案，而且可能是個別的專案。
 
-在 Program.cs 中的 Program 類別定義底下，新增下列兩個類別。
+在 Program.cs 中的程式類別定義下方，新增下列兩個類別。
 
 ``` csharp
 public class Blog
@@ -62,27 +64,27 @@ public class Post
 }
 ```
 
-您會注意到，我們會將這兩個導覽屬性（Blog 和文章 Blog）虛擬。 這會啟用 Entity Framework 的消極式載入功能。 消極式載入表示這些屬性的內容會在您嘗試存取時，自動從資料庫載入。
+您會注意到，我們會將兩個導覽屬性 (Blog 和 Post. Blog) virtual。 這會啟用 Entity Framework 的消極式載入功能。 消極式載入表示當您嘗試存取這些屬性的內容時，將會自動從資料庫載入這些屬性的內容。
 
 ## <a name="3-create-a-context"></a>3. 建立內容
 
-現在可以定義衍生的內容，代表與資料庫的會話，讓我們能夠查詢和儲存資料。 我們會定義衍生自 DbCoNtext 的內容，並針對模型中的每個類別公開具類型的 DbSet&lt;TEntity&gt;。
+現在是時候定義衍生的內容，它代表與資料庫的會話，讓我們可以查詢和儲存資料。 我們會定義衍生自 DbCoNtext 的內容，並 &lt; &gt; 針對模型中的每個類別公開具類型的 DbSet TEntity。
 
-我們現在開始使用 Entity Framework 的類型，因此我們需要新增 EntityFramework NuGet 套件。
+我們現在開始使用 Entity Framework 中的型別，因此我們需要新增 EntityFramework NuGet 套件。
 
--   **專案–&gt; 管理 NuGet 套件 。**
-    注意：如果您沒有 [**管理 NuGet 套件 ...** ] 選項您應該安裝[最新版的 NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
--   選取 [**線上**] 索引標籤
--   選取**EntityFramework**套件
+-   **專案- &gt; 管理 NuGet 套件 .。。**
+    注意：如果您沒有 [**管理 NuGet 套件 ...** ] 選項您應該安裝 [最新版本的 NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
+-   選取 [ **線上** ] 索引標籤
+-   選取 **EntityFramework** 套件
 -   按一下 [安裝]
 
-在 Program.cs 頂端，為 system.string 新增 using 語句。
+在 Program.cs 頂端加入 system.string 的 using 語句。
 
 ``` csharp
 using System.Data.Entity;
 ```
 
-在 Program.cs 中的 Post 類別底下，新增下列衍生內容。
+在 Program.cs 的 Post 類別底下，加入下列衍生內容。
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -137,11 +139,11 @@ namespace CodeFirstNewDatabaseSample
 }
 ```
 
-這就是我們開始儲存和抓取資料所需的所有程式碼。 很明顯地，我們會在幕後討論一下，但我們先看看它的運作情形。
+這就是開始儲存和取出資料所需的所有程式碼。 顯然在幕後有很大的進展，我們先來看看這一點，但首先我們要看看它的運作方式。
 
 ## <a name="4-reading--writing-data"></a>4. 讀取 & 寫入資料
 
-在 Program.cs 中執行 Main 方法，如下所示。 此程式碼會建立內容的新實例，然後使用它來插入新的 Blog。 然後，它會使用 LINQ 查詢來抓取資料庫中依標題字母順序排序的所有 Blog。
+在 Program.cs 中執行 Main 方法，如下所示。 這段程式碼會建立內容的新實例，然後使用它來插入新的 Blog。 然後，它會使用 LINQ 查詢來從資料庫中依標題的字母順序來取得所有的 Blog。
 
 ``` csharp
 class Program
@@ -176,7 +178,7 @@ class Program
 }
 ```
 
-您現在可以執行應用程式並加以測試。
+您現在可以執行應用程式並進行測試。
 
 ```console
 Enter a name for a new Blog: ADO.NET Blog
@@ -186,44 +188,44 @@ Press any key to exit...
 ```
 ### <a name="wheres-my-data"></a>我的資料在哪裡？
 
-依照慣例，DbCoNtext 已為您建立資料庫。
+依慣例，DbCoNtext 已為您建立資料庫。
 
--   如果可以使用本機 SQL Express 實例（預設會隨 Visual Studio 2010 安裝），則 Code First 已在該實例上建立資料庫
--   如果無法使用 SQL Express，Code First 將會嘗試並使用[LocalDB](https://msdn.microsoft.com/library/hh510202(v=sql.110).aspx) （預設會與 Visual Studio 2012 一起安裝）
--   資料庫會在衍生內容的完整名稱之後命名，在此案例中為**CodeFirstNewDatabaseSample. BloggingCoNtext**
+-   如果有本機 SQL Express 實例可用 (預設會隨 Visual Studio 2010) 安裝然後 Code First 已在該實例上建立資料庫
+-   如果無法使用 SQL Express，Code First 將會嘗試並使用預設安裝的 [LocalDB](https://msdn.microsoft.com/library/hh510202(v=sql.110).aspx) (搭配 Visual Studio 2012) 
+-   資料庫是以衍生內容的完整名稱命名，在我們的案例中為 **CodeFirstNewDatabaseSample。 BloggingCoNtext**
 
-這些只是預設慣例，而且有各種方式可以變更 Code First 使用的資料庫，而**DbCoNtext 如何探索模型和資料庫連接**主題中提供詳細資訊。
-您可以使用中的伺服器總管來連接到此資料庫 Visual Studio
+這些只是預設慣例，而且有各種方式可變更 Code First 使用的資料庫，而 **DbCoNtext 如何探索模型和資料庫連接** 主題中提供詳細資訊。
+您可以使用中的伺服器總管連接到這個資料庫 Visual Studio
 
--   **View&gt; 伺服器總管**
--   以滑鼠右鍵按一下 [**資料連線**]，然後選取 [**新增連接 ...** ]
--   如果您還沒有從伺服器總管連接到資料庫，則必須選取 [Microsoft SQL Server] 做為資料來源
+-   **View- &gt; 伺服器總管**
+-   以滑鼠右鍵按一下 [**資料連線**]，然後選取 [**加入連接 ...** ]。
+-   如果您還沒有從伺服器總管連接到資料庫，則必須選取 Microsoft SQL Server 作為資料來源
 
     ![選取資料來源](~/ef6/media/selectdatasource.png)
 
--   連接到 LocalDB 或 SQL Express （視您安裝的版本而定）
+-   連接至 LocalDB 或 SQL Express （視您已安裝的版本而定）
 
 我們現在可以檢查 Code First 建立的架構。
 
 ![架構初始](~/ef6/media/schemainitial.png)
 
-DbCoNtext 會藉由查看我們定義的 DbSet 屬性，來處理要包含在模型中的類別。 然後，它會使用一組預設的 Code First 慣例來判斷資料表和資料行名稱、判斷資料類型、尋找主鍵等。 稍後在本逐步解說中，我們將探討如何覆寫這些慣例。
+DbCoNtext 藉由查看我們所定義的 DbSet 屬性，來處理要包含在模型中的類別。 然後，它會使用一組預設的 Code First 慣例來決定資料表和資料行名稱、判斷資料類型、尋找主鍵等等。 稍後在此逐步解說中，我們將探討如何覆寫這些慣例。
 
 ## <a name="5-dealing-with-model-changes"></a>5. 處理模型變更
 
-現在是時候對我們的模型進行一些變更，當我們進行這些變更時，我們也需要更新資料庫架構。 為了這麼做，我們將使用稱為 Code First 移轉的功能或簡短的遷移。
+現在是時候對我們的模型進行一些變更，當我們進行這些變更時，我們也需要更新資料庫架構。 為了達到此目的，我們將使用稱為 Code First 移轉的功能，或簡短的遷移。
 
-遷移可讓我們擁有一組已排序的步驟，說明如何升級（和降級）我們的資料庫架構。 其中每個步驟（稱為「遷移」）都會包含一些程式碼來描述要套用的變更。 
+遷移可讓我們擁有一組已排序的步驟，說明如何升級 (和降級) 我們的資料庫架構。 上述每個步驟（稱為「遷移」）都包含一些程式碼，描述要套用的變更。 
 
 第一個步驟是啟用 BloggingCoNtext 的 Code First 移轉。
 
--   **工具-&gt; 程式庫套件管理員-&gt; 套件管理員主控台**
+-   **工具-連結 &gt; 庫封裝管理員- &gt; 封裝管理員主控台**
 -   在套件管理員主控台中執行 **Enable-migrations** 命令
--   已將新的 [遷移] 資料夾新增至包含兩個專案的專案：
-    -   **Configuration.cs** –此檔案包含遷移將用於遷移 BloggingCoNtext 的設定。 我們不需要變更此逐步解說的任何專案，但您可以在這裡指定種子資料、註冊其他資料庫的提供者、變更在其中產生遷移的命名空間等等。
-    -   **&lt;時間戳記&gt;\_InitialCreate.cs** –這是您第一次的遷移，它代表已套用至資料庫的變更，使其成為包含 [blog] 和 [貼文] 資料表的空資料庫。 雖然我們會讓 Code First 自動為我們建立這些資料表，但現在我們已選擇要進行遷移，並將其轉換為遷移。 Code First 也會記錄在我們的本機資料庫中，這項遷移已套用。 檔案名上的時間戳記會用於排序目的。
+-   專案中已加入新的 [遷移] 資料夾，其中包含兩個專案：
+    -   **Configuration.cs** –這個檔案包含遷移將用來遷移 BloggingCoNtext 的設定。 我們不需要變更此逐步解說中的任何內容，但您可以在這裡指定種子資料、註冊其他資料庫的提供者、變更在其中產生遷移的命名空間等等。
+    -   ** &lt; 時間戳記 &gt; \_ InitialCreate.cs** –這是您第一次的遷移，它代表已套用至資料庫的變更，使其成為包含 blog 和 post 資料表的空資料庫。 雖然我們會讓 Code First 自動為我們建立這些資料表，但現在我們已選擇要進行遷移，並已轉換成遷移。 Code First 也會記錄在我們的本機資料庫中，表示已套用此遷移。 檔案名的時間戳記是用於排序用途。
 
-    現在，讓我們對模型進行變更，並將 Url 屬性新增至 Blog 類別：
+    現在讓我們對模型進行變更，並將 Url 屬性新增至 Blog 類別：
 
 ``` csharp
 public class Blog
@@ -236,9 +238,9 @@ public class Blog
 }
 ```
 
--   在 [套件管理員主控台] 中執行 [**新增-遷移 AddUrl** ] 命令。
-    「新增-遷移」命令會在您上次遷移後檢查變更，並 scaffold 所發現的任何變更來進行新的遷移。 我們可以提供一個名稱給遷移;在此情況下，我們會呼叫「AddUrl」遷移。
-    Scaffold 程式碼的意思是，我們需要將可保存字串資料的 Url 資料行加入至 dbo。[Blog] 資料表。 如有需要，我們可以編輯 scaffold 程式碼，但在此情況下不需要這麼做。
+-   在封裝管理員主控台中執行 [ **新增-遷移 AddUrl** ] 命令。
+    新增-遷移命令會檢查自您上次遷移後的變更，並使用找到的任何變更 scaffold 新的遷移。 我們可以為遷移提供一個名稱;在此情況下，我們會呼叫遷移 ' AddUrl '。
+    Scaffold 程式碼指出我們需要將 Url 資料行（可保存字串資料）新增至 dbo。Blog 資料表。 如有需要，我們可以編輯 scaffold 程式碼，但在此情況下不需要這麼做。
 
 ``` csharp
 namespace CodeFirstNewDatabaseSample.Migrations
@@ -261,18 +263,18 @@ namespace CodeFirstNewDatabaseSample.Migrations
 }
 ```
 
--   在 [套件管理員主控台] 中執行 [**更新-資料庫**] 命令。 此命令會將任何暫止的遷移套用至資料庫。 我們的 InitialCreate 遷移已套用，因此，遷移只會套用我們的新 AddUrl 遷移。
-    提示：呼叫 Update-Database 時，您可以使用 **– Verbose**參數來查看正在對資料庫執行的 SQL。
+-   在封裝管理員主控台中執行 **更新資料庫** 命令。 此命令會將任何擱置中的遷移套用至資料庫。 我們的 InitialCreate 遷移已套用，因此遷移只會套用新的 AddUrl 遷移。
+    提示：呼叫更新資料庫時，您可以使用 **-Verbose** 參數來查看針對資料庫執行的 SQL。
 
-新的 Url 資料行現在已新增至資料庫中的 Blog 資料表：
+新的 Url 資料行會加入至資料庫中的 Blog 資料表：
 
 ![具有 Url 的架構](~/ef6/media/schemawithurl.png)
 
 ## <a name="6-data-annotations"></a>6. 資料批註
 
-到目前為止，我們只是讓 EF 使用其預設慣例來探索模型，但有時候我們的類別不會遵循慣例，而且我們需要能夠執行進一步的設定。 有兩個選項可供您選擇：我們將在此區段中查看資料批註，然後在下一節中探討 Fluent API。
+到目前為止，我們只是讓 EF 使用其預設慣例來探索模型，但在某些情況下，我們的類別不會遵循慣例，因此我們必須能夠執行進一步的設定。 有兩個選項可供選擇：在下一節中，我們將探討這一節中的資料批註，以及流暢的 API。
 
--   讓我們在模型中新增使用者類別
+-   讓我們將使用者類別新增至我們的模型
 
 ``` csharp
 public class User
@@ -293,14 +295,14 @@ public class BloggingContext : DbContext
 }
 ```
 
--   如果我們嘗試新增遷移，就會收到錯誤，指出「*EntityType ' User ' 未定義索引鍵。定義此 EntityType 的索引鍵。* 」 因為 EF 無法得知使用者名稱應為使用者的主要金鑰。
--   我們現在要使用資料批註，所以我們需要在 Program.cs 頂端新增 using 語句
+-   如果我們嘗試新增遷移，則會收到錯誤，指出「*EntityType ' User ' 沒有定義索引鍵。定義此 EntityType 的索引鍵。* 」 因為 EF 無法得知使用者名稱應該是使用者的主要金鑰。
+-   我們現在要使用資料批註，因此我們需要在 Program.cs 的頂端加入 using 語句
 
 ```csharp
 using System.ComponentModel.DataAnnotations;
 ```
 
--   現在，為 Username 屬性加上批註，以識別它是主要金鑰
+-   現在將 [使用者名稱] 屬性加上批註，以識別它是主要金鑰
 
 ``` csharp
 public class User
@@ -311,14 +313,14 @@ public class User
 }
 ```
 
--   使用**新增-遷移 AddUser**命令來 scaffold 遷移，以將這些變更套用至資料庫
--   執行 [**更新-資料庫**] 命令，將新的遷移套用至資料庫
+-   使用 **Add-遷移 AddUser** 命令來 scaffold 遷移，以將這些變更套用至資料庫
+-   執行 **Update-database** 命令，將新的遷移套用至資料庫
 
-新的資料表現在已新增至資料庫：
+現在會將新的資料表加入至資料庫：
 
 ![使用者的架構](~/ef6/media/schemawithusers.png)
 
-EF 支援的完整注釋清單如下：
+EF 支援的批註完整清單如下：
 
 -   [KeyAttribute](https://msdn.microsoft.com/library/system.componentmodel.dataannotations.keyattribute)
 -   [StringLengthAttribute](https://msdn.microsoft.com/library/system.componentmodel.dataannotations.stringlengthattribute)
@@ -336,11 +338,11 @@ EF 支援的完整注釋清單如下：
 
 ## <a name="7-fluent-api"></a>7. 流暢的 API
 
-在上一節中，我們探討了如何使用資料批註來補充或覆寫慣例所偵測到的內容。 設定模型的另一種方式是透過 Code First Fluent API。
+在上一節中，我們探討了如何使用資料批註來補充或覆寫慣例偵測到的內容。 設定模型的另一種方式是透過 Code First 的流暢 API。
 
-大部分的模型設定都可以使用簡單的資料批註來完成。 Fluent API 是指定模型設定的更先進方式，其中涵蓋資料批註除了其他不可能使用資料批註而進行的更先進設定之外，還可執行檔所有動作。 可以同時使用資料批註和 Fluent API。
+大部分的模型設定都可以使用簡單的資料批註來完成。 流暢的 API 是指定模型設定的更先進方式，其中涵蓋資料批註可以進行的所有動作，以及資料批註無法進行的一些更先進的設定。 資料批註和流暢的 API 可以一起使用。
 
-若要存取 Fluent API 您必須覆寫 DbCoNtext 中的 OnModelCreating 方法。 假設我們想要重新命名資料行，其中儲存了使用者的 DisplayName，以顯示\_的名稱。
+若要存取流暢的 API，您可以覆寫 DbCoNtext 中的 OnModelCreating 方法。 假設我們想要重新命名資料行，讓使用者的 DisplayName 儲存在顯示名稱中 \_ 。
 
 -   使用下列程式碼覆寫 BloggingCoNtext 上的 OnModelCreating 方法
 
@@ -360,13 +362,13 @@ public class BloggingContext : DbContext
 }
 ```
 
--   使用**Add-遷移 ChangeDisplayName**命令來 scaffold 遷移，以將這些變更套用至資料庫。
--   執行 [**更新-資料庫**] 命令，將新的遷移套用至資料庫。
+-   使用 [ **新增-遷移 ChangeDisplayName** ] 命令 scaffold 要將這些變更套用至資料庫的遷移。
+-   執行 **Update-database** 命令，將新的遷移套用至資料庫。
 
-[DisplayName] 資料行現在已重新命名為顯示\_名稱：
+DisplayName 資料行現在已重新命名為顯示 \_ 名稱：
 
-![已重新命名顯示名稱的架構](~/ef6/media/schemawithdisplaynamerenamed.png)
+![顯示名稱已重新命名的架構](~/ef6/media/schemawithdisplaynamerenamed.png)
 
 ## <a name="summary"></a>摘要
 
-在本逐步解說中，我們探討了使用新資料庫的 Code First 開發。 我們使用類別定義了模型，然後使用該模型來建立資料庫並儲存和抓取資料。 建立資料庫之後，我們就會在模型演進時，使用 Code First 移轉來變更架構。 我們也看到了如何使用資料批註和流暢的 API 來設定模型。
+在這個逐步解說中，我們探討了如何使用新的資料庫進行 Code First 開發。 我們使用類別定義了模型，然後使用該模型來建立資料庫，並儲存和取出資料。 建立資料庫之後，我們使用 Code First 移轉在模型演進時變更架構。 我們也已瞭解如何使用資料批註和流暢 API 來設定模型。

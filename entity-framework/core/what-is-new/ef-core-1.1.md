@@ -1,15 +1,16 @@
 ---
 title: EF Core 1.1 中的新增功能 - EF Core
+description: Entity Framework Core 1.1 的變更和改進
 author: divega
 ms.date: 10/27/2016
 ms.assetid: C7FE8C85-445A-4F0C-97EC-CC3F7F1D6F5E
 uid: core/what-is-new/ef-core-1.1
-ms.openlocfilehash: d582712ed62443318f4b9e209511fb2a557d667e
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 89dfe4b4772e9e6dc232860f38f07c94654af437
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417514"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618804"
 ---
 # <a name="new-features-in-ef-core-11"></a>EF Core 1.1 中的新增功能
 
