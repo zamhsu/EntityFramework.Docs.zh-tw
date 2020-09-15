@@ -3,13 +3,12 @@ title: Entity Framework 的案例研究-EF6
 description: Entity Framework 6 的個案研究
 author: divega
 ms.date: 10/23/2016
-ms.assetid: cd5d3ae3-717d-4095-a2ef-0e8fd72b1a2f
-ms.openlocfilehash: f6cabe34cfbdc5f15758678f458b2c0898198137
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 342929f70aa09704c934bd1d89e177f6953bfc43
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620234"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073817"
 ---
 # <a name="microsoft-case-studies-for-entity-framework"></a>適用于 Entity Framework 的 Microsoft 個案研究
 此頁面上的個案研究會強調一些已採用 Entity Framework 的真實世界生產專案。

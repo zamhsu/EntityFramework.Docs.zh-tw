@@ -3,14 +3,13 @@ title: 建立和設定模型 - EF Core
 description: 使用 Entity Framework Core 建立及設定模型的概觀
 author: rowanmiller
 ms.date: 11/05/2019
-ms.assetid: 88253ff3-174e-485c-b3f8-768243d01ee1
 uid: core/modeling/index
-ms.openlocfilehash: e980f11b08bee7b07156a80c6bead829e7a8b654
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 1380ed0c1af0fdd3ae24de311bea455cb57a7dcd
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616761"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071416"
 ---
 # <a name="creating-and-configuring-a-model"></a>建立和設定模型
 

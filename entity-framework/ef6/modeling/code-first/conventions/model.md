@@ -3,14 +3,13 @@ title: 以模型為基礎的慣例-EF6
 description: Entity Framework 6 中以模型為基礎的慣例
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 0fc4eef8-29b8-4192-9c77-08fd33d3db3a
 uid: ef6/modeling/code-first/conventions/model
-ms.openlocfilehash: 30a79f505939220b3d4040778397eab972e6a712
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: bcb7a88f4d9fc994b51300ac30ec58671be370c8
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617181"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073999"
 ---
 # <a name="model-based-conventions"></a>以模型為基礎的慣例
 > [!NOTE]
@@ -209,6 +208,6 @@ public class BlogContext : DbContext
 }
 ```  
 
-## <a name="notes"></a>注意  
+## <a name="notes"></a>備註  
 
 您可以在 MSDN 檔中取得 Entity Framework 目前套用的慣例清單： [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx) 。  這份清單會直接從我們的原始程式碼提取。  Entity Framework 6 的原始程式碼可在 [GitHub](https://github.com/aspnet/entityframework6/) 上取得，而 Entity Framework 所使用的許多慣例是以自訂模型為基礎之慣例的良好起點。  

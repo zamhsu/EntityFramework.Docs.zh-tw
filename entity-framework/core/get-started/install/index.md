@@ -3,14 +3,13 @@ title: 安裝 Entity Framework Core - EF Core
 description: Entity Framework Core 的安裝指示
 author: divega
 ms.date: 08/06/2017
-ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: 1cc6f8f73739e61adefb375ee37a830933903470
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 9cf264ea5c6b45a374c16fa6eac7f4f4bca9c825
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617995"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071936"
 ---
 # <a name="installing-entity-framework-core"></a>安裝 Entity Framework Core
 

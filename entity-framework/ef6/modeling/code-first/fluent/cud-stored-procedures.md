@@ -3,14 +3,13 @@ title: Code First Insert、Update 和 Delete 預存程式-EF6
 description: Code First Entity Framework 6 中的插入、更新和刪除預存程式
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 9a7ae7f9-4072-4843-877d-506dd7eef576
 uid: ef6/modeling/code-first/fluent/cud-stored-procedures
-ms.openlocfilehash: 4db54d7199baa408017159e25ce79a9d70707c59
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 2bf2b3d343b70d80c5c56922a31f9b1ece54f60a
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618124"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073934"
 ---
 # <a name="code-first-insert-update-and-delete-stored-procedures"></a>Code First 插入、更新和刪除預存程式
 > [!NOTE]

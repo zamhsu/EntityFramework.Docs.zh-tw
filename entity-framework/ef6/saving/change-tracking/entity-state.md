@@ -3,14 +3,13 @@ title: 使用實體狀態-EF6
 description: 使用 Entity Framework 6 中的實體狀態
 author: divega
 ms.date: 10/23/2016
-ms.assetid: acb27f46-3f3a-4179-874a-d6bea5d7120c
 uid: ef6/saving/change-tracking/entity-state
-ms.openlocfilehash: 981bdbca982403338f3f65a41f601641d59d74d8
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 88c1b67b3eda02e79f7d10d5e46fdd3566361634
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619979"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073765"
 ---
 # <a name="working-with-entity-states"></a>使用實體狀態
 本主題將討論如何在內容中新增和附加實體，以及在 SaveChanges 期間 Entity Framework 如何處理這些專案。

@@ -3,14 +3,13 @@ title: 取得 Entity Framework-EF6
 description: 取得 Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 122c38a2-f9e8-4ecc-9c72-a83bc9af7814
 uid: ef6/fundamentals/install
-ms.openlocfilehash: bfd016a93de73ada4487a454ec7abd9251aeecfe
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 9254f835f5007a213c49557165f6830c30711f1f
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616244"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072781"
 ---
 # <a name="get-entity-framework"></a>取得 Entity Framework
 Entity Framework 是由適用于 Visual Studio 和 EF Runtime 的 EF 工具所組成。

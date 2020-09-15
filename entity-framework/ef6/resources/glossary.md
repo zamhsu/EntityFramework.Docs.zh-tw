@@ -3,20 +3,19 @@ title: Entity Framework 詞彙-EF6
 description: Entity Framework 6 詞彙
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 3f05ffdd-49bc-499c-9732-4a368bf5d2d7
 uid: ef6/resources/glossary
-ms.openlocfilehash: 19d5e9e3a480337c2bcb93be5f989cc622b67dad
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 819bdda133b427fa6f8fc1915cde07560e6ca568
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620204"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072885"
 ---
 # <a name="entity-framework-glossary"></a>Entity Framework 詞彙
 ## <a name="code-first"></a>Code First
 使用程式碼建立 Entity Framework 模型。 模型可以將目標設為現有的資料庫或新的資料庫。
 
-## <a name="context"></a>內容
+## <a name="context"></a>Context
 代表資料庫之會話的類別，可讓您查詢和儲存資料。 內容衍生自 DbCoNtext 或 ObjectCoNtext 類別。
 
 ## <a name="convention-code-first"></a>慣例 (Code First) 

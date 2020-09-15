@@ -3,14 +3,13 @@ title: Entity Framework Core 3.x 中的新功能 - EF Core
 description: Entity Framework Core 3.x 中的變更與改進
 author: divega
 ms.date: 09/05/2020
-ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.x/index
-ms.openlocfilehash: ddf1632756d0be52310a4c62d5b7335a460f66a1
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d2c887640a9e24cef49fb469ef435d6b08937876
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620643"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072209"
 ---
 # <a name="new-features-in-entity-framework-core-3x"></a>Entity Framework Core 3.x 中的新功能
 

@@ -3,14 +3,13 @@ title: 設計工具 CUD 預存程式-EF6
 description: Entity Framework 6 中的設計工具 CUD 預存程式
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 1e773972-2da5-45e0-85a2-3cf3fbcfa5cf
 uid: ef6/modeling/designer/stored-procedures/cud
-ms.openlocfilehash: f722cb3ac0b6ce21e685dbb7bffe571fa7b783d5
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: fae795922980452cf062a62e3cbb47de49b49c74
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620366"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073210"
 ---
 # <a name="designer-cud-stored-procedures"></a>設計工具 CUD 預存程式
 

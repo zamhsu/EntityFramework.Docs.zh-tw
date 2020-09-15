@@ -3,14 +3,13 @@ title: 使用 VB.NET 的流暢 API-EF6
 description: Entity Framework 6 中的流暢 API 與 VB.NET
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 763dc6a2-764a-4600-896c-f6f13abf56ec
 uid: ef6/modeling/code-first/fluent/vb
-ms.openlocfilehash: d6430ee254c6f0d5f093961d25902326022226cd
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d59e685578fb151aea2ae0b41a933f3e13de6c50
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616974"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072573"
 ---
 # <a name="fluent-api-with-vbnet"></a>使用 VB.NET 的流暢 API
 Code First 可讓您使用 C 或 VB.NET 類別來定義您的模型 \# 。 您可以選擇性地使用類別和屬性上的屬性，或使用流暢的 API 來執行其他設定。 本逐步解說將說明如何使用 VB.NET 執行流暢的 API 設定。

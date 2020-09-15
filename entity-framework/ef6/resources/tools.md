@@ -3,13 +3,12 @@ title: 工具 & 擴充功能-EF6
 description: Entity Framework 6 中的工具 & 擴充功能
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 7f166290-d9f0-4eec-b4fd-e7a83068d977
-ms.openlocfilehash: e24485223baeaba875ea95adb99a364de8b72071
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e5f9deb0e965118193832ae8ffa3f2b294e6d604
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620017"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073791"
 ---
 # <a name="entity-framework-tools--extensions"></a>Entity Framework Tools & 擴充功能
 > [!IMPORTANT]  

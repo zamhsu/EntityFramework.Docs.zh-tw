@@ -3,14 +3,13 @@ title: 使用 Entity Framework-EF6 取得協助
 description: 使用 Entity Framework 6 的取得協助
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 592cae61-02e1-485a-bbb0-a508ade9c67d
 uid: ef6/resources/get-help
-ms.openlocfilehash: 7d0e90a79596233d0d58b9dea31bc79465e985bc
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e027293169895c0d9a4041e9fb367d49c9b3ce57
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620232"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073843"
 ---
 # <a name="get-help-using-entity-framework"></a>使用 Entity Framework 取得協助
 ## <a name="stackoverflow-questions-questions-about-using-ef"></a>![StackOverflow 問題](~/ef6/media/stackoverflow.png) 使用 EF 的相關問題  

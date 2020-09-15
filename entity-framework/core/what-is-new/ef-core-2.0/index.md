@@ -3,14 +3,13 @@ title: EF Core 2.0 中的新功能 - EF Core
 description: Entity Framework Core 2.0 中的變更與改進
 author: divega
 ms.date: 02/20/2018
-ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: e6683e2b70bce2b07881f3bfd047d54768b988f6
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f553e620c088a65eda64c0761aaab49313041727
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620647"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072352"
 ---
 # <a name="new-features-in-ef-core-20"></a>EF Core 2.0 中的新功能
 

@@ -3,14 +3,13 @@ title: 查詢資料 - EF Core
 description: 在 Entity Framework Core 中進行查詢的相關資訊概觀
 author: smitpatel
 ms.date: 10/03/2019
-ms.assetid: 7c65ec3e-46c8-48f8-8232-9e31f96c277b
 uid: core/querying/index
-ms.openlocfilehash: 028c640a17c4946158c86bdf1a663a4050f55921
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 0bc1ef7d5595d5ed534a118fdc33e1a78648582e
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616324"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071117"
 ---
 # <a name="querying-data"></a>查詢資料
 

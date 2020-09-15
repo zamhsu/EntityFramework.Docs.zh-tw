@@ -3,14 +3,13 @@ title: 從 EF6 移植至 EF Core-移植以程式碼為基礎的模型-EF
 description: 將 Entity Framework 6 以程式碼為基礎的模型應用程式移植到 Entity Framework Core 的特定資訊
 author: rowanmiller
 ms.date: 10/27/2016
-ms.assetid: 2dce1a50-7d84-4856-abf6-2763dd9be99d
 uid: efcore-and-ef6/porting/port-code
-ms.openlocfilehash: d3920e6132576e3a93dd0ffb9dac1412b6e511aa
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: a5bbdc2ee95ea6bea96e24bee4588b524e0ffc58
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619611"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073574"
 ---
 # <a name="porting-an-ef6-code-based-model-to-ef-core"></a>將 EF6 程式碼架構模型移植到 EF Core
 

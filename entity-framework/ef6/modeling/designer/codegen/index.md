@@ -3,14 +3,13 @@ title: 設計工具程式碼產生範本 - EF6
 description: Entity Framework 6 中的設計工具程式碼產生範本
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 56e00fa2-f9f0-48b3-8006-f8266ca7e74b
 uid: ef6/modeling/designer/codegen/index
-ms.openlocfilehash: edc8fe3c269336d59d5bb7a10582881584215b1c
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 4a8225d0186174ea2e2effbc1241389afcbe3921
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620571"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070194"
 ---
 # <a name="designer-code-generation-templates"></a>設計工具程式碼產生範本
 當您使用 Entity Framework Designer 建立模型時，會自動為您產生類別和衍生的內容。 除了預設程式碼產生之外，我們也提供許多範本，可用於自訂產生的程式碼。 這些範本會以 T4 文字範本的形式提供，讓您可根據需要來自訂範本。

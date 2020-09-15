@@ -3,14 +3,13 @@ title: 本機資料-EF6
 description: Entity Framework 6 中的本機資料
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 2eda668b-1e5d-487d-9a8c-0e3beef03fcb
 uid: ef6/querying/local-data
-ms.openlocfilehash: f7c4c8904a2985901491e423f655d4aea79f666d
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 5763424ab295ed6ceec655368fe3565a10c911d3
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620305"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073908"
 ---
 # <a name="local-data"></a>本機資料
 直接針對 DbSet 執行 LINQ 查詢，一律會將查詢傳送至資料庫，但您可以使用 DbSet 來存取目前記憶體內部的資料。 您也可以使用 DbCoNtext 和 DbCoNtext ChangeTracker 專案方法，存取 EF 追蹤實體的額外資訊。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  

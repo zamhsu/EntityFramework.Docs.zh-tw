@@ -3,14 +3,13 @@ title: 列舉支援-Code First-EF6
 description: 列舉支援-Entity Framework 6 中的 Code First
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 77a42501-27c9-4f4b-96df-26c128021467
 uid: ef6/modeling/code-first/data-types/enums
-ms.openlocfilehash: 2ed5cd73f8477469d3651ef4bf9f79ce80598ee7
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e9e1412afb097cc4c944be63130dba0496a80f14
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617168"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073973"
 ---
 # <a name="enum-support---code-first"></a>列舉支援-Code First
 > [!NOTE]

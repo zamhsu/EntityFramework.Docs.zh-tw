@@ -3,14 +3,13 @@ title: 每個模型的多個圖表-EF6
 description: Entity Framework 6 中每個模型的多個圖表
 author: divega
 ms.date: 10/23/2016
-ms.assetid: b95db5c8-de8d-43bd-9ccc-5df6a5e25e1b
 uid: ef6/modeling/designer/multiple-diagrams
-ms.openlocfilehash: 5ecda72af6430222864c62aea24cf85893436f56
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d934a1b709c93fe8e6b57d40dd874b564885b19f
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620438"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073327"
 ---
 # <a name="multiple-diagrams-per-model"></a>每個模型的多個圖表
 > [!NOTE]

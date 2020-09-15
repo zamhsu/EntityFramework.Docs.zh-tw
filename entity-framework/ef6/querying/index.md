@@ -3,14 +3,13 @@ title: 查詢和尋找實體 - EF6
 description: 在 Entity Framework 6 中查詢及尋找實體
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 65bb3db2-2226-44af-8864-caa575cf1b46
 uid: ef6/querying/index
-ms.openlocfilehash: 4bfdc59527ab75e7a2e08dc743a1974246643aa3
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d55c88280bcf164457da89ec58c180e9aa1ad12d
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620325"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072989"
 ---
 # <a name="querying-and-finding-entities"></a>查詢和尋找實體
 本主題涵蓋您可以使用 Entity Framework 查詢資料的各種方法，包括 LINQ 和 Find 方法。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  

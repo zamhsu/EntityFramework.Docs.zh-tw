@@ -3,14 +3,13 @@ title: 預先產生的對應視圖-EF6
 description: Entity Framework 6 中預先產生的對應視圖
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 917ba9c8-6ddf-4631-ab8c-c4fb378c2fcd
 uid: ef6/fundamentals/performance/pre-generated-views
-ms.openlocfilehash: 8318030603339c45c5c8459db580b7a8de5febda
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: b69c1eea1e219d76a8de1b2cf3b88de2cf74c8f0
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89615862"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073548"
 ---
 # <a name="pre-generated-mapping-views"></a>預先產生的對應視圖
 在 Entity Framework 可以執行查詢或將變更儲存至資料來源之前，必須先產生一組對應視圖來存取資料庫。 這些對應視圖是一組 Entity SQL 語句，以抽象的方式表示資料庫，而且是每個應用程式域所快取之中繼資料的一部分。 如果您在相同的應用程式域中建立相同內容的多個實例，則會使用來自快取中繼資料的對應視圖，而不是重新產生它們。 因為對應視圖產生是執行第一個查詢之整體成本的重要部分，Entity Framework 可讓您預先產生對應視圖，並將它們包含在已編譯的專案中。如需詳細資訊，請參閱  [ (Entity Framework) 的效能考慮 ](xref:ef6/fundamentals/performance/perf-whitepaper)。

@@ -3,14 +3,13 @@ title: Code First 慣例-EF6
 description: Entity Framework 6 中的 Code First 慣例
 author: divega
 ms.date: 10/23/2016
-ms.assetid: bc644573-c2b2-4ed7-8745-3c37c41058ad
 uid: ef6/modeling/code-first/conventions/built-in
-ms.openlocfilehash: 78471a1d4925e57146b8e9f2f43e57b626d164b6
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 71e865d674d6bef7aaf65d95abe1b1add96d890f
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617203"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072600"
 ---
 # <a name="code-first-conventions"></a>Code First 慣例
 Code First 可讓您使用 c # 或 Visual Basic .NET 類別來描述模型。 使用慣例偵測模型的基本圖形。 慣例是一組規則，可用來在使用 Code First 時，根據類別定義自動設定概念模型。 慣例會定義在 ModelConfiguration 命名空間中。  

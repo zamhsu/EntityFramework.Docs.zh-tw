@@ -3,14 +3,13 @@ title: 處理交易認可失敗-EF6
 description: 處理 Entity Framework 6 中的交易認可失敗
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 5b1f7a7d-1b24-4645-95ec-5608a31ef577
 uid: ef6/fundamentals/connection-resiliency/commit-failures
-ms.openlocfilehash: 10cb67837264bea37a0621aa078e1753af954c2f
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: c817e5e9342d5e0682318dc34fa3b4cdfa756228
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616287"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072846"
 ---
 # <a name="handling-transaction-commit-failures"></a>處理交易認可失敗
 

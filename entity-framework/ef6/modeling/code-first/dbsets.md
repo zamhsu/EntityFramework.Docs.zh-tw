@@ -3,14 +3,13 @@ title: 定義 DbSets-EF6
 description: 在 Entity Framework 6 中定義 DbSets
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 4528a509-ace7-4dfb-8065-1b833f5e03a0
 uid: ef6/modeling/code-first/dbsets
-ms.openlocfilehash: 55742c507e0d6b898a0cac18f34af84e736d771d
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 49ffe3ddb8cd4f7c414d7d45d108405b88a0115e
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617049"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073947"
 ---
 # <a name="defining-dbsets"></a>定義 DbSets
 使用 Code First 工作流程進行開發時，您會定義衍生的 DbCoNtext，以代表您的會話與資料庫，並針對模型中的每個類型公開 DbSet。 本主題涵蓋您可以定義 DbSet 屬性的各種方式。  

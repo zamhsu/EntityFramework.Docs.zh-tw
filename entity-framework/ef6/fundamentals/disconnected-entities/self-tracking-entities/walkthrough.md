@@ -3,14 +3,13 @@ title: 自我追蹤實體逐步解說-EF6
 description: Entity Framework 6 的自我追蹤實體逐步解說
 author: divega
 ms.date: 10/23/2016
-ms.assetid: b21207c9-1d95-4aa3-ae05-bc5fe300dab0
 uid: ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough
-ms.openlocfilehash: 942baae158d89acec98e70c391f677349148068c
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 398be11d330f5a7413f5a84424217ea3eda446ef
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616139"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072794"
 ---
 # <a name="self-tracking-entities-walkthrough"></a>自我追蹤實體逐步解說
 > [!IMPORTANT]

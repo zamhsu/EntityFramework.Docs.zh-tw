@@ -3,14 +3,13 @@ title: 使用屬性值-EF6
 description: 使用 Entity Framework 6 中的屬性值
 author: divega
 ms.date: 10/23/2016
-ms.assetid: e3278b4b-9378-4fdb-923d-f64d80aaae70
 uid: ef6/saving/change-tracking/property-values
-ms.openlocfilehash: 53c0829920c77768eae26d23c3da7d0553f44b62
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 30c8e7dbd59f0eb3ec15c0f57f022afd90fd80f8
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619965"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073752"
 ---
 # <a name="working-with-property-values"></a>使用屬性值
 在大部分的情況下，Entity Framework 會負責追蹤實體實例之屬性的狀態、原始值和目前值。 不過，在某些情況下可能會發生，例如已中斷連線的情況-您想要在其中查看或操作 EF 對屬性的相關資訊。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
