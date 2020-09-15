@@ -3,14 +3,13 @@ title: 小組環境中的 Code First 移轉-EF6
 description: Entity Framework 6 中的 Team 環境 Code First 移轉
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
 uid: ef6/modeling/code-first/migrations/teams
-ms.openlocfilehash: ec382ecb0b7c99e57447ee50119fc3699fe1f324
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: c3f12788f2aba85f54dc062bdb6a7919be47b56d
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617044"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072222"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>小組環境中的 Code First 移轉
 > [!NOTE]

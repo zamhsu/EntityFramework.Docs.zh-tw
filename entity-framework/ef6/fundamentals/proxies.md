@@ -3,14 +3,13 @@ title: 使用 proxy-EF6
 description: 使用 Entity Framework 6 中的 proxy
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 869ee4dc-06f1-471d-8e0e-0a1a2bc59c30
 uid: ef6/fundamentals/proxies
-ms.openlocfilehash: 26493ecf1a894a1cd421f574de38678661f324a0
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e626a7dff67497a2fbb3dcd169704814ea4cf2cf
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618371"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070493"
 ---
 # <a name="working-with-proxies"></a>使用 proxy
 建立 POCO 實體類型的實例時，Entity Framework 通常會建立動態產生之衍生型別的實例，作為實體的 proxy。 此 proxy 會覆寫實體的一些虛擬屬性，以便在存取屬性時自動插入用來執行動作的勾點。 例如，這項機制可用來支援關聯性的延遲載入。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  

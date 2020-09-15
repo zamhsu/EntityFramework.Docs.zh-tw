@@ -5,12 +5,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: c83194057d58f8278bfbb5264623858e6c022d8f
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 50937f96e63f9bda2ffcf5e94dabf688ee2ba1f3
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619460"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071885"
 ---
 # <a name="applying-migrations"></a>套用遷移
 
@@ -117,7 +117,7 @@ Script-Migration -Idempotent
 
 EF 命令列工具可以用來將遷移套用至資料庫。 雖然能在本機開發和測試遷移時保持生產力，但這種方法並不適合用來管理生產資料庫：
 
-* 此工具會直接套用 SQL 命令，而不會讓開發人員變更檢查或修改它們。 這在生產環境中可能會有危險。
+* 此工具會直接套用 SQL 命令，而不會讓開發人員有機會檢查或修改它們。 這在生產環境中可能會有危險。
 * 實際執行伺服器上必須安裝 .NET SDK 和 EF 工具。
 
 ### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
@@ -170,7 +170,7 @@ Update-Database AddNewTables
 * 同樣地，如果應用程式在另一個應用程式遷移時存取資料庫，這可能會造成嚴重的問題。
 * 應用程式必須具有較高的存取權，才能修改資料庫架構。 一般來說，限制應用程式在生產環境中的資料庫許可權是很好的作法。
 * 在發生問題時，必須能夠復原已套用的遷移。 其他策略則可輕鬆且現成地提供。
-* 此程式會直接套用 SQL 命令，而不會讓開發人員變更檢查或修改它們。 這在生產環境中可能會有危險。
+* SQL 命令會直接套用到程式，而不會讓開發人員有機會檢查或修改它們。 這在生產環境中可能會有危險。
 
 若要以程式設計方式套用遷移，請呼叫 `context.Database.Migrate()` 。 例如，一般的 ASP.NET 應用程式可以執行下列作業：
 

@@ -3,14 +3,13 @@ title: SSDL 規格-EF6
 description: Entity Framework 6 中的 SSDL 規格
 author: divega
 ms.date: 10/23/2016
-ms.assetid: a4af4b1a-40f4-48cc-b2e0-fa8f5d9d5419
 uid: ef6/modeling/designer/advanced/edmx/ssdl-spec
-ms.openlocfilehash: ab50579649c2e1b19d113cd127e52be995516e27
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: dbcd4c771e8ca1324a0520f9c8ca13ba4661487b
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620591"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070207"
 ---
 # <a name="ssdl-specification"></a>SSDL 規格
 存放結構定義語言 (SSDL) 是一種 XML 架構語言，會描述 Entity Framework 應用程式的儲存體模型。
@@ -630,7 +629,7 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 |:---------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **名稱**       | 是         | 參數名稱。                                                                                                                                                                                                      |
 | **型別**       | 是         | 參數類型。                                                                                                                                                                                                             |
-| **模式**       | 否          | **In**、 **Out**或 **InOut** ，取決於參數是輸入、輸出或輸入/輸出參數。                                                                                                                |
+| **Mode**       | 否          | **In**、 **Out**或 **InOut** ，取決於參數是輸入、輸出或輸入/輸出參數。                                                                                                                |
 | **MaxLength**  | 否          | 參數的長度上限。                                                                                                                                                                                            |
 | **有效位數**  | 否          | 參數的精確度。                                                                                                                                                                                                 |
 | **縮放比例**      | 否          | 參數的小數位數。                                                                                                                                                                                                     |

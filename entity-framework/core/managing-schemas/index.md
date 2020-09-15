@@ -1,13 +1,15 @@
 ---
 title: 管理資料庫結構描述 - EF Core
+description: 使用 Entity Framework Core 管理資料庫結構描述的策略概觀
 author: bricelam
 ms.date: 10/30/2017
-ms.openlocfilehash: 2da17865cb0192fb3e6e3396e4ca5f31fde9c52a
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+uid: core/managing-schemas/index
+ms.openlocfilehash: e4f8c82125534e9e7e0c2de552bce336a544a2aa
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78412733"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619502"
 ---
 # <a name="managing-database-schemas"></a>管理資料庫結構描述
 
@@ -20,7 +22,6 @@ EF Core 提供兩種主要方式來保持 EF Core 模型與資料庫結構描述
 > [!NOTE]
 > [建立和捨棄 API][3] 也可以從 EF Core 模型建立資料庫結構描述。 不過，它們主要用於測試、原型設計，以及可接受捨棄資料庫的其他案例。
 
-
-  [1]: migrations/index.md
-  [2]: scaffolding.md
-  [3]: ensure-created.md
+  [1]: xref:core/managing-schemas/migrations/index
+  [2]: xref:core/managing-schemas/scaffolding
+  [3]: xref:core/managing-schemas/ensure-created

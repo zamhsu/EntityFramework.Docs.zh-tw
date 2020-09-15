@@ -3,14 +3,13 @@ title: 陰影屬性-EF Core
 description: 在 Entity Framework Core 模型中設定陰影屬性
 author: AndriySvyryd
 ms.date: 01/03/2020
-ms.assetid: 75369266-d2b9-4416-b118-ed238f81f599
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: 06dbba7a4f6da247e6afde96debb0762fa55ce7e
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 735659a1a8523e63afa908d4fe3904e62f46cbd0
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616711"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071377"
 ---
 # <a name="shadow-properties"></a>陰影屬性
 

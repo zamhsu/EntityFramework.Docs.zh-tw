@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 0d88e0a4876755656626621fd9a4ca01d18b5b64
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
-ms.translationtype: HT
+ms.openlocfilehash: 188c5b10aefa784715c0bbf2d50337d65c21fd62
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619319"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071364"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB 提供者
 
@@ -47,7 +47,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 > [!TIP]  
 > 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Cosmos)。
 
-與其他提供者一樣，第一步是呼叫 [UseCosmos](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosDbContextOptionsExtensions.UseCosmos)：
+針對其他提供者，第一個步驟是呼叫 [UseCosmos](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosDbContextOptionsExtensions.UseCosmos)：
 
 [!code-csharp[Configuration](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=Configuration)]
 
@@ -60,7 +60,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 
 [!code-csharp[StreetAddress](../../../../samples/core/Cosmos/ModelBuilding/StreetAddress.cs?name=StreetAddress)]
 
-遵循一般的 EF 模式儲存及查詢資料：
+儲存和查詢資料會遵循一般 EF 模式：
 
 [!code-csharp[HelloCosmos](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=HelloCosmos)]
 
@@ -98,7 +98,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 
 ## <a name="embedded-entities"></a>內嵌實體
 
-針對 Cosmos，擁有的實體會以擁有者身分內嵌在相同項目中。 若要變更屬性名稱，請使用 [ToJsonProperty](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosEntityTypeBuilderExtensions.ToJsonProperty)：
+針對 Cosmos，擁有的實體會內嵌于與擁有者相同的專案中。 若要變更屬性名稱，請使用 [ToJsonProperty](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosEntityTypeBuilderExtensions.ToJsonProperty)：
 
 [!code-csharp[PropertyNames](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=PropertyNames)]
 

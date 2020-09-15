@@ -3,14 +3,14 @@ title: EF Core 工具參考 (封裝管理員主控台) -EF Core
 description: Entity Framework Core Visual Studio 封裝管理員主控台的參考指南
 author: bricelam
 ms.author: bricelam
-ms.date: 09/18/2018
+ms.date: 09/09/2020
 uid: core/miscellaneous/cli/powershell
-ms.openlocfilehash: 84ca41dc08f7bc813ee9491b66fc91b2854c7632
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 5dca397978c60c12610d9080caba972a66b079b6
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617866"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071858"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Visual Studio 中的 Entity Framework Core 工具參考-封裝管理員主控台
 
@@ -137,6 +137,7 @@ SHORT DESCRIPTION
 | -CoNtext \<String>        | 要使用的 `DbContext` 類別。 僅限類別名稱或完整限定命名空間。  如果省略此參數，EF Core 會尋找內容類別。 如果有多個內容類別，則需要此參數。 |
 | -Project \<String>        | 目標專案。 如果省略此參數，則會使用**封裝管理員主控台**的**預設專案**做為目標專案。                                                                             |
 | <nobr>-啟始專案</nobr>\<String> | 啟始專案。 如果省略此參數，則會使用**方案屬性**中的**啟始專案**做為目標專案。                                                                                 |
+| -Args \<String>           | 傳遞至應用程式的引數。 在 EF Core 5.0 中新增。                                                                                                                                                           |
 | -Verbose                  | 顯示詳細資訊輸出。                                                                                                                                                                                                 |
 
 若要顯示命令的說明資訊，請使用 PowerShell 的 `Get-Help` 命令。
@@ -154,7 +155,9 @@ SHORT DESCRIPTION
 |:----------------------------------|:------------------------------------------------------------------------------------------------------------------------|
 | <nobr>-Name \<String><nobr>       | 遷移的名稱。 這是位置參數，而且是必要的。                                              |
 | <nobr>-OutputDir \<String></nobr> | 用來輸出檔案的目錄。 路徑是相對於目標專案目錄。 預設為「遷移」。 |
-| <nobr>-命名空間 \<String></nobr> | 要用於產生之類別的命名空間。 預設為從輸出目錄產生。  (可從 EFCore 5.0.0 開始取得。 )  |
+| <nobr>-命名空間 \<String></nobr> | 要用於產生之類別的命名空間。 預設為從輸出目錄產生。 在 EF Core 5.0 中新增。  |
+
+上面列出 [一般參數](#common-parameters) 。
 
 ## <a name="drop-database"></a>捨棄資料庫
 
@@ -166,9 +169,26 @@ SHORT DESCRIPTION
 |:----------|:---------------------------------------------------------|
 | -WhatIf   | 顯示要卸載的資料庫，但不要卸載它。 |
 
+上面列出 [一般參數](#common-parameters) 。
+
 ## <a name="get-dbcontext"></a>DbCoNtext
 
-取得型別的相關資訊 `DbContext` 。
+列出並取得可用 `DbContext` 類型的相關資訊。
+
+上面列出 [一般參數](#common-parameters) 。
+
+## <a name="get-migration"></a>取得-遷移
+
+列出可用的遷移。 在 EF Core 5.0 中新增。
+
+參數：
+
+| 參數                          | 描述                                                                                            |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| <nobr>-連接 \<String></nobr> | 資料庫的連接字串。 預設為 AddDbCoNtext 或 OnConfiguring 中指定的值。 |
+| -NoConnect                         | 請勿連接至資料庫。                                                                         |
+
+上面列出 [一般參數](#common-parameters) 。
 
 ## <a name="remove-migration"></a>移除移轉
 
@@ -179,6 +199,8 @@ SHORT DESCRIPTION
 | 參數 | 描述                                                                     |
 |:----------|:--------------------------------------------------------------------------------|
 | -Force    | 還原遷移 (復原已套用至資料庫) 的變更。 |
+
+上面列出 [一般參數](#common-parameters) 。
 
 ## <a name="scaffold-dbcontext"></a>Scaffold-DbCoNtext
 
@@ -192,15 +214,18 @@ SHORT DESCRIPTION
 | <nobr>-提供者 \<String></nobr>   | 要使用的提供者。 這通常是 NuGet 套件的名稱，例如： `Microsoft.EntityFrameworkCore.SqlServer` 。 這是位置參數，而且是必要的。                                                                                           |
 | -OutputDir \<String>               | 要放置檔案的目錄。 路徑是相對於專案目錄。                                                                                                                                                                                             |
 | -CoNtextDir \<String>              | 要放置檔案的目錄 `DbContext` 。 路徑是相對於專案目錄。                                                                                                                                                               |
-| -命名空間 \<String>               | 要用於所有產生之類別的命名空間。 預設為從根命名空間和輸出目錄產生。  (可從 EFCore 5.0.0 開始取得。 )  |
-| -CoNtextNamespace \<String>        | 要用於產生之類別的命名空間 `DbContext` 。 注意：覆寫 `-Namespace` 。  (可從 EFCore 5.0.0 開始取得。 )  |
+| -命名空間 \<String>               | 要用於所有產生之類別的命名空間。 預設為從根命名空間和輸出目錄產生。 在 EF Core 5.0 中新增。                                                                                                                           |
+| -CoNtextNamespace \<String>        | 要用於產生之類別的命名空間 `DbContext` 。 注意：覆寫 `-Namespace` 。 在 EF Core 5.0 中新增。                                                                                                                                                           |
 | -CoNtext \<String>                 | `DbContext`要產生的類別名稱。                                                                                                                                                                                                                          |
 | -架構 \<String[]>               | 要產生之實體類型的資料表架構。 如果省略此參數，則會包含所有架構。                                                                                                                                                             |
 | -資料表 \<String[]>                | 要產生之實體類型的資料表。 如果省略此參數，則會包含所有資料表。                                                                                                                                                                         |
 | -DataAnnotations                   | 您可以使用屬性來設定模型 (可能的) 。 如果省略此參數，則只會使用流暢的 API。                                                                                                                                                      |
 | -UseDatabaseNames                  | 使用資料表和資料行名稱，如同它們出現在資料庫中一樣。 如果省略此參數，則會變更資料庫名稱，以更緊密符合 c # 名稱樣式慣例。                                                                                       |
 | -Force                             | 覆寫現有檔案。                                                                                                                                                                                                                                               |
-| -NoOnConfiguring                   | 隱藏 `OnConfiguring` 產生的類別中的方法產生 `DbContext` 。  (可從 EFCore 5.0.0 開始取得。 )  |
+| -NoOnConfiguring                   | 不要產生 `DbContext.OnConfiguring` 。 在 EF Core 5.0 中新增。                                                                                                                                                                                                         |
+| -NoPluralize                       | 請勿使用 pluralizer。 在 EF Core 5.0 中新增。                                                                                                                                                                                                                         |
+
+上面列出 [一般參數](#common-parameters) 。
 
 範例：
 
@@ -214,18 +239,33 @@ Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Conn
 Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Tables "Blog","Post" -ContextDir Context -Context BlogContext -ContextNamespace New.Namespace
 ```
 
+## <a name="script-dbcontext"></a>腳本-DbCoNtext
+
+從 DbCoNtext 產生 SQL 腳本。 略過任何遷移。 在 EF Core 3.0 中新增。
+
+參數：
+
+| 參數                      | 描述                      |
+| ------------------------------ | -------------------------------- |
+| <nobr>-Output \<String></nobr> | 要寫入結果的檔案。 |
+
+上面列出 [一般參數](#common-parameters) 。
+
 ## <a name="script-migration"></a>腳本-遷移
 
 產生 SQL 腳本，將所選遷移的所有變更套用到另一個選取的遷移。
 
 參數：
 
-| 參數                | 描述                                                                                                                                                                                                                |
-|:-------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *-從*\<String>        | 開始遷移。 遷移可依名稱或識別碼來識別。 數位0是特殊案例，這表示在 *第一次遷移之前*。 預設為 0。                                                              |
-| *-至*\<String>          | 結束的遷移。 預設為上次的遷移。                                                                                                                                                                      |
-| <nobr>-等冪</nobr> | 產生可在任何遷移時用於資料庫的腳本。                                                                                                                                                         |
-| -Output \<String>        | 要寫入結果的檔案。 如果省略此參數，則會在建立應用程式的執行時間檔案時，在相同的資料夾中建立檔案，例如： */obj/Debug/netcoreapp2.1/ghbkztfz.sql/*。 |
+| 參數                    | 描述                                                                                                                                                                                                                |
+|:---------------------------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| *-從*\<String>            | 開始遷移。 遷移可依名稱或識別碼來識別。 數位0是特殊案例，這表示在 *第一次遷移之前*。 預設為 0。                                                              |
+| *-至*\<String>              | 結束的遷移。 預設為上次的遷移。                                                                                                                                                                      |
+| -等冪                  | 產生可在任何遷移時用於資料庫的腳本。                                                                                                                                                         |
+| <nobr>-NoTransactions</nobr> | 不要產生 SQL 交易語句。 在 EF Core 5.0 中新增。                                                                                                                                                           |
+| -Output \<String>            | 要寫入結果的檔案。 如果省略此參數，則會在建立應用程式的執行時間檔案時，在相同的資料夾中建立檔案，例如： */obj/Debug/netcoreapp2.1/ghbkztfz.sql/*。 |
+
+上面列出 [一般參數](#common-parameters) 。
 
 > [!TIP]
 > To、From 和 Output 參數支援 tab 鍵展開。
@@ -249,7 +289,9 @@ Script-Migration -From 20180904195021_InitialCreate
 | 參數                           | 描述                                                                                                                                                                                                                                                     |
 |:------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>*-遷移*\<String></nobr> | 目標遷移。 遷移可依名稱或識別碼來識別。 數位0是特殊案例，這表示在 *第一次遷移之前* ，會將所有遷移還原。 如果未指定任何遷移，則命令會預設為上次的遷移。 |
-| <nobr>-連接 \<String></nobr>  | 資料庫的連接字串。 預設為或中所指定 `AddDbContext` 的 `OnConfiguring` 。 |
+| <nobr>-連接 \<String></nobr>  | 資料庫的連接字串。 預設為或中所指定 `AddDbContext` 的 `OnConfiguring` 。 在 EF Core 5.0 中新增。                                                                                                                                |
+
+上面列出 [一般參數](#common-parameters) 。
 
 > [!TIP]
 > 遷移參數支援 tab 鍵展開。

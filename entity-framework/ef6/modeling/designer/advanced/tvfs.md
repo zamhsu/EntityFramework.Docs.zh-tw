@@ -3,14 +3,13 @@ title: 資料表值函式 (Tvf) -EF6
 description: 'Entity Framework 6 中的資料表值函數 (Tvf) '
 author: divega
 ms.date: 10/23/2016
-ms.assetid: f019c97b-87b0-4e93-98f4-2c539f77b2dc
 uid: ef6/modeling/designer/advanced/tvfs
-ms.openlocfilehash: 1575526fb46f9ddd3ad43c7c4ac0304aefa1d5d3
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 727c6c7ff5947e78bf8eb489194e355e2fd157c9
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620548"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070157"
 ---
 # <a name="table-valued-functions-tvfs"></a>資料表值函式 (Tvf) 
 > [!NOTE]

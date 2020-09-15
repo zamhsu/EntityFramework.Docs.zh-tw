@@ -2,22 +2,664 @@
 title: EF Core 5.0 的新功能
 description: EF Core 5.0 的新功能總覽
 author: ajcvickers
-ms.date: 07/20/2020
+ms.date: 09/10/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: b4551a3c593694b104a750d500d81eb170a83dc0
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 0605d021b46066c6af7b631c99e86c0e53caa8db
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618604"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070753"
 ---
 # <a name="whats-new-in-ef-core-50"></a>EF Core 5.0 的新功能
 
-EF Core 5.0 目前正在開發中。 此頁面將包含每個預覽中所引進之有趣變更的總覽。
+所有規劃的 EF Core 5.0 功能現在都已完成。 本頁面包含每個預覽中所引進之有趣變更的總覽。
 
 此頁面不會複製 [EF Core 5.0 的方案](xref:core/what-is-new/ef-core-5.0/plan)。 此計畫描述 EF Core 5.0 的整體主題，包括我們在出貨最終發行版本之前打算包含的所有專案。
 
-我們會在發行時，將連結從這裡新增至官方檔。
+## <a name="rc1"></a>RC1
+
+### <a name="many-to-many"></a>多對多
+
+EF Core 5.0 支援多對多關聯性，而不需要明確地對應聯結資料表。
+
+例如，請考慮下列實體類型：
+
+```C#
+public class Post
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ICollection<Tag> Tags { get; set; }
+}
+
+public class Tag
+{
+    public int Id { get; set; }
+    public string Text { get; set; }
+    public ICollection<Post> Posts { get; set; }
+}
+```
+
+請注意，其中 `Post` 包含的集合 `Tags` ，並 `Tag` 包含的集合 `Posts` 。 EF Core 5.0 依慣例將此辨識為多對多關聯性。 這表示在中不需要任何程式碼 `OnModelCreating` ：
+
+```C#
+public class BlogContext : DbContext
+{
+    public DbSet<Post> Posts { get; set; }
+    public DbSet<Blog> Blogs { get; set; }
+}
+```
+
+當使用 (或 `EnsureCreated`) 的遷移來建立資料庫時，EF Core 會自動建立聯結資料表。 例如，在此模型的 SQL Server 上，EF Core 會產生：
+
+```sql
+CREATE TABLE [Posts] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    CONSTRAINT [PK_Posts] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [Tag] (
+    [Id] int NOT NULL IDENTITY,
+    [Text] nvarchar(max) NULL,
+    CONSTRAINT [PK_Tag] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [PostTag] (
+    [PostsId] int NOT NULL,
+    [TagsId] int NOT NULL,
+    CONSTRAINT [PK_PostTag] PRIMARY KEY ([PostsId], [TagsId]),
+    CONSTRAINT [FK_PostTag_Posts_PostsId] FOREIGN KEY ([PostsId]) REFERENCES [Posts] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_PostTag_Tag_TagsId] FOREIGN KEY ([TagsId]) REFERENCES [Tag] ([Id]) ON DELETE CASCADE
+);
+
+CREATE INDEX [IX_PostTag_TagsId] ON [PostTag] ([TagsId]);
+```
+
+建立和關聯 `Blog` 和 `Post` 實體會導致聯結資料表更新自動發生。 例如：
+
+```C#
+var beginnerTag = new Tag {Text = "Beginner"};
+var advancedTag = new Tag {Text = "Advanced"};
+var efCoreTag = new Tag {Text = "EF Core"};
+
+context.AddRange(
+    new Post {Name = "EF Core 101", Tags = new List<Tag> {beginnerTag, efCoreTag}},
+    new Post {Name = "Writing an EF database provider", Tags = new List<Tag> {advancedTag, efCoreTag}},
+    new Post {Name = "Savepoints in EF Core", Tags = new List<Tag> {beginnerTag, efCoreTag}});
+
+context.SaveChanges();
+```
+
+插入貼文和標記之後，EF 接著會自動在聯結資料表中建立資料列。 例如，在 SQL Server：
+
+```sql
+SET NOCOUNT ON;
+INSERT INTO [PostTag] ([PostsId], [TagsId])
+VALUES (@p6, @p7),
+(@p8, @p9),
+(@p10, @p11),
+(@p12, @p13),
+(@p14, @p15),
+(@p16, @p17);
+```
+
+針對查詢，包含和其他查詢作業的運作方式就像任何其他關聯性一樣。 例如：
+
+```C#
+foreach (var post in context.Posts.Include(e => e.Tags))
+{
+    Console.Write($"Post \"{post.Name}\" has tags");
+
+    foreach (var tag in post.Tags)
+    {
+        Console.Write($" '{tag.Text}'");
+    }
+}
+```
+
+產生的 SQL 會自動使用聯結資料表來取回所有相關的標記：
+
+```sql
+SELECT [p].[Id], [p].[Name], [t0].[PostsId], [t0].[TagsId], [t0].[Id], [t0].[Text]
+FROM [Posts] AS [p]
+LEFT JOIN (
+    SELECT [p0].[PostsId], [p0].[TagsId], [t].[Id], [t].[Text]
+    FROM [PostTag] AS [p0]
+    INNER JOIN [Tag] AS [t] ON [p0].[TagsId] = [t].[Id]
+) AS [t0] ON [p].[Id] = [t0].[PostsId]
+ORDER BY [p].[Id], [t0].[PostsId], [t0].[TagsId], [t0].[Id]
+```
+
+不同于 EF6，EF Core 允許完整自訂聯結資料表。 例如，下列程式碼會設定多對多關聯性，此關聯性也會具有對聯結實體的導覽，而且聯結實體會包含承載屬性：
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder
+        .Entity<Community>()
+        .HasMany(e => e.Members)
+        .WithMany(e => e.Memberships)
+        .UsingEntity<PersonCommunity>(
+            b => b.HasOne(e => e.Member).WithMany().HasForeignKey(e => e.MembersId),
+            b => b.HasOne(e => e.Membership).WithMany().HasForeignKey(e => e.MembershipsId))
+        .Property(e => e.MemberSince).HasDefaultValueSql("CURRENT_TIMESTAMP");
+}
+```
+
+### <a name="map-entity-types-to-queries"></a>將實體類型對應至查詢
+
+實體類型通常會對應至資料表或視圖，讓 EF Core 在查詢該型別時，將會提取資料表或視圖的內容。 EF Core 5.0 可讓實體類型對應至「定義查詢」。  (這在舊版中是部分支援的，但已經過改良，而且在 EF Core 5.0 中有不同的語法。 ) 
+
+例如，假設有兩個數據表;其中一個包含新式文章;具有舊版文章的另一篇。 新式貼文資料表有一些額外的資料行，但基於我們的應用程式的目的，我們想要結合新式和舊版的貼文，並將其對應至具有所有必要屬性的實體類型：
+
+```c#
+public class Post
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Category { get; set; }
+    public int BlogId { get; set; }
+    public Blog Blog { get; set; }
+}
+```
+
+在 EF Core 5.0 中， `ToSqlQuery` 可以用來將此實體類型對應至提取並結合兩個數據表中資料列的查詢：
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Post>().ToSqlQuery(
+        @"SELECT Id, Name, Category, BlogId FROM posts
+          UNION ALL
+          SELECT Id, Name, ""Legacy"", BlogId from legacy_posts");
+}
+```
+
+請注意， `legacy_posts` 資料表沒有資料 `Category` 行，因此我們會改為合成所有舊版文章的預設值。
+
+然後，您可以使用 LINQ 查詢的一般方式來使用此實體類型。 例如， LINQ 查詢：
+
+```c#
+var posts = context.Posts.Where(e => e.Blog.Name.Contains("Unicorn")).ToList();
+```
+
+在 SQLite 上產生下列 SQL：
+
+```sql
+SELECT "p"."Id", "p"."BlogId", "p"."Category", "p"."Name"
+FROM (
+    SELECT Id, Name, Category, BlogId FROM posts
+    UNION ALL
+    SELECT Id, Name, "Legacy", BlogId from legacy_posts
+) AS "p"
+INNER JOIN "Blogs" AS "b" ON "p"."BlogId" = "b"."Id"
+WHERE ('Unicorn' = '') OR (instr("b"."Name", 'Unicorn') > 0)
+```
+
+請注意，針對實體型別所設定的查詢是用來做為撰寫完整 LINQ 查詢的起點。
+
+### <a name="event-counters"></a>事件計數器
+
+[.Net 事件計數器](https://devblogs.microsoft.com/dotnet/introducing-diagnostics-improvements-in-net-core-3-0/) 是有效率地從應用程式公開效能度量的一種方式。 EF Core 5.0 包含類別下的事件計數器 `Microsoft.EntityFrameworkCore` 。 例如：
+
+```
+dotnet counters monitor Microsoft.EntityFrameworkCore -p 49496
+```
+
+這會告訴 dotnet 計數器開始收集進程49496的 EF Core 事件。 這會產生類似主控台的輸出：
+
+```
+[Microsoft.EntityFrameworkCore]
+    Active DbContexts                                               1
+    Execution Strategy Operation Failures (Count / 1 sec)           0
+    Execution Strategy Operation Failures (Total)                   0
+    Optimistic Concurrency Failures (Count / 1 sec)                 0
+    Optimistic Concurrency Failures (Total)                         0
+    Queries (Count / 1 sec)                                     1,755
+    Queries (Total)                                            98,402
+    Query Cache Hit Rate (%)                                      100
+    SaveChanges (Count / 1 sec)                                     0
+    SaveChanges (Total)                                             1
+```
+
+### <a name="property-bags"></a>屬性包
+
+EF Core 5.0 允許相同的 CLR 類型對應到多個不同的實體類型。 這類類型稱為共用類型實體類型。 這項功能與預覽) 1 中所包含的索引子屬性結合 (，可讓屬性包作為實體類型使用。
+
+例如，下列 DbCoNtext 會將 BCL 類型設定 `Dictionary<string, object>` 為產品和分類的共用類型實體類型。
+
+```c#
+public class ProductsContext : DbContext
+{
+    public DbSet<Dictionary<string, object>> Products => Set<Dictionary<string, object>>("Product");
+    public DbSet<Dictionary<string, object>> Categories => Set<Dictionary<string, object>>("Category");
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.SharedTypeEntity<Dictionary<string, object>>("Category", b =>
+        {
+            b.IndexerProperty<string>("Description");
+            b.IndexerProperty<int>("Id");
+            b.IndexerProperty<string>("Name").IsRequired();
+        });
+
+        modelBuilder.SharedTypeEntity<Dictionary<string, object>>("Product", b =>
+        {
+            b.IndexerProperty<int>("Id");
+            b.IndexerProperty<string>("Name").IsRequired();
+            b.IndexerProperty<string>("Description");
+            b.IndexerProperty<decimal>("Price");
+            b.IndexerProperty<int?>("CategoryId");
+
+            b.HasOne("Category", null).WithMany();
+        });
+    }
+}
+```
+
+字典物件 ( 「屬性包」 ) 現在可以新增至內容中做為實體實例並儲存。 例如：
+
+```c#
+var beverages = new Dictionary<string, object>
+{
+    ["Name"] = "Beverages",
+    ["Description"] = "Stuff to sip on"
+};
+
+context.Categories.Add(beverages);
+
+context.SaveChanges();
+```
+
+然後，您可以透過一般方式來查詢和更新這些實體：
+
+```c#
+var foods = context.Categories.Single(e => e["Name"] == "Foods");
+var marmite = context.Products.Single(e => e["Name"] == "Marmite");
+
+marmite["CategoryId"] = foods["Id"];
+marmite["Description"] = "Yummy when spread _thinly_ on buttered Toast!";
+
+context.SaveChanges();
+```
+
+### <a name="savechanges-interception-and-events"></a>SaveChanges 攔截和事件
+
+EF Core 5.0 引進了 .NET 事件，以及在呼叫 SaveChanges 時觸發的 EF Core 攔截器。
+
+事件很容易使用;例如：
+
+```c#
+context.SavingChanges += (sender, args) =>
+{
+    Console.WriteLine($"Saving changes for {((DbContext)sender).Database.GetConnectionString()}");
+};
+
+context.SavedChanges += (sender, args) =>
+{
+    Console.WriteLine($"Saved {args.EntitiesSavedCount} changes for {((DbContext)sender).Database.GetConnectionString()}");
+};
+```
+
+請注意：
+* 事件寄件者是 `DbContext` 實例
+* 事件的引數 `SavedChanges` 包含儲存至資料庫的實體數目
+
+攔截器是由定義 `ISaveChangesInterceptor` ，但通常會 convienient 繼承， `SaveChangesInterceptor` 以避免執行每個方法。 例如：
+
+```c#
+public class MySaveChangesInterceptor : SaveChangesInterceptor
+{
+    public override InterceptionResult<int> SavingChanges(
+        DbContextEventData eventData,
+        InterceptionResult<int> result)
+    {
+        Console.WriteLine($"Saving changes for {eventData.Context.Database.GetConnectionString()}");
+
+        return result;
+    }
+
+    public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
+        DbContextEventData eventData,
+        InterceptionResult<int> result,
+        CancellationToken cancellationToken = new CancellationToken())
+    {
+        Console.WriteLine($"Saving changes asynchronously for {eventData.Context.Database.GetConnectionString()}");
+
+        return new ValueTask<InterceptionResult<int>>(result);
+    }
+}
+```
+
+請注意：
+* 攔截器同時具有同步和非同步方法。 如果您需要執行非同步 i/o （例如寫入審核伺服器），這會很有用。
+* 攔截器可讓 SaveChanges 使用所有攔截器通用的機制來略過 `InterceptionResult` 。
+
+攔截器的缺點是它們必須在正在建立時于 DbCoNtext 上註冊。 例如：
+
+```c#
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder
+            .AddInterceptors(new MySaveChangesInterceptor())
+            .UseSqlite("Data Source = test.db");
+```
+
+相反地，您可以隨時在 DbCoNtext 實例上註冊事件。
+
+### <a name="exclude-tables-from-migrations"></a>從遷移中排除資料表
+
+在多個 DbcoNtext 中對應單一實體類型有時很有用。 尤其是 [在使用系](https://www.martinfowler.com/bliki/BoundedContext.html)結內容時更是如此，因為每個系結內容通常會有不同的 DbCoNtext 類型。
+
+例如， `User` 授權內容和報表內容可能需要型別。 如果對類型進行了變更 `User` ，則這兩個 dbcoNtext 的遷移將會嘗試更新資料庫。 為了避免這種情況，您可以將其中一個內容的模型設定為從其遷移中排除資料表。
+
+在下列程式碼中， `AuthorizationContext` 將會產生資料表變更的遷移 `Users` ，但 `ReportingContext` 不會導致衝突的遷移。
+
+```C#
+public class AuthorizationContext : DbContext
+{
+    public DbSet<User> Users { get; set; }
+}
+
+public class ReportingContext : DbContext
+{
+    public DbSet<User> Users { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<User>().ToTable("Users", t => t.ExcludeFromMigrations());
+    }
+}
+```
+
+### <a name="required-11-dependents"></a>必要的1:1 相依項
+
+在 EF Core 3.1 中，一對一關聯性的相依 end 一律視為選擇性。 這在使用擁有的實體時最為明顯。 例如，請考慮下列模型和設定：
+
+```c#
+public class Person
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public Address HomeAddress { get; set; }
+    public Address WorkAddress { get; set; }
+}
+
+public class Address
+{
+    public string Line1 { get; set; }
+    public string Line2 { get; set; }
+    public string City { get; set; }
+    public string Region { get; set; }
+    public string Country { get; set; }
+    public string Postcode { get; set; }
+}
+```
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Person>(b =>
+    {
+        b.OwnsOne(e => e.HomeAddress,
+            b =>
+            {
+                b.Property(e => e.Line1).IsRequired();
+                b.Property(e => e.City).IsRequired();
+                b.Property(e => e.Region).IsRequired();
+                b.Property(e => e.Postcode).IsRequired();
+            });
+
+        b.OwnsOne(e => e.WorkAddress);
+    });
+}
+```
+
+這會導致針對 SQLite 建立下表的遷移：
+
+```sql
+CREATE TABLE "People" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_People" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NULL,
+    "HomeAddress_Line1" TEXT NULL,
+    "HomeAddress_Line2" TEXT NULL,
+    "HomeAddress_City" TEXT NULL,
+    "HomeAddress_Region" TEXT NULL,
+    "HomeAddress_Country" TEXT NULL,
+    "HomeAddress_Postcode" TEXT NULL,
+    "WorkAddress_Line1" TEXT NULL,
+    "WorkAddress_Line2" TEXT NULL,
+    "WorkAddress_City" TEXT NULL,
+    "WorkAddress_Region" TEXT NULL,
+    "WorkAddress_Country" TEXT NULL,
+    "WorkAddress_Postcode" TEXT NULL
+);
+```
+
+請注意，所有資料行都可為 null，即使某些 `HomeAddress` 屬性已設定為必要也是一樣。 此外，當查詢時 `Person` ，如果 home 或 work 位址的所有資料行都是 null，則 EF Core 會將 `HomeAddress` 及/或 `WorkAddress` 屬性保留為 null，而不是設定的空白實例 `Address` 。
+
+在 EF Core 5.0 中， `HomeAddress` 現在可以將導覽設定為必要的相依。 例如：
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Person>(b =>
+    {
+        b.OwnsOne(e => e.HomeAddress,
+            b =>
+            {
+                b.Property(e => e.Line1).IsRequired();
+                b.Property(e => e.City).IsRequired();
+                b.Property(e => e.Region).IsRequired();
+                b.Property(e => e.Postcode).IsRequired();
+            });
+        b.Navigation(e => e.HomeAddress).IsRequired();
+
+        b.OwnsOne(e => e.WorkAddress);
+    });
+}
+```
+
+遷移所建立的資料表現在會針對必要相依的必要屬性，加入不可為 null 的資料行：
+
+```sql
+CREATE TABLE "People" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_People" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NULL,
+    "HomeAddress_Line1" TEXT NOT NULL,
+    "HomeAddress_Line2" TEXT NULL,
+    "HomeAddress_City" TEXT NOT NULL,
+    "HomeAddress_Region" TEXT NOT NULL,
+    "HomeAddress_Country" TEXT NULL,
+    "HomeAddress_Postcode" TEXT NOT NULL,
+    "WorkAddress_Line1" TEXT NULL,
+    "WorkAddress_Line2" TEXT NULL,
+    "WorkAddress_City" TEXT NULL,
+    "WorkAddress_Region" TEXT NULL,
+    "WorkAddress_Country" TEXT NULL,
+    "WorkAddress_Postcode" TEXT NULL
+);
+```
+
+此外，如果嘗試儲存具有 null 必要相依的擁有者，EF Core 現在將會擲回例外狀況。 在此範例中，EF Core 會在嘗試使用 null 儲存時擲回 `Person` `HomeAddress` 。
+
+最後，即使必要相依的所有資料行都有 null 值，EF Core 仍會建立必要相依的實例。
+
+### <a name="options-for-migration-generation"></a>產生遷移的選項
+
+EF Core 5.0 針對不同用途導入了更多的遷移控制。 這包括了能夠：
+
+* 知道是否正在為腳本產生遷移或立即執行
+* 知道是否正在產生等冪腳本
+* 知道腳本是否應該排除交易語句 (請參閱以下 _交易的遷移腳本_ 。 ) 
+
+此行為是由列舉所指定 `MigrationsSqlGenerationOptions` ，現在可傳遞給 `IMigrator.GenerateScript` 。
+
+這項工作中也包含了更好的等冪性腳本產生，可在 `EXEC` 需要時呼叫 SQL Server。 這項工作也可以對其他資料庫提供者（包括于 postgresql）所產生的腳本進行類似的改進。
+
+### <a name="migrations-scripts-with-transactions"></a>使用交易來遷移腳本
+
+從遷移產生的 SQL 腳本現在包含用來開始和認可交易的語句，適用于遷移。 例如，下列的遷移腳本是從兩個遷移產生的。 請注意，每個遷移現在都在交易內套用。
+
+```sql
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [Groups] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    CONSTRAINT [PK_Groups] PRIMARY KEY ([Id])
+);
+GO
+
+CREATE TABLE [Members] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    [GroupId] int NULL,
+    CONSTRAINT [PK_Members] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Members_Groups_GroupId] FOREIGN KEY ([GroupId]) REFERENCES [Groups] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+CREATE INDEX [IX_Members_GroupId] ON [Members] ([GroupId]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200910194835_One', N'6.0.0-alpha.1.20460.2');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+EXEC sp_rename N'[Groups].[Name]', N'GroupName', N'COLUMN';
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200910195234_Two', N'6.0.0-alpha.1.20460.2');
+GO
+
+COMMIT;
+```
+
+如上一節所述，如果交易需要以不同的方式處理，則可以停用這項交易。
+
+### <a name="see-pending-migrations"></a>查看暫止的遷移
+
+這項功能是由「社區」所貢獻 [@Psypher9](https://github.com/Psypher9) 。 許多人都感謝您的貢獻！
+
+`dotnet ef migrations list`命令現在會顯示尚未套用至資料庫的遷移。 例如：
+
+```
+ajcvickers@avickers420u:~/AllTogetherNow/Daily$ dotnet ef migrations list
+Build started...
+Build succeeded.
+20200910201647_One
+20200910201708_Two
+20200910202050_Three (Pending)
+ajcvickers@avickers420u:~/AllTogetherNow/Daily$
+```
+
+此外，現在有一個命令可 `Get-Migration` 讓封裝管理員主控台具有相同的功能。
+
+### <a name="modelbuilder-api-for-value-comparers"></a>值比較子的 ModelBuilder API
+
+自訂可變類型的 EF Core 屬性 [需要值比較子](xref:core/modeling/value-comparers) ，才能正確偵測屬性變更。 您現在可以在設定類型的值轉換時，指定此值。 例如：
+
+```c#
+modelBuilder
+    .Entity<EntityType>()
+    .Property(e => e.MyProperty)
+    .HasConversion(
+        v => JsonSerializer.Serialize(v, null),
+        v => JsonSerializer.Deserialize<List<int>>(v, null),
+        new ValueComparer<List<int>>(
+            (c1, c2) => c1.SequenceEqual(c2),
+            c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+            c => c.ToList()));
+```
+
+### <a name="entityentry-trygetvalue-methods"></a>Entityentry.state TryGetValue 方法
+
+這項功能是由「社區」所貢獻 [@m4ss1m0g](https://github.com/m4ss1m0g) 。 許多人都感謝您的貢獻！
+
+`TryGetValue`方法已加入至 `EntityEntry.CurrentValues` 和 `EntityEntry.OriginalValues` 。 這可讓要求屬性的值，而不需要先檢查屬性是否在 EF 模型中對應。 例如：
+
+```c#
+if (entry.CurrentValues.TryGetValue(propertyName, out var value))
+{
+    Console.WriteLine(value);
+}
+```
+
+### <a name="default-max-batch-size-for-sql-server"></a>SQL Server 的預設批次大小上限
+
+從 EF Core 5.0 開始，SQL Server 的 SaveChanges 的預設批次大小上限是42。 同樣地，這也是最重要的生命、Universe 和一切問題的答案。 不過，這可能是一項巧合，因為其值是透過 [分析批次處理效能](https://github.com/dotnet/efcore/issues/9270)來取得的。 我們不相信我們發現了一個終極問題，不過看起來似乎有點合理，那就是為了瞭解 SQL Server 的運作方式。
+
+### <a name="default-environment-to-development"></a>開發的預設環境
+
+EF Core 命令列工具現在會自動將 `ASPNETCORE_ENVIRONMENT` _和_ `DOTNET_ENVIRONMENT` 環境變數設定為「開發」。 這項功能可讓您在開發期間使用泛型主機搭配 ASP.NET Core 的體驗。 請參閱 [#19903](https://github.com/dotnet/efcore/issues/19903)。
+
+### <a name="better-migrations-column-ordering"></a>更好的遷移資料行排序
+
+未對應之基類的資料行現在會在對應實體類型的其他資料行之後排序。 請注意，這只會影響新建立的資料表。 現有資料表的資料行順序會維持不變。 請參閱 [#11314](https://github.com/dotnet/efcore/issues/11314)。
+
+### <a name="query-improvements"></a>查詢改進
+
+EF Core 5.0 RC1 包含一些額外的查詢翻譯改進：
+
+* `is`Cosmos 上的翻譯--請參閱[#16391](https://github.com/dotnet/efcore/issues/16391)
+* 使用者對應函式現在可以加上批註以控制 null 傳播--請參閱 [#19609](https://github.com/dotnet/efcore/issues/19609)
+* 支援使用條件式匯總進行 GroupBy 的翻譯--請參閱 [#11711](https://github.com/dotnet/efcore/issues/11711)
+* 在匯總之前將相異運算子轉換成群組元素--請參閱 [#17376](https://github.com/dotnet/efcore/issues/17376)
+
+### <a name="model-building-for-fields"></a>欄位的模型建立
+
+最後，在 RC1 中，EF Core 現在允許在 ModelBuilder 中使用 lambda 方法來尋找欄位以及屬性。 例如，如果您基於某些原因厭惡至屬性，並決定使用公用欄位，則這些欄位現在可以使用 lambda 產生器來對應：
+
+```c#
+public class Post
+{
+    public int Id;
+    public string Name;
+    public string Category;
+    public int BlogId;
+    public Blog Blog;
+}
+
+public class Blog
+{
+    public int Id;
+    public string Name;
+    public ICollection<Post> Posts;
+}
+```
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Blog>(b =>
+    {
+        b.Property(e => e.Id);
+        b.Property(e => e.Name);
+    });
+
+    modelBuilder.Entity<Post>(b =>
+    {
+        b.Property(e => e.Id);
+        b.Property(e => e.Name);
+        b.Property(e => e.Category);
+        b.Property(e => e.BlogId);
+        b.HasOne(e => e.Blog).WithMany(e => e.Posts);
+    });
+}
+```
+
+雖然這是可行的，但我們當然不建議您這麼做。 此外，請注意，這不會將任何額外的欄位對應功能新增至 EF Core，只允許使用 lambda 方法，而不是一律需要字串方法。 這種情況很少用，因為欄位很少是公用的。
 
 ## <a name="preview-8"></a>Preview 8
 

@@ -3,14 +3,13 @@ title: 從舊版升級至 EF Core 2-EF Core
 description: 升級至 Entity Framework Core 2.0 的指示和注意事項
 author: divega
 ms.date: 08/13/2017
-ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
 uid: core/what-is-new/ef-core-2.0/upgrade
-ms.openlocfilehash: 2bd88c0c52bcef8d5a9777f2cbd546a2787d67a9
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: bdc0cfe8c0be4a83f8c78ba2ac66bb1e18cea0f7
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620734"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072339"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>將繼承應用程式升級至 EF Core 2。0
 

@@ -3,21 +3,20 @@ title: 具有多個結果集的預存程式-EF6
 description: Entity Framework 6 中具有多個結果集的預存程式
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 1b3797f9-cd3d-4752-a55e-47b84b399dc1
 uid: ef6/modeling/designer/advanced/multiple-result-sets
-ms.openlocfilehash: 39b8ae171b7cee263554b6ff94bed6bd8f1e0c39
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 6b213b944ca06a7ca141746d86f1127be2fd7d87
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620580"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070220"
 ---
 # <a name="stored-procedures-with-multiple-result-sets"></a>具有多個結果集的預存程式
 有時候，使用預存程式時，您必須傳回一個以上的結果集。 此案例通常用來減少撰寫單一畫面所需的資料庫往返次數。在 EF5 之前，Entity Framework 可讓您呼叫預存程式，但只會將第一個結果集傳回給呼叫程式碼。
 
 本文將為您示範兩種方式，可讓您用來從 Entity Framework 中的預存程式存取多個結果集。 其中一個只使用程式碼，並使用程式碼 first 和 EF 設計工具，另一個則適用于 EF 設計工具。 這項工具和 API 支援在未來的 Entity Framework 版本中應該會改善。
 
-## <a name="model"></a>型號
+## <a name="model"></a>模型
 
 本文中的範例使用基本的 Blog 和貼文模型，其中的 blog 有許多貼文，而貼文屬於單一的 blog。 我們會使用資料庫中的預存程式，傳回所有的 blog 和 post，如下所示：
 

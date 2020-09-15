@@ -1,14 +1,16 @@
 ---
 title: 查詢和尋找實體 - EF6
+description: 在 Entity Framework 6 中查詢及尋找實體
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 65bb3db2-2226-44af-8864-caa575cf1b46
-ms.openlocfilehash: 29a86817e250a2f53ecaa73e8fa4bf93452f0497
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+uid: ef6/querying/index
+ms.openlocfilehash: 4bfdc59527ab75e7a2e08dc743a1974246643aa3
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78412973"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620325"
 ---
 # <a name="querying-and-finding-entities"></a>查詢和尋找實體
 本主題涵蓋您可以使用 Entity Framework 查詢資料的各種方法，包括 LINQ 和 Find 方法。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
@@ -41,7 +43,7 @@ using (var context = new BloggingContext())
 
 從資料庫傳回結果時，內容中不存在的物件會附加到內容。 如果某個物件已經存在於內容中，就會傳回現有的物件 (**不會**使用資料庫值來覆寫項目中物件屬性的目前和原始值)。  
 
-當您執行查詢時，已新增至內容但尚未儲存到資料庫的實體，並不會作為結果集的一部分傳回。 若要取得內容中的資料，請參閱[本機資料](~/ef6/querying/local-data.md)。  
+當您執行查詢時，已新增至內容但尚未儲存到資料庫的實體，並不會作為結果集的一部分傳回。 若要取得內容中的資料，請參閱[本機資料](xref:ef6/querying/local-data)。  
 
 如果查詢未從資料庫傳回任何資料列，結果將會是空集合，而非 **null**。  
 

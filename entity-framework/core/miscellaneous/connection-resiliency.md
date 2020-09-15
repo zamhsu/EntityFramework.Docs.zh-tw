@@ -3,14 +3,13 @@ title: 連接復原-EF Core
 description: 使用連接復原功能，利用 Entity Framework Core 自動重試失敗的命令
 author: rowanmiller
 ms.date: 11/15/2016
-ms.assetid: e079d4af-c455-4a14-8e15-a8471516d748
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: 6dd3d3eadb218ab32f373e44e2013d017e2966d8
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f4077672a9234bf66dc488d7450f437452e542b6
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617768"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071702"
 ---
 # <a name="connection-resiliency"></a>連接恢復功能
 

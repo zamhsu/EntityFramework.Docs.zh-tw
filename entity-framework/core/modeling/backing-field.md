@@ -3,14 +3,13 @@ title: 支援欄位-EF Core
 description: 在 Entity Framework Core 模型中設定屬性的支援欄位
 author: rowanmiller
 ms.date: 10/27/2016
-ms.assetid: a628795e-64df-4f24-a5e8-76bc261e7ed8
 uid: core/modeling/backing-field
-ms.openlocfilehash: 36fc64efa08f2cdeb7005e3fc6335298f2426bde
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 48ef28e7b880fee571cb1857601fb2cead535fbf
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617578"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071624"
 ---
 # <a name="backing-fields"></a>支援欄位
 

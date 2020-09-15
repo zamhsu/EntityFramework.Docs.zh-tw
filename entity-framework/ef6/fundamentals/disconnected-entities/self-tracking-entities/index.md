@@ -1,14 +1,16 @@
 ---
 title: 自我追蹤實體 - EF6
+description: Entity Framework 6 中的自我追蹤實體
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 5e60f5be-7bbb-4bf8-835e-0ac808d6c84a
-ms.openlocfilehash: 3bb9759d89fbd0c10b911625aa7d0afd7747de14
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+uid: ef6/fundamentals/disconnected-entities/self-tracking-entities/index
+ms.openlocfilehash: 0e771c0f147589112779359ab8c06344eb05b8fc
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413353"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616188"
 ---
 # <a name="self-tracking-entities"></a>自我追蹤實體
 
@@ -21,12 +23,12 @@ ms.locfileid: "78413353"
 
 這個範本項目會產生兩個 .tt (文字範本) 檔案：  
 
-- **\<模型名稱\>.tt** 檔案會產生實體類型和 Helper 類別，而這個類別包含自我追蹤實體所使用的變更追蹤邏輯，以及允許針對自我追蹤實體設定狀態的擴充方法。  
-- **\<模型名稱\>.Context.tt** 檔案會產生衍生的內容，以及包含 **ObjectContext** 和 **ObjectSet** 類別之 **ApplyChanges** 方法的擴充類別。 這些方法會檢查自我追蹤實體圖形中所含的變更追蹤資訊，以便推斷要在資料庫中儲存變更所需執行的作業組。  
+- **\<model name\>.tt**檔案會產生實體類型與協助程式類別，而此類別包含自我追蹤實體所使用的變更追蹤邏輯，以及允許針對自我追蹤實體設定狀態的擴充方法。  
+- **\<model name\>.Context.tt** 檔案會產生衍生的內容，以及包含 **ObjectContext** 與 **ObjectSet** 類別之 **ApplyChanges** 方法的擴充類別。 這些方法會檢查自我追蹤實體圖形中所含的變更追蹤資訊，以便推斷要在資料庫中儲存變更所需執行的作業組。  
 
 ## <a name="get-started"></a>開始使用  
 
-若要開始使用，請前往[自我追蹤實體逐步解說](walkthrough.md)頁面。  
+若要開始使用，請前往[自我追蹤實體逐步解說](xref:ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough)頁面。  
 
 ## <a name="functional-considerations-when-working-with-self-tracking-entities"></a>使用自我追蹤實體時的功能考量  
 > [!IMPORTANT]
@@ -39,7 +41,7 @@ ms.locfileid: "78413353"
 - 當您將已在用戶端上修改的圖形傳送至服務，然後想要繼續在用戶端上使用相同的圖形時，就必須手動逐一查看圖形，並且針對每個物件呼叫 **AcceptChanges** 方法，以便重設變更追蹤器。  
 
     > 如果圖形中的物件包含屬性，而這些屬性含有資料庫產生的值 (例如識別或並行值)，Entity Framework 就會在呼叫 **SaveChanges** 方法之後，將這些屬性的值取代為資料庫產生的值。 您可以實作服務作業，以便將已儲存的物件或物件的產生屬性值清單傳回給用戶端。 然後，用戶端就必須將物件執行個體或物件屬性值取代成服務作業所傳回的物件或屬性值。  
-- 合併來自多個服務要求的圖形時，可能會在產生的圖形中導入具有重複索引鍵值的物件。 Entity Framework 不會在您呼叫 **ApplyChanges** 方法時移除具有重複索引鍵的物件，但是會改為擲回例外狀況。 若要避免圖形具有重複的索引鍵值，請遵循下列部落格中描述的其中一種模式：[自我追蹤實體：ApplyChanges 和重複的實體](https://go.microsoft.com/fwlink/?LinkID=205119&clcid=0x409) \(英文\)。  
+- 合併來自多個服務要求的圖形時，可能會在產生的圖形中導入具有重複索引鍵值的物件。 Entity Framework 不會在您呼叫 **ApplyChanges** 方法時移除具有重複索引鍵的物件，但是會改為擲回例外狀況。 若要避免圖形具有重複的索引鍵值，請遵循下列部落格中描述的其中一種模式：[自我追蹤實體：ApplyChanges 和重複的實體](https://go.microsoft.com/fwlink/?LinkID=205119&clcid=0x409)。  
 - 當您設定外部索引鍵屬性來變更物件之間的關聯性時，參考導覽屬性會設定為 null，而且不會同步處理至用戶端上的適當主體實體。 當圖形附加至物件內容後 (例如，在您呼叫 **ApplyChanges** 方法之後)，外部索引鍵屬性和導覽屬性就會進行同步處理。  
 
     > 如果您已經在外部索引鍵關聯性上指定了串聯刪除，但是參考導覽屬性卻沒有與適當的主體物件同步處理，此時就可能會發生問題。 如果您刪除主體，此刪除作業將不會傳播至相依的物件。 如果您已經指定了串聯刪除，請使用導覽屬性來變更關聯性，而非設定外部索引鍵屬性。  

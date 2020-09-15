@@ -1,21 +1,22 @@
 ---
 title: 建立和設定模型 - EF Core
+description: 使用 Entity Framework Core 建立及設定模型的概觀
 author: rowanmiller
 ms.date: 11/05/2019
 ms.assetid: 88253ff3-174e-485c-b3f8-768243d01ee1
 uid: core/modeling/index
-ms.openlocfilehash: 0f44d9684ca5c8435d83085f9038860309bd82a2
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+ms.openlocfilehash: e980f11b08bee7b07156a80c6bead829e7a8b654
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78412773"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616761"
 ---
 # <a name="creating-and-configuring-a-model"></a>建立和設定模型
 
 Entity Framework 會使用一組慣例，根據您實體類別的圖形建置模型。 您可以指定其他組態來補充及 (或) 覆寫慣例探索到的項目。
 
-本文涵蓋可套用至將目標設為任何資料存放區之模型的組態，以及將目標設為任何關聯式資料庫時可套用的組態。 提供者也可以啟用特定資料存放區專屬的組態。 如需提供者專屬組態的文件，請參閱 [資料庫提供者](../providers/index.md) 一節。
+本文涵蓋可套用至將目標設為任何資料存放區之模型的組態，以及將目標設為任何關聯式資料庫時可套用的組態。 提供者也可以啟用特定資料存放區專屬的組態。 如需提供者專屬組態的文件，請參閱 [資料庫提供者](xref:core/providers/index) 一節。
 
 > [!TIP]  
 > 您可以在 GitHub 上檢視本文的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples) 。

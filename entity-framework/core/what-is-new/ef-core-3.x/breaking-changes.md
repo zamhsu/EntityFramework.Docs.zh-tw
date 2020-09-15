@@ -4,12 +4,12 @@ description: Entity Framework Core 3.x 引進的重大變更完整清單
 author: ajcvickers
 ms.date: 09/05/2020
 uid: core/what-is-new/ef-core-3.x/breaking-changes
-ms.openlocfilehash: 644e61994dab4e9993c6a78792ff584c57fbe48a
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e348cb630d91ebe4536b73b9a7bd9a7b6a46db79
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620733"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072235"
 ---
 # <a name="breaking-changes-included-in-ef-core-3x"></a>EF Core 3.x 中包含的重大變更
 
@@ -178,7 +178,7 @@ ms.locfileid: "89620733"
     $ dotnet tool install --global dotnet-ef
   ```
 
-您也可以在還原專案相依性時取得它作為本機工具 (該專案是使用[工具資訊清單檔](https://github.com/dotnet/cli/issues/10288)將它宣告為工具相依性)。
+您也可以在還原專案相依性時取得它作為本機工具 (該專案是使用[工具資訊清單檔](/dotnet/core/tools/global-tools#install-a-local-tool)將它宣告為工具相依性)。
 
 <a name="fromsql"></a>
 ### <a name="fromsql-executesql-and-executesqlasync-have-been-renamed"></a>FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名
@@ -478,6 +478,9 @@ API 的下列組件現已淘汰：
 * **`DbQuery<>`** - `DbSet<>` 請改為使用。
 * **`DbContext.Query<>()`** - `DbContext.Set<>()` 請改為使用。
 * **`IQueryTypeConfiguration<TQuery>`** -改 `IEntityTypeConfiguration<TEntity>` 為使用 * *。
+
+> [!NOTE]
+> 由於 3.x [在查詢](https://github.com/dotnet/efcore/issues/19537) 將所有屬性設為 a 的無索引鍵實體時 `null` `null` ，將會傳回，而不是實體，如果此問題適用于您的案例，也會新增邏輯來處理 `null` 結果。
 
 <a name="config"></a>
 ### <a name="configuration-api-for-owned-type-relationships-has-changed"></a>自有類型關聯性的設定 API 已變更

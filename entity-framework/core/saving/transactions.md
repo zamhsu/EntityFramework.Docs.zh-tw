@@ -3,21 +3,20 @@ title: 交易 - EF Core
 description: 使用 Entity Framework Core 儲存資料時，管理不可部分完成的交易
 author: rowanmiller
 ms.date: 10/27/2016
-ms.assetid: d3e6515b-8181-482c-a790-c4a6778748c1
 uid: core/saving/transactions
-ms.openlocfilehash: 2674fdc59cb08e5faf2302270629c446abc2670c
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d824db6a4d6e1fc0fc385f007ccfc2c6cbbcae79
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618932"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070831"
 ---
 # <a name="using-transactions"></a>使用交易
 
 交易可讓系統以不可部分完成的方式處理數個資料庫作業。 如果認可交易，就會對資料庫成功套用所有作業。 如果復原交易，則不會對資料庫套用任何作業。
 
 > [!TIP]  
-> 您可以在 GitHub 上查看這篇文章的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Transactions/) 。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Transactions/) \(英文\)。
 
 ## <a name="default-transaction-behavior"></a>預設交易行為
 

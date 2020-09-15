@@ -3,14 +3,13 @@ title: 為產生的屬性設定明確值 - EF Core
 description: 針對設定為隨 Entity Framework Core 產生的屬性，明確設定值的相關資訊
 author: rowanmiller
 ms.date: 10/27/2016
-ms.assetid: 3f1993c2-cdf5-425b-bac2-a2665a20322b
 uid: core/saving/explicit-values-generated-properties
-ms.openlocfilehash: 6a10e8d8c056ab66226f229dcb8b032ff83f06fe
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: efaa87356a78c4ec7e11d57c1effad776bd01cba
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617252"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072482"
 ---
 # <a name="setting-explicit-values-for-generated-properties"></a>為產生的屬性設定明確值
 
@@ -19,7 +18,7 @@ ms.locfileid: "89617252"
 在一些情況下，您可能會想要為產生的屬性設定明確值，而不是使用產生的值。
 
 > [!TIP]  
-> 您可以在 GitHub 上查看這篇文章的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/ExplicitValuesGenerateProperties/) 。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/ExplicitValuesGenerateProperties/) \(英文\)。
 
 ## <a name="the-model"></a>模型
 

@@ -1,15 +1,16 @@
 ---
 title: 使用者入門 - EF Core
+description: Entity Framework Core 的使用者入門教學課程
 author: rick-anderson
 ms.date: 09/17/2019
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: 7181df6ee73b09f196940178ffed38d96b075258
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: e33a18c8d3d72078eaaeba9c8cf0a1afca0cb66c
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370314"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618002"
 ---
 # <a name="getting-started-with-ef-core"></a>開始使用 EF Core
 
@@ -54,7 +55,7 @@ cd EFGetStarted
 
 ## <a name="install-entity-framework-core"></a>安裝 Entity Framework Core
 
-若要安裝 EF Core，請為希望作為目標的 EF Core 資料庫提供者，安裝此套件。 本教學課程會使用 SQLite，因為它可以在 .NET Core 支援的所有平台上執行。 如需可用的提供者清單，請參閱[資料庫提供者](../providers/index.md)。
+若要安裝 EF Core，請為希望作為目標的 EF Core 資料庫提供者，安裝此套件。 本教學課程會使用 SQLite，因為它可以在 .NET Core 支援的所有平台上執行。 如需可用的提供者清單，請參閱[資料庫提供者](xref:core/providers/index)。
 
 ### <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -93,9 +94,9 @@ dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 
 [!code-csharp[Main](../../../samples/core/GetStarted/Model.cs)]
 
-EF Core 也可以對現有資料庫中的模型進行[反向工程](../managing-schemas/scaffolding.md)。
+EF Core 也可以對現有資料庫中的模型進行[反向工程](xref:core/managing-schemas/scaffolding)。
 
-提示：為了清晰易懂，此應用程式刻意保持簡潔。 [連接字串](../miscellaneous/connection-strings.md)不應儲存在實際執行應用程式的程式碼中。 您可能也會想要將每個 c # 類別分割成自己的檔案。
+提示：為了清晰易懂，此應用程式刻意保持簡潔。 [連接字串](xref:core/miscellaneous/connection-strings)不應儲存在實際執行應用程式的程式碼中。 您也可以將每個 C# 類別分割到其自有檔案。
 
 ## <a name="create-the-database"></a>建立資料庫
 
@@ -112,11 +113,11 @@ EF Core 也可以對現有資料庫中的模型進行[反向工程](../managing-
   dotnet ef database update
   ```
 
-  這會安裝 [dotnet ef](../miscellaneous/cli/dotnet.md) 以及在專案上執行命令所需的設計套件。 `migrations` 命令會建立移轉的 Scaffolding，以針對模型建立一組初始資料表。 `database update` 命令會建立資料庫，並對資料庫套用新的移轉。
+  這會安裝 [dotnet ef](xref:core/miscellaneous/cli/dotnet) 以及在專案上執行命令所需的設計套件。 `migrations` 命令會建立移轉的 Scaffolding，以針對模型建立一組初始資料表。 `database update` 命令會建立資料庫，並對資料庫套用新的移轉。
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在**套件管理員主控台（PMC）** 中執行下列命令
+* 在**套件管理員主控台 (PMC)** 中執行下列命令
 
   ``` PowerShell
   Install-Package Microsoft.EntityFrameworkCore.Tools
@@ -124,7 +125,7 @@ EF Core 也可以對現有資料庫中的模型進行[反向工程](../managing-
   Update-Database
   ```
 
-  這會安裝[適用於 EF Core 的 PMC 工具](../miscellaneous/cli/powershell.md)。 `Add-Migration` 命令會建立移轉的 Scaffolding，以針對模型建立一組初始資料表。 `Update-Database` 命令會建立資料庫，並對資料庫套用新的移轉。
+  這會安裝[適用於 EF Core 的 PMC 工具](xref:core/miscellaneous/cli/powershell)。 `Add-Migration` 命令會建立移轉的 Scaffolding，以針對模型建立一組初始資料表。 `Update-Database` 命令會建立資料庫，並對資料庫套用新的移轉。
 
 ---
 

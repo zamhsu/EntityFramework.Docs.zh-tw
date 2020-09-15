@@ -33,30 +33,28 @@
                   href: core/what-is-new/ef-core-5.0/whatsnew.md
                 - name: 重大變更
                   href: core/what-is-new/ef-core-5.0/breaking-changes.md
-            - name: EF Core 3.0
+            - name: EF Core 3.x
               items:
                 - name: 新功能
-                  href: core/what-is-new/ef-core-3.0/index.md
+                  href: core/what-is-new/ef-core-3.x/index.md
                 - name: 重大變更
-                  href: core/what-is-new/ef-core-3.0/breaking-changes.md
-            - name: EF Core 2.2
-              href: core/what-is-new/ef-core-2.2.md
+                  href: core/what-is-new/ef-core-3.x/breaking-changes.md
             - name: EF Core 2.1
               href: core/what-is-new/ef-core-2.1.md
-            - name: EF Core 2.0
-              href: core/what-is-new/ef-core-2.0.md
-            - name: EF Core 1.1
-              href: core/what-is-new/ef-core-1.1.md
-            - name: EF Core 1.0
-              href: core/what-is-new/ef-core-1.0.md
-            - name: 從舊版升級
+            - name: 支援終止
               items:
-                - name: 從 1.0 RC1 至 RC2
-                  href: core/miscellaneous/rc1-rc2-upgrade.md
-                - name: 從 1.0 RC2 至 RTM
-                  href: core/miscellaneous/rc2-rtm-upgrade.md
-                - name: 從 1.x 至 2.0
-                  href: core/miscellaneous/1x-2x-upgrade.md
+                - name: EF Core 2.2
+                  href: core/what-is-new/ef-core-2.2.md
+                - name: EF Core 2.0
+                  items:
+                    - name: 新功能
+                      href: core/what-is-new/ef-core-2.0/index.md
+                    - name: 從 1.x 升級
+                      href: core/what-is-new/ef-core-2.0/upgrade.md
+                - name: EF Core 1.1
+                  href: core/what-is-new/ef-core-1.1.md
+                - name: EF Core 1.0
+                  href: core/what-is-new/ef-core-1.0.md
         - name: 開始使用
           items:
             - name: EF Core 教學課程
@@ -75,6 +73,8 @@
           items:
             - name: 連接字串
               href: core/miscellaneous/connection-strings.md
+            - name: 非同步程式設計
+              href: core/miscellaneous/async.md
             - name: 記錄
               href: core/miscellaneous/logging.md
             - name: 連線恢復功能
@@ -180,8 +180,6 @@
               href: core/querying/complex-query-operators.md
             - name: 讀取相關資料
               href: core/querying/related-data.md
-            - name: 非同步查詢
-              href: core/querying/async.md
             - name: 原始 SQL 查詢
               href: core/querying/raw-sql.md
             - name: 全域查詢篩選條件
@@ -204,8 +202,6 @@
               href: core/saving/concurrency.md
             - name: 異動
               href: core/saving/transactions.md
-            - name: 非同步儲存
-              href: core/saving/async.md
             - name: 已中斷連線的實體
               href: core/saving/disconnected-entities.md
             - name: 產生屬性的明確值
@@ -220,6 +216,8 @@
               items:
                 - name: 總覽
                   href: core/providers/sql-server/index.md
+                - name: 索引
+                  href: core/providers/sql-server/indexes.md
                 - name: 記憶體最佳化的資料表
                   href: core/providers/sql-server/memory-optimized-tables.md
                 - name: 指定 Azure SQL Database 選項

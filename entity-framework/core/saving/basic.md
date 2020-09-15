@@ -3,21 +3,20 @@ title: 基本儲存 - EF Core
 description: 使用 Entity Framework Core 新增、更新和移除資料的基本資訊
 author: rowanmiller
 ms.date: 10/27/2016
-ms.assetid: 850d842e-3fad-4ef2-be17-053768e97b9e
 uid: core/saving/basic
-ms.openlocfilehash: 21a9be10d081591a7d3b33a8e9cc48552c95fb6c
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: ea73ff86d8843acf8226f9d6696b79b99da9dab7
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617436"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070948"
 ---
 # <a name="basic-save"></a>基本儲存
 
 了解如何使用您的內容和實體類別來新增、修改及移除資料。
 
 > [!TIP]  
-> 您可以在 GitHub 上查看這篇文章的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/) 。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/) \(英文\)。
 
 ## <a name="adding-data"></a>加入資料
 

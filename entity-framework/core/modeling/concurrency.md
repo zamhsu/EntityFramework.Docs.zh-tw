@@ -3,14 +3,13 @@ title: 並行權杖-EF Core
 description: 在 Entity Framework Core 模型中設定開放式並行存取控制的並行標記
 author: AndriySvyryd
 ms.date: 01/03/2020
-ms.assetid: bc8b1cb0-befe-4b67-8004-26e6c5f69385
 uid: core/modeling/concurrency
-ms.openlocfilehash: 57718a1b0146f437bb4126524889c81ae0dfd895
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: fab9ad99609cd8e724b550000f6f06ef8c172c81
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617547"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071611"
 ---
 # <a name="concurrency-tokens"></a>並行語彙基元
 
@@ -19,7 +18,7 @@ ms.locfileid: "89617547"
 
 設定為並行權杖的屬性會用來執行開放式並行存取控制。
 
-## <a name="configuration"></a>設定
+## <a name="configuration"></a>組態
 
 ### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
 

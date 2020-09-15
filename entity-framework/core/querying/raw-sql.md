@@ -3,21 +3,20 @@ title: 原始 SQL 查詢 - EF Core
 description: 在 Entity Framework Core 中使用原始 SQL 查詢查詢
 author: smitpatel
 ms.date: 10/08/2019
-ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 3b95c15b2b07d1eeecf1603e6bfbb29f4931d5cc
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 13f5cbfbd7a110394402bff74d51b5fcda04c642
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617507"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071130"
 ---
 # <a name="raw-sql-queries"></a>原始 SQL 查詢
 
 Entity Framework Core 可讓您在處理關聯式資料庫時，下拉至原始 SQL 查詢。 如果您想要的查詢無法使用 LINQ 表示，原始 SQL 查詢會很有用。 如果使用 LINQ 查詢會導致 SQL 查詢效率不佳，也會使用原始 SQL 查詢。 原始 SQL 查詢可以傳回屬於模型一部分的一般實體類型或 [無索引鍵實體類型](xref:core/modeling/keyless-entity-types) 。
 
 > [!TIP]  
-> 您可以在 GitHub 上查看這篇文章的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/) 。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/) \(英文\)。
 
 ## <a name="basic-raw-sql-queries"></a>基本的原始 SQL 查詢
 

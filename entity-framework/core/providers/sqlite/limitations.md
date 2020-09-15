@@ -3,14 +3,13 @@ title: SQLite 資料庫提供者-限制-EF Core
 description: 與其他提供者相較之下，Entity Framework Core SQLite 資料庫提供者的限制
 author: bricelam
 ms.date: 07/16/2020
-ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: 2657bf03bc5cd0d5fb45c57e7f7605824deb44d2
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 546910afb9c97a93a7cc471bb813be0b9874a4bd
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616541"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071221"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>SQLite EF Core 資料庫提供者限制
 
@@ -70,7 +69,7 @@ SQLite 資料庫引擎不支援大部分其他關係資料庫都支援的一些�
 | RenameTable          | ✔           | 1.0              |
 | EnsureSchema         | ✔ (無 op)    | 2.0              |
 | DropSchema           | ✔ (無 op)    | 2.0              |
-| Insert               | ✔           | 2.0              |
+| 插入               | ✔           | 2.0              |
 | 更新               | ✔           | 2.0              |
 | 刪除               | ✔           | 2.0              |
 

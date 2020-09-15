@@ -3,14 +3,13 @@ title: 定序和區分大小寫-EF Core
 description: 在資料庫和使用 Entity Framework Core 的查詢中設定定序和區分大小寫
 author: roji
 ms.date: 04/27/2020
-ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: da37652484e0cd36c2aa907e41e875ba381ff41e
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e327df8adf777bfa5603a71eca8297a051f5bd56
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617814"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071715"
 ---
 # <a name="collations-and-case-sensitivity"></a>定序和區分大小寫
 

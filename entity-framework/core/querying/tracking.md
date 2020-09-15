@@ -3,14 +3,13 @@ title: 追蹤與無追蹤查詢-EF Core
 description: Entity Framework Core 中追蹤和無追蹤查詢的資訊
 author: smitpatel
 ms.date: 10/10/2019
-ms.assetid: e17e060c-929f-4180-8883-40c438fbcc01
 uid: core/querying/tracking
-ms.openlocfilehash: f49c6a3e1dc84dff72d80e3ef0f9bbe149d58a72
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: a01446d7aec4d47eda23d4ac056e1c8286d2a281
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617413"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070961"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>追蹤與無追蹤查詢
 
@@ -20,7 +19,7 @@ ms.locfileid: "89617413"
 > 永遠不會追蹤[無索引鍵的實體類型](xref:core/modeling/keyless-entity-types)。 本文提及實體類型時，是指已定義索引鍵的實體類型。
 
 > [!TIP]  
-> 您可以在 GitHub 上查看這篇文章的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) 。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
 
 ## <a name="tracking-queries"></a>追蹤查詢
 

@@ -3,14 +3,13 @@ title: EF Core 1.0 中的新增功能 - EF Core
 description: Entity Framework Core 1.0 的變更和改進
 author: divega
 ms.date: 10/27/2016
-ms.assetid: 20A25111-AEBE-4BC2-83A5-3F651952DF72
 uid: core/what-is-new/ef-core-1.0
-ms.openlocfilehash: adde26095a11016796f6bd616978c3ccc0fe4c18
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 898f243bace7f38ffb6b216af0bd9249d73f2fe4
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618851"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072456"
 ---
 # <a name="features-included-in-ef-core-10"></a>EF Core 1.0 中包含的功能
 
@@ -82,7 +81,7 @@ ms.locfileid: "89618851"
 
 偵測模型中的無效模式並提供實用的錯誤訊息。
 
-## <a name="change-tracking"></a>變更追蹤
+## <a name="change-tracking"></a>Change tracking
 
 ### <a name="snapshot-change-tracking"></a>快照集變更追蹤
 

@@ -1,21 +1,22 @@
 ---
 title: 新功能 - EF6
+description: Entity Framework 6 的新功能
 author: divega
 ms.date: 09/12/2019
 ms.assetid: 41d1f86b-ce66-4bf2-8963-48514406fb4c
 uid: ef6/what-is-new/index
-ms.openlocfilehash: e0367aeefd682434bf520301776bcff4f0e72e06
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+ms.openlocfilehash: 71854e0a7009b35742a70724210708a284f50a3d
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80136131"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619760"
 ---
 # <a name="whats-new-in-ef6"></a>EF6 的新功能
 
 強烈建議您使用 Entity Framework 的最新發行版本，以確保您取得最新的功能和最高的穩定性。
 不過，我們了解您可能需要使用先前的版本，或者可能想要體驗最新發行前版本中的新改善。
-若要安裝特定版本的 EF，請參閱[取得 Entity Framework](~/ef6/fundamentals/install.md)。
+若要安裝特定版本的 EF，請參閱[取得 Entity Framework](xref:ef6/fundamentals/install)。
 
 ## <a name="ef-640"></a>EF 6.4.0
 
@@ -56,4 +57,4 @@ EF 6.3.0 執行階段已於 2019 年 9 月發行至 NuGet。 此版本主要目�
 
 ## <a name="past-releases"></a>過去版本
 
-[過去版本](past-releases.md)頁面包含所有舊版 EF 與每一版所引進之主要功能的封存。
+[過去版本](xref:ef6/what-is-new/past-releases)頁面包含所有舊版 EF 與每一版所引進之主要功能的封存。

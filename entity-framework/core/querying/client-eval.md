@@ -3,14 +3,13 @@ title: 用戶端與伺服器的評估-EF Core
 description: 使用 Entity Framework Core 進行查詢的用戶端和伺服器評估
 author: smitpatel
 ms.date: 10/03/2019
-ms.assetid: 8b6697cc-7067-4dc2-8007-85d80503d123
 uid: core/querying/client-eval
-ms.openlocfilehash: 61a9f4d69b78f6cb42f4d367948f93230370d7f2
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 41be7da26423f50017f57a7686f65bd8baf69ef5
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616473"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071169"
 ---
 # <a name="client-vs-server-evaluation"></a>用戶端與伺服器評估
 
@@ -20,7 +19,7 @@ ms.locfileid: "89616473"
 > 在3.0 版之前，請在查詢中的任何位置 Entity Framework Core 支援的用戶端評估。 如需詳細資訊，請參閱「 [先前的版本」一節](#previous-versions)。
 
 > [!TIP]
-> 您可以在 GitHub 上查看這篇文章的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) 。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
 
 ## <a name="client-evaluation-in-the-top-level-projection"></a>最上層投影中的用戶端評估
 

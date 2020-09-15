@@ -3,14 +3,13 @@ title: Code First 新增至新資料庫-EF6
 description: Code First 至 Entity Framework 6 中的新資料庫
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 2df6cb0a-7d8b-4e28-9d05-e2b9a90125af
 uid: ef6/modeling/code-first/workflows/new-database
-ms.openlocfilehash: 4e927bab07ae7a9719c46655e10685b59d0b65dc
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 96d76162383149c045178954196e1294331918a8
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616888"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070363"
 ---
 # <a name="code-first-to-a-new-database"></a>新資料庫的 Code First
 這段影片和逐步解說將提供以新的資料庫為目標的 Code First 開發簡介。 這種情況包括以不存在的資料庫為目標，Code First 將會建立，或是 Code First 將新的資料表加入的空資料庫。 Code First 可讓您使用 C 或 VB.Net 類別來定義您的模型 \# 。 您可以選擇性地使用類別和屬性上的屬性，或使用流暢的 API 來執行其他設定。

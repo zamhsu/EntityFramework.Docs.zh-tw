@@ -4,14 +4,13 @@ description: 在 Entity Framework Core 中使用已中斷連線、未追蹤的�
 author: ajcvickers
 ms.author: avickers
 ms.date: 10/27/2016
-ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 52ba838c4d54771c51737c3940e5a88659f94144
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d9b6d2d2c0761dd6f670ba51f935c866e10460b7
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617274"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070883"
 ---
 # <a name="disconnected-entities"></a>已中斷連線的實體
 
@@ -21,7 +20,7 @@ DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在
 
 <!-- markdownlint-disable MD028 -->
 > [!TIP]
-> 您可以在 GitHub 上查看這篇文章的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) 。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) \(英文\)。
 
 > [!TIP]
 > 對於具有指定主索引鍵值的任何實體，EF Core 只能追蹤其中一個執行個體。 若要避免此情況成為問題，最佳方式就是針對每個工作單位都使用短期內容，讓內容從空白開始、有實體與其連結、儲存這些實體，然後再處置及捨棄內容。
