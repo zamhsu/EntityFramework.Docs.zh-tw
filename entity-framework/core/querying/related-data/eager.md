@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 積極載入相關資料
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: f7e33895293e1d7b8b32a135d60b58dd1f050621
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 5ac15a85b28f21588639f34cbaa9ef76f366f7b5
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90078916"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210463"
 ---
 # <a name="eager-loading-of-related-data"></a>相關資料的積極式載入
 
@@ -92,7 +92,7 @@ ORDER BY [b].[BlogId]
 
 當分割查詢設定為預設值時，仍然可以將特定查詢設定為以單一查詢的形式執行：
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSplitQuery&highlight=5)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSingleQuery&highlight=5)]
 
 如果未明確指定查詢分割模式，則全域或不是在查詢和 EF Core 會偵測到單一查詢會載入多個集合，併發出警告以吸引出可能產生的效能問題。 將查詢模式設定為 SingleQuery 會導致不產生警告。
 

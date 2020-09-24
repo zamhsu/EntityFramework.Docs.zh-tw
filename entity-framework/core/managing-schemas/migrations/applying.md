@@ -5,12 +5,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: 50937f96e63f9bda2ffcf5e94dabf688ee2ba1f3
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: cde83a944e1e698a7f8a00c4692c0ce08a87b5ab
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071885"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210402"
 ---
 # <a name="applying-migrations"></a>套用遷移
 
@@ -193,5 +193,5 @@ public static void Main(string[] args)
 
 > [!WARNING]
 >
-> * 在生產環境中使用這種方法之前，請先仔細考慮。 經驗證明，這項部署策略的簡潔性是由它所建立的問題所遠遠超過。 請考慮改為使用 SQL 腳本。
+> * 在生產環境中使用這種方法之前，請先仔細考慮。 經驗證明，這項部署策略的簡潔性是由它所建立的問題所遠遠超過。 請考慮改為從遷移產生 SQL 腳本。
 > * 請勿在 `Migrate()` 之前呼叫 `EnsureCreated()`。 `EnsureCreated()` 會略過移轉而建立結構描述，因此造成 `Migrate()` 失敗。

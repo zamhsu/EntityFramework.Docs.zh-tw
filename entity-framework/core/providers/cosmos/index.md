@@ -2,15 +2,14 @@
 title: Azure Cosmos DB 提供者 - EF Core
 description: 資料庫提供者的文件，內容說明如何搭配使用 Entity Framework Core 與 Azure Cosmos DB SQL API
 author: AndriySvyryd
-ms.author: ansvyryd
-ms.date: 11/05/2019
+ms.date: 09/14/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 188c5b10aefa784715c0bbf2d50337d65c21fd62
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 94ba29f3f2643e8f563a460e17dce9d15cb7c2df
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071364"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210337"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB 提供者
 
@@ -66,6 +65,18 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 
 > [!IMPORTANT]
 > 如果要建立需要的容器或插入[種子資料](xref:core/modeling/data-seeding) (如果存在於模型中)，就必須呼叫 [EnsureCreatedAsync](/dotnet/api/Microsoft.EntityFrameworkCore.Storage.IDatabaseCreator.EnsureCreatedAsync)。 但是，`EnsureCreatedAsync` 僅應在部署期間呼叫，在一般作業期間呼叫可能會導致效能問題。
+
+## <a name="cosmos-options"></a>Cosmos 選項
+
+您也可以使用單一連接字串來設定 Cosmos DB 提供者，並指定其他選項來自訂連接：
+
+[!code-csharp[Configuration](../../../../samples/core/Cosmos/ModelBuilding/OptionsContext.cs?name=Configuration)]
+
+> [!NOTE]
+> 這些選項大多是 EF Core Cosmos 5.0 中的新功能。
+
+> [!TIP]
+> 如需上述每個選項效果的詳細說明，請參閱 [Azure Cosmos DB 選項檔](/dotnet/api/microsoft.azure.cosmos.cosmosclientoptions) 。
 
 ## <a name="cosmos-specific-model-customization"></a>Cosmos 專用模型自訂
 

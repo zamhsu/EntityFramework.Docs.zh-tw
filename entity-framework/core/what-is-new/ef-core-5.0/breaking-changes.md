@@ -4,12 +4,12 @@ description: Entity Framework Core 5.0 中引進的重大變更完整清單
 author: bricelam
 ms.date: 09/09/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: 63fd1d1a01b7a72fd34bb9a0130191131306426c
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8e9df4e2ff81e20cf5a36855247c5aff89ea2394
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070792"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210363"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>EF Core 5.0 中的重大變更
 
@@ -21,14 +21,15 @@ ms.locfileid: "90070792"
 |:--------------------------------------------------------------------------------------------------------------------------------------|------------|
 | [從主體到相依的導覽上的必要項具有不同的語義](#required-dependent)                                 | 中     |
 | [定義查詢會取代為提供者特定的方法](#defining-query)                                                          | 中     |
-| [已從 SQLite NTS 擴充功能移除 HasGeometricDimension 方法](#geometric-sqlite)                                                   | 低        |
-| [Cosmos：現在已將資料分割索引鍵新增至主要索引鍵](#cosmos-partition-key)                                                        | 低        |
-| [Cosmos： `id` 屬性已重新命名為 `__id`](#cosmos-id)                                                                                 | 低        |
-| [Cosmos： byte [] 現在會儲存為 base64 字串，而不是數位陣列](#cosmos-byte)                                             | 低        |
-| [Cosmos： GetPropertyName 和 SetPropertyName 已重新命名](#cosmos-metadata)                                                          | 低        |
-| [當實體狀態從卸離變更為未變更、更新或刪除時，會呼叫值產生器](#non-added-generation) | 低        |
-| [IMigrationsModelDiffer 現在使用 IRelationalModel](#relational-model)                                                                 | 低        |
-| [鑒別子是唯讀的](#read-only-discriminators)                                                                             | 低        |
+| [已從 SQLite NTS 擴充功能移除 HasGeometricDimension 方法](#geometric-sqlite)                                                   | 低度        |
+| [Cosmos：現在已將資料分割索引鍵新增至主要索引鍵](#cosmos-partition-key)                                                        | 低度        |
+| [Cosmos： `id` 屬性已重新命名為 `__id`](#cosmos-id)                                                                                 | 低度        |
+| [Cosmos： byte [] 現在會儲存為 base64 字串，而不是數位陣列](#cosmos-byte)                                             | 低度        |
+| [Cosmos： GetPropertyName 和 SetPropertyName 已重新命名](#cosmos-metadata)                                                          | 低度        |
+| [當實體狀態從卸離變更為未變更、更新或刪除時，會呼叫值產生器](#non-added-generation) | 低度        |
+| [IMigrationsModelDiffer 現在使用 IRelationalModel](#relational-model)                                                                 | 低度        |
+| [鑒別子是唯讀的](#read-only-discriminators)                                                                             | 低度        |
+| [提供者特定的 EF。InMemory 提供者的函數方法擲回](#no-client-methods)                                              | 低度        |
 
 <a name="geometric-sqlite"></a>
 
@@ -40,7 +41,7 @@ ms.locfileid: "90070792"
 
 HasGeometricDimension 用來在幾何資料行上啟用 (Z 和 M) 的其他維度。 但是，它只會影響資料庫的建立。 不需要將它指定為使用其他維度來查詢值。 使用額外的維度插入或更新值時，也無法正確運作 ([請參閱 #14257](https://github.com/aspnet/EntityFrameworkCore/issues/14257)) 。
 
-**新行為**
+**新的行為**
 
 若要啟用以其他維度插入和更新幾何值 (Z 和 M) ，必須將維度指定為數據行類型名稱的一部分。 此 API 更接近 SpatiaLite 的 AddGeometryColumn 函式的基礎行為。
 
@@ -74,7 +75,7 @@ modelBuilder.Entity<GeoEntity>(
 
 只有導覽至主體可設定為必要。 因此， `RequiredAttribute` 在相依 (的實體上使用，包含外鍵的實體) 會改為在定義實體類型上建立外鍵。
 
-**新行為**
+**新的行為**
 
 由於已新增對必要相依性的支援，現在可以視需要將任何參考導覽標記，這表示在上方顯示的情況下，外鍵將會定義于關聯性的另一端，而且屬性不會標示為必要項。
 
@@ -114,7 +115,7 @@ modelBuilder.Entity<Blog>()
 
 分割區索引鍵屬性只會新增至包含的替代索引鍵 `id` 。
 
-**新行為**
+**新的行為**
 
 依慣例，資料分割索引鍵屬性現在也會依慣例新增至主要索引鍵。
 
@@ -141,7 +142,7 @@ modelBuilder.Entity<Blog>()
 
 對應至 JSON 屬性的陰影屬性 `id` 也稱為 `id` 。
 
-**新行為**
+**新的行為**
 
 慣例所建立的陰影屬性現在已命名 `__id` 。
 
@@ -169,7 +170,7 @@ modelBuilder.Entity<Blog>()
 
 Byte [] 類型的屬性已儲存為數字陣列。
 
-**新行為**
+**新的行為**
 
 Byte [] 類型的屬性現在會儲存為 base64 字串。
 
@@ -191,9 +192,9 @@ Byte [] 的這個標記法符合預期，而且是主要 JSON 序列化程式庫
 
 先前已呼叫擴充方法 `GetPropertyName` ，而且 `SetPropertyName`
 
-**新行為**
+**新的行為**
 
-舊的 API 已過時，並新增了新 `GetJsonPropertyName` 方法： `SetJsonPropertyName`
+移除舊的 API 並新增新 `GetJsonPropertyName` 方法： `SetJsonPropertyName`
 
 **為什麼**
 
@@ -201,7 +202,7 @@ Byte [] 的這個標記法符合預期，而且是主要 JSON 序列化程式庫
 
 **風險降低**
 
-使用新的 API，或暫時暫停過時的警告。
+使用新的 API。
 
 <a name="non-added-generation"></a>
 
@@ -213,7 +214,7 @@ Byte [] 的這個標記法符合預期，而且是主要 JSON 序列化程式庫
 
 只有當實體狀態變更為 [已加入] 時，才會呼叫值產生器。
 
-**新行為**
+**新的行為**
 
 現在當實體狀態從卸離變更為未變更、已更新或已刪除，且屬性包含預設值時，就會呼叫值產生器。
 
@@ -235,7 +236,7 @@ Byte [] 的這個標記法符合預期，而且是主要 JSON 序列化程式庫
 
 `IMigrationsModelDiffer` API 的定義使用 `IModel` 。
 
-**新行為**
+**新的行為**
 
 `IMigrationsModelDiffer` API 現在會使用 `IRelationalModel` 。 不過，模型快照集仍會包含， `IModel` 因為此程式碼是應用程式的一部分，而且 Entity Framework 無法變更它，而不會進行較大的中斷變更。
 
@@ -275,7 +276,7 @@ var hasDifferences = modelDiffer.HasDifferences(
 
 您可以在呼叫之前變更鑒別子值 `SaveChanges`
 
-**新行為**
+**新的行為**
 
 在上述案例中，將會擲回例外狀況。
 
@@ -303,7 +304,7 @@ modelBuilder.Entity<BaseEntity>()
 
 實體類型已對應至在核心層級定義查詢。 任何時候，實體類型的查詢根目錄中使用的實體類型已由任何提供者的定義查詢所取代。
 
-**新行為**
+**新的行為**
 
 用於定義查詢的 Api 已被取代。 引進了新的提供者特定 Api。
 
@@ -320,3 +321,25 @@ modelBuilder.Entity<BaseEntity>()
 
 若為關聯式提供者，請使用 `ToSqlQuery` 中的方法 `OnModelCreating` 並傳入要用於實體類型的 SQL 字串。
 對於記憶體中的提供者，請使用 `ToInMemoryQuery` 中的方法， `OnModelCreating` 並傳入 LINQ 查詢以用於實體型別。
+
+<a name="no-client-methods"></a>
+
+### <a name="provider-specific-effunctions-methods-throw-for-inmemory-provider"></a>提供者特定的 EF。InMemory 提供者的函數方法擲回
+
+[追蹤問題 #20294](https://github.com/dotnet/efcore/issues/20294)
+
+**舊行為**
+
+提供者特定的 EF。函數方法包含用戶端執行的執行，可讓它們在 InMemory 提供者上執行。 例如， `EF.Functions.DateDiffDay` 是一種 Sql Server 特定的方法，它是在 InMemory 提供者上處理。
+
+**新的行為**
+
+提供者特定方法已更新，在其方法主體中擲回例外狀況，以封鎖在用戶端上進行評估。
+
+**為什麼**
+
+提供者特定的方法會對應至資料庫函式。 對應資料庫函式所完成的計算無法永遠在 LINQ 的用戶端上複寫。 在用戶端上執行相同的方法時，可能會導致伺服器的結果不同。 因為這些方法是在 LINQ 中用來轉譯為特定的資料庫函式，所以不需要在用戶端上進行評估。 因為 InMemory 提供者是不同的 *資料庫*，所以這些方法不適用於此提供者。 嘗試針對 InMemory 提供者或任何其他未轉譯這些方法的提供者執行這些專案時，會擲回例外狀況。
+
+**風險降低**
+
+因為無法準確模擬資料庫函式的行為，所以您應該針對與生產環境中相同類型的資料庫，測試包含它們的查詢。

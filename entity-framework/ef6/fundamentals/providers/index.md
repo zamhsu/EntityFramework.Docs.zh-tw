@@ -4,12 +4,12 @@ description: Entity Framework 6 中的 Entity Framework 提供者
 author: divega
 ms.date: 06/27/2018
 uid: ef6/fundamentals/providers/index
-ms.openlocfilehash: bb573cb0666556de8fb37802f465af97fc40673a
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7d448f749448e35702c2440717593221324508fa
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073145"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210324"
 ---
 # <a name="entity-framework-6-providers"></a>Entity Framework 6 提供者
 > [!NOTE]
@@ -41,6 +41,8 @@ Entity Framework 目前正在開放原始碼授權下進行開發，EF6 和更�
     *   Npgsql 是以 [NuGet 套件](https://www.nuget.org/packages/EntityFramework6.Npgsql/)的形式提供給您
 *   **Oracle**
     *   ODP.NET 是以 [NuGet 套件](https://www.nuget.org/packages/Oracle.ManagedDataAccess.EntityFramework/)的形式提供給您
+*   **SQLite**
+    *   System.string 以[NuGet 套件](https://www.nuget.org/packages/System.Data.SQLite/)的形式提供
 
 請注意，這份清單中的包含項目並不表示指定提供者的功能或支援層級，而只是表示已提供適用於 EF6 的組建。
 

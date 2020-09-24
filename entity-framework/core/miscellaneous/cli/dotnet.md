@@ -3,45 +3,44 @@ title: EF Core 工具參考 ( .NET CLI) -EF Core
 description: Entity Framework Core .NET Core CLI 工具的參考指南
 author: bricelam
 ms.author: bricelam
-ms.date: 09/09/2020
+ms.date: 09/17/2020
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: a3fa73bf7f9173cbd49dffdabeacc98d5c35ac14
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ee1caebcda93f627d285878f8594688a0f08c194
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071832"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210389"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Entity Framework Core 工具參考-.NET Core CLI
 
 命令列介面 (CLI) 工具 Entity Framework Core 執行設計階段開發工作。 例如，他們會建立 [遷移](/aspnet/core/data/ef-mvc/migrations)、套用遷移，並根據現有的資料庫產生模型的程式碼。 這些命令是跨平臺 [dotnet](/dotnet/core/tools) 命令的延伸模組，這是 [.NET Core SDK](https://www.microsoft.com/net/core)的一部分。 這些工具適用于 .NET Core 專案。
 
-如果您使用 Visual Studio，建議您改用 [封裝管理員主控台工具](xref:core/miscellaneous/cli/powershell) ：
+使用 Visual Studio 時，請考慮使用 [封裝管理員主控台工具](xref:core/miscellaneous/cli/powershell) 代替 CLI 工具。 自動封裝管理員主控台工具：
 
-* 它們會自動使用 **封裝管理員主控台** 中選取的目前專案，而不需要手動切換目錄。
-* 在命令完成之後，它們會自動開啟命令所產生的檔案。
+* 適用于 **封裝管理員主控台** 中選取的目前專案，不需要您手動切換目錄。
+* 在命令完成之後，開啟命令所產生的檔案。
+* 提供命令、參數、專案名稱、內容類型和遷移名稱的 tab 鍵自動完成。
 
 ## <a name="installing-the-tools"></a>安裝工具
 
 安裝程式相依于專案類型和版本：
 
-* EF Core 3.x
+* EF Core 3.x 和5。x
 * ASP.NET Core 2.1 版和更新版本
 * EF Core 2。x
-* EF Core 1。x
 
-### <a name="ef-core-3x"></a>EF Core 3.x
+### <a name="ef-core-3x-and-5x"></a>EF Core 3.x 和5。x
 
-* `dotnet ef` 必須安裝為全域或本機工具。 大部分的開發人員會 `dotnet ef` 使用下列命令，安裝為通用工具：
+* `dotnet ef` 必須安裝為全域或本機工具。 大部分的開發人員偏好 `dotnet ef` 使用下列命令安裝為通用工具：
 
   ```dotnetcli
   dotnet tool install --global dotnet-ef
   ```
 
-  您也可以使用 `dotnet ef` 做為本機工具。 若要使用它作為本機工具，請使用 [工具資訊清單](/dotnet/core/tools/global-tools#install-a-local-tool)檔，還原將它宣告為工具相依性之專案的相依性。
+  `dotnet ef` 也可以用來做為本機工具。 若要使用它作為本機工具，請使用 [工具資訊清單](/dotnet/core/tools/global-tools#install-a-local-tool)檔，還原將它宣告為工具相依性之專案的相依性。
 
 * 安裝 [.NET Core SDK](https://www.microsoft.com/net/download/core)。
-
 * 安裝最新的 `Microsoft.EntityFrameworkCore.Design` 套件。
 
   ```dotnetcli
@@ -50,7 +49,7 @@ ms.locfileid: "90071832"
 
 ### <a name="aspnet-core-21"></a>ASP.NET Core 2.1 +
 
-* 安裝目前的 [.NET Core SDK](https://www.microsoft.com/net/download/core)。 即便您有最新版本的 Visual Studio 2017 也必須安裝該 SDK。
+* 安裝目前的 [.NET Core SDK](https://www.microsoft.com/net/download/core)。 即使您有最新版本的 Visual Studio，也必須安裝 SDK。
 
   這是 ASP.NET Core 2.1 + 所需的所有功能，因為 `Microsoft.EntityFrameworkCore.Design` 套件已包含在 [AspNetCore 中繼套件](/aspnet/core/fundamentals/metapackage-app)中。
 
@@ -66,43 +65,7 @@ ms.locfileid: "90071832"
   dotnet add package Microsoft.EntityFrameworkCore.Design
   ```
 
-### <a name="ef-core-1x"></a>EF Core 1。x
-
-* 安裝 .NET Core SDK 版本2.1.200。 較新版本與適用于 EF Core 1.0 和1.1 的 CLI 工具不相容。
-
-* 藉由修改檔案的 [global.js](/dotnet/core/tools/global-json) ，將應用程式設定為使用 2.1.200 SDK 版本。 這個檔案通常會包含在方案目錄中， (專案) 的上方。
-
-* 編輯專案檔，並加入 `Microsoft.EntityFrameworkCore.Tools.DotNet` 做為 `DotNetCliToolReference` 專案。 指定最新的1.x 版，例如：1.1.6。 請參閱本節結尾的專案檔範例。
-
-* 安裝最新的1.x 版 `Microsoft.EntityFrameworkCore.Design` 套件，例如：
-
-  ```dotnetcli
-  dotnet add package Microsoft.EntityFrameworkCore.Design -v 1.1.6
-  ```
-
-  加入這兩個套件參考後，專案檔看起來像這樣：
-
-  ``` xml
-  <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-      <OutputType>Exe</OutputType>
-      <TargetFramework>netcoreapp1.1</TargetFramework>
-    </PropertyGroup>
-    <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design"
-                        Version="1.1.6"
-                         PrivateAssets="All" />
-    </ItemGroup>
-    <ItemGroup>
-       <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet"
-                              Version="1.1.6" />
-    </ItemGroup>
-  </Project>
-  ```
-
-  的封裝參考 `PrivateAssets="All"` 不會公開給參考此專案的專案。 這項限制對於通常只會在開發期間使用的封裝特別有用。
-
-### <a name="verify-installation"></a>驗證安裝
+### <a name="verify-installation"></a>確認安裝
 
 執行下列命令，確認已正確安裝 EF Core CLI 工具：
 
@@ -127,9 +90,9 @@ Entity Framework Core .NET Command-line Tools 2.1.3-rtm-32065
 <Usage documentation follows, not shown.>
 ```
 
-## <a name="updating-the-tools"></a>更新工具
+## <a name="update-the-tools"></a>更新工具
 
-`dotnet tool update --global dotnet-ef`如果您的專案使用本機安裝的工具，請使用將全域工具更新為最新可用版本 `dotnet tool update dotnet-ef` 。 附加 `--version <VERSION>` 至命令以安裝特定版本。 如需詳細資訊，請參閱 dotnet 工具檔的 [更新](/dotnet/core/tools/dotnet-tool-update) 一節。
+使用 `dotnet tool update --global dotnet-ef` 將通用工具更新為最新可用版本。 如果您已在專案中本機安裝工具，請使用 `dotnet tool update dotnet-ef` 。 附加 `--version <VERSION>` 至命令以安裝特定版本。 如需詳細資訊，請參閱 dotnet 工具檔的 [更新](/dotnet/core/tools/dotnet-tool-update) 一節。
 
 ## <a name="using-the-tools"></a>使用工具
 

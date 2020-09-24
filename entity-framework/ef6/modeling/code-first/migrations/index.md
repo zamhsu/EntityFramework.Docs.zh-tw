@@ -4,12 +4,12 @@ description: Entity Framework 6 中的 Code First 移轉
 author: divega
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/migrations/index
-ms.openlocfilehash: aec3a53816e41bf7ead696fd9edc30618d58b07a
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7233789c277d87d0fda420cdbdf669c8fd56cd22
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072157"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210476"
 ---
 # <a name="code-first-migrations"></a>Code First 移轉
 如果您使用 Code First 工作流程，則建議使用 Code First 移轉來改善應用程式的資料庫結構描述。 移轉會提供一組工具，該工具允許下列項目：
@@ -18,7 +18,7 @@ ms.locfileid: "90072157"
 2. 產生移轉來追蹤您對 EF 模型進行的變更
 2. 使用這些變更來將您的資料庫保持最新
 
-下列逐步解說將提供 Entity Framework 中的 Code First 移轉概觀。 您可以完成整個逐步解說，或跳至您感興趣的主題。 其中包含下列主題：
+下列逐步解說將提供 Entity Framework 中的 Code First 移轉總覽。 您可以完成整個逐步解說，或跳至您感興趣的主題。 其中包含下列主題：
 
 ## <a name="building-an-initial-model--database"></a>建置初始模型與資料庫
 
