@@ -1,15 +1,15 @@
 ---
 title: EF Core 2.0 中的新功能 - EF Core
 description: Entity Framework Core 2.0 中的變更與改進
-author: divega
+author: ajcvickers
 ms.date: 02/20/2018
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: f553e620c088a65eda64c0761aaab49313041727
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7438d8ad1a5ade971af71186a20ec57fd83713de
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072352"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063448"
 ---
 # <a name="new-features-in-ef-core-20"></a>EF Core 2.0 中的新功能
 
@@ -26,7 +26,7 @@ EF Core 現在的目標是 .NET Standard 2.0，表示它可以處理 .NET Core 2
 
 若要使用資料表分割，必須在共用資料表的所有實體類型之間設定識別關聯性 (其中外部索引鍵屬性形成主索引鍵)：
 
-``` csharp
+```csharp
 modelBuilder.Entity<Product>()
     .HasOne(e => e.Details).WithOne(e => e.Product)
     .HasForeignKey<ProductDetails>(e => e.Id);
@@ -42,7 +42,7 @@ modelBuilder.Entity<ProductDetails>().ToTable("Products");
 
 依照慣例，將為擁有的類型建立陰影主索引鍵，而且會使用資料表分割將它對應至與擁有者相同的資料表。 這允許使用擁有的類型，其類似在 EF6 中如何使用複雜類型：
 
-``` csharp
+```csharp
 modelBuilder.Entity<Order>().OwnsOne(p => p.OrderDetails, cb =>
     {
         cb.OwnsOne(c => c.BillingAddress);
@@ -79,7 +79,7 @@ EF Core 2.0 包含我們稱為「模型層級查詢篩選」的新功能。 此�
 
 以下簡單範例示範上述兩個案例的功能：
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public DbSet<Blog> Blogs { get; set; }
@@ -113,7 +113,7 @@ EF Core 2.0 包含 [Paul Middleton](https://github.com/pmiddleton) 的重要比�
 
 在 `DbContext` 上宣告靜態方法，並將它加上 `DbFunctionAttribute` 註釋：
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     [DbFunction]
@@ -126,7 +126,7 @@ public class BloggingContext : DbContext
 
 這類方法會自動予以註冊。 註冊後，LINQ 查詢中的方法呼叫可轉譯成 SQL 中的函式呼叫：
 
-``` csharp
+```csharp
 var query =
     from p in context.Posts
     where BloggingContext.PostReadCount(p.Id) > 5
@@ -143,7 +143,7 @@ var query =
 
 在 EF6 中，可能已封裝衍生自 *EntityTypeConfiguration* 之特定實體類型的 Code First 組態。 在 EF Core 2.0 中，我們將重新使用這種模式：
 
-``` csharp
+```csharp
 class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
     public void Configure(EntityTypeBuilder<Customer> builder)
@@ -166,7 +166,7 @@ builder.ApplyConfiguration(new CustomerConfiguration());
 
 在 2.0 版中，我們引進在相依性插入中註冊自訂 DbContext 類型的新方式，而相依性插入會以透明方式引進可重複使用 DbContext 執行個體的集區中。 若要使用 DbContext 共用，請在服務註冊期間使用 `AddDbContextPool`，而非 `AddDbContext`：
 
-``` csharp
+```csharp
 services.AddDbContextPool<BloggingContext>(
     options => options.UseSqlServer(connectionString));
 ```
@@ -179,7 +179,7 @@ services.AddDbContextPool<BloggingContext>(
 
 新的方法引進 DbContext 的 `OnConfiguring()` 方法中可進行作業的一些限制。
 
-> [!WARNING]  
+> [!WARNING]
 > 如果您在不應該於要求間共用的衍生 DbContext 類別中維護自己的狀態 (例如私用欄位)，請避免使用 DbContext 共用。 EF Core 只會重設在將 DbContext 執行個體新增至集區之前所知道的狀態。
 
 ### <a name="explicitly-compiled-queries"></a>明確地編譯查詢
@@ -190,7 +190,7 @@ services.AddDbContextPool<BloggingContext>(
 
 一般而言，雖然 EF Core 可以根據查詢運算式的雜湊表示法來自動編譯並快取查詢 ，但是可以使用這項機制透過不計算雜湊和快取查閱來提升少許效能，以允許應用程式透過委派叫用來使用已編譯的查詢。
 
-``` csharp
+```csharp
 // Create an explicitly compiled query
 private static Func<CustomerContext, int, Customer> _customerById =
     EF.CompileQuery((CustomerContext db, int id) =>
@@ -227,7 +227,7 @@ C# 6 已引進「字串插值」，此功能允許 C# 運算式直接內嵌在�
 
 請看以下範例：
 
-``` csharp
+```csharp
 var city = "London";
 var contactTitle = "Sales Representative";
 
@@ -259,7 +259,7 @@ WHERE ""City"" = @p0
 
 我們已新增 EF.Functions 屬性，而 EF Core 或提供者用來定義可對應至資料庫函式或運算子的方法，以在 LINQ 查詢 中予以叫用。 這種方法的第一個範例是 Like()：
 
-``` csharp
+```csharp
 var aCustomers =
     from c in context.Customers
     where EF.Functions.Like(c.Name, "a%")
@@ -276,7 +276,7 @@ EF Core 2.0 引進新的 *IPluralizer* 服務，以用來將實體類型名稱�
 
 以下是開發人員在其專屬 pluralizer 中攔截的方式：
 
-``` csharp
+```csharp
 public class MyDesignTimeServices : IDesignTimeServices
 {
     public void ConfigureDesignTimeServices(IServiceCollection services)

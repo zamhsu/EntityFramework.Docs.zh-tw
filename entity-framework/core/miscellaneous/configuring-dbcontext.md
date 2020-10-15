@@ -1,15 +1,15 @@
 ---
 title: 設定 DbCoNtext-EF Core
 description: 使用 Entity Framework Core 設定 DbcoNtext 的策略
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: 95b855c01b4b0b721eb91d53e0257295527ea44e
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 3afad8d220acecbb01b15bbb855b52a895e6eb66
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071689"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062018"
 ---
 # <a name="configuring-a-dbcontext"></a>設定 DbContext
 
@@ -32,13 +32,13 @@ EF Core 的設計階段工具（例如 [遷移](xref:core/managing-schemas/migra
 
 下列範例會將設定 `DbContextOptions` 為使用 SQL Server 提供者、變數中包含的連接 `connectionString` 、提供者層級的命令逾時，以及讓所有查詢在 `DbContext` [no-tracking](xref:core/querying/tracking#no-tracking-queries)預設情況下執行的 EF Core 行為選取器：
 
-``` csharp
+```csharp
 optionsBuilder
     .UseSqlServer(connectionString, providerOptions=>providerOptions.CommandTimeout(60))
     .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > 上述提供者選取器方法和其他行為選取器方法，是 `DbContextOptions` 或提供者特定選項類別上的擴充方法。 若要能夠存取這些擴充方法，您可能需要命名空間 (通常 `Microsoft.EntityFrameworkCore`) 在範圍內，並在專案中包含額外的套件相依性。
 
 您 `DbContextOptions` 可以藉 `DbContext` 由覆寫 `OnConfiguring` 方法或從外部透過函式引數來提供。
@@ -49,7 +49,7 @@ optionsBuilder
 
 您的函式可以直接接受，如下 `DbContextOptions` 所示：
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public BloggingContext(DbContextOptions<BloggingContext> options)
@@ -60,12 +60,12 @@ public class BloggingContext : DbContext
 }
 ```
 
-> [!TIP]  
+> [!TIP]
 > DbCoNtext 的基底函式也會接受的非泛型版本 `DbContextOptions` ，但不建議針對具有多個內容類型的應用程式使用非泛型版本。
 
 您的應用程式現在可以在具現 `DbContextOptions` 化內容時傳遞，如下所示：
 
-``` csharp
+```csharp
 var optionsBuilder = new DbContextOptionsBuilder<BloggingContext>();
 optionsBuilder.UseSqlite("Data Source=blog.db");
 
@@ -81,7 +81,7 @@ using (var context = new BloggingContext(optionsBuilder.Options))
 
 若要在 `DbContextOptions` 內容中初始化，請覆寫 `OnConfiguring` 方法，並在提供的上呼叫方法 `DbContextOptionsBuilder` ：
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public DbSet<Blog> Blogs { get; set; }
@@ -95,7 +95,7 @@ public class BloggingContext : DbContext
 
 應用程式可以直接將這類內容具現化，而不將任何內容傳遞至其函式：
 
-``` csharp
+```csharp
 using (var context = new BloggingContext())
 {
   // do stuff
@@ -115,7 +115,7 @@ EF Core 支援搭配相依性 `DbContext` 插入容器使用。 您可以使用�
 
 將加入 `DbContext` 至相依性插入：
 
-``` csharp
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDbContext<BloggingContext>(options => options.UseSqlite("Data Source=blog.db"));
@@ -126,7 +126,7 @@ public void ConfigureServices(IServiceCollection services)
 
 內容程式碼：
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public BloggingContext(DbContextOptions<BloggingContext> options)
@@ -139,7 +139,7 @@ public class BloggingContext : DbContext
 
 ASP.NET Core) 中的應用程式程式碼 (：
 
-``` csharp
+```csharp
 public class MyController
 {
     private readonly BloggingContext _context;
@@ -155,7 +155,7 @@ public class MyController
 
 應用程式程式碼 (直接使用 ServiceProvider，較不常見) ：
 
-``` csharp
+```csharp
 using (var context = serviceProvider.GetService<BloggingContext>())
 {
   // do stuff
@@ -180,7 +180,7 @@ Entity Framework Core 不支援在相同實例上執行多個平行作業 `DbCon
 
 非同步方法可讓 EF Core 起始以非封鎖方式存取資料庫的作業。 但是，如果呼叫端未等候完成其中一種方法，並繼續在上執行其他作業 `DbContext` ，的狀態 `DbContext` 可能是， (且很可能會) 損毀。
 
-請一律立即等候 EF Core 非同步方法。  
+請一律立即等候 EF Core 非同步方法。
 
 ### <a name="implicitly-sharing-dbcontext-instances-across-multiple-threads-via-dependency-injection"></a>透過相依性插入，隱含地跨多個執行緒共用 DbCoNtext 實例
 

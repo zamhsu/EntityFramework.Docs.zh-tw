@@ -4,12 +4,12 @@ description: Entity Framework Core 的使用者入門教學課程
 author: rick-anderson
 ms.date: 09/17/2019
 uid: core/get-started/index
-ms.openlocfilehash: 9f0bb1eb99cb7f4cb7542c444ad86480917bdd0f
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 132586aa41916d94ebef156330cc553a789ed5a7
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071975"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062109"
 ---
 # <a name="getting-started-with-ef-core"></a>開始使用 EF Core
 
@@ -67,7 +67,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 * [工具] > [NuGet 套件管理員] > [套件管理員主控台] 
 * 執行下列命令：
 
-  ``` PowerShell
+  ```powershell
   Install-Package Microsoft.EntityFrameworkCore.Sqlite
   ```
 
@@ -118,7 +118,7 @@ EF Core 也可以對現有資料庫中的模型進行[反向工程](xref:core/ma
 
 * 在**套件管理員主控台 (PMC)** 中執行下列命令
 
-  ``` PowerShell
+  ```powershell
   Install-Package Microsoft.EntityFrameworkCore.Tools
   Add-Migration InitialCreate
   Update-Database
@@ -149,7 +149,7 @@ dotnet run
 * 以滑鼠右鍵按一下專案，然後選取 [編輯專案檔] 
 * 在 *TargetFramework* 屬性下方新增下列內容：
 
-  ``` XML
+  ```xml
   <StartWorkingDirectory>$(MSBuildProjectDirectory)</StartWorkingDirectory>
   ```
 

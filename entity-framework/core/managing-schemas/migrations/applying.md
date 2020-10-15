@@ -2,15 +2,14 @@
 title: 套用遷移-EF Core
 description: 使用 Entity Framework Core 將架構遷移套用至生產和開發資料庫的策略
 author: bricelam
-ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: cde83a944e1e698a7f8a00c4692c0ce08a87b5ab
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 68d482a34e5f5c7acf968acdfd8825e1d21ecb13
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210402"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062343"
 ---
 # <a name="applying-migrations"></a>套用遷移
 
@@ -65,7 +64,7 @@ dotnet ef migrations script AddNewTables AddAuditTable
 
 下列會從空白資料庫產生 SQL 腳本至最新的遷移：
 
-``` powershell
+```powershell
 Script-Migration
 ```
 
@@ -107,7 +106,7 @@ dotnet ef migrations script --idempotent
 
 #### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Script-Migration -Idempotent
 ```
 
@@ -143,13 +142,13 @@ dotnet ef database update AddNewTables
 
 下列程式會將您的資料庫更新至最新的遷移：
 
-``` powershell
+```powershell
 Update-Database
 ```
 
 下列程式會將您的資料庫更新為指定的遷移：
 
-``` powershell
+```powershell
 Update-Database AddNewTables
 ```
 
@@ -174,7 +173,7 @@ Update-Database AddNewTables
 
 若要以程式設計方式套用遷移，請呼叫 `context.Database.Migrate()` 。 例如，一般的 ASP.NET 應用程式可以執行下列作業：
 
-```c#
+```csharp
 public static void Main(string[] args)
 {
     var host = CreateHostBuilder(args).Build();

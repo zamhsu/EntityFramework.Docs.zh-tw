@@ -2,15 +2,14 @@
 title: 自訂遷移作業-EF Core
 description: 使用 Entity Framework Core 管理資料庫架構管理的自訂和原始 SQL 遷移
 author: bricelam
-ms.author: bricelam
 ms.date: 11/07/2017
 uid: core/managing-schemas/migrations/operations
-ms.openlocfilehash: 708894d8d567a4644be3a4ace98cc837465710e0
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d1d29b7789eea5e887490364a7ce3abfdc903545
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617955"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062031"
 ---
 # <a name="custom-migrations-operations"></a>自訂遷移作業
 
@@ -18,7 +17,7 @@ MigrationBuilder API 可讓您在遷移期間執行許多不同種類的作業�
 
 為了說明，讓我們看看如何使用每個方法來建立資料庫使用者。 在我們的遷移中，我們想要啟用撰寫下列程式碼：
 
-``` csharp
+```csharp
 migrationBuilder.CreateUser("SQLUser1", "Password");
 ```
 
@@ -26,7 +25,7 @@ migrationBuilder.CreateUser("SQLUser1", "Password");
 
 執行自訂作業最簡單的方式，就是定義呼叫的擴充方法 `MigrationBuilder.Sql()` 。 以下是產生適當 Transact-sql 的範例。
 
-``` csharp
+```csharp
 static MigrationBuilder CreateUser(
     this MigrationBuilder migrationBuilder,
     string name,
@@ -36,7 +35,7 @@ static MigrationBuilder CreateUser(
 
 如果您的遷移需要支援多個資料庫提供者，您可以使用 `MigrationBuilder.ActiveProvider` 屬性。 以下是支援 Microsoft SQL Server 和于 postgresql 的範例。
 
-``` csharp
+```csharp
 static MigrationBuilder CreateUser(
     this MigrationBuilder migrationBuilder,
     string name,
@@ -63,7 +62,7 @@ static MigrationBuilder CreateUser(
 
 若要將自訂作業與 SQL 分離，您可以定義自己的操作 `MigrationOperation` 來代表它。 作業接著會傳遞給提供者，以便判斷要產生的適當 SQL。
 
-``` csharp
+```csharp
 class CreateUserOperation : MigrationOperation
 {
     public string Name { get; set; }
@@ -73,7 +72,7 @@ class CreateUserOperation : MigrationOperation
 
 使用這個方法時，擴充方法只需要將這些作業的其中一項加入至 `MigrationBuilder.Operations` 。
 
-``` csharp
+```csharp
 static MigrationBuilder CreateUser(
     this MigrationBuilder migrationBuilder,
     string name,
@@ -92,7 +91,7 @@ static MigrationBuilder CreateUser(
 
 這種方法需要每個提供者知道如何在其服務中為這項作業產生 SQL `IMigrationsSqlGenerator` 。 以下範例會覆寫 SQL Server 的產生器，以處理新的作業。
 
-``` csharp
+```csharp
 class MyMigrationsSqlGenerator : SqlServerMigrationsSqlGenerator
 {
     public MyMigrationsSqlGenerator(
@@ -137,7 +136,7 @@ class MyMigrationsSqlGenerator : SqlServerMigrationsSqlGenerator
 
 以更新的服務取代預設的遷移 sql 產生器服務。
 
-``` csharp
+```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder options)
     => options
         .UseSqlServer(connectionString)

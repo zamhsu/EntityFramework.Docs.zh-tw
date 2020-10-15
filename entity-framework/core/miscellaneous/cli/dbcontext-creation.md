@@ -2,15 +2,14 @@
 title: 設計階段 DbCoNtext 建立-EF Core
 description: 使用 Entity Framework Core 建立設計階段 DbCoNtext 的策略
 author: bricelam
-ms.author: bricelam
 ms.date: 09/16/2019
 uid: core/miscellaneous/cli/dbcontext-creation
-ms.openlocfilehash: ef2eba93827e04a9731ba960c40e9a50168ca8ff
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: a9d7da2bb76d60ca63eb0dc189f924df125f0a7d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619451"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062005"
 ---
 # <a name="design-time-dbcontext-creation"></a>設計階段 DbContext 建立
 

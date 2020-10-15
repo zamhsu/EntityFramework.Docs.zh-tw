@@ -1,21 +1,21 @@
 ---
 title: 以程式碼為基礎的設定-EF6
 description: Entity Framework 6 中以程式碼為基礎的設定
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/configuring/code-based
-ms.openlocfilehash: 67bb7ebd620c90ebe80983cc5baa6cab032907f8
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ff86b542dead260190bbb0b0788a231f720fbeaf
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070727"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063275"
 ---
 # <a name="code-based-configuration"></a>以程式碼為基礎的設定
 > [!NOTE]
 > **僅限 EF6 及更新版本** - Entity Framework 6 已引進此頁面中所討論的功能及 API 等等。 如果您使用的是較早版本，則不適用部分或全部的資訊。  
 
-Entity Framework 應用程式的設定可以在設定檔中指定 ( # A0/web.config) 或透過程式碼。 後者稱為以程式碼為基礎的設定。  
+Entity Framework 應用程式的設定可以在設定檔中指定 ( # B0/web.config) 或透過程式碼。 後者稱為以程式碼為基礎的設定。  
 
 設定檔中的設定會在個別的 [文章](xref:ef6/fundamentals/configuring/config-file)中說明。 設定檔優先于以程式碼為基礎的設定。 換句話說，如果在程式碼和設定檔中設定了設定選項，則會使用設定檔中的設定。  
 
@@ -58,7 +58,7 @@ namespace MyNamespace
 
 在某些情況下，不可能將您的 >dbconfiguration 類別放在與 DbCoNtext 類別相同的元件中。 例如，您可能在不同的元件中有兩個 DbCoNtext 類別。 有兩個選項可處理此情況。  
 
-第一個選項是使用設定檔來指定要使用的 >dbconfiguration 實例。 若要這樣做，請設定 entityFramework 區段的 codeConfigurationType 屬性。 例如：  
+第一個選項是使用設定檔來指定要使用的 >dbconfiguration 實例。 若要這樣做，請設定 entityFramework 區段的 codeConfigurationType 屬性。 例如︰  
 
 ``` xml
 <entityFramework codeConfigurationType="MyNamespace.MyDbConfiguration, MyAssembly">
@@ -68,7 +68,7 @@ namespace MyNamespace
 
 CodeConfigurationType 的值必須是 >dbconfiguration 類別的元件和命名空間限定名稱。  
 
-第二個選項是將 DbConfigurationTypeAttribute 放在您的內容類別上。 例如：  
+第二個選項是將 DbConfigurationTypeAttribute 放在您的內容類別上。 例如︰  
 
 ``` csharp  
 [DbConfigurationType(typeof(MyDbConfiguration))]
@@ -77,7 +77,7 @@ public class MyContextContext : DbContext
 }
 ```  
 
-傳遞給屬性的值可以是您的 >dbconfiguration 類型（如上所示），或元件和命名空間限定類型名稱字串。 例如：  
+傳遞給屬性的值可以是您的 >dbconfiguration 類型（如上所示），或元件和命名空間限定類型名稱字串。 例如︰  
 
 ``` csharp
 [DbConfigurationType("MyNamespace.MyDbConfiguration, MyAssembly")]

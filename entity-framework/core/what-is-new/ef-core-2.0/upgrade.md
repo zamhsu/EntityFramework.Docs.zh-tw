@@ -1,15 +1,15 @@
 ---
 title: 從舊版升級至 EF Core 2-EF Core
 description: 升級至 Entity Framework Core 2.0 的指示和注意事項
-author: divega
+author: ajcvickers
 ms.date: 08/13/2017
 uid: core/what-is-new/ef-core-2.0/upgrade
-ms.openlocfilehash: bdc0cfe8c0be4a83f8c78ba2ac66bb1e18cea0f7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c7c736629209da99f191ceb0d4000d19f40414b9
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072339"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063435"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>將繼承應用程式升級至 EF Core 2。0
 
@@ -37,7 +37,7 @@ ms.locfileid: "90072339"
 
 ASP.NET Core 2.0 的預設範本中已加入新的設計階段勾點。 靜態 `Program.BuildWebHost` 方法可讓 EF Core 在設計階段存取應用程式的服務提供者。 如果您要升級 ASP.NET Core 1.x 應用程式，則必須將 `Program` 類別更新為如下所示。
 
-``` csharp
+```csharp
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -108,17 +108,17 @@ EF team 隨附的 SQL Server 和 SQLite 提供者，2.0 版將提供2.0 版的�
 
 EF Core 2.0 現在會為使用的每個不同提供者建置不同的 [IModel](/dotnet/api/microsoft.entityframeworkcore.metadata.imodel)。 應用程式通常可以看到這項作業。 這項功能簡化了較低層級中繼資料 Api 的簡化，讓 _一般關聯式中繼資料概念_ 的任何存取一律透過呼叫 `.Relational` 而非 `.SqlServer` 、等等進行 `.Sqlite` 。例如，像這樣的 1.1. x 程式碼：
 
-``` csharp
+```csharp
 var tableName = context.Model.FindEntityType(typeof(User)).SqlServer().TableName;
 ```
 
 現在應該如下撰寫：
 
-``` csharp
+```csharp
 var tableName = context.Model.FindEntityType(typeof(User)).Relational().TableName;
 ```
 
-`ForSqlServerToTable`擴充方法現在可以用來根據目前使用中的提供者來撰寫條件式程式碼，而不是使用類似的方法。 例如：
+`ForSqlServerToTable`擴充方法現在可以用來根據目前使用中的提供者來撰寫條件式程式碼，而不是使用類似的方法。 例如︰
 
 ```csharp
 modelBuilder.Entity<User>().ToTable(
@@ -135,9 +135,9 @@ EF Core 使用內部 (相依性 `IServiceProvider` 插入容器) 進行內部執
 
 ## <a name="in-memory-databases-must-be-named"></a>記憶體內部資料庫必須命名為
 
-全域未命名的記憶體中資料庫已移除，而不是所有記憶體中的資料庫都必須命名為。 例如：
+全域未命名的記憶體中資料庫已移除，而不是所有記憶體中的資料庫都必須命名為。 例如︰
 
-``` csharp
+```csharp
 optionsBuilder.UseInMemoryDatabase("MyDatabase");
 ```
 
@@ -161,7 +161,7 @@ optionsBuilder.UseInMemoryDatabase("MyDatabase");
 
 若要 `Scaffold-DbContext` `dotnet ef dbcontext scaffold` 在 EF Core 2.0 中啟用或，您只需要參考單一提供者套件：
 
-``` xml
+```xml
 <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer"
     Version="2.0.0" />
 <PackageReference Include="Microsoft.EntityFrameworkCore.Tools"

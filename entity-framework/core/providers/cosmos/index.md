@@ -2,14 +2,14 @@
 title: Azure Cosmos DB 提供者 - EF Core
 description: 資料庫提供者的文件，內容說明如何搭配使用 Entity Framework Core 與 Azure Cosmos DB SQL API
 author: AndriySvyryd
-ms.date: 09/14/2020
+ms.date: 10/09/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 94ba29f3f2643e8f563a460e17dce9d15cb7c2df
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 26be2b604453aa2d5b21ae45f590b294639db887
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210337"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064046"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB 提供者
 
@@ -35,7 +35,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Cosmos
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Install-Package Microsoft.EntityFrameworkCore.Cosmos
 ```
 
@@ -43,7 +43,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 
 ## <a name="get-started"></a>開始使用
 
-> [!TIP]  
+> [!TIP]
 > 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Cosmos)。
 
 針對其他提供者，第一個步驟是呼叫 [UseCosmos](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosDbContextOptionsExtensions.UseCosmos)：
@@ -115,7 +115,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 
 使用此組態，來自以上範例的順序會以如下方式儲存：
 
-``` json
+```json
 {
     "Id": 1,
     "PartitionKey": "1",
@@ -143,7 +143,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 
 它們會以如下方式保存：
 
-``` json
+```json
 {
     "Id": 1,
     "Discriminator": "Distributor",
@@ -183,7 +183,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 
 以下是輸出 JSON：
 
-``` json
+```json
 {
     "Id": 1,
     "Discriminator": "Distributor",
@@ -201,3 +201,16 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
     "_ts": 1572917100
 }
 ```
+
+## <a name="optimistic-concurrency-with-etags"></a>使用 Etag 的開放式平行存取
+
+> [!NOTE]
+> EF Core 5.0 中新增了對 eTag 平行存取的支援。
+
+將實體型別設定為使用 [開放式並行](xref:core/modeling/concurrency) 存取呼叫 `UseETagConcurrency` 。 此呼叫會 `_etag` 在 [陰影狀態](xref:core/modeling/shadow-properties) 中建立屬性，並將它設定為並行標記。
+
+[!code-csharp[Main](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=ETag)]
+
+為了讓您更輕鬆地解決並行錯誤，您可以使用將 eTag 對應至 CLR 屬性 `IsETagConcurrency` 。
+
+[!code-csharp[Main](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=ETagProperty)]

@@ -1,15 +1,15 @@
 ---
 title: 連接字串和模型-EF6
 description: Entity Framework 6 中的連接字串和模型
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/configuring/connection-strings
-ms.openlocfilehash: 45db461b18cde3bc1f1fccadec3c8ece6dd16832
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c60acb965b7062f3cd35dab94ee8dfe48394969a
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070779"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063383"
 ---
 # <a name="connection-strings-and-models"></a>連接字串和模型
 本主題說明 Entity Framework 如何探索要使用的資料庫連接，以及您可以如何加以變更。 本主題涵蓋使用 Code First 和 EF 設計工具建立的模型。  
@@ -24,7 +24,7 @@ ms.locfileid: "90070779"
 
 ## <a name="use-code-first-with-connection-by-convention"></a>依慣例使用 Code First 與連接  
 
-如果您未在應用程式中進行任何其他設定，則在 DbCoNtext 上呼叫無參數的函式將會導致 DbCoNtext 在 Code First 模式中執行，並具有依照慣例建立的資料庫連接。 例如：  
+如果您未在應用程式中進行任何其他設定，則在 DbCoNtext 上呼叫無參數的函式將會導致 DbCoNtext 在 Code First 模式中執行，並具有依照慣例建立的資料庫連接。 例如︰  
 
 ``` csharp  
 namespace Demo.EF
@@ -45,7 +45,7 @@ Visual Studio 2010 預設包含 SQL Express，Visual Studio 2012 和更新版本
 
 ## <a name="use-code-first-with-connection-by-convention-and-specified-database-name"></a>使用 Code First 搭配依慣例和指定的資料庫名稱進行連接  
 
-如果您未在應用程式中進行任何其他設定，則在 DbCoNtext 上使用您想要使用的資料庫名稱來呼叫字串的函式，將會導致 DbCoNtext 在 Code First 模式中執行，並將慣例建立的資料庫連接用於該名稱的資料庫。 例如：  
+如果您未在應用程式中進行任何其他設定，則在 DbCoNtext 上使用您想要使用的資料庫名稱來呼叫字串的函式，將會導致 DbCoNtext 在 Code First 模式中執行，並將慣例建立的資料庫連接用於該名稱的資料庫。 例如︰  
 
 ``` csharp  
 public class BloggingContext : DbContext
@@ -61,7 +61,7 @@ public class BloggingContext : DbContext
 
 ## <a name="use-code-first-with-connection-string-in-appconfigwebconfig-file"></a>在 app.config/web.config 檔案中搭配連接字串使用 Code First  
 
-您可以選擇將連接字串放在 app.config 或 web.config 檔案中。 例如：  
+您可以選擇將連接字串放在 app.config 或 web.config 檔案中。 例如︰  
 
 ``` xml  
 <configuration>
@@ -75,7 +75,7 @@ public class BloggingContext : DbContext
 
 這是告訴 DbCoNtext 使用 SQL Express 或 LocalDB 以外之資料庫伺服器的簡單方式，上述範例會指定 SQL Server Compact Edition 資料庫。  
 
-如果連接字串的名稱與您的內容名稱相符 (不論是否具有命名空間限定性) ，當使用無參數的函式時，DbCoNtext 會發現它。 如果連接字串名稱與內容的名稱不同，您可以將連接字串名稱傳遞至 DbCoNtext 的函式，以告知 DbCoNtext 在 Code First 模式中使用此連接。 例如：  
+如果連接字串的名稱與您的內容名稱相符 (不論是否具有命名空間限定性) ，當使用無參數的函式時，DbCoNtext 會發現它。 如果連接字串名稱與內容的名稱不同，您可以將連接字串名稱傳遞至 DbCoNtext 的函式，以告知 DbCoNtext 在 Code First 模式中使用此連接。 例如︰  
 
 ``` csharp  
 public class BloggingContext : DbContext
@@ -87,7 +87,7 @@ public class BloggingContext : DbContext
 }
 ```  
 
-或者，您可以使用 "name =" 形式 \<connection string name\> 傳遞給 DbCoNtext 函式的字串。 例如：  
+或者，您可以使用 "name =" 形式 \<connection string name\> 傳遞給 DbCoNtext 函式的字串。 例如︰  
 
 ``` csharp  
 public class BloggingContext : DbContext
@@ -105,7 +105,7 @@ public class BloggingContext : DbContext
 
 使用 EF 設計工具建立的模型不同于 Code First，因為您的模型已存在，而且不會在應用程式執行時從程式碼產生。 模型通常會以 EDMX 檔案的形式存在於您的專案中。  
 
-設計工具會將 EF 連接字串新增至您的 app.config 或 web.config 檔。 此連接字串是特殊的，其中包含如何在 EDMX 檔案中尋找資訊的相關資訊。 例如：  
+設計工具會將 EF 連接字串新增至您的 app.config 或 web.config 檔。 此連接字串是特殊的，其中包含如何在 EDMX 檔案中尋找資訊的相關資訊。 例如︰  
 
 ``` xml  
 <configuration>  
@@ -125,7 +125,7 @@ public class BloggingContext : DbContext
 </configuration>
 ```  
 
-EF 設計工具也會產生程式碼，藉由將連接字串名稱傳遞至 DbCoNtext 的函式，告知 DbCoNtext 使用此連接。 例如：  
+EF 設計工具也會產生程式碼，藉由將連接字串名稱傳遞至 DbCoNtext 的函式，告知 DbCoNtext 使用此連接。 例如︰  
 
 ``` csharp  
 public class NorthwindContext : DbContext

@@ -1,17 +1,17 @@
 ---
-title: 陰影屬性-EF Core
-description: 在 Entity Framework Core 模型中設定陰影屬性
+title: 陰影和索引子屬性-EF Core
+description: 在 Entity Framework Core 模型中設定陰影和索引子屬性
 author: AndriySvyryd
-ms.date: 01/03/2020
+ms.date: 10/09/2020
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: 735659a1a8523e63afa908d4fe3904e62f46cbd0
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 417ab57a4a77ecf626e54eeca900744d84e3fe08
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071377"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063890"
 ---
-# <a name="shadow-properties"></a>陰影屬性
+# <a name="shadow-and-indexer-properties"></a>陰影和索引子屬性
 
 陰影屬性是未在 .NET 實體類別中定義的屬性，但是是在 EF Core 模型中為該實體類型定義的。 這些屬性的值和狀態只會在變更追蹤程式中維護。 當資料庫中的資料不應該在對應的實體類型上公開時，陰影屬性會很有用。
 
@@ -37,15 +37,24 @@ ms.locfileid: "90071377"
 
 您可以透過 API 取得及變更陰影屬性值 `ChangeTracker` ：
 
-``` csharp
+```csharp
 context.Entry(myBlog).Property("LastUpdated").CurrentValue = DateTime.Now;
 ```
 
 您可以透過靜態方法，在 LINQ 查詢中參考陰影屬性 `EF.Property` ：
 
-``` csharp
+```csharp
 var blogs = context.Blogs
     .OrderBy(b => EF.Property<DateTime>(b, "LastUpdated"));
 ```
 
 因為變更追蹤器不會追蹤傳回的實體，所以無法在無追蹤查詢之後存取陰影屬性。
+
+## <a name="property-bag-entity-types"></a>屬性包實體類型
+
+> [!NOTE]
+> 已在 EF Core 5.0 中新增屬性包實體類型的支援。
+
+僅包含索引子屬性的實體類型稱為「屬性包」實體類型。 這些實體類型沒有陰影屬性。 目前僅 `Dictionary<string, object>` 支援做為屬性包實體類型。 這表示必須將它設定為具有唯一名稱的共用實體型別，而且 `DbSet` 必須使用呼叫來執行對應的屬性 `Set` 。
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/SharedType.cs?name=SharedType&highlight=3,7)]

@@ -1,15 +1,15 @@
 ---
 title: 基本儲存 - EF Core
 description: 使用 Entity Framework Core 新增、更新和移除資料的基本資訊
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/basic
-ms.openlocfilehash: ea73ff86d8843acf8226f9d6696b79b99da9dab7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c6288fc8ca79b78b6c377f25e3874211b38059b2
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070948"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063630"
 ---
 # <a name="basic-save"></a>基本儲存
 
@@ -25,7 +25,7 @@ ms.locfileid: "90070948"
 [!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#Add)]
 
 > [!TIP]  
-> 如[相關資料](xref:core/saving/related-data)一節中所述，Add、Attach 及 Update 方法對於傳遞給它們的整個實體圖表都適用。 或者，您也可以使用 EntityEntry.State 屬性來僅設定單一實體的狀態。 例如： `context.Entry(blog).State = EntityState.Modified` 。
+> 如[相關資料](xref:core/saving/related-data)一節中所述，Add、Attach 及 Update 方法對於傳遞給它們的整個實體圖表都適用。 或者，您也可以使用 EntityEntry.State 屬性來僅設定單一實體的狀態。 例如 `context.Entry(blog).State = EntityState.Modified`。
 
 ## <a name="updating-data"></a>更新資料
 

@@ -4,12 +4,12 @@ description: 有關特定支援 Entity Framework Core 提供者與一般提供�
 author: ajcvickers
 ms.date: 12/17/2019
 uid: core/providers/index
-ms.openlocfilehash: 4a5490beccfb4d038f7dde04399ec3493941ac83
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 76acd8bbb833fa7c377cc90cdb67278130694bd1
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210350"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063994"
 ---
 # <a name="database-providers"></a>資料庫提供者
 
@@ -17,11 +17,11 @@ Entity Framework Core 能夠透過稱為資料庫提供者的外掛程式程式�
 
 ## <a name="current-providers"></a>目前的提供者
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > EF Core 提供者是透過各種來源所建置。 [Entity Framework Core 專案](https://github.com/aspnet/EntityFrameworkCore)的維護並不包含所有提供者。 考慮使用提供者時，請務必評估品質、授權、支援等項目，以確保其符合您的需求。 同時也務必檢閱每個提供者的文件以了解詳細的版本相容性資訊。
 
-> [!IMPORTANT]  
-> EF Core 提供者通常可跨次要版本運作，但無法跨主要版本運作。 例如，針對 EF Core 2.1 發行的提供者應該可用於 EF Core 2.2，但無法用於 EF Core 3.0。 
+> [!IMPORTANT]
+> EF Core 提供者通常可跨次要版本運作，但無法跨主要版本運作。 例如，針對 EF Core 2.1 發行的提供者應該可用於 EF Core 2.2，但無法用於 EF Core 3.0。
 
 | NuGet 封裝                                                                                                                                                                         | 支援的資料庫引擎 | 維護程式/廠商                                                           | 注意/需求     | 針對版本所建置 | 實用連結                                                                                                                                                                                       |
 |:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|:------------------------------------------------------------------------------|:-------------------------|:------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -48,7 +48,6 @@ Entity Framework Core 能夠透過稱為資料庫提供者的外掛程式程式�
 | [Teradata.EntityFrameworkCore](https://www.nuget.org/packages/Teradata.EntityFrameworkCore/)                                                                                          | Teradata 資料庫 16.10 及更新版本 | [Teradata](https://downloads.teradata.com/download/connectivity/net-data-provider-for-teradata) |   | 2.2               |[網站](https://www.nuget.org/packages/Teradata.EntityFrameworkCore/)                                                                                                                            |
 | [EntityFrameworkCore.FirebirdSql](https://www.nuget.org/packages/EntityFrameworkCore.FirebirdSql/)                                                                                    | Firebird 2.5 及 3.x       | [Rafael Almeida](https://github.com/ralmsdeveloper)                           |                          | 2.1               | [wiki](https://github.com/ralmsdeveloper/EntityFrameworkCore.FirebirdSQL/wiki)                                                                                                                     |
 | [EntityFrameworkCore.OpenEdge](https://www.nuget.org/packages/EntityFrameworkCore.OpenEdge/)                                                                                          | Progress OpenEdge          | [Alex Wiese](https://github.com/alexwiese)                                    |                          | 2.1               | [讀我檔案](https://github.com/alexwiese/EntityFrameworkCore.OpenEdge/blob/master/README.md)                                                                                                          |
-| [Pomelo.EntityFrameworkCore.MyCat](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MyCat)                                                                                   | MyCAT 伺服器               | [Pomelo Foundation 專案](https://github.com/PomeloFoundation)              | 只有發行前版本          | 1.1               | [讀我檔案](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MyCat/blob/master/README.md)                                                                                               |
 
 ## <a name="adding-a-database-provider-to-your-application"></a>將資料庫提供者新增至應用程式
 
@@ -62,7 +61,7 @@ dotnet add package provider_package_name
 
 ## <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 install-package provider_package_name
 ```
 
@@ -71,10 +70,10 @@ install-package provider_package_name
 若您使用相依性插入容器，請在安裝完成後以 `OnConfiguring` 方式或 `AddDbContext` 方式在 `DbContext` 中設定提供者。
 例如，下列程式行會以傳遞的連接字串設定 SQL Server 提供者：
 
-``` csharp
+```csharp
 optionsBuilder.UseSqlServer(
     "Server=(localdb)\mssqllocaldb;Database=MyDatabase;Trusted_Connection=True;");
-```  
+```
 
 資料庫提供者能夠延伸 EF Core，來啟用特定資料庫套有的功能。
 有些概念通用於大多數資料庫，並且包含在主要 EF Core 元件中。
@@ -84,7 +83,7 @@ optionsBuilder.UseSqlServer(
 其他概念是提供者類別特有的。
 例如，關聯式資料庫的 EF Core 提供者是根據一般 `Microsoft.EntityFrameworkCore.Relational` 程式庫所建置，而此程式庫提供 API 來設定資料表和資料行對應、外部索引鍵條件約束等等。提供者通常會以 NuGet 套件的形式散發。
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > 當 EF Core 的新修補程式版本發行時，通常會包含 `Microsoft.EntityFrameworkCore.Relational` 套件的更新。
 > 當您新增關聯式資料庫提供者時，此套件會成為應用程式的可轉移相依性。
 > 但是，因為許多提供者皆從 EF Core 獨立發行，所以可能不會更新為相依於該套件的較新修補程式版本。

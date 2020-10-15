@@ -2,15 +2,14 @@
 title: Azure Cosmos DB 提供者-限制-EF Core
 description: 與其他提供者相較之下，Entity Framework Core Azure Cosmos DB 提供者的限制
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/limitations
-ms.openlocfilehash: 0b8edd9ac5fa3d684498efe222ce11a0356040b8
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e4d1c38da14d1e722797f8543313a69c7fb088cc
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619282"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064033"
 ---
 # <a name="ef-core-azure-cosmos-db-provider-limitations"></a>EF Core Azure Cosmos DB 提供者限制
 

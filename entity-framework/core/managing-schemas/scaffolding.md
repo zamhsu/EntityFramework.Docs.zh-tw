@@ -2,15 +2,14 @@
 title: 反向工程-EF Core
 description: 使用 Entity Framework Core 從現有的資料庫反轉模型的工程
 author: bricelam
-ms.author: bricelam
 ms.date: 11/13/2018
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 86aa6d22ebe8e5c1d654c83d4c292a1ed5842ddd
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: e1b4ed8d5209688fbe5c89ae60cf0d981136305f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071910"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92061966"
 ---
 # <a name="reverse-engineering"></a>反向工程
 
@@ -36,7 +35,7 @@ dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' Microsoft.EntityFrameworkCore.SqlServer
 ```
 
@@ -77,7 +76,7 @@ dotnet ef dbcontext scaffold ... --table Artist --table Album
 
 若要包含多個資料表，請使用陣列：
 
-``` powershell
+```powershell
 Scaffold-DbContext ... -Tables Artist, Album
 ```
 
@@ -93,7 +92,7 @@ Scaffold-DbContext ... -Tables Artist, Album
 
 例如，使用流暢的 API 將會 scaffold：
 
-``` csharp
+```csharp
 entity.Property(e => e.Title)
     .IsRequired()
     .HasMaxLength(160);
@@ -101,7 +100,7 @@ entity.Property(e => e.Title)
 
 使用資料批註時，會 scaffold：
 
-``` csharp
+```csharp
 [Required]
 [StringLength(160)]
 public string Title { get; set; }
@@ -133,13 +132,13 @@ dotnet ef dbcontext scaffold ... --namespace Your.Namespace --context-namespace 
 
 您可以指定使用 scaffold 類別的目錄 `-OutputDir` ，而且 `-ContextDir` 可以用來將 DbCoNtext 類別 scaffold 至實體類型類別的不同目錄中：
 
-``` powershell
+```powershell
 Scaffold-DbContext ... -ContextDir Data -OutputDir Models
 ```
 
 根據預設，命名空間會是根命名空間加上專案根目錄下任何子目錄的名稱。 不過，從 EFCore 5.0 開始，您可以使用來覆寫所有輸出類別的命名空間 `-Namespace` 。 您也可以使用，只覆寫 DbCoNtext 類別的命名空間 `-ContextNamespace` 。
 
-``` powershell
+```powershell
 Scaffold-DbContext ... -Namespace Your.Namespace -ContextNamespace Your.DbContext.Namespace
 ```
 

@@ -2,14 +2,14 @@
 title: SQLite 資料庫提供者-限制-EF Core
 description: 與其他提供者相較之下，Entity Framework Core SQLite 資料庫提供者的限制
 author: bricelam
-ms.date: 07/16/2020
+ms.date: 09/24/2020
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: 546910afb9c97a93a7cc471bb813be0b9874a4bd
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 3d696474d401e8fd6c26a78067d292f0bb97a457
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071221"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062733"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>SQLite EF Core 資料庫提供者限制
 
@@ -35,7 +35,7 @@ SQLite 本身並不支援下列資料類型。 EF Core 可以讀取和寫入這�
 
 此 `Decimal` 類型提供高等級的精確度。 但是，如果您不需要該層級的精確度，我們建議您改為使用 double。 您可以使用 [值轉換器](xref:core/modeling/value-conversions) 來繼續在您的類別中使用 decimal。
 
-``` csharp
+```csharp
 modelBuilder.Entity<MyEntity>()
     .Property(e => e.DecimalProperty)
     .HasConversion<double>();
@@ -50,31 +50,52 @@ SQLite 資料庫引擎不支援大部分其他關係資料庫都支援的一些�
 | 作業            | 是否支援？  | 需要版本 |
 |:---------------------|:------------|:-----------------|
 | AddCheckConstraint   | ✔ (重建)  | 5.0              |
-| AddColumn            | ✔           | 1.0              |
+| AddColumn            | ✔           |                  |
 | AddForeignKey        | ✔ (重建)  | 5.0              |
 | AddPrimaryKey        | ✔ (重建)  | 5.0              |
 | AddUniqueConstraint  | ✔ (重建)  | 5.0              |
 | AlterColumn          | ✔ (重建)  | 5.0              |
-| CreateIndex          | ✔           | 1.0              |
-| CreateTable          | ✔           | 1.0              |
+| CreateIndex          | ✔           |                  |
+| CreateTable          | ✔           |                  |
 | DropCheckConstraint  | ✔ (重建)  | 5.0              |
 | DropColumn           | ✔ (重建)  | 5.0              |
 | DropForeignKey       | ✔ (重建)  | 5.0              |
-| DropIndex            | ✔           | 1.0              |
+| DropIndex            | ✔           |                  |
 | DropPrimaryKey       | ✔ (重建)  | 5.0              |
-| DropTable            | ✔           | 1.0              |
+| DropTable            | ✔           |                  |
 | DropUniqueConstraint | ✔ (重建)  | 5.0              |
-| RenameColumn         | ✔           | 2.2.2            |
-| RenameIndex          | ✔ (重建)  | 2.1              |
-| RenameTable          | ✔           | 1.0              |
-| EnsureSchema         | ✔ (無 op)    | 2.0              |
-| DropSchema           | ✔ (無 op)    | 2.0              |
-| 插入               | ✔           | 2.0              |
-| 更新               | ✔           | 2.0              |
-| 刪除               | ✔           | 2.0              |
+| RenameColumn         | ✔           | 2.2              |
+| RenameIndex          | ✔ (重建)  |                  |
+| RenameTable          | ✔           |                  |
+| EnsureSchema         | ✔ (無 op)    |                  |
+| DropSchema           | ✔ (無 op)    |                  |
+| 插入               | ✔           |                  |
+| 更新               | ✔           |                  |
+| 刪除               | ✔           |                  |
 
-## <a name="migrations-limitations-workaround"></a>遷移限制解決方法
+### <a name="migrations-limitations-workaround"></a>遷移限制解決方法
 
 您可以藉由在您的遷移中手動撰寫程式碼來執行重建，以解決其中一些限制。 資料表重建牽涉到建立新的資料表、將資料複製到新的資料表、卸載舊的資料表、重新命名新的資料表。 您將需要使用 `Sql(string)` 方法來執行這些步驟的其中一部分。
 
 如需詳細資訊，請參閱在 SQLite 檔中 [進行其他類型的資料表架構變更](https://sqlite.org/lang_altertable.html#otheralter) 。
+
+### <a name="idempotent-script-limitations"></a>等冪腳本限制
+
+與其他資料庫不同的是，SQLite 不包含程式語言。 因此，沒有任何方法可以產生等冪性遷移腳本所需的 then 邏輯。
+
+如果您知道最後一個要套用到資料庫的遷移，您可以從該遷移到最新的遷移產生腳本。
+
+```dotnetcli
+dotnet ef migrations script CurrentMigration
+```
+
+否則，建議使用 `dotnet ef database update` 來套用遷移。 從 EF Core 5.0 開始，您可以在執行命令時指定資料庫檔案。
+
+```dotnetcli
+dotnet ef database update --connection "Data Source=My.db"
+```
+
+## <a name="see-also"></a>另請參閱
+
+* [Microsoft. Sqlite 非同步限制](/dotnet/standard/data/sqlite/async)
+* [ADO.NET 限制](/dotnet/standard/data/sqlite/adonet-limitations)

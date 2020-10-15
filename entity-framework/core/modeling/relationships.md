@@ -2,14 +2,14 @@
 title: 關聯性-EF Core
 description: 使用 Entity Framework Core 時如何設定實體類型之間的關聯性
 author: AndriySvyryd
-ms.date: 11/21/2019
+ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 9946b2190cb3c3973f245d44da7e359b60845541
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 71d960a15dfb938af1dcc7035dc2587df7ad4677
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619104"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063838"
 ---
 # <a name="relationships"></a>關聯性
 
@@ -148,7 +148,10 @@ ms.locfileid: "89619104"
 
 ### <a name="configuring-navigation-properties"></a>設定導覽屬性
 
-建立導覽屬性之後，您可能需要進一步設定。 在 EFCore 5.0 中，新增了新的流暢 API，可讓您執行該設定。
+> [!NOTE]
+> 這項功能已在 EF Core 5.0 中新增。
+
+建立導覽屬性之後，您可能需要進一步設定。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NavigationConfiguration.cs?name=NavigationConfiguration&highlight=7-9)]
 
@@ -224,6 +227,8 @@ ms.locfileid: "89619104"
 
 您可以使用流暢的 API 來設定關聯性是否為必要或選擇性。 最後，這會控制外鍵屬性是否為必要或選擇性。 當您使用陰影狀態外鍵時，這非常有用。 如果您的實體類別中有外鍵屬性，則關聯性的 requiredness 取決於是否需要外鍵屬性或選擇性 (如需詳細資訊，請參閱 [必要和選擇性屬性](xref:core/modeling/entity-properties#required-and-optional-properties)) 。
 
+外鍵屬性位於相依的實體類型上，因此如果設定為必要，則表示每個相依實體都必須有對應的主體實體。
+
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/Required.cs?name=Required&highlight=6)]
 
 > [!NOTE]
@@ -254,8 +259,69 @@ ms.locfileid: "89619104"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/OneToOne.cs?name=OneToOne&highlight=11)]
 
+根據預設，相依的端會被視為選擇性，但可以視需要進行設定。 但是 EF 不會驗證是否已提供相依實體，因此只有在資料庫對應允許強制執行此設定時，此設定才會有所差異。 常見的案例是依預設使用資料表分割的參考擁有類型。
+
+[!code-csharp[Main](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=Required&highlight=11-12)]
+
+使用此設定時，對應的 `ShippingAddress` 資料行會在資料庫中標示為不可為 null。
+
+> [!NOTE]
+> 如果您使用 [不可為 null 的參考型別](/dotnet/csharp/nullable-references) ，則 `IsRequired` 不需要呼叫。
+
+> [!NOTE]
+> 在 EF Core 5.0 中新增了是否需要相依的設定。
+
 ### <a name="many-to-many"></a>多對多
 
-尚不支援多對多關聯性，而不使用實體類別來表示聯結資料表。 不過，您可以包含聯結資料表的實體類別，並對應兩個不同的一對多關聯性，藉此表示多對多關聯性。
+多對多關聯性需要兩端的集合導覽屬性。 如同其他類型的關聯性，將會依照慣例來探索它們。
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=ManyToManyShared)]
+
+在資料庫中執行此關聯性的方式，是將包含和的外鍵加入資料表 `Post` `Tag` 。 例如，這是 EF 將在上述模型的關係資料庫中建立的。
+
+```sql
+CREATE TABLE [Posts] (
+    [PostId] int NOT NULL IDENTITY,
+    [Title] nvarchar(max) NULL,
+    [Content] nvarchar(max) NULL,
+    CONSTRAINT [PK_Posts] PRIMARY KEY ([PostId])
+);
+
+CREATE TABLE [Tags] (
+    [TagId] nvarchar(450) NOT NULL,
+    CONSTRAINT [PK_Tags] PRIMARY KEY ([TagId])
+);
+
+CREATE TABLE [PostTag] (
+    [PostId] int NOT NULL,
+    [TagId] nvarchar(450) NOT NULL,
+    CONSTRAINT [PK_PostTag] PRIMARY KEY ([PostId], [TagId]),
+    CONSTRAINT [FK_PostTag_Posts_PostId] FOREIGN KEY ([PostId]) REFERENCES [Posts] ([PostId]) ON DELETE CASCADE,
+    CONSTRAINT [FK_PostTag_Tags_TagId] FOREIGN KEY ([TagId]) REFERENCES [Tags] ([TagId]) ON DELETE CASCADE
+);
+```
+
+就內部而言，EF 會建立實體型別來代表聯結資料表，而該聯結資料表將被稱為聯結實體型別。 沒有可用於此的特定 CLR 型別，因此 `Dictionary<string, object>` 會使用。 模型中可以有一個以上的多對多關聯性，因此，在此情況下，必須為聯結實體類型指定唯一的名稱 `PostTag` 。 允許這項功能的功能稱為共用類型實體類型。
+
+「多對多導覽」稱為「略過導覽」，因為它們可有效略過聯結實體類型。 如果您正在採用大量設定，則可以從取得所有略過導覽 `GetSkipNavigations` 。
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Metadata)]
+
+通常會將設定套用至聯結實體類型。 您可以透過來完成此動作 `UsingEntity` 。
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=SharedConfiguration)]
+
+您可以使用匿名型別，為聯結實體型別提供[模型種子資料](xref:core/modeling/data-seeding)。 您可以檢查模型的偵錯工具，以判斷依慣例建立的屬性名稱。
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Seeding)]
+
+額外的資料可以儲存在聯結實體型別中，但為了這樣做，最好是建立定制的 CLR 型別。 設定自訂聯結實體類型的關聯性時，必須明確指定這兩個外鍵。
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyPayload.cs?name=ManyToManyPayload)]
+
+> [!NOTE]
+> 在 EF Core 5.0 中新增多對多關聯性的功能已加入至舊版，請使用下列方法。
+
+您也可以藉由加入聯結實體型別並對應兩個不同的一對多關聯性，來表示多對多關聯性。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=11-14,16-19,39-46)]

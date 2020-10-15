@@ -1,15 +1,15 @@
 ---
 title: 實體屬性-EF Core
 description: 如何使用 Entity Framework Core 來設定和對應實體屬性
-author: lajones
+author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
-ms.openlocfilehash: 3b76454bde153d3a6ddd035cefa00a55f47d2d7b
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 99b0a9ee1e11714e98ebea8b2e6ac53bd2dc6e55
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071494"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062291"
 ---
 # <a name="entity-properties"></a>實體屬性
 

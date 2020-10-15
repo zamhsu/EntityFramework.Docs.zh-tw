@@ -11,12 +11,12 @@ no-loc:
 - Tags
 - items
 - tags
-ms.openlocfilehash: 839f932f48e1cc6cb1b4c86d5e1405e888d5227a
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 07cde296f07a883ba6abf45f94a31e072fb6d6cb
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617647"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063045"
 ---
 # <a name="ef-core-testing-sample"></a>EF Core 測試範例
 
@@ -149,7 +149,7 @@ XUnit 和大部分的測試架構一樣，將會為每個測試回合建立新�
 [!code-csharp[Seeding](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=Seeding)]
 
 每個具體的測試類別都會繼承自這個類別。
-例如：
+例如︰
 
 [!code-csharp[SqliteItemsControllerTest](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/SqliteItemsControllerTest.cs?name=SqliteItemsControllerTest)]
 
@@ -160,7 +160,7 @@ XUnit 和大部分的測試架構一樣，將會為每個測試回合建立新�
 相反地，會使用建立 DbCoNtext，然後直接以相依性的 `new` 形式傳遞至控制器。
 
 然後，每個測試會在控制器上執行受測試的方法，並判斷提示結果如預期般執行。
-例如：
+例如︰
 
 [!code-csharp[CanGetItems](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanGetItems)]
 
@@ -170,7 +170,7 @@ XUnit 和大部分的測試架構一樣，將會為每個測試回合建立新�
 
 基於類似的原因，改變資料庫的測試會在測試中建立第二個 DbCoNtext 實例。
 也就是說，您可以建立新的、乾淨的內容，然後從資料庫中讀取資料，以確保變更已儲存至資料庫。
-例如：
+例如︰
 
 [!code-csharp[CanAddItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddItem)]
 
@@ -183,7 +183,7 @@ XUnit 和大部分的測試架構一樣，將會為每個測試回合建立新�
 ## <a name="issues-using-different-database-providers"></a>使用不同資料庫提供者的問題
 
 使用與生產環境應用程式不同的資料庫系統進行測試可能會導致問題。
-這些會在 [使用 EF Core 的測試程式碼](xref:core/miscellaneous/testing/index)的概念層級中討論。  
+這些會在 [使用 EF Core 的測試程式碼](xref:core/miscellaneous/testing/index)的概念層級中討論。
 下列各節涵蓋此範例中的測試所示範之這類問題的兩個範例。
 
 ### <a name="test-passes-when-the-application-is-broken"></a>應用程式中斷時的測試階段
@@ -197,7 +197,7 @@ XUnit 和大部分的測試架構一樣，將會為每個測試回合建立新�
 使用 SQLite 時，一切仍然沒問題。
 但是針對 SQL Server 執行時，測試會失敗！
 
-```console
+```output
 System.InvalidOperationException : Sequence contains more than one element
    at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
    at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
@@ -224,7 +224,7 @@ System.InvalidOperationException : Sequence contains more than one element
 
 這項測試會 SQL Server 和 SQLite 傳遞，但無法與 EF 記憶體內部資料庫一起使用！
 
-```console
+```output
 Assert.False() Failure
 Expected: False
 Actual:   True

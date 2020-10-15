@@ -2,15 +2,14 @@
 title: 在小組環境中進行遷移-EF Core
 description: 在 team 環境中使用 Entity Framework Core 管理遷移和解決衝突的最佳作法
 author: bricelam
-ms.author: bricelam
 ms.date: 10/30/2017
 uid: core/managing-schemas/migrations/teams
-ms.openlocfilehash: 1fbb7173a52218a4d00780ebc76e33600f3558c1
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 90549b369624301bc183e5a8a3cc1d6a92bb7008
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619198"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062499"
 ---
 # <a name="migrations-in-team-environments"></a>在小組環境中移轉
 
@@ -20,7 +19,7 @@ ms.locfileid: "89619198"
 
 當您合併小組成員時，您可能會在模型快照集檔案中發生衝突。 如果這兩個變更都不相關，則合併是很簡單的，而且這兩個遷移可以並存。 例如，您可能會在如下所示的 customer 實體類型設定中出現合併衝突：
 
-``` output
+```output
 <<<<<<< Mine
 b.Property<bool>("Deactivated");
 =======
@@ -30,7 +29,7 @@ b.Property<int>("LoyaltyPoints");
 
 因為這兩個屬性都必須存在於最終模型中，所以請加入這兩個屬性來完成合併。 在許多情況下，您的版本控制系統可能會自動為您合併這類變更。
 
-``` csharp
+```csharp
 b.Property<bool>("Deactivated");
 b.Property<int>("LoyaltyPoints");
 ```
@@ -41,7 +40,7 @@ b.Property<int>("LoyaltyPoints");
 
 當您合併模型快照模型時，有時會遇到真正的衝突。 例如，您和您的組員可能會將相同的屬性重新命名。
 
-``` output
+```output
 <<<<<<< Mine
 b.Property<string>("Username");
 =======

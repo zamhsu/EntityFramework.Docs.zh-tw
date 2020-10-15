@@ -4,17 +4,14 @@ description: 在 Entity Framework Core 模型中設定值轉換器
 author: ajcvickers
 ms.date: 02/19/2018
 uid: core/modeling/value-conversions
-ms.openlocfilehash: 1d347eb6a7fcdcb55239e1fa854f6c38ab081b21
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 221560a145fe25c2b7bf094839dd37791bc25955
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072547"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063955"
 ---
 # <a name="value-conversions"></a>值轉換
-
-> [!NOTE]  
-> 此功能是 EF Core 2.1 中的新功能。
 
 值轉換器可在讀取或寫入資料庫時，允許轉換屬性值。 這項轉換可從某個值轉換為相同類型的另一個值 (例如，將字串) 或從某個類型的值加密為另一個類型的值 (例如，在資料庫中來回轉換字串的列舉值。 ) 
 
@@ -28,7 +25,7 @@ ms.locfileid: "90072547"
 
 值轉換是在的屬性中定義的 `OnModelCreating` `DbContext` 。 例如，假設列舉和實體型別定義為：
 
-``` csharp
+```csharp
 public class Rider
 {
     public int Id { get; set; }
@@ -46,7 +43,7 @@ public enum EquineBeast
 
 然後，您可以在中定義轉換， `OnModelCreating` 以將列舉值儲存為字串 (例如，"Donkey"、"Mule"、... ) 在資料庫中：
 
-``` csharp
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder
@@ -58,14 +55,14 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > `null`永遠不會將值傳遞至值轉換器。 這可讓轉換的執行變得更容易，並可讓它們在可為 null 且不可為 null 的屬性之間共用。
 
 ## <a name="the-valueconverter-class"></a>ValueConverter 類別
 
-`HasConversion`如上面所示呼叫會建立 `ValueConverter` 實例，並在屬性上設定它。 `ValueConverter`可以改為明確建立。 例如：
+`HasConversion`如上面所示呼叫會建立 `ValueConverter` 實例，並在屬性上設定它。 `ValueConverter`可以改為明確建立。 例如︰
 
-``` csharp
+```csharp
 var converter = new ValueConverter<EquineBeast, string>(
     v => v.ToString(),
     v => (EquineBeast)Enum.Parse(typeof(EquineBeast), v));
@@ -78,7 +75,7 @@ modelBuilder
 
 當多個屬性使用相同的轉換時，這會很有用。
 
-> [!NOTE]  
+> [!NOTE]
 > 目前沒有任何方法可以在一個地方指定指定類型的每個屬性都必須使用相同的值轉換器。 未來的版本將會考慮這項功能。
 
 ## <a name="built-in-converters"></a>內建轉換器
@@ -109,7 +106,7 @@ EF Core 隨附一組預先定義的 `ValueConverter` 類別，可在 `Microsoft.
 
 請注意， `EnumToStringConverter` 包含在此清單中。 這表示不需要明確指定轉換，如上所示。 相反地，只使用內建的轉換器：
 
-``` csharp
+```csharp
 var converter = new EnumToStringConverter<EquineBeast>();
 
 modelBuilder
@@ -124,7 +121,7 @@ modelBuilder
 
 針對內建轉換器存在的一般轉換，不需要明確指定轉換器。 相反地，只需設定應該使用的提供者類型，EF 就會自動使用適當的內建轉換器。 列舉至字串轉換是以上述範例的形式使用，但如果已設定提供者類型，EF 將會自動執行這項作業：
 
-``` csharp
+```csharp
 modelBuilder
     .Entity<Rider>()
     .Property(e => e.Mount)
@@ -133,7 +130,7 @@ modelBuilder
 
 您可以明確指定資料行類型來達成相同的目的。 例如，如果實體類型定義如下：
 
-``` csharp
+```csharp
 public class Rider
 {
     public int Id { get; set; }

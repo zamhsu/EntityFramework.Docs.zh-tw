@@ -1,14 +1,14 @@
 ---
 title: 可測試性和 Entity Framework 4.0-EF6
 description: 可測試性和 Entity Framework 4。0
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
-ms.openlocfilehash: 439e2af6b0c851a2ab70d6d9ed1004deb83b1a0e
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8a9c8fbf7d6131498bd9b37567fdb90010b808cc
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070506"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062980"
 ---
 # <a name="testability-and-entity-framework-40"></a>可測試性和 Entity Framework 4。0
 Scott Allen
@@ -917,7 +917,7 @@ IEntity 可能被視為不符合持續性無知，因為我們的實體需要執
 -   確認模型保存在執行索引之後的所有員工清單。
 -   確認在刪除執行之後，儲存機制不包含指定的員工。
 
-模擬物件的另一種方法是驗證 *互動*。 以狀態為基礎的測試會對物件的狀態進行判斷提示，以互動為基礎的測試會對物件的互動進行判斷提示。 例如：
+模擬物件的另一種方法是驗證 *互動*。 以狀態為基礎的測試會對物件的狀態進行判斷提示，以互動為基礎的測試會對物件的互動進行判斷提示。 例如︰
 
 -   確認控制器會在建立執行時叫用存放庫的 Add 方法。
 -   確認控制器在索引執行時叫用存放庫的 FindAll 方法。

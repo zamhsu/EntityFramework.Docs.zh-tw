@@ -1,15 +1,15 @@
 ---
 title: 串聯刪除 - EF Core
 description: 在刪除主體實體時設定相關實體的刪除行為
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 197d52758f969bcdb69c0a7a230001737596b821
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 037b018c669da76a70f134e3991ad22b36917920
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070909"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063604"
 ---
 # <a name="cascade-delete"></a>串聯刪除
 
@@ -27,7 +27,7 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 * 可以將子系的外部索引鍵設定為 Null
 * 子系保持不變
 
-> [!NOTE]  
+> [!NOTE]
 > 只有在使用 EF Core 來刪除主體實體且已將相依實體載入記憶體中 (亦即針對所追蹤的相依項) 的情況下，才會套用 EF Core 模型中所設定的刪除行為。 必須在資料庫中設定對應的串聯行為，才能確保沒有受到內容追蹤的資料會套用必要的動作。 如果您使用 EF Core 來建立資料庫，將會為您設定此串聯行為。
 
 就上述第二個動作而言，如果外部索引鍵值不可為 Null，將其設定為 Null 就會無效。  (不可為 null 的外鍵相當於必要的關聯性。 ) 在這些情況下，EF Core 會追蹤外鍵屬性是否已標示為 null，直到呼叫 SaveChanges 為止，此時會擲回例外狀況，因為變更無法保存到資料庫。 這與從資料庫收到條件約束違規類似。
@@ -70,9 +70,6 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 > [!NOTE]
 > 不同於 EF6，在 EF Core 中，串聯影響不會立即發生，而是只有在呼叫 SaveChanges 時才會發生。
 
-> [!NOTE]  
-> **EF Core 2.0 中的變更：** 在舊版中，*Restrict* 會導致將所追蹤相依實體中的選擇性外部索引鍵屬性設定為 Null，而且是選擇性關聯性的預設刪除行為。 在 EF Core 2.0 中，則導入了 *ClientSetNull* 來代表該行為，並成為選擇性關聯性的預設值。 *Restrict* 的行為在調整後變成一律不會對相依實體產生任何副作用。
-
 ## <a name="entity-deletion-examples"></a>實體刪除範例
 
 對於可供下載並執行的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/CascadeDelete/)，以下程式碼是其中的一部分。 此範例示範刪除父系實體時，選擇性和必要關聯性的每個刪除行為會發生什麼情況。
@@ -83,26 +80,26 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorcascade-with-required-or-optional-relationship"></a>與必要或選擇性關聯性搭配的 DeleteBehavior.Cascade
 
-```console
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After deleting blog '1':
-    Blog '1' is in state Deleted with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+After deleting blog '1':
+  Blog '1' is in state Deleted with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  Saving changes:
-    DELETE FROM [Posts] WHERE [PostId] = 1
-    DELETE FROM [Posts] WHERE [PostId] = 2
-    DELETE FROM [Blogs] WHERE [BlogId] = 1
+Saving changes:
+  DELETE FROM [Posts] WHERE [PostId] = 1
+  DELETE FROM [Posts] WHERE [PostId] = 2
+  DELETE FROM [Blogs] WHERE [BlogId] = 1
 
-  After SaveChanges:
-    Blog '1' is in state Detached with 2 posts referenced.
-      Post '1' is in state Detached with FK '1' and no reference to a blog.
-      Post '2' is in state Detached with FK '1' and no reference to a blog.
+After SaveChanges:
+  Blog '1' is in state Detached with 2 posts referenced.
+    Post '1' is in state Detached with FK '1' and no reference to a blog.
+    Post '2' is in state Detached with FK '1' and no reference to a blog.
 ```
 
 * 部落格會標示為 Deleted
@@ -112,21 +109,21 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>與必要關聯性搭配的 DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After deleting blog '1':
-    Blog '1' is in state Deleted with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+After deleting blog '1':
+  Blog '1' is in state Deleted with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  Saving changes:
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
+Saving changes:
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
 
-  SaveChanges threw DbUpdateException: Cannot insert the value NULL into column 'BlogId', table 'EFSaving.CascadeDelete.dbo.Posts'; column does not allow nulls. UPDATE fails. The statement has been terminated.
+SaveChanges threw DbUpdateException: Cannot insert the value NULL into column 'BlogId', table 'EFSaving.CascadeDelete.dbo.Posts'; column does not allow nulls. UPDATE fails. The statement has been terminated.
 ```
 
 * 部落格會標示為 Deleted
@@ -135,26 +132,26 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>與選擇性關聯性搭配的 DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After deleting blog '1':
-    Blog '1' is in state Deleted with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+After deleting blog '1':
+  Blog '1' is in state Deleted with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  Saving changes:
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 2
-    DELETE FROM [Blogs] WHERE [BlogId] = 1
+Saving changes:
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 2
+  DELETE FROM [Blogs] WHERE [BlogId] = 1
 
-  After SaveChanges:
-    Blog '1' is in state Detached with 2 posts referenced.
-      Post '1' is in state Unchanged with FK 'null' and no reference to a blog.
-      Post '2' is in state Unchanged with FK 'null' and no reference to a blog.
+After SaveChanges:
+  Blog '1' is in state Detached with 2 posts referenced.
+    Post '1' is in state Unchanged with FK 'null' and no reference to a blog.
+    Post '2' is in state Unchanged with FK 'null' and no reference to a blog.
 ```
 
 * 部落格會標示為 Deleted
@@ -165,19 +162,19 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>與必要或選擇性關聯性搭配的 DeleteBehavior.Restrict
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After deleting blog '1':
-    Blog '1' is in state Deleted with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+After deleting blog '1':
+  Blog '1' is in state Deleted with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  Saving changes:
-  SaveChanges threw InvalidOperationException: The association between entity types 'Blog' and 'Post' has been severed but the foreign key for this relationship cannot be set to null. If the dependent entity should be deleted, then setup the relationship to use cascade deletes.
+Saving changes:
+SaveChanges threw InvalidOperationException: The association between entity types 'Blog' and 'Post' has been severed but the foreign key for this relationship cannot be set to null. If the dependent entity should be deleted, then setup the relationship to use cascade deletes.
 ```
 
 * 部落格會標示為 Deleted
@@ -194,25 +191,25 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorcascade-with-required-or-optional-relationship"></a>與必要或選擇性關聯性搭配的 DeleteBehavior.Cascade
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After making posts orphans:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Modified with FK '1' and no reference to a blog.
-      Post '2' is in state Modified with FK '1' and no reference to a blog.
+After making posts orphans:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Modified with FK '1' and no reference to a blog.
+    Post '2' is in state Modified with FK '1' and no reference to a blog.
 
-  Saving changes:
-    DELETE FROM [Posts] WHERE [PostId] = 1
-    DELETE FROM [Posts] WHERE [PostId] = 2
+Saving changes:
+  DELETE FROM [Posts] WHERE [PostId] = 1
+  DELETE FROM [Posts] WHERE [PostId] = 2
 
-  After SaveChanges:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Detached with FK '1' and no reference to a blog.
-      Post '2' is in state Detached with FK '1' and no reference to a blog.
+After SaveChanges:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Detached with FK '1' and no reference to a blog.
+    Post '2' is in state Detached with FK '1' and no reference to a blog.
 ```
 
 * 文章會標示為 Modified，因為切斷關聯性造成將 FK 標示為 Null
@@ -222,21 +219,21 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>與必要關聯性搭配的 DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After making posts orphans:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Modified with FK 'null' and no reference to a blog.
-      Post '2' is in state Modified with FK 'null' and no reference to a blog.
+After making posts orphans:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Modified with FK 'null' and no reference to a blog.
+    Post '2' is in state Modified with FK 'null' and no reference to a blog.
 
-  Saving changes:
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
+Saving changes:
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
 
-  SaveChanges threw DbUpdateException: Cannot insert the value NULL into column 'BlogId', table 'EFSaving.CascadeDelete.dbo.Posts'; column does not allow nulls. UPDATE fails. The statement has been terminated.
+SaveChanges threw DbUpdateException: Cannot insert the value NULL into column 'BlogId', table 'EFSaving.CascadeDelete.dbo.Posts'; column does not allow nulls. UPDATE fails. The statement has been terminated.
 ```
 
 * 文章會標示為 Modified，因為切斷關聯性造成將 FK 標示為 Null
@@ -245,25 +242,25 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>與選擇性關聯性搭配的 DeleteBehavior.ClientSetNull 或 DeleteBehavior.SetNull
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After making posts orphans:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Modified with FK 'null' and no reference to a blog.
-      Post '2' is in state Modified with FK 'null' and no reference to a blog.
+After making posts orphans:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Modified with FK 'null' and no reference to a blog.
+    Post '2' is in state Modified with FK 'null' and no reference to a blog.
 
-  Saving changes:
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 2
+Saving changes:
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 2
 
-  After SaveChanges:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK 'null' and no reference to a blog.
-      Post '2' is in state Unchanged with FK 'null' and no reference to a blog.
+After SaveChanges:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK 'null' and no reference to a blog.
+    Post '2' is in state Unchanged with FK 'null' and no reference to a blog.
 ```
 
 * 文章會標示為 Modified，因為切斷關聯性造成將 FK 標示為 Null
@@ -273,19 +270,19 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 
 ### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>與必要或選擇性關聯性搭配的 DeleteBehavior.Restrict
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After making posts orphans:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Modified with FK '1' and no reference to a blog.
-      Post '2' is in state Modified with FK '1' and no reference to a blog.
+After making posts orphans:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Modified with FK '1' and no reference to a blog.
+    Post '2' is in state Modified with FK '1' and no reference to a blog.
 
-  Saving changes:
-  SaveChanges threw InvalidOperationException: The association between entity types 'Blog' and 'Post' has been severed but the foreign key for this relationship cannot be set to null. If the dependent entity should be deleted, then setup the relationship to use cascade deletes.
+Saving changes:
+SaveChanges threw InvalidOperationException: The association between entity types 'Blog' and 'Post' has been severed but the foreign key for this relationship cannot be set to null. If the dependent entity should be deleted, then setup the relationship to use cascade deletes.
 ```
 
 * 文章會標示為 Modified，因為切斷關聯性造成將 FK 標示為 Null
@@ -297,15 +294,15 @@ EF Core 實作數種不同的刪除行為，並允許設定個別關聯性的刪
 當您呼叫 *SaveChanges* 時，串聯刪除規則將會套用至內容所追蹤的所有實體。 這是上述所有範例中發生的情況，也是為何產生 SQL 來同時刪除主體/父系 (部落格) 及所有相依項/子系 (文章) 的原因：
 
 ```sql
-    DELETE FROM [Posts] WHERE [PostId] = 1
-    DELETE FROM [Posts] WHERE [PostId] = 2
-    DELETE FROM [Blogs] WHERE [BlogId] = 1
+DELETE FROM [Posts] WHERE [PostId] = 1
+DELETE FROM [Posts] WHERE [PostId] = 2
+DELETE FROM [Blogs] WHERE [BlogId] = 1
 ```
 
 如果只載入主體 (例如對部落格進行查詢時，未使用可一併包含文章的 `Include(b => b.Posts)`)，則 SaveChanges 將只產生 SQL 來刪除主體/父系：
 
 ```sql
-    DELETE FROM [Blogs] WHERE [BlogId] = 1
+DELETE FROM [Blogs] WHERE [BlogId] = 1
 ```
 
 只有已在資料庫設定對應的串聯行為時，才會刪除相依項/子系 (文章)。 如果您使用 EF 來建立資料庫，將會為您設定此串聯行為。

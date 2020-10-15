@@ -2,15 +2,14 @@
 title: 擁有的實體類型-EF Core
 description: 使用 Entity Framework Core 時如何設定擁有的實體類型或匯總
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: f65c07c79daf38e733c76f328843c90466c657f5
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: a49d9aab735232dfd5a3db456410d527f94f3c18
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619324"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063773"
 ---
 # <a name="owned-entity-types"></a>擁有的實體類型
 
@@ -20,7 +19,7 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 
 ## <a name="explicit-configuration"></a>明確設定
 
-依慣例，模型中的 EF Core 絕不會包含擁有的實體類型。 您可以使用 `OwnsOne` 中的方法，或使用 `OnModelCreating` `OwnedAttribute` EF Core 2.1) 的 (new 來標注類型，以將類型設定為擁有的類型。
+依慣例，模型中的 EF Core 絕不會包含擁有的實體類型。 您可以使用中的方法，或使用將類型 `OwnsOne` `OnModelCreating` 標注 `OwnedAttribute` 為，以將類型設定為擁有的類型。
 
 在此範例中， `StreetAddress` 是沒有識別屬性的型別。 它用做訂單類型的屬性，指定特定訂單的送貨地址。
 
@@ -40,6 +39,9 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 
 請參閱 [完整的範例專案](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/OwnedEntities) ，以取得更多內容。
 
+> [!TIP]
+> 擁有的實體類型可標示為必要，如需詳細資訊，請參閱 [必要的一對一相依項](xref:core/modeling/relationships#one-to-one) 。
+
 ## <a name="implicit-keys"></a>隱含索引鍵
 
 `OwnsOne`透過參考導覽設定或探索的擁有型別，一律與擁有者有一對一的關聯性，因此它們不需要自己的索引鍵值，因為外鍵值是唯一的。 在上述範例中， `StreetAddress` 類型不需要定義索引鍵屬性。  
@@ -47,9 +49,6 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 為了瞭解 EF Core 如何追蹤這些物件，知道主鍵是建立為所擁有類型的 [陰影屬性](xref:core/modeling/shadow-properties) 會很有説明。 擁有之類型實例的索引鍵值將會與擁有者實例之索引鍵的值相同。
 
 ## <a name="collections-of-owned-types"></a>擁有類型的集合
-
-> [!NOTE]
-> 此為 EF Core 2.2 中的新功能。
 
 若要設定所擁有類型的集合，請 `OwnsMany` 在中使用 `OnModelCreating` 。
 
@@ -60,18 +59,15 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 - 在新屬性上定義代理主鍵，而此屬性與指向擁有者的外鍵無關。 包含的值在所有擁有者中都必須是唯一的 (例如，如果父系 {1} 有子系 {1} ，則父系 {2} 不能有子 {1}) ，因此值沒有任何固有意義。 因為外鍵不是主鍵的一部分，所以可以變更其值，因此您可以將子系從某個父系移至另一個父代，但這通常會針對匯總語義進行。
 - 使用外鍵和其他屬性做為複合索引鍵。 針對指定的父系，其他屬性值現在只需要是唯一的 (因此，如果父系 {1} 有子系， {1,1} 則父代 {2} 仍可以有子系 {2,1}) 。 藉由讓主鍵的外鍵部分成為擁有者與擁有之實體之間的關聯性，會變成不可變的，並更妥善地反映匯總語義。 這是 EF Core 預設的情況。
 
-在此範例中，我們將使用 `Distributor` 類別：
+在此範例中，我們會使用 `Distributor` 類別。
 
 [!code-csharp[Distributor](../../../samples/core/Modeling/OwnedEntities/Distributor.cs?name=Distributor)]
 
 根據預設，透過導覽屬性參考的擁有類型所使用的主鍵會是 `ShippingCenters` `("DistributorId", "Id")` `"DistributorId"` FK，而 `"Id"` 是唯一的 `int` 值。
 
-若要設定不同的 PK 呼叫 `HasKey` ：
+設定不同的主要金鑰呼叫 `HasKey` 。
 
 [!code-csharp[OwnsMany](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsMany)]
-
-> [!NOTE]
-> EF Core 3.0 `WithOwner()` 方法不存在之前，請先移除此呼叫。 此外，也不會自動探索主鍵，因此一律必須指定。
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>使用資料表分割來對應擁有的類型
 
@@ -79,7 +75,7 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 
 根據預設，EF Core 會在模式 _Navigation_OwnedEntityProperty_之後，為擁有的實體類型的屬性命名資料庫資料行。 因此， `StreetAddress` 屬性會出現在名稱為 ' ShippingAddress_Street ' 和 ' ShippingAddress_City ' 的 ' Orders ' 資料表中。
 
-您可以使用 `HasColumnName` 方法來重新命名這些資料行：
+您可以使用 `HasColumnName` 方法來重新命名這些資料行。
 
 [!code-csharp[ColumnNames](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=ColumnNames)]
 
@@ -92,7 +88,7 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 
 在這些情況下，從擁有者指向擁有之實體的屬性會變成所擁有實體類型的 _定義導覽_ 。 從 EF Core 的觀點來看，定義流覽是類型與 .NET 類型的身分識別的一部分。
 
-例如，在下列類別中， `ShippingAddress` 而且 `BillingAddress` 都是相同的 .net 型別 `StreetAddress` ：
+例如，在下列類別中， `ShippingAddress` 和 `BillingAddress` 都是相同的 .net 型別 `StreetAddress` 。
 
 [!code-csharp[OrderDetails](../../../samples/core/Modeling/OwnedEntities/OrderDetails.cs?name=OrderDetails)]
 
@@ -145,15 +141,14 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 ### <a name="by-design-restrictions"></a>依設計限制
 
 - 您無法 `DbSet<T>` 為擁有的類型建立。
-- 您無法 `Entity<T>()` 以所擁有的類型呼叫 `ModelBuilder`
+- 您無法 `Entity<T>()` 在上使用自有的型別呼叫 `ModelBuilder` 。
+- 多個擁有者無法共用擁有的實體類型實例 (這是已知的值物件案例，無法使用所擁有的實體類型) 來執行。
 
 ### <a name="current-shortcomings"></a>目前的缺點
 
 - 擁有的實體類型不能有繼承階層
-- 除非所擁有實體類型的參考導覽明確地對應至擁有者的個別資料表，否則不能是 null
-- 多個擁有者無法共用擁有的實體類型實例 (這是已知的值物件案例，無法使用擁有的實體類型來執行) 
 
 ### <a name="shortcomings-in-previous-versions"></a>舊版的缺點
 
-- 在 EF Core 2.0 中，除非擁有的實體明確地對應至擁有者階層的個別資料表，否則無法在衍生的實體類型中宣告導覽至擁有的實體類型。 這項限制已在 EF Core 2.1 中移除
-- 在 EF Core 2.0 和2.1 中，僅支援參考導覽至擁有的類型。 這項限制已在 EF Core 2.2 中移除
+- 在 EF Core 2.x 參考導覽至擁有的實體類型時，除非它們明確地對應至擁有者的個別資料表，否則不能是 null。
+- 在 EF Core 3.x 中，對應至與擁有者相同之資料表的擁有實體類型資料行一律會標示為可為 null。

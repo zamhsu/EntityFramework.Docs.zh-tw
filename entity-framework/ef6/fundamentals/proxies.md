@@ -1,22 +1,22 @@
 ---
 title: 使用 proxy-EF6
 description: 使用 Entity Framework 6 中的 proxy
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/proxies
-ms.openlocfilehash: e626a7dff67497a2fbb3dcd169704814ea4cf2cf
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 741fd72ee66b98ab132fb85f71c3101712e433fa
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070493"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063201"
 ---
 # <a name="working-with-proxies"></a>使用 proxy
 建立 POCO 實體類型的實例時，Entity Framework 通常會建立動態產生之衍生型別的實例，作為實體的 proxy。 此 proxy 會覆寫實體的一些虛擬屬性，以便在存取屬性時自動插入用來執行動作的勾點。 例如，這項機制可用來支援關聯性的延遲載入。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
 
 ## <a name="disabling-proxy-creation"></a>停用 proxy 建立  
 
-有時候，防止 Entity Framework 建立 proxy 實例會很有用。 例如，序列化非 proxy 實例比序列化 proxy 實例簡單得多。 您可以藉由清除 ProxyCreationEnabled 旗標來關閉 Proxy 建立。 您可以在內容的函式中，進行這項作業。 例如：  
+有時候，防止 Entity Framework 建立 proxy 實例會很有用。 例如，序列化非 proxy 實例比序列化 proxy 實例簡單得多。 您可以藉由清除 ProxyCreationEnabled 旗標來關閉 Proxy 建立。 您可以在內容的函式中，進行這項作業。 例如︰  
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -35,7 +35,7 @@ public class BloggingContext : DbContext
 
 ## <a name="explicitly-creating-an-instance-of-a-proxy"></a>明確建立 proxy 的實例  
 
-如果您使用 new 運算子建立實體的實例，將不會建立 proxy 實例。 這可能不是問題，但如果您需要建立 proxy 實例 (例如，讓消極式載入或 proxy 變更追蹤正常運作) 那麼您可以使用 DbSet 的 Create 方法來執行這項作業。 例如：  
+如果您使用 new 運算子建立實體的實例，將不會建立 proxy 實例。 這可能不是問題，但如果您需要建立 proxy 實例 (例如，讓消極式載入或 proxy 變更追蹤正常運作) 那麼您可以使用 DbSet 的 Create 方法來執行這項作業。 例如︰  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -44,7 +44,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-如果您想要建立衍生實體類型的實例，則可以使用建立的泛型版本。 例如：  
+如果您想要建立衍生實體類型的實例，則可以使用建立的泛型版本。 例如︰  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -61,9 +61,9 @@ using (var context = new BloggingContext())
 
 Proxy 類型的名稱看起來像這樣：  
 
-DynamicProxies.. Blog_5E43C6C196972BF0754973E48C9C941092D86818CD94005E9A759B70BF6E48E6  
+System.Data.Entity.DynamicProxies.Blog_5E43C6C196972BF0754973E48C9C941092D86818CD94005E9A759B70BF6E48E6  
 
-您可以使用 ObjectCoNtext 的 GetObjectType 方法，來尋找此 proxy 類型的實體類型。 例如：  
+您可以使用 ObjectCoNtext 的 GetObjectType 方法，來尋找此 proxy 類型的實體類型。 例如︰  
 
 ``` csharp
 using (var context = new BloggingContext())

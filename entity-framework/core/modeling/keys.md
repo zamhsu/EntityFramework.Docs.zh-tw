@@ -2,15 +2,14 @@
 title: 金鑰-EF Core
 description: 使用 Entity Framework Core 時如何設定實體類型的索引鍵
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/keys
-ms.openlocfilehash: ed4600258de460877ee4f94586a2fbe794e82ed1
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: ea744315514b19465aba9a311055a9b5e49fa3f8
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619349"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063786"
 ---
 # <a name="keys"></a>索引鍵
 

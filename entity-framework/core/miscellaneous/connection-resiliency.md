@@ -1,15 +1,15 @@
 ---
 title: 連接復原-EF Core
 description: 使用連接復原功能，利用 Entity Framework Core 自動重試失敗的命令
-author: rowanmiller
+author: AndriySvyryd
 ms.date: 11/15/2016
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: 25b754334edd15532780cb4e40682bc211620c76
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: db0666a49cbd41ef3eacf447eaeed1fb54ffcbf4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210289"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92061914"
 ---
 # <a name="connection-resiliency"></a>連接恢復功能
 
@@ -23,7 +23,7 @@ ms.locfileid: "91210289"
 
 或中 `Startup.cs` 的 ASP.NET Core 應用程式：
 
-``` csharp
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDbContext<PicnicContext>(
@@ -37,7 +37,7 @@ public void ConfigureServices(IServiceCollection services)
 
 如果您想要變更任何預設值，有一種機制可註冊您自己的自訂執行策略。
 
-``` csharp
+```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 {
     optionsBuilder
@@ -65,7 +65,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 ## <a name="transaction-commit-failure-and-the-idempotency-issue"></a>交易認可失敗和等冪性問題
 
-一般情況下，當發生連接失敗時，就會回復目前的交易。 但是，如果在認可交易時中斷連接，則交易的結果狀態是未知的。 
+一般情況下，當發生連接失敗時，就會回復目前的交易。 但是，如果在認可交易時中斷連接，則交易的結果狀態是未知的。
 
 根據預設，執行策略會重試此作業，就像交易已回復一樣，但如果不是如此，則如果新的資料庫狀態不相容，或如果作業不依賴特定狀態（例如，使用自動產生的索引鍵值插入新的資料列時），可能會導致 **資料損毀** ，這會導致例外狀況。
 

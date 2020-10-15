@@ -1,15 +1,15 @@
 ---
 title: 支援欄位-EF Core
 description: 在 Entity Framework Core 模型中設定屬性的支援欄位
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/modeling/backing-field
-ms.openlocfilehash: 48ef28e7b880fee571cb1857601fb2cead535fbf
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 4f5680b14c7f0e1fa5128d366f2960c4ae9b3735
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071624"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063682"
 ---
 # <a name="backing-fields"></a>支援欄位
 
@@ -17,7 +17,7 @@ ms.locfileid: "90071624"
 
 ## <a name="basic-configuration"></a>基本設定
 
-依照慣例，會將下欄欄位探索為指定屬性的支援欄位， (以優先順序) 列出。 
+依照慣例，會將下欄欄位探索為指定屬性的支援欄位， (以優先順序) 列出。
 
 * `_<camel-cased property name>`
 * `_<property name>`
@@ -63,6 +63,6 @@ EF 將嘗試尋找具有指定名稱的 CLR 屬性，如果找不到屬性，則
 
 您可能需要從 LINQ 查詢參考僅限欄位的屬性，但是這類欄位通常是私用的。 您可以 `EF.Property(...)` 在 LINQ 查詢中使用方法來參考欄位：
 
-``` csharp
+```csharp
 var blogs = db.blogs.OrderBy(b => EF.Property<string>(b, "_validatedUrl"));
 ```

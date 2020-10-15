@@ -5,12 +5,12 @@ author: rick-anderson
 ms.author: riande
 ms.date: 9/19/2020
 uid: core/miscellaneous/context-pooling
-ms.openlocfilehash: fd5f53ff97a73895f0c4239439730dd8cb3ecc29
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 8638c838511be85bd994751b9911b107974dfe2f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91215595"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92061953"
 ---
 # <a name="dbcontext-pooling"></a>DbContext 共用
 
@@ -20,7 +20,7 @@ ms.locfileid: "91215595"
 
 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContextPool%2A> 啟用可重複使用的內容實例集區。 若要使用內容共用，請使用 `AddDbContextPool` 方法，而不是 `AddDbContext` 在服務註冊期間：
 
-``` csharp
+```csharp
 services.AddDbContextPool<BloggingContext>(
     options => options.UseSqlServer(connectionString));
 ```
@@ -37,7 +37,7 @@ services.AddDbContextPool<BloggingContext>(
 
 `AddDbContextPool` 有幾項限制可在內容的方法中完成 `OnConfiguring` 。
 
-> [!WARNING]  
+> [!WARNING]
 > 避免在維護狀態的應用程式中使用內容共用。 例如，內容中不應該跨要求共用的私用欄位。 EF Core 只會在將內容實例新增至集區之前，重設其感知的狀態。
 
 內容共用的運作方式是跨要求重複使用相同的內容實例。 這表示它實際上是以實例本身的 [Singleton](/aspnet/core/fundamentals/dependency-injection#service-lifetimes) 來註冊，以便能夠保存。

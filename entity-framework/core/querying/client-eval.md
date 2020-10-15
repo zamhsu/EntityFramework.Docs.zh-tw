@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 進行查詢的用戶端和伺服器�
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/client-eval
-ms.openlocfilehash: 41be7da26423f50017f57a7686f65bd8baf69ef5
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f2e80541439de8cc824c182e52400f730dd2af48
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071169"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062707"
 ---
 # <a name="client-vs-server-evaluation"></a>用戶端與伺服器評估
 
@@ -19,21 +19,21 @@ ms.locfileid: "90071169"
 > 在3.0 版之前，請在查詢中的任何位置 Entity Framework Core 支援的用戶端評估。 如需詳細資訊，請參閱「 [先前的版本」一節](#previous-versions)。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/ClientEvaluation) \(英文\)。
 
 ## <a name="client-evaluation-in-the-top-level-projection"></a>最上層投影中的用戶端評估
 
 在下列範例中，helper 方法是用來標準化從 SQL Server 資料庫傳回的 blog 的 Url。 由於 SQL Server 提供者無法深入瞭解此方法的執行方式，因此無法將它轉譯成 SQL。 查詢的所有其他層面都會在資料庫中評估，但 `URL` 透過這個方法所傳回的會在用戶端上完成。
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientProjection)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ClientProjection)]
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientMethod)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ClientMethod)]
 
 ## <a name="unsupported-client-evaluation"></a>不支援的用戶端評估
 
 雖然用戶端評估很有用，但有時可能會導致效能不佳。 請考慮下列查詢，在其中，helper 方法現在用於 where 篩選準則中。 因為無法在資料庫中套用篩選，所以必須將所有資料提取至記憶體中，以將篩選套用至用戶端。 根據篩選和伺服器上的資料量，用戶端評估可能會導致效能不佳。 因此 Entity Framework Core 會封鎖這類用戶端評估，並擲回執行時間例外狀況。
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientWhere)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ClientWhere)]
 
 ## <a name="explicit-client-evaluation"></a>明確用戶端評估
 
@@ -44,7 +44,7 @@ ms.locfileid: "90071169"
 
 在這種情況下，您可以藉由呼叫方法（例如 `AsEnumerable` 或 `ToList` (） `AsAsyncEnumerable` 或 `ToListAsync` 非同步) 來明確加入宣告用戶端評估。 藉由使用，您將會 `AsEnumerable` 串流處理結果，但使用 `ToList` 會藉由建立清單來產生緩衝，這也會佔用額外的記憶體。 但是，如果您要列舉多次，則將結果儲存在清單中有助於更多，因為資料庫只有一個查詢。 根據特定使用方式，您應該評估哪一種方法對案例而言更有用。
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ExplicitClientEval)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ExplicitClientEvaluation)]
 
 ## <a name="potential-memory-leak-in-client-evaluation"></a>用戶端評估可能發生記憶體流失
 

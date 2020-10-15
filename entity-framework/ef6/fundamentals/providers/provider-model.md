@@ -1,15 +1,15 @@
 ---
 title: Entity Framework 6 提供者模型-EF6
 description: Entity Framework 6 中的 Entity Framework 6 提供者模型
-author: divega
+author: ajcvickers
 ms.date: 06/27/2018
 uid: ef6/fundamentals/providers/provider-model
-ms.openlocfilehash: 4fc45ba5fe916253be348182196be236729d685d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 15b5443ff05b5c8704f80d4f2f83b4ed20edd1c0
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90074012"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063188"
 ---
 # <a name="the-entity-framework-6-provider-model"></a>Entity Framework 6 提供者模型
 
@@ -75,7 +75,7 @@ EF 相依于具有衍生自 Dbproviderservices.createdatabase 的類型，以便
 
 ### <a name="config-file-registration"></a>組態檔註冊
 
-要使用的 Dbproviderservices.createdatabase 類型會在應用程式佈建檔的 [entityFramework] 區段的 [提供者] 清單中註冊為提供者元素。 例如：
+要使用的 Dbproviderservices.createdatabase 類型會在應用程式佈建檔的 [entityFramework] 區段的 [提供者] 清單中註冊為提供者元素。 例如︰
 
 ``` xml
 <entityFramework>
@@ -89,7 +89,7 @@ _類型_字串必須是要使用之 dbproviderservices.createdatabase 的實作�
 
 ### <a name="code-based-registration"></a>程式碼架構註冊
 
-從 EF6 提供者開始也可以使用程式碼進行註冊。 這允許使用 EF 提供者，而不需要變更應用程式的設定檔。 若要使用以程式碼為基礎的設定，應用程式應建立 >dbconfiguration 類別，如以程式 [代碼為基礎](https://msdn.com/data/jj680699)的設定檔中所述。 然後，>dbconfiguration 類別的函式應該呼叫 SetProviderServices 以註冊 EF 提供者。 例如：
+從 EF6 提供者開始也可以使用程式碼進行註冊。 這允許使用 EF 提供者，而不需要變更應用程式的設定檔。 若要使用以程式碼為基礎的設定，應用程式應建立 >dbconfiguration 類別，如以程式 [代碼為基礎](https://msdn.com/data/jj680699)的設定檔中所述。 然後，>dbconfiguration 類別的函式應該呼叫 SetProviderServices 以註冊 EF 提供者。 例如︰
 
 ``` csharp
 public class MyConfiguration : DbConfiguration
@@ -162,7 +162,7 @@ public override object GetService(Type type, object key)
 
 從 EF5 開始，EntityFramework NuGet 套件會自動在設定檔中註冊 SQL Express 連接處理站或 LocalDb 連接 factory。
 
-例如：
+例如︰
 
 ``` xml
 <entityFramework>
@@ -206,8 +206,8 @@ EF6 導入了新的運算式類型 DbInExpression，其已加入以解決使用�
 
 安裝 EntityFramework NuGet 套件時，它會註冊 PowerShell 模組，其中包含兩個對提供者套件非常實用的命令：
 
-*   EFProvider 會在目標專案的設定檔中加入提供者的新實體，並確定它位於已註冊之提供者清單的結尾。
-*   EFDefaultConnectionFactory 會在目標專案的設定檔中加入或更新 defaultConnectionFactory 註冊。
+*   Add-EFProvider 會在目標專案的設定檔中新增提供者的新實體，並確定它位於已註冊之提供者清單的結尾。
+*   Add-EFDefaultConnectionFactory 在目標專案的設定檔中新增或更新 defaultConnectionFactory 註冊。
 
 這兩個命令會負責將 entityFramework 區段新增至設定檔，並視需要新增提供者集合。
 

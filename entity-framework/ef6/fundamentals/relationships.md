@@ -1,15 +1,15 @@
 ---
 title: 關聯性、導覽屬性和外鍵-EF6
 description: Entity Framework 6 中的關聯性、導覽屬性和外鍵
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/relationships
-ms.openlocfilehash: 65caacfbd860b5b896695c208b55b9c66d11255d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 956a24051c89d410e052ab02f073e693e1934a74
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072248"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062967"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>關聯性、導覽屬性和外鍵
 
@@ -95,7 +95,7 @@ public class Department
   course.Department = department;
   ```
 
-- 若要刪除關聯性，請將導覽屬性設定為 `null` 。 如果您正在使用以 .NET 4.0 為基礎的 Entity Framework，則必須先載入相關端，才能將其設定為 null。 例如：   
+- 若要刪除關聯性，請將導覽屬性設定為 `null` 。 如果您正在使用以 .NET 4.0 為基礎的 Entity Framework，則必須先載入相關端，才能將其設定為 null。 例如︰   
   ``` csharp
   context.Entry(course).Reference(c => c.Department).Load();
   course.Department = null;

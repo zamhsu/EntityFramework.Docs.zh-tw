@@ -2,15 +2,14 @@
 title: 管理遷移-EF Core
 description: 新增、移除及以其他方式管理使用 Entity Framework Core 的資料庫架構遷移
 author: bricelam
-ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: 366824cecab57a0f1744fa58cc12e5d3f6675723
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: fdfda6f3dea306fbbc343c1be3f4d5754d1f65c4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617969"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062057"
 ---
 # <a name="managing-migrations"></a>管理遷移
 
@@ -31,7 +30,7 @@ dotnet ef migrations add AddBlogCreatedTimestamp
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Add-Migration AddBlogCreatedTimestamp
 ```
 
@@ -59,7 +58,7 @@ dotnet ef migrations add InitialCreate --namespace Your.Namespace
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Add-Migration InitialCreate -Namespace Your.Namespace
 ```
 
@@ -73,7 +72,7 @@ EF Core 通常會建立精確的遷移，您應該一律檢查程式碼，並確
 
 其中一個值得注意的範例是，當您重新命名屬性時，需要進行自訂的遷移。 例如，如果您將屬性從重新命名 `Name` 為 `FullName` ，EF Core 將會產生下列遷移：
 
-```c#
+```csharp
 migrationBuilder.DropColumn(
     name: "Name",
     table: "Customers");
@@ -86,7 +85,7 @@ migrationBuilder.AddColumn<string>(
 
 EF Core 通常無法知道何時要卸載資料行，並建立新的資料行 (兩個不同的變更) ，以及何時應重新命名資料行。 如果上述的遷移依原樣套用，您所有的客戶名稱都會遺失。 若要重新命名資料行，請以下列方式取代上述產生的遷移：
 
-```c#
+```csharp
 migrationBuilder.RenameColumn(
     name: "Name",
     table: "Customers",
@@ -100,7 +99,7 @@ migrationBuilder.RenameColumn(
 
 雖然您可以透過內建 API 來重新命名資料行，但在許多情況下都無法這麼做。 例如，我們可能想要 `FirstName` 使用單一的新屬性來取代現有和 `LastName` 屬性 `FullName` 。 EF Core 所產生的遷移將如下所示：
 
-``` csharp
+```csharp
 migrationBuilder.DropColumn(
     name: "FirstName",
     table: "Customer");
@@ -117,7 +116,7 @@ migrationBuilder.AddColumn<string>(
 
 同樣地，這會導致不必要的資料遺失。 若要從舊的資料行傳送資料，我們會重新排列遷移，並引進原始 SQL 作業，如下所示：
 
-``` csharp
+```csharp
 migrationBuilder.AddColumn<string>(
     name: "FullName",
     table: "Customer",
@@ -144,7 +143,7 @@ migrationBuilder.DropColumn(
 
 例如，下列遷移會建立 SQL Server 預存程式：
 
-```c#
+```csharp
 migrationBuilder.Sql(
 @"
     EXEC ('CREATE PROCEDURE getFullName
@@ -178,7 +177,7 @@ dotnet ef migrations remove
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Remove-Migration
 ```
 
@@ -206,4 +205,7 @@ dotnet ef migrations list
 * 刪除您的 **遷移** 資料夾
 * 建立新的遷移，並為其產生 SQL 腳本
 * 在您的資料庫中，刪除「遷移記錄」資料表中的所有資料列
-* 將單一資料列插入至「遷移」記錄，以記錄已套用第一個遷移，因為您的資料表已經存在。 Insert SEQL 是上面所產生之 SQL 腳本中的最後一個作業。
+* 將單一資料列插入至「遷移」記錄，以記錄已套用第一個遷移，因為您的資料表已經存在。 Insert SQL 是上面所產生之 SQL 腳本中的最後一個作業。
+
+> [!WARNING]
+> 刪除**遷移**資料夾時，任何[自訂的遷移程式碼](#customize-migration-code)都將遺失。  您必須手動將任何自訂套用至新的初始遷移，才能予以保留。

@@ -2,15 +2,14 @@
 title: 資料植入-EF Core
 description: 使用資料植入來以 Entity Framework Core 的初始資料集填入資料庫
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 11/02/2018
 uid: core/modeling/data-seeding
-ms.openlocfilehash: 1d7adbe45c4cbc64a39485c76d8f516e32ffeba5
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f8284d7473c6fbcafde25d01ec0709c2d50b666f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071598"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063695"
 ---
 # <a name="data-seeding"></a>資料植入
 
@@ -23,9 +22,6 @@ ms.locfileid: "90071598"
 * 自訂初始化邏輯
 
 ## <a name="model-seed-data"></a>模型種子資料
-
-> [!NOTE]
-> 此功能是 EF Core 2.1 中的新功能。
 
 不同于 EF6，在 EF Core 中，植入資料可以與實體類型相關聯，做為模型設定的一部分。 然後 EF Core 的 [遷移](xref:core/managing-schemas/migrations/index) 可以自動計算將資料庫升級至新版本的模型時，必須套用的插入、更新或刪除作業。
 

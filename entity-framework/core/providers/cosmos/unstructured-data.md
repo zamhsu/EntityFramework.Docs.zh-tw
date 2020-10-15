@@ -2,15 +2,14 @@
 title: Azure Cosmos DB 提供者-使用非結構化資料-EF Core
 description: 如何使用 Entity Framework Core 處理 Azure Cosmos DB 非結構化資料
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/unstructured-data
-ms.openlocfilehash: 9f96af00e8fcb012c33fc7528787560ea3a5e481
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: ac497c9f5540557b931db935f4f3ca480edf010d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619049"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064020"
 ---
 # <a name="working-with-unstructured-data-in-ef-core-azure-cosmos-db-provider"></a>使用 EF Core Azure Cosmos DB 提供者中的非結構化資料
 
@@ -22,7 +21,7 @@ EF Core 的設計可讓您輕鬆地使用在模型中定義之架構之後的資
 
 [!code-csharp[Unmapped](../../../../samples/core/Cosmos/UnstructuredData/Sample.cs?highlight=23,24&name=Unmapped)]
 
-``` json
+```json
 {
     "Id": 1,
     "PartitionKey": "1",
@@ -55,7 +54,7 @@ EF Core 的設計可讓您輕鬆地使用在模型中定義之架構之後的資
 
 ## <a name="missing-property-values"></a>遺漏的屬性值
 
-在上述範例中，我們已 `"TrackingNumber"` 從訂單中移除該屬性。 由於索引編制在 Cosmos DB 中的運作方式，在投影中參考遺漏屬性的查詢可能會傳回非預期的結果。 例如：
+在上述範例中，我們已 `"TrackingNumber"` 從訂單中移除該屬性。 由於索引編制在 Cosmos DB 中的運作方式，在投影中參考遺漏屬性的查詢可能會傳回非預期的結果。 例如︰
 
 [!code-csharp[MissingProperties](../../../../samples/core/Cosmos/UnstructuredData/Sample.cs?name=MissingProperties)]
 

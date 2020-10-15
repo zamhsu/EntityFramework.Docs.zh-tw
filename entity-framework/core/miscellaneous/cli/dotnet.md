@@ -2,15 +2,14 @@
 title: EF Core 工具參考 ( .NET CLI) -EF Core
 description: Entity Framework Core .NET Core CLI 工具的參考指南
 author: bricelam
-ms.author: bricelam
-ms.date: 09/17/2020
+ms.date: 10/13/2020
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: ee1caebcda93f627d285878f8594688a0f08c194
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 4056fb99659ee3390d16b18eca9b12cfc8a2dd03
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210389"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062512"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Entity Framework Core 工具參考-.NET Core CLI
 
@@ -24,59 +23,37 @@ ms.locfileid: "91210389"
 
 ## <a name="installing-the-tools"></a>安裝工具
 
-安裝程式相依于專案類型和版本：
+`dotnet ef` 可以安裝為全域或本機工具。 大部分的開發人員偏好 `dotnet ef` 使用下列命令安裝為通用工具：
 
-* EF Core 3.x 和5。x
-* ASP.NET Core 2.1 版和更新版本
-* EF Core 2。x
+```dotnetcli
+dotnet tool install --global dotnet-ef
+```
 
-### <a name="ef-core-3x-and-5x"></a>EF Core 3.x 和5。x
+若要使用它作為本機工具，請使用 [工具資訊清單](/dotnet/core/tools/global-tools#install-a-local-tool)檔，還原將它宣告為工具相依性之專案的相依性。
 
-* `dotnet ef` 必須安裝為全域或本機工具。 大部分的開發人員偏好 `dotnet ef` 使用下列命令安裝為通用工具：
+使用下列命令來更新工具工具：
 
-  ```dotnetcli
-  dotnet tool install --global dotnet-ef
-  ```
+```dotnetcli
+dotnet tool update --global dotnet-ef
+```
 
-  `dotnet ef` 也可以用來做為本機工具。 若要使用它作為本機工具，請使用 [工具資訊清單](/dotnet/core/tools/global-tools#install-a-local-tool)檔，還原將它宣告為工具相依性之專案的相依性。
+在特定專案上使用工具之前，您必須先將 `Microsoft.EntityFrameworkCore.Design` 套件新增至其中。
 
-* 安裝 [.NET Core SDK](https://www.microsoft.com/net/download/core)。
-* 安裝最新的 `Microsoft.EntityFrameworkCore.Design` 套件。
+```dotnetcli
+dotnet add package Microsoft.EntityFrameworkCore.Design
+```
 
-  ```dotnetcli
-  dotnet add package Microsoft.EntityFrameworkCore.Design
-  ```
-
-### <a name="aspnet-core-21"></a>ASP.NET Core 2.1 +
-
-* 安裝目前的 [.NET Core SDK](https://www.microsoft.com/net/download/core)。 即使您有最新版本的 Visual Studio，也必須安裝 SDK。
-
-  這是 ASP.NET Core 2.1 + 所需的所有功能，因為 `Microsoft.EntityFrameworkCore.Design` 套件已包含在 [AspNetCore 中繼套件](/aspnet/core/fundamentals/metapackage-app)中。
-
-### <a name="ef-core-2x-not-aspnet-core"></a>EF Core 2.x (不 ASP.NET Core) 
-
-這些 `dotnet ef` 命令包含在 .NET Core SDK 中，但若要啟用命令，您必須安裝 `Microsoft.EntityFrameworkCore.Design` 套件。
-
-* 安裝目前的 [.NET Core SDK](https://www.microsoft.com/net/download/core)。 即使您有最新版本的 Visual Studio，也必須安裝 SDK。
-
-* 安裝最新的穩定 `Microsoft.EntityFrameworkCore.Design` 套件。
-
-  ```dotnetcli
-  dotnet add package Microsoft.EntityFrameworkCore.Design
-  ```
-
-### <a name="verify-installation"></a>確認安裝
+### <a name="verify-installation"></a>驗證安裝
 
 執行下列命令，確認已正確安裝 EF Core CLI 工具：
 
   ```dotnetcli
-  dotnet restore
   dotnet ef
   ```
 
 命令的輸出會識別使用中的工具版本：
 
-```console
+```output
 
                      _/\__
                ---==/    \\

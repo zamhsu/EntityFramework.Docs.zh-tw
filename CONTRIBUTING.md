@@ -11,7 +11,7 @@
 您需要對 [Git 與 GitHub.com](https://guides.github.com/activities/hello-world/) 有基本了解。
 
 * 建立一項[議題](https://github.com/dotnet/EntityFramework.Docs/issues/new)，描述您要執行的動作，例如變更現有文章或建立新的文章。 在您投入更多時間之前，請先等候 EF 小組的核准。
-* 分支[dotnet/EntityFramework](https://github.com/dotnet/EntityFramework.Docs/)存放庫，並為您的變更建立分支。
+* 將 [dotnet/EntityFramework.Doc](https://github.com/dotnet/EntityFramework.Docs/) 的存放庫分叉，並為您的變更建立分支。
 * 將內含變更的提取要求 (PR) 提交給管理員。
 * 回應 PR 意見。
 
@@ -33,13 +33,13 @@
 
 若要將完整程式碼檔案轉譯為程式碼片段：
 
-``` none
+```none
 [!code-csharp[Main](../../../samples/core/saving/Program.cs)]
 ```
 
 若要使用行號，將一部分檔案轉譯為程式碼片段：
 
-``` none
+```none
 [!code-csharp[Main](../../../samples/core/saving/Program.cs?range=1-10]
 ```
 
@@ -47,13 +47,13 @@
 
 若要轉譯名為 "snippet_Example" 的 C# 區域：
 
-``` none
+```none
 [!code-csharp[Main](../../../samples/core/saving/Program.cs?name=snippet_Example)]
 ```
 
 若要醒目提示轉譯程式碼片段中所選取的行 (通常會以黃色背景色彩呈現)：
 
-``` none
+```none
 [!code-csharp[Main](../../../samples/core/saving/Program.cs?name=snippet_Example&highlight=1-3,10,20-25)]
 ```
 
@@ -69,7 +69,7 @@ DocFX 需要 .NET Framework (Windows) 或 Mono (Linux 或 macOS)。
 * 將 DocFX 新增至您的 PATH。
 * 在命令列視窗中，巡覽至複製的存放庫 (其中包含 *docfx.json* 檔案)，然後執行下列命令：
 
-   ``` console
+   ```console
    docfx -t default --serve
    ```
 
@@ -82,7 +82,7 @@ DocFX 需要 .NET Framework (Windows) 或 Mono (Linux 或 macOS)。
 * 解壓縮至 `\bin\docfx`。
 * 建立 **docfx** 的別名：
 
-  ``` console
+  ```console
   function docfx {
     mono $HOME/bin/docfx/docfx.exe
   }
@@ -94,6 +94,6 @@ DocFX 需要 .NET Framework (Windows) 或 Mono (Linux 或 macOS)。
 
 * 執行複製的存放庫中之 **docfx**，來建置網站，並執行 **docfx-serve** 於 `http://localhost:8080` 檢視網站。
 
-## <a name="voice-and-tone"></a>語態和語氣
+## <a name="voice-and-tone"></a>語氣和語調
 
 我們撰寫文件的目標是盡可能讓越多使用者輕鬆了解越好。 為此，我們制定了書寫樣式導方針，並要求參與者務必遵循。 如需詳細資訊，請參閱 .NET Core 存放庫中的[語態和語氣指導方針](https://github.com/dotnet/docs/blob/master/styleguide/voice-tone.md)。

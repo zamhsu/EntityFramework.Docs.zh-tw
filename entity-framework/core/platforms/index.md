@@ -4,12 +4,12 @@ description: 跨 Entity Framework Core 版本的支援平台資訊
 author: bricelam
 ms.date: 06/26/2020
 uid: core/platforms/index
-ms.openlocfilehash: f57002af869c16eeedf931085f5e5ff9e72e2984
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 3efec5fda2aecf44306a9d41386de1e9b9612850
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616648"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063968"
 ---
 # <a name="net-implementations-supported-by-ef-core"></a>EF Core 支援的 .NET 實作
 
@@ -45,13 +45,13 @@ ms.locfileid: "89616648"
 
 編輯專案檔，並確定下列項目出現在初始屬性群組中：
 
-``` xml
+```xml
 <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 ```
 
 針對測試專案，也請確定下列項目存在：
 
-``` xml
+```xml
 <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
 ```
 
@@ -59,7 +59,7 @@ ms.locfileid: "89616648"
 
 如果可能，我們也建議從 NuGetpackages.config 移轉至 PackageReference。 請將下列屬性新增至您的專案檔：
 
-``` xml
+```xml
 <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 ```
 

@@ -2,14 +2,14 @@
 title: 實體類型-EF Core
 description: 如何使用 Entity Framework Core 來設定和對應實體類型
 author: roji
-ms.date: 12/03/2019
+ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: fead7f9e37efb7f674f429acbfd16c2ca78480d4
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: bfefa29c08679a1524c00769b3495d75a301e2d3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071507"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062226"
 ---
 # <a name="entity-types"></a>實體類型
 
@@ -40,6 +40,19 @@ ms.locfileid: "90071507"
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IgnoreType.cs?name=IgnoreType&highlight=3)]
 
 ***
+
+### <a name="excluding-from-migrations"></a>從遷移中排除
+
+> [!NOTE]
+> 在 EF Core 5.0 中新增了從遷移中排除資料表的功能。
+
+將相同的實體類型對應到多個型別時，有時會很有用 `DbContext` 。 尤其是 [在使用系](https://www.martinfowler.com/bliki/BoundedContext.html)結內容時更是如此，因為每個限定的內容通常會有不同的 `DbContext` 類型。
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableExcludeFromMigrations.cs?name=TableExcludeFromMigrations&highlight=4)]
+
+使用此設定時，將不會建立 `blogs` 資料表，但 `Blog` 仍會包含在模型中，而且可以正常使用。
+
+如果您需要再次使用遷移來開始管理資料表，則應該在未排除的位置建立新的遷移 `blogs` 。 下一個遷移現在會包含對資料表所做的任何變更。
 
 ## <a name="table-name"></a>資料表名稱
 
@@ -78,3 +91,14 @@ ms.locfileid: "90071507"
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/DefaultSchema.cs?name=DefaultSchema&highlight=3)]
 
 請注意，設定預設架構也會影響其他資料庫物件，例如序列。
+
+## <a name="view-mapping"></a>視圖對應
+
+您可以使用流暢的 API，將實體類型對應至資料庫檢視。
+
+> [!Note]
+> EF 會假設參考的視圖已經存在於資料庫中，而不會在遷移時自動建立。
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ViewNameAndSchema.cs?name=ViewNameAndSchema&highlight=1)]
+
+ 對應至 view 會移除預設的資料表對應，但是實體類型也可以明確地對應到資料表。 在此情況下，查詢對應將用於查詢，而資料表對應將用於更新。

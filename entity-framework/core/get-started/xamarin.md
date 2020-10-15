@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: b4a7e2260337d74329d309e9db32fe97a2131d73
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 0552038d471e294834bed9e3bf1f05fd74c39192
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619292"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062538"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>使用 EF Core 和 Xamarin 消費者入門
 
@@ -19,7 +19,7 @@ ms.locfileid: "89619292"
 您可以使用 Windows 上的 Visual Studio 或 Visual Studio for Mac 來遵循教學課程。
 
 > [!TIP]
-> 您可以 [在 GitHub 上](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Xamarin)查看這篇文章的範例。
+> 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Xamarin)。
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -72,6 +72,14 @@ ms.locfileid: "89619292"
 下列各節將逐步引導您完成範例專案中的程式碼，該程式碼會使用 EF Core 搭配 Xamarin，從 SQLite 資料庫讀取、建立、更新及刪除資料。
 
 假設您已經熟悉 [顯示資料](/xamarin/xamarin-forms/app-fundamentals/data-binding/) 並在 [頁面之間流覽](/xamarin/xamarin-forms/app-fundamentals/navigation/)的 Xamarin. Forms 主題。
+
+> [!IMPORTANT]
+> Entity Framework Core 使用反映來叫用 Xamarin 連結器可能在 **發行** 模式設定中去除的函式。 您可以透過兩種方式來避免這種情況。
+> 
+> * 第一個方法是將新增 `--linkskip System.Core` 至**iOS 組建**選項中的**其他 mtouch 引數**。
+> * 或者， **Linker behavior** `Don't Link` 在**ios 組建**選項中將 [Xamarin] 連結器行為設定為。
+> 本文將[詳細說明 xamarin 連結器](/xamarin/ios/deploy-test/linker)，包括如何在 xamarin 上設定行為。
+> 
 
 ## <a name="entity-framework-core-nuget-packages"></a>Entity Framework Core NuGet 套件
 

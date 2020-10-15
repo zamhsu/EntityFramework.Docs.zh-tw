@@ -2,15 +2,14 @@
 title: 已中斷連線的實體 - EF Core
 description: 在 Entity Framework Core 中使用已中斷連線、未追蹤的實體（跨多個內容實例）
 author: ajcvickers
-ms.author: avickers
 ms.date: 10/27/2016
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: d9b6d2d2c0761dd6f670ba51f935c866e10460b7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f21cc71ef11ee4ef37618a68d5a5219e8174bf8b
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070883"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063565"
 ---
 # <a name="disconnected-entities"></a>已中斷連線的實體
 
@@ -74,9 +73,6 @@ DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在
 
 Update 方法通常會將實體標示為要進行更新，而不是插入。 不過，如果實體有自動產生的索引鍵，且尚未設定任何索引鍵值，就會改為將實體標示為要進行插入。
 
-> [!TIP]  
-> 這是在 EF Core 2.0 中所導入的行為。 在舊版中，一律是必須明確選擇 Add 或 Update。
-
 如果實體未使用自動產生的金鑰，應用程式就必須判斷是應該插入還是更新實體：例如：
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntityWithFind)]
@@ -131,7 +127,7 @@ Update 會將圖表中任何未設定索引鍵值的實體 (部落格或文章) 
 
 處理刪除可能相當棘手，因為當實體不存在時，常常意謂著應該將其刪除。 其中一個處理此情況的方式是使用「虛刪除」來將實體標示為已刪除，而不是實際進行刪除。 如此一來，刪除就變成與更新相同。 您可以在使用[查詢篩選](xref:core/querying/filters)時實作虛刪除。
 
-針對真實的刪除，常見的模式是使用查詢模式的延伸來執行基本上是圖表差異的操作。 例如：
+針對真實的刪除，常見的模式是使用查詢模式的延伸來執行基本上是圖表差異的操作。 例如︰
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 
