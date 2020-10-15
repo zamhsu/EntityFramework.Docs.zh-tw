@@ -1,15 +1,15 @@
 ---
 title: EF Core 2.2 的新功能 - EF Core
 description: Entity Framework Core 2.2 的變更和改進
-author: divega
+author: ajcvickers
 ms.date: 11/14/2018
 uid: core/what-is-new/ef-core-2.2
-ms.openlocfilehash: 68e3cbd5c7345330a47f1457c9b096fee5dd49e9
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ca71c7479254b25fe932e6abf43fe0fd8f1781b3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072325"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065689"
 ---
 # <a name="new-features-in-ef-core-22"></a>EF Core 2.2 中的新功能
 
@@ -25,9 +25,9 @@ EF Core 2.2 現已支援使用來自多個資料庫 (使用來自 [NetTopologySu
 這類的提供者延伸模組現已供 [SQL Server](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite/)、[SQLite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite/) 及 [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite/) (來自 [Npgsql 專案](https://www.npgsql.org/)) 使用。
 空間類型可搭配 [EF Core 記憶體內部提供者](xref:core/providers/in-memory/index)直接使用，且不需要額外的延伸模組。
 
-安裝提供者延伸模組之後，您可將支援類型的屬性，新增至您的實體。 例如：
+安裝提供者延伸模組之後，您可將支援類型的屬性，新增至您的實體。 例如︰
 
-``` csharp
+```csharp
 using NetTopologySuite.Geometries;
 
 namespace MyApp
@@ -36,7 +36,7 @@ namespace MyApp
   {
     [Key]
     public string Name { get; set; }
-  
+
     [Required]
     public Point Location { get; set; }
   }
@@ -45,7 +45,7 @@ namespace MyApp
 
 接下來可以保存具有空間資料的實體：
 
-``` csharp
+```csharp
 using (var context = new MyDbContext())
 {
     context.Add(
@@ -60,11 +60,11 @@ using (var context = new MyDbContext())
 
 還可以依據空間資料及作業，執行資料庫查詢：
 
-``` csharp
-  var nearestFriends =
-      (from f in context.Friends
-      orderby f.Location.Distance(myLocation) descending
-      select f).Take(5).ToList();
+```csharp
+var nearestFriends =
+    (from f in context.Friends
+    orderby f.Location.Distance(myLocation) descending
+    select f).Take(5).ToList();
 ```
 
 如需此功能的詳細資訊，請參閱[空間類型文件](xref:core/modeling/spatial)。
@@ -85,7 +85,7 @@ EF Core 2.2 將傳送擁有權的功能，擴展到一對多關聯。
 
 您可透過呼叫新的 OwnsMany() API 使用此功能：
 
-``` csharp
+```csharp
 modelBuilder.Entity<Customer>().OwnsMany(c => c.Addresses);
 ```
 
@@ -98,16 +98,16 @@ modelBuilder.Entity<Customer>().OwnsMany(c => c.Addresses);
 若要利用查詢標籤，您可以使用新的 TagWith() 方法，標註 LINQ 查詢。
 使用先前範例的空間查詢：
 
-``` csharp
-  var nearestFriends =
-      (from f in context.Friends.TagWith(@"This is my spatial query!")
-      orderby f.Location.Distance(myLocation) descending
-      select f).Take(5).ToList();
+```csharp
+var nearestFriends =
+    (from f in context.Friends.TagWith(@"This is my spatial query!")
+    orderby f.Location.Distance(myLocation) descending
+    select f).Take(5).ToList();
 ```
 
 此 LINQ 查詢會產生下列 SQL 輸出：
 
-``` sql
+```sql
 -- This is my spatial query!
 
 SELECT TOP(@__p_1) [f].[Name], [f].[Location]

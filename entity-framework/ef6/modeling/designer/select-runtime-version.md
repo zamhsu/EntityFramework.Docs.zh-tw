@@ -1,14 +1,14 @@
 ---
 title: 選取 EF Designer 模型 Entity Framework 執行階段版本-EF6
 description: 在 Entity Framework 6 中選取 EF Designer 模型 Entity Framework 執行階段版本
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
-ms.openlocfilehash: 2025ca5e46c7d9a38ba596d57c023a2c1b224129
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: dcd06ed9585028b3a318d867b03980254979a32f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073262"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066092"
 ---
 # <a name="selecting-entity-framework-runtime-version-for-ef-designer-models"></a>選取 EF Designer 模型 Entity Framework 執行階段版本
 > [!NOTE]
@@ -27,7 +27,7 @@ ms.locfileid: "90073262"
 1.  在方案總管中的專案上按一下滑鼠右鍵，然後選取 [**管理 NuGet 套件 ...** ]
 2.  選取 **更新**
 3.  選取 **EntityFramework** (確定它會將它更新為您想要的版本) 
-4.  按一下 [**更新**]
+4.  按一下 [更新] 
 
  
 

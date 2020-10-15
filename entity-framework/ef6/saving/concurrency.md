@@ -1,15 +1,15 @@
 ---
 title: 處理並行衝突-EF6
 description: 處理 Entity Framework 6 中的並行衝突
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/saving/concurrency
-ms.openlocfilehash: b6b1b3b9f593d437ed7da1873a878fcbdb3c3548
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 0cec285ab6071120e162567506d397a23c299177
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073726"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064506"
 ---
 # <a name="handling-concurrency-conflicts-ef6"></a>處理 (EF6) 的並行衝突
 
@@ -25,7 +25,7 @@ ms.locfileid: "90073726"
 
 ## <a name="resolving-optimistic-concurrency-exceptions-with-reload-database-wins"></a>使用重載 (資料庫 wins) 解析開放式平行存取例外狀況  
 
-您可以使用重載方法，以目前在資料庫中的值來覆寫實體目前的值。 然後，實體通常會以某種形式傳回給使用者，而且必須嘗試再次進行變更並重新儲存。 例如：  
+您可以使用重載方法，以目前在資料庫中的值來覆寫實體目前的值。 然後，實體通常會以某種形式傳回給使用者，而且必須嘗試再次進行變更並重新儲存。 例如︰  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -54,7 +54,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-模擬平行存取例外狀況的一個好方法是在 SaveChanges 呼叫上設定中斷點，然後使用其他工具（例如 SQL Server Management Studio）來修改儲存在資料庫中的實體。 您也可以在 SaveChanges 之前插入一行，以使用 SqlCommand 直接更新資料庫。 例如：  
+模擬平行存取例外狀況的一個好方法是在 SaveChanges 呼叫上設定中斷點，然後使用其他工具（例如 SQL Server Management Studio）來修改儲存在資料庫中的實體。 您也可以在 SaveChanges 之前插入一行，以使用 SqlCommand 直接更新資料庫。 例如︰  
 
 ``` csharp
 context.Database.SqlCommand(
@@ -96,7 +96,7 @@ using (var context = new BloggingContext())
 
 ## <a name="custom-resolution-of-optimistic-concurrency-exceptions"></a>自訂開放式平行存取例外狀況的解決方式  
 
-有時候您可能會想要將目前在資料庫中的值與實體中目前的值結合。 這通常需要一些自訂邏輯或使用者互動。 例如，您可能會向使用者呈現表單，其中包含目前的值、資料庫中的值，以及一組預設的已解決值。 然後，使用者會視需要編輯已解析的值，並將這些值儲存至資料庫。 您可以使用從 CurrentValues 傳回的 DbPropertyValues 物件，然後在實體的專案上 GetDatabaseValues，來完成這項工作。 例如：  
+有時候您可能會想要將目前在資料庫中的值與實體中目前的值結合。 這通常需要一些自訂邏輯或使用者互動。 例如，您可能會向使用者呈現表單，其中包含目前的值、資料庫中的值，以及一組預設的已解決值。 然後，使用者會視需要編輯已解析的值，並將這些值儲存至資料庫。 您可以使用從 CurrentValues 傳回的 DbPropertyValues 物件，然後在實體的專案上 GetDatabaseValues，來完成這項工作。 例如︰  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -147,7 +147,7 @@ public void HaveUserResolveConcurrency(DbPropertyValues currentValues,
 
 ## <a name="custom-resolution-of-optimistic-concurrency-exceptions-using-objects"></a>使用物件自訂開放式平行存取例外狀況的解決方式  
 
-上述程式碼使用 DbPropertyValues 實例來傳遞目前、資料庫和已解析的值。 有時候，使用實體類型的實例可能比較容易。 您可以使用 DbPropertyValues 的 ToObject 和 SetValues 方法來完成這項工作。 例如：  
+上述程式碼使用 DbPropertyValues 實例來傳遞目前、資料庫和已解析的值。 有時候，使用實體類型的實例可能比較容易。 您可以使用 DbPropertyValues 的 ToObject 和 SetValues 方法來完成這項工作。 例如︰  
 
 ``` csharp
 using (var context = new BloggingContext())

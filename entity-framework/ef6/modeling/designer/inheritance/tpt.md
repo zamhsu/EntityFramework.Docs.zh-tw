@@ -1,15 +1,15 @@
 ---
 title: 設計工具 TPT 繼承-EF6
 description: Entity Framework 6 中的設計工具 TPT 繼承
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/inheritance/tpt
-ms.openlocfilehash: e60965550db3f140dfebf4c1952b3901b9b00aab
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f8e4198278fb44309916d57b44fb9af41d572108
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073366"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066170"
 ---
 # <a name="designer-tpt-inheritance"></a>設計工具 TPT 繼承
 本逐步解說將示範如何使用 Entity Framework Designer (EF Designer) ，在您的模型中執行每一類型的資料表 (TPT) 繼承。 一類一表 (Table-Per-Type) 繼承會在資料庫中使用個別資料表來維護繼承階層架構 (Inheritance Hierarchy) 中每一個類型的非繼承屬性和索引鍵屬性。

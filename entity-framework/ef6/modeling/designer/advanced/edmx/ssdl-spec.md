@@ -1,15 +1,15 @@
 ---
 title: SSDL 規格-EF6
 description: Entity Framework 6 中的 SSDL 規格
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/advanced/edmx/ssdl-spec
-ms.openlocfilehash: dbcd4c771e8ca1324a0520f9c8ca13ba4661487b
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 33052967bb543048fc0885957cf1f37abfac9cd2
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070207"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066300"
 ---
 # <a name="ssdl-specification"></a>SSDL 規格
 存放結構定義語言 (SSDL) 是一種 XML 架構語言，會描述 Entity Framework 應用程式的儲存體模型。
@@ -713,7 +713,7 @@ SSDL 關聯集會透過 AssociationSetMapping 項目對應至 CSDL 關聯集。 
 | **名稱**                  | 是         | 對應資料行的名稱。                                                                                                                                                                                           |
 | **型別**                  | 是         | 對應資料行的類型。                                                                                                                                                                                           |
 | **可為 Null**              | 否          | **True** (預設值) 或 **False** ，取決於對應的資料行是否可以有 null 值。                                                                                                                  |
-| **值**          | 否          | 對應資料行的預設值。                                                                                                                                                                                  |
+| **DefaultValue**          | 否          | 對應資料行的預設值。                                                                                                                                                                                  |
 | **MaxLength**             | 否          | 對應資料行的長度上限。                                                                                                                                                                                 |
 | **FixedLength**           | 否          | **True** 或 **False** ，取決於對應的資料行值是否會儲存為固定長度字串。                                                                                                              |
 | **有效位數**             | 否          | 對應資料行的精確度。                                                                                                                                                                                      |

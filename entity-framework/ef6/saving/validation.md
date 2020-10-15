@@ -1,14 +1,14 @@
 ---
 title: 驗證-EF6
 description: Entity Framework 6 中的驗證
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
-ms.openlocfilehash: 29f5e22d7f2e388d6e8271a35d10bbf6e318eafa
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 224cdd8b033b0ea534efb547fd4d39ac922a6faa
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073687"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064402"
 ---
 # <a name="data-validation"></a>資料驗證
 > [!NOTE]

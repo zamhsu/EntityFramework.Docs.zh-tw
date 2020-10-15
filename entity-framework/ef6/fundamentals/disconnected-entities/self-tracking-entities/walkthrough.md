@@ -1,17 +1,17 @@
 ---
-title: 自我追蹤實體逐步解說-EF6
+title: Self-Tracking 實體逐步解說-EF6
 description: Entity Framework 6 的自我追蹤實體逐步解說
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough
-ms.openlocfilehash: 398be11d330f5a7413f5a84424217ea3eda446ef
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7c50bbc9fad10a474728b03e79b685c549cf675d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072794"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065598"
 ---
-# <a name="self-tracking-entities-walkthrough"></a>自我追蹤實體逐步解說
+# <a name="self-tracking-entities-walkthrough"></a>Self-Tracking 實體逐步解說
 > [!IMPORTANT]
 > 我們不再建議使用自我追蹤實體範本。 繼續提供該範本只是為了支援現有應用程式。 如果您的應用程式需要使用已中斷連線的實體圖形，請考慮使用 [Trackable Entities](https://trackableentities.github.io/) (可追蹤的實體) 之類的其他替代項目，這是一項類似於自我追蹤實體的技術，可由社群更積極地進行開發或使用低層級變更追蹤 API 來撰寫自訂程式碼。
 
@@ -23,7 +23,7 @@ ms.locfileid: "90072794"
 
 -   建立要存取的資料庫。
 -   建立包含模型的類別庫。
--   交換到自我追蹤實體產生器範本。
+-   交換至 Self-Tracking 實體產生器範本。
 -   將實體類別移至不同的專案。
 -   建立公開作業的 WCF 服務，以查詢和儲存實體。
 -   建立用戶端應用程式 (主控台和使用服務的 WPF) 。
@@ -104,7 +104,7 @@ ms.locfileid: "90072794"
 
 ## <a name="swap-to-ste-code-generation"></a>交換至 STE 程式碼產生
 
-現在我們需要停用預設的程式碼產生，並交換到自我追蹤實體。
+現在，我們需要停用預設的程式碼產生，並交換 Self-Tracking 實體。
 
 ### <a name="if-you-are-using-visual-studio-2012"></a>如果您使用 Visual Studio 2012
 
@@ -118,13 +118,13 @@ ms.locfileid: "90072794"
 ### <a name="if-you-are-using-visual-studio-2010"></a>如果您使用 Visual Studio 2010
 
 -   以滑鼠右鍵按一下 EF 設計工具介面上的空白區域，然後選取 [**新增程式碼產生專案 ...** ]。
--   從左窗格中選取程式**代碼**，然後**ADO.NET 自我追蹤實體**產生器
+-   從左窗格中選取 [程式**代碼**]，然後**ADO.NET Self-Tracking 實體**產生器]
 -   輸入**STETemplate**做為名稱，然後按一下 [**新增**]
 -   **STETemplate.tt**和**STETemplate.CoNtext.tt**檔案會直接新增至您的專案
 
 ## <a name="move-entity-types-into-separate-project"></a>將實體類型移至不同的專案
 
-若要使用自我追蹤實體，用戶端應用程式需要存取模型所產生的實體類別。 因為我們不想要將整個模型公開給用戶端應用程式，所以我們要將實體類別移至不同的專案。
+若要使用 Self-Tracking 實體，用戶端應用程式需要存取模型所產生的實體類別。 因為我們不想要將整個模型公開給用戶端應用程式，所以我們要將實體類別移至不同的專案。
 
 第一個步驟是停止產生現有專案中的實體類別：
 

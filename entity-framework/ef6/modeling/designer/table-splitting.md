@@ -1,15 +1,15 @@
 ---
 title: 設計工具資料表分割-EF6
 description: Entity Framework 6 中的設計工具資料表分割
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/table-splitting
-ms.openlocfilehash: 6fdb5050ab4d3860184f19ea056a0f2257e20a3c
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8f6db22913fb3ac8a4254c29b5f986eb6e14f18e
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073106"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066040"
 ---
 # <a name="designer-table-splitting"></a>設計工具資料表分割
 本逐步解說示範如何使用 Entity Framework Designer (EF Designer) 修改模型，將多個實體類型對應至單一資料表。
@@ -131,7 +131,7 @@ ms.locfileid: "90073106"
 
 -   執行內容的結果會執行下列**SELECT** 。FirstOrDefault ( # A1 並只選取與**Person**對應的資料行
 
-    ![選取1](~/ef6/media/select1.png)
+    ![選取 [1]](~/ef6/media/select1.png)
 
 -   下列**SELECT**是因為存取導覽屬性 existingPerson 而執行的結果，並只選取對應至**HireInfo**的資料行。
 

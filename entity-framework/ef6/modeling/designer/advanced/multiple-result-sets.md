@@ -1,15 +1,15 @@
 ---
 title: 具有多個結果集的預存程式-EF6
 description: Entity Framework 6 中具有多個結果集的預存程式
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/advanced/multiple-result-sets
-ms.openlocfilehash: 6b213b944ca06a7ca141746d86f1127be2fd7d87
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8c80e2b8c861a763b7f63ea2523194028498dace
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070220"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066274"
 ---
 # <a name="stored-procedures-with-multiple-result-sets"></a>具有多個結果集的預存程式
 有時候，使用預存程式時，您必須傳回一個以上的結果集。 此案例通常用來減少撰寫單一畫面所需的資料庫往返次數。在 EF5 之前，Entity Framework 可讓您呼叫預存程式，但只會將第一個結果集傳回給呼叫程式碼。

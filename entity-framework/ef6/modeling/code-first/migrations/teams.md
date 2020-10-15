@@ -1,15 +1,15 @@
 ---
 title: 小組環境中的 Code First 移轉-EF6
 description: Entity Framework 6 中的 Team 環境 Code First 移轉
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/migrations/teams
-ms.openlocfilehash: c3f12788f2aba85f54dc062bdb6a7919be47b56d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c617dc3c34e829585b21766c7738bd622890b286
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072222"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065078"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>小組環境中的 Code First 移轉
 > [!NOTE]
@@ -141,7 +141,7 @@ Developer \# 1 和 developer \# 2 現在會在其本機程式碼基底中對 EF 
 1.  確定您的本機程式碼基底中任何暫止的模型變更已寫入至遷移。 此步驟可確保您在產生空白遷移的時候，不會錯過任何合法的變更。
 2.  與原始檔控制同步。
 3.  執行 **更新-資料庫** 以套用其他開發人員已簽入的任何新的遷移。
-    **_注意：_** *如果您沒有從 Update-Database 命令得到任何警告，則不會從其他開發人員進行任何新的遷移，也不需要執行任何進一步的合併。*
+    **_注意：_** *如果您未收到 Update-Database 命令的任何警告，則不會從其他開發人員進行任何新的遷移，也不需要執行任何進一步的合併。*
 4.  執行 **新增-遷移 &lt; 挑選 \_ \_ 名稱 &gt; – IgnoreChanges** (例如， **新增-遷移 Merge – IgnoreChanges**) 。 這會產生一個包含所有中繼資料的遷移 (包括目前模型的快照集) 但是在比較目前的模型與最後一個遷移中的快照集時，將會忽略它所偵測到的任何變更 (這表示您會) 取得空白的 **向上** 和 **向下** 方法。
 5.  執行 **更新-資料庫** ，以使用更新的中繼資料重新套用最新的遷移。
 6.  執行課程) 的單元測試之後，繼續開發或提交至原始檔控制 (。
@@ -163,7 +163,7 @@ Developer \# 1 和 developer \# 2 現在會在其本機程式碼基底中對 EF 
 1.  確定您的本機程式碼基底中任何暫止的模型變更已寫入至遷移。 此步驟可確保您在產生空白遷移的時候，不會錯過任何合法的變更。
 2.  與原始檔控制同步。
 3.  執行 **更新-資料庫** 以套用其他開發人員已簽入的任何新的遷移。
-    **_注意：_** *如果您沒有從 Update-Database 命令得到任何警告，則不會從其他開發人員進行任何新的遷移，也不需要執行任何進一步的合併。*
+    **_注意：_** *如果您未收到 Update-Database 命令的任何警告，則不會從其他開發人員進行任何新的遷移，也不需要執行任何進一步的合併。*
 4.  執行**更新-資料庫-TargetMigration &lt; 第二 \_ 次的 \_ 遷移 &gt; ** (在我們接下來的範例中，我們將會**更新資料庫– TargetMigration AddRating**) 。 這會將資料庫復原到第二個遷移的狀態：有效地「取消套用」資料庫的最後一次遷移。
     **_注意：_** 您*必須執行此步驟，才能安全地編輯遷移的中繼資料，因為中繼資料也會儲存在 \_ \_ 資料庫的 MigrationsHistoryTable 中。這就是為什麼只有在您的本機程式碼基底中進行最後一次遷移時，才應該使用此選項。如果其他資料庫已套用最後的遷移，您也必須將它們回復並重新套用最後的遷移，以更新中繼資料。* 
 5.  執行**新增-遷移的 &lt; 完整 \_ 名稱， \_ 包括 \_ \_ \_ 上次 \_ 遷移的時間戳記** &gt; (在我們接下來的範例中，這會是類似**新增-遷移 201311062215252 \_ AddReaders**) 的內容。

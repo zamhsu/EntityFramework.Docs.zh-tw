@@ -1,15 +1,15 @@
 ---
 title: 使用實體狀態-EF6
 description: 使用 Entity Framework 6 中的實體狀態
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/saving/change-tracking/entity-state
-ms.openlocfilehash: 88c1b67b3eda02e79f7d10d5e46fdd3566361634
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 5373f7157882062e8a73b2bd414c6a8b9accdba4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073765"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064454"
 ---
 # <a name="working-with-entity-states"></a>使用實體狀態
 本主題將討論如何在內容中新增和附加實體，以及在 SaveChanges 期間 Entity Framework 如何處理這些專案。
@@ -39,7 +39,7 @@ SaveChanges 會針對不同狀態中的實體執行不同的專案：
 
 您可以藉由呼叫 DbSet 上的 Add 方法，將新的實體新增至內容。
 這會讓實體進入加入的狀態，這表示它會在下次呼叫 SaveChanges 時插入資料庫。
-例如：  
+例如︰  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -50,7 +50,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-將新實體新增至內容的另一種方式是將其狀態變更為 [已新增]。 例如：  
+將新實體新增至內容的另一種方式是將其狀態變更為 [已新增]。 例如︰  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -62,7 +62,7 @@ using (var context = new BloggingContext())
 ```  
 
 最後，您可以將新的實體連結到已追蹤的另一個實體，藉此將它加入至內容。
-這可能是因為將新實體新增至另一個實體的集合導覽屬性，或將另一個實體的參考導覽屬性設定為指向新的實體。 例如：  
+這可能是因為將新實體新增至另一個實體的集合導覽屬性，或將另一個實體的參考導覽屬性設定為指向新的實體。 例如︰  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -82,7 +82,7 @@ using (var context = new BloggingContext())
 
 ## <a name="attaching-an-existing-entity-to-the-context"></a>將現有實體附加至內容  
 
-如果您的實體已經存在於資料庫中，但目前未由內容追蹤，則您可以使用 DbSet 上的 Attach 方法告訴內容追蹤實體。 實體在內容中會處於未變更狀態。 例如：  
+如果您的實體已經存在於資料庫中，但目前未由內容追蹤，則您可以使用 DbSet 上的 Attach 方法告訴內容追蹤實體。 實體在內容中會處於未變更狀態。 例如︰  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -99,7 +99,7 @@ using (var context = new BloggingContext())
 
 請注意，如果呼叫 SaveChanges 時未進行任何其他的附加實體操作，就不會對資料庫進行任何變更。 這是因為實體處於未變更狀態。  
 
-將現有實體附加至內容的另一種方式是將其狀態變更為未變更。 例如：  
+將現有實體附加至內容的另一種方式是將其狀態變更為未變更。 例如︰  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -119,7 +119,7 @@ using (var context = new BloggingContext())
 ## <a name="attaching-an-existing-but-modified-entity-to-the-context"></a>將現有但修改過的實體附加至內容  
 
 如果您的實體已經存在於資料庫中，但變更可能已存在，您可以告知內容附加實體，並將其狀態設定為 [已修改]。
-例如：  
+例如︰  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -141,7 +141,7 @@ using (var context = new BloggingContext())
 
 ## <a name="changing-the-state-of-a-tracked-entity"></a>變更追蹤實體的狀態  
 
-您可以藉由在專案上設定 State 屬性，來變更已追蹤之實體的狀態。 例如：  
+您可以藉由在專案上設定 State 屬性，來變更已追蹤之實體的狀態。 例如︰  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -163,7 +163,7 @@ using (var context = new BloggingContext())
 
 某些應用程式的常見模式是將實體新增為新的 (導致資料庫插入) 或將實體附加為現有的，並將它標示為已修改 (產生資料庫更新) 取決於主鍵的值。
 例如，使用資料庫產生的整數主鍵時，通常會將具有零索引鍵的實體視為新的，並將具有非零索引鍵的實體視為現有的實體。
-您可以根據主鍵值的檢查來設定實體狀態，以達成這個模式。 例如：  
+您可以根據主鍵值的檢查來設定實體狀態，以達成這個模式。 例如︰  
 
 ``` csharp
 public void InsertOrUpdate(Blog blog)

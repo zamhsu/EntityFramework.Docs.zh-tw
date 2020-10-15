@@ -1,15 +1,15 @@
 ---
 title: 使用 migrate.exe-EF6
 description: 使用 Entity Framework 6 中的 migrate.exe
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/migrations/migrate-exe
-ms.openlocfilehash: 421b0a186afabdaa225816e0e5967633a95de959
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f57f56f7e3fe876c7265526bf6541e3c9e91ca7d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072170"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066365"
 ---
 # <a name="using-migrateexe"></a>使用 migrate.exe
 Code First 移轉可以用來從 visual studio 內更新資料庫，但也可以透過命令列工具 migrate.exe 來執行。 此頁面將快速瞭解如何使用 migrate.exe 來執行對資料庫的遷移。

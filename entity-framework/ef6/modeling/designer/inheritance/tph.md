@@ -1,15 +1,15 @@
 ---
 title: 設計工具 TPH 繼承-EF6
 description: Entity Framework 6 中的設計工具 TPH 繼承
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/inheritance/tph
-ms.openlocfilehash: 39675f9533dfef0ddad1867e3b70cd13b30708ea
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: bf689e02a76e46e5eee5a64cb9825e667c8cd65c
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073392"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064844"
 ---
 # <a name="designer-tph-inheritance"></a>設計工具 TPH 繼承
 本逐步解說將示範如何使用 Entity Framework Designer (EF Designer) ，在概念模型中執行每個階層的資料表 (TPH) 繼承。 TPH 繼承使用一個資料庫資料表來維護繼承階層中所有實體類型的資料。

@@ -1,15 +1,15 @@
 ---
 title: Model First-EF6
 description: Entity Framework 6 中的 Model First
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/workflows/model-first
-ms.openlocfilehash: 13c5e173182ad0781a674ce3d10f7374c4443bf9
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: b47c5805a63a1ea94baad4fb5eb137b633f6be1d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073158"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066027"
 ---
 # <a name="model-first"></a>Model First
 這段影片和逐步解說將提供使用 Entity Framework Model First 開發的簡介。 Model First 可讓您使用 Entity Framework Designer 建立新的模型，然後從模型產生資料庫架構。 模型會儲存在 EDMX 檔案 ( .edmx 副檔名) ，而且可以在 Entity Framework Designer 中加以查看和編輯。 您在應用程式中與互動的類別會自動從 EDMX 檔案產生。

@@ -1,15 +1,15 @@
 ---
 title: 列舉支援-EF Designer-EF6
 description: 列舉支援-Entity Framework 6 中的 EF 設計工具
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/data-types/enums
-ms.openlocfilehash: f3dff2c71cfdeb32183865265144a938eff087c0
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 42508b533249bf01c76939f864a23adc86a08822
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073119"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064922"
 ---
 # <a name="enum-support---ef-designer"></a>列舉支援-EF 設計工具
 > [!NOTE]
@@ -61,7 +61,7 @@ ms.locfileid: "90073119"
 
 1.  以滑鼠右鍵按一下設計介面的空白區域，然後選取 [ **加入 &gt; 實體**]，[新增實體] 對話方塊隨即出現。
 2.  指定類型名稱的 **部門** ，並指定索引鍵屬性名稱的 **DepartmentID** ，將類型保留為 **Int32**
-3.  按一下 [檔案] &gt; [新增] &gt; [專案] 
+3.  按一下 [檔案] &gt; [新增] &gt; [專案]
 4.  以滑鼠右鍵按一下實體，然後選取 [**加入 &gt; 新的-** 純量屬性]
 5.  將新屬性重新命名為 **Name**
 6.  根據預設，將新屬性的類型變更為 **Int32** (，新屬性的字串類型) 若要變更類型，請開啟屬性視窗，然後將 type 屬性變更為 **Int32**

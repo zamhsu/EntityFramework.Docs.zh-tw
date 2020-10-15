@@ -1,15 +1,15 @@
 ---
 title: Entity Framework Core 3.x 中的新功能 - EF Core
 description: Entity Framework Core 3.x 中的變更與改進
-author: divega
+author: ajcvickers
 ms.date: 09/05/2020
 uid: core/what-is-new/ef-core-3.x/index
-ms.openlocfilehash: d2c887640a9e24cef49fb469ef435d6b08937876
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: b987ca1fdbe46105162c1c7623822e15bd01ef25
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072209"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065624"
 ---
 # <a name="new-features-in-entity-framework-core-3x"></a>Entity Framework Core 3.x 中的新功能
 
@@ -34,7 +34,7 @@ LINQ 可讓您以偏好的 .NET 語言撰寫資料庫查詢，進而利用豐富
 
 例如，如果 EF Core 2.2 無法轉譯 `Where()` 呼叫中的述詞，它會不使用篩選執行 SQL 陳述式、從資料庫傳輸所有資料列，然後在記憶體內進行篩選：
 
-``` csharp
+```csharp
 var specialCustomers = context.Customers
     .Where(c => c.Name.StartsWith(n) && IsSpecialCustomer(c));
 ```
@@ -46,7 +46,7 @@ var specialCustomers = context.Customers
 
 若要在用戶端上評估述詞條件，如先前範例所示，開發人員現在必須將查詢的評估明確切換為 LINQ to Objects：
 
-``` csharp
+```csharp
 var specialCustomers = context.Customers
     .Where(c => c.Name.StartsWith(n))
     .AsEnumerable() // switches to LINQ to Objects
@@ -75,7 +75,7 @@ EF Core 3.x 會利用幾個 [C# 8.0 中的新功能](/dotnet/csharp/whats-new/cs
 
 非同步查詢結果現在會使用新的標準 `IAsyncEnumerable<T>` 介面公開，並可使用 `await foreach` 加以取用。
 
-``` csharp
+```csharp
 var orders =
     from o in context.Orders
     where o.Status == OrderStatus.Pending
@@ -95,7 +95,7 @@ await foreach(var o in orders.AsAsyncEnumerable())
 
 例如，在下列類別中，標示為型別 `string?` 的屬性會設定為選擇性，而 `string` 會設定為必要項：
 
-``` csharp
+```csharp
 public class Customer
 {
     public int Id { get; set; }
@@ -115,7 +115,7 @@ EF Core 3.x 中的新攔截 API 允許提供發生低層級資料庫作業 (在 
 
 例如，若要操作命令文字，您可以建立 `DbCommandInterceptor`：
 
-``` csharp
+```csharp
 public class HintCommandInterceptor : DbCommandInterceptor
 {
     public override InterceptionResult<DbDataReader> ReaderExecuting(
@@ -132,7 +132,7 @@ public class HintCommandInterceptor : DbCommandInterceptor
 
 並使用您的  `DbContext` 註冊它：
 
-``` csharp
+```csharp
 services.AddDbContext(b => b
     .UseSqlServer(connectionString)
     .AddInterceptors(new HintCommandInterceptor()));
@@ -151,7 +151,7 @@ dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Tr
 
 而此工具現在會自動針對不含索引鍵之檢視與資料表的類型建立結構：
 
-``` csharp
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Names>(entity =>
@@ -173,7 +173,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 進行查詢時，如果任何其必要的屬性不具有值，或如果其具有主索引鍵以外的非必要屬性，且所有屬性皆為 `null`，則 EF Core 會將 `OrderDetails` 設定為 `null`。
 
-``` csharp
+```csharp
 public class Order
 {
     public int Id { get; set; }

@@ -1,15 +1,15 @@
 ---
 title: Entity Framework 6 概觀 - EF6
 description: Entity Framework 6 概觀
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/index
-ms.openlocfilehash: aff7aee51c4e12b278f7cab8b5122ee0edbbac0f
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 09b7cb9e0141e9739b15d6c9789286c2e47018cc
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072118"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065390"
 ---
 # <a name="entity-framework-6"></a>Entity Framework 6
 Entity Framework 6 (EF6) 是通過試驗及測試的 .NET 物件關聯式對應程式 (O/RM)，歷經多年的功能開發和穩固。

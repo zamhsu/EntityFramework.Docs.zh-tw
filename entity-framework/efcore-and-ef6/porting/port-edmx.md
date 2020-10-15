@@ -1,17 +1,17 @@
 ---
-title: 從 EF6 移植到 EF Core-移植以 EDMX 為基礎的模型-EF
+title: 從 EF6 移植至 EF Core-移植 EDMX-Based 模型-EF
 description: 將 Entity Framework 6 以 EDMX 為基礎的模型應用程式移植到 Entity Framework Core 的特定資訊
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: efcore-and-ef6/porting/port-edmx
-ms.openlocfilehash: 7bd832f459ae3893e6a90e8483c95a41ca13f9ab
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 27b37ad1c2e3436ae96a71bc97e953763c48ee50
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90069999"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064259"
 ---
-# <a name="porting-an-ef6-edmx-based-model-to-ef-core"></a>將 EF6 以 EDMX 為基礎的模型移植到 EF Core
+# <a name="porting-an-ef6-edmx-based-model-to-ef-core"></a>將 EF6 EDMX-Based 模型移植到 EF Core
 
 EF Core 不支援模型的 EDMX 檔案格式。 移植這些模型的最佳選項，是為您的應用程式從資料庫產生新的以程式碼為基礎的模型。
 
@@ -25,13 +25,13 @@ EF Core 不支援模型的 EDMX 檔案格式。 移植這些模型的最佳選�
 
 在封裝管理員主控台中執行下列命令 (工具-> NuGet 封裝管理員– > 封裝管理員主控台) 。 請參閱 [封裝管理員主控台 (Visual Studio) ](xref:core/miscellaneous/cli/powershell) 的命令選項，以 scaffold 資料表的子集等等。
 
-``` powershell
+```powershell
 Scaffold-DbContext "<connection string>" <database provider name>
 ```
 
 例如，以下命令可讓您從 SQL Server LocalDB 實例上的 [日誌] 資料庫 scaffold 模型。
 
-``` powershell
+```powershell
 Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
 ```
 

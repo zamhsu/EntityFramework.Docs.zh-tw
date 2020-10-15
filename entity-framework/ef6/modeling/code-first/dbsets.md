@@ -1,22 +1,22 @@
 ---
 title: 定義 DbSets-EF6
 description: 在 Entity Framework 6 中定義 DbSets
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/dbsets
-ms.openlocfilehash: 49ffe3ddb8cd4f7c414d7d45d108405b88a0115e
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: dc5ad7f8b4ba32454c702f354b37223007e856e3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073947"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065221"
 ---
 # <a name="defining-dbsets"></a>定義 DbSets
 使用 Code First 工作流程進行開發時，您會定義衍生的 DbCoNtext，以代表您的會話與資料庫，並針對模型中的每個類型公開 DbSet。 本主題涵蓋您可以定義 DbSet 屬性的各種方式。  
 
 ## <a name="dbcontext-with-dbset-properties"></a>具有 DbSet 屬性的 DbCoNtext  
 
-Code First 範例中所顯示的常見案例是針對模型的實體類型，具有公用自動 DbSet 屬性的 DbCoNtext。 例如：  
+Code First 範例中所顯示的常見案例是針對模型的實體類型，具有公用自動 DbSet 屬性的 DbCoNtext。 例如︰  
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -30,7 +30,7 @@ public class BloggingContext : DbContext
 
 ## <a name="dbcontext-with-idbset-properties"></a>具有 Idbset 會屬性的 DbCoNtext  
 
-在某些情況下，例如在建立模擬或 fakes 時，使用介面宣告設定的屬性會更有用。 在這種情況下，Idbset 會介面可用來取代 DbSet。 例如：  
+在某些情況下，例如在建立模擬或 fakes 時，使用介面宣告設定的屬性會更有用。 在這種情況下，Idbset 會介面可用來取代 DbSet。 例如︰  
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -44,7 +44,7 @@ public class BloggingContext : DbContext
 
 ## <a name="dbcontext-with-read-only-set-properties"></a>具有唯讀設定屬性的 DbCoNtext  
 
-如果您不想要對 DbSet 或 Idbset 會屬性公開公用 setter，可以改為建立唯讀屬性，並自行建立集合實例。 例如：  
+如果您不想要對 DbSet 或 Idbset 會屬性公開公用 setter，可以改為建立唯讀屬性，並自行建立集合實例。 例如︰  
 
 ``` csharp
 public class BloggingContext : DbContext

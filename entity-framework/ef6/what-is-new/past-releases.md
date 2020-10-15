@@ -1,15 +1,15 @@
 ---
 title: 過去的 Entity Framework 版本 EF6
 description: 過去的 Entity Framework 版本
-author: divega
+author: ajcvickers
 ms.date: 09/12/2019
 uid: ef6/what-is-new/past-releases
-ms.openlocfilehash: 97ad8015f5302adbe98a63132f1b34009aa68468
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 990b543b2baff0a70e32bf3d5ce624b419c925b8
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073639"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064311"
 ---
 # <a name="past-releases-of-entity-framework"></a>過去的 Entity Framework 版本
 
@@ -228,7 +228,7 @@ EF 4.3.0 runtime 已于2012年2月發行至 NuGet。
 
 以下是我們特別為 EF 4.3 版本提供的內容清單，針對 EF 4.1 提供的內容大多也適用于 EF 4.3：
 -   [EF 4.3 發行 Post](https://blogs.msdn.com/b/adonet/archive/2012/02/09/ef-4-3-released.aspx)
--   [EF 4.3 以程式碼為基礎的遷移逐步解說](https://blogs.msdn.com/b/adonet/archive/2012/02/09/ef-4-3-code-based-migrations-walkthrough.aspx)
+-   [EF 4.3 Code-Based 遷移逐步解說](https://blogs.msdn.com/b/adonet/archive/2012/02/09/ef-4-3-code-based-migrations-walkthrough.aspx)
 -   [EF 4.3 自動遷移逐步解說](https://blogs.msdn.com/b/adonet/archive/2012/02/09/ef-4-3-automatic-migrations-walkthrough.aspx)
 
 ## <a name="ef-42"></a>EF 4。2

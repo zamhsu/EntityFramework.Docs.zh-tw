@@ -1,15 +1,15 @@
 ---
 title: 使用 WinForms 進行資料系結-EF6
 description: 在 Entity Framework 6 中使用 WinForms 進行資料系結
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/databinding/winforms
-ms.openlocfilehash: b316aea0a36edc8586a81427825ed4ee11fc9ef3
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ef2f19831cd5ce8b1faefeb51f23faef4e167529
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073223"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065676"
 ---
 # <a name="databinding-with-winforms"></a>使用 WinForms 的資料繫結
 本逐步解說將示範如何將 POCO 型別系結至視窗表單 (在「主從階層」表單中 WinForms) 控制項。 應用程式會使用 Entity Framework，以資料庫中的資料填入物件、追蹤變更，以及將資料保存到資料庫。

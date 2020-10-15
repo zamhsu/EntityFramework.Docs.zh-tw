@@ -1,15 +1,15 @@
 ---
 title: 使用 WPF 的資料系結-EF6
 description: Entity Framework 6 中的 WPF 資料系結
-author: divega
+author: ajcvickers
 ms.date: 05/19/2020
 uid: ef6/fundamentals/databinding/wpf
-ms.openlocfilehash: 85aea308d89241f1da9633ef60f4bc8c3997561d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: b6dc484d09340671dfcd841e34234d55e9808af2
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072976"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065650"
 ---
 # <a name="databinding-with-wpf"></a>使用 WPF 的資料繫結
 
@@ -257,7 +257,7 @@ EF 讓您可以選擇在第一次存取導覽屬性時，自動從資料庫載�
 - 如果 [資料來源] 視窗未顯示，請在 [MainWindow] 視窗旁邊開啟 [資料來源] 視窗 *，然後選取 [ **View- &gt; 其他 Windows- &gt; 資料來源*** ]。
 - 按下釘選圖示，讓 [資料來源] 視窗不會自動隱藏。 如果視窗已顯示，您可能需要按 [重新整理] 按鈕。
 
-    ![資料來源](~/ef6/media/datasources.png)
+    ![Data Sources](~/ef6/media/datasources.png)
 
 - 選取 [ **類別** ] 資料來源，然後將它拖曳到表單上。
 

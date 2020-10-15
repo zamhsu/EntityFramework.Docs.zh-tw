@@ -4,12 +4,12 @@ description: EF Core 5.0 的新功能總覽
 author: ajcvickers
 ms.date: 09/10/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: 0605d021b46066c6af7b631c99e86c0e53caa8db
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8fa45bf31cb5f1a7e35134f9513a40469719f8c2
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070753"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065611"
 ---
 # <a name="whats-new-in-ef-core-50"></a>EF Core 5.0 的新功能
 
@@ -25,7 +25,7 @@ EF Core 5.0 支援多對多關聯性，而不需要明確地對應聯結資料�
 
 例如，請考慮下列實體類型：
 
-```C#
+```csharp
 public class Post
 {
     public int Id { get; set; }
@@ -43,7 +43,7 @@ public class Tag
 
 請注意，其中 `Post` 包含的集合 `Tags` ，並 `Tag` 包含的集合 `Posts` 。 EF Core 5.0 依慣例將此辨識為多對多關聯性。 這表示在中不需要任何程式碼 `OnModelCreating` ：
 
-```C#
+```csharp
 public class BlogContext : DbContext
 {
     public DbSet<Post> Posts { get; set; }
@@ -77,9 +77,9 @@ CREATE TABLE [PostTag] (
 CREATE INDEX [IX_PostTag_TagsId] ON [PostTag] ([TagsId]);
 ```
 
-建立和關聯 `Blog` 和 `Post` 實體會導致聯結資料表更新自動發生。 例如：
+建立和關聯 `Blog` 和 `Post` 實體會導致聯結資料表更新自動發生。 例如︰
 
-```C#
+```csharp
 var beginnerTag = new Tag {Text = "Beginner"};
 var advancedTag = new Tag {Text = "Advanced"};
 var efCoreTag = new Tag {Text = "EF Core"};
@@ -105,9 +105,9 @@ VALUES (@p6, @p7),
 (@p16, @p17);
 ```
 
-針對查詢，包含和其他查詢作業的運作方式就像任何其他關聯性一樣。 例如：
+針對查詢，包含和其他查詢作業的運作方式就像任何其他關聯性一樣。 例如︰
 
-```C#
+```csharp
 foreach (var post in context.Posts.Include(e => e.Tags))
 {
     Console.Write($"Post \"{post.Name}\" has tags");
@@ -134,17 +134,27 @@ ORDER BY [p].[Id], [t0].[PostsId], [t0].[TagsId], [t0].[Id]
 
 不同于 EF6，EF Core 允許完整自訂聯結資料表。 例如，下列程式碼會設定多對多關聯性，此關聯性也會具有對聯結實體的導覽，而且聯結實體會包含承載屬性：
 
-```c#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder
-        .Entity<Community>()
-        .HasMany(e => e.Members)
-        .WithMany(e => e.Memberships)
-        .UsingEntity<PersonCommunity>(
-            b => b.HasOne(e => e.Member).WithMany().HasForeignKey(e => e.MembersId),
-            b => b.HasOne(e => e.Membership).WithMany().HasForeignKey(e => e.MembershipsId))
-        .Property(e => e.MemberSince).HasDefaultValueSql("CURRENT_TIMESTAMP");
+        .Entity<Post>()
+        .HasMany(p => p.Tags)
+        .WithMany(p => p.Posts)
+        .UsingEntity<PostTag>(
+            j => j
+                .HasOne(pt => pt.Tag)
+                .WithMany()
+                .HasForeignKey(pt => pt.TagId),
+            j => j
+                .HasOne(pt => pt.Post)
+                .WithMany()
+                .HasForeignKey(pt => pt.PostId),
+            j =>
+            {
+                j.Property(pt => pt.PublicationDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                j.HasKey(t => new { t.PostId, t.TagId });
+            });
 }
 ```
 
@@ -152,9 +162,9 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 實體類型通常會對應至資料表或視圖，讓 EF Core 在查詢該型別時，將會提取資料表或視圖的內容。 EF Core 5.0 可讓實體類型對應至「定義查詢」。  (這在舊版中是部分支援的，但已經過改良，而且在 EF Core 5.0 中有不同的語法。 ) 
 
-例如，假設有兩個數據表;其中一個包含新式文章;具有舊版文章的另一篇。 新式貼文資料表有一些額外的資料行，但基於我們的應用程式的目的，我們想要結合新式和舊版的貼文，並將其對應至具有所有必要屬性的實體類型：
+例如，假設有兩個數據表;其中一個包含新式文章;具有舊版文章的另一篇。 新式貼文資料表有一些額外的資料行，但基於我們的應用程式目的，我們想要結合新式和舊版文章，並將其對應至具有所有必要屬性的實體類型：
 
-```c#
+```csharp
 public class Post
 {
     public int Id { get; set; }
@@ -167,7 +177,7 @@ public class Post
 
 在 EF Core 5.0 中， `ToSqlQuery` 可以用來將此實體類型對應至提取並結合兩個數據表中資料列的查詢：
 
-```c#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Post>().ToSqlQuery(
@@ -181,7 +191,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 然後，您可以使用 LINQ 查詢的一般方式來使用此實體類型。 例如， LINQ 查詢：
 
-```c#
+```csharp
 var posts = context.Posts.Where(e => e.Blog.Name.Contains("Unicorn")).ToList();
 ```
 
@@ -202,7 +212,7 @@ WHERE ('Unicorn' = '') OR (instr("b"."Name", 'Unicorn') > 0)
 
 ### <a name="event-counters"></a>事件計數器
 
-[.Net 事件計數器](https://devblogs.microsoft.com/dotnet/introducing-diagnostics-improvements-in-net-core-3-0/) 是有效率地從應用程式公開效能度量的一種方式。 EF Core 5.0 包含類別下的事件計數器 `Microsoft.EntityFrameworkCore` 。 例如：
+[.Net 事件計數器](https://devblogs.microsoft.com/dotnet/introducing-diagnostics-improvements-in-net-core-3-0/) 是有效率地從應用程式公開效能度量的一種方式。 EF Core 5.0 包含類別下的事件計數器 `Microsoft.EntityFrameworkCore` 。 例如︰
 
 ```
 dotnet counters monitor Microsoft.EntityFrameworkCore -p 49496
@@ -230,7 +240,7 @@ EF Core 5.0 允許相同的 CLR 類型對應到多個不同的實體類型。 �
 
 例如，下列 DbCoNtext 會將 BCL 類型設定 `Dictionary<string, object>` 為產品和分類的共用類型實體類型。
 
-```c#
+```csharp
 public class ProductsContext : DbContext
 {
     public DbSet<Dictionary<string, object>> Products => Set<Dictionary<string, object>>("Product");
@@ -259,9 +269,9 @@ public class ProductsContext : DbContext
 }
 ```
 
-字典物件 ( 「屬性包」 ) 現在可以新增至內容中做為實體實例並儲存。 例如：
+字典物件 ( 「屬性包」 ) 現在可以新增至內容中做為實體實例並儲存。 例如︰
 
-```c#
+```csharp
 var beverages = new Dictionary<string, object>
 {
     ["Name"] = "Beverages",
@@ -275,7 +285,7 @@ context.SaveChanges();
 
 然後，您可以透過一般方式來查詢和更新這些實體：
 
-```c#
+```csharp
 var foods = context.Categories.Single(e => e["Name"] == "Foods");
 var marmite = context.Products.Single(e => e["Name"] == "Marmite");
 
@@ -291,7 +301,7 @@ EF Core 5.0 引進了 .NET 事件，以及在呼叫 SaveChanges 時觸發的 EF 
 
 事件很容易使用;例如：
 
-```c#
+```csharp
 context.SavingChanges += (sender, args) =>
 {
     Console.WriteLine($"Saving changes for {((DbContext)sender).Database.GetConnectionString()}");
@@ -307,9 +317,9 @@ context.SavedChanges += (sender, args) =>
 * 事件寄件者是 `DbContext` 實例
 * 事件的引數 `SavedChanges` 包含儲存至資料庫的實體數目
 
-攔截器是由定義 `ISaveChangesInterceptor` ，但通常會 convienient 繼承， `SaveChangesInterceptor` 以避免執行每個方法。 例如：
+攔截器是由定義 `ISaveChangesInterceptor` ，但通常會 convienient 繼承， `SaveChangesInterceptor` 以避免執行每個方法。 例如︰
 
-```c#
+```csharp
 public class MySaveChangesInterceptor : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(
@@ -337,13 +347,13 @@ public class MySaveChangesInterceptor : SaveChangesInterceptor
 * 攔截器同時具有同步和非同步方法。 如果您需要執行非同步 i/o （例如寫入審核伺服器），這會很有用。
 * 攔截器可讓 SaveChanges 使用所有攔截器通用的機制來略過 `InterceptionResult` 。
 
-攔截器的缺點是它們必須在正在建立時于 DbCoNtext 上註冊。 例如：
+攔截器的缺點是它們必須在正在建立時于 DbCoNtext 上註冊。 例如︰
 
-```c#
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder
-            .AddInterceptors(new MySaveChangesInterceptor())
-            .UseSqlite("Data Source = test.db");
+```csharp
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .AddInterceptors(new MySaveChangesInterceptor())
+        .UseSqlite("Data Source = test.db");
 ```
 
 相反地，您可以隨時在 DbCoNtext 實例上註冊事件。
@@ -356,7 +366,7 @@ public class MySaveChangesInterceptor : SaveChangesInterceptor
 
 在下列程式碼中， `AuthorizationContext` 將會產生資料表變更的遷移 `Users` ，但 `ReportingContext` 不會導致衝突的遷移。
 
-```C#
+```csharp
 public class AuthorizationContext : DbContext
 {
     public DbSet<User> Users { get; set; }
@@ -377,7 +387,7 @@ public class ReportingContext : DbContext
 
 在 EF Core 3.1 中，一對一關聯性的相依 end 一律視為選擇性。 這在使用擁有的實體時最為明顯。 例如，請考慮下列模型和設定：
 
-```c#
+```csharp
 public class Person
 {
     public int Id { get; set; }
@@ -398,7 +408,7 @@ public class Address
 }
 ```
 
-```c#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Person>(b =>
@@ -440,9 +450,9 @@ CREATE TABLE "People" (
 
 請注意，所有資料行都可為 null，即使某些 `HomeAddress` 屬性已設定為必要也是一樣。 此外，當查詢時 `Person` ，如果 home 或 work 位址的所有資料行都是 null，則 EF Core 會將 `HomeAddress` 及/或 `WorkAddress` 屬性保留為 null，而不是設定的空白實例 `Address` 。
 
-在 EF Core 5.0 中， `HomeAddress` 現在可以將導覽設定為必要的相依。 例如：
+在 EF Core 5.0 中， `HomeAddress` 現在可以將導覽設定為必要的相依。 例如︰
 
-```c#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Person>(b =>
@@ -552,7 +562,7 @@ COMMIT;
 
 這項功能是由「社區」所貢獻 [@Psypher9](https://github.com/Psypher9) 。 許多人都感謝您的貢獻！
 
-`dotnet ef migrations list`命令現在會顯示尚未套用至資料庫的遷移。 例如：
+`dotnet ef migrations list`命令現在會顯示尚未套用至資料庫的遷移。 例如︰
 
 ```
 ajcvickers@avickers420u:~/AllTogetherNow/Daily$ dotnet ef migrations list
@@ -568,9 +578,9 @@ ajcvickers@avickers420u:~/AllTogetherNow/Daily$
 
 ### <a name="modelbuilder-api-for-value-comparers"></a>值比較子的 ModelBuilder API
 
-自訂可變類型的 EF Core 屬性 [需要值比較子](xref:core/modeling/value-comparers) ，才能正確偵測屬性變更。 您現在可以在設定類型的值轉換時，指定此值。 例如：
+自訂可變類型的 EF Core 屬性 [需要值比較子](xref:core/modeling/value-comparers) ，才能正確偵測屬性變更。 您現在可以在設定類型的值轉換時，指定此值。 例如︰
 
-```c#
+```csharp
 modelBuilder
     .Entity<EntityType>()
     .Property(e => e.MyProperty)
@@ -587,9 +597,9 @@ modelBuilder
 
 這項功能是由「社區」所貢獻 [@m4ss1m0g](https://github.com/m4ss1m0g) 。 許多人都感謝您的貢獻！
 
-`TryGetValue`方法已加入至 `EntityEntry.CurrentValues` 和 `EntityEntry.OriginalValues` 。 這可讓要求屬性的值，而不需要先檢查屬性是否在 EF 模型中對應。 例如：
+`TryGetValue`方法已加入至 `EntityEntry.CurrentValues` 和 `EntityEntry.OriginalValues` 。 這可讓要求屬性的值，而不需要先檢查屬性是否在 EF 模型中對應。 例如︰
 
-```c#
+```csharp
 if (entry.CurrentValues.TryGetValue(propertyName, out var value))
 {
     Console.WriteLine(value);
@@ -621,7 +631,7 @@ EF Core 5.0 RC1 包含一些額外的查詢翻譯改進：
 
 最後，在 RC1 中，EF Core 現在允許在 ModelBuilder 中使用 lambda 方法來尋找欄位以及屬性。 例如，如果您基於某些原因厭惡至屬性，並決定使用公用欄位，則這些欄位現在可以使用 lambda 產生器來對應：
 
-```c#
+```csharp
 public class Post
 {
     public int Id;
@@ -639,7 +649,7 @@ public class Blog
 }
 ```
 
-```c#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Blog>(b =>
@@ -669,7 +679,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 例如，請考慮使用對應階層的這個模型：
 
-```c#
+```csharp
 public class Animal
 {
     public int Id { get; set; }
@@ -743,7 +753,7 @@ CREATE TABLE [Dogs] (
 
 您可以使用對應屬性，將實體類型對應至不同的資料表：
 
-```c#
+```csharp
 [Table("Animals")]
 public class Animal
 {
@@ -772,7 +782,7 @@ public class Dog : Pet
 
 或使用設定 `ModelBuilder` ：
 
-```c#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Animal>().ToTable("Animals");
@@ -790,7 +800,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 例如，假設我們有一個 `Unicorns` 針對實體類型建立的資料表 `Unicorn` ：
 
-```c#
+```csharp
 public class Unicorn
 {
     public int Id { get; set; }
@@ -877,7 +887,7 @@ EF Core 模型需要兩個實體類型才能使用此 TVF：
 * 以 `Employee` 正常方式對應至 Employees 資料表的類型
 * `Report`符合 TVF 所傳回之圖形的類型
 
-```c#
+```csharp
 public class Employee
 {
     public int Id { get; set; }
@@ -889,7 +899,7 @@ public class Employee
 }
 ```
 
-```c#
+```csharp
 public class Report
 {
     public string Name { get; set; }
@@ -899,7 +909,7 @@ public class Report
 
 這些類型必須包含在 EF Core 模型中：
 
-```c#
+```csharp
 modelBuilder.Entity<Employee>();
 modelBuilder.Entity(typeof(Report)).HasNoKey();
 ```
@@ -908,22 +918,22 @@ modelBuilder.Entity(typeof(Report)).HasNoKey();
 
 最後，.NET 方法必須對應到資料庫中的 TVF。 您可以使用新的方法，在 DbCoNtext 上定義這個方法 `FromExpression` ：
 
-```c#
+```csharp
 public IQueryable<Report> GetReports(int managerId)
     => FromExpression(() => GetReports(managerId));
 ```
 
 這個方法會使用符合上述定義之 TVF 的參數和傳回型別。 然後，方法會新增至 OnModelCreating 中的 EF Core 模型：
 
-```c#
+```csharp
 modelBuilder.HasDbFunction(() => GetReports(default));
 ```
 
 使用 lambda 的 (是將傳送至 EF Core 的簡單方法 `MethodInfo` 。 傳遞給方法的引數會被忽略。 ) 
 
-我們現在可以撰寫 `GetReports` 在結果上呼叫和撰寫的查詢。 例如：
+我們現在可以撰寫 `GetReports` 在結果上呼叫和撰寫的查詢。 例如︰
 
-```c#
+```csharp
 from e in context.Employees
 from rc in context.GetReports(e.Id)
 where rc.IsDeveloper == true
@@ -951,7 +961,7 @@ EF Core 5.0 可將相同的實體類型對應至不同的資料庫物件。 這�
 
 例如，實體類型可以對應至資料庫和資料庫資料表：
 
-```c#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder
@@ -963,7 +973,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 根據預設，EF Core 會從 view 查詢並將更新傳送至資料表。 例如，執行下列程式碼：
 
-```c#
+```csharp
 var blog = context.Set<Blog>().Single(e => e.Name == "One Unicorn");
 
 blog.Name = "1unicorn2";
@@ -986,9 +996,9 @@ SELECT @@ROWCOUNT;
 
 ### <a name="context-wide-split-query-configuration"></a>整個環境的分割查詢設定
 
-分割查詢 (看到下面) 現在可以設定為 DbCoNtext 所執行之任何查詢的預設值。 這項設定僅適用于關聯式提供者，因此必須指定為設定的一部分 `UseProvider` 。 例如：
+分割查詢 (看到下面) 現在可以設定為 DbCoNtext 所執行之任何查詢的預設值。 這項設定僅適用于關聯式提供者，因此必須指定為設定的一部分 `UseProvider` 。 例如︰
 
-```c#
+```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder
         .UseSqlServer(
@@ -1008,14 +1018,14 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 ### <a name="dbcontextfactory"></a>DbCoNtextFactory
 
-EF Core 5.0 引進 `AddDbContextFactory` 並 `AddPooledDbContextFactory` 註冊 factory，以在應用程式的相依性插入 (D.I. ) 容器中建立 DbCoNtext 實例。 例如：
+EF Core 5.0 引進 `AddDbContextFactory` 並 `AddPooledDbContextFactory` 註冊 factory，以在應用程式的相依性插入 (D.I. ) 容器中建立 DbCoNtext 實例。 例如︰
 
 ```csharp
 services.AddDbContextFactory<SomeDbContext>(b =>
     b.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Test"));
 ```
 
-然後，應用程式服務（例如 ASP.NET Core 控制器）可相依于 `IDbContextFactory<TContext>` 服務的函式中。 例如：
+然後，應用程式服務（例如 ASP.NET Core 控制器）可相依于 `IDbContextFactory<TContext>` 服務的函式中。 例如︰
 
 ```csharp
 public class MyController
@@ -1029,7 +1039,7 @@ public class MyController
 }
 ```
 
-然後，您可以視需要建立和使用 DbCoNtext 實例。 例如：
+然後，您可以視需要建立和使用 DbCoNtext 實例。 例如︰
 
 ```csharp
 public void DoSomeThing()
@@ -1057,7 +1067,7 @@ EF Core 5.0 引進了哪些專案會 `ChangeTracker.Clear()` 清除所有已追�
 
 EF Core 允許針對可能也有預設值條件約束的資料行設定明確值。 EF Core 使用類型屬性類型的 CLR 預設值做為這個的 sentinel;如果值不是 CLR 預設值，則會將其插入，否則會使用資料庫預設值。
 
-這會為 CLR 預設不是良好 sentinel 的型別（最值得注意的是屬性）建立問題 `bool` 。 EF Core 5.0 現在可讓支援欄位可針對像這樣的案例提供可為 null。 例如：
+這會為 CLR 預設不是良好 sentinel 的型別（最值得注意的是屬性）建立問題 `bool` 。 EF Core 5.0 現在可讓支援欄位可針對像這樣的案例提供可為 null。 例如︰
 
 ```csharp
 public class Blog
@@ -1078,7 +1088,7 @@ public class Blog
 
 ### <a name="cosmos-partition-keys"></a>Cosmos 分割區索引鍵
 
-EF Core 允許 EF 模型中包含 Cosmos 分割區索引鍵。 例如：
+EF Core 允許 EF 模型中包含 Cosmos 分割區索引鍵。 例如︰
 
 ```csharp
 modelBuilder.Entity<Customer>().HasPartitionKey(b => b.AlternateKey)
@@ -1092,7 +1102,7 @@ modelBuilder.Entity<Customer>().HasPartitionKey(b => b.AlternateKey)
 
 EF Core 5.0 可改善 Cosmos 和 Cosmos 連接的設定。
 
-先前，EF Core 需要在連接至 Cosmos 資料庫時明確指定端點和金鑰。 EF Core 5.0 允許改用連接字串。 此外，EF Core 5.0 允許明確設定 WebProxy 實例。 例如：
+先前，EF Core 需要在連接至 Cosmos 資料庫時明確指定端點和金鑰。 EF Core 5.0 允許改用連接字串。 此外，EF Core 5.0 允許明確設定 WebProxy 實例。 例如︰
 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -1104,7 +1114,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             });
 ```
 
-現在也可以設定許多其他的超時值、限制等等。 例如：
+現在也可以設定許多其他的超時值、限制等等。 例如︰
 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -1126,7 +1136,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 檔是由問題 [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471)所追蹤。
 
-### <a name="scaffold-dbcontext-now-singularizes"></a>Scaffold-DbCoNtext now singularizes
+### <a name="scaffold-dbcontext-now-singularizes"></a>Scaffold-DbContext 現在 singularizes
 
 先前當從現有的資料庫 DbCoNtext 樣板時，EF Core 將會建立符合資料庫中資料表名稱的實體類型名稱。 例如，資料表 `People` 並 `Addresses` 產生名為和的實體 `People` 類型 `Addresses` 。
 
@@ -1136,7 +1146,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 EF Core 現在支援儲存 [點](/sql/t-sql/language-elements/save-transaction-transact-sql#remarks) ，以便更充分掌控執行多個作業的交易。
 
-您可以手動建立、釋放和復原儲存點。 例如：
+您可以手動建立、釋放和復原儲存點。 例如︰
 
 ```csharp
 context.Database.CreateSavepoint("MySavePoint");
@@ -1158,7 +1168,7 @@ EF Core 5.0 現在允許單一 LINQ 查詢，包括要分割成多個 SQL 查詢
 
 例如，假設有一個查詢會使用下列程式提取兩個層級的相關集合 `Include` ：
 
-```CSharp
+```csharp
 var artists = context.Artists
     .Include(e => e.Albums).ThenInclude(e => e.Tags)
     .ToList();
@@ -1177,9 +1187,9 @@ LEFT JOIN (
 ORDER BY "a"."Id", "t0"."Id", "t0"."Id0"
 ```
 
-新的 `AsSplitQuery` API 可以用來變更此行為。 例如：
+新的 `AsSplitQuery` API 可以用來變更此行為。 例如︰
 
-```CSharp
+```csharp
 var artists = context.Artists
     .AsSplitQuery()
     .Include(e => e.Albums).ThenInclude(e => e.Tags)
@@ -1211,9 +1221,9 @@ ORDER BY "a"."Id", "a0"."Id"
 
 #### <a name="split-queries-with-collection-projections"></a>使用集合投影來分割查詢
 
-`AsSplitQuery` 當集合在投影中載入時，也可以使用。 例如：
+`AsSplitQuery` 當集合在投影中載入時，也可以使用。 例如︰
 
-```CSharp
+```csharp
 context.Artists
     .AsSplitQuery()
     .Select(e => new
@@ -1240,9 +1250,9 @@ ORDER BY "a"."Id"
 
 ### <a name="indexattribute"></a>IndexAttribute
 
-新的 IndexAttribute 可以放在實體類型上，以指定單一資料行的索引。 例如：
+新的 IndexAttribute 可以放在實體類型上，以指定單一資料行的索引。 例如︰
 
-```CSharp
+```csharp
 [Index(nameof(FullName), IsUnique = true)]
 public class User
 {
@@ -1261,9 +1271,9 @@ CREATE UNIQUE INDEX [IX_Users_FullName]
     WHERE [FullName] IS NOT NULL;
 ```
 
-IndexAttribute 也可用來指定跨越多個資料行的索引。 例如：
+IndexAttribute 也可用來指定跨越多個資料行的索引。 例如︰
 
-```CSharp
+```csharp
 [Index(nameof(FirstName), nameof(LastName), IsUnique = true)]
 public class User
 {
@@ -1291,7 +1301,7 @@ CREATE UNIQUE INDEX [IX_Users_FirstName_LastName]
 
 我們會持續改善查詢轉譯失敗時所產生的例外狀況訊息。 例如，此查詢會使用未對應的屬性 `IsSigned` ：
 
-```CSharp
+```csharp
 var artists = context.Artists.Where(e => e.IsSigned).ToList();
 ```
 
@@ -1301,7 +1311,7 @@ EF Core 會擲回下列例外狀況，表示轉譯失敗，因為未 `IsSigned` 
 
 同樣地，當您嘗試翻譯具有文化特性相依語義的字串比較時，現在會產生更好的例外狀況訊息。 例如，此查詢嘗試使用 `StringComparison.CurrentCulture` ：
 
-```CSharp
+```csharp
 var artists = context.Artists
     .Where(e => e.Name.Equals("The Unicorns", StringComparison.CurrentCulture))
     .ToList();
@@ -1315,9 +1325,9 @@ EF Core 現在會擲回下列例外狀況：
 
 這項功能是由「社區」所貢獻 [@Marusyk](https://github.com/Marusyk) 。 許多人都感謝您的貢獻！
 
-EF Core 公開交易的交易識別碼，以便跨呼叫進行交易的相互關聯。 此識別碼通常會在交易開始時由 EF Core 設定。 如果應用程式改為啟動交易，則這項功能可讓應用程式明確地設定交易識別碼，使其在使用它的任何地方都能正確地相互關聯。 例如：
+EF Core 公開交易的交易識別碼，以便跨呼叫進行交易的相互關聯。 此識別碼通常會在交易開始時由 EF Core 設定。 如果應用程式改為啟動交易，則這項功能可讓應用程式明確地設定交易識別碼，使其在使用它的任何地方都能正確地相互關聯。 例如︰
 
-```CSharp
+```csharp
 using (context.Database.UseTransaction(myTransaction, myId))
 {
    ...
@@ -1330,7 +1340,7 @@ using (context.Database.UseTransaction(myTransaction, myId))
 
 標準 .NET [IPAddress 類別](/dotnet/api/system.net.ipaddress) 現在會自動對應至尚未具有原生支援之資料庫的字串資料行。 例如，請考慮對應此實體類型：
 
-```CSharp
+```csharp
 public class Host
 {
     public int Id { get; set; }
@@ -1349,7 +1359,7 @@ CREATE TABLE [Host] (
 
 然後可以用一般方式新增實體：
 
-```CSharp
+```csharp
 context.AddRange(
     new Host { Address = IPAddress.Parse("127.0.0.1")},
     new Host { Address = IPAddress.Parse("0000:0000:0000:0000:0000:0000:0000:0001")});
@@ -1368,7 +1378,7 @@ Executed DbCommand (14ms) [Parameters=[@p0='1', @p1='127.0.0.1' (Size = 45), @p2
 
 從現有的資料庫 scaffold DbCoNtext 時，EF Core 預設會使用連接字串建立 OnConfiguring 多載，讓內容可以立即使用。 但是，如果您已經有部分類別具有 OnConfiguring，或如果您以其他方式設定內容，這就不會很有用。
 
-若要解決此情況，現在可以指示可忽略 OnConfiguring 產生的基本程式命令。 例如：
+若要解決此情況，現在可以指示可忽略 OnConfiguring 產生的基本程式命令。 例如︰
 
 ```
 dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook" Microsoft.EntityFrameworkCore.SqlServer --no-onconfiguring
@@ -1388,7 +1398,7 @@ Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' 
 
 字串中字元的 FirstOrDefault 和類似運算子現在已轉譯。 例如，這個 LINQ 查詢：
 
-```CSharp
+```csharp
 context.Customers.Where(c => c.ContactName.FirstOrDefault() == 'A').ToList();
 ```
 
@@ -1404,7 +1414,7 @@ WHERE SUBSTRING([c].[ContactName], 1, 1) = N'A'
 
 EF Core 現在會以案例區塊產生更好的查詢。 例如，這個 LINQ 查詢：
 
-```CSharp
+```csharp
 context.Weapons
     .OrderBy(w => w.Name.CompareTo("Marcus' Lancer") == 0)
     .ThenBy(w => w.Id)
@@ -1444,9 +1454,9 @@ END, [w].[Id]");
 
 ### <a name="database-collations"></a>資料庫定序
 
-您現在可以在 EF 模型中指定資料庫的預設定序。 這會流經產生的遷移，以在建立資料庫時設定定序。 例如：
+您現在可以在 EF 模型中指定資料庫的預設定序。 這會流經產生的遷移，以在建立資料庫時設定定序。 例如︰
 
-```CSharp
+```csharp
 modelBuilder.UseCollation("German_PhoneBook_CI_AS");
 ```
 
@@ -1457,20 +1467,20 @@ CREATE DATABASE [Test]
 COLLATE German_PhoneBook_CI_AS;
 ```
 
-您也可以指定要用於特定資料庫資料行的定序。 例如：
+您也可以指定要用於特定資料庫資料行的定序。 例如︰
 
-```CSharp
- modelBuilder
-     .Entity<User>()
-     .Property(e => e.Name)
-     .UseCollation("German_PhoneBook_CI_AS");
+```csharp
+modelBuilder
+    .Entity<User>()
+    .Property(e => e.Name)
+    .UseCollation("German_PhoneBook_CI_AS");
 ```
 
 若未使用遷移，則在 DbCoNtext 架構時，定序現在會從資料庫進行反向工程。
 
-最後， `EF.Functions.Collate()` 可以使用不同的定序來進行特定查詢。 例如：
+最後， `EF.Functions.Collate()` 可以使用不同的定序來進行特定查詢。 例如︰
 
-```CSharp
+```csharp
 context.Users.Single(e => EF.Functions.Collate(e.Name, "French_CI_AS") == "Jean-Michel Jarre");
 ```
 
@@ -1494,9 +1504,9 @@ WHERE [u].[Name] COLLATE French_CI_AS = N'Jean-Michel Jarre'
 dotnet ef migrations add two --verbose --dev
 ```
 
-然後，這個引數會流入處理站，可用來控制內容的建立與初始化方式。 例如：
+然後，這個引數會流入處理站，可用來控制內容的建立與初始化方式。 例如︰
 
-```CSharp
+```csharp
 public class MyDbContextFactory : IDesignTimeDbContextFactory<SomeDbContext>
 {
     public SomeDbContext CreateDbContext(string[] args)
@@ -1510,13 +1520,13 @@ public class MyDbContextFactory : IDesignTimeDbContextFactory<SomeDbContext>
 
 現在可以設定無追蹤查詢來執行識別解析。 例如，下列查詢會為每個貼文建立新的 Blog 實例，即使每個 Blog 都有相同的主要金鑰。
 
-```CSharp
+```csharp
 context.Posts.AsNoTracking().Include(e => e.Blog).ToList();
 ```
 
 不過，代價通常會稍微慢一點，且一律使用更多記憶體，因此可以變更此查詢，以確保只會建立單一的 Blog 實例：
 
-```CSharp
+```csharp
 context.Posts.AsNoTracking().PerformIdentityResolution().Include(e => e.Blog).ToList();
 ```
 
@@ -1528,9 +1538,9 @@ context.Posts.AsNoTracking().PerformIdentityResolution().Include(e => e.Blog).To
 
 大部分的資料庫允許在計算後儲存計算資料行值。 雖然這會佔用磁碟空間，但計算資料行只會在更新時計算一次，而不是每次抓取其值時。 這也可讓某些資料庫的資料行編制索引。
 
-EF Core 5.0 允許將計算資料行設定為已儲存。 例如：
+EF Core 5.0 允許將計算資料行設定為已儲存。 例如︰
 
-```CSharp
+```csharp
 modelBuilder
     .Entity<User>()
     .Property(e => e.SomethingComputed)
@@ -1545,9 +1555,9 @@ EF Core 現在支援 SQLite 資料庫中的計算資料行。
 
 ### <a name="configure-database-precisionscale-in-model"></a>在模型中設定資料庫 precision/scale
 
-您現在可以使用模型產生器來指定屬性的有效位數和小數位數。 例如：
+您現在可以使用模型產生器來指定屬性的有效位數和小數位數。 例如︰
 
-```CSharp
+```csharp
 modelBuilder
     .Entity<Blog>()
     .Property(b => b.Numeric)
@@ -1560,9 +1570,9 @@ modelBuilder
 
 ### <a name="specify-sql-server-index-fill-factor"></a>指定 SQL Server 索引填滿因數
 
-您現在可以在 SQL Server 上建立索引時指定填滿因數。 例如：
+您現在可以在 SQL Server 上建立索引時指定填滿因數。 例如︰
 
-```CSharp
+```csharp
 modelBuilder
     .Entity<Customer>()
     .HasIndex(e => e.Name)
@@ -1573,9 +1583,9 @@ modelBuilder
 
 ### <a name="filtered-include"></a>篩選的包含
 
-Include 方法現在支援篩選包含的實體。 例如：
+Include 方法現在支援篩選包含的實體。 例如︰
 
-```CSharp
+```csharp
 var blogs = context.Blogs
     .Include(e => e.Posts.Where(p => p.Title.Contains("Cheese")))
     .ToList();
@@ -1583,9 +1593,9 @@ var blogs = context.Blogs
 
 此查詢將會連同每個相關聯的貼文傳回 blog，但只有在貼文標題包含「乳酪」時。
 
-Skip 和 Take 也可以用來減少包含的實體數目。 例如：
+Skip 和 Take 也可以用來減少包含的實體數目。 例如︰
 
-```CSharp
+```csharp
 var blogs = context.Blogs
     .Include(e => e.Posts.OrderByDescending(post => post.Title).Take(5)))
     .ToList();
@@ -1598,7 +1608,7 @@ var blogs = context.Blogs
 
 導覽屬性主要是在 [定義關聯](xref:core/modeling/relationships)性時進行設定。 不過，在 `Navigation` 導覽屬性需要額外設定的情況下，可以使用新的方法。 例如，當依據慣例找不到欄位時，設定導覽的支援欄位：
 
-```CSharp
+```csharp
 modelBuilder.Entity<Blog>().Navigation(e => e.Posts).HasField("_myposts");
 ```
 
@@ -1633,9 +1643,9 @@ dotnet ef database update --connection "connection string"
 
 使用 `EnableDetailedErrors` 會將額外的 null 檢查新增至查詢，如此一來，若要降低效能，您可以更輕鬆地追蹤至根本原因。
 
-例如：
+例如︰
 
-```CSharp
+```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder
         .EnableDetailedErrors()
@@ -1647,9 +1657,9 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 ### <a name="cosmos-partition-keys"></a>Cosmos 分割區索引鍵
 
-您現在可以在查詢中指定要用於指定之查詢的資料分割索引鍵。 例如：
+您現在可以在查詢中指定要用於指定之查詢的資料分割索引鍵。 例如︰
 
-```CSharp
+```csharp
 await context.Set<Customer>()
              .WithPartitionKey(myPartitionKey)
              .FirstAsync();
@@ -1659,9 +1669,9 @@ await context.Set<Customer>()
 
 ### <a name="support-for-the-sql-server-datalength-function"></a>支援 SQL Server DATALENGTH 函數
 
-這可以使用新的方法來存取 `EF.Functions.DataLength` 。 例如：
+這可以使用新的方法來存取 `EF.Functions.DataLength` 。 例如︰
 
-```CSharp
+```csharp
 var count = context.Orders.Count(c => 100 < EF.Functions.DataLength(c.OrderDate));
 ```
 
@@ -1669,9 +1679,9 @@ var count = context.Orders.Count(c => 100 < EF.Functions.DataLength(c.OrderDate)
 
 ### <a name="use-a-c-attribute-to-specify-a-property-backing-field"></a>使用 c # 屬性來指定屬性支援欄位
 
-C # 屬性現在可用來指定屬性的支援欄位。 即使無法自動找到支援欄位，這個屬性仍可讓 EF Core 繼續寫入和讀取支援欄位。 例如：
+C # 屬性現在可用來指定屬性的支援欄位。 即使無法自動找到支援欄位，這個屬性仍可讓 EF Core 繼續寫入和讀取支援欄位。 例如︰
 
-```CSharp
+```csharp
 public class Blog
 {
     private string _mainTitle;
@@ -1739,9 +1749,9 @@ EF Core 5.0 引進了 `ToQueryString` 擴充方法，此方法會傳回 EF Core 
 
 ### <a name="use-a-c-attribute-to-indicate-that-an-entity-has-no-key"></a>使用 c # 屬性工作表示實體沒有索引鍵
 
-實體類型現在可以設定為沒有使用新的索引鍵 `KeylessAttribute` 。 例如：
+實體類型現在可以設定為沒有使用新的索引鍵 `KeylessAttribute` 。 例如︰
 
-```CSharp
+```csharp
 [Keyless]
 public class Address
 {
@@ -1787,9 +1797,9 @@ EF Core 5.0 支援 c # 索引子屬性的對應。 這些屬性可讓實體當�
 
 ### <a name="generation-of-check-constraints-for-enum-mappings"></a>列舉對應的檢查條件約束產生
 
-EF Core 5.0 遷移現在可以產生列舉屬性對應的檢查條件約束。 例如：
+EF Core 5.0 遷移現在可以產生列舉屬性對應的檢查條件約束。 例如︰
 
-```SQL
+```sql
 MyEnumColumn VARCHAR(10) NOT NULL CHECK (MyEnumColumn IN ('Useful', 'Useless', 'Unknown'))
 ```
 
@@ -1797,9 +1807,9 @@ MyEnumColumn VARCHAR(10) NOT NULL CHECK (MyEnumColumn IN ('Useful', 'Useless', '
 
 ### <a name="isrelational"></a>IsRelational
 
-`IsRelational`除了現有的、和之外，還加入了新的方法 `IsSqlServer` `IsSqlite` `IsInMemory` 。 這個方法可以用來測試 DbCoNtext 是否使用任何關係資料庫提供者。 例如：
+`IsRelational`除了現有的、和之外，還加入了新的方法 `IsSqlServer` `IsSqlite` `IsInMemory` 。 這個方法可以用來測試 DbCoNtext 是否使用任何關係資料庫提供者。 例如︰
 
-```CSharp
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     if (Database.IsRelational())
@@ -1815,7 +1825,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 Azure Cosmos DB 資料庫提供者現在支援使用 Etag 的開放式平行存取。 使用 OnModelCreating 中的模型產生器來設定 ETag：
 
-```CSharp
+```csharp
 builder.Entity<Customer>().Property(c => c.ETag).IsEtagConcurrency();
 ```
 
@@ -1832,9 +1842,9 @@ builder.Entity<Customer>().Property(c => c.ETag).IsEtagConcurrency();
 * DateDiffWeek
 * DateFromParts
 
-例如：
+例如︰
 
-```CSharp
+```csharp
 var count = context.Orders.Count(c => date > EF.Functions.DateFromParts(DateTime.Now.Year, 12, 25));
 
 ```
@@ -1851,9 +1861,9 @@ var count = context.Orders.Count(c => date > EF.Functions.DateFromParts(DateTime
 
 ### <a name="query-translation-for-reverse"></a>反向的查詢轉譯
 
-`Reverse`現在會轉譯使用的查詢。 例如：
+`Reverse`現在會轉譯使用的查詢。 例如︰
 
-```CSharp
+```csharp
 context.Employees.OrderBy(e => e.EmployeeID).Reverse()
 ```
 
@@ -1863,7 +1873,7 @@ context.Employees.OrderBy(e => e.EmployeeID).Reverse()
 
 使用位運算子的查詢現在會在更多情況下轉譯，例如：
 
-```CSharp
+```csharp
 context.Orders.Where(o => ~o.OrderID == negatedId)
 ```
 

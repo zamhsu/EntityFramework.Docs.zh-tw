@@ -1,14 +1,14 @@
 ---
 title: Entity Framework 的案例研究-EF6
 description: Entity Framework 6 的個案研究
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
-ms.openlocfilehash: 342929f70aa09704c934bd1d89e177f6953bfc43
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ca2315ac8aad8d28240f4bef6c962de0f63ac0df
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073817"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064662"
 ---
 # <a name="microsoft-case-studies-for-entity-framework"></a>適用于 Entity Framework 的 Microsoft 個案研究
 此頁面上的個案研究會強調一些已採用 Entity Framework 的真實世界生產專案。
@@ -17,7 +17,7 @@ ms.locfileid: "90073817"
 
 ## <a name="epicor"></a>Epicor
 Epicor 是一家大型的全球軟體公司 (有超過400的開發人員) ，為超過150個國家/地區的公司開發企業資源規劃 (ERP) 解決方案。
-其旗艦產品（Epicor 9）是以服務導向的架構為基礎， (SOA) 使用 .NET Framework。
+其旗艦產品（Epicor 9）是以 Service-Oriented 架構為基礎， (使用 .NET Framework 的 SOA) 。
 由於有許多客戶要求提供 (LINQ) 的語言整合式查詢支援，而且也想要減少其後端 SQL Server 的負載，因此小組決定升級到 Visual Studio 2010 和 .NET Framework 4.0。
 使用 Entity Framework 4.0，他們能夠達成這些目標，也大幅簡化了開發和維護工作。
 尤其是 Entity Framework 的豐富 T4 支援可讓他們完全掌控其產生的程式碼，並自動建立以效能節省的功能，例如預先編譯的查詢和快取。

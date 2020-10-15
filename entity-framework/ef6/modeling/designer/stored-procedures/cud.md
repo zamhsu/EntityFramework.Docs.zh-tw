@@ -1,21 +1,21 @@
 ---
 title: 設計工具 CUD 預存程式-EF6
 description: Entity Framework 6 中的設計工具 CUD 預存程式
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/stored-procedures/cud
-ms.openlocfilehash: fae795922980452cf062a62e3cbb47de49b49c74
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 167504d3abbd156f426c481c410a1953bc047de4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073210"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066118"
 ---
 # <a name="designer-cud-stored-procedures"></a>設計工具 CUD 預存程式
 
 本逐步解說示範如何 \\ 使用 Entity Framework Designer (EF Designer) ，將實體類型的 create insert、update 和 delete (CUD) 作業對應到預存程式。 根據預設，Entity Framework 會自動產生 CUD 作業的 SQL 語句，但您也可以將預存程式對應至這些作業。  
 
-請注意，Code First 不支援對應至預存程式或函數。 不過，您可以使用 DbSet 方法來呼叫預存程式或函數。 例如：
+請注意，Code First 不支援對應至預存程式或函數。 不過，您可以使用 DbSet 方法來呼叫預存程式或函數。 例如︰
 
 ``` csharp
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]");

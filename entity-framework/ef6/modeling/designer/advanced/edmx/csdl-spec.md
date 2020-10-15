@@ -1,15 +1,15 @@
 ---
 title: CSDL 規格-EF6
 description: Entity Framework 6 中的 CSDL 規格
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/advanced/edmx/csdl-spec
-ms.openlocfilehash: a4abfcd6438ca92fff4448844e0812060b1ae029
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 9fdd8fc5ed16f7ba7d11e79a9449f120f5d579c2
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070402"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066352"
 ---
 # <a name="csdl-specification"></a>CSDL 規格
 概念結構定義語言 (CSDL) 是 XML架構語言，可描述組成資料驅動應用程式之概念模型的實體、關聯性和函式。 Entity Framework 或 WCF Data Services 可以使用這個概念模型。 Entity Framework 使用 CSDL 描述的中繼資料，將概念模型中定義的實體和關聯性對應至資料來源。 如需詳細資訊，請參閱 [SSDL 規格](xref:ef6/modeling/designer/advanced/edmx/ssdl-spec) 和 [MSL 規格](xref:ef6/modeling/designer/advanced/edmx/msl-spec)。
@@ -169,7 +169,7 @@ Association 元素會定義兩個實體類型之間的 **關聯** 性。 關聯 
 | **型別**                                                                | 否          | 集合的型別。                                                                                                                                                                                                      |
 | **可為 Null**                                                            | 否          | **True** (預設值) 或 **False**，取決於屬性是否可以具有 null 值。 <br/> [!NOTE]                                                                                                                 |
 | > 在 CSDL v1 中，複雜型別屬性必須具有 `Nullable="False"` 。 |             |                                                                                                                                                                                                                                  |
-| **值**                                                        | 否          | 屬性的預設值。                                                                                                                                                                                               |
+| **DefaultValue**                                                        | 否          | 屬性的預設值。                                                                                                                                                                                               |
 | **MaxLength**                                                           | 否          | 屬性值的長度上限                                                                                                                                                                                        |
 | **FixedLength**                                                         | 否          | **True** 或 **False** ，取決於屬性值是否會儲存為固定長度字串。                                                                                                                           |
 | **有效位數**                                                           | 否          | 屬性值的有效位數。                                                                                                                                                                                             |
@@ -676,7 +676,7 @@ Association 元素會定義兩個實體類型之間的 **關聯** 性。 關聯 
 |:------------------------------------------------------------------------------------------------------------------------------------------------|:------------|:-------------------------------------------------------------------------------------------------|
 | **名稱**                                                                                                                                        | 是         | 實體類型的名稱。                                                                     |
 | **BaseType**                                                                                                                                    | 否          | 另一個實體類型的名稱，而此實體類型是要定義之實體類型的基底類型。  |
-| **摘要**                                                                                                                                    | 否          | **True** 或 **False**，取決於實體型別是否為抽象型別。                 |
+| **抽象**                                                                                                                                    | 否          | **True** 或 **False**，取決於實體型別是否為抽象型別。                 |
 | **OpenType**                                                                                                                                    | 否          | **True** 或 **False** ，取決於實體型別是否為開放式實體型別。 <br/> [!NOTE] |
 | > **OpenType** 屬性只適用于概念模型中定義的實體類型，這些模型會與 ADO.NET 資料服務搭配使用。 |             |                                                                                                  |
 
@@ -1112,7 +1112,7 @@ Association 元素會定義兩個實體類型之間的 **關聯** 性。 關聯 
 | **名稱**         | 是         | 參數名稱。                                                                                                                                                                                                      |
 | **型別**         | 否          | 參數類型。 參數可以是下列任何一種型別 (或這些型別的集合)： <br/> **EdmSimpleType** <br/> Entity Type - 實體類型 <br/> 複雜類型 <br/> 資料列型別 <br/> 參考類型                             |
 | **可為 Null**     | 否          | **True** (預設值) 或 **False** ，取決於屬性是否可以有 **null** 值。                                                                                                                          |
-| **值** | 否          | 屬性的預設值。                                                                                                                                                                                              |
+| **DefaultValue** | 否          | 屬性的預設值。                                                                                                                                                                                              |
 | **MaxLength**    | 否          | 屬性值的長度上限                                                                                                                                                                                       |
 | **FixedLength**  | 否          | **True** 或 **False** ，取決於屬性值是否會儲存為固定長度字串。                                                                                                                          |
 | **有效位數**    | 否          | 屬性值的有效位數。                                                                                                                                                                                            |
@@ -1220,7 +1220,7 @@ Association 元素會定義兩個實體類型之間的 **關聯** 性。 關聯 
 | **型別**                                                               | 是         | 屬性值的類型。 屬性值類型必須是 **EDMSimpleType** ，或是模型範圍內的複雜類型 (以完整名稱表示)。                                                 |
 | **可為 Null**                                                           | 否          | **True** (預設值) 或 <strong>False</strong>，取決於屬性是否可以具有 null 值。 <br/> [!NOTE]                                                                                                   |
 | CSDL v1 中的 >，複雜型別屬性必須具有 `Nullable="False"` 。 |             |                                                                                                                                                                                                                                 |
-| **值**                                                       | 否          | 屬性的預設值。                                                                                                                                                                                              |
+| **DefaultValue**                                                       | 否          | 屬性的預設值。                                                                                                                                                                                              |
 | **MaxLength**                                                          | 否          | 屬性值的長度上限                                                                                                                                                                                       |
 | **FixedLength**                                                        | 否          | **True** 或 **False** ，取決於屬性值是否會儲存為固定長度字串。                                                                                                                          |
 | **有效位數**                                                          | 否          | 屬性值的有效位數。                                                                                                                                                                                            |
@@ -1297,7 +1297,7 @@ Association 元素會定義兩個實體類型之間的 **關聯** 性。 關聯 
 | **型別**                                                           | 是         | 屬性值的類型。                                                                                                                                                                                                 |
 | **可為 Null**                                                       | 否          | **True** (預設值) 或 **False**，取決於屬性是否可以具有 null 值。 <br/> [!NOTE]                                                                                                                |
 | CSDL v1 中的 >，複雜型別屬性必須具有 `Nullable="False"` 。 |             |                                                                                                                                                                                                                                 |
-| **值**                                                   | 否          | 屬性的預設值。                                                                                                                                                                                              |
+| **DefaultValue**                                                   | 否          | 屬性的預設值。                                                                                                                                                                                              |
 | **MaxLength**                                                      | 否          | 屬性值的長度上限                                                                                                                                                                                       |
 | **FixedLength**                                                    | 否          | **True** 或 **False** ，取決於屬性值是否會儲存為固定長度字串。                                                                                                                          |
 | **有效位數**                                                      | 否          | 屬性值的有效位數。                                                                                                                                                                                            |
@@ -1766,7 +1766,7 @@ Association 元素會定義兩個實體類型之間的 **關聯** 性。 關聯 
 | **型別**                                                           | 否          | 所參考的型別名稱。                                                                                                                                                                                          |
 | **可為 Null**                                                       | 否          | **True** (預設值) 或 **False**，取決於屬性是否可以具有 null 值。 <br/> [!NOTE]                                                                                                                |
 | CSDL v1 中的 >，複雜型別屬性必須具有 `Nullable="False"` 。 |             |                                                                                                                                                                                                                                 |
-| **值**                                                   | 否          | 屬性的預設值。                                                                                                                                                                                              |
+| **DefaultValue**                                                   | 否          | 屬性的預設值。                                                                                                                                                                                              |
 | **MaxLength**                                                      | 否          | 屬性值的長度上限                                                                                                                                                                                       |
 | **FixedLength**                                                    | 否          | **True** 或 **False** ，取決於屬性值是否會儲存為固定長度字串。                                                                                                                          |
 | **有效位數**                                                      | 否          | 屬性值的有效位數。                                                                                                                                                                                            |

@@ -1,20 +1,20 @@
 ---
 title: 設計工具查詢預存程式-EF6
 description: Entity Framework 6 中的設計工具查詢預存程式
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/stored-procedures/query
-ms.openlocfilehash: 4976c7d4f788e6e9524055a508f9c906b47c9ebb
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: d88bf70e232f5245023ab6683290503822d07463
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073197"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066014"
 ---
 # <a name="designer-query-stored-procedures"></a>設計工具查詢預存程式
 本逐步解說將示範如何使用 Entity Framework Designer (EF) 設計工具，將預存程式匯入至模型，然後呼叫匯入的預存程式來取得結果。 
 
-請注意，Code First 不支援對應至預存程式或函數。 不過，您可以使用 DbSet 方法來呼叫預存程式或函數。 例如：
+請注意，Code First 不支援對應至預存程式或函數。 不過，您可以使用 DbSet 方法來呼叫預存程式或函數。 例如︰
 ``` csharp
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 ```

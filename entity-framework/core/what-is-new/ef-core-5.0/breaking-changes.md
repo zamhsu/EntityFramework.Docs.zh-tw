@@ -2,14 +2,14 @@
 title: EF Core 5.0-EF Core 的重大變更
 description: Entity Framework Core 5.0 中引進的重大變更完整清單
 author: bricelam
-ms.date: 09/09/2020
+ms.date: 09/24/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: 8e9df4e2ff81e20cf5a36855247c5aff89ea2394
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: e64f2b387d236e96d0451f3d55b3241daaba32d8
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210363"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065637"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>EF Core 5.0 中的重大變更
 
@@ -21,15 +21,17 @@ ms.locfileid: "91210363"
 |:--------------------------------------------------------------------------------------------------------------------------------------|------------|
 | [從主體到相依的導覽上的必要項具有不同的語義](#required-dependent)                                 | 中     |
 | [定義查詢會取代為提供者特定的方法](#defining-query)                                                          | 中     |
-| [已從 SQLite NTS 擴充功能移除 HasGeometricDimension 方法](#geometric-sqlite)                                                   | 低度        |
-| [Cosmos：現在已將資料分割索引鍵新增至主要索引鍵](#cosmos-partition-key)                                                        | 低度        |
-| [Cosmos： `id` 屬性已重新命名為 `__id`](#cosmos-id)                                                                                 | 低度        |
-| [Cosmos： byte [] 現在會儲存為 base64 字串，而不是數位陣列](#cosmos-byte)                                             | 低度        |
-| [Cosmos： GetPropertyName 和 SetPropertyName 已重新命名](#cosmos-metadata)                                                          | 低度        |
-| [當實體狀態從卸離變更為未變更、更新或刪除時，會呼叫值產生器](#non-added-generation) | 低度        |
-| [IMigrationsModelDiffer 現在使用 IRelationalModel](#relational-model)                                                                 | 低度        |
-| [鑒別子是唯讀的](#read-only-discriminators)                                                                             | 低度        |
-| [提供者特定的 EF。InMemory 提供者的函數方法擲回](#no-client-methods)                                              | 低度        |
+| [已從 SQLite NTS 擴充功能移除 HasGeometricDimension 方法](#geometric-sqlite)                                                   | 低        |
+| [Cosmos：現在已將資料分割索引鍵新增至主要索引鍵](#cosmos-partition-key)                                                        | 低        |
+| [Cosmos： `id` 屬性已重新命名為 `__id`](#cosmos-id)                                                                                 | 低        |
+| [Cosmos： byte [] 現在會儲存為 base64 字串，而不是數位陣列](#cosmos-byte)                                             | 低        |
+| [Cosmos： GetPropertyName 和 SetPropertyName 已重新命名](#cosmos-metadata)                                                          | 低        |
+| [當實體狀態從卸離變更為未變更、更新或刪除時，會呼叫值產生器](#non-added-generation) | 低        |
+| [IMigrationsModelDiffer 現在使用 IRelationalModel](#relational-model)                                                                 | 低        |
+| [鑒別子是唯讀的](#read-only-discriminators)                                                                             | 低        |
+| [提供者特定的 EF。InMemory 提供者的函數方法擲回](#no-client-methods)                                              | 低        |
+| [IndexBuilder. HasName 現已淘汰](#index-obsolete)                                                                               | 低        |
+| [Pluarlizer 現已包含給樣板反轉工程模型](#pluralizer)                                                 | 低        |
 
 <a name="geometric-sqlite"></a>
 
@@ -53,7 +55,7 @@ HasGeometricDimension 用來在幾何資料行上啟用 (Z 和 M) 的其他維�
 
 使用 `HasColumnType` 指定維度：
 
-```cs
+```csharp
 modelBuilder.Entity<GeoEntity>(
     x =>
     {
@@ -81,7 +83,7 @@ modelBuilder.Entity<GeoEntity>(
 
 `IsRequired`在指定相依端點之前呼叫，現在是不明確的：
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .HasOne(b => b.BlogImage)
     .WithOne(i => i.Blog)
@@ -97,7 +99,7 @@ modelBuilder.Entity<Blog>()
 
 `RequiredAttribute`從導覽中移除相依性，並將其放在主體的導覽上，或在中設定關聯性 `OnModelCreating` ：
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .HasOne(b => b.BlogImage)
     .WithOne(i => i.Blog)
@@ -127,7 +129,7 @@ modelBuilder.Entity<Blog>()
 
 若要避免將分割區索引鍵屬性加入至主鍵，請在中進行設定 `OnModelCreating` 。
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .HasKey(b => b.Id);
 ```
@@ -154,7 +156,7 @@ modelBuilder.Entity<Blog>()
 
 若要返回3.x 行為，請 `id` 在中設定屬性 `OnModelCreating` 。
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .Property<string>("id")
     .ToJsonProperty("id");
@@ -248,7 +250,7 @@ Byte [] 的這個標記法符合預期，而且是主要 JSON 序列化程式庫
 
 您可以使用下列程式碼，將模型 `snapshot` 與模型進行比較， `context` 如下所示：
 
-```cs
+```csharp
 var dependencies = context.GetService<ProviderConventionSetBuilderDependencies>();
 var relationalDependencies = context.GetService<RelationalConventionSetBuilderDependencies>();
 
@@ -288,7 +290,7 @@ EF 不會預期實體類型在仍在追蹤時變更，因此變更鑒別子值�
 
 如果需要變更鑒別子值，而且會在呼叫後立即處置內容 `SaveChanges` ，則可以將鑒別子設為可變：
 
-```cs
+```csharp
 modelBuilder.Entity<BaseEntity>()
     .Property<string>("Discriminator")
     .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
@@ -315,12 +317,12 @@ modelBuilder.Entity<BaseEntity>()
 - 如果定義查詢是使用 in 方法投射實體型別 `new { ... }` `Select` ，則將其識別為實體需要額外的工作，並使其與 EF Core 在查詢中處理名義類型的方式不一致。
 - 針對關聯式提供者， `FromSql` 仍需要以 LINQ 運算式形式傳遞 SQL 字串。
 
-最初定義查詢是以用戶端視圖的形式導入，以用於無索引鍵實體的記憶體內部提供者 (類似于關係資料庫) 中的資料庫檢視。 這類定義可讓您輕鬆地針對記憶體中資料庫測試應用程式。 之後，這些應用程式很有用，但卻變得不一致，而且難以理解的行為。 所以我們決定簡化這個概念。 我們對記憶體內部提供者進行以 LINQ 為基礎的定義查詢，並以不同的方式加以處理。 如需詳細資訊，請 [參閱此問題](https://github.com/dotnet/efcore/issues/20023)。
+最初定義查詢時，是以用戶端視圖的形式導入，以用於無索引鍵實體的 In-Memory 提供者 (類似于關係資料庫) 中的資料庫檢視。 這類定義可讓您輕鬆地針對記憶體中資料庫測試應用程式。 之後，這些應用程式很有用，但卻變得不一致，而且難以理解的行為。 所以我們決定簡化這個概念。 我們對 In-Memory 提供者進行以 LINQ 為基礎的定義查詢，並以不同的方式加以處理。 如需詳細資訊，請 [參閱此問題](https://github.com/dotnet/efcore/issues/20023)。
 
 **風險降低**
 
 若為關聯式提供者，請使用 `ToSqlQuery` 中的方法 `OnModelCreating` 並傳入要用於實體類型的 SQL 字串。
-對於記憶體中的提供者，請使用 `ToInMemoryQuery` 中的方法， `OnModelCreating` 並傳入 LINQ 查詢以用於實體型別。
+針對 In-Memory 提供者，請使用 `ToInMemoryQuery` 中的方法， `OnModelCreating` 並傳入 LINQ 查詢以用於實體型別。
 
 <a name="no-client-methods"></a>
 
@@ -343,3 +345,49 @@ modelBuilder.Entity<BaseEntity>()
 **風險降低**
 
 因為無法準確模擬資料庫函式的行為，所以您應該針對與生產環境中相同類型的資料庫，測試包含它們的查詢。
+
+<a name="index-obsolete"></a>
+
+### <a name="indexbuilderhasname-is-now-obsolete"></a>IndexBuilder. HasName 現已淘汰
+
+[追蹤問題 #21089](https://github.com/dotnet/efcore/issues/21089)
+
+**舊行為**
+
+之前，只能在一組指定的屬性上定義一個索引。 使用 IndexBuilder. HasName 設定索引的資料庫名稱。
+
+**新的行為**
+
+相同的集合或屬性現在允許多個索引。 這些索引現在是由模型中的名稱來區分。 依照慣例，會使用模型名稱做為資料庫名稱;不過，您也可以使用 HasDatabaseName 獨立設定它。
+
+**為什麼**
+
+未來，我們想要在相同的屬性集上啟用遞增和遞減索引，或具有不同定序的索引。 這項變更會將另一個步驟移至該方向。
+
+**風險降低**
+
+先前呼叫 IndexBuilder 的任何程式碼都應該更新為改為呼叫 HasDatabaseName。
+
+如果您的專案包含 EF Core 版本2.0.0 之前產生的遷移，您可以放心地忽略這些檔案中的警告，並藉由新增來隱藏它 `#pragma warning disable 612, 618` 。
+
+<a name="pluralizer"></a>
+
+### <a name="a-pluarlizer-is-now-included-for-scaffolding-reverse-engineered-models"></a>Pluarlizer 現已包含給樣板反轉工程模型
+
+[追蹤問題 #11160](https://github.com/dotnet/efcore/issues/11160)
+
+**舊行為**
+
+先前，您必須安裝個別的 pluralizer 封裝，才能在 scaffoding DbCoNtext 和實體類型時，透過反向工程資料庫架構來複數化 DbSet 和集合導覽名稱和單數化資料表名稱。
+
+**新的行為**
+
+EF Core 現在包含使用 [Humanizer](https://github.com/Humanizr/Humanizer) 程式庫的 pluralizer。 這是 Visual Studio 用來建議變數名稱的相同程式庫。
+
+**為什麼**
+
+針對集合屬性使用複數形式的單字以及類型和參考屬性的單數形式，在 .NET 中慣用。
+
+**風險降低**
+
+若要停用 pluralizer，請使用 `--no-pluralize` 上的選項 `dotnet ef dbcontext scaffold` 或開啟上的 `-NoPluralize` 參數 `Scaffold-DbContext` 。

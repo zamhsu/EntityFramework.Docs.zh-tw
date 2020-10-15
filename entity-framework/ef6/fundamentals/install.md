@@ -1,22 +1,22 @@
 ---
 title: 取得 Entity Framework-EF6
 description: 取得 Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/install
-ms.openlocfilehash: 9254f835f5007a213c49557165f6830c30711f1f
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7dc4c560cc4eb24a1c5d5dac0c9e28883de471b0
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072781"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065455"
 ---
 # <a name="get-entity-framework"></a>取得 Entity Framework
 Entity Framework 是由適用于 Visual Studio 和 EF Runtime 的 EF 工具所組成。
 
 ## <a name="ef-tools-for-visual-studio"></a>適用于 Visual Studio 的 EF 工具
 
-Visual Studio 的 Entity Framework Tools 包括 EF 設計工具和 EF 模型 Wizard，並且是資料庫 first 和模型優先工作流程的必要參數。 EF 工具組含在 Visual Studio 的所有最新版本中。 如果您執行 Visual Studio 的自訂安裝，您必須確定已選取包含該專案的工作負載，或是選取它作為個別元件，藉以選取 [Entity Framework 6 工具] 專案。
+[Visual Studio 的 Entity Framework Tools](/visualstudio/data-tools/entity-data-model-tools-in-visual-studio)包括 ef 設計工具和 Ef 模型 Wizard，並且是資料庫 first 和模型優先工作流程的必要參數。 EF 工具組含在 Visual Studio 的所有最新版本中。 如果您執行 Visual Studio 的自訂安裝，您必須確定已選取包含該專案的工作負載，或是選取它作為個別元件，藉以選取 [Entity Framework 6 工具] 專案。
 
 針對某些舊版的 Visual Studio，更新的 EF 工具可供下載。 請參閱 [Visual Studio 版本](xref:ef6/what-is-new/visual-studio) ，以取得如何取得適用于您的 Visual Studio 版本的最新 EF Tools 版本的指引。
 

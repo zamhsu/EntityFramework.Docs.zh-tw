@@ -1,17 +1,17 @@
 ---
-title: 從 EF6 移植至 EF Core-移植以程式碼為基礎的模型-EF
+title: 從 EF6 移植至 EF Core-移植 Code-Based 模型-EF
 description: 將 Entity Framework 6 以程式碼為基礎的模型應用程式移植到 Entity Framework Core 的特定資訊
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: efcore-and-ef6/porting/port-code
-ms.openlocfilehash: a5bbdc2ee95ea6bea96e24bee4588b524e0ffc58
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 819c3bc0eba140c023cdcd5038a4cd63c300ed4c
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073574"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064220"
 ---
-# <a name="porting-an-ef6-code-based-model-to-ef-core"></a>將 EF6 程式碼架構模型移植到 EF Core
+# <a name="porting-an-ef6-code-based-model-to-ef-core"></a>將 EF6 Code-Based 模型移植到 EF Core
 
 如果您已經閱讀過所有的注意事項，並已準備好進行埠，則以下是協助您開始使用的一些指導方針。
 
@@ -33,7 +33,7 @@ ms.locfileid: "90073574"
 
 大部分的 EF6 應用程式會將連接字串儲存在應用程式 `App/Web.config` 檔中。 在 EF Core 中，您會使用 API 來讀取此連接字串 `ConfigurationManager` 。 您可能需要加入架構元件的參考，才能 `System.Configuration` 使用此 API。
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public DbSet<Blog> Blogs { get; set; }

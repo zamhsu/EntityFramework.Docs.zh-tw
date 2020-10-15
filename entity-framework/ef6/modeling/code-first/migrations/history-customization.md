@@ -1,15 +1,15 @@
 ---
 title: 自訂遷移歷程記錄資料表-EF6
 description: 在 Entity Framework 6 中自訂遷移歷程記錄資料表
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/migrations/history-customization
-ms.openlocfilehash: b71ac7635d6804af2db9bf00acf7e8f4b2a11033
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f0f474507659d5fbe43ecf2ed7216fb5d1a86779
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073457"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066391"
 ---
 # <a name="customizing-the-migrations-history-table"></a>自訂遷移歷程記錄資料表
 > [!NOTE]
@@ -88,6 +88,6 @@ ms.locfileid: "90073457"
     }
 ```
 
-這就是這麼多。 現在您可以移至封裝管理員主控台、啟用-遷移、新增-遷移和最後更新資料庫。 這應該會導致依據您在 HistoryCoNtext 衍生類別中指定的詳細資料，將已設定的遷移歷程記錄資料表加入至資料庫。
+這就是這麼多。 現在您可以移至封裝管理員主控台、啟用-遷移、Add-Migration 和最後更新資料庫。 這應該會導致依據您在 HistoryCoNtext 衍生類別中指定的詳細資料，將已設定的遷移歷程記錄資料表加入至資料庫。
 
 ![遷移歷程記錄資料表](~/ef6/media/database.png)

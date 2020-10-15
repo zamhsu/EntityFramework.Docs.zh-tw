@@ -1,15 +1,15 @@
 ---
 title: 記錄和攔截資料庫作業-EF6
 description: 記錄和攔截 Entity Framework 6 中的資料庫作業
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/logging-and-interception
-ms.openlocfilehash: 858e96a781933da52725efa56087bc27db06257d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 97248af9953de4372503aa7340712f3eff19b6b8
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072664"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065429"
 ---
 # <a name="logging-and-intercepting-database-operations"></a>記錄和攔截資料庫作業
 > [!NOTE]
@@ -101,7 +101,7 @@ WHERE @@ROWCOUNT > 0 AND [Id] = scope_identity()
 
 當記錄屬性設定完成時，將會記錄下列各項：  
 
-- 適用于所有不同類型命令的 SQL。 例如：  
+- 適用于所有不同類型命令的 SQL。 例如︰  
     - 查詢，包括一般 LINQ 查詢、eSQL 查詢，以及來自方法（例如 SqlQuery）的原始查詢  
     - 作為 SaveChanges 一部分產生的插入、更新和刪除  
     - 關聯性載入查詢，例如消極式載入所產生的查詢  
@@ -228,7 +228,7 @@ public class OneLineFormatter : DatabaseLogFormatter
 
 ### <a name="setting-the-databaselogformatter"></a>設定 DatabaseLogFormatter  
 
-建立新的 DatabaseLogFormatter 類別之後，必須向 EF 註冊。 這是使用以程式碼為基礎的設定來完成。 總而言之，這表示建立新的類別，該類別衍生自 >dbconfiguration 在相同元件中的 DbCoNtext 類別，然後在這個新類別的函式中呼叫 SetDatabaseLogFormatter。 例如：  
+建立新的 DatabaseLogFormatter 類別之後，必須向 EF 註冊。 這是使用以程式碼為基礎的設定來完成。 總而言之，這表示建立新的類別，該類別衍生自 >dbconfiguration 在相同元件中的 DbCoNtext 類別，然後在這個新類別的函式中呼叫 SetDatabaseLogFormatter。 例如︰  
 
 ``` csharp
 public class MyDbConfiguration : DbConfiguration
@@ -290,7 +290,7 @@ OriginalResult 和 OriginalException 屬性是唯讀的，而且只會在實際�
 
 ### <a name="registering-interceptors"></a>註冊攔截器  
 
-一旦建立了一個或多個攔截介面的類別之後，就可以使用 DbInterception 類別向 EF 註冊。 例如：  
+一旦建立了一個或多個攔截介面的類別之後，就可以使用 DbInterception 類別向 EF 註冊。 例如︰  
 
 ``` csharp
 DbInterception.Add(new NLogCommandInterceptor());

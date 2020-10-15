@@ -1,15 +1,15 @@
 ---
 title: 流暢的 API-設定和對應屬性和類型-EF6
 description: 流暢的 API-設定和對應 Entity Framework 6 中的屬性和類型
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/fluent/types-and-properties
-ms.openlocfilehash: ddd56ff280b72adbfd2247a4f1a85e37bf2f4879
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 821672bcb797314c96189443ace7f875a79c8582
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072586"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065143"
 ---
 # <a name="fluent-api---configuring-and-mapping-properties-and-types"></a>流暢的 API-設定和對應屬性和類型
 使用 Entity Framework 時 Code First 預設行為是使用一組內建至 EF 的慣例，將 POCO 類別對應至資料表。 不過，有時候您不能或不想要遵循這些慣例，也不需要將實體對應至慣例所規定的專案。  
@@ -18,7 +18,7 @@ ms.locfileid: "90072586"
 
 Code first 流暢 API 最常透過覆寫衍生[DbCoNtext](https://msdn.microsoft.com/library/system.data.entity.dbcontext.aspx)的[OnModelCreating](https://msdn.microsoft.com/library/system.data.entity.dbcontext.onmodelcreating.aspx)方法來存取。 下列範例旨在示範如何使用流暢的 api 執行各種工作，並可讓您將程式碼複製並自訂成符合您的模型，如果您想要查看可依原樣使用的模型，則會在本文結尾處提供。  
 
-## <a name="model-wide-settings"></a>全模型設定  
+## <a name="model-wide-settings"></a>Model-Wide 設定  
 
 ### <a name="default-schema-ef6-onwards"></a>預設架構 (EF6)   
 

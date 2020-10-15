@@ -1,15 +1,15 @@
 ---
 title: 原始 SQL 查詢-EF6
 description: Entity Framework 6 中的原始 SQL 查詢
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/querying/raw-sql
-ms.openlocfilehash: 30fab3029d71fb560493af279231e46828aa43d4
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: da813ede818b24a5e7930202bfa761d65e4e6b72
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073882"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064714"
 ---
 # <a name="raw-sql-queries-ef6"></a> (EF6) 的原始 SQL 查詢
 
@@ -17,7 +17,7 @@ Entity Framework 可讓您使用 LINQ 搭配您的實體類別來進行查詢。
 
 ## <a name="writing-sql-queries-for-entities"></a>撰寫實體的 SQL 查詢  
 
-DbSet 上的 SqlQuery 方法可讓您撰寫可傳回實體實例的原始 SQL 查詢。 傳回的物件將會被內容追蹤，就像 LINQ 查詢所傳回的一樣。 例如：  
+DbSet 上的 SqlQuery 方法可讓您撰寫可傳回實體實例的原始 SQL 查詢。 傳回的物件將會被內容追蹤，就像 LINQ 查詢所傳回的一樣。 例如︰  
 
 ``` csharp  
 using (var context = new BloggingContext())
@@ -56,7 +56,7 @@ using (var context = new BloggingContext())
 
 ## <a name="writing-sql-queries-for-non-entity-types"></a>撰寫非實體類型的 SQL 查詢  
 
-您可以使用 Database 類別上的 SqlQuery 方法，建立傳回任何型別實例的 SQL 查詢（包括基本類型）。 例如：  
+您可以使用 Database 類別上的 SqlQuery 方法，建立傳回任何型別實例的 SQL 查詢（包括基本類型）。 例如︰  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -70,7 +70,7 @@ using (var context = new BloggingContext())
 
 ## <a name="sending-raw-commands-to-the-database"></a>傳送原始命令至資料庫  
 
-您可以使用資料庫上的 ExecuteSqlCommand 方法，將非查詢命令傳送至資料庫。 例如：  
+您可以使用資料庫上的 ExecuteSqlCommand 方法，將非查詢命令傳送至資料庫。 例如︰  
 
 ``` csharp
 using (var context = new BloggingContext())

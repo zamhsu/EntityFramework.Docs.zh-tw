@@ -1,15 +1,15 @@
 ---
 title: 載入相關實體-EF6
 description: 在 Entity Framework 6 中載入相關實體
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/querying/related-data
-ms.openlocfilehash: d1bf04f9d9017291ef3f5ec0809095df856329cd
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 30d5bcff0696b4886655f5413e4878f1a611cf88
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073869"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064688"
 ---
 # <a name="loading-related-entities"></a>載入相關實體
 
@@ -125,7 +125,7 @@ public class Blog
 
 ### <a name="turn-off-lazy-loading-for-all-entities"></a>關閉所有實體的延遲載入
 
-您可以藉由設定設定屬性上的旗標，關閉內容中所有實體的消極式載入。 例如：
+您可以藉由設定設定屬性上的旗標，關閉內容中所有實體的消極式載入。 例如︰
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -141,7 +141,7 @@ public class BloggingContext : DbContext
 
 ## <a name="explicitly-loading"></a>明確載入
 
-即使已停用消極式載入，仍然可以延遲載入相關實體，但必須透過明確呼叫來完成。 若要這樣做，請在相關實體的專案上使用 Load 方法。 例如：
+即使已停用消極式載入，仍然可以延遲載入相關實體，但必須透過明確呼叫來完成。 若要這樣做，請在相關實體的專案上使用 Load 方法。 例如︰
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -170,7 +170,7 @@ using (var context = new BloggingContext())
 
 ### <a name="applying-filters-when-explicitly-loading-related-entities"></a>明確載入相關實體時套用篩選
 
-查詢方法可讓您存取 Entity Framework 將在載入相關實體時使用的基礎查詢。 然後，您可以使用 LINQ 將篩選套用至查詢，然後再透過呼叫 LINQ 擴充方法（例如 ToList、載入等）來執行。查詢方法可以搭配參考和集合導覽屬性使用，但對於只能用來載入部分集合的集合而言最有用。 例如：
+查詢方法可讓您存取 Entity Framework 將在載入相關實體時使用的基礎查詢。 然後，您可以使用 LINQ 將篩選套用至查詢，然後再透過呼叫 LINQ 擴充方法（例如 ToList、載入等）來執行。查詢方法可以搭配參考和集合導覽屬性使用，但對於只能用來載入部分集合的集合而言最有用。 例如︰
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -201,7 +201,7 @@ using (var context = new BloggingContext())
 
 ## <a name="using-query-to-count-related-entities-without-loading-them"></a>使用查詢來計算相關實體，但不載入它們
 
-有時候，知道有多少個實體與資料庫中的另一個實體相關，並不會實際產生載入所有這些實體的成本，會很有用。 使用 LINQ Count 方法的查詢方法可以用來進行此作業。 例如：
+有時候，知道有多少個實體與資料庫中的另一個實體相關，並不會實際產生載入所有這些實體的成本，會很有用。 使用 LINQ Count 方法的查詢方法可以用來進行此作業。 例如︰
 
 ``` csharp
 using (var context = new BloggingContext())

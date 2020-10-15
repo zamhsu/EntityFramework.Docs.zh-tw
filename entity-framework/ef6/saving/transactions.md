@@ -1,15 +1,15 @@
 ---
 title: 使用交易-EF6
 description: 使用 Entity Framework 6 中的交易
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/saving/transactions
-ms.openlocfilehash: 15cc2171338defe482767114c58afe16cc1ffe21
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 525b5cf605c1b61225ee2b9f1e0559a8e13f3052
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073713"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064428"
 ---
 # <a name="working-with-transactions"></a>使用交易
 > [!NOTE]
@@ -112,7 +112,7 @@ using (var conn = new SqlConnection("..."))
 
 此外，您必須自行啟動交易 (包括 IsolationLevel 如果您想要避免預設設定) 並讓 Entity Framework 知道連線上已啟動現有的交易 (請參閱以下) 的行33。  
 
-然後，您可以直接在 SqlConnection 本身或 DbCoNtext 上執行資料庫作業。 所有這類作業都是在一個交易內執行。 您必須負責認可或回復交易，以及在其上呼叫 Dispose ( # A1，以及關閉和處置資料庫連接。 例如：  
+然後，您可以直接在 SqlConnection 本身或 DbCoNtext 上執行資料庫作業。 所有這類作業都是在一個交易內執行。 您必須負責認可或回復交易，以及在其上呼叫 Dispose ( # A1，以及關閉和處置資料庫連接。 例如︰  
 
 ``` csharp
 using System;
@@ -179,7 +179,7 @@ namespace TransactionsExamples
 
 本節將詳細說明上述交易與之互動的方式：  
 
-- 連線恢復功能  
+- 恢復連線  
 - 非同步方法  
 - TransactionScope 交易  
 

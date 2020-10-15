@@ -2,15 +2,14 @@
 title: Microsoft SQL Server 資料庫提供者 - EF Core
 description: 資料庫提供者的文件，可讓 Entity Framework Core 與 Microsoft SQL Server 搭配使用
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/sql-server/index
-ms.openlocfilehash: baae668a7ec255e35ab0e23e5c5ddfa47bda917e
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+ms.openlocfilehash: 344bf243577d39d2d5a03cf321f8d84c275d10d3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413143"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065325"
 ---
 # <a name="microsoft-sql-server-ef-core-database-provider"></a>Microsoft SQL Server EF Core 資料庫提供者
 
@@ -28,7 +27,7 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 

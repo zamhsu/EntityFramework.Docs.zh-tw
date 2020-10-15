@@ -1,15 +1,15 @@
 ---
 title: 複雜類型-EF Designer-EF6
 description: 複雜類型-Entity Framework 6 中的 EF 設計工具
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/data-types/complex-types
-ms.openlocfilehash: 6ebba9ea36ddad1a25b21bf98a6ac3090c327144
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: abacbdd375c2871e6c4205e0084764029b149a40
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073509"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065039"
 ---
 # <a name="complex-types---ef-designer"></a>複雜類型-EF 設計工具
 本主題說明如何使用 Entity Framework Designer (EF) 設計工具來對應複雜型別，以及如何查詢包含複雜型別屬性的實體。

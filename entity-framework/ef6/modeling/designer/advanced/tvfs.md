@@ -1,17 +1,17 @@
 ---
-title: 資料表值函式 (Tvf) -EF6
-description: 'Entity Framework 6 中的資料表值函數 (Tvf) '
-author: divega
+title: Table-Valued 函式 (Tvf) -EF6
+description: 'Entity Framework 6 中的 Table-Valued 函式 (Tvf) '
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/advanced/tvfs
-ms.openlocfilehash: 727c6c7ff5947e78bf8eb489194e355e2fd157c9
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 2c699cad3ace253842d17aca4eca4df2318c4795
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070157"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066196"
 ---
-# <a name="table-valued-functions-tvfs"></a>資料表值函式 (Tvf) 
+# <a name="table-valued-functions-tvfs"></a>Table-Valued 函式 (Tvf) 
 > [!NOTE]
 > **EF5 只** 會提供此 Entity Framework 頁面中所討論的功能、api 等等。 如果您使用的是較早版本，則不適用部分或全部的資訊。
 

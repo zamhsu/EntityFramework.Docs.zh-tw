@@ -1,15 +1,15 @@
 ---
 title: Entity Framework 詞彙-EF6
 description: Entity Framework 6 詞彙
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/resources/glossary
-ms.openlocfilehash: 819bdda133b427fa6f8fc1915cde07560e6ca568
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 6c11b45978ad8efaf70bb640567c79b60ff7a708
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072885"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064649"
 ---
 # <a name="entity-framework-glossary"></a>Entity Framework 詞彙
 ## <a name="code-first"></a>Code First
@@ -61,7 +61,7 @@ Visual Studio 中的視覺化設計工具，可讓您使用方塊和線條建立
 參考另一個實體之實體的屬性。 例如，Product 包含類別目錄導覽屬性，而類別則包含 Products 導覽屬性。
 
 ## <a name="poco"></a>POCO
-純舊 CLR 物件的縮寫。 與任何架構沒有相依性的簡單使用者類別。 在 EF 的內容中，不是衍生自 EntityObject 的實體類別會執行任何介面，或攜帶 EF 中定義的任何屬性。 從持續性架構分離的這類實體類別也稱為「持續性未知」。  
+Plain-Old CLR 物件的縮寫。 與任何架構沒有相依性的簡單使用者類別。 在 EF 的內容中，不是衍生自 EntityObject 的實體類別會執行任何介面，或攜帶 EF 中定義的任何屬性。 從持續性架構分離的這類實體類別也稱為「持續性未知」。  
 
 ## <a name="relationship-inverse"></a>反向關聯性
 關聯性的另一端，例如 product。類別目錄和類別目錄。產品。

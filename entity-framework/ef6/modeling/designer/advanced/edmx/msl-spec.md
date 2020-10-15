@@ -1,15 +1,15 @@
 ---
 title: MSL 規格-EF6
 description: Entity Framework 6 中的 MSL 規格
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/advanced/edmx/msl-spec
-ms.openlocfilehash: 36527b9827a7576f73c9ef476462d9392b601984
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 0780a549d4cbb60bf84bbed927d52588e99148e1
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070108"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066339"
 ---
 # <a name="msl-specification"></a>MSL 規格
 對應規格語言 (MSL) 是以 XML 為基礎的語言，描述 Entity Framework 應用程式的概念模型和儲存模型之間的對應。
@@ -383,7 +383,7 @@ MSL 的版本是以 XML 命名空間來區分。
 | **ColumnName** | 否          | 其值用來評估條件之資料表資料行的名稱。                                                                                                                                                                                                                   |
 | **IsNull**     | 否          | **True** 或 **False**。 如果值為 **True** 且資料行值為 **null**，或者如果值為 **False** 且資料行值不是 **null**，則條件為 true。 否則，條件不成立。 <br/> 不能同時使用 **IsNull** 和 **Value** 屬性。 |
 | **ReplTest1**      | 否          | 要與資料行值比較的值。 如果值相同，則條件成立。 否則，條件不成立。 <br/> 不能同時使用 **IsNull** 和 **Value** 屬性。                                                                       |
-| **Name**       | 否          | 其值用來評估條件之概念模型實體屬性的名稱。 <br/> 如果在 FunctionImportMapping 元素內使用 **Condition** 元素，則不適用這個屬性。                                                                           |
+| **名稱**       | 否          | 其值用來評估條件之概念模型實體屬性的名稱。 <br/> 如果在 FunctionImportMapping 元素內使用 **Condition** 元素，則不適用這個屬性。                                                                           |
 
 ### <a name="example"></a>範例
 

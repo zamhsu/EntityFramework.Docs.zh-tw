@@ -1,15 +1,15 @@
 ---
 title: 還原為 Entity Framework Designer 中的 ObjectCoNtext-EF6
 description: Entity Framework Designer 中的 ObjectCoNtext 還原至 Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/codegen/legacy-objectcontext
-ms.openlocfilehash: 9ceb8ef43e4df083fe3cc5e63862ba2eb338f659
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 563c1defd12a72836a158d9c2398202c421dd6f3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90069960"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064935"
 ---
 # <a name="reverting-to-objectcontext-in-entity-framework-designer"></a>Entity Framework Designer 中的 ObjectCoNtext 還原
 使用舊版 Entity Framework 使用 EF 設計工具建立的模型會產生衍生自 ObjectCoNtext 的內容，以及衍生自 EntityObject 的實體類別。
@@ -30,7 +30,7 @@ ms.locfileid: "90069960"
 
 ![顯示所有檔案](~/ef6/media/showallfiles.png)
 
-### <a name="2-re-enable-objectcontext-code-generation"></a>2. 重新啟用 ObjectCoNtext 程式碼產生
+### <a name="2-re-enable-objectcontext-code-generation"></a>2. Re-Enable ObjectCoNtext 程式碼產生
 
 在 EF 設計工具中開啟您的模型，以滑鼠右鍵按一下設計介面的空白區段，然後選取 [ **屬性**]。
 

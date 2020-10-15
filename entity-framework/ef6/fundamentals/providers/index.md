@@ -1,15 +1,15 @@
 ---
 title: Entity Framework 提供者 - EF6
 description: Entity Framework 6 中的 Entity Framework 提供者
-author: divega
+author: ajcvickers
 ms.date: 06/27/2018
 uid: ef6/fundamentals/providers/index
-ms.openlocfilehash: 7d448f749448e35702c2440717593221324508fa
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: d53cc98471597e98d5f54024b87e1f238b31473b
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210324"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065403"
 ---
 # <a name="entity-framework-6-providers"></a>Entity Framework 6 提供者
 > [!NOTE]

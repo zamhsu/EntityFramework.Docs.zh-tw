@@ -1,15 +1,15 @@
 ---
 title: EF Core 2.1 中的新功能 - EF Core
 description: Entity Framework Core 2.1 的變更和改進
-author: divega
+author: ajcvickers
 ms.date: 02/20/2018
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: b3d44fe344155df1d814e189b533010673754089
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c98a44f9bc06447bb41f0278c59b412f770c5bd4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072313"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065702"
 ---
 # <a name="new-features-in-ef-core-21"></a>EF Core 2.1 中的新功能
 
@@ -35,7 +35,7 @@ EF Core 現在包含必要的建置組塊，可讓任何人撰寫實體類別，
 - 使用 SQL Server 對應不帶正負號的整數
 - 屬性值的自動加密和解密
 
-如需此主題的詳細資訊，請閱讀[值轉換](xref:core/modeling/value-conversions)一節。  
+如需此主題的詳細資訊，請閱讀[值轉換](xref:core/modeling/value-conversions)一節。
 
 ## <a name="linq-groupby-translation"></a>LINQ GroupBy 轉譯
 
@@ -43,7 +43,7 @@ EF Core 現在包含必要的建置組塊，可讓任何人撰寫實體類別，
 
 此範例會顯示使用 GroupBy 來計算各種彙總函式的查詢：
 
-``` csharp
+```csharp
 var query = context.Orders
     .GroupBy(o => new { o.CustomerId, o.EmployeeId })
     .Select(g => new
@@ -59,7 +59,7 @@ var query = context.Orders
 
 對應的 SQL 轉譯如下所示：
 
-``` SQL
+```sql
 SELECT [o].[CustomerId], [o].[EmployeeId],
     SUM([o].[Amount]), MIN([o].[Amount]), MAX([o].[Amount]), AVG([o].[Amount])
 FROM [Orders] AS [o]
@@ -72,11 +72,11 @@ GROUP BY [o].[CustomerId], [o].[EmployeeId];
 
 例如，您可以使用此選項，為 `OnModelCreating` 中的 Post 設定種子資料：
 
-``` csharp
+```csharp
 modelBuilder.Entity<Post>().HasData(new Post{ Id = 1, Text = "Hello World!" });
 ```
 
-如需此主題的詳細資訊，請閱讀[資料植入](xref:core/modeling/data-seeding)一節。  
+如需此主題的詳細資訊，請閱讀[資料植入](xref:core/modeling/data-seeding)一節。
 
 ## <a name="query-types"></a>查詢類型
 
@@ -93,7 +93,7 @@ EF Core 模型現在可以包含查詢類型。 不同於實體類型，查詢�
 
 現在，當您為 `Include` 方法撰寫運算式時，您可以指定只在衍生類型上定義的導覽屬性。 針對 `Include` 的強型別版本，我們支援使用明確轉換或 `as` 運算子。 我們現在也支援參考 `Include` 的字串版本中衍生類型上所定義的導覽屬性名稱：
 
-``` csharp
+```csharp
 var option1 = context.People.Include(p => ((Student)p).School);
 var option2 = context.People.Include(p => (p as Student).School);
 var option3 = context.People.Include("School");
@@ -117,14 +117,14 @@ var option3 = context.People.Include("School");
 
 例如，下列查詢通常會轉譯成一個用於客戶的查詢，再加上 N (其中 "N" 是傳回的客戶數目) 個用於訂單的個別查詢：
 
-``` csharp
+```csharp
 var query = context.Customers.Select(
     c => c.Orders.Where(o => o.Amount  > 100).Select(o => o.Amount));
 ```
 
 藉由在正確位置包含 `ToList()`，您可以指出緩衝處理適用於訂單，因此可啟用最佳化：
 
-``` csharp
+```csharp
 var query = context.Customers.Select(
     c => c.Orders.Where(o => o.Amount  > 100).Select(o => o.Amount).ToList());
 ```
@@ -135,7 +135,7 @@ var query = context.Customers.Select(
 
 您現在可以直接對類型標註 `[Owned]`，然後確定擁有者實體已新增至模型，來設定[擁有的實體類型](xref:core/modeling/owned-entities)：
 
-``` csharp
+```csharp
 [Owned]
 public class StreetAddress
 {
@@ -168,7 +168,7 @@ _dotnet-ef_ 命令現為 .NET Core SDK 的一部分，因此不再需要在專�
 
 EF Core 隨附一個新的程式碼分析工具，可偵測原始 SQL API (例如 `FromSql` 或 `ExecuteSqlCommand`) 可能不安全的使用方式。 例如，在下列查詢中，因為 _minAge_ 未參數化，所以您會看到警告：
 
-``` csharp
+```csharp
 var sql = $"SELECT * FROM People WHERE Age > {minAge}";
 var query = context.People.FromSql(sql);
 ```

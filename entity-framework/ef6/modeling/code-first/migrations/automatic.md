@@ -1,15 +1,15 @@
 ---
 title: 自動 Code First 移轉-EF6
 description: Entity Framework 6 中的自動 Code First 移轉
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/migrations/automatic
-ms.openlocfilehash: e7bd9ff7d9dcecb7fecf213306047a53fc04135c
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8152cdf642258a30d98f3750bf1ca4ccd2859978
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072560"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066404"
 ---
 # <a name="automatic-code-first-migrations"></a>自動 Code First 移轉
 自動遷移可讓您使用 Code First 移轉，而不需要在專案中為您所做的每項變更建立程式碼檔案。 並非所有變更都可以自動套用-例如，資料行重新命名需要使用以程式碼為基礎的遷移。
@@ -116,7 +116,7 @@ Code First 移轉有兩個您將先熟悉的主要命令。
 -   **Add-Migration** 將根據自上次建立移轉以來您對模型所做的變更，來建立下一次移轉
 -   **Update-Database** 會將任何擱置的移轉套用至資料庫
 
-除非我們真的需要) ，並將焦點放在讓 Code First 移轉自動計算和套用變更，否則我們將會避免使用「新增-遷移 (」。 讓我們使用 **Update-database** 來取得 Code First 移轉將變更推送至我們的模型 (新的 **Blog**l 屬性) 至資料庫。
+除非我們真的需要) ，並將焦點放在讓 Code First 移轉自動計算並套用變更，否則我們將避免使用 Add-Migration (。 讓我們使用 **Update-database** 來取得 Code First 移轉將變更推送至我們的模型 (新的 **Blog**l 屬性) 至資料庫。
 
 -   在封裝管理員主控台中執行 **更新資料庫** 命令。
 
@@ -164,7 +164,7 @@ Code First 移轉有兩個您將先熟悉的主要命令。
 ```
 
 我們可以直接執行 **更新資料庫** ，將這些變更推送至資料庫。 但是，我們要新增一個不可為 null 的 **blog** 資料行，如果資料表中有任何現有的資料，則會將新資料行的 CLR 預設資料類型指派給資料類型 (評等為整數，因此為 **0**) 。 但我們應指定預設值為 **3**，以便 **Blog** 資料表中的現有資料列以適當的評等開頭。
-讓我們使用 [新增-遷移] 命令將這種變更寫入至以程式碼為基礎的遷移，讓我們可以進行編輯。 [ **新增-遷移** ] 命令可讓我們將名稱提供給這些遷移，讓我們直接呼叫我們的 **AddBlogRating**。
+讓我們使用 Add-Migration 命令將此變更寫入至以程式碼為基礎的遷移，讓我們可以進行編輯。 [ **新增-遷移** ] 命令可讓我們將名稱提供給這些遷移，讓我們直接呼叫我們的 **AddBlogRating**。
 
 -   在封裝管理員主控台中執行 [ **新增-遷移 AddBlogRating** ] 命令。
 -   在 [ **遷移** ] 資料夾中，我們現在有新的 **AddBlogRating** 遷移。 使用時間戳預先修正遷移檔案名，以協助進行排序。 讓我們編輯產生的程式碼，為 Blog (第10行的程式碼片段指定預設值 3) 

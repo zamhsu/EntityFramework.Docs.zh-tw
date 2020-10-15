@@ -1,15 +1,15 @@
 ---
 title: 自動偵測變更-EF6
 description: 自動偵測 Entity Framework 6 中的變更
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/saving/change-tracking/auto-detect-changes
-ms.openlocfilehash: aa8b94d843d99a8f040bdb065297d2e19b4770d7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 159143a9ade64a65e857a30117e577b21e0b9f98
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073778"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064492"
 ---
 # <a name="automatic-detect-changes"></a>自動偵測變更
 使用大部分的 POCO 實體時，會決定實體如何變更 (，因此必須將更新傳送至資料庫) 由「偵測變更」演算法處理。 偵測變更的運作方式是偵測實體的目前屬性值與在查詢或附加實體時儲存在快照中的原始屬性值之間的差異。 本主題所示範的技巧同樣適用於使用 Code First 和 EF 設計工具所建立的模型。  
@@ -30,7 +30,7 @@ ms.locfileid: "90073778"
 
 ## <a name="disabling-automatic-detection-of-changes"></a>停用自動偵測變更  
 
-如果您要在您的內容中追蹤許多實體，而且在迴圈中多次呼叫其中一個方法，則您可以關閉迴圈期間的變更偵測，以獲得大幅的效能改進。 例如：  
+如果您要在您的內容中追蹤許多實體，而且在迴圈中多次呼叫其中一個方法，則您可以關閉迴圈期間的變更偵測，以獲得大幅的效能改進。 例如︰  
 
 ``` csharp
 using (var context = new BloggingContext())

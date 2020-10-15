@@ -1,15 +1,15 @@
 ---
 title: 升級至 Entity Framework 6-EF6
 description: 升級至 Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/what-is-new/upgrading-to-ef6
-ms.openlocfilehash: 118853ad9b53fe2157f50b329bddc31d3135d75a
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 14cd0e259832377332f77a199502699d75982bb4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90074038"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064246"
 ---
 # <a name="upgrading-to-entity-framework-6"></a>升級至 Entity Framework 6
 
@@ -65,7 +65,7 @@ DbCoNtext 和 Code First 類型的命名空間尚未變更。 這表示使用 EF
 
 先前在 System.Data.Entity.dll 中的類型（例如 ObjectCoNtext）已移至新的命名空間。 這表示您可能需要更新 *使用* 或匯 *入* 指示詞，以針對 EF6 進行建立。
 
-命名空間變更的一般規則是，系統中的任何類型都會移至 system.string. *。 換句話說，只需要插入**Entity Core** 。 在 System. 資料之後。 例如：
+命名空間變更的一般規則是，系統中的任何類型都會移至 system.string. *。 換句話說，只需要插入**Entity Core** 。 在 System. 資料之後。 例如︰
 
 - EntityException => System.object。**Core**。EntityException  
 - System.string => 的 System.object。**Core**。物件. ObjectCoNtext  

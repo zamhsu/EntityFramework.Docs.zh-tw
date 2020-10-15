@@ -1,15 +1,15 @@
 ---
 title: Code First 新增至新資料庫-EF6
 description: Code First 至 Entity Framework 6 中的新資料庫
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/workflows/new-database
-ms.openlocfilehash: 96d76162383149c045178954196e1294331918a8
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 9d0082ac5226fff066d3e18c9164e2230c84b285
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070363"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065014"
 ---
 # <a name="code-first-to-a-new-database"></a>新資料庫的 Code First
 這段影片和逐步解說將提供以新的資料庫為目標的 Code First 開發簡介。 這種情況包括以不存在的資料庫為目標，Code First 將會建立，或是 Code First 將新的資料表加入的空資料庫。 Code First 可讓您使用 C 或 VB.Net 類別來定義您的模型 \# 。 您可以選擇性地使用類別和屬性上的屬性，或使用流暢的 API 來執行其他設定。
@@ -238,7 +238,7 @@ public class Blog
 ```
 
 -   在封裝管理員主控台中執行 [ **新增-遷移 AddUrl** ] 命令。
-    新增-遷移命令會檢查自您上次遷移後的變更，並使用找到的任何變更 scaffold 新的遷移。 我們可以為遷移提供一個名稱;在此情況下，我們會呼叫遷移 ' AddUrl '。
+    Add-Migration 命令會檢查自您上一次遷移後的變更，並使用所找到的任何變更 scaffold 新的遷移。 我們可以為遷移提供一個名稱;在此情況下，我們會呼叫遷移 ' AddUrl '。
     Scaffold 程式碼指出我們需要將 Url 資料行（可保存字串資料）新增至 dbo。Blog 資料表。 如有需要，我們可以編輯 scaffold 程式碼，但在此情況下不需要這麼做。
 
 ``` csharp
@@ -263,7 +263,7 @@ namespace CodeFirstNewDatabaseSample.Migrations
 ```
 
 -   在封裝管理員主控台中執行 **更新資料庫** 命令。 此命令會將任何擱置中的遷移套用至資料庫。 我們的 InitialCreate 遷移已套用，因此遷移只會套用新的 AddUrl 遷移。
-    提示：呼叫更新資料庫時，您可以使用 **-Verbose** 參數來查看針對資料庫執行的 SQL。
+    秘訣：呼叫 Update-Database 時，您可以使用 **-Verbose** 參數來查看針對資料庫執行的 SQL。
 
 新的 Url 資料行會加入至資料庫中的 Blog 資料表：
 

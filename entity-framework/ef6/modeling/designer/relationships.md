@@ -1,15 +1,15 @@
 ---
 title: 關聯性-EF Designer-EF6
 description: 關聯性-Entity Framework 6 中的 EF 設計工具
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/relationships
-ms.openlocfilehash: 65960dcfcafc239b5ecd8b396a52dababbb4ab08
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 0211eb1916a7372874f0b7812c512e6eeba0974f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073288"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066131"
 ---
 # <a name="relationships---ef-designer"></a>關聯性-EF 設計工具
 > [!NOTE]

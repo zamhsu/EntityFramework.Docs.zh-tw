@@ -1,14 +1,14 @@
 ---
 title: Entity Framework Designer 鍵盤快速鍵-EF6
 description: Entity Framework Designer Entity Framework 6 中的鍵盤快速鍵
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
-ms.openlocfilehash: 3552f2b9bfc499654bc1dce4a81d37cacc8b7996
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 90589419a52a198747eadee740775e2761bc757c
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073379"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064883"
 ---
 # <a name="entity-framework-designer-keyboard-shortcuts"></a>Entity Framework Designer 鍵盤快速鍵
 此頁面提供的鍵盤 shorcuts 清單，可用於 Visual Studio 之 Entity Framework Tools 的各種畫面。
@@ -118,7 +118,7 @@ ms.locfileid: "90073379"
 | 快速鍵                  | 動作         | 備註                                                                                                                                 |
 |:--------------------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------------------|
 | **索引標籤**                   | 切換內容 | 在主視窗區域和左邊的工具列之間切換                                                                     |
-| **方向鍵**            | 導覽     | 在主視窗區域中的資料行上移和下移資料列，或靠右和向左移動。 在左側工具列中的按鈕之間移動。 |
+| **方向鍵**            | 瀏覽     | 在主視窗區域中的資料行上移和下移資料列，或靠右和向左移動。 在左側工具列中的按鈕之間移動。 |
 | **進入** <br/> **空間** | 選取         | 選取左側工具列中的按鈕。                                                                                          |
 | **Alt + 向下鍵**      | 開啟清單      | 如果已選取具有下拉式清單的資料格，則下拉式清單。                                                                     |
 | **進入**                 | 清單選取    | 選取下拉式清單中的元素。                                                                                               |
