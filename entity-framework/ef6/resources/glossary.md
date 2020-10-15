@@ -1,82 +1,82 @@
 ---
 title: Entity Framework 詞彙-EF6
 description: Entity Framework 6 詞彙
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/resources/glossary
-ms.openlocfilehash: 819bdda133b427fa6f8fc1915cde07560e6ca568
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 6c11b45978ad8efaf70bb640567c79b60ff7a708
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072885"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064649"
 ---
-# <a name="entity-framework-glossary"></a><span data-ttu-id="6132a-103">Entity Framework 詞彙</span><span class="sxs-lookup"><span data-stu-id="6132a-103">Entity Framework Glossary</span></span>
-## <a name="code-first"></a><span data-ttu-id="6132a-104">Code First</span><span class="sxs-lookup"><span data-stu-id="6132a-104">Code First</span></span>
-<span data-ttu-id="6132a-105">使用程式碼建立 Entity Framework 模型。</span><span class="sxs-lookup"><span data-stu-id="6132a-105">Creating an Entity Framework model using code.</span></span> <span data-ttu-id="6132a-106">模型可以將目標設為現有的資料庫或新的資料庫。</span><span class="sxs-lookup"><span data-stu-id="6132a-106">The model can target an existing database or a new database.</span></span>
+# <a name="entity-framework-glossary"></a><span data-ttu-id="1f8f8-103">Entity Framework 詞彙</span><span class="sxs-lookup"><span data-stu-id="1f8f8-103">Entity Framework Glossary</span></span>
+## <a name="code-first"></a><span data-ttu-id="1f8f8-104">Code First</span><span class="sxs-lookup"><span data-stu-id="1f8f8-104">Code First</span></span>
+<span data-ttu-id="1f8f8-105">使用程式碼建立 Entity Framework 模型。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-105">Creating an Entity Framework model using code.</span></span> <span data-ttu-id="1f8f8-106">模型可以將目標設為現有的資料庫或新的資料庫。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-106">The model can target an existing database or a new database.</span></span>
 
-## <a name="context"></a><span data-ttu-id="6132a-107">Context</span><span class="sxs-lookup"><span data-stu-id="6132a-107">Context</span></span>
-<span data-ttu-id="6132a-108">代表資料庫之會話的類別，可讓您查詢和儲存資料。</span><span class="sxs-lookup"><span data-stu-id="6132a-108">A class that represents a session with the database, allowing you to query and save data.</span></span> <span data-ttu-id="6132a-109">內容衍生自 DbCoNtext 或 ObjectCoNtext 類別。</span><span class="sxs-lookup"><span data-stu-id="6132a-109">A context derives from the DbContext or ObjectContext class.</span></span>
+## <a name="context"></a><span data-ttu-id="1f8f8-107">Context</span><span class="sxs-lookup"><span data-stu-id="1f8f8-107">Context</span></span>
+<span data-ttu-id="1f8f8-108">代表資料庫之會話的類別，可讓您查詢和儲存資料。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-108">A class that represents a session with the database, allowing you to query and save data.</span></span> <span data-ttu-id="1f8f8-109">內容衍生自 DbCoNtext 或 ObjectCoNtext 類別。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-109">A context derives from the DbContext or ObjectContext class.</span></span>
 
-## <a name="convention-code-first"></a><span data-ttu-id="6132a-110">慣例 (Code First) </span><span class="sxs-lookup"><span data-stu-id="6132a-110">Convention (Code First)</span></span>
-<span data-ttu-id="6132a-111">Entity Framework 用來從您的類別推斷模型形狀的規則。</span><span class="sxs-lookup"><span data-stu-id="6132a-111">A rule that Entity Framework uses to infer the shape of you model from your classes.</span></span>
+## <a name="convention-code-first"></a><span data-ttu-id="1f8f8-110">慣例 (Code First) </span><span class="sxs-lookup"><span data-stu-id="1f8f8-110">Convention (Code First)</span></span>
+<span data-ttu-id="1f8f8-111">Entity Framework 用來從您的類別推斷模型形狀的規則。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-111">A rule that Entity Framework uses to infer the shape of you model from your classes.</span></span>
 
-## <a name="database-first"></a><span data-ttu-id="6132a-112">Database First</span><span class="sxs-lookup"><span data-stu-id="6132a-112">Database First</span></span>
-<span data-ttu-id="6132a-113">使用以現有資料庫為目標的 EF 設計工具建立 Entity Framework 模型。</span><span class="sxs-lookup"><span data-stu-id="6132a-113">Creating an Entity Framework model, using the EF Designer, that targets an existing database.</span></span>
+## <a name="database-first"></a><span data-ttu-id="1f8f8-112">Database First</span><span class="sxs-lookup"><span data-stu-id="1f8f8-112">Database First</span></span>
+<span data-ttu-id="1f8f8-113">使用以現有資料庫為目標的 EF 設計工具建立 Entity Framework 模型。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-113">Creating an Entity Framework model, using the EF Designer, that targets an existing database.</span></span>
 
-## <a name="eager-loading"></a><span data-ttu-id="6132a-114">積極式載入</span><span class="sxs-lookup"><span data-stu-id="6132a-114">Eager loading</span></span>
-<span data-ttu-id="6132a-115">載入相關資料的模式，其中一種實體類型的查詢也會將相關實體載入查詢的一部分。</span><span class="sxs-lookup"><span data-stu-id="6132a-115">A pattern of loading related data where a query for one type of entity also loads related entities as part of the query.</span></span>
+## <a name="eager-loading"></a><span data-ttu-id="1f8f8-114">積極式載入</span><span class="sxs-lookup"><span data-stu-id="1f8f8-114">Eager loading</span></span>
+<span data-ttu-id="1f8f8-115">載入相關資料的模式，其中一種實體類型的查詢也會將相關實體載入查詢的一部分。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-115">A pattern of loading related data where a query for one type of entity also loads related entities as part of the query.</span></span>
 
-## <a name="ef-designer"></a><span data-ttu-id="6132a-116">EF Designer</span><span class="sxs-lookup"><span data-stu-id="6132a-116">EF Designer</span></span>
-<span data-ttu-id="6132a-117">Visual Studio 中的視覺化設計工具，可讓您使用方塊和線條建立 Entity Framework 模型。</span><span class="sxs-lookup"><span data-stu-id="6132a-117">A visual designer in Visual Studio that allows you to create an Entity Framework model using boxes and lines.</span></span>
+## <a name="ef-designer"></a><span data-ttu-id="1f8f8-116">EF Designer</span><span class="sxs-lookup"><span data-stu-id="1f8f8-116">EF Designer</span></span>
+<span data-ttu-id="1f8f8-117">Visual Studio 中的視覺化設計工具，可讓您使用方塊和線條建立 Entity Framework 模型。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-117">A visual designer in Visual Studio that allows you to create an Entity Framework model using boxes and lines.</span></span>
 
-## <a name="entity"></a><span data-ttu-id="6132a-118">實體</span><span class="sxs-lookup"><span data-stu-id="6132a-118">Entity</span></span>
-<span data-ttu-id="6132a-119">代表像是客戶、產品和訂單這類應用程式資料的類別或物件。</span><span class="sxs-lookup"><span data-stu-id="6132a-119">A class or object that represents application data such as customers, products, and orders.</span></span>
+## <a name="entity"></a><span data-ttu-id="1f8f8-118">實體</span><span class="sxs-lookup"><span data-stu-id="1f8f8-118">Entity</span></span>
+<span data-ttu-id="1f8f8-119">代表像是客戶、產品和訂單這類應用程式資料的類別或物件。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-119">A class or object that represents application data such as customers, products, and orders.</span></span>
 
-## <a name="entity-data-model"></a><span data-ttu-id="6132a-120">實體資料模型</span><span class="sxs-lookup"><span data-stu-id="6132a-120">Entity Data Model</span></span>
-<span data-ttu-id="6132a-121">描述實體的模型以及它們之間的關聯性。</span><span class="sxs-lookup"><span data-stu-id="6132a-121">A model that describes entities and the relationships between them.</span></span> <span data-ttu-id="6132a-122">EF 使用 EDM 來描述開發人員程式的概念模型。</span><span class="sxs-lookup"><span data-stu-id="6132a-122">EF uses EDM to describe the conceptual model against which the developer programs.</span></span> <span data-ttu-id="6132a-123">由 Dr. Peter Chen 所引進之實體關聯性模型的 EDM 組建。</span><span class="sxs-lookup"><span data-stu-id="6132a-123">EDM builds on the Entity Relationship model introduced by Dr. Peter Chen.</span></span> <span data-ttu-id="6132a-124">EDM 最初開發的主要目標是要成為 Microsoft 開發人員和伺服器技術套件之間的通用資料模型。</span><span class="sxs-lookup"><span data-stu-id="6132a-124">The EDM was originally developed with the primary goal of becoming the common data model across a suite of developer and server technologies from Microsoft.</span></span> <span data-ttu-id="6132a-125">EDM 也可做為 OData 通訊協定的一部分。</span><span class="sxs-lookup"><span data-stu-id="6132a-125">EDM is also used as part of the OData protocol.</span></span>
+## <a name="entity-data-model"></a><span data-ttu-id="1f8f8-120">實體資料模型</span><span class="sxs-lookup"><span data-stu-id="1f8f8-120">Entity Data Model</span></span>
+<span data-ttu-id="1f8f8-121">描述實體的模型以及它們之間的關聯性。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-121">A model that describes entities and the relationships between them.</span></span> <span data-ttu-id="1f8f8-122">EF 使用 EDM 來描述開發人員程式的概念模型。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-122">EF uses EDM to describe the conceptual model against which the developer programs.</span></span> <span data-ttu-id="1f8f8-123">由 Dr. Peter Chen 所引進之實體關聯性模型的 EDM 組建。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-123">EDM builds on the Entity Relationship model introduced by Dr. Peter Chen.</span></span> <span data-ttu-id="1f8f8-124">EDM 最初開發的主要目標是要成為 Microsoft 開發人員和伺服器技術套件之間的通用資料模型。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-124">The EDM was originally developed with the primary goal of becoming the common data model across a suite of developer and server technologies from Microsoft.</span></span> <span data-ttu-id="1f8f8-125">EDM 也可做為 OData 通訊協定的一部分。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-125">EDM is also used as part of the OData protocol.</span></span>
 
-## <a name="explicit-loading"></a><span data-ttu-id="6132a-126">明確式載入</span><span class="sxs-lookup"><span data-stu-id="6132a-126">Explicit loading</span></span>
-<span data-ttu-id="6132a-127">載入相關物件的模式，其會藉由呼叫 API 來載入相關的資料。</span><span class="sxs-lookup"><span data-stu-id="6132a-127">A pattern of loading related data where related objects are loaded by calling an API.</span></span>
+## <a name="explicit-loading"></a><span data-ttu-id="1f8f8-126">明確式載入</span><span class="sxs-lookup"><span data-stu-id="1f8f8-126">Explicit loading</span></span>
+<span data-ttu-id="1f8f8-127">載入相關物件的模式，其會藉由呼叫 API 來載入相關的資料。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-127">A pattern of loading related data where related objects are loaded by calling an API.</span></span>
 
-## <a name="fluent-api"></a><span data-ttu-id="6132a-128">Fluent API</span><span class="sxs-lookup"><span data-stu-id="6132a-128">Fluent API</span></span>
-<span data-ttu-id="6132a-129">可以用來設定 Code First 模型的 API。</span><span class="sxs-lookup"><span data-stu-id="6132a-129">An API that can be used to configure a Code First model.</span></span>
+## <a name="fluent-api"></a><span data-ttu-id="1f8f8-128">Fluent API</span><span class="sxs-lookup"><span data-stu-id="1f8f8-128">Fluent API</span></span>
+<span data-ttu-id="1f8f8-129">可以用來設定 Code First 模型的 API。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-129">An API that can be used to configure a Code First model.</span></span>
 
-## <a name="foreign-key-association"></a><span data-ttu-id="6132a-130">外鍵關聯</span><span class="sxs-lookup"><span data-stu-id="6132a-130">Foreign key association</span></span>
-<span data-ttu-id="6132a-131">實體之間的關聯，其中表示外鍵的屬性會包含在相依實體的類別中。</span><span class="sxs-lookup"><span data-stu-id="6132a-131">An association between entities where a property that represents the foreign key is included in the class of the dependent entity.</span></span> <span data-ttu-id="6132a-132">例如，Product 包含 [類別類別] 屬性。</span><span class="sxs-lookup"><span data-stu-id="6132a-132">For example, Product contains a CategoryId property.</span></span>
+## <a name="foreign-key-association"></a><span data-ttu-id="1f8f8-130">外鍵關聯</span><span class="sxs-lookup"><span data-stu-id="1f8f8-130">Foreign key association</span></span>
+<span data-ttu-id="1f8f8-131">實體之間的關聯，其中表示外鍵的屬性會包含在相依實體的類別中。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-131">An association between entities where a property that represents the foreign key is included in the class of the dependent entity.</span></span> <span data-ttu-id="1f8f8-132">例如，Product 包含 [類別類別] 屬性。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-132">For example, Product contains a CategoryId property.</span></span>
 
-## <a name="identifying-relationship"></a><span data-ttu-id="6132a-133">識別關聯性</span><span class="sxs-lookup"><span data-stu-id="6132a-133">Identifying relationship</span></span>
-<span data-ttu-id="6132a-134">主要實體的主索引鍵為相依實體之主索引鍵一部分的關聯性。</span><span class="sxs-lookup"><span data-stu-id="6132a-134">A relationship where the primary key of the principal entity is part of the primary key of the dependent entity.</span></span> <span data-ttu-id="6132a-135">在這種關聯性中，相依實體一定要與主要實體一起存在。</span><span class="sxs-lookup"><span data-stu-id="6132a-135">In this kind of relationship, the dependent entity cannot exist without the principal entity.</span></span>
+## <a name="identifying-relationship"></a><span data-ttu-id="1f8f8-133">識別關聯性</span><span class="sxs-lookup"><span data-stu-id="1f8f8-133">Identifying relationship</span></span>
+<span data-ttu-id="1f8f8-134">主要實體的主索引鍵為相依實體之主索引鍵一部分的關聯性。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-134">A relationship where the primary key of the principal entity is part of the primary key of the dependent entity.</span></span> <span data-ttu-id="1f8f8-135">在這種關聯性中，相依實體一定要與主要實體一起存在。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-135">In this kind of relationship, the dependent entity cannot exist without the principal entity.</span></span>
 
-## <a name="independent-association"></a><span data-ttu-id="6132a-136">獨立關聯</span><span class="sxs-lookup"><span data-stu-id="6132a-136">Independent association</span></span>
-<span data-ttu-id="6132a-137">實體之間的關聯，其中沒有任何屬性代表相依實體之類別中的外鍵。</span><span class="sxs-lookup"><span data-stu-id="6132a-137">An association between entities where there is no property representing the foreign key in the class of the dependent entity.</span></span> <span data-ttu-id="6132a-138">例如，Product 類別包含類別的關聯性，但沒有任何類別目錄屬性。</span><span class="sxs-lookup"><span data-stu-id="6132a-138">For example, a Product class contains a relationship to Category but no CategoryId property.</span></span> <span data-ttu-id="6132a-139">Entity Framework 會追蹤關聯的狀態，而不是在兩個關聯端的實體狀態之外。</span><span class="sxs-lookup"><span data-stu-id="6132a-139">Entity Framework tracks the state of the association independently of the state of the entities at the two association ends.</span></span>
+## <a name="independent-association"></a><span data-ttu-id="1f8f8-136">獨立關聯</span><span class="sxs-lookup"><span data-stu-id="1f8f8-136">Independent association</span></span>
+<span data-ttu-id="1f8f8-137">實體之間的關聯，其中沒有任何屬性代表相依實體之類別中的外鍵。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-137">An association between entities where there is no property representing the foreign key in the class of the dependent entity.</span></span> <span data-ttu-id="1f8f8-138">例如，Product 類別包含類別的關聯性，但沒有任何類別目錄屬性。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-138">For example, a Product class contains a relationship to Category but no CategoryId property.</span></span> <span data-ttu-id="1f8f8-139">Entity Framework 會追蹤關聯的狀態，而不是在兩個關聯端的實體狀態之外。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-139">Entity Framework tracks the state of the association independently of the state of the entities at the two association ends.</span></span>
 
-## <a name="lazy-loading"></a><span data-ttu-id="6132a-140">消極式載入</span><span class="sxs-lookup"><span data-stu-id="6132a-140">Lazy loading</span></span>
-<span data-ttu-id="6132a-141">當存取導覽屬性時，會自動載入相關物件的載入相關資料模式。</span><span class="sxs-lookup"><span data-stu-id="6132a-141">A pattern of loading related data where related objects are automatically loaded when a navigation property is accessed.</span></span>
+## <a name="lazy-loading"></a><span data-ttu-id="1f8f8-140">消極式載入</span><span class="sxs-lookup"><span data-stu-id="1f8f8-140">Lazy loading</span></span>
+<span data-ttu-id="1f8f8-141">當存取導覽屬性時，會自動載入相關物件的載入相關資料模式。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-141">A pattern of loading related data where related objects are automatically loaded when a navigation property is accessed.</span></span>
 
-## <a name="model-first"></a><span data-ttu-id="6132a-142">Model First</span><span class="sxs-lookup"><span data-stu-id="6132a-142">Model First</span></span>
-<span data-ttu-id="6132a-143">使用 EF 設計工具建立 Entity Framework 模型，然後用它來建立新的資料庫。</span><span class="sxs-lookup"><span data-stu-id="6132a-143">Creating an Entity Framework model, using the EF Designer, that is then used to create a new database.</span></span>
+## <a name="model-first"></a><span data-ttu-id="1f8f8-142">Model First</span><span class="sxs-lookup"><span data-stu-id="1f8f8-142">Model First</span></span>
+<span data-ttu-id="1f8f8-143">使用 EF 設計工具建立 Entity Framework 模型，然後用它來建立新的資料庫。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-143">Creating an Entity Framework model, using the EF Designer, that is then used to create a new database.</span></span>
 
-## <a name="navigation-property"></a><span data-ttu-id="6132a-144">導覽屬性</span><span class="sxs-lookup"><span data-stu-id="6132a-144">Navigation property</span></span>
-<span data-ttu-id="6132a-145">參考另一個實體之實體的屬性。</span><span class="sxs-lookup"><span data-stu-id="6132a-145">A property of an entity that references another entity.</span></span> <span data-ttu-id="6132a-146">例如，Product 包含類別目錄導覽屬性，而類別則包含 Products 導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="6132a-146">For example, Product contains a Category navigation property and Category contains a Products navigation property.</span></span>
+## <a name="navigation-property"></a><span data-ttu-id="1f8f8-144">導覽屬性</span><span class="sxs-lookup"><span data-stu-id="1f8f8-144">Navigation property</span></span>
+<span data-ttu-id="1f8f8-145">參考另一個實體之實體的屬性。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-145">A property of an entity that references another entity.</span></span> <span data-ttu-id="1f8f8-146">例如，Product 包含類別目錄導覽屬性，而類別則包含 Products 導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-146">For example, Product contains a Category navigation property and Category contains a Products navigation property.</span></span>
 
-## <a name="poco"></a><span data-ttu-id="6132a-147">POCO</span><span class="sxs-lookup"><span data-stu-id="6132a-147">POCO</span></span>
-<span data-ttu-id="6132a-148">純舊 CLR 物件的縮寫。</span><span class="sxs-lookup"><span data-stu-id="6132a-148">Acronym for Plain-Old CLR Object.</span></span> <span data-ttu-id="6132a-149">與任何架構沒有相依性的簡單使用者類別。</span><span class="sxs-lookup"><span data-stu-id="6132a-149">A simple user class that has no dependencies with any framework.</span></span> <span data-ttu-id="6132a-150">在 EF 的內容中，不是衍生自 EntityObject 的實體類別會執行任何介面，或攜帶 EF 中定義的任何屬性。</span><span class="sxs-lookup"><span data-stu-id="6132a-150">In the context of EF, an entity class that does not derive from EntityObject, implements any interfaces or carries any attributes defined in EF.</span></span> <span data-ttu-id="6132a-151">從持續性架構分離的這類實體類別也稱為「持續性未知」。</span><span class="sxs-lookup"><span data-stu-id="6132a-151">Such entity classes that are decoupled from the persistence framework are also said to be "persistence ignorant".</span></span>  
+## <a name="poco"></a><span data-ttu-id="1f8f8-147">POCO</span><span class="sxs-lookup"><span data-stu-id="1f8f8-147">POCO</span></span>
+<span data-ttu-id="1f8f8-148">Plain-Old CLR 物件的縮寫。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-148">Acronym for Plain-Old CLR Object.</span></span> <span data-ttu-id="1f8f8-149">與任何架構沒有相依性的簡單使用者類別。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-149">A simple user class that has no dependencies with any framework.</span></span> <span data-ttu-id="1f8f8-150">在 EF 的內容中，不是衍生自 EntityObject 的實體類別會執行任何介面，或攜帶 EF 中定義的任何屬性。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-150">In the context of EF, an entity class that does not derive from EntityObject, implements any interfaces or carries any attributes defined in EF.</span></span> <span data-ttu-id="1f8f8-151">從持續性架構分離的這類實體類別也稱為「持續性未知」。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-151">Such entity classes that are decoupled from the persistence framework are also said to be "persistence ignorant".</span></span>  
 
-## <a name="relationship-inverse"></a><span data-ttu-id="6132a-152">反向關聯性</span><span class="sxs-lookup"><span data-stu-id="6132a-152">Relationship inverse</span></span>
-<span data-ttu-id="6132a-153">關聯性的另一端，例如 product。類別目錄和類別目錄。產品。</span><span class="sxs-lookup"><span data-stu-id="6132a-153">The opposite end of a relationship, for example, product.Category and category.Product.</span></span>
+## <a name="relationship-inverse"></a><span data-ttu-id="1f8f8-152">反向關聯性</span><span class="sxs-lookup"><span data-stu-id="1f8f8-152">Relationship inverse</span></span>
+<span data-ttu-id="1f8f8-153">關聯性的另一端，例如 product。類別目錄和類別目錄。產品。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-153">The opposite end of a relationship, for example, product.Category and category.Product.</span></span>
 
-## <a name="self-tracking-entity"></a><span data-ttu-id="6132a-154">自我追蹤實體</span><span class="sxs-lookup"><span data-stu-id="6132a-154">Self-tracking entity</span></span>
-<span data-ttu-id="6132a-155">從程式碼產生範本建立的實體，可協助進行多層式開發。</span><span class="sxs-lookup"><span data-stu-id="6132a-155">An entity built from a code generation template that helps with N-Tier development.</span></span>
+## <a name="self-tracking-entity"></a><span data-ttu-id="1f8f8-154">自我追蹤實體</span><span class="sxs-lookup"><span data-stu-id="1f8f8-154">Self-tracking entity</span></span>
+<span data-ttu-id="1f8f8-155">從程式碼產生範本建立的實體，可協助進行多層式開發。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-155">An entity built from a code generation template that helps with N-Tier development.</span></span>
 
-## <a name="table-per-concrete-type-tpc"></a><span data-ttu-id="6132a-156">每個具象型別的資料表 (TPC) </span><span class="sxs-lookup"><span data-stu-id="6132a-156">Table-per-concrete type (TPC)</span></span>
-<span data-ttu-id="6132a-157">對應繼承的方法，其中階層中的每個非抽象類別型都會對應到資料庫中的不同資料表。</span><span class="sxs-lookup"><span data-stu-id="6132a-157">A method of mapping the inheritance where each non-abstract type in the hierarchy is mapped to separate table in the database.</span></span>
+## <a name="table-per-concrete-type-tpc"></a><span data-ttu-id="1f8f8-156">每個具象型別的資料表 (TPC) </span><span class="sxs-lookup"><span data-stu-id="1f8f8-156">Table-per-concrete type (TPC)</span></span>
+<span data-ttu-id="1f8f8-157">對應繼承的方法，其中階層中的每個非抽象類別型都會對應到資料庫中的不同資料表。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-157">A method of mapping the inheritance where each non-abstract type in the hierarchy is mapped to separate table in the database.</span></span>
 
-## <a name="table-per-hierarchy-tph"></a><span data-ttu-id="6132a-158">每個階層的資料表 (TPH) </span><span class="sxs-lookup"><span data-stu-id="6132a-158">Table-per-hierarchy (TPH)</span></span>
-<span data-ttu-id="6132a-159">對應繼承的方法，其中階層中的所有類型都會對應到資料庫中的相同資料表。</span><span class="sxs-lookup"><span data-stu-id="6132a-159">A method of mapping the inheritance where all types in the hierarchy are mapped to the same table in the database.</span></span> <span data-ttu-id="6132a-160">鑒別子資料行 (s) 用來識別每個資料列相關聯的類型。</span><span class="sxs-lookup"><span data-stu-id="6132a-160">A discriminator column(s) is used to identify what type each row is associated with.</span></span>
+## <a name="table-per-hierarchy-tph"></a><span data-ttu-id="1f8f8-158">每個階層的資料表 (TPH) </span><span class="sxs-lookup"><span data-stu-id="1f8f8-158">Table-per-hierarchy (TPH)</span></span>
+<span data-ttu-id="1f8f8-159">對應繼承的方法，其中階層中的所有類型都會對應到資料庫中的相同資料表。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-159">A method of mapping the inheritance where all types in the hierarchy are mapped to the same table in the database.</span></span> <span data-ttu-id="1f8f8-160">鑒別子資料行 (s) 用來識別每個資料列相關聯的類型。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-160">A discriminator column(s) is used to identify what type each row is associated with.</span></span>
 
-## <a name="table-per-type-tpt"></a><span data-ttu-id="6132a-161">每一類型的資料表 (TPT) </span><span class="sxs-lookup"><span data-stu-id="6132a-161">Table-per-type (TPT)</span></span>
-<span data-ttu-id="6132a-162">對應繼承的方法，其中階層中所有類型的通用屬性都會對應到資料庫中的相同資料表，但每個類型唯一的屬性會對應至不同的資料表。</span><span class="sxs-lookup"><span data-stu-id="6132a-162">A method of mapping the inheritance where the common properties of all types in the hierarchy are mapped to the same table in the database, but properties unique to each type are mapped to a separate table.</span></span>
+## <a name="table-per-type-tpt"></a><span data-ttu-id="1f8f8-161">每一類型的資料表 (TPT) </span><span class="sxs-lookup"><span data-stu-id="1f8f8-161">Table-per-type (TPT)</span></span>
+<span data-ttu-id="1f8f8-162">對應繼承的方法，其中階層中所有類型的通用屬性都會對應到資料庫中的相同資料表，但每個類型唯一的屬性會對應至不同的資料表。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-162">A method of mapping the inheritance where the common properties of all types in the hierarchy are mapped to the same table in the database, but properties unique to each type are mapped to a separate table.</span></span>
 
-## <a name="type-discovery"></a><span data-ttu-id="6132a-163">類型探索</span><span class="sxs-lookup"><span data-stu-id="6132a-163">Type discovery</span></span>
-<span data-ttu-id="6132a-164">識別應該是 Entity Framework 模型一部分之類型的程式。</span><span class="sxs-lookup"><span data-stu-id="6132a-164">The process of identifying the types that should be part of an Entity Framework model.</span></span>
+## <a name="type-discovery"></a><span data-ttu-id="1f8f8-163">類型探索</span><span class="sxs-lookup"><span data-stu-id="1f8f8-163">Type discovery</span></span>
+<span data-ttu-id="1f8f8-164">識別應該是 Entity Framework 模型一部分之類型的程式。</span><span class="sxs-lookup"><span data-stu-id="1f8f8-164">The process of identifying the types that should be part of an Entity Framework model.</span></span>

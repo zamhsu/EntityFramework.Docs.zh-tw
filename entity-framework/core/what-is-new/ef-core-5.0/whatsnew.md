@@ -4,28 +4,28 @@ description: EF Core 5.0 的新功能總覽
 author: ajcvickers
 ms.date: 09/10/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: 0605d021b46066c6af7b631c99e86c0e53caa8db
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8fa45bf31cb5f1a7e35134f9513a40469719f8c2
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070753"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065611"
 ---
-# <a name="whats-new-in-ef-core-50"></a><span data-ttu-id="baa37-103">EF Core 5.0 的新功能</span><span class="sxs-lookup"><span data-stu-id="baa37-103">What's New in EF Core 5.0</span></span>
+# <a name="whats-new-in-ef-core-50"></a><span data-ttu-id="abf22-103">EF Core 5.0 的新功能</span><span class="sxs-lookup"><span data-stu-id="abf22-103">What's New in EF Core 5.0</span></span>
 
-<span data-ttu-id="baa37-104">所有規劃的 EF Core 5.0 功能現在都已完成。</span><span class="sxs-lookup"><span data-stu-id="baa37-104">All features planned for EF Core 5.0 have now been completed.</span></span> <span data-ttu-id="baa37-105">本頁面包含每個預覽中所引進之有趣變更的總覽。</span><span class="sxs-lookup"><span data-stu-id="baa37-105">This page contains an overview of interesting changes introduced in each preview.</span></span>
+<span data-ttu-id="abf22-104">所有規劃的 EF Core 5.0 功能現在都已完成。</span><span class="sxs-lookup"><span data-stu-id="abf22-104">All features planned for EF Core 5.0 have now been completed.</span></span> <span data-ttu-id="abf22-105">本頁面包含每個預覽中所引進之有趣變更的總覽。</span><span class="sxs-lookup"><span data-stu-id="abf22-105">This page contains an overview of interesting changes introduced in each preview.</span></span>
 
-<span data-ttu-id="baa37-106">此頁面不會複製 [EF Core 5.0 的方案](xref:core/what-is-new/ef-core-5.0/plan)。</span><span class="sxs-lookup"><span data-stu-id="baa37-106">This page does not duplicate the [plan for EF Core 5.0](xref:core/what-is-new/ef-core-5.0/plan).</span></span> <span data-ttu-id="baa37-107">此計畫描述 EF Core 5.0 的整體主題，包括我們在出貨最終發行版本之前打算包含的所有專案。</span><span class="sxs-lookup"><span data-stu-id="baa37-107">The plan describes the overall themes for EF Core 5.0, including everything we are planning to include before shipping the final release.</span></span>
+<span data-ttu-id="abf22-106">此頁面不會複製 [EF Core 5.0 的方案](xref:core/what-is-new/ef-core-5.0/plan)。</span><span class="sxs-lookup"><span data-stu-id="abf22-106">This page does not duplicate the [plan for EF Core 5.0](xref:core/what-is-new/ef-core-5.0/plan).</span></span> <span data-ttu-id="abf22-107">此計畫描述 EF Core 5.0 的整體主題，包括我們在出貨最終發行版本之前打算包含的所有專案。</span><span class="sxs-lookup"><span data-stu-id="abf22-107">The plan describes the overall themes for EF Core 5.0, including everything we are planning to include before shipping the final release.</span></span>
 
-## <a name="rc1"></a><span data-ttu-id="baa37-108">RC1</span><span class="sxs-lookup"><span data-stu-id="baa37-108">RC1</span></span>
+## <a name="rc1"></a><span data-ttu-id="abf22-108">RC1</span><span class="sxs-lookup"><span data-stu-id="abf22-108">RC1</span></span>
 
-### <a name="many-to-many"></a><span data-ttu-id="baa37-109">多對多</span><span class="sxs-lookup"><span data-stu-id="baa37-109">Many-to-many</span></span>
+### <a name="many-to-many"></a><span data-ttu-id="abf22-109">多對多</span><span class="sxs-lookup"><span data-stu-id="abf22-109">Many-to-many</span></span>
 
-<span data-ttu-id="baa37-110">EF Core 5.0 支援多對多關聯性，而不需要明確地對應聯結資料表。</span><span class="sxs-lookup"><span data-stu-id="baa37-110">EF Core 5.0 supports many-to-many relationships without explicitly mapping the join table.</span></span>
+<span data-ttu-id="abf22-110">EF Core 5.0 支援多對多關聯性，而不需要明確地對應聯結資料表。</span><span class="sxs-lookup"><span data-stu-id="abf22-110">EF Core 5.0 supports many-to-many relationships without explicitly mapping the join table.</span></span>
 
-<span data-ttu-id="baa37-111">例如，請考慮下列實體類型：</span><span class="sxs-lookup"><span data-stu-id="baa37-111">For example, consider these entity types:</span></span>
+<span data-ttu-id="abf22-111">例如，請考慮下列實體類型：</span><span class="sxs-lookup"><span data-stu-id="abf22-111">For example, consider these entity types:</span></span>
 
-```C#
+```csharp
 public class Post
 {
     public int Id { get; set; }
@@ -41,9 +41,9 @@ public class Tag
 }
 ```
 
-<span data-ttu-id="baa37-112">請注意，其中 `Post` 包含的集合 `Tags` ，並 `Tag` 包含的集合 `Posts` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-112">Notice that `Post` contains a collection of `Tags`, and `Tag` contains a collection of `Posts`.</span></span> <span data-ttu-id="baa37-113">EF Core 5.0 依慣例將此辨識為多對多關聯性。</span><span class="sxs-lookup"><span data-stu-id="baa37-113">EF Core 5.0 recognizes this as a many-to-many relationship by convention.</span></span> <span data-ttu-id="baa37-114">這表示在中不需要任何程式碼 `OnModelCreating` ：</span><span class="sxs-lookup"><span data-stu-id="baa37-114">This means no code is required in `OnModelCreating`:</span></span>
+<span data-ttu-id="abf22-112">請注意，其中 `Post` 包含的集合 `Tags` ，並 `Tag` 包含的集合 `Posts` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-112">Notice that `Post` contains a collection of `Tags`, and `Tag` contains a collection of `Posts`.</span></span> <span data-ttu-id="abf22-113">EF Core 5.0 依慣例將此辨識為多對多關聯性。</span><span class="sxs-lookup"><span data-stu-id="abf22-113">EF Core 5.0 recognizes this as a many-to-many relationship by convention.</span></span> <span data-ttu-id="abf22-114">這表示在中不需要任何程式碼 `OnModelCreating` ：</span><span class="sxs-lookup"><span data-stu-id="abf22-114">This means no code is required in `OnModelCreating`:</span></span>
 
-```C#
+```csharp
 public class BlogContext : DbContext
 {
     public DbSet<Post> Posts { get; set; }
@@ -51,7 +51,7 @@ public class BlogContext : DbContext
 }
 ```
 
-<span data-ttu-id="baa37-115">當使用 (或 `EnsureCreated`) 的遷移來建立資料庫時，EF Core 會自動建立聯結資料表。</span><span class="sxs-lookup"><span data-stu-id="baa37-115">When Migrations (or `EnsureCreated`) are used to create the database, EF Core will automatically create the join table.</span></span> <span data-ttu-id="baa37-116">例如，在此模型的 SQL Server 上，EF Core 會產生：</span><span class="sxs-lookup"><span data-stu-id="baa37-116">For example, on SQL Server for this model, EF Core generates:</span></span>
+<span data-ttu-id="abf22-115">當使用 (或 `EnsureCreated`) 的遷移來建立資料庫時，EF Core 會自動建立聯結資料表。</span><span class="sxs-lookup"><span data-stu-id="abf22-115">When Migrations (or `EnsureCreated`) are used to create the database, EF Core will automatically create the join table.</span></span> <span data-ttu-id="abf22-116">例如，在此模型的 SQL Server 上，EF Core 會產生：</span><span class="sxs-lookup"><span data-stu-id="abf22-116">For example, on SQL Server for this model, EF Core generates:</span></span>
 
 ```sql
 CREATE TABLE [Posts] (
@@ -77,9 +77,9 @@ CREATE TABLE [PostTag] (
 CREATE INDEX [IX_PostTag_TagsId] ON [PostTag] ([TagsId]);
 ```
 
-<span data-ttu-id="baa37-117">建立和關聯 `Blog` 和 `Post` 實體會導致聯結資料表更新自動發生。</span><span class="sxs-lookup"><span data-stu-id="baa37-117">Creating and associating `Blog` and `Post` entities results in join table updates happening automatically.</span></span> <span data-ttu-id="baa37-118">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-118">For example:</span></span>
+<span data-ttu-id="abf22-117">建立和關聯 `Blog` 和 `Post` 實體會導致聯結資料表更新自動發生。</span><span class="sxs-lookup"><span data-stu-id="abf22-117">Creating and associating `Blog` and `Post` entities results in join table updates happening automatically.</span></span> <span data-ttu-id="abf22-118">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-118">For example:</span></span>
 
-```C#
+```csharp
 var beginnerTag = new Tag {Text = "Beginner"};
 var advancedTag = new Tag {Text = "Advanced"};
 var efCoreTag = new Tag {Text = "EF Core"};
@@ -92,7 +92,7 @@ context.AddRange(
 context.SaveChanges();
 ```
 
-<span data-ttu-id="baa37-119">插入貼文和標記之後，EF 接著會自動在聯結資料表中建立資料列。</span><span class="sxs-lookup"><span data-stu-id="baa37-119">After inserting the Posts and Tags, EF will then automatically create rows in the join table.</span></span> <span data-ttu-id="baa37-120">例如，在 SQL Server：</span><span class="sxs-lookup"><span data-stu-id="baa37-120">For example, on SQL Server:</span></span>
+<span data-ttu-id="abf22-119">插入貼文和標記之後，EF 接著會自動在聯結資料表中建立資料列。</span><span class="sxs-lookup"><span data-stu-id="abf22-119">After inserting the Posts and Tags, EF will then automatically create rows in the join table.</span></span> <span data-ttu-id="abf22-120">例如，在 SQL Server：</span><span class="sxs-lookup"><span data-stu-id="abf22-120">For example, on SQL Server:</span></span>
 
 ```sql
 SET NOCOUNT ON;
@@ -105,9 +105,9 @@ VALUES (@p6, @p7),
 (@p16, @p17);
 ```
 
-<span data-ttu-id="baa37-121">針對查詢，包含和其他查詢作業的運作方式就像任何其他關聯性一樣。</span><span class="sxs-lookup"><span data-stu-id="baa37-121">For queries, Include and other query operations work just like for any other relationship.</span></span> <span data-ttu-id="baa37-122">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-122">For example:</span></span>
+<span data-ttu-id="abf22-121">針對查詢，包含和其他查詢作業的運作方式就像任何其他關聯性一樣。</span><span class="sxs-lookup"><span data-stu-id="abf22-121">For queries, Include and other query operations work just like for any other relationship.</span></span> <span data-ttu-id="abf22-122">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-122">For example:</span></span>
 
-```C#
+```csharp
 foreach (var post in context.Posts.Include(e => e.Tags))
 {
     Console.Write($"Post \"{post.Name}\" has tags");
@@ -119,7 +119,7 @@ foreach (var post in context.Posts.Include(e => e.Tags))
 }
 ```
 
-<span data-ttu-id="baa37-123">產生的 SQL 會自動使用聯結資料表來取回所有相關的標記：</span><span class="sxs-lookup"><span data-stu-id="baa37-123">The SQL generated uses the join table automatically to bring back all related Tags:</span></span>
+<span data-ttu-id="abf22-123">產生的 SQL 會自動使用聯結資料表來取回所有相關的標記：</span><span class="sxs-lookup"><span data-stu-id="abf22-123">The SQL generated uses the join table automatically to bring back all related Tags:</span></span>
 
 ```sql
 SELECT [p].[Id], [p].[Name], [t0].[PostsId], [t0].[TagsId], [t0].[Id], [t0].[Text]
@@ -132,29 +132,39 @@ LEFT JOIN (
 ORDER BY [p].[Id], [t0].[PostsId], [t0].[TagsId], [t0].[Id]
 ```
 
-<span data-ttu-id="baa37-124">不同于 EF6，EF Core 允許完整自訂聯結資料表。</span><span class="sxs-lookup"><span data-stu-id="baa37-124">Unlike EF6, EF Core allows full customization of the join table.</span></span> <span data-ttu-id="baa37-125">例如，下列程式碼會設定多對多關聯性，此關聯性也會具有對聯結實體的導覽，而且聯結實體會包含承載屬性：</span><span class="sxs-lookup"><span data-stu-id="baa37-125">For example, the code below configures a many-to-many relationship that also has navigations to the join entity, and in which the join entity contains a payload property:</span></span>
+<span data-ttu-id="abf22-124">不同于 EF6，EF Core 允許完整自訂聯結資料表。</span><span class="sxs-lookup"><span data-stu-id="abf22-124">Unlike EF6, EF Core allows full customization of the join table.</span></span> <span data-ttu-id="abf22-125">例如，下列程式碼會設定多對多關聯性，此關聯性也會具有對聯結實體的導覽，而且聯結實體會包含承載屬性：</span><span class="sxs-lookup"><span data-stu-id="abf22-125">For example, the code below configures a many-to-many relationship that also has navigations to the join entity, and in which the join entity contains a payload property:</span></span>
 
-```c#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder
-        .Entity<Community>()
-        .HasMany(e => e.Members)
-        .WithMany(e => e.Memberships)
-        .UsingEntity<PersonCommunity>(
-            b => b.HasOne(e => e.Member).WithMany().HasForeignKey(e => e.MembersId),
-            b => b.HasOne(e => e.Membership).WithMany().HasForeignKey(e => e.MembershipsId))
-        .Property(e => e.MemberSince).HasDefaultValueSql("CURRENT_TIMESTAMP");
+        .Entity<Post>()
+        .HasMany(p => p.Tags)
+        .WithMany(p => p.Posts)
+        .UsingEntity<PostTag>(
+            j => j
+                .HasOne(pt => pt.Tag)
+                .WithMany()
+                .HasForeignKey(pt => pt.TagId),
+            j => j
+                .HasOne(pt => pt.Post)
+                .WithMany()
+                .HasForeignKey(pt => pt.PostId),
+            j =>
+            {
+                j.Property(pt => pt.PublicationDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                j.HasKey(t => new { t.PostId, t.TagId });
+            });
 }
 ```
 
-### <a name="map-entity-types-to-queries"></a><span data-ttu-id="baa37-126">將實體類型對應至查詢</span><span class="sxs-lookup"><span data-stu-id="baa37-126">Map entity types to queries</span></span>
+### <a name="map-entity-types-to-queries"></a><span data-ttu-id="abf22-126">將實體類型對應至查詢</span><span class="sxs-lookup"><span data-stu-id="abf22-126">Map entity types to queries</span></span>
 
-<span data-ttu-id="baa37-127">實體類型通常會對應至資料表或視圖，讓 EF Core 在查詢該型別時，將會提取資料表或視圖的內容。</span><span class="sxs-lookup"><span data-stu-id="baa37-127">Entity types are commonly mapped to tables or views such that EF Core will pull back the contents of the table or view when querying for that type.</span></span> <span data-ttu-id="baa37-128">EF Core 5.0 可讓實體類型對應至「定義查詢」。</span><span class="sxs-lookup"><span data-stu-id="baa37-128">EF Core 5.0 allows an entity type to mapped to a "defining query".</span></span> <span data-ttu-id="baa37-129"> (這在舊版中是部分支援的，但已經過改良，而且在 EF Core 5.0 中有不同的語法。 ) </span><span class="sxs-lookup"><span data-stu-id="baa37-129">(This was partially supported in previous versions, but is much improved and has different syntax in EF Core 5.0.)</span></span>
+<span data-ttu-id="abf22-127">實體類型通常會對應至資料表或視圖，讓 EF Core 在查詢該型別時，將會提取資料表或視圖的內容。</span><span class="sxs-lookup"><span data-stu-id="abf22-127">Entity types are commonly mapped to tables or views such that EF Core will pull back the contents of the table or view when querying for that type.</span></span> <span data-ttu-id="abf22-128">EF Core 5.0 可讓實體類型對應至「定義查詢」。</span><span class="sxs-lookup"><span data-stu-id="abf22-128">EF Core 5.0 allows an entity type to mapped to a "defining query".</span></span> <span data-ttu-id="abf22-129"> (這在舊版中是部分支援的，但已經過改良，而且在 EF Core 5.0 中有不同的語法。 ) </span><span class="sxs-lookup"><span data-stu-id="abf22-129">(This was partially supported in previous versions, but is much improved and has different syntax in EF Core 5.0.)</span></span>
 
-<span data-ttu-id="baa37-130">例如，假設有兩個數據表;其中一個包含新式文章;具有舊版文章的另一篇。</span><span class="sxs-lookup"><span data-stu-id="baa37-130">For example, consider two tables; one with modern posts; the other with legacy posts.</span></span> <span data-ttu-id="baa37-131">新式貼文資料表有一些額外的資料行，但基於我們的應用程式的目的，我們想要結合新式和舊版的貼文，並將其對應至具有所有必要屬性的實體類型：</span><span class="sxs-lookup"><span data-stu-id="baa37-131">The modern posts table has some additional columns, but for the purpose of our application we want both modern and legacy posts tp be combined and mapped to an entity type with all necessary properties:</span></span>
+<span data-ttu-id="abf22-130">例如，假設有兩個數據表;其中一個包含新式文章;具有舊版文章的另一篇。</span><span class="sxs-lookup"><span data-stu-id="abf22-130">For example, consider two tables; one with modern posts; the other with legacy posts.</span></span> <span data-ttu-id="abf22-131">新式貼文資料表有一些額外的資料行，但基於我們的應用程式目的，我們想要結合新式和舊版文章，並將其對應至具有所有必要屬性的實體類型：</span><span class="sxs-lookup"><span data-stu-id="abf22-131">The modern posts table has some additional columns, but for the purpose of our application we want both modern and legacy posts to be combined and mapped to an entity type with all necessary properties:</span></span>
 
-```c#
+```csharp
 public class Post
 {
     public int Id { get; set; }
@@ -165,9 +175,9 @@ public class Post
 }
 ```
 
-<span data-ttu-id="baa37-132">在 EF Core 5.0 中， `ToSqlQuery` 可以用來將此實體類型對應至提取並結合兩個數據表中資料列的查詢：</span><span class="sxs-lookup"><span data-stu-id="baa37-132">In EF Core 5.0, `ToSqlQuery` can be used to map this entity type to a query that pulls and combines rows from both tables:</span></span>
+<span data-ttu-id="abf22-132">在 EF Core 5.0 中， `ToSqlQuery` 可以用來將此實體類型對應至提取並結合兩個數據表中資料列的查詢：</span><span class="sxs-lookup"><span data-stu-id="abf22-132">In EF Core 5.0, `ToSqlQuery` can be used to map this entity type to a query that pulls and combines rows from both tables:</span></span>
 
-```c#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Post>().ToSqlQuery(
@@ -177,15 +187,15 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-<span data-ttu-id="baa37-133">請注意， `legacy_posts` 資料表沒有資料 `Category` 行，因此我們會改為合成所有舊版文章的預設值。</span><span class="sxs-lookup"><span data-stu-id="baa37-133">Notice that the `legacy_posts` table does not have a `Category` column, so we instead synthesize a default value for all legacy posts.</span></span>
+<span data-ttu-id="abf22-133">請注意， `legacy_posts` 資料表沒有資料 `Category` 行，因此我們會改為合成所有舊版文章的預設值。</span><span class="sxs-lookup"><span data-stu-id="abf22-133">Notice that the `legacy_posts` table does not have a `Category` column, so we instead synthesize a default value for all legacy posts.</span></span>
 
-<span data-ttu-id="baa37-134">然後，您可以使用 LINQ 查詢的一般方式來使用此實體類型。</span><span class="sxs-lookup"><span data-stu-id="baa37-134">This entity type can then be used in the normal way for LINQ queries.</span></span> <span data-ttu-id="baa37-135">例如，</span><span class="sxs-lookup"><span data-stu-id="baa37-135">For example.</span></span> <span data-ttu-id="baa37-136">LINQ 查詢：</span><span class="sxs-lookup"><span data-stu-id="baa37-136">the LINQ query:</span></span>
+<span data-ttu-id="abf22-134">然後，您可以使用 LINQ 查詢的一般方式來使用此實體類型。</span><span class="sxs-lookup"><span data-stu-id="abf22-134">This entity type can then be used in the normal way for LINQ queries.</span></span> <span data-ttu-id="abf22-135">例如，</span><span class="sxs-lookup"><span data-stu-id="abf22-135">For example.</span></span> <span data-ttu-id="abf22-136">LINQ 查詢：</span><span class="sxs-lookup"><span data-stu-id="abf22-136">the LINQ query:</span></span>
 
-```c#
+```csharp
 var posts = context.Posts.Where(e => e.Blog.Name.Contains("Unicorn")).ToList();
 ```
 
-<span data-ttu-id="baa37-137">在 SQLite 上產生下列 SQL：</span><span class="sxs-lookup"><span data-stu-id="baa37-137">Generates the following SQL on SQLite:</span></span>
+<span data-ttu-id="abf22-137">在 SQLite 上產生下列 SQL：</span><span class="sxs-lookup"><span data-stu-id="abf22-137">Generates the following SQL on SQLite:</span></span>
 
 ```sql
 SELECT "p"."Id", "p"."BlogId", "p"."Category", "p"."Name"
@@ -198,17 +208,17 @@ INNER JOIN "Blogs" AS "b" ON "p"."BlogId" = "b"."Id"
 WHERE ('Unicorn' = '') OR (instr("b"."Name", 'Unicorn') > 0)
 ```
 
-<span data-ttu-id="baa37-138">請注意，針對實體型別所設定的查詢是用來做為撰寫完整 LINQ 查詢的起點。</span><span class="sxs-lookup"><span data-stu-id="baa37-138">Notice that the query configured for the entity type is used as a starting for composing the full LINQ query.</span></span>
+<span data-ttu-id="abf22-138">請注意，針對實體型別所設定的查詢是用來做為撰寫完整 LINQ 查詢的起點。</span><span class="sxs-lookup"><span data-stu-id="abf22-138">Notice that the query configured for the entity type is used as a starting for composing the full LINQ query.</span></span>
 
-### <a name="event-counters"></a><span data-ttu-id="baa37-139">事件計數器</span><span class="sxs-lookup"><span data-stu-id="baa37-139">Event counters</span></span>
+### <a name="event-counters"></a><span data-ttu-id="abf22-139">事件計數器</span><span class="sxs-lookup"><span data-stu-id="abf22-139">Event counters</span></span>
 
-<span data-ttu-id="baa37-140">[.Net 事件計數器](https://devblogs.microsoft.com/dotnet/introducing-diagnostics-improvements-in-net-core-3-0/) 是有效率地從應用程式公開效能度量的一種方式。</span><span class="sxs-lookup"><span data-stu-id="baa37-140">[.NET event counters](https://devblogs.microsoft.com/dotnet/introducing-diagnostics-improvements-in-net-core-3-0/) are a way to efficiently expose performance metrics from an application.</span></span> <span data-ttu-id="baa37-141">EF Core 5.0 包含類別下的事件計數器 `Microsoft.EntityFrameworkCore` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-141">EF Core 5.0 includes event counters under the `Microsoft.EntityFrameworkCore` category.</span></span> <span data-ttu-id="baa37-142">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-142">For example:</span></span>
+<span data-ttu-id="abf22-140">[.Net 事件計數器](https://devblogs.microsoft.com/dotnet/introducing-diagnostics-improvements-in-net-core-3-0/) 是有效率地從應用程式公開效能度量的一種方式。</span><span class="sxs-lookup"><span data-stu-id="abf22-140">[.NET event counters](https://devblogs.microsoft.com/dotnet/introducing-diagnostics-improvements-in-net-core-3-0/) are a way to efficiently expose performance metrics from an application.</span></span> <span data-ttu-id="abf22-141">EF Core 5.0 包含類別下的事件計數器 `Microsoft.EntityFrameworkCore` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-141">EF Core 5.0 includes event counters under the `Microsoft.EntityFrameworkCore` category.</span></span> <span data-ttu-id="abf22-142">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-142">For example:</span></span>
 
 ```
 dotnet counters monitor Microsoft.EntityFrameworkCore -p 49496
 ```
 
-<span data-ttu-id="baa37-143">這會告訴 dotnet 計數器開始收集進程49496的 EF Core 事件。</span><span class="sxs-lookup"><span data-stu-id="baa37-143">This tells dotnet counters to start collecting EF Core events for process 49496.</span></span> <span data-ttu-id="baa37-144">這會產生類似主控台的輸出：</span><span class="sxs-lookup"><span data-stu-id="baa37-144">This generates output like this in the console:</span></span>
+<span data-ttu-id="abf22-143">這會告訴 dotnet 計數器開始收集進程49496的 EF Core 事件。</span><span class="sxs-lookup"><span data-stu-id="abf22-143">This tells dotnet counters to start collecting EF Core events for process 49496.</span></span> <span data-ttu-id="abf22-144">這會產生類似主控台的輸出：</span><span class="sxs-lookup"><span data-stu-id="abf22-144">This generates output like this in the console:</span></span>
 
 ```
 [Microsoft.EntityFrameworkCore]
@@ -224,13 +234,13 @@ dotnet counters monitor Microsoft.EntityFrameworkCore -p 49496
     SaveChanges (Total)                                             1
 ```
 
-### <a name="property-bags"></a><span data-ttu-id="baa37-145">屬性包</span><span class="sxs-lookup"><span data-stu-id="baa37-145">Property bags</span></span>
+### <a name="property-bags"></a><span data-ttu-id="abf22-145">屬性包</span><span class="sxs-lookup"><span data-stu-id="abf22-145">Property bags</span></span>
 
-<span data-ttu-id="baa37-146">EF Core 5.0 允許相同的 CLR 類型對應到多個不同的實體類型。</span><span class="sxs-lookup"><span data-stu-id="baa37-146">EF Core 5.0 allows the same CLR type to be mapped to multiple different entity types.</span></span> <span data-ttu-id="baa37-147">這類類型稱為共用類型實體類型。</span><span class="sxs-lookup"><span data-stu-id="baa37-147">Such types are known as shared-type entity types.</span></span> <span data-ttu-id="baa37-148">這項功能與預覽) 1 中所包含的索引子屬性結合 (，可讓屬性包作為實體類型使用。</span><span class="sxs-lookup"><span data-stu-id="baa37-148">This feature combined with indexer properties (included in preview 1) allows property bags to be used as entity type.</span></span>
+<span data-ttu-id="abf22-146">EF Core 5.0 允許相同的 CLR 類型對應到多個不同的實體類型。</span><span class="sxs-lookup"><span data-stu-id="abf22-146">EF Core 5.0 allows the same CLR type to be mapped to multiple different entity types.</span></span> <span data-ttu-id="abf22-147">這類類型稱為共用類型實體類型。</span><span class="sxs-lookup"><span data-stu-id="abf22-147">Such types are known as shared-type entity types.</span></span> <span data-ttu-id="abf22-148">這項功能與預覽) 1 中所包含的索引子屬性結合 (，可讓屬性包作為實體類型使用。</span><span class="sxs-lookup"><span data-stu-id="abf22-148">This feature combined with indexer properties (included in preview 1) allows property bags to be used as entity type.</span></span>
 
-<span data-ttu-id="baa37-149">例如，下列 DbCoNtext 會將 BCL 類型設定 `Dictionary<string, object>` 為產品和分類的共用類型實體類型。</span><span class="sxs-lookup"><span data-stu-id="baa37-149">For example, the DbContext below configures the BCL type `Dictionary<string, object>` as a shared-type entity type for both products and categories.</span></span>
+<span data-ttu-id="abf22-149">例如，下列 DbCoNtext 會將 BCL 類型設定 `Dictionary<string, object>` 為產品和分類的共用類型實體類型。</span><span class="sxs-lookup"><span data-stu-id="abf22-149">For example, the DbContext below configures the BCL type `Dictionary<string, object>` as a shared-type entity type for both products and categories.</span></span>
 
-```c#
+```csharp
 public class ProductsContext : DbContext
 {
     public DbSet<Dictionary<string, object>> Products => Set<Dictionary<string, object>>("Product");
@@ -259,9 +269,9 @@ public class ProductsContext : DbContext
 }
 ```
 
-<span data-ttu-id="baa37-150">字典物件 ( 「屬性包」 ) 現在可以新增至內容中做為實體實例並儲存。</span><span class="sxs-lookup"><span data-stu-id="baa37-150">Dictionary objects ("property bags") can now be added to the context as entity instances and saved.</span></span> <span data-ttu-id="baa37-151">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-151">For example:</span></span>
+<span data-ttu-id="abf22-150">字典物件 ( 「屬性包」 ) 現在可以新增至內容中做為實體實例並儲存。</span><span class="sxs-lookup"><span data-stu-id="abf22-150">Dictionary objects ("property bags") can now be added to the context as entity instances and saved.</span></span> <span data-ttu-id="abf22-151">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-151">For example:</span></span>
 
-```c#
+```csharp
 var beverages = new Dictionary<string, object>
 {
     ["Name"] = "Beverages",
@@ -273,9 +283,9 @@ context.Categories.Add(beverages);
 context.SaveChanges();
 ```
 
-<span data-ttu-id="baa37-152">然後，您可以透過一般方式來查詢和更新這些實體：</span><span class="sxs-lookup"><span data-stu-id="baa37-152">These entities can then be queried and updated in the normal way:</span></span>
+<span data-ttu-id="abf22-152">然後，您可以透過一般方式來查詢和更新這些實體：</span><span class="sxs-lookup"><span data-stu-id="abf22-152">These entities can then be queried and updated in the normal way:</span></span>
 
-```c#
+```csharp
 var foods = context.Categories.Single(e => e["Name"] == "Foods");
 var marmite = context.Products.Single(e => e["Name"] == "Marmite");
 
@@ -285,13 +295,13 @@ marmite["Description"] = "Yummy when spread _thinly_ on buttered Toast!";
 context.SaveChanges();
 ```
 
-### <a name="savechanges-interception-and-events"></a><span data-ttu-id="baa37-153">SaveChanges 攔截和事件</span><span class="sxs-lookup"><span data-stu-id="baa37-153">SaveChanges interception and events</span></span>
+### <a name="savechanges-interception-and-events"></a><span data-ttu-id="abf22-153">SaveChanges 攔截和事件</span><span class="sxs-lookup"><span data-stu-id="abf22-153">SaveChanges interception and events</span></span>
 
-<span data-ttu-id="baa37-154">EF Core 5.0 引進了 .NET 事件，以及在呼叫 SaveChanges 時觸發的 EF Core 攔截器。</span><span class="sxs-lookup"><span data-stu-id="baa37-154">EF Core 5.0 introduces both .NET events and an EF Core interceptor triggered when SaveChanges is called.</span></span>
+<span data-ttu-id="abf22-154">EF Core 5.0 引進了 .NET 事件，以及在呼叫 SaveChanges 時觸發的 EF Core 攔截器。</span><span class="sxs-lookup"><span data-stu-id="abf22-154">EF Core 5.0 introduces both .NET events and an EF Core interceptor triggered when SaveChanges is called.</span></span>
 
-<span data-ttu-id="baa37-155">事件很容易使用;例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-155">The events are simple to use; for example:</span></span>
+<span data-ttu-id="abf22-155">事件很容易使用;例如：</span><span class="sxs-lookup"><span data-stu-id="abf22-155">The events are simple to use; for example:</span></span>
 
-```c#
+```csharp
 context.SavingChanges += (sender, args) =>
 {
     Console.WriteLine($"Saving changes for {((DbContext)sender).Database.GetConnectionString()}");
@@ -303,13 +313,13 @@ context.SavedChanges += (sender, args) =>
 };
 ```
 
-<span data-ttu-id="baa37-156">請注意：</span><span class="sxs-lookup"><span data-stu-id="baa37-156">Notice that:</span></span>
-* <span data-ttu-id="baa37-157">事件寄件者是 `DbContext` 實例</span><span class="sxs-lookup"><span data-stu-id="baa37-157">The event sender is the `DbContext` instance</span></span>
-* <span data-ttu-id="baa37-158">事件的引數 `SavedChanges` 包含儲存至資料庫的實體數目</span><span class="sxs-lookup"><span data-stu-id="baa37-158">The args for the `SavedChanges` event contains the number of entities saved to the database</span></span>
+<span data-ttu-id="abf22-156">請注意：</span><span class="sxs-lookup"><span data-stu-id="abf22-156">Notice that:</span></span>
+* <span data-ttu-id="abf22-157">事件寄件者是 `DbContext` 實例</span><span class="sxs-lookup"><span data-stu-id="abf22-157">The event sender is the `DbContext` instance</span></span>
+* <span data-ttu-id="abf22-158">事件的引數 `SavedChanges` 包含儲存至資料庫的實體數目</span><span class="sxs-lookup"><span data-stu-id="abf22-158">The args for the `SavedChanges` event contains the number of entities saved to the database</span></span>
 
-<span data-ttu-id="baa37-159">攔截器是由定義 `ISaveChangesInterceptor` ，但通常會 convienient 繼承， `SaveChangesInterceptor` 以避免執行每個方法。</span><span class="sxs-lookup"><span data-stu-id="baa37-159">The interceptor is defined by `ISaveChangesInterceptor`, but it is often convienient to inherit from `SaveChangesInterceptor` to avoid implementing every method.</span></span> <span data-ttu-id="baa37-160">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-160">For example:</span></span>
+<span data-ttu-id="abf22-159">攔截器是由定義 `ISaveChangesInterceptor` ，但通常會 convienient 繼承， `SaveChangesInterceptor` 以避免執行每個方法。</span><span class="sxs-lookup"><span data-stu-id="abf22-159">The interceptor is defined by `ISaveChangesInterceptor`, but it is often convienient to inherit from `SaveChangesInterceptor` to avoid implementing every method.</span></span> <span data-ttu-id="abf22-160">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-160">For example:</span></span>
 
-```c#
+```csharp
 public class MySaveChangesInterceptor : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(
@@ -333,30 +343,30 @@ public class MySaveChangesInterceptor : SaveChangesInterceptor
 }
 ```
 
-<span data-ttu-id="baa37-161">請注意：</span><span class="sxs-lookup"><span data-stu-id="baa37-161">Notice that:</span></span>
-* <span data-ttu-id="baa37-162">攔截器同時具有同步和非同步方法。</span><span class="sxs-lookup"><span data-stu-id="baa37-162">The interceptor has both sync and async methods.</span></span> <span data-ttu-id="baa37-163">如果您需要執行非同步 i/o （例如寫入審核伺服器），這會很有用。</span><span class="sxs-lookup"><span data-stu-id="baa37-163">This can be useful if you need to perform async I/O, such as writing to an audit server.</span></span>
-* <span data-ttu-id="baa37-164">攔截器可讓 SaveChanges 使用所有攔截器通用的機制來略過 `InterceptionResult` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-164">The interceptor allows SaveChanges to be skipped using the `InterceptionResult` mechanism common to all interceptors.</span></span>
+<span data-ttu-id="abf22-161">請注意：</span><span class="sxs-lookup"><span data-stu-id="abf22-161">Notice that:</span></span>
+* <span data-ttu-id="abf22-162">攔截器同時具有同步和非同步方法。</span><span class="sxs-lookup"><span data-stu-id="abf22-162">The interceptor has both sync and async methods.</span></span> <span data-ttu-id="abf22-163">如果您需要執行非同步 i/o （例如寫入審核伺服器），這會很有用。</span><span class="sxs-lookup"><span data-stu-id="abf22-163">This can be useful if you need to perform async I/O, such as writing to an audit server.</span></span>
+* <span data-ttu-id="abf22-164">攔截器可讓 SaveChanges 使用所有攔截器通用的機制來略過 `InterceptionResult` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-164">The interceptor allows SaveChanges to be skipped using the `InterceptionResult` mechanism common to all interceptors.</span></span>
 
-<span data-ttu-id="baa37-165">攔截器的缺點是它們必須在正在建立時于 DbCoNtext 上註冊。</span><span class="sxs-lookup"><span data-stu-id="baa37-165">The downside of interceptors is that they must be registered on the DbContext when it is being constructed.</span></span> <span data-ttu-id="baa37-166">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-166">For example:</span></span>
+<span data-ttu-id="abf22-165">攔截器的缺點是它們必須在正在建立時于 DbCoNtext 上註冊。</span><span class="sxs-lookup"><span data-stu-id="abf22-165">The downside of interceptors is that they must be registered on the DbContext when it is being constructed.</span></span> <span data-ttu-id="abf22-166">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-166">For example:</span></span>
 
-```c#
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder
-            .AddInterceptors(new MySaveChangesInterceptor())
-            .UseSqlite("Data Source = test.db");
+```csharp
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .AddInterceptors(new MySaveChangesInterceptor())
+        .UseSqlite("Data Source = test.db");
 ```
 
-<span data-ttu-id="baa37-167">相反地，您可以隨時在 DbCoNtext 實例上註冊事件。</span><span class="sxs-lookup"><span data-stu-id="baa37-167">In contrast, the events can be registered on the DbContext instance at any time.</span></span>
+<span data-ttu-id="abf22-167">相反地，您可以隨時在 DbCoNtext 實例上註冊事件。</span><span class="sxs-lookup"><span data-stu-id="abf22-167">In contrast, the events can be registered on the DbContext instance at any time.</span></span>
 
-### <a name="exclude-tables-from-migrations"></a><span data-ttu-id="baa37-168">從遷移中排除資料表</span><span class="sxs-lookup"><span data-stu-id="baa37-168">Exclude tables from migrations</span></span>
+### <a name="exclude-tables-from-migrations"></a><span data-ttu-id="abf22-168">從遷移中排除資料表</span><span class="sxs-lookup"><span data-stu-id="abf22-168">Exclude tables from migrations</span></span>
 
-<span data-ttu-id="baa37-169">在多個 DbcoNtext 中對應單一實體類型有時很有用。</span><span class="sxs-lookup"><span data-stu-id="baa37-169">It is sometimes useful to have a single entity type mapped in multiple DbContexts.</span></span> <span data-ttu-id="baa37-170">尤其是 [在使用系](https://www.martinfowler.com/bliki/BoundedContext.html)結內容時更是如此，因為每個系結內容通常會有不同的 DbCoNtext 類型。</span><span class="sxs-lookup"><span data-stu-id="baa37-170">This is especially true when using [bounded contexts](https://www.martinfowler.com/bliki/BoundedContext.html), for which it is common to have a different DbContext type for each bounded context.</span></span>
+<span data-ttu-id="abf22-169">在多個 DbcoNtext 中對應單一實體類型有時很有用。</span><span class="sxs-lookup"><span data-stu-id="abf22-169">It is sometimes useful to have a single entity type mapped in multiple DbContexts.</span></span> <span data-ttu-id="abf22-170">尤其是 [在使用系](https://www.martinfowler.com/bliki/BoundedContext.html)結內容時更是如此，因為每個系結內容通常會有不同的 DbCoNtext 類型。</span><span class="sxs-lookup"><span data-stu-id="abf22-170">This is especially true when using [bounded contexts](https://www.martinfowler.com/bliki/BoundedContext.html), for which it is common to have a different DbContext type for each bounded context.</span></span>
 
-<span data-ttu-id="baa37-171">例如， `User` 授權內容和報表內容可能需要型別。</span><span class="sxs-lookup"><span data-stu-id="baa37-171">For example, a `User` type may be needed by both an authorization context and a reporting context.</span></span> <span data-ttu-id="baa37-172">如果對類型進行了變更 `User` ，則這兩個 dbcoNtext 的遷移將會嘗試更新資料庫。</span><span class="sxs-lookup"><span data-stu-id="baa37-172">If a change is made to the `User` type, then migrations for both DbContexts will attempt to update the database.</span></span> <span data-ttu-id="baa37-173">為了避免這種情況，您可以將其中一個內容的模型設定為從其遷移中排除資料表。</span><span class="sxs-lookup"><span data-stu-id="baa37-173">To prevent this, the model for one of the contexts can be configured to exclude the table from its migrations.</span></span>
+<span data-ttu-id="abf22-171">例如， `User` 授權內容和報表內容可能需要型別。</span><span class="sxs-lookup"><span data-stu-id="abf22-171">For example, a `User` type may be needed by both an authorization context and a reporting context.</span></span> <span data-ttu-id="abf22-172">如果對類型進行了變更 `User` ，則這兩個 dbcoNtext 的遷移將會嘗試更新資料庫。</span><span class="sxs-lookup"><span data-stu-id="abf22-172">If a change is made to the `User` type, then migrations for both DbContexts will attempt to update the database.</span></span> <span data-ttu-id="abf22-173">為了避免這種情況，您可以將其中一個內容的模型設定為從其遷移中排除資料表。</span><span class="sxs-lookup"><span data-stu-id="abf22-173">To prevent this, the model for one of the contexts can be configured to exclude the table from its migrations.</span></span>
 
-<span data-ttu-id="baa37-174">在下列程式碼中， `AuthorizationContext` 將會產生資料表變更的遷移 `Users` ，但 `ReportingContext` 不會導致衝突的遷移。</span><span class="sxs-lookup"><span data-stu-id="baa37-174">In the code below, the `AuthorizationContext` will generate migrations for changes to the `Users` table, but the `ReportingContext` will not, preventing the migrations from clashing.</span></span>
+<span data-ttu-id="abf22-174">在下列程式碼中， `AuthorizationContext` 將會產生資料表變更的遷移 `Users` ，但 `ReportingContext` 不會導致衝突的遷移。</span><span class="sxs-lookup"><span data-stu-id="abf22-174">In the code below, the `AuthorizationContext` will generate migrations for changes to the `Users` table, but the `ReportingContext` will not, preventing the migrations from clashing.</span></span>
 
-```C#
+```csharp
 public class AuthorizationContext : DbContext
 {
     public DbSet<User> Users { get; set; }
@@ -373,11 +383,11 @@ public class ReportingContext : DbContext
 }
 ```
 
-### <a name="required-11-dependents"></a><span data-ttu-id="baa37-175">必要的1:1 相依項</span><span class="sxs-lookup"><span data-stu-id="baa37-175">Required 1:1 dependents</span></span>
+### <a name="required-11-dependents"></a><span data-ttu-id="abf22-175">必要的1:1 相依項</span><span class="sxs-lookup"><span data-stu-id="abf22-175">Required 1:1 dependents</span></span>
 
-<span data-ttu-id="baa37-176">在 EF Core 3.1 中，一對一關聯性的相依 end 一律視為選擇性。</span><span class="sxs-lookup"><span data-stu-id="baa37-176">In EF Core 3.1, the dependent end of a one-to-one relationship was always considered optional.</span></span> <span data-ttu-id="baa37-177">這在使用擁有的實體時最為明顯。</span><span class="sxs-lookup"><span data-stu-id="baa37-177">This was most apparent when using owned entities.</span></span> <span data-ttu-id="baa37-178">例如，請考慮下列模型和設定：</span><span class="sxs-lookup"><span data-stu-id="baa37-178">For example, consider the following model and configuration:</span></span>
+<span data-ttu-id="abf22-176">在 EF Core 3.1 中，一對一關聯性的相依 end 一律視為選擇性。</span><span class="sxs-lookup"><span data-stu-id="abf22-176">In EF Core 3.1, the dependent end of a one-to-one relationship was always considered optional.</span></span> <span data-ttu-id="abf22-177">這在使用擁有的實體時最為明顯。</span><span class="sxs-lookup"><span data-stu-id="abf22-177">This was most apparent when using owned entities.</span></span> <span data-ttu-id="abf22-178">例如，請考慮下列模型和設定：</span><span class="sxs-lookup"><span data-stu-id="abf22-178">For example, consider the following model and configuration:</span></span>
 
-```c#
+```csharp
 public class Person
 {
     public int Id { get; set; }
@@ -398,7 +408,7 @@ public class Address
 }
 ```
 
-```c#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Person>(b =>
@@ -417,7 +427,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-<span data-ttu-id="baa37-179">這會導致針對 SQLite 建立下表的遷移：</span><span class="sxs-lookup"><span data-stu-id="baa37-179">This results in Migrations creating the following table for SQLite:</span></span>
+<span data-ttu-id="abf22-179">這會導致針對 SQLite 建立下表的遷移：</span><span class="sxs-lookup"><span data-stu-id="abf22-179">This results in Migrations creating the following table for SQLite:</span></span>
 
 ```sql
 CREATE TABLE "People" (
@@ -438,11 +448,11 @@ CREATE TABLE "People" (
 );
 ```
 
-<span data-ttu-id="baa37-180">請注意，所有資料行都可為 null，即使某些 `HomeAddress` 屬性已設定為必要也是一樣。</span><span class="sxs-lookup"><span data-stu-id="baa37-180">Notice that all the columns are nullable, even though some of the `HomeAddress` properties have been configured as required.</span></span> <span data-ttu-id="baa37-181">此外，當查詢時 `Person` ，如果 home 或 work 位址的所有資料行都是 null，則 EF Core 會將 `HomeAddress` 及/或 `WorkAddress` 屬性保留為 null，而不是設定的空白實例 `Address` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-181">Also, when querying for a `Person`, if all the columns for either the home or work address are null, then EF Core will leave the `HomeAddress` and/or `WorkAddress` properties as null, rather than setting an empty instance of `Address`.</span></span>
+<span data-ttu-id="abf22-180">請注意，所有資料行都可為 null，即使某些 `HomeAddress` 屬性已設定為必要也是一樣。</span><span class="sxs-lookup"><span data-stu-id="abf22-180">Notice that all the columns are nullable, even though some of the `HomeAddress` properties have been configured as required.</span></span> <span data-ttu-id="abf22-181">此外，當查詢時 `Person` ，如果 home 或 work 位址的所有資料行都是 null，則 EF Core 會將 `HomeAddress` 及/或 `WorkAddress` 屬性保留為 null，而不是設定的空白實例 `Address` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-181">Also, when querying for a `Person`, if all the columns for either the home or work address are null, then EF Core will leave the `HomeAddress` and/or `WorkAddress` properties as null, rather than setting an empty instance of `Address`.</span></span>
 
-<span data-ttu-id="baa37-182">在 EF Core 5.0 中， `HomeAddress` 現在可以將導覽設定為必要的相依。</span><span class="sxs-lookup"><span data-stu-id="baa37-182">In EF Core 5.0, the `HomeAddress` navigation can now be configured as as a required dependent.</span></span> <span data-ttu-id="baa37-183">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-183">For example:</span></span>
+<span data-ttu-id="abf22-182">在 EF Core 5.0 中， `HomeAddress` 現在可以將導覽設定為必要的相依。</span><span class="sxs-lookup"><span data-stu-id="abf22-182">In EF Core 5.0, the `HomeAddress` navigation can now be configured as as a required dependent.</span></span> <span data-ttu-id="abf22-183">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-183">For example:</span></span>
 
-```c#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Person>(b =>
@@ -462,7 +472,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-<span data-ttu-id="baa37-184">遷移所建立的資料表現在會針對必要相依的必要屬性，加入不可為 null 的資料行：</span><span class="sxs-lookup"><span data-stu-id="baa37-184">The table created by Migrations will now included non-nullable columns for the required properties of the required dependent:</span></span>
+<span data-ttu-id="abf22-184">遷移所建立的資料表現在會針對必要相依的必要屬性，加入不可為 null 的資料行：</span><span class="sxs-lookup"><span data-stu-id="abf22-184">The table created by Migrations will now included non-nullable columns for the required properties of the required dependent:</span></span>
 
 ```sql
 CREATE TABLE "People" (
@@ -483,25 +493,25 @@ CREATE TABLE "People" (
 );
 ```
 
-<span data-ttu-id="baa37-185">此外，如果嘗試儲存具有 null 必要相依的擁有者，EF Core 現在將會擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="baa37-185">In addition, EF Core will now throw an exception if an attempt is made to save an owner which has a null required dependent.</span></span> <span data-ttu-id="baa37-186">在此範例中，EF Core 會在嘗試使用 null 儲存時擲回 `Person` `HomeAddress` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-186">In this example, EF Core will throw when attempting to save a `Person` with a null `HomeAddress`.</span></span>
+<span data-ttu-id="abf22-185">此外，如果嘗試儲存具有 null 必要相依的擁有者，EF Core 現在將會擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="abf22-185">In addition, EF Core will now throw an exception if an attempt is made to save an owner which has a null required dependent.</span></span> <span data-ttu-id="abf22-186">在此範例中，EF Core 會在嘗試使用 null 儲存時擲回 `Person` `HomeAddress` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-186">In this example, EF Core will throw when attempting to save a `Person` with a null `HomeAddress`.</span></span>
 
-<span data-ttu-id="baa37-187">最後，即使必要相依的所有資料行都有 null 值，EF Core 仍會建立必要相依的實例。</span><span class="sxs-lookup"><span data-stu-id="baa37-187">Finally, EF Core will still create an instance of a required dependent even when all the columns for the required dependent have null values.</span></span>
+<span data-ttu-id="abf22-187">最後，即使必要相依的所有資料行都有 null 值，EF Core 仍會建立必要相依的實例。</span><span class="sxs-lookup"><span data-stu-id="abf22-187">Finally, EF Core will still create an instance of a required dependent even when all the columns for the required dependent have null values.</span></span>
 
-### <a name="options-for-migration-generation"></a><span data-ttu-id="baa37-188">產生遷移的選項</span><span class="sxs-lookup"><span data-stu-id="baa37-188">Options for migration generation</span></span>
+### <a name="options-for-migration-generation"></a><span data-ttu-id="abf22-188">產生遷移的選項</span><span class="sxs-lookup"><span data-stu-id="abf22-188">Options for migration generation</span></span>
 
-<span data-ttu-id="baa37-189">EF Core 5.0 針對不同用途導入了更多的遷移控制。</span><span class="sxs-lookup"><span data-stu-id="baa37-189">EF Core 5.0 introduces greater control over generation of migrations for different purposes.</span></span> <span data-ttu-id="baa37-190">這包括了能夠：</span><span class="sxs-lookup"><span data-stu-id="baa37-190">This includes the ability to:</span></span>
+<span data-ttu-id="abf22-189">EF Core 5.0 針對不同用途導入了更多的遷移控制。</span><span class="sxs-lookup"><span data-stu-id="abf22-189">EF Core 5.0 introduces greater control over generation of migrations for different purposes.</span></span> <span data-ttu-id="abf22-190">這包括了能夠：</span><span class="sxs-lookup"><span data-stu-id="abf22-190">This includes the ability to:</span></span>
 
-* <span data-ttu-id="baa37-191">知道是否正在為腳本產生遷移或立即執行</span><span class="sxs-lookup"><span data-stu-id="baa37-191">Know if the migration is being generated for a script or for immediate execution</span></span>
-* <span data-ttu-id="baa37-192">知道是否正在產生等冪腳本</span><span class="sxs-lookup"><span data-stu-id="baa37-192">Know if an idempotent script is being generated</span></span>
-* <span data-ttu-id="baa37-193">知道腳本是否應該排除交易語句 (請參閱以下 _交易的遷移腳本_ 。 ) </span><span class="sxs-lookup"><span data-stu-id="baa37-193">Know if the script should exclude transaction statements (See _Migrations scripts with transactions_ below.)</span></span>
+* <span data-ttu-id="abf22-191">知道是否正在為腳本產生遷移或立即執行</span><span class="sxs-lookup"><span data-stu-id="abf22-191">Know if the migration is being generated for a script or for immediate execution</span></span>
+* <span data-ttu-id="abf22-192">知道是否正在產生等冪腳本</span><span class="sxs-lookup"><span data-stu-id="abf22-192">Know if an idempotent script is being generated</span></span>
+* <span data-ttu-id="abf22-193">知道腳本是否應該排除交易語句 (請參閱以下 _交易的遷移腳本_ 。 ) </span><span class="sxs-lookup"><span data-stu-id="abf22-193">Know if the script should exclude transaction statements (See _Migrations scripts with transactions_ below.)</span></span>
 
-<span data-ttu-id="baa37-194">此行為是由列舉所指定 `MigrationsSqlGenerationOptions` ，現在可傳遞給 `IMigrator.GenerateScript` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-194">This behavior is specified by an the `MigrationsSqlGenerationOptions` enum, which can now be passed to `IMigrator.GenerateScript`.</span></span>
+<span data-ttu-id="abf22-194">此行為是由列舉所指定 `MigrationsSqlGenerationOptions` ，現在可傳遞給 `IMigrator.GenerateScript` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-194">This behavior is specified by an the `MigrationsSqlGenerationOptions` enum, which can now be passed to `IMigrator.GenerateScript`.</span></span>
 
-<span data-ttu-id="baa37-195">這項工作中也包含了更好的等冪性腳本產生，可在 `EXEC` 需要時呼叫 SQL Server。</span><span class="sxs-lookup"><span data-stu-id="baa37-195">Also included in this work is better generation of idempotent scripts with calls to `EXEC` on SQL Server when needed.</span></span> <span data-ttu-id="baa37-196">這項工作也可以對其他資料庫提供者（包括于 postgresql）所產生的腳本進行類似的改進。</span><span class="sxs-lookup"><span data-stu-id="baa37-196">This work also enables similar improvements to the scripts generated by other database providers, including PostgreSQL.</span></span>
+<span data-ttu-id="abf22-195">這項工作中也包含了更好的等冪性腳本產生，可在 `EXEC` 需要時呼叫 SQL Server。</span><span class="sxs-lookup"><span data-stu-id="abf22-195">Also included in this work is better generation of idempotent scripts with calls to `EXEC` on SQL Server when needed.</span></span> <span data-ttu-id="abf22-196">這項工作也可以對其他資料庫提供者（包括于 postgresql）所產生的腳本進行類似的改進。</span><span class="sxs-lookup"><span data-stu-id="abf22-196">This work also enables similar improvements to the scripts generated by other database providers, including PostgreSQL.</span></span>
 
-### <a name="migrations-scripts-with-transactions"></a><span data-ttu-id="baa37-197">使用交易來遷移腳本</span><span class="sxs-lookup"><span data-stu-id="baa37-197">Migrations scripts with transactions</span></span>
+### <a name="migrations-scripts-with-transactions"></a><span data-ttu-id="abf22-197">使用交易來遷移腳本</span><span class="sxs-lookup"><span data-stu-id="abf22-197">Migrations scripts with transactions</span></span>
 
-<span data-ttu-id="baa37-198">從遷移產生的 SQL 腳本現在包含用來開始和認可交易的語句，適用于遷移。</span><span class="sxs-lookup"><span data-stu-id="baa37-198">SQL scripts generated from migrations now contain statements to begin and commit transactions as appropriate for the migration.</span></span> <span data-ttu-id="baa37-199">例如，下列的遷移腳本是從兩個遷移產生的。</span><span class="sxs-lookup"><span data-stu-id="baa37-199">For example, the migration script below was generated from two migrations.</span></span> <span data-ttu-id="baa37-200">請注意，每個遷移現在都在交易內套用。</span><span class="sxs-lookup"><span data-stu-id="baa37-200">Notice that each migration is now applied inside a transaction.</span></span>
+<span data-ttu-id="abf22-198">從遷移產生的 SQL 腳本現在包含用來開始和認可交易的語句，適用于遷移。</span><span class="sxs-lookup"><span data-stu-id="abf22-198">SQL scripts generated from migrations now contain statements to begin and commit transactions as appropriate for the migration.</span></span> <span data-ttu-id="abf22-199">例如，下列的遷移腳本是從兩個遷移產生的。</span><span class="sxs-lookup"><span data-stu-id="abf22-199">For example, the migration script below was generated from two migrations.</span></span> <span data-ttu-id="abf22-200">請注意，每個遷移現在都在交易內套用。</span><span class="sxs-lookup"><span data-stu-id="abf22-200">Notice that each migration is now applied inside a transaction.</span></span>
 
 ```sql
 BEGIN TRANSACTION;
@@ -546,13 +556,13 @@ GO
 COMMIT;
 ```
 
-<span data-ttu-id="baa37-201">如上一節所述，如果交易需要以不同的方式處理，則可以停用這項交易。</span><span class="sxs-lookup"><span data-stu-id="baa37-201">As mentioned in the previous section, this use of transactions can be disabled if transactions need to be handled differently.</span></span>
+<span data-ttu-id="abf22-201">如上一節所述，如果交易需要以不同的方式處理，則可以停用這項交易。</span><span class="sxs-lookup"><span data-stu-id="abf22-201">As mentioned in the previous section, this use of transactions can be disabled if transactions need to be handled differently.</span></span>
 
-### <a name="see-pending-migrations"></a><span data-ttu-id="baa37-202">查看暫止的遷移</span><span class="sxs-lookup"><span data-stu-id="baa37-202">See pending migrations</span></span>
+### <a name="see-pending-migrations"></a><span data-ttu-id="abf22-202">查看暫止的遷移</span><span class="sxs-lookup"><span data-stu-id="abf22-202">See pending migrations</span></span>
 
-<span data-ttu-id="baa37-203">這項功能是由「社區」所貢獻 [@Psypher9](https://github.com/Psypher9) 。</span><span class="sxs-lookup"><span data-stu-id="baa37-203">This feature was contributed from the community by [@Psypher9](https://github.com/Psypher9).</span></span> <span data-ttu-id="baa37-204">許多人都感謝您的貢獻！</span><span class="sxs-lookup"><span data-stu-id="baa37-204">Many thanks for the contribution!</span></span>
+<span data-ttu-id="abf22-203">這項功能是由「社區」所貢獻 [@Psypher9](https://github.com/Psypher9) 。</span><span class="sxs-lookup"><span data-stu-id="abf22-203">This feature was contributed from the community by [@Psypher9](https://github.com/Psypher9).</span></span> <span data-ttu-id="abf22-204">許多人都感謝您的貢獻！</span><span class="sxs-lookup"><span data-stu-id="abf22-204">Many thanks for the contribution!</span></span>
 
-<span data-ttu-id="baa37-205">`dotnet ef migrations list`命令現在會顯示尚未套用至資料庫的遷移。</span><span class="sxs-lookup"><span data-stu-id="baa37-205">The `dotnet ef migrations list` command now shows which migrations have not yet been applied to the database.</span></span> <span data-ttu-id="baa37-206">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-206">For example:</span></span>
+<span data-ttu-id="abf22-205">`dotnet ef migrations list`命令現在會顯示尚未套用至資料庫的遷移。</span><span class="sxs-lookup"><span data-stu-id="abf22-205">The `dotnet ef migrations list` command now shows which migrations have not yet been applied to the database.</span></span> <span data-ttu-id="abf22-206">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-206">For example:</span></span>
 
 ```
 ajcvickers@avickers420u:~/AllTogetherNow/Daily$ dotnet ef migrations list
@@ -564,13 +574,13 @@ Build succeeded.
 ajcvickers@avickers420u:~/AllTogetherNow/Daily$
 ```
 
-<span data-ttu-id="baa37-207">此外，現在有一個命令可 `Get-Migration` 讓封裝管理員主控台具有相同的功能。</span><span class="sxs-lookup"><span data-stu-id="baa37-207">In addition, there is now a `Get-Migration` command for the Package Manager Console with the same functionality.</span></span>
+<span data-ttu-id="abf22-207">此外，現在有一個命令可 `Get-Migration` 讓封裝管理員主控台具有相同的功能。</span><span class="sxs-lookup"><span data-stu-id="abf22-207">In addition, there is now a `Get-Migration` command for the Package Manager Console with the same functionality.</span></span>
 
-### <a name="modelbuilder-api-for-value-comparers"></a><span data-ttu-id="baa37-208">值比較子的 ModelBuilder API</span><span class="sxs-lookup"><span data-stu-id="baa37-208">ModelBuilder API for value comparers</span></span>
+### <a name="modelbuilder-api-for-value-comparers"></a><span data-ttu-id="abf22-208">值比較子的 ModelBuilder API</span><span class="sxs-lookup"><span data-stu-id="abf22-208">ModelBuilder API for value comparers</span></span>
 
-<span data-ttu-id="baa37-209">自訂可變類型的 EF Core 屬性 [需要值比較子](xref:core/modeling/value-comparers) ，才能正確偵測屬性變更。</span><span class="sxs-lookup"><span data-stu-id="baa37-209">EF Core properties for custom mutable types [require a value comparer](xref:core/modeling/value-comparers) for property changes to be detected correctly.</span></span> <span data-ttu-id="baa37-210">您現在可以在設定類型的值轉換時，指定此值。</span><span class="sxs-lookup"><span data-stu-id="baa37-210">This can now be specified as part of configuring the value conversion for the type.</span></span> <span data-ttu-id="baa37-211">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-211">For example:</span></span>
+<span data-ttu-id="abf22-209">自訂可變類型的 EF Core 屬性 [需要值比較子](xref:core/modeling/value-comparers) ，才能正確偵測屬性變更。</span><span class="sxs-lookup"><span data-stu-id="abf22-209">EF Core properties for custom mutable types [require a value comparer](xref:core/modeling/value-comparers) for property changes to be detected correctly.</span></span> <span data-ttu-id="abf22-210">您現在可以在設定類型的值轉換時，指定此值。</span><span class="sxs-lookup"><span data-stu-id="abf22-210">This can now be specified as part of configuring the value conversion for the type.</span></span> <span data-ttu-id="abf22-211">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-211">For example:</span></span>
 
-```c#
+```csharp
 modelBuilder
     .Entity<EntityType>()
     .Property(e => e.MyProperty)
@@ -583,45 +593,45 @@ modelBuilder
             c => c.ToList()));
 ```
 
-### <a name="entityentry-trygetvalue-methods"></a><span data-ttu-id="baa37-212">Entityentry.state TryGetValue 方法</span><span class="sxs-lookup"><span data-stu-id="baa37-212">EntityEntry TryGetValue methods</span></span>
+### <a name="entityentry-trygetvalue-methods"></a><span data-ttu-id="abf22-212">Entityentry.state TryGetValue 方法</span><span class="sxs-lookup"><span data-stu-id="abf22-212">EntityEntry TryGetValue methods</span></span>
 
-<span data-ttu-id="baa37-213">這項功能是由「社區」所貢獻 [@m4ss1m0g](https://github.com/m4ss1m0g) 。</span><span class="sxs-lookup"><span data-stu-id="baa37-213">This feature was contributed from the community by [@m4ss1m0g](https://github.com/m4ss1m0g).</span></span> <span data-ttu-id="baa37-214">許多人都感謝您的貢獻！</span><span class="sxs-lookup"><span data-stu-id="baa37-214">Many thanks for the contribution!</span></span>
+<span data-ttu-id="abf22-213">這項功能是由「社區」所貢獻 [@m4ss1m0g](https://github.com/m4ss1m0g) 。</span><span class="sxs-lookup"><span data-stu-id="abf22-213">This feature was contributed from the community by [@m4ss1m0g](https://github.com/m4ss1m0g).</span></span> <span data-ttu-id="abf22-214">許多人都感謝您的貢獻！</span><span class="sxs-lookup"><span data-stu-id="abf22-214">Many thanks for the contribution!</span></span>
 
-<span data-ttu-id="baa37-215">`TryGetValue`方法已加入至 `EntityEntry.CurrentValues` 和 `EntityEntry.OriginalValues` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-215">A `TryGetValue` method has been added to `EntityEntry.CurrentValues` and `EntityEntry.OriginalValues`.</span></span> <span data-ttu-id="baa37-216">這可讓要求屬性的值，而不需要先檢查屬性是否在 EF 模型中對應。</span><span class="sxs-lookup"><span data-stu-id="baa37-216">This allows the value of a property to be requested without first checking if the property is mapped in the EF model.</span></span> <span data-ttu-id="baa37-217">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-217">For example:</span></span>
+<span data-ttu-id="abf22-215">`TryGetValue`方法已加入至 `EntityEntry.CurrentValues` 和 `EntityEntry.OriginalValues` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-215">A `TryGetValue` method has been added to `EntityEntry.CurrentValues` and `EntityEntry.OriginalValues`.</span></span> <span data-ttu-id="abf22-216">這可讓要求屬性的值，而不需要先檢查屬性是否在 EF 模型中對應。</span><span class="sxs-lookup"><span data-stu-id="abf22-216">This allows the value of a property to be requested without first checking if the property is mapped in the EF model.</span></span> <span data-ttu-id="abf22-217">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-217">For example:</span></span>
 
-```c#
+```csharp
 if (entry.CurrentValues.TryGetValue(propertyName, out var value))
 {
     Console.WriteLine(value);
 }
 ```
 
-### <a name="default-max-batch-size-for-sql-server"></a><span data-ttu-id="baa37-218">SQL Server 的預設批次大小上限</span><span class="sxs-lookup"><span data-stu-id="baa37-218">Default max batch size for SQL Server</span></span>
+### <a name="default-max-batch-size-for-sql-server"></a><span data-ttu-id="abf22-218">SQL Server 的預設批次大小上限</span><span class="sxs-lookup"><span data-stu-id="abf22-218">Default max batch size for SQL Server</span></span>
 
-<span data-ttu-id="baa37-219">從 EF Core 5.0 開始，SQL Server 的 SaveChanges 的預設批次大小上限是42。</span><span class="sxs-lookup"><span data-stu-id="baa37-219">Starting with EF Core 5.0, the default maximum batch size for SaveChanges on SQL Server is now 42.</span></span> <span data-ttu-id="baa37-220">同樣地，這也是最重要的生命、Universe 和一切問題的答案。</span><span class="sxs-lookup"><span data-stu-id="baa37-220">As is well known, this is also the answer to the Ultimate Question of Life, the Universe, and Everything.</span></span> <span data-ttu-id="baa37-221">不過，這可能是一項巧合，因為其值是透過 [分析批次處理效能](https://github.com/dotnet/efcore/issues/9270)來取得的。</span><span class="sxs-lookup"><span data-stu-id="baa37-221">However, this is probably a coincidence, since the value was obtained through [analysis of batching performance](https://github.com/dotnet/efcore/issues/9270).</span></span> <span data-ttu-id="baa37-222">我們不相信我們發現了一個終極問題，不過看起來似乎有點合理，那就是為了瞭解 SQL Server 的運作方式。</span><span class="sxs-lookup"><span data-stu-id="baa37-222">We do not believe that we have discovered a form of the Ultimate Question, although it does seem somewhat plausible that the Earth was created to understand why SQL Server works the way it does.</span></span>
+<span data-ttu-id="abf22-219">從 EF Core 5.0 開始，SQL Server 的 SaveChanges 的預設批次大小上限是42。</span><span class="sxs-lookup"><span data-stu-id="abf22-219">Starting with EF Core 5.0, the default maximum batch size for SaveChanges on SQL Server is now 42.</span></span> <span data-ttu-id="abf22-220">同樣地，這也是最重要的生命、Universe 和一切問題的答案。</span><span class="sxs-lookup"><span data-stu-id="abf22-220">As is well known, this is also the answer to the Ultimate Question of Life, the Universe, and Everything.</span></span> <span data-ttu-id="abf22-221">不過，這可能是一項巧合，因為其值是透過 [分析批次處理效能](https://github.com/dotnet/efcore/issues/9270)來取得的。</span><span class="sxs-lookup"><span data-stu-id="abf22-221">However, this is probably a coincidence, since the value was obtained through [analysis of batching performance](https://github.com/dotnet/efcore/issues/9270).</span></span> <span data-ttu-id="abf22-222">我們不相信我們發現了一個終極問題，不過看起來似乎有點合理，那就是為了瞭解 SQL Server 的運作方式。</span><span class="sxs-lookup"><span data-stu-id="abf22-222">We do not believe that we have discovered a form of the Ultimate Question, although it does seem somewhat plausible that the Earth was created to understand why SQL Server works the way it does.</span></span>
 
-### <a name="default-environment-to-development"></a><span data-ttu-id="baa37-223">開發的預設環境</span><span class="sxs-lookup"><span data-stu-id="baa37-223">Default environment to Development</span></span>
+### <a name="default-environment-to-development"></a><span data-ttu-id="abf22-223">開發的預設環境</span><span class="sxs-lookup"><span data-stu-id="abf22-223">Default environment to Development</span></span>
 
-<span data-ttu-id="baa37-224">EF Core 命令列工具現在會自動將 `ASPNETCORE_ENVIRONMENT` _和_ `DOTNET_ENVIRONMENT` 環境變數設定為「開發」。</span><span class="sxs-lookup"><span data-stu-id="baa37-224">The EF Core command line tools now automatically configure the `ASPNETCORE_ENVIRONMENT` _and_ `DOTNET_ENVIRONMENT` environment variables to "Development".</span></span> <span data-ttu-id="baa37-225">這項功能可讓您在開發期間使用泛型主機搭配 ASP.NET Core 的體驗。</span><span class="sxs-lookup"><span data-stu-id="baa37-225">This brings the experience when using the generic host in line with the experience for ASP.NET Core during development.</span></span> <span data-ttu-id="baa37-226">請參閱 [#19903](https://github.com/dotnet/efcore/issues/19903)。</span><span class="sxs-lookup"><span data-stu-id="baa37-226">See [#19903](https://github.com/dotnet/efcore/issues/19903).</span></span>
+<span data-ttu-id="abf22-224">EF Core 命令列工具現在會自動將 `ASPNETCORE_ENVIRONMENT` _和_ `DOTNET_ENVIRONMENT` 環境變數設定為「開發」。</span><span class="sxs-lookup"><span data-stu-id="abf22-224">The EF Core command line tools now automatically configure the `ASPNETCORE_ENVIRONMENT` _and_ `DOTNET_ENVIRONMENT` environment variables to "Development".</span></span> <span data-ttu-id="abf22-225">這項功能可讓您在開發期間使用泛型主機搭配 ASP.NET Core 的體驗。</span><span class="sxs-lookup"><span data-stu-id="abf22-225">This brings the experience when using the generic host in line with the experience for ASP.NET Core during development.</span></span> <span data-ttu-id="abf22-226">請參閱 [#19903](https://github.com/dotnet/efcore/issues/19903)。</span><span class="sxs-lookup"><span data-stu-id="abf22-226">See [#19903](https://github.com/dotnet/efcore/issues/19903).</span></span>
 
-### <a name="better-migrations-column-ordering"></a><span data-ttu-id="baa37-227">更好的遷移資料行排序</span><span class="sxs-lookup"><span data-stu-id="baa37-227">Better migrations column ordering</span></span>
+### <a name="better-migrations-column-ordering"></a><span data-ttu-id="abf22-227">更好的遷移資料行排序</span><span class="sxs-lookup"><span data-stu-id="abf22-227">Better migrations column ordering</span></span>
 
-<span data-ttu-id="baa37-228">未對應之基類的資料行現在會在對應實體類型的其他資料行之後排序。</span><span class="sxs-lookup"><span data-stu-id="baa37-228">The columns for unmapped base classes are now ordered after other columns for mapped entity types.</span></span> <span data-ttu-id="baa37-229">請注意，這只會影響新建立的資料表。</span><span class="sxs-lookup"><span data-stu-id="baa37-229">Note this only impacts newly created tables.</span></span> <span data-ttu-id="baa37-230">現有資料表的資料行順序會維持不變。</span><span class="sxs-lookup"><span data-stu-id="baa37-230">The column order for existing tables remains unchanged.</span></span> <span data-ttu-id="baa37-231">請參閱 [#11314](https://github.com/dotnet/efcore/issues/11314)。</span><span class="sxs-lookup"><span data-stu-id="baa37-231">See [#11314](https://github.com/dotnet/efcore/issues/11314).</span></span>
+<span data-ttu-id="abf22-228">未對應之基類的資料行現在會在對應實體類型的其他資料行之後排序。</span><span class="sxs-lookup"><span data-stu-id="abf22-228">The columns for unmapped base classes are now ordered after other columns for mapped entity types.</span></span> <span data-ttu-id="abf22-229">請注意，這只會影響新建立的資料表。</span><span class="sxs-lookup"><span data-stu-id="abf22-229">Note this only impacts newly created tables.</span></span> <span data-ttu-id="abf22-230">現有資料表的資料行順序會維持不變。</span><span class="sxs-lookup"><span data-stu-id="abf22-230">The column order for existing tables remains unchanged.</span></span> <span data-ttu-id="abf22-231">請參閱 [#11314](https://github.com/dotnet/efcore/issues/11314)。</span><span class="sxs-lookup"><span data-stu-id="abf22-231">See [#11314](https://github.com/dotnet/efcore/issues/11314).</span></span>
 
-### <a name="query-improvements"></a><span data-ttu-id="baa37-232">查詢改進</span><span class="sxs-lookup"><span data-stu-id="baa37-232">Query improvements</span></span>
+### <a name="query-improvements"></a><span data-ttu-id="abf22-232">查詢改進</span><span class="sxs-lookup"><span data-stu-id="abf22-232">Query improvements</span></span>
 
-<span data-ttu-id="baa37-233">EF Core 5.0 RC1 包含一些額外的查詢翻譯改進：</span><span class="sxs-lookup"><span data-stu-id="baa37-233">EF Core 5.0 RC1 contains some additional query translation improvements:</span></span>
+<span data-ttu-id="abf22-233">EF Core 5.0 RC1 包含一些額外的查詢翻譯改進：</span><span class="sxs-lookup"><span data-stu-id="abf22-233">EF Core 5.0 RC1 contains some additional query translation improvements:</span></span>
 
-* <span data-ttu-id="baa37-234">`is`Cosmos 上的翻譯--請參閱[#16391](https://github.com/dotnet/efcore/issues/16391)</span><span class="sxs-lookup"><span data-stu-id="baa37-234">Translation of `is` on Cosmos--see [#16391](https://github.com/dotnet/efcore/issues/16391)</span></span>
-* <span data-ttu-id="baa37-235">使用者對應函式現在可以加上批註以控制 null 傳播--請參閱 [#19609](https://github.com/dotnet/efcore/issues/19609)</span><span class="sxs-lookup"><span data-stu-id="baa37-235">User-mapped functions can now be annotated to control null propagation--see [#19609](https://github.com/dotnet/efcore/issues/19609)</span></span>
-* <span data-ttu-id="baa37-236">支援使用條件式匯總進行 GroupBy 的翻譯--請參閱 [#11711](https://github.com/dotnet/efcore/issues/11711)</span><span class="sxs-lookup"><span data-stu-id="baa37-236">Support for translation of GroupBy with conditional aggregates--see [#11711](https://github.com/dotnet/efcore/issues/11711)</span></span>
-* <span data-ttu-id="baa37-237">在匯總之前將相異運算子轉換成群組元素--請參閱 [#17376](https://github.com/dotnet/efcore/issues/17376)</span><span class="sxs-lookup"><span data-stu-id="baa37-237">Translation of Distinct operator over group element before aggregate--see [#17376](https://github.com/dotnet/efcore/issues/17376)</span></span>
+* <span data-ttu-id="abf22-234">`is`Cosmos 上的翻譯--請參閱[#16391](https://github.com/dotnet/efcore/issues/16391)</span><span class="sxs-lookup"><span data-stu-id="abf22-234">Translation of `is` on Cosmos--see [#16391](https://github.com/dotnet/efcore/issues/16391)</span></span>
+* <span data-ttu-id="abf22-235">使用者對應函式現在可以加上批註以控制 null 傳播--請參閱 [#19609](https://github.com/dotnet/efcore/issues/19609)</span><span class="sxs-lookup"><span data-stu-id="abf22-235">User-mapped functions can now be annotated to control null propagation--see [#19609](https://github.com/dotnet/efcore/issues/19609)</span></span>
+* <span data-ttu-id="abf22-236">支援使用條件式匯總進行 GroupBy 的翻譯--請參閱 [#11711](https://github.com/dotnet/efcore/issues/11711)</span><span class="sxs-lookup"><span data-stu-id="abf22-236">Support for translation of GroupBy with conditional aggregates--see [#11711](https://github.com/dotnet/efcore/issues/11711)</span></span>
+* <span data-ttu-id="abf22-237">在匯總之前將相異運算子轉換成群組元素--請參閱 [#17376](https://github.com/dotnet/efcore/issues/17376)</span><span class="sxs-lookup"><span data-stu-id="abf22-237">Translation of Distinct operator over group element before aggregate--see [#17376](https://github.com/dotnet/efcore/issues/17376)</span></span>
 
-### <a name="model-building-for-fields"></a><span data-ttu-id="baa37-238">欄位的模型建立</span><span class="sxs-lookup"><span data-stu-id="baa37-238">Model building for fields</span></span>
+### <a name="model-building-for-fields"></a><span data-ttu-id="abf22-238">欄位的模型建立</span><span class="sxs-lookup"><span data-stu-id="abf22-238">Model building for fields</span></span>
 
-<span data-ttu-id="baa37-239">最後，在 RC1 中，EF Core 現在允許在 ModelBuilder 中使用 lambda 方法來尋找欄位以及屬性。</span><span class="sxs-lookup"><span data-stu-id="baa37-239">Finally for RC1, EF Core now allows use of the lambda methods in the ModelBuilder for fields as well as properties.</span></span> <span data-ttu-id="baa37-240">例如，如果您基於某些原因厭惡至屬性，並決定使用公用欄位，則這些欄位現在可以使用 lambda 產生器來對應：</span><span class="sxs-lookup"><span data-stu-id="baa37-240">For example, if you are averse to properties for some reason and decide to use public fields, then these fields can now be mapped using the lambda builders:</span></span>
+<span data-ttu-id="abf22-239">最後，在 RC1 中，EF Core 現在允許在 ModelBuilder 中使用 lambda 方法來尋找欄位以及屬性。</span><span class="sxs-lookup"><span data-stu-id="abf22-239">Finally for RC1, EF Core now allows use of the lambda methods in the ModelBuilder for fields as well as properties.</span></span> <span data-ttu-id="abf22-240">例如，如果您基於某些原因厭惡至屬性，並決定使用公用欄位，則這些欄位現在可以使用 lambda 產生器來對應：</span><span class="sxs-lookup"><span data-stu-id="abf22-240">For example, if you are averse to properties for some reason and decide to use public fields, then these fields can now be mapped using the lambda builders:</span></span>
 
-```c#
+```csharp
 public class Post
 {
     public int Id;
@@ -639,7 +649,7 @@ public class Blog
 }
 ```
 
-```c#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Blog>(b =>
@@ -659,17 +669,17 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-<span data-ttu-id="baa37-241">雖然這是可行的，但我們當然不建議您這麼做。</span><span class="sxs-lookup"><span data-stu-id="baa37-241">While this is now possible, we are certainly not recommending that you do this.</span></span> <span data-ttu-id="baa37-242">此外，請注意，這不會將任何額外的欄位對應功能新增至 EF Core，只允許使用 lambda 方法，而不是一律需要字串方法。</span><span class="sxs-lookup"><span data-stu-id="baa37-242">Also, note that this does not add any additional field mapping capabilities to EF Core, it only allows the lambda methods to be used instead of always requiring the string methods.</span></span> <span data-ttu-id="baa37-243">這種情況很少用，因為欄位很少是公用的。</span><span class="sxs-lookup"><span data-stu-id="baa37-243">This is seldom useful since fields are rarely public.</span></span>
+<span data-ttu-id="abf22-241">雖然這是可行的，但我們當然不建議您這麼做。</span><span class="sxs-lookup"><span data-stu-id="abf22-241">While this is now possible, we are certainly not recommending that you do this.</span></span> <span data-ttu-id="abf22-242">此外，請注意，這不會將任何額外的欄位對應功能新增至 EF Core，只允許使用 lambda 方法，而不是一律需要字串方法。</span><span class="sxs-lookup"><span data-stu-id="abf22-242">Also, note that this does not add any additional field mapping capabilities to EF Core, it only allows the lambda methods to be used instead of always requiring the string methods.</span></span> <span data-ttu-id="abf22-243">這種情況很少用，因為欄位很少是公用的。</span><span class="sxs-lookup"><span data-stu-id="abf22-243">This is seldom useful since fields are rarely public.</span></span>
 
-## <a name="preview-8"></a><span data-ttu-id="baa37-244">Preview 8</span><span class="sxs-lookup"><span data-stu-id="baa37-244">Preview 8</span></span>
+## <a name="preview-8"></a><span data-ttu-id="abf22-244">Preview 8</span><span class="sxs-lookup"><span data-stu-id="abf22-244">Preview 8</span></span>
 
-### <a name="table-per-type-tpt-mapping"></a><span data-ttu-id="baa37-245">每一類型的 (TPT) 對應的資料表</span><span class="sxs-lookup"><span data-stu-id="baa37-245">Table-per-type (TPT) mapping</span></span>
+### <a name="table-per-type-tpt-mapping"></a><span data-ttu-id="abf22-245">每一類型的 (TPT) 對應的資料表</span><span class="sxs-lookup"><span data-stu-id="abf22-245">Table-per-type (TPT) mapping</span></span>
 
-<span data-ttu-id="baa37-246">根據預設，EF Core 會將 .NET 類型的繼承階層對應到單一資料庫資料表。</span><span class="sxs-lookup"><span data-stu-id="baa37-246">By default, EF Core maps an inheritance hierarchy of .NET types to a single database table.</span></span> <span data-ttu-id="baa37-247">這稱為每一階層的資料表 (TPH) 對應。</span><span class="sxs-lookup"><span data-stu-id="baa37-247">This is known as table-per-hierarchy (TPH) mapping.</span></span> <span data-ttu-id="baa37-248">EF Core 5.0 也可將繼承階層架構中的每個 .NET 類型對應至不同的資料庫資料表;稱為每一類型的資料表 (TPT) 對應。</span><span class="sxs-lookup"><span data-stu-id="baa37-248">EF Core 5.0 also allows mapping each .NET type in an inheritance hierarchy to a different database table; known as table-per-type (TPT) mapping.</span></span>
+<span data-ttu-id="abf22-246">根據預設，EF Core 會將 .NET 類型的繼承階層對應到單一資料庫資料表。</span><span class="sxs-lookup"><span data-stu-id="abf22-246">By default, EF Core maps an inheritance hierarchy of .NET types to a single database table.</span></span> <span data-ttu-id="abf22-247">這稱為每一階層的資料表 (TPH) 對應。</span><span class="sxs-lookup"><span data-stu-id="abf22-247">This is known as table-per-hierarchy (TPH) mapping.</span></span> <span data-ttu-id="abf22-248">EF Core 5.0 也可將繼承階層架構中的每個 .NET 類型對應至不同的資料庫資料表;稱為每一類型的資料表 (TPT) 對應。</span><span class="sxs-lookup"><span data-stu-id="abf22-248">EF Core 5.0 also allows mapping each .NET type in an inheritance hierarchy to a different database table; known as table-per-type (TPT) mapping.</span></span>
 
-<span data-ttu-id="baa37-249">例如，請考慮使用對應階層的這個模型：</span><span class="sxs-lookup"><span data-stu-id="baa37-249">For example, consider this model with a mapped hierarchy:</span></span>
+<span data-ttu-id="abf22-249">例如，請考慮使用對應階層的這個模型：</span><span class="sxs-lookup"><span data-stu-id="abf22-249">For example, consider this model with a mapped hierarchy:</span></span>
 
-```c#
+```csharp
 public class Animal
 {
     public int Id { get; set; }
@@ -692,7 +702,7 @@ public class Dog : Pet
 }
 ```
 
-<span data-ttu-id="baa37-250">根據預設，EF Core 會將此對應到單一資料表：</span><span class="sxs-lookup"><span data-stu-id="baa37-250">By default, EF Core will map this to a single table:</span></span>
+<span data-ttu-id="abf22-250">根據預設，EF Core 會將此對應到單一資料表：</span><span class="sxs-lookup"><span data-stu-id="abf22-250">By default, EF Core will map this to a single table:</span></span>
 
 ```sql
 CREATE TABLE [Animals] (
@@ -706,7 +716,7 @@ CREATE TABLE [Animals] (
 );
 ```
 
-<span data-ttu-id="baa37-251">不過，將每個實體類型對應至不同的資料表，會改為每個類型產生一個資料表：</span><span class="sxs-lookup"><span data-stu-id="baa37-251">However, mapping each entity type to a different table will instead result in one table per type:</span></span>
+<span data-ttu-id="abf22-251">不過，將每個實體類型對應至不同的資料表，會改為每個類型產生一個資料表：</span><span class="sxs-lookup"><span data-stu-id="abf22-251">However, mapping each entity type to a different table will instead result in one table per type:</span></span>
 
 ```sql
 CREATE TABLE [Animals] (
@@ -739,11 +749,11 @@ CREATE TABLE [Dogs] (
 );
 ```
 
-<span data-ttu-id="baa37-252">請注意，在將 preview 8 的程式碼分支出來之後，會新增上述的外鍵條件約束的建立。</span><span class="sxs-lookup"><span data-stu-id="baa37-252">Note that creation of the foreign key constraints shown above were added after branching the code for preview 8.</span></span>
+<span data-ttu-id="abf22-252">請注意，在將 preview 8 的程式碼分支出來之後，會新增上述的外鍵條件約束的建立。</span><span class="sxs-lookup"><span data-stu-id="abf22-252">Note that creation of the foreign key constraints shown above were added after branching the code for preview 8.</span></span>
 
-<span data-ttu-id="baa37-253">您可以使用對應屬性，將實體類型對應至不同的資料表：</span><span class="sxs-lookup"><span data-stu-id="baa37-253">Entity types can be mapped to different tables using mapping attributes:</span></span>
+<span data-ttu-id="abf22-253">您可以使用對應屬性，將實體類型對應至不同的資料表：</span><span class="sxs-lookup"><span data-stu-id="abf22-253">Entity types can be mapped to different tables using mapping attributes:</span></span>
 
-```c#
+```csharp
 [Table("Animals")]
 public class Animal
 {
@@ -770,9 +780,9 @@ public class Dog : Pet
 }
 ```
 
-<span data-ttu-id="baa37-254">或使用設定 `ModelBuilder` ：</span><span class="sxs-lookup"><span data-stu-id="baa37-254">Or using `ModelBuilder` configuration:</span></span>
+<span data-ttu-id="abf22-254">或使用設定 `ModelBuilder` ：</span><span class="sxs-lookup"><span data-stu-id="abf22-254">Or using `ModelBuilder` configuration:</span></span>
 
-```c#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Animal>().ToTable("Animals");
@@ -782,15 +792,15 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-<span data-ttu-id="baa37-255">檔是由問題 [#1979](https://github.com/dotnet/EntityFramework.Docs/issues/1979)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-255">Documentation is tracked by issue [#1979](https://github.com/dotnet/EntityFramework.Docs/issues/1979).</span></span>
+<span data-ttu-id="abf22-255">檔是由問題 [#1979](https://github.com/dotnet/EntityFramework.Docs/issues/1979)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-255">Documentation is tracked by issue [#1979](https://github.com/dotnet/EntityFramework.Docs/issues/1979).</span></span>
 
-### <a name="migrations-rebuild-sqlite-tables"></a><span data-ttu-id="baa37-256">遷移：重建 SQLite 資料表</span><span class="sxs-lookup"><span data-stu-id="baa37-256">Migrations: Rebuild SQLite tables</span></span>
+### <a name="migrations-rebuild-sqlite-tables"></a><span data-ttu-id="abf22-256">遷移：重建 SQLite 資料表</span><span class="sxs-lookup"><span data-stu-id="abf22-256">Migrations: Rebuild SQLite tables</span></span>
 
-<span data-ttu-id="baa37-257">相較于其他資料庫，SQLite 的架構操作功能相對受限。</span><span class="sxs-lookup"><span data-stu-id="baa37-257">Compared to other database, SQLite is relatively limited in its schema manipulation capabilities.</span></span> <span data-ttu-id="baa37-258">例如，從現有的資料表卸載資料行時，必須卸載並重新建立整個資料表。</span><span class="sxs-lookup"><span data-stu-id="baa37-258">For example, dropping a column from an existing table requires that the entire table be dropped and re-created.</span></span> <span data-ttu-id="baa37-259">EF Core 5.0 遷移現在支援自動重建資料表，以進行需要的架構變更。</span><span class="sxs-lookup"><span data-stu-id="baa37-259">EF Core 5.0 Migrations now supports automatic rebuilding the table for schema changes that require it.</span></span>
+<span data-ttu-id="abf22-257">相較于其他資料庫，SQLite 的架構操作功能相對受限。</span><span class="sxs-lookup"><span data-stu-id="abf22-257">Compared to other database, SQLite is relatively limited in its schema manipulation capabilities.</span></span> <span data-ttu-id="abf22-258">例如，從現有的資料表卸載資料行時，必須卸載並重新建立整個資料表。</span><span class="sxs-lookup"><span data-stu-id="abf22-258">For example, dropping a column from an existing table requires that the entire table be dropped and re-created.</span></span> <span data-ttu-id="abf22-259">EF Core 5.0 遷移現在支援自動重建資料表，以進行需要的架構變更。</span><span class="sxs-lookup"><span data-stu-id="abf22-259">EF Core 5.0 Migrations now supports automatic rebuilding the table for schema changes that require it.</span></span>
 
-<span data-ttu-id="baa37-260">例如，假設我們有一個 `Unicorns` 針對實體類型建立的資料表 `Unicorn` ：</span><span class="sxs-lookup"><span data-stu-id="baa37-260">For example, imagine we have a `Unicorns` table created for a `Unicorn` entity type:</span></span>
+<span data-ttu-id="abf22-260">例如，假設我們有一個 `Unicorns` 針對實體類型建立的資料表 `Unicorn` ：</span><span class="sxs-lookup"><span data-stu-id="abf22-260">For example, imagine we have a `Unicorns` table created for a `Unicorn` entity type:</span></span>
 
-```c#
+```csharp
 public class Unicorn
 {
     public int Id { get; set; }
@@ -807,7 +817,7 @@ CREATE TABLE "Unicorns" (
 );
 ```
 
-<span data-ttu-id="baa37-261">接下來，我們將瞭解如何將獨角獸的年齡視為非常不一樣，因此讓我們移除該屬性、新增新的遷移，並更新資料庫。</span><span class="sxs-lookup"><span data-stu-id="baa37-261">We then learn that storing the age of a unicorn is considered very rude, so let's remove that property, add a new migration, and update the database.</span></span> <span data-ttu-id="baa37-262">使用 EF Core 3.1 時，此更新將會失敗，因為無法卸載資料行。</span><span class="sxs-lookup"><span data-stu-id="baa37-262">This update will fail when using EF Core 3.1 because the column cannot be dropped.</span></span> <span data-ttu-id="baa37-263">在 EF Core 5.0 中，遷移會改為重建資料表：</span><span class="sxs-lookup"><span data-stu-id="baa37-263">In EF Core 5.0, Migrations will instead rebuild the table:</span></span>
+<span data-ttu-id="abf22-261">接下來，我們將瞭解如何將獨角獸的年齡視為非常不一樣，因此讓我們移除該屬性、新增新的遷移，並更新資料庫。</span><span class="sxs-lookup"><span data-stu-id="abf22-261">We then learn that storing the age of a unicorn is considered very rude, so let's remove that property, add a new migration, and update the database.</span></span> <span data-ttu-id="abf22-262">使用 EF Core 3.1 時，此更新將會失敗，因為無法卸載資料行。</span><span class="sxs-lookup"><span data-stu-id="abf22-262">This update will fail when using EF Core 3.1 because the column cannot be dropped.</span></span> <span data-ttu-id="abf22-263">在 EF Core 5.0 中，遷移會改為重建資料表：</span><span class="sxs-lookup"><span data-stu-id="abf22-263">In EF Core 5.0, Migrations will instead rebuild the table:</span></span>
 
 ```sql
 CREATE TABLE "ef_temp_Unicorns" (
@@ -828,22 +838,22 @@ ALTER TABLE "ef_temp_Unicorns" RENAME TO "Unicorns";
 PRAGMA foreign_keys = 1;
 ```
 
-<span data-ttu-id="baa37-264">請注意：</span><span class="sxs-lookup"><span data-stu-id="baa37-264">Notice that:</span></span>
-* <span data-ttu-id="baa37-265">使用新資料表所需的架構來建立臨時表</span><span class="sxs-lookup"><span data-stu-id="baa37-265">A temporary table is created with the desired schema for the new table</span></span>
-* <span data-ttu-id="baa37-266">將資料從目前資料表複製到臨時表</span><span class="sxs-lookup"><span data-stu-id="baa37-266">Data is copied from the current table into the temporary table</span></span>
-* <span data-ttu-id="baa37-267">外鍵強制切換關閉</span><span class="sxs-lookup"><span data-stu-id="baa37-267">Foreign key enforcement is switched off</span></span>
-* <span data-ttu-id="baa37-268">刪除目前的資料表</span><span class="sxs-lookup"><span data-stu-id="baa37-268">The current table is dropped</span></span>
-* <span data-ttu-id="baa37-269">臨時表重新命名為新的資料表</span><span class="sxs-lookup"><span data-stu-id="baa37-269">The temporary table is renamed to be the new table</span></span>
+<span data-ttu-id="abf22-264">請注意：</span><span class="sxs-lookup"><span data-stu-id="abf22-264">Notice that:</span></span>
+* <span data-ttu-id="abf22-265">使用新資料表所需的架構來建立臨時表</span><span class="sxs-lookup"><span data-stu-id="abf22-265">A temporary table is created with the desired schema for the new table</span></span>
+* <span data-ttu-id="abf22-266">將資料從目前資料表複製到臨時表</span><span class="sxs-lookup"><span data-stu-id="abf22-266">Data is copied from the current table into the temporary table</span></span>
+* <span data-ttu-id="abf22-267">外鍵強制切換關閉</span><span class="sxs-lookup"><span data-stu-id="abf22-267">Foreign key enforcement is switched off</span></span>
+* <span data-ttu-id="abf22-268">刪除目前的資料表</span><span class="sxs-lookup"><span data-stu-id="abf22-268">The current table is dropped</span></span>
+* <span data-ttu-id="abf22-269">臨時表重新命名為新的資料表</span><span class="sxs-lookup"><span data-stu-id="abf22-269">The temporary table is renamed to be the new table</span></span>
 
-<span data-ttu-id="baa37-270">檔是由問題 [#2583](https://github.com/dotnet/EntityFramework.Docs/issues/2583)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-270">Documentation is tracked by issue [#2583](https://github.com/dotnet/EntityFramework.Docs/issues/2583).</span></span>
+<span data-ttu-id="abf22-270">檔是由問題 [#2583](https://github.com/dotnet/EntityFramework.Docs/issues/2583)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-270">Documentation is tracked by issue [#2583](https://github.com/dotnet/EntityFramework.Docs/issues/2583).</span></span>
 
-### <a name="table-valued-functions"></a><span data-ttu-id="baa37-271">資料表值函式</span><span class="sxs-lookup"><span data-stu-id="baa37-271">Table-valued functions</span></span>
+### <a name="table-valued-functions"></a><span data-ttu-id="abf22-271">資料表值函式</span><span class="sxs-lookup"><span data-stu-id="abf22-271">Table-valued functions</span></span>
 
-<span data-ttu-id="baa37-272">這項功能是由「社區」所貢獻 [@pmiddleton](https://github.com/pmiddleton) 。</span><span class="sxs-lookup"><span data-stu-id="baa37-272">This feature was contributed from the community by [@pmiddleton](https://github.com/pmiddleton).</span></span> <span data-ttu-id="baa37-273">許多人都感謝您的貢獻！</span><span class="sxs-lookup"><span data-stu-id="baa37-273">Many thanks for the contribution!</span></span>
+<span data-ttu-id="abf22-272">這項功能是由「社區」所貢獻 [@pmiddleton](https://github.com/pmiddleton) 。</span><span class="sxs-lookup"><span data-stu-id="abf22-272">This feature was contributed from the community by [@pmiddleton](https://github.com/pmiddleton).</span></span> <span data-ttu-id="abf22-273">許多人都感謝您的貢獻！</span><span class="sxs-lookup"><span data-stu-id="abf22-273">Many thanks for the contribution!</span></span>
 
-<span data-ttu-id="baa37-274">EF Core 5.0 包含將 .NET 方法對應至資料表值函式 (Tvf) 的第一級支援。</span><span class="sxs-lookup"><span data-stu-id="baa37-274">EF Core 5.0 includes first-class support for mapping .NET methods to table-valued functions (TVFs).</span></span> <span data-ttu-id="baa37-275">然後，這些函式可以在 LINQ 查詢中使用，而函式結果的其他組合也會轉譯為 SQL。</span><span class="sxs-lookup"><span data-stu-id="baa37-275">These functions can then be used in LINQ queries where additional composition on the results of the function will also be translated to SQL.</span></span>
+<span data-ttu-id="abf22-274">EF Core 5.0 包含將 .NET 方法對應至資料表值函式 (Tvf) 的第一級支援。</span><span class="sxs-lookup"><span data-stu-id="abf22-274">EF Core 5.0 includes first-class support for mapping .NET methods to table-valued functions (TVFs).</span></span> <span data-ttu-id="abf22-275">然後，這些函式可以在 LINQ 查詢中使用，而函式結果的其他組合也會轉譯為 SQL。</span><span class="sxs-lookup"><span data-stu-id="abf22-275">These functions can then be used in LINQ queries where additional composition on the results of the function will also be translated to SQL.</span></span>
 
-<span data-ttu-id="baa37-276">例如，請考慮在 SQL Server 資料庫中定義的 TVF：</span><span class="sxs-lookup"><span data-stu-id="baa37-276">For example, consider this TVF defined in a SQL Server database:</span></span>
+<span data-ttu-id="abf22-276">例如，請考慮在 SQL Server 資料庫中定義的 TVF：</span><span class="sxs-lookup"><span data-stu-id="abf22-276">For example, consider this TVF defined in a SQL Server database:</span></span>
 
 ```sql
 CREATE FUNCTION GetReports(@employeeId int)
@@ -873,11 +883,11 @@ BEGIN
 END
 ```
 
-<span data-ttu-id="baa37-277">EF Core 模型需要兩個實體類型才能使用此 TVF：</span><span class="sxs-lookup"><span data-stu-id="baa37-277">The EF Core model requires two entity types to use this TVF:</span></span>
-* <span data-ttu-id="baa37-278">以 `Employee` 正常方式對應至 Employees 資料表的類型</span><span class="sxs-lookup"><span data-stu-id="baa37-278">An `Employee` type that maps to the Employees table in the normal way</span></span>
-* <span data-ttu-id="baa37-279">`Report`符合 TVF 所傳回之圖形的類型</span><span class="sxs-lookup"><span data-stu-id="baa37-279">A `Report` type that matches the shape returned by the TVF</span></span>
+<span data-ttu-id="abf22-277">EF Core 模型需要兩個實體類型才能使用此 TVF：</span><span class="sxs-lookup"><span data-stu-id="abf22-277">The EF Core model requires two entity types to use this TVF:</span></span>
+* <span data-ttu-id="abf22-278">以 `Employee` 正常方式對應至 Employees 資料表的類型</span><span class="sxs-lookup"><span data-stu-id="abf22-278">An `Employee` type that maps to the Employees table in the normal way</span></span>
+* <span data-ttu-id="abf22-279">`Report`符合 TVF 所傳回之圖形的類型</span><span class="sxs-lookup"><span data-stu-id="abf22-279">A `Report` type that matches the shape returned by the TVF</span></span>
 
-```c#
+```csharp
 public class Employee
 {
     public int Id { get; set; }
@@ -889,7 +899,7 @@ public class Employee
 }
 ```
 
-```c#
+```csharp
 public class Report
 {
     public string Name { get; set; }
@@ -897,33 +907,33 @@ public class Report
 }
 ```
 
-<span data-ttu-id="baa37-280">這些類型必須包含在 EF Core 模型中：</span><span class="sxs-lookup"><span data-stu-id="baa37-280">These types must be included in the EF Core model:</span></span>
+<span data-ttu-id="abf22-280">這些類型必須包含在 EF Core 模型中：</span><span class="sxs-lookup"><span data-stu-id="abf22-280">These types must be included in the EF Core model:</span></span>
 
-```c#
+```csharp
 modelBuilder.Entity<Employee>();
 modelBuilder.Entity(typeof(Report)).HasNoKey();
 ```
 
-<span data-ttu-id="baa37-281">請注意，沒有 `Report` 主鍵，因此必須設定為。</span><span class="sxs-lookup"><span data-stu-id="baa37-281">Notice that `Report` has no primary key and so must be configured as such.</span></span>
+<span data-ttu-id="abf22-281">請注意，沒有 `Report` 主鍵，因此必須設定為。</span><span class="sxs-lookup"><span data-stu-id="abf22-281">Notice that `Report` has no primary key and so must be configured as such.</span></span>
 
-<span data-ttu-id="baa37-282">最後，.NET 方法必須對應到資料庫中的 TVF。</span><span class="sxs-lookup"><span data-stu-id="baa37-282">Finally, a .NET method must be mapped to the TVF in the database.</span></span> <span data-ttu-id="baa37-283">您可以使用新的方法，在 DbCoNtext 上定義這個方法 `FromExpression` ：</span><span class="sxs-lookup"><span data-stu-id="baa37-283">This method can be defined on the DbContext using the new `FromExpression` method:</span></span>
+<span data-ttu-id="abf22-282">最後，.NET 方法必須對應到資料庫中的 TVF。</span><span class="sxs-lookup"><span data-stu-id="abf22-282">Finally, a .NET method must be mapped to the TVF in the database.</span></span> <span data-ttu-id="abf22-283">您可以使用新的方法，在 DbCoNtext 上定義這個方法 `FromExpression` ：</span><span class="sxs-lookup"><span data-stu-id="abf22-283">This method can be defined on the DbContext using the new `FromExpression` method:</span></span>
 
-```c#
+```csharp
 public IQueryable<Report> GetReports(int managerId)
     => FromExpression(() => GetReports(managerId));
 ```
 
-<span data-ttu-id="baa37-284">這個方法會使用符合上述定義之 TVF 的參數和傳回型別。</span><span class="sxs-lookup"><span data-stu-id="baa37-284">This method uses a parameter and return type that match the TVF defined above.</span></span> <span data-ttu-id="baa37-285">然後，方法會新增至 OnModelCreating 中的 EF Core 模型：</span><span class="sxs-lookup"><span data-stu-id="baa37-285">The method is then added to the EF Core model in OnModelCreating:</span></span>
+<span data-ttu-id="abf22-284">這個方法會使用符合上述定義之 TVF 的參數和傳回型別。</span><span class="sxs-lookup"><span data-stu-id="abf22-284">This method uses a parameter and return type that match the TVF defined above.</span></span> <span data-ttu-id="abf22-285">然後，方法會新增至 OnModelCreating 中的 EF Core 模型：</span><span class="sxs-lookup"><span data-stu-id="abf22-285">The method is then added to the EF Core model in OnModelCreating:</span></span>
 
-```c#
+```csharp
 modelBuilder.HasDbFunction(() => GetReports(default));
 ```
 
-<span data-ttu-id="baa37-286">使用 lambda 的 (是將傳送至 EF Core 的簡單方法 `MethodInfo` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-286">(Using a lambda here is an easy way to pass the `MethodInfo` to EF Core.</span></span> <span data-ttu-id="baa37-287">傳遞給方法的引數會被忽略。 ) </span><span class="sxs-lookup"><span data-stu-id="baa37-287">The arguments passed to the method are ignored.)</span></span>
+<span data-ttu-id="abf22-286">使用 lambda 的 (是將傳送至 EF Core 的簡單方法 `MethodInfo` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-286">(Using a lambda here is an easy way to pass the `MethodInfo` to EF Core.</span></span> <span data-ttu-id="abf22-287">傳遞給方法的引數會被忽略。 ) </span><span class="sxs-lookup"><span data-stu-id="abf22-287">The arguments passed to the method are ignored.)</span></span>
 
-<span data-ttu-id="baa37-288">我們現在可以撰寫 `GetReports` 在結果上呼叫和撰寫的查詢。</span><span class="sxs-lookup"><span data-stu-id="baa37-288">We can now write queries that call `GetReports` and compose over the results.</span></span> <span data-ttu-id="baa37-289">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-289">For example:</span></span>
+<span data-ttu-id="abf22-288">我們現在可以撰寫 `GetReports` 在結果上呼叫和撰寫的查詢。</span><span class="sxs-lookup"><span data-stu-id="abf22-288">We can now write queries that call `GetReports` and compose over the results.</span></span> <span data-ttu-id="abf22-289">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-289">For example:</span></span>
 
-```c#
+```csharp
 from e in context.Employees
 from rc in context.GetReports(e.Id)
 where rc.IsDeveloper == true
@@ -934,7 +944,7 @@ select new
 })
 ```
 
-<span data-ttu-id="baa37-290">在 SQL Server 上，這會轉譯為：</span><span class="sxs-lookup"><span data-stu-id="baa37-290">On SQL Server, this translates to:</span></span>
+<span data-ttu-id="abf22-290">在 SQL Server 上，這會轉譯為：</span><span class="sxs-lookup"><span data-stu-id="abf22-290">On SQL Server, this translates to:</span></span>
 
 ```sql
 SELECT [e].[Name] AS [ManagerName], [g].[Name] AS [EmployeeName]
@@ -943,15 +953,15 @@ CROSS APPLY [dbo].[GetReports]([e].[Id]) AS [g]
 WHERE [g].[IsDeveloper] = CAST(1 AS bit)
 ```
 
-<span data-ttu-id="baa37-291">請注意，SQL 的根目錄是在 `Employees` 資料表中呼叫 `GetReports` ，然後在函式的結果上加入額外的 WHERE 子句。</span><span class="sxs-lookup"><span data-stu-id="baa37-291">Notice that the SQL is rooted in the `Employees` table, calls `GetReports`, and then adds an additional WHERE clause on the results of the function.</span></span>
+<span data-ttu-id="abf22-291">請注意，SQL 的根目錄是在 `Employees` 資料表中呼叫 `GetReports` ，然後在函式的結果上加入額外的 WHERE 子句。</span><span class="sxs-lookup"><span data-stu-id="abf22-291">Notice that the SQL is rooted in the `Employees` table, calls `GetReports`, and then adds an additional WHERE clause on the results of the function.</span></span>
 
-### <a name="flexible-queryupdate-mapping"></a><span data-ttu-id="baa37-292">彈性查詢/更新對應</span><span class="sxs-lookup"><span data-stu-id="baa37-292">Flexible query/update mapping</span></span>
+### <a name="flexible-queryupdate-mapping"></a><span data-ttu-id="abf22-292">彈性查詢/更新對應</span><span class="sxs-lookup"><span data-stu-id="abf22-292">Flexible query/update mapping</span></span>
 
-<span data-ttu-id="baa37-293">EF Core 5.0 可將相同的實體類型對應至不同的資料庫物件。</span><span class="sxs-lookup"><span data-stu-id="baa37-293">EF Core 5.0 allows mapping the same entity type to different database objects.</span></span> <span data-ttu-id="baa37-294">這些物件可以是資料表、views 或函數。</span><span class="sxs-lookup"><span data-stu-id="baa37-294">These objects may be tables, views, or functions.</span></span>
+<span data-ttu-id="abf22-293">EF Core 5.0 可將相同的實體類型對應至不同的資料庫物件。</span><span class="sxs-lookup"><span data-stu-id="abf22-293">EF Core 5.0 allows mapping the same entity type to different database objects.</span></span> <span data-ttu-id="abf22-294">這些物件可以是資料表、views 或函數。</span><span class="sxs-lookup"><span data-stu-id="abf22-294">These objects may be tables, views, or functions.</span></span>
 
-<span data-ttu-id="baa37-295">例如，實體類型可以對應至資料庫和資料庫資料表：</span><span class="sxs-lookup"><span data-stu-id="baa37-295">For example, an entity type can be mapped to both a database view and a database table:</span></span>
+<span data-ttu-id="abf22-295">例如，實體類型可以對應至資料庫和資料庫資料表：</span><span class="sxs-lookup"><span data-stu-id="abf22-295">For example, an entity type can be mapped to both a database view and a database table:</span></span>
 
-```c#
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder
@@ -961,9 +971,9 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-<span data-ttu-id="baa37-296">根據預設，EF Core 會從 view 查詢並將更新傳送至資料表。</span><span class="sxs-lookup"><span data-stu-id="baa37-296">By default, EF Core will then query from the view and send updates to the table.</span></span> <span data-ttu-id="baa37-297">例如，執行下列程式碼：</span><span class="sxs-lookup"><span data-stu-id="baa37-297">For example, executing the following code:</span></span>
+<span data-ttu-id="abf22-296">根據預設，EF Core 會從 view 查詢並將更新傳送至資料表。</span><span class="sxs-lookup"><span data-stu-id="abf22-296">By default, EF Core will then query from the view and send updates to the table.</span></span> <span data-ttu-id="abf22-297">例如，執行下列程式碼：</span><span class="sxs-lookup"><span data-stu-id="abf22-297">For example, executing the following code:</span></span>
 
-```c#
+```csharp
 var blog = context.Set<Blog>().Single(e => e.Name == "One Unicorn");
 
 blog.Name = "1unicorn2";
@@ -971,7 +981,7 @@ blog.Name = "1unicorn2";
 context.SaveChanges();
 ```
 
-<span data-ttu-id="baa37-298">針對視圖產生查詢，然後對資料表進行更新：</span><span class="sxs-lookup"><span data-stu-id="baa37-298">Results in a query against the view, and then an update to the table:</span></span>
+<span data-ttu-id="abf22-298">針對視圖產生查詢，然後對資料表進行更新：</span><span class="sxs-lookup"><span data-stu-id="abf22-298">Results in a query against the view, and then an update to the table:</span></span>
 
 ```sql
 SELECT TOP(2) [b].[Id], [b].[Name], [b].[Url]
@@ -984,11 +994,11 @@ WHERE [Id] = @p1;
 SELECT @@ROWCOUNT;
 ```
 
-### <a name="context-wide-split-query-configuration"></a><span data-ttu-id="baa37-299">整個環境的分割查詢設定</span><span class="sxs-lookup"><span data-stu-id="baa37-299">Context-wide split-query configuration</span></span>
+### <a name="context-wide-split-query-configuration"></a><span data-ttu-id="abf22-299">整個環境的分割查詢設定</span><span class="sxs-lookup"><span data-stu-id="abf22-299">Context-wide split-query configuration</span></span>
 
-<span data-ttu-id="baa37-300">分割查詢 (看到下面) 現在可以設定為 DbCoNtext 所執行之任何查詢的預設值。</span><span class="sxs-lookup"><span data-stu-id="baa37-300">Split queries (see below) can now be configured as the default for any query executed by the DbContext.</span></span> <span data-ttu-id="baa37-301">這項設定僅適用于關聯式提供者，因此必須指定為設定的一部分 `UseProvider` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-301">This configuration is only available for relational providers, and so must be specified as part of the `UseProvider` configuration.</span></span> <span data-ttu-id="baa37-302">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-302">For example:</span></span>
+<span data-ttu-id="abf22-300">分割查詢 (看到下面) 現在可以設定為 DbCoNtext 所執行之任何查詢的預設值。</span><span class="sxs-lookup"><span data-stu-id="abf22-300">Split queries (see below) can now be configured as the default for any query executed by the DbContext.</span></span> <span data-ttu-id="abf22-301">這項設定僅適用于關聯式提供者，因此必須指定為設定的一部分 `UseProvider` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-301">This configuration is only available for relational providers, and so must be specified as part of the `UseProvider` configuration.</span></span> <span data-ttu-id="abf22-302">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-302">For example:</span></span>
 
-```c#
+```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder
         .UseSqlServer(
@@ -996,26 +1006,26 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             b => b.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
 ```
 
-<span data-ttu-id="baa37-303">檔是由問題 [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-303">Documentation is tracked by issue [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407).</span></span>
+<span data-ttu-id="abf22-303">檔是由問題 [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-303">Documentation is tracked by issue [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407).</span></span>
 
-### <a name="physicaladdress-mapping"></a><span data-ttu-id="baa37-304">PhysicalAddress 對應</span><span class="sxs-lookup"><span data-stu-id="baa37-304">PhysicalAddress mapping</span></span>
+### <a name="physicaladdress-mapping"></a><span data-ttu-id="abf22-304">PhysicalAddress 對應</span><span class="sxs-lookup"><span data-stu-id="abf22-304">PhysicalAddress mapping</span></span>
 
-<span data-ttu-id="baa37-305">這項功能是由「社區」所貢獻 [@ralmsdeveloper](https://github.com/ralmsdeveloper) 。</span><span class="sxs-lookup"><span data-stu-id="baa37-305">This feature was contributed from the community by [@ralmsdeveloper](https://github.com/ralmsdeveloper).</span></span> <span data-ttu-id="baa37-306">許多人都感謝您的貢獻！</span><span class="sxs-lookup"><span data-stu-id="baa37-306">Many thanks for the contribution!</span></span>
+<span data-ttu-id="abf22-305">這項功能是由「社區」所貢獻 [@ralmsdeveloper](https://github.com/ralmsdeveloper) 。</span><span class="sxs-lookup"><span data-stu-id="abf22-305">This feature was contributed from the community by [@ralmsdeveloper](https://github.com/ralmsdeveloper).</span></span> <span data-ttu-id="abf22-306">許多人都感謝您的貢獻！</span><span class="sxs-lookup"><span data-stu-id="abf22-306">Many thanks for the contribution!</span></span>
 
-<span data-ttu-id="baa37-307">標準的 .NET [PhysicalAddress 類別](/dotnet/api/system.net.networkinformation.physicaladdress) 現在會自動對應到尚未具有原生支援之資料庫的字串資料行。</span><span class="sxs-lookup"><span data-stu-id="baa37-307">The standard .NET [PhysicalAddress class](/dotnet/api/system.net.networkinformation.physicaladdress) is now automatically mapped to a string column for databases that do not already have native support.</span></span> <span data-ttu-id="baa37-308">如需詳細資訊，請參閱下面的範例 `IPAddress` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-308">For more information, see the examples for `IPAddress` below.</span></span>
+<span data-ttu-id="abf22-307">標準的 .NET [PhysicalAddress 類別](/dotnet/api/system.net.networkinformation.physicaladdress) 現在會自動對應到尚未具有原生支援之資料庫的字串資料行。</span><span class="sxs-lookup"><span data-stu-id="abf22-307">The standard .NET [PhysicalAddress class](/dotnet/api/system.net.networkinformation.physicaladdress) is now automatically mapped to a string column for databases that do not already have native support.</span></span> <span data-ttu-id="abf22-308">如需詳細資訊，請參閱下面的範例 `IPAddress` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-308">For more information, see the examples for `IPAddress` below.</span></span>
 
-## <a name="preview-7"></a><span data-ttu-id="baa37-309">Preview 7</span><span class="sxs-lookup"><span data-stu-id="baa37-309">Preview 7</span></span>
+## <a name="preview-7"></a><span data-ttu-id="abf22-309">Preview 7</span><span class="sxs-lookup"><span data-stu-id="abf22-309">Preview 7</span></span>
 
-### <a name="dbcontextfactory"></a><span data-ttu-id="baa37-310">DbCoNtextFactory</span><span class="sxs-lookup"><span data-stu-id="baa37-310">DbContextFactory</span></span>
+### <a name="dbcontextfactory"></a><span data-ttu-id="abf22-310">DbCoNtextFactory</span><span class="sxs-lookup"><span data-stu-id="abf22-310">DbContextFactory</span></span>
 
-<span data-ttu-id="baa37-311">EF Core 5.0 引進 `AddDbContextFactory` 並 `AddPooledDbContextFactory` 註冊 factory，以在應用程式的相依性插入 (D.I. ) 容器中建立 DbCoNtext 實例。</span><span class="sxs-lookup"><span data-stu-id="baa37-311">EF Core 5.0 introduces `AddDbContextFactory` and `AddPooledDbContextFactory` to register a factory for creating DbContext instances in the application's dependency injection (D.I.) container.</span></span> <span data-ttu-id="baa37-312">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-312">For example:</span></span>
+<span data-ttu-id="abf22-311">EF Core 5.0 引進 `AddDbContextFactory` 並 `AddPooledDbContextFactory` 註冊 factory，以在應用程式的相依性插入 (D.I. ) 容器中建立 DbCoNtext 實例。</span><span class="sxs-lookup"><span data-stu-id="abf22-311">EF Core 5.0 introduces `AddDbContextFactory` and `AddPooledDbContextFactory` to register a factory for creating DbContext instances in the application's dependency injection (D.I.) container.</span></span> <span data-ttu-id="abf22-312">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-312">For example:</span></span>
 
 ```csharp
 services.AddDbContextFactory<SomeDbContext>(b =>
     b.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Test"));
 ```
 
-<span data-ttu-id="baa37-313">然後，應用程式服務（例如 ASP.NET Core 控制器）可相依于 `IDbContextFactory<TContext>` 服務的函式中。</span><span class="sxs-lookup"><span data-stu-id="baa37-313">Application services such as ASP.NET Core controllers can then depend on `IDbContextFactory<TContext>` in the service constructor.</span></span> <span data-ttu-id="baa37-314">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-314">For example:</span></span>
+<span data-ttu-id="abf22-313">然後，應用程式服務（例如 ASP.NET Core 控制器）可相依于 `IDbContextFactory<TContext>` 服務的函式中。</span><span class="sxs-lookup"><span data-stu-id="abf22-313">Application services such as ASP.NET Core controllers can then depend on `IDbContextFactory<TContext>` in the service constructor.</span></span> <span data-ttu-id="abf22-314">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-314">For example:</span></span>
 
 ```csharp
 public class MyController
@@ -1029,7 +1039,7 @@ public class MyController
 }
 ```
 
-<span data-ttu-id="baa37-315">然後，您可以視需要建立和使用 DbCoNtext 實例。</span><span class="sxs-lookup"><span data-stu-id="baa37-315">DbContext instances can then be created and used as needed.</span></span> <span data-ttu-id="baa37-316">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-316">For example:</span></span>
+<span data-ttu-id="abf22-315">然後，您可以視需要建立和使用 DbCoNtext 實例。</span><span class="sxs-lookup"><span data-stu-id="abf22-315">DbContext instances can then be created and used as needed.</span></span> <span data-ttu-id="abf22-316">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-316">For example:</span></span>
 
 ```csharp
 public void DoSomeThing()
@@ -1041,23 +1051,23 @@ public void DoSomeThing()
 }
 ```
 
-<span data-ttu-id="baa37-317">請注意，以這種方式建立的 DbCoNtext 實例 _不_ 會由應用程式的服務提供者來管理，因此必須由應用程式處置。</span><span class="sxs-lookup"><span data-stu-id="baa37-317">Note that the DbContext instances created in this way are _not_ managed by the application's service provider and therefore must be disposed by the application.</span></span> <span data-ttu-id="baa37-318">這種分離功能對於 Blazor 應用程式非常有用， `IDbContextFactory` 但建議使用，但在其他情況下也可能很有用。</span><span class="sxs-lookup"><span data-stu-id="baa37-318">This decoupling is very useful for Blazor applications, where using `IDbContextFactory` is recommended, but may also be useful in other scenarios.</span></span>
+<span data-ttu-id="abf22-317">請注意，以這種方式建立的 DbCoNtext 實例 _不_ 會由應用程式的服務提供者來管理，因此必須由應用程式處置。</span><span class="sxs-lookup"><span data-stu-id="abf22-317">Note that the DbContext instances created in this way are _not_ managed by the application's service provider and therefore must be disposed by the application.</span></span> <span data-ttu-id="abf22-318">這種分離功能對於 Blazor 應用程式非常有用， `IDbContextFactory` 但建議使用，但在其他情況下也可能很有用。</span><span class="sxs-lookup"><span data-stu-id="abf22-318">This decoupling is very useful for Blazor applications, where using `IDbContextFactory` is recommended, but may also be useful in other scenarios.</span></span>
 
-<span data-ttu-id="baa37-319">您可以藉由呼叫來將 DbCoNtext 實例集區 `AddPooledDbContextFactory` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-319">DbContext instances can be pooled by calling `AddPooledDbContextFactory`.</span></span> <span data-ttu-id="baa37-320">此共用的運作方式與相同 `AddDbContextPool` ，而且也具有相同的限制。</span><span class="sxs-lookup"><span data-stu-id="baa37-320">This pooling works the same way as for `AddDbContextPool`, and also has the same limitations.</span></span>
+<span data-ttu-id="abf22-319">您可以藉由呼叫來將 DbCoNtext 實例集區 `AddPooledDbContextFactory` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-319">DbContext instances can be pooled by calling `AddPooledDbContextFactory`.</span></span> <span data-ttu-id="abf22-320">此共用的運作方式與相同 `AddDbContextPool` ，而且也具有相同的限制。</span><span class="sxs-lookup"><span data-stu-id="abf22-320">This pooling works the same way as for `AddDbContextPool`, and also has the same limitations.</span></span>
 
-<span data-ttu-id="baa37-321">檔是由問題 [#2523](https://github.com/dotnet/EntityFramework.Docs/issues/2523)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-321">Documentation is tracked by issue [#2523](https://github.com/dotnet/EntityFramework.Docs/issues/2523).</span></span>
+<span data-ttu-id="abf22-321">檔是由問題 [#2523](https://github.com/dotnet/EntityFramework.Docs/issues/2523)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-321">Documentation is tracked by issue [#2523](https://github.com/dotnet/EntityFramework.Docs/issues/2523).</span></span>
 
-### <a name="reset-dbcontext-state"></a><span data-ttu-id="baa37-322">重設 DbCoNtext 狀態</span><span class="sxs-lookup"><span data-stu-id="baa37-322">Reset DbContext state</span></span>
+### <a name="reset-dbcontext-state"></a><span data-ttu-id="abf22-322">重設 DbCoNtext 狀態</span><span class="sxs-lookup"><span data-stu-id="abf22-322">Reset DbContext state</span></span>
 
-<span data-ttu-id="baa37-323">EF Core 5.0 引進了哪些專案會 `ChangeTracker.Clear()` 清除所有已追蹤實體的 DbCoNtext。</span><span class="sxs-lookup"><span data-stu-id="baa37-323">EF Core 5.0 introduces `ChangeTracker.Clear()` which clears the DbContext of all tracked entities.</span></span> <span data-ttu-id="baa37-324">針對每個工作單位，使用建立新的短期內容實例的最佳作法時，通常不需要這麼做。</span><span class="sxs-lookup"><span data-stu-id="baa37-324">This should usually not be needed when using the best practice of creating a new, short-lived context instance for each unit-of-work.</span></span> <span data-ttu-id="baa37-325">但是，如果需要重設 DbCoNtext 實例的狀態，則使用新的 `Clear()` 方法會比大量卸離所有實體更具效能和強大。</span><span class="sxs-lookup"><span data-stu-id="baa37-325">However, if there is a need to reset the state of a DbContext instance, then using the new `Clear()` method is more performant and robust than mass-detaching all entities.</span></span>
+<span data-ttu-id="abf22-323">EF Core 5.0 引進了哪些專案會 `ChangeTracker.Clear()` 清除所有已追蹤實體的 DbCoNtext。</span><span class="sxs-lookup"><span data-stu-id="abf22-323">EF Core 5.0 introduces `ChangeTracker.Clear()` which clears the DbContext of all tracked entities.</span></span> <span data-ttu-id="abf22-324">針對每個工作單位，使用建立新的短期內容實例的最佳作法時，通常不需要這麼做。</span><span class="sxs-lookup"><span data-stu-id="abf22-324">This should usually not be needed when using the best practice of creating a new, short-lived context instance for each unit-of-work.</span></span> <span data-ttu-id="abf22-325">但是，如果需要重設 DbCoNtext 實例的狀態，則使用新的 `Clear()` 方法會比大量卸離所有實體更具效能和強大。</span><span class="sxs-lookup"><span data-stu-id="abf22-325">However, if there is a need to reset the state of a DbContext instance, then using the new `Clear()` method is more performant and robust than mass-detaching all entities.</span></span>
 
-<span data-ttu-id="baa37-326">檔是由問題 [#2524](https://github.com/dotnet/EntityFramework.Docs/issues/2524)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-326">Documentation is tracked by issue [#2524](https://github.com/dotnet/EntityFramework.Docs/issues/2524).</span></span>
+<span data-ttu-id="abf22-326">檔是由問題 [#2524](https://github.com/dotnet/EntityFramework.Docs/issues/2524)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-326">Documentation is tracked by issue [#2524](https://github.com/dotnet/EntityFramework.Docs/issues/2524).</span></span>
 
-### <a name="new-pattern-for-store-generated-defaults"></a><span data-ttu-id="baa37-327">存放區產生之預設值的新模式</span><span class="sxs-lookup"><span data-stu-id="baa37-327">New pattern for store-generated defaults</span></span>
+### <a name="new-pattern-for-store-generated-defaults"></a><span data-ttu-id="abf22-327">存放區產生之預設值的新模式</span><span class="sxs-lookup"><span data-stu-id="abf22-327">New pattern for store-generated defaults</span></span>
 
-<span data-ttu-id="baa37-328">EF Core 允許針對可能也有預設值條件約束的資料行設定明確值。</span><span class="sxs-lookup"><span data-stu-id="baa37-328">EF Core allows an explicit value to be set for a column that may also have default value constraint.</span></span> <span data-ttu-id="baa37-329">EF Core 使用類型屬性類型的 CLR 預設值做為這個的 sentinel;如果值不是 CLR 預設值，則會將其插入，否則會使用資料庫預設值。</span><span class="sxs-lookup"><span data-stu-id="baa37-329">EF Core uses the CLR default of type property type as a sentinel for this; if the value is not the CLR default, then it is inserted, otherwise the database default is used.</span></span>
+<span data-ttu-id="abf22-328">EF Core 允許針對可能也有預設值條件約束的資料行設定明確值。</span><span class="sxs-lookup"><span data-stu-id="abf22-328">EF Core allows an explicit value to be set for a column that may also have default value constraint.</span></span> <span data-ttu-id="abf22-329">EF Core 使用類型屬性類型的 CLR 預設值做為這個的 sentinel;如果值不是 CLR 預設值，則會將其插入，否則會使用資料庫預設值。</span><span class="sxs-lookup"><span data-stu-id="abf22-329">EF Core uses the CLR default of type property type as a sentinel for this; if the value is not the CLR default, then it is inserted, otherwise the database default is used.</span></span>
 
-<span data-ttu-id="baa37-330">這會為 CLR 預設不是良好 sentinel 的型別（最值得注意的是屬性）建立問題 `bool` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-330">This creates problems for types where the CLR default is not a good sentinel--most notably, `bool` properties.</span></span> <span data-ttu-id="baa37-331">EF Core 5.0 現在可讓支援欄位可針對像這樣的案例提供可為 null。</span><span class="sxs-lookup"><span data-stu-id="baa37-331">EF Core 5.0 now allows the backing field to be nullable for cases like this.</span></span> <span data-ttu-id="baa37-332">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-332">For example:</span></span>
+<span data-ttu-id="abf22-330">這會為 CLR 預設不是良好 sentinel 的型別（最值得注意的是屬性）建立問題 `bool` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-330">This creates problems for types where the CLR default is not a good sentinel--most notably, `bool` properties.</span></span> <span data-ttu-id="abf22-331">EF Core 5.0 現在可讓支援欄位可針對像這樣的案例提供可為 null。</span><span class="sxs-lookup"><span data-stu-id="abf22-331">EF Core 5.0 now allows the backing field to be nullable for cases like this.</span></span> <span data-ttu-id="abf22-332">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-332">For example:</span></span>
 
 ```csharp
 public class Blog
@@ -1072,27 +1082,27 @@ public class Blog
 }
 ```
 
-<span data-ttu-id="baa37-333">請注意，支援欄位可為 null，但公開的屬性則不是。</span><span class="sxs-lookup"><span data-stu-id="baa37-333">Note that the backing field is nullable, but the publicly exposed property is not.</span></span> <span data-ttu-id="baa37-334">這可讓 sentinel 值不會 `null` 影響實體類型的公用介面。</span><span class="sxs-lookup"><span data-stu-id="baa37-334">This allows the sentinel value to be `null` without impacting the public surface of the entity type.</span></span> <span data-ttu-id="baa37-335">在此情況下，如果 `IsValid` 從未設定，則會使用資料庫預設值，因為支援欄位會維持 null。</span><span class="sxs-lookup"><span data-stu-id="baa37-335">In this case, if the `IsValid` is never set, then the database default will be used since the backing field remains null.</span></span> <span data-ttu-id="baa37-336">如果 `true` `false` 設定了或，則此值會明確地儲存至資料庫。</span><span class="sxs-lookup"><span data-stu-id="baa37-336">If either `true` or `false` are set, then this value is saved explicitly to the database.</span></span>
+<span data-ttu-id="abf22-333">請注意，支援欄位可為 null，但公開的屬性則不是。</span><span class="sxs-lookup"><span data-stu-id="abf22-333">Note that the backing field is nullable, but the publicly exposed property is not.</span></span> <span data-ttu-id="abf22-334">這可讓 sentinel 值不會 `null` 影響實體類型的公用介面。</span><span class="sxs-lookup"><span data-stu-id="abf22-334">This allows the sentinel value to be `null` without impacting the public surface of the entity type.</span></span> <span data-ttu-id="abf22-335">在此情況下，如果 `IsValid` 從未設定，則會使用資料庫預設值，因為支援欄位會維持 null。</span><span class="sxs-lookup"><span data-stu-id="abf22-335">In this case, if the `IsValid` is never set, then the database default will be used since the backing field remains null.</span></span> <span data-ttu-id="abf22-336">如果 `true` `false` 設定了或，則此值會明確地儲存至資料庫。</span><span class="sxs-lookup"><span data-stu-id="abf22-336">If either `true` or `false` are set, then this value is saved explicitly to the database.</span></span>
 
-<span data-ttu-id="baa37-337">檔是由問題 [#2525](https://github.com/dotnet/EntityFramework.Docs/issues/2525)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-337">Documentation is tracked by issue [#2525](https://github.com/dotnet/EntityFramework.Docs/issues/2525).</span></span>
+<span data-ttu-id="abf22-337">檔是由問題 [#2525](https://github.com/dotnet/EntityFramework.Docs/issues/2525)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-337">Documentation is tracked by issue [#2525](https://github.com/dotnet/EntityFramework.Docs/issues/2525).</span></span>
 
-### <a name="cosmos-partition-keys"></a><span data-ttu-id="baa37-338">Cosmos 分割區索引鍵</span><span class="sxs-lookup"><span data-stu-id="baa37-338">Cosmos partition keys</span></span>
+### <a name="cosmos-partition-keys"></a><span data-ttu-id="abf22-338">Cosmos 分割區索引鍵</span><span class="sxs-lookup"><span data-stu-id="abf22-338">Cosmos partition keys</span></span>
 
-<span data-ttu-id="baa37-339">EF Core 允許 EF 模型中包含 Cosmos 分割區索引鍵。</span><span class="sxs-lookup"><span data-stu-id="baa37-339">EF Core allows the Cosmos partition key is included in the EF model.</span></span> <span data-ttu-id="baa37-340">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-340">For example:</span></span>
+<span data-ttu-id="abf22-339">EF Core 允許 EF 模型中包含 Cosmos 分割區索引鍵。</span><span class="sxs-lookup"><span data-stu-id="abf22-339">EF Core allows the Cosmos partition key is included in the EF model.</span></span> <span data-ttu-id="abf22-340">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-340">For example:</span></span>
 
 ```csharp
 modelBuilder.Entity<Customer>().HasPartitionKey(b => b.AlternateKey)
 ```
 
-<span data-ttu-id="baa37-341">從 preview 7 開始，資料分割索引鍵會包含在實體類型的 PK 中，用來改善某些查詢的效能。</span><span class="sxs-lookup"><span data-stu-id="baa37-341">Starting with preview 7, the partition key is included in the entity type's PK and is used to improved performance in some queries.</span></span>
+<span data-ttu-id="abf22-341">從 preview 7 開始，資料分割索引鍵會包含在實體類型的 PK 中，用來改善某些查詢的效能。</span><span class="sxs-lookup"><span data-stu-id="abf22-341">Starting with preview 7, the partition key is included in the entity type's PK and is used to improved performance in some queries.</span></span>
 
-<span data-ttu-id="baa37-342">檔是由問題 [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-342">Documentation is tracked by issue [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471).</span></span>
+<span data-ttu-id="abf22-342">檔是由問題 [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-342">Documentation is tracked by issue [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471).</span></span>
 
-### <a name="cosmos-configuration"></a><span data-ttu-id="baa37-343">Cosmos 設定</span><span class="sxs-lookup"><span data-stu-id="baa37-343">Cosmos configuration</span></span>
+### <a name="cosmos-configuration"></a><span data-ttu-id="abf22-343">Cosmos 設定</span><span class="sxs-lookup"><span data-stu-id="abf22-343">Cosmos configuration</span></span>
 
-<span data-ttu-id="baa37-344">EF Core 5.0 可改善 Cosmos 和 Cosmos 連接的設定。</span><span class="sxs-lookup"><span data-stu-id="baa37-344">EF Core 5.0 improves configuration of Cosmos and Cosmos connections.</span></span>
+<span data-ttu-id="abf22-344">EF Core 5.0 可改善 Cosmos 和 Cosmos 連接的設定。</span><span class="sxs-lookup"><span data-stu-id="abf22-344">EF Core 5.0 improves configuration of Cosmos and Cosmos connections.</span></span>
 
-<span data-ttu-id="baa37-345">先前，EF Core 需要在連接至 Cosmos 資料庫時明確指定端點和金鑰。</span><span class="sxs-lookup"><span data-stu-id="baa37-345">Previously, EF Core required the end-point and key to be specified explicitly when connecting to a Cosmos database.</span></span> <span data-ttu-id="baa37-346">EF Core 5.0 允許改用連接字串。</span><span class="sxs-lookup"><span data-stu-id="baa37-346">EF Core 5.0 allows use of a connection string instead.</span></span> <span data-ttu-id="baa37-347">此外，EF Core 5.0 允許明確設定 WebProxy 實例。</span><span class="sxs-lookup"><span data-stu-id="baa37-347">In addition, EF Core 5.0 allows the WebProxy instance to be explicitly set.</span></span> <span data-ttu-id="baa37-348">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-348">For example:</span></span>
+<span data-ttu-id="abf22-345">先前，EF Core 需要在連接至 Cosmos 資料庫時明確指定端點和金鑰。</span><span class="sxs-lookup"><span data-stu-id="abf22-345">Previously, EF Core required the end-point and key to be specified explicitly when connecting to a Cosmos database.</span></span> <span data-ttu-id="abf22-346">EF Core 5.0 允許改用連接字串。</span><span class="sxs-lookup"><span data-stu-id="abf22-346">EF Core 5.0 allows use of a connection string instead.</span></span> <span data-ttu-id="abf22-347">此外，EF Core 5.0 允許明確設定 WebProxy 實例。</span><span class="sxs-lookup"><span data-stu-id="abf22-347">In addition, EF Core 5.0 allows the WebProxy instance to be explicitly set.</span></span> <span data-ttu-id="abf22-348">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-348">For example:</span></span>
 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -1104,7 +1114,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             });
 ```
 
-<span data-ttu-id="baa37-349">現在也可以設定許多其他的超時值、限制等等。</span><span class="sxs-lookup"><span data-stu-id="baa37-349">Many other timeout values, limits, etc. can now also be configured.</span></span> <span data-ttu-id="baa37-350">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-350">For example:</span></span>
+<span data-ttu-id="abf22-349">現在也可以設定許多其他的超時值、限制等等。</span><span class="sxs-lookup"><span data-stu-id="abf22-349">Many other timeout values, limits, etc. can now also be configured.</span></span> <span data-ttu-id="abf22-350">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-350">For example:</span></span>
 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -1122,49 +1132,49 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             });
 ```
 
-<span data-ttu-id="baa37-351">最後，預設的連接模式現在 `ConnectionMode.Gateway` 更相容。</span><span class="sxs-lookup"><span data-stu-id="baa37-351">Finally, the default connection mode is now `ConnectionMode.Gateway`, which is generally more compatible.</span></span>
+<span data-ttu-id="abf22-351">最後，預設的連接模式現在 `ConnectionMode.Gateway` 更相容。</span><span class="sxs-lookup"><span data-stu-id="abf22-351">Finally, the default connection mode is now `ConnectionMode.Gateway`, which is generally more compatible.</span></span>
 
-<span data-ttu-id="baa37-352">檔是由問題 [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-352">Documentation is tracked by issue [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471).</span></span>
+<span data-ttu-id="abf22-352">檔是由問題 [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-352">Documentation is tracked by issue [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471).</span></span>
 
-### <a name="scaffold-dbcontext-now-singularizes"></a><span data-ttu-id="baa37-353">Scaffold-DbCoNtext now singularizes</span><span class="sxs-lookup"><span data-stu-id="baa37-353">Scaffold-DbContext now singularizes</span></span>
+### <a name="scaffold-dbcontext-now-singularizes"></a><span data-ttu-id="abf22-353">Scaffold-DbContext 現在 singularizes</span><span class="sxs-lookup"><span data-stu-id="abf22-353">Scaffold-DbContext now singularizes</span></span>
 
-<span data-ttu-id="baa37-354">先前當從現有的資料庫 DbCoNtext 樣板時，EF Core 將會建立符合資料庫中資料表名稱的實體類型名稱。</span><span class="sxs-lookup"><span data-stu-id="baa37-354">Previously when scaffolding a DbContext from an existing database, EF Core will create entity type names that match the table names in the database.</span></span> <span data-ttu-id="baa37-355">例如，資料表 `People` 並 `Addresses` 產生名為和的實體 `People` 類型 `Addresses` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-355">For example, tables `People` and `Addresses` resulted in entity types named `People` and `Addresses`.</span></span>
+<span data-ttu-id="abf22-354">先前當從現有的資料庫 DbCoNtext 樣板時，EF Core 將會建立符合資料庫中資料表名稱的實體類型名稱。</span><span class="sxs-lookup"><span data-stu-id="abf22-354">Previously when scaffolding a DbContext from an existing database, EF Core will create entity type names that match the table names in the database.</span></span> <span data-ttu-id="abf22-355">例如，資料表 `People` 並 `Addresses` 產生名為和的實體 `People` 類型 `Addresses` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-355">For example, tables `People` and `Addresses` resulted in entity types named `People` and `Addresses`.</span></span>
 
-<span data-ttu-id="baa37-356">在先前的版本中，這項行為可透過註冊複數表示服務來設定。</span><span class="sxs-lookup"><span data-stu-id="baa37-356">In previous releases, this behavior was configurable through registration of a pluralization service.</span></span> <span data-ttu-id="baa37-357">現在在 EF Core 5.0 中，會使用 [Humanizer](https://www.nuget.org/packages/Humanizer.Core/) 套件作為預設複數表示服務。</span><span class="sxs-lookup"><span data-stu-id="baa37-357">Now in EF Core 5.0, the [Humanizer](https://www.nuget.org/packages/Humanizer.Core/) package is used as a default pluralization service.</span></span> <span data-ttu-id="baa37-358">這表示資料表 `People` 和 `Addresses` 現在會對名為和的實體類型進行反向工程 `Person` `Address` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-358">This means tables `People` and `Addresses` will now be reverse engineered to entity types named `Person` and `Address`.</span></span>
+<span data-ttu-id="abf22-356">在先前的版本中，這項行為可透過註冊複數表示服務來設定。</span><span class="sxs-lookup"><span data-stu-id="abf22-356">In previous releases, this behavior was configurable through registration of a pluralization service.</span></span> <span data-ttu-id="abf22-357">現在在 EF Core 5.0 中，會使用 [Humanizer](https://www.nuget.org/packages/Humanizer.Core/) 套件作為預設複數表示服務。</span><span class="sxs-lookup"><span data-stu-id="abf22-357">Now in EF Core 5.0, the [Humanizer](https://www.nuget.org/packages/Humanizer.Core/) package is used as a default pluralization service.</span></span> <span data-ttu-id="abf22-358">這表示資料表 `People` 和 `Addresses` 現在會對名為和的實體類型進行反向工程 `Person` `Address` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-358">This means tables `People` and `Addresses` will now be reverse engineered to entity types named `Person` and `Address`.</span></span>
 
-### <a name="savepoints"></a><span data-ttu-id="baa37-359">點</span><span class="sxs-lookup"><span data-stu-id="baa37-359">Savepoints</span></span>
+### <a name="savepoints"></a><span data-ttu-id="abf22-359">點</span><span class="sxs-lookup"><span data-stu-id="abf22-359">Savepoints</span></span>
 
-<span data-ttu-id="baa37-360">EF Core 現在支援儲存 [點](/sql/t-sql/language-elements/save-transaction-transact-sql#remarks) ，以便更充分掌控執行多個作業的交易。</span><span class="sxs-lookup"><span data-stu-id="baa37-360">EF Core now supports [savepoints](/sql/t-sql/language-elements/save-transaction-transact-sql#remarks) for greater control over transactions that execute multiple operations.</span></span>
+<span data-ttu-id="abf22-360">EF Core 現在支援儲存 [點](/sql/t-sql/language-elements/save-transaction-transact-sql#remarks) ，以便更充分掌控執行多個作業的交易。</span><span class="sxs-lookup"><span data-stu-id="abf22-360">EF Core now supports [savepoints](/sql/t-sql/language-elements/save-transaction-transact-sql#remarks) for greater control over transactions that execute multiple operations.</span></span>
 
-<span data-ttu-id="baa37-361">您可以手動建立、釋放和復原儲存點。</span><span class="sxs-lookup"><span data-stu-id="baa37-361">Savepoints can be manually created, released, and rolled back.</span></span> <span data-ttu-id="baa37-362">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-362">For example:</span></span>
+<span data-ttu-id="abf22-361">您可以手動建立、釋放和復原儲存點。</span><span class="sxs-lookup"><span data-stu-id="abf22-361">Savepoints can be manually created, released, and rolled back.</span></span> <span data-ttu-id="abf22-362">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-362">For example:</span></span>
 
 ```csharp
 context.Database.CreateSavepoint("MySavePoint");
 ```
 
-<span data-ttu-id="baa37-363">此外，EF Core 現在會在執行失敗時復原到最後一個儲存點 `SaveChanges` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-363">In addition, EF Core will now roll back to the last savepoint when executing `SaveChanges` fails.</span></span> <span data-ttu-id="baa37-364">這可讓 SaveChanges 重新嘗試，而不需要重新嘗試整個交易。</span><span class="sxs-lookup"><span data-stu-id="baa37-364">This allows SaveChanges to be re-tried without re-trying the entire transaction.</span></span>
+<span data-ttu-id="abf22-363">此外，EF Core 現在會在執行失敗時復原到最後一個儲存點 `SaveChanges` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-363">In addition, EF Core will now roll back to the last savepoint when executing `SaveChanges` fails.</span></span> <span data-ttu-id="abf22-364">這可讓 SaveChanges 重新嘗試，而不需要重新嘗試整個交易。</span><span class="sxs-lookup"><span data-stu-id="abf22-364">This allows SaveChanges to be re-tried without re-trying the entire transaction.</span></span>
 
-<span data-ttu-id="baa37-365">檔是由問題 [#2429](https://github.com/dotnet/EntityFramework.Docs/issues/2429)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-365">Documentation is tracked by issue [#2429](https://github.com/dotnet/EntityFramework.Docs/issues/2429).</span></span>
+<span data-ttu-id="abf22-365">檔是由問題 [#2429](https://github.com/dotnet/EntityFramework.Docs/issues/2429)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-365">Documentation is tracked by issue [#2429](https://github.com/dotnet/EntityFramework.Docs/issues/2429).</span></span>
 
-## <a name="preview-6"></a><span data-ttu-id="baa37-366">Preview 6</span><span class="sxs-lookup"><span data-stu-id="baa37-366">Preview 6</span></span>
+## <a name="preview-6"></a><span data-ttu-id="abf22-366">Preview 6</span><span class="sxs-lookup"><span data-stu-id="abf22-366">Preview 6</span></span>
 
-### <a name="split-queries-for-related-collections"></a><span data-ttu-id="baa37-367">分割相關集合的查詢</span><span class="sxs-lookup"><span data-stu-id="baa37-367">Split queries for related collections</span></span>
+### <a name="split-queries-for-related-collections"></a><span data-ttu-id="abf22-367">分割相關集合的查詢</span><span class="sxs-lookup"><span data-stu-id="abf22-367">Split queries for related collections</span></span>
 
-<span data-ttu-id="baa37-368">從 EF Core 3.0 開始，EF Core 一律會為每個 LINQ 查詢產生單一 SQL 查詢。</span><span class="sxs-lookup"><span data-stu-id="baa37-368">Starting with EF Core 3.0, EF Core always generates a single SQL query for each LINQ query.</span></span> <span data-ttu-id="baa37-369">這樣可確保在使用中交易模式的條件約束內所傳回的資料一致。</span><span class="sxs-lookup"><span data-stu-id="baa37-369">This ensures consistency of the data returned within the constraints of the transaction mode in use.</span></span> <span data-ttu-id="baa37-370">不過，當查詢使用 `Include` 或投射回多個相關的集合時，這可能會變得很慢。</span><span class="sxs-lookup"><span data-stu-id="baa37-370">However, this can become very slow when the query uses `Include` or a projection to bring back multiple related collections.</span></span>
+<span data-ttu-id="abf22-368">從 EF Core 3.0 開始，EF Core 一律會為每個 LINQ 查詢產生單一 SQL 查詢。</span><span class="sxs-lookup"><span data-stu-id="abf22-368">Starting with EF Core 3.0, EF Core always generates a single SQL query for each LINQ query.</span></span> <span data-ttu-id="abf22-369">這樣可確保在使用中交易模式的條件約束內所傳回的資料一致。</span><span class="sxs-lookup"><span data-stu-id="abf22-369">This ensures consistency of the data returned within the constraints of the transaction mode in use.</span></span> <span data-ttu-id="abf22-370">不過，當查詢使用 `Include` 或投射回多個相關的集合時，這可能會變得很慢。</span><span class="sxs-lookup"><span data-stu-id="abf22-370">However, this can become very slow when the query uses `Include` or a projection to bring back multiple related collections.</span></span>
 
-<span data-ttu-id="baa37-371">EF Core 5.0 現在允許單一 LINQ 查詢，包括要分割成多個 SQL 查詢的相關集合。</span><span class="sxs-lookup"><span data-stu-id="baa37-371">EF Core 5.0 now allows a single LINQ query including related collections to be split into multiple SQL queries.</span></span> <span data-ttu-id="baa37-372">這可以大幅提升效能，但如果兩個查詢之間的資料有所變更，則可能導致傳回的結果不一致。</span><span class="sxs-lookup"><span data-stu-id="baa37-372">This can significantly improve performance, but can result in inconsistency in the results returned if the data changes between the two queries.</span></span> <span data-ttu-id="baa37-373">可序列化或快照集交易可用來降低此問題，並與分割查詢達成一致性，但這可能會帶來其他效能成本和行為差異。</span><span class="sxs-lookup"><span data-stu-id="baa37-373">Serializable or snapshot transactions can be used to mitigate this and achieve consistency with split queries, but that may bring other performance costs and behavioral difference.</span></span>
+<span data-ttu-id="abf22-371">EF Core 5.0 現在允許單一 LINQ 查詢，包括要分割成多個 SQL 查詢的相關集合。</span><span class="sxs-lookup"><span data-stu-id="abf22-371">EF Core 5.0 now allows a single LINQ query including related collections to be split into multiple SQL queries.</span></span> <span data-ttu-id="abf22-372">這可以大幅提升效能，但如果兩個查詢之間的資料有所變更，則可能導致傳回的結果不一致。</span><span class="sxs-lookup"><span data-stu-id="abf22-372">This can significantly improve performance, but can result in inconsistency in the results returned if the data changes between the two queries.</span></span> <span data-ttu-id="abf22-373">可序列化或快照集交易可用來降低此問題，並與分割查詢達成一致性，但這可能會帶來其他效能成本和行為差異。</span><span class="sxs-lookup"><span data-stu-id="abf22-373">Serializable or snapshot transactions can be used to mitigate this and achieve consistency with split queries, but that may bring other performance costs and behavioral difference.</span></span>
 
-#### <a name="split-queries-with-include"></a><span data-ttu-id="baa37-374">使用 Include 分割查詢</span><span class="sxs-lookup"><span data-stu-id="baa37-374">Split queries with Include</span></span>
+#### <a name="split-queries-with-include"></a><span data-ttu-id="abf22-374">使用 Include 分割查詢</span><span class="sxs-lookup"><span data-stu-id="abf22-374">Split queries with Include</span></span>
 
-<span data-ttu-id="baa37-375">例如，假設有一個查詢會使用下列程式提取兩個層級的相關集合 `Include` ：</span><span class="sxs-lookup"><span data-stu-id="baa37-375">For example, consider a query that pulls in two levels of related collections using `Include`:</span></span>
+<span data-ttu-id="abf22-375">例如，假設有一個查詢會使用下列程式提取兩個層級的相關集合 `Include` ：</span><span class="sxs-lookup"><span data-stu-id="abf22-375">For example, consider a query that pulls in two levels of related collections using `Include`:</span></span>
 
-```CSharp
+```csharp
 var artists = context.Artists
     .Include(e => e.Albums).ThenInclude(e => e.Tags)
     .ToList();
 ```
 
-<span data-ttu-id="baa37-376">根據預設，EF Core 會在使用 SQLite 提供者時產生下列 SQL：</span><span class="sxs-lookup"><span data-stu-id="baa37-376">By default, EF Core will generate the following SQL when using the SQLite provider:</span></span>
+<span data-ttu-id="abf22-376">根據預設，EF Core 會在使用 SQLite 提供者時產生下列 SQL：</span><span class="sxs-lookup"><span data-stu-id="abf22-376">By default, EF Core will generate the following SQL when using the SQLite provider:</span></span>
 
 ```sql
 SELECT "a"."Id", "a"."Name", "t0"."Id", "t0"."ArtistId", "t0"."Title", "t0"."Id0", "t0"."AlbumId", "t0"."Name"
@@ -1177,16 +1187,16 @@ LEFT JOIN (
 ORDER BY "a"."Id", "t0"."Id", "t0"."Id0"
 ```
 
-<span data-ttu-id="baa37-377">新的 `AsSplitQuery` API 可以用來變更此行為。</span><span class="sxs-lookup"><span data-stu-id="baa37-377">The new `AsSplitQuery` API can be used to change this behavior.</span></span> <span data-ttu-id="baa37-378">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-378">For example:</span></span>
+<span data-ttu-id="abf22-377">新的 `AsSplitQuery` API 可以用來變更此行為。</span><span class="sxs-lookup"><span data-stu-id="abf22-377">The new `AsSplitQuery` API can be used to change this behavior.</span></span> <span data-ttu-id="abf22-378">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-378">For example:</span></span>
 
-```CSharp
+```csharp
 var artists = context.Artists
     .AsSplitQuery()
     .Include(e => e.Albums).ThenInclude(e => e.Tags)
     .ToList();
 ```
 
-<span data-ttu-id="baa37-379">AsSplitQuery 適用于所有關系資料庫提供者，而且可以在查詢中的任何位置使用，就像 AsNoTracking 一樣。</span><span class="sxs-lookup"><span data-stu-id="baa37-379">AsSplitQuery is available for all relational database providers and can be used anywhere in the query, just like AsNoTracking.</span></span> <span data-ttu-id="baa37-380">EF Core 現在會產生下列三個 SQL 查詢：</span><span class="sxs-lookup"><span data-stu-id="baa37-380">EF Core will now generate the following three SQL queries:</span></span>
+<span data-ttu-id="abf22-379">AsSplitQuery 適用于所有關系資料庫提供者，而且可以在查詢中的任何位置使用，就像 AsNoTracking 一樣。</span><span class="sxs-lookup"><span data-stu-id="abf22-379">AsSplitQuery is available for all relational database providers and can be used anywhere in the query, just like AsNoTracking.</span></span> <span data-ttu-id="abf22-380">EF Core 現在會產生下列三個 SQL 查詢：</span><span class="sxs-lookup"><span data-stu-id="abf22-380">EF Core will now generate the following three SQL queries:</span></span>
 
 ```sql
 SELECT "a"."Id", "a"."Name"
@@ -1205,15 +1215,15 @@ INNER JOIN "Tag" AS "t" ON "a0"."Id" = "t"."AlbumId"
 ORDER BY "a"."Id", "a0"."Id"
 ```
 
-<span data-ttu-id="baa37-381">支援查詢根目錄上的所有作業。</span><span class="sxs-lookup"><span data-stu-id="baa37-381">All operations on the query root are supported.</span></span> <span data-ttu-id="baa37-382">這包括 OrderBy/Skip/Take、聯結作業、FirstOrDefault，以及選取作業的類似單一結果。</span><span class="sxs-lookup"><span data-stu-id="baa37-382">This includes OrderBy/Skip/Take, Join operations, FirstOrDefault and similar single result selecting operations.</span></span>
+<span data-ttu-id="abf22-381">支援查詢根目錄上的所有作業。</span><span class="sxs-lookup"><span data-stu-id="abf22-381">All operations on the query root are supported.</span></span> <span data-ttu-id="abf22-382">這包括 OrderBy/Skip/Take、聯結作業、FirstOrDefault，以及選取作業的類似單一結果。</span><span class="sxs-lookup"><span data-stu-id="abf22-382">This includes OrderBy/Skip/Take, Join operations, FirstOrDefault and similar single result selecting operations.</span></span>
 
-<span data-ttu-id="baa37-383">請注意，preview 6 中不支援 OrderBy/Skip/Take 的篩選包含，但在每日組建中都有提供，而且將包含在 preview 7 中。</span><span class="sxs-lookup"><span data-stu-id="baa37-383">Note that filtered Includes with OrderBy/Skip/Take are not supported in preview 6, but are available in the daily builds and will be included in preview 7.</span></span>
+<span data-ttu-id="abf22-383">請注意，preview 6 中不支援 OrderBy/Skip/Take 的篩選包含，但在每日組建中都有提供，而且將包含在 preview 7 中。</span><span class="sxs-lookup"><span data-stu-id="abf22-383">Note that filtered Includes with OrderBy/Skip/Take are not supported in preview 6, but are available in the daily builds and will be included in preview 7.</span></span>
 
-#### <a name="split-queries-with-collection-projections"></a><span data-ttu-id="baa37-384">使用集合投影來分割查詢</span><span class="sxs-lookup"><span data-stu-id="baa37-384">Split queries with collection projections</span></span>
+#### <a name="split-queries-with-collection-projections"></a><span data-ttu-id="abf22-384">使用集合投影來分割查詢</span><span class="sxs-lookup"><span data-stu-id="abf22-384">Split queries with collection projections</span></span>
 
-<span data-ttu-id="baa37-385">`AsSplitQuery` 當集合在投影中載入時，也可以使用。</span><span class="sxs-lookup"><span data-stu-id="baa37-385">`AsSplitQuery` can also be used when collections are loaded in projections.</span></span> <span data-ttu-id="baa37-386">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-386">For example:</span></span>
+<span data-ttu-id="abf22-385">`AsSplitQuery` 當集合在投影中載入時，也可以使用。</span><span class="sxs-lookup"><span data-stu-id="abf22-385">`AsSplitQuery` can also be used when collections are loaded in projections.</span></span> <span data-ttu-id="abf22-386">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-386">For example:</span></span>
 
-```CSharp
+```csharp
 context.Artists
     .AsSplitQuery()
     .Select(e => new
@@ -1223,7 +1233,7 @@ context.Artists
     }).ToList();
 ```
 
-<span data-ttu-id="baa37-387">使用 SQLite 提供者時，這個 LINQ 查詢會產生下列兩個 SQL 查詢：</span><span class="sxs-lookup"><span data-stu-id="baa37-387">This LINQ query generates the following two SQL queries when using the SQLite provider:</span></span>
+<span data-ttu-id="abf22-387">使用 SQLite 提供者時，這個 LINQ 查詢會產生下列兩個 SQL 查詢：</span><span class="sxs-lookup"><span data-stu-id="abf22-387">This LINQ query generates the following two SQL queries when using the SQLite provider:</span></span>
 
 ```sql
 SELECT "a"."Id", "a"."Name"
@@ -1236,13 +1246,13 @@ INNER JOIN "Album" AS "a0" ON "a"."Id" = "a0"."ArtistId"
 ORDER BY "a"."Id"
 ```
 
-<span data-ttu-id="baa37-388">請注意，只支援集合的具體化。</span><span class="sxs-lookup"><span data-stu-id="baa37-388">Note that only materialization of the collection is supported.</span></span> <span data-ttu-id="baa37-389">`e.Albums`在上述情況下的任何組合都不會產生分割查詢。</span><span class="sxs-lookup"><span data-stu-id="baa37-389">Any composition after `e.Albums` in above case won't result in a split query.</span></span> <span data-ttu-id="baa37-390">[#21234](https://github.com/dotnet/efcore/issues/21234)會追蹤此區域的改進。</span><span class="sxs-lookup"><span data-stu-id="baa37-390">Improvements in this area are tracked by [#21234](https://github.com/dotnet/efcore/issues/21234).</span></span>
+<span data-ttu-id="abf22-388">請注意，只支援集合的具體化。</span><span class="sxs-lookup"><span data-stu-id="abf22-388">Note that only materialization of the collection is supported.</span></span> <span data-ttu-id="abf22-389">`e.Albums`在上述情況下的任何組合都不會產生分割查詢。</span><span class="sxs-lookup"><span data-stu-id="abf22-389">Any composition after `e.Albums` in above case won't result in a split query.</span></span> <span data-ttu-id="abf22-390">[#21234](https://github.com/dotnet/efcore/issues/21234)會追蹤此區域的改進。</span><span class="sxs-lookup"><span data-stu-id="abf22-390">Improvements in this area are tracked by [#21234](https://github.com/dotnet/efcore/issues/21234).</span></span>
 
-### <a name="indexattribute"></a><span data-ttu-id="baa37-391">IndexAttribute</span><span class="sxs-lookup"><span data-stu-id="baa37-391">IndexAttribute</span></span>
+### <a name="indexattribute"></a><span data-ttu-id="abf22-391">IndexAttribute</span><span class="sxs-lookup"><span data-stu-id="abf22-391">IndexAttribute</span></span>
 
-<span data-ttu-id="baa37-392">新的 IndexAttribute 可以放在實體類型上，以指定單一資料行的索引。</span><span class="sxs-lookup"><span data-stu-id="baa37-392">The new IndexAttribute can be placed on an entity type to specify an index for a single column.</span></span> <span data-ttu-id="baa37-393">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-393">For example:</span></span>
+<span data-ttu-id="abf22-392">新的 IndexAttribute 可以放在實體類型上，以指定單一資料行的索引。</span><span class="sxs-lookup"><span data-stu-id="abf22-392">The new IndexAttribute can be placed on an entity type to specify an index for a single column.</span></span> <span data-ttu-id="abf22-393">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-393">For example:</span></span>
 
-```CSharp
+```csharp
 [Index(nameof(FullName), IsUnique = true)]
 public class User
 {
@@ -1253,7 +1263,7 @@ public class User
 }
 ```
 
-<span data-ttu-id="baa37-394">針對 SQL Server，遷移將會產生下列 SQL：</span><span class="sxs-lookup"><span data-stu-id="baa37-394">For SQL Server, Migrations will then generate the following SQL:</span></span>
+<span data-ttu-id="abf22-394">針對 SQL Server，遷移將會產生下列 SQL：</span><span class="sxs-lookup"><span data-stu-id="abf22-394">For SQL Server, Migrations will then generate the following SQL:</span></span>
 
 ```sql
 CREATE UNIQUE INDEX [IX_Users_FullName]
@@ -1261,9 +1271,9 @@ CREATE UNIQUE INDEX [IX_Users_FullName]
     WHERE [FullName] IS NOT NULL;
 ```
 
-<span data-ttu-id="baa37-395">IndexAttribute 也可用來指定跨越多個資料行的索引。</span><span class="sxs-lookup"><span data-stu-id="baa37-395">IndexAttribute can also be used to specify an index spanning multiple columns.</span></span> <span data-ttu-id="baa37-396">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-396">For example:</span></span>
+<span data-ttu-id="abf22-395">IndexAttribute 也可用來指定跨越多個資料行的索引。</span><span class="sxs-lookup"><span data-stu-id="abf22-395">IndexAttribute can also be used to specify an index spanning multiple columns.</span></span> <span data-ttu-id="abf22-396">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-396">For example:</span></span>
 
-```CSharp
+```csharp
 [Index(nameof(FirstName), nameof(LastName), IsUnique = true)]
 public class User
 {
@@ -1277,7 +1287,7 @@ public class User
 }
 ```
 
-<span data-ttu-id="baa37-397">針對 SQL Server，這會導致：</span><span class="sxs-lookup"><span data-stu-id="baa37-397">For SQL Server, this results in:</span></span>
+<span data-ttu-id="abf22-397">針對 SQL Server，這會導致：</span><span class="sxs-lookup"><span data-stu-id="abf22-397">For SQL Server, this results in:</span></span>
 
 ```sql
 CREATE UNIQUE INDEX [IX_Users_FirstName_LastName]
@@ -1285,52 +1295,52 @@ CREATE UNIQUE INDEX [IX_Users_FirstName_LastName]
     WHERE [FirstName] IS NOT NULL AND [LastName] IS NOT NULL;
 ```
 
-<span data-ttu-id="baa37-398">檔是由問題 [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-398">Documentation is tracked by issue [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407).</span></span>
+<span data-ttu-id="abf22-398">檔是由問題 [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-398">Documentation is tracked by issue [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407).</span></span>
 
-### <a name="improved-query-translation-exceptions"></a><span data-ttu-id="baa37-399">改進的查詢轉譯例外狀況</span><span class="sxs-lookup"><span data-stu-id="baa37-399">Improved query translation exceptions</span></span>
+### <a name="improved-query-translation-exceptions"></a><span data-ttu-id="abf22-399">改進的查詢轉譯例外狀況</span><span class="sxs-lookup"><span data-stu-id="abf22-399">Improved query translation exceptions</span></span>
 
-<span data-ttu-id="baa37-400">我們會持續改善查詢轉譯失敗時所產生的例外狀況訊息。</span><span class="sxs-lookup"><span data-stu-id="baa37-400">We are continuing to improve the exception messages generated when query translation fails.</span></span> <span data-ttu-id="baa37-401">例如，此查詢會使用未對應的屬性 `IsSigned` ：</span><span class="sxs-lookup"><span data-stu-id="baa37-401">For example, this query uses the unmapped property `IsSigned`:</span></span>
+<span data-ttu-id="abf22-400">我們會持續改善查詢轉譯失敗時所產生的例外狀況訊息。</span><span class="sxs-lookup"><span data-stu-id="abf22-400">We are continuing to improve the exception messages generated when query translation fails.</span></span> <span data-ttu-id="abf22-401">例如，此查詢會使用未對應的屬性 `IsSigned` ：</span><span class="sxs-lookup"><span data-stu-id="abf22-401">For example, this query uses the unmapped property `IsSigned`:</span></span>
 
-```CSharp
+```csharp
 var artists = context.Artists.Where(e => e.IsSigned).ToList();
 ```
 
-<span data-ttu-id="baa37-402">EF Core 會擲回下列例外狀況，表示轉譯失敗，因為未 `IsSigned` 對應：</span><span class="sxs-lookup"><span data-stu-id="baa37-402">EF Core will throw the following exception indicating that translation failed because `IsSigned` is not mapped:</span></span>
+<span data-ttu-id="abf22-402">EF Core 會擲回下列例外狀況，表示轉譯失敗，因為未 `IsSigned` 對應：</span><span class="sxs-lookup"><span data-stu-id="abf22-402">EF Core will throw the following exception indicating that translation failed because `IsSigned` is not mapped:</span></span>
 
-> <span data-ttu-id="baa37-403">未處理的例外狀況。</span><span class="sxs-lookup"><span data-stu-id="baa37-403">Unhandled exception.</span></span> <span data-ttu-id="baa37-404">InvalidOperationException： LINQ 運算式 ' DbSet <Artist> ( # A2。無法轉譯 (a =>. IsSigned) '。</span><span class="sxs-lookup"><span data-stu-id="baa37-404">System.InvalidOperationException: The LINQ expression 'DbSet<Artist>() .Where(a => a.IsSigned)' could not be translated.</span></span> <span data-ttu-id="baa37-405">其他資訊：在實體類型 ' 演出者 ' 上轉譯成員 ' IsSigned ' 失敗。</span><span class="sxs-lookup"><span data-stu-id="baa37-405">Additional information: Translation of member 'IsSigned' on entity type 'Artist' failed.</span></span> <span data-ttu-id="baa37-406">可能是指定的成員未對應。</span><span class="sxs-lookup"><span data-stu-id="baa37-406">Possibly the specified member is not mapped.</span></span> <span data-ttu-id="baa37-407">請在可轉譯的表單中重寫查詢，或插入對 Enumerable.asenumerable ( # A1、AsAsyncEnumerable ( # A3、ToList ( # A5 或 ToListAsync ( # A7 的呼叫，以明確地切換至用戶端評估。</span><span class="sxs-lookup"><span data-stu-id="baa37-407">Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to either AsEnumerable(), AsAsyncEnumerable(), ToList(), or ToListAsync().</span></span> <span data-ttu-id="baa37-408">如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2101038 。</span><span class="sxs-lookup"><span data-stu-id="baa37-408">See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.</span></span>
+> <span data-ttu-id="abf22-403">未處理的例外狀況。</span><span class="sxs-lookup"><span data-stu-id="abf22-403">Unhandled exception.</span></span> <span data-ttu-id="abf22-404">InvalidOperationException： LINQ 運算式 ' DbSet <Artist> ( # A2。無法轉譯 (a =>. IsSigned) '。</span><span class="sxs-lookup"><span data-stu-id="abf22-404">System.InvalidOperationException: The LINQ expression 'DbSet<Artist>() .Where(a => a.IsSigned)' could not be translated.</span></span> <span data-ttu-id="abf22-405">其他資訊：在實體類型 ' 演出者 ' 上轉譯成員 ' IsSigned ' 失敗。</span><span class="sxs-lookup"><span data-stu-id="abf22-405">Additional information: Translation of member 'IsSigned' on entity type 'Artist' failed.</span></span> <span data-ttu-id="abf22-406">可能是指定的成員未對應。</span><span class="sxs-lookup"><span data-stu-id="abf22-406">Possibly the specified member is not mapped.</span></span> <span data-ttu-id="abf22-407">請在可轉譯的表單中重寫查詢，或插入對 Enumerable.asenumerable ( # A1、AsAsyncEnumerable ( # A3、ToList ( # A5 或 ToListAsync ( # A7 的呼叫，以明確地切換至用戶端評估。</span><span class="sxs-lookup"><span data-stu-id="abf22-407">Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to either AsEnumerable(), AsAsyncEnumerable(), ToList(), or ToListAsync().</span></span> <span data-ttu-id="abf22-408">如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2101038 。</span><span class="sxs-lookup"><span data-stu-id="abf22-408">See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.</span></span>
 
-<span data-ttu-id="baa37-409">同樣地，當您嘗試翻譯具有文化特性相依語義的字串比較時，現在會產生更好的例外狀況訊息。</span><span class="sxs-lookup"><span data-stu-id="baa37-409">Similarly, better exception messages are now generated when attempting to translate string comparisons with culture-dependent semantics.</span></span> <span data-ttu-id="baa37-410">例如，此查詢嘗試使用 `StringComparison.CurrentCulture` ：</span><span class="sxs-lookup"><span data-stu-id="baa37-410">For example, this query attempts to use `StringComparison.CurrentCulture`:</span></span>
+<span data-ttu-id="abf22-409">同樣地，當您嘗試翻譯具有文化特性相依語義的字串比較時，現在會產生更好的例外狀況訊息。</span><span class="sxs-lookup"><span data-stu-id="abf22-409">Similarly, better exception messages are now generated when attempting to translate string comparisons with culture-dependent semantics.</span></span> <span data-ttu-id="abf22-410">例如，此查詢嘗試使用 `StringComparison.CurrentCulture` ：</span><span class="sxs-lookup"><span data-stu-id="abf22-410">For example, this query attempts to use `StringComparison.CurrentCulture`:</span></span>
 
-```CSharp
+```csharp
 var artists = context.Artists
     .Where(e => e.Name.Equals("The Unicorns", StringComparison.CurrentCulture))
     .ToList();
 ```
 
-<span data-ttu-id="baa37-411">EF Core 現在會擲回下列例外狀況：</span><span class="sxs-lookup"><span data-stu-id="baa37-411">EF Core will now throw the following exception:</span></span>
+<span data-ttu-id="abf22-411">EF Core 現在會擲回下列例外狀況：</span><span class="sxs-lookup"><span data-stu-id="abf22-411">EF Core will now throw the following exception:</span></span>
 
-> <span data-ttu-id="baa37-412">未處理的例外狀況。</span><span class="sxs-lookup"><span data-stu-id="baa37-412">Unhandled exception.</span></span> <span data-ttu-id="baa37-413">InvalidOperationException： LINQ 運算式 ' DbSet <Artist> ( # A2。其中 (a => a. Equals ( 值： "獨角獸"，comparisonType： CurrentCulture) # A6 ' 無法轉譯。</span><span class="sxs-lookup"><span data-stu-id="baa37-413">System.InvalidOperationException: The LINQ expression 'DbSet<Artist>() .Where(a => a.Name.Equals( value: "The Unicorns", comparisonType: CurrentCulture))' could not be translated.</span></span> <span data-ttu-id="baa37-414">其他資訊： ' string ' 的翻譯。不支援採用 ' StringComparison ' 引數的 Equals ' 方法。</span><span class="sxs-lookup"><span data-stu-id="baa37-414">Additional information: Translation of 'string.Equals' method which takes 'StringComparison' argument is not supported.</span></span> <span data-ttu-id="baa37-415">如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2129535 。</span><span class="sxs-lookup"><span data-stu-id="baa37-415">See https://go.microsoft.com/fwlink/?linkid=2129535 for more information.</span></span> <span data-ttu-id="baa37-416">請在可轉譯的表單中重寫查詢，或插入對 Enumerable.asenumerable ( # A1、AsAsyncEnumerable ( # A3、ToList ( # A5 或 ToListAsync ( # A7 的呼叫，以明確地切換至用戶端評估。</span><span class="sxs-lookup"><span data-stu-id="baa37-416">Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to either AsEnumerable(), AsAsyncEnumerable(), ToList(), or ToListAsync().</span></span> <span data-ttu-id="baa37-417">如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2101038 。</span><span class="sxs-lookup"><span data-stu-id="baa37-417">See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.</span></span>
+> <span data-ttu-id="abf22-412">未處理的例外狀況。</span><span class="sxs-lookup"><span data-stu-id="abf22-412">Unhandled exception.</span></span> <span data-ttu-id="abf22-413">InvalidOperationException： LINQ 運算式 ' DbSet <Artist> ( # A2。其中 (a => a. Equals ( 值： "獨角獸"，comparisonType： CurrentCulture) # A6 ' 無法轉譯。</span><span class="sxs-lookup"><span data-stu-id="abf22-413">System.InvalidOperationException: The LINQ expression 'DbSet<Artist>() .Where(a => a.Name.Equals( value: "The Unicorns", comparisonType: CurrentCulture))' could not be translated.</span></span> <span data-ttu-id="abf22-414">其他資訊： ' string ' 的翻譯。不支援採用 ' StringComparison ' 引數的 Equals ' 方法。</span><span class="sxs-lookup"><span data-stu-id="abf22-414">Additional information: Translation of 'string.Equals' method which takes 'StringComparison' argument is not supported.</span></span> <span data-ttu-id="abf22-415">如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2129535 。</span><span class="sxs-lookup"><span data-stu-id="abf22-415">See https://go.microsoft.com/fwlink/?linkid=2129535 for more information.</span></span> <span data-ttu-id="abf22-416">請在可轉譯的表單中重寫查詢，或插入對 Enumerable.asenumerable ( # A1、AsAsyncEnumerable ( # A3、ToList ( # A5 或 ToListAsync ( # A7 的呼叫，以明確地切換至用戶端評估。</span><span class="sxs-lookup"><span data-stu-id="abf22-416">Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to either AsEnumerable(), AsAsyncEnumerable(), ToList(), or ToListAsync().</span></span> <span data-ttu-id="abf22-417">如需相關資訊，請參閱 https://go.microsoft.com/fwlink/?linkid=2101038 。</span><span class="sxs-lookup"><span data-stu-id="abf22-417">See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.</span></span>
 
-### <a name="specify-transaction-id"></a><span data-ttu-id="baa37-418">指定交易識別碼</span><span class="sxs-lookup"><span data-stu-id="baa37-418">Specify transaction ID</span></span>
+### <a name="specify-transaction-id"></a><span data-ttu-id="abf22-418">指定交易識別碼</span><span class="sxs-lookup"><span data-stu-id="abf22-418">Specify transaction ID</span></span>
 
-<span data-ttu-id="baa37-419">這項功能是由「社區」所貢獻 [@Marusyk](https://github.com/Marusyk) 。</span><span class="sxs-lookup"><span data-stu-id="baa37-419">This feature was contributed from the community by [@Marusyk](https://github.com/Marusyk).</span></span> <span data-ttu-id="baa37-420">許多人都感謝您的貢獻！</span><span class="sxs-lookup"><span data-stu-id="baa37-420">Many thanks for the contribution!</span></span>
+<span data-ttu-id="abf22-419">這項功能是由「社區」所貢獻 [@Marusyk](https://github.com/Marusyk) 。</span><span class="sxs-lookup"><span data-stu-id="abf22-419">This feature was contributed from the community by [@Marusyk](https://github.com/Marusyk).</span></span> <span data-ttu-id="abf22-420">許多人都感謝您的貢獻！</span><span class="sxs-lookup"><span data-stu-id="abf22-420">Many thanks for the contribution!</span></span>
 
-<span data-ttu-id="baa37-421">EF Core 公開交易的交易識別碼，以便跨呼叫進行交易的相互關聯。</span><span class="sxs-lookup"><span data-stu-id="baa37-421">EF Core exposes a transaction ID for correlation of transactions across calls.</span></span> <span data-ttu-id="baa37-422">此識別碼通常會在交易開始時由 EF Core 設定。</span><span class="sxs-lookup"><span data-stu-id="baa37-422">This ID typically set by EF Core when a transaction is started.</span></span> <span data-ttu-id="baa37-423">如果應用程式改為啟動交易，則這項功能可讓應用程式明確地設定交易識別碼，使其在使用它的任何地方都能正確地相互關聯。</span><span class="sxs-lookup"><span data-stu-id="baa37-423">If the application starts the transaction instead, then this feature allows the application to explicitly set the transaction ID so it is correlated correctly everywhere it is used.</span></span> <span data-ttu-id="baa37-424">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-424">For example:</span></span>
+<span data-ttu-id="abf22-421">EF Core 公開交易的交易識別碼，以便跨呼叫進行交易的相互關聯。</span><span class="sxs-lookup"><span data-stu-id="abf22-421">EF Core exposes a transaction ID for correlation of transactions across calls.</span></span> <span data-ttu-id="abf22-422">此識別碼通常會在交易開始時由 EF Core 設定。</span><span class="sxs-lookup"><span data-stu-id="abf22-422">This ID typically set by EF Core when a transaction is started.</span></span> <span data-ttu-id="abf22-423">如果應用程式改為啟動交易，則這項功能可讓應用程式明確地設定交易識別碼，使其在使用它的任何地方都能正確地相互關聯。</span><span class="sxs-lookup"><span data-stu-id="abf22-423">If the application starts the transaction instead, then this feature allows the application to explicitly set the transaction ID so it is correlated correctly everywhere it is used.</span></span> <span data-ttu-id="abf22-424">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-424">For example:</span></span>
 
-```CSharp
+```csharp
 using (context.Database.UseTransaction(myTransaction, myId))
 {
    ...
 }
 ```
 
-### <a name="ipaddress-mapping"></a><span data-ttu-id="baa37-425">IPAddress 對應</span><span class="sxs-lookup"><span data-stu-id="baa37-425">IPAddress mapping</span></span>
+### <a name="ipaddress-mapping"></a><span data-ttu-id="abf22-425">IPAddress 對應</span><span class="sxs-lookup"><span data-stu-id="abf22-425">IPAddress mapping</span></span>
 
-<span data-ttu-id="baa37-426">這項功能是由「社區」所貢獻 [@ralmsdeveloper](https://github.com/ralmsdeveloper) 。</span><span class="sxs-lookup"><span data-stu-id="baa37-426">This feature was contributed from the community by [@ralmsdeveloper](https://github.com/ralmsdeveloper).</span></span> <span data-ttu-id="baa37-427">許多人都感謝您的貢獻！</span><span class="sxs-lookup"><span data-stu-id="baa37-427">Many thanks for the contribution!</span></span>
+<span data-ttu-id="abf22-426">這項功能是由「社區」所貢獻 [@ralmsdeveloper](https://github.com/ralmsdeveloper) 。</span><span class="sxs-lookup"><span data-stu-id="abf22-426">This feature was contributed from the community by [@ralmsdeveloper](https://github.com/ralmsdeveloper).</span></span> <span data-ttu-id="abf22-427">許多人都感謝您的貢獻！</span><span class="sxs-lookup"><span data-stu-id="abf22-427">Many thanks for the contribution!</span></span>
 
-<span data-ttu-id="baa37-428">標準 .NET [IPAddress 類別](/dotnet/api/system.net.ipaddress) 現在會自動對應至尚未具有原生支援之資料庫的字串資料行。</span><span class="sxs-lookup"><span data-stu-id="baa37-428">The standard .NET [IPAddress class](/dotnet/api/system.net.ipaddress) is now automatically mapped to a string column for databases that do not already have native support.</span></span> <span data-ttu-id="baa37-429">例如，請考慮對應此實體類型：</span><span class="sxs-lookup"><span data-stu-id="baa37-429">For example, consider mapping this entity type:</span></span>
+<span data-ttu-id="abf22-428">標準 .NET [IPAddress 類別](/dotnet/api/system.net.ipaddress) 現在會自動對應至尚未具有原生支援之資料庫的字串資料行。</span><span class="sxs-lookup"><span data-stu-id="abf22-428">The standard .NET [IPAddress class](/dotnet/api/system.net.ipaddress) is now automatically mapped to a string column for databases that do not already have native support.</span></span> <span data-ttu-id="abf22-429">例如，請考慮對應此實體類型：</span><span class="sxs-lookup"><span data-stu-id="abf22-429">For example, consider mapping this entity type:</span></span>
 
-```CSharp
+```csharp
 public class Host
 {
     public int Id { get; set; }
@@ -1338,7 +1348,7 @@ public class Host
 }
 ```
 
-<span data-ttu-id="baa37-430">在 SQL Server 上，這會導致建立下表：</span><span class="sxs-lookup"><span data-stu-id="baa37-430">On SQL Server, this will result in Migrations creating the following table:</span></span>
+<span data-ttu-id="abf22-430">在 SQL Server 上，這會導致建立下表：</span><span class="sxs-lookup"><span data-stu-id="abf22-430">On SQL Server, this will result in Migrations creating the following table:</span></span>
 
 ```sql
 CREATE TABLE [Host] (
@@ -1347,15 +1357,15 @@ CREATE TABLE [Host] (
     CONSTRAINT [PK_Host] PRIMARY KEY ([Id]));
 ```
 
-<span data-ttu-id="baa37-431">然後可以用一般方式新增實體：</span><span class="sxs-lookup"><span data-stu-id="baa37-431">Entities can then be added in the normal way:</span></span>
+<span data-ttu-id="abf22-431">然後可以用一般方式新增實體：</span><span class="sxs-lookup"><span data-stu-id="abf22-431">Entities can then be added in the normal way:</span></span>
 
-```CSharp
+```csharp
 context.AddRange(
     new Host { Address = IPAddress.Parse("127.0.0.1")},
     new Host { Address = IPAddress.Parse("0000:0000:0000:0000:0000:0000:0000:0001")});
 ```
 
-<span data-ttu-id="baa37-432">而產生的 SQL 會插入正規化的 IPv4 或 IPv6 位址：</span><span class="sxs-lookup"><span data-stu-id="baa37-432">And the resulting SQL will insert the normalized IPv4 or IPv6 address:</span></span>
+<span data-ttu-id="abf22-432">而產生的 SQL 會插入正規化的 IPv4 或 IPv6 位址：</span><span class="sxs-lookup"><span data-stu-id="abf22-432">And the resulting SQL will insert the normalized IPv4 or IPv6 address:</span></span>
 
 ```sql
 Executed DbCommand (14ms) [Parameters=[@p0='1', @p1='127.0.0.1' (Size = 45), @p2='2', @p3='::1' (Size = 45)], CommandType='Text', CommandTimeout='30']
@@ -1364,35 +1374,35 @@ Executed DbCommand (14ms) [Parameters=[@p0='1', @p1='127.0.0.1' (Size = 45), @p2
       VALUES (@p0, @p1), (@p2, @p3);
 ```
 
-### <a name="exclude-onconfiguring-when-scaffolding"></a><span data-ttu-id="baa37-433">當樣板時排除 OnConfiguring</span><span class="sxs-lookup"><span data-stu-id="baa37-433">Exclude OnConfiguring when scaffolding</span></span>
+### <a name="exclude-onconfiguring-when-scaffolding"></a><span data-ttu-id="abf22-433">當樣板時排除 OnConfiguring</span><span class="sxs-lookup"><span data-stu-id="abf22-433">Exclude OnConfiguring when scaffolding</span></span>
 
-<span data-ttu-id="baa37-434">從現有的資料庫 scaffold DbCoNtext 時，EF Core 預設會使用連接字串建立 OnConfiguring 多載，讓內容可以立即使用。</span><span class="sxs-lookup"><span data-stu-id="baa37-434">When a DbContext is scaffolded from an existing database, EF Core by default creates an OnConfiguring overload with a connection string so that the context is immediately usable.</span></span> <span data-ttu-id="baa37-435">但是，如果您已經有部分類別具有 OnConfiguring，或如果您以其他方式設定內容，這就不會很有用。</span><span class="sxs-lookup"><span data-stu-id="baa37-435">However, this is not useful if you already have a partial class with OnConfiguring, or if you are configuring the context some other way.</span></span>
+<span data-ttu-id="abf22-434">從現有的資料庫 scaffold DbCoNtext 時，EF Core 預設會使用連接字串建立 OnConfiguring 多載，讓內容可以立即使用。</span><span class="sxs-lookup"><span data-stu-id="abf22-434">When a DbContext is scaffolded from an existing database, EF Core by default creates an OnConfiguring overload with a connection string so that the context is immediately usable.</span></span> <span data-ttu-id="abf22-435">但是，如果您已經有部分類別具有 OnConfiguring，或如果您以其他方式設定內容，這就不會很有用。</span><span class="sxs-lookup"><span data-stu-id="abf22-435">However, this is not useful if you already have a partial class with OnConfiguring, or if you are configuring the context some other way.</span></span>
 
-<span data-ttu-id="baa37-436">若要解決此情況，現在可以指示可忽略 OnConfiguring 產生的基本程式命令。</span><span class="sxs-lookup"><span data-stu-id="baa37-436">To address this, the scaffolding commands can now be instructed to omit generation of OnConfiguring.</span></span> <span data-ttu-id="baa37-437">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-437">For example:</span></span>
+<span data-ttu-id="abf22-436">若要解決此情況，現在可以指示可忽略 OnConfiguring 產生的基本程式命令。</span><span class="sxs-lookup"><span data-stu-id="abf22-436">To address this, the scaffolding commands can now be instructed to omit generation of OnConfiguring.</span></span> <span data-ttu-id="abf22-437">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-437">For example:</span></span>
 
 ```
 dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook" Microsoft.EntityFrameworkCore.SqlServer --no-onconfiguring
 ```
 
-<span data-ttu-id="baa37-438">或者，在封裝管理員主控台中：</span><span class="sxs-lookup"><span data-stu-id="baa37-438">Or in the Package Manager Console:</span></span>
+<span data-ttu-id="abf22-438">或者，在封裝管理員主控台中：</span><span class="sxs-lookup"><span data-stu-id="abf22-438">Or in the Package Manager Console:</span></span>
 
 ```
 Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' Microsoft.EntityFrameworkCore.SqlServer -NoOnConfiguring
 ```
 
-<span data-ttu-id="baa37-439">請注意，我們建議使用 [已命名的連接字串和安全的儲存體，例如使用者密碼](xref:core/managing-schemas/scaffolding#configuration-and-user-secrets)。</span><span class="sxs-lookup"><span data-stu-id="baa37-439">Note that we recommend using [a named connection string and secure storage like User Secrets](xref:core/managing-schemas/scaffolding#configuration-and-user-secrets).</span></span>
+<span data-ttu-id="abf22-439">請注意，我們建議使用 [已命名的連接字串和安全的儲存體，例如使用者密碼](xref:core/managing-schemas/scaffolding#configuration-and-user-secrets)。</span><span class="sxs-lookup"><span data-stu-id="abf22-439">Note that we recommend using [a named connection string and secure storage like User Secrets](xref:core/managing-schemas/scaffolding#configuration-and-user-secrets).</span></span>
 
-### <a name="translations-for-firstordefault-on-strings"></a><span data-ttu-id="baa37-440">字串的 FirstOrDefault 翻譯</span><span class="sxs-lookup"><span data-stu-id="baa37-440">Translations for FirstOrDefault on strings</span></span>
+### <a name="translations-for-firstordefault-on-strings"></a><span data-ttu-id="abf22-440">字串的 FirstOrDefault 翻譯</span><span class="sxs-lookup"><span data-stu-id="abf22-440">Translations for FirstOrDefault on strings</span></span>
 
-<span data-ttu-id="baa37-441">這項功能是由「社區」所貢獻 [@dvoreckyaa](https://github.com/dvoreckyaa) 。</span><span class="sxs-lookup"><span data-stu-id="baa37-441">This feature was contributed from the community by [@dvoreckyaa](https://github.com/dvoreckyaa).</span></span> <span data-ttu-id="baa37-442">許多人都感謝您的貢獻！</span><span class="sxs-lookup"><span data-stu-id="baa37-442">Many thanks for the contribution!</span></span>
+<span data-ttu-id="abf22-441">這項功能是由「社區」所貢獻 [@dvoreckyaa](https://github.com/dvoreckyaa) 。</span><span class="sxs-lookup"><span data-stu-id="abf22-441">This feature was contributed from the community by [@dvoreckyaa](https://github.com/dvoreckyaa).</span></span> <span data-ttu-id="abf22-442">許多人都感謝您的貢獻！</span><span class="sxs-lookup"><span data-stu-id="abf22-442">Many thanks for the contribution!</span></span>
 
-<span data-ttu-id="baa37-443">字串中字元的 FirstOrDefault 和類似運算子現在已轉譯。</span><span class="sxs-lookup"><span data-stu-id="baa37-443">FirstOrDefault and similar operators for characters in strings are now translated.</span></span> <span data-ttu-id="baa37-444">例如，這個 LINQ 查詢：</span><span class="sxs-lookup"><span data-stu-id="baa37-444">For example, this LINQ query:</span></span>
+<span data-ttu-id="abf22-443">字串中字元的 FirstOrDefault 和類似運算子現在已轉譯。</span><span class="sxs-lookup"><span data-stu-id="abf22-443">FirstOrDefault and similar operators for characters in strings are now translated.</span></span> <span data-ttu-id="abf22-444">例如，這個 LINQ 查詢：</span><span class="sxs-lookup"><span data-stu-id="abf22-444">For example, this LINQ query:</span></span>
 
-```CSharp
+```csharp
 context.Customers.Where(c => c.ContactName.FirstOrDefault() == 'A').ToList();
 ```
 
-<span data-ttu-id="baa37-445">使用 SQL Server 時，將會轉譯為下列 SQL：</span><span class="sxs-lookup"><span data-stu-id="baa37-445">Will be translated to the following SQL when using SQL Server:</span></span>
+<span data-ttu-id="abf22-445">使用 SQL Server 時，將會轉譯為下列 SQL：</span><span class="sxs-lookup"><span data-stu-id="abf22-445">Will be translated to the following SQL when using SQL Server:</span></span>
 
 ```sql
 SELECT [c].[Id], [c].[ContactName]
@@ -1400,17 +1410,17 @@ FROM [Customer] AS [c]
 WHERE SUBSTRING([c].[ContactName], 1, 1) = N'A'
 ```
 
-### <a name="simplify-case-blocks"></a><span data-ttu-id="baa37-446">簡化案例區塊</span><span class="sxs-lookup"><span data-stu-id="baa37-446">Simplify case blocks</span></span>
+### <a name="simplify-case-blocks"></a><span data-ttu-id="abf22-446">簡化案例區塊</span><span class="sxs-lookup"><span data-stu-id="abf22-446">Simplify case blocks</span></span>
 
-<span data-ttu-id="baa37-447">EF Core 現在會以案例區塊產生更好的查詢。</span><span class="sxs-lookup"><span data-stu-id="baa37-447">EF Core now generates better queries with CASE blocks.</span></span> <span data-ttu-id="baa37-448">例如，這個 LINQ 查詢：</span><span class="sxs-lookup"><span data-stu-id="baa37-448">For example, this LINQ query:</span></span>
+<span data-ttu-id="abf22-447">EF Core 現在會以案例區塊產生更好的查詢。</span><span class="sxs-lookup"><span data-stu-id="abf22-447">EF Core now generates better queries with CASE blocks.</span></span> <span data-ttu-id="abf22-448">例如，這個 LINQ 查詢：</span><span class="sxs-lookup"><span data-stu-id="abf22-448">For example, this LINQ query:</span></span>
 
-```CSharp
+```csharp
 context.Weapons
     .OrderBy(w => w.Name.CompareTo("Marcus' Lancer") == 0)
     .ThenBy(w => w.Id)
 ```
 
-<span data-ttu-id="baa37-449">Was SQL Server 正式轉譯為：</span><span class="sxs-lookup"><span data-stu-id="baa37-449">Was on SQL Server formally translated to:</span></span>
+<span data-ttu-id="abf22-449">Was SQL Server 正式轉譯為：</span><span class="sxs-lookup"><span data-stu-id="abf22-449">Was on SQL Server formally translated to:</span></span>
 
 ```sql
 SELECT [w].[Id], [w].[AmmunitionType], [w].[IsAutomatic], [w].[Name], [w].[OwnerFullName], [w].[SynergyWithId]
@@ -1429,7 +1439,7 @@ ORDER BY CASE
 END, [w].[Id]");
 ```
 
-<span data-ttu-id="baa37-450">但現在已轉譯為：</span><span class="sxs-lookup"><span data-stu-id="baa37-450">But is now translated to:</span></span>
+<span data-ttu-id="abf22-450">但現在已轉譯為：</span><span class="sxs-lookup"><span data-stu-id="abf22-450">But is now translated to:</span></span>
 
 ```sql
 SELECT [w].[Id], [w].[AmmunitionType], [w].[IsAutomatic], [w].[Name], [w].[OwnerFullName], [w].[SynergyWithId]
@@ -1440,41 +1450,41 @@ ORDER BY CASE
 END, [w].[Id]");
 ```
 
-## <a name="preview-5"></a><span data-ttu-id="baa37-451">Preview 5</span><span class="sxs-lookup"><span data-stu-id="baa37-451">Preview 5</span></span>
+## <a name="preview-5"></a><span data-ttu-id="abf22-451">Preview 5</span><span class="sxs-lookup"><span data-stu-id="abf22-451">Preview 5</span></span>
 
-### <a name="database-collations"></a><span data-ttu-id="baa37-452">資料庫定序</span><span class="sxs-lookup"><span data-stu-id="baa37-452">Database collations</span></span>
+### <a name="database-collations"></a><span data-ttu-id="abf22-452">資料庫定序</span><span class="sxs-lookup"><span data-stu-id="abf22-452">Database collations</span></span>
 
-<span data-ttu-id="baa37-453">您現在可以在 EF 模型中指定資料庫的預設定序。</span><span class="sxs-lookup"><span data-stu-id="baa37-453">The default collation for a database can now be specified in the EF model.</span></span> <span data-ttu-id="baa37-454">這會流經產生的遷移，以在建立資料庫時設定定序。</span><span class="sxs-lookup"><span data-stu-id="baa37-454">This will flow through to generated migrations to set the collation when the database is created.</span></span> <span data-ttu-id="baa37-455">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-455">For example:</span></span>
+<span data-ttu-id="abf22-453">您現在可以在 EF 模型中指定資料庫的預設定序。</span><span class="sxs-lookup"><span data-stu-id="abf22-453">The default collation for a database can now be specified in the EF model.</span></span> <span data-ttu-id="abf22-454">這會流經產生的遷移，以在建立資料庫時設定定序。</span><span class="sxs-lookup"><span data-stu-id="abf22-454">This will flow through to generated migrations to set the collation when the database is created.</span></span> <span data-ttu-id="abf22-455">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-455">For example:</span></span>
 
-```CSharp
+```csharp
 modelBuilder.UseCollation("German_PhoneBook_CI_AS");
 ```
 
-<span data-ttu-id="baa37-456">然後，遷移會產生下列各項，以在 SQL Server 上建立資料庫：</span><span class="sxs-lookup"><span data-stu-id="baa37-456">Migrations then generates the following to create the database on SQL Server:</span></span>
+<span data-ttu-id="abf22-456">然後，遷移會產生下列各項，以在 SQL Server 上建立資料庫：</span><span class="sxs-lookup"><span data-stu-id="abf22-456">Migrations then generates the following to create the database on SQL Server:</span></span>
 
 ```sql
 CREATE DATABASE [Test]
 COLLATE German_PhoneBook_CI_AS;
 ```
 
-<span data-ttu-id="baa37-457">您也可以指定要用於特定資料庫資料行的定序。</span><span class="sxs-lookup"><span data-stu-id="baa37-457">The collation to use for specific database columns can also be specified.</span></span> <span data-ttu-id="baa37-458">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-458">For example:</span></span>
+<span data-ttu-id="abf22-457">您也可以指定要用於特定資料庫資料行的定序。</span><span class="sxs-lookup"><span data-stu-id="abf22-457">The collation to use for specific database columns can also be specified.</span></span> <span data-ttu-id="abf22-458">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-458">For example:</span></span>
 
-```CSharp
- modelBuilder
-     .Entity<User>()
-     .Property(e => e.Name)
-     .UseCollation("German_PhoneBook_CI_AS");
+```csharp
+modelBuilder
+    .Entity<User>()
+    .Property(e => e.Name)
+    .UseCollation("German_PhoneBook_CI_AS");
 ```
 
-<span data-ttu-id="baa37-459">若未使用遷移，則在 DbCoNtext 架構時，定序現在會從資料庫進行反向工程。</span><span class="sxs-lookup"><span data-stu-id="baa37-459">For those not using migrations, collations are now reverse-engineered from the database when scaffolding a DbContext.</span></span>
+<span data-ttu-id="abf22-459">若未使用遷移，則在 DbCoNtext 架構時，定序現在會從資料庫進行反向工程。</span><span class="sxs-lookup"><span data-stu-id="abf22-459">For those not using migrations, collations are now reverse-engineered from the database when scaffolding a DbContext.</span></span>
 
-<span data-ttu-id="baa37-460">最後， `EF.Functions.Collate()` 可以使用不同的定序來進行特定查詢。</span><span class="sxs-lookup"><span data-stu-id="baa37-460">Finally, the `EF.Functions.Collate()` allows for ad-hoc queries using different collations.</span></span> <span data-ttu-id="baa37-461">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-461">For example:</span></span>
+<span data-ttu-id="abf22-460">最後， `EF.Functions.Collate()` 可以使用不同的定序來進行特定查詢。</span><span class="sxs-lookup"><span data-stu-id="abf22-460">Finally, the `EF.Functions.Collate()` allows for ad-hoc queries using different collations.</span></span> <span data-ttu-id="abf22-461">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-461">For example:</span></span>
 
-```CSharp
+```csharp
 context.Users.Single(e => EF.Functions.Collate(e.Name, "French_CI_AS") == "Jean-Michel Jarre");
 ```
 
-<span data-ttu-id="baa37-462">這會產生 SQL Server 的下列查詢：</span><span class="sxs-lookup"><span data-stu-id="baa37-462">This will generate the following query for SQL Server:</span></span>
+<span data-ttu-id="abf22-462">這會產生 SQL Server 的下列查詢：</span><span class="sxs-lookup"><span data-stu-id="abf22-462">This will generate the following query for SQL Server:</span></span>
 
 ```sql
 SELECT TOP(2) [u].[Id], [u].[Name]
@@ -1482,21 +1492,21 @@ FROM [Users] AS [u]
 WHERE [u].[Name] COLLATE French_CI_AS = N'Jean-Michel Jarre'
 ```
 
-<span data-ttu-id="baa37-463">請注意，特定定序應謹慎使用，因為它們可能會對資料庫效能造成負面影響。</span><span class="sxs-lookup"><span data-stu-id="baa37-463">Note that ad-hoc collations should be used with care as they can negatively impact database performance.</span></span>
+<span data-ttu-id="abf22-463">請注意，特定定序應謹慎使用，因為它們可能會對資料庫效能造成負面影響。</span><span class="sxs-lookup"><span data-stu-id="abf22-463">Note that ad-hoc collations should be used with care as they can negatively impact database performance.</span></span>
 
-<span data-ttu-id="baa37-464">檔是由問題 [#2273](https://github.com/dotnet/EntityFramework.Docs/issues/2273)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-464">Documentation is tracked by issue [#2273](https://github.com/dotnet/EntityFramework.Docs/issues/2273).</span></span>
+<span data-ttu-id="abf22-464">檔是由問題 [#2273](https://github.com/dotnet/EntityFramework.Docs/issues/2273)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-464">Documentation is tracked by issue [#2273](https://github.com/dotnet/EntityFramework.Docs/issues/2273).</span></span>
 
-### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a><span data-ttu-id="baa37-465">IDesignTimeDbCoNtextFactory 的流程引數</span><span class="sxs-lookup"><span data-stu-id="baa37-465">Flow arguments into IDesignTimeDbContextFactory</span></span>
+### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a><span data-ttu-id="abf22-465">IDesignTimeDbCoNtextFactory 的流程引數</span><span class="sxs-lookup"><span data-stu-id="abf22-465">Flow arguments into IDesignTimeDbContextFactory</span></span>
 
-<span data-ttu-id="baa37-466">引數現在會從命令列流向 `CreateDbContext` [IDesignTimeDbCoNtextFactory](/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1)方法。</span><span class="sxs-lookup"><span data-stu-id="baa37-466">Arguments are now flowed from the command line into the `CreateDbContext` method of [IDesignTimeDbContextFactory](/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1).</span></span> <span data-ttu-id="baa37-467">例如，若要表示這是開發組建，您 `dev` 可以在命令列上傳遞自訂引數 (例如) ：</span><span class="sxs-lookup"><span data-stu-id="baa37-467">For example, to indicate this is a dev build, a custom argument (e.g. `dev`) can be passed on the command line:</span></span>
+<span data-ttu-id="abf22-466">引數現在會從命令列流向 `CreateDbContext` [IDesignTimeDbCoNtextFactory](/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1)方法。</span><span class="sxs-lookup"><span data-stu-id="abf22-466">Arguments are now flowed from the command line into the `CreateDbContext` method of [IDesignTimeDbContextFactory](/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1).</span></span> <span data-ttu-id="abf22-467">例如，若要表示這是開發組建，您 `dev` 可以在命令列上傳遞自訂引數 (例如) ：</span><span class="sxs-lookup"><span data-stu-id="abf22-467">For example, to indicate this is a dev build, a custom argument (e.g. `dev`) can be passed on the command line:</span></span>
 
 ```
 dotnet ef migrations add two --verbose --dev
 ```
 
-<span data-ttu-id="baa37-468">然後，這個引數會流入處理站，可用來控制內容的建立與初始化方式。</span><span class="sxs-lookup"><span data-stu-id="baa37-468">This argument will then flow into the factory, where it can be used to control how the context is created and initialized.</span></span> <span data-ttu-id="baa37-469">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-469">For example:</span></span>
+<span data-ttu-id="abf22-468">然後，這個引數會流入處理站，可用來控制內容的建立與初始化方式。</span><span class="sxs-lookup"><span data-stu-id="abf22-468">This argument will then flow into the factory, where it can be used to control how the context is created and initialized.</span></span> <span data-ttu-id="abf22-469">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-469">For example:</span></span>
 
-```CSharp
+```csharp
 public class MyDbContextFactory : IDesignTimeDbContextFactory<SomeDbContext>
 {
     public SomeDbContext CreateDbContext(string[] args)
@@ -1504,138 +1514,138 @@ public class MyDbContextFactory : IDesignTimeDbContextFactory<SomeDbContext>
 }
 ```
 
-<span data-ttu-id="baa37-470">檔是由問題 [#2419](https://github.com/dotnet/EntityFramework.Docs/issues/2419)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-470">Documentation is tracked by issue [#2419](https://github.com/dotnet/EntityFramework.Docs/issues/2419).</span></span>
+<span data-ttu-id="abf22-470">檔是由問題 [#2419](https://github.com/dotnet/EntityFramework.Docs/issues/2419)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-470">Documentation is tracked by issue [#2419](https://github.com/dotnet/EntityFramework.Docs/issues/2419).</span></span>
 
-### <a name="no-tracking-queries-with-identity-resolution"></a><span data-ttu-id="baa37-471">沒有識別解析的追蹤查詢</span><span class="sxs-lookup"><span data-stu-id="baa37-471">No-tracking queries with identity resolution</span></span>
+### <a name="no-tracking-queries-with-identity-resolution"></a><span data-ttu-id="abf22-471">沒有識別解析的追蹤查詢</span><span class="sxs-lookup"><span data-stu-id="abf22-471">No-tracking queries with identity resolution</span></span>
 
-<span data-ttu-id="baa37-472">現在可以設定無追蹤查詢來執行識別解析。</span><span class="sxs-lookup"><span data-stu-id="baa37-472">No-tracking queries can now be configured to perform identity resolution.</span></span> <span data-ttu-id="baa37-473">例如，下列查詢會為每個貼文建立新的 Blog 實例，即使每個 Blog 都有相同的主要金鑰。</span><span class="sxs-lookup"><span data-stu-id="baa37-473">For example, the following query will create a new Blog instance for each Post, even if each Blog has the same primary key.</span></span>
+<span data-ttu-id="abf22-472">現在可以設定無追蹤查詢來執行識別解析。</span><span class="sxs-lookup"><span data-stu-id="abf22-472">No-tracking queries can now be configured to perform identity resolution.</span></span> <span data-ttu-id="abf22-473">例如，下列查詢會為每個貼文建立新的 Blog 實例，即使每個 Blog 都有相同的主要金鑰。</span><span class="sxs-lookup"><span data-stu-id="abf22-473">For example, the following query will create a new Blog instance for each Post, even if each Blog has the same primary key.</span></span>
 
-```CSharp
+```csharp
 context.Posts.AsNoTracking().Include(e => e.Blog).ToList();
 ```
 
-<span data-ttu-id="baa37-474">不過，代價通常會稍微慢一點，且一律使用更多記憶體，因此可以變更此查詢，以確保只會建立單一的 Blog 實例：</span><span class="sxs-lookup"><span data-stu-id="baa37-474">However, at the expense of usually being slightly slower and always using more memory, this query can be changed to ensure only a single Blog instance is created:</span></span>
+<span data-ttu-id="abf22-474">不過，代價通常會稍微慢一點，且一律使用更多記憶體，因此可以變更此查詢，以確保只會建立單一的 Blog 實例：</span><span class="sxs-lookup"><span data-stu-id="abf22-474">However, at the expense of usually being slightly slower and always using more memory, this query can be changed to ensure only a single Blog instance is created:</span></span>
 
-```CSharp
+```csharp
 context.Posts.AsNoTracking().PerformIdentityResolution().Include(e => e.Blog).ToList();
 ```
 
-<span data-ttu-id="baa37-475">請注意，這只適用于無追蹤查詢，因為所有追蹤查詢都已展示此行為。</span><span class="sxs-lookup"><span data-stu-id="baa37-475">Note that this is only useful for no-tracking queries since all tracking queries already exhibit this behavior.</span></span> <span data-ttu-id="baa37-476">此外，在遵循 API 審核之後，將會 `PerformIdentityResolution` 變更語法。</span><span class="sxs-lookup"><span data-stu-id="baa37-476">Also, following API review, the `PerformIdentityResolution` syntax will be changed.</span></span> <span data-ttu-id="baa37-477">請參閱 [#19877](https://github.com/dotnet/efcore/issues/19877#issuecomment-637371073)。</span><span class="sxs-lookup"><span data-stu-id="baa37-477">See [#19877](https://github.com/dotnet/efcore/issues/19877#issuecomment-637371073).</span></span>
+<span data-ttu-id="abf22-475">請注意，這只適用于無追蹤查詢，因為所有追蹤查詢都已展示此行為。</span><span class="sxs-lookup"><span data-stu-id="abf22-475">Note that this is only useful for no-tracking queries since all tracking queries already exhibit this behavior.</span></span> <span data-ttu-id="abf22-476">此外，在遵循 API 審核之後，將會 `PerformIdentityResolution` 變更語法。</span><span class="sxs-lookup"><span data-stu-id="abf22-476">Also, following API review, the `PerformIdentityResolution` syntax will be changed.</span></span> <span data-ttu-id="abf22-477">請參閱 [#19877](https://github.com/dotnet/efcore/issues/19877#issuecomment-637371073)。</span><span class="sxs-lookup"><span data-stu-id="abf22-477">See [#19877](https://github.com/dotnet/efcore/issues/19877#issuecomment-637371073).</span></span>
 
-<span data-ttu-id="baa37-478">檔是由問題 [#1895](https://github.com/dotnet/EntityFramework.Docs/issues/1895)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-478">Documentation is tracked by issue [#1895](https://github.com/dotnet/EntityFramework.Docs/issues/1895).</span></span>
+<span data-ttu-id="abf22-478">檔是由問題 [#1895](https://github.com/dotnet/EntityFramework.Docs/issues/1895)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-478">Documentation is tracked by issue [#1895](https://github.com/dotnet/EntityFramework.Docs/issues/1895).</span></span>
 
-### <a name="stored-persisted-computed-columns"></a><span data-ttu-id="baa37-479">儲存 (保存) 計算資料行</span><span class="sxs-lookup"><span data-stu-id="baa37-479">Stored (persisted) computed columns</span></span>
+### <a name="stored-persisted-computed-columns"></a><span data-ttu-id="abf22-479">儲存 (保存) 計算資料行</span><span class="sxs-lookup"><span data-stu-id="abf22-479">Stored (persisted) computed columns</span></span>
 
-<span data-ttu-id="baa37-480">大部分的資料庫允許在計算後儲存計算資料行值。</span><span class="sxs-lookup"><span data-stu-id="baa37-480">Most databases allow computed column values to be stored after computation.</span></span> <span data-ttu-id="baa37-481">雖然這會佔用磁碟空間，但計算資料行只會在更新時計算一次，而不是每次抓取其值時。</span><span class="sxs-lookup"><span data-stu-id="baa37-481">While this takes up disk space, the computed column is calculated only once on update, instead of each time its value is retrieved.</span></span> <span data-ttu-id="baa37-482">這也可讓某些資料庫的資料行編制索引。</span><span class="sxs-lookup"><span data-stu-id="baa37-482">This also allows the column to be indexed for some databases.</span></span>
+<span data-ttu-id="abf22-480">大部分的資料庫允許在計算後儲存計算資料行值。</span><span class="sxs-lookup"><span data-stu-id="abf22-480">Most databases allow computed column values to be stored after computation.</span></span> <span data-ttu-id="abf22-481">雖然這會佔用磁碟空間，但計算資料行只會在更新時計算一次，而不是每次抓取其值時。</span><span class="sxs-lookup"><span data-stu-id="abf22-481">While this takes up disk space, the computed column is calculated only once on update, instead of each time its value is retrieved.</span></span> <span data-ttu-id="abf22-482">這也可讓某些資料庫的資料行編制索引。</span><span class="sxs-lookup"><span data-stu-id="abf22-482">This also allows the column to be indexed for some databases.</span></span>
 
-<span data-ttu-id="baa37-483">EF Core 5.0 允許將計算資料行設定為已儲存。</span><span class="sxs-lookup"><span data-stu-id="baa37-483">EF Core 5.0 allows computed columns to be configured as stored.</span></span> <span data-ttu-id="baa37-484">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-484">For example:</span></span>
+<span data-ttu-id="abf22-483">EF Core 5.0 允許將計算資料行設定為已儲存。</span><span class="sxs-lookup"><span data-stu-id="abf22-483">EF Core 5.0 allows computed columns to be configured as stored.</span></span> <span data-ttu-id="abf22-484">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-484">For example:</span></span>
 
-```CSharp
+```csharp
 modelBuilder
     .Entity<User>()
     .Property(e => e.SomethingComputed)
     .HasComputedColumnSql("my sql", stored: true);
 ```
 
-### <a name="sqlite-computed-columns"></a><span data-ttu-id="baa37-485">SQLite 計算資料行</span><span class="sxs-lookup"><span data-stu-id="baa37-485">SQLite computed columns</span></span>
+### <a name="sqlite-computed-columns"></a><span data-ttu-id="abf22-485">SQLite 計算資料行</span><span class="sxs-lookup"><span data-stu-id="abf22-485">SQLite computed columns</span></span>
 
-<span data-ttu-id="baa37-486">EF Core 現在支援 SQLite 資料庫中的計算資料行。</span><span class="sxs-lookup"><span data-stu-id="baa37-486">EF Core now supports computed columns in SQLite databases.</span></span>
+<span data-ttu-id="abf22-486">EF Core 現在支援 SQLite 資料庫中的計算資料行。</span><span class="sxs-lookup"><span data-stu-id="abf22-486">EF Core now supports computed columns in SQLite databases.</span></span>
 
-## <a name="preview-4"></a><span data-ttu-id="baa37-487">Preview 4</span><span class="sxs-lookup"><span data-stu-id="baa37-487">Preview 4</span></span>
+## <a name="preview-4"></a><span data-ttu-id="abf22-487">Preview 4</span><span class="sxs-lookup"><span data-stu-id="abf22-487">Preview 4</span></span>
 
-### <a name="configure-database-precisionscale-in-model"></a><span data-ttu-id="baa37-488">在模型中設定資料庫 precision/scale</span><span class="sxs-lookup"><span data-stu-id="baa37-488">Configure database precision/scale in model</span></span>
+### <a name="configure-database-precisionscale-in-model"></a><span data-ttu-id="abf22-488">在模型中設定資料庫 precision/scale</span><span class="sxs-lookup"><span data-stu-id="abf22-488">Configure database precision/scale in model</span></span>
 
-<span data-ttu-id="baa37-489">您現在可以使用模型產生器來指定屬性的有效位數和小數位數。</span><span class="sxs-lookup"><span data-stu-id="baa37-489">Precision and scale for a property can now be specified using the model builder.</span></span> <span data-ttu-id="baa37-490">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-490">For example:</span></span>
+<span data-ttu-id="abf22-489">您現在可以使用模型產生器來指定屬性的有效位數和小數位數。</span><span class="sxs-lookup"><span data-stu-id="abf22-489">Precision and scale for a property can now be specified using the model builder.</span></span> <span data-ttu-id="abf22-490">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-490">For example:</span></span>
 
-```CSharp
+```csharp
 modelBuilder
     .Entity<Blog>()
     .Property(b => b.Numeric)
     .HasPrecision(16, 4);
 ```
 
-<span data-ttu-id="baa37-491">精確度和小數位數仍然可以透過完整的資料庫類型來設定，例如 "decimal (16，4) "。</span><span class="sxs-lookup"><span data-stu-id="baa37-491">Precision and scale can still be set via the full database type, such as "decimal(16,4)".</span></span>
+<span data-ttu-id="abf22-491">精確度和小數位數仍然可以透過完整的資料庫類型來設定，例如 "decimal (16，4) "。</span><span class="sxs-lookup"><span data-stu-id="abf22-491">Precision and scale can still be set via the full database type, such as "decimal(16,4)".</span></span>
 
-<span data-ttu-id="baa37-492">檔是由問題 [#527](https://github.com/dotnet/EntityFramework.Docs/issues/527)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-492">Documentation is tracked by issue [#527](https://github.com/dotnet/EntityFramework.Docs/issues/527).</span></span>
+<span data-ttu-id="abf22-492">檔是由問題 [#527](https://github.com/dotnet/EntityFramework.Docs/issues/527)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-492">Documentation is tracked by issue [#527](https://github.com/dotnet/EntityFramework.Docs/issues/527).</span></span>
 
-### <a name="specify-sql-server-index-fill-factor"></a><span data-ttu-id="baa37-493">指定 SQL Server 索引填滿因數</span><span class="sxs-lookup"><span data-stu-id="baa37-493">Specify SQL Server index fill factor</span></span>
+### <a name="specify-sql-server-index-fill-factor"></a><span data-ttu-id="abf22-493">指定 SQL Server 索引填滿因數</span><span class="sxs-lookup"><span data-stu-id="abf22-493">Specify SQL Server index fill factor</span></span>
 
-<span data-ttu-id="baa37-494">您現在可以在 SQL Server 上建立索引時指定填滿因數。</span><span class="sxs-lookup"><span data-stu-id="baa37-494">The fill factor can now be specified when creating an index on SQL Server.</span></span> <span data-ttu-id="baa37-495">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-495">For example:</span></span>
+<span data-ttu-id="abf22-494">您現在可以在 SQL Server 上建立索引時指定填滿因數。</span><span class="sxs-lookup"><span data-stu-id="abf22-494">The fill factor can now be specified when creating an index on SQL Server.</span></span> <span data-ttu-id="abf22-495">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-495">For example:</span></span>
 
-```CSharp
+```csharp
 modelBuilder
     .Entity<Customer>()
     .HasIndex(e => e.Name)
     .HasFillFactor(90);
 ```
 
-## <a name="preview-3"></a><span data-ttu-id="baa37-496">Preview 3</span><span class="sxs-lookup"><span data-stu-id="baa37-496">Preview 3</span></span>
+## <a name="preview-3"></a><span data-ttu-id="abf22-496">Preview 3</span><span class="sxs-lookup"><span data-stu-id="abf22-496">Preview 3</span></span>
 
-### <a name="filtered-include"></a><span data-ttu-id="baa37-497">篩選的包含</span><span class="sxs-lookup"><span data-stu-id="baa37-497">Filtered Include</span></span>
+### <a name="filtered-include"></a><span data-ttu-id="abf22-497">篩選的包含</span><span class="sxs-lookup"><span data-stu-id="abf22-497">Filtered Include</span></span>
 
-<span data-ttu-id="baa37-498">Include 方法現在支援篩選包含的實體。</span><span class="sxs-lookup"><span data-stu-id="baa37-498">The Include method now supports filtering of the entities included.</span></span> <span data-ttu-id="baa37-499">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-499">For example:</span></span>
+<span data-ttu-id="abf22-498">Include 方法現在支援篩選包含的實體。</span><span class="sxs-lookup"><span data-stu-id="abf22-498">The Include method now supports filtering of the entities included.</span></span> <span data-ttu-id="abf22-499">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-499">For example:</span></span>
 
-```CSharp
+```csharp
 var blogs = context.Blogs
     .Include(e => e.Posts.Where(p => p.Title.Contains("Cheese")))
     .ToList();
 ```
 
-<span data-ttu-id="baa37-500">此查詢將會連同每個相關聯的貼文傳回 blog，但只有在貼文標題包含「乳酪」時。</span><span class="sxs-lookup"><span data-stu-id="baa37-500">This query will return blogs together with each associated post, but only when the post title contains "Cheese".</span></span>
+<span data-ttu-id="abf22-500">此查詢將會連同每個相關聯的貼文傳回 blog，但只有在貼文標題包含「乳酪」時。</span><span class="sxs-lookup"><span data-stu-id="abf22-500">This query will return blogs together with each associated post, but only when the post title contains "Cheese".</span></span>
 
-<span data-ttu-id="baa37-501">Skip 和 Take 也可以用來減少包含的實體數目。</span><span class="sxs-lookup"><span data-stu-id="baa37-501">Skip and Take can also be used to reduce the number of included entities.</span></span> <span data-ttu-id="baa37-502">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-502">For example:</span></span>
+<span data-ttu-id="abf22-501">Skip 和 Take 也可以用來減少包含的實體數目。</span><span class="sxs-lookup"><span data-stu-id="abf22-501">Skip and Take can also be used to reduce the number of included entities.</span></span> <span data-ttu-id="abf22-502">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-502">For example:</span></span>
 
-```CSharp
+```csharp
 var blogs = context.Blogs
     .Include(e => e.Posts.OrderByDescending(post => post.Title).Take(5)))
     .ToList();
 ```
-<span data-ttu-id="baa37-503">此查詢會傳回包含每個 blog 最多五篇文章的 blog。</span><span class="sxs-lookup"><span data-stu-id="baa37-503">This query will return blogs with at most five posts included on each blog.</span></span>
+<span data-ttu-id="abf22-503">此查詢會傳回包含每個 blog 最多五篇文章的 blog。</span><span class="sxs-lookup"><span data-stu-id="abf22-503">This query will return blogs with at most five posts included on each blog.</span></span>
 
-<span data-ttu-id="baa37-504">如需完整詳細資料，請參閱 [包含檔](xref:core/querying/related-data#filtered-include) 。</span><span class="sxs-lookup"><span data-stu-id="baa37-504">See the [Include documentation](xref:core/querying/related-data#filtered-include) for full details.</span></span>
+<span data-ttu-id="abf22-504">如需完整詳細資料，請參閱 [包含檔](xref:core/querying/related-data#filtered-include) 。</span><span class="sxs-lookup"><span data-stu-id="abf22-504">See the [Include documentation](xref:core/querying/related-data#filtered-include) for full details.</span></span>
 
-### <a name="new-modelbuilder-api-for-navigation-properties"></a><span data-ttu-id="baa37-505">適用于導覽屬性的新 ModelBuilder API</span><span class="sxs-lookup"><span data-stu-id="baa37-505">New ModelBuilder API for navigation properties</span></span>
+### <a name="new-modelbuilder-api-for-navigation-properties"></a><span data-ttu-id="abf22-505">適用于導覽屬性的新 ModelBuilder API</span><span class="sxs-lookup"><span data-stu-id="abf22-505">New ModelBuilder API for navigation properties</span></span>
 
-<span data-ttu-id="baa37-506">導覽屬性主要是在 [定義關聯](xref:core/modeling/relationships)性時進行設定。</span><span class="sxs-lookup"><span data-stu-id="baa37-506">Navigation properties are primarily configured when [defining relationships](xref:core/modeling/relationships).</span></span> <span data-ttu-id="baa37-507">不過，在 `Navigation` 導覽屬性需要額外設定的情況下，可以使用新的方法。</span><span class="sxs-lookup"><span data-stu-id="baa37-507">However, the new `Navigation` method can be used in the cases where navigation properties need additional configuration.</span></span> <span data-ttu-id="baa37-508">例如，當依據慣例找不到欄位時，設定導覽的支援欄位：</span><span class="sxs-lookup"><span data-stu-id="baa37-508">For example, to set a backing field for the navigation when the field would not be found by convention:</span></span>
+<span data-ttu-id="abf22-506">導覽屬性主要是在 [定義關聯](xref:core/modeling/relationships)性時進行設定。</span><span class="sxs-lookup"><span data-stu-id="abf22-506">Navigation properties are primarily configured when [defining relationships](xref:core/modeling/relationships).</span></span> <span data-ttu-id="abf22-507">不過，在 `Navigation` 導覽屬性需要額外設定的情況下，可以使用新的方法。</span><span class="sxs-lookup"><span data-stu-id="abf22-507">However, the new `Navigation` method can be used in the cases where navigation properties need additional configuration.</span></span> <span data-ttu-id="abf22-508">例如，當依據慣例找不到欄位時，設定導覽的支援欄位：</span><span class="sxs-lookup"><span data-stu-id="abf22-508">For example, to set a backing field for the navigation when the field would not be found by convention:</span></span>
 
-```CSharp
+```csharp
 modelBuilder.Entity<Blog>().Navigation(e => e.Posts).HasField("_myposts");
 ```
 
-<span data-ttu-id="baa37-509">請注意， `Navigation` API 不會取代關聯性設定。</span><span class="sxs-lookup"><span data-stu-id="baa37-509">Note that the `Navigation` API does not replace relationship configuration.</span></span> <span data-ttu-id="baa37-510">相反地，它允許在已探索或已定義的關聯性中，進行其他的導覽屬性設定。</span><span class="sxs-lookup"><span data-stu-id="baa37-510">Instead it allows additional configuration of navigation properties in already discovered or defined relationships.</span></span>
+<span data-ttu-id="abf22-509">請注意， `Navigation` API 不會取代關聯性設定。</span><span class="sxs-lookup"><span data-stu-id="abf22-509">Note that the `Navigation` API does not replace relationship configuration.</span></span> <span data-ttu-id="abf22-510">相反地，它允許在已探索或已定義的關聯性中，進行其他的導覽屬性設定。</span><span class="sxs-lookup"><span data-stu-id="abf22-510">Instead it allows additional configuration of navigation properties in already discovered or defined relationships.</span></span>
 
-<span data-ttu-id="baa37-511">請參閱設定 [導覽屬性檔](xref:core/modeling/relationships#configuring-navigation-properties)。</span><span class="sxs-lookup"><span data-stu-id="baa37-511">See the [Configuring Navigation Properties documentation](xref:core/modeling/relationships#configuring-navigation-properties).</span></span>
+<span data-ttu-id="abf22-511">請參閱設定 [導覽屬性檔](xref:core/modeling/relationships#configuring-navigation-properties)。</span><span class="sxs-lookup"><span data-stu-id="abf22-511">See the [Configuring Navigation Properties documentation](xref:core/modeling/relationships#configuring-navigation-properties).</span></span>
 
-### <a name="new-command-line-parameters-for-namespaces-and-connection-strings"></a><span data-ttu-id="baa37-512">命名空間和連接字串的新命令列參數</span><span class="sxs-lookup"><span data-stu-id="baa37-512">New command-line parameters for namespaces and connection strings</span></span>
+### <a name="new-command-line-parameters-for-namespaces-and-connection-strings"></a><span data-ttu-id="abf22-512">命名空間和連接字串的新命令列參數</span><span class="sxs-lookup"><span data-stu-id="abf22-512">New command-line parameters for namespaces and connection strings</span></span>
 
-<span data-ttu-id="baa37-513">現在可讓您在命令列上指定命名空間。</span><span class="sxs-lookup"><span data-stu-id="baa37-513">Migrations and scaffolding now allow namespaces to be specified on the command line.</span></span> <span data-ttu-id="baa37-514">例如，若要對資料庫進行反向工程，將內容和模型類別放在不同的命名空間中：</span><span class="sxs-lookup"><span data-stu-id="baa37-514">For example, to reverse engineer a database putting the context and model classes in different namespaces:</span></span>
+<span data-ttu-id="abf22-513">現在可讓您在命令列上指定命名空間。</span><span class="sxs-lookup"><span data-stu-id="abf22-513">Migrations and scaffolding now allow namespaces to be specified on the command line.</span></span> <span data-ttu-id="abf22-514">例如，若要對資料庫進行反向工程，將內容和模型類別放在不同的命名空間中：</span><span class="sxs-lookup"><span data-stu-id="abf22-514">For example, to reverse engineer a database putting the context and model classes in different namespaces:</span></span>
 
 ```dotnetcli
 dotnet ef dbcontext scaffold "connection string" Microsoft.EntityFrameworkCore.SqlServer --context-namespace "My.Context" --namespace "My.Model"
 ```
 
-<span data-ttu-id="baa37-515">如需完整的詳細資料，請參閱「 [遷移](xref:core/managing-schemas/migrations/index#namespaces) 和 [反向工程](xref:core/managing-schemas/scaffolding#directories-and-namespaces) 」檔。</span><span class="sxs-lookup"><span data-stu-id="baa37-515">See the [Migrations](xref:core/managing-schemas/migrations/index#namespaces) and [Reverse Engineering](xref:core/managing-schemas/scaffolding#directories-and-namespaces) documentation for full details.</span></span>
+<span data-ttu-id="abf22-515">如需完整的詳細資料，請參閱「 [遷移](xref:core/managing-schemas/migrations/index#namespaces) 和 [反向工程](xref:core/managing-schemas/scaffolding#directories-and-namespaces) 」檔。</span><span class="sxs-lookup"><span data-stu-id="abf22-515">See the [Migrations](xref:core/managing-schemas/migrations/index#namespaces) and [Reverse Engineering](xref:core/managing-schemas/scaffolding#directories-and-namespaces) documentation for full details.</span></span>
 
 ---
-<span data-ttu-id="baa37-516">此外，現在可以將連接字串傳遞至 `database-update` 命令：</span><span class="sxs-lookup"><span data-stu-id="baa37-516">Also, a connection string can now be passed to the `database-update` command:</span></span>
+<span data-ttu-id="abf22-516">此外，現在可以將連接字串傳遞至 `database-update` 命令：</span><span class="sxs-lookup"><span data-stu-id="abf22-516">Also, a connection string can now be passed to the `database-update` command:</span></span>
 
 ```dotnetcli
 dotnet ef database update --connection "connection string"
 ```
 
-<span data-ttu-id="baa37-517">如需完整的詳細資訊，請參閱 [工具檔](xref:core/miscellaneous/cli/dotnet#dotnet-ef-database-update) 。</span><span class="sxs-lookup"><span data-stu-id="baa37-517">See the [Tools documentation](xref:core/miscellaneous/cli/dotnet#dotnet-ef-database-update) for full details.</span></span>
+<span data-ttu-id="abf22-517">如需完整的詳細資訊，請參閱 [工具檔](xref:core/miscellaneous/cli/dotnet#dotnet-ef-database-update) 。</span><span class="sxs-lookup"><span data-stu-id="abf22-517">See the [Tools documentation](xref:core/miscellaneous/cli/dotnet#dotnet-ef-database-update) for full details.</span></span>
 
-<span data-ttu-id="baa37-518">對應的參數也已加入至 VS 封裝管理員主控台中使用的 PowerShell 命令。</span><span class="sxs-lookup"><span data-stu-id="baa37-518">Equivalent parameters have also been added to the PowerShell commands used in the VS Package Manager Console.</span></span>
+<span data-ttu-id="abf22-518">對應的參數也已加入至 VS 封裝管理員主控台中使用的 PowerShell 命令。</span><span class="sxs-lookup"><span data-stu-id="abf22-518">Equivalent parameters have also been added to the PowerShell commands used in the VS Package Manager Console.</span></span>
 
-### <a name="enabledetailederrors-has-returned"></a><span data-ttu-id="baa37-519">EnableDetailedErrors 已傳回</span><span class="sxs-lookup"><span data-stu-id="baa37-519">EnableDetailedErrors has returned</span></span>
+### <a name="enabledetailederrors-has-returned"></a><span data-ttu-id="abf22-519">EnableDetailedErrors 已傳回</span><span class="sxs-lookup"><span data-stu-id="abf22-519">EnableDetailedErrors has returned</span></span>
 
-<span data-ttu-id="baa37-520">基於效能考慮，從資料庫讀取值時，EF 不會執行額外的 null 檢查。</span><span class="sxs-lookup"><span data-stu-id="baa37-520">For performance reasons, EF doesn't do additional null-checks when reading values from the database.</span></span> <span data-ttu-id="baa37-521">這可能會導致在遇到未預期的 null 時，難以造成根本原因的例外狀況。</span><span class="sxs-lookup"><span data-stu-id="baa37-521">This can result in exceptions that are hard to root-cause when an unexpected null is encountered.</span></span>
+<span data-ttu-id="abf22-520">基於效能考慮，從資料庫讀取值時，EF 不會執行額外的 null 檢查。</span><span class="sxs-lookup"><span data-stu-id="abf22-520">For performance reasons, EF doesn't do additional null-checks when reading values from the database.</span></span> <span data-ttu-id="abf22-521">這可能會導致在遇到未預期的 null 時，難以造成根本原因的例外狀況。</span><span class="sxs-lookup"><span data-stu-id="abf22-521">This can result in exceptions that are hard to root-cause when an unexpected null is encountered.</span></span>
 
-<span data-ttu-id="baa37-522">使用 `EnableDetailedErrors` 會將額外的 null 檢查新增至查詢，如此一來，若要降低效能，您可以更輕鬆地追蹤至根本原因。</span><span class="sxs-lookup"><span data-stu-id="baa37-522">Using `EnableDetailedErrors` will add extra null checking to queries such that, for a small performance overhead, these errors are easier to trace back to a root cause.</span></span>
+<span data-ttu-id="abf22-522">使用 `EnableDetailedErrors` 會將額外的 null 檢查新增至查詢，如此一來，若要降低效能，您可以更輕鬆地追蹤至根本原因。</span><span class="sxs-lookup"><span data-stu-id="abf22-522">Using `EnableDetailedErrors` will add extra null checking to queries such that, for a small performance overhead, these errors are easier to trace back to a root cause.</span></span>
 
-<span data-ttu-id="baa37-523">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-523">For example:</span></span>
+<span data-ttu-id="abf22-523">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-523">For example:</span></span>
 
-```CSharp
+```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder
         .EnableDetailedErrors()
@@ -1643,35 +1653,35 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         .UseSqlServer(Your.SqlServerConnectionString);
 ```
 
-<span data-ttu-id="baa37-524">檔是由問題 [#955](https://github.com/dotnet/EntityFramework.Docs/issues/955)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-524">Documentation is tracked by issue [#955](https://github.com/dotnet/EntityFramework.Docs/issues/955).</span></span>
+<span data-ttu-id="abf22-524">檔是由問題 [#955](https://github.com/dotnet/EntityFramework.Docs/issues/955)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-524">Documentation is tracked by issue [#955](https://github.com/dotnet/EntityFramework.Docs/issues/955).</span></span>
 
-### <a name="cosmos-partition-keys"></a><span data-ttu-id="baa37-525">Cosmos 分割區索引鍵</span><span class="sxs-lookup"><span data-stu-id="baa37-525">Cosmos partition keys</span></span>
+### <a name="cosmos-partition-keys"></a><span data-ttu-id="abf22-525">Cosmos 分割區索引鍵</span><span class="sxs-lookup"><span data-stu-id="abf22-525">Cosmos partition keys</span></span>
 
-<span data-ttu-id="baa37-526">您現在可以在查詢中指定要用於指定之查詢的資料分割索引鍵。</span><span class="sxs-lookup"><span data-stu-id="baa37-526">The partition key to use for a given query can now be specified in the query.</span></span> <span data-ttu-id="baa37-527">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-527">For example:</span></span>
+<span data-ttu-id="abf22-526">您現在可以在查詢中指定要用於指定之查詢的資料分割索引鍵。</span><span class="sxs-lookup"><span data-stu-id="abf22-526">The partition key to use for a given query can now be specified in the query.</span></span> <span data-ttu-id="abf22-527">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-527">For example:</span></span>
 
-```CSharp
+```csharp
 await context.Set<Customer>()
              .WithPartitionKey(myPartitionKey)
              .FirstAsync();
 ```
 
-<span data-ttu-id="baa37-528">檔是由問題 [#2199](https://github.com/dotnet/EntityFramework.Docs/issues/2199)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-528">Documentation is tracked by issue [#2199](https://github.com/dotnet/EntityFramework.Docs/issues/2199).</span></span>
+<span data-ttu-id="abf22-528">檔是由問題 [#2199](https://github.com/dotnet/EntityFramework.Docs/issues/2199)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-528">Documentation is tracked by issue [#2199](https://github.com/dotnet/EntityFramework.Docs/issues/2199).</span></span>
 
-### <a name="support-for-the-sql-server-datalength-function"></a><span data-ttu-id="baa37-529">支援 SQL Server DATALENGTH 函數</span><span class="sxs-lookup"><span data-stu-id="baa37-529">Support for the SQL Server DATALENGTH function</span></span>
+### <a name="support-for-the-sql-server-datalength-function"></a><span data-ttu-id="abf22-529">支援 SQL Server DATALENGTH 函數</span><span class="sxs-lookup"><span data-stu-id="abf22-529">Support for the SQL Server DATALENGTH function</span></span>
 
-<span data-ttu-id="baa37-530">這可以使用新的方法來存取 `EF.Functions.DataLength` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-530">This can be accessed using the new `EF.Functions.DataLength` method.</span></span> <span data-ttu-id="baa37-531">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-531">For example:</span></span>
+<span data-ttu-id="abf22-530">這可以使用新的方法來存取 `EF.Functions.DataLength` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-530">This can be accessed using the new `EF.Functions.DataLength` method.</span></span> <span data-ttu-id="abf22-531">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-531">For example:</span></span>
 
-```CSharp
+```csharp
 var count = context.Orders.Count(c => 100 < EF.Functions.DataLength(c.OrderDate));
 ```
 
-## <a name="preview-2"></a><span data-ttu-id="baa37-532">Preview 2</span><span class="sxs-lookup"><span data-stu-id="baa37-532">Preview 2</span></span>
+## <a name="preview-2"></a><span data-ttu-id="abf22-532">Preview 2</span><span class="sxs-lookup"><span data-stu-id="abf22-532">Preview 2</span></span>
 
-### <a name="use-a-c-attribute-to-specify-a-property-backing-field"></a><span data-ttu-id="baa37-533">使用 c # 屬性來指定屬性支援欄位</span><span class="sxs-lookup"><span data-stu-id="baa37-533">Use a C# attribute to specify a property backing field</span></span>
+### <a name="use-a-c-attribute-to-specify-a-property-backing-field"></a><span data-ttu-id="abf22-533">使用 c # 屬性來指定屬性支援欄位</span><span class="sxs-lookup"><span data-stu-id="abf22-533">Use a C# attribute to specify a property backing field</span></span>
 
-<span data-ttu-id="baa37-534">C # 屬性現在可用來指定屬性的支援欄位。</span><span class="sxs-lookup"><span data-stu-id="baa37-534">A C# attribute can now be used to specify the backing field for a property.</span></span> <span data-ttu-id="baa37-535">即使無法自動找到支援欄位，這個屬性仍可讓 EF Core 繼續寫入和讀取支援欄位。</span><span class="sxs-lookup"><span data-stu-id="baa37-535">This attribute allows EF Core to still write to and read from the backing field as would normally happen, even when the backing field cannot be found automatically.</span></span> <span data-ttu-id="baa37-536">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-536">For example:</span></span>
+<span data-ttu-id="abf22-534">C # 屬性現在可用來指定屬性的支援欄位。</span><span class="sxs-lookup"><span data-stu-id="abf22-534">A C# attribute can now be used to specify the backing field for a property.</span></span> <span data-ttu-id="abf22-535">即使無法自動找到支援欄位，這個屬性仍可讓 EF Core 繼續寫入和讀取支援欄位。</span><span class="sxs-lookup"><span data-stu-id="abf22-535">This attribute allows EF Core to still write to and read from the backing field as would normally happen, even when the backing field cannot be found automatically.</span></span> <span data-ttu-id="abf22-536">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-536">For example:</span></span>
 
-```CSharp
+```csharp
 public class Blog
 {
     private string _mainTitle;
@@ -1687,13 +1697,13 @@ public class Blog
 }
 ```
 
-<span data-ttu-id="baa37-537">檔是由問題 [#2230](https://github.com/dotnet/EntityFramework.Docs/issues/2230)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-537">Documentation is tracked by issue [#2230](https://github.com/dotnet/EntityFramework.Docs/issues/2230).</span></span>
+<span data-ttu-id="abf22-537">檔是由問題 [#2230](https://github.com/dotnet/EntityFramework.Docs/issues/2230)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-537">Documentation is tracked by issue [#2230](https://github.com/dotnet/EntityFramework.Docs/issues/2230).</span></span>
 
-### <a name="complete-discriminator-mapping"></a><span data-ttu-id="baa37-538">完成鑒別子對應</span><span class="sxs-lookup"><span data-stu-id="baa37-538">Complete discriminator mapping</span></span>
+### <a name="complete-discriminator-mapping"></a><span data-ttu-id="abf22-538">完成鑒別子對應</span><span class="sxs-lookup"><span data-stu-id="abf22-538">Complete discriminator mapping</span></span>
 
-<span data-ttu-id="baa37-539">EF Core 使用鑒別子資料行來進行 [繼承階層的 TPH 對應](xref:core/modeling/inheritance)。</span><span class="sxs-lookup"><span data-stu-id="baa37-539">EF Core uses a discriminator column for [TPH mapping of an inheritance hierarchy](xref:core/modeling/inheritance).</span></span> <span data-ttu-id="baa37-540">只要 EF Core 知道鑒別子的所有可能值，就可能會有一些效能增強功能。</span><span class="sxs-lookup"><span data-stu-id="baa37-540">Some performance enhancements are possible so long as EF Core knows all possible values for the discriminator.</span></span> <span data-ttu-id="baa37-541">EF Core 5.0 現在會實行這些增強功能。</span><span class="sxs-lookup"><span data-stu-id="baa37-541">EF Core 5.0 now implements these enhancements.</span></span>
+<span data-ttu-id="abf22-539">EF Core 使用鑒別子資料行來進行 [繼承階層的 TPH 對應](xref:core/modeling/inheritance)。</span><span class="sxs-lookup"><span data-stu-id="abf22-539">EF Core uses a discriminator column for [TPH mapping of an inheritance hierarchy](xref:core/modeling/inheritance).</span></span> <span data-ttu-id="abf22-540">只要 EF Core 知道鑒別子的所有可能值，就可能會有一些效能增強功能。</span><span class="sxs-lookup"><span data-stu-id="abf22-540">Some performance enhancements are possible so long as EF Core knows all possible values for the discriminator.</span></span> <span data-ttu-id="abf22-541">EF Core 5.0 現在會實行這些增強功能。</span><span class="sxs-lookup"><span data-stu-id="abf22-541">EF Core 5.0 now implements these enhancements.</span></span>
 
-<span data-ttu-id="baa37-542">例如，舊版的 EF Core 一律會為傳回階層中所有類型的查詢產生此 SQL：</span><span class="sxs-lookup"><span data-stu-id="baa37-542">For example, previous versions of EF Core would always generate this SQL for a query returning all types in a hierarchy:</span></span>
+<span data-ttu-id="abf22-542">例如，舊版的 EF Core 一律會為傳回階層中所有類型的查詢產生此 SQL：</span><span class="sxs-lookup"><span data-stu-id="abf22-542">For example, previous versions of EF Core would always generate this SQL for a query returning all types in a hierarchy:</span></span>
 
 ```sql
 SELECT [a].[Id], [a].[Discriminator], [a].[Name]
@@ -1701,47 +1711,47 @@ FROM [Animal] AS [a]
 WHERE [a].[Discriminator] IN (N'Animal', N'Cat', N'Dog', N'Human')
 ```
 
-<span data-ttu-id="baa37-543">當設定完整的鑒別子對應時，EF Core 5.0 現在會產生下列內容：</span><span class="sxs-lookup"><span data-stu-id="baa37-543">EF Core 5.0 will now generate the following when a complete discriminator mapping is configured:</span></span>
+<span data-ttu-id="abf22-543">當設定完整的鑒別子對應時，EF Core 5.0 現在會產生下列內容：</span><span class="sxs-lookup"><span data-stu-id="abf22-543">EF Core 5.0 will now generate the following when a complete discriminator mapping is configured:</span></span>
 
 ```sql
 SELECT [a].[Id], [a].[Discriminator], [a].[Name]
 FROM [Animal] AS [a]
 ```
 
-<span data-ttu-id="baa37-544">這會是從 preview 3 開始的預設行為。</span><span class="sxs-lookup"><span data-stu-id="baa37-544">It will be the default behavior starting with preview 3.</span></span>
+<span data-ttu-id="abf22-544">這會是從 preview 3 開始的預設行為。</span><span class="sxs-lookup"><span data-stu-id="abf22-544">It will be the default behavior starting with preview 3.</span></span>
 
-### <a name="performance-improvements-in-microsoftdatasqlite"></a><span data-ttu-id="baa37-545">Microsoft 的效能改進</span><span class="sxs-lookup"><span data-stu-id="baa37-545">Performance improvements in Microsoft.Data.Sqlite</span></span>
+### <a name="performance-improvements-in-microsoftdatasqlite"></a><span data-ttu-id="abf22-545">Microsoft 的效能改進</span><span class="sxs-lookup"><span data-stu-id="abf22-545">Performance improvements in Microsoft.Data.Sqlite</span></span>
 
-<span data-ttu-id="baa37-546">我們對 SQLIte 進行了兩項效能改進：</span><span class="sxs-lookup"><span data-stu-id="baa37-546">We have made two performance improvements for SQLIte:</span></span>
+<span data-ttu-id="abf22-546">我們對 SQLIte 進行了兩項效能改進：</span><span class="sxs-lookup"><span data-stu-id="abf22-546">We have made two performance improvements for SQLIte:</span></span>
 
-* <span data-ttu-id="baa37-547">使用 SqliteBlob 和資料流程，以 GetBytes、GetChars 和 GetTextReader 來取得二進位和字串資料，現在更有效率。</span><span class="sxs-lookup"><span data-stu-id="baa37-547">Retrieving binary and string data with GetBytes, GetChars, and GetTextReader is now more efficient by making use of SqliteBlob and streams.</span></span>
-* <span data-ttu-id="baa37-548">>sqliteconnection 的初始化現在是延遲的。</span><span class="sxs-lookup"><span data-stu-id="baa37-548">Initialization of SqliteConnection is now lazy.</span></span>
+* <span data-ttu-id="abf22-547">使用 SqliteBlob 和資料流程，以 GetBytes、GetChars 和 GetTextReader 來取得二進位和字串資料，現在更有效率。</span><span class="sxs-lookup"><span data-stu-id="abf22-547">Retrieving binary and string data with GetBytes, GetChars, and GetTextReader is now more efficient by making use of SqliteBlob and streams.</span></span>
+* <span data-ttu-id="abf22-548">>sqliteconnection 的初始化現在是延遲的。</span><span class="sxs-lookup"><span data-stu-id="abf22-548">Initialization of SqliteConnection is now lazy.</span></span>
 
-<span data-ttu-id="baa37-549">這些改良功能位於 ADO.NET 的 Microsoft. Sqlite 提供者中，因此也可改善 EF Core 之外的效能。</span><span class="sxs-lookup"><span data-stu-id="baa37-549">These improvements are in the ADO.NET Microsoft.Data.Sqlite provider and hence also improve performance outside of EF Core.</span></span>
+<span data-ttu-id="abf22-549">這些改良功能位於 ADO.NET 的 Microsoft. Sqlite 提供者中，因此也可改善 EF Core 之外的效能。</span><span class="sxs-lookup"><span data-stu-id="abf22-549">These improvements are in the ADO.NET Microsoft.Data.Sqlite provider and hence also improve performance outside of EF Core.</span></span>
 
-## <a name="preview-1"></a><span data-ttu-id="baa37-550">Preview 1</span><span class="sxs-lookup"><span data-stu-id="baa37-550">Preview 1</span></span>
+## <a name="preview-1"></a><span data-ttu-id="abf22-550">Preview 1</span><span class="sxs-lookup"><span data-stu-id="abf22-550">Preview 1</span></span>
 
-### <a name="simple-logging"></a><span data-ttu-id="baa37-551">簡單記錄</span><span class="sxs-lookup"><span data-stu-id="baa37-551">Simple logging</span></span>
+### <a name="simple-logging"></a><span data-ttu-id="abf22-551">簡單記錄</span><span class="sxs-lookup"><span data-stu-id="abf22-551">Simple logging</span></span>
 
-<span data-ttu-id="baa37-552">這項功能 `Database.Log` 在 EF6 中新增了類似的功能。</span><span class="sxs-lookup"><span data-stu-id="baa37-552">This feature adds functionality similar to `Database.Log` in EF6.</span></span> <span data-ttu-id="baa37-553">也就是說，它會提供簡單的方法來取得 EF Core 的記錄，而不需要設定任何種類的外部記錄架構。</span><span class="sxs-lookup"><span data-stu-id="baa37-553">That is, it provides a simple way to get logs from EF Core without the need to configure any kind of external logging framework.</span></span>
+<span data-ttu-id="abf22-552">這項功能 `Database.Log` 在 EF6 中新增了類似的功能。</span><span class="sxs-lookup"><span data-stu-id="abf22-552">This feature adds functionality similar to `Database.Log` in EF6.</span></span> <span data-ttu-id="abf22-553">也就是說，它會提供簡單的方法來取得 EF Core 的記錄，而不需要設定任何種類的外部記錄架構。</span><span class="sxs-lookup"><span data-stu-id="abf22-553">That is, it provides a simple way to get logs from EF Core without the need to configure any kind of external logging framework.</span></span>
 
-<span data-ttu-id="baa37-554">[2019 年12月5日的 EF 每週狀態](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863)包含初稿檔。</span><span class="sxs-lookup"><span data-stu-id="baa37-554">Preliminary documentation is included in the [EF weekly status for December 5, 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863).</span></span>
+<span data-ttu-id="abf22-554">[2019 年12月5日的 EF 每週狀態](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863)包含初稿檔。</span><span class="sxs-lookup"><span data-stu-id="abf22-554">Preliminary documentation is included in the [EF weekly status for December 5, 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863).</span></span>
 
-<span data-ttu-id="baa37-555">其他檔是由問題 [#2085](https://github.com/dotnet/EntityFramework.Docs/issues/2085)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-555">Additional documentation is tracked by issue [#2085](https://github.com/dotnet/EntityFramework.Docs/issues/2085).</span></span>
+<span data-ttu-id="abf22-555">其他檔是由問題 [#2085](https://github.com/dotnet/EntityFramework.Docs/issues/2085)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-555">Additional documentation is tracked by issue [#2085](https://github.com/dotnet/EntityFramework.Docs/issues/2085).</span></span>
 
-### <a name="simple-way-to-get-generated-sql"></a><span data-ttu-id="baa37-556">取得所產生 SQL 的簡單方式</span><span class="sxs-lookup"><span data-stu-id="baa37-556">Simple way to get generated SQL</span></span>
+### <a name="simple-way-to-get-generated-sql"></a><span data-ttu-id="abf22-556">取得所產生 SQL 的簡單方式</span><span class="sxs-lookup"><span data-stu-id="abf22-556">Simple way to get generated SQL</span></span>
 
-<span data-ttu-id="baa37-557">EF Core 5.0 引進了 `ToQueryString` 擴充方法，此方法會傳回 EF Core 將在執行 LINQ 查詢時產生的 SQL。</span><span class="sxs-lookup"><span data-stu-id="baa37-557">EF Core 5.0 introduces the `ToQueryString` extension method, which will return the SQL that EF Core will generate when executing a LINQ query.</span></span>
+<span data-ttu-id="abf22-557">EF Core 5.0 引進了 `ToQueryString` 擴充方法，此方法會傳回 EF Core 將在執行 LINQ 查詢時產生的 SQL。</span><span class="sxs-lookup"><span data-stu-id="abf22-557">EF Core 5.0 introduces the `ToQueryString` extension method, which will return the SQL that EF Core will generate when executing a LINQ query.</span></span>
 
-<span data-ttu-id="baa37-558">[2020 年1月9日的 EF 每週狀態](https://github.com/dotnet/efcore/issues/19549#issuecomment-572823246)包含初稿檔。</span><span class="sxs-lookup"><span data-stu-id="baa37-558">Preliminary documentation is included in the [EF weekly status for January 9, 2020](https://github.com/dotnet/efcore/issues/19549#issuecomment-572823246).</span></span>
+<span data-ttu-id="abf22-558">[2020 年1月9日的 EF 每週狀態](https://github.com/dotnet/efcore/issues/19549#issuecomment-572823246)包含初稿檔。</span><span class="sxs-lookup"><span data-stu-id="abf22-558">Preliminary documentation is included in the [EF weekly status for January 9, 2020](https://github.com/dotnet/efcore/issues/19549#issuecomment-572823246).</span></span>
 
-<span data-ttu-id="baa37-559">其他檔是由問題 [#1331](https://github.com/dotnet/EntityFramework.Docs/issues/1331)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-559">Additional documentation is tracked by issue [#1331](https://github.com/dotnet/EntityFramework.Docs/issues/1331).</span></span>
+<span data-ttu-id="abf22-559">其他檔是由問題 [#1331](https://github.com/dotnet/EntityFramework.Docs/issues/1331)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-559">Additional documentation is tracked by issue [#1331](https://github.com/dotnet/EntityFramework.Docs/issues/1331).</span></span>
 
-### <a name="use-a-c-attribute-to-indicate-that-an-entity-has-no-key"></a><span data-ttu-id="baa37-560">使用 c # 屬性工作表示實體沒有索引鍵</span><span class="sxs-lookup"><span data-stu-id="baa37-560">Use a C# attribute to indicate that an entity has no key</span></span>
+### <a name="use-a-c-attribute-to-indicate-that-an-entity-has-no-key"></a><span data-ttu-id="abf22-560">使用 c # 屬性工作表示實體沒有索引鍵</span><span class="sxs-lookup"><span data-stu-id="abf22-560">Use a C# attribute to indicate that an entity has no key</span></span>
 
-<span data-ttu-id="baa37-561">實體類型現在可以設定為沒有使用新的索引鍵 `KeylessAttribute` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-561">An entity type can now be configured as having no key using the new `KeylessAttribute`.</span></span> <span data-ttu-id="baa37-562">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-562">For example:</span></span>
+<span data-ttu-id="abf22-561">實體類型現在可以設定為沒有使用新的索引鍵 `KeylessAttribute` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-561">An entity type can now be configured as having no key using the new `KeylessAttribute`.</span></span> <span data-ttu-id="abf22-562">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-562">For example:</span></span>
 
-```CSharp
+```csharp
 [Keyless]
 public class Address
 {
@@ -1751,55 +1761,55 @@ public class Address
 }
 ```
 
-<span data-ttu-id="baa37-563">檔是由問題 [#2186](https://github.com/dotnet/EntityFramework.Docs/issues/2186)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-563">Documentation is tracked by issue [#2186](https://github.com/dotnet/EntityFramework.Docs/issues/2186).</span></span>
+<span data-ttu-id="abf22-563">檔是由問題 [#2186](https://github.com/dotnet/EntityFramework.Docs/issues/2186)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-563">Documentation is tracked by issue [#2186](https://github.com/dotnet/EntityFramework.Docs/issues/2186).</span></span>
 
-### <a name="connection-or-connection-string-can-be-changed-on-initialized-dbcontext"></a><span data-ttu-id="baa37-564">可以在初始化的 DbCoNtext 上變更連接或連接字串</span><span class="sxs-lookup"><span data-stu-id="baa37-564">Connection or connection string can be changed on initialized DbContext</span></span>
+### <a name="connection-or-connection-string-can-be-changed-on-initialized-dbcontext"></a><span data-ttu-id="abf22-564">可以在初始化的 DbCoNtext 上變更連接或連接字串</span><span class="sxs-lookup"><span data-stu-id="abf22-564">Connection or connection string can be changed on initialized DbContext</span></span>
 
-<span data-ttu-id="baa37-565">現在，您可以更輕鬆地建立沒有任何連接或連接字串的 DbCoNtext 實例。</span><span class="sxs-lookup"><span data-stu-id="baa37-565">It is now easier to create a DbContext instance without any connection or connection string.</span></span> <span data-ttu-id="baa37-566">此外，連接或連接字串現在可以在內容實例上進行變化。</span><span class="sxs-lookup"><span data-stu-id="baa37-566">Also, the connection or connection string can now be mutated on the context instance.</span></span> <span data-ttu-id="baa37-567">這項功能可讓相同的內容實例動態連接到不同的資料庫。</span><span class="sxs-lookup"><span data-stu-id="baa37-567">This feature allows the same context instance to dynamically connect to different databases.</span></span>
+<span data-ttu-id="abf22-565">現在，您可以更輕鬆地建立沒有任何連接或連接字串的 DbCoNtext 實例。</span><span class="sxs-lookup"><span data-stu-id="abf22-565">It is now easier to create a DbContext instance without any connection or connection string.</span></span> <span data-ttu-id="abf22-566">此外，連接或連接字串現在可以在內容實例上進行變化。</span><span class="sxs-lookup"><span data-stu-id="abf22-566">Also, the connection or connection string can now be mutated on the context instance.</span></span> <span data-ttu-id="abf22-567">這項功能可讓相同的內容實例動態連接到不同的資料庫。</span><span class="sxs-lookup"><span data-stu-id="abf22-567">This feature allows the same context instance to dynamically connect to different databases.</span></span>
 
-<span data-ttu-id="baa37-568">檔是由問題 [#2075](https://github.com/dotnet/EntityFramework.Docs/issues/2075)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-568">Documentation is tracked by issue [#2075](https://github.com/dotnet/EntityFramework.Docs/issues/2075).</span></span>
+<span data-ttu-id="abf22-568">檔是由問題 [#2075](https://github.com/dotnet/EntityFramework.Docs/issues/2075)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-568">Documentation is tracked by issue [#2075](https://github.com/dotnet/EntityFramework.Docs/issues/2075).</span></span>
 
-### <a name="change-tracking-proxies"></a><span data-ttu-id="baa37-569">變更追蹤 proxy</span><span class="sxs-lookup"><span data-stu-id="baa37-569">Change-tracking proxies</span></span>
+### <a name="change-tracking-proxies"></a><span data-ttu-id="abf22-569">變更追蹤 proxy</span><span class="sxs-lookup"><span data-stu-id="abf22-569">Change-tracking proxies</span></span>
 
-<span data-ttu-id="baa37-570">EF Core 現在可以產生自動執行 [INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging) 和 [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged)的執行時間 proxy。</span><span class="sxs-lookup"><span data-stu-id="baa37-570">EF Core can now generate runtime proxies that automatically implement [INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging) and [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged).</span></span> <span data-ttu-id="baa37-571">然後，這些會將實體屬性的值變更直接回報給 EF Core，以避免需要掃描變更。</span><span class="sxs-lookup"><span data-stu-id="baa37-571">These then report value changes on entity properties directly to EF Core, avoiding the need to scan for changes.</span></span> <span data-ttu-id="baa37-572">不過，proxy 有自己的一組限制，因此不適合所有人。</span><span class="sxs-lookup"><span data-stu-id="baa37-572">However, proxies come with their own set of limitations, so they are not for everyone.</span></span>
+<span data-ttu-id="abf22-570">EF Core 現在可以產生自動執行 [INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging) 和 [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged)的執行時間 proxy。</span><span class="sxs-lookup"><span data-stu-id="abf22-570">EF Core can now generate runtime proxies that automatically implement [INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging) and [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged).</span></span> <span data-ttu-id="abf22-571">然後，這些會將實體屬性的值變更直接回報給 EF Core，以避免需要掃描變更。</span><span class="sxs-lookup"><span data-stu-id="abf22-571">These then report value changes on entity properties directly to EF Core, avoiding the need to scan for changes.</span></span> <span data-ttu-id="abf22-572">不過，proxy 有自己的一組限制，因此不適合所有人。</span><span class="sxs-lookup"><span data-stu-id="abf22-572">However, proxies come with their own set of limitations, so they are not for everyone.</span></span>
 
-<span data-ttu-id="baa37-573">檔是由問題 [#2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-573">Documentation is tracked by issue [#2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076).</span></span>
+<span data-ttu-id="abf22-573">檔是由問題 [#2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-573">Documentation is tracked by issue [#2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076).</span></span>
 
-### <a name="enhanced-debug-views"></a><span data-ttu-id="baa37-574">增強的調試視圖</span><span class="sxs-lookup"><span data-stu-id="baa37-574">Enhanced debug views</span></span>
+### <a name="enhanced-debug-views"></a><span data-ttu-id="abf22-574">增強的調試視圖</span><span class="sxs-lookup"><span data-stu-id="abf22-574">Enhanced debug views</span></span>
 
-<span data-ttu-id="baa37-575">偵錯工具是一種簡單的方法，可讓您在偵測到問題時，查看 EF Core 的內部。</span><span class="sxs-lookup"><span data-stu-id="baa37-575">Debug views are an easy way to look at the internals of EF Core when debugging issues.</span></span> <span data-ttu-id="baa37-576">模型的偵錯工具是在一段時間前執行。</span><span class="sxs-lookup"><span data-stu-id="baa37-576">A debug view for the Model was implemented some time ago.</span></span> <span data-ttu-id="baa37-577">針對 EF Core 5.0，我們讓模型視圖更容易讀取，並在狀態管理員中為追蹤的實體新增了新的偵錯工具。</span><span class="sxs-lookup"><span data-stu-id="baa37-577">For EF Core 5.0, we have made the model view easier to read and added a new debug view for tracked entities in the state manager.</span></span>
+<span data-ttu-id="abf22-575">偵錯工具是一種簡單的方法，可讓您在偵測到問題時，查看 EF Core 的內部。</span><span class="sxs-lookup"><span data-stu-id="abf22-575">Debug views are an easy way to look at the internals of EF Core when debugging issues.</span></span> <span data-ttu-id="abf22-576">模型的偵錯工具是在一段時間前執行。</span><span class="sxs-lookup"><span data-stu-id="abf22-576">A debug view for the Model was implemented some time ago.</span></span> <span data-ttu-id="abf22-577">針對 EF Core 5.0，我們讓模型視圖更容易讀取，並在狀態管理員中為追蹤的實體新增了新的偵錯工具。</span><span class="sxs-lookup"><span data-stu-id="abf22-577">For EF Core 5.0, we have made the model view easier to read and added a new debug view for tracked entities in the state manager.</span></span>
 
-<span data-ttu-id="baa37-578">[2019 年12月12日的 EF 每週狀態](https://github.com/dotnet/efcore/issues/15403#issuecomment-565196206)包含初稿檔。</span><span class="sxs-lookup"><span data-stu-id="baa37-578">Preliminary documentation is included in the [EF weekly status for December 12, 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-565196206).</span></span>
+<span data-ttu-id="abf22-578">[2019 年12月12日的 EF 每週狀態](https://github.com/dotnet/efcore/issues/15403#issuecomment-565196206)包含初稿檔。</span><span class="sxs-lookup"><span data-stu-id="abf22-578">Preliminary documentation is included in the [EF weekly status for December 12, 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-565196206).</span></span>
 
-<span data-ttu-id="baa37-579">其他檔是由問題 [#2086](https://github.com/dotnet/EntityFramework.Docs/issues/2086)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-579">Additional documentation is tracked by issue [#2086](https://github.com/dotnet/EntityFramework.Docs/issues/2086).</span></span>
+<span data-ttu-id="abf22-579">其他檔是由問題 [#2086](https://github.com/dotnet/EntityFramework.Docs/issues/2086)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-579">Additional documentation is tracked by issue [#2086](https://github.com/dotnet/EntityFramework.Docs/issues/2086).</span></span>
 
-### <a name="improved-handling-of-database-null-semantics"></a><span data-ttu-id="baa37-580">改進資料庫 null 語義的處理</span><span class="sxs-lookup"><span data-stu-id="baa37-580">Improved handling of database null semantics</span></span>
+### <a name="improved-handling-of-database-null-semantics"></a><span data-ttu-id="abf22-580">改進資料庫 null 語義的處理</span><span class="sxs-lookup"><span data-stu-id="abf22-580">Improved handling of database null semantics</span></span>
 
-<span data-ttu-id="baa37-581">關係資料庫通常會將 Null 視為未知值，因此不等於任何其他 Null。</span><span class="sxs-lookup"><span data-stu-id="baa37-581">Relational databases typically treat NULL as an unknown value and therefore not equal to any other NULL.</span></span> <span data-ttu-id="baa37-582">雖然 c # 會將 null 視為已定義的值，但會比較是否等於任何其他 null。</span><span class="sxs-lookup"><span data-stu-id="baa37-582">While C# treats null as a defined value, which compares equal to any other null.</span></span> <span data-ttu-id="baa37-583">EF Core 預設會轉譯查詢，使其使用 c # null 語義。</span><span class="sxs-lookup"><span data-stu-id="baa37-583">EF Core by default translates queries so that they use C# null semantics.</span></span> <span data-ttu-id="baa37-584">EF Core 5.0 可大幅提升這些翻譯的效率。</span><span class="sxs-lookup"><span data-stu-id="baa37-584">EF Core 5.0 greatly improves the efficiency of these translations.</span></span>
+<span data-ttu-id="abf22-581">關係資料庫通常會將 Null 視為未知值，因此不等於任何其他 Null。</span><span class="sxs-lookup"><span data-stu-id="abf22-581">Relational databases typically treat NULL as an unknown value and therefore not equal to any other NULL.</span></span> <span data-ttu-id="abf22-582">雖然 c # 會將 null 視為已定義的值，但會比較是否等於任何其他 null。</span><span class="sxs-lookup"><span data-stu-id="abf22-582">While C# treats null as a defined value, which compares equal to any other null.</span></span> <span data-ttu-id="abf22-583">EF Core 預設會轉譯查詢，使其使用 c # null 語義。</span><span class="sxs-lookup"><span data-stu-id="abf22-583">EF Core by default translates queries so that they use C# null semantics.</span></span> <span data-ttu-id="abf22-584">EF Core 5.0 可大幅提升這些翻譯的效率。</span><span class="sxs-lookup"><span data-stu-id="abf22-584">EF Core 5.0 greatly improves the efficiency of these translations.</span></span>
 
-<span data-ttu-id="baa37-585">檔是由問題 [#1612](https://github.com/dotnet/EntityFramework.Docs/issues/1612)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-585">Documentation is tracked by issue [#1612](https://github.com/dotnet/EntityFramework.Docs/issues/1612).</span></span>
+<span data-ttu-id="abf22-585">檔是由問題 [#1612](https://github.com/dotnet/EntityFramework.Docs/issues/1612)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-585">Documentation is tracked by issue [#1612](https://github.com/dotnet/EntityFramework.Docs/issues/1612).</span></span>
 
-### <a name="indexer-properties"></a><span data-ttu-id="baa37-586">索引子屬性</span><span class="sxs-lookup"><span data-stu-id="baa37-586">Indexer properties</span></span>
+### <a name="indexer-properties"></a><span data-ttu-id="abf22-586">索引子屬性</span><span class="sxs-lookup"><span data-stu-id="abf22-586">Indexer properties</span></span>
 
-<span data-ttu-id="baa37-587">EF Core 5.0 支援 c # 索引子屬性的對應。</span><span class="sxs-lookup"><span data-stu-id="baa37-587">EF Core 5.0 supports mapping of C# indexer properties.</span></span> <span data-ttu-id="baa37-588">這些屬性可讓實體當做屬性包，其中的資料行會對應至包中的命名屬性。</span><span class="sxs-lookup"><span data-stu-id="baa37-588">These properties allow entities to act as property bags where columns are mapped to named properties in the bag.</span></span>
+<span data-ttu-id="abf22-587">EF Core 5.0 支援 c # 索引子屬性的對應。</span><span class="sxs-lookup"><span data-stu-id="abf22-587">EF Core 5.0 supports mapping of C# indexer properties.</span></span> <span data-ttu-id="abf22-588">這些屬性可讓實體當做屬性包，其中的資料行會對應至包中的命名屬性。</span><span class="sxs-lookup"><span data-stu-id="abf22-588">These properties allow entities to act as property bags where columns are mapped to named properties in the bag.</span></span>
 
-<span data-ttu-id="baa37-589">檔是由問題 [#2018](https://github.com/dotnet/EntityFramework.Docs/issues/2018)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-589">Documentation is tracked by issue [#2018](https://github.com/dotnet/EntityFramework.Docs/issues/2018).</span></span>
+<span data-ttu-id="abf22-589">檔是由問題 [#2018](https://github.com/dotnet/EntityFramework.Docs/issues/2018)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-589">Documentation is tracked by issue [#2018](https://github.com/dotnet/EntityFramework.Docs/issues/2018).</span></span>
 
-### <a name="generation-of-check-constraints-for-enum-mappings"></a><span data-ttu-id="baa37-590">列舉對應的檢查條件約束產生</span><span class="sxs-lookup"><span data-stu-id="baa37-590">Generation of check constraints for enum mappings</span></span>
+### <a name="generation-of-check-constraints-for-enum-mappings"></a><span data-ttu-id="abf22-590">列舉對應的檢查條件約束產生</span><span class="sxs-lookup"><span data-stu-id="abf22-590">Generation of check constraints for enum mappings</span></span>
 
-<span data-ttu-id="baa37-591">EF Core 5.0 遷移現在可以產生列舉屬性對應的檢查條件約束。</span><span class="sxs-lookup"><span data-stu-id="baa37-591">EF Core 5.0 Migrations can now generate CHECK constraints for enum property mappings.</span></span> <span data-ttu-id="baa37-592">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-592">For example:</span></span>
+<span data-ttu-id="abf22-591">EF Core 5.0 遷移現在可以產生列舉屬性對應的檢查條件約束。</span><span class="sxs-lookup"><span data-stu-id="abf22-591">EF Core 5.0 Migrations can now generate CHECK constraints for enum property mappings.</span></span> <span data-ttu-id="abf22-592">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-592">For example:</span></span>
 
-```SQL
+```sql
 MyEnumColumn VARCHAR(10) NOT NULL CHECK (MyEnumColumn IN ('Useful', 'Useless', 'Unknown'))
 ```
 
-<span data-ttu-id="baa37-593">檔是由問題 [#2082](https://github.com/dotnet/EntityFramework.Docs/issues/2082)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-593">Documentation is tracked by issue [#2082](https://github.com/dotnet/EntityFramework.Docs/issues/2082).</span></span>
+<span data-ttu-id="abf22-593">檔是由問題 [#2082](https://github.com/dotnet/EntityFramework.Docs/issues/2082)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-593">Documentation is tracked by issue [#2082](https://github.com/dotnet/EntityFramework.Docs/issues/2082).</span></span>
 
-### <a name="isrelational"></a><span data-ttu-id="baa37-594">IsRelational</span><span class="sxs-lookup"><span data-stu-id="baa37-594">IsRelational</span></span>
+### <a name="isrelational"></a><span data-ttu-id="abf22-594">IsRelational</span><span class="sxs-lookup"><span data-stu-id="abf22-594">IsRelational</span></span>
 
-<span data-ttu-id="baa37-595">`IsRelational`除了現有的、和之外，還加入了新的方法 `IsSqlServer` `IsSqlite` `IsInMemory` 。</span><span class="sxs-lookup"><span data-stu-id="baa37-595">A new `IsRelational` method has been added in addition to the existing `IsSqlServer`, `IsSqlite`, and `IsInMemory`.</span></span> <span data-ttu-id="baa37-596">這個方法可以用來測試 DbCoNtext 是否使用任何關係資料庫提供者。</span><span class="sxs-lookup"><span data-stu-id="baa37-596">This method can be used to test if the DbContext is using any relational database provider.</span></span> <span data-ttu-id="baa37-597">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-597">For example:</span></span>
+<span data-ttu-id="abf22-595">`IsRelational`除了現有的、和之外，還加入了新的方法 `IsSqlServer` `IsSqlite` `IsInMemory` 。</span><span class="sxs-lookup"><span data-stu-id="abf22-595">A new `IsRelational` method has been added in addition to the existing `IsSqlServer`, `IsSqlite`, and `IsInMemory`.</span></span> <span data-ttu-id="abf22-596">這個方法可以用來測試 DbCoNtext 是否使用任何關係資料庫提供者。</span><span class="sxs-lookup"><span data-stu-id="abf22-596">This method can be used to test if the DbContext is using any relational database provider.</span></span> <span data-ttu-id="abf22-597">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-597">For example:</span></span>
 
-```CSharp
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     if (Database.IsRelational())
@@ -1809,68 +1819,68 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-<span data-ttu-id="baa37-598">檔是由問題 [#2185](https://github.com/dotnet/EntityFramework.Docs/issues/2185)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-598">Documentation is tracked by issue [#2185](https://github.com/dotnet/EntityFramework.Docs/issues/2185).</span></span>
+<span data-ttu-id="abf22-598">檔是由問題 [#2185](https://github.com/dotnet/EntityFramework.Docs/issues/2185)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-598">Documentation is tracked by issue [#2185](https://github.com/dotnet/EntityFramework.Docs/issues/2185).</span></span>
 
-### <a name="cosmos-optimistic-concurrency-with-etags"></a><span data-ttu-id="baa37-599">使用 Etag Cosmos 開放式平行存取</span><span class="sxs-lookup"><span data-stu-id="baa37-599">Cosmos optimistic concurrency with ETags</span></span>
+### <a name="cosmos-optimistic-concurrency-with-etags"></a><span data-ttu-id="abf22-599">使用 Etag Cosmos 開放式平行存取</span><span class="sxs-lookup"><span data-stu-id="abf22-599">Cosmos optimistic concurrency with ETags</span></span>
 
-<span data-ttu-id="baa37-600">Azure Cosmos DB 資料庫提供者現在支援使用 Etag 的開放式平行存取。</span><span class="sxs-lookup"><span data-stu-id="baa37-600">The Azure Cosmos DB database provider now supports optimistic concurrency using ETags.</span></span> <span data-ttu-id="baa37-601">使用 OnModelCreating 中的模型產生器來設定 ETag：</span><span class="sxs-lookup"><span data-stu-id="baa37-601">Use the model builder in OnModelCreating to configure an ETag:</span></span>
+<span data-ttu-id="abf22-600">Azure Cosmos DB 資料庫提供者現在支援使用 Etag 的開放式平行存取。</span><span class="sxs-lookup"><span data-stu-id="abf22-600">The Azure Cosmos DB database provider now supports optimistic concurrency using ETags.</span></span> <span data-ttu-id="abf22-601">使用 OnModelCreating 中的模型產生器來設定 ETag：</span><span class="sxs-lookup"><span data-stu-id="abf22-601">Use the model builder in OnModelCreating to configure an ETag:</span></span>
 
-```CSharp
+```csharp
 builder.Entity<Customer>().Property(c => c.ETag).IsEtagConcurrency();
 ```
 
-<span data-ttu-id="baa37-602">然後 SaveChanges 會擲回 `DbUpdateConcurrencyException` 並行衝突，以進行 [處理](xref:core/saving/concurrency) 以執行重試等。</span><span class="sxs-lookup"><span data-stu-id="baa37-602">SaveChanges will then throw an `DbUpdateConcurrencyException` on a concurrency conflict, which [can be handled](xref:core/saving/concurrency) to implement retries, etc.</span></span>
+<span data-ttu-id="abf22-602">然後 SaveChanges 會擲回 `DbUpdateConcurrencyException` 並行衝突，以進行 [處理](xref:core/saving/concurrency) 以執行重試等。</span><span class="sxs-lookup"><span data-stu-id="abf22-602">SaveChanges will then throw an `DbUpdateConcurrencyException` on a concurrency conflict, which [can be handled](xref:core/saving/concurrency) to implement retries, etc.</span></span>
 
-<span data-ttu-id="baa37-603">檔是由問題 [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-603">Documentation is tracked by issue [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099).</span></span>
+<span data-ttu-id="abf22-603">檔是由問題 [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-603">Documentation is tracked by issue [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099).</span></span>
 
-### <a name="query-translations-for-more-datetime-constructs"></a><span data-ttu-id="baa37-604">更多日期時間結構的查詢翻譯</span><span class="sxs-lookup"><span data-stu-id="baa37-604">Query translations for more DateTime constructs</span></span>
+### <a name="query-translations-for-more-datetime-constructs"></a><span data-ttu-id="abf22-604">更多日期時間結構的查詢翻譯</span><span class="sxs-lookup"><span data-stu-id="abf22-604">Query translations for more DateTime constructs</span></span>
 
-<span data-ttu-id="baa37-605">現在已翻譯包含新日期時間結構的查詢。</span><span class="sxs-lookup"><span data-stu-id="baa37-605">Queries containing new DateTime construction are now translated.</span></span>
+<span data-ttu-id="abf22-605">現在已翻譯包含新日期時間結構的查詢。</span><span class="sxs-lookup"><span data-stu-id="abf22-605">Queries containing new DateTime construction are now translated.</span></span>
 
-<span data-ttu-id="baa37-606">此外，現在已對應下列 SQL Server 函式：</span><span class="sxs-lookup"><span data-stu-id="baa37-606">In addition, the following SQL Server functions are now mapped:</span></span>
+<span data-ttu-id="abf22-606">此外，現在已對應下列 SQL Server 函式：</span><span class="sxs-lookup"><span data-stu-id="abf22-606">In addition, the following SQL Server functions are now mapped:</span></span>
 
-* <span data-ttu-id="baa37-607">DateDiffWeek</span><span class="sxs-lookup"><span data-stu-id="baa37-607">DateDiffWeek</span></span>
-* <span data-ttu-id="baa37-608">DateFromParts</span><span class="sxs-lookup"><span data-stu-id="baa37-608">DateFromParts</span></span>
+* <span data-ttu-id="abf22-607">DateDiffWeek</span><span class="sxs-lookup"><span data-stu-id="abf22-607">DateDiffWeek</span></span>
+* <span data-ttu-id="abf22-608">DateFromParts</span><span class="sxs-lookup"><span data-stu-id="abf22-608">DateFromParts</span></span>
 
-<span data-ttu-id="baa37-609">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-609">For example:</span></span>
+<span data-ttu-id="abf22-609">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-609">For example:</span></span>
 
-```CSharp
+```csharp
 var count = context.Orders.Count(c => date > EF.Functions.DateFromParts(DateTime.Now.Year, 12, 25));
 
 ```
 
-<span data-ttu-id="baa37-610">檔是由問題 [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-610">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
+<span data-ttu-id="abf22-610">檔是由問題 [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-610">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
 
-### <a name="query-translations-for-more-byte-array-constructs"></a><span data-ttu-id="baa37-611">更多位元組陣列結構的查詢翻譯</span><span class="sxs-lookup"><span data-stu-id="baa37-611">Query translations for more byte array constructs</span></span>
+### <a name="query-translations-for-more-byte-array-constructs"></a><span data-ttu-id="abf22-611">更多位元組陣列結構的查詢翻譯</span><span class="sxs-lookup"><span data-stu-id="abf22-611">Query translations for more byte array constructs</span></span>
 
-<span data-ttu-id="baa37-612">使用 Contains、Length、Enumerable.sequenceequal 等的查詢現在會轉譯為 SQL。</span><span class="sxs-lookup"><span data-stu-id="baa37-612">Queries using Contains, Length, SequenceEqual, etc. on byte[] properties are now translated to SQL.</span></span>
+<span data-ttu-id="abf22-612">使用 Contains、Length、Enumerable.sequenceequal 等的查詢現在會轉譯為 SQL。</span><span class="sxs-lookup"><span data-stu-id="abf22-612">Queries using Contains, Length, SequenceEqual, etc. on byte[] properties are now translated to SQL.</span></span>
 
-<span data-ttu-id="baa37-613">[2019 年12月5日的 EF 每週狀態](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863)包含初稿檔。</span><span class="sxs-lookup"><span data-stu-id="baa37-613">Preliminary documentation is included in the [EF weekly status for December 5, 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863).</span></span>
+<span data-ttu-id="abf22-613">[2019 年12月5日的 EF 每週狀態](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863)包含初稿檔。</span><span class="sxs-lookup"><span data-stu-id="abf22-613">Preliminary documentation is included in the [EF weekly status for December 5, 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863).</span></span>
 
-<span data-ttu-id="baa37-614">其他檔是由問題 [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-614">Additional documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
+<span data-ttu-id="abf22-614">其他檔是由問題 [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-614">Additional documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
 
-### <a name="query-translation-for-reverse"></a><span data-ttu-id="baa37-615">反向的查詢轉譯</span><span class="sxs-lookup"><span data-stu-id="baa37-615">Query translation for Reverse</span></span>
+### <a name="query-translation-for-reverse"></a><span data-ttu-id="abf22-615">反向的查詢轉譯</span><span class="sxs-lookup"><span data-stu-id="abf22-615">Query translation for Reverse</span></span>
 
-<span data-ttu-id="baa37-616">`Reverse`現在會轉譯使用的查詢。</span><span class="sxs-lookup"><span data-stu-id="baa37-616">Queries using `Reverse` are now translated.</span></span> <span data-ttu-id="baa37-617">例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-617">For example:</span></span>
+<span data-ttu-id="abf22-616">`Reverse`現在會轉譯使用的查詢。</span><span class="sxs-lookup"><span data-stu-id="abf22-616">Queries using `Reverse` are now translated.</span></span> <span data-ttu-id="abf22-617">例如︰</span><span class="sxs-lookup"><span data-stu-id="abf22-617">For example:</span></span>
 
-```CSharp
+```csharp
 context.Employees.OrderBy(e => e.EmployeeID).Reverse()
 ```
 
-<span data-ttu-id="baa37-618">檔是由問題 [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-618">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
+<span data-ttu-id="abf22-618">檔是由問題 [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-618">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
 
-### <a name="query-translation-for-bitwise-operators"></a><span data-ttu-id="baa37-619">位運算子的查詢轉譯</span><span class="sxs-lookup"><span data-stu-id="baa37-619">Query translation for bitwise operators</span></span>
+### <a name="query-translation-for-bitwise-operators"></a><span data-ttu-id="abf22-619">位運算子的查詢轉譯</span><span class="sxs-lookup"><span data-stu-id="abf22-619">Query translation for bitwise operators</span></span>
 
-<span data-ttu-id="baa37-620">使用位運算子的查詢現在會在更多情況下轉譯，例如：</span><span class="sxs-lookup"><span data-stu-id="baa37-620">Queries using bitwise operators are now translated in more cases For example:</span></span>
+<span data-ttu-id="abf22-620">使用位運算子的查詢現在會在更多情況下轉譯，例如：</span><span class="sxs-lookup"><span data-stu-id="abf22-620">Queries using bitwise operators are now translated in more cases For example:</span></span>
 
-```CSharp
+```csharp
 context.Orders.Where(o => ~o.OrderID == negatedId)
 ```
 
-<span data-ttu-id="baa37-621">檔是由問題 [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-621">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
+<span data-ttu-id="abf22-621">檔是由問題 [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-621">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
 
-### <a name="query-translation-for-strings-on-cosmos"></a><span data-ttu-id="baa37-622">Cosmos 上字串的查詢轉譯</span><span class="sxs-lookup"><span data-stu-id="baa37-622">Query translation for strings on Cosmos</span></span>
+### <a name="query-translation-for-strings-on-cosmos"></a><span data-ttu-id="abf22-622">Cosmos 上字串的查詢轉譯</span><span class="sxs-lookup"><span data-stu-id="abf22-622">Query translation for strings on Cosmos</span></span>
 
-<span data-ttu-id="baa37-623">使用字串方法的查詢現在會在使用 Azure Cosmos DB 提供者時轉譯。</span><span class="sxs-lookup"><span data-stu-id="baa37-623">Queries that use the string methods Contains, StartsWith, and EndsWith are now translated when using the Azure Cosmos DB provider.</span></span>
+<span data-ttu-id="abf22-623">使用字串方法的查詢現在會在使用 Azure Cosmos DB 提供者時轉譯。</span><span class="sxs-lookup"><span data-stu-id="abf22-623">Queries that use the string methods Contains, StartsWith, and EndsWith are now translated when using the Azure Cosmos DB provider.</span></span>
 
-<span data-ttu-id="baa37-624">檔是由問題 [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="baa37-624">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
+<span data-ttu-id="abf22-624">檔是由問題 [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)所追蹤。</span><span class="sxs-lookup"><span data-stu-id="abf22-624">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
