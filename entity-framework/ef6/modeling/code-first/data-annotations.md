@@ -1,15 +1,15 @@
 ---
 title: Code First 資料批註-EF6
 description: Entity Framework 6 中的 Code First 資料批註
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/data-annotations
-ms.openlocfilehash: dd91ddf674f2235190e50beb847e569a898ad59b
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f6bf063ab99c5b7ef01993aec8fd6bdd06dd8f7d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90074060"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066469"
 ---
 # <a name="code-first-data-annotations"></a>Code First 資料註解
 > [!NOTE]
@@ -52,7 +52,7 @@ Code First 提供兩種方式，將這些設定新增至您的類別。 其中�
 
  
 
-## <a name="key"></a>機碼
+## <a name="key"></a>答案
 
 Entity Framework 依賴每個實體具有用於實體追蹤的索引鍵值。 Code First 的其中一個慣例是隱含索引鍵屬性;Code First 會尋找名為 "Id" 的屬性，或類別名稱和 "Id" 的組合，例如 "BlogId"。 這個屬性會對應至資料庫中的主鍵資料行。
 
@@ -370,7 +370,7 @@ Code first 慣例規定在資料庫中表示支援的資料類型的每個屬性
     }
 ```
 
-### <a name="multiple-column-indexes"></a>多重資料行索引
+### <a name="multiple-column-indexes"></a>Multiple-Column 索引
 
 跨多個資料行的索引是使用相同的名稱，在指定資料表的多個索引注釋中使用相同的名稱所指定。 當您建立多個資料行的索引時，您需要指定索引中資料行的順序。 例如，下列程式碼會在上建立多資料行索引 `Rating` ，並 `BlogId` 呼叫 **IX \_ BlogIdAndRating**。 `BlogId` 這是索引中的第一個資料行，而 `Rating` 是第二個數據行。
 

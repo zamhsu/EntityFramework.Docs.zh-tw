@@ -1,17 +1,17 @@
 ---
-title: 以模型為基礎的慣例-EF6
-description: Entity Framework 6 中以模型為基礎的慣例
-author: divega
+title: Model-Based 慣例-EF6
+description: Entity Framework 6 中的 Model-Based 慣例
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/conventions/model
-ms.openlocfilehash: bcb7a88f4d9fc994b51300ac30ec58671be370c8
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c4978277ced72cc5c017af5f69b8760f316087d5
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073999"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066430"
 ---
-# <a name="model-based-conventions"></a>以模型為基礎的慣例
+# <a name="model-based-conventions"></a>Model-Based 慣例
 > [!NOTE]
 > **僅限 EF6 及更新版本** - Entity Framework 6 已引進此頁面中所討論的功能及 API 等等。 如果您使用的是較早版本，則不適用部分或全部的資訊。  
 

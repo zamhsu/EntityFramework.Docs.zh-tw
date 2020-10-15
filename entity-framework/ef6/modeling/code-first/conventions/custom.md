@@ -1,15 +1,15 @@
 ---
 title: 自訂 Code First 慣例-EF6
 description: Entity Framework 6 中的自訂 Code First 慣例
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/conventions/custom
-ms.openlocfilehash: 19f22d311438b8c7d3ac9d270017f3ea4907efda
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 5142f58d229dd7743fd4d5c7f0004c080e22c9e4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90074025"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066456"
 ---
 # <a name="custom-code-first-conventions"></a>自訂 Code First 慣例
 > [!NOTE]
@@ -20,7 +20,7 @@ ms.locfileid: "90074025"
 這些預設慣例有時不適合您的模型，而且您必須使用資料批註或流暢的 API 來設定許多個別實體來解決這些預設慣例。 自訂 Code First 慣例可讓您定義自己的慣例，以提供模型的設定預設值。 在這個逐步解說中，我們將探討不同類型的自訂慣例，以及如何建立每個類型。
 
 
-## <a name="model-based-conventions"></a>以模型為基礎的慣例
+## <a name="model-based-conventions"></a>Model-Based 慣例
 
 本頁面涵蓋自訂慣例的 DbModelBuilder API。 此 API 應該足以撰寫大部分的自訂慣例。 不過，您也可以撰寫以模型為基礎的慣例慣例，在建立模型時操作最終模型，以處理先進的案例。 如需詳細資訊，請參閱以 [模型為基礎的慣例](xref:ef6/modeling/code-first/conventions/model)。
 
@@ -213,7 +213,7 @@ IsKey 方法有一個有趣的功能，就是它是加法。 這表示，如果�
 
 ``` csharp
     modelBuilder.Properties()
-                .Having(x =>x.GetCustomAttributes(false).OfType<IsUnicode>().FirstOrDefault())
+                .Having(x => x.GetCustomAttributes(false).OfType<IsUnicode>().FirstOrDefault())
                 .Configure((config, att) => config.IsUnicode(att.Unicode));
 ```
 
