@@ -77,6 +77,8 @@
               href: core/miscellaneous/async.md
             - name: 記錄
               href: core/miscellaneous/logging.md
+            - name: 內容共用
+              href: core/miscellaneous/context-pooling.md
             - name: 連線恢復功能
               href: core/miscellaneous/connection-resiliency.md
             - name: 測試
@@ -111,7 +113,7 @@
               href: core/modeling/generated-properties.md
             - name: 並行權杖
               href: core/modeling/concurrency.md
-            - name: 陰影屬性
+            - name: 陰影與索引子屬性
               href: core/modeling/shadow-properties.md
             - name: 關聯性
               href: core/modeling/relationships.md
@@ -172,14 +174,24 @@
           items:
             - name: 總覽
               href: core/querying/index.md
+            - name: 讀取相關資料
+              items:
+                - name: 概觀
+                  href: core/querying/related-data/index.md
+                - name: 積極式載入
+                  href: core/querying/related-data/eager.md
+                - name: 明確式載入
+                  href: core/querying/related-data/explicit.md
+                - name: 消極式載入
+                  href: core/querying/related-data/lazy.md
+                - name: 相關資料和序列化
+                  href: core/querying/related-data/serialization.md
             - name: 用戶端與伺服器的評估比較
               href: core/querying/client-eval.md
             - name: 追蹤與不追蹤的比較
               href: core/querying/tracking.md
             - name: 複雜查詢運算子
               href: core/querying/complex-query-operators.md
-            - name: 讀取相關資料
-              href: core/querying/related-data.md
             - name: 原始 SQL 查詢
               href: core/querying/raw-sql.md
             - name: 全域查詢篩選條件
@@ -216,10 +228,15 @@
               items:
                 - name: 總覽
                   href: core/providers/sql-server/index.md
+                - name: 函式對應
+                  href: core/providers/sql-server/functions.md
                 - name: 索引
                   href: core/providers/sql-server/indexes.md
                 - name: 記憶體最佳化的資料表
                   href: core/providers/sql-server/memory-optimized-tables.md
+                - name: 空間資料
+                  displayName: GIS
+                  href: core/providers/sql-server/spatial.md
                 - name: 指定 Azure SQL Database 選項
                   href: core/providers/sql-server/azure-sql-database.md
             - name: SQLite
@@ -228,6 +245,13 @@
                   href: core/providers/sqlite/index.md
                 - name: SQLite 限制
                   href: core/providers/sqlite/limitations.md
+                - name: 函式對應
+                  href: core/providers/sqlite/functions.md
+                - name: 空間資料
+                  displayName: GIS
+                  href: core/providers/sqlite/spatial.md
+                - name: Microsoft.Data.Sqlite >>
+                  href: /dotnet/standard/data/sqlite/
             - name: Cosmos
               items:
                 - name: 總覽
@@ -236,6 +260,8 @@
                   href: core/providers/cosmos/unstructured-data.md
                 - name: Cosmos 限制
                   href: core/providers/cosmos/limitations.md
+                - name: 函式對應
+                  href: core/providers/cosmos/functions.md
             - name: InMemory (測試用)
               href: core/providers/in-memory/index.md
             - name: 撰寫資料庫提供者
