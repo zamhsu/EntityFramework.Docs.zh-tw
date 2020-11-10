@@ -4,12 +4,12 @@ description: Entity Framework Core 2.1 的變更和改進
 author: ajcvickers
 ms.date: 02/20/2018
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: c98a44f9bc06447bb41f0278c59b412f770c5bd4
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: f235c310cbd336da65cd05d25e1338d87534eb2a
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92065702"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429334"
 ---
 # <a name="new-features-in-ef-core-21"></a>EF Core 2.1 中的新功能
 
@@ -154,7 +154,7 @@ public class Order
 
 _dotnet-ef_ 命令現為 .NET Core SDK 的一部分，因此不再需要在專案中使用 DotNetCliToolReference 才能使用移轉，或從現有的資料庫建立 DbContext 結構。
 
-如需如何啟用不同版本之 .NET Core SDK 和 EF Core 命令列工具的詳細資訊，請參閱[安裝工具](xref:core/miscellaneous/cli/dotnet#installing-the-tools)一節。
+如需如何啟用不同版本之 .NET Core SDK 和 EF Core 命令列工具的詳細資訊，請參閱[安裝工具](xref:core/cli/dotnet#installing-the-tools)一節。
 
 ## <a name="microsoftentityframeworkcoreabstractions-package"></a>Microsoft.EntityFrameworkCore.Abstractions 套件
 
@@ -178,4 +178,4 @@ var query = context.People.FromSql(sql);
 建議您使用 EF Core 2.1 與已更新或至少測試過可使用 EF Core 2.1 的提供者。
 
 > [!TIP]
-> 如果您在新功能中發現未預期的不相容或任何問題，或者如果您有相關意見反應，請使用[我們的問題追蹤程式](https://github.com/aspnet/EntityFrameworkCore/issues/new)進行回報。
+> 如果您在新功能中發現未預期的不相容或任何問題，或者如果您有相關意見反應，請使用[我們的問題追蹤程式](https://github.com/dotnet/efcore/issues/new)進行回報。

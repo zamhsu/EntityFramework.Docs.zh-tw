@@ -1,12 +1,12 @@
-## <a name="entity-framework-docs"></a>Entity Framework 文件
+# <a name="entity-framework-docs"></a>Entity Framework 文件
 
-此專案包含位於 [docs.microsoft.com/ef](https://docs.microsoft.com/ef/)之 EF CORE 和 EF6 檔的來源。 
+此專案包含位於 [docs.microsoft.com/ef](https://docs.microsoft.com/ef/)之 EF CORE 和 EF6 檔的來源。
 
 EF Core 和 EF6 的檔問題都應該在此存放庫中提出。  (錯誤) 的產品問題應該在 [EF Core](https://github.com/dotnet/efcore) 存放庫或 [EF6](https://github.com/dotnet/ef6) 存放庫中適當地進行歸檔。
 
 **我們接受提取要求！**
 
-## <a name="fixing-typosspellinggrammaretc"></a>修正打字錯誤/拼寫/文法/等等。
+## <a name="fixing-typosspellinggrammaretc"></a>修正打字錯誤/拼寫/文法/等
 
 考慮傳送提取要求，而不是提出問題。 這可以完全從 web 完成：
 

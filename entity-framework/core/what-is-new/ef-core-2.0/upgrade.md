@@ -4,12 +4,12 @@ description: 升級至 Entity Framework Core 2.0 的指示和注意事項
 author: ajcvickers
 ms.date: 08/13/2017
 uid: core/what-is-new/ef-core-2.0/upgrade
-ms.openlocfilehash: c7c736629209da99f191ceb0d4000d19f40414b9
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 5054661d308e7ea6acd433981dfb2af6026b7765
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063435"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430088"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>將繼承應用程式升級至 EF Core 2。0
 
@@ -17,11 +17,11 @@ ms.locfileid: "92063435"
 
 將現有的應用程式更新為 EF Core 2.0 可能需要：
 
-1. 將應用程式的目標 .NET 執行升級為支援 .NET Standard 2.0 的應用程式。 如需詳細資料，請參閱 [支援的 .net](xref:core/platforms/index) 執行。
+1. 將應用程式的目標 .NET 執行升級為支援 .NET Standard 2.0 的應用程式。 如需詳細資料，請參閱 [支援的 .net](xref:core/miscellaneous/platforms) 執行。
 
 2. 識別與 EF Core 2.0 相容的目標資料庫提供者。 請參閱下列 [EF Core 2.0 需要2.0 資料庫提供者](#ef-core-20-requires-a-20-database-provider) 。
 
-3. 將 (執行時間和工具) 的所有 EF Core 套件升級為2.0。 如需詳細資訊，請參閱 [安裝 EF Core](xref:core/get-started/install/index) 。
+3. 將 (執行時間和工具) 的所有 EF Core 套件升級為2.0。 如需詳細資訊，請參閱 [安裝 EF Core](xref:core/get-started/overview/install) 。
 
 4. 進行任何必要的程式碼變更，以補償本檔其餘部分所述的重大變更。
 
@@ -58,7 +58,7 @@ namespace AspNetCoreDotNetCore2._0App
 }
 ```
 
-強烈建議您在將應用程式更新為2.0 時採用這個新模式，因為產品功能（例如 Entity Framework Core 的遷移）必須是必要的。 另一個常見的替代方式[是*執行 \<TContext> IDesignTimeDbCoNtextFactory*](xref:core/miscellaneous/cli/dbcontext-creation#from-a-design-time-factory)。
+強烈建議您在將應用程式更新為2.0 時採用這個新模式，因為產品功能（例如 Entity Framework Core 的遷移）必須是必要的。 另一個常見的替代方式 [是 *執行 \<TContext> IDesignTimeDbCoNtextFactory*](xref:core/cli/dbcontext-creation#from-a-design-time-factory)。
 
 ## <a name="idbcontextfactory-renamed"></a>IDbCoNtextFactory 已重新命名
 
@@ -96,7 +96,7 @@ EF team 隨附的 SQL Server 和 SQLite 提供者，2.0 版將提供2.0 版的�
 
 傳送至 [ILogger](/dotnet/api/microsoft.extensions.logging.ilogger) 之訊息的事件識別碼在2.0 中已變更。 在 EF Core 程式碼中，事件識別碼現在是唯一的。 例如，這些訊息現在也遵循 MVC 所使用結構化記錄的標準模式。
 
-記錄器類別也已經變更。 現在已有一組類別可透過 [DbLoggerCategory](https://github.com/aspnet/EntityFrameworkCore/blob/rel/2.0.0/src/EFCore/DbLoggerCategory.cs) 進行存取。
+記錄器類別也已經變更。 現在已有一組類別可透過 [DbLoggerCategory](https://github.com/dotnet/efcore/blob/rel/2.0.0/src/EFCore/DbLoggerCategory.cs) 進行存取。
 
 [DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) 事件現在會使用相同的事件識別碼名稱作為對應的 `ILogger` 訊息。 事件承載是衍生自 [EventData](/dotnet/api/microsoft.entityframeworkcore.diagnostics.eventdata)的所有名義類型。
 
@@ -118,7 +118,7 @@ var tableName = context.Model.FindEntityType(typeof(User)).SqlServer().TableName
 var tableName = context.Model.FindEntityType(typeof(User)).Relational().TableName;
 ```
 
-`ForSqlServerToTable`擴充方法現在可以用來根據目前使用中的提供者來撰寫條件式程式碼，而不是使用類似的方法。 例如︰
+`ForSqlServerToTable`擴充方法現在可以用來根據目前使用中的提供者來撰寫條件式程式碼，而不是使用類似的方法。 例如：
 
 ```csharp
 modelBuilder.Entity<User>().ToTable(
@@ -135,7 +135,7 @@ EF Core 使用內部 (相依性 `IServiceProvider` 插入容器) 進行內部執
 
 ## <a name="in-memory-databases-must-be-named"></a>記憶體內部資料庫必須命名為
 
-全域未命名的記憶體中資料庫已移除，而不是所有記憶體中的資料庫都必須命名為。 例如︰
+全域未命名的記憶體中資料庫已移除，而不是所有記憶體中的資料庫都必須命名為。 例如：
 
 ```csharp
 optionsBuilder.UseInMemoryDatabase("MyDatabase");

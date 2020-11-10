@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 時，更複雜的 LINQ 查詢運算�
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/complex-query-operators
-ms.openlocfilehash: 03375e6c46a68a719df82572333f0a57e7de6262
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 84c2518972355d31cf5a6a7bafc57b44162412c8
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062616"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430478"
 ---
 # <a name="complex-query-operators"></a>複雜查詢運算子
 
@@ -20,7 +20,7 @@ ms.locfileid: "92062616"
 
 ## <a name="join"></a>Join
 
-LINQ Join 運算子可讓您根據每個來源的索引鍵選取器來連接兩個數據源，並在索引鍵符合時產生值的元組。 它會自然地轉譯為 `INNER JOIN` 關係資料庫。 當 LINQ 聯結具有外部和內部索引鍵選取器時，資料庫需要單一聯結條件。 因此 EF Core 藉由比較外部索引鍵選取器與內部索引鍵選取器的相等來產生聯結條件。 此外，如果索引鍵選取器是匿名型別，EF Core 會產生聯結條件來比較相等元件的狀況。
+LINQ Join 運算子可讓您根據每個來源的索引鍵選取器來連接兩個數據源，並在索引鍵符合時產生值的元組。 它會自然地轉譯為 `INNER JOIN` 關係資料庫。 當 LINQ 聯結具有外部和內部索引鍵選取器時，資料庫需要單一聯結條件。 因此 EF Core 藉由比較外部索引鍵選取器與內部索引鍵選取器的相等來產生聯結條件。
 
 [!code-csharp[Main](../../../samples/core/Querying/ComplexQuery/Program.cs#Join)]
 
@@ -28,6 +28,16 @@ LINQ Join 運算子可讓您根據每個來源的索引鍵選取器來連接兩�
 SELECT [p].[PersonId], [p].[Name], [p].[PhotoId], [p0].[PersonPhotoId], [p0].[Caption], [p0].[Photo]
 FROM [PersonPhoto] AS [p0]
 INNER JOIN [Person] AS [p] ON [p0].[PersonPhotoId] = [p].[PhotoId]
+```
+
+此外，如果索引鍵選取器是匿名型別，EF Core 會產生聯結條件來比較相等元件的相等性。
+
+[!code-csharp[Main](../../../samples/core/Querying/ComplexQuery/Program.cs#JoinComposite)]
+
+```sql
+SELECT [p].[PersonId], [p].[Name], [p].[PhotoId], [p0].[PersonPhotoId], [p0].[Caption], [p0].[Photo]
+FROM [PersonPhoto] AS [p0]
+INNER JOIN [Person] AS [p] ON ([p0].[PersonPhotoId] = [p].[PhotoId] AND ([p0].[Caption] = N'SN'))
 ```
 
 ## <a name="groupjoin"></a>GroupJoin
@@ -113,7 +123,7 @@ ORDER BY [p].[AuthorId]
 EF Core 支援的匯總運算子如下所示
 
 - 平均
-- Count
+- 計數
 - LongCount
 - 最大值
 - Min

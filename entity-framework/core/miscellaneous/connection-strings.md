@@ -4,20 +4,51 @@ description: 使用 Entity Framework Core 管理不同環境下的連接字串
 author: bricelam
 ms.date: 10/27/2016
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: f657d39f66e6a757380ca25436a638b47c11cd12
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: fee7e8f6de1faa11203cfcdab033b73a0a8ef6ea
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062317"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429724"
 ---
 # <a name="connection-strings"></a>連接字串
 
 大部分的資料庫提供者都需要某種形式的連接字串，才能連接到資料庫。 有時此連接字串包含需要保護的機密資訊。 當您在環境之間移動應用程式時，您可能也需要變更連接字串，例如開發、測試和生產環境。
 
+## <a name="aspnet-core"></a>ASP.NET Core
+
+在 ASP.NET Core 設定系統非常有彈性，而且可以將連接字串儲存在 `appsettings.json` 、環境變數、使用者秘密存放區或其他設定來源中。 如需詳細資訊，請參閱 [ASP.NET Core 檔的設定一節](/aspnet/core/fundamentals/configuration) 。
+
+例如，您可以使用 [Secret Manager 工具](/aspnet/core/security/app-secrets#secret-manager) 來儲存資料庫密碼，然後在範例中，使用只包含的連接字串 `Name=<database-alias>` 。
+
+```dotnetcli
+dotnet user-secrets set ConnectionStrings.YourDatabaseAlias "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=YourDatabase"
+dotnet ef dbcontext scaffold Name=ConnectionStrings.YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
+```
+
+或下列範例顯示儲存在中的連接字串 `appsettings.json` 。
+
+```json
+{
+  "ConnectionStrings": {
+    "BloggingDatabase": "Server=(localdb)\\mssqllocaldb;Database=EFGetStarted.ConsoleApp.NewDb;Trusted_Connection=True;"
+  },
+}
+```
+
+然後，通常會在中 `Startup.cs` 使用從設定讀取的連接字串來設定內容。 請注意， `GetConnectionString()` 方法會尋找其索引鍵為的設定值 `ConnectionStrings:<connection string name>` 。 您必須匯入 [Microsoft.Extensions.Configuration](/dotnet/api/microsoft.extensions.configuration) 命名空間，才能使用此擴充方法。
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext<BloggingContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")));
+}
+```
+
 ## <a name="winforms--wpf-applications"></a>WinForms & WPF 應用程式
 
-WinForms、WPF 和 ASP.NET 4 應用程式都有已嘗試和測試的連接字串模式。 如果您使用 ASP.NET) ，則應該將連接字串新增至應用程式的 App.config 檔 ( # A1。 如果您的連接字串包含敏感性資訊，例如使用者名稱和密碼，您可以使用 [Secret Manager 工具](/aspnet/core/security/app-secrets#secret-manager)保護設定檔的內容。
+WinForms、WPF 和 ASP.NET 4 應用程式都有已嘗試和測試的連接字串模式。 如果您使用 ASP.NET) ，則應該將連接字串新增至應用程式的 App.config 檔 ( # A1。 如果您的連接字串包含敏感性資訊，例如使用者名稱和密碼，您可以使用 [受保護](/dotnet/framework/data/adonet/connection-strings-and-configuration-files#encrypting-configuration-file-sections-using-protected-configuration)的設定來保護設定檔的內容。
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -62,36 +93,5 @@ public class BloggingContext : DbContext
     {
             optionsBuilder.UseSqlite("Data Source=blogging.db");
     }
-}
-```
-
-## <a name="aspnet-core"></a>ASP.NET Core
-
-在 ASP.NET Core 設定系統非常有彈性，而且可以將連接字串儲存在 `appsettings.json` 、環境變數、使用者秘密存放區或其他設定來源中。 如需詳細資訊，請參閱 [ASP.NET Core 檔的設定一節](/aspnet/core/fundamentals/configuration) 。
-
-例如，您可以使用 [Secret Manager 工具](/aspnet/core/security/app-secrets#secret-manager) 來儲存資料庫密碼，然後在範例中，使用只包含的連接字串 `Name=<database-alias>` 。
-
-```dotnetcli
-dotnet user-secrets set ConnectionStrings.YourDatabaseAlias "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=YourDatabase"
-dotnet ef dbcontext scaffold Name=ConnectionStrings.YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
-```
-
-或下列範例顯示儲存在中的連接字串 `appsettings.json` 。
-
-```json
-{
-  "ConnectionStrings": {
-    "BloggingDatabase": "Server=(localdb)\\mssqllocaldb;Database=EFGetStarted.ConsoleApp.NewDb;Trusted_Connection=True;"
-  },
-}
-```
-
-然後，通常會在中 `Startup.cs` 使用從設定讀取的連接字串來設定內容。 請注意， `GetConnectionString()` 方法會尋找其索引鍵為的設定值 `ConnectionStrings:<connection string name>` 。 您必須匯入 [Microsoft.Extensions.Configuration](/dotnet/api/microsoft.extensions.configuration) 命名空間，才能使用此擴充方法。
-
-```csharp
-public void ConfigureServices(IServiceCollection services)
-{
-    services.AddDbContext<BloggingContext>(options =>
-        options.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")));
 }
 ```

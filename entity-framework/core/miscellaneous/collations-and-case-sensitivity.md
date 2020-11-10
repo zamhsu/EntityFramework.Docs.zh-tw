@@ -4,12 +4,12 @@ description: 在資料庫和使用 Entity Framework Core 的查詢中設定定�
 author: roji
 ms.date: 04/27/2020
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: e327df8adf777bfa5603a71eca8297a051f5bd56
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: cced7e11f7bf02223d3f181677ad1707c1da4051
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071715"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429737"
 ---
 # <a name="collations-and-case-sensitivity"></a>定序和區分大小寫
 
@@ -20,7 +20,7 @@ ms.locfileid: "90071715"
 
 ## <a name="introduction-to-collations"></a>定序簡介
 
-文字處理的基本概念是定序 *，這*是一組規則，用來決定文字值的排序方式和比較是否相等。 例如，雖然不區分大小寫的定序會忽略大寫和小寫字母之間的差異以進行相等比較，但區分大小寫的定序並不會。 不過，由於區分大小寫區分文化特性 (例如 `i` ，並 `I` 以土耳其文) 表示不同的字母，因此存在多個不區分大小寫的定序，每個定序都有自己的一組規則。 定序的範圍也會延伸至不區分大小寫，以及字元資料的其他方面;例如，在德文中，有時會 (，但不一定會) 希望視為 `ä` `ae` 相同。 最後，定序也會定義文字值的 *排序*方式：在德文之後的地方 `ä` `a` ，瑞典文會將它放在字母結尾。
+文字處理的基本概念是定序 *，這* 是一組規則，用來決定文字值的排序方式和比較是否相等。 例如，雖然不區分大小寫的定序會忽略大寫和小寫字母之間的差異以進行相等比較，但區分大小寫的定序並不會。 不過，由於區分大小寫區分文化特性 (例如 `i` ，並 `I` 以土耳其文) 表示不同的字母，因此存在多個不區分大小寫的定序，每個定序都有自己的一組規則。 定序的範圍也會延伸至不區分大小寫，以及字元資料的其他方面;例如，在德文中，有時會 (，但不一定會) 希望視為 `ä` `ae` 相同。 最後，定序也會定義文字值的 *排序* 方式：在德文之後的地方 `ä` `a` ，瑞典文會將它放在字母結尾。
 
 資料庫中的所有文字作業都會使用定序（不論是明確或隱含）來判斷作業如何比較和排序字串。 可用定序及其命名配置的實際清單是資料庫專屬的，請參閱 [下一節](#database-specific-information) ，以取得各種資料庫相關檔頁面的連結。 幸運的是，資料庫通常允許在資料庫或資料行層級定義預設的定序，並明確指定要在查詢中針對特定作業使用哪一個定序。
 
@@ -69,9 +69,15 @@ WHERE [c].[Name] COLLATE SQL_Latin1_General_CP1_CS_AS = N'John'
 
 此外，.NET 也提供接受列舉的多載 [`string.Equals`](/dotnet/api/system.string.equals#System_String_Equals_System_String_System_StringComparison_) ，可讓您 [`StringComparison`](/dotnet/api/system.stringcomparison) 指定區分大小寫和文化特性進行比較。 根據設計，EF Core refrains 將這些多載轉譯成 SQL，並嘗試使用它們，將會導致例外狀況。 EF Core 不知道應該使用何種區分大小寫或不區分大小寫的定序。 更重要的是，在大部分情況下，套用定序可能會導致索引使用，大幅影響非常基本且常用的 .NET 結構效能。 若要強制查詢使用區分大小寫或不區分大小寫的比較，請依照 `EF.Functions.Collate` [上述詳細](#explicit-collations-and-indexes)說明明確地指定定序。
 
-## <a name="database-specific-information"></a>資料庫特定資訊
+## <a name="additional-resources"></a>其他資源
+
+### <a name="database-specific-information"></a>資料庫特定資訊
 
 * [有關定序的 SQL Server 檔](/sql/relational-databases/collations/collation-and-unicode-support)。
 * [有關定序的資料 Sqlite 檔](/dotnet/standard/data/sqlite/collation)。
 * [有關定序的于 postgresql 檔](https://www.postgresql.org/docs/current/collation.html)。
 * [有關定序的 MySQL 檔](https://dev.mysql.com/doc/refman/en/charset-general.html)。
+
+### <a name="other-resources"></a>其他資源
+
+* [EF Core 的站立會議課程](https://www.youtube.com/watch?v=OgMhLVa_VfA&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=1)，介紹定序以及探索效能和索引編制方面。

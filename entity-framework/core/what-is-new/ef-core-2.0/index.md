@@ -4,19 +4,19 @@ description: Entity Framework Core 2.0 中的變更與改進
 author: ajcvickers
 ms.date: 02/20/2018
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 7438d8ad1a5ade971af71186a20ec57fd83713de
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: a670cba56c9ba4ebc45c81c1185faa114b78c146
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063448"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429373"
 ---
 # <a name="new-features-in-ef-core-20"></a>EF Core 2.0 中的新功能
 
 ## <a name="net-standard-20"></a>.NET Standard 2.0
 
 EF Core 現在的目標是 .NET Standard 2.0，表示它可以處理 .NET Core 2.0、.NET Framework 4.6.1 以及其他實作 .NET Standard 2.0 的程式庫。
-如需所支援實作的詳細資料，請參閱[支援的 .NET 實作](xref:core/platforms/index)。
+如需所支援實作的詳細資料，請參閱[支援的 .NET 實作](xref:core/miscellaneous/platforms)。
 
 ## <a name="modeling"></a>模型化
 
@@ -309,7 +309,7 @@ public class MyPluralizer : IPluralizer
 
 大幅增加提供者如何與模型互動，以及簡化慣例、註釋和 Fluent API 如何與不同的提供者搭配運作。
 
-EF Core 2.0 現在會為使用的每個不同提供者建置不同的 [IModel](https://github.com/aspnet/EntityFramework/blob/master/src/EFCore/Metadata/IModel.cs)。 應用程式通常可以看到這項作業。 這已加速簡化較低階中繼資料 API；因此，任何對*一般關聯式中繼資料概念*的存取一律是透過 `.Relational` 呼叫來進行，而非 `.SqlServer`、`.Sqlite` 等等。
+EF Core 2.0 現在會為使用的每個不同提供者建置不同的 [IModel](https://github.com/aspnet/EntityFramework/blob/master/src/EFCore/Metadata/IModel.cs)。 應用程式通常可以看到這項作業。 這已加速簡化較低階中繼資料 API；因此，任何對 *一般關聯式中繼資料概念* 的存取一律是透過 `.Relational` 呼叫來進行，而非 `.SqlServer`、`.Sqlite` 等等。
 
 ### <a name="consolidated-logging-and-diagnostics"></a>合併的記錄和診斷
 

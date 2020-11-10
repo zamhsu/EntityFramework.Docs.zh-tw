@@ -2,14 +2,14 @@
 title: 用戶端與伺服器的評估-EF Core
 description: 使用 Entity Framework Core 進行查詢的用戶端和伺服器評估
 author: smitpatel
-ms.date: 10/03/2019
+ms.date: 11/09/2020
 uid: core/querying/client-eval
-ms.openlocfilehash: f2e80541439de8cc824c182e52400f730dd2af48
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: a1ddfb625be36cb05f01da08eb3be29512c54ab5
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062707"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430140"
 ---
 # <a name="client-vs-server-evaluation"></a>用戶端與伺服器評估
 
@@ -46,19 +46,22 @@ ms.locfileid: "92062707"
 
 [!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ExplicitClientEvaluation)]
 
+> [!TIP]
+> 如果您正在使用 `AsAsyncEnumerable` ，而且想要進一步在用戶端上撰寫查詢，則可以使用定義非同步可列舉值運算子的 [System.object. Async](https://www.nuget.org/packages/System.Interactive.Async/) 程式庫。 如需詳細資訊，請參閱 [用戶端 linq 運算子](xref:core/miscellaneous/async#client-side-async-linq-operators)。
+
 ## <a name="potential-memory-leak-in-client-evaluation"></a>用戶端評估可能發生記憶體流失
 
 由於查詢轉譯和編譯的成本很高，EF Core 快取已編譯的查詢計劃。 快取的委派可能會在執行最上層投影的用戶端評估時使用用戶端程式代碼。 EF Core 會為樹狀結構的用戶端評估部分產生參數，並藉由取代參數值來重複使用查詢計劃。 但是運算式樹狀架構中的某些常數無法轉換成參數。 如果快取的委派包含這類常數，則這些物件將無法進行垃圾收集，因為它們仍在參考中。 如果這類物件包含 DbCoNtext 或其他服務，則可能會導致應用程式的記憶體使用量隨著時間成長。 這種行為通常會造成記憶體流失的跡象。 EF Core 擲回例外狀況時，會擲回例外狀況，但無法使用目前的資料庫提供者來對應的類型常數。 常見原因和其解決方案如下：
 
-- **使用實例方法**：在用戶端投影中使用實例方法時，運算式樹狀架構會包含實例的常數。 如果您的方法未使用實例中的任何資料，請考慮將方法設為靜態。 如果您需要方法主體中的實例資料，請將特定資料當作引數傳遞給方法。
-- **將常數引數傳遞給方法**：這種情況通常會 `this` 在用戶端方法的引數中使用。 請考慮將引數分割成多個純量引數（可由資料庫提供者對應）。
-- **其他常數**：如果常數是在其他任何情況下，您可以評估是否需要常數來處理。 如果必須有常數，或如果您無法使用上述案例中的解決方案，請建立本機變數來儲存值，並在查詢中使用區域變數。 EF Core 會將本機變數轉換成參數。
+- **使用實例方法** ：在用戶端投影中使用實例方法時，運算式樹狀架構會包含實例的常數。 如果您的方法未使用實例中的任何資料，請考慮將方法設為靜態。 如果您需要方法主體中的實例資料，請將特定資料當作引數傳遞給方法。
+- **將常數引數傳遞給方法** ：這種情況通常會 `this` 在用戶端方法的引數中使用。 請考慮將引數分割成多個純量引數（可由資料庫提供者對應）。
+- **其他常數** ：如果常數是在其他任何情況下，您可以評估是否需要常數來處理。 如果必須有常數，或如果您無法使用上述案例中的解決方案，請建立本機變數來儲存值，並在查詢中使用區域變數。 EF Core 會將本機變數轉換成參數。
 
 ## <a name="previous-versions"></a>舊版
 
 下一節適用于3.0 之前的 EF Core 版本。
 
-較舊的 EF Core 版本在查詢的任何部分中支援用戶端評估，而不只是最上層的投射。 這就是為什麼類似于未 [受支援用戶端評估](#unsupported-client-evaluation) 章節的查詢會正確運作。 由於這種行為可能會導致未察覺的效能問題，EF Core 記錄用戶端評估警告。 如需有關如何查看記錄輸出的詳細資訊，請參閱 [記錄](xref:core/miscellaneous/logging)。
+較舊的 EF Core 版本在查詢的任何部分中支援用戶端評估，而不只是最上層的投射。 這就是為什麼類似于未 [受支援用戶端評估](#unsupported-client-evaluation) 章節的查詢會正確運作。 由於這種行為可能會導致未察覺的效能問題，EF Core 記錄用戶端評估警告。 如需有關如何查看記錄輸出的詳細資訊，請參閱 [記錄](xref:core/logging-events-diagnostics/index)。
 
 （選擇性） EF Core 可讓您變更預設行為，以在進行用戶端評估時擲回例外狀況或不執行任何動作， (除了投影) 中的。 例外狀況擲回行為會使它類似于3.0 中的行為。 若要變更此行為，您必須在設定內容的選項時（通常是在中）設定警告， `DbContext.OnConfiguring` `Startup.cs` 如果您使用 ASP.NET Core 則需要設定。
 

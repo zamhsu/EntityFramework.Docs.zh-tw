@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 將架構遷移套用至生產和開�
 author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: 68d482a34e5f5c7acf968acdfd8825e1d21ecb13
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 7ff84636fb0999941b832c6a2d65d77b0ad368c5
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062343"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429843"
 ---
 # <a name="applying-migrations"></a>套用遷移
 
@@ -83,14 +83,15 @@ Script-Migration AddNewTables
 ```powershell
 Script-Migration AddNewTables AddAuditTable
 ```
+
 您可以使用比 `to` 新的 `from` 來產生復原指令碼。 *請注意，可能會發生資料遺失的狀況。*
 
 ***
 
 腳本產生會接受下列兩個引數，指出應產生的遷移範圍：
 
-* 執行指令碼之前，**from** 移轉應該是套用到資料庫的最後一個移轉。 若未套用任何移轉，請指定 `0` (此為預設)。
-* 執行指令碼之後，**to** 移轉是套用到資料庫的最後一個移轉。 預設為您專案中的最後一個移轉。
+* 執行指令碼之前， **from** 移轉應該是套用到資料庫的最後一個移轉。 若未套用任何移轉，請指定 `0` (此為預設)。
+* 執行指令碼之後， **to** 移轉是套用到資料庫的最後一個移轉。 預設為您專案中的最後一個移轉。
 
 ## <a name="idempotent-sql-scripts"></a>等冪 SQL 腳本
 
@@ -98,25 +99,25 @@ Script-Migration AddNewTables AddAuditTable
 
 下列會產生等冪的遷移：
 
-#### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
+### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
 
 ```dotnetcli
 dotnet ef migrations script --idempotent
 ```
 
-#### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ```powershell
 Script-Migration -Idempotent
 ```
 
-***
+**_
 
 ## <a name="command-line-tools"></a>命令列工具
 
 EF 命令列工具可以用來將遷移套用至資料庫。 雖然能在本機開發和測試遷移時保持生產力，但這種方法並不適合用來管理生產資料庫：
 
-* 此工具會直接套用 SQL 命令，而不會讓開發人員有機會檢查或修改它們。 這在生產環境中可能會有危險。
+_ SQL 命令會直接套用到工具，而不會讓開發人員有機會檢查或修改它們。 這在生產環境中可能會有危險。
 * 實際執行伺服器上必須安裝 .NET SDK 和 EF 工具。
 
 ### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
@@ -159,7 +160,7 @@ Update-Database AddNewTables
 
 ***
 
-如需透過命令列工具套用遷移的詳細資訊，請參閱 [EF Core 工具參考](xref:core/miscellaneous/cli/index)。
+如需透過命令列工具套用遷移的詳細資訊，請參閱 [EF Core 工具參考](xref:core/cli/index)。
 
 ## <a name="apply-migrations-at-runtime"></a>在執行階段套用移轉
 

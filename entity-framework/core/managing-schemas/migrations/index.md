@@ -2,14 +2,14 @@
 title: 移轉概觀 - EF Core
 description: 透過 Entity Framework Core 使用移轉來管理資料庫結構描述的概觀
 author: bricelam
-ms.date: 05/06/2020
+ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: eea2c32cccbb678cacaa63760c4f7d36d2d19bb1
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 9f1c9e266d60b7ed4aed783bb8e01864c93867ea
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062278"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429815"
 ---
 # <a name="migrations-overview"></a>移轉概觀
 
@@ -38,10 +38,10 @@ public class Blog
 
 ### <a name="install-the-tools"></a>安裝工具
 
-首先，您必須安裝 [EF Core 命令列工具](xref:core/miscellaneous/cli/index)：
+首先，您必須安裝 [EF Core 命令列工具](xref:core/cli/index)：
 
-* 我們通常建議使用 [.NET Core CLI 工具](xref:core/miscellaneous/cli/dotnet)，適用於所有平台。
-* 如果更熟悉 Visual Studio 或有 EF6 移轉的經驗，您也可以使用 [套件管理員主控台工具](xref:core/miscellaneous/cli/powershell)。
+* 我們通常建議使用 [.NET Core CLI 工具](xref:core/cli/dotnet)，適用於所有平台。
+* 如果更熟悉 Visual Studio 或有 EF6 移轉的經驗，您也可以使用 [套件管理員主控台工具](xref:core/cli/powershell)。
 
 ### <a name="create-your-first-migration"></a>建立第一個移轉
 
@@ -59,9 +59,9 @@ dotnet ef migrations add InitialCreate
 Add-Migration InitialCreate
 ```
 
-***
+**_
 
-EF Core 將會在專案中建立名為 **Migrations** 的目錄，並產生一些檔案。 最好的作法是檢查 EF Core 產生的確切項目，並視需要加以修改，但我們現在會跳過此程序。
+EF Core 將會在您的專案中建立一個名為 _ [ *遷移* *] 的目錄，並產生一些檔案。 最好的作法是檢查 EF Core 產生的確切項目，並視需要加以修改，但我們現在會跳過此程序。
 
 ### <a name="create-your-database-and-schema"></a>建立您的資料庫與結構描述
 
@@ -72,13 +72,14 @@ EF Core 將會在專案中建立名為 **Migrations** 的目錄，並產生一�
 ```dotnetcli
 dotnet ef database update
 ```
+
 #### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ```powershell
 Update-Database
 ```
 
-***
+**_
 
 就是這麼簡單，您的應用程式已準備好在新的資料庫上執行，而且您不需要撰寫任何一行 SQL。 請注意，這種套用移轉的方式適用於本機開發，但較不適合用於生產環境。如需詳細資訊，請參閱[套用移轉頁面](xref:core/managing-schemas/migrations/applying)。
 
@@ -109,7 +110,7 @@ dotnet ef migrations add AddBlogCreatedTimestamp
 Add-Migration AddBlogCreatedTimestamp
 ```
 
-***
+_*_
 
 請注意，我們會為移轉提供描述性名稱，讓您稍後可以更輕鬆地了解專案歷程記錄。
 
@@ -117,21 +118,39 @@ Add-Migration AddBlogCreatedTimestamp
 
 您現在可以像之前一樣套用移轉：
 
+<!--markdownlint-disable MD024-->
+
 #### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)
 
 ```dotnetcli
 dotnet ef database update
 ```
+
 #### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ```powershell
 Update-Database
 ```
 
-***
+<!--markdownlint-enable MD024-->
+
+_*_
 
 請注意，這次 EF 會偵測到資料庫已經存在。 此外，第一次套用上面的移轉時，此事實會記錄在資料庫的特殊移轉歷程記錄資料表中；這可讓 EF 僅自動套用新的移轉。
 
+### <a name="excluding-parts-of-your-model"></a>排除模型的各部分
+
+> [!NOTE]
+> 這項功能已在 EF Core 5.0 中新增。
+
+有時您可能會想要從另一個 DbCoNtext 參考類型。 這可能會導致遷移衝突。 若要避免這種情況，請從 DbcoNtext 的其中一項的遷移中排除類型。
+
+[!code-csharp[](../../../../samples/core/Modeling/FluentAPI/TableExcludeFromMigrations.cs#TableExcludeFromMigrations)]
+
 ### <a name="next-steps"></a>後續步驟
 
-以上只是簡單的移轉簡介。 請參閱其他文件頁面，以深入了解[管理移轉](xref:core/managing-schemas/migrations/managing)、 [套用移轉](xref:core/managing-schemas/migrations/applying)與其他層面。 [.NET Core CLI 工具參考](xref:core/miscellaneous/cli/index)也包含不同命令的實用資訊
+以上只是簡單的移轉簡介。 請參閱其他文件頁面，以深入了解[管理移轉](xref:core/managing-schemas/migrations/managing)、 [套用移轉](xref:core/managing-schemas/migrations/applying)與其他層面。 [.NET Core CLI 工具參考](xref:core/cli/index)也包含不同命令的實用資訊
+
+## <a name="additional-resources"></a>其他資源
+
+_ EF Core 在 EF Core 5.0 中的新遷移功能的 [站立會議課程](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20) 。

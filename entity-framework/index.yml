@@ -10,17 +10,17 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 04/15/2020
-  ms.openlocfilehash: a97ca698d4fcd2cf26066e6088a0f88ebc5cf187
-  ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+  ms.openlocfilehash: 6d10d0c8487114548ed70d5ad9b152010ccfbf69
+  ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
   ms.translationtype: MT
   ms.contentlocale: zh-TW
-  ms.lasthandoff: 09/14/2020
-  ms.locfileid: "90070350"
+  ms.lasthandoff: 11/10/2020
+  ms.locfileid: "94429191"
 highlightedContent:
   items:
   - title: Entity Framework Core
     itemType: get-started
-    url: core/get-started/index.md
+    url: core/get-started/overview/first-app.md
   - title: 使用 Entity Framework Core 保存並擷取關聯式資料
     itemType: learn
     url: /learn/modules/persist-data-ef-core/
@@ -36,13 +36,16 @@ highlightedContent:
   - title: API 參考瀏覽器
     itemType: reference
     url: /dotnet/api/?view=efcore-3.1
+  - title: 參加 EF Core 6 問卷
+    itemType: reference
+    url: https://www.surveymonkey.com/r/XRL3JBL
 additionalContent:
   sections:
   - title: 使用 Entity Framework Core 來開發
     items:
     - title: 開發您的第一個應用程式
       links:
-      - url: core/get-started/index.md
+      - url: core/get-started/overview/first-app.md
         text: 使用 EF Core 存取 SQLite 的 .NET Core 主控台應用程式
       - url: /aspnet/core/data/ef-rp/
         text: 使用 EF Core 存取 SQL Server LocalDB 或 SQLite 的 ASP.NET Core Razor Pages Web 應用程式
@@ -70,7 +73,7 @@ additionalContent:
         text: 所有目前的資料庫提供者
     - title: 平台
       links:
-      - url: core/platforms/index.md
+      - url: core/miscellaneous/platforms.md
         text: 所有支援的平台
       - url: /aspnet/core/data/ef-rp/intro
         text: ASP.NET Core Razor Pages
@@ -88,13 +91,13 @@ additionalContent:
       links:
       - url: core/miscellaneous/connection-strings.md
         text: 連接字串
-      - url: core/miscellaneous/logging.md
+      - url: core/logging-events-diagnostics/index.md
         text: 記錄
       - url: core/miscellaneous/connection-resiliency.md
         text: 連線恢復功能
-      - url: core/miscellaneous/testing/index.md
+      - url: core/testing/index.md
         text: 測試
-      - url: core/miscellaneous/configuring-dbcontext.md
+      - url: core/dbcontext-configuration/index.md
         text: 設定 DbCoNtext
       - url: core/miscellaneous/nullable-reference-types.md
         text: 可為 Null 的參考型別
@@ -178,15 +181,15 @@ additionalContent:
         text: 已中斷連線的實體
     - title: 命令列參考
       links:
-      - url: core/miscellaneous/cli/index.md
+      - url: core/cli/index.md
         text: 總覽
-      - url: core/miscellaneous/cli/powershell.md
+      - url: core/cli/powershell.md
         text: 套件管理員主控台 (Visual Studio)
-      - url: core/miscellaneous/cli/dotnet.md
+      - url: core/cli/dotnet.md
         text: .NET Core CLI
-      - url: core/miscellaneous/cli/dbcontext-creation.md
+      - url: core/cli/dbcontext-creation.md
         text: 設計階段建立 DbContext
-      - url: core/miscellaneous/cli/services.md
+      - url: core/cli/services.md
         text: 設計階段服務
     - title: 舊版本
       links:

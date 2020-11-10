@@ -4,18 +4,18 @@ description: 使用全域查詢篩選準則來篩選 Entity Framework Core 的�
 author: maumar
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 8a9eabd7e86864c9ebb4b1dc4a06bf7fc207d496
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 6436f9f8e2e09d44ef9528fd2022720d40095fe0
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062603"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430127"
 ---
 # <a name="global-query-filters"></a>全域查詢篩選條件
 
 全域查詢篩選準則是套用至元資料模型中實體類型的 LINQ 查詢述詞， (通常是 `OnModelCreating`) 。 查詢述詞是通常傳遞給 LINQ 查詢運算子的布林運算式 `Where` 。  EF Core 會自動將這類篩選套用至任何涉及這些實體類型的 LINQ 查詢。  EF Core 也會將它們套用至實體類型，使用 Include 或導覽屬性間接參考。 此功能的一些常見應用如下：
 
-* 虛**刪除**-實體類型會定義 `IsDeleted` 屬性。
+* 虛 **刪除** -實體類型會定義 `IsDeleted` 屬性。
 * **多** 租使用者-實體類型會定義 `TenantId` 屬性。
 
 ## <a name="example"></a>範例
@@ -46,6 +46,21 @@ ms.locfileid: "92062603"
 ## <a name="use-of-navigations"></a>使用導覽
 
 您也可以使用導覽來定義全域查詢篩選準則。 使用查詢篩選器中的 [導覽]，將會以遞迴方式套用查詢篩選。 當 EF Core 展開查詢篩選中使用的導覽時，也會套用在參考實體上定義的查詢篩選。
+
+若要以下列方式說明這項設定查詢篩選 `OnModelCreating` ： [!code-csharp[Main](../../../samples/core/Querying/QueryFilters/FilteredBloggingContextRequired.cs#NavigationInFilter)]
+
+接下來，查詢所有 `Blog` 實體： [!code-csharp[Main](../../../samples/core/Querying/QueryFilters/FilteredBloggingContextRequired.cs#QueriesNavigation)]
+
+此查詢會產生下列 SQL，這會套用針對和實體定義的查詢篩選 `Blog` `Post` ：
+
+```sql
+SELECT [b].[BlogId], [b].[Name], [b].[Url]
+FROM [Blogs] AS [b]
+WHERE (
+    SELECT COUNT(*)
+    FROM [Posts] AS [p]
+    WHERE ([p].[Title] LIKE N'%fish%') AND ([b].[BlogId] = [p].[BlogId])) > 0
+```
 
 > [!NOTE]
 > 目前 EF Core 不會偵測到全域查詢篩選定義中的迴圈，因此在定義時，您應該小心。 如果指定不正確，迴圈可能會在查詢轉譯期間導致無限迴圈。

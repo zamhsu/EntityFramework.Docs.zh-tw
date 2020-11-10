@@ -4,12 +4,12 @@ description: 選擇 EF6 或 EF Core 的指引。
 author: ajcvickers
 ms.date: 01/23/2019
 uid: efcore-and-ef6/index
-ms.openlocfilehash: 02e5e20d270d1966154e9f564256c9afa9b2d5b4
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: e95bc572ac723dd22daa10117f5704f29ba97738
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073613"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430452"
 ---
 # <a name="compare-ef-core--ef6"></a>比較 EF Core 與 EF6
 
@@ -140,7 +140,7 @@ EF Core 行表示功能首次出現所在的產品版本。
 
 ### <a name="supported-platforms"></a>支援的平台
 
-EF Core 3.1 透過使用 .NET Standard 2.0，在 .NET Core 和 .NET Framework 上執行。 不過，EF Core 5.0 不會在 .NET Framework 上執行。 如需詳細資料，請參閱 [平台](xref:core/platforms/index)。
+EF Core 3.1 透過使用 .NET Standard 2.0，在 .NET Core 和 .NET Framework 上執行。 不過，EF Core 5.0 不會在 .NET Framework 上執行。 如需詳細資料，請參閱 [平台](xref:core/miscellaneous/platforms)。
 
 EF6.4 透過多目標在 .NET Core 和 .NET Framework 上執行。
 

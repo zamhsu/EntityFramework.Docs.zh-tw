@@ -4,12 +4,12 @@ description: 如何完成 Entity Framework Core 規劃和發行的資訊
 author: ajcvickers
 ms.date: 01/28/2020
 uid: core/what-is-new/release-planning
-ms.openlocfilehash: 91a130b4ddae66f626bcff8e70283a7e03192542
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f84b8cef40a74245575df6013d94fcda5738e229
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618565"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429139"
 ---
 # <a name="release-planning-process"></a>發行計劃程序
 
@@ -25,7 +25,7 @@ ms.locfileid: "89618565"
 ### <a name="patch-releases"></a>修補程式版本
 
 修補程式版本只會變更版本的「修補程式」部分。
-例如，EF Core 3.1。**1** 是在 EF Core 3.1 中找到修補程式問題的版本。**0**。
+例如，EF Core 3.1。 **1** 是在 EF Core 3.1 中找到修補程式問題的版本。 **0** 。
 
 修補程式版本旨在修正重要的客戶錯誤。
 這表示修補程式版本不包含新功能。
@@ -36,14 +36,16 @@ ms.locfileid: "89618565"
 因此，決策流程強調高價值和低風險。
 
 如果發生下列情況，比較可能會修補問題：
-  * 它會影響多個客戶
-  * 這是先前版本的回歸
-  * 失敗會造成資料損毀
+
+* 它會影響多個客戶
+* 這是先前版本的回歸
+* 失敗會造成資料損毀
 
 如果有下列情況，則不太可能修補問題：
-  * 有合理的解決方法
-  * 修正程式有高風險中斷其他
-  * Bug 位於角落案例中
+
+* 有合理的解決方法
+* 修正程式有高風險中斷其他
+* Bug 位於角落案例中
 
 此橫條會逐漸增加長期支援的存留期 [ (LTS) ](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) 版本。 這是因為 LTS 版本強調穩定性。
 
@@ -52,9 +54,10 @@ ms.locfileid: "89618565"
 ### <a name="minor-releases"></a>次要版本
 
 次要版本只會變更版本的「次要」部分。
-例如，EF Core 3。**1**.0 是 EF Core 3 改善的版本。**0**. 0。
+例如，EF Core 3。 **1**.0 是 EF Core 3 改善的版本。 **0**. 0。
 
 次要版本：
+
 * 旨在改善舊版的品質與功能
 * 通常包含 bug 修正和新功能
 * 請勿包含蓄意的重大變更
@@ -66,6 +69,7 @@ ms.locfileid: "89618565"
 例如，EF Core **3**. 0.0 是一種主要版本，可在 EF Core 2.2. x 上前進一大步。
 
 主要版本：
+
 * 旨在改善舊版的品質與功能
 * 通常包含 bug 修正和新功能
   * 某些新功能可能是 EF Core 運作方式的基本變更

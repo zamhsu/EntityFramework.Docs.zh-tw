@@ -4,12 +4,12 @@ description: 使用資料植入來以 Entity Framework Core 的初始資料集�
 author: AndriySvyryd
 ms.date: 11/02/2018
 uid: core/modeling/data-seeding
-ms.openlocfilehash: f8284d7473c6fbcafde25d01ec0709c2d50b666f
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: fefa6232496cd250d52a436971251f59af09f5c6
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063695"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429672"
 ---
 # <a name="data-seeding"></a>資料植入
 
@@ -66,6 +66,7 @@ ms.locfileid: "92063695"
 
 * 用於測試的暫存資料
 * 相依于資料庫狀態的資料
+* 大量 (植入資料的資料會在遷移快照集中捕捉，而大型資料可能很快會導致大型檔案和效能降低) 。
 * 需要資料庫產生的索引鍵值的資料，包括使用替代索引鍵做為身分識別的實體
 * 需要自訂轉換 (的資料，不是由 [值轉換](xref:core/modeling/value-conversions)) 處理，例如一些密碼雜湊
 * 需要呼叫外部 API 的資料，例如 ASP.NET Core 身分識別角色和使用者建立

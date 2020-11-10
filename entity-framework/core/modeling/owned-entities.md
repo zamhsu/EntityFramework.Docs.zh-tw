@@ -4,16 +4,16 @@ description: 使用 Entity Framework Core 時如何設定擁有的實體類型�
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: a49d9aab735232dfd5a3db456410d527f94f3c18
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 36f756b70c9ad1727c48b5c789fd324c9dc6cd29
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063773"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429431"
 ---
 # <a name="owned-entity-types"></a>擁有的實體類型
 
-EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體類型模型。 這些稱為 _擁有的實體類型_。 包含擁有之實體類型的實體是其 _擁有者_。
+EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體類型模型。 這些稱為 _擁有的實體類型_ 。 包含擁有之實體類型的實體是其 _擁有者_ 。
 
 擁有的實體基本上是擁有者的一部分，而且不存在，而且在概念上類似于 [匯總](https://martinfowler.com/bliki/DDD_Aggregate.html)。 這表示所擁有的實體是在與擁有者之關聯性的相依端上定義。
 
@@ -36,6 +36,10 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 如果 `ShippingAddress` 屬性在類型中是私用的 `Order` ，您可以使用方法的字串版本 `OwnsOne` ：
 
 [!code-csharp[OwnsOneString](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsOneString)]
+
+上述模型會對應至下列資料庫架構：
+
+![包含所擁有參考之實體的資料庫模型 Sceenshot](_static/owned-entities-ownsone.png)
 
 請參閱 [完整的範例專案](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/OwnedEntities) ，以取得更多內容。
 
@@ -69,11 +73,15 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 
 [!code-csharp[OwnsMany](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsMany)]
 
+上述模型會對應至下列資料庫架構：
+
+![包含所擁有集合之實體的資料庫模型 Sceenshot](_static/owned-entities-ownsmany.png)
+
 ## <a name="mapping-owned-types-with-table-splitting"></a>使用資料表分割來對應擁有的類型
 
 使用關係資料庫時，根據預設，參考擁有的類型會對應至與擁有者相同的資料表。 這需要將資料表分割成兩個：某些資料行將用來儲存擁有者的資料，而某些資料行會用來儲存擁有實體的資料。 這是稱為 [資料表分割](xref:core/modeling/table-splitting)的常見功能。
 
-根據預設，EF Core 會在模式 _Navigation_OwnedEntityProperty_之後，為擁有的實體類型的屬性命名資料庫資料行。 因此， `StreetAddress` 屬性會出現在名稱為 ' ShippingAddress_Street ' 和 ' ShippingAddress_City ' 的 ' Orders ' 資料表中。
+根據預設，EF Core 會在模式 _Navigation_OwnedEntityProperty_ 之後，為擁有的實體類型的屬性命名資料庫資料行。 因此， `StreetAddress` 屬性會出現在名稱為 ' ShippingAddress_Street ' 和 ' ShippingAddress_City ' 的 ' Orders ' 資料表中。
 
 您可以使用 `HasColumnName` 方法來重新命名這些資料行。
 
@@ -119,6 +127,10 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 也可以使用和來達成此結果 `OwnedAttribute` `OrderDetails` `StreetAddress` 。
 
 此外，請注意 `Navigation` 呼叫。 在 EFCore 5.0 中，您可以 [針對非擁有的導覽屬性](xref:core/modeling/relationships#configuring-navigation-properties)，進一步設定所擁有類型的導覽屬性。
+
+上述模型會對應至下列資料庫架構：
+
+![包含嵌套所擁有參考之實體的資料庫模型 Sceenshot](_static/owned-entities-nested.png)
 
 ## <a name="storing-owned-types-in-separate-tables"></a>將擁有的類型儲存在不同的資料表中
 

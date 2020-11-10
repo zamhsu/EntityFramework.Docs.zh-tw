@@ -4,12 +4,12 @@ description: 規劃 Entity Framework Core 5.0 的功能
 author: ajcvickers
 ms.date: 08/22/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: 5ac7a48a70959b625b7c602ee48dc08a360bee73
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f2639e41499f3bfca5942d613922fd97212fc2b9
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618661"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429230"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>規劃 Entity Framework Core 5。0
 
@@ -44,18 +44,18 @@ EF Core 5.0 將包含一些 [重大變更](xref:core/what-is-new/ef-core-5.0/bre
 
 領導開發人員： @smitpatel 、 @AndriySvyryd 和 @lajones
 
-追蹤 [#10508](https://github.com/aspnet/EntityFrameworkCore/issues/10508)
+追蹤 [#10508](https://github.com/dotnet/efcore/issues/10508)
 
 T 恤尺寸： L
 
 狀態：完成
 
-「多對多」是 [最常要求的功能](https://github.com/aspnet/EntityFrameworkCore/issues/1368) (~ 506 投票) 在 GitHub 待處理專案上。
+「多對多」是 [最常要求的功能](https://github.com/dotnet/efcore/issues/1368) (~ 506 投票) 在 GitHub 待處理專案上。
 
 多對多關聯性的支援分成三個主要區域：
 
 * 略過導覽屬性--下一個主題所涵蓋的內容。
-* 屬性包實體類型。 這些可讓標準的 CLR 型別 (例如 `Dictionary`) 用於實體實例，因此每個實體類型都不需要明確的 clr 型別。 由 [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)追蹤。
+* 屬性包實體類型。 這些可讓標準的 CLR 型別 (例如 `Dictionary`) 用於實體實例，因此每個實體類型都不需要明確的 clr 型別。 由 [#9914](https://github.com/dotnet/efcore/issues/9914)追蹤。
 * 方便設定多對多關聯性的方便。
 
 除了略過流覽支援以外，我們現在會將多對多的其他區域提取至 EF Core 5.0，以提供完整的體驗。
@@ -64,7 +64,7 @@ T 恤尺寸： L
 
 領導開發人員： @smitpatel 和 @AndriySvyryd
 
-追蹤 [#19003](https://github.com/aspnet/EntityFrameworkCore/issues/19003)
+追蹤 [#19003](https://github.com/dotnet/efcore/issues/19003)
 
 T 恤尺寸： L
 
@@ -79,7 +79,7 @@ T 恤尺寸： L
 
 首席開發人員： @AndriySvyryd 和 @smitpatel
 
-追蹤 [#2266](https://github.com/aspnet/EntityFrameworkCore/issues/2266)
+追蹤 [#2266](https://github.com/dotnet/efcore/issues/2266)
 
 T 恤尺寸： XL
 
@@ -91,7 +91,7 @@ T 恤尺寸： XL
 
 首席開發人員： @maumar
 
-追蹤 [#1833](https://github.com/aspnet/EntityFrameworkCore/issues/1833)
+追蹤 [#1833](https://github.com/dotnet/efcore/issues/1833)
 
 T 恤尺寸： M
 
@@ -131,7 +131,7 @@ T 恤尺寸： M
 
 領導開發人員： @AndriySvyryd 和 @smitpatel
 
-追蹤 [#17270](https://github.com/aspnet/EntityFrameworkCore/issues/17270)
+追蹤 [#17270](https://github.com/dotnet/efcore/issues/17270)
 
 T 恤尺寸： L
 
@@ -302,7 +302,7 @@ T 恤尺寸： L
 
 ## <a name="below-the-line"></a>以下-行
 
-由[標記為的 `consider-for-next-release` 問題](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+label%3Aconsider-for-next-release)追蹤
+由[標記為的 `consider-for-next-release` 問題](https://github.com/dotnet/efcore/issues?q=is%3Aopen+is%3Aissue+label%3Aconsider-for-next-release)追蹤
 
 這些是目前 **尚未** 針對5.0 版本排程的 bug 修正和增強功能，但我們將根據上述工作的進度來查看延展目標。
 

@@ -4,12 +4,12 @@ description: Entity Framework Core 的外部工具與延伸模組
 author: ErikEJ
 ms.date: 04/11/2020
 uid: core/extensions/index
-ms.openlocfilehash: 7c29203d802e801170ed10dca26e693d8ed19d2b
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c7056bcb0831ae1919b3060aacf73dc5cb9c8cb1
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071996"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429932"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -28,13 +28,13 @@ LLBLGen Pro 是實體模型化解決方案，具備 Entity Framework 與 Entity 
 
 ### <a name="devart-entity-developer"></a>Devart Entity Developer
 
-Devart Entity 是功能強大的 ORM 設計工具，適用於 ADO.NET Entity Framework、NHibernate、LinqConnect、Telerik Data Access、LINQ 到 SQL。 它支援使用 model first 或 database first 方法，以及 C# 或 Visual Basic 程式碼產生，以視覺化的方式設計 EF Core 模型。 適用於 EF Core：1、2、3、5。
+Entity Developer 是一種功能強大的 O/RM 設計工具，可用於 ADO.NET Entity Framework、NHibernate、LinqConnect、Telerik 資料存取和 LINQ to SQL。 它支援使用 model first 或 database first 方法，以及 C# 或 Visual Basic 程式碼產生，以視覺化的方式設計 EF Core 模型。 適用於 EF Core：1、2、3、5。
 
 [網站](https://www.devart.com/entitydeveloper/)
 
 ### <a name="nhydrate-orm-for-entity-framework"></a>Entity Framework 的 nHydrate ORM
 
-為 Entity Framework 建立可延伸類別的強型別 ORM。 產生的程式碼為 Entity Framework Core。 因此兩者沒有任何不同。 這不能取代 EF 或自訂 ORM。 這是一種視覺化的模型化層，可讓小組管理複雜的資料庫結構描述。 適用於 Git 這類的 SCM 軟體，允許多使用者存取模型，但具有最少的衝突。 安裝程式會追蹤模型變更並建立升級指令碼。 適用於 EF Core：3.
+O/RM，可針對 Entity Framework 建立強型別擴充的類別。 產生的程式碼為 Entity Framework Core。 因此兩者沒有任何不同。 這不是 EF 或自訂 O/RM 的替代方案。 這是一種視覺化的模型化層，可讓小組管理複雜的資料庫結構描述。 適用於 Git 這類的 SCM 軟體，允許多使用者存取模型，但具有最少的衝突。 安裝程式會追蹤模型變更並建立升級指令碼。 適用於 EF Core：3.
 
 [Github 網站](https://github.com/nHydrate/nHydrate)
 
@@ -46,7 +46,7 @@ EF Core Power Tools 是 Visual Studio 延伸模組，在簡單使用者介面中
 
 ### <a name="entity-framework-visual-editor"></a>Entity Framework 視覺效果編輯器
 
-Entity Framework 視覺效果編輯器是 Visual Studio 延伸模組，為 EF 6 和 EF Core 類別的視覺效果設計新增 ORM 設計工具。 因為程式碼會透過 T4 範本產生，所以能加以自訂來滿足各種需求。 它支援繼承、單向及雙向關聯、列舉，還能夠對類別進行色彩編碼以及新增文字區塊，以說明設計中可能較不易懂的部分。 適用於 EF Core：2.
+Entity Framework 的視覺化編輯器是 Visual Studio 擴充功能，可為 EF 6 的視覺效果設計以及 EF Core 類別加入 O/RM 設計工具。 因為程式碼會透過 T4 範本產生，所以能加以自訂來滿足各種需求。 它支援繼承、單向及雙向關聯、列舉，還能夠對類別進行色彩編碼以及新增文字區塊，以說明設計中可能較不易懂的部分。 適用於 EF Core：2.
 
 [Marketplace](https://marketplace.visualstudio.com/items?itemName=michaelsawczyn.EFDesigner) \(英文\)
 
@@ -83,13 +83,13 @@ Geco (產生器主控台) 是以主控台專案為基礎的簡單程式碼產生
 
 [GitHub 存放庫](https://github.com/iQuarc/Geco)
 
-### <a name="entityframeworkcorescaffoldinghandlebars"></a>EntityFrameworkCore.Scaffolding.Handlebars 
+### <a name="entityframeworkcorescaffoldinghandlebars"></a>EntityFrameworkCore.Scaffolding.Handlebars
 
 可讓您搭配 Handlebars 範本使用 Entity Framework Core 工具鏈，自訂從現有資料庫進行反向工程的類別。 適用於 EF Core：2、3。
 
 [GitHub 存放庫](https://github.com/TrackableEntities/EntityFrameworkCore.Scaffolding.Handlebars)
 
-### <a name="neinlinqentityframeworkcore"></a>NeinLinq.EntityFrameworkCore 
+### <a name="neinlinqentityframeworkcore"></a>NeinLinq.EntityFrameworkCore
 
 NeinLinq 擴充了 LINQ 提供者 (例如 Entity Framework)，並提供以下功能：重複使用函式、重寫查詢，以及使用可翻譯的述詞和選取器建置動態查詢。 適用於 EF Core：2、3。
 
@@ -143,13 +143,11 @@ Microsoft.EntityFrameworkCore 的外掛程式，可支援存放庫、工作模�
 
 [GitHub 存放庫](https://github.com/VantageSoftware/EFCore.TimeTraveler)
 
-
 ### <a name="entityframeworkcoretemporaltables"></a>EntityFrameworkCore.TemporalTables
 
 Entity Framework Core 的延伸模組程式庫，可讓使用 SQL Server 的開發人員輕鬆地使用時態表。 適用於 EF Core：2.
 
 [GitHub 存放庫](https://github.com/findulov/EntityFrameworkCore.TemporalTables)
-
 
 ### <a name="entityframeworkcorecacheable"></a>EntityFrameworkCore.Cacheable
 
@@ -236,3 +234,9 @@ Entity Framework Core 3.1 的 LINQ 延伸模組，以支援 Microsoft SQL Server
 虛刪除實體的實作。 適用於 EF Core：3.
 
 [NuGet](https://www.nuget.org/packages/EFCore.SoftDelete)
+
+### <a name="entityframeworkcoreconfigurationmanager"></a>EntityFrameworkCore.ConfigurationManager
+
+擴充 EF Core，以從 App.config 解析連接字串。針對 EF Core：3。
+
+[GitHub 存放庫](https://github.com/efcore/EFCore.ConfigurationManager)

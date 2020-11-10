@@ -4,19 +4,19 @@ description: 資料庫提供者的文件，內容說明如何搭配使用 Entity
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 26be2b604453aa2d5b21ae45f590b294639db887
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 825517e79891378a61f9564c90dbf4522459e9d0
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92064046"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430310"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB 提供者
 
 > [!NOTE]
 > 這是新的 EF Core 3.0 提供者。
 
-此資料庫提供者可讓 Entity Framework Core 與 Azure Cosmos DB 搭配使用。 [Entity Framework Core 專案](https://github.com/aspnet/EntityFrameworkCore)的維護包含此提供者。
+此資料庫提供者可讓 Entity Framework Core 與 Azure Cosmos DB 搭配使用。 [Entity Framework Core 專案](https://github.com/dotnet/efcore)的維護包含此提供者。
 
 強烈建議您在閱讀本節之前先熟悉 [Azure Cosmos DB 文件](/azure/cosmos-db/introduction)。
 
@@ -103,9 +103,14 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 > [!NOTE]
 >只要分割區索引鍵屬性會[轉換成字串](xref:core/modeling/value-conversions)，就不限於任何類型。
 
-分割區索引鍵屬性設定完成後，應該都會具有 null 以外的值。 您可在發出查詢時新增條件，讓查詢成為單一分割區。
+分割區索引鍵屬性設定完成後，應該都會具有 null 以外的值。 您可以藉由加入呼叫來建立單一分割區的查詢 `WithPartitionKey` 。
 
-[!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=PartitionKey)]
+[!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=PartitionKey&highlight=15)]
+
+> [!NOTE]
+> `WithPartitionKey` 已在 EF Core 5.0 中新增。
+
+通常建議將分割區索引鍵加入至主要索引鍵，因為這最能反映伺服器的語義並允許一些優化，例如在中 `FindAsync` 。
 
 ## <a name="embedded-entities"></a>內嵌實體
 

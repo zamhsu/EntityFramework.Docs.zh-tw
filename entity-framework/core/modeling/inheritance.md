@@ -4,12 +4,12 @@ description: 如何使用 Entity Framework Core 設定實體類型繼承
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/inheritance
-ms.openlocfilehash: 47aae0d57d7203f0e6da5868bdc082ad85d59620
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 3ec6e7bd98f9c9716c460d69fc707d95e5e47a05
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063864"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429516"
 ---
 # <a name="inheritance"></a>繼承
 
@@ -35,9 +35,9 @@ EF 可將 .NET 型別階層對應到資料庫。 這可讓您照常以程式碼�
 
 根據預設，EF 會使用 *每個* 階層的資料表來對應繼承 (TPH) 模式。 TPH 使用單一資料表來儲存階層中所有類型的資料，而鑒別子資料行會用來識別每個資料列所代表的類型。
 
-上述模型會對應至下列資料庫架構 (請注意隱含建立的資料 `Discriminator` 行，此資料 `Blog` 行會識別每個資料列) 中所儲存的型別。
+上述模型會對應至下列資料庫架構 (請注意隱含建立的資料 `Discriminator` 行，以識別 `Blog` 每個資料列) 中所儲存的型別。
 
-![image](_static/inheritance-tph-data.png)
+![使用每個階層的資料表模式查詢 Blog 實體階層之結果的螢幕擷取畫面](_static/inheritance-tph-data.png)
 
 您可以設定鑒別子資料行的名稱和類型，以及用來識別階層中每一種類型的值：
 
@@ -50,6 +50,10 @@ EF 可將 .NET 型別階層對應到資料庫。 這可讓您照常以程式碼�
 最後，鑒別子也可以對應至實體中的一般 .NET 屬性：
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/NonShadowDiscriminator.cs?name=NonShadowDiscriminator&highlight=4)]
+
+當查詢使用 TPH 模式的衍生實體時，EF Core 會在查詢中的鑒別子資料行上新增述詞。 此篩選準則可確保不會針對基底類型或不在結果中的同級類型取得任何額外的資料列。 因為查詢基底實體將會取得階層中所有實體的結果，所以會略過基底實體類型的篩選述詞。 從查詢具體化結果時，如果我們遇到不會對應到模型中任何實體類型的鑒別子值，我們會擲回例外狀況，因為我們不知道如何具體化結果。 只有當您的資料庫包含具有鑒別子值的資料列時，不會在 EF 模型中對應，才會發生此錯誤。 如果您有這類資料，您可以將 EF Core 模型中的鑒別子對應標示為 [不完整]，表示我們應該一律加入篩選述詞，以便查詢階層中的任何類型。 `IsComplete(false)` 在鑒別子設定上呼叫會將對應標示為不完整。
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/DiscriminatorMappingIncomplete.cs?name=DiscriminatorMappingIncomplete&highlight=5)]
 
 ### <a name="shared-columns"></a>共用資料行
 

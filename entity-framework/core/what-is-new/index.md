@@ -4,12 +4,12 @@ description: EF Core 目前版本及未來版本的排程/規劃詳細資料
 author: ajcvickers
 ms.date: 06/11/2020
 uid: core/what-is-new/index
-ms.openlocfilehash: 4424f9233016edbc8d98e8df840091f2adaf1ee9
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
-ms.translationtype: HT
+ms.openlocfilehash: 24b814bd906ece9cc485bf96713b9f8feac5eb2c
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618584"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430530"
 ---
 # <a name="ef-core-releases-and-planning"></a>EF Core 版本和計劃
 
@@ -25,7 +25,7 @@ ms.locfileid: "89618584"
 | ~~[EF Core 1.1](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/1.1.6)~~ | .NET Standard 1.3 | 2019 年 6 月 27 日過期 | [公告](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-1-1/) \(英文\)
 | ~~[EF Core 1.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/1.0.6)~~ | .NET Standard 1.3 | 2019 年 6 月 27 日過期 | [公告](https://devblogs.microsoft.com/dotnet/entity-framework-core-1-0-0-available/) \(英文\)
 
-如需每個 EF Core 版本所支援特定平台的相關資訊，請參閱[支援的平台](xref:core/platforms/index)。
+如需每個 EF Core 版本所支援特定平台的相關資訊，請參閱[支援的平台](xref:core/miscellaneous/platforms)。
 
 如需支援到期與長期支援 (LTS) 版本的資訊，請參閱 [.NET 支援原則](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) \(英文\)。
 
@@ -47,7 +47,7 @@ EF Core 發行與 [.NET Core 推出排程](https://github.com/dotnet/core/blob/m
 
 ## <a name="ef-core-50"></a>EF Core 5.0
 
-下一個已計劃穩定版本是 **EF Core 5.0**，排程於 2020 年 11 月推出。
+下一個已計劃穩定版本是 **EF Core 5.0** ，排程於 2020 年 11 月推出。
 
 [EF Core 5.0 的概略計劃](xref:core/what-is-new/ef-core-5.0/plan)已依照記載的[發行計劃程序](xref:core/what-is-new/release-planning)建立。
 
@@ -55,9 +55,9 @@ EF Core 發行與 [.NET Core 推出排程](https://github.com/dotnet/core/blob/m
 指出問題重要性的最佳方式是在 GitHub 上針對該問題發起投票 (點讚 👍)。
 此資料接著會進入下一個版本的計劃程序。
 
-### <a name="get-it-now"></a>立即下載！
+### <a name="get-it-now"></a>立即取得
 
-EF Core 5.0 套件**現以**作為
+EF Core 5.0 套件 **現以** 作為
 
 * [每日組建](https://github.com/dotnet/aspnetcore/blob/master/docs/DailyBuilds.md) (英文) 的形式提供
   * 所有最新的功能與 Bug 修正。 整體而言十分穩定，每個組建都經過 57000 次以上的測試。

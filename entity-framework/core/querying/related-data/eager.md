@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 積極載入相關資料
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: 97ec45a0f8bfecce4d4a59e5d1c36c0268d96052
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: bd9c9045c1c2707d69ee4070bea59ad8066789f3
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062572"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430101"
 ---
 # <a name="eager-loading-of-related-data"></a>相關資料的積極式載入
 
@@ -26,6 +26,9 @@ ms.locfileid: "92062572"
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleIncludes)]
 
+> [!CAUTION]
+> 積極載入單一查詢中的集合導覽可能會導致效能問題。 如需詳細資訊，請參閱 [單一與分割查詢](xref:core/querying/single-split-queries)。
+
 ## <a name="including-multiple-levels"></a>包括多個層級
 
 您可以使用 `ThenInclude` 方法，透過關聯性向下切入以包含多個層級的相關資料。 下列範例會載入所有部落格、其相關文章，以及每篇文章的作者。
@@ -40,78 +43,16 @@ ms.locfileid: "92062572"
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#IncludeTree)]
 
-您可能會想要針對所包括的其中一個實體包含多個相關實體。 例如，查詢 `Blogs` 時，您包括了 `Posts`，接著想要同時包含 `Posts` 的 `Author` 和 `Tags`。 若要同時包含這兩個，您必須指定從根目錄開始的每個 include 路徑。 例如 `Blog -> Posts -> Author` 和 `Blog -> Posts -> Tags`。 這並不表示您將會收到多餘的聯結;在大部分情況下，EF 會在產生 SQL 時合併聯結。
+您可能會想要針對所包括的其中一個實體包含多個相關實體。 例如，查詢 `Blogs` 時，您包括了 `Posts`，接著想要同時包含 `Posts` 的 `Author` 和 `Tags`。 若要同時包含這兩個，您必須指定從根目錄開始的每個 include 路徑。 例如，`Blog -> Posts -> Author` 與 `Blog -> Posts -> Tags`。 這並不表示您將會收到多餘的聯結;在大部分情況下，EF 會在產生 SQL 時合併聯結。
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludes)]
-
-## <a name="single-and-split-queries"></a>單一和分割查詢
-
-### <a name="single-queries"></a>單一查詢
-
-在關係資料庫中，所有相關的實體預設都是藉由引進聯結來載入：
-
-```sql
-SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url], [p].[PostId], [p].[AuthorId], [p].[BlogId], [p].[Content], [p].[Rating], [p].[Title]
-FROM [Blogs] AS [b]
-LEFT JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
-ORDER BY [b].[BlogId], [p].[PostId]
-```
-
-如果一般的 blog 有多個相關的文章，這些貼文的資料列將會複製 blog 的資訊，進而導致所謂的「笛卡兒爆炸」問題。 載入更多一對多關聯性時，重複的資料量可能會成長，而且會對應用程式的效能造成不良影響。 根據預設，如果偵測到載入集合的查詢可能會造成效能問題，EF Core 會發出警告。
-
-### <a name="split-queries"></a>分割查詢
-
-> [!NOTE]
-> 這項功能是在 EF Core 5.0 中引進。
-
-EF 可讓您指定應該將指定的 LINQ 查詢 *分割* 成多個 SQL 查詢。 分割查詢除了聯結之外，還會針對每個包含的一對多導覽執行額外的 SQL 查詢：
-
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs?name=AsSplitQuery&highlight=5)]
-
-它會產生下列 SQL：
-
-```sql
-SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url]
-FROM [Blogs] AS [b]
-ORDER BY [b].[BlogId]
-
-SELECT [p].[PostId], [p].[AuthorId], [p].[BlogId], [p].[Content], [p].[Rating], [p].[Title], [b].[BlogId]
-FROM [Blogs] AS [b]
-INNER JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
-ORDER BY [b].[BlogId]
-```
-
-> [!NOTE]
-> 一對多相關實體一律會透過相同查詢中的聯結載入，因為這不會影響效能。
-
-### <a name="enabling-split-queries-globally"></a>全域啟用分割查詢
-
-您也可以將分割查詢設定為應用程式內容的預設值：
-
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/SplitQueriesBloggingContext.cs?name=QuerySplittingBehaviorSplitQuery&highlight=6)]
-
-當分割查詢設定為預設值時，仍然可以將特定查詢設定為以單一查詢的形式執行：
-
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs?name=AsSingleQuery&highlight=5)]
-
-如果未明確指定查詢分割模式，則全域或不是在查詢和 EF Core 會偵測到單一查詢會載入多個集合，併發出警告以吸引出可能產生的效能問題。 將查詢模式設定為 SingleQuery 會導致不產生警告。
-
-### <a name="characteristics-of-split-queries"></a>分割查詢的特性
-
-雖然分割查詢可避免與聯結和笛卡兒爆炸相關的效能問題，但它也有一些缺點：
-
-* 雖然大部分資料庫保證單一查詢的資料一致性，但多個查詢沒有這類保證存在。 如果在執行查詢時同時更新資料庫，則產生的資料可能不一致。 您可以藉由將查詢包裝在可序列化或快照集交易中來加以減輕，雖然這樣做可能會產生自己的效能問題。 如需詳細資訊，請參閱資料庫檔案。
-* 每個查詢目前暗示對您資料庫的額外網路往返。 多個網路往返可能會降低效能，特別是在資料庫的延遲很高 (例如雲端服務) 的情況下。
-* 雖然某些資料庫允許同時使用多個查詢的結果 (使用 MARS 的 SQL Server，Sqlite) 大部分只允許在任何給定的時間點啟用單一查詢。 因此，必須先在應用程式的記憶體中緩衝處理舊版查詢的所有結果，然後再執行較新的查詢，這會導致記憶體需求增加。
-
-可惜的是，載入適用于所有案例的相關實體沒有一個策略。 請仔細考慮單一和分割查詢的優缺點，然後選取符合您需求的查詢。
 
 ## <a name="filtered-include"></a>篩選的包含
 
 > [!NOTE]
 > 這項功能是在 EF Core 5.0 中引進。
 
-將 Include 套用至載入相關資料時，您可以在包含的集合導覽上套用某些可列舉的作業，以篩選和排序結果。
+將 Include 套用至載入相關資料時，您可以將某些可列舉的作業加入至包含的集合導覽，以允許篩選和排序結果。
 
 支援的作業為： `Where` 、 `OrderBy` 、、、、 `OrderByDescending` `ThenBy` `ThenByDescending` `Skip` 和 `Take` 。
 
@@ -138,6 +79,9 @@ var orders = context.Orders.Where(o => o.Id > 1000).ToList();
 // customer entities will have references to all orders where Id > 1000, rather than > 5000
 var filtered = context.Customers.Include(c => c.Orders.Where(o => o.Id > 5000)).ToList();
 ```
+
+> [!NOTE]
+> 如果是追蹤查詢，則會將已套用篩選的包含的導覽視為已載入。 這表示 EF Core 不會嘗試使用 [明確載入](xref:core/querying/related-data/explicit) 或消極式 [載入](xref:core/querying/related-data/lazy)來重新載入它的值，即使某些元素仍然可能遺失也是一樣。
 
 ## <a name="include-on-derived-types"></a>衍生類型中的 Include
 

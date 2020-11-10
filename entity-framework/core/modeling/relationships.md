@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 時如何設定實體類型之間的�
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 71d960a15dfb938af1dcc7035dc2587df7ad4677
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 567d212ddf41f33ee32443d85d2a17234fbc026b
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063838"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430179"
 ---
 # <a name="relationships"></a>關聯性
 
@@ -85,7 +85,7 @@ ms.locfileid: "92063838"
 > 如果屬性是主鍵，或者是不與主體索引鍵相容的型別，則不會將它設定為外鍵。
 
 > [!NOTE]
-> 在 EF Core 3.0 之前，名為與 principal key 屬性完全相同的屬性也會與 [外鍵相符](https://github.com/aspnet/EntityFrameworkCore/issues/13274)
+> 在 EF Core 3.0 之前，名為與 principal key 屬性完全相同的屬性也會與 [外鍵相符](https://github.com/dotnet/efcore/issues/13274)
 
 ### <a name="no-foreign-key-property"></a>沒有外鍵屬性
 
@@ -194,7 +194,7 @@ ms.locfileid: "92063838"
 
 #### <a name="foreign-key-constraint-name"></a>Foreign key 條件約束名稱
 
-依照慣例，以關係資料庫為目標時，foreign key 條件約束會命名為 FK_ <dependent type name> _<principal type name>_ <foreign key property name> 。 若為複合外鍵， <foreign key property name> 則會變成以底線分隔的外鍵屬性名稱清單。
+依照慣例，以關係資料庫為目標時，foreign key 條件約束會命名為 FK \_ \<dependent type name> \_ \<principal type name> \_ \<foreign key property name> 。 若為複合外鍵， \<foreign key property name> 則會變成以底線分隔的外鍵屬性名稱清單。
 
 您也可以設定條件約束名稱，如下所示：
 
@@ -325,3 +325,10 @@ CREATE TABLE [PostTag] (
 您也可以藉由加入聯結實體型別並對應兩個不同的一對多關聯性，來表示多對多關聯性。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=11-14,16-19,39-46)]
+
+> [!NOTE]
+> 尚未新增與資料庫中多對多關聯性的元件支援。 請參閱 [追蹤問題](https://github.com/dotnet/efcore/issues/22475)。
+
+## <a name="additional-resources"></a>其他資源
+
+* [EF Core 的站立會議研討會](https://www.youtube.com/watch?v=W1sxepfIMRM&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=32)，深入探討多對多和基礎結構。

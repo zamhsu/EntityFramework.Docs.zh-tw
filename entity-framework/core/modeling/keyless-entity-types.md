@@ -4,19 +4,19 @@ description: 如何使用 Entity Framework Core 設定無索引鍵實體類型
 author: AndriySvyryd
 ms.date: 9/13/2019
 uid: core/modeling/keyless-entity-types
-ms.openlocfilehash: cb4ce44526ada77e37eb4dceb9986a670ea3656b
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: d1a60e0504b22623b97c1a4963d2e3f70faa365c
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063799"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429503"
 ---
 # <a name="keyless-entity-types"></a>無索引鍵實體類型
 
 > [!NOTE]
 > 這項功能是在查詢類型的名稱下加入。 在 EF Core 3.0 中，概念已重新命名為無索引鍵的實體類型。 `[Keyless]`資料批註在 EFCore 5.0 中變成可供使用。
 
-除了一般實體類型之外，EF Core 模型也可以包含 _無索引鍵的實體類型_，可用來針對不包含索引鍵值的資料執行資料庫查詢。
+除了一般實體類型之外，EF Core 模型也可以包含 _無索引鍵的實體類型_ ，可用來針對不包含索引鍵值的資料執行資料庫查詢。
 
 ## <a name="defining-keyless-entity-types"></a>定義無索引鍵實體類型
 
@@ -47,7 +47,7 @@ ms.locfileid: "92063799"
   - 它們只能包含指向一般實體的參考導覽屬性。
   - 實體不能包含無索引鍵實體類型的導覽屬性。
 - 需要使用 `[Keyless]` 資料批註或 `.HasNoKey()` 方法呼叫來設定。
-- 可能對應至 _定義查詢_。 定義查詢是在模型中宣告的查詢，可作為無索引鍵實體類型的資料來源。
+- 可能對應至 _定義查詢_ 。 定義查詢是在模型中宣告的查詢，可作為無索引鍵實體類型的資料來源。
 
 ## <a name="usage-scenarios"></a>使用方式情節
 
@@ -60,7 +60,7 @@ ms.locfileid: "92063799"
 
 ## <a name="mapping-to-database-objects"></a>對應至資料庫物件
 
-使用或流暢的 API 即可將無索引鍵實體類型對應至資料庫 `ToTable` 物件 `ToView` 。 從 EF Core 的觀點來看，這個方法中所指定的資料庫物件是一個 _視圖_，這表示它會被視為唯讀查詢來源，而不能是 update、insert 或 delete 作業的目標。 但是，這並不表示資料庫物件實際上必須是資料庫的視圖。 它也可以是將被視為唯讀的資料庫資料表。 相反地，對於一般的實體類型，EF Core 會假設在方法中指定的資料庫物件 `ToTable` 可以視為 _資料表_，這表示它可以當做查詢來源使用，也可作為 update、delete 和 insert 作業的目標。 事實上，您可以在中指定資料庫的名稱 `ToTable` ，而且只要視圖設定為可在資料庫上更新，一切都應可正常運作。
+使用或流暢的 API 即可將無索引鍵實體類型對應至資料庫 `ToTable` 物件 `ToView` 。 從 EF Core 的觀點來看，這個方法中所指定的資料庫物件是一個 _視圖_ ，這表示它會被視為唯讀查詢來源，而不能是 update、insert 或 delete 作業的目標。 但是，這並不表示資料庫物件實際上必須是資料庫的視圖。 它也可以是將被視為唯讀的資料庫資料表。 相反地，對於一般的實體類型，EF Core 會假設在方法中指定的資料庫物件 `ToTable` 可以視為 _資料表_ ，這表示它可以當做查詢來源使用，也可作為 update、delete 和 insert 作業的目標。 事實上，您可以在中指定資料庫的名稱 `ToTable` ，而且只要視圖設定為可在資料庫上更新，一切都應可正常運作。
 
 > [!NOTE]
 > `ToView` 假設物件已經存在於資料庫中，而不是由遷移所建立。
@@ -99,3 +99,6 @@ ms.locfileid: "92063799"
 
 > [!TIP]
 > 請注意，我們也定義了內容層級查詢屬性 (DbSet) 做為針對此型別進行查詢的根。
+
+> [!TIP]
+> 若要使用記憶體內部提供者來測試對應至 views 的無索引鍵實體型別，請透過將它們對應至查詢 `ToInMemoryQuery` 。 如需詳細資訊，請參閱使用此技術的可執行 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) 。

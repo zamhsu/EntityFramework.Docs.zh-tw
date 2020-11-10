@@ -4,12 +4,12 @@ description: Entity Framework Core 3.x 中的變更與改進
 author: ajcvickers
 ms.date: 09/05/2020
 uid: core/what-is-new/ef-core-3.x/index
-ms.openlocfilehash: b987ca1fdbe46105162c1c7623822e15bd01ef25
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 0c005345505c1c2f3712e489ab69ec4a20564293
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92065624"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429256"
 ---
 # <a name="new-features-in-entity-framework-core-3x"></a>Entity Framework Core 3.x 中的新功能
 
@@ -130,7 +130,7 @@ public class HintCommandInterceptor : DbCommandInterceptor
 }
 ```
 
-並使用您的  `DbContext` 註冊它：
+並向您的註冊 `DbContext` ：
 
 ```csharp
 services.AddDbContext(b => b
@@ -143,7 +143,7 @@ services.AddDbContext(b => b
 查詢類型 (代表可從資料庫讀取但未更新的資料) 已重新命名為[無索引鍵實體類型](xref:core/modeling/keyless-entity-types)。
 因為它們很適合在大部分的案例中用於對應資料庫檢視，所以 EF Core 現在會在反向工程資料庫檢視時，自動建立無索引鍵實體類型。
 
-例如，您可以使用 [dotnet ef 命令列工具](xref:core/miscellaneous/cli/dotnet)來輸入：
+例如，您可以使用 [dotnet ef 命令列工具](xref:core/cli/dotnet)來輸入：
 
 ```dotnetcli
 dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
@@ -202,5 +202,5 @@ public class OrderDetails
 
 原先針對 EF Core 3.x 規劃的一些功能，已延後到未來的版本：
 
-- 在移轉中忽略模型組件的功能，以 [#2725](https://github.com/aspnet/EntityFrameworkCore/issues/2725) \(英文\) 追蹤。
-- 屬性包實體，視為兩個不同的問題來追蹤：有關共用類型實體的 [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914) \(英文\)，以及有關已編製索引屬性對應支援的 [#13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) \(英文\)。
+- 在移轉中忽略模型組件的功能，以 [#2725](https://github.com/dotnet/efcore/issues/2725) \(英文\) 追蹤。
+- 屬性包實體，視為兩個不同的問題來追蹤：有關共用類型實體的 [#9914](https://github.com/dotnet/efcore/issues/9914) \(英文\)，以及有關已編製索引屬性對應支援的 [#13610](https://github.com/dotnet/efcore/issues/13610) \(英文\)。

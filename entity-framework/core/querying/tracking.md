@@ -2,14 +2,14 @@
 title: 追蹤與 No-Tracking 的查詢-EF Core
 description: Entity Framework Core 中追蹤和無追蹤查詢的資訊
 author: smitpatel
-ms.date: 10/10/2019
+ms.date: 11/09/2020
 uid: core/querying/tracking
-ms.openlocfilehash: dff6c14edcd69e7d16be8bab5fa3088c2c1288e1
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: b4c059f9a9b726697009589271e007bd1d2afd56
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063656"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430439"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>追蹤與 No-Tracking 的查詢
 
@@ -27,9 +27,11 @@ ms.locfileid: "92063656"
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#Tracking)]
 
+當追蹤查詢傳回結果時，EF Core 會檢查實體是否已存在於內容中。 如果 EF Core 找到現有的實體，則會傳回相同的實例。 EF Core 不會以資料庫值覆寫專案中實體屬性的目前值和原始值。 如果在內容中找不到實體，EF Core 將會建立新的實體實例，並將它附加至內容。 查詢結果不包含任何加入至內容的實體，但尚未儲存至資料庫。
+
 ## <a name="no-tracking-queries"></a>無追蹤查詢
 
-如果要在唯讀案例中使用結果，則不追蹤的查詢很實用。 執行速度較快，因為不需要設定變更追蹤資訊。 如果您不需要更新從資料庫取出的實體，則應該使用無追蹤查詢。 您可以將個別查詢交換為不追蹤。
+如果要在唯讀案例中使用結果，則不追蹤的查詢很實用。 執行速度較快，因為不需要設定變更追蹤資訊。 如果您不需要更新從資料庫取出的實體，則應該使用無追蹤查詢。 您可以將個別查詢交換為不追蹤。 沒有任何追蹤查詢也會根據資料庫中會忽略任何本機變更或新增實體的結果提供結果。
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#NoTracking)]
 
@@ -40,6 +42,10 @@ ms.locfileid: "92063656"
 ## <a name="identity-resolution"></a>身分識別解析
 
 由於追蹤查詢會使用變更追蹤器，因此 EF Core 會在追蹤查詢中進行識別解析。 具體化實體時，如果已追蹤，EF Core 將會從變更追蹤器傳回相同的實體實例。 如果結果多次包含相同的實體，您就會在每次發生時取回相同的實例。 無追蹤查詢不會使用變更追蹤器，也不會進行識別解析。 因此，即使相同的實體包含在結果中多次，您仍會取回實體的新實例。 在 EF Core 3.0 之前的版本中，這個行為不同，請參閱 [先前的版本](#previous-versions)。
+
+從 EF Core 5.0 開始，您可以在相同的查詢中結合上述兩個行為。 也就是說，您可以有沒有追蹤查詢，這會在結果中進行識別解析。 就像可 `AsNoTracking()` 查詢的運算子一樣，我們也新增了另一個運算子 `AsNoTrackingWithIdentityResolution()` 。 列舉中也加入了相關聯的專案 <xref:Microsoft.EntityFrameworkCore.QueryTrackingBehavior> 。 當您將查詢設定為使用沒有追蹤的身分識別解析時，我們會在產生查詢結果時，于背景使用獨立的變更追蹤器，因此每個實例僅具體化一次。 因為這項變更追蹤器與內容中的追蹤程式不同，所以內容不會追蹤結果。 完整列舉查詢之後，變更追蹤器就會超出範圍，並視需要進行垃圾收集。
+
+[!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#NoTrackingWithIdentityResolution)]
 
 ## <a name="tracking-and-custom-projections"></a>追蹤和自訂投影
 

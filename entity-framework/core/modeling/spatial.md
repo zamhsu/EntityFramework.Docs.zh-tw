@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 模型中的空間資料
 author: bricelam
 ms.date: 10/02/2020
 uid: core/modeling/spatial
-ms.openlocfilehash: 2c0cd7a8acf7e4b58eadf8805afa1fe4a1d6e949
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: fa9cf30ddb4291d96486934544b568b67b126846
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063929"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430517"
 ---
 # <a name="spatial-data"></a>空間資料
 
@@ -47,7 +47,7 @@ Teradata.EntityFrameworkCore            | [Teradata. Microsoft.entityframeworkco
 * 幾何形狀
   * Point
   * LineString
-  * 多邊形
+  * Polygon
   * GeometryCollection
     * MultiPoint
     * MultiLineString
@@ -78,7 +78,7 @@ NTS 中的座標是以 X 和 Y 值為依據。 若要表示經度和緯度，請
 
 ## <a name="reverse-engineering"></a>反向工程
 
-空間 NuGet 套件也會啟用具有空間屬性的 [反轉工程](xref:core/managing-schemas/scaffolding) 模型，但您必須先安裝封裝， ***才能*** 執行 `Scaffold-DbContext` 或 `dotnet ef dbcontext scaffold` 。 如果沒有，您將會收到關於找不到資料行之類型對應的警告，而且將略過資料行。
+空間 NuGet 套件也會啟用具有空間屬性的 [反轉工程](xref:core/managing-schemas/scaffolding) 模型，但您必須在執行或 *_之前，先_* 安裝套件 * `Scaffold-DbContext` `dotnet ef dbcontext scaffold` 。 如果沒有，您將會收到關於找不到資料行之類型對應的警告，而且將略過資料行。
 
 ## <a name="srid-ignored-during-client-operations"></a>用戶端作業期間忽略 SRID
 
@@ -97,9 +97,15 @@ NTS 會在作業期間忽略 SRID 值。 它會假設平面座標系統。 這�
 
 ## <a name="additional-resources"></a>其他資源
 
+### <a name="database-specific-information"></a>資料庫特定資訊
+
 請務必閱讀提供者的檔，以取得處理空間資料的其他資訊。
 
-* [SQL Server 提供者中的空間資料](xref:core/providers/sql-server/spatial)
+_ [SQL Server 提供者中的空間資料](xref:core/providers/sql-server/spatial)
 * [SQLite 提供者中的空間資料](xref:core/providers/sqlite/spatial)
 * [Npgsql 提供者中的空間資料](https://www.npgsql.org/efcore/mapping/nts.html)
+
+### <a name="other-resources"></a>其他資源
+
 * [NetTopologySuite 檔](https://nettopologysuite.github.io/NetTopologySuite/)
+* [EF Core 的站立會議課程](https://www.youtube.com/watch?v=IHslY5rrxD0&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=15)，著重于空間資料和 NetTopologySuite。

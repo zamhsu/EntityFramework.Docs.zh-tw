@@ -4,12 +4,12 @@ description: 將應用程式從 Entity Framework 6 移植至 Entity Framework Co
 author: ajcvickers
 ms.date: 10/27/2016
 uid: efcore-and-ef6/porting/index
-ms.openlocfilehash: 0dfb4cc5f7c65aa081d0175708a0db95b0688e50
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: d50def47e65455c8cf5242cad4386f157148c0bc
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92064207"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429204"
 ---
 # <a name="porting-from-ef6-to-ef-core"></a>從 EF6 移植至 EF Core
 
@@ -33,17 +33,12 @@ ms.locfileid: "92064207"
 
 **EF Core 會執行類似的遞迴搜尋，但有一些略有不同的規則。**
 
-*  根實體一律處於要求的狀態 (針對 `DbSet.Add` 進行新增，針對 `DbSet.Attach` 則未變更)。
-
-*  **針對在遞迴搜尋導覽屬性期間找到的實體：**
-
-    *  **如果實體的主索引鍵是存放區產生的**
-
-        * 如果主索引鍵未設定為值，則狀態會設定為「已加入」。 如果為主索引鍵指派了屬性類型的 CLR 預設值 (例如，`0` 代表 `int`，`null` 代表 `string` 等)，則會將它視為「未設定」。
-
-        * 如果主索引鍵設定為值，則狀態會設定為「未變更」。
-
-    *  如果主索引鍵不是資料庫產生的，實體會置於與根相同的狀態。
+* 根實體一律處於要求的狀態 (針對 `DbSet.Add` 進行新增，針對 `DbSet.Attach` 則未變更)。
+* **針對在遞迴搜尋導覽屬性期間找到的實體：**
+  * **如果實體的主索引鍵是存放區產生的**
+    * 如果主索引鍵未設定為值，則狀態會設定為「已加入」。 如果為主索引鍵指派了屬性類型的 CLR 預設值 (例如，`0` 代表 `int`，`null` 代表 `string` 等)，則會將它視為「未設定」。
+    * 如果主索引鍵設定為值，則狀態會設定為「未變更」。
+  * 如果主索引鍵不是資料庫產生的，實體會置於與根相同的狀態。
 
 ### <a name="code-first-database-initialization"></a>Code First 資料庫初始化
 

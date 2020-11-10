@@ -4,12 +4,12 @@ description: 如何在使用 Entity Framework Core 時設定屬性的值產生
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/generated-properties
-ms.openlocfilehash: d89739cf8bd2612b97bbf338e9685e9888b6216b
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 347cedbf5fdebc985d75c6cad3c28f17d1344993
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062213"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429620"
 ---
 # <a name="generated-values"></a>產生的值
 
@@ -34,7 +34,7 @@ ms.locfileid: "92062213"
 如果您將實體新增至有指派給屬性之值的內容，EF 會嘗試插入該值，而不是產生新的值。 如果屬性未獲指派 CLR 預設值 (for、for `null` `string` `0` `int` 、 `Guid.Empty` for、 `Guid` 等 ) ，則會將屬性視為具有指派的值。 如需詳細資訊，請參閱 [產生屬性的明確值](xref:core/saving/explicit-values-generated-properties)。
 
 > [!WARNING]
-> 針對新增的實體產生值的方式將取決於所使用的資料庫提供者。 資料庫提供者可能會自動為某些屬性類型設定值產生，但其他專案可能會要求您手動設定產生值的方式。
+> 針對新增的實體產生值的方式將取決於所使用的資料庫提供者。 資料庫提供者可能會自動為某些屬性類型設定值產生，但其他專案可能會要求您手動設定值的產生方式。
 >
 > 例如，使用 SQL Server 時，將會自動產生 `GUID` 屬性 (使用 SQL Server 順序 GUID 演算法) 的值。 但是，如果您指定 `DateTime` 在 add 上產生屬性，您就必須設定一個方法來產生值。 其中一個方法是設定的預設值 `GETDATE()` ，請參閱 [預設值](#default-values)。
 
@@ -45,7 +45,7 @@ ms.locfileid: "92062213"
 如同 `value generated on add` ，如果您在新加入的實體實例上指定屬性的值，則會插入該值，而不是要產生的值。 您也可以在更新時設定明確值。 如需詳細資訊，請參閱 [產生屬性的明確值](xref:core/saving/explicit-values-generated-properties)。
 
 > [!WARNING]
-> 針對新增和更新的實體產生值的方式，將取決於所使用的資料庫提供者。 資料庫提供者可能會自動設定某些屬性類型的值產生，而有些則需要您手動設定產生值的方式。
+> 針對新增和更新的實體產生值的方式，將取決於所使用的資料庫提供者。 資料庫提供者可能會自動設定某些屬性類型的值產生，而有些則需要您手動設定值的產生方式。
 >
 > 例如，使用 SQL Server 時， `byte[]` 設定為 [加入] 或 [更新] 和 [標記為並行標記] 所產生的屬性，將會以資料類型進行設定， `rowversion` 因此將會在資料庫中產生這些值。 但是，如果您指定 `DateTime` 在新增或更新時產生屬性，則必須設定要產生值的方式。 其中一種方法是設定預設值 `GETDATE()` (請參閱 [預設值](#default-values)) ，以產生新資料列的值。 然後，您可以使用資料庫觸發程式在更新期間產生值 (例如下列範例觸發程式) 。
 >
@@ -94,19 +94,23 @@ ms.locfileid: "92062213"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=5)]
 
-***
+**_
 
 > [!WARNING]
-> 這只是為了讓 EF 知道針對新增或更新的實體產生值，並不保證 EF 會設定實際的機制來產生值。 如需詳細資訊，請參閱 [新增或更新](#value-generated-on-add-or-update) 一節所產生的值。
+> 這只是為了讓 EF 知道針對已新增或更新的實體產生值，並不保證 EF 會設定實際的機制來產生值。 如需詳細資訊，請參閱 [新增或更新](#value-generated-on-add-or-update) 一節所產生的值。
 
 ### <a name="computed-columns"></a>計算資料行
 
-在某些關係資料庫上，資料行可以設定為在資料庫中計算其值，通常會有運算式參考其他資料行：
+在大部分的關係資料庫上，您可以將資料行設定成在資料庫中計算其值，通常會有運算式參考其他資料行：
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ComputedColumn.cs?name=ComputedColumn&highlight=5)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ComputedColumn.cs?name=DefaultComputedColumn)]
+
+上述程式會建立 _virtual * 計算資料行，其值會在每次從資料庫提取時計算。 您也可以指定將計算資料行 *儲存* (有時稱為 *保存* ) ，這表示它會在每次更新資料列時計算，並與一般資料行一起儲存在磁片上：
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ComputedColumn.cs?name=StoredComputedColumn)]
 
 > [!NOTE]
-> 在某些情況下，資料行的值會在每次提取時計算 (有時也稱為 *虛擬* 資料行) ，而在其他情況下，則會在每次更新資料列時計算，並儲存 (有時稱為 *儲存* 或 *保存* 的資料行) 。 這會因不同的資料庫提供者而異。
+> EF Core 5.0 已新增建立預存計算資料行的支援。
 
 ## <a name="no-value-generation"></a>不產生任何值
 

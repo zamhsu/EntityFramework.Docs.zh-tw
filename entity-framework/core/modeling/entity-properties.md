@@ -4,12 +4,12 @@ description: 如何使用 Entity Framework Core 來設定和對應實體屬性
 author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
-ms.openlocfilehash: 99b0a9ee1e11714e98ebea8b2e6ac53bd2dc6e55
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 55c6f31543d4ce3257cf203eaf9fd2191301ea7e
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062291"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429592"
 ---
 # <a name="entity-properties"></a>實體屬性
 
@@ -45,7 +45,7 @@ ms.locfileid: "92062291"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnName.cs?Name=ColumnName&highlight=3-5)]
 
-***
+**_
 
 ## <a name="column-data-types"></a>資料行資料類型
 
@@ -63,7 +63,7 @@ ms.locfileid: "92062291"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=5-6)]
 
-***
+_*_
 
 ### <a name="maximum-length"></a>長度上限
 
@@ -82,7 +82,7 @@ ms.locfileid: "92062291"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/MaxLength.cs?name=MaxLength&highlight=3-5)]
 
-***
+_*_
 
 ### <a name="precision-and-scale"></a>精確度和小數位數
 
@@ -97,7 +97,7 @@ ms.locfileid: "92062291"
 
 #### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
 
-目前無法使用資料批註進行設定。
+目前無法透過資料批註設定精確度和小數位數。
 
 #### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 
@@ -106,7 +106,7 @@ ms.locfileid: "92062291"
 > [!NOTE]
 > 您永遠不會定義小數位數，而不需要先定義有效位數，因此用來定義尺規的流暢 API 就是 `HasPrecision(precision, scale)` 。
 
-***
+_*_
 
 ## <a name="required-and-optional-properties"></a>必要和選用屬性
 
@@ -116,18 +116,18 @@ ms.locfileid: "92062291"
 
 依照慣例，其 .NET 型別可以包含 null 的屬性會設定為選擇性，而 .NET 型別不能包含 null 的屬性則會設定為必要。 例如，所有具有 .net 實值型別 (`int` 、 `decimal` 、等 `bool` ) 的屬性都會設定為必要，且所有具有可為 null 之 .net 實值型別的屬性 (`int?` 、 `decimal?` ) 、等等） `bool?` 都會設定為選擇性。
 
-C # 8 引進了新的功能，稱為 [可為 null 的參考型別](/dotnet/csharp/tutorials/nullable-reference-types)，可讓您標注參考型別，以指出其是否有效，以包含 null。 預設會停用此功能，如果已啟用，則會以下列方式修改 EF Core 的行為：
+C # 8 引進了新功能，稱為 [可為 null 的參考型別 (NRT) ](/dotnet/csharp/tutorials/nullable-reference-types)，可讓您標注參考型別，以指出其是否有效，以包含 null。 預設會停用這項功能，並以下列方式影響 EF Core 的行為：
 
-* 如果 (預設) 停用可為 null 的參考型別，則所有具有 .NET 參考型別的屬性都會依照慣例設定為選擇性 (例如 `string`) 。
+_ 如果 (預設) 停用可為 null 的參考型別，則所有具有 .NET 參考型別的屬性都會依照慣例設定為選擇性 (例如 `string`) 。
 * 如果已啟用可為 null 的參考型別，則會根據其 .NET 類型的 c # null 屬性來設定屬性： `string?` 將設定為選擇性，但 `string` 會設定為必要。
 
 下列範例顯示具有必要和選擇性屬性的實體類型，並停用 (預設) 和啟用的可為 null 參考功能：
 
-#### <a name="without-nullable-reference-types-default"></a>[沒有可為 null 的參考型別 (預設) ](#tab/without-nrt)
+#### <a name="without-nrt-default"></a>[沒有 NRT (預設) ](#tab/without-nrt)
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithoutNullableReferenceTypes.cs?name=Customer&highlight=4-8)]
 
-#### <a name="with-nullable-reference-types"></a>[使用可為 null 的參考型別](#tab/with-nrt)
+#### <a name="with-nrt"></a>[使用 NRT](#tab/with-nrt)
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Customer.cs?name=Customer&highlight=4-6)]
 

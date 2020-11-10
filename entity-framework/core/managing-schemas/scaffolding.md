@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 從現有的資料庫反轉模型的�
 author: bricelam
 ms.date: 11/13/2018
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: e1b4ed8d5209688fbe5c89ae60cf0d981136305f
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 11ffa2e62136e47959ebbfd54ccb55c2b9e23e04
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92061966"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429763"
 ---
 # <a name="reverse-engineering"></a>反向工程
 
@@ -17,7 +17,7 @@ ms.locfileid: "92061966"
 
 ## <a name="installing"></a>安裝
 
-在進行反向工程之前，您必須安裝 [PMC 工具](xref:core/miscellaneous/cli/powershell) (只 Visual Studio) 或 [CLI 工具](xref:core/miscellaneous/cli/dotnet)。 如需詳細資訊，請參閱連結。
+在進行反向工程之前，您必須安裝 [PMC 工具](xref:core/cli/powershell) (只 Visual Studio) 或 [CLI 工具](xref:core/cli/dotnet)。 如需詳細資訊，請參閱連結。
 
 您也必須為想要還原工程的資料庫架構安裝適當的 [資料庫提供者](xref:core/providers/index) 。
 
@@ -80,7 +80,7 @@ dotnet ef dbcontext scaffold ... --table Artist --table Album
 Scaffold-DbContext ... -Tables Artist, Album
 ```
 
-***
+**_
 
 ## <a name="preserving-names"></a>保留名稱
 
@@ -108,7 +108,7 @@ public string Title { get; set; }
 
 ## <a name="dbcontext-name"></a>DbCoNtext 名稱
 
-根據預設，scaffold DbCoNtext 類別名稱將會是以 *內容* 為尾碼的資料庫名稱。 若要指定不同的，請 `-Context` 在 PMC 和 `--context` .NET Core CLI 中使用。
+根據預設，scaffold DbCoNtext 類別名稱將會是 _CoNtext * 尾碼的資料庫名稱。 若要指定不同的，請 `-Context` 在 PMC 和 `--context` .NET Core CLI 中使用。
 
 ## <a name="directories-and-namespaces"></a>目錄和命名空間
 
@@ -157,7 +157,7 @@ Scaffold-DbContext ... -Namespace Your.Namespace -ContextNamespace Your.DbContex
 * 您無法使用資料庫架構來表示模型的所有內容。 例如，資料庫架構中不會有 [**繼承**](xref:core/modeling/inheritance)階層、 [**擁有類型**](xref:core/modeling/owned-entities)和 [**資料表分割**](xref:core/modeling/table-splitting) 的相關資訊。 因此，這些結構將永遠不會進行反向工程。
 * 此外，EF Core 提供者可能不支援 **某些資料行類型** 。 這些資料行不會包含在模型中。
 * 您可以在 EF Core 模型中定義 [**並行權杖**](xref:core/modeling/concurrency)，以防止兩位使用者同時更新相同的實體。 某些資料庫具有特殊類型來表示這種類型的資料行 (例如，在 SQL Server) 中的 rowversion，在此情況下，我們可以將此資訊進行反向工程。不過，其他並行存取權杖將不會進行反向工程。
-* 反向工程目前不支援[c # 8 可為 Null 的參考型別功能](/dotnet/csharp/tutorials/nullable-reference-types)： EF Core 一律會產生假設功能已停用的 c # 程式碼。 例如，可為 null 的文字資料行將 scaffold 為類型的屬性，而不是使用 `string` `string?` 流暢的 API 或資料批註來設定是否需要屬性。 您可以編輯 scaffold 程式碼，並以 c # 可 null 性注釋取代這些程式碼。 問題 [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)會追蹤可為 null 之參考型別的型別支援。
+* 反向工程目前不支援[c # 8 可為 Null 的參考型別功能](/dotnet/csharp/tutorials/nullable-reference-types)： EF Core 一律會產生假設功能已停用的 c # 程式碼。 例如，可為 null 的文字資料行將 scaffold 為類型的屬性，而不是使用 `string` `string?` 流暢的 API 或資料批註來設定是否需要屬性。 您可以編輯 scaffold 程式碼，並以 c # 可 null 性注釋取代這些程式碼。 問題 [#15520](https://github.com/dotnet/efcore/issues/15520)會追蹤可為 null 之參考型別的型別支援。
 
 ## <a name="customizing-the-model"></a>自訂模型
 
@@ -173,7 +173,7 @@ EF Core 產生的程式碼就是您的程式碼。 您可以隨意變更它。 �
 
 不過，更重要的變更並不容易以手動方式進行。 其中一個常見的工作流程是使用 `-Force` (PMC) 或 `--force` (CLI) ，使用更新的模型來覆寫現有的模型，以從資料庫反向工程模型。
 
-另一個經常要求的功能是能夠從資料庫更新模型，同時保留像是重新命名、類型階層等自訂。使用 [問題 [#831](https://github.com/aspnet/EntityFrameworkCore/issues/831) ] 來追蹤這項功能的進度。
+另一個經常要求的功能是能夠從資料庫更新模型，同時保留像是重新命名、類型階層等自訂。使用 [問題 [#831](https://github.com/dotnet/efcore/issues/831) ] 來追蹤這項功能的進度。
 
 > [!WARNING]
 > 如果您再次從資料庫反向工程模型，您對檔案所做的任何變更都將遺失。

@@ -4,16 +4,16 @@ description: 資料庫提供者的文件，可讓 Entity Framework Core 與 Micr
 author: AndriySvyryd
 ms.date: 11/05/2019
 uid: core/providers/sql-server/index
-ms.openlocfilehash: 344bf243577d39d2d5a03cf321f8d84c275d10d3
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 4118cd5737ece1ad084bb85d409523d217065353
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92065325"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430316"
 ---
 # <a name="microsoft-sql-server-ef-core-database-provider"></a>Microsoft SQL Server EF Core 資料庫提供者
 
-此資料庫提供者可讓 Entity Framework Core 與 Microsoft SQL Server (包含 Azure SQL Database) 搭配使用。 [Entity Framework Core 專案](https://github.com/aspnet/EntityFrameworkCore)的維護包含此提供者。
+此資料庫提供者可讓 Entity Framework Core 與 Microsoft SQL Server (包含 Azure SQL Database) 搭配使用。 [Entity Framework Core 專案](https://github.com/dotnet/efcore)的維護包含此提供者。
 
 ## <a name="install"></a>安裝
 

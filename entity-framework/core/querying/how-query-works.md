@@ -4,16 +4,19 @@ description: Entity Framework Core 如何在內部編譯及執行查詢的一般
 author: ajcvickers
 ms.date: 03/17/2020
 uid: core/querying/how-query-works
-ms.openlocfilehash: f3a6794b9bfdf70ae40bc8e97ee41861931b9b46
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7b3014cf64f8467ccbec10598ea1bb47304dfe43
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071182"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430465"
 ---
 # <a name="how-queries-work"></a>查詢的運作方式
 
 Entity Framework Core 使用 Language Integrated Query (LINQ) 查詢來自資料庫的資料。 LINQ 可讓您使用 C# (或您選擇的 .NET 語言)，根據衍生內容和實體類別來寫入強型別查詢。
+
+> [!NOTE]
+> 這篇文章已過期，必須更新其中的某些部分，以考慮在查詢管線設計中發生變更。 如果您對此處提及的任何行為有任何疑問，請 [提出問題](https://github.com/dotnet/efcore/issues/new/choose)。
 
 ## <a name="the-life-of-a-query"></a>查詢的生命週期
 
