@@ -4,12 +4,12 @@ description: 使用 DiagnosticListener 進行 EF Core 診斷的全球使用量
 author: ajcvickers
 ms.date: 10/16/2020
 uid: core/logging-events-diagnostics/diagnostic-listeners
-ms.openlocfilehash: dba82a910e2b551e692f37d721d41968981849cf
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: a2a962ac714cf80c42c269cee3770699aaa4c0c9
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431419"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503224"
 ---
 # <a name="using-diagnostic-listeners-in-ef-core"></a>使用 EF Core 中的診斷接聽程式
 
@@ -95,7 +95,7 @@ public class KeyValueObserver : IObserver<KeyValuePair<string, object>>
 例如，上述程式碼會處理 <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.ContextInitialized> 和 <xref:Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.ConnectionOpening> 事件。 針對其中的第一個，裝載是 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ContextInitializedEventData> 。 第二種是 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ConnectionEventData> 。
 
 > [!TIP]
-> ToString 會在每個 EF Core 事件資料類別中覆寫，以產生事件的對等記錄訊息。 例如，呼叫會 `ContextInitializedEventData.ToString` 產生 "Entity Framework Core 5.0.0-rc. 2.20475.6 已使用提供者 ' microsoft.entityframeworkcore. Sqlite ' （具有選項： None"）初始化 ' BlogsCoNtext '。
+> ToString 會在每個 EF Core 事件資料類別中覆寫，以產生事件的對等記錄訊息。 例如，呼叫會 `ContextInitializedEventData.ToString` 使用提供者 ' microsoft.entityframeworkcore. Sqlite ' （具有選項： None）來產生 "Entity Framework Core 5.0.0 初始化 ' BlogsCoNtext '。
 
 此 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/DiagnosticListeners) 包含一個簡單的主控台應用程式，此應用程式會變更「日誌」資料庫，並印出所遇到的診斷事件。
 

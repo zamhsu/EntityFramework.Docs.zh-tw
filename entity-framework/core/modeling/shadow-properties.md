@@ -4,16 +4,18 @@ description: 在 Entity Framework Core 模型中設定陰影和索引子屬性
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: f03dc000bb111253ae74c05a668703f2e6237a57
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 180478212b683a271d2519cc1a4c79be5d3f11b9
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430413"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503185"
 ---
 # <a name="shadow-and-indexer-properties"></a>陰影和索引子屬性
 
-陰影屬性是未在 .NET 實體類別中定義的屬性，但是是在 EF Core 模型中為該實體類型定義的。 這些屬性的值和狀態只會在變更追蹤程式中維護。 當資料庫中的資料不應該在對應的實體類型上公開時，陰影屬性會很有用。
+陰影屬性是在您的 .NET 實體類別中未定義的屬性，但是是在 EF Core 模型中為該實體類型定義的。 這些屬性的值和狀態只會在變更追蹤程式中維護。 當資料庫中的資料不應該在對應的實體類型上公開時，陰影屬性會很有用。
+
+索引子屬性是實體型別屬性，由 .NET 實體類別中的 [索引子](/dotnet/csharp/programming-guide/indexers/) 支援。 您可以使用 .NET 類別實例上的索引子來存取它們。 它也可讓您在不變更 CLR 類別的情況下，將其他屬性加入至實體類型。
 
 ## <a name="foreign-key-shadow-properties"></a>外鍵陰影屬性
 
@@ -50,11 +52,19 @@ var blogs = context.Blogs
 
 因為變更追蹤器不會追蹤傳回的實體，所以無法在無追蹤查詢之後存取陰影屬性。
 
+## <a name="configuring-indexer-properties"></a>設定索引子屬性
+
+您可以使用流暢的 API 來設定索引子屬性。 一旦呼叫方法之後 `IndexerProperty` ，您就可以將任何設定呼叫連結至其他屬性。 在下列範例中， `Blog` 已定義索引子，而且將用來建立索引子屬性。
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexerProperty.cs?name=ShadowProperty&highlight=3)]
+
+如果提供給方法的名稱 `IndexerProperty` 符合現有索引子屬性的名稱，則程式碼會設定該現有的屬性。 如果實體類型具有由實體類別上的屬性所支援的屬性，則會擲回例外狀況，因為必須透過索引子存取索引子屬性。
+
 ## <a name="property-bag-entity-types"></a>屬性包實體類型
 
 > [!NOTE]
 > 已在 EF Core 5.0 中新增屬性包實體類型的支援。
 
-僅包含索引子屬性的實體類型稱為「屬性包」實體類型。 這些實體類型沒有陰影屬性。 目前僅 `Dictionary<string, object>` 支援做為屬性包實體類型。 這表示必須將它設定為具有唯一名稱的共用實體型別，而且 `DbSet` 必須使用呼叫來執行對應的屬性 `Set` 。
+僅包含索引子屬性的實體類型稱為「屬性包」實體類型。 這些實體類型沒有陰影屬性，而 EF 會建立索引子屬性。 目前僅 `Dictionary<string, object>` 支援做為屬性包實體類型。 它必須設定為具有唯一名稱的共用實體類型，而且 `DbSet` 必須使用呼叫來執行對應的屬性 `Set` 。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/SharedType.cs?name=SharedType&highlight=3,7)]

@@ -4,18 +4,18 @@ description: Entity Framework Core 5.0 中引進的重大變更完整清單
 author: bricelam
 ms.date: 11/07/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: 3a00c2fdce51ff8b7d76b34f7003dc8ec0618830
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: e2537dbc1d5dba48450bd0fea7712054ba2fa622
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429282"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503172"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>EF Core 5.0 中的重大變更
 
 下列 API 和行為變更可能會中斷現有應用程式更新為 EF Core 5.0.0。
 
-## <a name="summary"></a>總結
+## <a name="summary"></a>摘要
 
 | **重大變更**                                                                                                                   | **影響** |
 |:--------------------------------------------------------------------------------------------------------------------------------------|------------|
@@ -490,7 +490,7 @@ context.Parents
 
 **新的行為**
 
-這些查詢並不是 loger 的支援。 擲回例外狀況，表示我們沒有足夠的資訊來正確建立結果。
+不再支援這些查詢。 擲回例外狀況，表示我們沒有足夠的資訊來正確建立結果。
 
 **為什麼**
 
@@ -531,7 +531,7 @@ context.Blogs
 
 **新的行為**
 
-這些查詢並不是 loger 的支援。 擲回例外狀況，表示我們無法建立可查詢型別的物件，並建議如何修正此問題。
+不再支援這些查詢。 擲回例外狀況，表示我們無法建立可查詢型別的物件，並建議如何修正此問題。
 
 **為什麼**
 

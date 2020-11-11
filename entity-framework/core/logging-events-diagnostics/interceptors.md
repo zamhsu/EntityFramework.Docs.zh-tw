@@ -4,12 +4,12 @@ description: 攔截資料庫作業和其他事件
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 6ee54c0bd45c55de1fae3e1949bfa2d5b3b2566e
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 61ec6968344798af8ecffb878a1e47a6a8e031cd
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431415"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503198"
 ---
 # <a name="interceptors"></a>攔截器
 
@@ -502,7 +502,7 @@ public class EntityAudit
 * 如果 SaveChanges 成功，則會更新審核訊息以指出成功
 * 如果 SaveChanges 失敗，則會更新審核訊息以指出失敗
 
-第一個階段會在任何變更傳送至資料庫之前先處理，並使用的覆寫 `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 -->  和 `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
+第一個階段會在任何變更傳送至資料庫之前先處理，並使用的覆寫 `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 --> 和 `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
 
 <!--
     public async ValueTask<InterceptionResult<int>> SavingChangesAsync(
@@ -594,7 +594,7 @@ public class EntityAudit
 結果是 `SaveChangesAudit` 具有實體集合的實體 `EntityAudit` ，每個插入、更新或刪除都有一個實體。 攔截器接著會將這些實體插入 audit 資料庫中。
 
 > [!TIP]
-> ToString 會在每個 EF Core 事件資料類別中覆寫，以產生事件的對等記錄訊息。 例如，呼叫會 `ContextInitializedEventData.ToString` 產生 "Entity Framework Core 5.0.0-rc. 2.20475.6 已使用提供者 ' microsoft.entityframeworkcore. Sqlite ' （具有選項： None"）初始化 ' BlogsCoNtext '。
+> ToString 會在每個 EF Core 事件資料類別中覆寫，以產生事件的對等記錄訊息。 例如，呼叫會 `ContextInitializedEventData.ToString` 使用提供者 ' microsoft.entityframeworkcore. Sqlite ' （具有選項： None）來產生 "Entity Framework Core 5.0.0 初始化 ' BlogsCoNtext '。
 
 #### <a name="detecting-success"></a>偵測成功
 
