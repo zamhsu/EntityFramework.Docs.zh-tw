@@ -17,8 +17,26 @@
           href: efcore-and-ef6/side-by-side.md
     - name: Entity Framework Core
       items:
-        - name: 總覽
+        - name: 歡迎！
           href: core/index.md
+        - name: 參加 EF Core 6 問卷調查 >>
+          href: 'https://www.surveymonkey.com/r/XRL3JBL'
+        - name: 開始使用
+          items:
+            - name: EF Core 概觀
+              items:
+                - name: 安裝 EF Core
+                  href: core/get-started/overview/install.md
+                - name: 您的第一個 EF Core 應用程式
+                  href: core/get-started/overview/first-app.md
+            - name: ASP.NET Core 教學課程 >>
+              href: /aspnet/core/data/ef-rp/intro
+            - name: Blazor Server 與 EF Core 指引 >>
+              href: /aspnet/core/blazor/blazor-server-ef-core
+            - name: WPF .NET Core 教學課程
+              href: core/get-started/wpf.md
+            - name: Xamarin 教學課程
+              href: core/get-started/xamarin.md
         - name: 版本及規劃 (藍圖)
           items:
             - name: 目前和已規劃的版本
@@ -33,7 +51,7 @@
                   href: core/what-is-new/ef-core-5.0/whatsnew.md
                 - name: 重大變更
                   href: core/what-is-new/ef-core-5.0/breaking-changes.md
-            - name: EF Core 3.x
+            - name: EF Core 3.1
               items:
                 - name: 新功能
                   href: core/what-is-new/ef-core-3.x/index.md
@@ -43,6 +61,8 @@
               href: core/what-is-new/ef-core-2.1.md
             - name: 支援終止
               items:
+                - name: EF Core 3.0
+                  href: core/what-is-new/ef-core-3.0.md
                 - name: EF Core 2.2
                   href: core/what-is-new/ef-core-2.2.md
                 - name: EF Core 2.0
@@ -55,50 +75,10 @@
                   href: core/what-is-new/ef-core-1.1.md
                 - name: EF Core 1.0
                   href: core/what-is-new/ef-core-1.0.md
-        - name: 開始使用
+        - name: DbContext 設定與初始化
           items:
-            - name: EF Core 教學課程
-              href: core/get-started/index.md
-            - name: 安裝 EF Core
-              href: core/get-started/install/index.md
-            - name: ASP.NET Core 教學課程 >>
-              href: /aspnet/core/data/ef-rp/intro
-            - name: Blazor Server 與 EF Core 指引 >>
-              href: /aspnet/core/blazor/blazor-server-ef-core
-            - name: WPF .NET Core 教學課程
-              href: core/get-started/wpf.md
-            - name: Xamarin 教學課程
-              href: core/get-started/xamarin.md
-        - name: 基礎
-          items:
-            - name: 連接字串
-              href: core/miscellaneous/connection-strings.md
-            - name: 非同步程式設計
-              href: core/miscellaneous/async.md
-            - name: 記錄
-              href: core/miscellaneous/logging.md
-            - name: 內容共用
-              href: core/miscellaneous/context-pooling.md
-            - name: 連線恢復功能
-              href: core/miscellaneous/connection-resiliency.md
-            - name: 測試
-              items:
-                - name: 測試使用 EF Core 的程式碼
-                  href: core/miscellaneous/testing/index.md
-                - name: EF Core 測試範例
-                  href: core/miscellaneous/testing/testing-sample.md
-                - name: 在測試之間共用資料庫
-                  href: core/miscellaneous/testing/sharing-databases.md
-                - name: 使用 SQLite 測試
-                  href: core/miscellaneous/testing/sqlite.md
-                - name: 使用 InMemory 測試
-                  href: core/miscellaneous/testing/in-memory.md
-            - name: 設定 DbCoNtext
-              href: core/miscellaneous/configuring-dbcontext.md
-            - name: 可為 Null 的參考型別
-              href: core/miscellaneous/nullable-reference-types.md
-            - name: 定序及區分大小寫
-              href: core/miscellaneous/collations-and-case-sensitivity.md
+            - name: 概觀
+              href: core/dbcontext-configuration/index.md
         - name: 建立模型
           items:
             - name: 總覽
@@ -190,6 +170,8 @@
               href: core/querying/client-eval.md
             - name: 追蹤與不追蹤的比較
               href: core/querying/tracking.md
+            - name: 分割查詢
+              href: core/querying/single-split-queries.md
             - name: 複雜查詢運算子
               href: core/querying/complex-query-operators.md
             - name: 原始 SQL 查詢
@@ -218,8 +200,48 @@
               href: core/saving/disconnected-entities.md
             - name: 產生屬性的明確值
               href: core/saving/explicit-values-generated-properties.md
-        - name: 支援的 .NET 實作
-          href: core/platforms/index.md
+        - name: 記錄、事件與診斷
+          items:
+            - name: 概觀
+              href: core/logging-events-diagnostics/index.md
+            - name: 簡單記錄
+              href: core/logging-events-diagnostics/simple-logging.md
+            - name: Microsoft.Extensions.Logging
+              href: core/logging-events-diagnostics/extensions-logging.md
+            - name: 事件
+              href: core/logging-events-diagnostics/events.md
+            - name: 攔截器
+              href: core/logging-events-diagnostics/interceptors.md
+            - name: 診斷接聽程式
+              href: core/logging-events-diagnostics/diagnostic-listeners.md
+        - name: 測試
+          items:
+            - name: 測試使用 EF Core 的程式碼
+              href: core/testing/index.md
+            - name: EF Core 測試範例
+              href: core/testing/testing-sample.md
+            - name: 在測試之間共用資料庫
+              href: core/testing/sharing-databases.md
+            - name: 使用 SQLite 測試
+              href: core/testing/sqlite.md
+            - name: 使用 InMemory 測試
+              href: core/testing/in-memory.md
+        - name: 其他
+          items:
+            - name: 支援的 .NET 實作
+              href: core/miscellaneous/platforms.md
+            - name: 非同步程式設計
+              href: core/miscellaneous/async.md
+            - name: 可為 Null 的參考型別
+              href: core/miscellaneous/nullable-reference-types.md
+            - name: 定序及區分大小寫
+              href: core/miscellaneous/collations-and-case-sensitivity.md
+            - name: 恢復連線
+              href: core/miscellaneous/connection-resiliency.md
+            - name: 連接字串
+              href: core/miscellaneous/connection-strings.md
+            - name: 內容共用
+              href: core/miscellaneous/context-pooling.md
         - name: 資料庫提供者
           items:
             - name: 總覽
@@ -273,15 +295,15 @@
         - name: 命令列參考
           items:
             - name: 總覽
-              href: core/miscellaneous/cli/index.md
+              href: core/cli/index.md
             - name: 套件管理員主控台 (Visual Studio)
-              href: core/miscellaneous/cli/powershell.md
+              href: core/cli/powershell.md
             - name: .NET Core CLI
-              href: core/miscellaneous/cli/dotnet.md
+              href: core/cli/dotnet.md
             - name: 設計階段建立 DbContext
-              href: core/miscellaneous/cli/dbcontext-creation.md
+              href: core/cli/dbcontext-creation.md
             - name: 設計階段服務
-              href: core/miscellaneous/cli/services.md
+              href: core/cli/services.md
         - name: EF Core API 參考 >>
           href: /dotnet/api/?view=efcore-3.1
     - name: Entity Framework 6
