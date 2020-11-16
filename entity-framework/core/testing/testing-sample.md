@@ -5,12 +5,12 @@ author: ajcvickers
 ms.date: 04/22/2020
 uid: core/testing/testing-sample
 no-loc:
-- ':::no-loc(Item):::'
-- ':::no-loc(Tag):::'
-- ':::no-loc(Items):::'
-- ':::no-loc(Tags):::'
-- ':::no-loc(items):::'
-- ':::no-loc(tags):::'
+- 'Item'
+- 'Tag'
+- 'Items'
+- 'Tags'
+- 'items'
+- 'tags'
 ms.openlocfilehash: 9666bbde8ae9608dcebbea3ad37c51883960a942
 ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
@@ -21,87 +21,87 @@ ms.locfileid: "94431491"
 # <a name="ef-core-testing-sample"></a><span data-ttu-id="e1a35-103">EF Core 測試範例</span><span class="sxs-lookup"><span data-stu-id="e1a35-103">EF Core testing sample</span></span>
 
 > [!TIP]
-> <span data-ttu-id="e1a35-104">您可以在 GitHub 上找到這份檔中的程式碼，做為可執行檔 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/)。</span><span class="sxs-lookup"><span data-stu-id="e1a35-104">The code in this document can be found on GitHub as a [runnable sample](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/).</span></span>
+> <span data-ttu-id="e1a35-104">您可以在 GitHub 上找到這份檔中的程式碼，做為可執行檔 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/)。</span><span class="sxs-lookup"><span data-stu-id="e1a35-104">The code in this document can be found on GitHub as a [runnable sample](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/).</span></span>
 > <span data-ttu-id="e1a35-105">請注意，其中有些測試 **預期會失敗** 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-105">Note that some of these tests **are expected to fail**.</span></span> <span data-ttu-id="e1a35-106">以下將說明這種情況的原因。</span><span class="sxs-lookup"><span data-stu-id="e1a35-106">The reasons for this are explained below.</span></span>
 
 <span data-ttu-id="e1a35-107">本檔會逐步解說使用 EF Core 之測試程式碼的範例。</span><span class="sxs-lookup"><span data-stu-id="e1a35-107">This doc walks through a sample for testing code that uses EF Core.</span></span>
 
 ## <a name="the-application"></a><span data-ttu-id="e1a35-108">應用程式</span><span class="sxs-lookup"><span data-stu-id="e1a35-108">The application</span></span>
 
-<span data-ttu-id="e1a35-109">此 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/) 包含兩個專案：</span><span class="sxs-lookup"><span data-stu-id="e1a35-109">The [sample](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/) contains two projects:</span></span>
+<span data-ttu-id="e1a35-109">此 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) 包含兩個專案：</span><span class="sxs-lookup"><span data-stu-id="e1a35-109">The [sample](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) contains two projects:</span></span>
 
-- <span data-ttu-id="e1a35-110">:::no-loc(Items):::WebApi：透過單一控制器[ASP.NET Core 支援的簡易 WEB API](/aspnet/core/tutorials/first-web-api)</span><span class="sxs-lookup"><span data-stu-id="e1a35-110">:::no-loc(Items):::WebApi: A very simple [Web API backed by ASP.NET Core](/aspnet/core/tutorials/first-web-api) with a single controller</span></span>
+- <span data-ttu-id="e1a35-110">ItemsWebApi：透過單一控制器[ASP.NET Core 支援的簡易 WEB API](/aspnet/core/tutorials/first-web-api)</span><span class="sxs-lookup"><span data-stu-id="e1a35-110">ItemsWebApi: A very simple [Web API backed by ASP.NET Core](/aspnet/core/tutorials/first-web-api) with a single controller</span></span>
 - <span data-ttu-id="e1a35-111">測試：用來測試控制器的 [XUnit](https://xunit.net/) 測試專案</span><span class="sxs-lookup"><span data-stu-id="e1a35-111">Tests: An [XUnit](https://xunit.net/) test project to test the controller</span></span>
 
 ### <a name="the-model-and-business-rules"></a><span data-ttu-id="e1a35-112">模型和商務規則</span><span class="sxs-lookup"><span data-stu-id="e1a35-112">The model and business rules</span></span>
 
-<span data-ttu-id="e1a35-113">支援此 API 的模型有兩個實體類型： :::no-loc(Items)::: 和 :::no-loc(Tags)::: 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-113">The model backing this API has two entity types: :::no-loc(Items)::: and :::no-loc(Tags):::.</span></span>
+<span data-ttu-id="e1a35-113">支援此 API 的模型有兩個實體類型： Items 和 Tags 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-113">The model backing this API has two entity types: Items and Tags.</span></span>
 
-- <span data-ttu-id="e1a35-114">:::no-loc(Items)::: 有區分大小寫的名稱和的集合 :::no-loc(Tags)::: 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-114">:::no-loc(Items)::: have a case-sensitive name and a collection of :::no-loc(Tags):::.</span></span>
-- <span data-ttu-id="e1a35-115">每個 :::no-loc(Tag)::: 都有一個標籤和一個計數，代表它已套用至的次數 :::no-loc(Item)::: 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-115">Each :::no-loc(Tag)::: has a label and a count representing the number of times it has been applied to the :::no-loc(Item):::.</span></span>
-- <span data-ttu-id="e1a35-116">每個都 :::no-loc(Item)::: 只能有一個 :::no-loc(Tag)::: 具有指定標籤的。</span><span class="sxs-lookup"><span data-stu-id="e1a35-116">Each :::no-loc(Item)::: should only have one :::no-loc(Tag)::: with a given label.</span></span>
+- <span data-ttu-id="e1a35-114">Items 有區分大小寫的名稱和的集合 Tags 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-114">Items have a case-sensitive name and a collection of Tags.</span></span>
+- <span data-ttu-id="e1a35-115">每個 Tag 都有一個標籤和一個計數，代表它已套用至的次數 Item 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-115">Each Tag has a label and a count representing the number of times it has been applied to the Item.</span></span>
+- <span data-ttu-id="e1a35-116">每個都 Item 只能有一個 Tag 具有指定標籤的。</span><span class="sxs-lookup"><span data-stu-id="e1a35-116">Each Item should only have one Tag with a given label.</span></span>
   - <span data-ttu-id="e1a35-117">如果專案的標記具有相同的標籤一次以上，則具有該標籤之現有標記的計數會遞增，而不是建立新標記。</span><span class="sxs-lookup"><span data-stu-id="e1a35-117">If an item is tagged with the same label more than once, then the count on the existing tag with that label is incremented instead of a new tag being created.</span></span>
-- <span data-ttu-id="e1a35-118">刪除 :::no-loc(Item)::: 會刪除所有相關聯的 :::no-loc(Tags)::: 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-118">Deleting an :::no-loc(Item)::: should delete all associated :::no-loc(Tags):::.</span></span>
+- <span data-ttu-id="e1a35-118">刪除 Item 會刪除所有相關聯的 Tags 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-118">Deleting an Item should delete all associated Tags.</span></span>
 
-#### <a name="the-no-locitem-entity-type"></a><span data-ttu-id="e1a35-119">:::no-loc(Item):::實體類型</span><span class="sxs-lookup"><span data-stu-id="e1a35-119">The :::no-loc(Item)::: entity type</span></span>
+#### <a name="the-no-locitem-entity-type"></a><span data-ttu-id="e1a35-119">Item實體類型</span><span class="sxs-lookup"><span data-stu-id="e1a35-119">The Item entity type</span></span>
 
-<span data-ttu-id="e1a35-120">`:::no-loc(Item):::`實體類型：</span><span class="sxs-lookup"><span data-stu-id="e1a35-120">The `:::no-loc(Item):::` entity type:</span></span>
+<span data-ttu-id="e1a35-120">`Item`實體類型：</span><span class="sxs-lookup"><span data-stu-id="e1a35-120">The `Item` entity type:</span></span>
 
-[!code-csharp[:::no-loc(Item):::EntityType](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/:::no-loc(Items):::WebApi/:::no-loc(Item):::.cs?name=:::no-loc(Item):::EntityType)]
+[!code-csharp[ItemEntityType](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Item.cs?name=ItemEntityType)]
 
 <span data-ttu-id="e1a35-121">以及其在中的設定 `DbContext.OnModelCreating` ：</span><span class="sxs-lookup"><span data-stu-id="e1a35-121">And its configuration in `DbContext.OnModelCreating`:</span></span>
 
-[!code-csharp[Configure:::no-loc(Item):::](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/:::no-loc(Items):::WebApi/:::no-loc(Items):::Context.cs?name=Configure:::no-loc(Item):::)]
+[!code-csharp[ConfigureItem](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/ItemsContext.cs?name=ConfigureItem)]
 
 <span data-ttu-id="e1a35-122">請注意，實體類型會限制可用來反映領域模型和商務規則的方式。</span><span class="sxs-lookup"><span data-stu-id="e1a35-122">Notice that entity type constrains the way it can be used to reflect the domain model and business rules.</span></span> <span data-ttu-id="e1a35-123">尤其是：</span><span class="sxs-lookup"><span data-stu-id="e1a35-123">In particular:</span></span>
 
 - <span data-ttu-id="e1a35-124">主要金鑰會直接對應到 `_id` 欄位，而不會公開</span><span class="sxs-lookup"><span data-stu-id="e1a35-124">The primary key is mapped directly to the `_id` field and not exposed publicly</span></span>
   - <span data-ttu-id="e1a35-125">EF 會偵測並使用私用的函式，以接受主要金鑰值和名稱。</span><span class="sxs-lookup"><span data-stu-id="e1a35-125">EF detects and uses the private constructor accepting the primary key value and name.</span></span>
 - <span data-ttu-id="e1a35-126">`Name`屬性是唯讀的，而且只會在函式中設定。</span><span class="sxs-lookup"><span data-stu-id="e1a35-126">The `Name` property is read-only and set only in the constructor.</span></span>
-- <span data-ttu-id="e1a35-127">:::no-loc(Tags)::: 會公開為 `IReadOnlyList<:::no-loc(Tag):::>` ，以防止任意修改。</span><span class="sxs-lookup"><span data-stu-id="e1a35-127">:::no-loc(Tags)::: are exposed as a `IReadOnlyList<:::no-loc(Tag):::>` to prevent arbitrary modification.</span></span>
-  - <span data-ttu-id="e1a35-128">EF 藉由比對 `:::no-loc(Tags):::` 屬性與支援欄位的名稱，來建立其關聯 `_:::no-loc(tags):::` 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-128">EF associates the `:::no-loc(Tags):::` property with the `_:::no-loc(tags):::` backing field by matching their names.</span></span>
-  - <span data-ttu-id="e1a35-129">`Add:::no-loc(Tag):::`方法會採用標記標籤，並執行上述的商務規則。</span><span class="sxs-lookup"><span data-stu-id="e1a35-129">The `Add:::no-loc(Tag):::` method takes a tag label and implements the business rule described above.</span></span>
+- <span data-ttu-id="e1a35-127">Tags 會公開為 `IReadOnlyList<Tag>` ，以防止任意修改。</span><span class="sxs-lookup"><span data-stu-id="e1a35-127">Tags are exposed as a `IReadOnlyList<Tag>` to prevent arbitrary modification.</span></span>
+  - <span data-ttu-id="e1a35-128">EF 藉由比對 `Tags` 屬性與支援欄位的名稱，來建立其關聯 `_tags` 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-128">EF associates the `Tags` property with the `_tags` backing field by matching their names.</span></span>
+  - <span data-ttu-id="e1a35-129">`AddTag`方法會採用標記標籤，並執行上述的商務規則。</span><span class="sxs-lookup"><span data-stu-id="e1a35-129">The `AddTag` method takes a tag label and implements the business rule described above.</span></span>
     <span data-ttu-id="e1a35-130">也就是說，只會為新標籤新增標記。</span><span class="sxs-lookup"><span data-stu-id="e1a35-130">That is, a tag is only added for new labels.</span></span>
     <span data-ttu-id="e1a35-131">否則，現有標籤上的計數會遞增。</span><span class="sxs-lookup"><span data-stu-id="e1a35-131">Otherwise the count on an existing label is incremented.</span></span>
-- <span data-ttu-id="e1a35-132">已 `:::no-loc(Tags):::` 針對多對一關聯性設定導覽屬性</span><span class="sxs-lookup"><span data-stu-id="e1a35-132">The `:::no-loc(Tags):::` navigation property is configured for a many-to-one relationship</span></span>
-  - <span data-ttu-id="e1a35-133">不需要從到的導覽屬性 :::no-loc(Tag)::: :::no-loc(Item)::: ，因此不包含它。</span><span class="sxs-lookup"><span data-stu-id="e1a35-133">There is no need for a navigation property from :::no-loc(Tag)::: to :::no-loc(Item):::, so it is not included.</span></span>
-  - <span data-ttu-id="e1a35-134">此外，也不 :::no-loc(Tag)::: 會定義外鍵屬性。</span><span class="sxs-lookup"><span data-stu-id="e1a35-134">Also, :::no-loc(Tag)::: does not define a foreign key property.</span></span>
+- <span data-ttu-id="e1a35-132">已 `Tags` 針對多對一關聯性設定導覽屬性</span><span class="sxs-lookup"><span data-stu-id="e1a35-132">The `Tags` navigation property is configured for a many-to-one relationship</span></span>
+  - <span data-ttu-id="e1a35-133">不需要從到的導覽屬性 Tag Item ，因此不包含它。</span><span class="sxs-lookup"><span data-stu-id="e1a35-133">There is no need for a navigation property from Tag to Item, so it is not included.</span></span>
+  - <span data-ttu-id="e1a35-134">此外，也不 Tag 會定義外鍵屬性。</span><span class="sxs-lookup"><span data-stu-id="e1a35-134">Also, Tag does not define a foreign key property.</span></span>
     <span data-ttu-id="e1a35-135">相反地，EF 會建立和管理陰影狀態的屬性。</span><span class="sxs-lookup"><span data-stu-id="e1a35-135">Instead, EF will create and manage a property in shadow-state.</span></span>
 
-#### <a name="the-no-loctag-entity-type"></a><span data-ttu-id="e1a35-136">:::no-loc(Tag):::實體類型</span><span class="sxs-lookup"><span data-stu-id="e1a35-136">The :::no-loc(Tag)::: entity type</span></span>
+#### <a name="the-no-loctag-entity-type"></a><span data-ttu-id="e1a35-136">Tag實體類型</span><span class="sxs-lookup"><span data-stu-id="e1a35-136">The Tag entity type</span></span>
 
-<span data-ttu-id="e1a35-137">`:::no-loc(Tag):::`實體類型：</span><span class="sxs-lookup"><span data-stu-id="e1a35-137">The `:::no-loc(Tag):::` entity type:</span></span>
+<span data-ttu-id="e1a35-137">`Tag`實體類型：</span><span class="sxs-lookup"><span data-stu-id="e1a35-137">The `Tag` entity type:</span></span>
 
-[!code-csharp[:::no-loc(Tag):::EntityType](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/:::no-loc(Items):::WebApi/:::no-loc(Tag):::.cs?name=:::no-loc(Tag):::EntityType)]
+[!code-csharp[TagEntityType](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Tag.cs?name=TagEntityType)]
 
 <span data-ttu-id="e1a35-138">以及其在中的設定 `DbContext.OnModelCreating` ：</span><span class="sxs-lookup"><span data-stu-id="e1a35-138">And its configuration in `DbContext.OnModelCreating`:</span></span>
 
-[!code-csharp[Configure:::no-loc(Tag):::](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/:::no-loc(Items):::WebApi/:::no-loc(Items):::Context.cs?name=Configure:::no-loc(Tag):::)]
+[!code-csharp[ConfigureTag](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/ItemsContext.cs?name=ConfigureTag)]
 
-<span data-ttu-id="e1a35-139">同樣地 :::no-loc(Item)::: ， :::no-loc(Tag)::: 會隱藏其主鍵，並讓 `Label` 屬性成為唯讀。</span><span class="sxs-lookup"><span data-stu-id="e1a35-139">Similarly to :::no-loc(Item):::, :::no-loc(Tag)::: hides its primary key and makes the `Label` property read-only.</span></span>
+<span data-ttu-id="e1a35-139">同樣地 Item ， Tag 會隱藏其主鍵，並讓 `Label` 屬性成為唯讀。</span><span class="sxs-lookup"><span data-stu-id="e1a35-139">Similarly to Item, Tag hides its primary key and makes the `Label` property read-only.</span></span>
 
-### <a name="the-no-locitemscontroller"></a><span data-ttu-id="e1a35-140">:::no-loc(Items):::控制器</span><span class="sxs-lookup"><span data-stu-id="e1a35-140">The :::no-loc(Items):::Controller</span></span>
+### <a name="the-no-locitemscontroller"></a><span data-ttu-id="e1a35-140">Items控制器</span><span class="sxs-lookup"><span data-stu-id="e1a35-140">The ItemsController</span></span>
 
 <span data-ttu-id="e1a35-141">Web API 控制器相當基本。</span><span class="sxs-lookup"><span data-stu-id="e1a35-141">The Web API controller is pretty basic.</span></span>
 <span data-ttu-id="e1a35-142">它會透過函式 `DbContext` 插入，從相依性插入容器取得：</span><span class="sxs-lookup"><span data-stu-id="e1a35-142">It gets a `DbContext` from the dependency injection container through constructor injection:</span></span>
 
-[!code-csharp[Constructor](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/:::no-loc(Items):::WebApi/Controllers/:::no-loc(Items):::Controller.cs?name=Constructor)]
+[!code-csharp[Constructor](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=Constructor)]
 
-<span data-ttu-id="e1a35-143">它有方法可取得所有 :::no-loc(Items)::: 或 :::no-loc(Item)::: 具有指定名稱的：</span><span class="sxs-lookup"><span data-stu-id="e1a35-143">It has methods to get all :::no-loc(Items)::: or an :::no-loc(Item)::: with a given name:</span></span>
+<span data-ttu-id="e1a35-143">它有方法可取得所有 Items 或 Item 具有指定名稱的：</span><span class="sxs-lookup"><span data-stu-id="e1a35-143">It has methods to get all Items or an Item with a given name:</span></span>
 
-[!code-csharp[Get](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/:::no-loc(Items):::WebApi/Controllers/:::no-loc(Items):::Controller.cs?name=Get)]
+[!code-csharp[Get](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=Get)]
 
-<span data-ttu-id="e1a35-144">它有一種方法可以新增 :::no-loc(Item)::: ：</span><span class="sxs-lookup"><span data-stu-id="e1a35-144">It has a method to add a new :::no-loc(Item)::::</span></span>
+<span data-ttu-id="e1a35-144">它有一種方法可以新增 Item ：</span><span class="sxs-lookup"><span data-stu-id="e1a35-144">It has a method to add a new Item:</span></span>
 
-[!code-csharp[Post:::no-loc(Item):::](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/:::no-loc(Items):::WebApi/Controllers/:::no-loc(Items):::Controller.cs?name=Post:::no-loc(Item):::)]
+[!code-csharp[PostItem](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=PostItem)]
 
-<span data-ttu-id="e1a35-145">:::no-loc(Item):::使用標籤標記的方法：</span><span class="sxs-lookup"><span data-stu-id="e1a35-145">A method to tag an :::no-loc(Item)::: with a label:</span></span>
+<span data-ttu-id="e1a35-145">Item使用標籤標記的方法：</span><span class="sxs-lookup"><span data-stu-id="e1a35-145">A method to tag an Item with a label:</span></span>
 
-[!code-csharp[Post:::no-loc(Tag):::](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/:::no-loc(Items):::WebApi/Controllers/:::no-loc(Items):::Controller.cs?name=Post:::no-loc(Tag):::)]
+[!code-csharp[PostTag](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=PostTag)]
 
-<span data-ttu-id="e1a35-146">以及刪除 :::no-loc(Item)::: 和所有相關聯的方法 :::no-loc(Tags)::: ：</span><span class="sxs-lookup"><span data-stu-id="e1a35-146">And a method to delete an :::no-loc(Item)::: and all associated :::no-loc(Tags)::::</span></span>
+<span data-ttu-id="e1a35-146">以及刪除 Item 和所有相關聯的方法 Tags ：</span><span class="sxs-lookup"><span data-stu-id="e1a35-146">And a method to delete an Item and all associated Tags:</span></span>
 
-[!code-csharp[Delete:::no-loc(Item):::](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/:::no-loc(Items):::WebApi/Controllers/:::no-loc(Items):::Controller.cs?name=Delete:::no-loc(Item):::)]
+[!code-csharp[DeleteItem](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=DeleteItem)]
 
 <span data-ttu-id="e1a35-147">已移除大部分的驗證和錯誤處理，以減少雜亂。</span><span class="sxs-lookup"><span data-stu-id="e1a35-147">Most validation and error handling have been removed to reduce clutter.</span></span>
 
@@ -122,7 +122,7 @@ ms.locfileid: "94431491"
 
 <span data-ttu-id="e1a35-157">下列兩項測試預期會失敗：</span><span class="sxs-lookup"><span data-stu-id="e1a35-157">The following two tests are expected to fail:</span></span>
 
-- <span data-ttu-id="e1a35-158">`Can_remove_item_and_all_associated_:::no-loc(tags):::` 使用 EF 記憶體內部資料庫提供者執行時</span><span class="sxs-lookup"><span data-stu-id="e1a35-158">`Can_remove_item_and_all_associated_:::no-loc(tags):::` when running with the EF in-memory database provider</span></span>
+- <span data-ttu-id="e1a35-158">`Can_remove_item_and_all_associated_tags` 使用 EF 記憶體內部資料庫提供者執行時</span><span class="sxs-lookup"><span data-stu-id="e1a35-158">`Can_remove_item_and_all_associated_tags` when running with the EF in-memory database provider</span></span>
 - <span data-ttu-id="e1a35-159">`Can_add_item_differing_only_by_case` 使用 SQL Server 提供者執行時</span><span class="sxs-lookup"><span data-stu-id="e1a35-159">`Can_add_item_differing_only_by_case` when running with the SQL Server provider</span></span>
 
 <span data-ttu-id="e1a35-160">以下將詳細說明這一點。</span><span class="sxs-lookup"><span data-stu-id="e1a35-160">This is covered in more detail below.</span></span>
@@ -146,12 +146,12 @@ ms.locfileid: "94431491"
   - <span data-ttu-id="e1a35-172">植入方法會藉由刪除並重新建立，來確保資料庫是乾淨的</span><span class="sxs-lookup"><span data-stu-id="e1a35-172">The Seed method ensures the database is clean by deleting it and then re-creating it</span></span>
   - <span data-ttu-id="e1a35-173">系統會建立一些知名的測試實體，並將其儲存至資料庫</span><span class="sxs-lookup"><span data-stu-id="e1a35-173">Some well-known test entities are created and saved to the database</span></span>
 
-[!code-csharp[Seeding](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/Tests/:::no-loc(Items):::ControllerTest.cs?name=Seeding)]
+[!code-csharp[Seeding](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=Seeding)]
 
 <span data-ttu-id="e1a35-174">每個具體的測試類別都會繼承自這個類別。</span><span class="sxs-lookup"><span data-stu-id="e1a35-174">Each concrete test class then inherits from this.</span></span>
 <span data-ttu-id="e1a35-175">例如：</span><span class="sxs-lookup"><span data-stu-id="e1a35-175">For example:</span></span>
 
-[!code-csharp[Sqlite:::no-loc(Items):::ControllerTest](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/Tests/Sqlite:::no-loc(Items):::ControllerTest.cs?name=Sqlite:::no-loc(Items):::ControllerTest)]
+[!code-csharp[SqliteItemsControllerTest](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/SqliteItemsControllerTest.cs?name=SqliteItemsControllerTest)]
 
 ### <a name="test-structure"></a><span data-ttu-id="e1a35-176">測試結構</span><span class="sxs-lookup"><span data-stu-id="e1a35-176">Test structure</span></span>
 
@@ -162,7 +162,7 @@ ms.locfileid: "94431491"
 <span data-ttu-id="e1a35-180">然後，每個測試會在控制器上執行受測試的方法，並判斷提示結果如預期般執行。</span><span class="sxs-lookup"><span data-stu-id="e1a35-180">Each test then executes the method under test on the controller and asserts the results are as expected.</span></span>
 <span data-ttu-id="e1a35-181">例如：</span><span class="sxs-lookup"><span data-stu-id="e1a35-181">For example:</span></span>
 
-[!code-csharp[CanGet:::no-loc(Items):::](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/Tests/:::no-loc(Items):::ControllerTest.cs?name=CanGet:::no-loc(Items):::)]
+[!code-csharp[CanGetItems](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanGetItems)]
 
 <span data-ttu-id="e1a35-182">請注意，會使用不同的 DbCoNtext 實例來植入資料庫，並執行測試。</span><span class="sxs-lookup"><span data-stu-id="e1a35-182">Notice that different DbContext instances are used to seed the database and run the tests.</span></span>
 <span data-ttu-id="e1a35-183">這可確保測試不會使用 (，或在植入時，不使用) 內容所追蹤的實體。</span><span class="sxs-lookup"><span data-stu-id="e1a35-183">This ensures that the test is not using (or tripping over) entities tracked by the context when seeding.</span></span>
@@ -172,13 +172,13 @@ ms.locfileid: "94431491"
 <span data-ttu-id="e1a35-186">也就是說，您可以建立新的、乾淨的內容，然後從資料庫中讀取資料，以確保變更已儲存至資料庫。</span><span class="sxs-lookup"><span data-stu-id="e1a35-186">That is, creating a new, clean, context and then reading into it from the database to ensure that the changes were saved to the database.</span></span>
 <span data-ttu-id="e1a35-187">例如：</span><span class="sxs-lookup"><span data-stu-id="e1a35-187">For example:</span></span>
 
-[!code-csharp[CanAdd:::no-loc(Item):::](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/Tests/:::no-loc(Items):::ControllerTest.cs?name=CanAdd:::no-loc(Item):::)]
+[!code-csharp[CanAddItem](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddItem)]
 
-<span data-ttu-id="e1a35-188">有兩個稍微複雜的測試涵蓋了有關加入的商務邏輯 :::no-loc(tags)::: 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-188">Two slightly more involved tests cover the business logic around adding :::no-loc(tags):::.</span></span>
+<span data-ttu-id="e1a35-188">有兩個稍微複雜的測試涵蓋了有關加入的商務邏輯 tags 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-188">Two slightly more involved tests cover the business logic around adding tags.</span></span>
 
-[!code-csharp[CanAdd:::no-loc(Tag):::](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/Tests/:::no-loc(Items):::ControllerTest.cs?name=CanAdd:::no-loc(Tag):::)]
+[!code-csharp[CanAddTag](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddTag)]
 
-[!code-csharp[CanUp:::no-loc(Tag):::Count](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/Tests/:::no-loc(Items):::ControllerTest.cs?name=CanUp:::no-loc(Tag):::Count)]
+[!code-csharp[CanUpTagCount](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanUpTagCount)]
 
 ## <a name="issues-using-different-database-providers"></a><span data-ttu-id="e1a35-189">使用不同資料庫提供者的問題</span><span class="sxs-lookup"><span data-stu-id="e1a35-189">Issues using different database providers</span></span>
 
@@ -188,10 +188,10 @@ ms.locfileid: "94431491"
 
 ### <a name="test-passes-when-the-application-is-broken"></a><span data-ttu-id="e1a35-193">應用程式中斷時的測試階段</span><span class="sxs-lookup"><span data-stu-id="e1a35-193">Test passes when the application is broken</span></span>
 
-<span data-ttu-id="e1a35-194">我們應用程式的其中一項需求是「 :::no-loc(Items)::: 有區分大小寫的名稱和集合。」 :::no-loc(Tags):::</span><span class="sxs-lookup"><span data-stu-id="e1a35-194">One of the requirements for our application is that ":::no-loc(Items)::: have a case-sensitive name and a collection of :::no-loc(Tags):::."</span></span>
+<span data-ttu-id="e1a35-194">我們應用程式的其中一項需求是「 Items 有區分大小寫的名稱和集合。」 Tags</span><span class="sxs-lookup"><span data-stu-id="e1a35-194">One of the requirements for our application is that "Items have a case-sensitive name and a collection of Tags."</span></span>
 <span data-ttu-id="e1a35-195">這相當簡單，可進行測試：</span><span class="sxs-lookup"><span data-stu-id="e1a35-195">This is pretty simple to test:</span></span>
 
-[!code-csharp[CanAdd:::no-loc(Item):::CaseInsensitive](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/Tests/:::no-loc(Items):::ControllerTest.cs?name=CanAdd:::no-loc(Item):::CaseInsensitive)]
+[!code-csharp[CanAddItemCaseInsensitive](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddItemCaseInsensitive)]
 
 <span data-ttu-id="e1a35-196">針對 EF 記憶體內部資料庫執行這項測試表示一切正常。</span><span class="sxs-lookup"><span data-stu-id="e1a35-196">Running this test against the EF in-memory database indicates that everything is fine.</span></span>
 <span data-ttu-id="e1a35-197">使用 SQLite 時，一切仍然沒問題。</span><span class="sxs-lookup"><span data-stu-id="e1a35-197">Everything still looks fine when using SQLite.</span></span>
@@ -204,7 +204,7 @@ System.InvalidOperationException : Sequence contains more than one element
    at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
    at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryProvider.Execute[TResult](Expression expression)
    at System.Linq.Queryable.Single[TSource](IQueryable`1 source, Expression`1 predicate)
-   at Tests.:::no-loc(Items):::ControllerTest.Can_add_item_differing_only_by_case()
+   at Tests.ItemsControllerTest.Can_add_item_differing_only_by_case()
 ```
 
 <span data-ttu-id="e1a35-199">這是因為 EF 記憶體內部資料庫和 SQLite 資料庫預設都有區分大小寫。</span><span class="sxs-lookup"><span data-stu-id="e1a35-199">This is because both the EF in-memory database and the SQLite database are case-sensitive by default.</span></span>
@@ -217,10 +217,10 @@ System.InvalidOperationException : Sequence contains more than one element
 
 ### <a name="test-fails-when-the-application-is-correct"></a><span data-ttu-id="e1a35-204">當應用程式正確時測試失敗</span><span class="sxs-lookup"><span data-stu-id="e1a35-204">Test fails when the application is correct</span></span>
 
-<span data-ttu-id="e1a35-205">我們應用程式的另一項需求是「刪除 :::no-loc(Item)::: 所有相關聯的」 :::no-loc(Tags)::: 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-205">Another of the requirements for our application is that "deleting an :::no-loc(Item)::: should delete all associated :::no-loc(Tags):::."</span></span>
+<span data-ttu-id="e1a35-205">我們應用程式的另一項需求是「刪除 Item 所有相關聯的」 Tags 。</span><span class="sxs-lookup"><span data-stu-id="e1a35-205">Another of the requirements for our application is that "deleting an Item should delete all associated Tags."</span></span>
 <span data-ttu-id="e1a35-206">同樣地，您也可以輕鬆地進行測試：</span><span class="sxs-lookup"><span data-stu-id="e1a35-206">Again, easy to test:</span></span>
 
-[!code-csharp[Delete:::no-loc(Item):::](../../../samples/core/Miscellaneous/Testing/:::no-loc(Items):::WebApi/Tests/:::no-loc(Items):::ControllerTest.cs?name=Delete:::no-loc(Item):::)]
+[!code-csharp[DeleteItem](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=DeleteItem)]
 
 <span data-ttu-id="e1a35-207">這項測試會 SQL Server 和 SQLite 傳遞，但無法與 EF 記憶體內部資料庫一起使用！</span><span class="sxs-lookup"><span data-stu-id="e1a35-207">This test passes on SQL Server and SQLite, but fails with the EF in-memory database!</span></span>
 
@@ -228,7 +228,7 @@ System.InvalidOperationException : Sequence contains more than one element
 Assert.False() Failure
 Expected: False
 Actual:   True
-   at Tests.:::no-loc(Items):::ControllerTest.Can_remove_item_and_all_associated_:::no-loc(tags):::()
+   at Tests.ItemsControllerTest.Can_remove_item_and_all_associated_tags()
 ```
 
 <span data-ttu-id="e1a35-208">在此情況下，應用程式會正常運作，因為 SQL Server 支援串聯 [刪除](xref:core/saving/cascade-delete)。</span><span class="sxs-lookup"><span data-stu-id="e1a35-208">In this case, the application is working correctly because SQL Server supports [cascade deletes](xref:core/saving/cascade-delete).</span></span>
