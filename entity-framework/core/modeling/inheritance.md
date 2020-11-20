@@ -4,12 +4,12 @@ description: 如何使用 Entity Framework Core 設定實體類型繼承
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/inheritance
-ms.openlocfilehash: 3ec6e7bd98f9c9716c460d69fc707d95e5e47a05
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 33429bbc4a9941ff8ea98a8f99cc652c8ea26455
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429516"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003623"
 ---
 # <a name="inheritance"></a>繼承
 
@@ -64,7 +64,7 @@ EF 可將 .NET 型別階層對應到資料庫。 這可讓您照常以程式碼�
 ## <a name="table-per-type-configuration"></a>每一類型的資料表設定
 
 > [!NOTE]
-> 每一類型的 (TPT) 資料表是 EF Core 5.0 中的新功能。 EF6 支援每個具體的資料表類型 (TPC) ，但 EF Core 尚未支援。
+> EF Core 5.0 中引進了每一類型的 (TPT) 功能的資料表。 EF6 支援每個具體的資料表類型 (TPC) ，但 EF Core 尚未支援。
 
 在 TPT 對應模式中，所有類型都會對應至個別資料表。 單獨屬於基底型別 (Base Type) 或衍生型別 (Derived Type) 的屬性會儲存在對應至該型別的資料表中。 對應至衍生類型的資料表也會儲存外鍵，以聯結衍生資料表與基表。
 

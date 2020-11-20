@@ -4,17 +4,17 @@ description: 使用 Entity Framework Core 模型中的空間資料
 author: bricelam
 ms.date: 10/02/2020
 uid: core/modeling/spatial
-ms.openlocfilehash: fa9cf30ddb4291d96486934544b568b67b126846
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: a38e75e150b3d3404f2ed7619d05ba478c411117
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430517"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003441"
 ---
 # <a name="spatial-data"></a>空間資料
 
 > [!NOTE]
-> 這項功能已在 EF Core 2.2 中新增。
+> 這項功能是在 EF Core 2.2 中引進。
 
 空間資料代表實體位置和物件的形狀。 許多資料庫都支援這種類型的資料，因此可與其他資料一起進行編制索引和查詢。 常見的案例包括從位置查詢指定距離內的物件，或選取其框線包含指定位置的物件。 EF Core 支援使用 NetTopologySuite 空間程式庫對應到空間資料類型。
 
@@ -44,7 +44,7 @@ Teradata.EntityFrameworkCore            | [Teradata. Microsoft.entityframeworkco
 
 有數種空間資料類型。 您所使用的類型取決於您想要允許的圖形類型。 以下是您可以在模型中用於屬性的 NTS 類型階層。 它們位於 `NetTopologySuite.Geometries` 命名空間內。
 
-* 幾何形狀
+* 幾何
   * Point
   * LineString
   * Polygon

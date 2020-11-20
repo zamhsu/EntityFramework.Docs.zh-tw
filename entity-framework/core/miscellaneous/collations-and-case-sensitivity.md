@@ -4,12 +4,12 @@ description: 在資料庫和使用 Entity Framework Core 的查詢中設定定�
 author: roji
 ms.date: 04/27/2020
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: cced7e11f7bf02223d3f181677ad1707c1da4051
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: eca68af6e658f76e1480b1e1083212f160fa765c
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429737"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003454"
 ---
 # <a name="collations-and-case-sensitivity"></a>定序和區分大小寫
 

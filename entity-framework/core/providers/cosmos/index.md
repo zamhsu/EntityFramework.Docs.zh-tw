@@ -4,17 +4,17 @@ description: 資料庫提供者的文件，內容說明如何搭配使用 Entity
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 825517e79891378a61f9564c90dbf4522459e9d0
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: b167f53515799efdaead232f44ad5eab37fb0b14
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430310"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003597"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB 提供者
 
 > [!NOTE]
-> 這是新的 EF Core 3.0 提供者。
+> 此提供者是在 EF Core 3.0 中引進。
 
 此資料庫提供者可讓 Entity Framework Core 與 Azure Cosmos DB 搭配使用。 [Entity Framework Core 專案](https://github.com/dotnet/efcore)的維護包含此提供者。
 
@@ -73,7 +73,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 [!code-csharp[Configuration](../../../../samples/core/Cosmos/ModelBuilding/OptionsContext.cs?name=Configuration)]
 
 > [!NOTE]
-> 這些選項大多是 EF Core Cosmos 5.0 中的新功能。
+> 這些選項大多是在 EF Core 5.0 中引進。
 
 > [!TIP]
 > 如需上述每個選項效果的詳細說明，請參閱 [Azure Cosmos DB 選項檔](/dotnet/api/microsoft.azure.cosmos.cosmosclientoptions) 。
@@ -108,7 +108,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 [!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=PartitionKey&highlight=15)]
 
 > [!NOTE]
-> `WithPartitionKey` 已在 EF Core 5.0 中新增。
+> `WithPartitionKey` 在 EF Core 5.0 中引進。
 
 通常建議將分割區索引鍵加入至主要索引鍵，因為這最能反映伺服器的語義並允許一些優化，例如在中 `FindAsync` 。
 
@@ -210,7 +210,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 ## <a name="optimistic-concurrency-with-etags"></a>使用 Etag 的開放式平行存取
 
 > [!NOTE]
-> EF Core 5.0 中新增了對 eTag 平行存取的支援。
+> EF Core 5.0 中引進了對 eTag 平行存取的支援。
 
 將實體型別設定為使用 [開放式並行](xref:core/modeling/concurrency) 存取呼叫 `UseETagConcurrency` 。 此呼叫會 `_etag` 在 [陰影狀態](xref:core/modeling/shadow-properties) 中建立屬性，並將它設定為並行標記。
 

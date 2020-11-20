@@ -4,12 +4,12 @@ description: Entity Framework Core SQL Server 提供者特有的索引功能
 author: roji
 ms.date: 9/1/2020
 uid: core/providers/sql-server/indexes
-ms.openlocfilehash: a01ab3d12f5bf5f05f0925c93d90c0ee40fe977c
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 66b4e3ce5ab1d4da855c106a6a2d2e75c43081f7
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92061862"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003156"
 ---
 # <a name="index-features-specific-to-the-entity-framework-core-sql-server-provider"></a>Entity Framework Core SQL Server 提供者特有的索引功能
 

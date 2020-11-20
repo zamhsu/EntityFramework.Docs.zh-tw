@@ -4,12 +4,12 @@ description: 在 Entity Framework Core 模型中設定陰影和索引子屬性
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: 180478212b683a271d2519cc1a4c79be5d3f11b9
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: d419de2da2a9fc29e675dde76e824217347d2e9c
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503185"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003428"
 ---
 # <a name="shadow-and-indexer-properties"></a>陰影和索引子屬性
 
@@ -63,7 +63,7 @@ var blogs = context.Blogs
 ## <a name="property-bag-entity-types"></a>屬性包實體類型
 
 > [!NOTE]
-> 已在 EF Core 5.0 中新增屬性包實體類型的支援。
+> 屬性包實體類型的支援是在 EF Core 5.0 中引進。
 
 僅包含索引子屬性的實體類型稱為「屬性包」實體類型。 這些實體類型沒有陰影屬性，而 EF 會建立索引子屬性。 目前僅 `Dictionary<string, object>` 支援做為屬性包實體類型。 它必須設定為具有唯一名稱的共用實體類型，而且 `DbSet` 必須使用呼叫來執行對應的屬性 `Set` 。
 

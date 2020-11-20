@@ -4,12 +4,12 @@ description: 新增、移除及以其他方式管理使用 Entity Framework Core
 author: bricelam
 ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: 81f7cec54510d95b1e2432d56ff95110224fd9bf
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: ef5e1b9bb10d6f1cd428db2fee327ec513c3f528
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429844"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003272"
 ---
 # <a name="managing-migrations"></a>管理遷移
 
@@ -40,8 +40,8 @@ Add-Migration AddBlogCreatedTimestamp
 
 會新增三個檔案到您 **移轉** 目錄下的專案：
 
-* **XXXXXXXXXXXXXX_AddCreatedTimestamp .cs** --主要的遷移檔。 包含套用移轉 (在 `Up` 中) 及予以反轉 (在 `Down` 中) 的必要作業。
-* **XXXXXXXXXXXXXX_AddCreatedTimestamp .cs** --遷移中繼資料檔案。 包含 EF 使用的資訊。
+* **XXXXXXXXXXXXXX_AddCreatedTimestamp .cs**--主要的遷移檔。 包含套用移轉 (在 `Up` 中) 及予以反轉 (在 `Down` 中) 的必要作業。
+* **XXXXXXXXXXXXXX_AddCreatedTimestamp .cs**--遷移中繼資料檔案。 包含 EF 使用的資訊。
 * **MyContextModelSnapshot.cs** - 您目前模型的快照集。 用來決定新增下一個移轉時所要變更的項目。
 
 檔案名稱中的時間戳記有助於使其依時間先後順序排列，以便您查看變更的進展。
@@ -210,7 +210,7 @@ dotnet ef migrations list
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 > [!NOTE]
-> 此命令已在 EF Core 5.0 中新增。
+> 此命令是在 EF Core 5.0 中引進。
 
 ```powershell
 Get-Migration
@@ -220,7 +220,7 @@ Get-Migration
 
 ## <a name="resetting-all-migrations"></a>正在重設所有遷移
 
-在某些極端的情況下，可能需要移除所有的遷移並重新開始。 您可以藉由刪除 _ *遷移* * 資料夾並卸載資料庫，輕鬆地完成此工作。屆時，您可以建立新的初始遷移，其中將包含您目前的整個架構。
+在某些極端的情況下，可能需要移除所有的遷移並重新開始。 您可以藉由刪除 _ *遷移** 資料夾並卸載資料庫，輕鬆地完成此工作。屆時，您可以建立新的初始遷移，其中將包含您目前的整個架構。
 
 您也可以重設所有遷移，並建立單一的遷移，而不會遺失您的資料。 這有時稱為「抓」，並牽涉到一些手動工作：
 

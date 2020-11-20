@@ -4,17 +4,17 @@ description: 使用值比較子來控制 EF Core 如何比較屬性值
 author: ajcvickers
 ms.date: 03/20/2020
 uid: core/modeling/value-comparers
-ms.openlocfilehash: d07aee866a542f55c4e1074c5782e67cb4035a89
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d59ab093c7e9d251aac80420972d3e35edabae0b
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616677"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003610"
 ---
 # <a name="value-comparers"></a>值比較子
 
 > [!NOTE]  
-> 這項功能是 EF Core 3.0 中的新功能。
+> 這項功能是在 EF Core 3.0 中引進。
 
 > [!TIP]  
 > 您可以在 GitHub 上找到這份檔中的程式碼，做為可執行檔 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/ValueConversions/)。

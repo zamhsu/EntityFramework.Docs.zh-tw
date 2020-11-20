@@ -4,12 +4,12 @@ description: 透過 Entity Framework Core 使用移轉來管理資料庫結構�
 author: bricelam
 ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 9f1c9e266d60b7ed4aed783bb8e01864c93867ea
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: b9547298714af59453aeae6d05742a03c067708b
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429815"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003389"
 ---
 # <a name="migrations-overview"></a>移轉概觀
 
@@ -61,7 +61,7 @@ Add-Migration InitialCreate
 
 **_
 
-EF Core 將會在您的專案中建立一個名為 _ [ *遷移* *] 的目錄，並產生一些檔案。 最好的作法是檢查 EF Core 產生的確切項目，並視需要加以修改，但我們現在會跳過此程序。
+EF Core 將會在您的專案中建立一個名為 _ [*遷移**] 的目錄，並產生一些檔案。 最好的作法是檢查 EF Core 產生的確切項目，並視需要加以修改，但我們現在會跳過此程序。
 
 ### <a name="create-your-database-and-schema"></a>建立您的資料庫與結構描述
 
@@ -141,7 +141,7 @@ _*_
 ### <a name="excluding-parts-of-your-model"></a>排除模型的各部分
 
 > [!NOTE]
-> 這項功能已在 EF Core 5.0 中新增。
+> 這項功能在核心5.0 中引進了 EF。
 
 有時您可能會想要從另一個 DbCoNtext 參考類型。 這可能會導致遷移衝突。 若要避免這種情況，請從 DbcoNtext 的其中一項的遷移中排除類型。
 
