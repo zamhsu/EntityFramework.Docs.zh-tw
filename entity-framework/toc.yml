@@ -19,8 +19,6 @@
       items:
         - name: 歡迎！
           href: core/index.md
-        - name: 參加 EF Core 6 問卷調查 >>
-          href: 'https://www.surveymonkey.com/r/XRL3JBL'
         - name: 開始使用
           items:
             - name: EF Core 概觀
@@ -216,6 +214,8 @@
               href: core/logging-events-diagnostics/interceptors.md
             - name: 診斷接聽程式
               href: core/logging-events-diagnostics/diagnostic-listeners.md
+            - name: 事件計數器
+              href: core/logging-events-diagnostics/event-counters.md
         - name: 測試
           items:
             - name: 測試使用 EF Core 的程式碼
