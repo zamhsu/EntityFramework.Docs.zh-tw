@@ -4,12 +4,12 @@ description: Entity Framework Core 的外部工具與延伸模組
 author: ErikEJ
 ms.date: 04/11/2020
 uid: core/extensions/index
-ms.openlocfilehash: c7056bcb0831ae1919b3060aacf73dc5cb9c8cb1
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: dc8125ab522b5b0c5126fda2d7c8093c2babdc29
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429932"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003298"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -240,3 +240,9 @@ Entity Framework Core 3.1 的 LINQ 延伸模組，以支援 Microsoft SQL Server
 擴充 EF Core，以從 App.config 解析連接字串。針對 EF Core：3。
 
 [GitHub 存放庫](https://github.com/efcore/EFCore.ConfigurationManager)
+
+### <a name="detached-mapper"></a>卸離對應程式
+
+DTO-Entity 對應程式具有組合/匯總處理 (類似于 GraphDiff) 。 針對 EF Core：3，5。
+
+[NuGet](https://www.nuget.org/packages/Detached.Mappers.EntityFramework)

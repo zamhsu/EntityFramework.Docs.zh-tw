@@ -4,17 +4,17 @@ description: 使用 LogTo 從 EF Core DbCoNtext 記錄
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 49619cc10ea098e39e71dde347e00bbc3c39b13a
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 274fca39c45c4e2ccfd47f3c4eeb0834e00d18aa
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431414"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003506"
 ---
 # <a name="simple-logging"></a>簡單記錄
 
 > [!NOTE]
-> 這項功能已在 EF Core 5.0 中新增。
+> 這項功能是在 EF Core 5.0 中引進。
 
 > [!TIP]  
 > 您可以從 GitHub [下載本文的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SimpleLogging) 。
@@ -24,7 +24,7 @@ Entity Framework Core (EF Core) 簡單記錄可以用來在開發和偵測應用
 > [!TIP]
 > EF Core 也會與需要更多設定的 [Microsoft 擴充功能](xref:core/logging-events-diagnostics/extensions-logging)整合，但通常更適合用來記錄生產應用程式。
 
-## <a name="configuration"></a>設定
+## <a name="configuration"></a>組態
 
 您可以使用[LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135)從任何類型的應用程式存取 EF Core 記錄 <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> 設定 [DbCoNtext 實例](xref:core/dbcontext-configuration/index)時。 這項設定通常是在的覆寫中完成 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 。 例如：
 

@@ -4,16 +4,16 @@ description: 如何使用 Entity Framework Core 來設定和對應實體類型
 author: roji
 ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: 9094193640e7cab6db3fed7ae0ab818a455156ca
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 9d86b959b5e0360df6d782d8d1c1c2f9393fdf8b
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429581"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003493"
 ---
 # <a name="entity-types"></a>實體類型
 
-在您的內容中包含類型的 DbSet，表示它包含在 EF Core 的模型中;我們通常會將這類型別稱為 *實體* 。 EF Core 可以從資料庫讀取和寫入實體實例，如果您使用關係資料庫，EF Core 可以透過遷移來為您的實體建立資料表。
+在您的內容中包含類型的 DbSet，表示它包含在 EF Core 的模型中;我們通常會將這類型別稱為 *實體*。 EF Core 可以從資料庫讀取和寫入實體實例，如果您使用關係資料庫，EF Core 可以透過遷移來為您的實體建立資料表。
 
 ## <a name="including-types-in-the-model"></a>在模型中包含類型
 
@@ -44,7 +44,7 @@ ms.locfileid: "94429581"
 ### <a name="excluding-from-migrations"></a>從遷移中排除
 
 > [!NOTE]
-> 在 EF Core 5.0 中新增了從遷移中排除資料表的功能。
+> 在 EF Core 5.0 中引進了從遷移中排除資料表的功能。
 
 將相同的實體類型對應到多個型別時，有時會很有用 `DbContext` 。 尤其是 [在使用系](https://www.martinfowler.com/bliki/BoundedContext.html)結內容時更是如此，因為每個限定的內容通常會有不同的 `DbContext` 類型。
 

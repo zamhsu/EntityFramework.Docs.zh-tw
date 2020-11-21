@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 儲存資料時，管理不可部分�
 author: roji
 ms.date: 9/26/2020
 uid: core/saving/transactions
-ms.openlocfilehash: 2cefe23068a40122b7a37c21536213456eef7b66
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: b5e1fa2a0bcc466f22f03fee7ecaef9dcea1efaf
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063617"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003545"
 ---
 # <a name="using-transactions"></a>使用交易
 
@@ -34,7 +34,13 @@ ms.locfileid: "92063617"
 
 ## <a name="savepoints"></a>點
 
+> [!NOTE]
+> 這項功能是在 EF Core 5.0 中引進。
+
 當叫用， `SaveChanges` 且內容中已有交易正在進行時，EF 會自動建立儲存 *點* ，然後再儲存任何資料。 儲存點是資料庫交易內的點，如果發生錯誤或因任何其他原因，可能會在稍後回復至。 如果 `SaveChanges` 遇到任何錯誤，它會自動將交易回復回儲存點，讓交易保持與從未啟動的相同狀態。 這可讓您在發生 [開放式並行](xref:core/saving/concurrency) 存取問題時，可能會更正問題並重試儲存。
+
+> [!WARNING]
+> 儲存點與 SQL Server 的 Multiple Active Result Sets 不相容，且不會使用。 如果發生錯誤 `SaveChanges` ，交易可能會處於未知的狀態。
 
 您也可以手動管理儲存點，就像使用交易一樣。 下列範例會在交易中建立儲存點，並在失敗時回復至該儲存點：
 

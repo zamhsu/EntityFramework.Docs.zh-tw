@@ -4,12 +4,12 @@ description: 攔截資料庫作業和其他事件
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 61ec6968344798af8ecffb878a1e47a6a8e031cd
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 22d860a083c5ece9be109be630c3ce01dd742bf2
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503198"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003403"
 ---
 # <a name="interceptors"></a>攔截器
 
@@ -56,8 +56,8 @@ public class TaggedQueryCommandInterceptorContext : BlogsContext
 ## <a name="database-interception"></a>資料庫攔截
 
 > [!NOTE]
-> 資料庫攔截是在 EF Core 3.0 中新增的，且僅適用于關係資料庫提供者。
-> EF Core 5.0 中已新增儲存點支援。
+> 資料庫攔截是在 EF Core 3.0 中引進，而且僅適用于關係資料庫提供者。
+> EF Core 5.0 中引進了儲存點支援。
 
 低層級資料庫攔截會分割成下表所示的三個介面。
 
@@ -182,7 +182,7 @@ public class AadAuthenticationInterceptor : DbConnectionInterceptor
 [!code-csharp[AadAuthenticationInterceptor](../../../samples/core/Miscellaneous/ConnectionInterception/AadAuthenticationInterceptor.cs?name=AadAuthenticationInterceptor)]
 
 > [!TIP]
-> [SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient/) 現在透過連接字串支援 AAD 驗證。 如需相關資訊，請參閱 <xref:Microsoft.Data.SqlClient.SqlAuthenticationMethod> 。
+> [SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient/) 現在透過連接字串支援 AAD 驗證。 如需詳細資訊，請參閱 <xref:Microsoft.Data.SqlClient.SqlAuthenticationMethod>。
 
 > [!WARNING]
 > 請注意，如果進行同步呼叫以開啟連接，攔截器就會擲回。 這是因為沒有任何非非同步方法可以取得存取權杖，而且沒有 [任何通用且簡單的方法可從非非同步內容呼叫非同步方法，而不會產生風險鎖死](https://devblogs.microsoft.com/dotnet/configureawait-faq/)。
@@ -396,7 +396,7 @@ Free beer for unicorns
 ## <a name="savechanges-interception"></a>SaveChanges 攔截
 
 > [!NOTE]
-> 已在 EF Core 5.0 中新增 SaveChanges 攔截。
+> SaveChanges 攔截是在 EF Core 5.0 中引進。
 
 > [!TIP]  
 > 您可以從 GitHub [下載 SaveChanges 攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) 。

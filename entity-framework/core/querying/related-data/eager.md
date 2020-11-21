@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 積極載入相關資料
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: bd9c9045c1c2707d69ee4070bea59ad8066789f3
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 66956fcd85bb21a08c69fa93b93c12382bbfc8eb
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430101"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003571"
 ---
 # <a name="eager-loading-of-related-data"></a>相關資料的積極式載入
 
@@ -46,6 +46,11 @@ ms.locfileid: "94430101"
 您可能會想要針對所包括的其中一個實體包含多個相關實體。 例如，查詢 `Blogs` 時，您包括了 `Posts`，接著想要同時包含 `Posts` 的 `Author` 和 `Tags`。 若要同時包含這兩個，您必須指定從根目錄開始的每個 include 路徑。 例如，`Blog -> Posts -> Author` 與 `Blog -> Posts -> Tags`。 這並不表示您將會收到多餘的聯結;在大部分情況下，EF 會在產生 SQL 時合併聯結。
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludes)]
+
+> [!TIP]
+> 您也可以使用單一方法來載入多個導覽 `Include` 。 這可能適用于所有參考的導覽「鏈」，或是以單一集合結尾。
+
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#IncludeMultipleNavigationsWithSingleInclude)]
 
 ## <a name="filtered-include"></a>篩選的包含
 

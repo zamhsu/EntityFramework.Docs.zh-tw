@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 時如何設定實體類型之間的�
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: c92fa1904436ec43ff8918354a99440079e2a96a
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 716c034bd73d831996b727da18c2c1f83dd55290
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503211"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003259"
 ---
 # <a name="relationships"></a>關聯性
 
@@ -149,7 +149,7 @@ ms.locfileid: "94503211"
 ### <a name="configuring-navigation-properties"></a>設定導覽屬性
 
 > [!NOTE]
-> 這項功能已在 EF Core 5.0 中新增。
+> 這項功能是在 EF Core 5.0 中引進。
 
 建立導覽屬性之後，您可能需要進一步設定。
 
@@ -269,7 +269,7 @@ ms.locfileid: "94503211"
 > 如果您使用 [不可為 null 的參考型別](/dotnet/csharp/nullable-references) ，則 `IsRequired` 不需要呼叫。
 
 > [!NOTE]
-> 在 EF Core 5.0 中新增了是否需要相依的設定。
+> 在 EF Core 5.0 中引進了設定相依是否必要的能力。
 
 ### <a name="many-to-many"></a>多對多
 
@@ -320,11 +320,11 @@ CREATE TABLE [PostTag] (
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyPayload.cs?name=ManyToManyPayload)]
 
 > [!NOTE]
-> 在 EF Core 5.0 中新增多對多關聯性的功能已加入至舊版，請使用下列方法。
+> 在 EF Core 5.0 中引進了設定多對多關聯性的能力，但在舊版中，請使用下列方法。
 
 您也可以藉由加入聯結實體型別並對應兩個不同的一對多關聯性，來表示多對多關聯性。
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=11-14,16-19,39-46)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=16-19,21-24)]
 
 > [!NOTE]
 > 尚未新增與資料庫中多對多關聯性的元件支援。 請參閱 [追蹤問題](https://github.com/dotnet/efcore/issues/22475)。
