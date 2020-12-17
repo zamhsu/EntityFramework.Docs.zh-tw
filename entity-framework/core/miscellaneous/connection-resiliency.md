@@ -4,12 +4,12 @@ description: 使用連接復原功能，利用 Entity Framework Core 自動重�
 author: AndriySvyryd
 ms.date: 11/15/2016
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: db0666a49cbd41ef3eacf447eaeed1fb54ffcbf4
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: bcafdf5de26ecfd7539d426388154550a39332ab
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92061914"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635779"
 ---
 # <a name="connection-resiliency"></a>連接恢復功能
 
@@ -32,6 +32,9 @@ public void ConfigureServices(IServiceCollection services)
             providerOptions => providerOptions.EnableRetryOnFailure()));
 }
 ```
+
+> [!NOTE]
+> 啟用失敗時的重試會導致 EF 在內部緩衝結果集，這可能會大幅增加傳回大型結果集之查詢的記憶體需求。 如需詳細資料，請參閱 [緩衝和串流](xref:core/performance/efficient-querying#buffering-and-streaming) 。
 
 ## <a name="custom-execution-strategy"></a>自訂執行策略
 

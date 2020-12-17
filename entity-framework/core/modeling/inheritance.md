@@ -4,12 +4,12 @@ description: 如何使用 Entity Framework Core 設定實體類型繼承
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/inheritance
-ms.openlocfilehash: 33429bbc4a9941ff8ea98a8f99cc652c8ea26455
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 11bd653a53767aa732790b1222da1beff8ad26a9
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003623"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635753"
 ---
 # <a name="inheritance"></a>繼承
 
@@ -90,6 +90,9 @@ CREATE TABLE [RssBlogs] (
 > [!NOTE]
 > 如果重新命名 primary key 條件約束，則新名稱將會套用至對應至階層的所有資料表，未來 EF 版本將允許在 [問題 19970](https://github.com/dotnet/efcore/issues/19970) 修正時，只針對特定資料表重新命名條件約束。
 
-如果您使用大量設定，則可以藉由呼叫來抓取特定資料表的資料行名稱 <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName%2A> 。
+如果您使用大量設定，則可以藉由呼叫來抓取特定資料表的資料行名稱 <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName(Microsoft.EntityFrameworkCore.Metadata.IProperty,Microsoft.EntityFrameworkCore.Metadata.StoreObjectIdentifier@)> 。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TPTConfiguration.cs?name=Metadata&highlight=10)]
+
+> [!WARNING]
+> 在許多情況下，相較于 TPH，TPT 會顯示較差的效能。 [如需詳細資訊，請參閱效能](xref:core/performance/modeling-for-performance#inheritance-mapping)檔。

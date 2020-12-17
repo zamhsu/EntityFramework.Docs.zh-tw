@@ -4,12 +4,12 @@ description: 攔截資料庫作業和其他事件
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 22d860a083c5ece9be109be630c3ce01dd742bf2
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: fba9f3d02b8cf504c2cadca8eb844cd3e818e915
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003403"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635805"
 ---
 # <a name="interceptors"></a>攔截器
 
@@ -182,7 +182,7 @@ public class AadAuthenticationInterceptor : DbConnectionInterceptor
 [!code-csharp[AadAuthenticationInterceptor](../../../samples/core/Miscellaneous/ConnectionInterception/AadAuthenticationInterceptor.cs?name=AadAuthenticationInterceptor)]
 
 > [!TIP]
-> [SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient/) 現在透過連接字串支援 AAD 驗證。 如需詳細資訊，請參閱 <xref:Microsoft.Data.SqlClient.SqlAuthenticationMethod>。
+> [SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient/) 現在透過連接字串支援 AAD 驗證。 如需相關資訊，請參閱 <xref:Microsoft.Data.SqlClient.SqlAuthenticationMethod> 。
 
 > [!WARNING]
 > 請注意，如果進行同步呼叫以開啟連接，攔截器就會擲回。 這是因為沒有任何非非同步方法可以取得存取權杖，而且沒有 [任何通用且簡單的方法可從非非同步內容呼叫非同步方法，而不會產生風險鎖死](https://devblogs.microsoft.com/dotnet/configureawait-faq/)。
@@ -401,7 +401,7 @@ Free beer for unicorns
 > [!TIP]  
 > 您可以從 GitHub [下載 SaveChanges 攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) 。
 
-<xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 和 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> 攔截點是由 `ISaveChangesInterceptor` <!-- Issue #2748 --> 介面。 針對其他攔截器， `SaveChangesInterceptor` <!-- Issue #2748 --> 提供沒有 op 方法的基類是為了方便起見。
+<xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 和 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> 攔截點是由介面所定義 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor> 。 針對其他攔截器，則 <xref:Microsoft.EntityFrameworkCore.Diagnostics.SaveChangesInterceptor> 會提供具有無 op 方法的基類，以方便使用。
 
 > [!TIP]
 > 攔截器功能強大。 不過，在許多情況下，覆寫 SaveChanges 方法或針對 DbCoNtext 上公開的 [SaveChanges 使用 .net 事件](xref:core/logging-events-diagnostics/events) 可能比較容易。
@@ -502,7 +502,7 @@ public class EntityAudit
 * 如果 SaveChanges 成功，則會更新審核訊息以指出成功
 * 如果 SaveChanges 失敗，則會更新審核訊息以指出失敗
 
-第一個階段會在任何變更傳送至資料庫之前先處理，並使用的覆寫 `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 --> 和 `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
+第一個階段是在使用和的覆寫將任何變更傳送至資料庫之前處理 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavingChanges%2A?displayProperty=nameWithType> <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavingChangesAsync%2A?displayProperty=nameWithType> 。
 
 <!--
     public async ValueTask<InterceptionResult<int>> SavingChangesAsync(
@@ -538,7 +538,7 @@ public class EntityAudit
 -->
 [!code-csharp[SavingChanges](../../../samples/core/Miscellaneous/SaveChangesInterception/AuditingInterceptor.cs?name=SavingChanges)]
 
-覆寫同步處理和非同步方法，可確保不論是否呼叫 SaveChanges 或 SaveChangesAsync，都會發生審核。 另外也請注意，非同步多載本身可以對審核資料庫執行非封鎖的非同步 i/o。 您可能想要從同步處理 SavingChanges 方法擲回，以確保所有資料庫 i/o 都是非同步。 然後，應用程式必須一律呼叫 SaveChangesAsync，而不是 SaveChanges。
+覆寫同步和非同步方法，可確保不論是否呼叫或，都會進行審核 `SaveChanges` `SaveChangesAsync` 。 另外也請注意，非同步多載本身可以對審核資料庫執行非封鎖的非同步 i/o。 您可能想要從同步方法擲回， `SavingChanges` 以確保所有資料庫 i/o 都是非同步。 然後，應用程式必須一律呼叫 `SaveChangesAsync` 而不是 `SaveChanges` 。
 
 #### <a name="the-audit-message"></a>審核訊息
 
@@ -598,7 +598,7 @@ public class EntityAudit
 
 #### <a name="detecting-success"></a>偵測成功
 
-Audit 實體會儲存在攔截器上，如此一來，一旦 SaveChanges 成功或失敗，就可以再次存取該實體。 若為成功， `ISaveChangesInterceptor.SavedChanges` <!-- Issue #2748 --> 或 `ISaveChangesInterceptor.SavedChangesAsync` <!-- Issue #2748 --> 呼叫 。
+Audit 實體會儲存在攔截器上，如此一來，一旦 SaveChanges 成功或失敗，就可以再次存取該實體。 表示成功， <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavedChanges%2A?displayProperty=nameWithType> 或 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavedChangesAsync%2A?displayProperty=nameWithType> 呼叫。
 
 <!--
     public int SavedChanges(SaveChangesCompletedEventData eventData, int result)
@@ -638,7 +638,7 @@ Audit 實體會附加至 audit 內容，因為它已經存在於資料庫中，�
 
 #### <a name="detecting-failure"></a>偵測失敗
 
-失敗的處理方式非常類似于成功，但在 `ISaveChangesInterceptor.SaveChangesFailed` <!-- Issue #2748 --> 或 `ISaveChangesInterceptor.SaveChangesFailedAsync` <!-- Issue #2748 --> 方法。 事件資料包含擲回的例外狀況。
+失敗的處理方式與成功相同，但在 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SaveChangesFailed%2A?displayProperty=nameWithType> 或 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SaveChangesFailedAsync%2A?displayProperty=nameWithType> 方法中。 事件資料包含擲回的例外狀況。
 
 <!--
     public void SaveChangesFailed(DbContextErrorEventData eventData)

@@ -4,12 +4,12 @@ description: EF Core 的記錄、事件、攔截器和診斷總覽
 author: ajcvickers
 ms.date: 10/01/2020
 uid: core/logging-events-diagnostics/index
-ms.openlocfilehash: 2c44772b22112645f85cf0bffa680bc510ea5afb
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: d85a506167661523bf70b62d3a075a6248180d11
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003519"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635675"
 ---
 # <a name="overview-of-logging-and-interception"></a>記錄和攔截的總覽
 
@@ -21,11 +21,11 @@ Entity Framework Core (EF Core) 包含數個產生記錄、回應事件和取得
 
 | 機制 |  Async | 影響範圍 | 已登錄 | 預定用途
 |:----------|--------|-------|------------|-------------
-| 簡單記錄 | No | 每個內容 | 內容設定 | 開發階段記錄
-| Microsoft.Extensions.Logging | No | 每個內容 * | D.I. 或內容設定 | 生產記錄
-| 事件 | No | 每個內容 | 任何時間 | 回應 EF 事件
+| 簡單記錄 | 否 | 每個內容 | 內容設定 | 開發階段記錄
+| Microsoft.Extensions.Logging | 否 | 每個內容 * | D.I. 或內容設定 | 生產記錄
+| 事件 | 否 | 每個內容 | 任何時間 | 回應 EF 事件
 | 攔截器 | 是 | 每個內容 | 內容設定 | 操作 EF 作業
-| 診斷接聽程式 | No | Process | 全域 | 應用程式診斷
+| 診斷接聽程式 | 否 | Process | 全域 | 應用程式診斷
 
 * 通常是透過相依性 `Microsoft.Extensions.Logging` 插入來設定每個應用程式，但在 EF 層級，您可以視需要使用不同的記錄器 _來_ 設定每個內容。
 
@@ -34,7 +34,7 @@ Entity Framework Core (EF Core) 包含數個產生記錄、回應事件和取得
 > [!NOTE]
 > 這項功能是在 EF Core 5.0 中引進。
 
-您可以使用[LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135)從任何類型的應用程式存取 EF Core 記錄 <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> 設定 [DbCoNtext 實例](xref:core/dbcontext-configuration/index)時。 這項設定通常是在的覆寫中完成 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 。 例如：
+在設定 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> [DbCoNtext 實例](xref:core/dbcontext-configuration/index)時，可以使用任何類型的應用程式存取 EF Core 記錄。 這項設定通常是在的覆寫中完成 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 。 例如：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

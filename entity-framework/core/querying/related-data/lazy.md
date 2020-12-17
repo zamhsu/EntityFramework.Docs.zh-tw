@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 消極式載入相關資料
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/lazy
-ms.openlocfilehash: c42cde469e2be38d53a46cb6c5c252a088978e5c
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 55622b9c5a8f70ef4e7246d6eb14678036948f18
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90078915"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635454"
 ---
 # <a name="lazy-loading-of-related-data"></a>延遲載入相關資料
 
@@ -52,6 +52,9 @@ public class Post
     public virtual Blog Blog { get; set; }
 }
 ```
+
+> [!WARNING]
+> 消極式載入可能會導致不必要的額外資料庫往返發生 (所謂的 N + 1 問題) ，而且應該小心避免此情況。 如需詳細資訊，請參閱 [ [效能] 區段](xref:core/performance/efficient-querying#beware-of-lazy-loading) 。
 
 ## <a name="lazy-loading-without-proxies"></a>沒有 Proxy 的消極式載入
 

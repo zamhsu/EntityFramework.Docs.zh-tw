@@ -4,12 +4,12 @@ description: 如何使用 Entity Framework Core 來設定和對應實體類型
 author: roji
 ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: 9d86b959b5e0360df6d782d8d1c1c2f9393fdf8b
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: ca8cb8560afe374218e763bc0476839187a40ece
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003493"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635766"
 ---
 # <a name="entity-types"></a>實體類型
 
@@ -84,7 +84,7 @@ ms.locfileid: "95003493"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=3-4)]
 
-_**
+_*_
 
 您也可以使用流暢的 API，在模型層級定義預設架構，而不是指定每個資料表的架構：
 
@@ -105,3 +105,63 @@ _**
 
 > [!TIP]
 > 若要使用記憶體內部提供者來測試對應至 views 的實體類型，請透過將它們對應至查詢 `ToInMemoryQuery` 。 如需詳細資訊，請參閱使用此技術的可執行 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) 。
+
+## <a name="table-valued-function-mapping"></a>資料表值函數對應
+
+您可以將實體類型對應至資料表值函式 (TVF) ，而不是資料庫中的資料表。 為了說明這一點，讓我們使用多篇文章來定義代表 blog 的另一個實體。 在此範例中，實體是 [無索引鍵](xref:core/modeling/keyless-entity-types)，但不一定要這樣做。
+
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/EntityTypes.cs#BlogWithMultiplePostsEntity)]
+
+接下來，在資料庫中建立下列資料表值函式，此函式只會傳回包含多篇文章的 blog，以及與這些 blog 相關聯的貼文數目：
+
+```sql
+CREATE FUNCTION dbo.BlogsWithMultiplePosts()
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT b.Url, COUNT(p.BlogId) AS PostCount
+    FROM Blogs AS b
+    JOIN Posts AS p ON b.BlogId = p.BlogId
+    GROUP BY b.BlogId, b.Url
+    HAVING COUNT(p.BlogId) > 1
+)
+```
+
+現在，實體 `BlogWithMultiplePost` 可透過下列方式對應至此函式：
+
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/EntityTypes.cs#QueryableFunctionConfigurationToFunction)]
+
+> [!NOTE]
+> 為了將實體對應至資料表值函式，函式必須是無參數。
+
+傳統的實體屬性將會對應至 TVF 所傳回的相符資料行。 如果 TVF 傳回的資料行與實體屬性的名稱不同，則可以使用方法來設定它 `HasColumnName` ，就像對應到一般資料表一樣。
+
+當實體類型對應至資料表值函式時，查詢：
+
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Program.cs#ToFunctionQuery)]
+
+產生下列 SQL：
+
+```sql
+SELECT [b].[Url], [b].[PostCount]
+FROM [dbo].[BlogsWithMultiplePosts]() AS [b]
+WHERE [b].[PostCount] > 3
+```
+
+## <a name="table-comments"></a>資料表批註
+
+您可以設定在資料庫資料表上設定的任意文字批註，讓您可以在資料庫中記錄您的架構：
+
+### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
+
+> [!NOTE]
+> 透過資料批註設定批註是在 EF Core 5.0 中引進。
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/TableComment.cs?name=TableComment&highlight=1)]
+
+### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableComment.cs?name=TableComment&highlight=4)]
+
+_**

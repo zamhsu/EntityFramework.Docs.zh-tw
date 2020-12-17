@@ -4,12 +4,12 @@ description: Entity Framework Core 5.0 中引進的重大變更完整清單
 author: bricelam
 ms.date: 11/07/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: e2537dbc1d5dba48450bd0fea7712054ba2fa622
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 7a13c9a6f6bd299991c379ec490480e1fbb4ba46
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503172"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635467"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>EF Core 5.0 中的重大變更
 
@@ -19,9 +19,9 @@ ms.locfileid: "94503172"
 
 | **重大變更**                                                                                                                   | **影響** |
 |:--------------------------------------------------------------------------------------------------------------------------------------|------------|
-| [從主體到相依的導覽上的必要項具有不同的語義](#required-dependent)                                 | 中型     |
-| [定義查詢會取代為提供者特定的方法](#defining-query)                                                          | 中型     |
-| [查詢不會覆寫非 null 的參考導覽](#nonnullreferences)                                                   | 中型     |
+| [從主體到相依的導覽上的必要項具有不同的語義](#required-dependent)                                 | 中     |
+| [定義查詢會取代為提供者特定的方法](#defining-query)                                                          | 中     |
+| [查詢不會覆寫非 null 的參考導覽](#nonnullreferences)                                                   | 中     |
 | [已從 SQLite NTS 擴充功能移除 HasGeometricDimension 方法](#geometric-sqlite)                                                   | 低        |
 | [Cosmos：現在已將資料分割索引鍵新增至主要索引鍵](#cosmos-partition-key)                                                        | 低        |
 | [Cosmos： `id` 屬性已重新命名為 `__id`](#cosmos-id)                                                                                 | 低        |
@@ -29,10 +29,13 @@ ms.locfileid: "94503172"
 | [Cosmos： GetPropertyName 和 SetPropertyName 已重新命名](#cosmos-metadata)                                                          | 低        |
 | [當實體狀態從卸離變更為未變更、更新或刪除時，會呼叫值產生器](#non-added-generation) | 低        |
 | [IMigrationsModelDiffer 現在使用 IRelationalModel](#relational-model)                                                                 | 低        |
+| [ToView ( # A1 以不同方式處理，由遷移](#toview)                                                                              | 低        |
+| [ToTable (null) 將實體類型標示為未對應至資料表](#totable)                                                              | 低        |
 | [鑒別子是唯讀的](#read-only-discriminators)                                                                             | 低        |
 | [提供者特定的 EF。InMemory 提供者的函數方法擲回](#no-client-methods)                                              | 低        |
+| [IProperty. GetColumnName ( # A1 現已淘汰](#getcolumnname-obsolete)                                                                  | 低        |
 | [IndexBuilder. HasName 現已淘汰](#index-obsolete)                                                                               | 低        |
-| [Pluarlizer 現已包含給樣板反轉工程模型](#pluralizer)                                                 | 低        |
+| [Pluralizer 現已包含給樣板反轉工程模型](#pluralizer)                                                 | 低        |
 | [INavigationBase 取代某些 Api 中的 INavigation，以支援略過導覽](#inavigationbase)                                     | 低        |
 | [某些使用 `Distinct` 或已不再支援之相互關聯集合的查詢 `GroupBy`](#collection-distinct-groupby) | 低        |
 | [不支援在投射中使用可查詢型別的集合](#queryable-projection)                                          | 低        |
@@ -340,6 +343,64 @@ var hasDifferences = modelDiffer.HasDifferences(
 
 我們打算在 6.0 ([查看 #22031](https://github.com/dotnet/efcore/issues/22031) 的這項體驗) 
 
+<a name="toview"></a>
+
+### <a name="toview-is-treated-differently-by-migrations"></a>ToView ( # A1 以不同方式處理，由遷移
+
+[追蹤問題 #2725](https://github.com/dotnet/efcore/issues/2725)
+
+#### <a name="old-behavior"></a>舊的行為
+
+`ToView(string)`除了將實體類型對應至視圖之外，呼叫的呼叫也會忽略該實體類型。
+
+#### <a name="new-behavior"></a>新的行為
+
+現在 `ToView(string)` 除了將實體類型對應至視圖之外，還會將實體類型標示為未對應到資料表。 這會導致在升級至 EF Core 5 之後第一次遷移，以嘗試卸載此實體類型的預設資料表，因為它不會再被忽略。
+
+#### <a name="why"></a>原因
+
+EF Core 現在可讓實體類型同時對應至資料表和視圖，因此不 `ToView` 會再由遷移所忽略的有效指標。
+
+#### <a name="mitigations"></a>風險降低
+
+使用下列程式碼，將對應的資料表標示為從遷移中排除：
+
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<User>().ToTable("UserView", t => t.ExcludeFromMigrations());
+}
+```
+
+<a name="totable"></a>
+
+### <a name="totablenull-marks-the-entity-type-as-not-mapped-to-a-table"></a>ToTable (null) 將實體類型標示為未對應至資料表
+
+[追蹤問題 #21172](https://github.com/dotnet/efcore/issues/21172)
+
+#### <a name="old-behavior"></a>舊的行為
+
+`ToTable(null)` 會將資料表名稱重設為預設值。
+
+#### <a name="new-behavior"></a>新的行為
+
+`ToTable(null)` 現在會將實體類型標示為未對應到任何資料表。
+
+#### <a name="why"></a>原因
+
+EF Core 現在可讓實體類型同時對應至資料表和視圖，因此 `ToTable(null)` 用來表示它不會對應到任何資料表。
+
+#### <a name="mitigations"></a>風險降低
+
+如果資料表名稱未對應到 view 或 DbFunction，請使用下列程式碼將它重設為預設值：
+
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<User>().Metadata.RemoveAnnotation(RelationalAnnotationNames.TableName);
+}
+```
+
 <a name="read-only-discriminators"></a>
 
 ### <a name="discriminators-are-read-only"></a>鑒別子是唯讀的
@@ -384,11 +445,37 @@ modelBuilder.Entity<BaseEntity>()
 
 #### <a name="why"></a>原因
 
-提供者特定的方法會對應至資料庫函式。 對應資料庫函式所完成的計算無法永遠在 LINQ 的用戶端上複寫。 在用戶端上執行相同的方法時，可能會導致伺服器的結果不同。 因為這些方法是在 LINQ 中用來轉譯為特定的資料庫函式，所以不需要在用戶端上進行評估。 因為 InMemory 提供者是不同的 *資料庫* ，所以這些方法不適用於此提供者。 嘗試針對 InMemory 提供者或任何其他未轉譯這些方法的提供者執行這些專案時，會擲回例外狀況。
+提供者特定的方法會對應至資料庫函式。 對應資料庫函式所完成的計算無法永遠在 LINQ 的用戶端上複寫。 在用戶端上執行相同的方法時，可能會導致伺服器的結果不同。 因為這些方法是在 LINQ 中用來轉譯為特定的資料庫函式，所以不需要在用戶端上進行評估。 因為 InMemory 提供者是不同的 *資料庫*，所以這些方法不適用於此提供者。 嘗試針對 InMemory 提供者或任何其他未轉譯這些方法的提供者執行這些專案時，會擲回例外狀況。
 
 #### <a name="mitigations"></a>風險降低
 
 因為無法準確模擬資料庫函式的行為，所以您應該針對與生產環境中相同類型的資料庫，測試包含它們的查詢。
+
+<a name="getcolumnname-obsolete"></a>
+
+### <a name="ipropertygetcolumnname-is-now-obsolete"></a>IProperty. GetColumnName ( # A1 現已淘汰
+
+[追蹤問題 #2266](https://github.com/dotnet/efcore/issues/2266)
+
+#### <a name="old-behavior"></a>舊的行為
+
+`GetColumnName()` 傳回屬性所對應之資料行的名稱。
+
+#### <a name="new-behavior"></a>新的行為
+
+`GetColumnName()` 仍會傳回屬性所對應之資料行的名稱，但這種行為現在不明確，因為 EF Core 5 支援 TPT 和同時對應至 view 或函數，讓這些對應可以針對相同的屬性使用不同的資料行名稱。
+
+#### <a name="why"></a>原因
+
+我們將此方法標示為過時，以引導使用者更精確地進行多載 <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName(Microsoft.EntityFrameworkCore.Metadata.IProperty,Microsoft.EntityFrameworkCore.Metadata.StoreObjectIdentifier@)> 。
+
+#### <a name="mitigations"></a>風險降低
+
+使用下列程式碼來取得特定資料表的資料行名稱：
+
+```csharp
+var columnName = property.GetColumnName(StoreObjectIdentifier.Table("Users", null)));
+```
 
 <a name="index-obsolete"></a>
 

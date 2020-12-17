@@ -4,12 +4,12 @@ description: 資料庫提供者的文件，內容說明如何搭配使用 Entity
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: b167f53515799efdaead232f44ad5eab37fb0b14
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 8bfce78465e8194544562c3ecac4d3398ca91265
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003597"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635584"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB 提供者
 
@@ -103,12 +103,12 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 > [!NOTE]
 >只要分割區索引鍵屬性會[轉換成字串](xref:core/modeling/value-conversions)，就不限於任何類型。
 
-分割區索引鍵屬性設定完成後，應該都會具有 null 以外的值。 您可以藉由加入呼叫來建立單一分割區的查詢 `WithPartitionKey` 。
+分割區索引鍵屬性設定完成後，應該都會具有 null 以外的值。 您可以藉由加入呼叫來建立單一分割區的查詢 <xref:Microsoft.EntityFrameworkCore.CosmosQueryableExtensions.WithPartitionKey%2A> 。
 
 [!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=PartitionKey&highlight=15)]
 
 > [!NOTE]
-> `WithPartitionKey` 在 EF Core 5.0 中引進。
+> <xref:Microsoft.EntityFrameworkCore.CosmosQueryableExtensions.WithPartitionKey%2A> 在 EF Core 5.0 中引進。
 
 通常建議將分割區索引鍵加入至主要索引鍵，因為這最能反映伺服器的語義並允許一些優化，例如在中 `FindAsync` 。
 
@@ -212,10 +212,10 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 > [!NOTE]
 > EF Core 5.0 中引進了對 eTag 平行存取的支援。
 
-將實體型別設定為使用 [開放式並行](xref:core/modeling/concurrency) 存取呼叫 `UseETagConcurrency` 。 此呼叫會 `_etag` 在 [陰影狀態](xref:core/modeling/shadow-properties) 中建立屬性，並將它設定為並行標記。
+將實體型別設定為使用 [開放式並行](xref:core/modeling/concurrency) 存取呼叫 <xref:Microsoft.EntityFrameworkCore.CosmosEntityTypeBuilderExtensions.UseETagConcurrency%2A> 。 此呼叫會 `_etag` 在 [陰影狀態](xref:core/modeling/shadow-properties) 中建立屬性，並將它設定為並行標記。
 
 [!code-csharp[Main](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=ETag)]
 
-為了讓您更輕鬆地解決並行錯誤，您可以使用將 eTag 對應至 CLR 屬性 `IsETagConcurrency` 。
+為了讓您更輕鬆地解決並行錯誤，您可以使用將 eTag 對應至 CLR 屬性 <xref:Microsoft.EntityFrameworkCore.CosmosPropertyBuilderExtensions.IsETagConcurrency%2A> 。
 
 [!code-csharp[Main](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=ETagProperty)]

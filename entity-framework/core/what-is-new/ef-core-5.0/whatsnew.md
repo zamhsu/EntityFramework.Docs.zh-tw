@@ -4,12 +4,12 @@ description: EF Core 5.0 的新功能總覽
 author: ajcvickers
 ms.date: 09/10/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: 3efa883cdfac1ecd412112ef06c7763f1a7e12f1
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 7737a143b9478412cdafe3c2fe5e8d7a106c9a3f
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429243"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635493"
 ---
 # <a name="whats-new-in-ef-core-50"></a>EF Core 5.0 的新功能
 
@@ -321,7 +321,7 @@ context.SavedChanges += (sender, args) =>
 * 事件寄件者是 `DbContext` 實例
 * 事件的引數 `SavedChanges` 包含儲存至資料庫的實體數目
 
-攔截器是由定義 `ISaveChangesInterceptor` ，但通常會 convienient 繼承， `SaveChangesInterceptor` 以避免執行每個方法。 例如：
+攔截器是由定義 `ISaveChangesInterceptor` ，但是繼承自的是很方便的 `SaveChangesInterceptor` 方式，以避免每個方法的執行。 例如：
 
 ```csharp
 public class MySaveChangesInterceptor : SaveChangesInterceptor
@@ -715,7 +715,7 @@ CREATE TABLE [Animals] (
     [Species] nvarchar(max) NULL,
     [Discriminator] nvarchar(max) NOT NULL,
     [Name] nvarchar(max) NULL,
-    [EdcuationLevel] nvarchar(max) NULL,
+    [EducationLevel] nvarchar(max) NULL,
     [FavoriteToy] nvarchar(max) NULL,
     CONSTRAINT [PK_Animals] PRIMARY KEY ([Id])
 );
@@ -739,7 +739,7 @@ CREATE TABLE [Pets] (
 
 CREATE TABLE [Cats] (
     [Id] int NOT NULL,
-    [EdcuationLevel] nvarchar(max) NULL,
+    [EducationLevel] nvarchar(max) NULL,
     CONSTRAINT [PK_Cats] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_Cats_Animals_Id] FOREIGN KEY ([Id]) REFERENCES [Animals] ([Id]) ON DELETE NO ACTION,
     CONSTRAINT [FK_Cats_Pets_Id] FOREIGN KEY ([Id]) REFERENCES [Pets] ([Id]) ON DELETE NO ACTION
@@ -775,7 +775,7 @@ public class Pet : Animal
 [Table("Cats")]
 public class Cat : Pet
 {
-    public string EdcuationLevel { get; set; }
+    public string EducationLevel { get; set; }
 }
 
 [Table("Dogs")]

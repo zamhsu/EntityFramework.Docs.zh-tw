@@ -4,12 +4,12 @@ description: 使用 .NET 事件計數器追蹤 EF Core 效能和診斷異常
 author: roji
 ms.date: 11/17/2020
 uid: core/logging-events-diagnostics/event-counters
-ms.openlocfilehash: 46acfe82d8aeb7d16146bae0cc2cd4ff733e2831
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 73d360b266db3d3252defbf4a4035c0eb430e22e
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003700"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635818"
 ---
 # <a name="event-counters"></a>事件計數器
 
@@ -77,7 +77,7 @@ Press p to pause, r to resume, q to quit.
 
 計數器名稱                          | 描述
 ------------------------------------- | ----
-現用 DbcoNtext                     | 目前在您應用程式中的作用中尚未處置 DbCoNtext 實例數目。 如果此數位持續成長，您可能會因為未正確處置 DbCoNtext 實例而發生流失問題。 請注意，如果已啟用 [內容](xref:core/miscellaneous/context-pooling) 共用，此數目包括目前未使用的共用 DbCoNtext 實例。
+現用 DbcoNtext                     | 目前在您應用程式中的作用中尚未處置 DbCoNtext 實例數目。 如果此數位持續成長，您可能會因為未正確處置 DbCoNtext 實例而發生流失問題。 請注意，如果已啟用 [內容](xref:core/performance/advanced-performance-topics#dbcontext-pooling) 共用，此數目包括目前未使用的共用 DbCoNtext 實例。
 執行策略作業失敗 | 資料庫作業無法執行的次數。 如果已啟用重試執行策略，這會在相同作業的多次嘗試中包含每個個別的失敗。 這可以用來偵測基礎結構的暫時性問題。
 開放式平行存取失敗       | `SaveChanges`因為開放式平行存取錯誤而失敗的次數，因為資料存放區中的資料在您的程式碼載入之後已經變更。 這對應于擲回的 <xref:Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException> 。
 查詢                               | 執行的查詢數目。

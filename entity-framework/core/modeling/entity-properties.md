@@ -4,12 +4,12 @@ description: 如何使用 Entity Framework Core 來設定和對應實體屬性
 author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
-ms.openlocfilehash: 67ea6eb9cc62c01c16ef33d4d1d1597576ec8b3d
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: fe6dd2c24b8f8ffffa8e0101f69966b7b7c74036
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003404"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635545"
 ---
 # <a name="entity-properties"></a>實體屬性
 
@@ -152,7 +152,7 @@ _ 如果 (預設) 停用可為 null 的參考型別，則所有具有 .NET 參�
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Required.cs?name=Required&highlight=3-5)]
 
-***
+**_
 
 ## <a name="column-collations"></a>資料行定序
 
@@ -166,3 +166,20 @@ _ 如果 (預設) 停用可為 null 的參考型別，則所有具有 .NET 參�
 如果資料庫中的所有資料行都需要使用特定定序，請改為在資料庫層級定義定序。
 
 您可以在 [定 [序檔] 頁面](xref:core/miscellaneous/collations-and-case-sensitivity)中找到有關定序 EF Core 支援的一般資訊。
+
+## <a name="column-comments"></a>資料行批註
+
+您可以設定在資料庫資料行上設定的任意文字批註，讓您可以在資料庫中記錄您的架構：
+
+### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
+
+> [!NOTE]
+> 透過資料批註設定批註是在 EF Core 5.0 中引進。
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnComment.cs?name=ColumnComment&highlight=4)]
+
+### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnComment.cs?name=ColumnComment&highlight=5)]
+
+_**

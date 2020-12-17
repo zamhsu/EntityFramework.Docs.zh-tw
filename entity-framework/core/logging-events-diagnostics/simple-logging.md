@@ -4,12 +4,12 @@ description: 使用 LogTo 從 EF Core DbCoNtext 記錄
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 274fca39c45c4e2ccfd47f3c4eeb0834e00d18aa
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 076c4b12aa033b51a2b839686c520a76520ee415
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003506"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635610"
 ---
 # <a name="simple-logging"></a>簡單記錄
 
@@ -26,7 +26,7 @@ Entity Framework Core (EF Core) 簡單記錄可以用來在開發和偵測應用
 
 ## <a name="configuration"></a>組態
 
-您可以使用[LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135)從任何類型的應用程式存取 EF Core 記錄 <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> 設定 [DbCoNtext 實例](xref:core/dbcontext-configuration/index)時。 這項設定通常是在的覆寫中完成 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 。 例如：
+在設定 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> [DbCoNtext 實例](xref:core/dbcontext-configuration/index)時，可以使用任何類型的應用程式存取 EF Core 記錄。 這項設定通常是在的覆寫中完成 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 。 例如：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -188,7 +188,7 @@ Entity Framework Core (EF Core) 簡單記錄可以用來在開發和偵測應用
 [!code-csharp[CustomFilter](../../../samples/core/Miscellaneous/Logging/SimpleLogging/Program.cs?name=CustomFilter)]
 
 > [!TIP]
-> 使用自訂篩選或使用此處所示的任何其他選項進行篩選，比在 LogTo 委派中進行篩選更有效率。 這是因為如果篩選器決定不記錄訊息，則甚至不會建立記錄訊息。
+> 使用自訂篩選或使用此處所示的任何其他選項進行篩選，比在委派中進行篩選更有效率 `LogTo` 。 這是因為如果篩選器決定不記錄訊息，則甚至不會建立記錄訊息。
 
 ## <a name="configuration-for-specific-messages"></a>特定訊息的設定
 
@@ -260,14 +260,14 @@ dbug: 10/6/2020 10:52:45.585 RelationalEventId.TransactionCommitted[20202] (Micr
       Committed transaction.
 ```
 
-您可以從[DbCoNtextLoggerOptions](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/Diagnostics/DbContextLoggerOptions.cs#L15)傳遞值以自訂此內容 <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> -->，如下列各節所示。
+您可以從傳遞值以自訂此內容 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> ，如下列各節所示。
 
 > [!TIP]
 > 請考慮使用 [Microsoft 擴充功能](/aspnet/core/fundamentals/logging) ，以進一步控制記錄格式。
 
 ### <a name="using-utc-time"></a>使用 UTC 時間
 
-根據預設，timestamnps 是針對在進行偵錯工具時的本機耗用量所設計。 `DbContextLoggerOptions.DefaultWithUtcTime`請改用與文化特性無關的 UTC 時間戳記，但保留其他所有專案。 例如：
+根據預設，時間戳記是針對在進行偵錯工具時的本機耗用量所設計。 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions.DefaultWithUtcTime?displayProperty=nameWithType>請改用與文化特性無關的 UTC 時間戳記，但保留其他所有專案。 例如：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -295,7 +295,7 @@ dbug: 2020-10-06T17:55:39.0351684Z RelationalEventId.TransactionCommitted[20202]
 
 ### <a name="single-line-logging"></a>單行記錄
 
-有時候，每個記錄訊息只會取得一行。 這可以由啟用 `DbContextLoggerOptions.SingleLine` 。 例如：
+有時候，每個記錄訊息只會取得一行。 這可以由啟用 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions.SingleLine?displayProperty=nameWithType> 。 例如：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -316,7 +316,7 @@ dbug: 10/6/2020 10:52:45.725 RelationalEventId.TransactionCommitted[20202] (Micr
 
 ### <a name="other-content-options"></a>其他內容選項
 
-[DbCoNtextLoggerOptions](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/Diagnostics/DbContextLoggerOptions.cs#L15)中的其他旗標 <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> --> 可以用來修剪記錄檔中包含的中繼資料量。 這有助於搭配單行記錄使用。 例如：
+中的其他旗標 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> 可以用來修剪記錄檔中包含的中繼資料量。 這有助於搭配單行記錄使用。 例如：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

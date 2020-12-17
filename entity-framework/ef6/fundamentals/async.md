@@ -4,12 +4,12 @@ description: Entity Framework 6 中的非同步查詢和儲存
 author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/async
-ms.openlocfilehash: 2b5f6f868cbf2e0699a943cf68c8568550f4ba36
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 77204f56e4dca63322c8ae2e1117318262f16f83
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063396"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635727"
 ---
 # <a name="async-query-and-save"></a>非同步查詢並儲存
 > [!NOTE]
@@ -77,7 +77,7 @@ EF6 引進了非同步查詢的支援，並使用 .NET 4.5 中引進的 [async �
     }
 ```
 
- 
+ 
 
 ## <a name="create-a-synchronous-program"></a>建立同步程式
 
@@ -137,32 +137,32 @@ EF6 引進了非同步查詢的支援，並使用 .NET 4.5 中引進的 [async �
     }
 ```
 
-此程式碼會呼叫 **PerformDatabaseOperations** 方法，該方法會將新的 **blog** 儲存至資料庫，然後從資料庫中取出所有的 **blog** ，然後將其列印至 **主控台**。 之後，程式會將一天的報價寫入 **主控台**。
+此程式碼會呼叫 `PerformDatabaseOperations` 方法，以將新的 **blog** 儲存至資料庫，然後從資料庫中取出所有的 **blog** ，然後將其列印至 **主控台**。 之後，程式會將一天的報價寫入 **主控台**。
 
 由於程式碼是同步的，我們可以在執行程式時觀察到下列執行流程：
 
-1.  **SaveChanges** 開始將新的 **Blog** 推送至資料庫
-2.  **SaveChanges** 完成
+1.  `SaveChanges` 開始將新的 **Blog** 推送至資料庫
+2.  `SaveChanges` 完成
 3.  所有 **blog** 的查詢都會傳送至資料庫
 4.  查詢傳回和結果會寫入 **主控台**
 5.  日期的報價會寫入 **主控台**
 
-![同步輸出](~/ef6/media/syncoutput.png) 
+![同步輸出](~/ef6/media/syncoutput.png) 
 
- 
+ 
 
 ## <a name="making-it-asynchronous"></a>使其變成非同步
 
 既然我們已啟動並執行程式，就可以開始使用新的 async 和 await 關鍵字。 我們已對 Program.cs 進行下列變更
 
-1.  第2行： **system.object** 命名空間的 using 語句可讓我們存取 EF async 擴充方法。
-2.  第4行： [ **system.object** ] 命名空間的 using 語句可讓我們使用**工作類型。**
-3.  第12行 & 18：我們正在作為工作來監視 **PerformSomeDatabaseOperations** (第) 12 行的進度，然後在程式的所有工作完成後，封鎖此工作的程式執行 (第18行) 。
-4.  第25行：我們已將**PerformSomeDatabaseOperations**更新為以**非同步**方式標記，並**傳回工作。**
-5.  第35行：我們現在呼叫了 SaveChanges 的非同步版本，並等候它完成。
-6.  行42：我們目前正在呼叫 ToList 的非同步版本，並等候結果。
+1.  第2行：命名空間的 using 語句 `System.Data.Entity` 可讓我們存取 EF async 擴充方法。
+2.  第4行：命名空間的 using 語句 `System.Threading.Tasks` 可讓我們使用 `Task` 型別。
+3.  第12行 & 18：我們要作為監視 `PerformSomeDatabaseOperations` (第) 12 行進度的工作，然後在程式的所有工作都完成後，封鎖此工作的程式執行 (第18行) 。
+4.  第25行：我們已 `PerformSomeDatabaseOperations` 將更新標記為 `async` ，並傳回 `Task` 。
+5.  第35行：我們目前正在呼叫的非同步版本 `SaveChanges` ，並等候它完成。
+6.  行42：我們目前正在呼叫的非同步版本 `ToList` ，並等候結果。
 
-如需 system.string 命名空間中可用擴充方法的完整清單，請參閱 QueryableExtensions 類別。 *您也需要將「使用 system.string」新增至您的 using 語句。*
+如需命名空間中可用擴充方法的完整清單 `System.Data.Entity` ，請參閱 `QueryableExtensions` 類別。 *您也必須將加入 `using System.Data.Entity` 至 using 語句。*
 
 ``` csharp
     using System;
@@ -222,18 +222,18 @@ EF6 引進了非同步查詢的支援，並使用 .NET 4.5 中引進的 [async �
 
 現在程式碼是非同步，我們可以在執行程式時觀察到不同的執行流程：
 
-1. **SaveChanges** 開始將新的 **Blog** 推送至資料庫  
-    *將命令傳送至資料庫之後，目前的 managed 執行緒上不需要有更多的計算時間。 **PerformDatabaseOperations** 方法會傳回 (，即使它尚未完成執行) 和 Main 方法中的程式流程仍繼續。*
+1. `SaveChanges` 開始將新的 **Blog** 推送至資料庫  
+    *將命令傳送至資料庫之後，目前的 managed 執行緒上不需要有更多的計算時間。 `PerformDatabaseOperations` 方法會傳回 (，即使它尚未完成執行) 和 Main 方法中的程式流程仍繼續。*
 2. **日期的報價會寫入主控台**  
-    *由於 Main 方法中沒有其他要執行的工作，因此在資料庫作業完成之前，會封鎖等候呼叫上的 managed 執行緒。完成之後，我們將會執行 **PerformDatabaseOperations** 的其餘部分。*
-3.  **SaveChanges** 完成  
+    *由於 Main 方法中沒有其他要執行的工作，因此在資料庫作業完成之前，managed 執行緒會在呼叫上遭到封鎖 `Wait` 。完成之後，我們 `PerformDatabaseOperations` 將會執行其餘的部分。*
+3.  `SaveChanges` 完成  
 4.  所有 **blog** 的查詢都會傳送至資料庫  
     *同樣地，在資料庫中處理查詢時，managed 執行緒可以自由地執行其他工作。因為所有其他執行都已完成，所以執行緒只會在等候呼叫上停止。*
 5.  查詢傳回和結果會寫入 **主控台**  
 
-![非同步輸出](~/ef6/media/asyncoutput.png) 
+![非同步輸出](~/ef6/media/asyncoutput.png) 
 
- 
+ 
 
 ## <a name="the-takeaway"></a>重點
 

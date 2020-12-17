@@ -4,12 +4,12 @@ description: 使用或不使用相依性插入來建立和管理 DbCoNtext 實�
 author: ajcvickers
 ms.date: 11/07/2020
 uid: core/dbcontext-configuration/index
-ms.openlocfilehash: f4d51e10555844b5a14000a464f86d3440d5749e
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 93d5942fbc81ee0ae9aeff0c5c8b9e20b160d512
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003285"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635388"
 ---
 # <a name="dbcontext-lifetime-configuration-and-initialization"></a>DbCoNtext 存留期、設定和初始化
 
@@ -42,7 +42,7 @@ ms.locfileid: "95003285"
 
 在許多 web 應用程式中，每個 HTTP 要求都對應至單一工作單位。 這會將內容存留期與要求的內容存留期系結至 web 應用程式的良好預設值。
 
-ASP.NET Core 的應用程式會使用相依性 [插入進行設定](/aspnet/core/fundamentals/startup)。 您可以使用的方法，將 EF Core 加入至這個設定 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> [`ConfigurureServices`](/aspnet/core/fundamentals/startup#the-configureservices-method) `Startup.cs` 。 例如：
+ASP.NET Core 的應用程式會使用相依性 [插入進行設定](/aspnet/core/fundamentals/startup)。 您可以使用的方法，將 EF Core 加入至這個設定 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> [`ConfigureServices`](/aspnet/core/fundamentals/startup#the-configureservices-method) `Startup.cs` 。 例如：
 
 <!--
         public void ConfigureServices(IServiceCollection services)

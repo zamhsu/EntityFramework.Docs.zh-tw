@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 時如何設定實體類型之間的�
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 716c034bd73d831996b727da18c2c1f83dd55290
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 9c8fe469c4e0b8714a36624ff5bcf236e5b1652f
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003259"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635740"
 ---
 # <a name="relationships"></a>關聯性
 
@@ -301,11 +301,13 @@ CREATE TABLE [PostTag] (
 );
 ```
 
-就內部而言，EF 會建立實體型別來代表聯結資料表，而該聯結資料表將被稱為聯結實體型別。 沒有可用於此的特定 CLR 型別，因此 `Dictionary<string, object>` 會使用。 模型中可以有一個以上的多對多關聯性，因此，在此情況下，必須為聯結實體類型指定唯一的名稱 `PostTag` 。 允許這項功能的功能稱為共用類型實體類型。
+就內部而言，EF 會建立實體型別來代表聯結資料表，而該聯結資料表將被稱為聯結實體型別。 `Dictionary<string, object>` 用來處理外鍵屬性的任何組合，如需詳細資訊，請參閱 [屬性包實體類型](shadow-properties.md#property-bag-entity-types) 。 模型中可以有一個以上的多對多關聯性，因此，在此情況下，必須為聯結實體類型指定唯一的名稱 `PostTag` 。 允許這項功能的功能稱為共用類型實體類型。
 
-「多對多導覽」稱為「略過導覽」，因為它們可有效略過聯結實體類型。 如果您正在採用大量設定，則可以從取得所有略過導覽 `GetSkipNavigations` 。
+「多對多導覽」稱為「略過導覽」，因為它們可有效略過聯結實體類型。 如果您正在採用大量設定，則可以從取得所有略過導覽 <xref:Microsoft.EntityFrameworkCore.Metadata.IEntityType.GetSkipNavigations%2A> 。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Metadata)]
+
+#### <a name="join-entity-type-configuration"></a>聯結實體類型設定
 
 通常會將設定套用至聯結實體類型。 您可以透過來完成此動作 `UsingEntity` 。
 
@@ -319,8 +321,16 @@ CREATE TABLE [PostTag] (
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyPayload.cs?name=ManyToManyPayload)]
 
+#### <a name="joining-relationships-configuration"></a>正在加入關聯性設定
+
+EF 會在聯結實體類型上使用 2 1 對多關聯性，以代表多對多關聯性。 您可以在引數中設定這些關聯性 `UsingEntity` 。
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Components)]
+
 > [!NOTE]
 > 在 EF Core 5.0 中引進了設定多對多關聯性的能力，但在舊版中，請使用下列方法。
+
+#### <a name="indirect-many-to-many-relationships"></a>間接多對多關聯性
 
 您也可以藉由加入聯結實體型別並對應兩個不同的一對多關聯性，來表示多對多關聯性。
 

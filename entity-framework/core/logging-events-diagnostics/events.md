@@ -4,12 +4,12 @@ description: EF Core 所定義的 .NET 事件
 author: ajcvickers
 ms.date: 10/15/2020
 uid: core/logging-events-diagnostics/events
-ms.openlocfilehash: 21ee65b7a2c5155c4d5b45350f3f47bdcee22921
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 51c0bba5cf25e1d9ddd1fd9aebea50b9a03481a3
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431417"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635688"
 ---
 # <a name="net-events-in-ef-core"></a>EF Core 中的 .NET 事件
 
@@ -26,9 +26,9 @@ EF Core 會引發下列事件：
 
 | 事件 | 引進的版本 | 引發時
 |:------|--------------------|-------
-| `DbContext.SavingChanges` <!-- Issue #2748 -->| 5.0 | 在 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 或開頭 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
-| `DbContext.SavedChanges`  <!-- Issue #2748 -->| 5.0 | 在成功 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 或之後 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
-| `DbContext.SaveChangesFailed`  <!-- Issue #2748 -->| 5.0 | 在失敗的結尾 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 或 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
+| <xref:Microsoft.EntityFrameworkCore.DbContext.SavingChanges?displayProperty=nameWithType> | 5.0 | 在 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 或開頭 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
+| <xref:Microsoft.EntityFrameworkCore.DbContext.SavedChanges?displayProperty=nameWithType> | 5.0 | 在成功 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 或之後 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
+| <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesFailed?displayProperty=nameWithType> | 5.0 | 在失敗的結尾 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 或 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.Tracked?displayProperty=nameWithType> | 2.1 | 當實體由內容追蹤時
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.StateChanged?displayProperty=nameWithType> | 2.1 | 當追蹤的實體變更其狀態時
 
