@@ -176,6 +176,8 @@
               href: core/querying/raw-sql.md
             - name: 資料庫函式
               href: core/querying/database-functions.md
+            - name: 使用者定義函數對應
+              href: core/querying/user-defined-function-mapping.md
             - name: 全域查詢篩選條件
               href: core/querying/filters.md
             - name: 查詢標籤
@@ -228,6 +230,20 @@
               href: core/testing/sqlite.md
             - name: 使用 InMemory 測試
               href: core/testing/in-memory.md
+        - name: 效能
+          items:
+            - name: 簡介
+              href: core/performance/index.md
+            - name: 效能診斷
+              href: core/performance/performance-diagnosis.md
+            - name: 高效率查詢
+              href: core/performance/efficient-querying.md
+            - name: 高效率更新
+              href: core/performance/efficient-updating.md
+            - name: 效能模型
+              href: core/performance/modeling-for-performance.md
+            - name: 進階效能主題
+              href: core/performance/advanced-performance-topics.md
         - name: 其他
           items:
             - name: 支援的 .NET 實作
@@ -307,7 +323,7 @@
             - name: 設計階段服務
               href: core/cli/services.md
         - name: EF Core API 參考 >>
-          href: /dotnet/api/?view=efcore-3.1
+          href: /dotnet/api/?view=efcore-5.0
     - name: Entity Framework 6
       items:
         - name: 概觀
