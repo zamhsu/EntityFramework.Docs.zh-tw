@@ -4,12 +4,12 @@ description: Entity Framework Core 如何在內部編譯及執行查詢的一般
 author: ajcvickers
 ms.date: 03/17/2020
 uid: core/querying/how-query-works
-ms.openlocfilehash: 7b3014cf64f8467ccbec10598ea1bb47304dfe43
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 4f856bf7e084d020edee1585d5c6c64873a5ed15
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430465"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129001"
 ---
 # <a name="how-queries-work"></a>查詢的運作方式
 
@@ -43,5 +43,5 @@ Entity Framework Core 使用 Language Integrated Query (LINQ) 查詢來自資料
 * 在 `for` 迴圈中逐一查看結果
 * 使用運算子 `ToList` ，例如、、 `ToArray` `Single` 、 `Count` 或對等的非同步多載
 
-> [!WARNING]  
+> [!WARNING]
 > **一律驗證使用者輸入：** 雖然 EF Core 使用參數以及在查詢中逸出常值來防止 SQL 插入式攻擊，但是它不會驗證輸入。 每個應用程式需求的適當驗證都應該在 LINQ 查詢中使用不受信任來源的值、指派給實體屬性或傳遞給其他 EF Core Api 之前執行。 這包括用來以動態方式建構查詢的任何使用者輸入。 即使在使用 LINQ 時，如果您接受使用者輸入來建置運算式，就必須確定只會建構預期的運算式。

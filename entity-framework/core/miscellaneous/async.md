@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 以非同步方式查詢和儲存資�
 author: roji
 ms.date: 9/2/2020
 uid: core/miscellaneous/async
-ms.openlocfilehash: d887bf898d741070f3f3d64b3baf0311b0ab2b63
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 52b3ac20a50babbed6937ebe3365ac1947dcaef1
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635792"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128572"
 ---
 # <a name="asynchronous-programming"></a>非同步程式設計
 
@@ -28,7 +28,7 @@ ms.locfileid: "97635792"
 > [SqlClient](https://github.com/dotnet/SqlClient)的非同步執行有一些已知問題 (例如[#593](https://github.com/dotnet/SqlClient/issues/593)、 [#601](https://github.com/dotnet/SqlClient/issues/601)及其他) 。
 
 > [!NOTE]
-> EF Core 將取消權杖傳遞給使用中的基礎資料庫提供者 (例如 SqlClient) 。 這些權杖可能會或可能不會被接受-請洽詢您資料庫提供者的檔。  
+> EF Core 將取消權杖傳遞給使用中的基礎資料庫提供者 (例如 SqlClient) 。 這些權杖可能會或可能不會被接受-請洽詢您資料庫提供者的檔。
 
 ## <a name="async-linq-operators"></a>非同步 LINQ 運算子
 

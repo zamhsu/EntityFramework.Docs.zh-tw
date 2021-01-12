@@ -4,18 +4,18 @@ description: 使用 EF 記憶體內部資料庫來測試 Entity Framework Core �
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/testing/in-memory
-ms.openlocfilehash: db91570dc9d5a4b95d513df509867e9bca406356
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 78dcac3d0fd69110986c99a097a864104caa1951
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431409"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128806"
 ---
 # <a name="testing-with-the-ef-in-memory-database"></a>使用 EF In-Memory 資料庫進行測試
 
 > [!WARNING]
 > EF 記憶體內部資料庫的行為通常與關係資料庫不同。
-> 在完全瞭解所涉及的問題和取捨之後，請只使用 EF 記憶體內部資料庫，如 [使用 EF Core 的測試程式碼](xref:core/testing/index)中所述。  
+> 在完全瞭解所涉及的問題和取捨之後，請只使用 EF 記憶體內部資料庫，如 [使用 EF Core 的測試程式碼](xref:core/testing/index)中所述。
 
 > [!TIP]
 > SQLite 是關聯式提供者，也可以使用記憶體內部資料庫。

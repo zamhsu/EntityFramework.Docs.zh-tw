@@ -4,12 +4,12 @@ description: Entity Framework Core 3.x 引進的重大變更完整清單
 author: ajcvickers
 ms.date: 09/05/2020
 uid: core/what-is-new/ef-core-3.x/breaking-changes
-ms.openlocfilehash: bfcfb7257091d1b6889f7c0af00ddab10e0e12e3
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 8c0be4193c79e838e40bfc2dc10c9d12b01381cd
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429308"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128767"
 ---
 # <a name="breaking-changes-included-in-ef-core-3x"></a>EF Core 3.x 中包含的重大變更
 
@@ -25,54 +25,54 @@ ms.locfileid: "94429308"
 | [DetectChanges 接受存放區產生的索引鍵值](#dc) | 高      |
 | [FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名](#fromsql) | 高      |
 | [查詢類型會與實體類型合併](#qt) | 高      |
-| [Entity Framework Core 不再屬於 ASP.NET Core 共用架構](#no-longer) | 中型      |
-| [現在預設會立即發生串聯刪除](#cascade) | 中型      |
-| [相關實體的積極式載入現在會在單一查詢中發生](#eager-loading-single-query) | 中型      |
-| [DeleteBehavior.Restrict 具有更簡潔的語意](#deletebehavior) | 中型      |
-| [自有類型關聯性的設定 API 已變更](#config) | 中型      |
-| [每個屬性會使用獨立的記憶體內部整數索引鍵產生](#each) | 中型      |
-| [無追蹤查詢已不再執行身分識別解析](#notrackingresolution) | 中型      |
-| [中繼資料 API 變更](#metadata-api-changes) | 中型      |
-| [提供者獨有的中繼資料 API 變更](#provider) | 中型      |
-| [已移除 UseRowNumberForPaging](#urn) | 中型      |
-| [無法撰寫搭配預存程式使用時的 FromSql 方法](#fromsqlsproc) | 中型      |
-| [FromSql 方法只能在查詢根目錄上指定](#fromsql) | 低      |
-| [實體執行個體上不會再設定暫存索引鍵值](#tkv) | 低      |
-| [現在可選用以主體來共用資料表的相依實體](#de) | 低      |
-| [共用具有並行語彙基元資料行的所有實體，都必須將其對應至屬性](#aes) | 低      |
-| [沒有使用追蹤查詢的擁有者，無法查詢擁有的實體](#owned-query) | 低      |
-| [未對應類型的繼承屬性，現在會對應至所有衍生類型的單一資料行](#ip) | 低      |
-| [外部索引鍵屬性慣例不會再比對與主體屬性相同的名稱](#fkp) | 低      |
-| [如果在 TransactionScope 完成之前未再使用，則資料庫連線現在已關閉](#dbc) | 低      |
-| [根據預設，會使用支援欄位](#backing-fields-are-used-by-default) | 低      |
-| [找到多個相容的支援欄位時擲回](#throw-if-multiple-compatible-backing-fields-are-found) | 低      |
-| [僅限欄位的屬性名稱應與欄位名稱相符](#field-only-property-names-should-match-the-field-name) | 低      |
-| [AddDbContext/AddDbContextPool 再也不會呼叫 AddLogging 與 AddMemoryCache](#adddbc) | 低      |
-| [AddEntityFramework * 新增具有大小限制的 IMemoryCache](#addentityframework-adds-imemorycache-with-a-size-limit) | 低      |
-| [DbContext.Entry 現在會執行本機 DetectChanges](#dbe) | 低      |
-| [字串和位元組陣列索引鍵預設不是由用戶端產生](#string-and-byte-array-keys-are-not-client-generated-by-default) | 低      |
-| [ILoggerFactory 現在是限定範圍的服務](#ilf) | 低      |
-| [消極式載入 Proxy 不再假設導覽屬性已完全載入](#lazy-loading-proxies-no-longer-assume-navigation-properties-are-fully-loaded) | 低      |
-| [現在根據預設，過度建立內部服務提供者會是錯誤](#excessive-creation-of-internal-service-providers-is-now-an-error-by-default) | 低      |
-| [使用單一字串呼叫之 HasOne/HasMany 的新行為](#nbh) | 低      |
-| [數個非同步方法的傳回類型已從 Task 變更為 ValueTask](#rtnt) | 低      |
-| [Relational:TypeMapping 註解現在變成只有 TypeMapping](#rtt) | 低      |
-| [衍生類型上的 ToTable 會擲回例外狀況](#totable-on-a-derived-type-throws-an-exception) | 低      |
-| [EF Core 不會再傳送 SQLite FK 強制的 pragma](#pragma) | 低      |
-| [Microsoft.EntityFrameworkCore.Sqlite 現在相依於 SQLitePCLRaw.bundle_e_sqlite3](#sqlite3) | 低      |
-| [GUID 值現在於 SQLite 上的儲存形式為 TEXT](#guid) | 低      |
-| [Char 值現在於 SQLite 上會儲存為文字](#char) | 低      |
-| [移轉識別碼現在會使用不因文化特性而異的行事曆產生](#migid) | 低      |
-| [已從 IDbContextOptionsExtension 移除延伸模組資訊/中繼資料](#xinfo) | 低      |
-| [已為 LogQueryPossibleExceptionWithAggregateOperator 重新命名](#lqpe) | 低      |
-| [讓 API 的外部索引鍵限制式名稱更清楚](#clarify) | 低      |
-| [IRelationalDatabaseCreator.HasTables/HasTablesAsync 已設為公用](#irdc2) | 低      |
-| [Microsoft.EntityFrameworkCore.Design 現在是 DevelopmentDependency 套件](#dip) | 低      |
-| [SQLitePCL.raw 已更新為 2.0.0 版](#SQLitePCL) | 低      |
-| [NetTopologySuite 已更新為 2.0.0 版](#NetTopologySuite) | 低      |
-| [使用 SqlClient，而不是 SqlClient](#SqlClient) | 低      |
-| [必須設定多個不明確的自我參考關聯性](#mersa) | 低      |
-| [DbFunction 為 null 或空字串，將其設定為模型的預設架構](#udf-empty-string) | 低      |
+| [Entity Framework Core 不再屬於 ASP.NET Core 共用架構](#no-longer) | 中      |
+| [現在預設會立即發生串聯刪除](#cascade) | 中      |
+| [相關實體的積極式載入現在會在單一查詢中發生](#eager-loading-single-query) | 中      |
+| [DeleteBehavior.Restrict 具有更簡潔的語意](#deletebehavior) | 中      |
+| [自有類型關聯性的設定 API 已變更](#config) | 中      |
+| [每個屬性會使用獨立的記憶體內部整數索引鍵產生](#each) | 中      |
+| [無追蹤查詢已不再執行身分識別解析](#notrackingresolution) | 中      |
+| [中繼資料 API 變更](#metadata-api-changes) | 中      |
+| [提供者獨有的中繼資料 API 變更](#provider) | 中      |
+| [已移除 UseRowNumberForPaging](#urn) | 中      |
+| [無法撰寫搭配預存程式使用時的 FromSql 方法](#fromsqlsproc) | 中      |
+| [FromSql 方法只能在查詢根目錄上指定](#fromsql) | 低度      |
+| [實體執行個體上不會再設定暫存索引鍵值](#tkv) | 低度      |
+| [現在可選用以主體來共用資料表的相依實體](#de) | 低度      |
+| [共用具有並行語彙基元資料行的所有實體，都必須將其對應至屬性](#aes) | 低度      |
+| [沒有使用追蹤查詢的擁有者，無法查詢擁有的實體](#owned-query) | 低度      |
+| [未對應類型的繼承屬性，現在會對應至所有衍生類型的單一資料行](#ip) | 低度      |
+| [外部索引鍵屬性慣例不會再比對與主體屬性相同的名稱](#fkp) | 低度      |
+| [如果在 TransactionScope 完成之前未再使用，則資料庫連線現在已關閉](#dbc) | 低度      |
+| [根據預設，會使用支援欄位](#backing-fields-are-used-by-default) | 低度      |
+| [找到多個相容的支援欄位時擲回](#throw-if-multiple-compatible-backing-fields-are-found) | 低度      |
+| [僅限欄位的屬性名稱應與欄位名稱相符](#field-only-property-names-should-match-the-field-name) | 低度      |
+| [AddDbContext/AddDbContextPool 再也不會呼叫 AddLogging 與 AddMemoryCache](#adddbc) | 低度      |
+| [AddEntityFramework * 新增具有大小限制的 IMemoryCache](#addentityframework-adds-imemorycache-with-a-size-limit) | 低度      |
+| [DbContext.Entry 現在會執行本機 DetectChanges](#dbe) | 低度      |
+| [字串和位元組陣列索引鍵預設不是由用戶端產生](#string-and-byte-array-keys-are-not-client-generated-by-default) | 低度      |
+| [ILoggerFactory 現在是限定範圍的服務](#ilf) | 低度      |
+| [消極式載入 Proxy 不再假設導覽屬性已完全載入](#lazy-loading-proxies-no-longer-assume-navigation-properties-are-fully-loaded) | 低度      |
+| [現在根據預設，過度建立內部服務提供者會是錯誤](#excessive-creation-of-internal-service-providers-is-now-an-error-by-default) | 低度      |
+| [使用單一字串呼叫之 HasOne/HasMany 的新行為](#nbh) | 低度      |
+| [數個非同步方法的傳回類型已從 Task 變更為 ValueTask](#rtnt) | 低度      |
+| [Relational:TypeMapping 註解現在變成只有 TypeMapping](#rtt) | 低度      |
+| [衍生類型上的 ToTable 會擲回例外狀況](#totable-on-a-derived-type-throws-an-exception) | 低度      |
+| [EF Core 不會再傳送 SQLite FK 強制的 pragma](#pragma) | 低度      |
+| [Microsoft.EntityFrameworkCore.Sqlite 現在相依於 SQLitePCLRaw.bundle_e_sqlite3](#sqlite3) | 低度      |
+| [GUID 值現在於 SQLite 上的儲存形式為 TEXT](#guid) | 低度      |
+| [Char 值現在於 SQLite 上會儲存為文字](#char) | 低度      |
+| [移轉識別碼現在會使用不因文化特性而異的行事曆產生](#migid) | 低度      |
+| [已從 IDbContextOptionsExtension 移除延伸模組資訊/中繼資料](#xinfo) | 低度      |
+| [已為 LogQueryPossibleExceptionWithAggregateOperator 重新命名](#lqpe) | 低度      |
+| [讓 API 的外部索引鍵限制式名稱更清楚](#clarify) | 低度      |
+| [IRelationalDatabaseCreator.HasTables/HasTablesAsync 已設為公用](#irdc2) | 低度      |
+| [Microsoft.EntityFrameworkCore.Design 現在是 DevelopmentDependency 套件](#dip) | 低度      |
+| [SQLitePCL.raw 已更新為 2.0.0 版](#SQLitePCL) | 低度      |
+| [NetTopologySuite 已更新為 2.0.0 版](#NetTopologySuite) | 低度      |
+| [使用 SqlClient，而不是 SqlClient](#SqlClient) | 低度      |
+| [必須設定多個不明確的自我參考關聯性](#mersa) | 低度      |
+| [DbFunction 為 null 或空字串，將其設定為模型的預設架構](#udf-empty-string) | 低度      |
 | [~~EF Core 3.0 的目標 .NET Standard 2.1 而非 .NET Standard 2.0~~ 恢復](#netstandard21) | |
 | [~~查詢執行會在偵錯層級記錄~~已還原](#qe) | |
 
@@ -170,6 +170,9 @@ dotnet tool install --global dotnet-ef
 ### <a name="fromsql-executesql-and-executesqlasync-have-been-renamed"></a>FromSql、ExecuteSql 和 ExecuteSqlAsync 已重新命名
 
 [追蹤問題 #10996](https://github.com/dotnet/efcore/issues/10996)
+
+> [!IMPORTANT]
+> `ExecuteSqlCommand` 和 `ExecuteSqlCommandAsync` 已被取代。 請改用這些方法。
 
 #### <a name="old-behavior"></a>舊的行為
 

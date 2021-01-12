@@ -4,16 +4,16 @@ description: 使用 Entity Framework Core 時如何設定擁有的實體類型�
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 36f756b70c9ad1727c48b5c789fd324c9dc6cd29
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 0cd6bfd25d4462509a3e6c112b892d652d29e45e
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429431"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128624"
 ---
 # <a name="owned-entity-types"></a>擁有的實體類型
 
-EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體類型模型。 這些稱為 _擁有的實體類型_ 。 包含擁有之實體類型的實體是其 _擁有者_ 。
+EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體類型模型。 這些稱為 _擁有的實體類型_。 包含擁有之實體類型的實體是其 _擁有者_。
 
 擁有的實體基本上是擁有者的一部分，而且不存在，而且在概念上類似于 [匯總](https://martinfowler.com/bliki/DDD_Aggregate.html)。 這表示所擁有的實體是在與擁有者之關聯性的相依端上定義。
 
@@ -48,7 +48,7 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 
 ## <a name="implicit-keys"></a>隱含索引鍵
 
-`OwnsOne`透過參考導覽設定或探索的擁有型別，一律與擁有者有一對一的關聯性，因此它們不需要自己的索引鍵值，因為外鍵值是唯一的。 在上述範例中， `StreetAddress` 類型不需要定義索引鍵屬性。  
+`OwnsOne`透過參考導覽設定或探索的擁有型別，一律與擁有者有一對一的關聯性，因此它們不需要自己的索引鍵值，因為外鍵值是唯一的。 在上述範例中， `StreetAddress` 類型不需要定義索引鍵屬性。
 
 為了瞭解 EF Core 如何追蹤這些物件，知道主鍵是建立為所擁有類型的 [陰影屬性](xref:core/modeling/shadow-properties) 會很有説明。 擁有之類型實例的索引鍵值將會與擁有者實例之索引鍵的值相同。
 
@@ -130,7 +130,7 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 
 上述模型會對應至下列資料庫架構：
 
-![包含嵌套所擁有參考之實體的資料庫模型 Sceenshot](_static/owned-entities-nested.png)
+![包含嵌套所擁有參考之實體的資料庫模型螢幕擷取畫面](_static/owned-entities-nested.png)
 
 ## <a name="storing-owned-types-in-separate-tables"></a>將擁有的類型儲存在不同的資料表中
 

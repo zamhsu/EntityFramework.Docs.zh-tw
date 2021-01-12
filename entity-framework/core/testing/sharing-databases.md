@@ -4,12 +4,12 @@ description: 顯示如何在多個測試之間共用資料庫的範例
 author: ajcvickers
 ms.date: 04/25/2020
 uid: core/testing/sharing-databases
-ms.openlocfilehash: 95b756c80b983356a07fd836aa1b02f2835e6629
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 7a90a144271d5c34e9d5043aa439f84db805c6af
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431408"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128832"
 ---
 # <a name="sharing-databases-between-tests"></a>在測試之間共用資料庫
 
@@ -29,7 +29,7 @@ ms.locfileid: "94431408"
 
 * 如何安全地在測試之間共用物件
 * 當測試架構平行執行測試時
-* 如何針對每個測試讓資料庫保持乾淨狀態  
+* 如何針對每個測試讓資料庫保持乾淨狀態
 
 ## <a name="the-fixture"></a>裝置
 
@@ -65,7 +65,7 @@ ms.locfileid: "94431408"
 處置裝置時，就會處置資料庫連接。
 您也可以考慮在此時刪除測試資料庫。
 但是，如果多個測試類別正在共用這些裝置，則這將需要額外的鎖定和參考計數。
-此外，讓測試資料庫仍可用於偵測失敗的測試通常會很有用。  
+此外，讓測試資料庫仍可用於偵測失敗的測試通常會很有用。
 
 ## <a name="using-the-fixture"></a>使用裝置
 

@@ -4,12 +4,12 @@ description: 攔截資料庫作業和其他事件
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: fba9f3d02b8cf504c2cadca8eb844cd3e818e915
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: e3b2f1a0f1a97d211bcaba0633955a7fe9c0aa91
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635805"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128585"
 ---
 # <a name="interceptors"></a>攔截器
 
@@ -26,7 +26,7 @@ Entity Framework Core (EF Core) 攔截器可以攔截、修改及/或隱藏 EF C
 <!--
 public class ExampleContext : BlogsContext
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.AddInterceptors(new TaggedQueryCommandInterceptor());
 }
 -->
@@ -42,10 +42,10 @@ public class ExampleContext : BlogsContext
 <!--
 public class TaggedQueryCommandInterceptorContext : BlogsContext
 {
-    private static readonly TaggedQueryCommandInterceptor _interceptor 
+    private static readonly TaggedQueryCommandInterceptor _interceptor
         = new TaggedQueryCommandInterceptor();
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.AddInterceptors(_interceptor);
 }
 -->
@@ -75,7 +75,7 @@ public class TaggedQueryCommandInterceptorContext : BlogsContext
 
 ### <a name="example-command-interception-to-add-query-hints"></a>範例：命令攔截以新增查詢提示
 
-> [!TIP]  
+> [!TIP]
 > 您可以從 GitHub [下載命令攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/CommandInterception) 。
 
 <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbCommandInterceptor>可以用來修改 SQL，然後再傳送至資料庫。 此範例顯示如何修改 SQL 以包含查詢提示。
@@ -148,7 +148,7 @@ FROM [Blogs] AS [b]
 
 ### <a name="example-connection-interception-for-sql-azure-authentication-using-add"></a>範例：使用 ADD 的 SQL Azure 驗證連接攔截
 
-> [!TIP]  
+> [!TIP]
 > 您可以從 GitHub [下載連接攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/ConnectionInterception) 。
 
 <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbConnectionInterceptor>可以用來在 <xref:System.Data.Common.DbConnection> 用來連接到資料庫之前，先操作。 這可以用來取得 Azure Active Directory (AAD) 存取權杖。 例如：
@@ -192,7 +192,7 @@ public class AadAuthenticationInterceptor : DbConnectionInterceptor
 
 ### <a name="example-advanced-command-interception-for-caching"></a>範例：快取的 Advanced 命令攔截
 
-> [!TIP]  
+> [!TIP]
 > 您可以從 GitHub [下載 advanced command 攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/CachingInterception) 。
 
 EF Core 攔截器可以：
@@ -343,7 +343,7 @@ EF Core 攔截器可以：
         {
             Console.WriteLine(await GetDailyMessage(context));
         }
-        
+
         #region GetDailyMessage
         async Task<string> GetDailyMessage(DailyMessageContext context)
             => (await context.DailyMessages.TagWith("Get_Daily_Message").OrderBy(e => e.Id).LastAsync()).Message;
@@ -398,7 +398,7 @@ Free beer for unicorns
 > [!NOTE]
 > SaveChanges 攔截是在 EF Core 5.0 中引進。
 
-> [!TIP]  
+> [!TIP]
 > 您可以從 GitHub [下載 SaveChanges 攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) 。
 
 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 和 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> 攔截點是由介面所定義 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor> 。 針對其他攔截器，則 <xref:Microsoft.EntityFrameworkCore.Diagnostics.SaveChangesInterceptor> 會提供具有無 op 方法的基類，以方便使用。

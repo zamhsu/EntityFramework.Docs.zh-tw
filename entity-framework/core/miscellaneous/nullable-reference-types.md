@@ -4,12 +4,12 @@ description: '使用 Entity Framework Core 時，使用 c # 可為 null 的參�
 author: roji
 ms.date: 09/09/2019
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 648b79576838d2ba424b5216d5ad6811912f8ccb
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 749fef8560c6777dcb2314126b11d2dd6a3562f8
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429711"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128559"
 ---
 # <a name="working-with-nullable-reference-types"></a>使用可為 Null 的參考型別
 
@@ -76,4 +76,4 @@ C # 8 引進了一項新功能，稱為 [可為 null 的參考型別 (NRT) ](/do
 ## <a name="limitations"></a>限制
 
 * 反向工程目前不支援 [c # 8 可為 null 的參考型別 (NRTs) ](/dotnet/csharp/tutorials/nullable-reference-types)： EF Core 一律會產生假設功能已關閉的 c # 程式碼。 例如，可為 null 的文字資料行將 scaffold 為類型的屬性，而不是使用 `string` `string?` 流暢的 API 或資料批註來設定是否需要屬性。 您可以編輯 scaffold 程式碼，並以 c # 可 null 性注釋取代這些程式碼。 問題 [#15520](https://github.com/dotnet/efcore/issues/15520)會追蹤可為 null 之參考型別的型別支援。
-* EF Core 的公用 API 介面尚未標注為可 null 性 (公用 API 為 "無警示" ) ，因此在開啟 NRT 功能時，有時很難使用。 這特別包含 EF Core 所公開的非同步 LINQ 運算子，例如 [singleordefaultasync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_)。 我們計畫在5.0 版中解決此情況。
+* EF Core 的公用 API 介面尚未標注為可 null 性 (公用 API 為 "無警示" ) ，因此在開啟 NRT 功能時，有時很難使用。 這特別包含 EF Core 所公開的非同步 LINQ 運算子，例如 [singleordefaultasync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_)。 我們計畫在6.0 版中解決此情況。

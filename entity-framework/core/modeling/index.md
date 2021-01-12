@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 建立及設定模型的概觀
 author: AndriySvyryd
 ms.date: 10/13/2020
 uid: core/modeling/index
-ms.openlocfilehash: b18db0059efd335abe2fc44bbc78e0106717e058
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 709e2bde60c8e2c31f0a39390624c5d31a9cfa08
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429607"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129196"
 ---
 # <a name="creating-and-configuring-a-model"></a>建立和設定模型
 
@@ -17,7 +17,7 @@ Entity Framework 會使用一組慣例，根據您實體類別的圖形建置模
 
 本文涵蓋可套用至將目標設為任何資料存放區之模型的組態，以及將目標設為任何關聯式資料庫時可套用的組態。 提供者也可以啟用特定資料存放區專屬的組態。 針對提供者專屬組態的文件，請參閱[資料庫提供者](xref:core/providers/index)一節。
 
-> [!TIP]  
+> [!TIP]
 > 您可以在 GitHub 上查看這篇文章的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples) 。
 
 ## <a name="use-fluent-api-to-configure-a-model"></a>使用 Fluent API 設定模型

@@ -4,27 +4,27 @@ description: 使用 LogTo 從 EF Core DbCoNtext 記錄
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 076c4b12aa033b51a2b839686c520a76520ee415
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 5c2dc41122dfa3919d1e6a26b0760883d77ee1a0
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635610"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129209"
 ---
 # <a name="simple-logging"></a>簡單記錄
 
 > [!NOTE]
 > 這項功能是在 EF Core 5.0 中引進。
 
-> [!TIP]  
-> 您可以從 GitHub [下載本文的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SimpleLogging) 。
+> [!TIP]
+> 您可以從 GitHub [下載本文的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging/SimpleLogging) 。
 
 Entity Framework Core (EF Core) 簡單記錄可以用來在開發和偵測應用程式時輕鬆取得記錄。 這種形式的記錄需要最基本的設定，而且沒有其他 NuGet 套件。
 
 > [!TIP]
 > EF Core 也會與需要更多設定的 [Microsoft 擴充功能](xref:core/logging-events-diagnostics/extensions-logging)整合，但通常更適合用來記錄生產應用程式。
 
-## <a name="configuration"></a>組態
+## <a name="configuration"></a>設定
 
 在設定 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> [DbCoNtext 實例](xref:core/dbcontext-configuration/index)時，可以使用任何類型的應用程式存取 EF Core 記錄。 這項設定通常是在的覆寫中完成 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 。 例如：
 
@@ -62,7 +62,7 @@ Entity Framework Core (EF Core) 簡單記錄可以用來在開發和偵測應用
 寫入檔案時，需要建立 <xref:System.IO.StreamWriter> 或類似檔案的。 然後，您 <xref:System.IO.StreamWriter.WriteLine%2A> 可以使用方法，如同上述的其他範例。 請記得在處置內容時，藉由處置寫入器來確定檔案已完全關閉。 例如：
 
 <!--
-    private readonly StreamWriter _logStream = new StreamWriter("mylog.txt", append: true); 
+    private readonly StreamWriter _logStream = new StreamWriter("mylog.txt", append: true);
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.LogTo(_logStream.WriteLine);
@@ -72,7 +72,7 @@ Entity Framework Core (EF Core) 簡單記錄可以用來在開發和偵測應用
         base.Dispose();
         _logStream.Dispose();
     }
-    
+
     public override async ValueTask DisposeAsync()
     {
         await base.DisposeAsync();
@@ -130,7 +130,7 @@ Entity Framework Core (EF Core) 簡單記錄可以用來在開發和偵測應用
 
 系統會為每個記錄檔訊息指派 <xref:Microsoft.Extensions.Logging.EventId> 。 您可以從 <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId> 類別或類別存取這些識別碼， <xref:Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId> 以取得關聯式特定的訊息。 資料庫提供者也可能在類似的類別中有提供者特定的識別碼。 例如， <xref:Microsoft.EntityFrameworkCore.Diagnostics.SqlServerEventId> SQL Server 提供者。
 
-`LogTo` 可以設定為只記錄與一或多個事件識別碼相關聯的訊息。 例如，若要只針對正在初始化或處置的內容記錄訊息：  
+`LogTo` 可以設定為只記錄與一或多個事件識別碼相關聯的訊息。 例如，若要只針對正在初始化或處置的內容記錄訊息：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

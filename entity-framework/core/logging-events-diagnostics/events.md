@@ -4,16 +4,16 @@ description: EF Core 所定義的 .NET 事件
 author: ajcvickers
 ms.date: 10/15/2020
 uid: core/logging-events-diagnostics/events
-ms.openlocfilehash: 51c0bba5cf25e1d9ddd1fd9aebea50b9a03481a3
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 0888009af0bedfb63690e72c4a0e08979a9e9cf3
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635688"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129248"
 ---
 # <a name="net-events-in-ef-core"></a>EF Core 中的 .NET 事件
 
-> [!TIP]  
+> [!TIP]
 > 您可以從 GitHub [下載事件範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Events) 。
 
 Entity Framework Core (EF Core) 會公開 [.net 事件](/dotnet/standard/events/) ，以在 EF Core 程式碼中發生特定情況時做為回呼。 事件比 [攔截](xref:core/logging-events-diagnostics/interceptors) 器更簡單，並允許更具彈性的註冊。 不過，它們只會進行同步處理，因此無法執行非封鎖的非同步 i/o。
@@ -97,7 +97,7 @@ public interface IHasTimestamps
         {
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
-            
+
             context.Add(
                 new Blog
                 {

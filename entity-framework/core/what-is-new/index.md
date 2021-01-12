@@ -2,14 +2,14 @@
 title: EF Core 版本和計劃
 description: EF Core 目前版本及未來版本的排程/規劃詳細資料
 author: ajcvickers
-ms.date: 10/11/2020
+ms.date: 01/12/2021
 uid: core/what-is-new/index
-ms.openlocfilehash: 983a8b21d353481df4f1db232d00761e070d893b
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 18d8055840b5a38dc62d20e7e18c440b7360c9e4
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503135"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128325"
 ---
 # <a name="ef-core-releases-and-planning"></a>EF Core 版本和計劃
 
@@ -48,9 +48,9 @@ EF Core 發行與 [.NET Core 推出排程](https://github.com/dotnet/core/blob/m
 
 ## <a name="ef-core-60"></a>EF Core 6。0
 
-下一個規劃的穩定版本是 **EF Core 6.0** ，排程于 **2021 年11月** 。
+下一個規劃的穩定版本是 **EF Core 6.0**，排程于 **2021 年11月**。
 
-我們目前正在根據 [發行計畫](xref:core/what-is-new/release-planning)程式處理高階方案。
+遵循記載的[發行規劃](xref:core/what-is-new/release-planning)程式，建立了[EF Core 6.0 的高階計畫](xref:core/what-is-new/ef-core-6.0/plan)。
 
 您對計劃的意見反應很重要。
 指出問題重要性的最佳方式是在 GitHub 上針對該問題發起投票 (點讚 👍)。
@@ -61,7 +61,7 @@ EF Core 發行與 [.NET Core 推出排程](https://github.com/dotnet/core/blob/m
 EF Core 6.0 套件 **現已提供**
 
 * [每日組建](https://github.com/dotnet/aspnetcore/blob/master/docs/DailyBuilds.md) (英文) 的形式提供
-  * 所有最新的功能與 Bug 修正。 整體而言十分穩定，每個組建都經過 57000 次以上的測試。
+  * 所有最新的功能與 Bug 修正。 通常非常穩定;75000 + 針對每個組建執行的測試。
 
 此外，當我們進行時，經常會將預覽推送至 NuGet。 請注意，每日組建背後的預覽延隔，但經過測試，可搭配對應的 ASP.NET Core 和 .NET Core 預覽。
 

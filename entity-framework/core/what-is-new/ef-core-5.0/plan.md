@@ -4,14 +4,17 @@ description: 規劃 Entity Framework Core 5.0 的功能
 author: ajcvickers
 ms.date: 08/22/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: f2639e41499f3bfca5942d613922fd97212fc2b9
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: ba56a5f3c79dacc25b3402be114c57067da49433
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429230"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129040"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>規劃 Entity Framework Core 5。0
+
+> [!IMPORTANT]
+> [現在已發行](xref:core/what-is-new/index)EF Core 5.0。 此頁面會保留為方案的歷程記錄。
 
 如 [規劃](xref:core/what-is-new/release-planning)程式中所述，我們已將專案關係人的輸入收集到 EF Core 5.0 版的暫時計畫。
 

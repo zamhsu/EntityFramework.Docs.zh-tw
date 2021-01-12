@@ -4,12 +4,12 @@ description: Entity Framework Core SQL Server 提供者特有的索引功能
 author: roji
 ms.date: 9/1/2020
 uid: core/providers/sql-server/indexes
-ms.openlocfilehash: 66b4e3ce5ab1d4da855c106a6a2d2e75c43081f7
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 42411a562b4741ba39b4eb855bb84c66e100456b
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003156"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129157"
 ---
 # <a name="index-features-specific-to-the-entity-framework-core-sql-server-provider"></a>Entity Framework Core SQL Server 提供者特有的索引功能
 
@@ -24,6 +24,9 @@ ms.locfileid: "95003156"
 您可以設定要叢集化的索引或索引鍵，如下所示：
 
 [!code-csharp[ClusteredIndex](../../../../samples/core/SqlServer/Indexes/ClusteredIndexContext.cs?name=ClusteredIndex)]
+
+> [!NOTE]
+> SQL Server 針對每個資料表只支援一個叢集索引，而且主要索引鍵預設為叢集。 如果您想要在非索引鍵資料行上有叢集索引，則必須明確地將金鑰設為非叢集。
 
 ## <a name="fill-factor"></a>填滿因數
 

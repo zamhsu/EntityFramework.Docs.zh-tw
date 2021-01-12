@@ -4,12 +4,12 @@ description: EF Core 的記錄、事件、攔截器和診斷總覽
 author: ajcvickers
 ms.date: 10/01/2020
 uid: core/logging-events-diagnostics/index
-ms.openlocfilehash: d85a506167661523bf70b62d3a075a6248180d11
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 5ddbffc8d39e97065f2e06af14443c62b4a9465d
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635675"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129222"
 ---
 # <a name="overview-of-logging-and-interception"></a>記錄和攔截的總覽
 
@@ -25,7 +25,7 @@ Entity Framework Core (EF Core) 包含數個產生記錄、回應事件和取得
 | Microsoft.Extensions.Logging | 否 | 每個內容 * | D.I. 或內容設定 | 生產記錄
 | 事件 | 否 | 每個內容 | 任何時間 | 回應 EF 事件
 | 攔截器 | 是 | 每個內容 | 內容設定 | 操作 EF 作業
-| 診斷接聽程式 | 否 | Process | 全域 | 應用程式診斷
+| 診斷接聽程式 | 否 | 處理序 | 全域 | 應用程式診斷
 
 * 通常是透過相依性 `Microsoft.Extensions.Logging` 插入來設定每個應用程式，但在 EF 層級，您可以視需要使用不同的記錄器 _來_ 設定每個內容。
 

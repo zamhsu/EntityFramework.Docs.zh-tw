@@ -4,12 +4,12 @@ description: 針對使用 Entity Framework Core 的應用程式進行測試的�
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/testing/index
-ms.openlocfilehash: db25a51ec83bff15ff8c8a959a5f1707dbcf7f0f
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: d94c40bdb1082473ee88e7c3c1fbfecee90ba4ff
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431498"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129066"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>測試使用 EF Core 的程式碼
 
@@ -19,7 +19,7 @@ ms.locfileid: "94431498"
 * 對其他一些較容易管理的資料庫系統執行查詢和更新。
 * 使用 test double 或其他一些機制來完全避免使用資料庫。
 
-本文件概述上述每種選擇所牽涉到的取捨，並示範 EF Core 如何搭配每種方法使用。  
+本文件概述上述每種選擇所牽涉到的取捨，並示範 EF Core 如何搭配每種方法使用。
 
 > [!TIP]
 > 請參閱 [EF Core 測試範例](xref:core/testing/testing-sample)來取得示範這裡所介紹之概念的程式碼。
@@ -35,7 +35,7 @@ EF Core 資料庫提供者接著會在此通用架構上分層資料庫特定的
 話雖如此，在許多情況下，由於關聯式資料庫之間有高度的共通性，因此這樣做沒有問題。
 這有好處也有壞處。
 好處是在資料庫系統之間移動可能相當容易。
-壞處是如果應用程式未針對新的資料庫系統進行完整測試，可能會對安全性有所誤判。  
+壞處是如果應用程式未針對新的資料庫系統進行完整測試，可能會對安全性有所誤判。
 
 ## <a name="approach-1-production-database-system"></a>方法 1：生產資料庫系統
 
@@ -65,7 +65,7 @@ LocalDB 的主要優點在於會視需要啟動資料庫執行個體。
 我個人從不認為在開發電腦上執行資料庫服務有何問題，因此通常會建議改用 Developer Edition。
 不過，LocalDB 可能適合某些人，特別是在功能不強大的開發電腦上。
 
-在 Docker 容器 (或類似容器) 中[執行 SQL Server](/sql/linux/quickstart-install-connect-docker) (或任何其他資料庫系統)，是另一種能夠避免直接在開發電腦上執行資料庫系統的方式。  
+在 Docker 容器 (或類似容器) 中[執行 SQL Server](/sql/linux/quickstart-install-connect-docker) (或任何其他資料庫系統)，是另一種能夠避免直接在開發電腦上執行資料庫系統的方式。
 
 ## <a name="approach-2-sqlite"></a>方法 2：SQLite
 
@@ -96,7 +96,7 @@ SQLite 是不錯的選擇，因為：
 ## <a name="approach-3-the-ef-core-in-memory-database"></a>方法 3：EF Core 記憶體內部資料庫
 
 EF Core 隨附記憶體內部資料庫，可用於 EF Core 本身的內部測試。
-此資料庫一般 **不適合用於測試使用 EF Core 的應用程式** 。 尤其是：
+此資料庫一般 **不適合用於測試使用 EF Core 的應用程式**。 尤其是：
 
 * 這不是關聯式資料庫。
 * 不支援異動。

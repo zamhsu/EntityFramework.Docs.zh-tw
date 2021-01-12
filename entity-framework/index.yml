@@ -10,12 +10,12 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 04/15/2020
-  ms.openlocfilehash: 644d3ad0654e8d97835d4a2e6ee3d2ba3cbaf370
-  ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+  ms.openlocfilehash: 2ef9ee31ef84d779f911ec7c6da1e631889e693a
+  ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
   ms.translationtype: MT
   ms.contentlocale: zh-TW
-  ms.lasthandoff: 12/17/2020
-  ms.locfileid: "97635831"
+  ms.lasthandoff: 01/12/2021
+  ms.locfileid: "98129287"
 highlightedContent:
   items:
   - title: Entity Framework Core
@@ -140,6 +140,8 @@ additionalContent:
         text: 使用者定義函數對應
       - url: core/querying/filters.md
         text: 全域查詢篩選條件
+      - url: core/querying/null-comparisons.md
+        text: 查詢中與 null 值的比較
     - title: 管理資料庫架構
       links:
       - url: core/managing-schemas/index.md

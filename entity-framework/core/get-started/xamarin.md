@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: a08c5582b063f4a7748a43811c2bf28e8f3e5c14
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: c19c70903926c2c8ff4b51cca7781859af7e3567
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429906"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128780"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>使用 EF Core 和 Xamarin 消費者入門
 
@@ -21,7 +21,7 @@ ms.locfileid: "94429906"
 > [!TIP]
 > 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Xamarin)。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>Prerequisites
 
 安裝下列其中一項：
 
@@ -76,8 +76,8 @@ ms.locfileid: "94429906"
 > [!IMPORTANT]
 > Entity Framework Core 使用反映來叫用 Xamarin 連結器可能在 **發行** 模式設定中去除的函式。 您可以透過兩種方式來避免這種情況。
 >
-> * 第一個方法是將新增 `--linkskip System.Core` 至 **iOS 組建** 選項中的 **其他 mtouch 引數** 。
-> * 或者， **Linker behavior** `Don't Link` 在 **ios 組建** 選項中將 [Xamarin] 連結器行為設定為。
+> * 第一個方法是將新增 `--linkskip System.Core` 至 **iOS 組建** 選項中的 **其他 mtouch 引數**。
+> * 或者，  `Don't Link` 在 **ios 組建** 選項中將 [Xamarin] 連結器行為設定為。
 > 本文將[詳細說明 xamarin 連結器](/xamarin/ios/deploy-test/linker)，包括如何在 xamarin 上設定行為。
 >
 
@@ -165,7 +165,7 @@ using (var blogContext = new BloggingContext())
 
 * 更新現有的記錄。
   * `Save_Clicked`的函式會以新的來 `AddPostPage.xaml.cs` 更新現有的 `Blog` 物件 `Post` 。
-  
+
 ```csharp
 var newPost = new Post
 {

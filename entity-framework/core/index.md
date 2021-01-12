@@ -4,12 +4,12 @@ description: Entity Framework Core 的一般入門總覽
 author: ajcvickers
 ms.date: 9/20/2020
 uid: core/index
-ms.openlocfilehash: ccb1fa4cbc0bd1a02e1aeb613475bfe4b2c1d118
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: f2905fc55419e196a6f5b8883cf2a2a76b8a1ab2
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429893"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128598"
 ---
 # <a name="entity-framework-core"></a>Entity Framework Core
 
@@ -53,7 +53,7 @@ EF 支援下列模型開發方法：
 * 基礎資料庫伺服器的中繼層級知識或更高版本，對於在高效能的生產環境應用程式中設計、分析、分析和遷移資料而言是不可或缺的。 例如，主要與外鍵、條件約束、索引、正規化、DML 和 DDL 語句、資料類型、分析等等的知識。
 * 功能和整合測試：請務必盡可能將生產環境複寫至：
   * 找出應用程式中只有在使用特定版本的資料庫伺服器時才會顯示的問題。
-  * 升級 EF Core 和其他相依性時攔截重大變更。 例如，加入或升級 ASP.NET Core、OData 或 Automapper 等架構。 這些相依性可能會以非預期的方式影響 EF Core。
+  * 升級 EF Core 和其他相依性時攔截重大變更。 例如，加入或升級 ASP.NET Core、OData 或 AutoMapper 等架構。 這些相依性可能會以非預期的方式影響 EF Core。
 * 具有代表性負載的效能和壓力測試。 部分功能的最簡單用途無法妥善調整。 例如，多個集合包括過度使用消極式載入、非索引資料行上的條件式查詢、具有存放區產生值的大量更新和插入、缺乏並行處理、大型模型、不適當的快取原則。
 * 安全性審核：例如，處理連接字串和其他秘密、非部署作業的資料庫許可權、原始 SQL 的輸入驗證、機密資料的加密。
 * 請確定記錄和診斷功能足夠且可用。 例如，適當的記錄設定、查詢標記以及 Application Insights。

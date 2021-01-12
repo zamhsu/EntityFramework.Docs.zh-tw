@@ -4,18 +4,18 @@ description: 在 Entity Framework Core 中儲存相關實體和管理關聯性�
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/related-data
-ms.openlocfilehash: 25b4e265f19e658097be7332f9cba6fec3b560db
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: f1cc752587e6a3eb58d070f5f573450b51986f70
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062941"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129092"
 ---
 # <a name="saving-related-data"></a>儲存相關資料
 
 儲存隔離的實體之外，您也可以利用模型中所定義的關聯性。
 
-> [!TIP]  
+> [!TIP]
 > 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/) \(英文\)。
 
 ## <a name="adding-a-graph-of-new-entities"></a>新增新實體的圖表
@@ -26,8 +26,8 @@ ms.locfileid: "92062941"
 
 [!code-csharp[Main](../../../samples/core/Saving/RelatedData/Sample.cs#AddingGraphOfEntities)]
 
-> [!TIP]  
-> 請使用 EntityEntry.State 屬性來僅設定單一實體的狀態。 例如 `context.Entry(blog).State = EntityState.Modified`。
+> [!TIP]
+> 請使用 EntityEntry.State 屬性來僅設定單一實體的狀態。 例如： `context.Entry(blog).State = EntityState.Modified` 。
 
 ## <a name="adding-a-related-entity"></a>新增相關實體
 

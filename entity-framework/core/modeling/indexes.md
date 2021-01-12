@@ -4,35 +4,66 @@ description: 在 Entity Framework Core 模型中設定索引
 author: roji
 ms.date: 12/16/2019
 uid: core/modeling/indexes
-ms.openlocfilehash: 3a89f1ae9727dcd8f086e915e666721572636314
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ab81b108c4ff518cf98b7e835da3553c0c41efed
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071403"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128533"
 ---
 # <a name="indexes"></a>索引
 
-在許多資料存放區中，索引是常見的概念。 雖然它們在資料存放區中的執行方式可能不同，但它們是用來根據資料行 (或資料行集進行查閱，) 更有效率。
+在許多資料存放區中，索引是常見的概念。 雖然它們在資料存放區中的執行方式可能不同，但它們是用來根據資料行 (或資料行集進行查閱，) 更有效率。 如需良好索引使用方式的詳細資訊，請參閱效能檔中的「 [索引」一節](xref:core/performance/efficient-querying#use-indexes-properly) 。
 
-無法使用資料批註建立索引。 您可以使用流暢的 API，在單一資料行上指定索引，如下所示：
+您可以指定資料行的索引，如下所示：
+
+## <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Index.cs?name=Index&highlight=1)]
+
+> [!NOTE]
+> EF Core 5.0 中引進了透過資料批註設定索引。
+
+## <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Index.cs?name=Index&highlight=4)]
 
-您也可以在一個以上的資料行上指定索引：
-
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=4)]
+***
 
 > [!NOTE]
 > 依照慣例，會在每個屬性 (中建立索引，或使用一組屬性) 做為外鍵。
 >
-> EF Core 僅針對每一組不同的屬性支援一個索引。 如果您使用流暢的 API 來設定一組屬性的索引，這些屬性已定義索引（依照慣例或先前的設定），則您將變更該索引的定義。 如果您想要進一步設定依慣例建立的索引，這會很有用。
+> EF Core 僅針對每一組不同的屬性支援一個索引。 如果您在已定義索引的一組屬性上設定索引（依照慣例或先前的設定），則您將會變更該索引的定義。 如果您想要進一步設定依慣例建立的索引，這會很有用。
+
+## <a name="composite-index"></a>複合索引
+
+索引也可以跨越一個以上的資料行：
+
+### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IndexComposite.cs?name=Composite&highlight=1)]
+
+### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=4)]
+
+**_
+
+多個資料行（也稱為 _composite 索引 *）的索引，可加速篩選索引資料行的查詢，以及只篩選索引所涵蓋之 *第一個* 資料行的查詢。 如需詳細資訊，請參閱 [效能](xref:core/performance/efficient-querying#use-indexes-properly) 檔。
 
 ## <a name="index-uniqueness"></a>索引唯一性
 
 根據預設，索引不是唯一的：多個資料列可以有相同的值， (s) 用於索引的資料行集。 您可以建立唯一的索引，如下所示：
 
+### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IndexUnique.cs?name=IndexUnique&highlight=1)]
+
+### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
+
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexUnique.cs?name=IndexUnique&highlight=5)]
+
+***
 
 嘗試插入多個具有相同索引資料行集值的實體，將會擲回例外狀況。
 
@@ -40,9 +71,17 @@ ms.locfileid: "90071403"
 
 依照慣例，在關係資料庫中建立的索引會命名為 `IX_<type name>_<property name>` 。 如果是複合索引， `<property name>` 則會變成以底線分隔的屬性名稱清單。
 
-您可以使用流暢的 API 來設定在資料庫中建立的索引名稱：
+您可以設定在資料庫中建立的索引名稱：
+
+### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IndexName.cs?name=IndexName&highlight=1)]
+
+### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexName.cs?name=IndexName&highlight=5)]
+
+***
 
 ## <a name="index-filter"></a>索引篩選
 

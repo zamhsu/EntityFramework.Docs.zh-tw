@@ -4,12 +4,12 @@ description: 在 Entity Framework Core 中使用已中斷連線、未追蹤的�
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: f21cc71ef11ee4ef37618a68d5a5219e8174bf8b
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 4ddae08b68aa99fb81de77fed8a195c60927e0bb
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063565"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128845"
 ---
 # <a name="disconnected-entities"></a>已中斷連線的實體
 
@@ -45,8 +45,8 @@ DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#IsItNewGeneral)]
 
-> [!TIP]  
-> 只要內容一追蹤實體，就會立即設定索引鍵，即使該實體處於 Added 狀態時也一樣。 周遊實體圖表並判斷要針對每個實體執行什麼動作時 (例如使用 TrackGraph API 時)，這會很有幫助。 使用索引鍵值時，應該只以這裡所示的方式在發出任何呼叫來追蹤實體「之前」__ 使用。
+> [!TIP]
+> 只要內容一追蹤實體，就會立即設定索引鍵，即使該實體處於 Added 狀態時也一樣。 周遊實體圖表並判斷要針對每個實體執行什麼動作時 (例如使用 TrackGraph API 時)，這會很有幫助。 使用索引鍵值時，應該只以這裡所示的方式在發出任何呼叫來追蹤實體「之前」使用。
 
 ### <a name="with-other-keys"></a>搭配其他索引鍵
 
@@ -84,7 +84,7 @@ Update 方法通常會將實體標示為要進行更新，而不是插入。 不
   * 那麼，我們就會使用 SetValues 將此實體上所有屬性的值設定為那些來自用戶端的值。
   * SetValues 呼叫會將實體標示為視需要進行更新。
 
-> [!TIP]  
+> [!TIP]
 > SetValues 只會將值與所追蹤實體值不同的屬性標示為已修改。 這意謂著傳送更新時，將只會更新已實際變更的資料行。 (如果沒有任何變更，則不會傳送任何更新)。
 
 ## <a name="working-with-graphs"></a>使用圖表
@@ -127,7 +127,7 @@ Update 會將圖表中任何未設定索引鍵值的實體 (部落格或文章) 
 
 處理刪除可能相當棘手，因為當實體不存在時，常常意謂著應該將其刪除。 其中一個處理此情況的方式是使用「虛刪除」來將實體標示為已刪除，而不是實際進行刪除。 如此一來，刪除就變成與更新相同。 您可以在使用[查詢篩選](xref:core/querying/filters)時實作虛刪除。
 
-針對真實的刪除，常見的模式是使用查詢模式的延伸來執行基本上是圖表差異的操作。 例如︰
+針對真實的刪除，常見的模式是使用查詢模式的延伸來執行基本上是圖表差異的操作。 例如：
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 

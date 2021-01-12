@@ -4,18 +4,18 @@ description: 使用 Entity Framework Core 時如何設定實體類型之間的�
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 9c8fe469c4e0b8714a36624ff5bcf236e5b1652f
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 2bc17365adb802f2e813077731ae70c68f8e3be3
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635740"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129170"
 ---
 # <a name="relationships"></a>關聯性
 
 關聯性會定義兩個實體彼此之間的關聯性。 在關係資料庫中，這是由 foreign key 條件約束表示。
 
-> [!NOTE]  
+> [!NOTE]
 > 本文中大部分的範例都使用一對多關聯性來示範概念。 如需一對一和多對多關聯性的範例，請參閱本文結尾的 [其他關聯性模式](#other-relationship-patterns) 一節。
 
 ## <a name="definition-of-terms"></a>詞彙定義
@@ -37,7 +37,7 @@ ms.locfileid: "97635740"
   * **參考導覽屬性：** 保存單一相關實體之參考的導覽屬性。
 
   * **反向導覽屬性：** 在討論特定的導覽屬性時，這個詞彙是指關聯性另一端的導覽屬性。
-  
+
 * **自我參考關聯性：** 相依和主體實體類型相同的關聯性。
 
 下列程式碼顯示與之間的一對多關聯性 `Blog``Post`
@@ -62,7 +62,7 @@ ms.locfileid: "97635740"
 
 根據預設，當類型上有探索到導覽屬性時，會建立關聯性。 如果目前的資料庫提供者無法將屬性所指向的型別對應為純量類型，則會將屬性視為導覽屬性。
 
-> [!NOTE]  
+> [!NOTE]
 > 依慣例探索的關聯性一律會以主體實體的主要金鑰為目標。 若要以替代金鑰為目標，則必須使用流暢的 API 來執行其他設定。
 
 ### <a name="fully-defined-relationships"></a>完整定義的關聯性
@@ -178,7 +178,7 @@ ms.locfileid: "97635740"
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/ForeignKey.cs?name=ForeignKey&highlight=17)]
 
-> [!TIP]  
+> [!TIP]
 > `[ForeignKey]`批註可以放置於關聯性中的任何導覽屬性。 它不需要移至相依實體類別中的導覽屬性。
 
 > [!NOTE]
@@ -218,7 +218,7 @@ ms.locfileid: "97635740"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositePrincipalKey.cs?name=CompositePrincipalKey&highlight=11)]
 
-> [!WARNING]  
+> [!WARNING]
 > 您指定主體索引鍵屬性的順序必須符合為外鍵指定的順序。
 
 ---
@@ -250,7 +250,7 @@ ms.locfileid: "97635740"
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/OneToOne.cs?name=OneToOne&highlight=6,15-16)]
 
-> [!NOTE]  
+> [!NOTE]
 > EF 會根據其偵測外鍵屬性的能力，選擇要相依的其中一個實體。 如果選擇錯誤的實體做為相依的實體，您可以使用流暢的 API 來修正此問題。
 
 設定與流暢 API 的關聯性時，您會使用 `HasOne` 和 `WithOne` 方法。

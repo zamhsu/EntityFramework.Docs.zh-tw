@@ -11,18 +11,18 @@ no-loc:
 - Tags
 - items
 - tags
-ms.openlocfilehash: 9666bbde8ae9608dcebbea3ad37c51883960a942
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 7af516421a6ec3040b636507a6cd7976cabce3a9
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431491"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128793"
 ---
 # <a name="ef-core-testing-sample"></a>EF Core 測試範例
 
 > [!TIP]
 > 您可以在 GitHub 上找到這份檔中的程式碼，做為可執行檔 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/)。
-> 請注意，其中有些測試 **預期會失敗** 。 以下將說明這種情況的原因。
+> 請注意，其中有些測試 **預期會失敗**。 以下將說明這種情況的原因。
 
 本檔會逐步解說使用 EF Core 之測試程式碼的範例。
 
@@ -131,7 +131,7 @@ Item使用標籤標記的方法：
 
 XUnit 和大部分的測試架構一樣，將會為每個測試回合建立新的測試類別實例。
 此外，XUnit 也不會平行執行指定測試類別內的測試。
-這表示我們可以在測試的函式中設定和設定資料庫，而且每個測試的狀態都是已知狀態。
+這表示我們可以在測試的函式中設定和設定資料庫，而且每個測試都是已知的狀態。
 
 > [!TIP]
 > 此範例會為每個測試重新建立資料庫。

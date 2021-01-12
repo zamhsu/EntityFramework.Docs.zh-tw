@@ -4,12 +4,12 @@ description: 使用或不使用相依性插入來建立和管理 DbCoNtext 實�
 author: ajcvickers
 ms.date: 11/07/2020
 uid: core/dbcontext-configuration/index
-ms.openlocfilehash: 93d5942fbc81ee0ae9aeff0c5c8b9e20b160d512
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 10ed474df2c4c52e61083d9d671909be02cd8cef
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635388"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129027"
 ---
 # <a name="dbcontext-lifetime-configuration-and-initialization"></a>DbCoNtext 存留期、設定和初始化
 
@@ -48,7 +48,7 @@ ASP.NET Core 的應用程式會使用相依性 [插入進行設定](/aspnet/core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
         }
@@ -303,7 +303,7 @@ ASP.NET Core 的應用程式會使用相依性 [插入進行設定](/aspnet/core
 |:-------------------------------------------------------------------------------------------|-------------------------------------------------------------|--------------
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseQueryTrackingBehavior%2A>   | 設定查詢的預設追蹤行為              | [查詢追蹤行為](xref:core/querying/tracking)
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A>                      | 取得 EF Core 記錄 (EF Core 5.0 和更新版本的簡單方式)     | [記錄、事件和診斷](xref:core/logging-events-diagnostics/index)
-| <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseLoggerFactory%2A>           | 註冊 `Micrsofot.Extensions.Logging` factory         | [記錄、事件和診斷](xref:core/logging-events-diagnostics/index)
+| <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseLoggerFactory%2A>           | 註冊 `Microsoft.Extensions.Logging` factory         | [記錄、事件和診斷](xref:core/logging-events-diagnostics/index)
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> | 包含例外狀況和記錄中的應用程式資料         | [記錄、事件和診斷](xref:core/logging-events-diagnostics/index)
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableDetailedErrors%2A>       | 更詳細的查詢錯誤 (的效能成本)   | [記錄、事件和診斷](xref:core/logging-events-diagnostics/index)
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.ConfigureWarnings%2A>          | 忽略或擲回警告和其他事件               | [記錄、事件和診斷](xref:core/logging-events-diagnostics/index)

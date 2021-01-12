@@ -3,13 +3,13 @@ title: 使用者定義函數對應-EF Core
 description: 將使用者定義函數對應至資料庫函式
 author: maumar
 ms.date: 11/23/2020
-uid: core/user-defined-function-mapping
-ms.openlocfilehash: ba60abdc9c81b34b8f4ed8f501cf2f7e52ba9d7d
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+uid: core/querying/user-defined-function-mapping
+ms.openlocfilehash: 3e49ed9c49b38b98430128ffdc7ceef0b844b9df
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657793"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129118"
 ---
 # <a name="user-defined-function-mapping"></a>使用者定義函數對應
 
@@ -94,6 +94,52 @@ CLR 方法如下所示：
 SELECT 100 * (ABS(CAST([p].[BlogId] AS float) - 3) / ((CAST([p].[BlogId] AS float) + 3) / 2))
 FROM [Posts] AS [p]
 ```
+
+## <a name="configuring-nullability-of-user-defined-function-based-on-its-arguments"></a>根據使用者自訂函數的引數，設定其 null 屬性
+
+如果使用者定義函數只能 `null` 在其中一個或多個引數為時傳回 `null` ，EFCore 會提供指定該函式的方式，以產生更高效能的 SQL。 您可以藉由新增相關函式參數模型設定的呼叫來完成此 `PropagatesNullability()` 工作。
+
+為了說明這一點，請定義使用者功能 `ConcatStrings` ：
+
+```sql
+CREATE FUNCTION [dbo].[ConcatStrings] (@prm1 nvarchar(max), @prm2 nvarchar(max))
+RETURNS nvarchar(max)
+AS
+BEGIN
+    RETURN @prm1 + @prm2;
+END
+```
+
+還有兩個對應至它的 CLR 方法：
+
+[!code-csharp[Main](../../../samples/core/Querying/UserDefinedFunctionMapping/Model.cs#NullabilityPropagationFunctionDefinition)]
+
+方法) 內的模型設定 (如下所示 `OnModelCreating` ：
+
+[!code-csharp[Main](../../../samples/core/Querying/UserDefinedFunctionMapping/Model.cs#NullabilityPropagationModelConfiguration)]
+
+第一個函式是以標準方式進行設定。 第二個函式會設定為利用 null 屬性傳播優化，以提供有關函數如何針對 null 參數的行為的詳細資訊。
+
+發出下列查詢時：
+
+[!code-csharp[Main](../../../samples/core/Querying/UserDefinedFunctionMapping/Program.cs#NullabilityPropagationExamples)]
+
+我們會取得這個 SQL：
+
+```sql
+SELECT [b].[BlogId], [b].[Rating], [b].[Url]
+FROM [Blogs] AS [b]
+WHERE ([dbo].[ConcatStrings]([b].[Url], CONVERT(VARCHAR(11), [b].[Rating])) <> N'Lorem ipsum...') OR [dbo].[ConcatStrings]([b].[Url], CONVERT(VARCHAR(11), [b].[Rating])) IS NULL
+
+SELECT [b].[BlogId], [b].[Rating], [b].[Url]
+FROM [Blogs] AS [b]
+WHERE ([dbo].[ConcatStrings]([b].[Url], CONVERT(VARCHAR(11), [b].[Rating])) <> N'Lorem ipsum...') OR ([b].[Url] IS NULL OR [b].[Rating] IS NULL)
+```
+
+第二個查詢不需要重新評估函數本身，即可測試其 null 屬性。
+
+> [!NOTE]
+> 只有在函式 `null` 的參數為時，才會傳回此優化 `null` 。
 
 ## <a name="mapping-a-queryable-function-to-a-table-valued-function"></a>將可查詢函數對應至資料表值函式
 

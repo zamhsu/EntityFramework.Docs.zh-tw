@@ -4,16 +4,16 @@ description: 在 Entity Framework Core 模型中設定順序
 author: roji
 ms.date: 12/18/2019
 uid: core/modeling/sequences
-ms.openlocfilehash: 8848a7237934091c1253ec61a37eea1c4326d1cb
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: e388bde11b1251564b37227e8884d2b8c34dc02e
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071390"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128520"
 ---
 # <a name="sequences"></a>序列
 
-> [!NOTE]  
+> [!NOTE]
 > 序列是通常只有關係資料庫才支援的功能。 如果您使用非關係資料庫（例如 Cosmos），請查看您的資料庫檔案，以產生唯一值。
 
 順序會在資料庫中產生唯一的連續數值。 序列不會與特定資料表相關聯，而且可以設定多個資料表，以從相同的序列中繪製值。
