@@ -19,6 +19,8 @@
       items:
         - name: 歡迎！
           href: core/index.md
+        - name: EF Core 5.0 的新功能
+          href: /ef/core/what-is-new/ef-core-5.0/whatsnew
         - name: 開始使用
           items:
             - name: EF Core 概觀
@@ -41,6 +43,14 @@
               href: core/what-is-new/index.md
             - name: 發行計劃程序
               href: core/what-is-new/release-planning.md
+            - name: EF Core 6.0
+              items:
+                - name: 概略計劃
+                  href: core/what-is-new/ef-core-6.0/plan.md
+                - name: 新功能
+                  href: core/what-is-new/ef-core-6.0/whatsnew.md
+                - name: 重大變更
+                  href: core/what-is-new/ef-core-6.0/breaking-changes.md
             - name: EF Core 5.0
               items:
                 - name: 概略計劃
@@ -79,7 +89,7 @@
               href: core/dbcontext-configuration/index.md
         - name: 建立模型
           items:
-            - name: 總覽
+            - name: 概觀
               href: core/modeling/index.md
             - name: 實體類型
               href: core/modeling/entity-types.md
@@ -182,6 +192,8 @@
               href: core/querying/filters.md
             - name: 查詢標籤
               href: core/querying/tags.md
+            - name: 查詢中具有 Null 值的比較
+              href: core/querying/null-comparisons.md
             - name: 查詢的運作方式
               href: core/querying/how-query-works.md
         - name: 儲存資料
@@ -202,6 +214,24 @@
               href: core/saving/disconnected-entities.md
             - name: 產生屬性的明確值
               href: core/saving/explicit-values-generated-properties.md
+        - name: Change tracking
+          items:
+            - name: 總覽
+              href: core/change-tracking/index.md
+            - name: 明確追蹤實體
+              href: core/change-tracking/explicit-tracking.md
+            - name: 存取追蹤實體
+              href: core/change-tracking/entity-entries.md
+            - name: 變更外部索引鍵與瀏覽
+              href: core/change-tracking/relationship-changes.md
+            - name: 變更偵測與通知
+              href: core/change-tracking/change-detection.md
+            - name: 身分識別解析
+              href: core/change-tracking/identity-resolution.md
+            - name: 其他變更追蹤功能
+              href: core/change-tracking/miscellaneous.md
+            - name: 變更追蹤器偵錯
+              href: core/change-tracking/debug-views.md
         - name: 記錄、事件與診斷
           items:
             - name: 概觀
@@ -326,7 +356,7 @@
           href: /dotnet/api/?view=efcore-5.0
     - name: Entity Framework 6
       items:
-        - name: 概觀
+        - name: 總覽
           href: ef6/index.md
         - name: 新功能
           items:
@@ -380,7 +410,7 @@
                   href: ef6/fundamentals/disconnected-entities/index.md
                 - name: 自我追蹤實體
                   items:
-                    - name: 概觀
+                    - name: 總覽
                       href: ef6/fundamentals/disconnected-entities/self-tracking-entities/index.md
                     - name: 逐步解說
                       href: ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough.md
@@ -508,7 +538,7 @@
                   href: ef6/modeling/designer/select-runtime-version.md
                 - name: 程式碼產生
                   items:
-                    - name: 概觀
+                    - name: 總覽
                       href: ef6/modeling/designer/codegen/index.md
                     - name: 舊版 ObjectContext
                       href: ef6/modeling/designer/codegen/legacy-objectcontext.md
