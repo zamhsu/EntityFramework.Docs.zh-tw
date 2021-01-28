@@ -4,12 +4,12 @@ description: 如何藉由操作外鍵和導覽來變更實體之間的關聯性
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/relationship-changes
-ms.openlocfilehash: ac2110509b6748e85411dbb14989522465925ecf
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: b1ebe77ed29291beeef3708b603db026c38bbbec
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129704"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983608"
 ---
 # <a name="changing-foreign-keys-and-navigations"></a>變更外鍵和導覽
 
@@ -184,8 +184,8 @@ Post {Id: 4} Unchanged
         var posts = context.Posts.ToList();
         Console.WriteLine(context.ChangeTracker.DebugView.LongView);
 -->
-[！ code-csharp[Relationship_fixup_2](../../../ samples / core / ChangeTracking / ChangingFKsAndNavigations / OptionalRelationshipsSamples.cs ? name = Relationship_fixup_2
-) ]在第一次查詢時，在第一次查詢時，只會追蹤兩個 blog：
+[!code-csharp[Relationship_fixup_2](../../../samples/core/ChangeTracking/ChangingFKsAndNavigations/OptionalRelationshipsSamples.cs?name=Relationship_fixup_2)]
+在第一次查詢時，在第一次查詢時，只會追蹤兩個 blog：
 
 ```output
 Blog {Id: 1} Unchanged

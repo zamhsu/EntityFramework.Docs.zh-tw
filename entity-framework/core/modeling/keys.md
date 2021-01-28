@@ -2,18 +2,20 @@
 title: 金鑰-EF Core
 description: 使用 Entity Framework Core 時如何設定實體類型的索引鍵
 author: AndriySvyryd
-ms.date: 11/06/2019
+ms.date: 1/10/2021
 uid: core/modeling/keys
-ms.openlocfilehash: 805396a13227aa62ed86ac17c742d055d7a22bbf
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: c79ab0445e80b0b6f4a8b49ef0d4c063bf938851
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129183"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983529"
 ---
 # <a name="keys"></a>索引鍵
 
 索引鍵作為每個實體實例的唯一識別碼。 EF 中的大部分實體都有單一索引鍵，它會對應至關係資料庫中 *主鍵* 的概念， (沒有索引鍵的實體，請參閱 [無索引鍵實體](xref:core/modeling/keyless-entity-types)) 。 實體可以有超出主鍵的額外索引鍵 (如需詳細資訊，請參閱其他索引 [鍵](#alternate-keys)) 。
+
+## <a name="configuring-a-primary-key"></a>設定主要金鑰
 
 依照慣例，名為或的屬性 `Id` `<type name>Id` 將會設定為實體的主要索引鍵。
 
@@ -24,11 +26,11 @@ ms.locfileid: "98129183"
 
 您可以將單一屬性設定為實體的主要索引鍵，如下所示：
 
-## <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
+### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/KeySingle.cs?name=KeySingle&highlight=3)]
 
-## <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
+### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeySingle.cs?name=KeySingle&highlight=4)]
 
@@ -37,6 +39,10 @@ ms.locfileid: "98129183"
 您也可以將多個屬性設定為實體的索引鍵，這稱為複合索引鍵。 複合索引鍵只能使用流暢的 API 進行設定;慣例永遠不會設定複合索引鍵，而且您不能使用資料批註來設定它。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeyComposite.cs?name=KeyComposite&highlight=4)]
+
+## <a name="value-generation"></a>產生價值
+
+若為非複合數值和 GUID 主鍵，EF Core 會依照慣例設定值產生。 例如，SQL Server 中的數值主要索引鍵會自動設定為識別資料行。 如需詳細資訊，請參閱 [產生值的相關檔](xref:core/modeling/generated-properties)。
 
 ## <a name="primary-key-name"></a>主要金鑰名稱
 
@@ -51,7 +57,7 @@ ms.locfileid: "98129183"
 將新實體新增至內容時，索引鍵屬性必須一律具有非預設值，但某些類型會 [由資料庫產生](xref:core/modeling/generated-properties)。 在這種情況下，當加入實體以供追蹤時，EF 會嘗試產生暫時的值。 呼叫 [SaveChanges](/dotnet/api/Microsoft.EntityFrameworkCore.DbContext.SaveChanges) 之後，暫存值就會由資料庫產生的值取代。
 
 > [!Important]
-> 如果索引鍵屬性的值是由資料庫產生的，而且在加入實體時指定了非預設值，則 EF 會假設實體已經存在於資料庫中，並會嘗試更新它，而不是插入新的實體。 若要避免這種情況，請關閉值產生，或查看 [如何為產生的屬性指定明確值](xref:core/saving/explicit-values-generated-properties)。
+> 如果索引鍵屬性的值是由資料庫產生的，而且在加入實體時指定了非預設值，則 EF 會假設實體已經存在於資料庫中，並會嘗試更新它，而不是插入新的實體。 若要避免這種情況，請關閉值產生，或查看 [如何為產生的屬性指定明確值](xref:core/modeling/generated-properties#overriding-value-generation)。
 
 ## <a name="alternate-keys"></a>替代索引鍵
 

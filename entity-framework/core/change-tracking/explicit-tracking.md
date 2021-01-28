@@ -4,12 +4,12 @@ description: 使用 [新增]、[附加]、[更新] 和 [移除] 以 DbCoNtext �
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/explicit-tracking
-ms.openlocfilehash: 28a6ec3e3c25dad70882b8681f78744a5979efe6
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 1428096b362c8016f7924c72ec9ac3e2f9203ed6
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129707"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983270"
 ---
 # <a name="explicitly-tracking-entities"></a>明確追蹤實體
 
@@ -311,7 +311,7 @@ Post {Id: 2} Unchanged
 這與上一個使用明確索引鍵值的範例完全相同。
 
 > [!TIP]
-> 即使使用產生的索引鍵值，仍然可以設定明確的索引鍵值。 EF Core 接著會嘗試使用此索引鍵值來插入。 某些資料庫設定（包括具有識別資料行的 SQL Server）不支援這類插入，且將會擲回。
+> 即使使用產生的索引鍵值，仍然可以設定明確的索引鍵值。 EF Core 接著會嘗試使用此索引鍵值來插入。 某些資料庫設定（包括具有識別資料行的 SQL Server）不支援這類插入，而且將會擲回 ([請參閱這些檔，以瞭解](xref:core/providers/sql-server/value-generation#inserting-explicit-values-into-identity-columns)) 的因應措施。
 
 ## <a name="attaching-existing-entities"></a>附加現有的實體
 
@@ -394,35 +394,6 @@ Post {Id: 2} Unchanged
 ### <a name="generated-key-values"></a>產生的索引鍵值
 
 如上所述，根據預設，會將整數和 GUID 索引 [鍵屬性](xref:core/modeling/keys) 設定為使用 [自動產生](xref:core/modeling/generated-properties) 的索引鍵值。 使用已中斷連線的實體時，這有一個主要優點：未設定的索引鍵值表示實體尚未插入資料庫。 這可讓變更追蹤器自動偵測新的實體，並將它們放入 `Added` 狀態。 例如，請考慮附加這份有關 blog 和 post 的圖表：
-
-```c#
-            context.Attach(
-                new Blog
-                {
-                    Id = 1,
-                    Name = ".NET Blog",
-                    Posts =
-                    {
-                        new Post
-                        {
-                            Id = 1,
-                            Title = "Announcing the Release of EF Core 5.0",
-                            Content = "Announcing the release of EF Core 5.0, a full featured cross-platform..."
-                        },
-                        new Post
-                        {
-                            Id = 2,
-                            Title = "Announcing F# 5",
-                            Content = "F# 5 is the latest version of F#, the functional programming language..."
-                        },
-                        new Post
-                        {
-                            Title = "Announcing .NET 5.0",
-                            Content = ".NET 5.0 includes many enhancements, including single file applications, more..."
-                        },
-                    }
-                });
-```
 
 <!--
             context.Attach(
@@ -922,7 +893,7 @@ WHERE "Id" = @p1;
 
 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.TrackGraph%2A?displayProperty=nameWithType> 的運作方式類似 `Add` ，但 `Attach` `Update` 它會在追蹤之前為每個實體實例產生回呼。 這可讓您在決定如何追蹤圖形中的個別實體時使用自訂邏輯。
 
-例如，請考慮在使用產生的索引鍵值追蹤實體時，EF Core 所使用的規則：如果 kye 值為零，則實體是新的，而且應該插入。 讓我們擴充此規則，以找出索引鍵值是否為負數，則應該刪除實體。 這可讓我們變更已中斷連線圖形之實體中的主鍵值，以標記已刪除的實體：
+例如，請考慮在使用產生的索引鍵值追蹤實體時，EF Core 所使用的規則：如果索引鍵值為零，則實體是新的，而且應該插入。 讓我們擴充此規則，以找出索引鍵值是否為負數，則應該刪除實體。 這可讓我們變更已中斷連線圖形之實體中的主鍵值，以標記已刪除的實體：
 
 <!--
             blog.Posts.Add(

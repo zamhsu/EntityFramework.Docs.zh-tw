@@ -4,12 +4,12 @@ description: Entity Framework Core Visual Studio 封裝管理員主控台的參�
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/powershell
-ms.openlocfilehash: 4a1ab889fc1117b67252ace51fd3df4797b6c8d3
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 51f2dbcad0606a0d5571e96d7a7951cf595e2b9e
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431472"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983504"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Visual Studio 中的 Entity Framework Core 工具參考-封裝管理員主控台
 
@@ -69,11 +69,11 @@ SHORT DESCRIPTION
 
 ### <a name="target-and-startup-project"></a>目標和啟始專案
 
-這些命令會參考 *專案* 和 *啟始專案* 。
+這些命令會參考 *專案* 和 *啟始專案*。
 
-* *專案* 也稱為 *目標專案* ，因為這是命令新增或移除檔案的位置。 依預設， **封裝管理員主控台** 中選取的 **預設專案** 是目標專案。 您可以使用選項，將不同的專案指定為目標專案 <nobr>`--project`</nobr> 。
+* *專案* 也稱為 *目標專案*，因為這是命令新增或移除檔案的位置。 依預設，**封裝管理員主控台** 中選取的 **預設專案** 是目標專案。 您可以使用選項，將不同的專案指定為目標專案 <nobr>`--project`</nobr> 。
 
-* *啟始專案* 是工具建立和執行的專案。 這些工具必須在設計階段執行應用程式程式碼，以取得專案的相關資訊，例如資料庫連接字串和模型的設定。 根據預設， **方案總管** 中的 **啟始專案** 是啟始專案。 您可以使用選項，將不同的專案指定為啟始專案 <nobr>`--startup-project`</nobr> 。
+* *啟始專案* 是工具建立和執行的專案。 這些工具必須在設計階段執行應用程式程式碼，以取得專案的相關資訊，例如資料庫連接字串和模型的設定。 根據預設，**方案總管** 中的 **啟始專案** 是啟始專案。 您可以使用選項，將不同的專案指定為啟始專案 <nobr>`--startup-project`</nobr> 。
 
 啟始專案和目標專案通常是相同的專案。 一般情況下，它們是不同的專案：
 
@@ -102,7 +102,7 @@ Update-Database -Args '--environment Production'
 
 下表顯示所有 EF Core 命令通用的參數：
 
-| 參數                 | 說明                                                                                                                                                                                                          |
+| 參數                 | Description                                                                                                                                                                                                          |
 |:--------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | -CoNtext \<String>        | 要使用的 `DbContext` 類別。 僅限類別名稱或完整限定命名空間。  如果省略此參數，EF Core 會尋找內容類別。 如果有多個內容類別，則需要此參數。 |
 | -Project \<String>        | 目標專案。 如果省略此參數，則會使用 **封裝管理員主控台** 的 **預設專案** 做為目標專案。                                                                             |
@@ -121,7 +121,7 @@ Update-Database -Args '--environment Production'
 
 參數：
 
-| 參數                         | 說明                                                                                                             |
+| 參數                         | Description                                                                                                             |
 |:----------------------------------|:------------------------------------------------------------------------------------------------------------------------|
 | <nobr>-Name \<String><nobr>       | 遷移的名稱。 這是位置參數，而且是必要的。                                              |
 | <nobr>-OutputDir \<String></nobr> | 用來輸出檔案的目錄。 路徑是相對於目標專案目錄。 預設為「遷移」。 |
@@ -135,7 +135,7 @@ Update-Database -Args '--environment Production'
 
 參數：
 
-| 參數 | 說明                                              |
+| 參數 | Description                                              |
 |:----------|:---------------------------------------------------------|
 | -WhatIf   | 顯示要卸載的資料庫，但不要卸載它。 |
 
@@ -153,7 +153,7 @@ Update-Database -Args '--environment Production'
 
 參數：
 
-| 參數                          | 說明                                                                                            |
+| 參數                          | Description                                                                                            |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | <nobr>-連接 \<String></nobr> | 資料庫的連接字串。 預設為 AddDbCoNtext 或 OnConfiguring 中指定的值。 |
 | -NoConnect                         | 請勿連接至資料庫。                                                                         |
@@ -166,7 +166,7 @@ Update-Database -Args '--environment Production'
 
 參數：
 
-| 參數 | 說明                                                                     |
+| 參數 | Description                                                                     |
 |:----------|:--------------------------------------------------------------------------------|
 | -Force    | 還原遷移 (復原已套用至資料庫) 的變更。 |
 
@@ -178,9 +178,9 @@ Update-Database -Args '--environment Production'
 
 參數：
 
-| 參數                          | 說明                                                                                                                                                                                                                                                             |
+| 參數                          | Description                                                                                                                                                                                                                                                             |
 |:-----------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-連接 \<String></nobr> | 資料庫的連接字串。 針對 ASP.NET Core 2.x 專案，值可以是 *名稱 = \<name of connection string>* 。 在該情況下，名稱來自為專案設定的設定來源。 這是位置參數，而且是必要的。 |
+| <nobr>-連接 \<String></nobr> | 資料庫的連接字串。 針對 ASP.NET Core 2.x 專案，值可以是 *名稱 = \<name of connection string>*。 在該情況下，名稱來自為專案設定的設定來源。 這是位置參數，而且是必要的。 |
 | <nobr>-提供者 \<String></nobr>   | 要使用的提供者。 這通常是 NuGet 套件的名稱，例如： `Microsoft.EntityFrameworkCore.SqlServer` 。 這是位置參數，而且是必要的。                                                                                           |
 | -OutputDir \<String>               | 要放置檔案的目錄。 路徑是相對於專案目錄。                                                                                                                                                                                             |
 | -CoNtextDir \<String>              | 要放置檔案的目錄 `DbContext` 。 路徑是相對於專案目錄。                                                                                                                                                               |
@@ -212,7 +212,7 @@ Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Conn
 下列範例會從專案的設定讀取連接字串，可能會使用「 [秘密管理員」工具](/aspnet/core/security/app-secrets#secret-manager)來設定。
 
 ```powershell
-Scaffold-DbContext "Name=ConnectionStrings.Blogging" Microsoft.EntityFrameworkCore.SqlServer
+Scaffold-DbContext "Name=ConnectionStrings:Blogging" Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 ## <a name="script-dbcontext"></a>Script-DbContext
@@ -221,7 +221,7 @@ Scaffold-DbContext "Name=ConnectionStrings.Blogging" Microsoft.EntityFrameworkCo
 
 參數：
 
-| 參數                      | 說明                      |
+| 參數                      | Description                      |
 | ------------------------------ | -------------------------------- |
 | <nobr>-Output \<String></nobr> | 要寫入結果的檔案。 |
 
@@ -233,13 +233,13 @@ Scaffold-DbContext "Name=ConnectionStrings.Blogging" Microsoft.EntityFrameworkCo
 
 參數：
 
-| 參數                    | 說明                                                                                                                                                                                                                |
+| 參數                    | Description                                                                                                                                                                                                                |
 |:---------------------------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *-從*\<String>            | 開始遷移。 遷移可依名稱或識別碼來識別。 數位0是特殊案例，這表示在 *第一次遷移之前* 。 預設為 0。                                                              |
+| *-從*\<String>            | 開始遷移。 遷移可依名稱或識別碼來識別。 數位0是特殊案例，這表示在 *第一次遷移之前*。 預設為 0。                                                              |
 | *-至*\<String>              | 結束的遷移。 預設為上次的遷移。                                                                                                                                                                      |
 | -等冪                  | 產生可在任何遷移時用於資料庫的腳本。                                                                                                                                                         |
 | <nobr>-NoTransactions</nobr> | 不要產生 SQL 交易語句。 在 EF Core 5.0 中新增。                                                                                                                                                           |
-| -Output \<String>            | 要寫入結果的檔案。 如果省略此參數，則會在建立應用程式的執行時間檔案時，在相同的資料夾中建立檔案，例如： */obj/Debug/netcoreapp2.1/ghbkztfz.sql/* 。 |
+| -Output \<String>            | 要寫入結果的檔案。 如果省略此參數，則會在建立應用程式的執行時間檔案時，在相同的資料夾中建立檔案，例如： */obj/Debug/netcoreapp2.1/ghbkztfz.sql/*。 |
 
 上面列出 [一般參數](#common-parameters) 。
 
@@ -262,7 +262,7 @@ Script-Migration 20180904195021_InitialCreate
 
 將資料庫更新為上次遷移或指定的遷移。
 
-| 參數                           | 說明                                                                                                                                                                                                                                                     |
+| 參數                           | Description                                                                                                                                                                                                                                                     |
 |:------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>*-遷移*\<String></nobr> | 目標遷移。 遷移可依名稱或識別碼來識別。 數位0是特殊案例，這表示在 *第一次遷移之前* ，會將所有遷移還原。 如果未指定任何遷移，則命令會預設為上次的遷移。 |
 | <nobr>-連接 \<String></nobr>  | 資料庫的連接字串。 預設為或中所指定 `AddDbContext` 的 `OnConfiguring` 。 在 EF Core 5.0 中新增。                                                                                                                                |

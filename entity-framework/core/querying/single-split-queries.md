@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 將查詢轉譯成 SQL 中的單一和
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/single-split-queries
-ms.openlocfilehash: 8615e7ba5247a90a1f980e9f7b1b23c81170971f
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 1857e05d45979c5530a349b9c7470407e7574fdf
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128988"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983426"
 ---
 # <a name="split-queries"></a>分割查詢
 

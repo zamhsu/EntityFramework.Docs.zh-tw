@@ -1,15 +1,15 @@
 ---
-title: 查詢中與 null 值的比較
+title: 查詢中具有 Null 值的比較
 description: Entity Framework Core 如何在查詢中處理 null 比較的資訊
 author: maumar
 ms.date: 11/11/2020
 uid: core/querying/null-comparisons
-ms.openlocfilehash: d1235eb8df7fd22c7a930b3661ec38a99f75e5fa
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: fc63d0e0e6aea09e46b1700152312d4b74270219
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129723"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983348"
 ---
 # <a name="query-null-semantics"></a>查詢 null 語義
 
@@ -77,7 +77,7 @@ WHERE [e].[String1] IS NULL OR [e].[String2] IS NULL
 
 - 比較不可為 null 的資料行比比較可為 null 的資料行更簡單且更快速。 請考慮盡可能將資料行標示為不可為 null。
 
-- 檢查是否相等 (`==`) 比檢查不相等 () 更簡單且快速 `!=` ，因為查詢不需要區分 `null` 和 `false` 結果。 盡可能使用相等比較。不過，單純 `==` 的否定比較與相同 `!=` ，因此不會導致效能改進。
+- 檢查是否相等 (`==`) 比檢查不相等 () 更簡單且快速 `!=` ，因為查詢不需要區分 `null` 和 `false` 結果。 盡可能使用相等比較。 不過，單純 `==` 的否定比較與相同 `!=` ，因此不會導致效能改進。
 
 - 在某些情況下，您可以明確地篩選出資料行中的值，以簡化複雜的比較-例如， `null` 當沒有 `null` 值存在或這些值與結果不相關時。 請考慮下列範例：
 

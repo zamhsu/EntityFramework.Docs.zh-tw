@@ -4,12 +4,12 @@ description: 使用或不使用相依性插入來建立和管理 DbCoNtext 實�
 author: ajcvickers
 ms.date: 11/07/2020
 uid: core/dbcontext-configuration/index
-ms.openlocfilehash: 10ed474df2c4c52e61083d9d671909be02cd8cef
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 5b3143edbcfb82312b8026fb09c96dac85427831
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129027"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983517"
 ---
 # <a name="dbcontext-lifetime-configuration-and-initialization"></a>DbCoNtext 存留期、設定和初始化
 
@@ -314,7 +314,7 @@ ASP.NET Core 的應用程式會使用相依性 [插入進行設定](/aspnet/core
 > [!NOTE]
 > <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies%2A> 和 <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseChangeTrackingProxies%2A> 是 [microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) NuGet 套件中的擴充方法。 這種類型的」。UseSomething ( # A1」呼叫是設定及/或使用其他套件中所含 EF Core 擴充功能的建議方式。
 
-### <a name="dbcontextoptions-verses-dbcontextoptionstcontext"></a>`DbContextOptions` 詩句 `DbContextOptions<TContext>`
+### <a name="dbcontextoptions-versus-dbcontextoptionstcontext"></a>`DbContextOptions` 與 `DbContextOptions<TContext>`
 
 大部分 `DbContext` 接受的子類別都 `DbContextOptions` 應該使用 [一般](/dotnet/csharp/programming-guide/generics/) `DbContextOptions<TContext>` 變化。 例如：
 

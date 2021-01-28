@@ -4,12 +4,12 @@ description: Entity Framework Core .NET Core CLI 工具的參考指南
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dotnet
-ms.openlocfilehash: 83989b8690236dbec3466cda78c204ab67fd10c4
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 60655c03a7fc29137ccb8d9304c94dac6b803cb2
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431475"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983582"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Entity Framework Core 工具參考-.NET Core CLI
 
@@ -43,7 +43,7 @@ dotnet tool update --global dotnet-ef
 dotnet add package Microsoft.EntityFrameworkCore.Design
 ```
 
-### <a name="verify-installation"></a>驗證安裝
+### <a name="verify-installation"></a>確認安裝
 
 執行下列命令，確認已正確安裝 EF Core CLI 工具：
 
@@ -77,9 +77,9 @@ Entity Framework Core .NET Command-line Tools 2.1.3-rtm-32065
 
 ### <a name="target-project-and-startup-project"></a>目標專案和啟始專案
 
-這些命令會參考 *專案* 和 *啟始專案* 。
+這些命令會參考 *專案* 和 *啟始專案*。
 
-* *專案* 也稱為 *目標專案* ，因為這是命令新增或移除檔案的位置。 根據預設，目前目錄中的專案是目標專案。 您可以使用選項，將不同的專案指定為目標專案 <nobr>`--project`</nobr> 。
+* *專案* 也稱為 *目標專案*，因為這是命令新增或移除檔案的位置。 根據預設，目前目錄中的專案是目標專案。 您可以使用選項，將不同的專案指定為目標專案 <nobr>`--project`</nobr> 。
 
 * *啟始專案* 是工具建立和執行的專案。 這些工具必須在設計階段執行應用程式程式碼，以取得專案的相關資訊，例如資料庫連接字串和模型的設定。 根據預設，目前目錄中的專案是啟始專案。 您可以使用選項，將不同的專案指定為啟始專案 <nobr>`--startup-project`</nobr> 。
 
@@ -111,7 +111,7 @@ dotnet ef database update -- --environment Production
 
 ## <a name="common-options"></a>一般選項
 
-| 選項                                         | Short             | 說明                                                                                                                                                                                                                                                   |
+| 選項                                         | Short             | Description                                                                                                                                                                                                                                                   |
 |:-----------------------------------------------|:------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--json`                                       |                   | 顯示 JSON 輸出。                                                                                                                                                                                                                                             |
 | `--context <DBCONTEXT>`                        | <nobr>`-c`</nobr> | 要使用的 `DbContext` 類別。 僅限類別名稱或完整限定命名空間。  如果省略此選項，EF Core 會尋找內容類別。 如果有多個內容類別，則需要此選項。                                            |
@@ -134,7 +134,7 @@ dotnet ef database update -- --environment Production
 
 選項：
 
-| 選項                   | Short             | 說明                                              |
+| 選項                   | Short             | Description                                              |
 |:-------------------------|:------------------|:---------------------------------------------------------|
 | `--force`                | <nobr>`-f`</nobr> | 不要確認。                                           |
 | <nobr>`--dry-run`</nobr> |                   | 顯示要卸載的資料庫，但不要卸載它。 |
@@ -147,13 +147,13 @@ dotnet ef database update -- --environment Production
 
 引數：
 
-| 引數                   | 說明                                                                                                                                                                                                                                                     |
+| 引數                   | 描述                                                                                                                                                                                                                                                     |
 |:---------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>`<MIGRATION>`</nobr> | 目標遷移。 遷移可依名稱或識別碼來識別。 數位0是特殊案例，這表示在 *第一次遷移之前* ，會將所有遷移還原。 如果未指定任何遷移，則命令會預設為上次的遷移。 |
 
 選項：
 
-| 選項                                    | 說明                                                                                                                      |
+| 選項                                    | Description                                                                                                                      |
 |:------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------|
 |  <nobr>`--connection <CONNECTION>`</nobr> | 資料庫的連接字串。 預設為或中所指定 `AddDbContext` 的 `OnConfiguring` 。 在 EF Core 5.0 中新增。 |
 
@@ -184,14 +184,14 @@ dotnet ef database update 20180904195021_InitialCreate --connection your_connect
 
 引數：
 
-| 引數                    | 說明                                                                                                                                                                                                             |
+| 引數                    | 描述                                                                                                                                                                                                             |
 |:----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>`<CONNECTION>`</nobr> | 資料庫的連接字串。 針對 ASP.NET Core 2.x 專案，值可以是 *名稱 = \<name of connection string>* 。 在該情況下，名稱來自為專案設定的設定來源。 |
+| <nobr>`<CONNECTION>`</nobr> | 資料庫的連接字串。 針對 ASP.NET Core 2.x 專案，值可以是 *名稱 = \<name of connection string>*。 在該情況下，名稱來自為專案設定的設定來源。 |
 | `<PROVIDER>`                | 要使用的提供者。 這通常是 NuGet 套件的名稱，例如： `Microsoft.EntityFrameworkCore.SqlServer` 。                                                                                           |
 
 選項：
 
-| 選項                                   | Short             | 說明                                                                                                                                                                    |
+| 選項                                   | Short             | Description                                                                                                                                                                    |
 |:-----------------------------------------|:------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--data-annotations`                     | <nobr>`-d`</nobr> | 您可以使用屬性來設定模型 (可能的) 。 如果省略此選項，則只會使用流暢的 API。                                                                |
 | `--context <NAME>`                       | `-c`              | `DbContext`要產生的類別名稱。                                                                                                                                 |
@@ -223,8 +223,8 @@ dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Tr
 下列範例會使用 [Secret Manager 工具](/aspnet/core/security/app-secrets#secret-manager)，從專案的設定集讀取連接字串。
 
 ```dotnetcli
-dotnet user-secrets set ConnectionStrings.Blogging "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Blogging"
-dotnet ef dbcontext scaffold Name=ConnectionStrings.Blogging Microsoft.EntityFrameworkCore.SqlServer
+dotnet user-secrets set ConnectionStrings:Blogging "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Blogging"
+dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 ## <a name="dotnet-ef-dbcontext-script"></a>dotnet ef dbcoNtext 腳本
@@ -233,7 +233,7 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings.Blogging Microsoft.EntityFra
 
 選項：
 
-| 選項                         | Short             | 說明                      |
+| 選項                         | Short             | Description                      |
 | ------------------------------ | ----------------- | -------------------------------- |
 | <nobr>`--output <FILE>`</nobr> | <nobr>`-o`</nobr> | 要寫入結果的檔案。 |
 
@@ -245,13 +245,13 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings.Blogging Microsoft.EntityFra
 
 引數：
 
-| 引數              | 說明                |
+| 引數              | 描述                |
 |:----------------------|:---------------------------|
 | <nobr>`<NAME>`</nobr> | 遷移的名稱。 |
 
 選項：
 
-| 選項                                 | Short             | 說明                                                                                                            |
+| 選項                                 | Short             | Description                                                                                                            |
 |:---------------------------------------|:------------------|:-----------------------------------------------------------------------------------------------------------------------|
 | `--output-dir <PATH>`                  | <nobr>`-o`</nobr> | 用來輸出檔案的目錄。 路徑是相對於目標專案目錄。 預設為「遷移」。   |
 | <nobr>`--namespace <NAMESPACE>`</nobr> | `-n`              | 要用於產生之類別的命名空間。 預設為從輸出目錄產生。 在 EF Core 5.0 中新增。 |
@@ -264,7 +264,7 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings.Blogging Microsoft.EntityFra
 
 選項：
 
-| 選項                                   | 說明                                                                                                                  |
+| 選項                                   | Description                                                                                                                  |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | <nobr>`--connection <CONNECTION>`</nobr> | 資料庫的連接字串。 預設為 AddDbCoNtext 或 OnConfiguring 中指定的值。 在 EF Core 5.0 中新增。 |
 | `--no-connect`                           | 請勿連接至資料庫。 在 EF Core 5.0 中新增。                                                                         |
@@ -277,7 +277,7 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings.Blogging Microsoft.EntityFra
 
 選項：
 
-| 選項                 | Short             | 說明                                                                     |
+| 選項                 | Short             | Description                                                                     |
 |:-----------------------|:------------------|:--------------------------------------------------------------------------------|
 | <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | 還原遷移 (復原已套用至資料庫) 的變更。 |
 
@@ -289,14 +289,14 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings.Blogging Microsoft.EntityFra
 
 引數：
 
-| 引數              | 說明                                                                                                                                                   |
+| 引數              | 描述                                                                                                                                                   |
 |:----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>`<FROM>`</nobr> | 開始遷移。 遷移可依名稱或識別碼來識別。 數位0是特殊案例，這表示在 *第一次遷移之前* 。 預設為 0。 |
+| <nobr>`<FROM>`</nobr> | 開始遷移。 遷移可依名稱或識別碼來識別。 數位0是特殊案例，這表示在 *第一次遷移之前*。 預設為 0。 |
 | `<TO>`                | 結束的遷移。 預設為上次的遷移。                                                                                                         |
 
 選項：
 
-| 選項                           | Short             | 說明                                                        |
+| 選項                           | Short             | Description                                                        |
 |:---------------------------------|:------------------|:-------------------------------------------------------------------|
 | `--output <FILE>`                | <nobr>`-o`</nobr> | 要寫入腳本的檔案。                                   |
 | `--idempotent`                   | `-i`              | 產生可在任何遷移時用於資料庫的腳本。 |

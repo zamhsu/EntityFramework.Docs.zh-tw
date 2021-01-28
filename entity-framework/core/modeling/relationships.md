@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 時如何設定實體類型之間的�
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 2bc17365adb802f2e813077731ae70c68f8e3be3
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 93d129435a3583ac5f741cc27952fb702f415a01
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129170"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983465"
 ---
 # <a name="relationships"></a>關聯性
 
@@ -301,7 +301,10 @@ CREATE TABLE [PostTag] (
 );
 ```
 
-就內部而言，EF 會建立實體型別來代表聯結資料表，而該聯結資料表將被稱為聯結實體型別。 `Dictionary<string, object>` 用來處理外鍵屬性的任何組合，如需詳細資訊，請參閱 [屬性包實體類型](shadow-properties.md#property-bag-entity-types) 。 模型中可以有一個以上的多對多關聯性，因此，在此情況下，必須為聯結實體類型指定唯一的名稱 `PostTag` 。 允許這項功能的功能稱為共用類型實體類型。
+就內部而言，EF 會建立實體型別來代表聯結資料表，而該聯結資料表將被稱為聯結實體型別。 `Dictionary<string, object>` 目前用來處理外鍵屬性的任何組合，如需詳細資訊，請參閱 [屬性包實體類型](shadow-properties.md#property-bag-entity-types) 。 模型中可以有一個以上的多對多關聯性，因此，在此情況下，必須為聯結實體類型指定唯一的名稱 `PostTag` 。 允許這項功能的功能稱為共用類型實體類型。
+
+> [!IMPORTANT]
+> 依慣例用於聯結實體類型的 CLR 型別，在未來的版本中可能會變更，以改善效能。 `Dictionary<string, object>`除非已明確設定，否則請勿依賴聯結類型，如下一節所述。
 
 「多對多導覽」稱為「略過導覽」，因為它們可有效略過聯結實體類型。 如果您正在採用大量設定，則可以從取得所有略過導覽 <xref:Microsoft.EntityFrameworkCore.Metadata.IEntityType.GetSkipNavigations%2A> 。
 

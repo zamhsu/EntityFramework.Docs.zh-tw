@@ -4,12 +4,12 @@ description: 設定當實體從其主體/父系刪除或中斷時，所觸發的
 author: ajcvickers
 ms.date: 01/07/2021
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 7c35de900930cf42da0e534df76124b5fb19ca52
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 27ba84fa5d7e0d72e66ccbd96df9b6a5008791fb
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128858"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983335"
 ---
 # <a name="cascade-delete"></a>串聯刪除
 
@@ -473,11 +473,11 @@ SELECT @@ROWCOUNT;
 |:----------------------|--------------------------
 | Cascade               | ON DELETE CASCADE
 | 限制              | ON DELETE NO ACTION
-| NoAction              | <database default>
+| NoAction              | 資料庫預設值
 | SetNull               | ON DELETE SET NULL
 | ClientSetNull         | ON DELETE NO ACTION
 | ClientCascade         | ON DELETE NO ACTION
-| ClientNoAction        | <database default>
+| ClientNoAction        | 資料庫預設值
 
 > [!NOTE]
 > 此資料表很令人困惑，我們計畫在未來的版本中重新討論。 請參閱 [GitHub 問題 #21252](https://github.com/dotnet/efcore/issues/21252)。
@@ -518,13 +518,13 @@ SELECT @@ROWCOUNT;
 
 | Deletebehavior.restrict    | 刪除主體/父系時             | 從 principal/parent 切斷
 |:------------------|------------------------------------------|----------------------------------------
-| Cascade           | 資料庫刪除的相依項           | 不適用
-| 限制          | `DbUpdateException`                      | 不適用
-| NoAction          | `DbUpdateException`                      | 不適用
-| SetNull           | `SqlException` 建立資料庫時      | 不適用
-| ClientSetNull     | `DbUpdateException`                      | 不適用
-| ClientCascade     | `DbUpdateException`                      | 不適用
-| ClientNoAction    | `DbUpdateException`                      | 不適用
+| Cascade           | 資料庫刪除的相依項           | N/A
+| 限制          | `DbUpdateException`                      | N/A
+| NoAction          | `DbUpdateException`                      | N/A
+| SetNull           | `SqlException` 建立資料庫時      | N/A
+| ClientSetNull     | `DbUpdateException`                      | N/A
+| ClientCascade     | `DbUpdateException`                      | N/A
+| ClientNoAction    | `DbUpdateException`                      | N/A
 
 注意：
 
@@ -557,13 +557,13 @@ SELECT @@ROWCOUNT;
 
 | Deletebehavior.restrict    | 刪除主體/父系時             | 從 principal/parent 切斷
 |:------------------|------------------------------------------|----------------------------------------
-| Cascade           | 資料庫刪除的相依項           | 不適用
-| 限制          | `DbUpdateException`                      | 不適用
-| NoAction          | `DbUpdateException`                      | 不適用
-| SetNull           | 依資料庫將相依 Fk 設為 null    | 不適用
-| ClientSetNull     | `DbUpdateException`                      | 不適用
-| ClientCascade     | `DbUpdateException`                      | 不適用
-| ClientNoAction    | `DbUpdateException`                      | 不適用
+| Cascade           | 資料庫刪除的相依項           | N/A
+| 限制          | `DbUpdateException`                      | N/A
+| NoAction          | `DbUpdateException`                      | N/A
+| SetNull           | 依資料庫將相依 Fk 設為 null    | N/A
+| ClientSetNull     | `DbUpdateException`                      | N/A
+| ClientCascade     | `DbUpdateException`                      | N/A
+| ClientNoAction    | `DbUpdateException`                      | N/A
 
 注意：
 

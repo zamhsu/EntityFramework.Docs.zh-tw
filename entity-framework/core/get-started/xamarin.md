@@ -1,18 +1,18 @@
 ---
-title: 使用 EF Core 和 Xamarin EF Core 的消費者入門
+title: 使用 EF Core 和 Xamarin EF Core 的開始使用
 description: 使用 Xamarin 建立行動裝置應用程式的使用者入門教學課程 Entity Framework Core
 author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: c19c70903926c2c8ff4b51cca7781859af7e3567
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: e4a26d7a0c6909002be0974ee9fe1c5db7c1046a
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128780"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983595"
 ---
-# <a name="getting-started-with-ef-core-and-xamarin"></a>使用 EF Core 和 Xamarin 消費者入門
+# <a name="getting-started-with-ef-core-and-xamarin"></a>使用 EF Core 和 Xamarin 開始使用
 
 在本教學課程中，您會建立一個 [Xamarin. Forms](/xamarin/get-started/what-is-xamarin-forms) 應用程式，該應用程式會使用 Entity Framework Core 對 SQLite 資料庫執行資料存取。
 
@@ -21,7 +21,7 @@ ms.locfileid: "98128780"
 > [!TIP]
 > 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Xamarin)。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 安裝下列其中一項：
 
@@ -78,8 +78,7 @@ ms.locfileid: "98128780"
 >
 > * 第一個方法是將新增 `--linkskip System.Core` 至 **iOS 組建** 選項中的 **其他 mtouch 引數**。
 > * 或者，  `Don't Link` 在 **ios 組建** 選項中將 [Xamarin] 連結器行為設定為。
-> 本文將[詳細說明 xamarin 連結器](/xamarin/ios/deploy-test/linker)，包括如何在 xamarin 上設定行為。
->
+> 本文將[詳細說明 xamarin 連結器](/xamarin/ios/deploy-test/linker)，包括如何在 xamarin 上設定行為。  (這種方法並不理想，因為它可能會導致存放區) 遭到拒絕。
 
 ## <a name="entity-framework-core-nuget-packages"></a>Entity Framework Core NuGet 套件
 
@@ -200,7 +199,7 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 在此快速入門中，您已瞭解如何使用 Xamarin 應用程式，利用 Entity Framework Core 來存取 SQLite 資料庫。
 

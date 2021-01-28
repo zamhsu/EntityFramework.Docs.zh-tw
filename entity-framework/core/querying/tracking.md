@@ -4,12 +4,12 @@ description: Entity Framework Core 中追蹤和無追蹤查詢的資訊
 author: smitpatel
 ms.date: 11/09/2020
 uid: core/querying/tracking
-ms.openlocfilehash: 1b3c1db702438390c0de4a2ad5d13e868a522b65
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: cb18125fb3453bb533981afb36480b12727cd6f2
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128897"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983413"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>追蹤與 No-Tracking 的查詢
 
@@ -67,7 +67,7 @@ ms.locfileid: "98128897"
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#ClientMethod)]
 
-EF Core 不會追蹤結果中包含的無索引鍵實體實例。 但是 EF Core 會根據上述規則，追蹤實體類型的所有其他實例與索引鍵。
+EF Core 不會追蹤結果中包含的無索引鍵實體實例。 但是 EF Core 會根據上述規則，以索引鍵來追蹤實體類型的所有其他實例。
 
 上述一些規則在 EF Core 3.0 之前的運作方式不同。 如需詳細資訊，請參閱 [先前的版本](#previous-versions)。
 
@@ -82,5 +82,5 @@ EF Core 不會追蹤結果中包含的無索引鍵實體實例。 但是 EF Core
   - 在某些情況下，EF Core 不會追蹤 LINQ 組合所推出的物件。 下列範例沒有追蹤 `Post` 。
     [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#CustomProjection2)]
 
-- 每當查詢結果包含無索引鍵的實體類型時，就會進行整個查詢進行非追蹤。 這表示不會追蹤具有索引鍵的實體類型，也就是結果。
-- EF Core 在無追蹤查詢中進行身分識別解析。 它使用弱式參考來追蹤已經傳回的實體。 因此，如果結果集包含相同的實體多次，則每次出現時，您都會取得相同的實例。 雖然先前具有相同身分識別的結果超出範圍，且已進行垃圾收集，但 EF Core 會傳回新的實例。
+- 每當查詢結果包含無索引鍵的實體類型時，就會進行整個查詢進行非追蹤。 這表示不會追蹤結果中有索引鍵的實體類型。
+- EF Core 用來在無追蹤查詢中進行身分識別解析。 它使用弱式參考來追蹤已經傳回的實體。 因此，如果結果集包含相同的實體多次，則每次出現時，您都會取得相同的實例。 雖然先前具有相同身分識別的結果超出範圍，且已進行垃圾收集，但 EF Core 會傳回新的實例。
