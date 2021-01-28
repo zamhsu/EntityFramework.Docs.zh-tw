@@ -4,89 +4,89 @@ description: EF Core 的變更追蹤總覽
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/index
-ms.openlocfilehash: 52223e5472b09271d19ac9449a3989b4a0e277f7
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 8cfa4590af07ec1715eb48ec0c7acb3426b6a6b4
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129685"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983257"
 ---
-# <a name="change-tracking-in-ef-core"></a><span data-ttu-id="4a256-103">EF Core 中的變更追蹤</span><span class="sxs-lookup"><span data-stu-id="4a256-103">Change Tracking in EF Core</span></span>
+# <a name="change-tracking-in-ef-core"></a><span data-ttu-id="7300b-103">EF Core 中的變更追蹤</span><span class="sxs-lookup"><span data-stu-id="7300b-103">Change Tracking in EF Core</span></span>
 
-<span data-ttu-id="4a256-104">每個 <xref:Microsoft.EntityFrameworkCore.DbContext> 實例都會追蹤對實體所做的變更。</span><span class="sxs-lookup"><span data-stu-id="4a256-104">Each <xref:Microsoft.EntityFrameworkCore.DbContext> instance tracks changes made to entities.</span></span> <span data-ttu-id="4a256-105">接著，這些追蹤的實體會在呼叫時驅動資料庫的變更 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。</span><span class="sxs-lookup"><span data-stu-id="4a256-105">These tracked entities in turn drive the changes to the database when <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> is called.</span></span>
+<span data-ttu-id="7300b-104">每個 <xref:Microsoft.EntityFrameworkCore.DbContext> 實例都會追蹤對實體所做的變更。</span><span class="sxs-lookup"><span data-stu-id="7300b-104">Each <xref:Microsoft.EntityFrameworkCore.DbContext> instance tracks changes made to entities.</span></span> <span data-ttu-id="7300b-105">接著，這些追蹤的實體會在呼叫時驅動資料庫的變更 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。</span><span class="sxs-lookup"><span data-stu-id="7300b-105">These tracked entities in turn drive the changes to the database when <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> is called.</span></span>
 
-<span data-ttu-id="4a256-106">本檔概述 Entity Framework Core 的 (EF Core) 變更追蹤，以及它與查詢和更新之間的關聯。</span><span class="sxs-lookup"><span data-stu-id="4a256-106">This document presents an overview of Entity Framework Core (EF Core) change tracking and how it relates to queries and updates.</span></span>
-
-> [!TIP]
-> <span data-ttu-id="4a256-107">您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackingInEFCore)，以執行並偵測到本檔中的所有程式碼。</span><span class="sxs-lookup"><span data-stu-id="4a256-107">You can run and debug into all the code in this document by [downloading the sample code from GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackingInEFCore).</span></span>
+<span data-ttu-id="7300b-106">本檔概述 Entity Framework Core 的 (EF Core) 變更追蹤，以及它與查詢和更新之間的關聯。</span><span class="sxs-lookup"><span data-stu-id="7300b-106">This document presents an overview of Entity Framework Core (EF Core) change tracking and how it relates to queries and updates.</span></span>
 
 > [!TIP]
-> <span data-ttu-id="4a256-108">為了簡單起見，本檔會使用和參考同步方法（例如）， <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 而不是其非同步對應專案（例如） <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> 。</span><span class="sxs-lookup"><span data-stu-id="4a256-108">For simplicity, this document uses and references synchronous methods such as <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> rather their async equivalents such as <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>.</span></span> <span data-ttu-id="4a256-109">除非另有說明，否則呼叫和等候 async 方法可以替代。</span><span class="sxs-lookup"><span data-stu-id="4a256-109">Calling and awaiting the async method can be substituted unless otherwise noted.</span></span>
-
-## <a name="how-to-track-entities"></a><span data-ttu-id="4a256-110">如何追蹤實體</span><span class="sxs-lookup"><span data-stu-id="4a256-110">How to track entities</span></span>
-
-<span data-ttu-id="4a256-111">當實體實例為時，就會進行追蹤：</span><span class="sxs-lookup"><span data-stu-id="4a256-111">Entity instances become tracked when they are:</span></span>
-
-- <span data-ttu-id="4a256-112">從針對資料庫執行的查詢傳回</span><span class="sxs-lookup"><span data-stu-id="4a256-112">Returned from a query executed against the database</span></span>
-- <span data-ttu-id="4a256-113">由 `Add` 、 `Attach` 、 `Update` 或類似方法明確附加至 DbCoNtext</span><span class="sxs-lookup"><span data-stu-id="4a256-113">Explicitly attached to the DbContext by `Add`, `Attach`, `Update`, or similar methods</span></span>
-- <span data-ttu-id="4a256-114">偵測到連接到現有追蹤實體的新實體</span><span class="sxs-lookup"><span data-stu-id="4a256-114">Detected as new entities connected to existing tracked entities</span></span>
-
-<span data-ttu-id="4a256-115">當下列情況時，不會再追蹤實體實例：</span><span class="sxs-lookup"><span data-stu-id="4a256-115">Entity instances are no longer tracked when:</span></span>
-
-- <span data-ttu-id="4a256-116">已處置 DbCoNtext</span><span class="sxs-lookup"><span data-stu-id="4a256-116">The DbContext is disposed</span></span>
-- <span data-ttu-id="4a256-117"> (EF Core 5.0 和更新版本中已清除變更追蹤程式) </span><span class="sxs-lookup"><span data-stu-id="4a256-117">The change tracker is cleared (EF Core 5.0 and later)</span></span>
-- <span data-ttu-id="4a256-118">實體已明確卸離</span><span class="sxs-lookup"><span data-stu-id="4a256-118">The entities are explicitly detached</span></span>
-
-<span data-ttu-id="4a256-119">DbCoNtext 的設計目的是代表短期的工作單位，如 [DbCoNtext 初始化和](xref:core/dbcontext-configuration/index)設定中所述。</span><span class="sxs-lookup"><span data-stu-id="4a256-119">DbContext is designed to represent a short-lived unit-of-work, as described in [DbContext Initialization and Configuration](xref:core/dbcontext-configuration/index).</span></span> <span data-ttu-id="4a256-120">這表示處置 DbCoNtext 是停止追蹤實體 _的正常方式_ 。</span><span class="sxs-lookup"><span data-stu-id="4a256-120">This means that disposing the DbContext is _the normal way_ to stop tracking entities.</span></span> <span data-ttu-id="4a256-121">換句話說，DbCoNtext 的存留期應該是：</span><span class="sxs-lookup"><span data-stu-id="4a256-121">In other words, the lifetime of a DbContext should be:</span></span>
-
-1. <span data-ttu-id="4a256-122">建立 DbCoNtext 實例</span><span class="sxs-lookup"><span data-stu-id="4a256-122">Create the DbContext instance</span></span>
-2. <span data-ttu-id="4a256-123">追蹤某些實體</span><span class="sxs-lookup"><span data-stu-id="4a256-123">Track some entities</span></span>
-3. <span data-ttu-id="4a256-124">對實體進行一些變更</span><span class="sxs-lookup"><span data-stu-id="4a256-124">Make some changes to the entities</span></span>
-4. <span data-ttu-id="4a256-125">呼叫 SaveChanges 以更新資料庫</span><span class="sxs-lookup"><span data-stu-id="4a256-125">Call SaveChanges to update the database</span></span>
-5. <span data-ttu-id="4a256-126">處置 DbCoNtext 實例</span><span class="sxs-lookup"><span data-stu-id="4a256-126">Dispose the DbContext instance</span></span>
+> <span data-ttu-id="7300b-107">您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackingInEFCore)，以執行並偵測到本檔中的所有程式碼。</span><span class="sxs-lookup"><span data-stu-id="7300b-107">You can run and debug into all the code in this document by [downloading the sample code from GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackingInEFCore).</span></span>
 
 > [!TIP]
-> <span data-ttu-id="4a256-127">採用這種方法時，不需要清除變更追蹤器或明確卸離實體實例。</span><span class="sxs-lookup"><span data-stu-id="4a256-127">It is not necessary to clear the change tracker or explicitly detach entity instances when taking this approach.</span></span> <span data-ttu-id="4a256-128">但是，如果您需要卸離實體，則呼叫 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.Clear%2A?displayProperty=nameWithType> 會比將實體逐一卸離的效率更高。</span><span class="sxs-lookup"><span data-stu-id="4a256-128">However, if you do need to detach entities, then calling <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.Clear%2A?displayProperty=nameWithType> is more efficient than detaching entities one-by-one.</span></span>
+> <span data-ttu-id="7300b-108">為了簡單起見，本檔會使用和參考同步方法（例如）， <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 而不是其非同步對應專案（例如） <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> 。</span><span class="sxs-lookup"><span data-stu-id="7300b-108">For simplicity, this document uses and references synchronous methods such as <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> rather their async equivalents such as <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>.</span></span> <span data-ttu-id="7300b-109">除非另有說明，否則呼叫和等候 async 方法可以替代。</span><span class="sxs-lookup"><span data-stu-id="7300b-109">Calling and awaiting the async method can be substituted unless otherwise noted.</span></span>
 
-## <a name="entity-states"></a><span data-ttu-id="4a256-129">實體狀態</span><span class="sxs-lookup"><span data-stu-id="4a256-129">Entity states</span></span>
+## <a name="how-to-track-entities"></a><span data-ttu-id="7300b-110">如何追蹤實體</span><span class="sxs-lookup"><span data-stu-id="7300b-110">How to track entities</span></span>
 
-<span data-ttu-id="4a256-130">每個實體都與指定的相關聯 <xref:Microsoft.EntityFrameworkCore.EntityState> ：</span><span class="sxs-lookup"><span data-stu-id="4a256-130">Every entity is is associated with a given <xref:Microsoft.EntityFrameworkCore.EntityState>:</span></span>
+<span data-ttu-id="7300b-111">當實體實例為時，就會進行追蹤：</span><span class="sxs-lookup"><span data-stu-id="7300b-111">Entity instances become tracked when they are:</span></span>
 
-- <span data-ttu-id="4a256-131">`Detached` 未追蹤實體 <xref:Microsoft.EntityFrameworkCore.DbContext> 。</span><span class="sxs-lookup"><span data-stu-id="4a256-131">`Detached` entities are not being tracked by the <xref:Microsoft.EntityFrameworkCore.DbContext>.</span></span>
-- <span data-ttu-id="4a256-132">`Added` 實體是新的，而且尚未插入資料庫中。</span><span class="sxs-lookup"><span data-stu-id="4a256-132">`Added` entities are new and have not yet been inserted into the database.</span></span> <span data-ttu-id="4a256-133">這表示在呼叫時將會插入它們 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。</span><span class="sxs-lookup"><span data-stu-id="4a256-133">This means they will be inserted when <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> is called.</span></span>
-- <span data-ttu-id="4a256-134">`Unchanged` 實體從資料庫查詢 _以來尚未變更_ 。</span><span class="sxs-lookup"><span data-stu-id="4a256-134">`Unchanged` entities have _not_ been changed since they were queried from the database.</span></span> <span data-ttu-id="4a256-135">從查詢傳回的所有實體一開始都會處於此狀態。</span><span class="sxs-lookup"><span data-stu-id="4a256-135">All entities returned from queries are initially in this state.</span></span>
-- <span data-ttu-id="4a256-136">`Modified` 實體自資料庫查詢之後已經變更。</span><span class="sxs-lookup"><span data-stu-id="4a256-136">`Modified` entities have been changed since they were queried from the database.</span></span> <span data-ttu-id="4a256-137">這表示在呼叫 SaveChanges 時將會更新它們。</span><span class="sxs-lookup"><span data-stu-id="4a256-137">This means they will be updated when SaveChanges is called.</span></span>
-- <span data-ttu-id="4a256-138">`Deleted` 實體存在於資料庫中，但在呼叫 SaveChanges 時標示為已刪除。</span><span class="sxs-lookup"><span data-stu-id="4a256-138">`Deleted` entities exist in the database, but are marked to be deleted when SaveChanges is called.</span></span>
+- <span data-ttu-id="7300b-112">從針對資料庫執行的查詢傳回</span><span class="sxs-lookup"><span data-stu-id="7300b-112">Returned from a query executed against the database</span></span>
+- <span data-ttu-id="7300b-113">由 `Add` 、 `Attach` 、 `Update` 或類似方法明確附加至 DbCoNtext</span><span class="sxs-lookup"><span data-stu-id="7300b-113">Explicitly attached to the DbContext by `Add`, `Attach`, `Update`, or similar methods</span></span>
+- <span data-ttu-id="7300b-114">偵測到連接到現有追蹤實體的新實體</span><span class="sxs-lookup"><span data-stu-id="7300b-114">Detected as new entities connected to existing tracked entities</span></span>
 
-<span data-ttu-id="4a256-139">EF Core 會追蹤屬性層級的變更。</span><span class="sxs-lookup"><span data-stu-id="4a256-139">EF Core tracks changes at the property level.</span></span> <span data-ttu-id="4a256-140">例如，如果只修改了單一屬性值，資料庫更新將只會變更該值。</span><span class="sxs-lookup"><span data-stu-id="4a256-140">For example, if only a single property value is modified, then a database update will change only that value.</span></span> <span data-ttu-id="4a256-141">不過，只有當實體本身處於修改狀態時，才能將屬性標示為已修改。</span><span class="sxs-lookup"><span data-stu-id="4a256-141">However, properties can only be marked as modified when the entity itself is in the Modified state.</span></span> <span data-ttu-id="4a256-142"> (或從替代的觀點來看，修改的狀態表示至少有一個屬性值標示為已修改。 ) </span><span class="sxs-lookup"><span data-stu-id="4a256-142">(Or, from an alternate perspective, the Modified state means that at least one property value has been marked as modified.)</span></span>
+<span data-ttu-id="7300b-115">當下列情況時，不會再追蹤實體實例：</span><span class="sxs-lookup"><span data-stu-id="7300b-115">Entity instances are no longer tracked when:</span></span>
 
-<span data-ttu-id="4a256-143">下表摘要說明不同的狀態：</span><span class="sxs-lookup"><span data-stu-id="4a256-143">The following table summarizes the different states:</span></span>
+- <span data-ttu-id="7300b-116">已處置 DbCoNtext</span><span class="sxs-lookup"><span data-stu-id="7300b-116">The DbContext is disposed</span></span>
+- <span data-ttu-id="7300b-117"> (EF Core 5.0 和更新版本中已清除變更追蹤程式) </span><span class="sxs-lookup"><span data-stu-id="7300b-117">The change tracker is cleared (EF Core 5.0 and later)</span></span>
+- <span data-ttu-id="7300b-118">實體已明確卸離</span><span class="sxs-lookup"><span data-stu-id="7300b-118">The entities are explicitly detached</span></span>
 
-| <span data-ttu-id="4a256-144">實體狀態</span><span class="sxs-lookup"><span data-stu-id="4a256-144">Entity state</span></span>     | <span data-ttu-id="4a256-145">DbCoNtext 追蹤</span><span class="sxs-lookup"><span data-stu-id="4a256-145">Tracked by DbContext</span></span> | <span data-ttu-id="4a256-146">存在於資料庫中</span><span class="sxs-lookup"><span data-stu-id="4a256-146">Exists in database</span></span> | <span data-ttu-id="4a256-147">修改的屬性</span><span class="sxs-lookup"><span data-stu-id="4a256-147">Properties modified</span></span> | <span data-ttu-id="4a256-148">SaveChanges 上的動作</span><span class="sxs-lookup"><span data-stu-id="4a256-148">Action on SaveChanges</span></span>
+<span data-ttu-id="7300b-119">DbCoNtext 的設計目的是代表短期的工作單位，如 [DbCoNtext 初始化和](xref:core/dbcontext-configuration/index)設定中所述。</span><span class="sxs-lookup"><span data-stu-id="7300b-119">DbContext is designed to represent a short-lived unit-of-work, as described in [DbContext Initialization and Configuration](xref:core/dbcontext-configuration/index).</span></span> <span data-ttu-id="7300b-120">這表示處置 DbCoNtext 是停止追蹤實體 _的正常方式_ 。</span><span class="sxs-lookup"><span data-stu-id="7300b-120">This means that disposing the DbContext is _the normal way_ to stop tracking entities.</span></span> <span data-ttu-id="7300b-121">換句話說，DbCoNtext 的存留期應該是：</span><span class="sxs-lookup"><span data-stu-id="7300b-121">In other words, the lifetime of a DbContext should be:</span></span>
+
+1. <span data-ttu-id="7300b-122">建立 DbCoNtext 實例</span><span class="sxs-lookup"><span data-stu-id="7300b-122">Create the DbContext instance</span></span>
+2. <span data-ttu-id="7300b-123">追蹤某些實體</span><span class="sxs-lookup"><span data-stu-id="7300b-123">Track some entities</span></span>
+3. <span data-ttu-id="7300b-124">對實體進行一些變更</span><span class="sxs-lookup"><span data-stu-id="7300b-124">Make some changes to the entities</span></span>
+4. <span data-ttu-id="7300b-125">呼叫 SaveChanges 以更新資料庫</span><span class="sxs-lookup"><span data-stu-id="7300b-125">Call SaveChanges to update the database</span></span>
+5. <span data-ttu-id="7300b-126">處置 DbCoNtext 實例</span><span class="sxs-lookup"><span data-stu-id="7300b-126">Dispose the DbContext instance</span></span>
+
+> [!TIP]
+> <span data-ttu-id="7300b-127">採用這種方法時，不需要清除變更追蹤器或明確卸離實體實例。</span><span class="sxs-lookup"><span data-stu-id="7300b-127">It is not necessary to clear the change tracker or explicitly detach entity instances when taking this approach.</span></span> <span data-ttu-id="7300b-128">但是，如果您需要卸離實體，則呼叫 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.Clear%2A?displayProperty=nameWithType> 會比將實體逐一卸離的效率更高。</span><span class="sxs-lookup"><span data-stu-id="7300b-128">However, if you do need to detach entities, then calling <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.Clear%2A?displayProperty=nameWithType> is more efficient than detaching entities one-by-one.</span></span>
+
+## <a name="entity-states"></a><span data-ttu-id="7300b-129">實體狀態</span><span class="sxs-lookup"><span data-stu-id="7300b-129">Entity states</span></span>
+
+<span data-ttu-id="7300b-130">每個實體都與指定的相關聯 <xref:Microsoft.EntityFrameworkCore.EntityState> ：</span><span class="sxs-lookup"><span data-stu-id="7300b-130">Every entity is associated with a given <xref:Microsoft.EntityFrameworkCore.EntityState>:</span></span>
+
+- <span data-ttu-id="7300b-131">`Detached` 未追蹤實體 <xref:Microsoft.EntityFrameworkCore.DbContext> 。</span><span class="sxs-lookup"><span data-stu-id="7300b-131">`Detached` entities are not being tracked by the <xref:Microsoft.EntityFrameworkCore.DbContext>.</span></span>
+- <span data-ttu-id="7300b-132">`Added` 實體是新的，而且尚未插入資料庫中。</span><span class="sxs-lookup"><span data-stu-id="7300b-132">`Added` entities are new and have not yet been inserted into the database.</span></span> <span data-ttu-id="7300b-133">這表示在呼叫時將會插入它們 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。</span><span class="sxs-lookup"><span data-stu-id="7300b-133">This means they will be inserted when <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> is called.</span></span>
+- <span data-ttu-id="7300b-134">`Unchanged` 實體從資料庫查詢 _以來尚未變更_ 。</span><span class="sxs-lookup"><span data-stu-id="7300b-134">`Unchanged` entities have _not_ been changed since they were queried from the database.</span></span> <span data-ttu-id="7300b-135">從查詢傳回的所有實體一開始都會處於此狀態。</span><span class="sxs-lookup"><span data-stu-id="7300b-135">All entities returned from queries are initially in this state.</span></span>
+- <span data-ttu-id="7300b-136">`Modified` 實體自資料庫查詢之後已經變更。</span><span class="sxs-lookup"><span data-stu-id="7300b-136">`Modified` entities have been changed since they were queried from the database.</span></span> <span data-ttu-id="7300b-137">這表示在呼叫 SaveChanges 時將會更新它們。</span><span class="sxs-lookup"><span data-stu-id="7300b-137">This means they will be updated when SaveChanges is called.</span></span>
+- <span data-ttu-id="7300b-138">`Deleted` 實體存在於資料庫中，但在呼叫 SaveChanges 時標示為已刪除。</span><span class="sxs-lookup"><span data-stu-id="7300b-138">`Deleted` entities exist in the database, but are marked to be deleted when SaveChanges is called.</span></span>
+
+<span data-ttu-id="7300b-139">EF Core 會追蹤屬性層級的變更。</span><span class="sxs-lookup"><span data-stu-id="7300b-139">EF Core tracks changes at the property level.</span></span> <span data-ttu-id="7300b-140">例如，如果只修改了單一屬性值，資料庫更新將只會變更該值。</span><span class="sxs-lookup"><span data-stu-id="7300b-140">For example, if only a single property value is modified, then a database update will change only that value.</span></span> <span data-ttu-id="7300b-141">不過，只有當實體本身處於修改狀態時，才能將屬性標示為已修改。</span><span class="sxs-lookup"><span data-stu-id="7300b-141">However, properties can only be marked as modified when the entity itself is in the Modified state.</span></span> <span data-ttu-id="7300b-142"> (或從替代的觀點來看，修改的狀態表示至少有一個屬性值標示為已修改。 ) </span><span class="sxs-lookup"><span data-stu-id="7300b-142">(Or, from an alternate perspective, the Modified state means that at least one property value has been marked as modified.)</span></span>
+
+<span data-ttu-id="7300b-143">下表摘要說明不同的狀態：</span><span class="sxs-lookup"><span data-stu-id="7300b-143">The following table summarizes the different states:</span></span>
+
+| <span data-ttu-id="7300b-144">實體狀態</span><span class="sxs-lookup"><span data-stu-id="7300b-144">Entity state</span></span>     | <span data-ttu-id="7300b-145">DbCoNtext 追蹤</span><span class="sxs-lookup"><span data-stu-id="7300b-145">Tracked by DbContext</span></span> | <span data-ttu-id="7300b-146">存在於資料庫中</span><span class="sxs-lookup"><span data-stu-id="7300b-146">Exists in database</span></span> | <span data-ttu-id="7300b-147">修改的屬性</span><span class="sxs-lookup"><span data-stu-id="7300b-147">Properties modified</span></span> | <span data-ttu-id="7300b-148">SaveChanges 上的動作</span><span class="sxs-lookup"><span data-stu-id="7300b-148">Action on SaveChanges</span></span>
 |:-----------------|----------------------|--------------------|---------------------|-----------------------
-| `Detached`       | <span data-ttu-id="4a256-149">否</span><span class="sxs-lookup"><span data-stu-id="4a256-149">No</span></span>                   | -                  | -                   | -
-| `Added`          | <span data-ttu-id="4a256-150">是</span><span class="sxs-lookup"><span data-stu-id="4a256-150">Yes</span></span>                  | <span data-ttu-id="4a256-151">否</span><span class="sxs-lookup"><span data-stu-id="4a256-151">No</span></span>                 | -                   | <span data-ttu-id="4a256-152">插入</span><span class="sxs-lookup"><span data-stu-id="4a256-152">Insert</span></span>
-| `Unchanged`      | <span data-ttu-id="4a256-153">是</span><span class="sxs-lookup"><span data-stu-id="4a256-153">Yes</span></span>                  | <span data-ttu-id="4a256-154">是</span><span class="sxs-lookup"><span data-stu-id="4a256-154">Yes</span></span>                | <span data-ttu-id="4a256-155">否</span><span class="sxs-lookup"><span data-stu-id="4a256-155">No</span></span>                  | -
-| `Modified`       | <span data-ttu-id="4a256-156">是</span><span class="sxs-lookup"><span data-stu-id="4a256-156">Yes</span></span>                  | <span data-ttu-id="4a256-157">是</span><span class="sxs-lookup"><span data-stu-id="4a256-157">Yes</span></span>                | <span data-ttu-id="4a256-158">是</span><span class="sxs-lookup"><span data-stu-id="4a256-158">Yes</span></span>                 | <span data-ttu-id="4a256-159">更新</span><span class="sxs-lookup"><span data-stu-id="4a256-159">Update</span></span>
-| `Deleted`        | <span data-ttu-id="4a256-160">是</span><span class="sxs-lookup"><span data-stu-id="4a256-160">Yes</span></span>                  | <span data-ttu-id="4a256-161">是</span><span class="sxs-lookup"><span data-stu-id="4a256-161">Yes</span></span>                | -                   | <span data-ttu-id="4a256-162">刪除</span><span class="sxs-lookup"><span data-stu-id="4a256-162">Delete</span></span>
+| `Detached`       | <span data-ttu-id="7300b-149">否</span><span class="sxs-lookup"><span data-stu-id="7300b-149">No</span></span>                   | -                  | -                   | -
+| `Added`          | <span data-ttu-id="7300b-150">是</span><span class="sxs-lookup"><span data-stu-id="7300b-150">Yes</span></span>                  | <span data-ttu-id="7300b-151">否</span><span class="sxs-lookup"><span data-stu-id="7300b-151">No</span></span>                 | -                   | <span data-ttu-id="7300b-152">插入</span><span class="sxs-lookup"><span data-stu-id="7300b-152">Insert</span></span>
+| `Unchanged`      | <span data-ttu-id="7300b-153">是</span><span class="sxs-lookup"><span data-stu-id="7300b-153">Yes</span></span>                  | <span data-ttu-id="7300b-154">是</span><span class="sxs-lookup"><span data-stu-id="7300b-154">Yes</span></span>                | <span data-ttu-id="7300b-155">否</span><span class="sxs-lookup"><span data-stu-id="7300b-155">No</span></span>                  | -
+| `Modified`       | <span data-ttu-id="7300b-156">是</span><span class="sxs-lookup"><span data-stu-id="7300b-156">Yes</span></span>                  | <span data-ttu-id="7300b-157">是</span><span class="sxs-lookup"><span data-stu-id="7300b-157">Yes</span></span>                | <span data-ttu-id="7300b-158">是</span><span class="sxs-lookup"><span data-stu-id="7300b-158">Yes</span></span>                 | <span data-ttu-id="7300b-159">更新</span><span class="sxs-lookup"><span data-stu-id="7300b-159">Update</span></span>
+| `Deleted`        | <span data-ttu-id="7300b-160">是</span><span class="sxs-lookup"><span data-stu-id="7300b-160">Yes</span></span>                  | <span data-ttu-id="7300b-161">是</span><span class="sxs-lookup"><span data-stu-id="7300b-161">Yes</span></span>                | -                   | <span data-ttu-id="7300b-162">刪除</span><span class="sxs-lookup"><span data-stu-id="7300b-162">Delete</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="4a256-163">為了清楚起見，此文字使用關係資料庫詞彙。</span><span class="sxs-lookup"><span data-stu-id="4a256-163">This text uses relational database terms for clarity.</span></span> <span data-ttu-id="4a256-164">NoSQL 資料庫通常會支援類似的作業，但可能會有不同的名稱。</span><span class="sxs-lookup"><span data-stu-id="4a256-164">NoSQL databases typically support similar operations but possibly with different names.</span></span> <span data-ttu-id="4a256-165">如需詳細資訊，請參閱您的資料庫提供者檔。</span><span class="sxs-lookup"><span data-stu-id="4a256-165">Consult your database provider documentation for more information.</span></span>
+> <span data-ttu-id="7300b-163">為了清楚起見，此文字使用關係資料庫詞彙。</span><span class="sxs-lookup"><span data-stu-id="7300b-163">This text uses relational database terms for clarity.</span></span> <span data-ttu-id="7300b-164">NoSQL 資料庫通常會支援類似的作業，但可能會有不同的名稱。</span><span class="sxs-lookup"><span data-stu-id="7300b-164">NoSQL databases typically support similar operations but possibly with different names.</span></span> <span data-ttu-id="7300b-165">如需詳細資訊，請參閱您的資料庫提供者檔。</span><span class="sxs-lookup"><span data-stu-id="7300b-165">Consult your database provider documentation for more information.</span></span>
 
-## <a name="tracking-from-queries"></a><span data-ttu-id="4a256-166">從查詢追蹤</span><span class="sxs-lookup"><span data-stu-id="4a256-166">Tracking from queries</span></span>
+## <a name="tracking-from-queries"></a><span data-ttu-id="7300b-166">從查詢追蹤</span><span class="sxs-lookup"><span data-stu-id="7300b-166">Tracking from queries</span></span>
 
-<span data-ttu-id="4a256-167">當相同的 <xref:Microsoft.EntityFrameworkCore.DbContext> 實例用於查詢實體，並藉由呼叫來更新時，EF Core 變更追蹤的效果最佳。 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A></span><span class="sxs-lookup"><span data-stu-id="4a256-167">EF Core change tracking works best when the same <xref:Microsoft.EntityFrameworkCore.DbContext> instance is used to both query for entities and update them by calling <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A>.</span></span> <span data-ttu-id="4a256-168">這是因為 EF Core 會自動追蹤查詢實體的狀態，然後在呼叫 SaveChanges 時，偵測對這些實體所做的任何變更。</span><span class="sxs-lookup"><span data-stu-id="4a256-168">This is because EF Core automatically tracks the state of queried entities and then detects any changes made to these entities when SaveChanges is called.</span></span>
+<span data-ttu-id="7300b-167">當相同的 <xref:Microsoft.EntityFrameworkCore.DbContext> 實例用於查詢實體，並藉由呼叫來更新時，EF Core 變更追蹤的效果最佳。 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A></span><span class="sxs-lookup"><span data-stu-id="7300b-167">EF Core change tracking works best when the same <xref:Microsoft.EntityFrameworkCore.DbContext> instance is used to both query for entities and update them by calling <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A>.</span></span> <span data-ttu-id="7300b-168">這是因為 EF Core 會自動追蹤查詢實體的狀態，然後在呼叫 SaveChanges 時，偵測對這些實體所做的任何變更。</span><span class="sxs-lookup"><span data-stu-id="7300b-168">This is because EF Core automatically tracks the state of queried entities and then detects any changes made to these entities when SaveChanges is called.</span></span>
 
-<span data-ttu-id="4a256-169">這種方法有幾個優點，而不是 [明確追蹤實體實例](xref:core/change-tracking/explicit-tracking)：</span><span class="sxs-lookup"><span data-stu-id="4a256-169">This approach has several advantages over [explicitly tracking entity instances](xref:core/change-tracking/explicit-tracking):</span></span>
+<span data-ttu-id="7300b-169">這種方法有幾個優點，而不是 [明確追蹤實體實例](xref:core/change-tracking/explicit-tracking)：</span><span class="sxs-lookup"><span data-stu-id="7300b-169">This approach has several advantages over [explicitly tracking entity instances](xref:core/change-tracking/explicit-tracking):</span></span>
 
-- <span data-ttu-id="4a256-170">它為簡單式。</span><span class="sxs-lookup"><span data-stu-id="4a256-170">It is simple.</span></span> <span data-ttu-id="4a256-171">實體狀態很少需要明確操作，EF Core 負責處理狀態變更。</span><span class="sxs-lookup"><span data-stu-id="4a256-171">Entity states rarely need to be manipulated explicitly--EF Core takes care of state changes.</span></span>
-- <span data-ttu-id="4a256-172">更新僅限於實際變更的值。</span><span class="sxs-lookup"><span data-stu-id="4a256-172">Updates are limited to only those values that have actually changed.</span></span>
-- <span data-ttu-id="4a256-173">系統會保留 [陰影屬性](xref:core/modeling/shadow-properties) 的值，並視需要加以使用。</span><span class="sxs-lookup"><span data-stu-id="4a256-173">The values of [shadow properties](xref:core/modeling/shadow-properties) are preserved and used as needed.</span></span> <span data-ttu-id="4a256-174">當外鍵儲存在陰影狀態時，這會特別相關。</span><span class="sxs-lookup"><span data-stu-id="4a256-174">This is especially relevant when foreign keys are stored in shadow state.</span></span>
-- <span data-ttu-id="4a256-175">系統會自動保留屬性的原始值，並將其用於有效率的更新。</span><span class="sxs-lookup"><span data-stu-id="4a256-175">The original values of properties are preserved automatically and used for efficient updates.</span></span>
+- <span data-ttu-id="7300b-170">它為簡單式。</span><span class="sxs-lookup"><span data-stu-id="7300b-170">It is simple.</span></span> <span data-ttu-id="7300b-171">實體狀態很少需要明確操作，EF Core 負責處理狀態變更。</span><span class="sxs-lookup"><span data-stu-id="7300b-171">Entity states rarely need to be manipulated explicitly--EF Core takes care of state changes.</span></span>
+- <span data-ttu-id="7300b-172">更新僅限於實際變更的值。</span><span class="sxs-lookup"><span data-stu-id="7300b-172">Updates are limited to only those values that have actually changed.</span></span>
+- <span data-ttu-id="7300b-173">系統會保留 [陰影屬性](xref:core/modeling/shadow-properties) 的值，並視需要加以使用。</span><span class="sxs-lookup"><span data-stu-id="7300b-173">The values of [shadow properties](xref:core/modeling/shadow-properties) are preserved and used as needed.</span></span> <span data-ttu-id="7300b-174">當外鍵儲存在陰影狀態時，這會特別相關。</span><span class="sxs-lookup"><span data-stu-id="7300b-174">This is especially relevant when foreign keys are stored in shadow state.</span></span>
+- <span data-ttu-id="7300b-175">系統會自動保留屬性的原始值，並將其用於有效率的更新。</span><span class="sxs-lookup"><span data-stu-id="7300b-175">The original values of properties are preserved automatically and used for efficient updates.</span></span>
 
-## <a name="simple-query-and-update"></a><span data-ttu-id="4a256-176">簡單查詢和更新</span><span class="sxs-lookup"><span data-stu-id="4a256-176">Simple query and update</span></span>
+## <a name="simple-query-and-update"></a><span data-ttu-id="7300b-176">簡單查詢和更新</span><span class="sxs-lookup"><span data-stu-id="7300b-176">Simple query and update</span></span>
 
-<span data-ttu-id="4a256-177">例如，假設有一個簡單的 blog/post 模型：</span><span class="sxs-lookup"><span data-stu-id="4a256-177">For example, consider a simple blog/posts model:</span></span>
+<span data-ttu-id="7300b-177">例如，假設有一個簡單的 blog/post 模型：</span><span class="sxs-lookup"><span data-stu-id="7300b-177">For example, consider a simple blog/posts model:</span></span>
 
 <!--
 public class Blog
@@ -111,7 +111,7 @@ public class Post
 -->
 [!code-csharp[Model](../../../samples/core/ChangeTracking/ChangeTrackingInEFCore/GeneratedKeysSamples.cs?name=Model)]
 
-<span data-ttu-id="4a256-178">我們可以使用此模型來查詢 blog 和文章，然後對資料庫進行一些更新：</span><span class="sxs-lookup"><span data-stu-id="4a256-178">We can use this model to query for blogs and posts and then make some updates to the database:</span></span>
+<span data-ttu-id="7300b-178">我們可以使用此模型來查詢 blog 和文章，然後對資料庫進行一些更新：</span><span class="sxs-lookup"><span data-stu-id="7300b-178">We can use this model to query for blogs and posts and then make some updates to the database:</span></span>
 
 <!--
             using var context = new BlogsContext();
@@ -129,7 +129,7 @@ public class Post
 -->
 [!code-csharp[Simple_query_and_update_1](../../../samples/core/ChangeTracking/ChangeTrackingInEFCore/GeneratedKeysSamples.cs?name=Simple_query_and_update_1)]
 
-<span data-ttu-id="4a256-179">呼叫 SaveChanges 會導致下列資料庫更新，並使用 SQLite 作為範例資料庫：</span><span class="sxs-lookup"><span data-stu-id="4a256-179">Calling SaveChanges results in the following database updates, using SQLite as an example database:</span></span>
+<span data-ttu-id="7300b-179">呼叫 SaveChanges 會導致下列資料庫更新，並使用 SQLite 作為範例資料庫：</span><span class="sxs-lookup"><span data-stu-id="7300b-179">Calling SaveChanges results in the following database updates, using SQLite as an example database:</span></span>
 
 ```sql
 -- Executed DbCommand (0ms) [Parameters=[@p1='1' (DbType = String), @p0='.NET Blog (Updated!)' (Size = 20)], CommandType='Text', CommandTimeout='30']
@@ -143,7 +143,7 @@ WHERE "Id" = @p1;
 SELECT changes();
 ```
 
-<span data-ttu-id="4a256-180">[變更追蹤](xref:core/change-tracking/debug-views)器的偵錯工具可讓您以視覺化方式呈現正在追蹤的實體及其狀態。</span><span class="sxs-lookup"><span data-stu-id="4a256-180">The [change tracker debug view](xref:core/change-tracking/debug-views) is a great way visualize which entities are being tracked and what their states are.</span></span> <span data-ttu-id="4a256-181">例如，在呼叫 SaveChanges 之前，將下列程式碼插入至上述範例：</span><span class="sxs-lookup"><span data-stu-id="4a256-181">For example, inserting the following code into the sample above before calling SaveChanges:</span></span>
+<span data-ttu-id="7300b-180">[變更追蹤](xref:core/change-tracking/debug-views)器的偵錯工具可讓您以視覺化方式呈現正在追蹤的實體及其狀態。</span><span class="sxs-lookup"><span data-stu-id="7300b-180">The [change tracker debug view](xref:core/change-tracking/debug-views) is a great way visualize which entities are being tracked and what their states are.</span></span> <span data-ttu-id="7300b-181">例如，在呼叫 SaveChanges 之前，將下列程式碼插入至上述範例：</span><span class="sxs-lookup"><span data-stu-id="7300b-181">For example, inserting the following code into the sample above before calling SaveChanges:</span></span>
 
 <!--
                 context.ChangeTracker.DetectChanges();
@@ -151,7 +151,7 @@ SELECT changes();
 -->
 [!code-csharp[Simple_query_and_update_2](../../../samples/core/ChangeTracking/ChangeTrackingInEFCore/GeneratedKeysSamples.cs?name=Simple_query_and_update_2)]
 
-<span data-ttu-id="4a256-182">產生下列輸出：</span><span class="sxs-lookup"><span data-stu-id="4a256-182">Generates the following output:</span></span>
+<span data-ttu-id="7300b-182">產生下列輸出：</span><span class="sxs-lookup"><span data-stu-id="7300b-182">Generates the following output:</span></span>
 
 ```output
 Blog {Id: 1} Modified
@@ -172,16 +172,16 @@ Post {Id: 2} Modified
   Blog: {Id: 1}
 ```
 
-<span data-ttu-id="4a256-183">請特別注意：</span><span class="sxs-lookup"><span data-stu-id="4a256-183">Notice specifically:</span></span>
+<span data-ttu-id="7300b-183">請特別注意：</span><span class="sxs-lookup"><span data-stu-id="7300b-183">Notice specifically:</span></span>
 
-- <span data-ttu-id="4a256-184">`Blog.Name`屬性會標示為修改的 (`Name: '.NET Blog (Updated!)' Modified Originally '.NET Blog'`) ，而這會導致 blog 處於 `Modified` 狀態。</span><span class="sxs-lookup"><span data-stu-id="4a256-184">The `Blog.Name` property is marked as modified (`Name: '.NET Blog (Updated!)' Modified Originally '.NET Blog'`), and this results in the blog being in the `Modified` state.</span></span>
-- <span data-ttu-id="4a256-185">`Post.Title`Post 2 的屬性會標示為修改的 (`Title: 'Announcing F# 5.0' Modified Originally 'Announcing F# 5'`) ，這會導致此文章處於 `Modified` 狀態。</span><span class="sxs-lookup"><span data-stu-id="4a256-185">The `Post.Title` property of post 2 is marked as modified (`Title: 'Announcing F# 5.0' Modified Originally 'Announcing F# 5'`), and this results in this post being in the `Modified` state.</span></span>
-- <span data-ttu-id="4a256-186">第2篇的其他屬性值並未變更，因此未標示為已修改。</span><span class="sxs-lookup"><span data-stu-id="4a256-186">The other property values of post 2 have not changed and are therefore not marked as modified.</span></span> <span data-ttu-id="4a256-187">這就是為什麼這些值不會包含在資料庫更新中的原因。</span><span class="sxs-lookup"><span data-stu-id="4a256-187">This is why these values are not included in the database update.</span></span>
-- <span data-ttu-id="4a256-188">另一篇文章未以任何方式修改。</span><span class="sxs-lookup"><span data-stu-id="4a256-188">The other post was not modified in any way.</span></span> <span data-ttu-id="4a256-189">這就是為什麼它仍處於 `Unchanged` 狀態，而且不包含在資料庫更新中。</span><span class="sxs-lookup"><span data-stu-id="4a256-189">This is why it is still in the `Unchanged` state and is not included in the database update.</span></span>
+- <span data-ttu-id="7300b-184">`Blog.Name`屬性會標示為修改的 (`Name: '.NET Blog (Updated!)' Modified Originally '.NET Blog'`) ，而這會導致 blog 處於 `Modified` 狀態。</span><span class="sxs-lookup"><span data-stu-id="7300b-184">The `Blog.Name` property is marked as modified (`Name: '.NET Blog (Updated!)' Modified Originally '.NET Blog'`), and this results in the blog being in the `Modified` state.</span></span>
+- <span data-ttu-id="7300b-185">`Post.Title`Post 2 的屬性會標示為修改的 (`Title: 'Announcing F# 5.0' Modified Originally 'Announcing F# 5'`) ，這會導致此文章處於 `Modified` 狀態。</span><span class="sxs-lookup"><span data-stu-id="7300b-185">The `Post.Title` property of post 2 is marked as modified (`Title: 'Announcing F# 5.0' Modified Originally 'Announcing F# 5'`), and this results in this post being in the `Modified` state.</span></span>
+- <span data-ttu-id="7300b-186">第2篇的其他屬性值並未變更，因此未標示為已修改。</span><span class="sxs-lookup"><span data-stu-id="7300b-186">The other property values of post 2 have not changed and are therefore not marked as modified.</span></span> <span data-ttu-id="7300b-187">這就是為什麼這些值不會包含在資料庫更新中的原因。</span><span class="sxs-lookup"><span data-stu-id="7300b-187">This is why these values are not included in the database update.</span></span>
+- <span data-ttu-id="7300b-188">另一篇文章未以任何方式修改。</span><span class="sxs-lookup"><span data-stu-id="7300b-188">The other post was not modified in any way.</span></span> <span data-ttu-id="7300b-189">這就是為什麼它仍處於 `Unchanged` 狀態，而且不包含在資料庫更新中。</span><span class="sxs-lookup"><span data-stu-id="7300b-189">This is why it is still in the `Unchanged` state and is not included in the database update.</span></span>
 
-## <a name="query-then-insert-update-and-delete"></a><span data-ttu-id="4a256-190">查詢、插入、更新和刪除</span><span class="sxs-lookup"><span data-stu-id="4a256-190">Query then insert, update, and delete</span></span>
+## <a name="query-then-insert-update-and-delete"></a><span data-ttu-id="7300b-190">查詢、插入、更新和刪除</span><span class="sxs-lookup"><span data-stu-id="7300b-190">Query then insert, update, and delete</span></span>
 
-<span data-ttu-id="4a256-191">如同上述範例中的更新，可以與相同工作單位中的插入和刪除結合。</span><span class="sxs-lookup"><span data-stu-id="4a256-191">Updates like those in the previous example can be combined with inserts and deletes in the same unit-of-work.</span></span> <span data-ttu-id="4a256-192">例如：</span><span class="sxs-lookup"><span data-stu-id="4a256-192">For example:</span></span>
+<span data-ttu-id="7300b-191">如同上述範例中的更新，可以與相同工作單位中的插入和刪除結合。</span><span class="sxs-lookup"><span data-stu-id="7300b-191">Updates like those in the previous example can be combined with inserts and deletes in the same unit-of-work.</span></span> <span data-ttu-id="7300b-192">例如：</span><span class="sxs-lookup"><span data-stu-id="7300b-192">For example:</span></span>
 
 <!--
             using var context = new BlogsContext();
@@ -209,14 +209,14 @@ Post {Id: 2} Modified
 -->
 [!code-csharp[Query_then_insert_update_and_delete_1](../../../samples/core/ChangeTracking/ChangeTrackingInEFCore/GeneratedKeysSamples.cs?name=Query_then_insert_update_and_delete_1)]
 
-<span data-ttu-id="4a256-193">在此範例中：</span><span class="sxs-lookup"><span data-stu-id="4a256-193">In this example:</span></span>
+<span data-ttu-id="7300b-193">在此範例中：</span><span class="sxs-lookup"><span data-stu-id="7300b-193">In this example:</span></span>
 
-- <span data-ttu-id="4a256-194">從資料庫查詢和追蹤的 blog 和相關文章</span><span class="sxs-lookup"><span data-stu-id="4a256-194">A blog and related posts are queried from the database and tracked</span></span>
-- <span data-ttu-id="4a256-195">`Blog.Name`屬性已變更</span><span class="sxs-lookup"><span data-stu-id="4a256-195">The `Blog.Name` property is changed</span></span>
-- <span data-ttu-id="4a256-196">新貼文會新增至 blog 的現有文章集合</span><span class="sxs-lookup"><span data-stu-id="4a256-196">A new post is added to the collection of existing posts for the blog</span></span>
-- <span data-ttu-id="4a256-197">藉由呼叫來標記現有的貼文以進行刪除 <xref:Microsoft.EntityFrameworkCore.DbContext.Remove%2A?displayProperty=nameWithType></span><span class="sxs-lookup"><span data-stu-id="4a256-197">An existing post is marked for deletion by calling <xref:Microsoft.EntityFrameworkCore.DbContext.Remove%2A?displayProperty=nameWithType></span></span>
+- <span data-ttu-id="7300b-194">從資料庫查詢和追蹤的 blog 和相關文章</span><span class="sxs-lookup"><span data-stu-id="7300b-194">A blog and related posts are queried from the database and tracked</span></span>
+- <span data-ttu-id="7300b-195">`Blog.Name`屬性已變更</span><span class="sxs-lookup"><span data-stu-id="7300b-195">The `Blog.Name` property is changed</span></span>
+- <span data-ttu-id="7300b-196">新貼文會新增至 blog 的現有文章集合</span><span class="sxs-lookup"><span data-stu-id="7300b-196">A new post is added to the collection of existing posts for the blog</span></span>
+- <span data-ttu-id="7300b-197">藉由呼叫來標記現有的貼文以進行刪除 <xref:Microsoft.EntityFrameworkCore.DbContext.Remove%2A?displayProperty=nameWithType></span><span class="sxs-lookup"><span data-stu-id="7300b-197">An existing post is marked for deletion by calling <xref:Microsoft.EntityFrameworkCore.DbContext.Remove%2A?displayProperty=nameWithType></span></span>
 
-<span data-ttu-id="4a256-198">在呼叫 SaveChanges 之前再次查看 [變更追蹤器調試](xref:core/change-tracking/debug-views) 程式，會顯示 EF Core 如何追蹤這些變更：</span><span class="sxs-lookup"><span data-stu-id="4a256-198">Looking again at the [change tracker debug view](xref:core/change-tracking/debug-views) before calling SaveChanges shows how EF Core is tracking these changes:</span></span>
+<span data-ttu-id="7300b-198">在呼叫 SaveChanges 之前再次查看 [變更追蹤器調試](xref:core/change-tracking/debug-views) 程式，會顯示 EF Core 如何追蹤這些變更：</span><span class="sxs-lookup"><span data-stu-id="7300b-198">Looking again at the [change tracker debug view](xref:core/change-tracking/debug-views) before calling SaveChanges shows how EF Core is tracking these changes:</span></span>
 
 ```output
 Blog {Id: 1} Modified
@@ -243,13 +243,13 @@ Post {Id: 2} Deleted
   Blog: {Id: 1}
 ```
 
-<span data-ttu-id="4a256-199">請注意：</span><span class="sxs-lookup"><span data-stu-id="4a256-199">Notice that:</span></span>
+<span data-ttu-id="7300b-199">請注意：</span><span class="sxs-lookup"><span data-stu-id="7300b-199">Notice that:</span></span>
 
-- <span data-ttu-id="4a256-200">此 blog 會標示為 `Modified` 。</span><span class="sxs-lookup"><span data-stu-id="4a256-200">The blog is marked as `Modified`.</span></span> <span data-ttu-id="4a256-201">這會產生資料庫更新。</span><span class="sxs-lookup"><span data-stu-id="4a256-201">This will generate a database update.</span></span>
-- <span data-ttu-id="4a256-202">Post 2 標示為 `Deleted` 。</span><span class="sxs-lookup"><span data-stu-id="4a256-202">Post 2 is marked as `Deleted`.</span></span> <span data-ttu-id="4a256-203">這會產生資料庫刪除。</span><span class="sxs-lookup"><span data-stu-id="4a256-203">This will generate a database delete.</span></span>
-- <span data-ttu-id="4a256-204">具有暫存識別碼的新貼文會與 blog 1 相關聯，並標示為 `Added` 。</span><span class="sxs-lookup"><span data-stu-id="4a256-204">A new post with a temporary ID is associated with blog 1 and is marked as `Added`.</span></span> <span data-ttu-id="4a256-205">這會產生資料庫插入。</span><span class="sxs-lookup"><span data-stu-id="4a256-205">This will generate a database insert.</span></span>
+- <span data-ttu-id="7300b-200">此 blog 會標示為 `Modified` 。</span><span class="sxs-lookup"><span data-stu-id="7300b-200">The blog is marked as `Modified`.</span></span> <span data-ttu-id="7300b-201">這會產生資料庫更新。</span><span class="sxs-lookup"><span data-stu-id="7300b-201">This will generate a database update.</span></span>
+- <span data-ttu-id="7300b-202">Post 2 標示為 `Deleted` 。</span><span class="sxs-lookup"><span data-stu-id="7300b-202">Post 2 is marked as `Deleted`.</span></span> <span data-ttu-id="7300b-203">這會產生資料庫刪除。</span><span class="sxs-lookup"><span data-stu-id="7300b-203">This will generate a database delete.</span></span>
+- <span data-ttu-id="7300b-204">具有暫存識別碼的新貼文會與 blog 1 相關聯，並標示為 `Added` 。</span><span class="sxs-lookup"><span data-stu-id="7300b-204">A new post with a temporary ID is associated with blog 1 and is marked as `Added`.</span></span> <span data-ttu-id="7300b-205">這會產生資料庫插入。</span><span class="sxs-lookup"><span data-stu-id="7300b-205">This will generate a database insert.</span></span>
 
-<span data-ttu-id="4a256-206">這會導致下列資料庫命令 (在呼叫 SaveChanges 時使用 SQLite) ：</span><span class="sxs-lookup"><span data-stu-id="4a256-206">This results in the following database commands (using SQLite) when SaveChanges is called:</span></span>
+<span data-ttu-id="7300b-206">這會導致下列資料庫命令 (在呼叫 SaveChanges 時使用 SQLite) ：</span><span class="sxs-lookup"><span data-stu-id="7300b-206">This results in the following database commands (using SQLite) when SaveChanges is called:</span></span>
 
 ```sql
 -- Executed DbCommand (0ms) [Parameters=[@p1='1' (DbType = String), @p0='.NET Blog (Updated!)' (Size = 20)], CommandType='Text', CommandTimeout='30']
@@ -270,7 +270,7 @@ FROM "Posts"
 WHERE changes() = 1 AND "rowid" = last_insert_rowid();
 ```
 
-<span data-ttu-id="4a256-207">如需有關插入和刪除實體的詳細資訊，請參閱 [明確的追蹤實體](xref:core/change-tracking/explicit-tracking) 。</span><span class="sxs-lookup"><span data-stu-id="4a256-207">See [Explicitly Tracking Entities](xref:core/change-tracking/explicit-tracking) for more information on inserting and deleting entities.</span></span> <span data-ttu-id="4a256-208">如需 EF Core 如何自動偵測這類變更的詳細資訊，請參閱 [變更偵測和通知](xref:core/change-tracking/change-detection) 。</span><span class="sxs-lookup"><span data-stu-id="4a256-208">See [Change Detection and Notifications](xref:core/change-tracking/change-detection) for more information on how EF Core automatically detects changes like this.</span></span>
+<span data-ttu-id="7300b-207">如需有關插入和刪除實體的詳細資訊，請參閱 [明確的追蹤實體](xref:core/change-tracking/explicit-tracking) 。</span><span class="sxs-lookup"><span data-stu-id="7300b-207">See [Explicitly Tracking Entities](xref:core/change-tracking/explicit-tracking) for more information on inserting and deleting entities.</span></span> <span data-ttu-id="7300b-208">如需 EF Core 如何自動偵測這類變更的詳細資訊，請參閱 [變更偵測和通知](xref:core/change-tracking/change-detection) 。</span><span class="sxs-lookup"><span data-stu-id="7300b-208">See [Change Detection and Notifications](xref:core/change-tracking/change-detection) for more information on how EF Core automatically detects changes like this.</span></span>
 
 > [!TIP]
-> <span data-ttu-id="4a256-209">呼叫 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.HasChanges?displayProperty=nameWithType> 以判斷是否有任何變更會導致 SaveChanges 進行資料庫的更新。</span><span class="sxs-lookup"><span data-stu-id="4a256-209">Call <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.HasChanges?displayProperty=nameWithType> to determine whether any changes have been made that will cause SaveChanges to make updates to the database.</span></span> <span data-ttu-id="4a256-210">如果 HasChanges 傳回 false，則 SaveChanges 將為無作業。</span><span class="sxs-lookup"><span data-stu-id="4a256-210">If HasChanges return false, then SaveChanges will be a no-op.</span></span>
+> <span data-ttu-id="7300b-209">呼叫 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.HasChanges?displayProperty=nameWithType> 以判斷是否有任何變更會導致 SaveChanges 進行資料庫的更新。</span><span class="sxs-lookup"><span data-stu-id="7300b-209">Call <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.HasChanges?displayProperty=nameWithType> to determine whether any changes have been made that will cause SaveChanges to make updates to the database.</span></span> <span data-ttu-id="7300b-210">如果 HasChanges 傳回 false，則 SaveChanges 將為無作業。</span><span class="sxs-lookup"><span data-stu-id="7300b-210">If HasChanges return false, then SaveChanges will be a no-op.</span></span>
