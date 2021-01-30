@@ -212,8 +212,6 @@
               href: core/saving/transactions.md
             - name: 已中斷連線的實體
               href: core/saving/disconnected-entities.md
-            - name: 產生屬性的明確值
-              href: core/saving/explicit-values-generated-properties.md
         - name: Change tracking
           items:
             - name: 總覽
@@ -298,6 +296,8 @@
               items:
                 - name: 總覽
                   href: core/providers/sql-server/index.md
+                - name: 產生價值
+                  href: core/providers/sql-server/value-generation.md
                 - name: 函式對應
                   href: core/providers/sql-server/functions.md
                 - name: 索引
@@ -356,7 +356,7 @@
           href: /dotnet/api/?view=efcore-5.0
     - name: Entity Framework 6
       items:
-        - name: 總覽
+        - name: 概觀
           href: ef6/index.md
         - name: 新功能
           items:
@@ -410,7 +410,7 @@
                   href: ef6/fundamentals/disconnected-entities/index.md
                 - name: 自我追蹤實體
                   items:
-                    - name: 總覽
+                    - name: 概觀
                       href: ef6/fundamentals/disconnected-entities/self-tracking-entities/index.md
                     - name: 逐步解說
                       href: ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough.md
@@ -538,7 +538,7 @@
                   href: ef6/modeling/designer/select-runtime-version.md
                 - name: 程式碼產生
                   items:
-                    - name: 總覽
+                    - name: 概觀
                       href: ef6/modeling/designer/codegen/index.md
                     - name: 舊版 ObjectContext
                       href: ef6/modeling/designer/codegen/legacy-objectcontext.md
