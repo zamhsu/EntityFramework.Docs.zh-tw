@@ -5,10 +5,10 @@ author: bricelam
 ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
 ms.openlocfilehash: b9547298714af59453aeae6d05742a03c067708b
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/19/2020
+ms.lasthandoff: 02/04/2021
 ms.locfileid: "95003389"
 ---
 # <a name="migrations-overview"></a>移轉概觀
@@ -59,9 +59,9 @@ dotnet ef migrations add InitialCreate
 Add-Migration InitialCreate
 ```
 
-**_
+***
 
-EF Core 將會在您的專案中建立一個名為 _ [*遷移**] 的目錄，並產生一些檔案。 最好的作法是檢查 EF Core 產生的確切項目，並視需要加以修改，但我們現在會跳過此程序。
+EF Core 將會在專案中建立名為 **Migrations** 的目錄，並產生一些檔案。 最好的作法是檢查 EF Core 產生的確切項目，並視需要加以修改，但我們現在會跳過此程序。
 
 ### <a name="create-your-database-and-schema"></a>建立您的資料庫與結構描述
 
@@ -79,7 +79,7 @@ dotnet ef database update
 Update-Database
 ```
 
-**_
+***
 
 就是這麼簡單，您的應用程式已準備好在新的資料庫上執行，而且您不需要撰寫任何一行 SQL。 請注意，這種套用移轉的方式適用於本機開發，但較不適合用於生產環境。如需詳細資訊，請參閱[套用移轉頁面](xref:core/managing-schemas/migrations/applying)。
 
@@ -110,7 +110,7 @@ dotnet ef migrations add AddBlogCreatedTimestamp
 Add-Migration AddBlogCreatedTimestamp
 ```
 
-_*_
+***
 
 請注意，我們會為移轉提供描述性名稱，讓您稍後可以更輕鬆地了解專案歷程記錄。
 
@@ -134,7 +134,7 @@ Update-Database
 
 <!--markdownlint-enable MD024-->
 
-_*_
+***
 
 請注意，這次 EF 會偵測到資料庫已經存在。 此外，第一次套用上面的移轉時，此事實會記錄在資料庫的特殊移轉歷程記錄資料表中；這可讓 EF 僅自動套用新的移轉。
 
@@ -153,4 +153,4 @@ _*_
 
 ## <a name="additional-resources"></a>其他資源
 
-_ EF Core 在 EF Core 5.0 中的新遷移功能的 [站立會議課程](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20) 。
+* EF Core EF Core 5.0 中新的遷移功能的[站立會議課程](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20)。
