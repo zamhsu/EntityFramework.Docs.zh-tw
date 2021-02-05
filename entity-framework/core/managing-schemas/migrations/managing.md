@@ -5,10 +5,10 @@ author: bricelam
 ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
 ms.openlocfilehash: ef5e1b9bb10d6f1cd428db2fee327ec513c3f528
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "95003272"
 ---
 # <a name="managing-migrations"></a>管理遷移
@@ -68,7 +68,7 @@ Add-Migration InitialCreate -OutputDir Your\Directory
 > [!NOTE]
 > 在 EF Core 5.0 中，您也可以使用來個別變更目錄的命名空間 `-Namespace` 。
 
-**_
+***
 
 ## <a name="customize-migration-code"></a>自訂移轉程式碼
 
@@ -164,7 +164,7 @@ migrationBuilder.Sql(
 
 這可以用來管理資料庫的任何層面，包括：
 
-_ 預存程式
+* 預存程序
 * 全文檢索搜尋
 * 函式
 * 觸發程序
@@ -216,11 +216,11 @@ dotnet ef migrations list
 Get-Migration
 ```
 
-**_
+***
 
 ## <a name="resetting-all-migrations"></a>正在重設所有遷移
 
-在某些極端的情況下，可能需要移除所有的遷移並重新開始。 您可以藉由刪除 _ *遷移** 資料夾並卸載資料庫，輕鬆地完成此工作。屆時，您可以建立新的初始遷移，其中將包含您目前的整個架構。
+在某些極端的情況下，可能需要移除所有的遷移並重新開始。 這可以藉由刪除您的 [ **遷移** ] 資料夾並卸載您的資料庫來輕鬆完成;屆時，您可以建立新的初始遷移，其中將包含您目前的整個架構。
 
 您也可以重設所有遷移，並建立單一的遷移，而不會遺失您的資料。 這有時稱為「抓」，並牽涉到一些手動工作：
 

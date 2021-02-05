@@ -5,10 +5,10 @@ author: roji
 ms.date: 12/16/2019
 uid: core/modeling/indexes
 ms.openlocfilehash: ab81b108c4ff518cf98b7e835da3553c0c41efed
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "98128533"
 ---
 # <a name="indexes"></a>索引
@@ -47,9 +47,9 @@ ms.locfileid: "98128533"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=4)]
 
-**_
+***
 
-多個資料行（也稱為 _composite 索引 *）的索引，可加速篩選索引資料行的查詢，以及只篩選索引所涵蓋之 *第一個* 資料行的查詢。 如需詳細資訊，請參閱 [效能](xref:core/performance/efficient-querying#use-indexes-properly) 檔。
+多個資料行的索引（也稱為 *複合索引*）會加速篩選索引資料行的查詢，以及只篩選索引所涵蓋之 *第一個* 資料行的查詢。 如需詳細資訊，請參閱 [效能](xref:core/performance/efficient-querying#use-indexes-properly) 檔。
 
 ## <a name="index-uniqueness"></a>索引唯一性
 

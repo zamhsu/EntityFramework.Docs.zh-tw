@@ -8,7 +8,7 @@ ms.openlocfilehash: 4cad43f4b1300e1ef3cb31e60d3e9890826d974d
 ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/28/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "98983569"
 ---
 # <a name="reverse-engineering"></a>反向工程
@@ -80,7 +80,7 @@ dotnet ef dbcontext scaffold ... --table Artist --table Album
 Scaffold-DbContext ... -Tables Artist, Album
 ```
 
-**_
+***
 
 ## <a name="preserving-names"></a>保留名稱
 
@@ -108,7 +108,7 @@ public string Title { get; set; }
 
 ## <a name="dbcontext-name"></a>DbCoNtext 名稱
 
-根據預設，scaffold DbCoNtext 類別名稱將會是 _CoNtext * 尾碼的資料庫名稱。 若要指定不同的，請 `-Context` 在 PMC 和 `--context` .NET Core CLI 中使用。
+根據預設，scaffold DbCoNtext 類別名稱將會是以 *內容* 為尾碼的資料庫名稱。 若要指定不同的，請 `-Context` 在 PMC 和 `--context` .NET Core CLI 中使用。
 
 ## <a name="directories-and-namespaces"></a>目錄和命名空間
 

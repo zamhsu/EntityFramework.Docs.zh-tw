@@ -5,10 +5,10 @@ author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
 ms.openlocfilehash: fe6dd2c24b8f8ffffa8e0101f69966b7b7c74036
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/19/2020
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "97635545"
 ---
 # <a name="entity-properties"></a>實體屬性
@@ -45,7 +45,7 @@ ms.locfileid: "97635545"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnName.cs?Name=ColumnName&highlight=3-5)]
 
-**_
+***
 
 ## <a name="column-data-types"></a>資料行資料類型
 
@@ -63,7 +63,7 @@ ms.locfileid: "97635545"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=5-6)]
 
-_*_
+***
 
 ### <a name="maximum-length"></a>長度上限
 
@@ -82,7 +82,7 @@ _*_
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/MaxLength.cs?name=MaxLength&highlight=3-5)]
 
-_*_
+***
 
 ### <a name="precision-and-scale"></a>精確度和小數位數
 
@@ -106,7 +106,7 @@ _*_
 > [!NOTE]
 > 您永遠不會定義小數位數，而不需要先定義有效位數，因此用來定義尺規的流暢 API 就是 `HasPrecision(precision, scale)` 。
 
-_*_
+***
 
 ## <a name="required-and-optional-properties"></a>必要和選用屬性
 
@@ -118,7 +118,7 @@ _*_
 
 C # 8 引進了新功能，稱為 [可為 null 的參考型別 (NRT) ](/dotnet/csharp/tutorials/nullable-reference-types)，可讓您標注參考型別，以指出其是否有效，以包含 null。 預設會停用這項功能，並以下列方式影響 EF Core 的行為：
 
-_ 如果 (預設) 停用可為 null 的參考型別，則所有具有 .NET 參考型別的屬性都會依照慣例設定為選擇性 (例如 `string`) 。
+* 如果 (預設) 停用可為 null 的參考型別，則所有具有 .NET 參考型別的屬性都會依照慣例設定為選擇性 (例如 `string`) 。
 * 如果已啟用可為 null 的參考型別，則會根據其 .NET 類型的 c # null 屬性來設定屬性： `string?` 將設定為選擇性，但 `string` 會設定為必要。
 
 下列範例顯示具有必要和選擇性屬性的實體類型，並停用 (預設) 和啟用的可為 null 參考功能：
@@ -152,7 +152,7 @@ _ 如果 (預設) 停用可為 null 的參考型別，則所有具有 .NET 參�
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Required.cs?name=Required&highlight=3-5)]
 
-**_
+***
 
 ## <a name="column-collations"></a>資料行定序
 
@@ -182,4 +182,4 @@ _ 如果 (預設) 停用可為 null 的參考型別，則所有具有 .NET 參�
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnComment.cs?name=ColumnComment&highlight=5)]
 
-_**
+***
