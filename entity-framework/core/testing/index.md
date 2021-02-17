@@ -4,12 +4,12 @@ description: 針對使用 Entity Framework Core 的應用程式進行測試的�
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/testing/index
-ms.openlocfilehash: d94c40bdb1082473ee88e7c3c1fbfecee90ba4ff
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 5ac7954a87697e43b68845e925e2510c027b7135
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129066"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543571"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>測試使用 EF Core 的程式碼
 
@@ -86,7 +86,7 @@ SQLite 是不錯的選擇，因為：
 
 不過，請記住：
 
-* SQLite 必然無法提供生產資料庫系統的所有支援。
+* SQLite 不可避免支援您的實際執行資料庫系統所執行的所有工作。
 * 對於某些查詢，SQLite 的運作方式會不同於生產資料庫系統。
 
 因此，如果使用 SQLite 進行一些測試，請務必同時對實際資料庫系統進行測試。

@@ -2,14 +2,14 @@
 title: 函數對應-Microsoft SQL Server 資料庫提供者-EF Core
 description: Microsoft SQL Server 資料庫提供者的函式對應
 author: bricelam
-ms.date: 10/07/2020
+ms.date: 1/26/2021
 uid: core/providers/sql-server/functions
-ms.openlocfilehash: 8eb66521b00f2f4879a098200239849c7219a095
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: c39e81fca52854e7fa7d5b2e81b80511e8184b90
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92066605"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543220"
 ---
 # <a name="function-mappings-of-the-microsoft-sql-server-provider"></a>Microsoft SQL Server 提供者的函式對應
 
@@ -20,17 +20,19 @@ ms.locfileid: "92066605"
 .NET                         | SQL                           | 加入
 ---------------------------- | ----------------------------- | --------
 位元組。包含 (值)         | CHARINDEX (@value ， @bytes) > 0 | EF Core 5.0
+位元組。第一個 ()                 | 子字串 (@bytes ，1，1)        | EF Core 6.0
 位元組。長度                 | DATALENGTH (@bytes)             | EF Core 5.0
 位元組。Enumerable.sequenceequal (第二個)   | @bytes = @second              | EF Core 5.0
+位元組 [i]                     | 子字串 (@bytes 、 @i + 1、1)   | EF Core 6.0
 英 孚。DataLength (arg)  | DATALENGTH (@arg)               | EF Core 5.0
 
 ## <a name="conversion-functions"></a>轉換函數
 
 .NET                      | SQL                                    | 加入
 ------------------------- | -------------------------------------- | --------
-位元組。ToString ( # A1          | 轉換 (Varchar (100) ， @bytes) 
-byteValue ( # A1      | 轉換 (Varchar (3) ， @byteValue) 
-charValue ( # A1      | 轉換 (Varchar (1) ， @charValue) 
+位元組。ToString ()           | 轉換 (Varchar (100) ， @bytes) 
+byteValue ToString ()       | 轉換 (Varchar (3) ， @byteValue) 
+charValue ToString ()       | 轉換 (Varchar (1) ， @charValue) 
 轉換. ToBoolean (值)   | 轉換 (位， @value)                    | EF Core 5.0
 轉換. ToByte (值)      | 轉換 (Tinyint， @value) 
 轉換. ToDecimal (值)   | 將 (decimal (18，2) ， @value) 
@@ -39,28 +41,28 @@ charValue ( # A1      | 轉換 (Varchar (1) ， @charValue)
 轉換. ToInt32 (值)     | 轉換 (int， @value) 
 轉換. ToInt64 (值)     | 轉換 (Bigint， @value) 
 將 ToString (值轉換)    | 將 (Nvarchar (max) ， @value) 
-dateTime. ToString ( # A1       | 轉換 (Varchar (100) ， @dateTime) 
-dateTimeOffset ( # A1 | 轉換 (Varchar (100) ， @dateTimeOffset) 
-decimalValue ( # A1   | 轉換 (Varchar (100) ， @decimalValue) 
-doubleValue ( # A1    | 轉換 (Varchar (100) ， @doubleValue) 
-floatValue ( # A1     | 轉換 (Varchar (100) ， @floatValue) 
-Guid。ToString ( # A1           | 轉換 (Varchar (36) ， @guid) 
-intValue ( # A1       | 轉換 (Varchar (11) ， @intValue) 
-longValue ( # A1      | 轉換 (Varchar (20) ， @longValue) 
-sbyteValue ( # A1     | 轉換 (Varchar (4) ， @sbyteValue) 
-shortValue ( # A1     | 轉換 (Varchar (6) ， @shortValue) 
-timeSpan ( # A1       | 轉換 (Varchar (100) ， @timeSpan) 
-uintValue ( # A1      | 轉換 (Varchar (10) ， @uintValue) 
-ulongValue ( # A1     | 轉換 (Varchar (19) ， @ulongValue) 
-ushortValue ( # A1    | 轉換 (Varchar (5) ， @ushortValue) 
+dateTime. ToString ()        | 轉換 (Varchar (100) ， @dateTime) 
+dateTimeOffset ()  | 轉換 (Varchar (100) ， @dateTimeOffset) 
+decimalValue ToString ()    | 轉換 (Varchar (100) ， @decimalValue) 
+doubleValue ToString ()     | 轉換 (Varchar (100) ， @doubleValue) 
+floatValue ToString ()      | 轉換 (Varchar (100) ， @floatValue) 
+Guid。ToString ()            | 轉換 (Varchar (36) ， @guid) 
+intValue ToString ()        | 轉換 (Varchar (11) ， @intValue) 
+longValue ToString ()       | 轉換 (Varchar (20) ， @longValue) 
+sbyteValue ToString ()      | 轉換 (Varchar (4) ， @sbyteValue) 
+shortValue ToString ()      | 轉換 (Varchar (6) ， @shortValue) 
+timeSpan. ToString ()        | 轉換 (Varchar (100) ， @timeSpan) 
+uintValue ToString ()       | 轉換 (Varchar (10) ， @uintValue) 
+ulongValue ToString ()      | 轉換 (Varchar (19) ， @ulongValue) 
+ushortValue ToString ()     | 轉換 (Varchar (5) ， @ushortValue) 
 
 ## <a name="date-and-time-functions"></a>日期和時間函式
 
 .NET                                                        | SQL                                                  | 加入
 ----------------------------------------------------------- | ---------------------------------------------------- | --------
-DateTime.Now                                                | GETDATE ( # A1
-DateTime. Today                                              | 轉換 (日期、GETDATE ( # A2 # A3
-DateTime.UtcNow                                             | GETUTCDATE ( # A1
+DateTime.Now                                                | GETDATE () 
+DateTime. Today                                              | 轉換 (日期，GETDATE () ) 
+DateTime.UtcNow                                             | GETUTCDATE () 
 dateTime. AddDays (值)                                      | DATEADD (day， @value ， @dateTime) 
 dateTime. Time.addhours (值)                                     | DATEADD (小時， @value ， @dateTime) 
 dateTime. AddMilliseconds (值)                              | DATEADD (毫秒、 @value ， @dateTime) 
@@ -78,8 +80,8 @@ dateTime. Month                                              | DATEPART (month�
 日期時間。秒                                             | DATEPART (第二個， @dateTime) 
 dateTime. TimeOfDay                                          | 轉換 (時間， @dateTime)                               | EF Core 2.2
 dateTime. Year                                               | DATEPART (year， @dateTime) 
-DateTimeOffset.Now                                          | SYSDATETIMEOFFSET ( # A1
-DateTimeOffset. UtcNow                                       | SYSUTCDATETIME ( # A1
+DateTimeOffset.Now                                          | SYSDATETIMEOFFSET () 
+DateTimeOffset. UtcNow                                       | SYSUTCDATETIME () 
 AddDays (天)                                 | DATEADD (day， @days ， @dateTimeOffset) 
 dateTimeOffset Time.addhours (小時)                               | DATEADD (小時， @hours ， @dateTimeOffset) 
 dateTimeOffset AddMilliseconds (毫秒)                 | DATEADD (毫秒、 @milliseconds ， @dateTimeOffset) 
@@ -121,8 +123,9 @@ timeSpan. 秒                                            | DATEPART (第二個�
 
 ## <a name="numeric-functions"></a>數值函數
 
-.NET                    | SQL
------------------------ | ---
+.NET                    | SQL                  | 加入
+----------------------- | -------------------- | --------
+英 孚。函數。隨機 ()    | RAND ()                | EF Core 6.0
 數學 Abs (值)          | ABS (@value) 
 Acos (d)             | ACOS (@d) 
 Asin (d)             | ASIN (@d) 
@@ -153,27 +156,28 @@ Pow (x，y)           | POWER (@x ， @y)
 英 孚。函數。包含 (propertyReference、searchCondition、languageTerm)  | 包含 (@propertyReference 、 @searchCondition 、LANGUAGE @languageTerm)  | EF Core 2.2
 英 孚。函數 FreeText (propertyReference，freeText)                       | FREETEXT (@propertyReference ， @freeText) 
 英 孚。函數 FreeText (propertyReference、freeText、languageTerm)         | FREETEXT (@propertyReference 、 @freeText 、LANGUAGE @languageTerm) 
+英 孚。IsNumeric (運算式)                                       | ISNUMERIC (@expression)                                                  | EF Core 6.0
 英 孚。函數。例如 (matchExpression、pattern)                              | @matchExpression 喜歡 @pattern
 英 孚。函數。例如 (matchExpression、pattern、escapeCharacter)             | @matchExpression LIKE @pattern ESCAPE @escapeCharacter
 字串。比較 (strA、strB)                                               | @strA= @strB THEN 0 時的案例 .。。結束
 字串。Concat (str0、str1)                                                | @str0 + @str1
-字串。IsNullOrEmpty (值)                                              | @value 為 Null 或 @value = N ' '
-字串。IsNullOrWhiteSpace (值)                                         | @value 為 Null 或 LTRIM (RTRIM (@value) # A3 = N ' '
+字串。IsNullOrEmpty (值)                                              | @value 為 Null 或 @value 類似 N ' '
+字串。IsNullOrWhiteSpace (值)                                         | @value 為 Null 或 LTRIM (RTRIM (@value) ) = N ' '
 stringValue. CompareTo (strB)                                              | @stringValue= @strB THEN 0 時的案例 .。。結束
 stringValue 包含 (值)                                              | @stringValue 例如 N '% ' + @value + N '% '
 stringValue. EndsWith (值)                                              | @stringValue 例如 N '% ' + @value
-stringValue. FirstOrDefault ( # A1                                            | 子字串 (@stringValue ，1，1)                                           | EF Core 5.0
+stringValue. FirstOrDefault ()                                             | 子字串 (@stringValue ，1，1)                                           | EF Core 5.0
 stringValue. IndexOf (值)                                               | CHARINDEX (@value ， @stringValue) -1
-stringValue. LastOrDefault ( # A1                                             | SUBSTRING (@stringValue 、LEN (@stringValue) 、1)                           | EF Core 5.0
+stringValue. LastOrDefault ()                                              | SUBSTRING (@stringValue 、LEN (@stringValue) 、1)                           | EF Core 5.0
 stringValue。長度                                                      | LEN (@stringValue) 
 stringValue，取代 (@oldValue ， @newValue)                                | 取代 (@stringValue 、 @oldValue @newValue) 
 stringValue. StartsWith (值)                                            | @stringValue LIKE @value + N '% '
 stringValue (startIndex，長度)                                | 子字串 (@stringValue 、 @startIndex + 1、 @length) 
-stringValue. ToLower ( # A1                                                   | 較低的 (@stringValue) 
-stringValue. ToUpper ( # A1                                                   | 上層 (@stringValue) 
-stringValue ( # A1                                                      | LTRIM (RTRIM (@stringValue) # A3
-stringValue. TrimEnd ( # A1                                                   | RTRIM (@stringValue) 
-stringValue. TrimStart ( # A1                                                 | LTRIM (@stringValue) 
+stringValue. ToLower ()                                                    | 較低的 (@stringValue) 
+stringValue. ToUpper ()                                                    | 上層 (@stringValue) 
+stringValue Trim ()                                                       | LTRIM (RTRIM (@stringValue) ) 
+stringValue. TrimEnd ()                                                    | RTRIM (@stringValue) 
+stringValue. TrimStart ()                                                  | LTRIM (@stringValue) 
 
 ## <a name="miscellaneous-functions"></a>其他函式
 
@@ -182,7 +186,7 @@ stringValue. TrimStart ( # A1                                                 | 
 收集。包含 (專案)                 | @item 在 @collection               | EF Core 3.0
 Enumvalue 類型. HasFlag (旗標)                   | @enumValue & @flag = @flag
 Guid.NewGuid()                           | NEWID()
-空。CoNtext.variables.getvalueordefault<t ( # A1             | 聯合 (@nullable 、0) 
+空。CoNtext.variables.getvalueordefault<t ()              | 聯合 (@nullable 、0) 
 空。CoNtext.variables.getvalueordefault<t (defaultValue)  | 聯合 (@nullable 、 @defaultValue) 
 
 > [!NOTE]

@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 以非同步方式查詢和儲存資�
 author: roji
 ms.date: 9/2/2020
 uid: core/miscellaneous/async
-ms.openlocfilehash: 52b3ac20a50babbed6937ebe3365ac1947dcaef1
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 78c109e9fd73dbb0451f9e29562799e4d22d66c9
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128572"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543350"
 ---
 # <a name="asynchronous-programming"></a>非同步程式設計
 
@@ -43,7 +43,7 @@ ms.locfileid: "98128572"
 
 ## <a name="client-side-async-linq-operators"></a>用戶端非同步 LINQ 運算子
 
-以上所討論的非同步 LINQ 運算子只能用於 EF 查詢-您無法將它們與用戶端 LINQ to Objects 查詢搭配使用。 若要在 EF 之外執行用戶端非同步 LINQ 作業，請使用 system.string [封裝](https://www.nuget.org/packages/System.Interactive.Async);在用戶端上執行無法在伺服器上進行評估的作業時，此封裝會特別有用。
+以上所討論的非同步 LINQ 運算子只能用於 EF 查詢-您無法將它們與用戶端 LINQ to Objects 查詢搭配使用。 若要在 EF 之外執行用戶端非同步 LINQ 作業，請使用 system.string [封裝](https://www.nuget.org/packages/System.Linq.Async);在用戶端上執行無法在伺服器上進行評估的作業時，此封裝會特別有用。
 
 可惜的是，參考 system.string 會導致套用至 EF DbSets 的 LINQ 運算子發生不明確的調用編譯錯誤;這會讓您難以在相同專案中使用 EF 和 Async。 若要解決此問題，請將 AsQueryable 新增至您的 DbSet：
 

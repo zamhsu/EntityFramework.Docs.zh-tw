@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 將架構遷移套用至生產和開�
 author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: 7ff84636fb0999941b832c6a2d65d77b0ad368c5
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: cb4e6f719ba5ab4ef70e2e1d06760db1de5658b4
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429843"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543597"
 ---
 # <a name="applying-migrations"></a>套用遷移
 
@@ -88,10 +88,10 @@ Script-Migration AddNewTables AddAuditTable
 
 ***
 
-腳本產生會接受下列兩個引數，指出應產生的遷移範圍：
+腳本產生會接受下列兩個引數，以指出應產生的遷移範圍：
 
-* 執行指令碼之前， **from** 移轉應該是套用到資料庫的最後一個移轉。 若未套用任何移轉，請指定 `0` (此為預設)。
-* 執行指令碼之後， **to** 移轉是套用到資料庫的最後一個移轉。 預設為您專案中的最後一個移轉。
+* 執行指令碼之前，**from** 移轉應該是套用到資料庫的最後一個移轉。 若未套用任何移轉，請指定 `0` (此為預設)。
+* 執行指令碼之後，**to** 移轉是套用到資料庫的最後一個移轉。 預設為您專案中的最後一個移轉。
 
 ## <a name="idempotent-sql-scripts"></a>等冪 SQL 腳本
 
@@ -111,13 +111,13 @@ dotnet ef migrations script --idempotent
 Script-Migration -Idempotent
 ```
 
-**_
+***
 
 ## <a name="command-line-tools"></a>命令列工具
 
 EF 命令列工具可以用來將遷移套用至資料庫。 雖然能在本機開發和測試遷移時保持生產力，但這種方法並不適合用來管理生產資料庫：
 
-_ SQL 命令會直接套用到工具，而不會讓開發人員有機會檢查或修改它們。 這在生產環境中可能會有危險。
+* 此工具會直接套用 SQL 命令，而不會讓開發人員有機會檢查或修改它們。 這在生產環境中可能會有危險。
 * 實際執行伺服器上必須安裝 .NET SDK 和 EF 工具。
 
 ### <a name="net-core-cli"></a>[.NET Core CLI](#tab/dotnet-core-cli)

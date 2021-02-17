@@ -4,12 +4,12 @@ description: 如何在使用 Entity Framework Core 時設定屬性的值產生
 author: AndriySvyryd
 ms.date: 1/10/2021
 uid: core/modeling/generated-properties
-ms.openlocfilehash: 76fa4454c88a5ef7afb9864c2a4b1063ac75e37e
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: a9e43f3b755bf028bc76581135988e831a42d0d1
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983543"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543337"
 ---
 # <a name="generated-values"></a>產生的值
 
@@ -52,7 +52,7 @@ ms.locfileid: "98983543"
 
 ### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAdd.cs?name=ValueGeneratedOnAdd&highlight=5)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAdd.cs?name=ValueGeneratedOnAdd&highlight=6)]
 
 ### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 
@@ -64,16 +64,16 @@ ms.locfileid: "98983543"
 
 ### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=5)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=6)]
 
 ### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=5)]
 
-**_
+***
 
 > [!WARNING]
-> 不同于預設值或計算資料行，我們不會指定 _how * 將產生值;這取決於所使用的資料庫提供者。 資料庫提供者可能會自動為某些屬性類型設定值產生，但其他專案可能會要求您手動設定值的產生方式。
+> 與預設值或計算資料行不同的是，我們不會指定產生值的 *方式* ;這取決於所使用的資料庫提供者。 資料庫提供者可能會自動為某些屬性類型設定值產生，但其他專案可能會要求您手動設定值的產生方式。
 >
 > 例如，在 SQL Server 上，當 GUID 屬性設定為 add 時產生的值時，提供者會使用演算法來產生最佳的連續 GUID 值，以自動執行值產生用戶端。 不過， `ValueGeneratedOnAdd()` 在 datetime 屬性上指定將沒有任何作用 ([請參閱下一節中的日期時間值產生](#datetime-value-generation)) 。
 >

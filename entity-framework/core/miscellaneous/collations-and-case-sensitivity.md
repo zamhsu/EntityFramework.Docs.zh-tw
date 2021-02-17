@@ -4,12 +4,12 @@ description: 在資料庫和使用 Entity Framework Core 的查詢中設定定�
 author: roji
 ms.date: 04/27/2020
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: eca68af6e658f76e1480b1e1083212f160fa765c
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 48e0a6b316742dc1467134ae81f90086bb93d011
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003454"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543532"
 ---
 # <a name="collations-and-case-sensitivity"></a>定序和區分大小寫
 
@@ -30,7 +30,7 @@ ms.locfileid: "95003454"
 
 使用 EF Core 遷移來管理您的資料庫架構時，您模型的方法中的下列內容會將 `OnModelCreating` SQL Server 資料庫設定為使用區分大小寫的定序：
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?range=40)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=DatabaseCollation)]
 
 ## <a name="column-collation"></a>資料行定序
 
@@ -38,7 +38,7 @@ ms.locfileid: "95003454"
 
 使用 EF Core 遷移來管理您的資料庫架構時，下列內容會將屬性的資料行設定為不區分大小寫的 `Name` 資料庫中的資料行，否則會設定為區分大小寫：
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=OnModelCreating&highlight=6)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=ColumnCollation)]
 
 ## <a name="explicit-collation-in-a-query"></a>查詢中的明確定序
 

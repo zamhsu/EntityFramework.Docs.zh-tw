@@ -4,12 +4,12 @@ description: 使用主鍵值將多個實體實例解析成單一實例
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/identity-resolution
-ms.openlocfilehash: f94b61371dcead27853799719dabc7849500d466
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: d4c8f935c8d0ab92eaecd8fc7a4156bd824713d4
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129721"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543610"
 ---
 # <a name="identity-resolution-in-ef-core"></a>EF Core 中的身分識別解析
 
@@ -617,7 +617,7 @@ Discarding duplicate EntityType: Post entity with key value 4
 
 ## <a name="identity-resolution-and-queries"></a>身分識別解析和查詢
 
-當從查詢追蹤實體時，會自動進行識別解析。 這表示，如果已經追蹤具有指定之索引鍵值的實體實例，則會使用這個現有的追蹤實例，而不是建立新的實例。 這有一個重要的結果：如果資料庫中的資料已變更，則不會反映在查詢的結果中。 這是將新的 DbCoNtext 實例用於每個工作單位的 angood 原因，如 [DbCoNtext 初始化和](xref:core/dbcontext-configuration/index)設定中所述，以及 [EF Core 的變更追蹤](xref:core/change-tracking/index)中的詳細說明。
+當從查詢追蹤實體時，會自動進行識別解析。 這表示，如果已經追蹤具有指定之索引鍵值的實體實例，則會使用這個現有的追蹤實例，而不是建立新的實例。 這有一個重要的結果：如果資料庫中的資料已變更，則不會反映在查詢的結果中。 這是將新的 DbCoNtext 實例用於每個工作單位的好理由，如 [DbCoNtext 初始化和](xref:core/dbcontext-configuration/index)設定中所述，以及 [EF Core 的變更追蹤](xref:core/change-tracking/index)中的詳細說明。
 
 > [!IMPORTANT]
 > 請務必瞭解，EF Core 一律針對資料庫執行 DbSet 的 LINQ 查詢，而且只會根據資料庫中的內容傳回結果。 不過，對於追蹤查詢，如果傳回的實體已被追蹤，則會使用追蹤的實例，而不是從資料庫中的資料建立實例。

@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 建立設計階段 DbCoNtext 的策略
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dbcontext-creation
-ms.openlocfilehash: 144ed26dcf605dc29d53519ad2ea9cea58fb4e44
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 1a2c0e853047cf4ab54a320d0bef413a114e90bc
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431476"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543402"
 ---
 # <a name="design-time-dbcontext-creation"></a>設計階段 DbContext 建立
 
@@ -44,11 +44,11 @@ ms.locfileid: "94431476"
 > 在 EFCore 5.0 之前， `args` 參數未使用 () 會看到 [此問題][8] 。
 > 這在 EFCore 5.0 中已修正，而且任何額外的設計階段引數都會透過該參數傳遞至應用程式。
 
-如果您需要以不同于執行時間的方式來設定設計階段的 DbCoNtext，則設計階段處理站會特別有用，如果函式 `DbContext` 接受其他參數，則不會在 di 中註冊，如果您根本不使用 di，或基於某些原因，您不想 `CreateHostBuilder` 在 ASP.NET Core 應用程式的類別中有方法 `Main` 。
+如果您需要在 `DbContext` 設計階段與執行時間不同的情況下設定不同的設計階段，則如果在 `DbContext` di 中使用其他參數，則如果您完全不使用 di，或如果基於某些原因，您不想在 `CreateHostBuilder` ASP.NET Core 應用程式的類別中擁有方法，設計階段處理站可能會特別有用 `Main` 。
 
 ## <a name="args"></a>Args
 
-IDesignTimeDbCoNtextFactory. CreateDbCoNtext 和 CreateHostBuilder 都接受命令列引數。
+<xref:Microsoft.EntityFrameworkCore.Design.IDesignTimeDbContextFactory%601.CreateDbContext%2A?displayProperty=nameWithType>和都 `Program.CreateHostBuilder` 接受命令列引數。
 
 從 EF Core 5.0 開始，您可以從工具指定這些引數：
 

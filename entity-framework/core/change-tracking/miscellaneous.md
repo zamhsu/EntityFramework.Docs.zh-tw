@@ -4,12 +4,12 @@ description: 涉及 EF Core 變更追蹤的其他功能和案例
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/miscellaneous
-ms.openlocfilehash: db1e32948b2a60ad1b85e300bbbccd54d49a84e5
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 9eb3186f4eef300e4824dc86700497444ece4a2c
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129703"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543415"
 ---
 # <a name="additional-change-tracking-features"></a>其他變更追蹤功能
 
@@ -21,7 +21,7 @@ ms.locfileid: "98129703"
 > [!TIP]
 > 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/AdditionalChangeTrackingFeatures)，以執行並偵測到本檔中的所有程式碼。
 
-## <a name="add-verses-addasync"></a>新增辭 AddAsync
+## <a name="add-versus-addasync"></a>`Add` 與 `AddAsync`
 
 Entity Framework Core (EF Core) 會在使用該方法時提供非同步方法，可能會導致資料庫互動。 也提供同步方法，以避免使用不支援高效能非同步存取的資料庫時的額外負荷。
 
@@ -29,16 +29,16 @@ Entity Framework Core (EF Core) 會在使用該方法時提供非同步方法，
 
 和、和等其他類似的方法並 `Update` `Attach` 沒有非同步多載 `Remove` ，因為它們絕對不會產生新的索引鍵值，因此永遠不需要存取資料庫。
 
-## <a name="addrange-updaterange-attachrange-and-removerange"></a>>addrange、UpdateRange、AttachRange 和 RemoveRange
+## <a name="addrange-updaterange-attachrange-and-removerange"></a>`AddRange`、`UpdateRange`、`AttachRange` 和 `RemoveRange`
 
-<xref:Microsoft.EntityFrameworkCore.DbSet%601> 以及 <xref:Microsoft.EntityFrameworkCore.DbContext> 提供 `Add` `Update` `Attach` `Remove` 可在單一呼叫中接受多個實例的、、和的替代版本。 這些方法分別稱為 `AddRange` 、 `UpdateRange` 、 `AttachRange` 和 `RemoveRange` 。
+<xref:Microsoft.EntityFrameworkCore.DbSet%601> 以及 <xref:Microsoft.EntityFrameworkCore.DbContext> 提供 `Add` `Update` `Attach` `Remove` 可在單一呼叫中接受多個實例的、、和的替代版本。 這些方法 <xref:Microsoft.EntityFrameworkCore.DbSet%601.AddRange%2A> 分別為、、 <xref:Microsoft.EntityFrameworkCore.DbSet%601.UpdateRange%2A> <xref:Microsoft.EntityFrameworkCore.DbSet%601.AttachRange%2A> 和 <xref:Microsoft.EntityFrameworkCore.DbSet%601.RemoveRange%2A> 。
 
 提供這些方法是為了方便起見。 使用「範圍」方法的功能與對等的非範圍方法的多個呼叫相同。 這兩種方法之間並沒有顯著的效能差異。
 
 > [!NOTE]
-> 這不同于 EF6，其中 >addrange 和新增兩個自動呼叫的 DetectChanges，但呼叫 Add 多次會導致 DetectChanges 多次呼叫，而不是一次。 這使得 >addrange 在 EF6 方面更有效率。 在 EF Core 中，這些方法都不會自動呼叫 DetectChanges。
+> 這不同于 EF6、 `AddRange` `Add` 會自動呼叫 `DetectChanges` ，但呼叫多次會導致多次呼叫 `Add` DetectChanges，而不是呼叫一次。 這 `AddRange` 在 EF6 時更有效率。 在 EF Core 中，這些方法都不會自動呼叫 `DetectChanges` 。
 
-## <a name="dbcontext-verses-dbset-methods"></a>DbCoNtext 辭 DbSet 方法
+## <a name="dbcontext-versus-dbset-methods"></a>DbCoNtext 和 DbSet 方法
 
 許多方法（包括 `Add` 、 `Update` 、 `Attach` 和 `Remove` ）都有 <xref:Microsoft.EntityFrameworkCore.DbSet%601> 和 <xref:Microsoft.EntityFrameworkCore.DbContext> 的實作為。 這些方法對一般實體類型具有 _完全相同的行為_ 。 這是因為實體的 CLR 型別會對應到 EF Core 模型中的單一實體類型。 因此，CLR 型別會完整定義實體放在模型中的位置，因此可以隱含地判斷要使用的 DbSet。
 
@@ -89,14 +89,14 @@ Entity Framework Core (EF Core) 會在使用該方法時提供非同步方法，
 
             context.SaveChanges();
 -->
-[!code-csharp[DbContext_verses_DbSet_methods_1](../../../samples/core/ChangeTracking/AdditionalChangeTrackingFeatures/Samples.cs?name=DbContext_verses_DbSet_methods_1)]
+[!code-csharp[DbContext_versus_DbSet_methods_1](../../../samples/core/ChangeTracking/AdditionalChangeTrackingFeatures/Samples.cs?name=DbContext_versus_DbSet_methods_1)]
 
 請注意，這 <xref:Microsoft.EntityFrameworkCore.DbContext.Set%60%601(System.String)?displayProperty=nameWithType> 是用來建立 `PostTag` 實體類型的 DbSet。 然後可以使用這個 DbSet，以 `Add` 新的聯結實體實例來呼叫。
 
 > [!IMPORTANT]
 > 依慣例用於聯結實體類型的 CLR 型別，在未來的版本中可能會變更，以改善效能。 除非已明確設定為在上述程式碼中完成，否則請勿相依于任何特定的聯結實體類型 `Dictionary<string, int>` 。
 
-## <a name="property-verses-field-access"></a>屬性辭欄位存取權
+## <a name="property-versus-field-access"></a>屬性與欄位存取
 
 從 EF Core 3.0 開始，實體屬性的存取預設會使用屬性的支援欄位。 這是有效率的，可避免觸發呼叫屬性 getter 和 setter 的副作用。 例如，這是消極式載入能夠避免觸發無限迴圈的方式。 如需有關在模型中設定支援欄位的詳細資訊，請參閱 [支援欄位](xref:core/modeling/backing-field) 。
 

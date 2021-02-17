@@ -4,12 +4,12 @@ description: '使用 Entity Framework Core 時，使用 c # 可為 null 的參�
 author: roji
 ms.date: 09/09/2019
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 749fef8560c6777dcb2314126b11d2dd6a3562f8
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 0747b1328458fbaddd9e3cca117e378bbad5b365
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128559"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543428"
 ---
 # <a name="working-with-nullable-reference-types"></a>使用可為 Null 的參考型別
 
@@ -28,7 +28,7 @@ C # 8 引進了一項新功能，稱為 [可為 null 的參考型別 (NRT) ](/do
 
 啟用可為 null 的參考型別時，c # 編譯器會針對任何未初始化的不可為 null 的屬性發出警告，因為這些屬性會包含 null。 因此，不能使用撰寫實體類型的一般方式：
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithWarning.cs?name=CustomerWithWarning&highlight=4-5)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithWarning.cs?name=CustomerWithWarning&highlight=5-6)]
 
 「函式系結」是一項實用的[技巧，可](xref:core/modeling/constructors)確保您的不可為 null 的屬性會初始化：
 
@@ -65,11 +65,11 @@ C # 8 引進了一項新功能，稱為 [可為 null 的參考型別 (NRT) ](/do
 
 處理選擇性關聯性時，可能會遇到可能不可能發生實際 null 參考例外狀況的編譯器警告。 轉譯和執行 LINQ 查詢時，EF Core 保證如果選擇性的相關實體不存在，則會直接忽略它的任何導覽，而不會擲回。 不過，編譯器並不知道此 EF Core 保證，並會產生警告，就像 LINQ 查詢是在記憶體中執行，並具有 LINQ to Objects 一樣。 如此一來，就必須使用容許運算子 (！ ) 來通知編譯器，不可能有實際的 null 值：
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Program.cs?range=46)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Program.cs?name=Navigating)]
 
 在選擇性導覽中包含多個層級的關聯性時，會發生類似的問題：
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Program.cs?range=36-39&highlight=2)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Program.cs?name=Including&highlight=2)]
 
 如果您覺得自己這麼做很多，而且問題中的實體類型主要是 (或獨佔) 用於 EF Core 查詢中，請考慮將導覽屬性設為不可為 null，並透過流暢的 API 或資料批註將其設定為選擇性。 這會移除所有編譯器警告，同時保留關聯性。但是，如果您的實體是在 EF Core 之外進行，您可能會觀察到 null 值，但屬性會標注為不可為 null。
 

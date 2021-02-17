@@ -4,12 +4,12 @@ description: Entity Framework Core .NET Core CLI 工具的參考指南
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dotnet
-ms.openlocfilehash: 60655c03a7fc29137ccb8d9304c94dac6b803cb2
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 5f25ad67060e59507285af6e78269baa784c5288
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983582"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543389"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Entity Framework Core 工具參考-.NET Core CLI
 
@@ -111,7 +111,7 @@ dotnet ef database update -- --environment Production
 
 ## <a name="common-options"></a>一般選項
 
-| 選項                                         | Short             | Description                                                                                                                                                                                                                                                   |
+| 選項                                         | Short             | 描述                                                                                                                                                                                                                                                   |
 |:-----------------------------------------------|:------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--json`                                       |                   | 顯示 JSON 輸出。                                                                                                                                                                                                                                             |
 | `--context <DBCONTEXT>`                        | <nobr>`-c`</nobr> | 要使用的 `DbContext` 類別。 僅限類別名稱或完整限定命名空間。  如果省略此選項，EF Core 會尋找內容類別。 如果有多個內容類別，則需要此選項。                                            |
@@ -128,20 +128,20 @@ dotnet ef database update -- --environment Production
 
 從 EF Core 5.0 開始，任何額外的引數都會傳遞至應用程式。
 
-## <a name="dotnet-ef-database-drop"></a>dotnet ef 資料庫 drop
+## `dotnet ef database drop`
 
 刪除資料庫。
 
 選項：
 
-| 選項                   | Short             | Description                                              |
+| 選項                   | Short             | 描述                                              |
 |:-------------------------|:------------------|:---------------------------------------------------------|
 | `--force`                | <nobr>`-f`</nobr> | 不要確認。                                           |
 | <nobr>`--dry-run`</nobr> |                   | 顯示要卸載的資料庫，但不要卸載它。 |
 
 上述的 [通用選項](#common-options) 如下所示。
 
-## <a name="dotnet-ef-database-update"></a>dotnet ef 資料庫更新
+## `dotnet ef database update`
 
 將資料庫更新為上次遷移或指定的遷移。
 
@@ -153,7 +153,7 @@ dotnet ef database update -- --environment Production
 
 選項：
 
-| 選項                                    | Description                                                                                                                      |
+| 選項                                    | 描述                                                                                                                      |
 |:------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------|
 |  <nobr>`--connection <CONNECTION>`</nobr> | 資料庫的連接字串。 預設為或中所指定 `AddDbContext` 的 `OnConfiguring` 。 在 EF Core 5.0 中新增。 |
 
@@ -166,19 +166,19 @@ dotnet ef database update InitialCreate
 dotnet ef database update 20180904195021_InitialCreate --connection your_connection_string
 ```
 
-## <a name="dotnet-ef-dbcontext-info"></a>dotnet ef dbcoNtext info
+## `dotnet ef dbcontext info`
 
 取得型別的相關資訊 `DbContext` 。
 
 上述的 [通用選項](#common-options) 如下所示。
 
-## <a name="dotnet-ef-dbcontext-list"></a>dotnet ef dbcoNtext 清單
+## `dotnet ef dbcontext list`
 
 列出可用 `DbContext` 的類型。
 
 上述的 [通用選項](#common-options) 如下所示。
 
-## <a name="dotnet-ef-dbcontext-scaffold"></a>dotnet ef dbcoNtext scaffold
+## `dotnet ef dbcontext scaffold`
 
 `DbContext`針對資料庫的和實體類型產生程式碼。 為了讓這個命令產生實體型別，資料庫資料表必須有主鍵。
 
@@ -191,7 +191,7 @@ dotnet ef database update 20180904195021_InitialCreate --connection your_connect
 
 選項：
 
-| 選項                                   | Short             | Description                                                                                                                                                                    |
+| 選項                                   | Short             | 描述                                                                                                                                                                    |
 |:-----------------------------------------|:------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--data-annotations`                     | <nobr>`-d`</nobr> | 您可以使用屬性來設定模型 (可能的) 。 如果省略此選項，則只會使用流暢的 API。                                                                |
 | `--context <NAME>`                       | `-c`              | `DbContext`要產生的類別名稱。                                                                                                                                 |
@@ -227,19 +227,19 @@ dotnet user-secrets set ConnectionStrings:Blogging "Data Source=(localdb)\MSSQLL
 dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-## <a name="dotnet-ef-dbcontext-script"></a>dotnet ef dbcoNtext 腳本
+## `dotnet ef dbcontext script`
 
 從 DbCoNtext 產生 SQL 腳本。 略過任何遷移。 在 EF Core 3.0 中新增。
 
 選項：
 
-| 選項                         | Short             | Description                      |
+| 選項                         | Short             | 描述                      |
 | ------------------------------ | ----------------- | -------------------------------- |
 | <nobr>`--output <FILE>`</nobr> | <nobr>`-o`</nobr> | 要寫入結果的檔案。 |
 
 上述的 [通用選項](#common-options) 如下所示。
 
-## <a name="dotnet-ef-migrations-add"></a>dotnet ef 遷移新增
+## `dotnet ef migrations add`
 
 加入新的遷移。
 
@@ -251,39 +251,39 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFra
 
 選項：
 
-| 選項                                 | Short             | Description                                                                                                            |
+| 選項                                 | Short             | 描述                                                                                                            |
 |:---------------------------------------|:------------------|:-----------------------------------------------------------------------------------------------------------------------|
 | `--output-dir <PATH>`                  | <nobr>`-o`</nobr> | 用來輸出檔案的目錄。 路徑是相對於目標專案目錄。 預設為「遷移」。   |
 | <nobr>`--namespace <NAMESPACE>`</nobr> | `-n`              | 要用於產生之類別的命名空間。 預設為從輸出目錄產生。 在 EF Core 5.0 中新增。 |
 
 上述的 [通用選項](#common-options) 如下所示。
 
-## <a name="dotnet-ef-migrations-list"></a>dotnet ef 遷移清單
+## `dotnet ef migrations list`
 
 列出可用的遷移。
 
 選項：
 
-| 選項                                   | Description                                                                                                                  |
+| 選項                                   | 描述                                                                                                                  |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | <nobr>`--connection <CONNECTION>`</nobr> | 資料庫的連接字串。 預設為 AddDbCoNtext 或 OnConfiguring 中指定的值。 在 EF Core 5.0 中新增。 |
 | `--no-connect`                           | 請勿連接至資料庫。 在 EF Core 5.0 中新增。                                                                         |
 
 上述的 [通用選項](#common-options) 如下所示。
 
-## <a name="dotnet-ef-migrations-remove"></a>dotnet ef 遷移移除
+## `dotnet ef migrations remove`
 
 移除最後一個遷移 (復原針對遷移) 所做的程式碼變更。
 
 選項：
 
-| 選項                 | Short             | Description                                                                     |
+| 選項                 | Short             | 描述                                                                     |
 |:-----------------------|:------------------|:--------------------------------------------------------------------------------|
 | <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | 還原遷移 (復原已套用至資料庫) 的變更。 |
 
 上述的 [通用選項](#common-options) 如下所示。
 
-## <a name="dotnet-ef-migrations-script"></a>dotnet ef 遷移腳本
+## `dotnet ef migrations script`
 
 從遷移產生 SQL 腳本。
 
@@ -296,7 +296,7 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFra
 
 選項：
 
-| 選項                           | Short             | Description                                                        |
+| 選項                           | Short             | 描述                                                        |
 |:---------------------------------|:------------------|:-------------------------------------------------------------------|
 | `--output <FILE>`                | <nobr>`-o`</nobr> | 要寫入腳本的檔案。                                   |
 | `--idempotent`                   | `-i`              | 產生可在任何遷移時用於資料庫的腳本。 |

@@ -4,12 +4,12 @@ description: 如何使用 Entity Framework Core 來設定和對應實體屬性
 author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
-ms.openlocfilehash: fe6dd2c24b8f8ffffa8e0101f69966b7b7c74036
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 3c64f5ac1c86a83b6456df9e29472dc0b22d8524
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "97635545"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543363"
 ---
 # <a name="entity-properties"></a>實體屬性
 
@@ -57,11 +57,11 @@ ms.locfileid: "97635545"
 
 ### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnDataType.cs?name=ColumnDataType&highlight=4,6)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnDataType.cs?name=ColumnDataType&highlight=5,8)]
 
 ### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=5-6)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=6-7)]
 
 ***
 
@@ -76,7 +76,7 @@ ms.locfileid: "97635545"
 
 #### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/MaxLength.cs?name=MaxLength&highlight=4)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/MaxLength.cs?name=MaxLength&highlight=5)]
 
 #### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 
@@ -125,7 +125,7 @@ C # 8 引進了新功能，稱為 [可為 null 的參考型別 (NRT) ](/dotnet/c
 
 #### <a name="without-nrt-default"></a>[沒有 NRT (預設) ](#tab/without-nrt)
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithoutNullableReferenceTypes.cs?name=Customer&highlight=4-8)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithoutNullableReferenceTypes.cs?name=Customer&highlight=5,8)]
 
 #### <a name="with-nrt"></a>[使用 NRT](#tab/with-nrt)
 
@@ -146,7 +146,7 @@ C # 8 引進了新功能，稱為 [可為 null 的參考型別 (NRT) ](/dotnet/c
 
 #### <a name="data-annotations"></a>[資料批註](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Required.cs?name=Required&highlight=4)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Required.cs?name=Required&highlight=5)]
 
 #### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 
@@ -161,7 +161,7 @@ C # 8 引進了新功能，稱為 [可為 null 的參考型別 (NRT) ](/dotnet/c
 
 您可以在文字資料行上定義定序，以決定如何比較和排序定序。 例如，下列程式碼片段會將 SQL Server 資料行設定為不區分大小寫：
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?range=42-43)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=ColumnCollation)]
 
 如果資料庫中的所有資料行都需要使用特定定序，請改為在資料庫層級定義定序。
 
@@ -176,7 +176,7 @@ C # 8 引進了新功能，稱為 [可為 null 的參考型別 (NRT) ](/dotnet/c
 > [!NOTE]
 > 透過資料批註設定批註是在 EF Core 5.0 中引進。
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnComment.cs?name=ColumnComment&highlight=4)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnComment.cs?name=ColumnComment&highlight=5)]
 
 ### <a name="fluent-api"></a>[Fluent API](#tab/fluent-api)
 

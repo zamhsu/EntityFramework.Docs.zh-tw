@@ -4,12 +4,12 @@ description: 使用 [新增]、[附加]、[更新] 和 [移除] 以 DbCoNtext �
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/explicit-tracking
-ms.openlocfilehash: 1428096b362c8016f7924c72ec9ac3e2f9203ed6
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 3d9142cecf272c635c3a041fe6c5d9c49a26c33d
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983270"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543181"
 ---
 # <a name="explicitly-tracking-entities"></a>明確追蹤實體
 
@@ -42,7 +42,7 @@ Web 應用程式現在必須重新附加這些實體，才能再次追蹤這些�
 > [!TIP]
 > 通常不需要將實體附加至其查詢來源的 _相同 DbCoNtext 實例_ 。 請勿定期執行無追蹤查詢，然後將傳回的實體附加至相同的內容。 這會比使用追蹤查詢更慢，而且也可能會導致問題（例如遺漏陰影屬性值），使其更難正確。
 
-### <a name="generated-verses-explicit-key-values"></a>產生的辭句明確索引鍵值
+### <a name="generated-versus-explicit-key-values"></a>產生的與明確的索引鍵值
 
 依預設，會將整數和 GUID 索引 [鍵屬性](xref:core/modeling/keys) 設定為使用 [自動產生](xref:core/modeling/generated-properties)的索引鍵值。 這主要是 **變更追蹤的優點：未設定的索引鍵值表示實體為 "new"**。 「新增」表示它尚未插入資料庫中。
 

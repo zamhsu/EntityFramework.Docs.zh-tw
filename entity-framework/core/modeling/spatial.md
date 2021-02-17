@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 模型中的空間資料
 author: bricelam
 ms.date: 10/02/2020
 uid: core/modeling/spatial
-ms.openlocfilehash: a38e75e150b3d3404f2ed7619d05ba478c411117
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 721aa2628d17b89b79160f8f658f8ef0dd78d6a6
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003441"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543285"
 ---
 # <a name="spatial-data"></a>空間資料
 
@@ -78,15 +78,18 @@ NTS 中的座標是以 X 和 Y 值為依據。 若要表示經度和緯度，請
 
 ## <a name="reverse-engineering"></a>反向工程
 
-空間 NuGet 套件也會啟用具有空間屬性的 [反轉工程](xref:core/managing-schemas/scaffolding) 模型，但您必須在執行或 *_之前，先_* 安裝套件 * `Scaffold-DbContext` `dotnet ef dbcontext scaffold` 。 如果沒有，您將會收到關於找不到資料行之類型對應的警告，而且將略過資料行。
+空間 NuGet 套件也會啟用具有空間屬性的 [反轉工程](xref:core/managing-schemas/scaffolding) 模型，但您必須先安裝封裝， ***才能*** 執行 `Scaffold-DbContext` 或 `dotnet ef dbcontext scaffold` 。 如果沒有，您將會收到關於找不到資料行之類型對應的警告，而且將略過資料行。
 
 ## <a name="srid-ignored-during-client-operations"></a>用戶端作業期間忽略 SRID
 
-NTS 會在作業期間忽略 SRID 值。 它會假設平面座標系統。 這表示，如果您在經度和緯度方面指定座標，某些用戶端評估值（例如距離、長度和區域）會以度為單位，而非計量。 如需更有意義的值，您必須先使用 [ProjNet4GeoAPI](https://github.com/NetTopologySuite/ProjNet4GeoAPI) 之類的程式庫，將座標投影至另一個座標系統，然後再計算這些值。
+NTS 會在作業期間忽略 SRID 值。 它會假設平面座標系統。 這表示，如果您在經度和緯度方面指定座標，某些用戶端評估值（例如距離、長度和區域）會以度為單位，而非計量。 如需更有意義的值，您必須先使用程式庫（例如 [ProjNet (For GeoAPI) ](https://github.com/NetTopologySuite/ProjNet4GeoAPI)）將座標投影至另一個座標系統。
+
+> [!NOTE]
+> 使用較新的 [ProjNet NuGet 套件](https://www.nuget.org/packages/ProjNet/)， **而不** 是較舊的套件，稱為 ProjNet4GeoAPI。
 
 如果作業是由 EF Core 透過 SQL 評估，則結果的單位將由資料庫決定。
 
-以下範例使用 ProjNet4GeoAPI 來計算兩個城市之間的距離。
+以下範例使用 ProjNet 來計算兩個城市之間的距離。
 
 [!code-csharp[](../../../samples/core/Spatial/Projections/GeometryExtensions.cs?name=snippet_GeometryExtensions)]
 
@@ -101,7 +104,7 @@ NTS 會在作業期間忽略 SRID 值。 它會假設平面座標系統。 這�
 
 請務必閱讀提供者的檔，以取得處理空間資料的其他資訊。
 
-_ [SQL Server 提供者中的空間資料](xref:core/providers/sql-server/spatial)
+* [SQL Server 提供者中的空間資料](xref:core/providers/sql-server/spatial)
 * [SQLite 提供者中的空間資料](xref:core/providers/sqlite/spatial)
 * [Npgsql 提供者中的空間資料](https://www.npgsql.org/efcore/mapping/nts.html)
 
