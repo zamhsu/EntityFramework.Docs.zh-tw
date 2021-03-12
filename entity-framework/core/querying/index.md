@@ -4,19 +4,19 @@ description: 在 Entity Framework Core 中進行查詢的相關資訊概觀
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/index
-ms.openlocfilehash: da5177dda4f2df6537ee9133edf4f1240a4b5e94
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 733b44e2f571bd32689b9d8e5d7507bd90e7848d
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430114"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023727"
 ---
 # <a name="querying-data"></a>查詢資料
 
-Entity Framework Core 使用 Language-Integrated 查詢 (LINQ) 來查詢資料庫中的資料。 LINQ 可讓您使用 C# (或您選擇的 .NET 語言) 來撰寫強型別查詢。 它使用您的衍生內容與實體類別來參考資料庫物件。 EF Core 會將 LINQ 查詢的表示法剖析為資料庫提供者。 資料庫提供者接著會將它轉譯為資料庫特定查詢語言 (例如，關聯式資料庫的 SQL)。 即使在結果中傳回的實體已經存在於內容中，也一律會對資料庫執行查詢。
+Entity Framework Core 使用 Language-Integrated Query (LINQ) 來查詢資料庫中的資料。 LINQ 可讓您使用 C# (或您選擇的 .NET 語言) 來撰寫強型別查詢。 它使用您的衍生內容與實體類別來參考資料庫物件。 EF Core 會將 LINQ 查詢的表示法剖析為資料庫提供者。 資料庫提供者接著會將它轉譯為資料庫特定查詢語言 (例如，關聯式資料庫的 SQL)。 即使在結果中傳回的實體已經存在於內容中，也一律會對資料庫執行查詢。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/Overview) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/Overview) \(英文\)。
 
 下列片段顯示一些有關如何使用 Entity Framework Core 完成常見工作的範例。
 

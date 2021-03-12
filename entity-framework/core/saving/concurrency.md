@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 同時更新相同的資料時，管�
 author: ajcvickers
 ms.date: 03/03/2018
 uid: core/saving/concurrency
-ms.openlocfilehash: b596a99db431331bb12a28fc6ddc06f1c941b67c
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 290fc3f68e71e4112891a4963f361506e95db17c
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063019"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023545"
 ---
 # <a name="handling-concurrency-conflicts"></a>處理並行存取衝突
 
@@ -17,11 +17,11 @@ ms.locfileid: "92063019"
 > 本頁記載並行存取在 EF Core 中的運作方式，以及如何處理您應用程式中的並行存取衝突。 如需有關如何在模型中設定並行存取語彙基元的詳細資料，請參閱[並行存取語彙基元](xref:core/modeling/concurrency)。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Concurrency/) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Saving/Concurrency/) \(英文\)。
 
-「資料庫並行存取」__ 係指多個處理程序或使用者同時存取或變更資料庫中的相同資料。 「並行存取控制」__ 係指在發生並行變更時用來確保資料一致性的特定機制。
+「資料庫並行存取」係指多個處理程序或使用者同時存取或變更資料庫中的相同資料。 「並行存取控制」係指在發生並行變更時用來確保資料一致性的特定機制。
 
-EF Core 實作「開放式並行存取控制」__，意謂著它會讓多個處理程序或使用者獨立進行變更，而無同步處理或鎖定的額外負荷。 在理想的情況下，這些變更不會互相影響，因此將能夠成功。 在最糟的情況下，會有兩個或更多個處理程序嘗試進行衝突變更，而只有其中一個應該會成功。
+EF Core 實作「開放式並行存取控制」，意謂著它會讓多個處理程序或使用者獨立進行變更，而無同步處理或鎖定的額外負荷。 在理想的情況下，這些變更不會互相影響，因此將能夠成功。 在最糟的情況下，會有兩個或更多個處理程序嘗試進行衝突變更，而只有其中一個應該會成功。
 
 ## <a name="how-concurrency-control-works-in-ef-core"></a>並行存取控制在 EF Core 中如何運作
 
@@ -30,7 +30,7 @@ EF Core 實作「開放式並行存取控制」__，意謂著它會讓多個處�
 - 如果值相符，作業便能完成。
 - 如果值不相符，EF Core 就會假設另一位使用者已執行衝突作業，而將目前的交易中止。
 
-當另一位使用者已執行與目前作業衝突的作業時，此情況稱為「並行存取衝突」__。
+當另一位使用者已執行與目前作業衝突的作業時，此情況稱為「並行存取衝突」。
 
 資料庫提供者需負責實作並行存取語彙基元值的比較。
 
@@ -51,15 +51,15 @@ WHERE [PersonId] = @p0 AND [LastName] = @p2;
 
 此時，應用程式可以直接通知使用者因變更發生衝突而導致更新失敗，然後繼續進行。 但提示使用者確定此記錄仍代表相同的實際人員並重試作業，可能是較理想的做法。
 
-此程序是「解決並行存取衝突」__ 的一個範例。
+此程序是「解決並行存取衝突」的一個範例。
 
 解決並行存取衝突牽涉到將來自目前 `DbContext` 的擱置中變更與資料庫中的值合併。 要合併的值將因應用程式而異，且可能由使用者輸入來指示。
 
 **有三組值可供協助解決並行存取衝突：**
 
-- 「目前值」**** 係指應用程式嘗試寫入至資料庫的值。
-- 「原始值」**** 係指在進行任何編輯之前，原先從資料庫擷取到的值。
-- 「資料庫值」**** 係指目前儲存在資料庫中的值。
+- 「目前值」係指應用程式嘗試寫入至資料庫的值。
+- 「原始值」係指在進行任何編輯之前，原先從資料庫擷取到的值。
+- 「資料庫值」係指目前儲存在資料庫中的值。
 
 處理並行存取衝突的一般方法是：
 

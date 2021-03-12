@@ -4,16 +4,16 @@ description: 如何使用 Entity Framework Core 設定資料表分割
 author: AndriySvyryd
 ms.date: 01/03/2020
 uid: core/modeling/table-splitting
-ms.openlocfilehash: 71d332ec3f500f48e12863c71ac44ce4d60699f0
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 43261ea0dab57528ab14faf7f455c0ed72d1bfc3
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063032"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023922"
 ---
 # <a name="table-splitting"></a>資料表分割
 
-EF Core 允許將兩個或多個實體對應至單一資料列。 這稱為「 _資料表分割_ 」或「 _資料表共用_」。
+EF Core 可讓您將兩個或多個實體對應至單一資料列。 這稱為「 _資料表分割_ 」或「 _資料表共用_」。
 
 ## <a name="configuration"></a>組態
 
@@ -32,7 +32,7 @@ EF Core 允許將兩個或多個實體對應至單一資料列。 這稱為「 _
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting)]
 
 > [!TIP]
-> 請參閱 [完整的範例專案](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) ，以取得更多內容。
+> 請參閱 [完整的範例專案](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Modeling/TableSplitting) ，以取得更多內容。
 
 ## <a name="usage"></a>使用方式
 

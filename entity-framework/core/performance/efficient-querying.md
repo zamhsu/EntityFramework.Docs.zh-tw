@@ -1,15 +1,15 @@
 ---
 title: 有效率的查詢-EF Core
-description: 使用 Entity Framework Core 有效率查詢的效能指南
+description: 使用 Entity Framework Core 進行有效率查詢的效能指南
 author: roji
 ms.date: 12/1/2020
 uid: core/performance/efficient-querying
-ms.openlocfilehash: e945a1e0f734d62ce8948904bcbe819455fcbefa
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: e14837b779f2fbe8d5bf10206c6a336a952fc35b
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128481"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023870"
 ---
 # <a name="efficient-querying"></a>有效率的查詢
 
@@ -28,7 +28,7 @@ ms.locfileid: "98128481"
 * 當索引加速查詢時，它們也會使更新變慢，因為它們必須保持在最新狀態。 避免定義不需要的索引，並考慮使用 [索引篩選準則](xref:core/modeling/indexes#index-filter) 將索引限制為數據列的子集，藉此減少此額外負荷。
 * 複合索引可以加速篩選多個資料行的查詢，但也可以加速查詢，而這些查詢不會篩選所有索引資料行，視順序而定。 例如，資料行 A 和 B 上的索引會加速 A 和 B 的查詢篩選，以及只查詢篩選的查詢，但不會加速僅限 B 的查詢篩選。
 * 如果查詢依據運算式篩選資料行 (例如 `price / 2`) ，就不能使用簡單的索引。 不過，您可以為您的運算式定義已 [儲存的保存資料行](xref:core/modeling/generated-properties#computed-columns) ，並在該資料行上建立索引。 某些資料庫也支援運算式索引，可以直接用來加速任何運算式的查詢篩選。
-* 不同的資料庫可讓您以各種方式設定索引，而且在許多情況下，EF Core 提供者會透過流暢的 API 來公開這些索引。 例如，SQL Server 提供者可讓您設定 [索引是否已叢集化，或](xref:core/providers/sql-server/indexes#clustering)設定其 [填滿因數](xref:core/providers/sql-server/indexes#fill-factor)。 如需詳細資訊，請參閱您的提供者檔。
+* 不同的資料庫可讓您以各種方式設定索引，而且在許多情況下，EF Core 提供者會透過流暢的 API 公開這些索引。 例如，SQL Server 提供者可讓您設定 [索引是否已叢集化，或](xref:core/providers/sql-server/indexes#clustering)設定其 [填滿因數](xref:core/providers/sql-server/indexes#fill-factor)。 如需詳細資訊，請參閱您的提供者檔。
 
 ## <a name="project-only-properties-you-need"></a>只投影您需要的屬性
 
@@ -94,7 +94,7 @@ EF 可透過使用「分割查詢」來避免此效果，這會透過個別查�
 
 建議您先閱讀 [相關實體的專用頁面](xref:core/querying/related-data) ，再繼續進行本節。
 
-處理相關的實體時，我們通常會事先知道需要載入的專案：一般範例會載入一組特定的 Blog，以及所有的貼文。 在這些情況下，最好是使用積極式 [載入](xref:core/querying/related-data/eager)，讓 EF 可以在一個往返中提取所有必要的資料。 已 [篩選的 include](xref:core/querying/related-data/eager#filtered-include) 功能（在 EF Core 5.0 中引進）也可讓您限制要載入的相關實體，同時讓載入流程保持積極，因此在單一往返中雖可行：
+處理相關的實體時，我們通常會事先知道需要載入的專案：一般範例會載入一組特定的 Blog，以及所有的貼文。 在這些情況下，最好是使用積極式 [載入](xref:core/querying/related-data/eager)，讓 EF 可以在一個往返中提取所有必要的資料。 EF Core 5.0 中引進的 [篩選包含](xref:core/querying/related-data/eager#filtered-include) 功能，也可讓您限制要載入的相關實體，同時讓載入程式保持積極，因此在單一往返中雖可行：
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Program.cs#FilteredInclude)]
 
@@ -102,13 +102,13 @@ EF 可透過使用「分割查詢」來避免此效果，這會透過個別查�
 
 ### <a name="beware-of-lazy-loading"></a>注意消極式載入
 
-消極式[載入](xref:core/querying/related-data/lazy)通常很適合用來撰寫資料庫邏輯，因為 EF Core 會在程式碼存取資料庫時，從資料庫自動載入相關實體。 這可避免載入不需要的相關實體 (例如 [明確載入](xref:core/querying/related-data/explicit)) ，而且看似讓程式設計人員不必全部處理相關的實體。 不過，消極式載入特別容易產生不必要的額外往返，而導致應用程式變慢。
+消極式[載入](xref:core/querying/related-data/lazy)通常看起來像是一個非常有用的方式來撰寫資料庫邏輯，因為 EF Core 會在程式碼存取資料庫時，從資料庫自動載入相關實體。 這可避免載入不需要的相關實體 (例如 [明確載入](xref:core/querying/related-data/explicit)) ，而且看似讓程式設計人員不必全部處理相關的實體。 不過，消極式載入特別容易產生不必要的額外往返，而導致應用程式變慢。
 
 請考慮下列事項：
 
 [!code-csharp[Main](../../../samples/core/Performance/Program.cs#NPlusOne)]
 
-這種看似無害的程式碼會逐一查看所有的 blog 和其貼文，並將其列印出來。開啟 EF Core 的 [語句記錄](xref:core/logging-events-diagnostics/index) 會顯示下列內容：
+這種看似無害的程式碼會逐一查看所有的 blog 和其貼文，並將其列印出來。開啟 EF Core 的 [語句記錄](xref:core/logging-events-diagnostics/index) 會顯示下列各項：
 
 ```console
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
@@ -140,7 +140,7 @@ info: Microsoft.EntityFrameworkCore.Database.Command[20101]
 
 [!code-csharp[Main](../../../samples/core/Performance/Program.cs#EagerlyLoadRelatedAndProject)]
 
-這會讓 EF Core 在單一查詢中提取所有的 Blog 及其 Post。 在某些情況下，使用 [分割查詢](xref:core/querying/single-split-queries)來避免笛卡兒爆炸效果也可能很有用。
+這會讓 EF Core 在單一查詢中提取所有的 Blog 以及它們的貼文。 在某些情況下，使用 [分割查詢](xref:core/querying/single-split-queries)來避免笛卡兒爆炸效果也可能很有用。
 
 > [!WARNING]
 > 由於消極式載入讓您很容易不小心觸發 N + 1 問題，因此建議您避免使用它。 積極或明確的載入，可讓您在發生資料庫往返時，在原始程式碼中非常清楚。
@@ -180,7 +180,7 @@ EF 預設會追蹤實體實例，以便在呼叫時，偵測並保存它們的�
 
 為了說明這一點，假設我們從資料庫載入大量的貼文，以及每一篇文章所參考的 Blog。 如果出現100文章參考相同的 Blog，追蹤查詢會透過識別解析來偵測到此情況，而且所有 Post 實例都會參考相同的重複複製的 Blog 實例。 相反地，無追蹤查詢會重複相同的 Blog 100 次，而且應用程式程式碼必須據以撰寫。
 
-以下是比較追蹤的結果，以及每個包含20篇文章的查詢載入10個 Blog 的追蹤行為。 您[可以從這裡取得原始程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Benchmarks/QueryTrackingBehavior.cs)，並將其作為您自己的度量基礎。
+以下是比較追蹤的結果，以及每個包含20篇文章的查詢載入10個 Blog 的追蹤行為。 您[可以從這裡取得原始程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Benchmarks/QueryTrackingBehavior.cs)，並將其作為您自己的度量基礎。
 
 |       方法 | NumBlogs | NumPostsPerBlog |       平均數 |    錯誤 |   StdDev |     Median | 外觀比例 | RatioSD |   Gen 0 |   Gen 1 | Gen 2 | 已配置 |
 |------------- |--------- |---------------- |-----------:|---------:|---------:|-----------:|------:|--------:|--------:|--------:|------:|----------:|

@@ -4,23 +4,23 @@ description: 使用 Entity Framework Core 時，更複雜的 LINQ 查詢運算�
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/complex-query-operators
-ms.openlocfilehash: 84c2518972355d31cf5a6a7bafc57b44162412c8
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: bdcb2f4d00ee4833ae9e0a10d307e5124bafb4b6
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430478"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023753"
 ---
 # <a name="complex-query-operators"></a>複雜查詢運算子
 
  (LINQ) 的語言整合式查詢包含許多複雜的運算子，這些運算子結合多個資料來源或複雜的處理。 並非所有 LINQ 運算子在伺服器端都有適當的翻譯。 有時候，一個表單中的查詢會轉譯成伺服器，但如果以不同的表單撰寫，即使結果相同也不會轉譯。 此頁面描述一些複雜運算子及其支援的變化。 在未來的版本中，我們可能會辨識更多模式，並新增其對應的翻譯。 此外，請務必記住，提供者之間的翻譯支援會有所不同。 在 SqlServer 中轉譯的特定查詢，在 SQLite 資料庫中可能無法運作。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/ComplexQuery) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/ComplexQuery) \(英文\)。
 
 ## <a name="join"></a>Join
 
-LINQ Join 運算子可讓您根據每個來源的索引鍵選取器來連接兩個數據源，並在索引鍵符合時產生值的元組。 它會自然地轉譯為 `INNER JOIN` 關係資料庫。 當 LINQ 聯結具有外部和內部索引鍵選取器時，資料庫需要單一聯結條件。 因此 EF Core 藉由比較外部索引鍵選取器與內部索引鍵選取器的相等來產生聯結條件。
+LINQ Join 運算子可讓您根據每個來源的索引鍵選取器來連接兩個數據源，並在索引鍵符合時產生值的元組。 它會自然地轉譯為 `INNER JOIN` 關係資料庫。 當 LINQ 聯結具有外部和內部索引鍵選取器時，資料庫需要單一聯結條件。 因此 EF Core 會藉由比較外部索引鍵選取器與內部索引鍵選擇器的相等來產生聯結條件。
 
 [!code-csharp[Main](../../../samples/core/Querying/ComplexQuery/Program.cs#Join)]
 
@@ -42,7 +42,7 @@ INNER JOIN [Person] AS [p] ON ([p0].[PersonPhotoId] = [p].[PhotoId] AND ([p0].[C
 
 ## <a name="groupjoin"></a>GroupJoin
 
-LINQ GroupJoin 運算子可讓您連接類似于聯結的兩個數據源，但是它會建立一組內部值以符合專用項目。 執行類似下列範例的查詢會產生的結果 `Blog`  &  `IEnumerable<Post>` 。 由於資料庫 (特別是關係資料庫) 無法表示用戶端物件的集合，因此在許多情況下，GroupJoin 不會轉譯成伺服器。 您必須從伺服器取得所有資料，才能進行 GroupJoin，而不需要特殊的選取器 (第一個查詢) 。 但是，如果選取器會限制選取的資料，則從伺服器提取所有資料可能會導致效能問題 (第二個查詢) 。 這就是 EF Core 不會轉譯 GroupJoin 的原因。
+LINQ GroupJoin 運算子可讓您連接類似于聯結的兩個數據源，但是它會建立一組內部值以符合專用項目。 執行類似下列範例的查詢會產生的結果 `Blog`  &  `IEnumerable<Post>` 。 由於資料庫 (特別是關係資料庫) 無法表示用戶端物件的集合，因此在許多情況下，GroupJoin 不會轉譯成伺服器。 您必須從伺服器取得所有資料，才能進行 GroupJoin，而不需要特殊的選取器 (第一個查詢) 。 但是，如果選取器會限制選取的資料，則從伺服器提取所有資料可能會導致效能問題 (第二個查詢) 。 這就是為什麼 EF Core 不會轉譯 GroupJoin。
 
 [!code-csharp[Main](../../../samples/core/Querying/ComplexQuery/Program.cs#GroupJoin)]
 
@@ -66,7 +66,7 @@ CROSS JOIN [Posts] AS [p]
 
 ### <a name="collection-selector-references-outer-in-a-where-clause"></a>集合選取器參考 where 子句中的 outer
 
-當集合選取器具有 where 子句（參考外部專案）時，EF Core 會將它轉譯成資料庫聯結，並使用述詞做為聯結條件。 一般來說，在專用項目上使用集合導覽作為集合選取器時，會發生這種情況。 如果外部專案的集合是空的，則不會針對該專用項目產生任何結果。 但是，如果在 `DefaultIfEmpty` 集合選取器上套用，則外部專案將會與內部元素的預設值連接。 由於這種差異，這類的查詢在沒有 `INNER JOIN` 和套用時， `DefaultIfEmpty` 會轉譯為 `LEFT JOIN` `DefaultIfEmpty` 。
+當集合選取器有 where 子句（參考專用項目）時，EF Core 會將它轉譯成資料庫聯結，並使用述詞做為聯結條件。 一般來說，在專用項目上使用集合導覽作為集合選取器時，會發生這種情況。 如果外部專案的集合是空的，則不會針對該專用項目產生任何結果。 但是，如果在 `DefaultIfEmpty` 集合選取器上套用，則外部專案將會與內部元素的預設值連接。 由於這種差異，這類的查詢在沒有 `INNER JOIN` 和套用時， `DefaultIfEmpty` 會轉譯為 `LEFT JOIN` `DefaultIfEmpty` 。
 
 [!code-csharp[Main](../../../samples/core/Querying/ComplexQuery/Program.cs#SelectManyConvertedToJoin)]
 
@@ -98,7 +98,7 @@ OUTER APPLY [Posts] AS [p]
 
 ## <a name="groupby"></a>GroupBy
 
-LINQ GroupBy 運算子會建立類型的結果 `IGrouping<TKey, TElement>` `TKey` ，而且可以 `TElement` 是任何任意型別。 此外， `IGrouping` `IEnumerable<TElement>` 也會執行，這表示您可以使用群組之後的任何 LINQ 運算子來撰寫它。 因為沒有任何資料庫結構可以表示 `IGrouping` ，所以在大部分情況下，GroupBy 運算子沒有任何轉譯。 當匯總運算子套用至傳回純量的每個群組時，可以將它轉譯為 `GROUP BY` 關係資料庫中的 SQL。 SQL 也 `GROUP BY` 有限制。 您只需以純量值群組。 投影只能包含群組索引鍵資料行或套用在資料行上的任何匯總。 EF Core 識別此模式，並將它轉譯成伺服器，如下列範例所示：
+LINQ GroupBy 運算子會建立類型的結果 `IGrouping<TKey, TElement>` `TKey` ，而且可以 `TElement` 是任何任意型別。 此外， `IGrouping` `IEnumerable<TElement>` 也會執行，這表示您可以使用群組之後的任何 LINQ 運算子來撰寫它。 因為沒有任何資料庫結構可以表示 `IGrouping` ，所以在大部分情況下，GroupBy 運算子沒有任何轉譯。 當匯總運算子套用至傳回純量的每個群組時，可以將它轉譯為 `GROUP BY` 關係資料庫中的 SQL。 SQL 也 `GROUP BY` 有限制。 您只需以純量值群組。 投影只能包含群組索引鍵資料行或套用在資料行上的任何匯總。 EF Core 會識別此模式，並將它轉譯成伺服器，如下列範例所示：
 
 [!code-csharp[Main](../../../samples/core/Querying/ComplexQuery/Program.cs#GroupBy)]
 
@@ -123,7 +123,7 @@ ORDER BY [p].[AuthorId]
 EF Core 支援的匯總運算子如下所示
 
 - 平均
-- 計數
+- Count
 - LongCount
 - 最大值
 - Min
@@ -131,7 +131,7 @@ EF Core 支援的匯總運算子如下所示
 
 ## <a name="left-join"></a>左方聯結
 
-雖然左方聯結不是 LINQ 運算子，但關係資料庫具有左方聯結的概念，其通常會在查詢中使用。 LINQ 查詢中的特定模式會提供與伺服器上相同的結果 `LEFT JOIN` 。 EF Core 識別這類模式，並在伺服器端產生對等的 `LEFT JOIN` 。 此模式包含在兩個數據源之間建立 GroupJoin，然後在內部沒有相關專案時，使用 SelectMany 運算子搭配群組來源上的 DefaultIfEmpty 來比對 null，以將群組壓平合併。 下列範例會顯示該模式的外觀和產生的內容。
+雖然左方聯結不是 LINQ 運算子，但關係資料庫具有左方聯結的概念，其通常會在查詢中使用。 LINQ 查詢中的特定模式會提供與伺服器上相同的結果 `LEFT JOIN` 。 EF Core 會識別這類模式，並在伺服器端產生對等的 `LEFT JOIN` 。 此模式包含在兩個數據源之間建立 GroupJoin，然後在內部沒有相關專案時，使用 SelectMany 運算子搭配群組來源上的 DefaultIfEmpty 來比對 null，以將群組壓平合併。 下列範例會顯示該模式的外觀和產生的內容。
 
 [!code-csharp[Main](../../../samples/core/Querying/ComplexQuery/Program.cs#LeftJoin)]
 
@@ -141,4 +141,4 @@ FROM [Blogs] AS [b]
 LEFT JOIN [Posts] AS [p] ON [b].[BlogId] = [p].[BlogId]
 ```
 
-上述模式會在運算式樹狀結構中建立複雜結構。 因此，EF Core 要求您在緊接著運算子之後的步驟中，將 GroupJoin 運算子的群組結果壓平合併。 即使使用了 GroupJoin-DefaultIfEmpty-SelectMany，但在不同的模式下，也無法將其識別為左方聯結。
+上述模式會在運算式樹狀結構中建立複雜結構。 因此，EF Core 會要求您在緊接在運算子之後的步驟中，將 GroupJoin 運算子的群組結果壓平合併。 即使使用了 GroupJoin-DefaultIfEmpty-SelectMany，但在不同的模式下，也無法將其識別為左方聯結。

@@ -1,31 +1,31 @@
 ---
-title: 使用 EF Core 和 Xamarin EF Core 的開始使用
-description: 使用 Xamarin 建立行動裝置應用程式的使用者入門教學課程 Entity Framework Core
+title: EF Core 和 Xamarin 使用者入門-EF Core
+description: 使用 Xamarin 建立使用 Entity Framework Core 的行動應用程式的使用者入門教學課程
 author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: e4a26d7a0c6909002be0974ee9fe1c5db7c1046a
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: edec7dfec3d6ac8313f9fc07af8844e4a19c3bb2
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983595"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024273"
 ---
-# <a name="getting-started-with-ef-core-and-xamarin"></a>使用 EF Core 和 Xamarin 開始使用
+# <a name="getting-started-with-ef-core-and-xamarin"></a>開始使用 EF Core 和 Xamarin
 
-在本教學課程中，您會建立一個 [Xamarin. Forms](/xamarin/get-started/what-is-xamarin-forms) 應用程式，該應用程式會使用 Entity Framework Core 對 SQLite 資料庫執行資料存取。
+在本教學課程中，您會建立 [Xamarin. Forms](/xamarin/get-started/what-is-xamarin-forms) 應用程式，以使用 Entity Framework Core 對 SQLite 資料庫執行資料存取。
 
 您可以使用 Windows 上的 Visual Studio 或 Visual Studio for Mac 來遵循教學課程。
 
 > [!TIP]
-> 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Xamarin)。
+> 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Xamarin)。
 
 ## <a name="prerequisites"></a>必要條件
 
 安裝下列其中一項：
 
-* 使用此工作負載[Visual Studio 2019 16.3 版或更新版本](https://www.visualstudio.com/downloads/)：
+* 具有此工作負載的[Visual Studio 2019 16.3 版或更新版本](https://www.visualstudio.com/downloads/)：
   * **使用 .NET 的行動裝置程式開發**
 * [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/)
 
@@ -35,7 +35,7 @@ ms.locfileid: "98983595"
 
 若要執行及探索此範例應用程式，請下載 GitHub 上的程式碼。
 
-下載之後，請在 Visual Studio 中開啟方案檔， `EFGettingStarted.sln` 或 Visual Studio for Mac，然後在您選擇的平臺上執行應用程式。
+下載之後，請 `EFGettingStarted.sln` 在 Visual studio 或 Visual studio For Mac 中開啟方案檔，然後在您選擇的平臺上執行應用程式。
 
 當應用程式第一次啟動時，它會在本機 SQLite 資料庫中填入兩個代表 blog 的專案。
 
@@ -63,7 +63,7 @@ ms.locfileid: "98983595"
 
 新的貼文將會與您在上一個步驟中按一下的 blog 文章相關聯，並會儲存至應用程式的 SQLite 資料庫，並顯示在清單中。
 
-返回至 [blog 清單] 頁面。 並按一下工具列中的 [ **全部刪除** ]。 然後，將會從應用程式的 SQLite 資料庫中刪除所有的 blog 和其對應的貼文。
+返回 [blog 清單] 頁面。 並按一下工具列中的 [ **全部刪除** ]。 然後，將會從應用程式的 SQLite 資料庫中刪除所有的 blog 和其對應的貼文。
 
 ![已刪除所有 blog 的應用程式螢幕擷取畫面](_static/xamarin-tutorial-5.png)
 
@@ -74,7 +74,7 @@ ms.locfileid: "98983595"
 假設您已經熟悉 [顯示資料](/xamarin/xamarin-forms/app-fundamentals/data-binding/) 並在 [頁面之間流覽](/xamarin/xamarin-forms/app-fundamentals/navigation/)的 Xamarin. Forms 主題。
 
 > [!IMPORTANT]
-> Entity Framework Core 使用反映來叫用 Xamarin 連結器可能在 **發行** 模式設定中去除的函式。 您可以透過兩種方式來避免這種情況。
+> Entity Framework Core 使用反映來叫用在 **發行** 模式設定中，Xamarin 連結器可能會去除的函式。 您可以透過兩種方式來避免這種情況。
 >
 > * 第一個方法是將新增 `--linkskip System.Core` 至 **iOS 組建** 選項中的 **其他 mtouch 引數**。
 > * 或者，  `Don't Link` 在 **ios 組建** 選項中將 [Xamarin] 連結器行為設定為。
@@ -82,7 +82,7 @@ ms.locfileid: "98983595"
 
 ## <a name="entity-framework-core-nuget-packages"></a>Entity Framework Core NuGet 套件
 
-若要使用 EF Core 建立 Xamarin 的 Forms 應用程式，請為 EF Core 資料庫提供 (者安裝套件，) 您想要以 Xamarin 方案中的所有專案為目標。 本教學課程使用 SQLite 提供者。
+若要使用 EF Core 建立 Xamarin. Forms 應用程式，您可以為 EF Core 資料庫提供者安裝套件， (s) 您想要將目標設為 Xamarin 方案中的所有專案。 本教學課程使用 SQLite 提供者。
 
 在 Xamarin 方案中的每個專案都需要下列 NuGet 套件。
 
@@ -90,7 +90,7 @@ ms.locfileid: "98983595"
 
 ## <a name="model-classes"></a>模型類別
 
-在 SQLite 資料庫中透過 EF Core 存取的每個資料表都會在類別中模型化。 在此範例中，會使用兩個類別： `Blog` 以及 `Post` 可在資料夾中找到的類別 `Models` 。
+透過 EF Core 存取 SQLite 資料庫中的每個資料表都會在類別中模型化。 在此範例中，會使用兩個類別： `Blog` 以及 `Post` 可在資料夾中找到的類別 `Models` 。
 
 模型類別只是由屬性所組成，而這些屬性是資料庫中的模型資料行。
 
@@ -118,7 +118,7 @@ ms.locfileid: "98983595"
 
 ## <a name="create-read-update--delete"></a>建立、讀取、更新及刪除
 
-以下是應用程式中 EF Core 用來存取 SQLite 的一些實例。
+以下是應用程式中使用 EF Core 來存取 SQLite 的一些實例。
 
 ### <a name="read"></a>讀取
 
@@ -201,9 +201,9 @@ using (var blogContext = new BloggingContext())
 
 ## <a name="next-steps"></a>下一步
 
-在此快速入門中，您已瞭解如何使用 Xamarin 應用程式，利用 Entity Framework Core 來存取 SQLite 資料庫。
+在此快速入門中，您已瞭解如何使用 Xamarin 應用程式，以使用 Entity Framework Core 來存取 SQLite 資料庫。
 
-其他與 Xamarin 開發人員相關的 Entity Framework Core 主題：
+Xamarin 開發人員感興趣的其他 Entity Framework 核心主題：
 
 * [設定 `DbContext`](xref:core/dbcontext-configuration/index)
 * 深入了解 [LINQ 查詢運算式](/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations)

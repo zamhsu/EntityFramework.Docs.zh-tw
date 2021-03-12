@@ -1,15 +1,15 @@
 ---
 title: 效能診斷-EF Core
-description: 診斷 Entity Framework Core 效能並找出瓶頸
+description: 診斷 Entity Framework 核心效能並找出瓶頸
 author: roji
 ms.date: 12/1/2020
 uid: core/performance/performance-diagnosis
-ms.openlocfilehash: 9416acf3326056ef7a5d732c4bd456dac751167b
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 85ffd1826723ad97bdcce517781f920c193e4286
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657787"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023844"
 ---
 # <a name="performance-diagnosis"></a>效能診斷
 
@@ -68,21 +68,21 @@ ORDER BY [p].[Location].STDistance(@__myLocation_0) DESC
 
 EF 的記錄功能有許多替代方法可以用來捕捉命令執行時間，這可能更強大。 資料庫通常會隨附自己的追蹤和效能分析工具，這些工具通常會提供更豐富的資料庫特定資訊，而不只是簡單的執行時間;實際的設定、功能和使用方式在不同的資料庫之間會有很大的差別。
 
-例如， [SQL Server Management Studio](/sql/ssms/download-sql-server-management-studio-ssms) 是一個功能強大的用戶端，可連接到您的 SQL Server 實例，並提供重要的管理和效能資訊。 本章節涵蓋的詳細資料不在本章節的討論範圍內，但有兩項值得一提的功能是 [活動監視器](/sql/relational-databases/performance-monitor/open-activity-monitor-sql-server-management-studio)，它提供了伺服器活動的即時儀表板 (包括) 的最高成本查詢，以及 [擴充的事件 (XEvent) ](/sql/relational-databases/extended-events/quick-start-extended-events-in-sql-server) 功能，可讓您定義可針對您的確切需求量身打造的任意資料捕獲會話。 [有關監視的 SQL Server 檔](/sql/relational-databases/performance/monitor-and-tune-for-performance) 會提供這些功能以及其他功能的詳細資訊。
+例如， [Sql Server Management Studio](/sql/ssms/download-sql-server-management-studio-ssms) 是一個功能強大的用戶端，可連接到您的 SQL Server 實例，並提供重要的管理和效能資訊。 本章節涵蓋的詳細資料不在本章節的討論範圍內，但有兩項值得一提的功能是 [活動監視器](/sql/relational-databases/performance-monitor/open-activity-monitor-sql-server-management-studio)，它提供了伺服器活動的即時儀表板 (包括) 的最高成本查詢，以及 [擴充的事件 (XEvent) ](/sql/relational-databases/extended-events/quick-start-extended-events-in-sql-server) 功能，可讓您定義可針對您的確切需求量身打造的任意資料捕獲會話。 [SQL Server 的監視檔](/sql/relational-databases/performance/monitor-and-tune-for-performance) 提供這些功能的詳細資訊，以及其他功能。
 
-另一種捕獲效能資料的方法是透過介面收集由 EF 或資料庫驅動程式自動發出的資訊 `DiagnosticSource` ，然後分析該資料，或將其顯示在儀表板上。 如果您使用 Azure， [Azure 應用程式 Insights](https://docs.microsoft.com/azure/azure-monitor/learn/tutorial-performance) 會提供現成的強大監視功能，並在分析您的 web 要求的速度時，整合資料庫效能和查詢執行時間。 有關此功能的詳細資訊可在 [Application Insights 效能教學](/azure/azure-monitor/learn/tutorial-performance)課程和 [Azure SQL 分析頁面](/azure/azure-monitor/insights/azure-sql)中取得。
+另一種捕獲效能資料的方法是透過介面收集由 EF 或資料庫驅動程式自動發出的資訊 `DiagnosticSource` ，然後分析該資料，或將其顯示在儀表板上。 如果您使用 Azure，則 [Azure Application Insights](https://docs.microsoft.com/azure/azure-monitor/learn/tutorial-performance) 會提供現成的強大監視功能，並在分析 web 要求的速度時，整合資料庫效能和查詢執行時間。 您可以在 [Application Insights 效能教學](/azure/azure-monitor/learn/tutorial-performance)課程和 [Azure SQL 分析頁面](/azure/azure-monitor/insights/azure-sql)中取得此資訊的詳細資訊。
 
 ## <a name="inspecting-query-execution-plans"></a>檢查查詢執行計畫
 
 當您指出需要優化的有問題查詢之後，下一個步驟通常是分析查詢的 *執行計畫*。 當資料庫收到 SQL 語句時，它們通常會產生計畫的執行方式，這有時候需要根據已定義的索引、資料表中有多少資料，以及資料表中有多少資料，而這種情況下，也需要在伺服器上快取計畫本身，以獲得最佳效能) 的 (。 關係資料庫通常會提供一種方式，讓使用者查看查詢計劃，以及查詢的不同部分的計算成本。這對改善您的查詢非常有用。
 
-若要開始 SQL Server，請參閱 [查詢執行計畫](/sql/relational-databases/performance/execution-plans)的相關檔。 一般分析工作流程是使用 [SQL Server Management Studio](/sql/relational-databases/performance/display-an-actual-execution-plan)、貼上透過上述其中一種方式識別的慢速查詢 SQL，以及 [產生圖形化執行計畫](/sql/relational-databases/performance/display-an-actual-execution-plan)：
+若要開始使用 SQL Server，請參閱 [查詢執行計畫](/sql/relational-databases/performance/execution-plans)的相關檔。 一般的分析工作流程是使用 [SQL Server Management Studio](/sql/relational-databases/performance/display-an-actual-execution-plan)，貼上透過上述其中一種方式所識別的緩慢查詢 SQL，並 [產生圖形化執行計畫](/sql/relational-databases/performance/display-an-actual-execution-plan)：
 
 ![顯示 SQL Server 執行計畫](_static/actualexecplan.png)
 
 雖然執行計畫在一開始可能有點複雜，但值得花一點時間熟悉它們。 特別重要的是，請注意與方案的每個節點相關聯的成本，以及識別如何在不同的節點中 () 使用索引。
 
-雖然上述資訊是 SQL Server 特有的資訊，但其他資料庫通常會提供具有類似視覺效果的相同類型工具。
+雖然上述資訊是 SQL Server 專屬的資訊，但其他資料庫通常會提供具有類似視覺效果的相同工具類型。
 
 > [!IMPORTANT]
 > 資料庫有時會根據資料庫中的實際資料來產生不同的查詢計劃。 例如，如果資料表只包含幾個資料列，則資料庫可能會選擇不使用該資料表上的索引，而是改為執行完整資料表掃描。 如果要分析測試資料庫上的查詢計劃，請務必確定它包含的資料與您的生產系統類似。
@@ -93,12 +93,12 @@ EF 的記錄功能有許多替代方法可以用來捕捉命令執行時間，�
 
 如需詳細資訊，請參閱 [EF 事件計數器](xref:core/logging-events-diagnostics/event-counters) 的專用頁面。
 
-## <a name="benchmarking-with-ef-core"></a>EF Core 的基準測試
+## <a name="benchmarking-with-ef-core"></a>使用 EF Core 進行基準測試
 
-在一天結束時，您有時需要知道撰寫或執行查詢的特定方式是否比另一種方法更快。 絕對不要設想或 speculate 答案很重要，而且很容易就能將快速基準測試放在一起以取得答案。 撰寫基準測試時，強烈建議使用已知的 [BenchmarkDotNet](https://benchmarkdotnet.org/index.html) 程式庫，它會處理使用者嘗試撰寫自己的基準測試時遇到的許多陷阱：您是否已執行一些預先準備的反復專案？ 您的基準測試實際執行的反覆運算次數，以及原因為何？ 讓我們看看 EF Core 的基準測試。
+在一天結束時，您有時需要知道撰寫或執行查詢的特定方式是否比另一種方法更快。 絕對不要設想或 speculate 答案很重要，而且很容易就能將快速基準測試放在一起以取得答案。 撰寫基準測試時，強烈建議使用已知的 [BenchmarkDotNet](https://benchmarkdotnet.org/index.html) 程式庫，它會處理使用者嘗試撰寫自己的基準測試時遇到的許多陷阱：您是否已執行一些預先準備的反復專案？ 您的基準測試實際執行的反覆運算次數，以及原因為何？ 讓我們看看 EF Core 的基準測試看起來是什麼樣子。
 
 > [!TIP]
-> [以下提供適用](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Benchmarks/AverageBlogRanking.cs)于下列來源的完整基準測試專案。 建議您將它複製，並使用它作為您自己基準測試的範本。
+> [以下提供適用](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Benchmarks/AverageBlogRanking.cs)于下列來源的完整基準測試專案。 建議您將它複製，並使用它作為您自己基準測試的範本。
 
 作為簡單的基準測試案例，讓我們比較下列不同的方法來計算資料庫中所有 Blog 的平均排名：
 
@@ -107,7 +107,7 @@ EF 的記錄功能有許多替代方法可以用來捕捉命令執行時間，�
 * 藉由只投射排名來避免載入整個 Blog 實體實例。 會讓我們無法傳輸其他不必要的 Blog 資料行的 Blog 實體類型。
 * 藉由使其成為查詢的一部分，計算資料庫中的平均值。 這應該是最快的方式，因為所有專案都會在資料庫中計算出來，而且只會將結果傳回給用戶端。
 
-有了 BenchmarkDotNet，您就可以撰寫程式碼以做為簡單的方法，就像單元測試一樣，BenchmarkDotNet 會自動針對足夠的反復專案數執行每個方法，以可靠的方式測量花費的時間，以及配置多少記憶體。 以下是不同的方法 ([完整的基準測試程式碼可以在這裡看到](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Benchmarks/AverageBlogRanking.cs)) ：
+有了 BenchmarkDotNet，您就可以撰寫程式碼以做為簡單的方法，就像單元測試一樣，BenchmarkDotNet 會自動針對足夠的反復專案數執行每個方法，以可靠的方式測量花費的時間，以及配置多少記憶體。 以下是不同的方法 ([完整的基準測試程式碼可以在這裡看到](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Benchmarks/AverageBlogRanking.cs)) ：
 
 ### <a name="load-entities"></a>[載入實體](#tab/load-entities)
 

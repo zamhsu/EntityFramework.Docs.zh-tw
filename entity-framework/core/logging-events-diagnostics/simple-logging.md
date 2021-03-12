@@ -4,12 +4,12 @@ description: 使用 LogTo 從 EF Core DbCoNtext 記錄
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 5c2dc41122dfa3919d1e6a26b0760883d77ee1a0
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 24a3de668a0e587dcc0ab2ae5f061b0eb4d4edcf
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129209"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024208"
 ---
 # <a name="simple-logging"></a>簡單記錄
 
@@ -17,16 +17,16 @@ ms.locfileid: "98129209"
 > 這項功能是在 EF Core 5.0 中引進。
 
 > [!TIP]
-> 您可以從 GitHub [下載本文的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging/SimpleLogging) 。
+> 您可以從 GitHub [下載本文的範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Logging/SimpleLogging) 。
 
 Entity Framework Core (EF Core) 簡單記錄可以用來在開發和偵測應用程式時輕鬆取得記錄。 這種形式的記錄需要最基本的設定，而且沒有其他 NuGet 套件。
 
 > [!TIP]
 > EF Core 也會與需要更多設定的 [Microsoft 擴充功能](xref:core/logging-events-diagnostics/extensions-logging)整合，但通常更適合用來記錄生產應用程式。
 
-## <a name="configuration"></a>設定
+## <a name="configuration"></a>組態
 
-在設定 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> [DbCoNtext 實例](xref:core/dbcontext-configuration/index)時，可以使用任何類型的應用程式存取 EF Core 記錄。 這項設定通常是在的覆寫中完成 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 。 例如：
+在設定 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> [DbCoNtext 實例](xref:core/dbcontext-configuration/index)時，可以使用任何類型的應用程式來存取 EF Core 記錄。 這項設定通常是在的覆寫中完成 <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> 。 例如：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -43,7 +43,7 @@ Entity Framework Core (EF Core) 簡單記錄可以用來在開發和偵測應用
 
 ### <a name="logging-to-the-console"></a>記錄到主控台
 
-`LogTo` 需要可 <xref:System.Action%601> 接受字串的委派。 EF Core 會使用每個產生的記錄訊息的字串來呼叫這個委派。 然後由委派來對指定的訊息進行某個動作。
+`LogTo` 需要可 <xref:System.Action%601> 接受字串的委派。 EF Core 會使用每個產生之記錄訊息的字串來呼叫這個委派。 然後由委派來對指定的訊息進行某個動作。
 
 <xref:System.Console.WriteLine%2A?displayProperty=nameWithType>方法通常用於此委派，如上所示。 這會導致每個記錄訊息都寫入主控台。
 
@@ -102,7 +102,7 @@ Entity Framework Core (EF Core) 簡單記錄可以用來在開發和偵測應用
 
 ### <a name="detailed-query-exceptions"></a>詳細的查詢例外狀況
 
-基於效能的考慮，EF Core 不會將每次呼叫都包裝在 try-catch 區塊中讀取資料庫提供者的值。 不過，這有時候會導致難以診斷的例外狀況，尤其是當資料庫在模型不允許時傳回 Null 時。
+基於效能的考慮，EF Core 不會將每個呼叫包裝成在 try-catch 區塊中讀取資料庫提供者的值。 不過，這有時候會導致難以診斷的例外狀況，尤其是當資料庫在模型不允許時傳回 Null 時。
 
 開啟 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableDetailedErrors%2A> 會導致 EF 引入這些 try-catch 區塊，進而提供更詳細的錯誤。 例如：
 
@@ -118,7 +118,7 @@ Entity Framework Core (EF Core) 簡單記錄可以用來在開發和偵測應用
 
 ### <a name="log-levels"></a>記錄層級
 
-每個 EF Core 記錄檔訊息都會指派給列舉所定義的層級 <xref:Microsoft.Extensions.Logging.LogLevel> 。 依預設，EF Core 簡單記錄包含每個 `Debug` 層級或以上的訊息。 `LogTo` 可以傳遞較高的最小層級，以篩選出某些訊息。 例如， `Information` 以最少的一組記錄來傳遞結果，限制為資料庫存取和一些內務處理訊息。
+每個 EF Core 記錄訊息都會指派給列舉所定義的層級 <xref:Microsoft.Extensions.Logging.LogLevel> 。 根據預設，EF Core 簡單記錄包含每個 `Debug` 層級或以上的訊息。 `LogTo` 可以傳遞較高的最小層級，以篩選出某些訊息。 例如， `Information` 以最少的一組記錄來傳遞結果，限制為資料庫存取和一些內務處理訊息。
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -226,7 +226,7 @@ EF Core <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.ConfigureWar
 
 ### <a name="throw-for-an-event"></a>擲回事件
 
-最後，EF Core 可以設定為針對指定的事件擲回。 這特別適用于將警告變更為錯誤。  (真的，這是方法的原始用途 `ConfigureWarnings` ，因此是名稱 ) 例如：
+最後，可以設定 EF Core 以針對指定的事件擲回。 這特別適用于將警告變更為錯誤。  (真的，這是方法的原始用途 `ConfigureWarnings` ，因此是名稱 ) 例如：
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -337,7 +337,7 @@ dbug: 10/6/2020 10:52:45.725 RelationalEventId.TransactionCommitted[20202] (Micr
 
 ## <a name="moving-from-ef6"></a>從 EF6 移動
 
-EF Core 簡單的記錄與 <xref:System.Data.Entity.Database.Log?displayProperty=nameWithType> EF6 中的兩個重要方式不同：
+EF Core 簡單記錄與 <xref:System.Data.Entity.Database.Log?displayProperty=nameWithType> EF6 中的兩個重要方式不同：
 
 * 記錄訊息不限於只有資料庫互動
 * 必須在內容初始化時間設定記錄

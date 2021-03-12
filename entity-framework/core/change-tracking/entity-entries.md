@@ -4,12 +4,12 @@ description: 使用 Entityentry.state、DbCoNtext 和 DbSet 存取追蹤的實�
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/entity-entries
-ms.openlocfilehash: f385016aba61535f33e34c622dd43ce6dc823fc5
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 758d21f44dfeb8b1de2702165df0d705edfb91b6
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129683"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024507"
 ---
 # <a name="accessing-tracked-entities"></a>存取追蹤的實體
 
@@ -23,14 +23,14 @@ ms.locfileid: "98129683"
 以下各節將更詳細地說明每一個。
 
 > [!TIP]
-> 本檔假設您已瞭解實體狀態以及 EF Core 變更追蹤的基本概念。 如需有關這些主題的詳細資訊，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
+> 本檔假設您已瞭解實體狀態和 EF Core 變更追蹤的基本概念。 如需有關這些主題的詳細資訊，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
 
 > [!TIP]
-> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/AccessingTrackedEntities)，以執行並偵測到本檔中的所有程式碼。
+> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/AccessingTrackedEntities)，以執行並偵測到本檔中的所有程式碼。
 
 ## <a name="using-dbcontextentry-and-entityentry-instances"></a>使用 DbCoNtext 和 Entityentry.state 實例
 
-針對每個追蹤的實體，Entity Framework Core (EF Core) 追蹤：
+針對每個追蹤的實體，Entity Framework Core (EF Core) 持續追蹤：
 
 - 實體的整體狀態。 這是、、 `Unchanged` 或中的其中一個 `Modified` `Added` `Deleted` ; 如需詳細資訊，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
 - 追蹤實體之間的關聯性。 例如，貼文所屬的 blog。
@@ -81,7 +81,7 @@ Entry 方法也可以用於尚未追蹤的實體。 這不 _會開始追蹤實�
 
 下表摘要說明使用 Entityentry.state 來處理整個實體的方式：
 
-| Entityentry.state 成員                                                                                         | 描述
+| Entityentry.state 成員                                                                                         | Description
 |:-----------------------------------------------------------------------------------------------------------|----------------------
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.State?displayProperty=nameWithType>         | 取得和設定 <xref:Microsoft.EntityFrameworkCore.EntityState> 實體的。
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.Entity?displayProperty=nameWithType>        | 取得實體實例。
@@ -134,7 +134,7 @@ Entry 方法也可以用於尚未追蹤的實體。 這不 _會開始追蹤實�
 
 下表摘要說明 PropertyEntry 所公開的屬性資訊：
 
-| PropertyEntry 成員                               | 描述
+| PropertyEntry 成員                               | Description
 |:-------------------------------------------------|----------------------
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyEntry%602.CurrentValue?displayProperty=nameWithType>  | 取得和設定屬性的目前值。
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyEntry%602.OriginalValue?displayProperty=nameWithType> | 取得和設定屬性的原始值（如果有的話）。
@@ -146,7 +146,7 @@ Entry 方法也可以用於尚未追蹤的實體。 這不 _會開始追蹤實�
 注意：
 
 - 屬性的原始值是在從資料庫查詢實體時，該屬性所擁有的值。 但是，如果實體已中斷連接，然後明確附加至另一個 DbCoNtext （例如，使用或），則無法使用原始值 `Attach` `Update` 。 在此情況下，傳回的原始值將會與目前的值相同。
-- <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 只會更新標示為已修改的屬性。 設定 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyEntry.IsModified> 為 true 以強制 EF Core 更新指定的屬性值，或將它設定為 false，以防止 EF Core 更新屬性值。
+- <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 只會更新標示為已修改的屬性。 設定 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyEntry.IsModified> 為 true 以強制 Ef core 更新指定的屬性值，或將它設定為 false，以防止 Ef core 更新屬性值。
 - [暫存值](xref:core/change-tracking/miscellaneous) 通常是由 EF Core [值](xref:core/modeling/generated-properties)產生器所產生。 設定屬性的目前值會將暫存值取代為指定的值，並將該屬性標示為不是暫時性的。 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyEntry.IsTemporary>如果設定為 true，則即使在明確設定值之後，也會強制將值設為暫時性。
 
 ### <a name="working-with-a-single-navigation"></a>使用單一導覽
@@ -180,13 +180,13 @@ Entry 方法也可以用於尚未追蹤的實體。 這不 _會開始追蹤實�
 
 下表摘要說明使用 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ReferenceEntry%602> 、和的方式 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.CollectionEntry%602> <xref:Microsoft.EntityFrameworkCore.ChangeTracking.NavigationEntry> ：
 
-| NavigationEntry 成員                                                                                    | 描述
+| NavigationEntry 成員                                                                                    | Description
 |:----------------------------------------------------------------------------------------------------------|----------------------
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.MemberEntry.CurrentValue?displayProperty=nameWithType> | 取得和設定導覽的目前值。 這是集合導覽的整個集合。
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.NavigationEntry.Metadata?displayProperty=nameWithType> | <xref:Microsoft.EntityFrameworkCore.Metadata.INavigationBase> 導覽的中繼資料。
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.NavigationEntry.IsLoaded?displayProperty=nameWithType> | 取得或設定值，這個值表示是否已從資料庫完全載入相關實體或集合。
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.NavigationEntry.Load?displayProperty=nameWithType>     | 從資料庫載入相關的實體或集合;請參閱 [明確載入相關資料](xref:core/querying/related-data/explicit)。
-| <xref:Microsoft.EntityFrameworkCore.ChangeTracking.NavigationEntry.Query?displayProperty=nameWithType>    | 查詢 EF Core 會使用將此導覽載入為 `IQueryable` 可進一步組成的，請參閱 [明確載入相關資料](xref:core/querying/related-data/explicit)。
+| <xref:Microsoft.EntityFrameworkCore.ChangeTracking.NavigationEntry.Query?displayProperty=nameWithType>    | EF Core 會使用查詢將此導覽載入為 `IQueryable` 可進一步組成的，請參閱 [明確載入相關資料](xref:core/querying/related-data/explicit)。
 
 ### <a name="working-with-all-properties-of-an-entity"></a>使用實體的所有屬性
 
@@ -336,7 +336,7 @@ Member Posts is of type IList<Post> and has value System.Collections.Generic.Lis
 -->
 [!code-csharp[Find_and_FindAsync_1](../../../samples/core/ChangeTracking/AccessingTrackedEntities/Samples.cs?name=Find_and_FindAsync_1)]
 
-使用 SQLite 時，此程式碼 (包括 EF Core 記錄) 的輸出為：
+使用 SQLite 時，此程式碼的輸出 (包括 EF Core 記錄) ：
 
 ```output
 First call to Find...
@@ -483,8 +483,8 @@ EF Core 查詢一律會在資料庫上執行，而且只會傳回已儲存至資
 
 <xref:Microsoft.EntityFrameworkCore.DbSet%601.Local?displayProperty=nameWithType> 傳回可反映這些實體目前的本機追蹤實體的視圖 <xref:Microsoft.EntityFrameworkCore.EntityState> 。 具體來說，這表示：
 
-- `Added` 包括實體。 請注意，這不是一般 EF Core 查詢的情況，因為 `Added` 實體尚未存在於資料庫中，因此不會由資料庫查詢傳回。
-- `Deleted` 排除實體。 請注意，這並不是一般 EF Core 查詢的情況，因為 `Deleted` 實體仍然存在於資料庫中，因此 _會_ 由資料庫查詢傳回。
+- `Added` 包括實體。 請注意，這不是一般 EF Core 查詢的案例，因為 `Added` 實體尚未存在於資料庫中，因此不會由資料庫查詢傳回。
+- `Deleted` 排除實體。 請注意，這不是一般 EF Core 查詢的案例，因為 `Deleted` 實體仍然存在於資料庫中，因此 _會_ 由資料庫查詢傳回。
 
 這所有的方法都 `DbSet.Local` 是在反映實體圖形目前概念狀態的資料上查看，其中 `Added` 包含包含的實體和 `Deleted` 排除的實體。 這會比對在呼叫 SaveChanges 之後預期的資料庫狀態。
 
@@ -539,7 +539,7 @@ Local view after adding and deleting posts:
 
 ### <a name="using-local-to-add-and-remove-entities"></a>使用 Local 來新增和移除實體
 
-<xref:Microsoft.EntityFrameworkCore.DbSet%601.Local?displayProperty=nameWithType> 會傳回 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.LocalView%601> 的執行個體。 這是的實 <xref:System.Collections.Generic.ICollection%601> ，會在從集合中加入和移除實體時，產生並回應通知。  (此概念與相同 <xref:System.Collections.ObjectModel.ObservableCollection%601> ，但實作為現有 EF Core 變更追蹤專案的投影，而不是獨立集合。 ) 
+<xref:Microsoft.EntityFrameworkCore.DbSet%601.Local?displayProperty=nameWithType> 會傳回 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.LocalView%601> 的執行個體。 這是的實 <xref:System.Collections.Generic.ICollection%601> ，會在從集合中加入和移除實體時，產生並回應通知。  (此概念與相同 <xref:System.Collections.ObjectModel.ObservableCollection%601> ，但實作為現有 EF Core 變更追蹤專案的投影，而不是獨立的集合。 ) 
 
 本機視圖的通知會連結至 DbCoNtext 變更追蹤，讓本機視圖與 DbCoNtext 保持同步。 具體來說：
 
@@ -584,10 +584,10 @@ Local view after adding and deleting posts:
 
 ### <a name="using-the-local-view-for-windows-forms-or-wpf-data-binding"></a>使用 Windows Forms 或 WPF 資料系結的本機視圖
 
-<xref:Microsoft.EntityFrameworkCore.DbSet%601.Local?displayProperty=nameWithType> 形成資料系結至 EF Core 實體的基礎。 但是，當使用 Windows Forms 和 WPF 時，最好使用與預期的特定類型的通知集合搭配使用。 本機視圖支援建立這些特定的集合類型：
+<xref:Microsoft.EntityFrameworkCore.DbSet%601.Local?displayProperty=nameWithType> 形成將資料系結至 EF Core 實體的基礎。 不過，當 Windows Forms 和 WPF 與預期的特定類型的通知集合搭配使用時，其效果最好。 本機視圖支援建立這些特定的集合類型：
 
 - <xref:Microsoft.EntityFrameworkCore.ChangeTracking.LocalView%601.ToObservableCollection?displayProperty=nameWithType> 傳回 <xref:System.Collections.ObjectModel.ObservableCollection%601> WPF 資料系結的。
-- <xref:Microsoft.EntityFrameworkCore.ChangeTracking.LocalView%601.ToBindingList?displayProperty=nameWithType> 傳回 Windows Forms 資料系結的 <xref:System.ComponentModel.BindingList%601> 。
+- <xref:Microsoft.EntityFrameworkCore.ChangeTracking.LocalView%601.ToBindingList?displayProperty=nameWithType> 傳回 <xref:System.ComponentModel.BindingList%601> Windows Forms 資料系結的。
 
 例如：
 
@@ -597,7 +597,7 @@ Local view after adding and deleting posts:
 -->
 [!code-csharp[Using_DbSet_Local_to_query_tracked_entities_4](../../../samples/core/ChangeTracking/AccessingTrackedEntities/Samples.cs?name=Using_DbSet_Local_to_query_tracked_entities_4)]
 
-如需有關使用 EF Core 的 WPF 資料系結的詳細資訊，請參閱 [使用 wpf 開始](xref:core/get-started/wpf) 。
+如需有關使用 EF Core 的 WPF 資料系結的詳細資訊，請參閱 [開始使用 wpf](xref:core/get-started/wpf) 。
 
 > [!TIP]
 > 給定 DbSet 實例的本機視圖會在第一次存取時延遲建立，然後再進行快取。 LocalView 本身的建立速度很快，而且不會使用大量的記憶體。 不過，它會呼叫 [DetectChanges](xref:core/change-tracking/change-detection)，這對大量實體而言可能很慢。 和建立的集合 `ToObservableCollection` `ToBindingList` 也會延遲建立，然後再進行快取。 這兩種方法都會建立新的集合，在涉及上千個實體時，可能會很慢，而且會使用大量的記憶體。

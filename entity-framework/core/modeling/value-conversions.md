@@ -4,19 +4,19 @@ description: 在 Entity Framework Core 模型中設定值轉換器
 author: ajcvickers
 ms.date: 01/16/2021
 uid: core/modeling/value-conversions
-ms.openlocfilehash: d9d3753c7f0b257a2109e4af1f587df913c15b44
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 114a18e41804c85c97791047aa915c2ec38dea15
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983439"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023883"
 ---
 # <a name="value-conversions"></a>值轉換
 
 值轉換器可在讀取或寫入資料庫時，允許轉換屬性值。 這項轉換可從某個值轉換為相同類型的另一個值 (例如，將字串) 或從某個類型的值加密為另一個類型的值 (例如，在資料庫中來回轉換字串的列舉值。 ) 
 
 > [!TIP]
-> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/ValueConversions/)，以執行並偵測到本檔中的所有程式碼。
+> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Modeling/ValueConversions/)，以執行並偵測到本檔中的所有程式碼。
 
 ## <a name="overview"></a>概觀
 
@@ -68,9 +68,9 @@ ms.locfileid: "98983439"
 
 ## <a name="pre-defined-conversions"></a>預先定義的轉換
 
-EF Core 包含許多預先定義的轉換，以避免需要手動寫入轉換函數。 相反地，EF Core 會根據模型中的屬性型別和要求的資料庫提供者類型，挑選要使用的轉換。
+EF Core 包含許多預先定義的轉換，可避免需要手動寫入轉換函數。 相反地，EF Core 會根據模型中的屬性型別和要求的資料庫提供者類型，挑選要使用的轉換。
 
-例如，列舉至字串轉換是以上述範例的方式來使用，但是當提供者類型設定為使用泛型型別時，EF Core 會自動執行這 `string` 項作業 <xref:Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder.HasConversion%2A> ：
+例如，列舉至字串轉換會當做上述範例使用，但當提供者類型設定為使用泛型型別時，EF Core 會自動執行這 `string` 項作業 <xref:Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder.HasConversion%2A> ：
 
 <!--
             protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -135,7 +135,7 @@ EF Core 包含許多預先定義的轉換，以避免需要手動寫入轉換函
 
 ## <a name="built-in-converters"></a>內建轉換器
 
-如先前所述，EF Core 隨附一組預先定義的 <xref:Microsoft.EntityFrameworkCore.Storage.ValueConversion.ValueConverter%602> 類別，可在 <xref:Microsoft.EntityFrameworkCore.Storage.ValueConversion> 命名空間中找到。 在許多情況下，EF 會根據模型中的屬性型別和資料庫中所要求的型別，選擇適當的內建轉換器，如上所示列舉。 例如， `.HasConversion<int>()` 在屬性上使用 `bool` 會導致 EF Core 將 bool 值轉換成數位零和一個值：
+如前文所述，EF Core 隨附一組預先定義的 <xref:Microsoft.EntityFrameworkCore.Storage.ValueConversion.ValueConverter%602> 類別，可在 <xref:Microsoft.EntityFrameworkCore.Storage.ValueConversion> 命名空間中找到。 在許多情況下，EF 會根據模型中的屬性型別和資料庫中所要求的型別，選擇適當的內建轉換器，如上所示列舉。 例如， `.HasConversion<int>()` 在屬性上使用 `bool` 會導致 EF Core 將 bool 值轉換為數值零和一個值：
 
 <!--
             protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -298,7 +298,7 @@ EF Core 包含許多預先定義的轉換，以避免需要手動寫入轉換函
 -->
 [!code-csharp[ConversionByConverterInstanceWithFacets](../../../samples/core/Modeling/ValueConversions/EnumToStringConversions.cs?name=ConversionByConverterInstanceWithFacets)]
 
-這會在 `varchar(20)` 使用 EF Core 的 SQL Server 遷移時產生資料行：
+這會在 `varchar(20)` 針對 SQL Server 使用 EF Core 遷移時產生資料行：
 
 ```sql
 CREATE TABLE [Rider] (
@@ -371,7 +371,7 @@ CREATE TABLE [Rider] (
 [!code-csharp[ConfigureImmutableStructProperty](../../../samples/core/Modeling/ValueConversions/SimpleValueObject.cs?name=ConfigureImmutableStructProperty)]
 
 > [!NOTE]
-> 此值物件會實作為 [唯讀結構](/dotnet/csharp/language-reference/builtin-types/struct)。 這表示 EF Core 可以在不發生問題的情況下，快照並比較值。 如需詳細資訊，請參閱 [值](xref:core/modeling/value-comparers) 比較子。
+> 此值物件會實作為 [唯讀結構](/dotnet/csharp/language-reference/builtin-types/struct)。 這表示 EF Core 可以快照並比較值，而不會發生問題。 如需詳細資訊，請參閱 [值](xref:core/modeling/value-comparers) 比較子。
 
 ### <a name="composite-value-objects"></a>複合值物件
 
@@ -429,7 +429,7 @@ CREATE TABLE [Rider] (
 > 我們計畫允許將物件對應至 EF Core 6.0 中的多個資料行，而不需要在此使用序列化。 這是 [GitHub 問題 #13947](https://github.com/dotnet/efcore/issues/13947)所追蹤。
 
 > [!NOTE]
-> 如同上述範例，這個值物件會實作為 [唯讀結構](/dotnet/csharp/language-reference/builtin-types/struct)。 這表示 EF Core 可以在不發生問題的情況下，快照並比較值。 如需詳細資訊，請參閱 [值](xref:core/modeling/value-comparers) 比較子。
+> 如同上述範例，這個值物件會實作為 [唯讀結構](/dotnet/csharp/language-reference/builtin-types/struct)。 這表示 EF Core 可以快照並比較值，而不會發生問題。 如需詳細資訊，請參閱 [值](xref:core/modeling/value-comparers) 比較子。
 
 ### <a name="collections-of-primitives"></a>基本類型的集合
 
@@ -645,7 +645,7 @@ SQL Server 支援使用[8 位元組二進位資料 `rowversion` / `timestamp` �
 
 <xref:System.DateTime.Kind%2A?displayProperty=nameWithType>當將儲存為或時，SQL Server 會捨棄旗標 <xref:System.DateTime> [`datetime`](/sql/t-sql/data-types/datetime-transact-sql) [`datetime2`](/sql/t-sql/data-types/datetime2-transact-sql) 。 這表示從資料庫傳回的日期時間值一律為 <xref:System.DateTimeKind> 的 `Unspecified` 。
 
-值轉換器可以用兩種方式來處理此情況。 首先，EF Core 有一個值轉換器，會建立8個位元組的不透明值，以保留 `Kind` 旗標。 例如：
+值轉換器可以用兩種方式來處理此情況。 首先，EF Core 具有值轉換器，會建立8個位元組的不透明值，以保留 `Kind` 旗標。 例如：
 
 <!--
                 modelBuilder.Entity<Post>()
@@ -683,7 +683,7 @@ SQL Server 支援使用[8 位元組二進位資料 `rowversion` / `timestamp` �
 
 ### <a name="use-case-insensitive-string-keys"></a>使用不區分大小寫的字串索引鍵
 
-某些資料庫（包括 SQL Server）預設會執行不區分大小寫的字串比較。 相反地，.NET 預設會執行區分大小寫的字串比較。 這表示外鍵值（例如 "DotNet"）會符合 SQL Server 上的主鍵值 "DotNet"，但不會在 EF Core 中符合。 索引鍵的值比較子可以用來強制 EF Core 不區分大小寫的字串比較，例如資料庫。 例如，假設有一個具有字串索引鍵的 blog/post 模型：
+某些資料庫（包括 SQL Server）預設會執行不區分大小寫的字串比較。 相反地，.NET 預設會執行區分大小寫的字串比較。 這表示外鍵值（例如 "DotNet"）會比對 SQL Server 上的主鍵值 "DotNet"，但不符合 EF Core 中的值。 索引鍵的值比較子可以用來強制 EF Core 成為不區分大小寫的字串比較，例如資料庫。 例如，假設有一個具有字串索引鍵的 blog/post 模型：
 
 <!--
         public class Blog

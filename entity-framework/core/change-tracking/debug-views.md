@@ -1,34 +1,34 @@
 ---
-title: 變更追蹤器的偵錯工具-EF Core
+title: 變更追蹤程式偵錯工具-EF Core
 description: 使用 ChangeTracker DebugView 和記錄訊息來進行 EF Core 變更追蹤的調試
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/debug-views
-ms.openlocfilehash: 76108120cf7f532d085fef12121bb639b065add0
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: cda81728beb5ffbc8604c191e84b3553a7343ec0
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129681"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023168"
 ---
 # <a name="change-tracker-debugging"></a>變更追蹤程式偵錯工具
 
-Entity Framework Core (EF Core) 變更追蹤程式會產生兩種輸出，以協助進行偵錯工具：
+Entity Framework Core (EF Core) 變更追蹤器會產生兩種輸出，以協助進行偵錯工具：
 
 - <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.DebugView%2A?displayProperty=nameWithType>提供所有正在追蹤之實體的人們看得懂的觀點
 - 當變更追蹤器偵測到狀態並修正關聯性時，會產生 Debug 層級記錄訊息
 
 > [!TIP]
-> 本檔假設您已瞭解實體狀態以及 EF Core 變更追蹤的基本概念。 如需有關這些主題的詳細資訊，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
+> 本檔假設您已瞭解實體狀態和 EF Core 變更追蹤的基本概念。 如需有關這些主題的詳細資訊，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
 
 > [!TIP]
-> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackerDebugging)，以執行並偵測到本檔中的所有程式碼。
+> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/ChangeTrackerDebugging)，以執行並偵測到本檔中的所有程式碼。
 
 ## <a name="change-tracker-debug-view"></a>變更追蹤器的偵錯工具
 
-您可以在 IDE 的偵錯工具中存取變更追蹤器的偵錯工具。 例如，利用 Visual Studio：
+您可以在 IDE 的偵錯工具中存取變更追蹤器的偵錯工具。 例如，使用 Visual Studio：
 
-![從 Visual Studio 偵錯工具存取變更追蹤程式偵錯工具](_static/debug-view.png)
+![從 Visual Studio 偵錯工具存取變更追蹤器的偵錯工具](_static/debug-view.png)
 
 它也可以直接從程式碼存取，例如，將偵錯工具傳送至主控台：
 
@@ -253,7 +253,7 @@ dbug: 12/30/2020 13:52:44.831 CoreEventId.DetectChangesCompleted[10801] (Microso
 
 下表摘要說明變更追蹤程式記錄訊息：
 
-| 事件識別碼                                                                                                               | 描述
+| 事件識別碼                                                                                                               | Description
 |:-----------------------------------------------------------------------------------------------------------------------|----
 | <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.DetectChangesStarting?displayProperty=nameWithType>        | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.DetectChanges> 正在啟動
 | <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.DetectChangesCompleted?displayProperty=nameWithType>       | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.DetectChanges> 已完成
@@ -261,7 +261,7 @@ dbug: 12/30/2020 13:52:44.831 CoreEventId.DetectChangesCompleted[10801] (Microso
 | <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.ForeignKeyChangeDetected?displayProperty=nameWithType>     | 外鍵屬性值已變更
 | <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.CollectionChangeDetected?displayProperty=nameWithType>     | 非略過集合導覽已新增或移除相關的實體。
 | <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.ReferenceChangeDetected?displayProperty=nameWithType>      | 參考導覽已變更為指向另一個實體，或設定為 null
-| <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.StartedTracking?displayProperty=nameWithType>              | EF Core 開始追蹤實體
+| <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.StartedTracking?displayProperty=nameWithType>              | EF Core 已開始追蹤實體
 | <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.StateChanged?displayProperty=nameWithType>                 | <xref:Microsoft.EntityFrameworkCore.EntityState>實體的已變更
 | <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.ValueGenerated?displayProperty=nameWithType>               | 已為屬性產生值
 | <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.SkipCollectionChangeDetected?displayProperty=nameWithType> | 略過集合導覽已新增或移除相關實體

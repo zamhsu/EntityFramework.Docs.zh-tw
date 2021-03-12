@@ -4,12 +4,12 @@ description: 設定當實體從其主體/父系刪除或中斷時，所觸發的
 author: ajcvickers
 ms.date: 01/07/2021
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 27ba84fa5d7e0d72e66ccbd96df9b6a5008791fb
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 6e897be6b4f5e6550d9ed3590445df60bef4fb3c
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983335"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023610"
 ---
 # <a name="cascade-delete"></a>串聯刪除
 
@@ -27,10 +27,10 @@ Entity Framework Core (EF Core) 代表使用外鍵的關聯性。 具有外鍵�
 第二個選項適用于任何種類的關聯性，也稱為「串聯刪除」。
 
 > [!TIP]
-> 本檔說明串聯刪除 (，以及從更新資料庫的觀點來刪除孤立的) 。 它會大量使用 [變更追蹤中](xref:core/change-tracking/index) 引入的概念，EF Core 及 [變更外鍵和](xref:core/change-tracking/relationship-changes)導覽。 在這裡處理材質之前，請務必完整瞭解這些概念。
+> 本檔說明串聯刪除 (，以及從更新資料庫的觀點來刪除孤立的) 。 它會大量使用 EF Core 中的 [變更追蹤](xref:core/change-tracking/index) 所引進的概念，以及 [變更外鍵和](xref:core/change-tracking/relationship-changes)導覽。 在這裡處理材質之前，請務必完整瞭解這些概念。
 
 > [!TIP]  
-> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/CascadeDeletes)，以執行並偵測到本檔中的所有程式碼。
+> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/CascadeDeletes)，以執行並偵測到本檔中的所有程式碼。
 
 ## <a name="when-cascading-behaviors-happen"></a>當級聯行為發生時
 
@@ -78,7 +78,7 @@ Entity Framework Core (EF Core) 代表使用外鍵的關聯性。 具有外鍵�
 -->
 [!code-csharp[Deleting_principal_parent_1](../../../samples/core/CascadeDeletes/IntroRequiredSamples.cs?name=Deleting_principal_parent_1)]
 
-SaveChanges 會使用 SQL Server 作為範例，產生下列 SQL：
+SaveChanges 會使用 SQL Server 做為範例，產生下列 SQL：
 
 ```sql
 -- Executed DbCommand (1ms) [Parameters=[@p0='1'], CommandType='Text', CommandTimeout='30']
@@ -168,7 +168,7 @@ EF Core 一律會將設定的串聯行為套用至追蹤的實體。 這表示�
 
 ### <a name="cascade-delete-in-the-database"></a>資料庫中的 Cascade delete
 
-許多資料庫系統也會提供在資料庫中刪除實體時所觸發的串聯行為。 當使用或 EF Core 遷移來建立資料庫時，EF Core 會根據 EF Core 模型中的串聯刪除行為來設定這些行為 <xref:Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.EnsureCreated%2A> 。 例如，使用上述模型時，會在使用 SQL Server 時，為貼文建立下表：
+許多資料庫系統也會提供在資料庫中刪除實體時所觸發的串聯行為。 EF core 會在使用 <xref:Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.EnsureCreated%2A> 或 Ef core 遷移建立資料庫時，根據 EF core 模型中的串聯刪除行為來設定這些行為。 例如，使用上述模型時，會針對使用 SQL Server 的文章建立下表：
 
 ```sql
 CREATE TABLE [Posts] (
@@ -209,17 +209,17 @@ SELECT @@ROWCOUNT;
 如果資料庫中的外鍵條件約束未設定成串聯刪除，這會導致例外狀況。 不過，在此情況下，資料庫會刪除貼文，因為它在 `ON DELETE CASCADE` 建立時已設定。
 
 > [!NOTE]
-> 資料庫通常不會有任何方法可以自動刪除孤立。 這是因為當 EF Core 使用導覽和外鍵來表示關聯性時，資料庫只會有外鍵和沒有導覽。 這表示，通常不可能在不將雙方載入至 DbCoNtext 的情況下，伺服器關聯性。
+> 資料庫通常不會有任何方法可以自動刪除孤立。 這是因為當 EF Core 表示使用導覽的關聯性，以及外鍵時，資料庫只會有外鍵且沒有導覽。 這表示，通常不可能在不將雙方載入至 DbCoNtext 的情況下，伺服器關聯性。
 
 > [!NOTE]
-> 記憶體內部資料庫 EF Core 目前不支援資料庫中的串聯刪除。
+> EF Core 記憶體內部資料庫目前不支援資料庫中的串聯刪除。
 
 > [!WARNING]
 > 當虛刪除實體時，請勿在資料庫中設定串聯刪除。 這可能會導致意外刪除實體，而不是虛刪除。
 
 ### <a name="database-cascade-limitations"></a>資料庫串聯限制
 
-某些資料庫（尤其是 SQL Server）對於形成迴圈的串聯行為有限制。 例如，請考慮下列模型：
+某些資料庫（最值得注意的是 SQL Server）對於形成迴圈的串聯行為有限制。 例如，請考慮下列模型：
 
 <!--
     public class Blog
@@ -264,14 +264,14 @@ SELECT @@ROWCOUNT;
 - 刪除貼文的作者將會導致撰寫的貼文被刪除
 - 刪除 blog 的擁有者會導致將 blog 刪除
 
-如果在 blog 管理原則中定下嚴格，這是很合理的 (！ ) 但嘗試建立已設定這些級聯的 SQL Server 資料庫會導致下列例外狀況：
+如果在 blog 管理原則中定下嚴格，這是合理的 (！ ) 但嘗試以這些已設定的已設定層級建立 SQL Server 資料庫時，會產生下列例外狀況：
 
 > SqlClient. SqlException (0x80131904) ：在資料表 ' Post ' 上導入 FOREIGN KEY 條件約束 ' FK_Posts_Person_AuthorId ' 可能會造成迴圈或多個串聯路徑。 請指定 ON DELETE NO ACTION 或 ON UPDATE NO ACTION，或者修改其他 FOREIGN KEY 條件約束。
 
 有兩種方式可以處理這種情況：
 
 1. 將一或多個關聯性變更為 [不串聯刪除]。
-2. 設定不含一或多個這些串聯刪除的資料庫，然後確定已載入所有相依的實體，使 EF Core 可以執行串聯行為。
+2. 在不包含一或多個這些串聯刪除的情況下設定資料庫，然後確定已載入所有相依的實體，以便 EF Core 可以執行串聯行為。
 
 利用我們的範例採用第一種方法，我們可以為它提供可為 null 的外鍵屬性，讓您可以選擇建立 blog 擁有者關係：
 
@@ -280,7 +280,7 @@ SELECT @@ROWCOUNT;
 -->
 [!code-csharp[NullableBlogId](../../../samples/core/CascadeDeletes/OptionalDependentsSamples.cs?name=NullableBlogId)]
 
-選擇性的關聯性可讓 blog 在沒有擁有者的情況下存在，這表示預設不會再設定串聯刪除。 這表示串聯動作中不再有迴圈，而且可以在 SQL Server 上建立資料庫，而不會發生錯誤。
+選擇性的關聯性可讓 blog 在沒有擁有者的情況下存在，這表示預設不會再設定串聯刪除。 這表示串聯動作不再有迴圈，而且在 SQL Server 上建立資料庫時不會發生錯誤。
 
 改為採用第二種方法，我們可以保持所需的 blog 擁有者關係並設定串聯刪除，但讓此設定只適用于追蹤的實體，而不是資料庫：
 
@@ -310,7 +310,7 @@ SELECT @@ROWCOUNT;
 -->
 [!code-csharp[Database_cascade_limitations_1](../../../samples/core/CascadeDeletes/WithDatabaseCycleSamples.cs?name=Database_cascade_limitations_1)]
 
-EF Core 會將擁有者的刪除重迭，因此也會刪除該 blog：
+EF Core 會將擁有者的刪除重迭，如此一來，也會刪除該 blog：
 
 ```sql
 -- Executed DbCommand (8ms) [Parameters=[@p0='1'], CommandType='Text', CommandTimeout='30']
@@ -435,12 +435,12 @@ WHERE [Id] = @p1;
 SELECT @@ROWCOUNT;
 ```
 
-如需 EF Core 如何管理外鍵和導覽的詳細資訊，請參閱 [變更外鍵和](xref:core/change-tracking/relationship-changes) 導覽。
+如需 EF Core 如何在其值變更時管理外鍵和導覽的詳細資訊，請參閱 [變更外鍵和](xref:core/change-tracking/relationship-changes) 導覽。
 
 > [!NOTE]
-> 這類關聯性的修復是自2008的第一個版本起 Entity Framework 的預設行為。 在 EF Core 之前，它沒有名稱，也不能變更。 現在稱為 `ClientSetNull` 下一節中所述。
+> 這類關聯性的修正已成為 Entity Framework 的預設行為，因為它是2008的第一個版本。 在 EF Core 之前，它沒有名稱，也不能變更。 現在稱為 `ClientSetNull` 下一節中所述。
 
-當您刪除選擇性關聯性中的主體/父系時，也可以將資料庫設定為以如下方式串聯 null。 不過，這比使用資料庫中的串聯式刪除更不常見。 在資料庫中同時使用串聯刪除和串聯 null，幾乎一律會在使用 SQL Server 時產生關聯性迴圈。 如需設定串聯 null 的詳細資訊，請參閱下一節。
+當您刪除選擇性關聯性中的主體/父系時，也可以將資料庫設定為以如下方式串聯 null。 不過，這比使用資料庫中的串聯式刪除更不常見。 在資料庫中同時使用串聯刪除和串聯 null，在使用 SQL Server 時，幾乎一律會產生關聯性迴圈。 如需設定串聯 null 的詳細資訊，請參閱下一節。
 
 ## <a name="configuring-cascading-behaviors"></a>設定串聯行為
 
@@ -463,7 +463,7 @@ SELECT @@ROWCOUNT;
 
 如需設定實體類型之間關聯性的詳細資訊，請參閱 [關聯](xref:core/modeling/relationships) 性。
 
-`OnDelete` 接受來自的值，不可否認的混淆， <xref:Microsoft.EntityFrameworkCore.DeleteBehavior> 列舉。 此列舉會定義追蹤實體上 EF Core 的行為，以及當 EF 用來建立架構時，資料庫中的串聯刪除的設定。
+`OnDelete` 接受來自的值，不可否認的混淆， <xref:Microsoft.EntityFrameworkCore.DeleteBehavior> 列舉。 此列舉會在追蹤的實體上定義 EF Core 的行為，以及在使用 EF 來建立架構時，在資料庫中設定串聯刪除。
 
 ### <a name="impact-on-database-schema"></a>對資料庫架構的影響
 
@@ -509,10 +509,10 @@ SELECT @@ROWCOUNT;
 
 - 這類必要關聯性的預設值為 `Cascade` 。
 - 針對必要關聯性使用 cascade delete 以外的任何其他作業，會在呼叫 SaveChanges 時產生例外狀況。
-  - 一般來說，這是 `InvalidOperationException` 來自 EF Core，因為在載入的子系/相依項中偵測到不正確狀態。
-  - `ClientNoAction` 強制 EF Core 不檢查修復相依項，然後再將它們傳送到資料庫，因此在此情況下，資料庫會擲回例外狀況，然後 `DbUpdateException` 由 SaveChanges 包裝在中。
+  - 一般而言，這是 `InvalidOperationException` 來自 EF Core 的，因為在載入的子系/相依項中偵測到不正確狀態。
+  - `ClientNoAction` 強制 EF Core 在將其傳送至資料庫之前，不檢查修復相依項，因此在此情況下，資料庫會擲回例外狀況，然後 `DbUpdateException` 由 SaveChanges 包裝在中。
   - `SetNull` 在建立資料庫時拒絕，因為外鍵資料行不可為 null。
-- 因為相依項/子系已載入，所以 EF Core 一律會將其刪除，且永遠不會將資料庫刪除。
+- 由於相依項/子系已載入，因此 EF Core 一律會刪除這些相依項/子系，而且永遠不會離開資料庫來刪除。
 
 #### <a name="required-relationship-with-dependentschildren-not-loaded"></a>未載入相依項/子系的必要關聯性
 
@@ -539,19 +539,19 @@ SELECT @@ROWCOUNT;
 | Deletebehavior.restrict    | 刪除主體/父系時             | 從 principal/parent 切斷
 |:------------------|------------------------------------------|----------------------------------------
 | Cascade           | EF Core 刪除的相依項            | EF Core 刪除的相依項
-| 限制          | 依 EF Core 將相依 Fk 設為 null     | 依 EF Core 將相依 Fk 設為 null
-| NoAction          | 依 EF Core 將相依 Fk 設為 null     | 依 EF Core 將相依 Fk 設為 null
-| SetNull           | 依 EF Core 將相依 Fk 設為 null     | 依 EF Core 將相依 Fk 設為 null
-| ClientSetNull     | 依 EF Core 將相依 Fk 設為 null     | 依 EF Core 將相依 Fk 設為 null
+| 限制          | EF Core 將相依 Fk 設為 null     | EF Core 將相依 Fk 設為 null
+| NoAction          | EF Core 將相依 Fk 設為 null     | EF Core 將相依 Fk 設為 null
+| SetNull           | EF Core 將相依 Fk 設為 null     | EF Core 將相依 Fk 設為 null
+| ClientSetNull     | EF Core 將相依 Fk 設為 null     | EF Core 將相依 Fk 設為 null
 | ClientCascade     | EF Core 刪除的相依項            | EF Core 刪除的相依項
-| ClientNoAction    | `DbUpdateException`                      | 依 EF Core 將相依 Fk 設為 null
+| ClientNoAction    | `DbUpdateException`                      | EF Core 將相依 Fk 設為 null
 
 注意：
 
 - 這類選擇性關聯性的預設值為 `ClientSetNull` 。
 - 除非已 `Cascade` 設定或，否則不會刪除相依項/子系 `ClientCascade` 。
-- 所有其他值都會將相依的 Fk 設為 null，EF Core .。。
-  - ...但 `ClientNoAction` 在刪除主體/父系時，會告知 EF Core 不會接觸相依項/子系的外鍵。 因此，資料庫會擲回例外狀況，此例外狀況會 `DbUpdateException` 由 SaveChanges 包裝為。
+- 所有其他值都會導致 EF Core 將相依 Fk 設為 null。
+  - ...但 `ClientNoAction` 會在刪除主體/父系時，告知 EF Core 不會接觸相依項/子系的外鍵。 因此，資料庫會擲回例外狀況，此例外狀況會 `DbUpdateException` 由 SaveChanges 包裝為。
 
 #### <a name="optional-relationship-with-dependentschildren-not-loaded"></a>未載入相依項/子系的選擇性關聯性
 

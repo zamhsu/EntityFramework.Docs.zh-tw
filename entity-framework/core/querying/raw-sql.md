@@ -4,19 +4,19 @@ description: 在 Entity Framework Core 中使用原始 SQL 查詢查詢
 author: smitpatel
 ms.date: 10/08/2019
 uid: core/querying/raw-sql
-ms.openlocfilehash: 56724f9fddc9126fd4dfe0f348a0c525b43a3478
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 5d7be9726e11a1a33b1faa302a7daa53f67bfd2f
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128377"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023701"
 ---
 # <a name="raw-sql-queries"></a>原始 SQL 查詢
 
 Entity Framework Core 可讓您在處理關聯式資料庫時，下拉至原始 SQL 查詢。 如果您想要的查詢無法使用 LINQ 表示，原始 SQL 查詢會很有用。 如果使用 LINQ 查詢會導致 SQL 查詢效率不佳，也會使用原始 SQL 查詢。 原始 SQL 查詢可以傳回屬於模型一部分的一般實體類型或 [無索引鍵實體類型](xref:core/modeling/keyless-entity-types) 。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/RawSQL) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/RawSQL) \(英文\)。
 
 ## <a name="basic-raw-sql-queries"></a>基本的原始 SQL 查詢
 
@@ -86,9 +86,9 @@ ORDER BY [b].[Rating] DESC
 
 - 尾端分號
 - 在 SQL Server 上，結尾的查詢層級提示 (例如，`OPTION (HASH JOIN)`)
-- 在 SQL Server 上， `ORDER BY` 不會搭配 `OFFSET 0` `TOP 100 PERCENT` 子句或子句中使用的子句 `SELECT`
+- 在 SQL Server 上，子句 `ORDER BY` 不能搭配 `OFFSET 0` 或 `TOP 100 PERCENT` `SELECT` 子句使用
 
-SQL Server 不允許撰寫預存程序呼叫，因此將其他查詢運算子套用到這類呼叫的任何嘗試都會導致不正確 SQL。 `AsEnumerable` `AsAsyncEnumerable` 請在或方法之後使用或方法 `FromSqlRaw` `FromSqlInterpolated` ，以確定 EF Core 不會嘗試在預存程式上撰寫。
+SQL Server 不允許撰寫預存程序呼叫，因此任何嘗試將額外的查詢運算子套用到這類呼叫，將會導致不正確 SQL。 `AsEnumerable` `AsAsyncEnumerable` 請在或方法之後使用或方法 `FromSqlRaw` `FromSqlInterpolated` ，以確定 EF Core 不會嘗試在預存程式上撰寫。
 
 ## <a name="change-tracking"></a>變更追蹤
 

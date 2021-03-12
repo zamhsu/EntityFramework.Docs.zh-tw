@@ -1,15 +1,15 @@
 ---
 title: 資料植入-EF Core
-description: 使用資料植入來以 Entity Framework Core 的初始資料集填入資料庫
+description: 使用資料植入，以使用 Entity Framework Core 的初始資料集填入資料庫
 author: AndriySvyryd
 ms.date: 11/02/2018
 uid: core/modeling/data-seeding
-ms.openlocfilehash: fefa6232496cd250d52a436971251f59af09f5c6
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 812d64ff2455e90436fc8c41e27f28115e207ff3
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429672"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024039"
 ---
 # <a name="data-seeding"></a>資料植入
 
@@ -23,7 +23,7 @@ ms.locfileid: "94429672"
 
 ## <a name="model-seed-data"></a>模型種子資料
 
-不同于 EF6，在 EF Core 中，植入資料可以與實體類型相關聯，做為模型設定的一部分。 然後 EF Core 的 [遷移](xref:core/managing-schemas/migrations/index) 可以自動計算將資料庫升級至新版本的模型時，必須套用的插入、更新或刪除作業。
+不同于 EF6，在 EF Core 中，植入資料可以與實體類型相關聯，做為模型設定的一部分。 然後 EF Core [遷移](xref:core/managing-schemas/migrations/index) 可以自動計算將資料庫升級至新版本的模型時，必須套用的插入、更新或刪除作業。
 
 > [!NOTE]
 > 當您決定應該執行哪一種作業來讓種子資料進入預期狀態時，遷移只會考慮模型變更。 因此，在遷移外部所執行之資料的任何變更都可能遺失或造成錯誤。
@@ -44,7 +44,7 @@ ms.locfileid: "94429672"
 
 [!code-csharp[OwnedTypeSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=OwnedTypeSeed)]
 
-請參閱 [完整的範例專案](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/DataSeeding) ，以取得更多內容。
+請參閱 [完整的範例專案](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Modeling/DataSeeding) ，以取得更多內容。
 
 一旦將資料加入至模型之後，就應該使用 [遷移](xref:core/managing-schemas/migrations/index) 來套用變更。
 
@@ -69,7 +69,7 @@ ms.locfileid: "94429672"
 * 大量 (植入資料的資料會在遷移快照集中捕捉，而大型資料可能很快會導致大型檔案和效能降低) 。
 * 需要資料庫產生的索引鍵值的資料，包括使用替代索引鍵做為身分識別的實體
 * 需要自訂轉換 (的資料，不是由 [值轉換](xref:core/modeling/value-conversions)) 處理，例如一些密碼雜湊
-* 需要呼叫外部 API 的資料，例如 ASP.NET Core 身分識別角色和使用者建立
+* 需要呼叫外部 API 的資料，例如 ASP.NET 核心身分識別角色和使用者建立
 
 ## <a name="manual-migration-customization"></a>手動遷移自訂
 

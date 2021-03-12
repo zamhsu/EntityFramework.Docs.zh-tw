@@ -4,23 +4,23 @@ description: EF Core 所定義的 .NET 事件
 author: ajcvickers
 ms.date: 10/15/2020
 uid: core/logging-events-diagnostics/events
-ms.openlocfilehash: 0888009af0bedfb63690e72c4a0e08979a9e9cf3
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: c26032d19d7bc05d30d4576534c7425da4472072
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129248"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024234"
 ---
 # <a name="net-events-in-ef-core"></a>EF Core 中的 .NET 事件
 
 > [!TIP]
-> 您可以從 GitHub [下載事件範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Events) 。
+> 您可以從 GitHub [下載事件範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Events) 。
 
-Entity Framework Core (EF Core) 會公開 [.net 事件](/dotnet/standard/events/) ，以在 EF Core 程式碼中發生特定情況時做為回呼。 事件比 [攔截](xref:core/logging-events-diagnostics/interceptors) 器更簡單，並允許更具彈性的註冊。 不過，它們只會進行同步處理，因此無法執行非封鎖的非同步 i/o。
+Entity Framework Core (EF Core) 會在 EF Core 程式碼中發生特定情況時，公開 [.net 事件](/dotnet/standard/events/) 作為回呼。 事件比 [攔截](xref:core/logging-events-diagnostics/interceptors) 器更簡單，並允許更具彈性的註冊。 不過，它們只會進行同步處理，因此無法執行非封鎖的非同步 i/o。
 
 每個實例都會註冊事件 `DbContext` 。 您可以使用 [診斷](xref:core/logging-events-diagnostics/diagnostic-listeners) 接聽程式來取得相同資訊，但會針對進程中的所有 DbCoNtext 實例取得相同的資訊。
 
-## <a name="events-raised-by-ef-core"></a>EF Core 所引發的事件
+## <a name="events-raised-by-ef-core"></a>EF Core 引發的事件
 
 EF Core 會引發下列事件：
 
@@ -90,7 +90,7 @@ public interface IHasTimestamps
 
 這兩個事件都是必要的，因為新 `Tracked` 的實體會在第一次追蹤時引發事件。 `StateChanged` 只有當實體 _已_ 在追蹤時變更狀態時，才會引發事件。
 
-此範例的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Events) 包含一個簡單的主控台應用程式，可對 [日誌] 資料庫進行變更：
+此範例的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Events) 包含一個簡單的主控台應用程式，可對 [日誌] 資料庫進行變更：
 
 <!--
         using (var context = new BlogsContext())

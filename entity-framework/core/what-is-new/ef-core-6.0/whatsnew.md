@@ -1,15 +1,15 @@
 ---
 title: EF Core 6.0 的新功能
-description: EF Core 6.0 的新功能總覽
+description: EF Core 6.0 中的新功能總覽
 author: ajcvickers
-ms.date: 01/28/2021
+ms.date: 03/08/2021
 uid: core/what-is-new/ef-core-6.0/whatsnew
-ms.openlocfilehash: bcc2b3ce9047a2c6b5a89e99b96919914bcf42fe
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: 15ab49f60d8831c60e599d8c06b3700aace74bda
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543194"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023519"
 ---
 # <a name="whats-new-in-ef-core-60"></a>EF Core 6.0 的新功能
 
@@ -17,10 +17,95 @@ EF Core 6.0 目前正在開發中。 這包含每個預覽中所引進之有趣�
 
 此頁面不會複製 [EF Core 6.0 的方案](xref:core/what-is-new/ef-core-6.0/plan)。 此計畫描述 EF Core 6.0 的整體主題，包括我們在出貨最終發行版本之前打算包含的所有專案。
 
-## <a name="ef-core-60-preview-1"></a>EF Core 6.0 Preview 1
-
 > [!TIP]
-> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/NewInEFCore6)，以執行並偵測到下列顯示的所有 preview 1 範例。
+> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/NewInEFCore6)，以執行並偵測到下列顯示的所有 preview 1 範例。
+
+## <a name="ef-core-60-preview-2"></a>EF Core 6.0 Preview 2
+
+### <a name="preserve-synchronization-context-in-savechangesasync"></a>保留 SaveChangesAsync 中的同步處理內容
+
+GitHub 問題： [#23971](https://github.com/dotnet/efcore/issues/23971)。
+
+我們 [已將5.0 版中的 EF Core 程式碼變更](https://github.com/dotnet/efcore/issues/10164) 為 <xref:System.Threading.Tasks.Task.ConfigureAwait%2A?displayProperty=nameWithType> `false` 在我們非同步程式碼的所有位置中設定為 `await` 。 這通常是 EF Core 使用方式的較佳選擇。 不過，這 <xref:System.Data.Entity.DbContext.SaveChangesAsync%2A> 是特殊案例，因為 EF Core 會在非同步資料庫作業完成之後，將產生的值設定為追蹤的實體。 這些變更可能會觸發通知，例如，可能必須在 U.I. 上執行 執行緒。 因此，我們只會在此方法的 EF Core 6.0 中還原這項變更 <xref:System.Data.Entity.DbContext.SaveChangesAsync%2A> 。
+
+### <a name="translate-stringconcat-with-multiple-arguments"></a>使用多個引數來轉譯 String. Concat
+
+GitHub 問題： [#23859](https://github.com/dotnet/efcore/issues/23859)。 這項功能是由所貢獻 [@wmeints](https://github.com/wmeints) 。
+
+從 EF Core 6.0 開始， <xref:System.String.Concat%2A?displayProperty=nameWithType> 具有多個引數的呼叫現在會轉譯為 SQL。 例如，下列查詢：
+
+<!--
+        var shards = context.Shards
+            .Where(e => string.Concat(e.Token1, e.Token2, e.Token3) != e.TokensProcessed).ToList();
+-->
+[!code-csharp[StringConcat](../../../../samples/core/Miscellaneous/NewInEFCore6/StringConcatSample.cs?name=StringConcat)]
+
+使用 SQL Server 時，將會轉譯為下列 SQL：
+
+```sql
+SELECT [s].[Id], [s].[Token1], [s].[Token2], [s].[Token3], [s].[TokensProcessed]
+FROM [Shards] AS [s]
+WHERE ((COALESCE([s].[Token1], N'') + (COALESCE([s].[Token2], N'') + COALESCE([s].[Token3], N''))) <> [s].[TokensProcessed]) OR [s].[TokensProcessed] IS NULL
+```
+
+### <a name="smoother-integration-with-systemlinqasync"></a>與 System.object 的整合更加順暢
+
+GitHub 問題： [#24041](https://github.com/dotnet/efcore/issues/24041)。
+
+System.string [封裝會](https://www.nuget.org/packages/System.Linq.Async/) 加入用戶端非同步 Linq 處理。 將此套件與舊版 EF Core 搭配使用，會因為非同步 LINQ 方法的命名空間衝突而繁瑣。 在 EF Core 6.0 中，我們已利用 c # 模式比對，讓 <xref:System.Collections.Generic.IAsyncEnumerable%601> 公開的 EF Core 不 <xref:Microsoft.EntityFrameworkCore.DbSet%601> 需要直接執行介面。
+
+請注意，大部分的應用程式不需要使用 system.string，因為 EF Core 查詢通常會在伺服器上完整轉譯。
+
+### <a name="more-flexible-free-text-search"></a>更具彈性的自由文字搜尋
+
+GitHub 問題： [#23921](https://github.com/dotnet/efcore/issues/23921)。
+
+在 EF Core 6.0 中，我們已放寬和的參數 <xref:Microsoft.EntityFrameworkCore.SqlServerDbFunctionsExtensions.FreeText(Microsoft.EntityFrameworkCore.DbFunctions,System.String,System.String)> 需求 <xref:Microsoft.EntityFrameworkCore.SqlServerDbFunctionsExtensions.Contains%2A> 。 這可讓這些函式搭配二進位資料行使用，或與使用值轉換器對應的資料行搭配使用。 例如，假設某個實體類型的 `Name` 屬性定義為值物件：
+
+<!--
+    public class Customer
+    {
+        public int Id { get; set; }
+
+        public Name Name{ get; set; }
+    }
+
+    public class Name
+    {
+        public string First { get; set; }
+        public string MiddleInitial { get; set; }
+        public string Last { get; set; }
+    }
+-->
+[!code-csharp[EntityType](../../../../samples/core/Miscellaneous/NewInEFCore6/ContainsFreeTextSample.cs?name=EntityType)]
+
+這會對應到資料庫中的 JSON：
+
+<!--
+            modelBuilder.Entity<Customer>()
+                .Property(e => e.Name)
+                .HasConversion(
+                    v => JsonSerializer.Serialize(v, null),
+                    v => JsonSerializer.Deserialize<Name>(v, null));
+-->
+[!code-csharp[ConfigureCompositeValueObject](../../../../samples/core/Miscellaneous/NewInEFCore6/ContainsFreeTextSample.cs?name=ConfigureCompositeValueObject)]
+
+您現在可以使用 `Contains` 或， `FreeText` 即使屬性的類型不是，也可以執行 `Name` 查詢 `string` 。 例如：
+
+<!--
+        var result = context.Customers.Where(e => EF.Functions.Contains(e.Name, "Martin")).ToList();
+-->
+[!code-csharp[Query](../../../../samples/core/Miscellaneous/NewInEFCore6/ContainsFreeTextSample.cs?name=Query)]
+
+使用 SQL Server 時，這會產生下列 SQL：
+
+```sql
+SELECT [c].[Id], [c].[Name]
+FROM [Customers] AS [c]
+WHERE CONTAINS([c].[Name], N'Martin')
+```
+
+## <a name="ef-core-60-preview-1"></a>EF Core 6.0 Preview 1
 
 ### <a name="unicodeattribute"></a>UnicodeAttribute
 
@@ -41,7 +126,7 @@ GitHub 問題： [#19794](https://github.com/dotnet/efcore/issues/19794)。 這�
 -->
 [!code-csharp[BookEntityType](../../../../samples/core/Miscellaneous/NewInEFCore6/UnicodeAttributeSample.cs?name=BookEntityType)]
 
-由於 ISBNs 不能包含任何非 unicode 字元，因此 `Unicode` 屬性會導致使用非 unicode 字串類型。 此外， `MaxLength` 也會用來限制資料庫資料行的大小。 例如，使用 SQL Server 時，會產生下列的資料庫資料行 `varchar(22)` ：
+由於 ISBNs 不能包含任何非 unicode 字元，因此 `Unicode` 屬性會導致使用非 unicode 字串類型。 此外， `MaxLength` 也會用來限制資料庫資料行的大小。 例如，使用 SQL Server 時，這會產生的資料庫資料行 `varchar(22)` ：
 
 ```sql
 CREATE TABLE [Book] (
@@ -71,7 +156,7 @@ GitHub 問題： [#17914](https://github.com/dotnet/efcore/issues/17914)。 這�
 -->
 [!code-csharp[ProductEntityType](../../../../samples/core/Miscellaneous/NewInEFCore6/PrecisionAttributeSample.cs?name=ProductEntityType)]
 
-EF Core 會將此屬性對應至精確度為10且小數位數為2的資料庫資料行。 例如，在 SQL Server：
+EF Core 會將此屬性對應至精確度為10且小數位數為2的資料庫資料行。 例如，在 SQL Server 上：
 
 ```sql
 CREATE TABLE [Product] (
@@ -109,7 +194,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-從 EF Core 6.0 開始， `EntityTypeConfigurationAttribute` 可以在實體類型上放置，讓 EF Core 可以尋找及使用適當的設定。 例如：
+從 EF Core 6.0 開始， `EntityTypeConfigurationAttribute` 可以在實體類型上放置，讓 EF Core 可以尋找並使用適當的設定。 例如：
 
 <!--
 [EntityTypeConfiguration(typeof(BookConfiguration))]
@@ -176,13 +261,13 @@ FROM "Users" AS "u"
 WHERE CAST("u"."PhoneNumber" AS TEXT) LIKE '%555%'
 ```
 
-請注意， <xref:System.Object.ToString> EF Core 5.0 中已支援 SQL Server 的翻譯，其他資料庫提供者也可能支援此功能。
+請注意， <xref:System.Object.ToString> EF Core 5.0 已支援 FOR SQL Server 的翻譯，其他資料庫提供者也可能支援此功能。
 
 ### <a name="effunctionsrandom"></a>英 孚。函數。 Random
 
 GitHub 問題： [#16141](https://github.com/dotnet/efcore/issues/16141)。 這項功能是由所貢獻 [@RaymondHuy](https://github.com/RaymondHuy) 。
 
-`EF.Functions.Random` 對應至資料庫函式，其會傳回介於0和1之間的虛擬亂數。 SQL Server、SQLite 和 Cosmos 的 EF Core 存放庫中已實行翻譯。 例如，假設有一個 `User` 具有屬性的實體類型 `Popularity` ：
+`EF.Functions.Random` 對應至資料庫函式，其會傳回介於0和1之間的虛擬亂數。 適用于 SQL Server、SQLite 和 Cosmos 的 EF Core 存放庫中已執行翻譯。 例如，假設有一個 `User` 具有屬性的實體類型 `Popularity` ：
 
 <!--
     public class User
@@ -201,7 +286,7 @@ var users = context.Users.Where(u => u.Popularity == (int)(EF.Functions.Random()
 -->
 [!code-csharp[Query](../../../../samples/core/Miscellaneous/NewInEFCore6/RandomFunctionSample.cs?name=Query)]
 
-使用 SQL Server 資料庫時，這會轉譯成下列 SQL：
+使用 SQL Server 資料庫時，這會轉換成下列 SQL：
 
 ```sql
 SELECT [u].[Id], [u].[Popularity], [u].[Username]
@@ -209,7 +294,7 @@ FROM [Users] AS [u]
 WHERE [u].[Popularity] = (CAST((RAND() * 5.0E0) AS int) + 1)
 ```
 
-### <a name="support-for-sql-server-sparse-columns"></a>支援 SQL Server 的稀疏資料行
+### <a name="support-for-sql-server-sparse-columns"></a>支援 SQL Server sparse 資料行
 
 GitHub 問題： [#8023](https://github.com/dotnet/efcore/issues/8023)。
 
@@ -242,7 +327,7 @@ SQL Server [稀疏資料行](/sql/relational-databases/tables/use-sparse-columns
 -->
 [!code-csharp[OnModelCreating](../../../../samples/core/Miscellaneous/NewInEFCore6/SparseColumnsSample.cs?name=OnModelCreating)]
 
-EF Core 的遷移會將資料行標示為「稀疏」。 例如：
+EF Core 遷移會將資料行標示為「稀疏」。 例如：
 
 ```sql
 CREATE TABLE [ForumUser] (
@@ -254,13 +339,13 @@ CREATE TABLE [ForumUser] (
 ```
 
 > [!NOTE]
-> 稀疏資料行有限制。 請務必閱讀 SQL Server 的 [稀疏資料行檔](/sql/relational-databases/tables/use-sparse-columns) ，以確保稀疏資料行是您案例的正確選擇。
+> 稀疏資料行有限制。 請務必閱讀 [SQL Server sparse 資料行檔](/sql/relational-databases/tables/use-sparse-columns) ，以確保稀疏資料行是您案例的正確選擇。
 
 ### <a name="in-memory-database-validate-required-properties-are-not-null"></a>記憶體內部資料庫：驗證必要的屬性不是 null
 
 GitHub 問題： [#10613](https://github.com/dotnet/efcore/issues/10613)。 這項功能是由所貢獻 [@fagnercarvalho](https://github.com/fagnercarvalho) 。
 
-如果嘗試針對標示為必要的屬性儲存 null 值，則記憶體內部資料庫的 EF Core 將會擲回例外狀況。 例如，假設有一個 `User` 具有必要屬性的型別 `Username` ：
+如果嘗試針對標示為必要的屬性儲存 null 值，則 EF Core 記憶體內部資料庫現在會擲回例外狀況。 例如，假設有一個 `User` 具有必要屬性的型別 `Username` ：
 
 <!--
     public class User
@@ -290,7 +375,7 @@ GitHub 問題： [#10613](https://github.com/dotnet/efcore/issues/10613)。 這�
 -->
 [!code-csharp[OnConfiguring](../../../../samples/core/Miscellaneous/NewInEFCore6/InMemoryRequiredPropertiesSample.cs?name=OnConfiguring)]
 
-### <a name="improved-sql-server-translation-for-isnullorwhitespace"></a>改進 IsNullOrWhitespace SQL Server 轉譯
+### <a name="improved-sql-server-translation-for-isnullorwhitespace"></a>改進適用于 IsNullOrWhitespace 的 SQL Server 轉譯
 
 GitHub 問題： [#22916](https://github.com/dotnet/efcore/issues/22916)。 這項功能是由所貢獻 [@Marusyk](https://github.com/Marusyk) 。
 
@@ -311,7 +396,7 @@ FROM [Users] AS [u]
 WHERE ([u].[FirstName] IS NULL OR (LTRIM(RTRIM([u].[FirstName])) = N'')) OR ([u].[LastName] IS NULL OR (LTRIM(RTRIM([u].[LastName])) = N''))
 ```
 
-這種翻譯已針對 EF Core 6.0 改進為：
+EF Core 6.0 的這種轉譯已經過改善，可讓您：
 
 ```sql
 SELECT [u].[Id], [u].[FirstName], [u].[LastName]
@@ -323,7 +408,7 @@ WHERE ([u].[FirstName] IS NULL OR ([u].[FirstName] = N'')) OR ([u].[LastName] IS
 
 GitHub 問題： [#19113](https://github.com/dotnet/efcore/issues/19113)。 這項功能是由所貢獻 [@ErikEJ](https://github.com/ErikEJ) 。
 
-SQL 資料表和資料行上的批註現在 scaffold 至從現有 SQL Server 資料庫 [對 EF Core 模型進行反向工程](xref:core/managing-schemas/scaffolding) 時所建立的實體類型。 例如：
+SQL 資料表和資料行的批註現在 scaffold 至從現有 SQL Server 資料庫 [對 EF Core 模型進行反向工程](xref:core/managing-schemas/scaffolding) 時所建立的實體類型。 例如：
 
 ```csharp
 /// <summary>
@@ -342,7 +427,7 @@ public partial class Blog
 ## <a name="microsoftdatasqlite-60-preview-1"></a>Microsoft. Sqlite 6.0 Preview 1
 
 > [!TIP]
-> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/NewInEFCore6)，以執行並偵測到下列顯示的所有 preview 1 範例。
+> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/NewInEFCore6)，以執行並偵測到下列顯示的所有 preview 1 範例。
 
 ### <a name="savepoints-api"></a>儲存點 API
 

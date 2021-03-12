@@ -10,12 +10,12 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 04/15/2020
-  ms.openlocfilehash: 2ef9ee31ef84d779f911ec7c6da1e631889e693a
-  ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+  ms.openlocfilehash: 48983793d1cbf3e0ef7b9cc3f47ab893b6f95e34
+  ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
   ms.translationtype: MT
   ms.contentlocale: zh-TW
-  ms.lasthandoff: 01/12/2021
-  ms.locfileid: "98129287"
+  ms.lasthandoff: 03/11/2021
+  ms.locfileid: "103024520"
 highlightedContent:
   items:
   - title: Entity Framework Core
@@ -103,7 +103,7 @@ additionalContent:
     - title: 建立模型
       links:
       - url: core/modeling/index.md
-        text: 總覽
+        text: 概觀
       - url: core/modeling/entity-types.md
         text: 實體類型
       - url: core/modeling/entity-properties.md
@@ -141,7 +141,7 @@ additionalContent:
       - url: core/querying/filters.md
         text: 全域查詢篩選條件
       - url: core/querying/null-comparisons.md
-        text: 查詢中與 null 值的比較
+        text: 查詢中具有 Null 值的比較
     - title: 管理資料庫架構
       links:
       - url: core/managing-schemas/index.md
@@ -196,4 +196,4 @@ additionalContent:
       links:
       - url: ef6/get-started.md
         text: Entity Framework 6
-  footer: 參與 Entity Framework 文件。請參閱 [參與者指南](https://github.com/dotnet/EntityFramework.Docs/blob/master/CONTRIBUTING.md)(英文)。
+  footer: 參與 Entity Framework 文件。請參閱 [參與者指南](https://github.com/dotnet/EntityFramework.Docs/blob/main/CONTRIBUTING.md)(英文)。

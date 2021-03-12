@@ -4,7 +4,7 @@
 
 ## <a name="how-to-make-a-simple-correction-or-suggestion"></a>如何提出簡單的修正或建議
 
-文章會以 Markdown 檔案的形式儲存在此存放庫中。 若要對 Markdown 檔案內容進行簡易變更，請按一下瀏覽器視窗右上角的 [編輯]**** 連結。 您可能需要展開 [選項]**** 列，才可看到 [編輯]**** 連結。 請依照指示來建立提取要求 (PR)。 EF 小組將會於檢閱 PR 後接受，或建議變更。
+文章會以 Markdown 檔案的形式儲存在此存放庫中。 若要對 Markdown 檔案內容進行簡易變更，請按一下瀏覽器視窗右上角的 [編輯] 連結。 您可能需要展開 [選項] 列，才可看到 [編輯] 連結。 請依照指示來建立提取要求 (PR)。 EF 小組將會於檢閱 PR 後接受，或建議變更。
 
 ## <a name="how-to-make-a-more-complex-submission"></a>如何進行更複雜的提交
 
@@ -12,12 +12,12 @@
 
 * 建立一項[議題](https://github.com/dotnet/EntityFramework.Docs/issues/new)，描述您要執行的動作，例如變更現有文章或建立新的文章。 在您投入更多時間之前，請先等候 EF 小組的核准。
 * 將 [dotnet/EntityFramework.Doc](https://github.com/dotnet/EntityFramework.Docs/) 的存放庫分叉，並為您的變更建立分支。
-* 將內含變更的提取要求 (PR) 提交給管理員。
+* 使用您的變更，將提取要求 (PR) 提交至 main。
 * 回應 PR 意見。
 
 ## <a name="markdown-syntax"></a>Markdown 語法
 
-文章是以 [DocFx-flavored Markdown (DFM)](http://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html) 撰寫，其涵蓋 [GitHub-flavored Markdown (GFM)](https://guides.github.com/features/mastering-markdown/)。 如需 EF 文件中常用 UI 功能的 DFM 語法和中繼資料範例，請參閱 .NET Core 存放庫樣式指南中的[中繼資料與 Markdown 範本](https://github.com/dotnet/docs/blob/master/styleguide/template.md)。
+文章是以 [DocFx-flavored Markdown (DFM)](http://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html) 撰寫，其涵蓋 [GitHub-flavored Markdown (GFM)](https://guides.github.com/features/mastering-markdown/)。 如需 EF 檔中常用 UI 功能的 DFM 語法和中繼資料的範例，請參閱 [中繼資料和 Markdown 範本](https://docs.microsoft.com/contribute/dotnet/dotnet-style-guide)。
 
 ## <a name="folder-structure-conventions"></a>資料夾結構慣例
 
@@ -96,4 +96,4 @@ DocFX 需要 .NET Framework (Windows) 或 Mono (Linux 或 macOS)。
 
 ## <a name="voice-and-tone"></a>語氣和語調
 
-我們撰寫文件的目標是盡可能讓越多使用者輕鬆了解越好。 為此，我們制定了書寫樣式導方針，並要求參與者務必遵循。 如需詳細資訊，請參閱 .NET Core 存放庫中的[語態和語氣指導方針](https://github.com/dotnet/docs/blob/master/styleguide/voice-tone.md)。
+我們撰寫文件的目標是盡可能讓越多使用者輕鬆了解越好。 為此，我們制定了書寫樣式導方針，並要求參與者務必遵循。 如需詳細資訊，請參閱 [語音和語氣指導方針](https://docs.microsoft.com/contribute/dotnet/dotnet-voice-tone)。

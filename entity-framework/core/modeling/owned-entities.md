@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 時如何設定擁有的實體類型�
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 0cd6bfd25d4462509a3e6c112b892d652d29e45e
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 4175c281254c25e957fd701c671f2d75c7789aab
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128624"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023948"
 ---
 # <a name="owned-entity-types"></a>擁有的實體類型
 
@@ -41,7 +41,7 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 
 ![包含所擁有參考之實體的資料庫模型 Sceenshot](_static/owned-entities-ownsone.png)
 
-請參閱 [完整的範例專案](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/OwnedEntities) ，以取得更多內容。
+請參閱 [完整的範例專案](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Modeling/OwnedEntities) ，以取得更多內容。
 
 > [!TIP]
 > 擁有的實體類型可標示為必要，如需詳細資訊，請參閱 [必要的一對一相依項](xref:core/modeling/relationships#one-to-one) 。
@@ -56,12 +56,12 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 
 若要設定所擁有類型的集合，請 `OwnsMany` 在中使用 `OnModelCreating` 。
 
-擁有的類型需要主鍵。 如果 .NET 類型上沒有適合的候選屬性，EF Core 可以嘗試建立一個。 不過，當擁有的型別是透過集合定義時，您只需要建立一個影子屬性，就可以同時作為擁有者的外鍵和所擁有實例的主鍵，就像我們所做的一樣 `OwnsOne` ：每個擁有者可以有多個自有的型別實例，因此擁有者的金鑰也不足以提供每個擁有實例的唯一身分識別。
+擁有的類型需要主鍵。 如果 .NET 類型上沒有適合的候選屬性，EF Core 會嘗試建立一個。 不過，當擁有的型別是透過集合定義時，您只需要建立一個影子屬性，就可以同時作為擁有者的外鍵和所擁有實例的主鍵，就像我們所做的一樣 `OwnsOne` ：每個擁有者可以有多個自有的型別實例，因此擁有者的金鑰也不足以提供每個擁有實例的唯一身分識別。
 
 這兩個最簡單的解決方案是：
 
 - 在新屬性上定義代理主鍵，而此屬性與指向擁有者的外鍵無關。 包含的值在所有擁有者中都必須是唯一的 (例如，如果父系 {1} 有子系 {1} ，則父系 {2} 不能有子 {1}) ，因此值沒有任何固有意義。 因為外鍵不是主鍵的一部分，所以可以變更其值，因此您可以將子系從某個父系移至另一個父代，但這通常會針對匯總語義進行。
-- 使用外鍵和其他屬性做為複合索引鍵。 針對指定的父系，其他屬性值現在只需要是唯一的 (因此，如果父系 {1} 有子系， {1,1} 則父代 {2} 仍可以有子系 {2,1}) 。 藉由讓主鍵的外鍵部分成為擁有者與擁有之實體之間的關聯性，會變成不可變的，並更妥善地反映匯總語義。 這是 EF Core 預設的情況。
+- 使用外鍵和其他屬性做為複合索引鍵。 針對指定的父系，其他屬性值現在只需要是唯一的 (因此，如果父系 {1} 有子系， {1,1} 則父代 {2} 仍可以有子系 {2,1}) 。 藉由讓主鍵的外鍵部分成為擁有者與擁有之實體之間的關聯性，會變成不可變的，並更妥善地反映匯總語義。 這是 EF Core 預設執行的功能。
 
 在此範例中，我們會使用 `Distributor` 類別。
 
@@ -100,7 +100,7 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 
 [!code-csharp[OrderDetails](../../../samples/core/Modeling/OwnedEntities/OrderDetails.cs?name=OrderDetails)]
 
-若要瞭解 EF Core 將如何區分這些物件的追蹤實例，請考慮定義導覽已成為實例索引鍵的一部分，以及擁有者的索引鍵和所擁有類型之 .NET 類型的值。
+為了瞭解 EF Core 如何區分這些物件的追蹤實例，認為定義導覽已成為實例索引鍵的一部分，以及擁有者的索引鍵和所擁有類型之 .NET 類型的值。
 
 ## <a name="nested-owned-types"></a>嵌套擁有的類型
 
@@ -162,5 +162,5 @@ EF Core 可讓您建立只能出現在其他實體類型導覽屬性上的實體
 
 ### <a name="shortcomings-in-previous-versions"></a>舊版的缺點
 
-- 在 EF Core 2.x 參考導覽至擁有的實體類型時，除非它們明確地對應至擁有者的個別資料表，否則不能是 null。
-- 在 EF Core 3.x 中，對應至與擁有者相同之資料表的擁有實體類型資料行一律會標示為可為 null。
+- 在 EF Core 2.x 中，如果擁有的實體類型已明確對應至擁有者的個別資料表，則不能為 null。
+- 在 EF Core 3.x 中，對應至與擁有者相同之資料表的自有實體型別資料行一律會標示為可為 null。

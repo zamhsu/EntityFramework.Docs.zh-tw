@@ -4,24 +4,24 @@ description: 使用 [新增]、[附加]、[更新] 和 [移除] 以 DbCoNtext �
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/explicit-tracking
-ms.openlocfilehash: 3d9142cecf272c635c3a041fe6c5d9c49a26c33d
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: a0e51db4a70338e725ed40caa57a7f02245f0707
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543181"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024468"
 ---
 # <a name="explicitly-tracking-entities"></a>明確追蹤實體
 
 每個 <xref:Microsoft.EntityFrameworkCore.DbContext> 實例都會追蹤對實體所做的變更。 接著，這些追蹤的實體會在呼叫時驅動資料庫的變更 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。
 
-Entity Framework Core (EF Core) 當相同的 <xref:Microsoft.EntityFrameworkCore.DbContext> 實例用於查詢實體，並藉由呼叫來更新時，變更追蹤的效果最佳。 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 這是因為 EF Core 會自動追蹤查詢實體的狀態，然後在呼叫 SaveChanges 時，偵測對這些實體所做的任何變更。 這種方法會在 [EF Core 的變更追蹤中](xref:core/change-tracking/index)涵蓋。
+Entity Framework Core (EF Core) 當相同的 <xref:Microsoft.EntityFrameworkCore.DbContext> 實例用來查詢實體，並藉由呼叫來更新它們時，變更追蹤的效果最佳。 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 這是因為 EF Core 會自動追蹤查詢實體的狀態，然後在呼叫 SaveChanges 時，偵測對這些實體所做的任何變更。 這種方法涵蓋于 [EF Core 中的變更追蹤](xref:core/change-tracking/index)。
 
 > [!TIP]
-> 本檔假設您已瞭解實體狀態以及 EF Core 變更追蹤的基本概念。 如需有關這些主題的詳細資訊，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
+> 本檔假設您已瞭解實體狀態和 EF Core 變更追蹤的基本概念。 如需有關這些主題的詳細資訊，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
 
 > [!TIP]
-> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackingInEFCore)，以執行並偵測到本檔中的所有程式碼。
+> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/ChangeTrackingInEFCore)，以執行並偵測到本檔中的所有程式碼。
 
 > [!TIP]
 > 為了簡單起見，本檔會使用和參考同步方法（例如）， <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 而不是其非同步對應專案（例如） <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> 。 除非另有說明，否則呼叫和等候 async 方法可以替代。
@@ -311,7 +311,7 @@ Post {Id: 2} Unchanged
 這與上一個使用明確索引鍵值的範例完全相同。
 
 > [!TIP]
-> 即使使用產生的索引鍵值，仍然可以設定明確的索引鍵值。 EF Core 接著會嘗試使用此索引鍵值來插入。 某些資料庫設定（包括具有識別資料行的 SQL Server）不支援這類插入，而且將會擲回 ([請參閱這些檔，以瞭解](xref:core/providers/sql-server/value-generation#inserting-explicit-values-into-identity-columns)) 的因應措施。
+> 即使使用產生的索引鍵值，仍然可以設定明確的索引鍵值。 接著 EF Core 會嘗試使用此索引鍵值來插入。 某些資料庫設定（包括具有識別資料行的 SQL Server）不支援這類插入，且將會擲回 ([請參閱這些檔以取得因](xref:core/providers/sql-server/value-generation#inserting-explicit-values-into-identity-columns) 應措施) 。
 
 ## <a name="attaching-existing-entities"></a>附加現有的實體
 
@@ -425,7 +425,7 @@ Post {Id: 2} Unchanged
 -->
 [!code-csharp[Attaching_existing_entities_3](../../../samples/core/ChangeTracking/ChangeTrackingInEFCore/GeneratedKeysSamples.cs?name=Attaching_existing_entities_3)]
 
-此 blog 的索引鍵值為1，表示它已經存在於資料庫中。 這兩篇文章也會設定索引鍵值，但第三篇則否。 EF Core 將會看到此索引鍵值為0，這是一個整數的 CLR 預設值。 這會導致 EF Core 將新實體標示為， `Added` 而不是 `Unchanged` ：
+此 blog 的索引鍵值為1，表示它已經存在於資料庫中。 這兩篇文章也會設定索引鍵值，但第三篇則否。 EF Core 會看到此索引鍵值為0，這是一個整數的 CLR 預設值。 這會導致 EF Core 將新實體標示為， `Added` 而不是 `Unchanged` ：
 
 ```output
 Blog {Id: 1} Unchanged
@@ -461,7 +461,7 @@ FROM "Posts"
 WHERE changes() = 1 AND "rowid" = last_insert_rowid();
 ```
 
-這裡要注意的重點是，使用產生的索引鍵值時，EF Core 可以 **自動區別已中斷連線圖形中現有實體的新** 專案。 總而言之，使用產生的索引鍵時，EF Core 一律會在實體未設定索引鍵值時插入實體。
+這裡要注意的重點是，使用產生的索引鍵值時，EF Core 可以 **自動區別已中斷連線圖形中現有實體的新** 專案。 總而言之，使用產生的索引鍵時，當實體未設定索引鍵值時，EF Core 一律會插入實體。
 
 ## <a name="updating-existing-entities"></a>更新現有實體
 
@@ -834,7 +834,7 @@ Post {Id: 2} Unchanged
 
 ### <a name="required-relationships"></a>必要關係
 
-如果 `Post.BlogId` 外鍵屬性不可為 null，則 blog 和 post 之間的關聯性會變成「必要」。 在這種情況下，EF Core 預設會在刪除主體/父系時，刪除相依/子系實體。 例如，刪除包含相關文章的 blog，如先前的範例所示：
+如果 `Post.BlogId` 外鍵屬性不可為 null，則 blog 和 post 之間的關聯性會變成「必要」。 在此情況下，當刪除主體/父系時，EF Core 預設會刪除相依/子系實體。 例如，刪除包含相關文章的 blog，如先前的範例所示：
 
 <!--
             // Attach a blog and associated posts
@@ -887,13 +887,13 @@ WHERE "Id" = @p1;
 完成 SaveChanges 之後，所有刪除的實體都會從 DbCoNtext 卸離，因為它們不再存在於資料庫中。 因此，偵錯工具的輸出會是空的。
 
 > [!NOTE]
-> 這份檔只會在 EF Core 中使用關聯性的表面上有劃痕。 如需有關模型關聯性的詳細資訊，[以及如何](xref:core/change-tracking/relationship-changes)在呼叫 SaveChanges 時更新/刪除相依/子系實體的詳細資訊，請參閱[關聯](xref:core/modeling/relationships)性。
+> 本檔只在使用 EF Core 中的關聯性時，才會有劃痕。 如需有關模型關聯性的詳細資訊，[以及如何](xref:core/change-tracking/relationship-changes)在呼叫 SaveChanges 時更新/刪除相依/子系實體的詳細資訊，請參閱[關聯](xref:core/modeling/relationships)性。
 
 ## <a name="custom-tracking-with-trackgraph"></a>使用 TrackGraph 的自訂追蹤
 
 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.TrackGraph%2A?displayProperty=nameWithType> 的運作方式類似 `Add` ，但 `Attach` `Update` 它會在追蹤之前為每個實體實例產生回呼。 這可讓您在決定如何追蹤圖形中的個別實體時使用自訂邏輯。
 
-例如，請考慮在使用產生的索引鍵值追蹤實體時，EF Core 所使用的規則：如果索引鍵值為零，則實體是新的，而且應該插入。 讓我們擴充此規則，以找出索引鍵值是否為負數，則應該刪除實體。 這可讓我們變更已中斷連線圖形之實體中的主鍵值，以標記已刪除的實體：
+例如，請考慮 EF Core 在使用產生的索引鍵值追蹤實體時所使用的規則：如果索引鍵值為零，則實體是新的，而且應該插入。 讓我們擴充此規則，以找出索引鍵值是否為負數，則應該刪除實體。 這可讓我們變更已中斷連線圖形之實體中的主鍵值，以標記已刪除的實體：
 
 <!--
             blog.Posts.Add(
@@ -945,7 +945,7 @@ WHERE "Id" = @p1;
 -->
 [!code-csharp[Custom_tracking_with_TrackGraph_1b](../../../samples/core/ChangeTracking/ChangeTrackingInEFCore/GeneratedKeysSamples.cs?name=Custom_tracking_with_TrackGraph_1b)]
 
-針對圖形中的每個實體，上述程式碼會在 _追蹤實體之前，先_ 檢查主鍵值。 針對取消設定 (零) 索引鍵值，程式碼會執行 EF Core 通常會執行的動作。 亦即，如果未設定索引鍵，則會將實體標示為 `Added` 。 如果已設定索引鍵且值為非負數，則會將實體標示為 `Modified` 。 但是，如果找到負的索引鍵值，則會還原其真實的非負數值，並將該實體追蹤為 `Deleted` 。
+針對圖形中的每個實體，上述程式碼會在 _追蹤實體之前，先_ 檢查主鍵值。 如果未設定 (零) 索引鍵值，則程式碼會執行 EF Core 通常會執行的動作。 亦即，如果未設定索引鍵，則會將實體標示為 `Added` 。 如果已設定索引鍵且值為非負數，則會將實體標示為 `Modified` 。 但是，如果找到負的索引鍵值，則會還原其真實的非負數值，並將該實體追蹤為 `Deleted` 。
 
 執行此程式碼的輸出為：
 

@@ -4,12 +4,12 @@ description: Entity Framework Core 的使用者入門教學課程
 author: rick-anderson
 ms.date: 09/17/2019
 uid: core/get-started/overview/first-app
-ms.openlocfilehash: ee2b8f87e48f466f8385548b0b9e20a3791ba2a3
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 560a6f293e32f4e1f75c13367291c4e31e83b157
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431459"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024338"
 ---
 # <a name="getting-started-with-ef-core"></a>開始使用 EF Core
 
@@ -17,7 +17,7 @@ ms.locfileid: "94431459"
 
 若要遵循本教學課程，您可以在 Windows 上使用 Visual Studio 或在 Windows、macOS 或 Linux 上使用 .NET Core CLI。
 
-[在 GitHub 上檢視此文章的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/GetStarted)。
+[在 GitHub 上檢視此文章的範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/GetStarted)。
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -144,20 +144,7 @@ dotnet run
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-執行 .NET Core 主控台應用程式時，Visual Studio 會使用不一致的工作目錄。 (請參閱 [dotnet/project-system#3619](https://github.com/dotnet/project-system/issues/3619)) 這會導致擲回例外狀況：「沒有這個表格：  部落格」。 更新工作目錄：
-
-* 以滑鼠右鍵按一下專案，然後選取 [編輯專案檔] 
-* 在 *TargetFramework* 屬性下方新增下列內容：
-
-  ```xml
-  <StartWorkingDirectory>$(MSBuildProjectDirectory)</StartWorkingDirectory>
-  ```
-
-* 儲存檔案
-
-現在您可以執行應用程式：
-
-* [偵錯] > [啟動但不偵錯] 
+[偵錯] > [啟動但不偵錯] 
 
 ---
 

@@ -1,15 +1,15 @@
 ---
 title: 已中斷連線的實體 - EF Core
-description: 在 Entity Framework Core 中使用已中斷連線、未追蹤的實體（跨多個內容實例）
+description: 在 Entity Framework Core 中使用跨多個內容實例的已中斷連線、未追蹤實體
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 4ddae08b68aa99fb81de77fed8a195c60927e0bb
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 1a86c28257449252a9cf7d3e1e65cd54bd5aa461
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128845"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023494"
 ---
 # <a name="disconnected-entities"></a>已中斷連線的實體
 
@@ -19,7 +19,7 @@ DbContext 執行個體會自動追蹤從資料庫傳回的實體。 接著，在
 
 <!-- markdownlint-disable MD028 -->
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Saving/Disconnected/) \(英文\)。
 
 > [!TIP]
 > 對於具有指定主索引鍵值的任何實體，EF Core 只能追蹤其中一個執行個體。 若要避免此情況成為問題，最佳方式就是針對每個工作單位都使用短期內容，讓內容從空白開始、有實體與其連結、儲存這些實體，然後再處置及捨棄內容。

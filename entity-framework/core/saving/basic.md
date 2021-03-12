@@ -4,19 +4,19 @@ description: 使用 Entity Framework Core 新增、更新和移除資料的基�
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/basic
-ms.openlocfilehash: 8c98f95dee85641f11af716290333b47f340bff8
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 5b75a6f7ac43243485dc6e27e25ee0bcdd3277e4
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129105"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023636"
 ---
 # <a name="basic-save"></a>基本儲存
 
 了解如何使用您的內容和實體類別來新增、修改及移除資料。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Saving/Basics/) \(英文\)。
 
 ## <a name="adding-data"></a>加入資料
 

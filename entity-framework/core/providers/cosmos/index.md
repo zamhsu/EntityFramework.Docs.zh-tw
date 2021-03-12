@@ -4,12 +4,12 @@ description: 資料庫提供者的文件，內容說明如何搭配使用 Entity
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 8bfce78465e8194544562c3ecac4d3398ca91265
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: e4ceea32fda0d07e9dd19ac0de162c57b90b5f34
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635584"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023831"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB 提供者
 
@@ -44,7 +44,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 ## <a name="get-started"></a>開始使用
 
 > [!TIP]
-> 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Cosmos)。
+> 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Cosmos)。
 
 針對其他提供者，第一個步驟是呼叫 [UseCosmos](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosDbContextOptionsExtensions.UseCosmos)：
 
@@ -76,7 +76,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 > 這些選項大多是在 EF Core 5.0 中引進。
 
 > [!TIP]
-> 如需上述每個選項效果的詳細說明，請參閱 [Azure Cosmos DB 選項檔](/dotnet/api/microsoft.azure.cosmos.cosmosclientoptions) 。
+> 如需上述每個選項效果的詳細說明，請參閱 [Azure COSMOS DB 選項檔](/dotnet/api/microsoft.azure.cosmos.cosmosclientoptions) 。
 
 ## <a name="cosmos-specific-model-customization"></a>Cosmos 專用模型自訂
 

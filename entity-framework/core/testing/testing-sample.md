@@ -11,26 +11,26 @@ no-loc:
 - Tags
 - items
 - tags
-ms.openlocfilehash: 7af516421a6ec3040b636507a6cd7976cabce3a9
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: a1c858333ee8ebe5a0ad82358c518c86576cdd32
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128793"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023454"
 ---
 # <a name="ef-core-testing-sample"></a>EF Core 測試範例
 
 > [!TIP]
-> 您可以在 GitHub 上找到這份檔中的程式碼，做為可執行檔 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/)。
+> 您可以在 GitHub 上找到這份檔中的程式碼，做為可執行檔 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Testing/ItemsWebApi/)。
 > 請注意，其中有些測試 **預期會失敗**。 以下將說明這種情況的原因。
 
-本檔會逐步解說使用 EF Core 之測試程式碼的範例。
+本檔會逐步解說使用 EF Core 測試程式碼的範例。
 
 ## <a name="the-application"></a>應用程式
 
-此 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) 包含兩個專案：
+此 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Testing/ItemsWebApi/) 包含兩個專案：
 
-- ItemsWebApi：透過單一控制器[ASP.NET Core 支援的簡易 WEB API](/aspnet/core/tutorials/first-web-api)
+- ItemsWebApi：透過單一控制器以[ASP.NET Core 支援的簡單 WEB API](/aspnet/core/tutorials/first-web-api)
 - 測試：用來測試控制器的 [XUnit](https://xunit.net/) 測試專案
 
 ### <a name="the-model-and-business-rules"></a>模型和商務規則
@@ -43,7 +43,7 @@ ms.locfileid: "98128793"
   - 如果專案的標記具有相同的標籤一次以上，則具有該標籤之現有標記的計數會遞增，而不是建立新標記。
 - 刪除 Item 會刪除所有相關聯的 Tags 。
 
-#### <a name="the-no-locitem-entity-type"></a>Item實體類型
+#### <a name="the-item-entity-type"></a>Item實體類型
 
 `Item`實體類型：
 
@@ -68,7 +68,7 @@ ms.locfileid: "98128793"
   - 此外，也不 Tag 會定義外鍵屬性。
     相反地，EF 會建立和管理陰影狀態的屬性。
 
-#### <a name="the-no-loctag-entity-type"></a>Tag實體類型
+#### <a name="the-tag-entity-type"></a>Tag實體類型
 
 `Tag`實體類型：
 
@@ -80,7 +80,7 @@ ms.locfileid: "98128793"
 
 同樣地 Item ， Tag 會隱藏其主鍵，並讓 `Label` 屬性成為唯讀。
 
-### <a name="the-no-locitemscontroller"></a>Items控制器
+### <a name="the-itemscontroller"></a>Items控制器
 
 Web API 控制器相當基本。
 它會透過函式 `DbContext` 插入，從相依性插入容器取得：
@@ -123,7 +123,7 @@ Item使用標籤標記的方法：
 下列兩項測試預期會失敗：
 
 - `Can_remove_item_and_all_associated_tags` 使用 EF 記憶體內部資料庫提供者執行時
-- `Can_add_item_differing_only_by_case` 使用 SQL Server 提供者執行時
+- `Can_add_item_differing_only_by_case` 搭配 SQL Server 提供者執行時
 
 以下將詳細說明這一點。
 
@@ -135,7 +135,7 @@ XUnit 和大部分的測試架構一樣，將會為每個測試回合建立新�
 
 > [!TIP]
 > 此範例會為每個測試重新建立資料庫。
-> 這適用于 SQLite 和 EF 記憶體內部資料庫測試，但可能涉及與其他資料庫系統（包括 SQL Server）的大量額外負荷。
+> 這適用于 SQLite 和 EF 記憶體內部資料庫測試，但可能需要與其他資料庫系統（包括 SQL Server）有相當大的負擔。
 > [跨測試共用資料庫](xref:core/testing/sharing-databases)涵蓋了降低此額外負荷的方法。
 
 執行每個測試時：
@@ -208,7 +208,7 @@ System.InvalidOperationException : Sequence contains more than one element
 ```
 
 這是因為 EF 記憶體內部資料庫和 SQLite 資料庫預設都有區分大小寫。
-另一方面，SQL Server 不區分大小寫！
+另一方面，SQL Server 則不區分大小寫！
 
 根據設計，EF Core 不會變更這些行為，因為強制變更區分大小寫可能會對效能造成重大影響。
 
@@ -222,7 +222,7 @@ System.InvalidOperationException : Sequence contains more than one element
 
 [!code-csharp[DeleteItem](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=DeleteItem)]
 
-這項測試會 SQL Server 和 SQLite 傳遞，但無法與 EF 記憶體內部資料庫一起使用！
+這項測試會在 SQL Server 和 SQLite 上通過，但是 EF 記憶體中資料庫會失敗！
 
 ```output
 Assert.False() Failure

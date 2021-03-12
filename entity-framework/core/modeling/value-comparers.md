@@ -4,12 +4,12 @@ description: 使用值比較子來控制 EF Core 如何比較屬性值
 author: ajcvickers
 ms.date: 01/16/2021
 uid: core/modeling/value-comparers
-ms.openlocfilehash: 5c5e5beee72230a331a8e1c88a2020dc5ad88ecf
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 9318b41479b43b327c76a11cc99b4f7695fa88d3
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983478"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023896"
 ---
 # <a name="value-comparers"></a>值比較子
 
@@ -17,13 +17,13 @@ ms.locfileid: "98983478"
 > 這項功能是在 EF Core 3.0 中引進。
 
 > [!TIP]
-> 您可以在 GitHub 上找到這份檔中的程式碼，做為可執行檔 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/ValueConversions/)。
+> 您可以在 GitHub 上找到這份檔中的程式碼，做為可執行檔 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Modeling/ValueConversions/)。
 
 ## <a name="background"></a>背景
 
-[變更追蹤](xref:core/change-tracking/index) 表示 EF Core 會自動判斷已載入的實體實例上應用程式所執行的變更，以便在呼叫時將這些變更儲存回資料庫 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。 EF Core 通常會在從資料庫載入實例時製作實例的 *快照* 集，並將該快照集與向外傳遞至應用程式的實例進行 *比較* ，藉此執行此工作。
+[變更追蹤](xref:core/change-tracking/index) 表示 EF Core 會自動判斷已載入的實體實例上應用程式所執行的變更，以便在呼叫時將這些變更儲存回資料庫 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。 EF Core 通常會在從資料庫載入實例時建立實例的 *快照* 集，並將該快照集與向外傳遞至應用程式的實例進行 *比較* ，藉此執行此程式。
 
-EF Core 隨附內建邏輯來進行快照，並比較資料庫中使用的大部分標準型別，因此使用者通常不需要擔心這個主題。 不過，當屬性透過 [值轉換器](xref:core/modeling/value-conversions)對應時，EF Core 必須對任意的使用者類型執行比較，這可能會很複雜。 根據預設，EF Core 會使用類型所定義的預設相等比較 (例如 `Equals`) 的方法; 針對快照集，系統會複製 [值](/dotnet/csharp/language-reference/builtin-types/value-types) 型別以產生快照集，而針對 [參考](/dotnet/csharp/language-reference/keywords/reference-types) 型別，則不會進行複製，而且會使用相同的實例作為快照集。
+EF Core 隨附內建邏輯，可用於快照，並比較資料庫中使用的大部分標準類型，因此使用者通常不需要擔心此主題。 不過，當屬性透過 [值轉換器](xref:core/modeling/value-conversions)對應時，EF Core 需要對任意的使用者類型執行比較，這可能會很複雜。 根據預設，EF Core 會使用類型所定義的預設相等比較 (例如 `Equals`) 的方法; 針對快照集，系統會複製 [值](/dotnet/csharp/language-reference/builtin-types/value-types) 型別以產生快照集，而針對 [參考](/dotnet/csharp/language-reference/keywords/reference-types) 型別，則不會進行複製，而且會使用相同的實例作為快照集。
 
 當內建的比較行為不適當時，使用者可以提供 *值比較* 子，其中包含快照的邏輯、比較和計算雜湊碼。 例如，下列會將屬性的值轉換設定為 `List<int>` 將值轉換為資料庫中的 JSON 字串，並且也定義適當的值比較子：
 
@@ -35,7 +35,7 @@ EF Core 隨附內建邏輯來進行快照，並比較資料庫中使用的大部
 
 ## <a name="shallow-vs-deep-comparison"></a>淺層與深層比較
 
-針對較小、不變的實值型別（例如 `int` ），EF Core 的預設邏輯運作正常：當快照時，值會依原樣複製，並與型別內建的相等比較比較。 在實您自己的值比較子時，請務必考慮深度或淺層比較 (，以及) 邏輯是否適當的快照。
+針對小型的不可變實數值型別（例如 `int` ），EF Core 的預設邏輯運作正常：當快照時，值會依原樣複製，並與類型的內建相等比較比較。 在實您自己的值比較子時，請務必考慮深度或淺層比較 (，以及) 邏輯是否適當的快照。
 
 請考慮位元組陣列，這可能會任意大。 這些可以比較：
 
@@ -44,7 +44,7 @@ EF Core 隨附內建邏輯來進行快照，並比較資料庫中使用的大部
 
 根據預設，EF Core 會針對非索引鍵位元組陣列使用這些方法中的第一個。 也就是說，只會比較參考，而且只有當現有的位元組陣列取代為新的位元組陣列時，才會偵測到變更。 這是一項實用的決策，可避免在執行時複製整個陣列並比較它們的位元組至位元組 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。 這表示，將另一個影像取代為另一個映射的常見案例，會以高效能的方式處理。
 
-另一方面，當使用位元組陣列來表示二進位索引鍵時，參考相等將無法運作，因為 FK 屬性不太可能會設定為與需要比較的 PK 屬性 _相同的實例_ 。 因此，EF Core 對作為索引鍵的位元組陣列使用深層比較;這不太可能會造成嚴重的效能影響，因為二進位金鑰通常很短。
+另一方面，當使用位元組陣列來表示二進位索引鍵時，參考相等將無法運作，因為 FK 屬性不太可能會設定為與需要比較的 PK 屬性 _相同的實例_ 。 因此，EF Core 會對作為索引鍵的位元組陣列使用深層比較;這不太可能會造成嚴重的效能影響，因為二進位金鑰通常很短。
 
 請注意，所選的比較和快照式邏輯必須互相對應：深層比較需要深度快照才能正確運作。
 
@@ -71,7 +71,7 @@ EF Core 隨附內建邏輯來進行快照，並比較資料庫中使用的大部
 
 [!code-csharp[ConfigureImmutableStructProperty](../../../samples/core/Modeling/ValueConversions/MappingImmutableStructProperty.cs?name=ConfigureImmutableStructProperty)]
 
-EF Core 有內建的支援，可產生結構屬性的已編譯、成員比較。 這表示結構不需要覆寫 EF Core 的相等，但基於 [其他原因](/dotnet/csharp/programming-guide/statements-expressions-operators/how-to-define-value-equality-for-a-type)，您可能還是會選擇這麼做。 此外，不需要特殊的快照，因為結構是固定的，而且一律會成員複製。  (這種情況也適用于可變結構，但 [應該要避免變動結構](/dotnet/csharp/write-safe-efficient-code)。 ) 
+EF Core 有內建的支援，可產生結構屬性的已編譯、成員比較。 這表示結構不需要針對 EF Core 覆寫相等，但基於 [其他原因](/dotnet/csharp/programming-guide/statements-expressions-operators/how-to-define-value-equality-for-a-type)，您可能還是會選擇這麼做。 此外，不需要特殊的快照，因為結構是固定的，而且一律會成員複製。  (這種情況也適用于可變結構，但 [應該要避免變動結構](/dotnet/csharp/write-safe-efficient-code)。 ) 
 
 ## <a name="mutable-classes"></a>可變類別
 
@@ -122,7 +122,7 @@ EF Core 有內建的支援，可產生結構屬性的已編譯、成員比較。
 
 ## <a name="overriding-the-default-comparer"></a>覆寫預設比較子
 
-有時 EF Core 所使用的預設比較可能不適當。 例如，根據預設，在 EF Core 中偵測到位元組陣列的變化。 這可以藉由在屬性上設定不同的比較子來覆寫：
+有時 EF Core 所使用的預設比較可能不適當。 例如，在 EF Core 中，預設不會偵測到位元組陣列的變化。 這可以藉由在屬性上設定不同的比較子來覆寫：
 
 [!code-csharp[OverrideComparer](../../../samples/core/Modeling/ValueConversions/OverridingByteArrayComparisons.cs?name=OverrideComparer)]
 

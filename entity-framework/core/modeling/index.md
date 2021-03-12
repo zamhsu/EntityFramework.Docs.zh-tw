@@ -4,21 +4,21 @@ description: 使用 Entity Framework Core 建立及設定模型的概觀
 author: AndriySvyryd
 ms.date: 10/13/2020
 uid: core/modeling/index
-ms.openlocfilehash: 709e2bde60c8e2c31f0a39390624c5d31a9cfa08
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: f8ab985b8f17617ca30e7a528ebaac773e789f27
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129196"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023974"
 ---
 # <a name="creating-and-configuring-a-model"></a>建立和設定模型
 
-Entity Framework 會使用一組慣例，根據您實體類別的圖形建置模型。 您可以指定其他組態來補充及 (或) 覆寫慣例探索到的項目。
+Entity Framework Core 會使用一組慣例，根據實體類別的形狀來建立模型。 您可以指定其他組態來補充及 (或) 覆寫慣例探索到的項目。
 
 本文涵蓋可套用至將目標設為任何資料存放區之模型的組態，以及將目標設為任何關聯式資料庫時可套用的組態。 提供者也可以啟用特定資料存放區專屬的組態。 針對提供者專屬組態的文件，請參閱[資料庫提供者](xref:core/providers/index)一節。
 
 > [!TIP]
-> 您可以在 GitHub 上查看這篇文章的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples) 。
+> 您可以在 GitHub 上查看這篇文章的 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples) 。
 
 ## <a name="use-fluent-api-to-configure-a-model"></a>使用 Fluent API 設定模型
 
@@ -28,7 +28,7 @@ Entity Framework 會使用一組慣例，根據您實體類別的圖形建置模
 
 ### <a name="grouping-configuration"></a>群組設定
 
-若要減少方法的大小， <xref:System.Data.Entity.DbContext.OnModelCreating%2A> 可以將實體類型的所有設定都解壓縮到個別的類別來執行 <xref:Microsoft.EntityFrameworkCore.IEntityTypeConfiguration%601> 。
+若要減少方法的大小， <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A> 可以將實體類型的所有設定都解壓縮到個別的類別來執行 <xref:Microsoft.EntityFrameworkCore.IEntityTypeConfiguration%601> 。
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/EntityTypeConfiguration.cs?Name=IEntityTypeConfiguration)]
 

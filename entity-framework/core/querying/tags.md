@@ -1,15 +1,15 @@
 ---
 title: 查詢標籤 - EF Core
-description: 使用查詢標記協助識別 Entity Framework Core 所發出記錄訊息中的特定查詢
+description: 使用查詢標記協助識別 Entity Framework Core 所發出之記錄訊息中的特定查詢
 author: smitpatel
 ms.date: 11/14/2018
 uid: core/querying/tags
-ms.openlocfilehash: f7cd3558682b1c19e03fc6d04957c7112e870734
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: bd71b8ce1cdb33aae417a90e84861de92224daa3
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92065728"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023766"
 ---
 # <a name="query-tags"></a>查詢標籤
 
@@ -17,7 +17,7 @@ ms.locfileid: "92065728"
 您可使用新的 `TagWith()` 方法，標註 LINQ 查詢：
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/Tags) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/Tags) \(英文\)。
 
 [!code-csharp[Main](../../../samples/core/Querying/Tags/Program.cs#BasicQueryTag)]
 
@@ -54,7 +54,7 @@ ORDER BY [p].[Location].STDistance(@__myLocation_0) DESC
 ```
 
 其也能夠將多行字串作為查詢標籤使用。
-例如︰
+例如：
 
 [!code-csharp[Main](../../../samples/core/Querying/Tags/Program.cs#MultilineQueryTag)]
 

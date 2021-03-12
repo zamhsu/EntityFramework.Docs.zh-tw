@@ -1,22 +1,22 @@
 ---
 title: 使用個別的遷移專案-EF Core
-description: 使用不同的遷移專案來管理具有 Entity Framework Core 的資料庫架構
+description: 使用不同的遷移專案來管理使用 Entity Framework Core 的資料庫架構
 author: bricelam
 ms.date: 11/06/2020
 uid: core/managing-schemas/migrations/projects
-ms.openlocfilehash: 2d1c093e0bb307584e2bf19cb93deec98aa10692
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 9a6b8977f9d7bcdae0fb9aea6966a7eb43e9e7db
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429802"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024143"
 ---
 # <a name="using-a-separate-migrations-project"></a>使用個別的遷移專案
 
 您可能會想要將您的遷移儲存在與包含的專案不同的專案中 `DbContext` 。 您也可以使用這項策略來維護多個遷移集，例如一個用於開發，另一個用於發行到發行的升級。
 
 > [!TIP]
-> 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Schemas/ThreeProjectMigrations)。
+> 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Schemas/ThreeProjectMigrations)。
 
 ## <a name="steps"></a>步驟
 

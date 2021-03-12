@@ -1,22 +1,22 @@
 ---
 title: 儲存相關資料 - EF Core
-description: 在 Entity Framework Core 中儲存相關實體和管理關聯性圖形的相關資訊
+description: 在 Entity Framework Core 中儲存相關實體和管理關聯性圖表的相關資訊
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/related-data
-ms.openlocfilehash: f1cc752587e6a3eb58d070f5f573450b51986f70
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: abb8c0ddd146f38935753a5883dbbf3c1c40e3c9
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129092"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023467"
 ---
 # <a name="saving-related-data"></a>儲存相關資料
 
 儲存隔離的實體之外，您也可以利用模型中所定義的關聯性。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Saving/RelatedData/) \(英文\)。
 
 ## <a name="adding-a-graph-of-new-entities"></a>新增新實體的圖表
 

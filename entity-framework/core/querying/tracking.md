@@ -1,15 +1,15 @@
 ---
-title: 追蹤與 No-Tracking 的查詢-EF Core
+title: 追蹤與 No-Tracking 查詢-EF Core
 description: Entity Framework Core 中追蹤和無追蹤查詢的資訊
 author: smitpatel
 ms.date: 11/09/2020
 uid: core/querying/tracking
-ms.openlocfilehash: cb18125fb3453bb533981afb36480b12727cd6f2
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: a96ed4ebe12446d5d69fdf58046cade0aec6294d
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983413"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023623"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>追蹤與 No-Tracking 的查詢
 
@@ -19,7 +19,7 @@ ms.locfileid: "98983413"
 > 永遠不會追蹤[無索引鍵的實體類型](xref:core/modeling/keyless-entity-types)。 本文提及實體類型時，是指已定義索引鍵的實體類型。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/Tracking) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/Tracking) \(英文\)。
 
 ## <a name="tracking-queries"></a>追蹤查詢
 
@@ -27,7 +27,7 @@ ms.locfileid: "98983413"
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#Tracking)]
 
-當追蹤查詢傳回結果時，EF Core 會檢查實體是否已存在於內容中。 如果 EF Core 找到現有的實體，則會傳回相同的實例。 EF Core 不會以資料庫值覆寫專案中實體屬性的目前值和原始值。 如果在內容中找不到實體，EF Core 將會建立新的實體實例，並將它附加至內容。 查詢結果不包含任何加入至內容的實體，但尚未儲存至資料庫。
+當追蹤查詢傳回結果時，EF Core 會檢查實體是否已存在於內容中。 如果 EF Core 找到現有的實體，則會傳回相同的實例。 EF Core 不會以資料庫值覆寫專案中實體屬性的目前值和原始值。 如果在內容中找不到實體，則 EF Core 會建立新的實體實例，並將它附加至內容。 查詢結果不包含任何加入至內容的實體，但尚未儲存至資料庫。
 
 ## <a name="no-tracking-queries"></a>無追蹤查詢
 
@@ -49,11 +49,11 @@ ms.locfileid: "98983413"
 
 ## <a name="tracking-and-custom-projections"></a>追蹤和自訂投影
 
-即使查詢的結果型別不是實體型別，EF Core 仍會依預設追蹤包含在結果中的實體類型。 下列查詢會傳回匿名類型，並且將在結果集中追蹤 `Blog` 的執行個體。
+即使查詢的結果類型不是實體類型，EF Core 仍會依預設追蹤包含在結果中的實體類型。 下列查詢會傳回匿名類型，並且將在結果集中追蹤 `Blog` 的執行個體。
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#CustomProjection1)]
 
-如果結果集包含來自 LINQ 組合的實體類型，EF Core 將會追蹤這些型別。
+如果結果集包含來自 LINQ 組合的實體類型，則 EF Core 會追蹤這些型別。
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#CustomProjection2)]
 
@@ -61,13 +61,13 @@ ms.locfileid: "98983413"
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#CustomProjection3)]
 
- EF Core 支援在最上層投影中進行用戶端評估。 如果 EF Core 具體化實體實例以進行用戶端評估，則會進行追蹤。 在這裡，因為我們 `blog` 要將實體傳遞給用戶端方法 `StandardizeURL` ，EF Core 也會追蹤 blog 實例。
+ EF Core 支援在最上層投影中進行用戶端評估。 如果 EF Core 具體化實體實例以進行用戶端評估，則會進行追蹤。 在這裡，因為我們 `blog` 要將實體傳遞給用戶端方法 `StandardizeURL` ，所以 EF Core 也會追蹤 blog 實例。
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#ClientProjection)]
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#ClientMethod)]
 
-EF Core 不會追蹤結果中包含的無索引鍵實體實例。 但是 EF Core 會根據上述規則，以索引鍵來追蹤實體類型的所有其他實例。
+EF Core 不會追蹤結果中包含的無索引鍵實體實例。 但 EF Core 會根據上述規則，追蹤實體類型的所有其他實例和索引鍵。
 
 上述一些規則在 EF Core 3.0 之前的運作方式不同。 如需詳細資訊，請參閱 [先前的版本](#previous-versions)。
 
@@ -75,7 +75,7 @@ EF Core 不會追蹤結果中包含的無索引鍵實體實例。 但是 EF Core
 
 在3.0 版之前，EF Core 在追蹤的完成方式上有一些差異。 值得注意的差異如下：
 
-- 如 [ [用戶端與伺服器評估](xref:core/querying/client-eval) ] 頁面中所述，在3.0 版之前的查詢的任何部分中 EF Core 支援的用戶端評估。 用戶端評估會造成實體具體化，而不是結果的一部分。 因此 EF Core 分析結果來偵測要追蹤的內容。此設計有一些差異，如下所示：
+- 如 [ [用戶端與伺服器評估](xref:core/querying/client-eval) ] 頁面中所述，在3.0 版之前的查詢的任何部分中，EF Core 支援用戶端評估。 用戶端評估會造成實體具體化，而不是結果的一部分。 因此 EF Core 會分析結果來偵測要追蹤的內容。此設計有一些差異，如下所示：
   - 投射中的用戶端評估，這會造成具體化但未傳回具體化實體實例。 下列範例不會追蹤 `blog` 實體。
     [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#ClientProjection)]
 
@@ -83,4 +83,4 @@ EF Core 不會追蹤結果中包含的無索引鍵實體實例。 但是 EF Core
     [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#CustomProjection2)]
 
 - 每當查詢結果包含無索引鍵的實體類型時，就會進行整個查詢進行非追蹤。 這表示不會追蹤結果中有索引鍵的實體類型。
-- EF Core 用來在無追蹤查詢中進行身分識別解析。 它使用弱式參考來追蹤已經傳回的實體。 因此，如果結果集包含相同的實體多次，則每次出現時，您都會取得相同的實例。 雖然先前具有相同身分識別的結果超出範圍，且已進行垃圾收集，但 EF Core 會傳回新的實例。
+- EF Core 用來在無追蹤查詢中進行識別解析。 它使用弱式參考來追蹤已經傳回的實體。 因此，如果結果集包含相同的實體多次，則每次出現時，您都會取得相同的實例。 雖然先前具有相同身分識別的結果超出範圍，且已進行垃圾收集，但 EF Core 會傳回新的實例。

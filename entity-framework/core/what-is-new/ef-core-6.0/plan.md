@@ -1,19 +1,19 @@
 ---
 title: 規劃 Entity Framework Core 6。0
-description: 規劃 EF Core 6.0 的主題和功能
+description: 針對 EF Core 6.0 規劃的主題和功能
 author: ajcvickers
 ms.date: 01/12/2021
 uid: core/what-is-new/ef-core-6.0/plan
-ms.openlocfilehash: 612461bc6ad30778baa5c6d10dda5cabac91dcb2
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: d6d4f957a57d8ab6a11232b66a5b2a1238df59a3
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129725"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023480"
 ---
 # <a name="plan-for-entity-framework-core-60"></a>規劃 Entity Framework Core 6。0
 
-如 [規劃](xref:core/what-is-new/release-planning)程式中所述，我們已將專案關係人的輸入收集至 Entity Framework Core (EF Core) 6.0 版的方案。
+如 [規劃](xref:core/what-is-new/release-planning)程式中所述，我們已將專案關係人的輸入收集到 Entity Framework CORE (EF Core) 6.0 版的方案。
 
 與舊版不同的是，此計畫不會嘗試涵蓋6.0 版本的所有工作。 相反地，它會指出我們要在此版本中投資的位置和方式，但在我們收集意見反應並學習發行時，您可以彈性地調整範圍或提取新的工作。
 
@@ -24,23 +24,23 @@ ms.locfileid: "98129725"
 
 ### <a name="version-number-and-release-date"></a>版本號碼和發行日期
 
-EF Core 6.0 是 EF Core 5.0 之後的下一個版本，而且目前排定在11月2021與 .NET 6 同時發行。
+EF core 6.0 是 EF Core 5.0 之後的下一個版本，目前已排程在11月2021與 .NET 6 相同的時間內發行。
 
 ### <a name="supported-platforms"></a>支援的平台
 
-EF Core 6.0 目前以 .NET 5 為目標。 這可能會隨著我們附近的版本而更新為 .NET 6。 EF Core 6.0 不會以任何 .NET Standard 版本為目標;如需詳細資訊，請參閱 [.NET Standard 的未來](https://devblogs.microsoft.com/dotnet/the-future-of-net-standard/)。
+EF Core 6.0 目前以 .NET 5 為目標。 這可能會隨著我們附近的版本而更新為 .NET 6。 EF Core 6.0 不以任何 .NET Standard 版本為目標;如需詳細資訊，請參閱 [.Net Standard 的未來](https://devblogs.microsoft.com/dotnet/the-future-of-net-standard/)。
 
 EF Core 6.0 不會在 .NET Framework 上執行。
 
-EF Core 6.0 將與 .NET 6 保持一致，以 [ (LTS) 版本的長期支援](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)。
+EF Core 6.0 將與 .NET 6 一致 [ (LTS) 版本的長期支援](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)。
 
 ### <a name="breaking-changes"></a>重大變更
 
-EF Core 6.0 將包含少量的 [重大變更](xref:core/what-is-new/ef-core-6.0/breaking-changes) ，因為我們會持續發展 EF Core 和 .net 平臺。 我們的目標是要讓大部分的應用程式在不中斷的情況下進行更新。
+EF Core 6.0 將包含少量的 [重大變更](xref:core/what-is-new/ef-core-6.0/breaking-changes) ，因為我們會持續演進 EF core 和 .net 平臺。 我們的目標是要讓大部分的應用程式在不中斷的情況下進行更新。
 
 ## <a name="themes"></a>佈景主題
 
-下列領域將構成 EF Core 6.0 中的大型投資基礎。
+下欄區域將構成 EF Core 6.0 中的大型投資基礎。
 
 ## <a name="highly-requested-features"></a>高度要求的功能
 
@@ -54,7 +54,7 @@ EF Core 6.0 將包含少量的 [重大變更](xref:core/what-is-new/ef-core-6.0/
 
 T 恤尺寸：大型
 
-時態表支援在 _任何時間點_，查詢儲存在資料表中的資料，而不只是一般資料表所儲存的最新資料。 EF Core 6.0 將允許透過遷移來建立時態表，以及允許透過 LINQ 查詢來存取資料。
+時態表支援在 _任何時間點_，查詢儲存在資料表中的資料，而不只是一般資料表所儲存的最新資料。 EF Core 6.0 可讓您透過遷移來建立時態表，並允許透過 LINQ 查詢來存取資料。
 
 這項工作一開始的範圍是此 [問題的描述](https://github.com/dotnet/efcore/issues/4693#issuecomment-625048974)。 我們可能會根據發行期間的意見反應，提取其他支援。
 
@@ -66,7 +66,7 @@ T 恤尺寸：大型
 
 T 恤尺寸：中
 
-這項功能會介紹可由任何資料庫提供者所執行之 JSON 支援的常見機制和模式。 我們將與此社區合作，將 [Npgsql](https://github.com/npgsql/efcore.pg) 和 [Pomelo MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)的現有執行保持一致，並同時新增 SQL Server 和 SQLite 的支援。
+這項功能會介紹可由任何資料庫提供者所執行之 JSON 支援的常見機制和模式。 我們將與此社區合作，將 [Npgsql](https://github.com/npgsql/efcore.pg) 和 [Pomelo MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)的現有執行保持一致，並同時新增對 SQL Server 和 SQLite 的支援。
 
 ### <a name="columnattributeorder"></a>ColumnAttribute。訂單
 
@@ -76,7 +76,7 @@ T 恤尺寸：中
 
 T 恤尺寸：小型
 
-使用遷移或 **建立資料表** 時，這項功能將允許任意順序的資料行 `EnsureCreated` 。 請注意，變更現有資料表中的資料行順序需要重建資料表，但這不是我們計畫在任何 EF Core 版本中支援的。
+使用遷移或 **建立資料表** 時，這項功能將允許任意順序的資料行 `EnsureCreated` 。 請注意，變更現有資料表中的資料行順序需要重建資料表，但這不是我們計畫在任何 EF Core 版本中支援的功能。
 
 ## <a name="performance"></a>效能
 
@@ -130,7 +130,7 @@ EF Core 會執行大量的執行時間程式碼產生。 這對相依于連結�
 
 ## <a name="migrations-and-deployment"></a>遷移和部署
 
-從 [針對 EF Core 5.0 完成的調查](xref:core/what-is-new/ef-core-5.0/plan#migrations-and-deployment-experience)中，我們計畫為管理遷移和部署資料庫帶來更好的支援。 這包括兩個主要區域：
+從 [針對 EF Core 5.0 完成的調查](xref:core/what-is-new/ef-core-5.0/plan#migrations-and-deployment-experience)中開始，我們計畫改進對管理遷移和部署資料庫的支援。 這包括兩個主要區域：
 
 ### <a name="migrations-bundles"></a>遷移套件組合
 
@@ -164,7 +164,7 @@ T 恤尺寸：大型
 
 T 恤尺寸：大型
 
-除了 EF6 不支援的模式之外，EF Core 5.0 支援 EF6 支援的大部分查詢模式。 針對 EF Core 6.0，我們計畫關閉間距，並讓支援的 EF Core 查詢成為支援 EF6 查詢的真正超集合。 這會藉由調查間距來推動，但已包含 GroupBy 問題，例如，[平移 groupby 後面接著 FirstOrDefault](https://github.com/dotnet/efcore/issues/12088) [，以及](https://github.com/dotnet/efcore/issues/10753)[基本](https://github.com/dotnet/efcore/issues/11624)和未對應類型的原始 SQL 查詢。  
+EF Core 5.0 除了 EF6 不支援的模式之外，還支援 EF6 支援的大部分查詢模式。 針對 EF Core 6.0，我們計畫關閉差距，並讓支援的 EF Core 查詢成為支援的 EF6 查詢的真正超集合。 這會藉由調查間距來推動，但已包含 GroupBy 問題，例如，[平移 groupby 後面接著 FirstOrDefault](https://github.com/dotnet/efcore/issues/12088) [，以及](https://github.com/dotnet/efcore/issues/10753)[基本](https://github.com/dotnet/efcore/issues/11624)和未對應類型的原始 SQL 查詢。  
 
 ### <a name="value-objects"></a>值物件
 
@@ -186,7 +186,7 @@ T 恤尺寸：中
 
 T 恤尺寸：大型
 
-我們會主動收集 EF Core 6.0 中對 Cosmos 提供者所做的改善意見反應。 當我們深入瞭解時，我們將會更新這份檔。 目前，請務必針對 👍 您需要的 Cosmos 功能投票 () 。
+我們會主動收集在 EF Core 6.0 中對 Cosmos 提供者所做的改善意見反應。 當我們深入瞭解時，我們將會更新這份檔。 目前，請務必針對 👍 您需要的 Cosmos 功能投票 () 。
 
 ### <a name="expose-model-building-conventions-to-applications"></a>將模型建立慣例公開給應用程式
 
@@ -206,7 +206,7 @@ EF Core 會使用一組用來從 .NET 類型建立模型的慣例。 這些慣�
 
 T 恤尺寸：大型
 
-我們計畫在 EF Core 6.0 時間範圍內修正所有未處理的 bug。 請注意下列事項：
+我們計畫修正 EF Core 6.0 時間範圍內所有未解決的 bug。 請注意下列事項：
 
 - 這特別適用于標示為「 [類型-bug」的](https://github.com/dotnet/efcore/issues?q=is%3Aissue+label%3Atype-bug)問題。
 - 有一些例外狀況，例如 bug 需要設計變更或新功能才能正常修正。 這些問題將會以標籤標示 `blocked` 。
@@ -231,7 +231,7 @@ T 恤尺寸：大型
 
 ## <a name="net-integration"></a>.NET 整合
 
-EF Core 小組也可以處理數個相關但獨立的技術。 尤其是，我們打算處理：
+EF Core 小組也適用于數個相關但獨立的技術。 尤其是，我們打算處理：
 
 ### <a name="enhancements-to-systemdata"></a>System. 資料的增強功能
 
@@ -265,11 +265,11 @@ T 恤尺寸：中
 
 T 恤尺寸：大型
 
-我們會標注 EF Core 程式碼，以使用 [可為 null 的參考型別](/dotnet/csharp/nullable-references)。
+我們將批註 EF Core 程式碼以使用 [可為 null 的參考型別](/dotnet/csharp/nullable-references)。
 
 ## <a name="experiments-and-investigations"></a>實驗和調查
 
-EF 小組計畫在 EF Core 6.0 時間範圍內投入時間，在兩個領域進行實驗和調查。 這是一個學習程式，因此不會針對6.0 版本規劃任何具體的交付專案。
+EF team 計畫在 EF Core 6.0 時間範圍內進行時間實驗，並在兩方面進行調查。 這是一個學習程式，因此不會針對6.0 版本規劃任何具體的交付專案。
 
 ### <a name="sqlservercore"></a>SqlServer. 核心
 
@@ -279,10 +279,10 @@ EF 小組計畫在 EF Core 6.0 時間範圍內投入時間，在兩個領域進�
 
 T 恤尺寸：進行中
 
-[SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient/) 是功能完整的 ADO.NET 資料庫提供者，適用于 SQL Server。 它支援 .NET Core 和 .NET Framework 上廣泛的 SQL Server 功能。 不過，它也是大型和舊的程式碼基底，其行為之間有許多複雜的互動。 這會讓您難以使用較新的 .NET Core 功能來調查可能的收益。 因此，我們會開始與小組共同作業的實驗，以判斷針對 .NET 進行高度執行的 SQL Server 驅動程式有何潛力。
+[SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient/) 是適用于 SQL Server 的全功能 ADO.NET 資料庫提供者。 它可支援 .NET Core 和 .NET Framework 上廣泛的 SQL Server 功能。 不過，它也是大型和舊的程式碼基底，其行為之間有許多複雜的互動。 這會讓您難以使用較新的 .NET Core 功能來調查可能的收益。 因此，我們會開始與小組共同作業的實驗，以判斷適用于 .NET 的高度執行 SQL Server 驅動程式有何潛力。
 
 > [!IMPORTANT]
-> SqlClient 的投資不會改變。 它會繼續是連接到 SQL Server 與 SQL Azure 的建議方式，不論是否有 EF Core。 它會繼續支援新的 SQL Server 功能。
+> SqlClient 的投資不會改變。 它會繼續是連接到 SQL Server 和 SQL Azure 的建議方式（不論是否使用 EF Core）。 它會繼續支援新推出的 SQL Server 功能。
 
 ### <a name="graphql"></a>GraphQL
 
@@ -298,7 +298,7 @@ T 恤尺寸：進行中
 
 T 恤尺寸：進行中
 
-[DataVerse](/powerapps/maker/data-platform/data-platform-intro) 是以資料行為基礎的資料存放區，專為快速開發商務應用程式所設計。 它會自動處理複雜的資料類型，例如 (Blob 的二進位物件) 而且具有內建的實體和關聯性，例如組織和連絡人。 有一個 SDK，但開發人員可能會受益于讓 EF Core 提供者使用 advanced LINQ 查詢、利用工作單位並擁有一致的資料存取 API。 小組會考慮不同的方法來改善連接至 DataVerse 的 .NET 開發人員體驗。
+[DataVerse](/powerapps/maker/data-platform/data-platform-intro) 是以資料行為基礎的資料存放區，專為快速開發商務應用程式所設計。 它會自動處理複雜的資料類型，例如 (Blob 的二進位物件) 而且具有內建的實體和關聯性，例如組織和連絡人。 有一個 SDK，但開發人員可能會受益于讓 EF Core 提供者使用先進的 LINQ 查詢，利用工作單位並擁有一致的資料存取 API。 小組會考慮不同的方法來改善連接至 DataVerse 的 .NET 開發人員體驗。
 
 ## <a name="below-the-cut-line"></a>低於-剪下行
 

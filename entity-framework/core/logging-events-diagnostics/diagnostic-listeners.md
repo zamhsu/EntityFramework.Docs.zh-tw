@@ -1,20 +1,20 @@
 ---
 title: 使用診斷接聽程式-EF Core
-description: 使用 DiagnosticListener 進行 EF Core 診斷的全球使用量
+description: 使用 DiagnosticListener 進行 EF Core 診斷的全球耗用量
 author: ajcvickers
 ms.date: 10/16/2020
 uid: core/logging-events-diagnostics/diagnostic-listeners
-ms.openlocfilehash: afb80aa8f05f70761e423f58653f681938079858
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 7035acaa6d306e73a0a2c071532ece0d8e9a0a1d
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129261"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024247"
 ---
 # <a name="using-diagnostic-listeners-in-ef-core"></a>使用 EF Core 中的診斷接聽程式
 
 > [!TIP]
-> 您可以從 GitHub [下載本文的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/DiagnosticListeners) 。
+> 您可以從 GitHub [下載本文的範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/DiagnosticListeners) 。
 
 診斷接聽項允許接聽目前 .NET 進程中發生的任何 EF Core 事件。 <xref:System.Diagnostics.DiagnosticListener>類別是[跨 .net 的通用機制](https://github.com/dotnet/runtime/blob/master/src/libraries/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md)的一部分，可從執行中的應用程式取得診斷資訊。
 
@@ -55,7 +55,7 @@ public class DiagnosticObserver : IObserver<DiagnosticListener>
 -->
 [!code-csharp[RegisterDiagnosticListener](../../../samples/core/Miscellaneous/DiagnosticListeners/Program.cs?name=RegisterDiagnosticListener)]
 
-其次，一旦找到 EF Core DiagnosticListener，就會建立新的索引鍵-值觀察者來訂閱實際的 EF Core 事件。 例如：
+其次，一旦找到 EF Core DiagnosticListener 之後，就會建立新的索引鍵-值觀察者來訂閱實際的 EF Core 事件。 例如：
 
 <!--
 public class KeyValueObserver : IObserver<KeyValuePair<string, object>>
@@ -84,7 +84,7 @@ public class KeyValueObserver : IObserver<KeyValuePair<string, object>>
 -->
 [!code-csharp[KeyValueObserver](../../../samples/core/Miscellaneous/DiagnosticListeners/Program.cs?name=KeyValueObserver)]
 
-`OnNext`方法會使用每個 EF Core 事件的索引鍵/值組來呼叫。 金鑰是事件的名稱，可從下列其中一個取得：
+`OnNext`此時間會使用每個 EF Core 事件的索引鍵/值組來呼叫。 金鑰是事件的名稱，可從下列其中一個取得：
 
 * <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId> 適用于所有 EF Core 資料庫提供者的常見事件
 * <xref:Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId> 適用于所有關系資料庫提供者的常見事件
@@ -95,9 +95,9 @@ public class KeyValueObserver : IObserver<KeyValuePair<string, object>>
 例如，上述程式碼會處理 <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.ContextInitialized> 和 <xref:Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.ConnectionOpening> 事件。 針對其中的第一個，裝載是 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ContextInitializedEventData> 。 第二種是 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ConnectionEventData> 。
 
 > [!TIP]
-> ToString 會在每個 EF Core 事件資料類別中覆寫，以產生事件的對等記錄訊息。 例如，呼叫會 `ContextInitializedEventData.ToString` 使用提供者 ' microsoft.entityframeworkcore. Sqlite ' （具有選項： None）來產生 "Entity Framework Core 5.0.0 初始化 ' BlogsCoNtext '。
+> ToString 會在每個 EF Core 事件資料類別中覆寫，以產生事件的對等記錄訊息。 例如，呼叫會 `ContextInitializedEventData.ToString` 使用提供者 ' microsoft.entityframeworkcore. Sqlite ' （具有選項： None）來產生「Entity Framework Core 5.0.0 初始化的 ' BlogsCoNtext '」。
 
-此 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/DiagnosticListeners) 包含一個簡單的主控台應用程式，此應用程式會變更「日誌」資料庫，並印出所遇到的診斷事件。
+此 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/DiagnosticListeners) 包含一個簡單的主控台應用程式，此應用程式會變更「日誌」資料庫，並印出所遇到的診斷事件。
 
 <!--
     public static void Main()

@@ -1,31 +1,31 @@
 ---
-title: 變更外鍵和導覽 EF Core
+title: 變更外鍵和導覽-EF Core
 description: 如何藉由操作外鍵和導覽來變更實體之間的關聯性
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/relationship-changes
-ms.openlocfilehash: b1ebe77ed29291beeef3708b603db026c38bbbec
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 5d3a68a40ed8bd112c19bdaed466071b03e30a66
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983608"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024403"
 ---
 # <a name="changing-foreign-keys-and-navigations"></a>變更外鍵和導覽
 
 ## <a name="overview-of-foreign-keys-and-navigations"></a>外鍵和導覽的總覽
 
-Entity Framework Core (EF Core) 模型中的關聯性，會使用外鍵 (Fk) 來表示。 FK 是由關聯性中的相依或子實體上的一或多個屬性所組成。 當相依/子系上的外鍵屬性值符合 (PK) 主體/父系上的屬性時，此相依/子系實體會與指定的主體/父實體相關聯。
+Entity Framework Core (EF Core) 模型中的關聯性是使用 (Fk) 的外鍵來表示。 FK 是由關聯性中的相依或子實體上的一或多個屬性所組成。 當相依/子系上的外鍵屬性值符合 (PK) 主體/父系上的屬性時，此相依/子系實體會與指定的主體/父實體相關聯。
 
-外鍵是在資料庫中儲存和操作關聯性的好方法，但是在應用程式程式碼中使用多個相關實體時，並不太容易。 因此，大部分的 EF Core 模型也會將「導覽」分層至 FK 表示。 導覽表單 c #/.NET 實體實例之間的參考，這些實體實例可反映將外鍵值與主要或替代索引鍵值相符的關聯。
+外鍵是在資料庫中儲存和操作關聯性的好方法，但是在應用程式程式碼中使用多個相關實體時，並不太容易。 因此，大部分的 EF Core 模型也會在 FK 表示上分層「導覽」。 導覽表單 c #/.NET 實體實例之間的參考，這些實體實例可反映將外鍵值與主要或替代索引鍵值相符的關聯。
 
 導覽可以在關聯性的兩端使用，或完全不使用，只留下 FK 屬性。 FK 屬性可以藉由將其設為 [陰影屬性](xref:core/modeling/shadow-properties)來隱藏。 如需模型關聯性的詳細資訊，請參閱 [關聯](xref:core/modeling/relationships) 性。
 
 > [!TIP]
-> 本檔假設您已瞭解實體狀態以及 EF Core 變更追蹤的基本概念。 如需有關這些主題的詳細資訊，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
+> 本檔假設您已瞭解實體狀態和 EF Core 變更追蹤的基本概念。 如需有關這些主題的詳細資訊，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
 
 > [!TIP]
-> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangingFKsAndNavigations)，以執行並偵測到本檔中的所有程式碼。
+> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/ChangingFKsAndNavigations)，以執行並偵測到本檔中的所有程式碼。
 
 ### <a name="example-model"></a>範例模型
 
@@ -111,7 +111,7 @@ EF Core 會讓導覽與外鍵值保持一致，反之亦然。 也就是說，�
 -->
 [!code-csharp[Relationship_fixup_1](../../../samples/core/ChangeTracking/ChangingFKsAndNavigations/OptionalRelationshipsSamples.cs?name=Relationship_fixup_1)]
 
-針對每個 blog，EF Core 將會先建立 `Blog` 實例。 然後，當每個貼文都從資料庫載入時，就 `Post.Blog` 會將參考導覽設定為指向相關的 blog。 同樣地，post 也會新增至 `Blog.Posts` 集合導覽。 也會發生相同的問題 `BlogAssets` ，但在此情況下，這兩個導覽都是參考。 `Blog.Assets`導覽設定為指向 [資產] 實例，而 `BlogAsserts.Blog` 導覽設定為指向 [blog] 實例。
+針對每個 blog，EF Core 會先建立 `Blog` 實例。 然後，當每個貼文都從資料庫載入時，就 `Post.Blog` 會將參考導覽設定為指向相關的 blog。 同樣地，post 也會新增至 `Blog.Posts` 集合導覽。 也會發生相同的問題 `BlogAssets` ，但在此情況下，這兩個導覽都是參考。 `Blog.Assets`導覽設定為指向 [資產] 實例，而 `BlogAsserts.Blog` 導覽設定為指向 [blog] 實例。
 
 查看此查詢之後的 [變更追蹤器調試](xref:core/change-tracking/debug-views) 程式，會顯示兩個 blog，每個都有一個資產和兩個貼文：
 
@@ -280,7 +280,7 @@ Post {Id: 4} Unchanged
   Tags: []
 ```
 
-這與原始的單一查詢相同，因為已在追蹤實體的情況下 EF Core 修正導覽，即使來自多個不同的查詢也一樣。
+這與原始的單一查詢相同，因為 EF Core 已在追蹤實體的情況下，將導覽視為實體進行修正，即使來自多個不同的查詢也一樣。
 
 > [!NOTE]
 > 修復永遠不會導致從資料庫傳回更多資料。 它只會連接查詢所傳回或已由 DbCoNtext 追蹤的實體。 如需在序列化實體時處理重複項的詳細資訊，請參閱 [EF Core 中的識別解析](xref:core/change-tracking/identity-resolution) 。
@@ -361,9 +361,9 @@ Post {Id: 4} Unchanged
   Tags: []
 ```
 
-`Blog.Posts`.Net Blog 上的導覽現在有三個貼文 (`Posts: [{Id: 1}, {Id: 2}, {Id: 3}]`) 。 同樣地， `Blog.Posts` Visual Studio blog 上的導覽只會有一個 () 的貼文 `Posts: [{Id: 4}]` 。 這是預期的，因為程式碼會明確變更這些集合。
+`Blog.Posts`.Net Blog 上的導覽現在有三個貼文 (`Posts: [{Id: 1}, {Id: 2}, {Id: 3}]`) 。 同樣地， `Blog.Posts` Visual Studio blog 上的導覽只會有一個 post (`Posts: [{Id: 4}]`) 。 這是預期的，因為程式碼會明確變更這些集合。
 
-更有趣的是，即使程式碼未明確變更 `Post.Blog` 流覽，還是已修正為指向 Visual Studio 的 blog (`Blog: {Id: 1}`) 。 此外， `Post.BlogId` 外鍵值也已更新，以符合 .net blog 的主鍵值。 這項變更會變更中的 FK 值，然後在呼叫 SaveChanges 時保存到資料庫中：
+更有趣的是，即使程式碼未明確變更 `Post.Blog` 導覽，還是已修正為指向 Visual Studio blog (`Blog: {Id: 1}`) 。 此外， `Post.BlogId` 外鍵值也已更新，以符合 .net blog 的主鍵值。 這項變更會變更中的 FK 值，然後在呼叫 SaveChanges 時保存到資料庫中：
 
 ```sql
 -- Executed DbCommand (0ms) [Parameters=[@p1='3' (DbType = String), @p0='1' (Nullable = true) (DbType = String)], CommandType='Text', CommandTimeout='30']
@@ -405,7 +405,7 @@ SELECT changes();
 
 ### <a name="adding-to-a-collection-navigation"></a>加入至集合導覽
 
-EF Core 在 [偵測](xref:core/change-tracking/change-detection) 到新的相依/子實體已加入至集合流覽時，會執行下列動作：
+EF Core 會在 [偵測](xref:core/change-tracking/change-detection) 到新的相依/子實體已加入至集合導覽時執行下列動作：
 
 - 如果未追蹤實體，則會進行追蹤。  (實體通常會處於 `Added` 狀態。 但是，如果實體類型設定為使用產生的索引鍵，且已設定主鍵值，則會以狀態追蹤實體 `Unchanged` 。 ) 
 - 如果實體與不同的主體/父系相關聯，則會切斷該關聯性。
@@ -429,7 +429,7 @@ EF Core 在 [偵測](xref:core/change-tracking/change-detection) 到新的相依
 -->
 [!code-csharp[Fixup_for_added_or_deleted_entities_2](../../../samples/core/ChangeTracking/ChangingFKsAndNavigations/OptionalRelationshipsSamples.cs?name=Fixup_for_added_or_deleted_entities_2)]
 
-EF Core 看到貼文已新增至新的 blog，並會自動從第一個 blog 的集合中移除。
+EF Core 會看到貼文已新增至新的 blog，並會自動從第一個 blog 的集合中移除。
 
 ### <a name="removing-from-a-collection-navigation"></a>從集合導覽中移除
 
@@ -477,7 +477,7 @@ Post {Id: 2} Modified
 
 #### <a name="required-relationships"></a>必要關係
 
- (不允許將 FK 值設定為 null，而且通常不可能) 需要的關聯性。 因此，切斷所需的關聯性，表示相依/子系實體必須重設為新主體/父系的父代，或在呼叫 SaveChanges 以避免參考條件約束違規時，從資料庫中移除。 這就是所謂的「刪除孤立」，這是 EF Core 中的預設行為，是必要的關聯性。
+ (不允許將 FK 值設定為 null，而且通常不可能) 需要的關聯性。 因此，切斷所需的關聯性，表示相依/子系實體必須重設為新主體/父系的父代，或在呼叫 SaveChanges 以避免參考條件約束違規時，從資料庫中移除。 這稱為「刪除孤立」，在 EF Core 中，是必要關聯性的預設行為。
 
 例如，讓我們變更需要的 blog 和 post 之間的關聯性，然後執行與上述範例相同的程式碼：
 
@@ -548,7 +548,7 @@ SELECT changes();
 -->
 [!code-csharp[Fixup_for_added_or_deleted_entities_5](../../../samples/core/ChangeTracking/ChangingFKsAndNavigations/RequiredRelationshipsSamples.cs?name=Fixup_for_added_or_deleted_entities_5)]
 
-從第一個集合中移除 post 之後，物件未標示為 `Deleted` 先前範例中的。 相反地，EF Core 會追蹤關聯性是否已中斷， _即使這是必要的關聯_ 性也是一樣。  (FK 值會被 EF Core 視為 null，即使該型別不可為 null 也是一樣。 這就是所謂的「概念 null」。 ) 
+從第一個集合中移除 post 之後，物件未標示為 `Deleted` 先前範例中的。 相反地，EF Core 會追蹤此關聯性， _即使這是必要的關聯_ 性也是一樣。  (FK 值會被 EF Core 視為 null，即使該型別不可為 null 也是一樣。 這就是所謂的「概念 null」。 ) 
 
 ```output
 Post {Id: 3} Modified
@@ -592,7 +592,7 @@ Post {Id: 3} Modified
 
 > InvalidOperationException：實體 ' Blog ' 和 ' Post ' 之間的關聯（具有索引鍵值 ' {BlogId： 1} '）已遭到中斷，但關聯性標示為必要或隱含需要，因為外鍵不可為 null。 如果相依/子系實體在必要的關聯性中斷時應該刪除，請將關聯性設定為使用串聯刪除。
 
-您可以藉由呼叫來隨時強制刪除遺孤以及串聯刪除 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.CascadeChanges?displayProperty=nameWithType> 。 將此項與設定 [刪除孤立時間] 相結合，將可確保不會 `Never` 刪除孤立時間，除非明確指示 EF Core。
+您可以藉由呼叫來隨時強制刪除遺孤以及串聯刪除 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.CascadeChanges?displayProperty=nameWithType> 。 將此項與設定的 [刪除孤立時間] 結合，可 `Never` 確保永遠不會刪除孤立的，除非 EF Core 明確指示您這樣做。
 
 ### <a name="changing-a-reference-navigation"></a>變更參考導覽
 
@@ -752,7 +752,7 @@ Post {Id: 4} Modified
 
 #### <a name="required-relationships"></a>必要關係
 
-必要關聯性的修復行為與選用的關聯性相同，不同之處在于相依/子系實體會標示為， `Deleted` 因為它們不能在沒有主體/父系的情況下存在，而且必須在呼叫 SaveChanges 時從資料庫中移除，以避免參考條件約束例外狀況。 這就是所謂的「串聯刪除」，而且是必要關聯性 EF Core 中的預設行為。 例如，執行與上一個範例相同的程式碼，但使用必要的關聯性會導致在呼叫 SaveChanges 之前的下列偵錯工具視圖：
+必要關聯性的修復行為與選用的關聯性相同，不同之處在于相依/子系實體會標示為， `Deleted` 因為它們不能在沒有主體/父系的情況下存在，而且必須在呼叫 SaveChanges 時從資料庫中移除，以避免參考條件約束例外狀況。 這稱為「串聯刪除」，在 EF Core 中，是必要關聯性的預設行為。 例如，執行與上一個範例相同的程式碼，但使用必要的關聯性會導致在呼叫 SaveChanges 之前的下列偵錯工具視圖：
 
 ```output
 Blog {Id: 2} Deleted
@@ -787,7 +787,7 @@ Post {Id: 4} Deleted
 
 依預設，當父/主體標示為時，就會立即進行串聯刪除 `Deleted` 。 這與刪除孤立的相同，如先前所述。 就像刪除孤立的一樣，在呼叫 SaveChanges 之前（甚至完全停用），您可以藉由適當設定來延遲此進程 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.CascadeDeleteTiming?displayProperty=nameWithType> 。 這與刪除孤立的方式相同，包括刪除主體/父系之後，重新父代/相依項。
 
-您可以藉由呼叫來強制執行串聯刪除，以及刪除孤立的孤立部分 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.CascadeChanges?displayProperty=nameWithType> 。 將此項與設定串聯刪除時間結合，將可確保不會發生串聯刪除， `Never` 除非明確指示 EF Core。
+您可以藉由呼叫來強制執行串聯刪除，以及刪除孤立的孤立部分 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.CascadeChanges?displayProperty=nameWithType> 。 將此項與設定串聯刪除時間結合，可確保永遠不會發生串聯刪除， `Never` 除非明確指示 EF Core 執行此動作。
 
 > [!TIP]
 > 串聯刪除和刪除孤立的緊密相關。 這兩種方式都會在中斷與所需主體/父系的關聯性時，刪除相依/子系實體。 若是串聯刪除，則會發生此切斷，是因為主體/父系本身已被刪除。 若為孤立，主體/父實體仍存在，但不再與相依/子系實體相關。
@@ -798,7 +798,7 @@ EF Core 中的多對多關聯性是使用聯結實體來執行。 多對多關�
 
 ### <a name="how-many-to-many-relationships-work"></a>多對多關聯性的運作方式
 
-請考慮此 EF Core 模型，此模型會使用明確定義的聯結實體類型，在貼文和標記之間建立多對多關聯性：
+請考慮使用明確定義的聯結實體類型，在貼文和標記之間建立多對多關聯性的 EF Core 模型：
 
 <!--
     public class Post
@@ -1050,7 +1050,7 @@ EF Core 支援將其他屬性加入至聯結實體類型。 這就是所謂的�
 -->
 [!code-csharp[Model](../../../samples/core/ChangeTracking/ChangingFKsAndNavigations/ExplicitJoinEntityWithPayloadSamples.cs?name=Model)]
 
-當 EF Core 建立聯結實體實例時，不會設定這個承載屬性。 最常見的處理方式是使用裝載屬性搭配自動產生的值。 例如，在 `TaggedOn` 插入每個新實體時，可以將屬性設定為使用存放區產生的時間戳記：
+當 EF Core 建立聯結實體實例時，不會設定此承載屬性。 最常見的處理方式是使用裝載屬性搭配自動產生的值。 例如，在 `TaggedOn` 插入每個新實體時，可以將屬性設定為使用存放區產生的時間戳記：
 
 <!--
         protected override void OnModelCreating(ModelBuilder modelBuilder)

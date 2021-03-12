@@ -1,16 +1,16 @@
 ---
-title: 使用 WPF 的開始-EF Core
+title: WPF 入門-EF Core
 description: 使用 WPF 搭配 Entity Framework Core 的使用者入門教學課程
 author: jeremylikness
 ms.author: jeliknes
 ms.date: 07/24/2020
 uid: core/get-started/wpf
-ms.openlocfilehash: f183064fafbe2d0e7b8dbdafa921169afc9ffe78
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 8b489207c297f0de5bb23b46c71a302300f538b0
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429919"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024325"
 ---
 # <a name="getting-started-with-wpf"></a>WPF 使用者入門
 
@@ -21,28 +21,28 @@ ms.locfileid: "94429919"
 本逐步解說中的螢幕擷取畫面和程式代碼清單取自 Visual Studio 2019 16.6.5。
 
 > [!TIP]
-> 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/WPF)。
+> 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/WPF)。
 
 ## <a name="pre-requisites"></a>必要條件
 
-您必須在選取 **.net 桌面工作負載** 的情況下安裝 Visual Studio 2019 16.3 或更新版本，才能完成此逐步解說。 如需安裝最新版本 Visual Studio 的詳細資訊，請參閱 [安裝 Visual Studio](/visualstudio/install/install-visual-studio)。
+您必須安裝 Visual Studio 2019 16.3 或更新版本，且已選取 **.net 桌面工作負載** ，才能完成此逐步解說。 如需安裝最新版本 Visual Studio 的詳細資訊，請參閱 [安裝 Visual studio](/visualstudio/install/install-visual-studio)。
 
 ## <a name="create-the-application"></a>建立應用程式
 
 1. 開啟 Visual Studio
 2. 在開始視窗中，選擇 [建立新專案]。
-3. 搜尋 "WPF"，選擇 [ **Wpf 應用程式 ( .Net Core])** 然後選擇 **[下一步]** 。
-4. 在下一個畫面中，為專案命名，例如 **GetStartedWPF** ，然後選擇 [建立] **。**
+3. 搜尋 "WPF"，選擇 [ **Wpf 應用程式 ( .Net Core])** 然後選擇 **[下一步]**。
+4. 在下一個畫面中，為專案命名，例如 **GetStartedWPF**，然後選擇 [建立] **。**
 
 ## <a name="install-the-entity-framework-nuget-packages"></a>安裝 Entity Framework NuGet 套件
 
-1. 以滑鼠右鍵按一下方案，然後選擇 [ **管理解決方案的 NuGet 套件**...]
+1. 以滑鼠右鍵按一下方案，然後選擇 [**管理解決方案的 NuGet 套件**...]
 
     ![Manage NuGet Packages](_static/wpf-tutorial-nuget.jpg)
 
 1. 在搜尋方塊中鍵入 `entityframeworkcore.sqlite`。
 1. 選取 **Microsoft.entityframeworkcore Sqlite** 套件。
-1. 檢查右窗格中的專案，然後按一下 [ **安裝** ]。
+1. 檢查右窗格中的專案，然後按一下 [**安裝**]。
 
     ![Sqlite 封裝](_static/wpf-tutorial-sqlite.jpg)
 
@@ -53,7 +53,7 @@ ms.locfileid: "94429919"
 
 ## <a name="define-a-model"></a>定義模型
 
-在這個逐步解說中，您將使用「code first」來執行模型。 這表示 EF Core 將根據您定義的 c # 類別，建立資料庫資料表和架構。
+在這個逐步解說中，您將使用「code first」來執行模型。 這表示 EF Core 會根據您定義的 c # 類別，建立資料庫資料表和架構。
 
 新增類別。 為其指定名稱 `Product.cs` ，並將其填入如下：
 
@@ -67,7 +67,7 @@ ms.locfileid: "94429919"
 
 [!code-csharp[](../../../samples/core/WPF/GetStartedWPF/GetStartedWPF/Category.cs)]
 
-**Product** 類別的 **Category** 類別和 **category** 屬性上的 **Products** 屬性為導覽屬性。 在 Entity Framework 中，導覽屬性會提供一種方式來導覽兩個實體類型之間的關聯性。
+**Product** 類別的 **Category** 類別和 **category** 屬性上的 **Products** 屬性為導覽屬性。 在 Entity Framework 中，導覽屬性會提供一種方法來流覽兩個實體類型之間的關聯性。
 
 除了定義實體之外，您還必須定義衍生自 DbCoNtext 的類別，並公開 DbSet &lt; TEntity &gt; 屬性。 DbSet &lt; TEntity &gt; 屬性可讓內容知道您想要包含在模型中的類型。
 
@@ -79,10 +79,10 @@ DbCoNtext 衍生類型的實例會在運行時間管理實體物件，包括將�
 
 [!code-csharp[](../../../samples/core/WPF/GetStartedWPF/GetStartedWPF/ProductContext.cs)]
 
-* `DbSet`通知 EF Core 應將哪些 c # 實體對應到資料庫。
+* `DbSet`會通知 EF Core 哪些 c # 實體應該對應到資料庫。
 * 有多種方式可以設定 EF Core `DbContext` 。 您可以在中閱讀相關資訊：設定 [DbCoNtext](xref:core/dbcontext-configuration/index)。
 * 此範例會使用覆 `OnConfiguring` 寫來指定 Sqlite 資料檔案。
-* 此 `UseLazyLoadingProxies` 呼叫會告知 EF Core 要執行消極式載入，因此子實體會在從父系存取時自動載入。
+* `UseLazyLoadingProxies`呼叫會告知 EF Core 執行消極式載入，因此子實體會在從父系存取時自動載入。
 
 按 **CTRL + SHIFT + B** 或流覽至 **組建 &gt; 組建方案** ，以編譯專案。
 
@@ -91,19 +91,19 @@ DbCoNtext 衍生類型的實例會在運行時間管理實體物件，包括將�
 
 ## <a name="lazy-loading"></a>消極式載入
 
-**Product** 類別的 **Category** 類別和 **category** 屬性上的 **Products** 屬性為導覽屬性。 在 Entity Framework Core 中，導覽屬性會提供一種方式來導覽兩個實體類型之間的關聯性。
+**Product** 類別的 **Category** 類別和 **category** 屬性上的 **Products** 屬性為導覽屬性。 在 Entity Framework Core 中，導覽屬性會提供一種方式來流覽兩個實體類型之間的關聯性。
 
-EF Core 讓您可以選擇在第一次存取導覽屬性時，自動從資料庫載入相關實體。 使用這種類型的載入 (稱為消極式載入) ，請注意，當您第一次存取每個導覽屬性時，如果內容中還沒有內容，則會對資料庫執行個別的查詢。
+EF Core 可讓您選擇在第一次存取導覽屬性時，自動從資料庫載入相關實體。 使用這種類型的載入 (稱為消極式載入) ，請注意，當您第一次存取每個導覽屬性時，如果內容中還沒有內容，則會對資料庫執行個別的查詢。
 
-使用「單純的 c # 物件」 (POCO) 實體類型時，EF Core 會在執行時間建立衍生的 proxy 類型實例，然後覆寫類別中的虛擬屬性以新增載入攔截，以達成消極式載入。 若要取得相關物件的消極式載入，您必須在 Visual Basic) 中將導覽屬性 getter 宣告為 **public** 和 **virtual** (可覆 **寫** ，而且您的類別不得在 Visual Basic) 中 **密封** ( **NotOverridable** 。 使用 Database First 時，導覽屬性會自動設為虛擬，以啟用消極式載入。
+使用「單純的 c # 物件」 (POCO) 實體類型時，EF Core 會在執行時間建立衍生的 proxy 類型實例，然後覆寫類別中的虛擬屬性以新增載入攔截，以達成消極式載入。 若要取得相關物件的消極式載入，您必須在 Visual Basic) 中將導覽屬性 getter 宣告為 **public** 和 **virtual** (可覆 **寫** ，而且您的類別不能在 Visual basic) 中 **密封** (**NotOverridable** 。 使用 Database First 時，導覽屬性會自動設為虛擬，以啟用消極式載入。
 
 ## <a name="bind-object-to-controls"></a>將物件系結至控制項
 
 將模型中定義的類別加入為這個 WPF 應用程式的資料來源。
 
-1. 按兩下方案總管中的 [ **MainWindow** ] 以開啟主要表單
+1. 按兩下 [方案 **MainWindow** ] 中的 [xaml] 以開啟主表單
 1. 選擇 [ **xaml** ] 索引標籤以編輯 xaml。
-1. 緊接在開頭 `Window` 標記之後，新增下列來源以連接到 EF Core 實體。
+1. 緊接在開頭 `Window` 標記之後，新增下列來源以連接至 EF Core 實體。
 
     [!code-xaml[](../../../samples/core/WPF/GetStartedWPF/GetStartedWPF/MainWindow.xaml?range=1-13&highlight=9-13)]
 
@@ -152,7 +152,7 @@ EF Core 讓您可以選擇在第一次存取導覽屬性時，自動從資料庫
 
 ## <a name="test-the-wpf-application"></a>測試 WPF 應用程式
 
-按下 **F5** 或選擇 [ **Debug &gt; 開始調試** 程式]，以編譯並執行應用程式。 應該使用名為的檔案自動建立資料庫 `products.db` 。 輸入類別名稱，然後按 enter 鍵，然後將產品新增至下方方格。 按一下 [儲存]，並以資料庫提供的識別碼監看方格重新整理。 將資料列反白顯示並按 **Delete** 以移除資料列。 當您按一下 [ **儲存** ] 時，就會刪除實體。
+按下 **F5** 或選擇 [ **Debug &gt; 開始調試** 程式]，以編譯並執行應用程式。 應該使用名為的檔案自動建立資料庫 `products.db` 。 輸入類別名稱，然後按 enter 鍵，然後將產品新增至下方方格。 按一下 [儲存]，並以資料庫提供的識別碼監看方格重新整理。 將資料列反白顯示並按 **Delete** 以移除資料列。 當您按一下 [ **儲存**] 時，就會刪除實體。
 
 ![正在執行應用程式](_static/wpf-tutorial-app.jpg)
 

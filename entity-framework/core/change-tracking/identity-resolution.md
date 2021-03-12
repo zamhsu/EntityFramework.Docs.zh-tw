@@ -4,22 +4,22 @@ description: 使用主鍵值將多個實體實例解析成單一實例
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/identity-resolution
-ms.openlocfilehash: d4c8f935c8d0ab92eaecd8fc7a4156bd824713d4
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: 24b2fbeea5f740dd2830676bfe8a49720c2b86a9
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543610"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024455"
 ---
 # <a name="identity-resolution-in-ef-core"></a>EF Core 中的身分識別解析
 
 <xref:Microsoft.EntityFrameworkCore.DbContext>只能追蹤一個具有任何指定主鍵值的實體實例。 這表示多個具有相同索引鍵值的實體實例，必須解析為單一實例。 這稱為「識別解析」。 身分識別解析可確保 Entity Framework Core (EF Core) 正在追蹤一致的圖形，而實體的關聯性或屬性值沒有任何多義性。
 
 > [!TIP]
-> 本檔假設您已瞭解實體狀態以及 EF Core 變更追蹤的基本概念。 如需有關這些主題的詳細資訊，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
+> 本檔假設您已瞭解實體狀態和 EF Core 變更追蹤的基本概念。 如需有關這些主題的詳細資訊，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
 
 > [!TIP]
-> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/IdentityResolutionInEFCore)，以執行並偵測到本檔中的所有程式碼。
+> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/IdentityResolutionInEFCore)，以執行並偵測到本檔中的所有程式碼。
 
 ## <a name="introduction"></a>簡介
 
@@ -62,7 +62,7 @@ EF Core 需要單一實例，因為：
 
 ## <a name="updating-an-entity"></a>更新實體
 
-有幾種不同的方法可以用新的值更新實體，如 EF Core 和[明確追蹤實體](xref:core/change-tracking/explicit-tracking)中的[變更追蹤](xref:core/change-tracking/index)所述。 這些方法在識別解析的內容中如下所述。 要注意的一個重點是，每個方法都使用查詢或呼叫其中一個或的呼叫 `Update` `Attach` ，但 **_永遠不會同時使用這兩_** 種方法。
+有幾種不同的方法可以用新的值更新實體，如 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 和 [明確追蹤實體](xref:core/change-tracking/explicit-tracking)中所述。 這些方法在識別解析的內容中如下所述。 要注意的一個重點是，每個方法都使用查詢或呼叫其中一個或的呼叫 `Update` `Attach` ，但 **_永遠不會同時使用這兩_** 種方法。
 
 ### <a name="call-update"></a>呼叫更新
 
@@ -196,7 +196,7 @@ EF Core 有一些協助程式來傳送屬性值（如下所示）。 例如， <
 
 ## <a name="attaching-a-serialized-graph"></a>附加序列化圖形
 
-EF Core 適用于透過外鍵和導覽屬性連接的實體圖形，如 [變更外鍵和](xref:core/change-tracking/relationship-changes)導覽所述。 如果這些圖形是使用 EF Core （例如，從 JSON 檔案建立）之外建立的，則它們可以有相同實體的多個實例。 這些重複專案必須先解析成單一實例，然後才能追蹤圖形。
+EF Core 適用于透過外鍵和導覽屬性連接的實體圖形，如 [變更外鍵和](xref:core/change-tracking/relationship-changes)導覽所述。 如果這些圖形是在 EF Core 之外建立，例如，從 JSON 檔案，則它們可以有相同實體的多個實例。 這些重複專案必須先解析成單一實例，然後才能追蹤圖形。
 
 ### <a name="graphs-with-no-duplicates"></a>沒有重複專案的圖表
 
@@ -610,17 +610,17 @@ Discarding duplicate EntityType: Post entity with key value 4
 
 ## <a name="overusing-a-single-dbcontext-instance"></a>過度使用單一 DbCoNtext 實例
 
-<xref:Microsoft.EntityFrameworkCore.DbContext> 的設計目的是代表短期的工作單位（如 [DbCoNtext 初始化和](xref:core/dbcontext-configuration/index)設定所述），並在 [EF Core 的變更追蹤](xref:core/change-tracking/index)中詳細說明。 未遵循此指引可讓您輕鬆地遇到嘗試追蹤相同實體的多個實例的情況。 常見範例包括：
+<xref:Microsoft.EntityFrameworkCore.DbContext> 的設計目的是代表短期的工作單位（如 [DbCoNtext 初始化和](xref:core/dbcontext-configuration/index)設定中所述），以及 [EF Core 變更追蹤](xref:core/change-tracking/index)中的詳細說明。 未遵循此指引可讓您輕鬆地遇到嘗試追蹤相同實體的多個實例的情況。 常見範例包括：
 
 - 使用相同的 DbCoNtext 實例來設定測試狀態，然後執行測試。 這通常會導致 DbCoNtext 仍在測試設定中追蹤一個實體實例，然後嘗試在適當的測試中附加新的實例。 相反地，請使用不同的 DbCoNtext 實例來設定測試狀態和適當的測試程式碼。
 - 使用存放庫中的共用 DbCoNtext 實例或類似的程式碼。 相反地，請確定您的存放庫針對每個工作單位使用單一 DbCoNtext 實例。
 
 ## <a name="identity-resolution-and-queries"></a>身分識別解析和查詢
 
-當從查詢追蹤實體時，會自動進行識別解析。 這表示，如果已經追蹤具有指定之索引鍵值的實體實例，則會使用這個現有的追蹤實例，而不是建立新的實例。 這有一個重要的結果：如果資料庫中的資料已變更，則不會反映在查詢的結果中。 這是將新的 DbCoNtext 實例用於每個工作單位的好理由，如 [DbCoNtext 初始化和](xref:core/dbcontext-configuration/index)設定中所述，以及 [EF Core 的變更追蹤](xref:core/change-tracking/index)中的詳細說明。
+當從查詢追蹤實體時，會自動進行識別解析。 這表示，如果已經追蹤具有指定之索引鍵值的實體實例，則會使用這個現有的追蹤實例，而不是建立新的實例。 這有一個重要的結果：如果資料庫中的資料已變更，則不會反映在查詢的結果中。 這是將新的 DbCoNtext 實例用於每個工作單位（如 [DbCoNtext 初始化和](xref:core/dbcontext-configuration/index)設定，以及 [EF Core 中的變更追蹤](xref:core/change-tracking/index)中的詳細說明）的好理由。
 
 > [!IMPORTANT]
-> 請務必瞭解，EF Core 一律針對資料庫執行 DbSet 的 LINQ 查詢，而且只會根據資料庫中的內容傳回結果。 不過，對於追蹤查詢，如果傳回的實體已被追蹤，則會使用追蹤的實例，而不是從資料庫中的資料建立實例。
+> 請務必瞭解 EF Core 一律會針對資料庫在 DbSet 上執行 LINQ 查詢，而且只會根據資料庫中的內容傳回結果。 不過，對於追蹤查詢，如果傳回的實體已被追蹤，則會使用追蹤的實例，而不是從資料庫中的資料建立實例。
 
 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.Reload> 或者， <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.GetDatabaseValues> 當追蹤的實體需要以資料庫中的最新資料重新整理時，也可以使用。 如需詳細資訊，請參閱 [存取追蹤的實體](xref:core/change-tracking/entity-entries) 。
 
@@ -631,11 +631,11 @@ Discarding duplicate EntityType: Post entity with key value 4
 
 無追蹤查詢不會執行身分識別解析，因為這樣會影響從查詢串流處理大量實體的效能。 這是因為身分識別解析需要追蹤每個傳回的實例，如此就可以使用它，而不是稍後建立重複的實例。
 
-從 EF Core 5.0 開始，可以強制不追蹤查詢使用來執行識別解析 <xref:Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.AsNoTrackingWithIdentityResolution%60%601(System.Linq.IQueryable{%60%600})> 。 然後，查詢會追蹤傳回的實例 (而不是以正常方式進行追蹤) 並確保查詢結果中不會建立重複的專案。
+從 EF Core 5.0 開始，可以強制執行不追蹤查詢，以使用來執行識別解析 <xref:Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.AsNoTrackingWithIdentityResolution%60%601(System.Linq.IQueryable{%60%600})> 。 然後，查詢會追蹤傳回的實例 (而不是以正常方式進行追蹤) 並確保查詢結果中不會建立重複的專案。
 
 ## <a name="overriding-object-equality"></a>覆寫物件相等
 
-在比較實體實例時，EF Core 會使用 [參考相等](/dotnet/csharp/programming-guide/statements-expressions-operators/equality-comparisons) 。 即使實體類型覆寫 <xref:System.Object.Equals(System.Object)?displayProperty=nameWithType> 或變更物件相等，還是會發生這種情況。 不過，有一個地方覆寫相等可能會影響 EF Core 行為：當集合導覽使用覆寫的相等而非參考相等時，也會將多個實例報告為相同。
+比較實體實例時，EF Core 會使用 [參考相等](/dotnet/csharp/programming-guide/statements-expressions-operators/equality-comparisons) 。 即使實體類型覆寫 <xref:System.Object.Equals(System.Object)?displayProperty=nameWithType> 或變更物件相等，還是會發生這種情況。 不過，有一個地方覆寫相等可能會影響 EF Core 行為：當集合導覽使用覆寫的相等，而不是參考相等時，則會將多個實例報告為相同。
 
 因此，建議您避免覆寫實體相等。 如果使用，請務必建立強制參考相等的集合導覽。 例如，建立使用參考相等的相等比較子：
 

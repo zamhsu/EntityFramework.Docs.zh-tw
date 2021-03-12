@@ -1,31 +1,31 @@
 ---
 title: 其他變更追蹤功能-EF Core
-description: 涉及 EF Core 變更追蹤的其他功能和案例
+description: 牽涉到 EF Core 變更追蹤的其他功能和案例
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/miscellaneous
-ms.openlocfilehash: 9eb3186f4eef300e4824dc86700497444ece4a2c
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: 63d96227b6862e920d900a5cc3f1f85d7c6d85ac
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543415"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024429"
 ---
 # <a name="additional-change-tracking-features"></a>其他變更追蹤功能
 
 本檔涵蓋涉及變更追蹤的其他功能和案例。
 
 > [!TIP]
-> 本檔假設您已瞭解實體狀態以及 EF Core 變更追蹤的基本概念。 如需有關這些主題的詳細資訊，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
+> 本檔假設您已瞭解實體狀態和 EF Core 變更追蹤的基本概念。 如需有關這些主題的詳細資訊，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
 
 > [!TIP]
-> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/AdditionalChangeTrackingFeatures)，以執行並偵測到本檔中的所有程式碼。
+> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/AdditionalChangeTrackingFeatures)，以執行並偵測到本檔中的所有程式碼。
 
 ## <a name="add-versus-addasync"></a>`Add` 與 `AddAsync`
 
-Entity Framework Core (EF Core) 會在使用該方法時提供非同步方法，可能會導致資料庫互動。 也提供同步方法，以避免使用不支援高效能非同步存取的資料庫時的額外負荷。
+Entity Framework Core (EF Core) 提供非同步方法，只要使用該方法可能會導致資料庫互動。 也提供同步方法，以避免使用不支援高效能非同步存取的資料庫時的額外負荷。
 
-<xref:Microsoft.EntityFrameworkCore.DbContext.Add%2A?displayProperty=nameWithType> 而且 <xref:Microsoft.EntityFrameworkCore.DbSet%601.Add%2A?displayProperty=nameWithType> 通常不會存取資料庫，因為這些方法原本就是開始追蹤實體。 不過，某些形式的值產生 _可能會_ 存取資料庫，以便產生索引鍵值。 唯一的值產生器會執行這項工作並隨附于 EF Core <xref:Microsoft.EntityFrameworkCore.ValueGeneration.HiLoValueGenerator%601> 。 使用這個產生器並不常見;預設不會設定它。 這表示大部分的應用程式都應該使用 `Add` ，而不是 `AddAsync` 。
+<xref:Microsoft.EntityFrameworkCore.DbContext.Add%2A?displayProperty=nameWithType> 而且 <xref:Microsoft.EntityFrameworkCore.DbSet%601.Add%2A?displayProperty=nameWithType> 通常不會存取資料庫，因為這些方法原本就是開始追蹤實體。 不過，某些形式的值產生 _可能會_ 存取資料庫，以便產生索引鍵值。 執行這項工作並隨附于 EF Core 的唯一值產生器是 <xref:Microsoft.EntityFrameworkCore.ValueGeneration.HiLoValueGenerator%601> 。 使用這個產生器並不常見;預設不會設定它。 這表示大部分的應用程式都應該使用 `Add` ，而不是 `AddAsync` 。
 
 和、和等其他類似的方法並 `Update` `Attach` 沒有非同步多載 `Remove` ，因為它們絕對不會產生新的索引鍵值，因此永遠不需要存取資料庫。
 
@@ -40,9 +40,9 @@ Entity Framework Core (EF Core) 會在使用該方法時提供非同步方法，
 
 ## <a name="dbcontext-versus-dbset-methods"></a>DbCoNtext 和 DbSet 方法
 
-許多方法（包括 `Add` 、 `Update` 、 `Attach` 和 `Remove` ）都有 <xref:Microsoft.EntityFrameworkCore.DbSet%601> 和 <xref:Microsoft.EntityFrameworkCore.DbContext> 的實作為。 這些方法對一般實體類型具有 _完全相同的行為_ 。 這是因為實體的 CLR 型別會對應到 EF Core 模型中的單一實體類型。 因此，CLR 型別會完整定義實體放在模型中的位置，因此可以隱含地判斷要使用的 DbSet。
+許多方法（包括 `Add` 、 `Update` 、 `Attach` 和 `Remove` ）都有 <xref:Microsoft.EntityFrameworkCore.DbSet%601> 和 <xref:Microsoft.EntityFrameworkCore.DbContext> 的實作為。 這些方法對一般實體類型具有 _完全相同的行為_ 。 這是因為實體的 CLR 型別會對應至 EF Core 模型中的單一實體類型。 因此，CLR 型別會完整定義實體放在模型中的位置，因此可以隱含地判斷要使用的 DbSet。
 
-這項規則的例外狀況是，使用在 EF Core 5.0 引進的共用類型實體類型時，主要是針對多對多聯結實體。 使用共用類型實體類型時，必須先針對正在使用的 EF Core 模型類型建立 DbSet。 `Add` `Update` `Attach` 然後，可以在 DbSet 上使用、、和等方法， `Remove` 而不會因為使用哪一個 EF Core 模型類型而產生任何混淆。
+這項規則的例外狀況是在使用 EF Core 5.0 引進的共用類型實體類型時，主要是針對多對多的聯結實體。 使用共用類型實體類型時，必須先針對正在使用的 EF Core 模型類型建立 DbSet。 `Add` `Update` `Attach` 然後，可以在 DbSet 上使用、、和等方法， `Remove` 而不會對使用的 EF Core 模型類型造成任何混淆。
 
 針對多對多關聯性中的聯結實體，預設會使用共用類型的實體類型。 您也可以明確地設定共用類型實體類型，以便在多對多關聯性中使用。 例如，下列程式碼會設定 `Dictionary<string, int>` 為聯結實體類型：
 
@@ -100,20 +100,20 @@ Entity Framework Core (EF Core) 會在使用該方法時提供非同步方法，
 
 從 EF Core 3.0 開始，實體屬性的存取預設會使用屬性的支援欄位。 這是有效率的，可避免觸發呼叫屬性 getter 和 setter 的副作用。 例如，這是消極式載入能夠避免觸發無限迴圈的方式。 如需有關在模型中設定支援欄位的詳細資訊，請參閱 [支援欄位](xref:core/modeling/backing-field) 。
 
-有時候在修改屬性值時，EF Core 可能會產生副作用。 例如，將資料系結至實體時，設定屬性可能會產生通知至 U.I。 直接設定欄位時不會發生這種情況。 您可以藉由變更的來達成此目的 <xref:Microsoft.EntityFrameworkCore.PropertyAccessMode> ：
+有時候 EF Core 在修改屬性值時，可能需要產生副作用。 例如，將資料系結至實體時，設定屬性可能會產生通知至 U.I。 直接設定欄位時不會發生這種情況。 您可以藉由變更的來達成此目的 <xref:Microsoft.EntityFrameworkCore.PropertyAccessMode> ：
 
 - 模型中的所有實體類型（使用 <xref:Microsoft.EntityFrameworkCore.ModelBuilder.UsePropertyAccessMode%2A?displayProperty=nameWithType>
 - 特定實體類型的所有屬性和導覽（使用 <xref:Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder%601.UsePropertyAccessMode%2A?displayProperty=nameWithType>
 - 使用的特定屬性 <xref:Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder.UsePropertyAccessMode%2A?displayProperty=nameWithType>
 - 使用的特定流覽 <xref:Microsoft.EntityFrameworkCore.Metadata.Builders.NavigationBuilder.UsePropertyAccessMode%2A?displayProperty=nameWithType>
 
-屬性存取模式 `Field` ， `PreferField` 會導致 EF Core 透過其支援欄位來存取屬性值。 同樣 `Property` 地，和 `PreferProperty` 會導致 EF Core 透過其 getter 和 setter 存取屬性值。
+屬性存取模式 `Field` ， `PreferField` 會導致 EF Core 透過其支援欄位來存取屬性值。 同樣 `Property` 地，和 `PreferProperty` 將會導致 EF Core 透過其 getter 和 setter 存取屬性值。
 
-如果 `Field` 使用或， `Property` 而且 EF Core 無法分別透過 field 或 property getter/setter 存取值，則 EF Core 會擲回例外狀況。 這可確保當您認為 EF Core 一律使用欄位/屬性存取。
+如果 `Field` 使用或， `Property` 而且 ef core 無法分別透過 field 或 property getter/setter 存取值，ef core 將會擲回例外狀況。 這可確保當您認為 EF Core 時，一律會使用欄位/屬性存取。
 
-另一方面， `PreferField` `PreferProperty` 如果無法使用慣用的存取，和模式將會切換回使用屬性或支援欄位。 `PreferField` 是 EF Core 3.0 的預設值。 這表示 EF Core 會在有欄位時使用欄位，但如果屬性必須透過 getter 或 setter 來存取，則不會失敗。
+另一方面， `PreferField` `PreferProperty` 如果無法使用慣用的存取，和模式將會切換回使用屬性或支援欄位。 `PreferField` 是 EF Core 3.0 的預設值。 這表示 EF Core 會盡可能使用欄位，但如果屬性必須透過 getter 或 setter 來存取，則不會失敗。
 
-`FieldDuringConstruction` 而且 `PreferFieldDuringConstruction` _只有在建立實體實例時，才_ 將 EF Core 設定為使用支援欄位。 這可讓您在沒有 getter 和 setter 副作用的情況下執行查詢，而 EF Core 稍後的屬性變更將會造成這些副作用。 `PreferFieldDuringConstruction` 是 EF Core 3.0 之前的預設值。
+`FieldDuringConstruction` 並 `PreferFieldDuringConstruction` 設定 EF Core _只在建立實體實例時_ 使用支援欄位。 這可讓您在沒有 getter 和 setter 副作用的情況下執行查詢，而 EF Core 稍後的屬性變更將會造成這些副作用。 `PreferFieldDuringConstruction` 是 EF Core 3.0 之前的預設值。
 
 下表摘要說明不同的屬性存取模式：
 
@@ -128,7 +128,7 @@ Entity Framework Core (EF Core) 會在使用該方法時提供非同步方法，
 
 ## <a name="temporary-values"></a>暫存值
 
-當呼叫 SaveChanges 時，當您追蹤將擁有資料庫所產生之實際索引鍵值的新實體時，EF Core 會建立暫存索引鍵值。 如需如何使用這些暫存值的總覽，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
+當呼叫 SaveChanges 時，EF Core 會在追蹤將擁有資料庫所產生之實際索引鍵值的新實體時，建立暫存索引鍵值。 如需如何使用這些暫存值的總覽，請參閱 [EF Core 中的變更追蹤](xref:core/change-tracking/index) 。
 
 ### <a name="accessing-temporary-values"></a>存取臨時值
 
@@ -265,7 +265,7 @@ Post {Id: 2} Unchanged
 
 ## <a name="working-with-default-values"></a>使用預設值
 
-當呼叫時，EF Core 允許屬性從資料庫取得其預設值 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。 如同產生的索引鍵值，EF Core 只有在未明確設定任何值的情況下，才會使用資料庫中的預設值。 例如，請考慮下列實體類型：
+EF Core 可讓屬性在呼叫時，從資料庫取得其預設值 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。 如同產生的索引鍵值，EF Core 只會在未明確設定任何值的情況下，從資料庫使用預設值。 例如，請考慮下列實體類型：
 
 <!--
     public class Token
@@ -316,11 +316,11 @@ Token {Id: 2} Unchanged
 ```
 
 > [!NOTE]
-> 若要使用資料庫預設值，資料庫資料行必須已設定預設值條件約束。 這是在使用或時 EF Core 遷移自動 <xref:Microsoft.EntityFrameworkCore.RelationalPropertyBuilderExtensions.HasDefaultValueSql%2A> 完成 <xref:Microsoft.EntityFrameworkCore.RelationalPropertyBuilderExtensions.HasDefaultValue%2A> 。 請勿使用 EF Core 的遷移時，請務必以其他方式在資料行上建立預設條件約束。
+> 若要使用資料庫預設值，資料庫資料行必須已設定預設值條件約束。 使用或時，EF Core 遷移會自動完成這項工作 <xref:Microsoft.EntityFrameworkCore.RelationalPropertyBuilderExtensions.HasDefaultValueSql%2A> <xref:Microsoft.EntityFrameworkCore.RelationalPropertyBuilderExtensions.HasDefaultValue%2A> 。 在不使用 EF Core 遷移的情況下，請務必以其他方式在資料行上建立預設條件約束。
 
 ### <a name="using-nullable-properties"></a>使用可為 null 的屬性
 
-EF Core 可以藉由比較屬性值與該類型的 CLR 預設值，判斷是否已設定屬性。 這在大多數情況下都能順利運作，但表示 CLR 預設值無法明確地插入資料庫中。 例如，假設有一個具有整數屬性的實體：
+EF Core 可以比較屬性值與該類型的 CLR 預設值，以判斷是否已設定屬性。 這在大多數情況下都能順利運作，但表示 CLR 預設值無法明確地插入資料庫中。 例如，假設有一個具有整數屬性的實體：
 
 <!--
 public class Foo1
@@ -341,7 +341,7 @@ public class Foo1
 -->
 [!code-csharp[OnModelCreating_Foo1](../../../samples/core/ChangeTracking/AdditionalChangeTrackingFeatures/DefaultValueSamples.cs?name=OnModelCreating_Foo1)]
 
-其目的是只要未設定明確的值，就會使用預設值-1。 但是，將值設定為 0 () 的 CLR 預設值，無法區分 EF Core 不會設定任何值，這表示不可能為這個屬性插入0。 例如：
+其目的是只要未設定明確的值，就會使用預設值-1。 不過，將值設定為 0 (整數的 CLR 預設值) 與 EF Core 無關，不會設定任何值，這表示不可能為這個屬性插入0。 例如：
 
 <!--
         using var context = new BlogsContext();
@@ -502,7 +502,7 @@ WHERE changes() = 1 AND "rowid" = last_insert_rowid();
 
 ### <a name="schema-defaults-only"></a>僅限架構預設值
 
-有時候，在 EF Core 遷移所建立的資料庫架構中使用預設值，而不 EF Core 使用這些值來進行插入，會很有説明。 您可以藉由設定屬性來達成此目的， <xref:Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder.ValueGeneratedNever%2A?displayProperty=nameWithType> 例如：
+有時候，在 EF Core 遷移所建立的資料庫架構中使用預設值，而沒有 EF Core 使用這些值來進行插入，會很有用。 您可以藉由設定屬性來達成此目的， <xref:Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder.ValueGeneratedNever%2A?displayProperty=nameWithType> 例如：
 
 <!--
         modelBuilder

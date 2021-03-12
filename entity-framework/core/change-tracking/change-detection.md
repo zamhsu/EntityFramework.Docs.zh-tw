@@ -4,31 +4,31 @@ description: 使用 DetectChanges 或通知來偵測屬性和關聯性變更
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/change-detection
-ms.openlocfilehash: 39dc66a3ba74be89d3e470cfe788a357401965d1
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: fae8bdb1a89478531535b377f4ba8b02d1c848f4
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129682"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023181"
 ---
 # <a name="change-detection-and-notifications"></a>變更偵測和通知
 
-每個 <xref:Microsoft.EntityFrameworkCore.DbContext> 實例都會追蹤對實體所做的變更。 接著，這些追蹤的實體會在呼叫時驅動資料庫的變更 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。 這涵蓋在 [EF Core 的變更追蹤](xref:core/change-tracking/index)中，本檔假設您瞭解 Entity Framework Core (EF Core) 變更追蹤的實體狀態和基本概念。
+每個 <xref:Microsoft.EntityFrameworkCore.DbContext> 實例都會追蹤對實體所做的變更。 接著，這些追蹤的實體會在呼叫時驅動資料庫的變更 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 。 這涵蓋在 [Ef core 的變更追蹤](xref:core/change-tracking/index)中，本檔假設實體狀態和 Entity Framework CORE (ef Core) 變更追蹤的基本概念。
 
 追蹤屬性和關聯性變更需要 DbCoNtext 能夠偵測這些變更。 本檔涵蓋此偵測的發生方式，以及如何使用屬性通知或變更追蹤 proxy 來強制立即偵測變更。
 
 > [!TIP]
-> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeDetectionAndNotifications)，以執行並偵測到本檔中的所有程式碼。
+> 您可以 [從 GitHub 下載範例程式碼](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/ChangeDetectionAndNotifications)，以執行並偵測到本檔中的所有程式碼。
 
 ## <a name="snapshot-change-tracking"></a>快照集變更追蹤
 
-根據預設，EF Core 會在第一次由 DbCoNtext 實例追蹤時，建立每個實體屬性值的快照集。 然後，此快照中儲存的值會與實體的目前值進行比較，以判斷哪些屬性值已變更。
+根據預設，EF Core 會在 DbCoNtext 實例第一次追蹤時，建立每個實體屬性值的快照集。 然後，此快照中儲存的值會與實體的目前值進行比較，以判斷哪些屬性值已變更。
 
 當呼叫 SaveChanges 以確保在將更新傳送至資料庫之前偵測到所有變更的值時，就會發生這項變更的偵測。 不過，變更的偵測也會在其他時間發生，以確保應用程式能夠使用最新的追蹤資訊。 您可以藉由呼叫來隨時強制偵測變更 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.DetectChanges?displayProperty=nameWithType> 。
 
 ### <a name="when-change-detection-is-needed"></a>需要變更偵測時
 
-在未 _使用 EF Core 進行這項變更的情況下_ 變更屬性或導覽時，需要進行變更的偵測。 例如，請考慮載入 blog 和 post，然後對這些實體進行變更：
+_若未使用 EF Core 來進行這項變更_，就需要在變更屬性或導覽時偵測變更。 例如，請考慮載入 blog 和 post，然後對這些實體進行變更：
 
 <!--
         using var context = new BlogsContext();
@@ -102,7 +102,7 @@ Post {Id: 2} Unchanged
 
 現在，已正確地將 blog 標記為 `Modified` ，並偵測到新文章，並將其追蹤為 `Added` 。
 
-在本節一開始，我們說明不使用 _EF Core 來進行變更_ 時，需要偵測變更。 這是上述程式碼中發生的情況。 也就是說，屬性和導覽的變更會 _直接在實體實例上_ 進行，而不是使用任何 EF Core 方法。
+在本節一開始，我們指出不使用 _EF Core 進行變更_ 時，需要偵測變更。 這是上述程式碼中發生的情況。 也就是說，屬性和導覽的變更會 _直接在實體實例上_ 進行，而不是使用任何 EF Core 方法。
 
 將此與下列程式碼相比較，以相同方式修改實體，但這次使用 EF Core 方法：
 
@@ -126,7 +126,7 @@ Post {Id: 2} Unchanged
 -->
 [!code-csharp[Snapshot_change_tracking_2](../../../samples/core/ChangeTracking/ChangeDetectionAndNotifications/SnapshotSamples.cs?name=Snapshot_change_tracking_2)]
 
-在此情況下，變更追蹤器偵錯工具會顯示已知所有實體狀態和屬性修改，即使尚未進行變更的偵測也是一樣。 這是因為 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyEntry.CurrentValue?displayProperty=nameWithType> 是 EF Core 方法，這表示 EF Core 立即知道這個方法所做的變更。 同樣地，呼叫 <xref:Microsoft.EntityFrameworkCore.DbContext.Add%2A?displayProperty=nameWithType> 可讓 EF Core 立即知道新的實體並適當地進行追蹤。
+在此情況下，變更追蹤器偵錯工具會顯示已知所有實體狀態和屬性修改，即使尚未進行變更的偵測也是一樣。 這是因為 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyEntry.CurrentValue?displayProperty=nameWithType> 是 Ef core 方法，這表示 Ef core 會立即知道這個方法所做的變更。 同樣地，呼叫 <xref:Microsoft.EntityFrameworkCore.DbContext.Add%2A?displayProperty=nameWithType> 可讓 EF Core 立即知道新的實體並適當地進行追蹤。
 
 > [!TIP]
 > 請勿嘗試使用 EF Core 方法來進行實體變更，以避免偵測變更。 這麼做通常比較麻煩，而且執行的效能比一般方式變更實體還低。 本檔的目的是要在偵測到所需的變更時通知。 目的不是要鼓勵避免變更偵測。
@@ -188,13 +188,13 @@ Post {Id: 2} Unchanged
 
 ### <a name="detecting-changes-and-value-conversions"></a>偵測變更和值轉換
 
-若要使用具有實體類型的快照集變更追蹤，EF Core 必須能夠：
+若要搭配實體類型使用快照集變更追蹤，EF Core 必須能夠：
 
 - 追蹤實體時，建立每個屬性值的快照集
 - 將此值與屬性的目前值進行比較
 - 產生值的雜湊碼
 
-這會由可直接對應至資料庫之類型的 EF Core 自動處理。 不過，當 [使用值轉換器來對應屬性](xref:core/modeling/value-conversions)時，該轉換器必須指定如何執行這些動作。 這可透過值比較子來達成，並在 [值](xref:core/modeling/value-comparers) 比較子檔中詳細說明。
+這會由 EF Core 針對可直接對應至資料庫的類型自動處理。 不過，當 [使用值轉換器來對應屬性](xref:core/modeling/value-conversions)時，該轉換器必須指定如何執行這些動作。 這可透過值比較子來達成，並在 [值](xref:core/modeling/value-comparers) 比較子檔中詳細說明。
 
 ## <a name="notification-entities"></a>通知實體
 
@@ -239,7 +239,7 @@ Post {Id: 2} Unchanged
 -->
 [!code-csharp[Model](../../../samples/core/ChangeTracking/ChangeDetectionAndNotifications/NotificationEntitiesSamples.cs?name=Model)]
 
-此外，任何集合導覽都必須執行 `INotifyCollectionChanged` ; 在上述範例中，您可以使用貼文來滿足這項工作 <xref:System.Collections.ObjectModel.ObservableCollection%601> 。 EF Core 也 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ObservableHashSet%601> 會隨附具有更有效率查詢的實作為穩定順序的成本。
+此外，任何集合導覽都必須執行 `INotifyCollectionChanged` ; 在上述範例中，您可以使用貼文來滿足這項工作 <xref:System.Collections.ObjectModel.ObservableCollection%601> 。 EF Core 也隨附具有 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ObservableHashSet%601> 更有效率查閱的實作為穩定順序的成本。
 
 大部分的通知程式碼通常都會移到未對應的基類中。 例如：
 
@@ -286,7 +286,7 @@ Post {Id: 2} Unchanged
 
 ### <a name="configuring-notification-entities"></a>設定通知實體
 
-沒有方法可 EF Core 驗證， `INotifyPropertyChanging` 或 `INotifyPropertyChanged` 完全實作為與 EF Core 搭配使用。 尤其是，這些介面的某些用途只會在某些屬性上使用通知，而不是所有屬性 (包括 EF Core 所需的導覽) 。 基於這個理由，EF Core 不會自動連接到這些事件。
+EF Core 無法驗證 `INotifyPropertyChanging` 或 `INotifyPropertyChanged` 完全實作為 ef core 使用。 尤其是，這些介面的某些用途只會在某些屬性上使用通知，而不是所有屬性 (包括 EF Core 所需的導覽) 。 基於這個理由，EF Core 不會自動連接到這些事件。
 
 相反地，EF Core 必須設定為使用這些通知實體。 這通常是透過呼叫來針對所有實體類型進行 <xref:Microsoft.EntityFrameworkCore.ModelBuilder.HasChangeTrackingStrategy%2A?displayProperty=nameWithType> 。 例如：
 
@@ -300,7 +300,7 @@ Post {Id: 2} Unchanged
 
  (也可以使用不同的實體類型來設定不同的策略 <xref:Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder.HasChangeTrackingStrategy%2A?displayProperty=nameWithType> ，但這通常是這些的，因為那些不是通知實體的類型仍需要 DetectChanges ) 。
 
-完整通知變更追蹤需要同時 `INotifyPropertyChanging` 執行和 `INotifyPropertyChanged` 。 這可讓您在屬性值變更之前儲存原始值，避免在追蹤實體時 EF Core 建立快照集的需求。 執行的實體類型 `INotifyPropertyChanged` 也可以搭配 EF Core 使用。 在這種情況下，當追蹤實體以追蹤原始值時，EF 仍會建立快照集，但接著會使用通知立即偵測變更，而不需要呼叫 DetectChanges。
+完整通知變更追蹤需要同時 `INotifyPropertyChanging` 執行和 `INotifyPropertyChanged` 。 這可讓您在屬性值變更之前儲存原始值，避免 EF Core 在追蹤實體時建立快照集的需求。 實作為的實體類型 `INotifyPropertyChanged` 也可以搭配 EF Core 使用。 在這種情況下，當追蹤實體以追蹤原始值時，EF 仍會建立快照集，但接著會使用通知立即偵測變更，而不需要呼叫 DetectChanges。
 
 <xref:Microsoft.EntityFrameworkCore.ChangeTrackingStrategy>下表摘要說明不同的值。
 
@@ -396,9 +396,9 @@ EF Core 可以動態產生執行和的 proxy <xref:System.ComponentModel.INotify
 -->
 [!code-csharp[Model](../../../samples/core/ChangeTracking/ChangeDetectionAndNotifications/ChangeTrackingProxiesSamples.cs?name=Model)]
 
-變更追蹤 proxy 有一個重大的缺點，那就是 EF Core 必須一律追蹤 proxy 的實例，而不是基礎實體類型的實例。 這是因為基礎實體類型的實例不會產生通知，這表示將會遺漏對這些實體所做的變更。
+變更追蹤 proxy 有一個重大的缺點，就是 EF Core 一律必須追蹤 proxy 的實例，而不是基礎實體類型的實例。 這是因為基礎實體類型的實例不會產生通知，這表示將會遺漏對這些實體所做的變更。
 
-EF Core 在查詢資料庫時自動建立 proxy 實例，所以這個缺點通常僅限於追蹤新的實體實例。 這些實例必須使用 <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.CreateProxy%2A> 擴充方法建立，而 **不** 是使用一般的方式 `new` 。 這表示之前範例中的程式碼現在必須使用 `CreateProxy` ：
+EF Core 會在查詢資料庫時自動建立 proxy 實例，因此此缺點通常僅限於追蹤新的實體實例。 這些實例必須使用 <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.CreateProxy%2A> 擴充方法建立，而 **不** 是使用一般的方式 `new` 。 這表示之前範例中的程式碼現在必須使用 `CreateProxy` ：
 
 <!--
             using var context = new BlogsContext();
@@ -422,7 +422,7 @@ EF Core 在查詢資料庫時自動建立 proxy 實例，所以這個缺點通�
 
 ## <a name="change-tracking-events"></a>變更追蹤事件
 
-<xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.Tracked?displayProperty=nameWithType>當第一次追蹤實體時，EF Core 會引發事件。 未來的實體狀態變更會產生 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.StateChanged?displayProperty=nameWithType> 事件。 如需詳細資訊，請參閱 [EF Core 中的 .Net 事件](xref:core/logging-events-diagnostics/events) 。
+EF Core 會在 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.Tracked?displayProperty=nameWithType> 第一次追蹤實體時引發事件。 未來的實體狀態變更會產生 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.StateChanged?displayProperty=nameWithType> 事件。 如需詳細資訊，請參閱 [EF Core 中的 .Net 事件](xref:core/logging-events-diagnostics/events) 。
 
 > [!NOTE]
 > `StateChanged`第一次追蹤實體時不會引發事件，即使狀態已從變更 `Detached` 為其中一個其他狀態也一樣。 請務必接聽 `StateChanged` 和 `Tracked` 事件，以取得所有相關的通知。

@@ -1,15 +1,15 @@
 ---
 title: 實體類型-EF Core
-description: 如何使用 Entity Framework Core 來設定和對應實體類型
+description: 如何使用 Entity Framework Core 設定和對應實體類型
 author: roji
 ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: ca8cb8560afe374218e763bc0476839187a40ece
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 6c8029b64210dd9bc69fd53d9a3b4aa06bf519e0
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635766"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023987"
 ---
 # <a name="entity-types"></a>實體類型
 
@@ -44,7 +44,7 @@ ms.locfileid: "97635766"
 ### <a name="excluding-from-migrations"></a>從遷移中排除
 
 > [!NOTE]
-> 在 EF Core 5.0 中引進了從遷移中排除資料表的功能。
+> EF Core 5.0 引進了從遷移中排除資料表的功能。
 
 將相同的實體類型對應到多個型別時，有時會很有用 `DbContext` 。 尤其是 [在使用系](https://www.martinfowler.com/bliki/BoundedContext.html)結內容時更是如此，因為每個限定的內容通常會有不同的 `DbContext` 類型。
 
@@ -68,11 +68,11 @@ ms.locfileid: "97635766"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableName.cs?Name=TableName&highlight=3-4)]
 
-**_
+***
 
 ## <a name="table-schema"></a>資料表結構描述
 
-使用關係資料庫時，資料表會依照慣例建立在您資料庫的預設架構中。 例如，Microsoft SQL Server 會使用 `dbo` 架構 (SQLite 不支援架構) 。
+使用關係資料庫時，資料表會依照慣例建立在您資料庫的預設架構中。 例如，Microsoft SQL Server 將使用 `dbo` 架構 (SQLite 不支援架構) 。
 
 您可以設定要在特定架構中建立的資料表，如下所示：
 
@@ -84,7 +84,7 @@ ms.locfileid: "97635766"
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=3-4)]
 
-_*_
+***
 
 您也可以使用流暢的 API，在模型層級定義預設架構，而不是指定每個資料表的架構：
 
@@ -104,7 +104,7 @@ _*_
  對應至 view 會移除預設的資料表對應，但是從 EF 5.0 開始，實體類型也可以明確地對應到資料表。 在此情況下，查詢對應將用於查詢，而資料表對應將用於更新。
 
 > [!TIP]
-> 若要使用記憶體內部提供者來測試對應至 views 的實體類型，請透過將它們對應至查詢 `ToInMemoryQuery` 。 如需詳細資訊，請參閱使用此技術的可執行 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) 。
+> 若要使用記憶體內部提供者來測試對應至 views 的實體類型，請透過將它們對應至查詢 `ToInMemoryQuery` 。 如需詳細資訊，請參閱使用此技術的可執行 [範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Testing/ItemsWebApi/) 。
 
 ## <a name="table-valued-function-mapping"></a>資料表值函數對應
 
@@ -164,4 +164,4 @@ WHERE [b].[PostCount] > 3
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableComment.cs?name=TableComment&highlight=4)]
 
-_**
+***

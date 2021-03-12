@@ -4,16 +4,16 @@ description: 攔截資料庫作業和其他事件
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: e3b2f1a0f1a97d211bcaba0633955a7fe9c0aa91
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 459c0495e9a2f81e2e84388988f04ca9787080cc
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128585"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024221"
 ---
 # <a name="interceptors"></a>攔截器
 
-Entity Framework Core (EF Core) 攔截器可以攔截、修改及/或隱藏 EF Core 作業。 這包括執行命令等低層級的資料庫作業，以及較高層級的作業，例如對 SaveChanges 的呼叫。
+Entity Framework Core (EF Core) 攔截器可讓您攔截、修改及/或隱藏 EF Core 作業。 這包括執行命令等低層級的資料庫作業，以及較高層級的作業，例如對 SaveChanges 的呼叫。
 
 攔截器與記錄和診斷不同，因為它們允許修改或隱藏正在攔截的作業。 [簡易記錄](xref:core/logging-events-diagnostics/simple-logging) 或 [Microsoft Extensions。記錄](xref:core/logging-events-diagnostics/extensions-logging) 是較佳的記錄選擇。
 
@@ -57,7 +57,7 @@ public class TaggedQueryCommandInterceptorContext : BlogsContext
 
 > [!NOTE]
 > 資料庫攔截是在 EF Core 3.0 中引進，而且僅適用于關係資料庫提供者。
-> EF Core 5.0 中引進了儲存點支援。
+> 在 EF Core 5.0 中引進了儲存點支援。
 
 低層級資料庫攔截會分割成下表所示的三個介面。
 
@@ -76,11 +76,11 @@ public class TaggedQueryCommandInterceptorContext : BlogsContext
 ### <a name="example-command-interception-to-add-query-hints"></a>範例：命令攔截以新增查詢提示
 
 > [!TIP]
-> 您可以從 GitHub [下載命令攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/CommandInterception) 。
+> 您可以從 GitHub [下載命令攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/CommandInterception) 。
 
 <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbCommandInterceptor>可以用來修改 SQL，然後再傳送至資料庫。 此範例顯示如何修改 SQL 以包含查詢提示。
 
-攔截的最棘手部分通常會判斷命令是否對應到需要修改的查詢。 剖析 SQL 是一個選項，但通常是脆弱的。 另一個選項是使用 [EF Core 的查詢標記](xref:core/querying/tags) 來標記每個應該修改的查詢。 例如：
+攔截的最棘手部分通常會判斷命令是否對應到需要修改的查詢。 剖析 SQL 是一個選項，但通常是脆弱的。 另一個選項是使用 [EF Core 查詢標記](xref:core/querying/tags) 來標記應該修改的每個查詢。 例如：
 
 <!--
             var blogs1 = context.Blogs.TagWith("Use hint: robust plan").ToList();
@@ -149,7 +149,7 @@ FROM [Blogs] AS [b]
 ### <a name="example-connection-interception-for-sql-azure-authentication-using-add"></a>範例：使用 ADD 的 SQL Azure 驗證連接攔截
 
 > [!TIP]
-> 您可以從 GitHub [下載連接攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/ConnectionInterception) 。
+> 您可以從 GitHub [下載連接攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/ConnectionInterception) 。
 
 <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbConnectionInterceptor>可以用來在 <xref:System.Data.Common.DbConnection> 用來連接到資料庫之前，先操作。 這可以用來取得 Azure Active Directory (AAD) 存取權杖。 例如：
 
@@ -193,17 +193,17 @@ public class AadAuthenticationInterceptor : DbConnectionInterceptor
 ### <a name="example-advanced-command-interception-for-caching"></a>範例：快取的 Advanced 命令攔截
 
 > [!TIP]
-> 您可以從 GitHub [下載 advanced command 攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/CachingInterception) 。
+> 您可以從 GitHub [下載 advanced command 攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/CachingInterception) 。
 
 EF Core 攔截器可以：
 
-* 告訴 EF Core 隱藏執行正在攔截的作業
+* 告知 EF Core 隱藏執行正在攔截的作業
 * 將回報的作業結果變更回 EF Core
 
 此範例顯示使用這些功能的攔截器，其行為就像基本的第二層快取。 針對特定的查詢會傳回快取的查詢結果，以避免資料庫往返。
 
 > [!WARNING]
-> 以這種方式變更 EF Core 預設行為時，請小心。 如果發生無法正確處理的異常結果，EF Core 可能會以非預期的方式表現。 此外，此範例會示範攔截器概念;它不適合作為健全的第二層快取執行的範本。
+> 以這種方式變更 EF Core 預設行為時，請小心。 如果 EF Core 得到無法正確處理的異常結果，其行為可能會以非預期的方式運作。 此外，此範例會示範攔截器概念;它不適合作為健全的第二層快取執行的範本。
 
 在此範例中，應用程式會經常執行查詢來取得最新的「每日訊息」：
 
@@ -256,13 +256,13 @@ EF Core 攔截器可以：
 -->
 [!code-csharp[ReaderExecutingAsync](../../../samples/core/Miscellaneous/CachingInterception/CachingCommandInterceptor.cs?name=ReaderExecutingAsync)]
 
-請注意程式碼如何呼叫 <xref:Microsoft.EntityFrameworkCore.Diagnostics.InterceptionResult%601.SuppressWithResult%2A?displayProperty=nameWithType> 和傳遞包含快取資料的取代 <xref:System.Data.Common.DbDataReader> 。 然後會傳回這個 InterceptionResult，而導致查詢執行隱藏。 EF Core 會使用取代讀取器作為查詢的結果。
+請注意程式碼如何呼叫 <xref:Microsoft.EntityFrameworkCore.Diagnostics.InterceptionResult%601.SuppressWithResult%2A?displayProperty=nameWithType> 和傳遞包含快取資料的取代 <xref:System.Data.Common.DbDataReader> 。 然後會傳回這個 InterceptionResult，而導致查詢執行隱藏。 EF Core 會改為使用取代讀取器作為查詢的結果。
 
 此攔截器也會操控命令文字。 這並非必要的操作，但可改善記錄訊息中的清楚明瞭。 因為目前不會執行查詢，所以命令文字不需要是有效的 SQL。
 
 #### <a name="after-execution"></a>執行之後
 
-如果沒有可用的快取訊息，或已過期，則上述程式碼不會隱藏結果。 因此 EF Core 會正常執行查詢。 然後，它會在執行之後返回攔截器的 `Executed` 方法。 此時，如果結果不是快取的讀取器，則會從實際讀取器 exacted 新的訊息識別碼和字串，並在下次使用此查詢時加以快取。
+如果沒有可用的快取訊息，或已過期，則上述程式碼不會隱藏結果。 因此 EF Core 將會正常執行查詢。 然後，它會在執行之後返回攔截器的 `Executed` 方法。 此時，如果結果不是快取的讀取器，則會從實際讀取器 exacted 新的訊息識別碼和字串，並在下次使用此查詢時加以快取。
 
 <!--
     public override async ValueTask<DbDataReader> ReaderExecutedAsync(
@@ -299,7 +299,7 @@ EF Core 攔截器可以：
 
 #### <a name="demonstration"></a>示範
 
-快取 [攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/CachingInterception) 包含一個簡單的主控台應用程式，可查詢每日訊息來測試快取：
+快取 [攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/CachingInterception) 包含一個簡單的主控台應用程式，可查詢每日訊息來測試快取：
 
 <!--
         // 1. Initialize the database with some daily messages.
@@ -396,10 +396,10 @@ Free beer for unicorns
 ## <a name="savechanges-interception"></a>SaveChanges 攔截
 
 > [!NOTE]
-> SaveChanges 攔截是在 EF Core 5.0 中引進。
+> 在 EF Core 5.0 中引進了 SaveChanges 攔截。
 
 > [!TIP]
-> 您可以從 GitHub [下載 SaveChanges 攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) 。
+> 您可以從 GitHub [下載 SaveChanges 攔截器範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/SaveChangesInterception) 。
 
 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> 和 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> 攔截點是由介面所定義 <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor> 。 針對其他攔截器，則 <xref:Microsoft.EntityFrameworkCore.Diagnostics.SaveChangesInterceptor> 會提供具有無 op 方法的基類，以方便使用。
 
@@ -415,7 +415,7 @@ Free beer for unicorns
 
 #### <a name="the-application-context"></a>應用程式內容
 
-[用於進行審核的範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception)會使用包含 blog 和文章的簡單 DbCoNtext。
+[用於進行審核的範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/SaveChangesInterception)會使用包含 blog 和文章的簡單 DbCoNtext。
 
 <!--
 public class BlogsContext : DbContext
@@ -594,7 +594,7 @@ public class EntityAudit
 結果是 `SaveChangesAudit` 具有實體集合的實體 `EntityAudit` ，每個插入、更新或刪除都有一個實體。 攔截器接著會將這些實體插入 audit 資料庫中。
 
 > [!TIP]
-> ToString 會在每個 EF Core 事件資料類別中覆寫，以產生事件的對等記錄訊息。 例如，呼叫會 `ContextInitializedEventData.ToString` 使用提供者 ' microsoft.entityframeworkcore. Sqlite ' （具有選項： None）來產生 "Entity Framework Core 5.0.0 初始化 ' BlogsCoNtext '。
+> ToString 會在每個 EF Core 事件資料類別中覆寫，以產生事件的對等記錄訊息。 例如，呼叫會 `ContextInitializedEventData.ToString` 使用提供者 ' microsoft.entityframeworkcore. Sqlite ' （具有選項： None）來產生「Entity Framework Core 5.0.0 初始化的 ' BlogsCoNtext '」。
 
 #### <a name="detecting-success"></a>偵測成功
 
@@ -673,7 +673,7 @@ Audit 實體會附加至 audit 內容，因為它已經存在於資料庫中，�
 
 #### <a name="demonstration"></a>示範
 
-此 [審核範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) 包含一個簡單的主控台應用程式，可對 [日誌] 資料庫進行變更，然後顯示所建立的審核。
+此 [審核範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/SaveChangesInterception) 包含一個簡單的主控台應用程式，可對 [日誌] 資料庫進行變更，然後顯示所建立的審核。
 
 <!--
         // Insert, update, and delete some entities

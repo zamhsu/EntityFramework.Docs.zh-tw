@@ -1,21 +1,21 @@
 ---
 title: 全域查詢篩選條件 - EF Core
-description: 使用全域查詢篩選準則來篩選 Entity Framework Core 的結果
+description: 使用全域查詢篩選器來篩選 Entity Framework Core 的結果
 author: maumar
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 6436f9f8e2e09d44ef9528fd2022720d40095fe0
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: d28f34cd3846203675b5a03343e0211460797b0a
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430127"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023740"
 ---
 # <a name="global-query-filters"></a>全域查詢篩選條件
 
-全域查詢篩選準則是套用至元資料模型中實體類型的 LINQ 查詢述詞， (通常是 `OnModelCreating`) 。 查詢述詞是通常傳遞給 LINQ 查詢運算子的布林運算式 `Where` 。  EF Core 會自動將這類篩選套用至任何涉及這些實體類型的 LINQ 查詢。  EF Core 也會將它們套用至實體類型，使用 Include 或導覽屬性間接參考。 此功能的一些常見應用如下：
+全域查詢篩選準則是套用至元資料模型中實體類型的 LINQ 查詢述詞， (通常是 `OnModelCreating`) 。 查詢述詞是通常傳遞給 LINQ 查詢運算子的布林運算式 `Where` 。  EF Core 會自動將這類篩選準則套用至任何涉及這些實體類型的 LINQ 查詢。  EF Core 也會將它們套用至實體類型，使用 Include 或導覽屬性間接參考。 此功能的一些常見應用如下：
 
-* 虛 **刪除** -實體類型會定義 `IsDeleted` 屬性。
+* 虛 **刪除**-實體類型會定義 `IsDeleted` 屬性。
 * **多** 租使用者-實體類型會定義 `TenantId` 屬性。
 
 ## <a name="example"></a>範例
@@ -23,7 +23,7 @@ ms.locfileid: "94430127"
 下列範例將示範如何使用全域查詢篩選器，在簡單的電子博客模型中執行多租使用者和虛刪除查詢行為。
 
 > [!TIP]
-> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/QueryFilters) \(英文\)。
+> 您可以在 GitHub 上檢視此文章的[範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/QueryFilters) \(英文\)。
 
 首先，定義實體：
 
@@ -63,7 +63,7 @@ WHERE (
 ```
 
 > [!NOTE]
-> 目前 EF Core 不會偵測到全域查詢篩選定義中的迴圈，因此在定義時，您應該小心。 如果指定不正確，迴圈可能會在查詢轉譯期間導致無限迴圈。
+> 目前 EF Core 不會偵測全域查詢篩選定義中的迴圈，因此在定義時，您應該小心。 如果指定不正確，迴圈可能會在查詢轉譯期間導致無限迴圈。
 
 ## <a name="accessing-entity-with-query-filter-using-required-navigation"></a>使用必要的導覽存取具有查詢篩選的實體
 
@@ -84,7 +84,7 @@ WHERE (
 
 [!code-csharp[Main](../../../samples/core/Querying/QueryFilters/Program.cs#Queries)]
 
-在上述設定中，第一個查詢會傳回所有 6 `Post` 秒，但是第二個查詢只會傳回3個。 因為 `Include` 第二個查詢中的方法會載入相關實體，所以會發生這種不符的情況 `Blog` 。 由於和之間的 `Blog` 導覽 `Post` 是必要的，EF Core `INNER JOIN` 在建立查詢時使用：
+在上述設定中，第一個查詢會傳回所有 6 `Post` 秒，但是第二個查詢只會傳回3個。 因為 `Include` 第二個查詢中的方法會載入相關實體，所以會發生這種不符的情況 `Blog` 。 由於和之間的 `Blog` 導覽 `Post` 是必要的，因此 EF Core 會 `INNER JOIN` 在建立查詢時使用：
 
 ```sql
 SELECT [p].[PostId], [p].[BlogId], [p].[Content], [p].[IsDeleted], [p].[Title], [t].[BlogId], [t].[Name], [t].[Url]

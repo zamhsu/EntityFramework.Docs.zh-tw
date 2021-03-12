@@ -4,16 +4,16 @@ description: 使用 Entity Framework Core 以多個資料庫提供者為目標�
 author: bricelam
 ms.date: 10/29/2020
 uid: core/managing-schemas/migrations/providers
-ms.openlocfilehash: fb8c6121a4baccf573e57b52ebeb3fcd29fe2cba
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: feed19abb188eebc473386b67fac62848e682d96
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429776"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024091"
 ---
 # <a name="migrations-with-multiple-providers"></a>使用多個提供者進行遷移
 
-[EF Core 的工具](xref:core/cli/index)只會 scaffold 作用中提供者的遷移。 不過，有時候您可能會想要使用一個以上的提供者 (例如 Microsoft SQL Server 和 SQLite) DbCoNtext）。 藉由維護多個遷移集（每個提供者各一個），並為每個模型變更新增每個的遷移，來處理此情況。
+[EF Core 工具](xref:core/cli/index)只會 scaffold 作用中提供者的遷移。 不過，有時候您可能會想要使用一個以上的提供者 (例如 Microsoft SQL Server 和 SQLite) DbCoNtext。 藉由維護多個遷移集（每個提供者各一個），並為每個模型變更新增每個的遷移，來處理此情況。
 
 ## <a name="using-multiple-context-types"></a>使用多個內容類型
 
@@ -53,7 +53,7 @@ Add-Migration InitialCreate -Context SqliteBlogContext -OutputDir Migrations\Sql
 也可以使用一個 DbCoNtext 類型。 這目前需要將遷移移至另一個元件。 如需設定專案的指示，請參閱 [使用個別的遷移專案](xref:core/managing-schemas/migrations/projects) 。
 
 > [!TIP]
-> 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Schemas/TwoProjectMigrations)。
+> 您可以檢視本文中的 [GitHut 範例](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Schemas/TwoProjectMigrations)。
 
 從 EF Core 5.0 開始，您可以從工具將引數傳遞至應用程式。 這可以讓更簡化的工作流程，避免在執行工具時手動變更專案。
 
@@ -83,4 +83,4 @@ Add-Migration MyMigration -Args "--provider Sqlite"
 ***
 
 > [!NOTE]
-> 在 EF Core 5.0 中新增了為應用程式指定額外引數的功能。 如果您使用的是較舊的版本，請改為使用環境變數來指定設定值。
+> EF Core 5.0 中新增了為應用程式指定額外引數的功能。 如果您使用的是較舊的版本，請改為使用環境變數來指定設定值。

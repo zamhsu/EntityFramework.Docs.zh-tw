@@ -4,12 +4,12 @@ description: 透過 Entity Framework Core 使用移轉來管理資料庫結構�
 author: bricelam
 ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: b9547298714af59453aeae6d05742a03c067708b
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 27f94ad24e0255f023025d16b0ae1950d0ed4cc7
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "95003389"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024182"
 ---
 # <a name="migrations-overview"></a>移轉概觀
 
@@ -153,4 +153,6 @@ Update-Database
 
 ## <a name="additional-resources"></a>其他資源
 
-* EF Core EF Core 5.0 中新的遷移功能的[站立會議課程](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20)。
+* [Entity Framework Core 工具參考-.Net CORE CLI](xref:core/cli/dotnet) ：包含用來更新、卸載、新增、移除等等的命令。
+* [Entity Framework Core 工具參考-Visual Studio 中的套件管理員主控台](xref:core/cli/powershell) ：包含用來更新、卸載、新增、移除等等的命令。
+* Ef [Core 社區站立會議課程](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20)在 ef core 5.0 中的新遷移功能。

@@ -1,15 +1,15 @@
 ---
-title: 效能的模型-EF Core
+title: 效能模型-EF Core
 description: 在使用 Entity Framework Core 時有效率地建立模型
 author: roji
 ms.date: 12/1/2020
 uid: core/performance/modeling-for-performance
-ms.openlocfilehash: fc16ec67c3865aa7b7a95519463ca7493a2709b0
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 882398189cc828798c1682f849fac524d90d317f
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657795"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023857"
 ---
 # <a name="modeling-for-performance"></a>效能模型
 
@@ -21,7 +21,7 @@ ms.locfileid: "97657795"
 
 您可以將上述內容視為快 *取的形式* ，也就是在其 Blog 上快取貼文中的匯總資訊。就像使用任何快取一樣，問題在於如何讓快取的值與快取的資料保持在最新狀態。 在許多情況下，快取的資料會延遲一點;例如，在上述範例中，在任何指定的時間點，blog 的平均評等通常是合理的，而不是完全保持最新狀態。 如果是這種情況，您可以讓它每次重新計算一次，然後：否則，就必須設定更詳盡的系統，讓快取的值保持在最新狀態。
 
-以下詳細說明 EF Core 中正規化和快取的一些技術，並指向檔中的相關章節。
+以下將詳細說明 EF Core 中的正規化和快取技術，並指向檔中的相關章節。
 
 ### <a name="stored-computed-columns"></a>儲存的計算資料行
 
@@ -31,7 +31,7 @@ ms.locfileid: "97657795"
 
 如果您的快取資料行需要從資料表的資料列外部參考輸入，您就無法使用計算資料行。 不過，您仍然可以在每次輸入變更時重新計算資料行;例如，您可以在每次變更、新增或移除 Post 時，重新計算平均 Blog 的評等。 在需要重新計算時，請務必識別確切的條件，否則快取的值將不會同步。
 
-執行這項作業的其中一種方式，是透過一般的 EF Core API 自行執行更新。 `SaveChanges`[事件](xref:core/logging-events-diagnostics/events)或[攔截](xref:core/logging-events-diagnostics/interceptors#savechanges-interception)器可以用來自動檢查是否有任何文章正在更新，並以該方式執行重新計算。 請注意，這通常需要額外的資料庫往返，因為必須傳送額外的命令。
+執行這項作業的其中一種方式，是透過一般 EF Core API 自行執行更新。 `SaveChanges`[事件](xref:core/logging-events-diagnostics/events)或[攔截](xref:core/logging-events-diagnostics/interceptors#savechanges-interception)器可以用來自動檢查是否有任何文章正在更新，並以該方式執行重新計算。 請注意，這通常需要額外的資料庫往返，因為必須傳送額外的命令。
 
 對於更有效能影響的應用程式，可以定義資料庫觸發程式，以在資料庫中自動執行重新計算。 這會儲存額外的資料庫往返、自動發生在與主要更新相同的交易中，而且可能更容易設定。 EF 未提供任何特定的 API 來建立或維護觸發程式，但您可以 [建立空白的遷移，並透過原始 SQL 新增觸發程序定義](xref:core/managing-schemas/migrations/managing#arbitrary-changes-via-raw-sql)。
 
@@ -54,9 +54,9 @@ EF Core 目前支援兩種將繼承模型對應至關係資料庫的技術：
 
 人們有時會選擇 TPT，因為它看起來會是「清除程式」的技巧;每個 .NET 類型都會有個別的資料表，使資料庫架構看起來類似 .NET 類型階層。 此外，由於 TPH 必須在單一資料表中代表整個階層，因此資料列會有 *所有* 資料行，不論實際保留在資料列中的類型為何，不相關的資料行一律為空白且未使用。 除了如同是「unclean」的對應技巧之外，許多人認為這些空白資料行在資料庫中佔用的空間很大，而且也可能會影響效能。
 
-不過，測量會顯示 TPT 在大部分情況下都是效能觀點的最差對應技術;其中的所有資料都是來自單一資料表，而 TPT 查詢必須聯結多個資料表，而聯結則是關係資料庫中效能問題的其中一個主要來源。 資料庫通常通常會與空白資料行妥善處理，而像是 [SQL Server 稀疏資料行](/sql/relational-databases/tables/use-sparse-columns) 之類的功能也可以更進一步地降低此額外負荷。
+不過，測量會顯示 TPT 在大部分情況下都是效能觀點的最差對應技術;其中的所有資料都是來自單一資料表，而 TPT 查詢必須聯結多個資料表，而聯結則是關係資料庫中效能問題的其中一個主要來源。 資料庫通常通常會與空白資料行妥善處理，而 [SQL Server sparse 資料行](/sql/relational-databases/tables/use-sparse-columns) 之類的功能也可以更進一步降低這種負擔。
 
-如需具體的範例， [請參閱此基準測試](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Benchmarks/Inheritance.cs) ，其會設定具有7類型階層的簡單模型;5000資料列會針對每個類型總計35000資料列植入，而基準測試只會從資料庫載入所有資料列：
+如需具體的範例， [請參閱此基準測試](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Benchmarks/Inheritance.cs) ，其會設定具有7類型階層的簡單模型;5000資料列會針對每個類型總計35000資料列植入，而基準測試只會從資料庫載入所有資料列：
 
 | 方法 |     平均數 |   錯誤 |  StdDev |     Gen 0 |     Gen 1 |     Gen 2 | 已配置 |
 |------- |---------:|--------:|--------:|----------:|----------:|----------:|----------:|
