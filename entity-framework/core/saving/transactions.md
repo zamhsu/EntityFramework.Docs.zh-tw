@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 儲存資料時，管理不可部分�
 author: roji
 ms.date: 9/26/2020
 uid: core/saving/transactions
-ms.openlocfilehash: 25bf615cffa36384de9fe04fe2b84d4a6bca98d0
-ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
+ms.openlocfilehash: 4e124747dc6dd9b57b6f60621c27d878d3f9be00
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103023532"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106165914"
 ---
 # <a name="using-transactions"></a>使用交易
 
@@ -115,4 +115,4 @@ public class BloggingContext : DbContext
    > [!IMPORTANT]
    > 建議您先測試該 API 是否可與您的提供者正確搭配運作，再倚賴它來管理交易。 如果無法正確搭配運作，建議您與資料庫提供者的維護人員連絡。
 
-2. 從 .NET Core 2.1 的觀點來看，System.object 的執行不包含對分散式交易的支援，因此您無法使用 `TransactionScope` 或 `CommittableTransaction` 協調多個資源管理員的交易。
+2. System 的 .NET Core 實作為目前不支援分散式交易的功能，因此您不能使用 `TransactionScope` 或 `CommittableTransaction` 協調多個資源管理員之間的交易。 [此問題](https://github.com/dotnet/runtime/issues/715)會追蹤支援。

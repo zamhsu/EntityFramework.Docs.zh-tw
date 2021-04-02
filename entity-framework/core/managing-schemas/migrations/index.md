@@ -4,16 +4,16 @@ description: 透過 Entity Framework Core 使用移轉來管理資料庫結構�
 author: bricelam
 ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 27f94ad24e0255f023025d16b0ae1950d0ed4cc7
-ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
+ms.openlocfilehash: 60546d92704e0bb350e1df7f3bcc69171109b85b
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103024182"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166065"
 ---
 # <a name="migrations-overview"></a>移轉概觀
 
-在實際專案中，資料模型會隨著功能的實作 (新增和移除新的實體或屬性) 而變更，而且必須據以變更資料庫結構描述，使其與應用程式保持同步。 EF Core 中的移轉功能讓您能夠以累加方式來更新資料庫結構描述，讓它與應用程式的資料模型保持同步，同時將現有的資料保留在資料庫中。
+在真實世界的專案中，資料模型會隨著功能的執行而變更：新增或移除新的實體或屬性，而且需要變更資料庫架構，以與應用程式保持同步。 EF Core 中的移轉功能讓您能夠以累加方式來更新資料庫結構描述，讓它與應用程式的資料模型保持同步，同時將現有的資料保留在資料庫中。
 
 概括而言，移轉的運作方式如下：
 
@@ -153,6 +153,6 @@ Update-Database
 
 ## <a name="additional-resources"></a>其他資源
 
-* [Entity Framework Core 工具參考-.Net CORE CLI](xref:core/cli/dotnet) ：包含用來更新、卸載、新增、移除等等的命令。
-* [Entity Framework Core 工具參考-Visual Studio 中的套件管理員主控台](xref:core/cli/powershell) ：包含用來更新、卸載、新增、移除等等的命令。
-* Ef [Core 社區站立會議課程](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20)在 ef core 5.0 中的新遷移功能。
+* [Entity Framework Core 工具參考-.NET Core CLI](xref:core/cli/dotnet) ：包含用來更新、卸載、新增、移除等等的命令。
+* [Visual Studio 中的 Entity Framework Core 工具參考-封裝管理員主控台](xref:core/cli/powershell) ：包含用來更新、卸載、新增、移除等等的命令。
+* EF Core EF Core 5.0 中新的遷移功能的[站立會議課程](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20)。

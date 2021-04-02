@@ -4,12 +4,12 @@ description: 使用空間資料搭配 Entity Framework Core SQLite 資料庫提�
 author: bricelam
 ms.date: 10/02/2020
 uid: core/providers/sqlite/spatial
-ms.openlocfilehash: 3296955dc046b91b53a1dcb09c51b340bc853b4a
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: aaf0dcd7dc4b670d56ac99567e2e129313427e40
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92066599"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106165941"
 ---
 # <a name="spatial-data-in-the-sqlite-ef-core-provider"></a>SQLite EF Core 提供者中的空間資料
 
@@ -40,7 +40,7 @@ brew install libspatialite
 </ItemGroup>
 ```
 
-在 **macOS**上，您也需要先設定環境變數，然後再執行您的應用程式，使其使用 Homebrew 的 SQLite 版本。 在 Visual Studio for Mac 中，您可以在 [專案] > 專案選項下設定此專案， **> 執行 > 設定 > 預設**
+在 **macOS** 上，您也需要先設定環境變數，然後再執行您的應用程式，使其使用 Homebrew 的 SQLite 版本。 在 Visual Studio for Mac 中，您可以在 [專案] > 專案選項下設定此專案， **> 執行 > 設定 > 預設**
 
 ```bash
 DYLD_LIBRARY_PATH=/usr/local/opt/sqlite/lib
@@ -48,17 +48,17 @@ DYLD_LIBRARY_PATH=/usr/local/opt/sqlite/lib
 
 ## <a name="configuring-srid"></a>設定 SRID
 
-在 SpatiaLite 中，資料行需要指定每個資料行的 SRID。 預設 SRID 為 `0` 。 使用 ForSqliteHasSrid 方法指定不同的 SRID。
+在 SpatiaLite 中，資料行需要指定每個資料行的 SRID。 預設 SRID 為 `0` 。 使用 HasSrid 方法指定不同的 SRID。
 
 ```csharp
 modelBuilder.Entity<City>().Property(c => c.Location)
-    .ForSqliteHasSrid(4326);
+    .HasSrid(4326);
 ```
 
 > [!NOTE]
 > 4326是指 WGS 84，這是在 GPS 和其他地理系統中使用的標準。
 
-## <a name="dimension"></a>尺寸
+## <a name="dimension"></a>維度
 
 資料行的預設維度 (或座標) 是 X 和 Y。若要啟用其他座標（例如 Z 或 M），請設定資料行類型。
 
@@ -74,14 +74,14 @@ modelBuilder.Entity<City>().Property(c => c.Location)
 .NET                                        | SQL
 ------------------------------------------- | ---
 幾何。地區                               | 區域 (@geometry) 
-幾何。AsBinary ( # A1                         | AsBinary (@geometry) 
-幾何。AsText ( # A1                           | AsText (@geometry) 
+幾何。AsBinary ()                          | AsBinary (@geometry) 
+幾何。AsText ()                            | AsText (@geometry) 
 幾何。邊界                           | 界限 (@geometry) 
 幾何。緩衝區 (距離)                    | 緩衝區 (@geometry ， @distance) 
 幾何。緩衝區 (距離，quadrantSegments)  | 緩衝區 (@geometry 、 @distance 、 @quadrantSegments) 
 幾何。質心                           | 距心 (@geometry) 
 幾何。包含 (g)                         | 包含 (@geometry 、 @g) 
-幾何。ConvexHull ( # A1                       | ConvexHull (@geometry) 
+幾何。ConvexHull ()                        | ConvexHull (@geometry) 
 幾何。CoveredBy (g)                        | CoveredBy (@geometry ， @g) 
 幾何。涵蓋 (g)                           | 涵蓋 (@geometry 、 @g) 
 幾何。交叉 (g)                          | 交叉 (@geometry ， @g) 
@@ -107,13 +107,13 @@ modelBuilder.Entity<City>().Property(c => c.Location)
 幾何。 (g) 重迭                        | 重迭 (@geometry ， @g) 
 幾何。PointOnSurface                     | PointOnSurface (@geometry) 
 幾何。 (g、intersectionPattern) 建立關聯     |  (@geometry 、 @g 、 @intersectionPattern) 的關聯
-幾何。反向 ( # A1                          | ST_Reverse (@geometry) 
+幾何。反向 ()                           | ST_Reverse (@geometry) 
 幾何。SRID                               | SRID (@geometry) 
 幾何。SymmetricDifference (其他)          | SymDifference (@geometry ， @other) 
-幾何。ToBinary ( # A1                         | AsBinary (@geometry) 
-幾何。Duration.totext ( # A1                           | AsText (@geometry) 
+幾何。ToBinary ()                          | AsBinary (@geometry) 
+幾何。Duration.totext ()                            | AsText (@geometry) 
 幾何。接觸 (g)                          | 接觸 (@geometry ， @g) 
-幾何。Union ( # A1                            | UnaryUnion (@geometry) 
+幾何。Union ()                             | UnaryUnion (@geometry) 
 幾何。Union (其他)                        | GUnion (@geometry ， @other) 
 幾何。在 (g) 內                          | 在 (中 @geometry ， @g) 
 >geometrycollection [i]                       | GeometryN (@geometryCollection 、 @i + 1) 

@@ -4,12 +4,12 @@ description: 不同 Entity Framework Core NuGet 套件的總覽
 author: ajcvickers
 ms.date: 01/21/2021
 uid: core/what-is-new/nuget-packages
-ms.openlocfilehash: 4b6e210f2324ea97e006d681d399bfdd6918d1b4
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: 25042eef49ae906e9243b782ddcd9186492eae04
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100544594"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106165915"
 ---
 # <a name="ef-core-nuget-packages"></a>EF Core NuGet 套件
 
@@ -21,8 +21,8 @@ Entity Framework Core (EF Core) 會以 [NuGet](https://www.nuget.org/) 套件的
 安裝套件的一般程式如下：
 
 - 決定資料庫提供者並安裝適當的封裝 ([請參閱下文](#database-providers)) 
-- 如果使用關聯式提供者，也請安裝[microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/)和[microsoft.entityframeworkcore。](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Relational/) 這有助於確保使用的是一致的版本，也表示 NuGet 會讓您知道新套件版本的推出時間。
-- （選擇性）決定您需要的工具類型，並為該 (安裝適當的套件，如下所示) 
+- 此外，如果使用關係資料庫提供者，請安裝[microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/)和[microsoft.entityframeworkcore。](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Relational/) 這有助於確保使用的是一致的版本，也表示 NuGet 會讓您知道新套件版本的推出時間。
+- （選擇性）決定您需要的工具類型，並為該 (安裝適當的套件， [如下所示](#tools)) 
 
 如需開始使用 EF Core 的說明，請參閱 Entity Framework Core 的使用者入門 [教學](xref:core/get-started/overview/first-app) 課程。
 
@@ -33,7 +33,7 @@ Entity Framework Core (EF Core) 會以 [NuGet](https://www.nuget.org/) 套件的
 也請確定任何外部封裝都與所使用的 EF Core 版本相容。 尤其是，請檢查外部資料庫提供者是否支援您所使用的 EF Core 版本。 EF Core 的新主要版本通常需要更新的資料庫提供者。
 
 > [!WARNING]
-> NuGet 不會強制執行一致的套件版本。 請一律仔細檢查您在檔案中參考的版本 `csproj` 或對等專案。
+> NuGet 不會強制執行一致的套件版本。 請一律仔細檢查您在檔案中參考的套件版本 `.csproj` 或對等專案。
 
 ## <a name="database-providers"></a>資料庫提供者
 
@@ -59,12 +59,12 @@ EF Core 透過使用「資料庫提供者」支援不同的資料庫系統。 �
 您必須安裝適當的工具套件，才能從現有的資料庫使用工具進行 [EF Core 的遷移](xref:core/managing-schemas/migrations/index) 和 [反向工程 (的) ](xref:core/managing-schemas/scaffolding) ：
 
 - 適用于 PowerShell[工具的 Microsoft.entityframeworkcore 工具](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/)，可在 Visual Studio[封裝管理員主控台](/nuget/consume-packages/install-use-packages-powershell)中運作
-- [dotnet-ef](https://www.nuget.org/packages/dotnet-ef/) 和 [microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design/) 是跨平臺命令列工具的設計
+- [dotnet-](https://www.nuget.org/packages/dotnet-ef/)適用于跨平臺命令列工具的 ef 和[Microsoft.EntityFrameworkCore.Design](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design/)
 
 如需有關使用 EF Core 工具的詳細資訊，請參閱 [Entity Framework Core 工具參考](xref:core/cli/index) ，包括如何正確地 `dotnet-ef` 在專案或全域安裝此工具。
 
 > [!TIP]
-> 根據預設，Microsoft.entityframeworkcore 設計套件的安裝方式，不會與您的應用程式一起部署。 這也表示它的型別無法在其他專案中以可傳遞的方式使用。 `PackageReference` `.csproj` 如果您需要存取套件中的型別，請在檔案中使用一般檔案或對等專案。 如需詳細資訊，請參閱 [設計階段服務](xref:core/cli/services) 。
+> 根據預設，Microsoft.EntityFrameworkCore.Design 套件的安裝方式將不會與您的應用程式一起部署。 這也表示它的型別無法在其他專案中以可傳遞的方式使用。 `PackageReference` `.csproj` 如果您需要存取此封裝中的型別，請在檔案中使用一般檔案或對等專案。 如需詳細資訊，請參閱 [設計階段服務](xref:core/cli/services) 。
 
 ## <a name="extension-packages"></a>擴充套件
 
@@ -103,8 +103,8 @@ EF Core 透過使用「資料庫提供者」支援不同的資料庫系統。 �
 
 請勿 **安裝下列** 已淘汰的套件，如果目前已安裝在您的專案中，請將它們移除：
 
-- Microsoft.entityframeworkcore 設計
+- Microsoft.EntityFrameworkCore.Relational.Design
 - Microsoft.entityframeworkcore. DotNet
-- Microsoft.entityframeworkcore 設計
-- Microsoft.entityframeworkcore 設計
+- Microsoft.EntityFrameworkCore.SqlServer.Design
+- Microsoft.EntityFrameworkCore.Sqlite.Design
 - Microsoft.entityframeworkcore： Design. 測試

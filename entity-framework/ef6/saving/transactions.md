@@ -4,12 +4,12 @@ description: 使用 Entity Framework 6 中的交易
 author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/saving/transactions
-ms.openlocfilehash: 525b5cf605c1b61225ee2b9f1e0559a8e13f3052
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 992e2a6e16a95159759416b93d1e315f537a0f14
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92064428"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166084"
 ---
 # <a name="working-with-transactions"></a>使用交易
 > [!NOTE]
@@ -19,9 +19,9 @@ ms.locfileid: "92064428"
 
 ## <a name="what-ef-does-by-default"></a>EF 預設的功能  
 
-在所有版本的 Entity Framework 中，每當您執行 **SaveChanges ( # B1 ** 來插入、更新或刪除資料庫時，架構會將該作業包裝在交易中。 此交易的持續時間只有足夠的時間可執行作業，然後完成。 當您執行其他這類作業時，就會啟動新的交易。  
+在所有版本的 Entity Framework 中，每當您執行 **SaveChanges ()** 以在資料庫上插入、更新或刪除時，架構會將該作業包裝在交易中。 此交易的持續時間只有足夠的時間可執行作業，然後完成。 當您執行其他這類作業時，就會啟動新的交易。  
 
-從 EF6 開始 **Database.ExecuteSqlCommand ( # B1 ** 預設會將命令包裝在交易中（如果尚未存在的話）。 這種方法有多載，可讓您視需要覆寫此行為。 此外，透過 Api （例如 **ObjectContext.ExecuteFunction ( # B1 ** ）在模型中包含的預存程式執行也會執行相同的 (，但目前無法覆寫) 的預設行為。  
+從 EF6 開始 **Database.ExecuteSqlCommand ()** 預設會將命令包裝在交易中（如果尚未存在的話）。 這種方法有多載，可讓您視需要覆寫此行為。 此外，透過 Api （例如 **ObjectContext.ExecuteFunction ()** ）在模型中包含的預存程式執行也會執行相同的 (，但目前無法覆寫) 的預設行為。  
 
 在任一種情況下，交易的隔離等級就是資料庫提供者視為其預設設定的任何隔離等級。 例如，根據預設，在 SQL Server 此為讀取認可。  
 
@@ -33,21 +33,21 @@ Entity Framework 不會將查詢包裝在交易中。
 
 ## <a name="how-the-apis-work"></a>Api 的運作方式  
 
-在 EF6 之前 Entity Framework 堅持認為開啟資料庫連接本身時 (它會在傳遞已) 開啟的連接時擲回例外狀況。 由於交易只能在開啟的連接上啟動，這表示使用者唯一能夠將數個作業包裝成一個交易的方式，就是使用[TransactionScope](https://msdn.microsoft.com/library/system.transactions.transactionscope.aspx)或使用**ObjectCoNtext. connection**屬性，並開始直接在傳回的**EntityConnection**物件上呼叫**open ( # B1**和**BeginTransaction ( # B3** 。 此外，如果您已在基礎資料庫連接上啟動交易，則與資料庫聯繫的 API 呼叫將會失敗。  
+在 EF6 之前 Entity Framework 堅持認為開啟資料庫連接本身時 (它會在傳遞已) 開啟的連接時擲回例外狀況。 由於交易只能在開啟的連接上啟動，這表示使用者唯一能夠將數個作業包裝成一個交易的方式是使用 [TransactionScope](https://msdn.microsoft.com/library/system.transactions.transactionscope.aspx)或使用 **ObjectCoNtext 連接** 屬性，然後開始呼叫 **open ()** ，並直接在傳回的 **EntityConnection** 物件上 **BeginTransaction ()** 。 此外，如果您已在基礎資料庫連接上啟動交易，則與資料庫聯繫的 API 呼叫將會失敗。  
 
 > [!NOTE]
 > Entity Framework 6 中已移除僅接受已關閉連接的限制。 如需詳細資訊，請參閱 [連接管理](xref:ef6/fundamentals/connection-management)。  
 
 從 EF6 開始，架構現在提供：  
 
-1. **BeginTransaction ( # B1 ** ：更簡單的方法，讓使用者在現有的 DbCoNtext 內自行啟動及完成交易，允許在相同的交易內結合數項作業，因此全部認可或全部回復為一個。 它也可讓使用者更輕鬆地指定交易的隔離等級。  
-2. **UseTransaction ( # B1 ** ：這可讓 DbCoNtext 使用在 Entity Framework 以外啟動的交易。  
+1. **BeginTransaction ()** ：更簡單的方法，讓使用者在現有的 DbCoNtext 內自行啟動及完成交易，允許在相同的交易內結合數項作業，並因此全部認可或全部回復為一個交易。 它也可讓使用者更輕鬆地指定交易的隔離等級。  
+2. **UseTransaction ()** ：可讓 DbCoNtext 使用在 Entity Framework 之外啟動的交易。  
 
 ### <a name="combining-several-operations-into-one-transaction-within-the-same-context"></a>將數個作業結合到相同內容中的一個交易  
 
-**BeginTransaction ( # B1 ** 有兩個覆寫–一個接受明確的 [IsolationLevel](https://msdn.microsoft.com/library/system.data.isolationlevel.aspx) ，另一個則不接受任何引數，並且會使用基礎資料庫提供者的預設 IsolationLevel。 這兩個覆寫會傳回 **DbCoNtextTransaction** 物件，此物件提供 **Commit ( # B1 ** 和 **Rollback ( # B3 ** 方法，這些方法會在基礎存放區交易上執行認可和回復。  
+**BeginTransaction ()** 有兩個覆寫–一個接受明確的 [IsolationLevel](https://msdn.microsoft.com/library/system.data.isolationlevel.aspx) ，另一個則不接受任何引數，並且會使用基礎資料庫提供者的預設 IsolationLevel。 這兩個覆寫都會傳回 **DbCoNtextTransaction** 物件，此物件會提供 **認可 ()** ，以及在基礎存放區交易上執行 commit 和 rollback **()** 方法。  
 
-**DbCoNtextTransaction**的目的是要在認可或回復之後處置。 完成這項工作的一個簡單方式是 **使用 ( ... ) {...}** 當 using 區塊完成時，將會自動呼叫 **Dispose ( # B1 ** 的語法：  
+**DbCoNtextTransaction** 的目的是要在認可或回復之後處置。 完成這項工作的一個簡單方式是 **使用 ( ... ) {...}** 當 using 區塊完成時，將會自動呼叫 **Dispose ()** 的語法：  
 
 ``` csharp
 using System;
@@ -89,7 +89,7 @@ namespace TransactionsExamples
 ```  
 
 > [!NOTE]
-> 開始交易時，必須開啟基礎存放區連接。 因此，呼叫 BeginTransaction ( # A1 會開啟連接（如果尚未開啟）。 如果 DbCoNtextTransaction 開啟連接，則會在呼叫 Dispose ( # A1 時將它關閉。  
+> 開始交易時，必須開啟基礎存放區連接。 因此，呼叫 BeginTransaction () 會開啟連接（如果尚未開啟）。 如果 DbCoNtextTransaction 開啟連接，則會在呼叫 Dispose () 時將它關閉。  
 
 ### <a name="passing-an-existing-transaction-to-the-context"></a>將現有交易傳遞至內容  
 
@@ -112,7 +112,7 @@ using (var conn = new SqlConnection("..."))
 
 此外，您必須自行啟動交易 (包括 IsolationLevel 如果您想要避免預設設定) 並讓 Entity Framework 知道連線上已啟動現有的交易 (請參閱以下) 的行33。  
 
-然後，您可以直接在 SqlConnection 本身或 DbCoNtext 上執行資料庫作業。 所有這類作業都是在一個交易內執行。 您必須負責認可或回復交易，以及在其上呼叫 Dispose ( # A1，以及關閉和處置資料庫連接。 例如︰  
+然後，您可以直接在 SqlConnection 本身或 DbCoNtext 上執行資料庫作業。 所有這類作業都是在一個交易內執行。 您必須負責認可或回復交易，以及在其上呼叫 Dispose () 以及關閉和處置資料庫連接。 例如：  
 
 ``` csharp
 using System;
@@ -165,11 +165,11 @@ namespace TransactionsExamples
 
 ### <a name="clearing-up-the-transaction"></a>清除交易
 
-您可以將 null 傳遞給 UseTransaction ( # A1，以清除 Entity Framework 對目前交易的知識。 當您這樣做時，Entity Framework 將不會認可或回復現有的交易，因此請小心使用，並確定這是您想要執行的動作。  
+您可以將 null 傳遞至 UseTransaction () ，以清除 Entity Framework 對目前交易的知識。 當您這樣做時，Entity Framework 將不會認可或回復現有的交易，因此請小心使用，並確定這是您想要執行的動作。  
 
 ### <a name="errors-in-usetransaction"></a>UseTransaction 中的錯誤
 
-如果您在下列情況中傳遞交易，則會看到 UseTransaction ( # A1 的例外狀況：  
+如果您在下列情況中傳遞交易，則會看到 UseTransaction () 的例外狀況：  
 - Entity Framework 已經有現有交易  
 - Entity Framework 已在 TransactionScope 內運作  
 - 傳遞的交易中的連線物件為 null。 也就是說，交易不會與連接產生關聯–這通常是該交易已完成的正負號  
@@ -179,7 +179,7 @@ namespace TransactionsExamples
 
 本節將詳細說明上述交易與之互動的方式：  
 
-- 恢復連線  
+- 連線恢復功能  
 - 非同步方法  
 - TransactionScope 交易  
 
@@ -282,6 +282,8 @@ namespace TransactionsExamples
                         await context.SaveChangesAsync();
                     }
                 }
+                
+                scope.Complete();
             }
         }
     }
@@ -292,7 +294,7 @@ TransactionScope 方法仍有一些限制：
 
 - 需要 .NET 4.5.1 或更新版本才能使用非同步方法。  
 - 除非您確定只有一個連線 (雲端案例不支援) 的分散式交易，否則無法在雲端案例中使用它。  
-- 它無法與 UseTransaction 的上一節中的 ( # A1 方法合併。  
+- 它不能與 UseTransaction () 方法的前面幾節一起使用。  
 - 如果您發出任何 DDL，而且尚未透過 MSDTC 服務啟用分散式交易，則會擲回例外狀況。  
 
 TransactionScope 方法的優點：  
@@ -300,4 +302,4 @@ TransactionScope 方法的優點：
 - 如果您對指定的資料庫進行一個以上的連接，或將連接與同一個交易中不同資料庫的連接合並到一個資料庫，則它會自動將本機交易升級為分散式交易 (注意：您必須將 MSDTC 服務設定為允許這項作業) 的分散式交易。  
 - 輕鬆撰寫程式碼。 如果您希望交易具有環境，並隱含地在背景中處理，而不是明確地在您控制之下，則 TransactionScope 方法可能會符合您的需要。  
 
-總而言之，有了新的資料庫. BeginTransaction ( # A1 和 UseTransaction ( # A3 Api 以上，大部分的使用者已不再需要 TransactionScope 方法。 如果您繼續使用 TransactionScope，請留意上述限制。 建議您盡可能使用先前章節中所述的方法。  
+總而言之，有了新的資料庫. BeginTransaction () 和 UseTransaction () Api，大部分的使用者都不再需要 TransactionScope 方法。 如果您繼續使用 TransactionScope，請留意上述限制。 建議您盡可能使用先前章節中所述的方法。  

@@ -1,23 +1,23 @@
 ---
-title: EF Core tools 參考 ( .NET CLI) -EF Core
+title: EF Core 工具參考 ( .NET CLI) -EF Core
 description: Entity Framework Core .NET Core CLI 工具的參考指南
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dotnet
-ms.openlocfilehash: f33d598c444eb9cb9aba754d629934b7b2240919
-ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
+ms.openlocfilehash: e1ee9af9fa4e2d863c8ef0ed2c019970b5e2967e
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103024416"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166080"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Entity Framework Core 工具參考-.NET Core CLI
 
-適用于 Entity Framework Core (CLI) 工具的命令列介面會執行設計階段開發工作。 例如，他們會建立 [遷移](/aspnet/core/data/ef-mvc/migrations)、套用遷移，並根據現有的資料庫產生模型的程式碼。 這些命令是跨平臺 [dotnet](/dotnet/core/tools) 命令的延伸模組，它是 [.net Core SDK](https://www.microsoft.com/net/core)的一部分。 這些工具適用于 .NET Core 專案。
+命令列介面 (CLI) 工具 Entity Framework Core 執行設計階段開發工作。 例如，他們會建立 [遷移](/aspnet/core/data/ef-mvc/migrations)、套用遷移，並根據現有的資料庫產生模型的程式碼。 這些命令是跨平臺 [dotnet](/dotnet/core/tools) 命令的延伸模組，這是 [.NET Core SDK](https://www.microsoft.com/net/core)的一部分。 這些工具適用于 .NET Core 專案。
 
-使用 Visual Studio 時，請考慮使用 [套件管理員主控台工具](xref:core/cli/powershell) 代替 CLI 工具。 套件管理員主控台工具會自動：
+使用 Visual Studio 時，請考慮使用 [封裝管理員主控台工具](xref:core/cli/powershell) 代替 CLI 工具。 自動封裝管理員主控台工具：
 
-* 適用于在 **封裝管理員主控台** 中選取的目前專案，而不需要手動切換目錄。
+* 適用于 **封裝管理員主控台** 中選取的目前專案，不需要您手動切換目錄。
 * 在命令完成之後，開啟命令所產生的檔案。
 * 提供命令、參數、專案名稱、內容類型和遷移名稱的 tab 鍵自動完成。
 
@@ -31,7 +31,7 @@ dotnet tool install --global dotnet-ef
 
 若要使用它作為本機工具，請使用 [工具資訊清單](/dotnet/core/tools/global-tools#install-a-local-tool)檔，還原將它宣告為工具相依性之專案的相依性。
 
-使用下列命令來更新工具工具：
+使用下列命令來更新工具：
 
 ```dotnetcli
 dotnet tool update --global dotnet-ef
@@ -45,7 +45,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 
 ### <a name="verify-installation"></a>確認安裝
 
-執行下列命令以確認 EF Core CLI 工具已正確安裝：
+執行下列命令，確認已正確安裝 EF Core CLI 工具：
 
   ```dotnetcli
   dotnet ef
@@ -88,19 +88,19 @@ Entity Framework Core .NET Command-line Tools 2.1.3-rtm-32065
 * EF Core 內容和實體類別位於 .NET Core 類別庫中。
 * .NET Core 主控台應用程式或 web 應用程式會參考類別庫。
 
-您也可以 [將遷移程式碼放在與 EF Core 內容不同的類別庫中](xref:core/managing-schemas/migrations/projects)。
+您也可以將與 [EF Core 內容分開的類別庫中的遷移程式碼](xref:core/managing-schemas/migrations/projects)。
 
 ### <a name="other-target-frameworks"></a>其他目標 framework
 
 CLI 工具適用于 .NET Core 專案和 .NET Framework 專案。 在 .NET Standard 類別庫中具有 EF Core 模型的應用程式可能沒有 .NET Core 或 .NET Framework 專案。 例如，這適用于 Xamarin 和通用 Windows 平臺應用程式。 在這種情況下，您可以建立 .NET Core 主控台應用程式專案，其唯一目的是作為工具的啟始專案。 專案可以是沒有真正程式碼的虛擬專案， &mdash; 只需要提供工具的目標。
 
-為什麼需要虛擬專案？ 如先前所述，這些工具必須在設計階段執行應用程式程式碼。 若要這樣做，他們必須使用 .NET Core 執行時間。 當 EF Core 模型位於以 .NET Core 或 .NET Framework 為目標的專案中時，EF Core 工具會從專案借用執行時間。 如果 EF Core 模型位於 .NET Standard 類別庫中，他們就無法這麼做。 .NET Standard 並非實際的 .NET 執行;它是一組 .NET 開發人員必須支援的 Api 的規格。 因此，.NET Standard 不足以供 EF Core 工具執行應用程式程式碼。 您建立用來做為啟始專案的虛擬專案提供了具體的目標平臺，可讓工具載入 .NET Standard 類別庫。
+為什麼需要虛擬專案？ 如先前所述，這些工具必須在設計階段執行應用程式程式碼。 若要這樣做，他們必須使用 .NET Core 執行時間。 當 EF Core 模型位於以 .NET Core 或 .NET Framework 為目標的專案中時，EF Core 工具會從專案借用執行時間。 如果 EF Core 模型位於 .NET Standard 類別庫中，則無法這麼做。 .NET Standard 不是實際的 .NET 執行;它是一組 .NET 開發人員必須支援的 Api 的規格。 因此 .NET Standard 不足以執行應用程式程式碼 EF Core 工具。 您建立用來做為啟始專案的虛擬專案提供可讓工具載入 .NET Standard 類別庫的具體目標平臺。
 
-### <a name="aspnet-core-environment"></a>ASP.NET 核心環境
+### <a name="aspnet-core-environment"></a>ASP.NET Core 環境
 
-若要指定 ASP.NET 核心專案 [的環境](/aspnet/core/fundamentals/environments) ，請先設定 **ASPNETCORE_ENVIRONMENT** 環境變數，然後再執行命令。
+若要指定 ASP.NET Core 專案 [的環境](/aspnet/core/fundamentals/environments) ，請先設定 **ASPNETCORE_ENVIRONMENT** 環境變數，然後再執行命令。
 
-從 EF Core 5.0 開始，還可以將額外的引數傳遞至 CreateHostBuilder，讓您可以在命令列上指定環境：
+從 EF Core 5.0 開始，還可以將額外的引數傳遞至 CreateHostBuilder，讓您在命令列上指定環境：
 
 ```dotnetcli
 dotnet ef database update -- --environment Production
@@ -111,7 +111,7 @@ dotnet ef database update -- --environment Production
 
 ## <a name="common-options"></a>一般選項
 
-| 選項                                         | Short             | Description                                                                                                                                                                                                                                                   |
+| 選項                                         | Short             | 描述                                                                                                                                                                                                                                                   |
 |:-----------------------------------------------|:------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--json`                                       |                   | 顯示 JSON 輸出。                                                                                                                                                                                                                                             |
 | `--context <DBCONTEXT>`                        | <nobr>`-c`</nobr> | 要使用的 `DbContext` 類別。 僅限類別名稱或完整限定命名空間。  如果省略此選項，EF Core 會尋找內容類別。 如果有多個內容類別，則需要此選項。                                            |
@@ -134,7 +134,7 @@ dotnet ef database update -- --environment Production
 
 選項：
 
-| 選項                   | Short             | Description                                              |
+| 選項                   | Short             | 描述                                              |
 |:-------------------------|:------------------|:---------------------------------------------------------|
 | `--force`                | <nobr>`-f`</nobr> | 不要確認。                                           |
 | <nobr>`--dry-run`</nobr> |                   | 顯示要卸載的資料庫，但不要卸載它。 |
@@ -153,9 +153,9 @@ dotnet ef database update -- --environment Production
 
 選項：
 
-| 選項                                    | Description                                                                                                                      |
+| 選項                                    | 描述                                                                                                                      |
 |:------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-|  <nobr>`--connection <CONNECTION>`</nobr> | 資料庫的連接字串。 預設為或中所指定 `AddDbContext` 的 `OnConfiguring` 。 已在 EF Core 5.0 中新增。 |
+|  <nobr>`--connection <CONNECTION>`</nobr> | 資料庫的連接字串。 預設為或中所指定 `AddDbContext` 的 `OnConfiguring` 。 在 EF Core 5.0 中新增。 |
 
 上述的 [通用選項](#common-options) 如下所示。
 
@@ -191,20 +191,20 @@ dotnet ef database update 20180904195021_InitialCreate --connection your_connect
 
 選項：
 
-| 選項                                   | Short             | Description                                                                                                                                                                    |
+| 選項                                   | Short             | 描述                                                                                                                                                                    |
 |:-----------------------------------------|:------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--data-annotations`                     | <nobr>`-d`</nobr> | 您可以使用屬性來設定模型 (可能的) 。 如果省略此選項，則只會使用流暢的 API。                                                                |
 | `--context <NAME>`                       | `-c`              | `DbContext`要產生的類別名稱。                                                                                                                                 |
 | `--context-dir <PATH>`                   |                   | 要放置類別檔案的目錄 `DbContext` 。 路徑是相對於專案目錄。 命名空間衍生自資料夾名稱。                                 |
-| `--context-namespace <NAMESPACE>`        |                   | 要用於產生之類別的命名空間 `DbContext` 。 注意：覆寫 `--namespace` 。 已在 EF Core 5.0 中新增。                                                                 |
+| `--context-namespace <NAMESPACE>`        |                   | 要用於產生之類別的命名空間 `DbContext` 。 注意：覆寫 `--namespace` 。 在 EF Core 5.0 中新增。                                                                 |
 | `--force`                                | `-f`              | 覆寫現有檔案。                                                                                                                                                      |
 | `--output-dir <PATH>`                    | `-o`              | 要放置實體類別檔案的目錄。 路徑是相對於專案目錄。                                                                                       |
-| `--namespace <NAMESPACE>`                | `-n`              | 要用於所有產生之類別的命名空間。 預設為從根命名空間和輸出目錄產生。 已在 EF Core 5.0 中新增。                                  |
+| `--namespace <NAMESPACE>`                | `-n`              | 要用於所有產生之類別的命名空間。 預設為從根命名空間和輸出目錄產生。 在 EF Core 5.0 中新增。                                  |
 | <nobr>`--schema <SCHEMA_NAME>...`</nobr> |                   | 要產生之實體類型的資料表架構。 若要指定多個架構，請 `--schema` 針對每一個架構重複執行。 如果省略這個選項，則會包含所有架構。          |
 | `--table <TABLE_NAME>`...                | `-t`              | 要產生之實體類型的資料表。 若要指定多個資料表，請 `-t` `--table` 針對每一個資料表重複或。 如果省略這個選項，則會包含所有資料表。                |
 | `--use-database-names`                   |                   | 使用資料表和資料行名稱，如同它們出現在資料庫中一樣。 如果省略這個選項，則會變更資料庫名稱，以更緊密符合 c # 名稱樣式慣例。 |
-| `--no-onconfiguring`                     |                   | 隱藏 `OnConfiguring` 產生的類別中的方法產生 `DbContext` 。 已在 EF Core 5.0 中新增。                                                                  |
-| `--no-pluralize`                         |                   | 請勿使用 pluralizer。 在 EF Core 5.0 中新增                                                                                                                                 |
+| `--no-onconfiguring`                     |                   | 隱藏 `OnConfiguring` 產生的類別中的方法產生 `DbContext` 。 在 EF Core 5.0 中新增。                                                                  |
+| `--no-pluralize`                         |                   | 請勿使用 pluralizer。 新增于 EF Core 5。0                                                                                                                                 |
 
 上述的 [通用選項](#common-options) 如下所示。
 
@@ -227,13 +227,19 @@ dotnet user-secrets set ConnectionStrings:Blogging "Data Source=(localdb)\MSSQLL
 dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFrameworkCore.SqlServer
 ```
 
+下列範例會略過方法的範例 `OnConfiguring` 。 當您想要在類別以外設定 DbCoNtext 時，這會很有用。 例如，ASP.NET Core apps 通常會在 Startup.ConfigureServices 中進行設定。 在 EF Core 5.0 中新增。
+
+```dotnetcli
+dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;User Id=myUsername;Password=myPassword;" Microsoft.EntityFrameworkCore.SqlServer --no-onconfiguring
+```
+
 ## `dotnet ef dbcontext script`
 
-從 DbCoNtext 產生 SQL 腳本。 略過任何遷移。 已在 EF Core 3.0 中新增。
+從 DbCoNtext 產生 SQL 腳本。 略過任何遷移。 在 EF Core 3.0 中新增。
 
 選項：
 
-| 選項                         | Short             | Description                      |
+| 選項                         | Short             | 描述                      |
 | ------------------------------ | ----------------- | -------------------------------- |
 | <nobr>`--output <FILE>`</nobr> | <nobr>`-o`</nobr> | 要寫入結果的檔案。 |
 
@@ -251,10 +257,10 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFra
 
 選項：
 
-| 選項                                 | Short             | Description                                                                                                            |
+| 選項                                 | Short             | 描述                                                                                                            |
 |:---------------------------------------|:------------------|:-----------------------------------------------------------------------------------------------------------------------|
 | `--output-dir <PATH>`                  | <nobr>`-o`</nobr> | 用來輸出檔案的目錄。 路徑是相對於目標專案目錄。 預設為「遷移」。   |
-| <nobr>`--namespace <NAMESPACE>`</nobr> | `-n`              | 要用於產生之類別的命名空間。 預設為從輸出目錄產生。 已在 EF Core 5.0 中新增。 |
+| <nobr>`--namespace <NAMESPACE>`</nobr> | `-n`              | 要用於產生之類別的命名空間。 預設為從輸出目錄產生。 在 EF Core 5.0 中新增。 |
 
 上述的 [通用選項](#common-options) 如下所示。
 
@@ -264,22 +270,22 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFra
 
 選項：
 
-| 選項                                   | Description                                                                                                                  |
+| 選項                                   | 描述                                                                                                                  |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| <nobr>`--connection <CONNECTION>`</nobr> | 資料庫的連接字串。 預設為 AddDbCoNtext 或 OnConfiguring 中指定的值。 已在 EF Core 5.0 中新增。 |
-| `--no-connect`                           | 請勿連接至資料庫。 已在 EF Core 5.0 中新增。                                                                         |
+| <nobr>`--connection <CONNECTION>`</nobr> | 資料庫的連接字串。 預設為 AddDbCoNtext 或 OnConfiguring 中指定的值。 在 EF Core 5.0 中新增。 |
+| `--no-connect`                           | 請勿連接至資料庫。 在 EF Core 5.0 中新增。                                                                         |
 
 上述的 [通用選項](#common-options) 如下所示。
 
 ## `dotnet ef migrations remove`
 
-藉由呼叫最新遷移的方法，來移除最後的遷移 `Down` 。 此命令會復原針對最新遷移所做的程式碼變更。
+移除最後一次的遷移，復原針對最新遷移所做的程式碼變更。
 
 選項：
 
-| 選項                 | Short             | Description                                                                     |
+| 選項                 | Short             | 描述                                                                     |
 |:-----------------------|:------------------|:--------------------------------------------------------------------------------|
-| <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | 還原最新的遷移，並回復上次遷移時套用至資料庫的變更。 |
+| <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | 還原最新的遷移，復原針對最新遷移所執行的程式碼和資料庫變更。 如果連接到資料庫時發生錯誤，只會繼續復原程式碼變更。 |
 
 上述的 [通用選項](#common-options) 如下所示。
 
@@ -296,11 +302,11 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFra
 
 選項：
 
-| 選項                           | Short             | Description                                                        |
+| 選項                           | Short             | 描述                                                        |
 |:---------------------------------|:------------------|:-------------------------------------------------------------------|
 | `--output <FILE>`                | <nobr>`-o`</nobr> | 要寫入腳本的檔案。                                   |
 | `--idempotent`                   | `-i`              | 產生可在任何遷移時用於資料庫的腳本。 |
-| <nobr>`--no-transactions`</nobr> |                   | 不要產生 SQL 交易語句。 已在 EF Core 5.0 中新增。   |
+| <nobr>`--no-transactions`</nobr> |                   | 不要產生 SQL 交易語句。 在 EF Core 5.0 中新增。   |
 
 上述的 [通用選項](#common-options) 如下所示。
 

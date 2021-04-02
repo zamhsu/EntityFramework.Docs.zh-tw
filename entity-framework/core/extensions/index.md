@@ -4,12 +4,12 @@ description: Entity Framework Core 的外部工具與延伸模組
 author: ErikEJ
 ms.date: 02/21/2021
 uid: core/extensions/index
-ms.openlocfilehash: 67d078250d8bfdb845cf98949ee1412a8fe842bd
-ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
+ms.openlocfilehash: 5034454cc23e34d28b26ff28cccee818663376c6
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103024377"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166119"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core 工具和延伸模組
 
@@ -28,25 +28,25 @@ LLBLGen Pro 是實體模型化解決方案，具備 Entity Framework 與 Entity 
 
 ### <a name="devart-entity-developer"></a>Devart Entity Developer
 
-Entity Developer 是一種功能強大的 O/RM 設計工具，可用於 ADO.NET Entity Framework、NHibernate、LinqConnect、Telerik 資料存取和 LINQ to SQL。 它支援使用 model first 或 database first 方法，以及 C# 或 Visual Basic 程式碼產生，以視覺化的方式設計 EF Core 模型。 EF Core：2，3，5。
+Entity Developer 是一種功能強大的 O/RM 設計工具，可用於 ADO.NET Entity Framework、NHibernate、LinqConnect、Telerik 資料存取和 LINQ to SQL。 它支援使用 model first 或 database first 方法，以及 C# 或 Visual Basic 程式碼產生，以視覺化的方式設計 EF Core 模型。 針對 EF Core：2、3、5。
 
 [網站](https://www.devart.com/entitydeveloper/)
 
 ### <a name="nhydrate-orm-for-entity-framework"></a>Entity Framework 的 nHydrate ORM
 
-為 Entity Framework 建立強型別擴充類別的 O/RM。 產生的程式碼為 Entity Framework Core。 因此兩者沒有任何不同。 這不是 EF 或自訂 O/RM 的替代方案。 這是一種視覺化的模型化層，可讓小組管理複雜的資料庫結構描述。 適用於 Git 這類的 SCM 軟體，允許多使用者存取模型，但具有最少的衝突。 安裝程式會追蹤模型變更並建立升級指令碼。 適用於 EF Core：3.
+O/RM，可針對 Entity Framework 建立強型別擴充的類別。 產生的程式碼為 Entity Framework Core。 因此兩者沒有任何不同。 這不是 EF 或自訂 O/RM 的替代方案。 這是一種視覺化的模型化層，可讓小組管理複雜的資料庫結構描述。 適用於 Git 這類的 SCM 軟體，允許多使用者存取模型，但具有最少的衝突。 安裝程式會追蹤模型變更並建立升級指令碼。 適用於 EF Core：3.
 
 [Github 儲存機制](https://github.com/nHydrate/nHydrate)
 
 ### <a name="ef-core-power-tools"></a>EF Core Power Tools
 
-EF Core Power Tools 是 Visual Studio 延伸模組，在簡單使用者介面中公開各種設計階段工作。 包括現有資料庫和 [SQL Server DACPAC](/sql/relational-databases/data-tier-applications/data-tier-applications) 之 DbContext 及實體類別的反向工程、資料庫移轉的管理，以及模型視覺效果。 EF Core：3，5。
+EF Core Power Tools 是 Visual Studio 延伸模組，在簡單使用者介面中公開各種設計階段工作。 包括現有資料庫和 [SQL Server DACPAC](/sql/relational-databases/data-tier-applications/data-tier-applications) 之 DbContext 及實體類別的反向工程、資料庫移轉的管理，以及模型視覺效果。 針對 EF Core：3，5。
 
 [GitHub Wiki](https://github.com/ErikEJ/EFCorePowerTools/wiki)
 
 ### <a name="entity-framework-visual-editor"></a>Entity Framework 視覺效果編輯器
 
-Entity Framework 視覺效果編輯器是 Visual Studio 延伸模組，為 EF 6 和 EF Core 類別的視覺效果設計新增了 O/RM 設計工具。 因為程式碼會透過 T4 範本產生，所以能加以自訂來滿足各種需求。 它支援繼承、單向及雙向關聯、列舉，還能夠對類別進行色彩編碼以及新增文字區塊，以說明設計中可能較不易懂的部分。 EF Core：2，3，5。
+Entity Framework 的視覺化編輯器是 Visual Studio 擴充功能，可為 EF 6 的視覺效果設計以及 EF Core 類別加入 O/RM 設計工具。 因為程式碼會透過 T4 範本產生，所以能加以自訂來滿足各種需求。 它支援繼承、單向及雙向關聯、列舉，還能夠對類別進行色彩編碼以及新增文字區塊，以說明設計中可能較不易懂的部分。 針對 EF Core：2、3、5。
 
 [Marketplace](https://marketplace.visualstudio.com/items?itemName=michaelsawczyn.EFDesigner) \(英文\)
 
@@ -73,7 +73,7 @@ Entity Framework Core 產生器 (efg) 是 .NET Core CLI 工具，可以從現有
 
 ### <a name="efcoresecondlevelcacheinterceptor"></a>EFCoreSecondLevelCacheInterceptor
 
-第二個層級快取是查詢快取。 EF 命令的結果會存放在快取中，使相同的 EF 命令會從快取擷取其資料，而不必再次向資料庫再次執行命令。 EF Core：3，5。
+第二個層級快取是查詢快取。 EF 命令的結果會存放在快取中，使相同的 EF 命令會從快取擷取其資料，而不必再次向資料庫再次執行命令。 針對 EF Core：3，5。
 
 [GitHub 存放庫](https://github.com/VahidN/EFCoreSecondLevelCacheInterceptor)
 
@@ -85,13 +85,13 @@ Geco (產生器主控台) 是以主控台專案為基礎的簡單程式碼產生
 
 ### <a name="entityframeworkcorescaffoldinghandlebars"></a>EntityFrameworkCore.Scaffolding.Handlebars
 
-可讓您搭配 Handlebars 範本使用 Entity Framework Core 工具鏈，自訂從現有資料庫進行反向工程的類別。 EF Core：2，3，5。
+可讓您搭配 Handlebars 範本使用 Entity Framework Core 工具鏈，自訂從現有資料庫進行反向工程的類別。 針對 EF Core：2、3、5。
 
 [GitHub 存放庫](https://github.com/TrackableEntities/EntityFrameworkCore.Scaffolding.Handlebars)
 
 ### <a name="neinlinqentityframeworkcore"></a>NeinLinq.EntityFrameworkCore
 
-NeinLinq 擴充了 LINQ 提供者 (例如 Entity Framework)，並提供以下功能：重複使用函式、重寫查詢，以及使用可翻譯的述詞和選取器建置動態查詢。 EF Core：2，3，5。
+NeinLinq 擴充了 LINQ 提供者 (例如 Entity Framework)，並提供以下功能：重複使用函式、重寫查詢，以及使用可翻譯的述詞和選取器建置動態查詢。 針對 EF Core：2、3、5。
 
 [GitHub 存放庫](https://github.com/axelheer/nein-linq/)
 
@@ -115,25 +115,25 @@ Microsoft.EntityFrameworkCore 的外掛程式，可支援存放庫、工作模�
 
 ### <a name="toolbeltentityframeworkcoreindexattribute"></a>Toolbelt.EntityFrameworkCore.IndexAttribute
 
-[Index] 屬性的復興 (附有模型組建的延伸模組)。 EF Core：2，3，5。
+[Index] 屬性的復興 (附有模型組建的延伸模組)。 針對 EF Core：2、3、5。
 
 [GitHub 存放庫](https://github.com/jsakamoto/EntityFrameworkCore.IndexAttribute)
 
 ### <a name="verifyentityframework"></a>確認 EntityFramework。
 
-擴充 [驗證](https://github.com/VerifyTests/Verify) 以允許使用 EntityFramework 進行快照集測試。 EF Core：3，5。
+擴充 [驗證](https://github.com/VerifyTests/Verify) 以允許使用 EntityFramework 進行快照集測試。 針對 EF Core：3，5。
 
 [GitHub 存放庫](https://github.com/VerifyTests/Verify.EntityFramework)
 
 ### <a name="localdb"></a>LocalDb
 
-提供 [SQL Server Express LocalDB](https://docs.microsoft.com/sql/database-engine/configure-windows/sql-server-express-localdb) 周圍的包裝函式，以簡化對 Entity Framework 執行測試的程式。 EF Core：3，5。
+提供 [SQL Server Express LocalDB](https://docs.microsoft.com/sql/database-engine/configure-windows/sql-server-express-localdb) 的包裝函式，以簡化對 Entity Framework 執行測試的程式。 針對 EF Core：3，5。
 
 [GitHub 存放庫](https://github.com/SimonCropp/LocalDb)
 
 ### <a name="effluentvalidation"></a>EfFluentValidation
 
-將 [FluentValidation](https://fluentvalidation.net/) 支援新增至 Entity Framework。 EF Core：3，5。
+將 [FluentValidation](https://fluentvalidation.net/) 支援新增至 Entity Framework。 針對 EF Core：3，5。
 
 [GitHub 存放庫](https://github.com/SimonCropp/EfFluentValidation)
 
@@ -163,26 +163,26 @@ Entity Framework Core 的延伸模組程式庫，可讓使用 SQL Server 的開�
 
 ### <a name="entityframeworkcorencache"></a>EntityFrameworkCore.NCache
 
-NCache Entity Framework Core Provider 是快取查詢結果的分散式第二層級快取提供者。 NCache 的分散式架構使其更具可擴縮性與高可用性。 適用于 EF Core 2、3。
+NCache Entity Framework Core Provider 是快取查詢結果的分散式第二層級快取提供者。 NCache 的分散式架構使其更具可擴縮性與高可用性。 針對 EF Core 2，3。
 
 [網站](https://www.alachisoft.com/ncache/ef-core-cache.html)
 
 ### <a name="entityframeworkcoretriggered"></a>Microsoft.entityframeworkcore 觸發
 
-EF Core 的觸發程式。 在認可至資料庫之前和之後，回應 DbCoNtext 中的變更。 觸發程式是完全非同步，且支援相依性插入、繼承、串聯等。 EF Core：3，5。
+EF Core 的觸發程式。 在認可至資料庫之前和之後，回應 DbCoNtext 中的變更。 觸發程式是完全非同步，且支援相依性插入、繼承、串聯等。 針對 EF Core：3，5。
 
 [GitHub 存放庫](https://github.com/koenbeuk/EntityFrameworkCore.Triggered)
 
 ### <a name="entity-framework-plus"></a>Entity Framework Plus
 
-使用下功能延伸您的 DbContext：包括篩選、稽核、快取、查詢未來、批次刪除、批次更新等。 EF Core：2，3，5。
+使用下功能延伸您的 DbContext：包括篩選、稽核、快取、查詢未來、批次刪除、批次更新等。 針對 EF Core：2、3、5。
 
 [網站](https://entityframework-plus.net/)
 [GitHub 存放庫](https://github.com/zzzprojects/EntityFramework-Plus)
 
 ### <a name="entity-framework-extensions"></a>Entity Framework 擴充功能
 
-使用高效能批次作業延伸您的 DbContext：BulkSaveChanges、BulkInsert、BulkUpdate、BulkDelete、BulkMerge 等。 EF Core：2，3，5。
+使用高效能批次作業延伸您的 DbContext：BulkSaveChanges、BulkInsert、BulkUpdate、BulkDelete、BulkMerge 等。 針對 EF Core：2、3、5。
 
 [網站](https://entityframework-extensions.net/)
 
@@ -217,7 +217,7 @@ EF Core 的觸發程式。 在認可至資料庫之前和之後，回應 DbCoNte
 
 ### <a name="simplersoftwareentityframeworkcoresqlservernodatime"></a>SimplerSoftware.EntityFrameworkCore.SqlServer.NodaTime
 
-針對 NodaTime 類型，將原生支援新增至 SQL Server 的 EntityFrameworkCore。 EF Core：3，5。
+針對 NodaTime 類型，將原生支援新增至 SQL Server 的 EntityFrameworkCore。 針對 EF Core：3，5。
 
 [GitHub 存放庫](https://github.com/StevenRasmussen/EFCore.SqlServer.NodaTime)
 
@@ -235,7 +235,7 @@ Entity Framework Core 3.1 的 LINQ 延伸模組，以支援 Microsoft SQL Server
 
 ### <a name="linq2dbentityframeworkcore"></a>linq2db.EntityFrameworkCore
 
-將 LINQ 查詢轉換為 SQL 運算式的替代轉譯程式。 EF Core：3，5。
+將 LINQ 查詢轉換為 SQL 運算式的替代轉譯程式。 針對 EF Core：3，5。
 
 包括對進階 SQL 功能的支援，例如 CTE、大量複製、資料表提示、視窗型函式、暫存資料表，以及資料庫端的建立/更新/刪除作業。
 
@@ -249,40 +249,52 @@ Entity Framework Core 3.1 的 LINQ 延伸模組，以支援 Microsoft SQL Server
 
 ### <a name="entityframeworkcoreconfigurationmanager"></a>EntityFrameworkCore.ConfigurationManager
 
-擴充 EF Core 以解析 App.config 的連接字串。適用于 EF Core：3。
+擴充 EF Core，以從 App.config 解析連接字串。針對 EF Core：3。
 
 [GitHub 存放庫](https://github.com/efcore/EFCore.ConfigurationManager)
 
 ### <a name="detached-mapper"></a>卸離對應程式
 
-DTO-Entity 對應程式具有組合/匯總處理 (類似于 GraphDiff) 。 EF Core：3，5。
+DTO-Entity 對應程式具有組合/匯總處理 (類似于 GraphDiff) 。 針對 EF Core：3，5。
 
 [NuGet](https://www.nuget.org/packages/Detached.Mappers.EntityFramework)
 
 ### <a name="entityframeworkcoresqlitenodatime"></a>Microsoft.entityframeworkcore。 NodaTime
 
-在使用[SQLite](https://sqlite.org)時新增對[NodaTime](https://nodatime.org)類型的支援。 適用于 EF Core：5。
+在使用[SQLite](https://sqlite.org)時新增對[NodaTime](https://nodatime.org)類型的支援。 針對 EF Core：5。
 
 [GitHub 存放庫](https://github.com/khellang/EFCore.Sqlite.NodaTime)
 
 ### <a name="erikejentityframeworkcoresqlserverdacpac"></a>ErikEJ. Microsoft.entityframeworkcore。 .Dacpac
 
-啟用從 SQL Server 資料層應用程式封裝的 EF Core 模型進行反向工程， ( .dacpac) 。 EF Core：3，5。
+啟用從 SQL Server 資料層應用程式封裝 EF Core 模型的反向工程 ( .dacpac) 。 針對 EF Core：3，5。
 
 [GitHub Wiki](https://github.com/ErikEJ/EFCorePowerTools/wiki/ErikEJ.EntityFrameworkCore.SqlServer.Dacpac)
 
 ### <a name="erikejentityframeworkcoredgmlbuilder"></a>ErikEJ. Microsoft.entityframeworkcore. DgmlBuilder
 
-產生 DGML (圖形) 內容，以視覺化方式呈現您的 DbCoNtext。 將 AsDgml () 擴充方法加入至 DbCoNtext 類別。 EF Core：3，5。
+產生 DGML (圖形) 內容，以視覺化方式呈現您的 DbCoNtext。 將 AsDgml () 擴充方法加入至 DbCoNtext 類別。 針對 EF Core：3，5。
 
 [GitHub Wiki](https://github.com/ErikEJ/EFCorePowerTools/wiki/Inspect-your-DbContext-model)
 
 ### <a name="entityframeworkexceptions"></a>EntityFramework。例外狀況
 
-使用 Entity Framework Core 時，所有資料庫例外狀況都會包裝在就 dbupdateexception 中。 EntityFramework 會處理所有資料庫特定的詳細資料，以找出違反了哪些條件約束，並可讓您在 `UniqueConstraintException` `CannotInsertNullException` `MaxLengthExceededException` `NumericOverflowException` `ReferenceConstraintException` 查詢違反資料庫條件約束時，使用具類型的例外狀況，例如、、、。
+使用 Entity Framework Core 所有資料庫例外狀況都會包裝在就 dbupdateexception 中。 EntityFramework 會處理所有資料庫特定的詳細資料，以找出違反了哪些條件約束，並可讓您在 `UniqueConstraintException` `CannotInsertNullException` `MaxLengthExceededException` `NumericOverflowException` `ReferenceConstraintException` 查詢違反資料庫條件約束時，使用具類型的例外狀況，例如、、、。
 
 支援 SQL Server、Postgres、MySql、SQLite 和 Oracle
 
-EF Core：3，5。
+針對 EF Core：3，5。
 
 [GitHub 儲存機制](https://github.com/Giorgi/EntityFramework.Exceptions)
+
+### <a name="efcoreauditing"></a>EFCoreAuditing
+
+Entity Framework Core 的程式庫，以支援自動記錄資料變更歷程記錄 (audit 記錄) 、虛刪除和 snake_case 命名慣例功能。 適用於 EF Core：3.
+
+[GitHub 儲存機制](https://github.com/OKTAYKIR/EFCoreAuditing)
+
+### <a name="entityframeworkcorefsharp"></a>Microsoft.entityframeworkcore. Fsharp.core
+
+將 F # 設計階段支援新增至 EF Core。 針對 EF Core：5。
+
+[GitHub 存放庫](https://github.com/efcore/EFCore.FSharp)

@@ -4,12 +4,12 @@ description: 使用 Entity Framework Core 建立設計階段 DbCoNtext 的策略
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dbcontext-creation
-ms.openlocfilehash: 1a2c0e853047cf4ab54a320d0bef413a114e90bc
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: c5acf025407b6903d09cc1aff253d35a8801ab40
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543402"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166100"
 ---
 # <a name="design-time-dbcontext-creation"></a>設計階段 DbContext 建立
 
@@ -36,7 +36,7 @@ ms.locfileid: "100543402"
 
 ## <a name="from-a-design-time-factory"></a>從設計階段工廠
 
-您也可以藉由執行介面，告訴工具如何建立您的 DbCoNtext `IDesignTimeDbContextFactory<TContext>` ：如果在相同的專案中找到實作為此介面的類別 `DbContext` ，或在應用程式的啟始專案中找到這個介面，則工具會略過其他建立 DbCoNtext 的方法，並改為使用設計階段 factory。
+您也可以藉由執行介面，告訴工具如何建立您的 DbCoNtext <xref:Microsoft.EntityFrameworkCore.Design.IDesignTimeDbContextFactory%601?displayProperty=nameWithType> ：如果在相同的專案中找到實作為此介面的類別 `DbContext` ，或在應用程式的啟始專案中找到這個介面，則工具會略過其他建立 DbCoNtext 的方法，並改為使用設計階段 factory。
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/CommandLine/BloggingContextFactory.cs#BloggingContextFactory)]
 

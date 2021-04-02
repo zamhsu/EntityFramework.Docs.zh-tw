@@ -4,12 +4,12 @@ description: 新增、移除及以其他方式管理使用 Entity Framework Core
 author: bricelam
 ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: a6e64bde753ae34b6dccb10b228d1ea87a79357b
-ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
+ms.openlocfilehash: ea2bf0e14214369af61bd1aedc932d90fc5f90c5
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103024169"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106165867"
 ---
 # <a name="managing-migrations"></a>管理遷移
 
@@ -72,7 +72,7 @@ Add-Migration InitialCreate -OutputDir Your\Directory
 
 ## <a name="customize-migration-code"></a>自訂移轉程式碼
 
-雖然 EF Core 通常會建立精確的遷移，但您應該一律檢查程式碼，並確定其對應至所需的變更;在某些情況下，甚至必須這樣做。
+EF Core 通常會建立精確的遷移，您應該一律檢查程式碼，並確定其對應至所需的變更;在某些情況下，甚至必須這樣做。
 
 ### <a name="column-renames"></a>資料行重新命名
 
@@ -170,7 +170,7 @@ migrationBuilder.Sql(
 * 觸發程序
 * 檢視
 
-在大部分情況下，EF Core 會在套用遷移時，自動將每個遷移包裝在自己的交易中。 可惜的是，有些遷移作業無法在某些資料庫的交易中執行;在這些情況下，您可以藉由傳遞 `suppressTransaction: true` 到來退出交易 `migrationBuilder.Sql` 。
+在大多數情況下，EF Core 會在套用遷移時，自動將每個遷移功能包裝在自己的交易中。 可惜的是，有些遷移作業無法在某些資料庫的交易中執行;在這些情況下，您可以藉由傳遞 `suppressTransaction: true` 到來退出交易 `migrationBuilder.Sql` 。
 
 如果 `DbContext` 與啟始專案位於不同的組件中，您可以在[套件管理員主控台工具](xref:core/cli/powershell#target-and-startup-project)或 [.NET Core CLI 工具](xref:core/cli/dotnet#target-project-and-startup-project)中明確指定目標和啟始專案。
 
@@ -220,7 +220,7 @@ Get-Migration
 
 ## <a name="resetting-all-migrations"></a>正在重設所有遷移
 
-在某些極端的情況下，可能需要移除所有的遷移並重新開始。 這可以藉由刪除您的 [ **遷移** ] 資料夾並卸載您的資料庫來輕鬆完成;屆時，您可以建立新的初始遷移，其中將包含您目前的整個架構。
+在某些極端的情況下，可能需要移除所有的遷移並重新開始。 這可以藉由刪除您的 [ **遷移** ] 資料夾並卸載您的資料庫來輕鬆完成;屆時，您可以建立新的初始遷移，其中將包含整個目前的架構。
 
 您也可以重設所有遷移，並建立單一的遷移，而不會遺失您的資料。 這有時稱為「抓」，並牽涉到一些手動工作：
 
@@ -234,5 +234,5 @@ Get-Migration
 
 ## <a name="additional-resources"></a>其他資源
 
-* [Entity Framework Core 工具參考-.Net CORE CLI](xref:core/cli/dotnet) ：包含用來更新、卸載、新增、移除等等的命令。
-* [Entity Framework Core 工具參考-Visual Studio 中的套件管理員主控台](xref:core/cli/powershell) ：包含用來更新、卸載、新增、移除等等的命令。
+* [Entity Framework Core 工具參考-.NET Core CLI](xref:core/cli/dotnet) ：包含用來更新、卸載、新增、移除等等的命令。
+* [Visual Studio 中的 Entity Framework Core 工具參考-封裝管理員主控台](xref:core/cli/powershell) ：包含用來更新、卸載、新增、移除等等的命令。

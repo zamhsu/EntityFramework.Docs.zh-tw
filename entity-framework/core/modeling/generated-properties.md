@@ -4,12 +4,12 @@ description: 如何在使用 Entity Framework Core 時設定屬性的值產生
 author: AndriySvyryd
 ms.date: 1/10/2021
 uid: core/modeling/generated-properties
-ms.openlocfilehash: a9e43f3b755bf028bc76581135988e831a42d0d1
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: e1eebd6c8b385cde71bc5ca556d8e348e2221494
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543337"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166039"
 ---
 # <a name="generated-values"></a>產生的值
 
@@ -75,9 +75,9 @@ ms.locfileid: "100543337"
 > [!WARNING]
 > 與預設值或計算資料行不同的是，我們不會指定產生值的 *方式* ;這取決於所使用的資料庫提供者。 資料庫提供者可能會自動為某些屬性類型設定值產生，但其他專案可能會要求您手動設定值的產生方式。
 >
-> 例如，在 SQL Server 上，當 GUID 屬性設定為 add 時產生的值時，提供者會使用演算法來產生最佳的連續 GUID 值，以自動執行值產生用戶端。 不過， `ValueGeneratedOnAdd()` 在 datetime 屬性上指定將沒有任何作用 ([請參閱下一節中的日期時間值產生](#datetime-value-generation)) 。
+> 例如，在 SQL Server 上，當 GUID 屬性設定為 add 時產生的值時，提供者會使用演算法來產生最佳的連續 GUID 值，以自動執行值產生用戶端。 不過， <xref:Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder.ValueGeneratedOnAdd%2A> 在 datetime 屬性上指定將沒有任何作用 ([請參閱下一節中的日期時間值產生](#datetime-value-generation)) 。
 >
-> 同樣地，在新增或更新時所設定的 byte [] 屬性，以及標示為並行 token 的，都會設定 rowversion 資料類型，以便在資料庫中自動產生值。 不過，指定 `ValueGeneratedOnAddOrUpdate()` 將不再有作用。
+> 同樣地，在新增或更新時所設定的 byte [] 屬性，以及標示為並行 token 的，都會設定 rowversion 資料類型，以便在資料庫中自動產生值。 不過，指定 <xref:Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder.ValueGeneratedOnAdd%2A> 不會有任何作用。
 >
 > [!NOTE]
 > 根據所使用的資料庫提供者而定，值可能會由 EF 或資料庫中的用戶端產生。 如果值是由資料庫所產生，則當您將實體新增至內容時，EF 可能會指派暫時值;這個暫存值接著會由資料庫產生的值取代 `SaveChanges()` 。 如需詳細資訊，請 [參閱臨時值上的](xref:core/change-tracking/explicit-tracking#temporary-values)檔。

@@ -4,12 +4,12 @@ description: 如何使用 Entity Framework Core 處理 Azure Cosmos DB 非結構
 author: AndriySvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/unstructured-data
-ms.openlocfilehash: ac497c9f5540557b931db935f4f3ca480edf010d
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: a5149062db89fa8e2ae2097c45fe0f0f29f22017
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92064020"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166025"
 ---
 # <a name="working-with-unstructured-data-in-ef-core-azure-cosmos-db-provider"></a>使用 EF Core Azure Cosmos DB 提供者中的非結構化資料
 
@@ -54,7 +54,7 @@ EF Core 的設計可讓您輕鬆地使用在模型中定義之架構之後的資
 
 ## <a name="missing-property-values"></a>遺漏的屬性值
 
-在上述範例中，我們已 `"TrackingNumber"` 從訂單中移除該屬性。 由於索引編制在 Cosmos DB 中的運作方式，在投影中參考遺漏屬性的查詢可能會傳回非預期的結果。 例如︰
+在上述範例中，我們已 `"TrackingNumber"` 從訂單中移除該屬性。 由於索引編制在 Cosmos DB 中的運作方式，在投影中參考遺漏屬性的查詢可能會傳回非預期的結果。 例如：
 
 [!code-csharp[MissingProperties](../../../../samples/core/Cosmos/UnstructuredData/Sample.cs?name=MissingProperties)]
 
