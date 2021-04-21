@@ -1,6 +1,6 @@
 ---
-title: 使用 DbCoNtext-EF6
-description: 在 Entity Framework 6 中使用 DbCoNtext
+title: 使用 DbContext-EF6
+description: 在 Entity Framework 6 中使用 DbContext
 author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/working-with-dbcontext
@@ -15,7 +15,7 @@ ms.locfileid: "92062798"
 
 若要使用 Entity Framework 使用 .NET 物件來查詢、插入、更新和刪除資料，您必須先 [建立模型](xref:ef6/modeling/index) ，將模型中所定義的實體和關聯性對應至資料庫中的資料表。
 
-一旦有模型之後，您的應用程式所互動的主要類別 `System.Data.Entity.DbContext` (通常稱為內容類別) 。 您可以使用與模型相關聯的 DbCoNtext 來：
+一旦有模型之後，您的應用程式所互動的主要類別 `System.Data.Entity.DbContext` (通常稱為內容類別) 。 您可以使用與模型相關聯的 DbContext 來：
 - 撰寫和執行查詢   
 - 將查詢結果具體化為實體物件
 - 追蹤對這些物件所做的變更
@@ -24,9 +24,9 @@ ms.locfileid: "92062798"
 
 此頁面提供有關如何管理內容類別的一些指引。  
 
-## <a name="defining-a-dbcontext-derived-class"></a>定義 DbCoNtext 衍生類別  
+## <a name="defining-a-dbcontext-derived-class"></a>定義 DbContext 衍生類別  
 
-使用內容的建議方式是定義衍生自 DbCoNtext 的類別，並公開 DbSet 屬性，以表示內容中指定之實體的集合。 如果您使用 EF 設計工具，將會為您產生內容。 如果您正在使用 Code First，通常會自行撰寫內容。  
+使用內容的建議方式是定義衍生自 DbContext 的類別，並公開 DbSet 屬性，以表示內容中指定之實體的集合。 如果您使用 EF 設計工具，將會為您產生內容。 如果您正在使用 Code First，通常會自行撰寫內容。  
 
 ``` csharp
 public class ProductContext : DbContext
@@ -36,12 +36,12 @@ public class ProductContext : DbContext
 }
 ```  
 
-一旦有內容之後，您就可以使用或方法來查詢、新增 (， `Add` `Attach` ) 或 `Remove` 透過這些屬性在內容中使用) 實體來移除 (。 存取 `DbSet` 內容物件上的屬性代表會傳回指定型別之所有實體的起始查詢。 請注意，只存取屬性不會執行查詢。 當下列情況時，會執行查詢：  
+一旦有內容之後，您就可以使用或方法來查詢、新增 (`Add` ， `Attach`) 或 移除（`Remove`）。透過這些屬性在內容中使用實體來存取 `DbSet` 內容物件上的屬性代表會傳回指定型別之所有實體的起始查詢。 請注意，只存取屬性不會執行查詢。 當下列情況時，會執行查詢：  
 
 - 它是由 `foreach` (C#) 或 `For Each` (Visual Basic) 陳述式所列舉。  
 - 它是由集合作業（例如、或）所列舉 `ToArray` `ToDictionary` `ToList` 。  
-- LINQ 運算子（例如 `First` 或） `Any` 是在查詢的最外面部分指定的。  
-- `Load` `DbEntityEntry.Reload` `Database.ExecuteSqlCommand` `DbSet<T>.Find` 如果找不到具有指定索引鍵的實體，則會呼叫下列其中一種方法：延伸方法：、和。  
+- LINQ 運算子（例如 `First` 或 `Any` ）是在查詢的最外面部分指定的。  
+- 如果找不到具有指定索引鍵的實體，則會呼叫下列其中一種方法：`Load`的擴充方法 、 `DbEntityEntry.Reload` 、 `Database.ExecuteSqlCommand` 和 `DbSet<T>.Find`。  
 
 ## <a name="lifetime"></a>存留期  
 
